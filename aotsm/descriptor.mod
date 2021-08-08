@@ -21,6 +21,8 @@ replace_path="common/scripted_localisation"
 replace_path="common/scripted_effects"
 replace_path="common/ai_strategy"
 replace_path="common/bookmarks"
+replace_path="common/technologies"
+replace_path="common/technologies_tags"
 replace_path="gfx/loadingscreens"
 
 
