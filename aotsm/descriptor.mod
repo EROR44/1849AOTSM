@@ -1,4 +1,4 @@
-version="1.10.7"
+version="1.10.8"
 tags={
 	"Alternative History"
 	"Map"
@@ -27,4 +27,4 @@ replace_path="gfx/loadingscreens"
 
 
 name="AOTSM"
-supported_version="1.10.7"
+supported_version="1.10.8"
