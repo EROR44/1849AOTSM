@@ -1,16 +1,11 @@
-search_filter_prios = {
-	FOCUS_FILTER_POLITICAL = 1010
+search_filters = {FOCUS_FILTER_POLITICAL}
+search_filters = {FOCUS_FILTER_RESEARCH}
+search_filters = {FOCUS_FILTER_INDUSTRY}
+search_filters = {FOCUS_FILTER_STABILITY}
+search_filters = {FOCUS_FILTER_WAR_SUPPORT}
+search_filters = {FOCUS_FILTER_MANPOWER}
+search_filters = {FOCUS_FILTER_ANNEXATION}
 
-	
- 
-	
-	
-	FOCUS_FILTER_RESEARCH = 522
-
-	
-	FOCUS_FILTER_INDUSTRY = 509
-
-}
 focus_tree = {
 	id = byzantium_focus
 	
@@ -29,20 +24,275 @@ focus_tree = {
 	initial_show_position = {
 		focus = 1
 	}
+	
+	continuous_focus_position = { x = 130 y = 1050 }
 
+	#Экономика
 	focus = {
-		id = 1
-		#icon = 
-		x = 1
+		id = BYZ_economic_plan
+		icon = GFX_goal_generic_position_armies
+		x = 4
 		y = 0
 		cost = 10
-		#search_filters = {   }
-		
-		available_if_capitulated = yes
-
+		#ai_will_do = { factor = 0 }
+		search_filters = { FOCUS_FILTER_INDUSTRY }
 		completion_reward = {
-			
 		}
-	}	
+		
+	}
 	
+	#Экономика План А
+	focus = {
+		id = BYZ_economic_plan_A
+		icon = GFX_goal_generic_construct_civ_factory
+		prerequisite = { focus = BYZ_economic_plan }
+		mutually_exclusive = { focus = BYZ_economic_plan_B focus = BYZ_economic_plan_C }
+		x = 2
+		y = 1
+		cost = 10
+		#ai_will_do = { factor = 0 }
+		completion_reward = {
+		}
+	}
+	
+	focus = {
+		id = BYZ_economic_plan_AA
+		icon = GFX_goal_generic_construct_civ_factory
+		prerequisite = { focus = BYZ_economic_plan_A }
+		x = 1
+		y = 2
+		cost = 10
+		#ai_will_do = { factor = 0 }
+		completion_reward = {
+		}
+	}
+	
+	#Экономика План Б
+	focus = {
+		id = BYZ_economic_plan_B
+		icon = GFX_goal_generic_construct_civilian
+		prerequisite = { focus = BYZ_economic_plan }
+		mutually_exclusive = { focus = BYZ_economic_plan_A focus = BYZ_economic_plan_C }
+		x = 4
+		y = 1
+		cost = 10
+		#ai_will_do = { factor = 0 }
+		completion_reward = {
+		}
+	}
+	
+	focus = {
+		id = BYZ_economic_plan_AB
+		icon = GFX_goal_generic_positive_trade_relations
+		prerequisite = { focus = BYZ_economic_plan_A focus = BYZ_economic_plan_B }
+		x = 3
+		y = 2
+		cost = 10
+		#ai_will_do = { factor = 0 }
+		completion_reward = {
+		}
+	}
+	
+	focus = {
+		id = BYZ_economic_plan_BC
+		icon = GFX_goal_generic_construction2
+		prerequisite = { focus = BYZ_economic_plan_B focus = BYZ_economic_plan_C }
+		x = 5
+		y = 2
+		cost = 10
+		#ai_will_do = { factor = 0 }
+		completion_reward = {
+		}
+	}
+	
+	#Экономика План Ц
+	focus = {
+		id = BYZ_economic_plan_C
+		icon = GFX_goal_generic_construct_mil_factory
+		prerequisite = { focus = BYZ_economic_plan }
+		mutually_exclusive = { focus = BYZ_economic_plan_A focus = BYZ_economic_plan_B }
+		x = 6
+		y = 1
+		cost = 10
+		#ai_will_do = { factor = 0 }
+		completion_reward = {
+		}
+	}
+	
+	focus = {
+		id = BYZ_economic_plan_CC
+		icon = GFX_goal_generic_construct_civ_factory
+		prerequisite = { focus = BYZ_economic_plan_C }
+		x = 7
+		y = 2
+		cost = 10
+		#ai_will_do = { factor = 0 }
+		completion_reward = {
+		}
+	}
+	
+	#Финал Плана
+
+	focus = {
+		id = BYZ_economic_plan_final
+		icon = GFX_focus_hol_the_foundations_of_defense
+		prerequisite = { focus = BYZ_economic_plan_AB focus = BYZ_economic_plan_BC }
+		prerequisite = { focus = BYZ_economic_plan_AA focus = BYZ_economic_plan_BC }
+		prerequisite = { focus = BYZ_economic_plan_AB focus = BYZ_economic_plan_CC }
+		x = 4
+		y = 3
+		cost = 10
+		#ai_will_do = { factor = 0 }
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+		}
+	}
+	
+	#Мировая торговля
+	
+	focus = {
+		id = BYZ_economic_world_trade
+		icon = GFX_goal_generic_positive_trade_relations
+		prerequisite = { focus = BYZ_economic_plan_final }
+		mutually_exclusive = { focus = BYZ_economic_limited_trade focus = BYZ_economic_autarky }
+		x = 0
+		y = 4
+		cost = 10
+		#ai_will_do = { factor = 0 }
+		completion_reward = {
+		}
+	}
+	
+	focus = {
+		id = BYZ_economic_europeon_trade_union
+		icon = GFX_focus_usa_focus_on_europe
+		prerequisite = { focus = BYZ_economic_world_trade }
+		x = 0
+		y = 5
+		cost = 10
+		#ai_will_do = { factor = 0 }
+		completion_reward = {
+		}
+	}
+	
+	focus = {
+		id = BYZ_economic_centr_of_trade
+		icon = GFX_focus_usa_reestablish_the_gold_standard
+		prerequisite = { focus = BYZ_economic_europeon_trade_union }
+		prerequisite = { focus = BYZ_economic_resource_union }
+		x = 0
+		y = 7
+		cost = 10
+		#ai_will_do = { factor = 0 }
+		completion_reward = {
+		}
+	}
+	
+	#Граничная Торговля
+	
+	focus = {
+		id = BYZ_economic_limited_trade
+		icon = GFX_goal_generic_trade
+		prerequisite = { focus = BYZ_economic_plan_final }
+		mutually_exclusive = { focus = BYZ_economic_world_trade focus = BYZ_economic_autarky }
+		x = 4
+		y = 4
+		cost = 10
+		#ai_will_do = { factor = 0 }
+		completion_reward = {
+		}
+	}
+	
+	focus = {
+		id = BYZ_economic_balkan_trade_union
+		icon = GFX_focus_BUL_free_balkan_states
+		prerequisite = { focus = BYZ_economic_limited_trade }
+		x = 4
+		y = 5
+		cost = 10
+		#ai_will_do = { factor = 0 }
+		completion_reward = {
+		}
+	}
+	
+	focus = {
+		id = BYZ_economic_balkan_centr
+		icon = GFX_focus_hol_abandon_the_gold_standard
+		prerequisite = { focus = BYZ_economic_balkan_trade_union }
+		prerequisite = { focus = BYZ_economic_resource_base focus = BYZ_economic_resource_union }
+		x = 4
+		y = 7
+		cost = 10
+		#ai_will_do = { factor = 0 }
+		completion_reward = {
+		}
+	}
+	
+	#Автаркия
+	
+	focus = {
+		id = BYZ_economic_autarky
+		icon = GFX_focus_eng_concessions_to_the_trade_unions
+		prerequisite = { focus = BYZ_economic_plan_final }
+		mutually_exclusive = { focus = BYZ_economic_world_trade focus = BYZ_economic_autarky }
+		x = 8
+		y = 4
+		cost = 10
+		#ai_will_do = { factor = 0 }
+		completion_reward = {
+		}
+	}
+	
+	focus = {
+		id = BYZ_economic_currency_growth
+		icon = GFX_focus_GRE_bedrock_of_balkan_stability
+		prerequisite = { focus = BYZ_economic_autarky }
+		x = 8
+		y = 5
+		cost = 10
+		#ai_will_do = { factor = 0 }
+		completion_reward = {
+		}
+	}
+	
+	focus = {
+		id = BYZ_economic_autarky_complet
+		icon = GFX_focus_generic_industry_3
+		prerequisite = { focus = BYZ_economic_currency_growth }
+		prerequisite = { focus = BYZ_economic_resource_base }
+		x = 8
+		y = 7
+		cost = 10
+		#ai_will_do = { factor = 0 }
+		completion_reward = {
+		}
+	}
+	
+	#Доп эконом фокусы
+	
+	focus = {
+		id = BYZ_economic_resource_base
+		icon = GFX_focus_generic_rubber
+		prerequisite = { focus = BYZ_economic_currency_growth focus = BYZ_economic_balkan_trade_union }
+		mutually_exclusive = { focus = BYZ_economic_resource_union }
+		x = 6
+		y = 6
+		cost = 10
+		#ai_will_do = { factor = 0 }
+		completion_reward = {
+		}
+	}
+	
+	focus = {
+		id = BYZ_economic_resource_union
+		icon = GFX_goal_generic_intelligence_exchange
+		prerequisite = { focus = BYZ_economic_europeon_trade_union focus = BYZ_economic_balkan_trade_union }
+		mutually_exclusive = { focus = BYZ_economic_resource_base }
+		x = 2
+		y = 6
+		cost = 10
+		#ai_will_do = { factor = 0 }
+		completion_reward = {
+		}
+	}
 }
