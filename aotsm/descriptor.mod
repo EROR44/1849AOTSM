@@ -29,6 +29,7 @@ replace_path="gfx/flags"
 replace_path="history/states"
 replace_path="history/countries"
 replace_path="history/units"
+replace_path="common/units"
 
 picture="thumb.jpg"
 name="AOTSM"
