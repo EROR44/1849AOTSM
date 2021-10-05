@@ -1,0 +1,81 @@
+###################
+# Byzantian event #
+#  by Derkyster   #
+###################
+
+add_namespace = byz
+add_namespace = arm
+
+country_event = {
+	id = byz.1
+	title = byz.1.t
+	desc = byz.1.d
+	picture = GFX_report_event_molotov_signing_pact
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = byz.1.a
+		BYZ = { add_to_faction = KLK }
+		BYZ = { add_to_faction = ARM }		
+	}
+}
+
+country_event = {
+	id = byz.2
+	title = byz.2.t
+	desc = byz.2.d
+	picture = GFX_report_event_molotov_signing_pact
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = byz.2.a
+		ai_chance = {
+			factor = 20
+		}
+		add_political_power = -100
+		hidden_effect = {
+			BYZ = {
+				declare_war_on = {
+					target = ARM
+					type = annex_everything
+				}
+			}
+		}
+	}
+	option = {
+		name = byz.2.b
+		ai_chance = {
+			factor = 40
+		}
+		add_political_power = -200
+		hidden_effect = { 
+			annex_country = { target = ARM transfer_troops = no }
+		}
+	}
+	option = {
+		name = byz.2.c	
+		ai_chance = {
+			factor = 40
+		}
+		add_political_power = -300
+		hidden_effect = {
+			annex_country = { target = ARM transfer_troops = yes }
+		}
+	}
+}
+
+country_event = {
+	id = arm.1
+	title = arm.1.t
+	desc = arm.1.d
+	picture = GFX_report_event_molotov_signing_pact
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = arm.1.a
+		annex_country = { target = KLK transfer_troops = yes }	
+	}
+}

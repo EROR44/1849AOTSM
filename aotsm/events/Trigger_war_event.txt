@@ -1,0 +1,43 @@
+####################
+# Triger war event #
+#   by Derkyster   #
+####################
+
+add_namespace = twe
+
+country_event = {
+	id = twe.1
+	title = twe.1.t
+	desc = twe.1.d
+	picture = GFX_report_event_molotov_signing_pact
+	
+	fire_only_once = yes
+	
+	trigger = {
+		tag = BYZ
+		RUM = {
+			surrender_progress > 0.70
+		}
+		RUM = { has_country_flag = RUM_vs_BYZ }
+	}
+	
+	option = {
+		name = twe.1.a
+		KLK = {
+			transfer_state = 348
+		}
+		ARM = {
+			transfer_state = 349
+			annex_country = { 
+				target = AZR transfer_troops = no 
+			}
+			country_event = { id = arm.1 days = 1 }		
+		}
+		BYZ = { 
+			annex_country = { 
+				target = RUM transfer_troops = no 
+			} 
+		}
+		RUM = { clr_country_flag = RUM_vs_BYZ }
+	}
+}
