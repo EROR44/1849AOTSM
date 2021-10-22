@@ -9,7 +9,7 @@ liberalist_peace = {
 		OR = {
 			has_government = liberalism
 			AND = {
-				NOT = { has_government = socialist }
+				NOT = { has_government = socialism }
 				NOT = { has_government = conservatism }
 				OR = {
 					any_country = {
@@ -118,13 +118,13 @@ liberalist_peace = {
 				AND = {
 					#Is NOT a major
 					NOT = { num_of_factories > 100 }
-					NOT = { tag = GER }
-					NOT = { tag = ENG }
-					NOT = { tag = ITA }
+					NOT = { tag = PRU }
+					NOT = { tag = CBI }
+					NOT = { tag = SAR }
 					NOT = { tag = FRA }
-					NOT = { tag = USA }
+					NOT = { tag = JAS }
 					NOT = { tag = JAP }
-					NOT = { tag = SOV }
+					NOT = { tag = RUS }
 				}
 				is_puppet = yes
 			}
@@ -137,26 +137,6 @@ liberalist_peace = {
 				}
 			}
 		}
-		modifier = { #Don't release these nations
-			factor = 0
-			FROM = {
-				OR = { 
-					tag = SIK
-					tag = PRC
-					tag = GXC
-					tag = YUN
-					tag = SHX
-					tag = XSM
-					AND = { #Only Japan can release Meng.
-						OR = {
-							tag = MEN
-							#tag = MAN #Manchukuo
-						}
-						ROOT = { NOT = { tag = JAP } }
-					}
-				}
-			}
-		}
 	}
 
 	# ROOT = Taker, FROM = Giver
@@ -166,81 +146,23 @@ liberalist_peace = {
 			factor = 0
 			#Is NOT a major
 			NOT = { num_of_factories > 100 }
-			NOT = { tag = GER }
-			NOT = { tag = ENG }
-			NOT = { tag = ITA }
+			NOT = { tag = PRU }
+			NOT = { tag = CBI }
+			NOT = { tag = SAR }
 			NOT = { tag = FRA }
-			NOT = { tag = USA }
+			NOT = { tag = JAS }
 			NOT = { tag = JAP }
-			NOT = { tag = SOV }
+			NOT = { tag = RUS }
 			NOT = { is_owner_neighbor_of = FROM }
-		}
-		modifier = { #Strongly seek to establish a puppet after taking Moscow if Japan and Germany - test. Germany also needs Northern Urals.
-			factor = 50
-			FROM = { tag = SOV }
-			NOT = { 
-				219 = { #This seems to make Soviet unreleasable by AI for some reason.
-					OR = {
-						is_owned_by = SOV
-						has_claimed_state_in_peace_conference = ROOT
-					}
-				}
-			}
-			OR = {
-				tag = JAP
-				tag = GER
-			}
-			OR = {
-				tag = JAP
-				581 = { is_owned_by = ROOT }
-			}
 		}
 		modifier = {
 			factor = 0
 			tag = TUR
 			FROM = { tag = GRE }
 		}
-		modifier = { #Japan wants PUPPETS for it's co-prosperity sphere instead of direct control.
-			factor = 100
-			tag = JAP
-			#FROM = { capital_scope = { is_on_continent = asia } }
-			FROM = {
-				OR = {
-					tag = BHU
-					tag = MEN
-					tag = NEP
-					tag = SIA
-					tag = SIK
-					tag = TIB
-					tag = YUN
-					tag = MON
-					tag = RAJ
-					tag = PHI
-				}
-			}
-		}
 		modifier = {
 			factor = 0
 			is_puppet = yes
-		}
-		modifier = { #Poland probably shouldn't be puppeted by liberalists
-			factor = 0
-			FROM = { tag = POL }
-		}
-		modifier = { #Dismantle Yugoslavia (revisit in the future)
-			factor = 0
-			FROM = { tag = YUG }
-		}
-		modifier = { #Do not puppet Soviet Union unless a border with Moscow is established...
-			factor = 0
-			FROM = { tag = SOV }
-			NOT = {
-				219 = {
-					any_neighbor_state = {
-						is_owned_by = ROOT
-					}
-				}
-			}
 		}
 		modifier = {
 			factor = 0
@@ -260,9 +182,6 @@ liberalist_peace = {
 					}
 				}
 			}
-			#Workaround for 1.1 beta
-			FROM = { NOT = { tag = BOL } }
-			FROM = { NOT = { tag = PAR } }
 			#End workaround
 			NOT = {
 				FROM = {
@@ -281,7 +200,7 @@ liberalist_peace = {
 				AND = {
 					FROM = { capital_scope = { is_on_continent = europe } }
 					FROM = { NOT = { tag = IRE } }
-					FROM = { NOT = { tag = ENG } }
+					FROM = { NOT = { tag = CBI } }
 				}
 				NOT = {
 					FROM = {
@@ -296,25 +215,6 @@ liberalist_peace = {
 				NOT = { any_owned_state = { OR = { is_coastal = yes is_island_state = yes } } }
 			}
 		}
-		# modifier = { #Don't release Chinese warlords - Japan has a focus to take care of them and is allowed to annex them directly...
-		# 	factor = 0
-		# 	FROM = {
-		# 		OR = {
-		# 			tag = PRC
-		# 			tag = GXC
-		# 			tag = YUN
-		# 			tag = SHX
-		# 			tag = XSM
-		# 			tag = SIK
-		# 			original_tag = PRC
-		# 			original_tag = GXC
-		# 			original_tag = YUN
-		# 			original_tag = SHX
-		# 			original_tag = XSM
-		# 			original_tag = SIK					
-		# 		}
-		# 	}
-		# }
 		modifier = { #Don't puppet nations in civil war... this is too buggy.
 			factor = 0
 			FROM = { has_civil_war = yes }
@@ -378,51 +278,9 @@ liberalist_peace = {
 				}
 			}
 		}
-
-		modifier = { #Japan doesn't puppet Australia or NZ
-			factor = 0
-			tag = JAP
-			FROM = { 
-				OR = {
-					tag = AST 
-					tag = NZL
-				}
-			}
-		}
-		modifier = { #If Japan is in faction, leave Asia and Australia to Japan.
-			factor = 0
-			is_in_faction_with = JAP
-			JAP = { is_puppet = no }
-			NOT = { tag = JAP }
-			FROM = {
-				capital_scope = {
-					OR = {
-						is_on_continent = asia
-						is_on_continent = australia
-					}
-				}
-			}
-		}
-		modifier = { #Japan doesn't puppet non-Asian nations if in faction with a major liberalist European power
-			factor = 0
-			tag = JAP
-			OR = {
-				is_in_faction_with = GER
-				is_in_faction_with = FRA
-				is_in_faction_with = ITA
-			}
-			FROM = {
-				OR = {
-					NOT = { capital_scope = { is_on_continent = asia } }
-					tag = FRA
-					tag = ENG
-					tag = HOL
-				}
-			}
-		}
 		modifier = {
 			factor = 0
-			tag = ITA
+			tag = SAR
 			FROM = {
 				capital_scope = {
 					OR = {
@@ -470,81 +328,12 @@ liberalist_peace = {
 				is_in_array = { subject_states@FROM = this }
 			}
 		}
-
-		modifier = { #Puppet Bulgarias core isntead of annexing them (THE COMEBACK)
-			factor = 0.5
-			
-			any_neighbor_state = {
-				is_controlled_by = BUL
-				is_core_of = BUL
-			}
-			BUL = {
-				is_ai = no
-				has_capitulated = no
-				is_puppet = no
-				NOT = {has_war_with = FROM}
-			}
-			is_core_of = BUL
-		}
 	}
 	
 	# ROOT = Taker, FROM = State
 	take_states = {
 		factor = 600 #Up from 500 #200 - vanilla		
-		modifier = { #Japan prefers puppets for it's co-prosperity sphere instead of direct control.
-			factor = 0
-			OR = {
-				tag = JAP
-				is_in_faction_with = JAP
-			}
-			NOT = {
-				FROM = {
-					OR = {
-						is_claimed_by = ROOT
-						is_core_of = ROOT
-					}
-				}
-			}
-			FROM = {
-				OR = {
-					is_core_of = BHU
-					is_core_of = MEN
-					is_core_of = NEP
-					is_core_of = SIA
-					is_core_of = SIK
-					is_core_of = TIB
-					is_core_of = YUN
-					is_core_of = MON
-					is_core_of = RAJ
-					is_core_of = PHI
-				}
-			}
-		}
-		
-		modifier = { #Don't screw over Bulgarias cores if possible
-			factor = -10
-
-			NOT = {
-				FROM = {
-					is_core_of = ROOT
-				}
-			}
-			FROM = {
-				AND = {
-					controller = {
-						is_ai = no
-						has_capitulated = no
-						is_puppet = no
-						NOT = {has_war_with = ROOT}
-						
-					}
-					OR = {
-						is_core_of = BUL
-						is_claimed_by = BUL
-					}
-				}
-			}
-		}
+	
 		modifier = { # prefer not to take from humans in our own faction
 			factor = 0.5
 			NOT = { 
@@ -584,42 +373,11 @@ liberalist_peace = {
 			}
 			FROM = {
 				OR = {
-					is_claimed_by = PRC
-					is_claimed_by = CHI
-					is_core_of = CHI
-					is_core_of = PRC
-				}
-			}
-			#Can annex Chinese Warlords.
-			NOT = { 
-				FROM = { 
-					owner = { 
-						OR = {
-							tag = GXC
-							tag = PRC
-							tag = YUN
-							tag = SHX
-							tag = XSM
-						}
-					} 
-				} 
-			}
-			NOT = {
-				OR = {
-					tag = CHI
-					tag = PRC
-					tag = GXC
-					tag = YUN
-					tag = SHX
-					tag = XSM
+					is_claimed_by = QIN
+					is_core_of = QIN
 				}
 			}
 
-			#liberalist versions of these countries can take Chinese land
-			NOT = { tag = MON }
-			NOT = { tag = TIB }
-			NOT = { tag = SIK }
-			NOT = { tag = MEN }
 		}
 		modifier = { #Only majors can take non-neighboring coastal territories for now to prevent weird results with 1.1
 			factor = 0
@@ -655,50 +413,20 @@ liberalist_peace = {
 			}
 			#Is NOT a major
 			NOT = { num_of_factories > 100 }
-			NOT = { tag = GER }
-			NOT = { tag = ENG }
-			NOT = { tag = ITA }
+			NOT = { tag = PRU }
+			NOT = { tag = CBI }
+			NOT = { tag = SAR }
 			NOT = { tag = FRA }
-			NOT = { tag = USA }
+			NOT = { tag = JAS }
 			NOT = { tag = JAP }
-			NOT = { tag = SOV }			
-		}
-		modifier = { #If in axis, Japan doesn't take territory out of Asia or Australia or South America or North America (to do)
-			factor = 0
-			tag = JAP
-			OR = {
-				is_in_faction_with = GER
-				is_in_faction_with = FRA
-				is_in_faction_with = ITA
-			}
-			NOT = {
-				FROM = {
-					OR = {
-						is_claimed_by = ROOT
-						is_core_of = ROOT
-					}
-				}
-			}
-			NOT = {
-				FROM = {
-					OR = {
-						is_on_continent = asia
-						is_on_continent = australia
-						#is_on_continent = south_america
-						#AND = { #Deal with this with Japanese specific AI instead, not restrictive enough here
-						#	is_on_continent = north_america
-						#	is_coastal = yes
-						#}
-					}
-				}			
-			}
+			NOT = { tag = RUS }			
 		}
 		modifier = { #If Japan is in faction, leave Asia and Australia to Japan.
 			factor = 0
 			OR = {
 				is_in_faction_with = JAP
 				AND = { #Workaround for a puppeted USA being given land in Asia
-					tag = USA
+					tag = JAS
 					JAP = { has_government = liberalism }
 				}
 			}
@@ -944,35 +672,28 @@ liberalist_peace = {
 			}
 			OR = {
 				#Must be taken in contiguous chunks.
-				AND = {
-					FROM = { is_core_of = SOV }
-					OR = { #Germany can always take Soviet land
-						NOT = { tag = GER }
-						NOT = { FROM = { is_on_continent = europe } }
-					}
-				}
 				FROM = { 
 					is_on_continent = europe
 					is_coastal = yes
 					#Temp Workaround since "is_island_state" doesn't cover some cases like Gotland, Iceland, Crete, Norn Iron
-					NOT = { is_core_of = ENG }
-					NOT = { is_core_of = GRE }
+					NOT = { is_core_of = CBI }
+					NOT = { is_core_of = BYZ }
 					NOT = { is_core_of = SWE }
 					NOT = { is_core_of = DEN }
-					NOT = { is_core_of = SOV }
-					NOT = { owner = { tag = ENG } } #Cyprus
+					NOT = { is_core_of = RUS }
+					NOT = { owner = { tag = CBI } } #Cyprus
 				}
 				#Minor old world AI sticks to their own continents 
 				AND = {
 					#Is NOT a major
 					NOT = { num_of_factories > 100 }
-					NOT = { tag = GER }
-					NOT = { tag = ENG }
-					NOT = { tag = ITA }
+					NOT = { tag = PRU }
+					NOT = { tag = CBI }
+					NOT = { tag = SAR }
 					NOT = { tag = FRA }
-					NOT = { tag = USA }
+					NOT = { tag = JAS }
 					NOT = { tag = JAP }
-					NOT = { tag = SOV }
+					NOT = { tag = RUS }
 					OR = {
 						AND = {
 							capital_scope = { is_on_continent = europe }
@@ -1019,31 +740,8 @@ liberalist_peace = {
 		
 		modifier = {# Italy doesn't care about Asia, but might consider taking south american colonies held by the allies.
 			factor = 0
-			tag = ITA
+			tag = SAR
 			OR = {
-				#For now don't take Russian or Northern European lands at all if in the same faction as germany.
-				AND = {
-					is_faction_leader = no
-					is_in_faction_with = GER
-					OR = {
-						FROM = { owner = { tag = SOV } }
-						FROM = {
-							is_island_state = no
-							is_core_of = ENG
-						}
-						FROM = { 
-							OR = {
-								is_core_of = DEN
-								is_core_of = IRE
-								is_core_of = SWE
-								is_core_of = NOR
-								is_core_of = GER
-								is_core_of = FIN
-								owner = { tag = SWE }
-							}
-						}
-					}
-				}
 				FROM = {
 					NOT = {
 						OR = {
@@ -1053,7 +751,7 @@ liberalist_peace = {
 							AND = {
 								is_on_continent = south_america
 								OR = {
-									owner = { tag = ENG }
+									owner = { tag = CBI }
 									owner = { tag = FRA }
 									owner = { tag = HOL }
 									is_island_state = yes
@@ -1111,22 +809,6 @@ liberalist_peace = {
 				}
 			}
 		}
-		modifier ={ #Do not take Greek territory directly if allied with Italy - except for Bulgaria and Turkey.
-			factor = 0
-			NOT = { tag = ITA }
-			NOT = { tag = TUR }
-			NOT = { tag = BUL }
-			is_in_faction_with = ITA
-			FROM = { is_core_of = GRE }
-			NOT = { 
-				FROM = { 
-					OR = {
-						is_claimed_by = ROOT
-						is_core_of = ROOT
-					}
-				} 
-			}
-		}
 		modifier = { #Caribbean islands only take islands for now - might consider expanding later.
 			factor = 0
 			NOT = { 
@@ -1136,11 +818,6 @@ liberalist_peace = {
 						is_core_of = ROOT
 					}
 				} 
-			}
-			OR = {
-				tag = DOM
-				tag = CUB
-				tag = HAI
 			}
 			FROM = { 
 				OR = {
@@ -1154,14 +831,13 @@ liberalist_peace = {
 		}
 		modifier = { #Old World AI will generally stick to the old world and new world to the new.
 			factor = 0
-			NOT = { tag = ITA }
+			NOT = { tag = SAR }
 			NOT = { tag = JAP }
 			OR = { #Danish territories can be taken by these nations
 				NOT = { FROM = { is_core_of = DEN } }
 				AND = {
-					NOT = { tag = USA }
-					NOT = { tag = GER }
-					NOT = { tag = ENG }
+					NOT = { tag = PRU }
+					NOT = { tag = CBI }
 					NOT = { tag = SWE }
 					NOT = { tag = NOR }
 				}
@@ -1181,7 +857,7 @@ liberalist_peace = {
 						OR = { #Colonial core workaround
 							is_on_continent = europe
 							AND = {
-								NOT = { is_core_of = ENG }
+								NOT = { is_core_of = CBI }
 								NOT = { is_core_of = DEN }
 								NOT = { is_core_of = HOL }
 							}
@@ -1213,7 +889,7 @@ liberalist_peace = {
 							is_on_continent = australia
 							AND = {
 								is_on_continent = asia
-								NOT = { is_core_of = SOV }
+								NOT = { is_core_of = RUS }
 							}
 						}
 					}
