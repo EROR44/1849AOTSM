@@ -27,7 +27,7 @@ news_event = { # Austria-Prussian war
 	
 	option = {
 		name = news.1.c
-		trigger = { NOT = { tag = AUS tag = PRU }
+		trigger = { NOT = { tag = AUS tag = PRU } }
 		add_stability = -0.01
 	}
 }
@@ -36,7 +36,7 @@ news_event = { # Prussian Win
 	id = news.2
 	title = news.2.t
 	desc = news.2.d
-	picture = GFX_news_event_002
+	picture = GFX_news_event_001
 	
 	major = yes
 	
@@ -51,7 +51,7 @@ news_event = { # Austria Win
 	id = news.3
 	title = news.3.t
 	desc = news.3.d
-	picture = GFX_news_event_003
+	picture = GFX_news_event_001
 	
 	major = yes
 	
@@ -60,4 +60,58 @@ news_event = { # Austria Win
 	option = {
 		name = news.3.a
 	}	
+}
+
+news_event = { # German Economic Wonder
+	id = news.4
+	title = news.4.t
+	desc = news.4.d
+	picture = GFX_news_event_001
+	
+	major = yes
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = news.4.a
+		trigger = { NOT = { tag = PRU } }
+	}
+	
+	option = {
+		name = news.4.b
+		trigger = { tag = PRU }
+		if = {
+			limit = { has_completed_focus = PRU_economi_sauer }
+			add_timed_idea = { idea = PRU_sauer_wonder days = 365 }
+		}
+		if = {
+			limit = { has_completed_focus = PRU_economi_domr }
+			add_timed_idea = { idea = PRU_domr_wonder days = 365 }
+		}
+		if = {
+			limit = { has_completed_focus = PRU_economi_ebik }
+			add_timed_idea = { idea = PRU_ebik_wonder days = 365 }
+		}
+	}
+}
+
+news_event = { # Second German Reich
+	id = news.5
+	title = news.5.t
+	desc = news.5.d
+	picture = GFX_news_event_001
+	
+	major = yes
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = news.5.a
+		trigger = { NOT = { tag = PRU } }
+	}	
+	
+	option = {
+		name = news.5.b
+		trigger = { tag = PRU }
+	}
 }
