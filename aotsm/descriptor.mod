@@ -1,4 +1,4 @@
-version="1.10.8"
+version="1.11.3"
 tags={
 	"Alternative History"
 	"Map"
@@ -70,4 +70,4 @@ replace_path="map"
 
 picture="thumb.jpg"
 name="AOTSM"
-supported_version="1.10.8"
+supported_version="1.11.3"
