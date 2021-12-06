@@ -129,10 +129,11 @@ focus_tree = {
 			hidden_effect = {
 				set_technology = { 
 					interwar_antitank = 1 
-					gwtank = 1
-					basic_light_tank = 1
-					improved_light_tank = 1
-					basic_medium_tank = 1
+					gwtank_chassis = 1
+					basic_light_tank_chassis = 1
+					improved_light_tank_chassis = 1
+					basic_medium_tank_chassis = 1
+					improved_medium_tank_chassis = 1
 				}
 			}
 			set_country_flag = PRU_vs_AUS_1
@@ -624,6 +625,7 @@ focus_tree = {
 					type = annex_everything
 				}
 			}
+			PRU = { set_country_flag = PRU_vs_AUS_3 }
 		}
 	}
 	
@@ -651,6 +653,9 @@ focus_tree = {
 				remove_idea = potential_world_power
 				add_idea = world_power
 			}
+			hidden_effect = {
+				PRU = { country_event = ger.1 days = 7 }
+			}
 		}
 	}
 	
@@ -674,6 +679,63 @@ focus_tree = {
 		#search_filters = {  }
 		
 		completion_reward = {
+			add_stability = 0.1
+		}
+	}
+	
+	#Domestic policy
+	
+	#Bismark
+	
+	focus = {
+		id = PRU_bismark_first_kanzler
+		icon = GFX_goal_tfv_sever_ties_with_uk
+		x = -9
+		y = 12
+		cost = 7
+		prerequisite = { focus = PRU_shot_focus }
+		mutually_exclusive = { focus = PRU_emperor_domestic }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			set_politics = { ruling_party = conservatism elections_allowed = no }
+		}
+	}
+	
+	#Emperor
+	
+	focus = {
+		id = PRU_emperor_domestic
+		icon = GFX_goal_tfv_strengthen_commonwealth_ties
+		x = 9
+		y = 12
+		cost = 7
+		prerequisite = { focus = PRU_shot_focus }
+		mutually_exclusive = { focus = PRU_bismark_first_kanzler }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_stability = 0.1
 		}
 	}
 	
@@ -1177,6 +1239,7 @@ focus_tree = {
 		#search_filters = {  }
 		
 		completion_reward = {
+			custom_effect_tooltip = PRU_resourse_effect
 		}
 	}
 	
@@ -1848,7 +1911,7 @@ focus_tree = {
 		#search_filters = {  }
 		
 		completion_reward = {
-			army_experience = 50
+			army_experience = 100
 			if = { 
 				limit = {
 					has_idea = PRU_technology_taktic_2 
@@ -1876,6 +1939,7 @@ focus_tree = {
 					add_idea = PRU_legion_taktic_3
 				}
 			}
+			custom_effect_tooltip = PRU_creating_of_wehrmacht_effect
 		}
 	}
 	
@@ -1964,6 +2028,23 @@ focus_tree = {
 		#search_filters = {  }
 		
 		completion_reward = {
+			navy_experience = 75 
+			random_owned_controlled_state = {
+				limit = {
+					is_coastal = yes
+					free_building_slots = {
+						building = dockyard
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 3
+				add_building_construction = {
+					type = dockyard
+					level = 3
+					instant_build = yes
+				}
+			}
 		}
 	}
 	
@@ -1988,6 +2069,12 @@ focus_tree = {
 		#search_filters = {  }
 		
 		completion_reward = {
+			add_tech_bonus = {
+				name = GER_u_boat_effort
+				bonus = 1.0
+				uses = 2
+				category = ss_tech
+			}
 		}
 	}
 	
@@ -2012,6 +2099,55 @@ focus_tree = {
 		#search_filters = {  }
 		
 		completion_reward = {
+			navy_experience = 75 
+			random_owned_controlled_state = {
+				limit = {
+					is_coastal = yes
+					free_building_slots = {
+						building = dockyard
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = dockyard
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_owned_controlled_state = {
+				limit = {
+					is_coastal = yes
+					free_building_slots = {
+						building = dockyard
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = dockyard
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_owned_controlled_state = {
+				limit = {
+					is_coastal = yes
+					free_building_slots = {
+						building = dockyard
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = dockyard
+					level = 1
+					instant_build = yes
+				}
+			}
 		}
 	}
 	
@@ -2036,6 +2172,8 @@ focus_tree = {
 		#search_filters = {  }
 		
 		completion_reward = {
+			navy_experience = 100
+			custom_effect_tooltip = PRU_creating_of_kriegsmarine_effect
 		}
 	}
 	
@@ -2087,6 +2225,18 @@ focus_tree = {
 		#search_filters = {  }
 		
 		completion_reward = {
+			add_tech_bonus = {
+				name = fighter_bonus
+				bonus = 1.0
+				uses = 2
+				technology = early_fighter
+				technology = fighter1
+				technology = fighter2
+				technology = fighter3
+				technology = heavy_fighter1
+				technology = heavy_fighter2
+				technology = heavy_fighter3
+			}
 		}
 	}
 	
@@ -2111,6 +2261,12 @@ focus_tree = {
 		#search_filters = {  }
 		
 		completion_reward = {
+			add_doctrine_cost_reduction = {
+				name =  air_doc_bonus
+				cost_reduction = 0.5
+				uses = 1
+				category = air_doctrine
+			}
 		}
 	}
 	
@@ -2135,6 +2291,15 @@ focus_tree = {
 		#search_filters = {  }
 		
 		completion_reward = {
+			add_tech_bonus = {
+				name = bomber_bonus
+				bonus = 1.0
+				uses = 2
+				technology = strategic_bomber1
+				technology = strategic_bomber2
+				technology = strategic_bomber3
+				category = tactical_bomber
+			}
 		}
 	}
 	
@@ -2159,6 +2324,12 @@ focus_tree = {
 		#search_filters = {  }
 		
 		completion_reward = {
+			add_doctrine_cost_reduction = {
+				name =  air_doc_bonus
+				cost_reduction = 0.5
+				uses = 3
+				category = air_doctrine
+			}
 		}
 	}
 	
@@ -2183,6 +2354,8 @@ focus_tree = {
 		#search_filters = {  }
 		
 		completion_reward = {
+			air_experience = 100
+			custom_effect_tooltip = PRU_creating_of_luftwaffe_effect
 		}
 	}
 	
