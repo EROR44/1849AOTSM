@@ -19,7 +19,7 @@ focus_tree = {
 	reset_on_civilwar = no
 	
 	initial_show_position = {
-		focus = FRA_continue_Lagranj_course
+		focus = FRA_convocation_of_the_assembly
 	}
 
 #	focus = {
@@ -60,13 +60,48 @@ focus_tree = {
 
 	
 	focus = {
-		id = FRA_Clode_Bule_plan
-		icon = GFX_goal_generic_consumer_goods
-		mutually_exclusive = { focus = FRA_Robert_Malo_plan }
-		x = -8
-		y = 0
-		relative_position_id = FRA_continue_Lagranj_course
+		id = FRA_convocation_of_the_assembly
+		icon = GFX_goal_generic_improve_relations
 		
+		x = 2
+		y = 0
+		
+		
+		cost = 10
+		#search_filters = {   }
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+			add_political_power = 150
+		}
+	}
+	
+	focus = {
+		id = FRA_economic_quiestion
+		icon = GFX_focus_generic_industry_3
+		
+		x = -2
+		y = 1
+		relative_position_id = FRA_convocation_of_the_assembly
+		prerequisite = { focus = FRA_convocation_of_the_assembly }
+		cost = 10
+		#search_filters = {   }
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+			add_idea = FRA_economic_update
+		}
+	}
+	focus = {
+		id = FRA_expand_resourses
+		icon = GFX_goal_generic_construction2
+		
+		x = -3
+		y = 1
+		relative_position_id = FRA_economic_quiestion
+		prerequisite = { focus = FRA_economic_quiestion }
 		cost = 10
 		#search_filters = {   }
 		
@@ -77,13 +112,13 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = FRA_Robert_Malo_plan
-		icon = GFX_goal_generic_consumer_goods
-		mutually_exclusive = { focus = FRA_Clode_Bule_plan }
-		x = -4
-		y = 0
-		relative_position_id = FRA_continue_Lagranj_course
+		id = FRA_the_program_of_prom_reorg
+		icon = GFX_goal_generic_construct_civilian
 		
+		x = -1
+		y = 1
+		relative_position_id = FRA_economic_quiestion
+		prerequisite = { focus = FRA_economic_quiestion }
 		cost = 10
 		#search_filters = {   }
 		
@@ -93,13 +128,33 @@ focus_tree = {
 			
 		}
 	}
-####HISTORICAL_POLITICAL_WAY#########
 	focus = {
-		id = FRA_continue_Lagranj_course
+		id = FRA_prom_reorg_var_1
 		icon = GFX_goal_generic_consumer_goods
-		mutually_exclusive = { focus = FRA_go_with_opposition }
-		x = 0
-		y = 0
+		
+		x = -1
+		y = 1
+		relative_position_id = FRA_the_program_of_prom_reorg
+		prerequisite = { focus = FRA_the_program_of_prom_reorg }
+		mutually_exclusive = { focus = FRA_prom_reorg_var_2 }
+		cost = 10
+		#search_filters = {   }
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+			
+		}
+	}
+	focus = {
+		id = FRA_prom_reorg_var_2
+		icon = GFX_goal_generic_improve_relations
+		
+		x = 1
+		y = 1
+		relative_position_id = FRA_the_program_of_prom_reorg
+		prerequisite = { focus = FRA_the_program_of_prom_reorg }
+		mutually_exclusive = { focus = FRA_prom_reorg_var_1 }
 		cost = 10
 		#search_filters = {   }
 		
@@ -111,13 +166,13 @@ focus_tree = {
 	}
 	focus = {
 		id = FRA_
-		icon = GFX_goal_generic_consumer_goods
-		x = 0
-		y = 1
-		relative_position_id = FRA_continue_Lagranj_course
+		icon = GFX_goal_generic_improve_relations
 		
+		x = 2
+		y = 1
+		relative_position_id = FRA_economic_quiestion
+		prerequisite = { focus = FRA_economic_quiestion }
 		cost = 10
-		prerequisite = { focus = FRA_continue_Lagranj_course }
 		#search_filters = {   }
 		
 		available_if_capitulated = yes
@@ -126,17 +181,219 @@ focus_tree = {
 			
 		}
 	}
-#########GOVERMENT_COUP_WAY###########
+	
+	focus = {
+		id = FRA_extend_the_Fobers_agreement
+		icon = GFX_goal_generic_national_unity
+		
+		x = 2
+		y = 1
+		relative_position_id = FRA_convocation_of_the_assembly
+		prerequisite = { focus = FRA_convocation_of_the_assembly }
+		cost = 10
+		#search_filters = {   }
+		mutually_exclusive= { focus = FRA_french_mandate }
+		available_if_capitulated = yes
+
+		completion_reward = {
+			
+		}
+	}
+	focus = {
+		id = FRA_french_mandate
+		icon = GFX_goal_generic_position_armies
+		
+		x = 6
+		y = 1
+		relative_position_id = FRA_convocation_of_the_assembly
+		prerequisite = { focus = FRA_convocation_of_the_assembly }
+		cost = 10
+		#search_filters = {   }
+		mutually_exclusive= { focus = FRA_convocation_of_the_assembly }
+		available_if_capitulated = yes
+
+		completion_reward = {
+			
+		}
+	}
+	focus = {
+		id = FRA_decline_export_tariff #пошлина
+		icon = GFX_goal_generic_positive_trade_relations
+		
+		x = 2
+		y = 1
+		relative_position_id = FRA_extend_the_Fobers_agreement
+		prerequisite = { 
+			focus = FRA_extend_the_Fobers_agreement
+			focus = FRA_french_mandate
+		}
+		cost = 10
+		#search_filters = {   }
+
+		available_if_capitulated = yes
+
+		completion_reward = {
+			
+		}
+	}
+	focus = {
+		id = FRA_trade_convention
+		icon = GFX_goal_generic_trade
+		
+		x = 0
+		y = 2
+		relative_position_id = FRA_extend_the_Fobers_agreement
+		prerequisite = { focus = FRA_extend_the_Fobers_agreement }
+		prerequisite = { focus = FRA_decline_export_tariff }
+		cost = 10
+		#search_filters = {   }
+
+		available_if_capitulated = yes
+
+		completion_reward = {
+			
+		}
+	}
+	
+	focus = {
+		id = FRA_the_politic_of_trade_dependency
+		icon = GFX_goal_generic_dangerous_deal
+		
+		x = 0
+		y = 2
+		relative_position_id = FRA_french_mandate
+		prerequisite = { focus = FRA_french_mandate }
+		prerequisite = { focus = FRA_decline_export_tariff }
+		cost = 10
+		#search_filters = {   }
+
+		available_if_capitulated = yes
+
+		completion_reward = {
+			
+		}
+	}
+	
+	focus = {
+		id = FRA_long_live_the_republick
+		icon = GFX_focus_generic_self_management
+		
+		x = 11
+		y = 0
+		relative_position_id = FRA_convocation_of_the_assembly
+		mutually_exclusive = { focus = FRA_go_with_opposition }
+		cost = 10
+		#search_filters = {   }
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+			
+		}
+	}
+	
+	focus = {
+		id = FRA_speech_to_the_nation
+		icon = GFX_goal_generic_propaganda
+		
+		x = 0
+		y = 2 	
+		relative_position_id = FRA_long_live_the_republick
+		prerequisite = { focus = FRA_long_live_the_republick }
+		prerequisite = { focus = FRA_coop_with_liberal }
+		prerequisite = { focus = FRA_ban_the_opposition }
+		cost = 3
+		#search_filters = {   }
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+			
+		}
+	}
+	focus = {
+		id = FRA_coop_with_liberal
+		icon = GFX_goal_generic_major_alliance
+		x = -2
+		y = 1
+		relative_position_id = FRA_long_live_the_republick
+		prerequisite = { focus = FRA_long_live_the_republick }
+			mutually_exclusive = { focus = FRA_coop_with_conservators }
+		cost = 3
+		#search_filters = {   }
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+			
+		}
+	}
+	focus = {
+		id = FRA_coop_with_conservators
+		icon = GFX_goal_generic_major_alliance
+		x = 0
+		y = 1
+		relative_position_id = FRA_long_live_the_republick
+		prerequisite = { focus = FRA_long_live_the_republick }
+		mutually_exclusive = { focus = FRA_coop_with_liberal }
+		cost = 3
+		#search_filters = {   }
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+			
+		}
+	}
+	focus = {
+		id = FRA_ban_the_opposition
+		icon = GFX_goal_generic_political_pressure
+		
+		x = 2
+		y = 1
+		relative_position_id = FRA_long_live_the_republick
+		prerequisite = { focus = FRA_long_live_the_republick }
+		cost = 3
+		#search_filters = {   }
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+			
+		}
+	}
+	focus = {
+		id = FRA_unite_the_divided_nation
+		icon = GFX_goal_molotov_ribbentrop_pact
+		
+		x = 0
+		y = 3
+		relative_position_id = FRA_speech_to_the_nation
+		prerequisite = { focus = FRA_speech_to_the_nation }
+		cost = 10
+		#search_filters = {   }
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+			
+		}
+	}
+	
 	focus = {
 		id = FRA_go_with_opposition
-		icon = GFX_goal_generic_consumer_goods
-		mutually_exclusive = { focus = FRA_continue_Lagranj_course }
-		x = 6
+		icon = GFX_focus_generic_monarchy_1
+		
+		x = 7
 		y = 0
-		relative_position_id = FRA_continue_Lagranj_course
-		
+		relative_position_id = FRA_long_live_the_republick
+		mutually_exclusive = { focus = FRA_long_live_the_republick }
 		cost = 10
 		#search_filters = {   }
+		
+		available = {
+			has_country_flag = FRA_opposition_choosen
+		}
 		
 		available_if_capitulated = yes
 
@@ -144,112 +401,5 @@ focus_tree = {
 			
 		}
 	}
-	focus = {
-		id = FRA_anti_goverment_propaganda
-		icon = GFX_goal_generic_consumer_goods
-		x = 0
-		y = 1
-		relative_position_id = FRA_go_with_opposition
-		
-		cost = 10
-		prerequisite = { focus = FRA_go_with_opposition }
-		#search_filters = {   }
-		
-		available_if_capitulated = yes
-
-		completion_reward = {
-			
-		}
-	}
-	focus = {
-		id = FRA_mass_manifestations
-		icon = GFX_goal_generic_consumer_goods
-		x = 0
-		y = 1
-		relative_position_id = FRA_anti_goverment_propaganda
-		
-		cost = 10
-		prerequisite = { focus = FRA_anti_goverment_propaganda }
-		#search_filters = {   }
-		
-		available_if_capitulated = yes
-
-		completion_reward = {
-			
-		}
-	}
-	focus = {
-		id = FRA_demand_for_the_resignation_of_the_government
-		icon = GFX_goal_generic_consumer_goods
-		x = 0
-		y = 1
-		relative_position_id = FRA_mass_manifestations
-		
-		cost = 10
-		prerequisite = { focus = FRA_mass_manifestations }
-		#search_filters = {   }
-		
-		available_if_capitulated = yes
-
-		completion_reward = {
-			
-		}
-	}
-	focus = {
-		id = FRA_return_of_monarhy
-		icon = GFX_goal_generic_consumer_goods
-		x = 3
-		y = 1
-		mutually_exclusive = { focus = FRA_create_conservative_coalition }
-		mutually_exclusive = { focus = FRA_the_new_autocratic_regime }
-		relative_position_id = FRA_demand_for_the_resignation_of_the_government
-		
-		cost = 10
-		prerequisite = { focus = FRA_demand_for_the_resignation_of_the_government }
-		#search_filters = {   }
-		
-		available_if_capitulated = yes
-
-		completion_reward = {
-			
-		}
-	}
-	focus = {
-		id = FRA_the_new_autocratic_regime
-		icon = GFX_goal_generic_consumer_goods
-		x = 0
-		y = 1
-		mutually_exclusive = { focus = FRA_create_conservative_coalition }
-		mutually_exclusive = { focus = FRA_return_of_monarhy }
-		relative_position_id = FRA_demand_for_the_resignation_of_the_government
-		
-		cost = 10
-		prerequisite = { focus = FRA_demand_for_the_resignation_of_the_government }
-		#search_filters = {   }
-		
-		available_if_capitulated = yes
-
-		completion_reward = {
-			
-		}
-	}
-	focus = {
-		id = FRA_create_conservative_coalition
-		icon = GFX_goal_generic_consumer_goods
-		x = -3
-		y = 1
-		mutually_exclusive = { focus = FRA_return_of_monarhy }
-		mutually_exclusive = { focus = FRA_the_new_autocratic_regime }
-		relative_position_id = FRA_demand_for_the_resignation_of_the_government
-		
-		cost = 10
-		prerequisite = { focus = FRA_demand_for_the_resignation_of_the_government }
-		#search_filters = {   }
-		
-		available_if_capitulated = yes
-
-		completion_reward = {
-			
-		}
-	}
+	
 }
