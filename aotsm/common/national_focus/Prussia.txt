@@ -739,6 +739,388 @@ focus_tree = {
 		}
 	}
 	
+	#Austria question
+	
+	#By force
+	
+	focus = {
+		id = PRU_oppressing_of_austria
+		icon = GFX_goal_generic_forceful_treaty
+		x = 2
+		y = 13
+		cost = 7
+		prerequisite = { focus = PRU_bismark_first_kanzler focus = PRU_emperor_domestic	}
+		mutually_exclusive = { focus = PRU_integration_of_austria }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_stability = -0.05
+			add_manpower = -50000
+		}
+	}
+	
+	focus = {
+		id = PRU_destroy_dangerous_element
+		icon = GFX_goal_generic_political_pressure
+		x = 2
+		y = 15
+		cost = 7
+		prerequisite = { focus = PRU_oppressing_of_austria }
+		prerequisite = { focus = PRU_set_loyal_goverment }
+		#mutually_exclusive = { }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_manpower = -18933
+			4 = {
+				add_resistance = 15
+				add_manpower = -432
+			}
+			152 = {
+				add_resistance = 15
+				add_manpower = -1211
+			}
+			153 = {
+				add_resistance = 15
+				add_manpower = -938
+			}
+		}
+	}
+	
+	focus = {
+		id = PRU_march_in_viena
+		icon = GFX_focus_generic_little_entente
+		x = 1
+		y = 16
+		cost = 7
+		prerequisite = { focus = PRU_destroy_dangerous_element }
+		#mutually_exclusive = { }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_state_core = 152
+			add_state_core = 153
+			add_manpower = -25000
+			4 = {
+				add_resistance = 25
+				add_manpower = -7433
+			}
+		}
+	}
+	
+	#Neutral
+	
+	focus = {
+		id = PRU_set_loyal_goverment
+		icon = GFX_focus_generic_home_defense
+		x = 0
+		y = 14
+		cost = 7
+		prerequisite = { focus = PRU_integration_of_austria focus = PRU_oppressing_of_austria	}
+		mutually_exclusive = { focus = PRU_oppressing_of_austria }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			if = { 
+				limit = {
+					AUS = { is_puppet_of = PRU } 
+				}
+				AUS = {
+					create_country_leader = {
+						name = "Вильгельм Брауншвейгский"
+						desc = "POLITICS_WILHELM_VON_BRAUNSCHWEIG_DESC"
+						picture = ".dds"
+						expire = "1965.1.1"
+						ideology = conservator
+						traits = {
+						}
+					}
+				hidden_effect = {
+					set_politics = { ruling_party = conservatism elections_allowed = no }
+				}
+				}
+			}
+			if = {
+				limit = {
+					NOT = { country_exists = AUS }
+				}
+				4 = {
+					set_compliance = 50
+				}
+				152 = {
+					set_compliance = 50
+				}
+				153 = {
+					set_compliance = 50
+				}
+			}
+			if = {
+				limit = {
+					country_exists = AUS 
+				}
+				custom_effect_tooltip = PRU_set_loyal_goverment_effect
+			}
+		}
+	}
+	
+	focus = {
+		id = PRU_new_austria
+		icon = GFX_goal_generic_neutrality_focus
+		x = 0
+		y = 17
+		cost = 7
+		prerequisite = { focus = PRU_religion_freedom_in_austria focus = PRU_march_in_viena }
+		#mutually_exclusive = { }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			if = {
+				limit = {
+					NOT = {
+						AND = { 
+							has_completed_focus = PRU_integration_of_austria 
+							has_completed_focus = PRU_oppressing_of_austria	
+						}
+					}
+				}
+				custom_effect_tooltip = PRU_new_austria_effect
+			}
+			if = {
+				limit = {
+					has_completed_focus = PRU_integration_of_austria 
+				}
+				PRU = {
+					add_stability = 0.1
+					add_political_power = 150
+				}
+				AUS = {
+					add_stability = 0.1
+					add_political_power = 150
+				}
+			}
+			if = {
+				limit = {
+					has_completed_focus = PRU_oppressing_of_austria
+				}
+				add_state_core = 4
+			}
+		}
+	}
+	
+	#By diplomacy
+	
+	focus = {
+		id = PRU_integration_of_austria
+		icon = GFX_focus_hol_the_foundations_of_defense
+		x = -2
+		y = 13
+		cost = 7
+		prerequisite = { focus = PRU_bismark_first_kanzler focus = PRU_emperor_domestic	}
+		mutually_exclusive = { focus = PRU_oppressing_of_austria }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_stability = -0.05
+			add_political_power = -250
+		}
+	}
+	
+	focus = {
+		id = PRU_set_temporary_autonomy
+		icon = GFX_focus_generic_self_management
+		x = -2
+		y = 15
+		cost = 7
+		prerequisite = { focus = PRU_integration_of_austria	}
+		prerequisite = { focus = PRU_set_loyal_goverment }
+		#mutually_exclusive = { }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			AUS = {
+				add_stability = 0.1
+				add_political_power = 150
+			}
+		}
+	}
+	
+	focus = {
+		id = PRU_religion_freedom_in_austria
+		icon = GFX_focus_mex_triumph_over_the_cristeros
+		x = -1
+		y = 16
+		cost = 7
+		prerequisite = { focus = PRU_set_temporary_autonomy	}
+		#mutually_exclusive = { }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_stability = 0.05
+			AUS = { add_political_power = 150 }
+		}
+	}
+	
+	focus = {
+		id = PRU_emperor_domestic
+		icon = GFX_goal_tfv_strengthen_commonwealth_ties
+		x = 9
+		y = 12
+		cost = 7
+		prerequisite = { focus = PRU_shot_focus }
+		mutually_exclusive = { focus = PRU_bismark_first_kanzler }
+		ai_will_do = {
+			factor = 100
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_stability = 0.1
+		}
+	}
+	
+	focus = {
+		id = PRU_emperor_save_power
+		icon = GFX_goal_tfv_strengthen_commonwealth_ties
+		x = 6
+		y = 13
+		cost = 7
+		prerequisite = { focus = PRU_emperor_domestic }
+		mutually_exclusive = { focus = PRU_juncker_take_power }
+		ai_will_do = {
+			factor = 100
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = constitutional_monarchy
+				add_idea = monarchy
+			}
+		}
+	}
+	
+	focus = {
+		id = PRU_juncker_take_power
+		icon = GFX_goal_tfv_strengthen_commonwealth_ties
+		x = 12
+		y = 13
+		cost = 7
+		prerequisite = { focus = PRU_emperor_domestic }
+		mutually_exclusive = { focus = PRU_emperor_save_power }
+		ai_will_do = {
+			factor = 100
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = constitutional_monarchy
+				add_idea = dictature
+			}
+		}
+	}
+	
 	#Economic
 	
 	focus = {
