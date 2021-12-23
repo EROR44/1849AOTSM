@@ -613,18 +613,7 @@ focus_tree = {
 		#search_filters = {  }
 		
 		completion_reward = {
-			PRU = {
-				declare_war_on = {
-					target = AUS
-					type = annex_everything
-				}
-			}
-			BYZ = {
-				declare_war_on = {
-					target = AUS
-					type = annex_everything
-				}
-			}
+			country_event = gerultimate.5
 			PRU = { set_country_flag = PRU_vs_AUS_3 }
 		}
 	}
@@ -873,11 +862,18 @@ focus_tree = {
 						expire = "1965.1.1"
 						ideology = conservator
 						traits = {
+						#
 						}
 					}
-				hidden_effect = {
-					set_politics = { ruling_party = conservatism elections_allowed = no }
-				}
+					hidden_effect = {
+						set_politics = { ruling_party = conservatism elections_allowed = no }
+						set_popularities = {
+							liberalism = 5
+							conservatism = 75
+							authoritarian = 20
+							socialism = 0
+						}
+					}
 				}
 			}
 			if = {
@@ -982,6 +978,42 @@ focus_tree = {
 		completion_reward = {
 			add_stability = -0.05
 			add_political_power = -250
+			AUS = {
+				transfer_state = 4
+				transfer_state = 152
+				transfer_state = 153
+			}
+			hidden_effect = {
+				AUS = {
+					set_stability = 0.4
+					set_war_support = 0.0
+					set_politics = { ruling_party = authoritarian elections_allowed = no }
+					set_popularities = {
+						liberalism = 15
+						conservatism = 35
+						authoritarian = 50
+						socialism = 0
+					}
+					create_country_leader = {
+						name = "Австрийский Рейхстаг"
+						desc = "POLITICS_AUSTRIAN_REICHSTAG_DESC"
+						picture = ".dds"
+						expire = "1965.1.1"
+						ideology = authoritarian_democrat
+						traits = {
+						#	
+						}
+					}
+					swap_ideas = {
+						remove_idea = constitutional_monarchy
+						add_idea = republic
+					}
+					add_state_core = 4
+					add_state_core = 152
+					add_state_core = 153
+					set_cosmetic_tag = AUS_VAS_PRU
+				}
+			}
 		}
 	}
 	
@@ -1095,7 +1127,7 @@ focus_tree = {
 	
 	focus = {
 		id = PRU_juncker_take_power
-		icon = GFX_goal_tfv_strengthen_commonwealth_ties
+		icon = GFX_focus_generic_manpower
 		x = 12
 		y = 13
 		cost = 7
@@ -1116,7 +1148,17 @@ focus_tree = {
 		completion_reward = {
 			swap_ideas = {
 				remove_idea = constitutional_monarchy
-				add_idea = dictature
+				add_idea = military_dictature
+			}
+			create_country_leader = {
+				name = "Карл Антон Гогенцоллерн-Зигмаринген"
+				desc = "POLITICS_KARL_ZIGMARINGER_DESC"
+				picture = ".dds"
+				expire = "1965.1.1"
+				ideology = authoritarian_democrat
+				traits = {
+				#	
+				}
 			}
 		}
 	}
