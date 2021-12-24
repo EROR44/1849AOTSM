@@ -1097,6 +1097,8 @@ focus_tree = {
 		}
 	}
 	
+	#Emperor
+	
 	focus = {
 		id = PRU_emperor_save_power
 		icon = GFX_goal_tfv_strengthen_commonwealth_ties
@@ -1124,6 +1126,61 @@ focus_tree = {
 			}
 		}
 	}
+	
+	#War Economic
+	
+	focus = {
+		id = PRU_new_economica
+		icon = GFX_goal_generic_positive_trade_relations
+		x = 9
+		y = 14
+		cost = 7
+		prerequisite = { focus = PRU_emperor_save_power focus = PRU_juncker_take_power }
+		#mutually_exclusive = { }
+		ai_will_do = {
+			factor = 100
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			custom_effect_tooltip = PRU_open_new_economic_effect
+		}
+	}
+	
+	focus = {
+		id = PRU_war_rule
+		icon = GFX_focus_generic_combined_arms
+		x = 9
+		y = 15
+		cost = 7
+		prerequisite = { focus = PRU_new_economica }
+		#mutually_exclusive = { }
+		ai_will_do = {
+			factor = 100
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_political_power = 150
+			add_war_support = 0.10
+		}
+	}
+	
+	#Juncker
 	
 	focus = {
 		id = PRU_juncker_take_power
@@ -1160,6 +1217,552 @@ focus_tree = {
 				#	
 				}
 			}
+		}
+	}
+	
+	focus = {
+		id = PRU_juncker_army_reform
+		icon = GFX_focus_generic_little_entente
+		x = 15
+		y = 14
+		cost = 7
+		prerequisite = { focus = PRU_juncker_take_power }
+		#mutually_exclusive = { }
+		ai_will_do = {
+			factor = 100
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			if = {
+				limit = {
+					has_idea = volunteer_only
+				}
+				swap_ideas = {
+					remove_idea = volunteer_only
+					add_idea = extensive_conscription
+				}
+			}
+			if = {
+				limit = {
+					has_idea = limited_conscription
+				}
+				swap_ideas = {
+					remove_idea = limited_conscription
+					add_idea = extensive_conscription
+				}
+			}
+			if = {
+				limit = {
+					has_idea = extensive_conscription
+				}
+				add_manpower = 150000
+				add_political_power = 150
+			}
+		}
+	}
+	
+	focus = {
+		id = PRU_juncker_economic_reform
+		icon = GFX_goal_generic_trade
+		x = 15
+		y = 15
+		cost = 7
+		prerequisite = { focus = PRU_juncker_army_reform }
+		#mutually_exclusive = { }
+		ai_will_do = {
+			factor = 100
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			if = {
+				limit = {
+					has_idea = free_trade
+				}
+				swap_ideas = {
+					remove_idea = free_trade
+					add_idea = limited_exports
+				}
+			}
+			if = {
+				limit = {
+					has_idea = export_focus
+				}
+				swap_ideas = {
+					remove_idea = export_focus
+					add_idea = limited_exports
+				}
+			}
+			if = {
+				limit = {
+					has_idea = limited_exports
+				}
+				add_political_power = 250
+			}
+		}
+	}
+	
+	focus = {
+		id = PRU_juncker_no_election
+		icon = GFX_focus_usa_voter_registration_act
+		x = 12
+		y = 14
+		cost = 7
+		prerequisite = { focus = PRU_juncker_take_power }
+		#mutually_exclusive = { }
+		ai_will_do = {
+			factor = 100
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			hidden_effect = {
+				set_temp_variable = {
+					var = ban_ideology_var
+					value = party_popularity@conservatism
+				}
+				multiply_temp_variable = {
+					var = ban_ideology_var
+					value = -1
+				}
+				add_popularity = {
+					ideology = conservatism
+					popularity = ban_ideology_var
+				}
+				multiply_temp_variable = {
+					var = ban_ideology_var
+					value = 0.66
+				}
+				set_country_flag = banned_conservatism_flag
+			}
+			remove_conservatism_spirits_effect = yes
+			custom_effect_tooltip = ban_conservatism_party_tt
+			add_stability = ban_ideology_var
+			
+			hidden_effect = {
+				set_temp_variable = {
+					var = ban_ideology_var
+					value = party_popularity@liberalism
+				}
+				multiply_temp_variable = {
+					var = ban_ideology_var
+					value = -1
+				}
+				add_popularity = {
+					ideology = liberalism
+					popularity = ban_ideology_var
+				}
+				multiply_temp_variable = {
+					var = ban_ideology_var
+					value = 0.66
+				}
+				set_country_flag = banned_liberalism_flag
+			}
+			remove_liberalism_spirits_effect = yes
+			custom_effect_tooltip = ban_liberalism_party_tt
+			add_stability = ban_ideology_var
+			
+			hidden_effect = {
+				set_temp_variable = {
+					var = ban_ideology_var
+					value = party_popularity@socialism
+				}
+				multiply_temp_variable = {
+					var = ban_ideology_var
+					value = -1
+				}
+				add_popularity = {
+					ideology = socialism
+					popularity = ban_ideology_var
+				}
+				multiply_temp_variable = {
+					var = ban_ideology_var
+					value = 0.66
+				}
+				set_country_flag = banned_socialism_flag
+			}
+			remove_socialism_spirits_effect = yes
+			custom_effect_tooltip = ban_socialism_party_tt
+			add_stability = ban_ideology_var
+		}
+	}
+	
+	focus = {
+		id = PRU_juncker_army_from_city
+		icon = GFX_goal_generic_trade
+		x = 12
+		y = 15
+		cost = 7
+		prerequisite = { focus = PRU_juncker_no_election }
+		#mutually_exclusive = { }
+		ai_will_do = {
+			factor = 100
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			if = {
+				limit = {
+					controls_state = 4
+				}
+				add_manpower = 2500
+				4 = { 
+					add_manpower = -2500
+				}
+			}
+			if = {
+				limit = {
+					controls_state = 5
+				}
+				add_manpower = 2500
+				5 = { 
+					add_manpower = -2500
+				}
+			}
+			if = {
+				limit = {
+					controls_state = 8
+				}
+				add_manpower = 2500
+				8 = { 
+					add_manpower = -2500
+				}
+			}
+			if = {
+				limit = {
+					controls_state = 28
+				}
+				add_manpower = 2500
+				28 = { 
+					add_manpower = -2500
+				}
+			}
+			if = {
+				limit = {
+					controls_state = 42
+				}
+				add_manpower = 2500
+				42 = { 
+					add_manpower = -2500
+				}
+			}
+			if = {
+				limit = {
+					controls_state = 50
+				}
+				add_manpower = 2500
+				50 = { 
+					add_manpower = -2500
+				}
+			}
+			if = {
+				limit = {
+					controls_state = 51
+				}
+				add_manpower = 2500
+				51 = { 
+					add_manpower = -2500
+				}
+			}
+			if = {
+				limit = {
+					controls_state = 52
+				}
+				add_manpower = 2500
+				52 = { 
+					add_manpower = -2500
+				}
+			}
+			if = {
+				limit = {
+					controls_state = 53
+				}
+				add_manpower = 2500
+				53 = { 
+					add_manpower = -2500
+				}
+			}
+			if = {
+				limit = {
+					controls_state = 54
+				}
+				add_manpower = 2500
+				54 = { 
+					add_manpower = -2500
+				}
+			}
+			if = {
+				limit = {
+					controls_state = 55
+				}
+				add_manpower = 2500
+				55 = { 
+					add_manpower = -2500
+				}
+			}
+			if = {
+				limit = {
+					controls_state = 56
+				}
+				add_manpower = 2500
+				56 = { 
+					add_manpower = -2500
+				}
+			}
+			if = {
+				limit = {
+					controls_state = 57
+				}
+				add_manpower = 2500
+				57 = { 
+					add_manpower = -2500
+				}
+			}
+			if = {
+				limit = {
+					controls_state = 58
+				}
+				add_manpower = 2500
+				58 = { 
+					add_manpower = -2500
+				}
+			}
+			if = {
+				limit = {
+					controls_state = 59
+				}
+				add_manpower = 2500
+				59 = { 
+					add_manpower = -2500
+				}
+			}
+			if = {
+				limit = {
+					controls_state = 60
+				}
+				add_manpower = 2500
+				60 = { 
+					add_manpower = -2500
+				}
+			}
+			if = {
+				limit = {
+					controls_state = 61
+				}
+				add_manpower = 2500
+				61 = { 
+					add_manpower = -2500
+				}
+			}
+			if = {
+				limit = {
+					controls_state = 62
+				}
+				add_manpower = 2500
+				62 = { 
+					add_manpower = -2500
+				}
+			}
+			if = {
+				limit = {
+					controls_state = 63
+				}
+				add_manpower = 2500
+				63 = { 
+					add_manpower = -2500
+				}
+			}
+			if = {
+				limit = {
+					controls_state = 64
+				}
+				add_manpower = 2500
+				64 = { 
+					add_manpower = -2500
+				}
+			}
+			if = {
+				limit = {
+					controls_state = 65
+				}
+				add_manpower = 2500
+				65 = { 
+					add_manpower = -2500
+				}
+			}
+			if = {
+				limit = {
+					controls_state = 66
+				}
+				add_manpower = 2500
+				66 = { 
+					add_manpower = -2500
+				}
+			}
+			if = {
+				limit = {
+					controls_state = 67
+				}
+				add_manpower = 2500
+				67 = { 
+					add_manpower = -2500
+				}
+			}
+			if = {
+				limit = {
+					controls_state = 68
+				}
+				add_manpower = 2500
+				68 = { 
+					add_manpower = -2500
+				}
+			}
+			if = {
+				limit = {
+					controls_state = 85
+				}
+				add_manpower = 2500
+				85 = { 
+					add_manpower = -2500
+				}
+			}
+			if = {
+				limit = {
+					controls_state = 86
+				}
+				add_manpower = 2500
+				86 = { 
+					add_manpower = -2500
+				}
+			}
+			if = {
+				limit = {
+					controls_state = 152
+				}
+				add_manpower = 2500
+				152 = { 
+					add_manpower = -2500
+				}
+			}
+			if = {
+				limit = {
+					controls_state = 153
+				}
+				add_manpower = 2500
+				153 = { 
+					add_manpower = -2500
+				}
+			}
+			if = {
+				limit = {
+					controls_state = 188
+				}
+				add_manpower = 2500
+				188 = { 
+					add_manpower = -2500
+				}
+			}
+			if = {
+				limit = {
+					controls_state = 762
+				}
+				add_manpower = 2500
+				762 = { 
+					add_manpower = -2500
+				}
+			}
+			if = {
+				limit = {
+					controls_state = 763
+				}
+				add_manpower = 2500
+				763 = { 
+					add_manpower = -2500
+				}
+			}
+			if = {
+				limit = {
+					controls_state = 808
+				}
+				add_manpower = 2500
+				808 = { 
+					add_manpower = -2500
+				}
+			}
+			if = {
+				limit = {
+					controls_state = 828
+				}
+				add_manpower = 2500
+				828 = { 
+					add_manpower = -2500
+				}
+			}
+			if = {
+				limit = {
+					controls_state = 829
+				}
+				add_manpower = 2500
+				829 = { 
+					add_manpower = -2500
+				}
+			}
+		}
+	}
+	
+	focus = {
+		id = PRU_juncker_final_new_politic
+		icon = GFX_focus_generic_treaty
+		x = 12
+		y = 16
+		cost = 7
+		prerequisite = { focus = PRU_war_rule }
+		prerequisite = { focus = PRU_juncker_army_from_city }
+		prerequisite = { focus = PRU_juncker_economic_reform }
+		#mutually_exclusive = { }
+		ai_will_do = {
+			factor = 8500
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			custom_effect_tooltip = PRU_WORK_IN_PROGRESS
 		}
 	}
 	
