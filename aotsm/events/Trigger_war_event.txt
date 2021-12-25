@@ -378,3 +378,123 @@ country_event = {
 		}
 	}
 }
+
+country_event = {
+	id = twe.8
+	title = twe.8.t
+	desc = twe.8.d
+	picture = GFX_report_event_molotov_signing_pact
+	
+	fire_only_once = yes
+	
+	hidden =  yes
+	
+	trigger = {
+		OR = {
+			SAR = {
+				surrender_progress > 0.35
+				has_country_flag = ITA_WAR
+			}
+			PAP = {
+				surrender_progress > 0.35
+				has_country_flag = ITA_WAR
+			}
+			SYC = {
+				surrender_progress > 0.35
+				has_country_flag = ITA_WAR
+			}
+		}
+	}
+	
+	option = {
+		name = twe.8.a
+		hidden_effect = {
+			if = {
+				limit = {
+					AND = {
+						country_exists = VEN
+						is_puppet_of = PRU
+					}
+				}
+				if = { 
+					limit = {
+						FRA = { is_in_faction_with = PRU }
+					}
+					FRA = {
+						transfer_state = 735
+					}
+				}
+				if = {
+					limit = {
+						NOT = {
+							FRA = { is_in_faction_with = PRU }
+						}
+					}
+					VEN = {
+						transfer_state = 735 
+					}
+				}
+			}
+			VEN = {
+				transfer_state = 158
+				transfer_state = 161
+				transfer_state = 162
+			}
+			BYZ = {
+				transfer_state = 2
+				transfer_state = 114
+				transfer_state = 115
+				transfer_state = 116
+				transfer_state = 117
+				transfer_state = 156
+				transfer_state = 157
+			}
+			SAR = {
+				remove_state_core = 2
+				remove_state_core = 114
+				remove_state_core = 115
+				remove_state_core = 116
+				remove_state_core = 117
+				remove_state_core = 156
+				remove_state_core = 157
+				remove_state_core = 158
+				remove_state_core = 161
+				remove_state_core = 162
+				remove_state_core = 735
+			}
+			PRM = {
+				remove_state_core = 161
+			}
+			TUS = {
+				remove_state_core = 162
+			}
+			PAP = {
+				remove_state_core = 2
+				remove_state_core = 114
+				remove_state_core = 115
+				remove_state_core = 116
+				remove_state_core = 117
+				remove_state_core = 156
+				remove_state_core = 157
+				remove_state_core = 158
+				remove_state_core = 161
+				remove_state_core = 162
+				remove_state_core = 735
+			}	
+			SYC = {
+				remove_state_core = 2
+				remove_state_core = 114
+				remove_state_core = 115
+				remove_state_core = 116
+				remove_state_core = 117
+				remove_state_core = 156
+				remove_state_core = 157
+				remove_state_core = 158
+				remove_state_core = 161
+				remove_state_core = 162
+				remove_state_core = 735
+			}
+		}
+	}
+	
+}

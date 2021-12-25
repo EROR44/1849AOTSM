@@ -259,7 +259,199 @@ country_event = {
 				type = annex_everything
 			}
 		}
-		BYZ = { country_event = { id = byz.1 hours = 12 }
+		BYZ = { country_event = { id = byz.1 hours = 12 } }
+	}
+}
+
+country_event = {
+	id = gerultimate.6
+	title = gerultimate.6.t
+	desc = gerultimate.6.d
+	picture = GFX_report_event_molotov_signing_pact
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = {
+		name = gerultimate.6.a	
+		ai_chance = {
+			factor = 10
+		}
+		if = {
+			limit = {
+				AND = {
+					country_exists = VEN
+					is_puppet_of = PRU
+				}
+			}
+			if = { 
+				limit = {
+					FRA = { is_in_faction_with = PRU }
+				}
+				FRA = {
+					transfer_state = 735
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						FRA = { is_in_faction_with = PRU }
+					}
+				}
+				VEN = {
+					transfer_state = 735 
+				}
+			}
+		}
+		VEN = {
+			transfer_state = 158
+			transfer_state = 161
+			transfer_state = 162
+		}
+		BYZ = {
+			transfer_state = 2
+			transfer_state = 114
+			transfer_state = 115
+			transfer_state = 116
+			transfer_state = 117
+			transfer_state = 156
+			transfer_state = 157
+		}
+		SAR = {
+			remove_state_core = 2
+			remove_state_core = 114
+			remove_state_core = 115
+			remove_state_core = 116
+			remove_state_core = 117
+			remove_state_core = 156
+			remove_state_core = 157
+			remove_state_core = 158
+			remove_state_core = 161
+			remove_state_core = 162
+			remove_state_core = 735
+		}
+		PRM = {
+			remove_state_core = 161
+		}
+		TUS = {
+			remove_state_core = 162
+		}
+		PAP = {
+			remove_state_core = 2
+			remove_state_core = 114
+			remove_state_core = 115
+			remove_state_core = 116
+			remove_state_core = 117
+			remove_state_core = 156
+			remove_state_core = 157
+			remove_state_core = 158
+			remove_state_core = 161
+			remove_state_core = 162
+			remove_state_core = 735
+		}	
+		SYC = {
+			remove_state_core = 2
+			remove_state_core = 114
+			remove_state_core = 115
+			remove_state_core = 116
+			remove_state_core = 117
+			remove_state_core = 156
+			remove_state_core = 157
+			remove_state_core = 158
+			remove_state_core = 161
+			remove_state_core = 162
+			remove_state_core = 735
+		}		
+	}
+	
+	option = {
+		name = gerultimate.6.b	
+		ai_chance = {
+			factor = 90
+		}
+		if = {
+			limit = {
+				OR = {
+					2 = { is_controlled_by = SAR }
+					2 = { is_controlled_by = PAP }
+					2 = { is_controlled_by = SYC }
+				}
+			}
+			2 = { 
+				controller = {
+					annex_country = { target = SAR transfer_troops = yes }
+					annex_country = { target = PRM transfer_troops = yes }
+					annex_country = { target = TUS transfer_troops = yes }
+					annex_country = { target = PAP transfer_troops = yes }
+					annex_country = { target = SYC transfer_troops = yes }
+					set_country_flag = ITA_WAR
+				}
+			}
+		}
+		PRU = {
+			if = { 
+				limit = {
+					2 = { is_controlled_by = PAP }
+				}
+				declare_war_on = {
+					target = PAP
+					type = annex_everything
+				}
+			}
+			if = { 
+				limit = {
+					2 = { is_controlled_by = SAR }
+				}
+				declare_war_on = {
+					target = SAR
+					type = annex_everything
+				}
+			}
+			if = { 
+				limit = {
+					2 = { is_controlled_by = SYC }
+				}
+				declare_war_on = {
+					target = SYC
+					type = annex_everything
+				}
+			}
+		}
+		if = {
+			limit = {
+				BYZ = { is_in_faction_with = PRU }
+			}
+			BYZ = {
+				if = { 
+					limit = {
+						2 = { is_controlled_by = PAP }
+					}
+					declare_war_on = {
+						target = PAP
+						type = annex_everything
+					}
+				}
+				if = { 
+					limit = {
+						2 = { is_controlled_by = SAR }
+					}
+					declare_war_on = {
+						target = SAR
+						type = annex_everything
+					}
+				}
+				if = { 
+					limit = {
+						2 = { is_controlled_by = SYC }
+					}
+					declare_war_on = {
+						target = SYC
+						type = annex_everything
+					}
+				}
+			}
+		}
 	}
 }
 
@@ -291,6 +483,44 @@ country_event = {
 		add_stability = -0.25
 	}
 }	
+
+country_event = {
+	id = ger.2
+	title = ger.2.t
+	desc = ger.2.d
+	picture = GFX_report_event_molotov_signing_pact
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = {
+		name = ger.2.a #divid italia
+		2 = { 
+			controller = {
+				country_event = { id = gerultimate.6 hours = 12 }
+			}
+		}
+	}
+}	
+
+country_event = {
+	id = ger.3
+	title = ger.3.t
+	desc = ger.3.d
+	picture = GFX_report_event_molotov_signing_pact
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = {
+		name = ger.3.a #Constitutia
+		PRU = {
+			add_stability = 0.01
+		}
+	}
+}
 
 country_event = {
 	id = ger_byz.1
