@@ -3777,4 +3777,733 @@ focus_tree = {
 		}
 	}
 	
+	#Faction bonus
+	
+	focus = {
+		id = PRU_faction_production
+		icon = GFX_focus_generic_diplomatic_treaty
+		x = 26
+		y = 5
+		cost = 7
+		#prerequisite = { }
+		#mutually_exclusive = {  }
+		ai_will_do = {
+			factor = 9999
+		}
+		
+		#cancel = { }
+		
+		available = { 
+			OR = {
+				has_completed_focus = PRU_all_union_build
+				has_completed_focus = PRU_new_economica
+			}
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+		
+		}
+	}
+	
+	#faction in Peace
+	
+	focus = {
+		id = PRU_faction_production_peace
+		icon = GFX_goal_generic_national_unity
+		x = 24
+		y = 6
+		cost = 7
+		prerequisite = { focus = PRU_faction_production }
+		#mutually_exclusive = {  }
+		ai_will_do = {
+			factor = 9999
+		}
+		
+		#cancel = { }
+		
+		available = {
+			NOT = {
+				has_war = yes
+			}
+			is_faction_leader = yes
+			num_faction_members > 1
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_stability = 0.05
+		}
+	}
+	
+	focus = {
+		id = PRU_faction_production_factori
+		icon = GFX_goal_generic_construct_civ_factory
+		x = 22
+		y = 7
+		cost = 7
+		prerequisite = { focus = PRU_faction_production_peace }
+		#mutually_exclusive = {  }
+		ai_will_do = {
+			factor = 9999
+		}
+		
+		#cancel = { }
+		
+		available = {
+			NOT = {
+				has_war = yes
+			}
+			is_faction_leader = yes
+			num_faction_members > 1
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			random_state = {
+				limit = { is_core_of = PRU }
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+			random_state = {
+				limit = { is_core_of = PRU }
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+		if = {
+				limit = {
+					is_in_faction_with = PRU
+				}
+				random_state = {
+					add_extra_state_shared_building_slots = 2
+					add_building_construction = {
+						type = industrial_complex
+						level = 2
+						instant_build = yes
+					}
+				}
+				random_state = {
+					add_extra_state_shared_building_slots = 2
+					add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+					}
+				}
+			}
+		}
+	}
+	
+	focus = {
+		id = PRU_faction_production_infrastructure
+		icon = GFX_goal_generic_construct_infrastructure
+		x = 22
+		y = 8
+		cost = 7
+		prerequisite = { focus = PRU_faction_production_factori }
+		#mutually_exclusive = {  }
+		ai_will_do = {
+			factor = 9999
+		}
+		
+		#cancel = { }
+		
+		available = {
+			NOT = {
+				has_war = yes
+			}
+			is_faction_leader = yes
+			num_faction_members > 1
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			random_state = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_state = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_state = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			if = {
+				limit = {
+					is_in_faction_with = PRU
+				}
+				random_state = {
+					add_building_construction = {
+						type = infrastructure
+						level = 1
+						instant_build = yes
+				}
+				}
+				random_state = {
+					add_building_construction = {
+						type = infrastructure
+						level = 1
+						instant_build = yes
+					}
+				}
+				random_state = {
+					add_building_construction = {
+						type = infrastructure
+						level = 1
+						instant_build = yes
+					}
+				}
+			}	
+		}
+	}
+	
+	focus = {
+		id = PRU_faction_production_politic
+		icon = GFX_focus_generic_treaty
+		x = 24
+		y = 7
+		cost = 7
+		prerequisite = { focus = PRU_faction_production_peace }
+		#mutually_exclusive = {  }
+		ai_will_do = {
+			factor = 9999
+		}
+		
+		#cancel = { }
+		
+		available = {
+			NOT = {
+				has_war = yes
+			}
+			is_faction_leader = yes
+			num_faction_members > 1
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_political_power = 250
+			if = {
+				limit = {
+					is_in_faction_with = PRU
+				}
+				add_political_power = 250
+			}	
+		}
+	}
+	
+	focus = {
+		id = PRU_faction_production_stability
+		icon = GFX_focus_generic_self_management
+		x = 24
+		y = 8
+		cost = 7
+		prerequisite = { focus = PRU_faction_production_politic }
+		#mutually_exclusive = {  }
+		ai_will_do = {
+			factor = 9999
+		}
+		
+		#cancel = { }
+		
+		available = {
+			NOT = {
+				has_war = yes
+			}
+			is_faction_leader = yes
+			num_faction_members > 1
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_stability = 0.05
+			if = {
+				limit = {
+					is_in_faction_with = PRU
+				}
+				add_stability = 0.05
+			}
+		}
+	}
+	
+	focus = {
+		id = PRU_faction_production_peace_final
+		icon = GFX_goal_generic_consumer_goods
+		x = 23
+		y = 9
+		cost = 7
+		prerequisite = { focus = PRU_faction_production_infrastructure }
+		prerequisite = { focus = PRU_faction_production_stability }
+		#mutually_exclusive = {  }
+		ai_will_do = {
+			factor = 9999
+		}
+		
+		#cancel = { }
+		
+		available = {
+			NOT = {
+				has_war = yes
+			}
+			is_faction_leader = yes
+			num_faction_members > 1
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_offsite_building = { type = industrial_complex level = 3 }
+			if = {
+				limit = {
+					is_in_faction_with = PRU
+				}
+				add_offsite_building = { type = industrial_complex level = 2 }
+			}		
+		}
+	}
+	
+	#faction in war
+	
+	focus = {
+		id = PRU_faction_production_war
+		icon = GFX_goal_generic_forceful_treaty
+		x = 28
+		y = 6
+		cost = 7
+		prerequisite = { focus = PRU_faction_production }
+		#mutually_exclusive = {  }
+		ai_will_do = {
+			factor = 9999
+		}
+		
+		#cancel = { }
+		
+		available = {
+			has_war = yes
+			is_faction_leader = yes
+			num_faction_members > 1
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_war_support = 0.05
+		}
+	}
+	
+	focus = {
+		id = PRU_faction_production_manpower
+		icon = GFX_focus_generic_little_entente
+		x = 28
+		y = 7
+		cost = 7
+		prerequisite = { focus = PRU_faction_production_war }
+		#mutually_exclusive = {  }
+		ai_will_do = {
+			factor = 9999
+		}
+		
+		#cancel = { }
+		
+		available = {
+			has_war = yes
+			is_faction_leader = yes
+			num_faction_members > 1
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_manpower = 150000
+			add_stability = -0.1
+			if = {
+				limit = {
+					is_in_faction_with = PRU
+				}
+				add_manpower = 25000
+				PRU = { add_manpower = -25000 }
+			}	
+		}
+	}
+	
+	focus = {
+		id = PRU_faction_production_warsupport
+		icon = GFX_goal_generic_propaganda
+		x = 28
+		y = 8
+		cost = 7
+		prerequisite = { focus = PRU_faction_production_manpower }
+		#mutually_exclusive = {  }
+		ai_will_do = {
+			factor = 9999
+		}
+		
+		#cancel = { }
+		
+		available = {
+			has_war = yes
+			is_faction_leader = yes
+			num_faction_members > 1
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_war_support = 0.05
+			if = {
+				limit = {
+					is_in_faction_with = PRU
+				}
+				add_war_support = 0.05
+			}
+		}
+	}
+	
+	focus = {
+		id = PRU_faction_production_dockyard
+		icon = GFX_goal_generic_construct_naval_dockyard
+		x = 30
+		y = 7
+		cost = 7
+		prerequisite = { focus = PRU_faction_production_war }
+		#mutually_exclusive = {  }
+		ai_will_do = {
+			factor = 9999
+		}
+		
+		#cancel = { }
+		
+		available = {
+			has_war = yes
+			is_faction_leader = yes
+			num_faction_members > 1
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			random_owned_controlled_state = {
+				limit = {
+					is_coastal = yes
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = dockyard
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_owned_controlled_state = {
+				limit = {
+					is_coastal = yes
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = dockyard
+					level = 1
+					instant_build = yes
+				}
+			}
+			if = {
+				limit = {
+					is_in_faction_with = PRU
+				}
+				random_owned_controlled_state = {
+					limit = {
+						is_coastal = yes
+					}
+					add_extra_state_shared_building_slots = 1
+					add_building_construction = {
+						type = dockyard
+						level = 1
+						instant_build = yes
+					}
+				}	
+				random_owned_controlled_state = {
+					limit = {
+						is_coastal = yes
+					}
+					add_extra_state_shared_building_slots = 1
+					add_building_construction = {
+						type = dockyard
+						level = 1
+						instant_build = yes
+					}
+				}
+			}
+		}
+	}
+	
+	focus = {
+		id = PRU_faction_production_army_factory
+		icon = GFX_goal_generic_construct_mil_factory
+		x = 30
+		y = 8
+		cost = 7
+		prerequisite = { focus = PRU_faction_production_dockyard }
+		#mutually_exclusive = {  }
+		ai_will_do = {
+			factor = 9999
+		}
+		
+		#cancel = { }
+		
+		available = {
+			has_war = yes
+			is_faction_leader = yes
+			num_faction_members > 1
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			random_state = {
+				limit = { is_core_of = PRU }
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+			random_state = {
+				limit = { is_core_of = PRU }
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+			if = {
+				limit = {
+					is_in_faction_with = PRU
+				}
+				random_state = {
+					add_extra_state_shared_building_slots = 2
+					add_building_construction = {
+						type = arms_factory
+						level = 2
+						instant_build = yes
+					}
+				}
+				random_state = {
+					add_extra_state_shared_building_slots = 2
+					add_building_construction = {
+						type = arms_factory
+						level = 2
+						instant_build = yes
+					}
+				}
+			}
+		}
+	}
+	
+	focus = {
+		id = PRU_faction_production_war_final
+		icon = GFX_goal_generic_attack_allies
+		x = 29
+		y = 9
+		cost = 7
+		prerequisite = { focus = PRU_faction_production_warsupport }
+		prerequisite = { focus = PRU_faction_production_army_factory }
+		#mutually_exclusive = {  }
+		ai_will_do = {
+			factor = 9999
+		}
+		
+		#cancel = { }
+		
+		available = {
+			has_war = yes
+			is_faction_leader = yes
+			num_faction_members > 1
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_offsite_building = { type = arms_factory level = 3 }
+			if = {
+				limit = {
+					is_in_faction_with = PRU
+				}
+				add_offsite_building = { type = arms_factory level = 2 }
+			}		
+		}
+	}
+	
+	# Centrl way
+	
+	focus = {
+		id = PRU_faction_production_xp
+		icon = GFX_focus_generic_combined_arms
+		x = 26
+		y = 7
+		cost = 7
+		prerequisite = { focus = PRU_faction_production_peace focus = PRU_faction_production_war }
+		#mutually_exclusive = {  }
+		ai_will_do = {
+			factor = 9999
+		}
+		
+		#cancel = { }
+		
+		available = {
+			is_faction_leader = yes
+			num_faction_members > 1
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			army_experience = 25
+			navy_experience = 25
+			air_experience = 25
+			if = {
+				limit = {
+					is_in_faction_with = PRU
+				}
+				army_experience = 25
+				navy_experience = 25
+				air_experience = 25
+			}
+		}
+	}
+	
+	focus = {
+		id = PRU_faction_production_doctrin
+		icon = GFX_goal_generic_army_doctrines
+		x = 26
+		y = 8
+		cost = 7
+		prerequisite = { focus = PRU_faction_production_xp }
+		#mutually_exclusive = {  }
+		ai_will_do = {
+			factor = 9999
+		}
+		
+		#cancel = { }
+		
+		available = {
+			is_faction_leader = yes
+			num_faction_members > 1
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {	
+			add_tech_bonus = {
+				name = land_doc_bonus
+				bonus = 1.0
+				uses = 2
+				category = land_doctrine
+			}
+			if = {
+				limit = {
+					is_in_faction_with = PRU
+				}
+				add_tech_bonus = {
+					name = land_doc_bonus
+					bonus = 1.0
+					uses = 1
+					category = land_doctrine
+				}
+			}
+		}
+	}
+	
+	#final of faction
+	
+	focus = {
+		id = PRU_faction_production_final
+		icon = GFX_goal_generic_major_alliance
+		x = 26
+		y = 10
+		cost = 7
+		prerequisite = { focus = PRU_faction_production_peace_final focus = PRU_faction_production_war_final }
+		prerequisite = { focus = PRU_faction_production_doctrin }
+		#mutually_exclusive = {  }
+		ai_will_do = {
+			factor = 9999
+		}
+		
+		#cancel = { }
+		
+		available = {
+			is_faction_leader = yes
+			num_faction_members > 1
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_stability = 0.1
+			add_war_support = 0.1
+			if = {
+				limit = {
+					is_in_faction_with = PRU
+				}
+			add_stability = 0.1
+			add_war_support	= 0.1
+			}
+		}
+	}
+	
 }
