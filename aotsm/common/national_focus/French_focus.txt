@@ -286,9 +286,9 @@ focus_tree = {
 ##############################################################	
 	focus = {
 		id = FRA_long_live_the_republick
-		icon = GFX_focus_generic_self_management
+		icon = GFX_fra_long_live_the_republick
 		
-		x = 11
+		x = 14
 		y = 0
 		relative_position_id = FRA_convocation_of_the_assembly
 		mutually_exclusive = { focus = FRA_go_with_monarhist_opposition }
@@ -306,8 +306,8 @@ focus_tree = {
 ##########HISTORICAL_SECTION_POLITIC#############################	
 	focus = {
 		id = FRA_the_head_of_goverment_sharl_lagranj
-		icon = GFX_goal_generic_major_alliance
-		x = -3
+		icon = GFX_fra_sharl_lagranj
+		x = -5
 		y = 1
 		relative_position_id = FRA_long_live_the_republick
 		prerequisite = { focus = FRA_long_live_the_republick }
@@ -318,12 +318,14 @@ focus_tree = {
 		available_if_capitulated = yes
 
 		completion_reward = {
-			
+			hidden_effect = {
+				set_country_flag = FRA_lagranj_course
+			}
 		}
 	}
 	focus = {
 		id = FRA_speech_to_the_nation
-		icon = GFX_goal_generic_propaganda
+		icon = GFX_fra_speech_on_the_nation
 		
 		x = 0
 		y = 2 	
@@ -335,18 +337,204 @@ focus_tree = {
 		available_if_capitulated = yes
 
 		completion_reward = {
+			add_stability = 0.05
+			add_political_power = 150
+		}
+	}
+	focus = {
+		id = FRA_lobbying_in_parlament
+		icon = GFX_fra_lobbying_in_parlament
+		
+		x = -2
+		y = 1
+		relative_position_id = FRA_speech_to_the_nation
+		prerequisite = { focus = FRA_speech_to_the_nation }
+		cost = 7
+		#search_filters = {   }
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
 			
 		}
 	}
-		focus = {
-		id = FRA_ban_the_opposition
+	focus = {
+		id = FRA_coop_with_liberal
+		icon = GFX_coop_with_liberal
+		
+		x = -1
+		y = 1
+		relative_position_id = FRA_lobbying_in_parlament
+		prerequisite = { focus = FRA_lobbying_in_parlament }
+		mutually_exclusive = { focus = FRA_coop_with_conservatie}
+		cost = 7
+		#search_filters = {   }
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+			
+		}
+	}
+	focus = {
+		id = FRA_coop_with_conservatie
+		icon = GFX_coop_with_conservators
+		
+		x = 1
+		y = 1
+		relative_position_id = FRA_lobbying_in_parlament
+		prerequisite = { focus = FRA_lobbying_in_parlament }
+		mutually_exclusive = { focus = FRA_coop_with_liberal }
+		cost = 7
+		#search_filters = {   }
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+			
+		}
+	}
+	focus = {
+		id = FRA_new_program
 		icon = GFX_goal_generic_political_pressure
+		
+		x = 0
+		y = 2
+		relative_position_id = FRA_lobbying_in_parlament
+		prerequisite = { 
+			focus = FRA_coop_with_conservatie
+			focus = FRA_coop_with_liberal
+		}
+		
+		cost = 7
+		#search_filters = {   }
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+			
+		}
+	}
+	focus = {
+		id = FRA_create_coalition
+		icon = GFX_goal_generic_political_pressure
+		
+		x = 0
+		y = 1
+		relative_position_id = FRA_new_program
+		prerequisite = { 
+			focus = FRA_new_program
+		}
+		
+		cost = 7
+		#search_filters = {   }
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+			
+		}
+	}
+	focus = {
+		id = FRA_save_control_on_country
+		icon = GFX_fra_save_control_on_country
 		
 		x = 2
 		y = 1
-		relative_position_id = FRA_the_head_of_goverment_sharl_lagranj
-		prerequisite = { focus = FRA_the_head_of_goverment_sharl_lagranj }
-		cost = 3
+		relative_position_id = FRA_speech_to_the_nation
+		prerequisite = { 
+			focus = FRA_speech_to_the_nation
+			focus = FRA_reorg_the_goverment
+			}
+		cost = 7
+		#search_filters = {   }
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+			
+		}
+	}
+	focus = {
+		id = FRA_propaganda_in_army
+		icon = GFX_goal_generic_political_pressure
+		
+		x = 1
+		y = 1
+		relative_position_id = FRA_save_control_on_country
+		prerequisite = { focus = FRA_save_control_on_country }
+		cost = 7
+		#search_filters = {   }
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+			
+		}
+	}
+	focus = {
+		id = FRA_check_the_army_command
+		icon = GFX_goal_generic_political_pressure
+		
+		x = 0
+		y = 1
+		relative_position_id = FRA_propaganda_in_army
+		prerequisite = { focus = FRA_propaganda_in_army }
+		cost = 7
+		#search_filters = {   }
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+			
+		}
+	}
+	focus = {
+		id = FRA_control_the_press
+		icon = GFX_fra_control_the_press
+		
+		x = -1
+		y = 1
+		relative_position_id = FRA_save_control_on_country
+		prerequisite = { focus = FRA_save_control_on_country }
+		cost = 7
+		#search_filters = {   }
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+			
+		}
+	}
+	focus = {
+		id = FRA_purge_the_opposition #чистка оппозиции
+		icon = GFX_goal_generic_political_pressure
+		
+		x = 0
+		y = 1
+		relative_position_id = FRA_control_the_press
+		prerequisite = { focus = FRA_control_the_press }
+		cost = 7
+		#search_filters = {   }
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+			
+		}
+	}
+	focus = {
+		id = FRA_ban_the_radical_opposition
+		icon = GFX_goal_generic_political_pressure
+		
+		x = 0
+		y = 3
+		relative_position_id = FRA_save_control_on_country
+		prerequisite = { 
+			focus = FRA_purge_the_opposition
+			focus = FRA_check_the_army_command
+			}
+		cost = 7
 		#search_filters = {   }
 		
 		available_if_capitulated = yes
@@ -357,12 +545,14 @@ focus_tree = {
 	}
 	focus = {
 		id = FRA_unite_the_divided_nation
-		icon = GFX_goal_molotov_ribbentrop_pact
+		icon = GFX_union_with_france
 		
 		x = 0
-		y = 3
+		y = 7
 		relative_position_id = FRA_the_head_of_goverment_sharl_lagranj
 		prerequisite = { focus = FRA_speech_to_the_nation }
+		prerequisite = { focus = FRA_ban_the_radical_opposition }
+		prerequisite = { focus = FRA_create_coalition }
 		cost = 10
 		#search_filters = {   }
 		
@@ -376,7 +566,7 @@ focus_tree = {
 	focus = {
 		id = FRA_opposition_coup
 		icon = GFX_goal_generic_major_alliance
-		x = 3
+		x = 4
 		y = 1
 		relative_position_id = FRA_long_live_the_republick
 		prerequisite = { focus = FRA_long_live_the_republick }
@@ -390,8 +580,61 @@ focus_tree = {
 			
 		}
 	}
-	
+#############LIBERAL_OPPOSITION_WAT############################
+	focus = {
+		id = FRA_iberal_head
+		icon = GFX_goal_generic_major_alliance
+		x = -3
+		y = 1
+		relative_position_id = FRA_opposition_coup
+		prerequisite = { focus = FRA_opposition_coup }
+		mutually_exclusive = { focus = FRA_conservative_head }
+		cost = 3
+		#search_filters = {   }
+		
+		available_if_capitulated = yes
 
+		completion_reward = {
+			
+		}
+	}
+	focus = {
+		id = FRA_reorg_the_goverment
+		icon = GFX_goal_generic_major_alliance
+		x = 0
+		y = 2
+		relative_position_id = FRA_opposition_coup
+		prerequisite = {
+			focus = FRA_iberal_head
+			focus = FRA_conservative_head
+		}
+		
+		cost = 3
+		#search_filters = {   }
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+			
+		}
+	}
+	focus = {
+		id = FRA_conservative_head
+		icon = GFX_goal_generic_major_alliance
+		x = 3
+		y = 1
+		relative_position_id = FRA_opposition_coup
+		prerequisite = { focus = FRA_opposition_coup }
+		mutually_exclusive = { focus = FRA_iberal_head }
+		cost = 3
+		#search_filters = {   }
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+			
+		}
+	}
 	
 
 	
@@ -399,7 +642,7 @@ focus_tree = {
 		id = FRA_go_with_monarhist_opposition
 		icon = GFX_focus_generic_monarchy_1
 		
-		x = 7
+		x = 14
 		y = 0
 		relative_position_id = FRA_long_live_the_republick
 		mutually_exclusive = { focus = FRA_long_live_the_republick }
