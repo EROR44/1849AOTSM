@@ -328,7 +328,7 @@ focus_tree = {
 		icon = GFX_fra_speech_on_the_nation
 		
 		x = 0
-		y = 2 	
+		y = 3	
 		relative_position_id = FRA_the_head_of_goverment_sharl_lagranj
 		prerequisite = { focus = FRA_the_head_of_goverment_sharl_lagranj }
 		cost = 3
@@ -444,7 +444,9 @@ focus_tree = {
 		relative_position_id = FRA_speech_to_the_nation
 		prerequisite = { 
 			focus = FRA_speech_to_the_nation
-			focus = FRA_reorg_the_goverment
+			focus = FRA_louis_napoleon_the_head_of_goverment
+			focus = FRA_mishel_shevalie_the_head_of_goverment
+			focus = FRA_anri_sharl_de_artua_the_head_of_goverment
 			}
 		cost = 7
 		#search_filters = {   }
@@ -547,12 +549,15 @@ focus_tree = {
 		id = FRA_unite_the_divided_nation
 		icon = GFX_union_with_france
 		
-		x = 0
-		y = 7
-		relative_position_id = FRA_the_head_of_goverment_sharl_lagranj
-		prerequisite = { focus = FRA_speech_to_the_nation }
+		x = 8
+		y = 5
+		relative_position_id = FRA_speech_to_the_nation
+		#prerequisite = { focus = FRA_speech_to_the_nation }
 		prerequisite = { focus = FRA_ban_the_radical_opposition }
-		prerequisite = { focus = FRA_create_coalition }
+		prerequisite = { 
+			focus = FRA_create_coalition 
+			focus = FRA_subsidies_to_ecucation
+		}
 		cost = 10
 		#search_filters = {   }
 		
@@ -566,7 +571,7 @@ focus_tree = {
 	focus = {
 		id = FRA_opposition_coup
 		icon = GFX_goal_generic_major_alliance
-		x = 4
+		x = 6
 		y = 1
 		relative_position_id = FRA_long_live_the_republick
 		prerequisite = { focus = FRA_long_live_the_republick }
@@ -577,25 +582,34 @@ focus_tree = {
 		available_if_capitulated = yes
 
 		completion_reward = {
-			
+			country_event = { id = fren.1  }
 		}
 	}
 #############LIBERAL_OPPOSITION_WAT############################
 	focus = {
-		id = FRA_iberal_head
-		icon = GFX_goal_generic_major_alliance
-		x = -3
+		id = FRA_the_party_of_order
+		icon = GFX_fra_party_of_order
+		x = -5
 		y = 1
 		relative_position_id = FRA_opposition_coup
 		prerequisite = { focus = FRA_opposition_coup }
-		mutually_exclusive = { focus = FRA_conservative_head }
-		cost = 3
+		mutually_exclusive = { focus = FRA_the_conservative_party }
+		mutually_exclusive = { focus = FRA_the_party_of_legitimist }
+		cost = 0
 		#search_filters = {   }
+		
+		available = {
+			always = no
+		}
 		
 		available_if_capitulated = yes
 
 		completion_reward = {
-			
+			set_politics = { ruling_party = liberalism elections_allowed = yes }
+			add_popularity = {
+				ideology = liberalism
+				popularity = 0.1
+			}
 		}
 	}
 	focus = {
@@ -605,8 +619,9 @@ focus_tree = {
 		y = 2
 		relative_position_id = FRA_opposition_coup
 		prerequisite = {
-			focus = FRA_iberal_head
-			focus = FRA_conservative_head
+			focus = FRA_the_party_of_order
+			focus = FRA_the_conservative_party
+			focus = FRA_the_party_of_legitimist
 		}
 		
 		cost = 3
@@ -619,13 +634,188 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = FRA_conservative_head
+		id = FRA_louis_napoleon_the_head_of_goverment
 		icon = GFX_goal_generic_major_alliance
-		x = 3
+		x = 0
+		y = 2
+		relative_position_id = FRA_the_party_of_order
+		prerequisite = { focus = FRA_the_party_of_order }
+		prerequisite = { focus = FRA_reorg_the_goverment }
+		cost = 3
+		#search_filters = {   }
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+			
+		}
+	}
+	focus = {
+		id = FRA_the_party_programm
+		icon = GFX_goal_generic_major_alliance
+		x = 0
+		y = 1
+		relative_position_id = FRA_louis_napoleon_the_head_of_goverment
+		prerequisite = { focus = FRA_louis_napoleon_the_head_of_goverment }
+		
+		cost = 7
+		#search_filters = {   }
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+			
+		}
+	}
+	focus = {
+		id = FRA_decline_the_export_duties #снижение экспортных пошлин
+		icon = GFX_goal_generic_major_alliance
+		x = -1
+		y = 1
+		relative_position_id = FRA_the_party_programm
+		prerequisite = { focus = FRA_the_party_programm }
+		
+		cost = 7
+		#search_filters = {   }
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+			
+		}
+	}
+	focus = {
+		id = FRA_religios_freedom
+		icon = GFX_goal_generic_major_alliance
+		x = 1
+		y = 1
+		relative_position_id = FRA_the_party_programm
+		prerequisite = { focus = FRA_the_party_programm }
+		
+		cost = 7
+		#search_filters = {   }
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+			
+		}
+	}
+	focus = {
+		id = FRA_10_hours_work_day
+		icon = GFX_goal_generic_major_alliance
+		x = 0
+		y = 2
+		relative_position_id = FRA_the_party_programm
+		prerequisite = { focus = FRA_decline_the_export_duties }
+		prerequisite = { focus = FRA_religios_freedom }
+		cost = 7
+		#search_filters = {   }
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+			
+		}
+	}
+	focus = {
+		id = FRA_subsidies_to_ecucation
+		icon = GFX_goal_generic_major_alliance
+		x = 0
+		y = 1
+		relative_position_id = FRA_10_hours_work_day
+		prerequisite = { focus = FRA_10_hours_work_day }
+
+		cost = 7
+		#search_filters = {   }
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+			
+		}
+	}
+	
+###########COMSERVATIVE_OPPOSITION_SECTION####################
+	focus = {
+		id = FRA_the_conservative_party
+		icon = GFX_goal_generic_major_alliance
+		x = 0
 		y = 1
 		relative_position_id = FRA_opposition_coup
 		prerequisite = { focus = FRA_opposition_coup }
-		mutually_exclusive = { focus = FRA_iberal_head }
+		mutually_exclusive = { focus = FRA_the_party_of_order }
+		mutually_exclusive = { focus = FRA_the_party_of_legitimist }
+		cost = 0
+		#search_filters = {   }
+		
+		available = {
+			always = no
+		}
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+			set_politics = { ruling_party = conservatism elections_allowed = yes }
+			add_popularity = {
+				ideology = conservatism
+				popularity = 0.1
+			}
+		}
+	}
+	focus = {
+		id = FRA_mishel_shevalie_the_head_of_goverment
+		icon = GFX_goal_generic_major_alliance
+		x = 0
+		y = 2
+		relative_position_id = FRA_the_conservative_party
+		prerequisite = { focus = FRA_the_conservative_party }
+		prerequisite = { focus = FRA_reorg_the_goverment }
+		cost = 3
+		#search_filters = {   }
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+			
+		}
+	}
+####################AUTH_OPPOSITION_SECTION############################	
+	focus = {
+		id = FRA_the_party_of_legitimist
+		icon = GFX_fra_legitimist_party
+		x = 5
+		y = 1
+		relative_position_id = FRA_opposition_coup
+		prerequisite = { focus = FRA_opposition_coup }
+		mutually_exclusive = { focus = FRA_the_party_of_order }
+		mutually_exclusive = { focus = FRA_the_conservative_party }
+		cost = 0
+		#search_filters = {   }
+		
+		available = {
+			always = no
+		}
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+			set_politics = { ruling_party = authoritarian elections_allowed = yes }
+			add_popularity = {
+				ideology = authoritarian
+				popularity = 0.1
+			}
+		}
+	}
+	focus = {
+		id = FRA_anri_sharl_de_artua_the_head_of_goverment
+		icon = GFX_goal_generic_major_alliance
+		x = 0
+		y = 2
+		relative_position_id = FRA_the_party_of_legitimist
+		prerequisite = { focus = FRA_the_party_of_legitimist }
+		prerequisite = { focus = FRA_reorg_the_goverment }
+
 		cost = 3
 		#search_filters = {   }
 		
@@ -637,12 +827,12 @@ focus_tree = {
 	}
 	
 
-	
+#####################RETURN_OF_MONARHY_BLOCK#########################	
 	focus = {
 		id = FRA_go_with_monarhist_opposition
 		icon = GFX_focus_generic_monarchy_1
 		
-		x = 14
+		x = 17
 		y = 0
 		relative_position_id = FRA_long_live_the_republick
 		mutually_exclusive = { focus = FRA_long_live_the_republick }
@@ -651,6 +841,101 @@ focus_tree = {
 		
 		available = {
 			has_country_flag = FRA_opposition_choosen
+		}
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+			
+		}
+		
+	}
+	focus = {
+		id = FRA_return_of_old_orders #возвращение старых порядков
+		icon = GFX_focus_generic_monarchy_1
+		
+		x = 0
+		y = 1
+		relative_position_id = FRA_go_with_monarhist_opposition
+		prerequisite = { focus = FRA_go_with_monarhist_opposition }
+		cost = 10
+		#search_filters = {   }
+		
+		available = {
+		
+		}
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+			
+		}
+		
+	}
+	focus = {
+		id = FRA_democratic_emperror
+		icon = GFX_focus_generic_monarchy_1
+		
+		x = -3
+		y = 1
+		relative_position_id = FRA_return_of_old_orders
+		prerequisite = { focus = FRA_return_of_old_orders }
+		mutually_exclusive = { focus = FRA_autocrat_emperror }
+		cost = 10
+		#search_filters = {   }
+		
+		available = {
+		
+		}
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+			
+		}
+		
+	}
+	focus = {
+		id = FRA_autocrat_emperror
+		icon = GFX_focus_generic_monarchy_1
+		
+		x = 3
+		y = 1
+		relative_position_id = FRA_return_of_old_orders
+		prerequisite = { focus = FRA_return_of_old_orders }
+		mutually_exclusive = { focus = FRA_democratic_emperror }
+		cost = 10
+		#search_filters = {   }
+		
+		available = {
+		
+		}
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+			
+		}
+		
+	}
+	focus = {
+		id = FRA_proclaim_the_second_french_empire
+		icon = GFX_focus_generic_monarchy_1
+		
+		x = 0
+		y = 2
+		relative_position_id = FRA_return_of_old_orders
+		prerequisite = { focus = FRA_return_of_old_orders }
+		prerequisite = {
+			focus = FRA_democratic_emperror
+			focus = FRA_autocrat_emperror
+		
+		}
+		cost = 10
+		#search_filters = {   }
+		
+		available = {
+		
 		}
 		
 		available_if_capitulated = yes
