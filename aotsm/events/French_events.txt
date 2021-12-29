@@ -10,7 +10,8 @@ country_event = {
 	desc = { 
 		text = fren.1.d
 		trigger = {
-			
+			tag = FRA
+
 		}
 	}
 	
@@ -24,6 +25,13 @@ country_event = {
 			
 		}
 		hidden_effect = {
+			if = {
+				limit = {
+					NOT = { has_completed_focus = FRA_opposition_coup 
+					}
+				}
+				complete_national_focus = FRA_opposition_coup
+			}
 			complete_national_focus = FRA_the_party_of_order
 		}
 	}
@@ -33,6 +41,13 @@ country_event = {
 			
 		}
 		hidden_effect = {
+			if = {
+				limit = {
+					NOT = { has_completed_focus = FRA_opposition_coup 
+					}
+				}
+				complete_national_focus = FRA_opposition_coup
+			}
 			complete_national_focus = FRA_the_conservative_party
 		}
 	}
@@ -42,8 +57,127 @@ country_event = {
 			
 		}
 		hidden_effect = {
+			if = {
+				limit = {
+					NOT = { has_completed_focus = FRA_opposition_coup 
+					}
+				}
+				complete_national_focus = FRA_opposition_coup
+			}
 			complete_national_focus = FRA_the_party_legitimist
 		}
+	}
+	
+}
+#покушение на лагранжа
+country_event = {
+	id = fren.2
+	title = fren.2.t
+	desc = fren.2.d
+	picture = GFX_report_event_spain_civil_war_soldiers
+	
+	fire_only_once = yes
+	
+	trigger = {
+		tag = FRA
+		has_defensive_war = no
+		NOT = { has_government = socialism }
+		NOT = {
+			OR = {
+				has_completed focus = FRA_create_coalition
+				has_completed focus = FRA_ban_the_radical_opposition
+			}
+		}
+	}
+
+	mean_time_to_happen = {
+		days = 151	# Historical outbreak time after elections
+	}
+
+	is_triggered_only = yes
+
+	option = {
+		name = fren.2.a
+		trigger = {
+			
+		}
+		kill_country_leader = yes
+		add_stability = -0.1
+		hidden_effect = {
+			create_country_leader = {
+					name = "Временное правительство"
+					desc = "POLITICS_TEMPORARY_GOVERMENT_DESC"
+					picture = "Portrait_temporary_goverment.dds"
+					expire = "1965.1.1"
+					ideology = traditional_socialist
+					traits = {
+			
+					}
+				}
+			set_country_flag = FRA_sharl_lagranj_was_killed
+			country_event = { 
+				id = fren.1
+				days = 14
+			}
+		}
+		
+	}
+	option = {
+		name = fren.2.b
+		trigger = {
+			
+		}
+		hidden_effect = {
+			set_country_flag = FRA_sharl_lagranj_is_alive
+		}
+		add_stability = 0.03
+		}
+}
+	
+country_event = {
+	id = fren.3
+	title = fren.3.t
+	desc = fren.3.d
+	picture = GFX_report_event_spain_civil_war_soldiers
+	
+	fire_only_once = yes
+	
+	trigger = {
+		tag = FRA
+	}
+
+
+	#is_triggered_only = yes
+
+	option = {
+		name = fren.3.a
+		trigger = {
+			
+		}
+		hidden_effect = {
+		
+		}
+	
+	}
+	option = {
+		name = fren.3.b
+		trigger = {
+			
+		}
+		hidden_effect = {
+		
+		}
+
+	}
+	option = {
+		name = fren.3.c
+		trigger = {
+			
+		}
+		hidden_effect = {
+		
+		}
+
 	}
 	
 }
