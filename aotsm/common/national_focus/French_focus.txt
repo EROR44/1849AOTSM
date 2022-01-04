@@ -186,7 +186,7 @@ focus_tree = {
 		available_if_capitulated = yes
 
 		completion_reward = {
-			
+			add_political_power = 150
 		}
 	}
 	
@@ -258,7 +258,28 @@ focus_tree = {
 		available_if_capitulated = yes
 
 		completion_reward = {
-			
+			add_political_power = -100
+			custom_effect_tooltip = fra_add_10_liberal_sup
+			add_to_variable = { fra_liberal_support = 10 }
+			clamp_variable = {
+				var = fra_liberal_support
+				min = 0
+				max = 100
+			}
+			custom_effect_tooltip = fra_add_10_conservator_sup
+			add_to_variable = { fra_conservator_support = 10 }
+			clamp_variable = {
+				var = fra_conservator_support
+				min = 0
+				max = 100
+			}
+			custom_effect_tooltip = fra_add_5_gov_tension
+			add_to_variable = { fra_tension_in_goverment = 5 }
+			clamp_variable = {
+				var = fra_tension_in_goverment
+				min = 0
+				max = 100
+				}
 		}
 	}
 	focus = {
@@ -273,10 +294,21 @@ focus_tree = {
 		cost = 7
 		#search_filters = {   }
 		
+		available = {
+			check_variable = { fra_liberal_support > 50 }
+		}
+		
 		available_if_capitulated = yes
 
 		completion_reward = {
-			
+			add_political_power = -100
+			custom_effect_tooltip = fra_add_10_liberal_sup
+			add_to_variable = { fra_liberal_support = 10 }
+			clamp_variable = {
+				var = fra_liberal_support
+				min = 0
+				max = 100
+			}
 		}
 	}
 	focus = {
@@ -291,10 +323,22 @@ focus_tree = {
 		cost = 7
 		#search_filters = {   }
 		
+		available = {
+			custom_effect_tooltip = fra_has_more_then_50_cons_sup
+			check_variable = { fra_conservator_support > 50 }
+		}
+		
 		available_if_capitulated = yes
 
 		completion_reward = {
-			
+			add_political_power = -100
+			custom_effect_tooltip = fra_add_10_conservator_sup
+			add_to_variable = { fra_conservator_support = 10 }
+			clamp_variable = {
+				var = fra_conservator_support
+				min = 0
+				max = 100
+			}
 		}
 	}
 	focus = {
@@ -315,7 +359,16 @@ focus_tree = {
 		available_if_capitulated = yes
 
 		completion_reward = {
-			
+			add_ideas = {
+				FRA_updated_party_program
+			}
+			custom_effect_tooltip = fra_remove_10_gov_tension
+			add_to_variable = { fra_tension_in_goverment = -10 }
+			clamp_variable = {
+				var = fra_tension_in_goverment
+				min = 0
+				max = 100
+			}
 		}
 	}
 	focus = {
@@ -331,11 +384,15 @@ focus_tree = {
 		
 		cost = 7
 		#search_filters = {   }
+		bypass = {
+			has_country_flag = fra_coalition_created
+		}
 		
 		available_if_capitulated = yes
 
 		completion_reward = {
-			
+			add_political_power = 150
+			add_stability = 0.08
 		}
 	}
 	focus = {
@@ -357,7 +414,15 @@ focus_tree = {
 		available_if_capitulated = yes
 
 		completion_reward = {
-			
+			add_political_power = -50
+			add_stability = 0.05
+			custom_effect_tooltip = fra_add_5_gov_tension
+			add_to_variable = { fra_tension_in_goverment = 5 }
+			clamp_variable = {
+				var = fra_tension_in_goverment
+				min = 0
+				max = 100
+				}
 		}
 	}
 	focus = {
@@ -374,7 +439,7 @@ focus_tree = {
 		available_if_capitulated = yes
 
 		completion_reward = {
-			
+			add_ideas = FRA_army_propaganda
 		}
 	}
 	focus = {
@@ -391,7 +456,8 @@ focus_tree = {
 		available_if_capitulated = yes
 
 		completion_reward = {
-			
+			add_political_power = -20
+			unlock_decision_tooltip = fren_check_army_command_cat
 		}
 	}
 	focus = {
@@ -408,7 +474,10 @@ focus_tree = {
 		available_if_capitulated = yes
 
 		completion_reward = {
-			
+			add_timed_idea = { 
+				idea = FRA_press_on_control 
+				days = 730 
+			}
 		}
 	}
 	focus = {
@@ -425,7 +494,23 @@ focus_tree = {
 		available_if_capitulated = yes
 
 		completion_reward = {
-			
+			add_political_power = -50
+			add_timed_idea = { 
+				idea = FRA_purge_the_opposition_idea 
+				days = 365
+			}
+			add_popularity = {
+				ideology = conservatism
+				popularity = -0.1
+			}
+			add_popularity = {
+				ideology = liberalism
+				popularity = -0.1
+			}
+			add_popularity = {
+				ideology = authoritarian
+				popularity = -0.1
+			}
 		}
 	}
 	focus = {
@@ -444,7 +529,29 @@ focus_tree = {
 		available_if_capitulated = yes
 
 		completion_reward = {
-			
+			add_political_power = -20
+			hidden_effect = {
+				set_temp_variable = {
+					var = ban_ideology_var
+					value = party_popularity@authoritarian
+				}
+				multiply_temp_variable = {
+					var = ban_ideology_var
+					value = -1
+				}
+				add_popularity = {
+					ideology = authoritarian
+					popularity = ban_ideology_var
+				}
+				multiply_temp_variable = {
+					var = ban_ideology_var
+					value = 0.66
+				}
+				set_country_flag = banned_authoritarian_flag
+			}
+			remove_authoritarian_spirits_effect = yes
+			custom_effect_tooltip = ban_authoritarian_party_tt
+			add_stability = ban_ideology_var
 		}
 	}
 	focus = {
@@ -483,13 +590,20 @@ focus_tree = {
 		
 		available = {
 			has_country_flag = FRA_sharl_lagranj_was_killed
-			has_country_flag = FRA_sharl_lagranj_was_killed
 		}
 		
 		available_if_capitulated = yes
 
 		completion_reward = {
 			country_event = { id = fren.1  }
+			add_political_power = -50
+			custom_effect_tooltip = fra_add_10_gov_tension
+			add_to_variable = { fra_tension_in_goverment = 10 }
+			clamp_variable = {
+				var = fra_tension_in_goverment
+				min = 0
+				max = 100
+			}
 		}
 	}
 #############LIBERAL_OPPOSITION_WAT############################
@@ -554,7 +668,14 @@ focus_tree = {
 		available_if_capitulated = yes
 
 		completion_reward = {
-			
+			add_political_power = -50
+			custom_effect_tooltip = fra_add_5_gov_tension
+			add_to_variable = { fra_tension_in_goverment = 5 }
+			clamp_variable = {
+				var = fra_tension_in_goverment
+				min = 0
+				max = 100
+			}
 		}
 	}
 	focus = {
@@ -684,7 +805,14 @@ focus_tree = {
 		available_if_capitulated = yes
 
 		completion_reward = {
-			
+			add_political_power = -50
+			custom_effect_tooltip = fra_add_5_gov_tension
+			add_to_variable = { fra_tension_in_goverment = 5 }
+			clamp_variable = {
+				var = fra_tension_in_goverment
+				min = 0
+				max = 100
+			}
 		}
 	}
 ####################AUTH_OPPOSITION_SECTION############################	
@@ -729,7 +857,14 @@ focus_tree = {
 		available_if_capitulated = yes
 
 		completion_reward = {
-			
+			add_political_power = -50
+			custom_effect_tooltip = fra_add_10_gov_tension
+			add_to_variable = { fra_tension_in_goverment = 10 }
+			clamp_variable = {
+				var = fra_tension_in_goverment
+				min = 0
+				max = 100
+			}
 		}
 	}
 	

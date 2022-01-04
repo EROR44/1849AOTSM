@@ -70,6 +70,6 @@ replace_path="map/supplyareas"
 replace_path="map"
 replace_path="gfx/interface/equipmentdesigner"
 
-picture="thumb.jpg"
+picture="aotsm_picture.jpg"
 name="AOTSM"
 supported_version="1.11.3"

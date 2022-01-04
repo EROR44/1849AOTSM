@@ -97,7 +97,9 @@ fren_party_loyality_cat = {
 			tag = FRA
 		}
 		available = {
+			check_variable = { fra_liberal_support < 100 }
 			OR = {
+				NOT = { has_country_flag = fra_up_relations }
 				custom_effect_tooltip = fra_cons_sup_less_when_60
 				NOT = { check_variable = { fra_conservator_support > 60 } }
 				custom_effect_tooltip = fra_loyal_sup_less_when_60
@@ -106,8 +108,9 @@ fren_party_loyality_cat = {
 		}
 		visible = {
 			tag = FRA
+			check_variable = { fra_liberal_support < 100 }
 		}		
-		fire_only_once = yes		
+			
 		cost = 40		
 		ai_will_do = {
 			factor = 40
@@ -116,11 +119,17 @@ fren_party_loyality_cat = {
 				is_historical_focus_on = yes
 			}
 		}
-		complete_effect = {		
 		
+		days_remove = 14
+		days_re_enable = 0
+		fire_only_once = no
+		
+		complete_effect = {		
+			set_country_flag = fra_up_relations
 		}
 		
 		remove_effect = {
+			drop_country_flag = fra_up_relations
 			custom_effect_tooltip = fra_add_10_liberal_sup
 			add_to_variable = { fra_liberal_support = 10 }
 			clamp_variable = {
@@ -136,15 +145,18 @@ fren_party_loyality_cat = {
 			tag = FRA
 		}
 		available = {
+			check_variable = { fra_conservator_support < 100 }
 			OR = {
+				NOT = { has_country_flag = fra_up_relations }
 				NOT = { check_variable = { fra_liberal_support > 60 } }
 				NOT = { check_variable = { fra_loyalist_support > 60 } }
 			}
 		}
 		visible = {
 			tag = FRA
+			check_variable = { fra_conservator_support < 100 }
 		}		
-		fire_only_once = yes		
+				
 		cost = 40		
 		ai_will_do = {
 			factor = 40
@@ -153,6 +165,11 @@ fren_party_loyality_cat = {
 				is_historical_focus_on = yes
 			}
 		}
+		
+		days_remove = 14
+		days_re_enable = 0
+		fire_only_once = no
+		
 		complete_effect = {		
 		
 		}
@@ -174,7 +191,9 @@ fren_party_loyality_cat = {
 		}
 		available = {
 			has_country_flag = fra_coop_with_loyalist
+			check_variable = { fra_loyalist_support < 100 }
 			OR = {
+				NOT = { has_country_flag = fra_up_relations }
 				NOT = { check_variable = { fra_liberal_support > 60 } }
 				NOT = { check_variable = { fra_conservator_support > 60 } }
 			}
@@ -182,8 +201,9 @@ fren_party_loyality_cat = {
 		visible = {
 			tag = FRA
 			has_country_flag = fra_coop_with_loyalist
+			check_variable = { fra_loyalist_support < 100 }
 		}		
-		fire_only_once = yes		
+			
 		cost = 40		
 		ai_will_do = {
 			factor = 50
@@ -192,6 +212,11 @@ fren_party_loyality_cat = {
 				is_historical_focus_on = yes
 			}
 		}
+		
+		days_remove = 14
+		days_re_enable = 0
+		fire_only_once = no
+		
 		complete_effect = {		
 		
 		}
@@ -217,7 +242,7 @@ fren_party_loyality_cat = {
 		visible = {
 			tag = FRA
 		}		
-		fire_only_once = yes		
+				
 		cost = 40		
 		ai_will_do = {
 			factor = 5
@@ -226,6 +251,11 @@ fren_party_loyality_cat = {
 				is_historical_focus_on = yes
 			}
 		}
+		
+		days_remove = 14
+		days_re_enable = 0
+		fire_only_once = no
+		
 		complete_effect = {		
 		
 		}
@@ -251,7 +281,7 @@ fren_party_loyality_cat = {
 		visible = {
 			tag = FRA
 		}		
-		fire_only_once = yes		
+				
 		cost = 40		
 		ai_will_do = {
 			factor = 20
@@ -260,6 +290,11 @@ fren_party_loyality_cat = {
 				is_historical_focus_on = yes
 			}
 		}
+		
+		days_remove = 14
+		days_re_enable = 0
+		fire_only_once = no
+		
 		complete_effect = {		
 		
 		}
@@ -283,7 +318,7 @@ fren_party_loyality_cat = {
 			tag = FRA
 			
 		}		
-		fire_only_once = yes		
+				
 		cost = 40		
 		ai_will_do = {
 			factor = 20
@@ -292,6 +327,11 @@ fren_party_loyality_cat = {
 				is_historical_focus_on = yes
 			}
 		}
+		
+		days_remove = 14
+		days_re_enable = 0
+		fire_only_once = no
+		
 		complete_effect = {		
 		
 		}
@@ -313,7 +353,7 @@ fren_party_loyality_cat = {
 			tag = FRA
 			check_variable = { fra_liberal_support > 90 }
 		}		
-		fire_only_once = yes		
+			
 		cost = 100	
 		ai_will_do = {
 			factor = 200
@@ -322,12 +362,17 @@ fren_party_loyality_cat = {
 				is_historical_focus_on = yes
 			}
 		}
+		
+		days_remove = 14
+		days_re_enable = 0
+		fire_only_once = yes
+		
 		complete_effect = {		
 		
 		}
 		
 		remove_effect = {			
-			
+			set_country_flag = fra_coalition_created
 		}
 	}
 	fra_create_coalition_with_conservative = {
@@ -342,7 +387,7 @@ fren_party_loyality_cat = {
 			tag = FRA
 			check_variable = { fra_conservator_support > 90 }
 		}		
-		fire_only_once = yes		
+		
 		cost = 100		
 		ai_will_do = {
 			factor = 200
@@ -351,12 +396,17 @@ fren_party_loyality_cat = {
 				is_historical_focus_on = yes
 			}
 		}
+		
+		days_remove = 14
+		days_re_enable = 0
+		fire_only_once = yes
+		
 		complete_effect = {		
 		
 		}
 		
 		remove_effect = {		
-			
+			set_country_flag = fra_coalition_created
 		}
 	}
 	fra_create_coalition_with_loyalist = {
@@ -372,7 +422,7 @@ fren_party_loyality_cat = {
 			tag = FRA
 			has_country_flag = fra_coop_with_loyalist
 		}		
-		fire_only_once = yes		
+			
 		cost = 100		
 		ai_will_do = {
 			factor = 200
@@ -381,12 +431,17 @@ fren_party_loyality_cat = {
 				is_historical_focus_on = yes
 			}
 		}
+		
+		days_remove = 14
+		days_re_enable = 0
+		fire_only_once = yes
+		
 		complete_effect = {		
 		
 		}
 		
 		remove_effect = {			
-			
+			set_country_flag = fra_coalition_created
 		}
 	}
 }
