@@ -1,9 +1,45 @@
 on_actions = {
 	on_startup = {
 		effect = {
-			FRA = {
-				# You can put this in the country's history file alternatively too.
-				parliament_gui_initial = yes
+			if = {
+				limit = {
+					original_tag = FRA 
+					NOT =  {
+						has_country_flag = fra_coalition_created 
+					}
+				}
+				if = {
+					limit = {
+					FRA = { 
+						check_variable = { fra_tension_in_goverment > 50 } 
+						}
+					}
+				}
+				else_if = {
+					limit = {
+						FRA = { 
+							check_variable = { fra_tension_in_goverment > 70 } 
+							}
+						}
+				}
+				else_if = {
+					limit = {
+						FRA = { 
+							check_variable = { fra_tension_in_goverment > 90 } 
+							has_ruling_party = socialism
+							}
+						}
+						#kill_country_leader = yes
+						#start_civil_war = yes
+				}
+				else = {
+					limit = {
+						FRA = { 
+							check_variable = { fra_tension_in_goverment > 90 } 
+							}
+						}
+						
+				}
 			}
 		}
 	}
