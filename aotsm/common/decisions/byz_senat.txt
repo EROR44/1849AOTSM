@@ -58,4 +58,139 @@ byz_senat_decision_category = {
 		}
 	}
 	
+	byz_civil_donation = {
+		icon = generic_political_discourse
+		allowed = {
+			always = no
+		}
+		available = {
+			has_political_power > 150
+		}
+		visible = {
+			has_completed_focus = BYZ_support_from_democrats
+		}		
+			
+		cost = 75		
+		ai_will_do = {
+			factor = 40
+			modifier = {
+				factor = 100
+				is_historical_focus_on = yes
+			}
+		}
+		
+		days_mission_timeout = 70
+		fire_only_once = yes
+		
+		complete_effect = {
+			add_political_power = -150
+			custom_effect_tooltip = byz_civil_donation_c
+			add_to_variable = { byz_imperial_faction_support = 5 }
+			add_to_variable = { byz_democrats_faction_support = -5 }
+			clamp_variable = {
+				var = byz_imperial_faction_support
+				min = 0
+				max = 200
+			}
+			clamp_variable = {
+				var = byz_democrats_faction_support
+				min = 0
+				max = 200
+			}
+		}
+		
+		remove_effect = {
+			add_stability = -0.05
+		}
+	}
+	
+	byz_grow_army = {
+		icon = generic_political_discourse
+		allowed = {
+			always = no
+		}
+		available = {
+			has_army_manpower = { size > 149999 }
+		}
+		visible = {
+			has_completed_focus = BYZ_support_from_generals
+		}		
+			
+		cost = 0		
+		ai_will_do = {
+			factor = 40
+			modifier = {
+				factor = 100
+				is_historical_focus_on = yes
+			}
+		}
+		
+		days_mission_timeout = 70
+		fire_only_once = yes
+		
+		complete_effect = {
+			custom_effect_tooltip = byz_grow_army_c
+			add_to_variable = { byz_imperial_faction_support = 5 }
+			add_to_variable = { byz_generals_faction_support = -5 }
+			clamp_variable = {
+				var = byz_imperial_faction_support
+				min = 0
+				max = 200
+			}
+			clamp_variable = {
+				var = byz_generals_faction_support
+				min = 0
+				max = 200
+			}
+		}
+		
+		remove_effect = {
+			add_war_support = -0.05
+		}
+	}
+	
+	byz_trade_next = {
+		icon = generic_political_discourse
+		allowed = {
+			always = no
+		}
+		available = {
+			has_idea = free_trade
+		}
+		visible = {
+			has_completed_focus = BYZ_support_from_merchants
+		}		
+			
+		cost = 0		
+		ai_will_do = {
+			factor = 40
+			modifier = {
+				factor = 100
+				is_historical_focus_on = yes
+			}
+		}
+		
+		days_mission_timeout = 70
+		fire_only_once = yes
+		
+		complete_effect = {		
+			custom_effect_tooltip = byz_trade_next_c
+			add_to_variable = { byz_imperial_faction_support = 5 }
+			add_to_variable = { byz_merchants_faction_support = -5 }
+			clamp_variable = {
+				var = byz_imperial_faction_support
+				min = 0
+				max = 200
+			}
+			clamp_variable = {
+				var = byz_merchants_faction_support
+				min = 0
+				max = 200
+			}
+		}
+		
+		remove_effect = {
+			add_stability = -0.05
+		}
+	}
 }

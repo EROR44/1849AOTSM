@@ -32,13 +32,13 @@ focus_tree = {
 	
 	focus = {
 		id = BYZ_power_to_senat
-		icon = GFX_goal_generic_air_production
+		icon = GFX_focus_rom_handle_king
 		x = 15
 		y = 0
 		cost = 5
 		mutually_exclusive = { focus = BYZ_counteraction_of_senat }
 		ai_will_do = {
-			factor = 10000
+			factor = 10
 		}
 		
 		#cancel = { }
@@ -55,8 +55,8 @@ focus_tree = {
 	
 	focus = {
 		id = BYZ_support_of_merchants
-		icon = GFX_goal_generic_air_production
-		x = 14
+		icon = GFX_goal_generic_intelligence_exchange
+		x = 13
 		y = 1
 		cost = 5
 		prerequisite = { focus = BYZ_power_to_senat }
@@ -73,13 +73,70 @@ focus_tree = {
 		#search_filters = {  }
 		
 		completion_reward = {
+			add_political_power = 150
+			custom_effect_tooltip = byz_merchants_support
+			add_to_variable = { byz_imperial_faction_support = -5 }
+			add_to_variable = { byz_merchants_faction_support = 5 }
+			clamp_variable = {
+				var = byz_imperial_faction_support
+				min = 0
+				max = 200
+			}
+			clamp_variable = {
+				var = byz_merchants_faction_support
+				min = 0
+				max = 200
+			}
+		}
+	}
+	
+	focus = {
+		id = BYZ_suppression_generals
+		icon = GFX_focus_SAF_colonialist_crusade
+		x = 15
+		y = 1
+		cost = 5
+		prerequisite = { focus = BYZ_power_to_senat }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = {  }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_war_support = -0.1
+			custom_effect_tooltip = byz_general_suppression
+			add_to_variable = { byz_generals_faction_support = -10 }
+			add_to_variable = { byz_merchants_faction_support = 5 }
+			add_to_variable = { byz_democrats_faction_support = 5 }
+			clamp_variable = {
+				var = byz_generals_faction_support
+				min = 0
+				max = 200
+			}
+			clamp_variable = {
+				var = byz_merchants_faction_support
+				min = 0
+				max = 200
+			}
+			clamp_variable = {
+				var = byz_democrats_faction_support
+				min = 0
+				max = 200
+			}
 		}
 	}
 	
 	focus = {
 		id = BYZ_support_of_democrats
-		icon = GFX_goal_generic_air_production
-		x = 16
+		icon = GFX_goal_generic_improve_relations
+		x = 17
 		y = 1
 		cost = 5
 		prerequisite = { focus = BYZ_power_to_senat }
@@ -96,12 +153,26 @@ focus_tree = {
 		#search_filters = {  }
 		
 		completion_reward = {
+			add_stability = 0.1
+			custom_effect_tooltip = byz_democrats_support
+			add_to_variable = { byz_imperial_faction_support = -5 }
+			add_to_variable = { byz_democrats_faction_support = 5 }
+			clamp_variable = {
+				var = byz_imperial_faction_support
+				min = 0
+				max = 200
+			}
+			clamp_variable = {
+				var = byz_democrats_faction_support
+				min = 0
+				max = 200
+			}
 		}
 	}
 	
 	focus = {
 		id = BYZ_counteraction_of_senat
-		icon = GFX_goal_generic_air_production
+		icon = GFX_focus_usa_voter_registration_act
 		x = 25
 		y = 0
 		cost = 5
@@ -119,5 +190,80 @@ focus_tree = {
 		#search_filters = {  }
 		
 		completion_reward = {
+		}
+	}
+	
+	focus = {
+		id = BYZ_support_from_democrats
+		icon = GFX_focus_generic_treaty
+		x = 23
+		y = 1
+		cost = 5
+		#mutually_exclusive = { }
+		prerequisite = { focus = BYZ_counteraction_of_senat }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = {  }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			activate_mission = byz_civil_donation
+		}
+	}
+	
+	focus = {
+		id = BYZ_support_from_generals
+		icon = GFX_focus_generic_little_entente
+		x = 25
+		y = 1
+		cost = 5
+		#mutually_exclusive = { }
+		prerequisite = { focus = BYZ_counteraction_of_senat }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = {  }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			activate_mission = byz_grow_army
+		}
+	}
+	
+	focus = {
+		id = BYZ_support_from_merchants
+		icon = GFX_focus_mex_privatisation
+		x = 27
+		y = 1
+		cost = 5
+		#mutually_exclusive = { }
+		prerequisite = { focus = BYZ_counteraction_of_senat }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = {  }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			activate_mission = byz_trade_next
 		}
 	}
