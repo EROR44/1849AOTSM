@@ -1,0 +1,146 @@
+#######################
+	French events
+#######################
+
+add_namespace = sos
+
+country_event = {
+	id = sos.1
+	title = sos.1.t
+	desc = sos.1.d
+	
+	trigger = {
+		tag = SOS
+		has_defensive_war = no
+		has_government = authoritarian 
+		date > 1849.4.16 
+	}
+	
+	mean_time_to_happen = {
+		days = 91
+	}
+	
+	picture = GFX_report_event_fra_ev_read_write
+
+	fire_only_once = yes
+
+	option = {
+		name = sos.1.a
+		trigger = {
+			tag = SOS
+			#is_ai = no
+		}
+		hidden_effect = {
+			SOS = {
+				set_global_flag = somali_civil_war
+			}
+			SOR = {
+				set_global_flag = somali_civil_war
+				add_state_core = 268
+				add_state_core = 269
+				add_state_core = 831
+				add_state_core = 559
+				add_state_core = 830
+				transfer_state = 268
+				transfer_state = 831
+				set_capital = 268
+				load_oob = "SOR_civil_war"
+				declare_war_on = {
+					target = SOS
+					type = annex_everything
+				}
+				set_province_controller = 7980
+				set_province_controller = 12714
+				set_province_controller = 13385
+				set_province_controller = 10833
+				set_province_controller = 13226
+				set_province_controller = 13322
+				set_province_controller = 13318
+				set_province_controller = 13298
+				set_province_controller = 13317
+				set_province_controller = 11014
+				set_province_controller = 13402
+				set_province_controller = 8133
+			}
+		}
+	}		
+}
+country_event = {
+	id = sos.2
+	title = sos.2.t
+	desc =  sos.2.d
+	
+	trigger = {
+		tag = SOS
+	}
+	
+	picture = GFX_report_event_fra_ev_read_write
+
+	is_triggered_only = yes
+
+	option = {
+		name = sos.2.a
+		trigger = {
+			tag = SOS
+			has_global_flag = somali_civil_war
+			SOR = {
+				surrender_progress > 0.70
+			}
+		}
+		hidden_effect = {
+			white_peace = SOR
+			transfer_state = 268
+			transfer_state = 831
+			remove_state_core = 268
+			remove_state_core = 269
+			remove_state_core = 831
+			remove_state_core = 559
+			remove_state_core = 830
+			clr_global_flag = somali_civil_war
+		}
+	}		
+}
+country_event = {
+	id = sos.3
+	title = sos.3.t
+	desc = sos.3.d
+	
+	trigger = {
+		tag = SOR
+	}
+	
+	picture = GFX_report_event_fra_ev_read_write
+
+	is_triggered_only = yes
+
+	option = {
+		name = sos.3.a
+		trigger = {
+			tag = SOR
+			has_global_flag = somali_civil_war
+			SOS = {
+				surrender_progress > 0.70
+			}
+		}
+		hidden_effect = {
+			white_peace = SOS 
+			transfer_state = 559
+			transfer_state = 830
+			transfer_state = 269
+			remove_state_core = 268
+			remove_state_core = 269
+			remove_state_core = 831
+			remove_state_core = 559
+			remove_state_core = 830
+			set_capital = 559
+			if = {
+				limit = { has_idea = war_economy}
+				swap_ideas = {
+					remove_idea = war_economy
+					add_idea = civilian_economy
+				}
+			}
+			clr_global_flag = somali_civil_war
+		}
+	}		
+}
