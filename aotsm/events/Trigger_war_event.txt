@@ -513,6 +513,102 @@ country_event = {
 				remove_state_core = 735
 			}
 		}
+	}	
+}
+
+country_event = {
+	id = twe.9
+	title = twe.9.t
+	desc = twe.9.d
+	picture = GFX_report_event_molotov_signing_pact
+	
+	fire_only_once = yes
+	
+	hidden =  yes
+	
+	trigger = {
+		tag = BYZ
+		if = {
+			limit = {
+				is_ai = yes 
+			}
+			ALB = {
+				surrender_progress > 0.10
+			}
+		}
+		if = {
+			limit = {
+				is_ai = no
+			}
+			ALB = {
+				surrender_progress > 0.35
+			}
+		}
+		BYZ = { has_country_flag = BYZ_vs_ALB }
 	}
 	
+	option = {
+		name = twe.9.a
+		BYZ = { 
+			transfer_state = 44
+		}
+		BYZ = { clr_country_flag = BYZ_vs_ALB }
+		BYZ = {
+			white_peace = {
+				tag = ALB
+				message = BYZ_win_ALB
+			}
+		}
+		BYZ = { set_country_flag = BYZ_vs_ALB_win }
+	}
+}
+
+country_event = {
+	id = twe.10
+	title = twe.10.t
+	desc = twe.10.d
+	picture = GFX_report_event_molotov_signing_pact
+	
+	fire_only_once = yes
+	
+	hidden =  yes
+	
+	trigger = {
+		tag = BYZ
+		if = {
+			limit = {
+				is_ai = yes 
+			}
+			SER = {
+				surrender_progress > 0.10
+			}
+		}
+		if = {
+			limit = {
+				is_ai = no
+			}
+			SER = {
+				surrender_progress > 0.35
+			}
+		}
+		BYZ = { has_country_flag = BYZ_vs_SER }
+	}
+	
+	option = {
+		name = twe.10.a
+		BYZ = { 
+			transfer_state = 105
+			transfer_state = 107
+			transfer_state = 108
+			transfer_state = 802
+		}
+		BYZ = { clr_country_flag = BYZ_vs_SER }
+		BYZ = {
+			white_peace = {
+				tag = SER
+				message = BYZ_win_SER
+			}
+		}
+		BYZ = { set_country_flag = BYZ_vs_SER_win }
+	}
 }
