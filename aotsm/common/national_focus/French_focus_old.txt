@@ -1,0 +1,1052 @@
+search_filter_prios = {
+	FOCUS_FILTER_POLITICAL = 1010
+	FOCUS_FILTER_RESEARCH = 522
+	FOCUS_FILTER_INDUSTRY = 509
+}
+focus_tree = {
+	id = french_focus
+	
+	country = {
+		factor = 0
+		
+		modifier = {
+			add = 0#100
+			tag = FRA
+		}
+	}
+	
+	default = no
+	reset_on_civilwar = no
+	
+	initial_show_position = {
+		focus = FRA_long_live_the_republick
+	}
+
+#	focus = {
+#		id = FRA_
+#		icon = GFX_
+#		prerequisite = { focus = }
+#		mutually_exclusive = { focus =  }
+#		x = -3
+#		y = 0
+#		relative_position_id =
+#
+#		cost = 10
+#
+#		ai_will_do = {
+#			factor = 1
+#		}
+#
+#		available = {
+#
+#		}
+#		
+#		bypass = {
+#
+#		}
+#
+#		cancel_if_invalid = yes
+#		continue_if_invalid = no
+#		available_if_capitulated = no
+#
+#		complete_tooltip = {
+#
+#		}
+#
+#		completion_reward = {
+#
+#		}
+#	}
+	
+###############################################################
+#################POLITICAL_SECTION############################
+##############################################################	
+	focus = {
+		id = FRA_long_live_the_republick
+		icon = GFX_fra_long_live_the_republick
+		
+		x = 14
+		y = 0
+		relative_position_id = FRA_convocation_of_the_assembly
+		mutually_exclusive = { focus = FRA_go_with_monarhist_opposition }
+		cost = 10
+		#search_filters = {   }
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+			add_political_power = 150
+		}
+	}
+	
+
+##########HISTORICAL_SECTION_POLITIC#############################	
+	focus = {
+		id = FRA_the_head_of_goverment_sharl_lagranj
+		icon = GFX_fra_sharl_lagranj
+		x = -5
+		y = 1
+		relative_position_id = FRA_long_live_the_republick
+		prerequisite = { focus = FRA_long_live_the_republick }
+		mutually_exclusive = { focus = FRA_opposition_coup }
+		cost = 3
+		#search_filters = {   }
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+			add_stability = 0.05
+			add_political_power = 100
+			hidden_effect = {
+				set_country_flag = FRA_lagranj_course
+			}
+		}
+	}
+	focus = {
+		id = FRA_speech_to_the_nation
+		icon = GFX_fra_speech_on_the_nation
+		
+		x = 0
+		y = 3	
+		relative_position_id = FRA_the_head_of_goverment_sharl_lagranj
+		prerequisite = { focus = FRA_the_head_of_goverment_sharl_lagranj }
+		cost = 3
+		#search_filters = {   }
+		
+		available = {
+			has_country_flag = FRA_lagranj_course
+			custom_effect_tooltip = fra_tension_more_when_40_procent
+			check_variable = { fra_fra_tension_in_goverment > 40 }
+		}
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+			add_stability = 0.05
+			add_political_power = 150
+			custom_effect_tooltip = fra_remove_10_gov_tension
+			add_to_variable = { fra_tension_in_goverment = -10 }
+			clamp_variable = {
+				var = fra_tension_in_goverment
+				min = 0
+				max = 100
+			}
+		}
+	}
+	focus = {
+		id = FRA_lobbying_in_parlament
+		icon = GFX_fra_lobbying_in_parlament
+		
+		x = 7
+		y = 1
+		relative_position_id = FRA_speech_to_the_nation
+		prerequisite = { 
+			focus = FRA_speech_to_the_nation 
+			focus = FRA_louis_napoleon_the_head_of_goverment 
+			focus = FRA_mishel_shevalie_the_head_of_goverment 
+			focus = FRA_anri_sharl_de_artua_the_head_of_goverment 
+			}
+		cost = 7
+		#search_filters = {   }
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+			add_political_power = -20
+			custom_effect_tooltip = fra_add_10_liberal_sup
+			add_to_variable = { fra_liberal_support = 10 }
+			clamp_variable = {
+				var = fra_liberal_support
+				min = 0
+				max = 100
+			}
+			custom_effect_tooltip = fra_add_10_conservator_sup
+			add_to_variable = { fra_conservator_support = 10 }
+			clamp_variable = {
+				var = fra_conservator_support
+				min = 0
+				max = 100
+			}
+			custom_effect_tooltip = fra_add_5_gov_tension
+			add_to_variable = { fra_tension_in_goverment = 5 }
+			clamp_variable = {
+				var = fra_tension_in_goverment
+				min = 0
+				max = 100
+				}
+		}
+	}
+	focus = {
+		id = FRA_coop_with_liberal
+		icon = GFX_coop_with_liberal
+		
+		x = -2
+		y = 1
+		relative_position_id = FRA_lobbying_in_parlament
+		prerequisite = { focus = FRA_lobbying_in_parlament }
+		prerequisite = {
+			focus = FRA_anri_sharl_de_artua_the_head_of_goverment
+			focus = FRA_mishel_shevalie_the_head_of_goverment
+			focus = FRA_speech_to_the_nation
+		}
+		mutually_exclusive = { focus = FRA_coop_with_conservatie}
+		mutually_exclusive = { focus =FRA_coop_with_legitimists }
+		cost = 7
+		#search_filters = {   }
+		
+		available = {
+			check_variable = { fra_liberal_support > 50 }
+		}
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+			add_political_power = -30
+			custom_effect_tooltip = fra_add_10_liberal_sup
+			add_to_variable = { fra_liberal_support = 10 }
+			clamp_variable = {
+				var = fra_liberal_support
+				min = 0
+				max = 100
+			}
+		}
+	}
+	focus = {
+		id = FRA_coop_with_conservatie
+		icon = GFX_coop_with_conservators
+		
+		x = 0
+		y = 1
+		relative_position_id = FRA_lobbying_in_parlament
+		prerequisite = { focus = FRA_lobbying_in_parlament }
+		prerequisite = {
+			focus = FRA_louis_napoleon_the_head_of_goverment
+			focus = FRA_anri_sharl_de_artua_the_head_of_goverment
+			focus = FRA_speech_to_the_nation
+		}
+		
+		mutually_exclusive = { focus = FRA_coop_with_liberal }
+		mutually_exclusive = { focus =FRA_coop_with_legitimists }
+		cost = 7
+		#search_filters = {   }
+		
+		available = {
+			custom_effect_tooltip = fra_has_more_then_50_cons_sup
+			check_variable = { fra_conservator_support > 50 }
+			NOT = { has_ruling_party = conservatism }
+		}
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+			add_political_power = -30
+			custom_effect_tooltip = fra_add_10_conservator_sup
+			add_to_variable = { fra_conservator_support = 10 }
+			clamp_variable = {
+				var = fra_conservator_support
+				min = 0
+				max = 100
+			}
+		}
+	}
+	focus = {
+		id = FRA_coop_with_legitimists
+		icon = GFX_coop_with_conservators
+		
+		x = 2
+		y = 1
+		relative_position_id = FRA_lobbying_in_parlament
+		prerequisite = { focus = FRA_lobbying_in_parlament }
+		prerequisite = {
+			focus = FRA_louis_napoleon_the_head_of_goverment
+			focus = FRA_mishel_shevalie_the_head_of_goverment
+		}
+		mutually_exclusive = { focus = FRA_coop_with_liberal }
+		mutually_exclusive = { focus =FRA_coop_with_conservatie }
+		cost = 7
+		#search_filters = {   }
+		
+		available = {
+			custom_effect_tooltip = fra_has_more_then_50_cons_sup
+			check_variable = { fra_conservator_support > 50 }
+		}
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+			add_political_power = -30
+			custom_effect_tooltip = fra_add_10_loyalist_sup
+			add_to_variable = { fra_add_10_loyalist_sup = 10 }
+			clamp_variable = {
+				var = fra_conservator_support
+				min = 0
+				max = 100
+			}
+		}
+	}
+	focus = {
+		id = FRA_new_program
+		icon = GFX_focus_generic_treaty
+		
+		x = 0
+		y = 2
+		relative_position_id = FRA_lobbying_in_parlament
+		prerequisite = { 
+			focus = FRA_coop_with_conservatie
+			focus = FRA_coop_with_liberal
+			focus = FRA_coop_with_legitimists
+		}
+		
+		cost = 7
+		#search_filters = {   }
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+			add_ideas = {
+				FRA_updated_party_program
+			}
+			custom_effect_tooltip = fra_remove_10_gov_tension
+			add_to_variable = { fra_tension_in_goverment = -10 }
+			clamp_variable = {
+				var = fra_tension_in_goverment
+				min = 0
+				max = 100
+			}
+		}
+	}
+	focus = {
+		id = FRA_create_coalition
+		icon = GFX_fra_create_coalition
+		
+		x = 0
+		y = 1
+		relative_position_id = FRA_new_program
+		prerequisite = { 
+			focus = FRA_new_program
+		}
+		
+		cost = 7
+		#search_filters = {   }
+		bypass = {
+			has_country_flag = fra_coalition_created
+		}
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+			add_political_power = 150
+			add_stability = 0.08
+		}
+	}
+	focus = {
+		id = FRA_save_control_on_country
+		icon = GFX_fra_save_control_on_country
+		
+		x = 2
+		y = 1
+		relative_position_id = FRA_speech_to_the_nation
+		prerequisite = { 
+			focus = FRA_speech_to_the_nation
+			focus = FRA_louis_napoleon_the_head_of_goverment
+			#focus = FRA_mishel_shevalie_the_head_of_goverment
+			#focus = FRA_anri_sharl_de_artua_the_head_of_goverment
+			}
+		cost = 7
+		#search_filters = {   }
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+			add_political_power = -50
+			add_stability = 0.05
+			custom_effect_tooltip = fra_add_5_gov_tension
+			add_to_variable = { fra_tension_in_goverment = 5 }
+			clamp_variable = {
+				var = fra_tension_in_goverment
+				min = 0
+				max = 100
+				}
+		}
+	}
+	focus = {
+		id = FRA_propaganda_in_army
+		icon = GFX_goal_generic_propaganda
+		
+		x = 1
+		y = 1
+		relative_position_id = FRA_save_control_on_country
+		prerequisite = { focus = FRA_save_control_on_country }
+		cost = 7
+		#search_filters = {   }
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+			add_ideas = FRA_army_propaganda
+		}
+	}
+	focus = {
+		id = FRA_check_the_army_command
+		icon = GFX_goal_generic_political_pressure
+		
+		x = 0
+		y = 1
+		relative_position_id = FRA_propaganda_in_army
+		prerequisite = { focus = FRA_propaganda_in_army }
+		cost = 7
+		#search_filters = {   }
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+			add_political_power = -20
+			unlock_decision_tooltip = fren_check_army_command_cat
+		}
+	}
+	focus = {
+		id = FRA_control_the_press
+		icon = GFX_fra_control_the_press
+		
+		x = -1
+		y = 1
+		relative_position_id = FRA_save_control_on_country
+		prerequisite = { focus = FRA_save_control_on_country }
+		cost = 7
+		#search_filters = {   }
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+			add_timed_idea = { 
+				idea = FRA_press_on_control 
+				days = 730 
+			}
+		}
+	}
+	focus = {
+		id = FRA_purge_the_opposition #чистка оппозиции
+		icon = GFX_goal_generic_political_pressure
+		
+		x = 0
+		y = 1
+		relative_position_id = FRA_control_the_press
+		prerequisite = { focus = FRA_control_the_press }
+		cost = 7
+		#search_filters = {   }
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+			add_political_power = -50
+			add_timed_idea = { 
+				idea = FRA_purge_the_opposition_idea 
+				days = 365
+			}
+			add_popularity = {
+				ideology = conservatism
+				popularity = -0.1
+			}
+			add_popularity = {
+				ideology = liberalism
+				popularity = -0.1
+			}
+			add_popularity = {
+				ideology = authoritarian
+				popularity = -0.1
+			}
+		}
+	}
+	focus = {
+		id = FRA_ban_the_radical_opposition
+		icon = GFX_goal_generic_political_pressure
+		
+		x = 0
+		y = 3
+		relative_position_id = FRA_save_control_on_country
+		prerequisite = { focus = FRA_purge_the_opposition }
+		prerequisite = { focus = FRA_check_the_army_command }
+		prerequisite = { focus = FRA_check_the_army_command }
+		cost = 7
+		#search_filters = {   }
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+			add_political_power = -20
+			hidden_effect = {
+				set_temp_variable = {
+					var = ban_ideology_var
+					value = party_popularity@authoritarian
+				}
+				multiply_temp_variable = {
+					var = ban_ideology_var
+					value = -1
+				}
+				add_popularity = {
+					ideology = authoritarian
+					popularity = ban_ideology_var
+				}
+				multiply_temp_variable = {
+					var = ban_ideology_var
+					value = 0.66
+				}
+				set_country_flag = banned_authoritarian_flag
+			}
+			remove_authoritarian_spirits_effect = yes
+			custom_effect_tooltip = ban_authoritarian_party_tt
+			add_stability = ban_ideology_var
+		}
+	}
+	focus = {
+		id = FRA_trade_relations_with_pru
+		icon = GFX_ger_fra_agreement
+		
+		x = 0
+		y = 1
+		relative_position_id = FRA_speech_to_the_nation
+		prerequisite = { focus = FRA_speech_to_the_nation }
+		cost = 7
+		#search_filters = {   }
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+			add_political_power = 50
+			add_opinion_modifier = { target = PRU modifier = medium_increase }
+		}
+	}
+	focus = {
+		id = FRA_subsides_to_bisness
+		icon = GFX_prom_expand
+		
+		x = 0
+		y = 3
+		relative_position_id = FRA_trade_relations_with_pru
+		prerequisite = { focus = FRA_trade_relations_with_pru }
+		cost = 7
+		#search_filters = {   }
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+			add_stability = 0.03
+			24 = {
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+	focus = {
+		id = FRA_end_of_close_economic_politic #конец политики закрытой экономики
+		icon = GFX_fra_end_control_of_trade
+		
+		x = 0
+		y = 1
+		relative_position_id = FRA_ban_the_radical_opposition
+		prerequisite = { 
+			focus = FRA_subsides_to_bisness 
+			focus = FRA_decline_the_export_duties
+			}
+		prerequisite = { focus = FRA_ban_the_radical_opposition }
+		cost = 7
+		#search_filters = {   }
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+			
+		}
+	}
+	focus = {
+		id = FRA_unite_the_divided_nation
+		icon = GFX_union_with_france
+		
+		x = 0
+		y = 2
+		relative_position_id = FRA_create_coalition
+		prerequisite = { focus = FRA_create_coalition }
+		prerequisite = { 
+			focus = FRA_end_of_close_economic_politic 
+			focus = FRA_c_or_a_itog
+		}
+		cost = 10
+		#search_filters = {   }
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+			
+		}
+	}
+###########COUP_SECTION###########################	
+	focus = {
+		id = FRA_opposition_coup
+		icon = GFX_goal_generic_major_alliance
+		x = 5
+		y = 1
+		relative_position_id = FRA_long_live_the_republick
+		prerequisite = { focus = FRA_long_live_the_republick }
+		mutually_exclusive = { focus = FRA_the_head_of_goverment_sharl_lagranj }
+		cost = 3
+		#search_filters = {   }
+		
+		available = {
+			has_country_flag = FRA_sharl_lagranj_was_killed
+		}
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+			country_event = { id = fren.1  }
+			add_political_power = -50
+			custom_effect_tooltip = fra_add_10_gov_tension
+			add_to_variable = { fra_tension_in_goverment = 10 }
+			clamp_variable = {
+				var = fra_tension_in_goverment
+				min = 0
+				max = 100
+			}
+		}
+	}
+#############LIBERAL_OPPOSITION_WAT############################
+	focus = {
+		id = FRA_the_party_of_order
+		icon = GFX_fra_party_of_order
+		x = -6
+		y = 1
+		relative_position_id = FRA_opposition_coup
+		prerequisite = { focus = FRA_opposition_coup }
+		mutually_exclusive = { focus = FRA_the_conservative_party }
+		mutually_exclusive = { focus = FRA_the_party_of_legitimist }
+		cost = 0
+		#search_filters = {   }
+		
+		available = {
+			always = no
+		}
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+			set_politics = { ruling_party = liberalism elections_allowed = yes }
+			add_popularity = {
+				ideology = liberalism
+				popularity = 0.1
+			}
+		}
+	}
+	focus = {
+		id = FRA_reorg_the_goverment
+		icon = GFX_goal_generic_major_alliance
+		x = 0
+		y = 2
+		relative_position_id = FRA_opposition_coup
+		prerequisite = {
+			focus = FRA_the_party_of_order
+			focus = FRA_the_conservative_party
+			focus = FRA_the_party_of_legitimist
+		}
+		
+		cost = 3
+		#search_filters = {   }
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+			
+		}
+	}
+	focus = {
+		id = FRA_louis_napoleon_the_head_of_goverment
+		icon = GFX_goal_generic_major_alliance
+		x = 0
+		y = 2
+		relative_position_id = FRA_the_party_of_order
+		prerequisite = { focus = FRA_the_party_of_order }
+		prerequisite = { focus = FRA_reorg_the_goverment }
+		cost = 3
+		#search_filters = {   }
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+			add_political_power = -50
+			custom_effect_tooltip = fra_add_5_gov_tension
+			add_to_variable = { fra_tension_in_goverment = 5 }
+			clamp_variable = {
+				var = fra_tension_in_goverment
+				min = 0
+				max = 100
+			}
+		}
+	}
+	focus = {
+		id = FRA_trade_relations_with_balcans
+		icon = GFX_goal_generic_major_alliance
+		x = 0
+		x = 0
+		y = 1
+		relative_position_id = FRA_louis_napoleon_the_head_of_goverment
+		prerequisite = { focus = FRA_louis_napoleon_the_head_of_goverment }
+		
+		cost = 7
+		#search_filters = {   }
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+			add_opinion_modifier = { target = BYZ modifier = small_increase }
+			add_opinion_modifier = { target = BUL modifier = small_increase }
+			add_opinion_modifier = { target = SER modifier = small_increase }
+			add_opinion_modifier = { target = ALB modifier = small_increase }
+		}
+	}
+	focus = {
+		id = FRA_decline_the_export_duties #снижение экспортных пошлин
+		icon = GFX_goal_generic_major_alliance
+		x = 0
+		y = 3
+		relative_position_id = FRA_trade_relations_with_balcans
+		prerequisite = { focus = FRA_trade_relations_with_balcans }
+		
+		cost = 7
+		#search_filters = {   }
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+			add_stability = 0.05
+			swap_ideas = {
+				remove_idea = limited_export
+				add_idea = export_focus
+			}
+		}
+	}
+
+	
+###########COMSERVATIVE_OPPOSITION_SECTION####################
+	focus = {
+		id = FRA_the_conservative_party
+		icon = GFX_fra_republicsan_union
+		x = 0
+		y = 1
+		relative_position_id = FRA_opposition_coup
+		prerequisite = { focus = FRA_opposition_coup }
+		mutually_exclusive = { focus = FRA_the_party_of_order }
+		mutually_exclusive = { focus = FRA_the_party_of_legitimist }
+		cost = 0
+		#search_filters = {   }
+		
+		available = {
+			always = no
+		}
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+			set_politics = { ruling_party = conservatism elections_allowed = yes }
+			add_popularity = {
+				ideology = conservatism
+				popularity = 0.1
+			}
+		}
+	}
+	focus = {
+		id = FRA_mishel_shevalie_the_head_of_goverment
+		icon = GFX_goal_generic_major_alliance
+		x = 0
+		y = 2
+		relative_position_id = FRA_the_conservative_party
+		prerequisite = { focus = FRA_the_conservative_party }
+		prerequisite = { focus = FRA_reorg_the_goverment }
+		cost = 3
+		#search_filters = {   }
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+			add_political_power = -50
+			custom_effect_tooltip = fra_add_5_gov_tension
+			add_to_variable = { fra_tension_in_goverment = 5 }
+			clamp_variable = {
+				var = fra_tension_in_goverment
+				min = 0
+				max = 100
+			}
+		}
+	}
+	focus = {
+		id = FRA_depolitisation_of_army
+		icon = GFX_goal_generic_major_alliance
+		x = 2
+		y = 1
+		relative_position_id = FRA_mishel_shevalie_the_head_of_goverment
+		prerequisite = { 
+			focus = FRA_mishel_shevalie_the_head_of_goverment 
+			focus = FRA_anri_sharl_de_artua_the_head_of_goverment 
+		}
+		cost = 7
+		#search_filters = {   }
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+
+		}
+	}
+	focus = {
+		id = FRA_army_left_1
+		icon = GFX_goal_generic_major_alliance
+		x = -1
+		y = 1
+		relative_position_id = FRA_depolitisation_of_army
+		prerequisite = { focus = FRA_depolitisation_of_army }
+		cost = 7
+		#search_filters = {   }
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+
+		}
+	}
+	focus = {
+		id = FRA_army_left_2
+		icon = GFX_goal_generic_major_alliance
+		x = 0
+		y = 1
+		relative_position_id = FRA_army_left_1
+		prerequisite = { focus = FRA_army_left_1 }
+		cost = 7
+		#search_filters = {   }
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+
+		}
+	}
+	focus = {
+		id = FRA_army_right_1
+		icon = GFX_goal_generic_major_alliance
+		x = 1
+		y = 1
+		relative_position_id = FRA_depolitisation_of_army
+		prerequisite = { focus = FRA_depolitisation_of_army }
+		cost = 7
+		#search_filters = {   }
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+
+		}
+	}
+	focus = {
+		id = FRA_army_right_2
+		icon = GFX_goal_generic_major_alliance
+		x = 0
+		y = 1
+		relative_position_id = FRA_army_right_1
+		prerequisite = { focus = FRA_army_right_1 }
+		cost = 7
+		#search_filters = {   }
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+
+		}
+	}
+	focus = {
+		id = FRA_army_itog
+		icon = GFX_goal_generic_major_alliance
+		x = 0
+		y = 3
+		relative_position_id = FRA_depolitisation_of_army
+		prerequisite = { 
+			focus = FRA_army_right_2
+			focus = FRA_army_left_2
+			}
+		cost = 7
+		#search_filters = {   }
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+
+		}
+	}
+	focus = {
+		id = FRA_c_1
+		icon = GFX_goal_generic_major_alliance
+		x = 0
+		y = 1
+		relative_position_id = FRA_mishel_shevalie_the_head_of_goverment
+		prerequisite = { focus = FRA_mishel_shevalie_the_head_of_goverment }
+		cost = 7
+		#search_filters = {   }
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+
+		}
+	}
+	focus = {
+		id = FRA_c_2
+		icon = GFX_goal_generic_major_alliance
+		x = 0
+		y = 3
+		relative_position_id = FRA_c_1
+		prerequisite = { focus = FRA_c_1 }
+		cost = 7
+		#search_filters = {   }
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+
+		}
+	}
+	focus = {
+		id = FRA_c_or_a_itog
+		icon = GFX_goal_generic_major_alliance
+		x = 0
+		y = 1
+		relative_position_id = FRA_army_itog
+		prerequisite = {focus = FRA_army_itog }
+		prerequisite = { 
+			focus = FRA_c_2
+			focus = FRA_a_2 
+		}
+		cost = 7
+		#search_filters = {   }
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+
+		}
+	}
+####################AUTH_OPPOSITION_SECTION############################	
+	focus = {
+		id = FRA_the_party_of_legitimist
+		icon = GFX_fra_legitimist_party
+		x = 4
+		y = 1
+		relative_position_id = FRA_opposition_coup
+		prerequisite = { focus = FRA_opposition_coup }
+		mutually_exclusive = { focus = FRA_the_party_of_order }
+		mutually_exclusive = { focus = FRA_the_conservative_party }
+		cost = 0
+		#search_filters = {   }
+		
+		available = {
+			always = no
+		}
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+			set_politics = { ruling_party = authoritarian elections_allowed = yes }
+			add_popularity = {
+				ideology = authoritarian
+				popularity = 0.1
+			}
+		}
+	}
+	focus = {
+		id = FRA_anri_sharl_de_artua_the_head_of_goverment
+		icon = GFX_goal_generic_major_alliance
+		x = 0
+		y = 2
+		relative_position_id = FRA_the_party_of_legitimist
+		prerequisite = { focus = FRA_the_party_of_legitimist }
+		prerequisite = { focus = FRA_reorg_the_goverment }
+
+		cost = 3
+		#search_filters = {   }
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+			add_political_power = -50
+			custom_effect_tooltip = fra_add_10_gov_tension
+			add_to_variable = { fra_tension_in_goverment = 10 }
+			clamp_variable = {
+				var = fra_tension_in_goverment
+				min = 0
+				max = 100
+			}
+		}
+	}
+	focus = {
+		id = FRA_a_1
+		icon = GFX_goal_generic_major_alliance
+		x = 0
+		y = 1
+		relative_position_id = FRA_anri_sharl_de_artua_the_head_of_goverment
+		prerequisite = { 
+			focus = FRA_anri_sharl_de_artua_the_head_of_goverment
+		}
+		cost = 7
+		#search_filters = {   }
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+
+		}
+	}
+	focus = {
+		id = FRA_a_2
+		icon = GFX_goal_generic_major_alliance
+		x = 0
+		y = 3
+		relative_position_id = FRA_a_1
+		prerequisite = { 
+			focus = FRA_a_1
+		}
+		cost = 7
+		#search_filters = {   }
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+
+		}
+	}
+	
+
+#####################RETURN_OF_MONARHY_BLOCK#########################	
+	focus = {
+		id = FRA_go_with_monarhist_opposition
+		icon = GFX_focus_generic_monarchy_1
+		
+		x = 9
+		y = 0
+		relative_position_id = FRA_long_live_the_republick
+		mutually_exclusive = { focus = FRA_long_live_the_republick }
+		cost = 10
+		#search_filters = {   }
+		
+		available = {
+			has_country_flag = FRA_opposition_choosen
+			custom_effect_tooltip = fra_tension_more_when_50_procent
+			check_variable = { fra_fra_tension_in_goverment > 50 }
+		}
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+			load_focus_tree = fren_monarhist_focus
+		}
+		
+	}
+
+}
