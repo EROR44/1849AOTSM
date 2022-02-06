@@ -72,4 +72,4 @@ replace_path="gfx/interface/equipmentdesigner"
 
 picture="aotsm_picture.jpg"
 name="AOTSM"
-supported_version="1.11.3"
+supported_version="1.11.5"
