@@ -24,7 +24,10 @@ focus_tree = {
 	}
 	
 	default = no
+	
 	reset_on_civilwar = no
+	
+	continuous_focus_position = { x = 320 y = 1045 }
 	
 	initial_show_position = {
 		focus = BYZ_bulgaria_war
@@ -386,7 +389,7 @@ focus_tree = {
 	
 	focus = {
 		id = BYZ_bulgaria_war
-		icon = GFX_focus_generic_attack_bulgaria
+		icon = GFX_BYZ_bulgaria_war
 		x = 20
 		y = 1
 		cost = 5
@@ -410,7 +413,7 @@ focus_tree = {
 		#search_filters = {  }
 		
 		completion_reward = {
-			activate_mission = byz_bulgarian_war
+			activate_mission = byz_bulgaria_war_missia
 			declare_war_on = {
 				target = BUL
 				type = annex_everything
@@ -842,7 +845,7 @@ focus_tree = {
 	
 	focus = {
 		id = BYZ_albania_war
-		icon = GFX_focus_generic_provoke_border_clashes
+		icon = GFX_BYZ_albania_war
 		x = 18
 		y = 5
 		cost = 5
@@ -867,7 +870,7 @@ focus_tree = {
 		#search_filters = {  }
 		
 		completion_reward = {
-			activate_mission = byz_albania_war
+			activate_mission = byz_albania_war_missia
 			declare_war_on = {
 				target = ALB
 				type = annex_everything
@@ -999,7 +1002,7 @@ focus_tree = {
 	
 	focus = {
 		id = BYZ_serbia_war
-		icon = GFX_focus_generic_provoke_border_clashes
+		icon = GFX_BYZ_serbia_war
 		x = 22
 		y = 5
 		cost = 5
@@ -1024,7 +1027,7 @@ focus_tree = {
 		#search_filters = {  }
 		
 		completion_reward = {
-			activate_mission = byz_serbia_war
+			activate_mission = byz_serbia_war_missia
 			declare_war_on = {
 				target = SER
 				type = annex_everything
@@ -1326,3 +1329,1148 @@ focus_tree = {
 		}
 	}
 	
+	#Bosnia
+	
+	focus = {
+		id = BYZ_bosnia_war
+		icon = GFX_BYZ_bosnia_war
+		x = 20
+		y = 9
+		cost = 5
+		#mutually_exclusive = { }
+		prerequisite = { focus = BYZ_albania_investments }
+		prerequisite = { focus = BYZ_forced_rebaptize_north_balkna }
+		prerequisite = { focus = BYZ_serbia_investments }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			activate_mission = byz_bosnia_war_missia
+			declare_war_on = {
+				target = BOS
+				type = annex_everything
+			}
+			hidden_effect = {
+				BYZ = { 
+					set_country_flag = BYZ_vs_BOS
+				}
+			}
+		}
+	}
+	
+	focus = {
+		id = BYZ_bosnia_dissenters
+		icon = GFX_focus_eng_move_to_secure_the_dominions
+		x = 18
+		y = 10
+		cost = 5
+		#mutually_exclusive = { }
+		prerequisite = { focus = BYZ_bosnia_war }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		available = { has_country_flag = BYZ_vs_BOS_win }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			104 = {
+				add_manpower = -11912
+			}
+			804 = {
+				add_manpower = -7999
+			}
+			custom_effect_tooltip = byz_hellen_bos_20
+			add_to_variable = { byz_hellenization_of_bosnia_var = 20 }
+			clamp_variable = {
+				var = byz_hellenization_of_bosnia_var
+				min = 0
+				max = 100
+			}
+		}
+	}
+	
+	focus = {
+		id = BYZ_bosnia_deportation
+		icon = GFX_goal_generic_position_armies
+		x = 18
+		y = 11
+		cost = 5
+		#mutually_exclusive = { }
+		prerequisite = { focus = BYZ_bosnia_dissenters }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			random_state = {
+				limit = { 
+					is_core_of = BYZ 
+				}
+				add_manpower = -25000
+			}
+			104 = {
+				add_manpower = -109321
+			}
+			104 = {
+				add_manpower = 25000
+			}
+			random_state = {
+				limit = { 
+					is_core_of = RUS 
+				}
+				add_manpower = 109321
+			}
+			random_state = {
+				limit = { 
+					is_core_of = BYZ 
+				}
+				add_manpower = -25000
+			}
+			804 = {
+				add_manpower = -41013
+			}
+			804 = {
+				add_manpower = 25000
+			}
+			random_state = {
+				limit = { 
+					is_core_of = RU
+				}
+				add_manpower = 41013
+			}
+			custom_effect_tooltip = byz_hellen_bos_20
+			add_to_variable = { byz_hellenization_of_bosnia_var = 20 }
+			clamp_variable = {
+				var = byz_hellenization_of_bosnia_var
+				min = 0
+				max = 100
+			}
+		}
+	}
+	
+	focus = {
+		id = BYZ_hellenization_of_bosnia
+		icon = GFX_focus_GRE_following_in_the_footsteps_of_giants
+		x = 20
+		y = 10
+		cost = 5
+		#mutually_exclusive = { }
+		prerequisite = { focus = BYZ_bosnia_war }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		available = { has_country_flag = BYZ_vs_BOS_win }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_stability = -0.05
+			custom_effect_tooltip = byz_hellen_bos_20
+			add_to_variable = { byz_hellenization_of_bosnia_var = 20 }
+			clamp_variable = {
+				var = byz_hellenization_of_bosnia_var
+				min = 0
+				max = 100
+			}
+		}
+	}
+	
+	focus = {
+		id = BYZ_bosnia_not_bosnia
+		icon = GFX_focus_YUG_safeguard_bosnia
+		x = 20
+		y = 11
+		cost = 5
+		#mutually_exclusive = { }
+		prerequisite = { focus = BYZ_hellenization_of_bosnia }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			country_event = { id = byz.3 hours = 14 }
+		}
+	}
+	
+	focus = {
+		id = BYZ_bosnia_investments
+		icon = GFX_goal_generic_construction2
+		x = 22
+		y = 10
+		cost = 5
+		#mutually_exclusive = { }
+		prerequisite = { focus = BYZ_bosnia_war }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		available = { has_country_flag = BYZ_vs_BOS_win }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			104 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			804 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			custom_effect_tooltip = byz_hellen_bos_20
+			add_to_variable = { byz_hellenization_of_bosnia_var = 20 }
+			clamp_variable = {
+				var = byz_hellenization_of_bosnia_var
+				min = 0
+				max = 100
+			}
+		}
+	}
+	
+	focus = {
+		id = BYZ_bosnia_industry
+		icon = GFX_focus_generic_industry_3
+		x = 22
+		y = 11
+		cost = 5
+		#mutually_exclusive = { }
+		prerequisite = { focus = BYZ_bosnia_investments }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			104 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			804 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			custom_effect_tooltip = byz_hellen_bos_20
+			add_to_variable = { byz_hellenization_of_bosnia_var = 20 }
+			clamp_variable = {
+				var = byz_hellenization_of_bosnia_var
+				min = 0
+				max = 100
+			}
+		}
+	}
+	
+	focus = {
+		id = BYZ_hellenization_of_bosnia_complete
+		icon = GFX_focus_generic_home_defense
+		x = 20
+		y = 12
+		cost = 5
+		#mutually_exclusive = { }
+		prerequisite = { focus = BYZ_bosnia_deportation }
+		prerequisite = { focus = BYZ_bosnia_not_bosnia }
+		prerequisite = { focus = BYZ_bosnia_industry }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			BYZ = { 
+				add_state_core = 104
+				add_state_core = 804
+			}
+			BOS = {
+				remove_state_core = 104
+				remove_state_core = 804
+			}
+		}
+	}
+	
+	#Croatia
+	
+	focus = {
+		id = BYZ_croatia
+		icon = GFX_focus_yug_banovina_of_croatia
+		x = 20
+		y = 13
+		cost = 5
+		#mutually_exclusive = { }
+		#prerequisite = { }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		available = { 
+			owns_state = 102
+			owns_state = 103
+			owns_state = 109
+			owns_state = 163
+			owns_state = 736
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			country_event = { id = byz.4 hours = 7 } 
+		}
+	}
+	
+	#italia
+	
+	#Army_reform
+	
+	#on your own
+	
+	focus = {
+		id = BYZ_on_you_own_army_reform
+		icon = GFX_focus_GRE_following_in_the_footsteps_of_giants
+		x = 0
+		y = 0
+		cost = 5
+		mutually_exclusive = { focus = BYZ_pru_will_help_army_reform }
+		#prerequisite = { }
+		ai_will_do = {
+			factor = 1000
+		}
+		
+		#cancel = { }
+		
+		available = { 
+			OR = {
+				has_completed_focus = BYZ_decentralisation
+				has_completed_focus = BYZ_centralization 
+			}
+		}
+	
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			army_experience = 15
+		}
+	}
+	
+	focus = {
+		id = BYZ_on_you_own_army_base
+		icon = GFX_goal_generic_production2
+		x = 0
+		y = 2
+		cost = 5
+		#mutually_exclusive = { }
+		prerequisite = { focus = BYZ_on_you_own_army_reform }
+		ai_will_do = {
+			factor = 1000
+		}
+		
+		#cancel = { }
+		
+		available = {
+			owns_state = 186
+		}
+	
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			186 = {
+				add_extra_state_shared_building_slots = 3
+				add_building_construction = {
+					type = arms_factory
+					level = 3
+					instant_build = yes
+				}
+			}
+		}
+	}
+	
+	focus = {
+		id = BYZ_on_you_own_army_advance
+		icon = GFX_goal_generic_construct_mil_factory
+		x = 0
+		y = 4
+		cost = 5
+		#mutually_exclusive = { }
+		prerequisite = { focus = BYZ_on_you_own_army_base }
+		ai_will_do = {
+			factor = 1000
+		}
+		
+		#cancel = { }
+		
+		available = { 
+			owns_state = 47 
+			owns_state = 185
+		}
+	
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			47 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+			185 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+	
+	focus = {
+		id = BYZ_on_you_own_army_complete
+		icon = GFX_goal_generic_build_tank
+		x = 0
+		y = 6
+		cost = 5
+		#mutually_exclusive = { }
+		prerequisite = { focus = BYZ_old_doctrin_national_spirit focus = BYZ_new_doctrin_national_spirit }
+		prerequisite = { focus = BYZ_on_you_own_army_advance }
+		ai_will_do = {
+			factor = 1000
+		}
+		
+		#cancel = { }
+		
+		available = { 
+			owns_state = 47 
+			owns_state = 185
+		}
+	
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			army_experience = 25
+			add_war_support = 0.05
+		}
+	}
+	
+	#old doctrin
+	
+	focus = {
+		id = BYZ_old_doctrin
+		icon = GFX_focus_generic_little_entente
+		x = -2
+		y = 1
+		cost = 5
+		mutually_exclusive = { focus = BYZ_new_doctrin }
+		prerequisite = { focus = BYZ_on_you_own_army_reform }
+		ai_will_do = {
+			factor = 1
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+	
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = byz_stagnat_army
+				add_idea = byz_old_army_1
+			}
+		}
+	}
+	
+	focus = {
+		id = BYZ_old_doctrin_doctrin
+		icon = GFX_goal_generic_army_doctrines
+		x = -1
+		y = 3
+		cost = 5
+		#mutually_exclusive = { }
+		prerequisite = { focus = BYZ_old_doctrin }
+		ai_will_do = {
+			factor = 1000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+	
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_tech_bonus = {
+				name = land_doc_bonus
+				bonus = 0.5
+				uses = 2
+				category = land_doctrine
+			}
+			army_experience = 10
+		}
+	}
+	
+	focus = {
+		id = BYZ_old_doctrin_tech
+		icon = GFX_goal_generic_axis_build_infantry
+		x = -3
+		y = 3
+		cost = 5
+		#mutually_exclusive = { }
+		prerequisite = { focus = BYZ_old_doctrin }
+		ai_will_do = {
+			factor = 1000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+	
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 0.5
+				uses = 2
+				name = mech_army_bonus
+				category = infantry_weapons
+			}	
+			army_experience = 10
+		}
+	}
+	
+	focus = {
+		id = BYZ_old_doctrin_national_spirit
+		icon = GFX_goal_generic_small_arms
+		x = -2
+		y = 5
+		cost = 5
+		#mutually_exclusive = { }
+		prerequisite = { focus = BYZ_old_doctrin_tech }
+		prerequisite = { focus = BYZ_old_doctrin_doctrin }
+		ai_will_do = {
+			factor = 1000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+	
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = byz_old_army_1
+				add_idea = byz_old_army_2
+			}
+		}
+	}
+	
+	#new doctrin
+	
+	focus = {
+		id = BYZ_new_doctrin
+		icon = GFX_focus_generic_license_production
+		x = 2
+		y = 1
+		cost = 5
+		mutually_exclusive = { focus = BYZ_old_doctrin }
+		prerequisite = { focus = BYZ_on_you_own_army_reform }
+		ai_will_do = {
+			factor = 1000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+	
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = byz_stagnat_army
+				add_idea = byz_new_army_1
+			}
+		}
+	}
+	
+	focus = {
+		id = BYZ_new_doctrin_doctrin
+		icon = GFX_goal_generic_army_doctrines
+		x = 1
+		y = 3
+		cost = 5
+		#mutually_exclusive = { }
+		prerequisite = { focus = BYZ_new_doctrin }
+		ai_will_do = {
+			factor = 1000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+	
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_tech_bonus = {
+				name = land_doc_bonus
+				bonus = 0.5
+				uses = 2
+				category = land_doctrine
+			}
+			army_experience = 10
+		}
+	}
+	
+	focus = {
+		id = BYZ_new_doctrin_tech
+		icon = GFX_focus_generic_tank_production
+		x = 3
+		y = 3
+		cost = 5
+		#mutually_exclusive = { }
+		prerequisite = { focus = BYZ_new_doctrin }
+		ai_will_do = {
+			factor = 1000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+	
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 0.5
+				uses = 2
+				name = mech_army_bonus
+				category = armor
+			}
+			army_experience = 10
+		}
+	}
+	
+	focus = {
+		id = BYZ_new_doctrin_national_spirit
+		icon = GFX_goal_generic_army_tanks
+		x = 2
+		y = 5
+		cost = 5
+		#mutually_exclusive = { }
+		prerequisite = { focus = BYZ_new_doctrin_doctrin }
+		prerequisite = { focus = BYZ_new_doctrin_tech }
+		ai_will_do = {
+			factor = 1000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+	
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = byz_new_army_1
+				add_idea = byz_new_army_2
+			}
+		}
+	}
+	
+	#Prussia will help
+	
+	focus = {
+		id = BYZ_pru_will_help_army_reform
+		icon = GFX_focus_ger_oppose_hitler
+		x = 6
+		y = 0
+		cost = 5
+		mutually_exclusive = { focus = BYZ_on_you_own_army_reform }
+		#prerequisite = { }
+		ai_will_do = {
+			factor = 1
+		}
+		
+		#cancel = { }
+		
+		available = { 
+			OR = {
+				has_completed_focus = BYZ_decentralisation
+				has_completed_focus = BYZ_centralization 
+			}
+		}
+	
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			army_experience = 30
+			swap_ideas = {
+				remove_idea = byz_stagnat_army
+				add_idea = byz_pru_army_1
+			}
+		}
+	}
+	
+	focus = {
+		id = BYZ_pru_will_help_investmant_1
+		icon = GFX_focus_mex_privatisation
+		x = 5
+		y = 1
+		cost = 5
+		#mutually_exclusive = { }
+		prerequisite = { focus = BYZ_pru_will_help_army_reform }
+		ai_will_do = {
+			factor = 1000
+		}
+		
+		#cancel = { }
+		
+		available = { 
+			owns_state = 731
+		}
+	
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_stability = -0.025
+			731 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+	
+	focus = {
+		id = BYZ_pru_will_help_tech
+		icon = GFX_goal_generic_allies_build_infantry
+		x = 7
+		y = 1
+		cost = 5
+		#mutually_exclusive = { }
+		prerequisite = { focus = BYZ_pru_will_help_army_reform }
+		ai_will_do = {
+			factor = 1000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+	
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_stability = -0.025
+			add_tech_bonus = {
+				name = land_doc_bonus
+				bonus = 0.5
+				uses = 1
+				category = infantry_weapons
+			}
+			add_tech_bonus = {
+				name = land_doc_bonus
+				bonus = 0.5
+				uses = 1
+				category = support_tech
+			}
+		}
+	}
+	
+	focus = {
+		id = BYZ_pru_will_help_national_spirit
+		icon = GFX_goal_generic_demand_territory
+		x = 6
+		y = 2
+		cost = 5
+		#mutually_exclusive = { }
+		prerequisite = { focus = BYZ_pru_will_help_investmant_1 }
+		prerequisite = { focus = BYZ_pru_will_help_tech }
+		ai_will_do = {
+			factor = 1000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+	
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_stability = -0.025
+			swap_ideas = {
+				remove_idea = byz_pru_army_1
+				add_idea = byz_pru_army_2
+			}
+		}
+	}
+	
+	focus = {
+		id = BYZ_pru_will_help_investmant_2
+		icon = GFX_focus_usa_reestablish_the_gold_standard
+		x = 5
+		y = 3
+		cost = 5
+		#mutually_exclusive = { }
+		prerequisite = { focus = BYZ_pru_will_help_national_spirit }
+		ai_will_do = {
+			factor = 1000
+		}
+		
+		#cancel = { }
+		
+		available = { 
+			owns_state = 47
+			owns_state = 186
+		}
+	
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_stability = -0.025
+			47 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+			186 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+	
+	focus = {
+		id = BYZ_pru_will_help_doctrin
+		icon = GFX_goal_generic_army_doctrines
+		x = 7
+		y = 3
+		cost = 5
+		#mutually_exclusive = { }
+		prerequisite = { focus = BYZ_pru_will_help_national_spirit }
+		ai_will_do = {
+			factor = 1000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+	
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_stability = -0.025
+			add_tech_bonus = {
+				name = land_doc_bonus
+				bonus = 0.25
+				uses = 2
+				category = land_doctrine
+			}
+		}
+	}
+	
+	focus = {
+		id = BYZ_pru_will_help_complete
+		icon = GFX_focus_ger_return_of_the_kaiser
+		x = 6
+		y = 6
+		cost = 5
+		#mutually_exclusive = { }
+		prerequisite = { focus = BYZ_pru_will_help_investmant_2 }
+		prerequisite = { focus = BYZ_pru_will_help_doctrin }
+		ai_will_do = {
+			factor = 1000
+		}
+		
+		#cancel = { }
+		
+		available = { 
+			owns_state = 731
+		}
+	
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_stability = -0.025
+			army_experience = 30
+		}
+	}
+	
+	#Army_final
+	
+	focus = {
+		id = BYZ_pru_will_help_complete
+		icon = GFX_focus_GRE_byzantine_themata
+		x = 3
+		y = 7
+		cost = 5
+		#mutually_exclusive = { }
+		prerequisite = { focus = BYZ_on_you_own_army_complete focus = BYZ_pru_will_help_complete }
+		ai_will_do = {
+			factor = 1000
+		}
+		
+		#cancel = { }
+		
+		available = { 
+			owns_state = 731
+		}
+	
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			if = {
+				limit = { 
+					has_idea = {
+						byz_old_army_2
+					}
+				}
+				swap_ideas = {
+					remove_idea = byz_old_army_2
+					add_idea = byz_old_army_3
+				}
+			}
+			if = {
+				limit = { 
+					has_idea = {
+						byz_new_army_2
+					}
+				}
+				swap_ideas = {
+					remove_idea = byz_new_army_2
+					add_idea = byz_new_army_3
+				}
+			}
+			if = {
+				limit = { 
+					has_idea = {
+						byz_pru_army_2
+					}
+				}
+				swap_ideas = {
+					remove_idea = byz_pru_army_2
+					add_idea = byz_pru_army_3
+				}
+			}
+		}
+	}
+	
+	#King of mediterranean
+	
+	focus = {
+		id = BYZ_navy_modernization
+		icon = GFX_goal_generic_amphibious_assault
+		x = 38
+		y = 0
+		cost = 5
+		#mutually_exclusive = { }
+		#prerequisite = { }
+		ai_will_do = {
+			factor = 1000
+		}
+		
+		#cancel = { }
+		
+		available = { 
+			OR = {
+				has_completed_focus = BYZ_decentralisation
+				has_completed_focus = BYZ_centralization
+			}
+			owns_state = 164
+			owns_state = 182
+			owns_state = 183
+			owns_state = 187
+			owns_state = 817
+		}
+	
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			164 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = dockyard
+					level = 2
+					instant_build = yes
+				}
+			}
+			182 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = dockyard
+					level = 2
+					instant_build = yes
+				}
+			}
+			183 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = dockyard
+					level = 2
+					instant_build = yes
+				}
+			}
+			187 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = dockyard
+					level = 2
+					instant_build = yes
+				}
+			}
+			817 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = dockyard
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+	
+	focus = {
+		id = BYZ_malta_operation
+		icon = GFX_goal_generic_amphibious_assault
+		x = 38
+		y = 1
+		cost = 5
+		#mutually_exclusive = { }
+		prerequisite = { focus = BYZ_navy_modernization }
+		ai_will_do = {
+			factor = 1000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+	
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			transfer_state = 116
+		}
