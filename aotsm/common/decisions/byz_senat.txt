@@ -366,4 +366,43 @@ byz_senat_decision_category = {
 			}
 		}
 	}
+	
+	byz_malta_war_missia = {
+		icon = decision_category_border_conflicts
+		allowed = {
+			always = no
+		}
+		available = {
+			controller = { 116 }
+			SYC = {
+				surrender_progress > 0.20
+			}
+		}
+		visible = {
+			has_country_flag = BYZ_malta_war
+		}
+		
+		days_mission_timeout = 105
+		fire_only_once = yes
+		
+		complete_effect = {
+			clr_country_flag = BYZ_malta_war
+			add_stability = 0.05
+			white_peace = {
+				tag = SYC
+				message = BYZ_win_SYC
+			}
+			SYC = { remove_state_core = 116 }
+			BYZ = { add_state_core = 116 }
+		}
+		
+		timeout_effect = {
+			clr_country_flag = BYZ_malta_war
+			add_stability = -0.05
+			white_peace = {
+				tag = SYC
+				message = BYZ_lose_SYC
+			}
+			SYC = { transfer_state = 116 }
+		}
 }

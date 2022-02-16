@@ -5,13 +5,15 @@
 add_namespace = chain
 
 
-country_event = {
+country_event = { #Creat Romania?
 	id = chain.1
 	title = chain.1.t
 	desc = chain.1.d
 	picture = GFX_report_event_generic_conference
 	
 	is_triggered_only = yes
+	
+	fire_only_once = yes
 	
 	option = {
 		name = chain.1.a
@@ -33,13 +35,15 @@ country_event = {
 	}
 }
 
-country_event = {
+country_event = { #Creating Romania
 	id = chain.2
 	title = chain.2.t
 	desc = chain.2.d
 	picture = GFX_report_event_eng_royal_family
 	
 	is_triggered_only = yes
+	
+	fire_only_once = yes
 	
 	option = {
 		name = chain.2.a
@@ -63,5 +67,293 @@ country_event = {
 		ai_chance = {
 			factor = 5
 		}
+	}
+}
+
+country_event = { #Do something with malta
+	id = chain.3
+	title = chain.3.t
+	desc = chain.3.d
+	picture = GFX_news_event_ast_navy
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = { #surrend
+		name = chain.2.a
+		ai_chance = {
+			factor = 50
+		}
+		add_stability = -0.05
+		news_event = { id = news.11 days = 1 }
+		SYC = { remove_state_core = 116 }
+		BYZ = { add_state_core = 116 }
+	}
+	
+	option = { #let's fight
+		name = chain.2.b
+		ai_chance = {
+			factor = 50
+		}
+		add_war_support = 0.05
+		BYZ = { country_event = { id = chain.4 days = 1 } }
+	}
+}
+
+country_event = { #They want fight for malta
+	id = chain.4
+	title = chain.4.t
+	desc = chain.4.d
+	picture = GFX_report_event_saf_soldiers_2
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = { #let's true
+		name = chain.4.a
+		ai_chance = {
+			factor = 10
+		}
+		SYC = { country_event = { id = chain.5 days = 1 }}
+	}
+	
+	option = { #let's buy it
+		name = chain.4.b
+		ai_chance = {
+			factor = 90
+		}
+		SYC = { country_event = { id = chain.6 days = 1 }}
+	}
+	
+	option = { #surrend
+		name = chain.4.c
+		ai_chance = {
+			factor = 0
+		}
+		add_stability = -0.05
+		SYC = { transfer_state = 116 }
+		news_event = { id = news.10 days = 1 }
+	}
+}
+
+country_event = { #They want fight for malta Sicilia
+	id = chain.5
+	title = chain.5.t
+	desc = chain.5.d
+	picture = GFX_news_event_usa_japan_at_war
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = { #War is hell
+		name = chain.5.a
+		ai_chance = {
+			factor = 10
+		}
+		news_event = { id = news.12 days = 1 }
+		SYC = {
+			declare_war_on = {
+				target = BYZ
+				type = annex_everything
+			}
+		}
+		BYZ = { set_country_flag = BYZ_malta_war }
+		BYZ = { activate_mission = byz_malta_war_missia }
+	}
+	
+	option = { #Surrend
+		name = chain.5.b
+		ai_chance = {
+			factor = 90
+		}
+		news_event = { id = news.11 days = 1 }
+		SYC = { remove_state_core = 116 }
+		BYZ = { add_state_core = 116 }
+	}
+}
+
+country_event = { #They want buy malta
+	id = chain.6
+	title = chain.6.t
+	desc = chain.6.d
+	picture = GFX_report_event_SOV_negotiations_japan_bukharin
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = { #Not sell
+		name = chain.6.a
+		ai_chance = {
+			factor = 10
+		}
+		BYZ = { country_event = { id = chain.7 days = 1 } }
+	}
+	
+	option = { #Sell
+		name = chain.6.b
+		ai_chance = {
+			factor = 90
+		}
+		BYZ = { country_event = { id = chain.8 days 1 } }
+	}
+}
+
+country_event = { #They want fight for malta Byzantium
+	id = chain.7
+	title = chain.7.t
+	desc = chain.7.d
+	picture = GFX_report_event_ast_navy
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = { #Fight
+		name = chain.7.a
+		ai_chance = {
+			factor = 90
+		}
+		news_event = { id = news.12 days = 1 }
+		SYC = {
+			declare_war_on = {
+				target = BYZ
+				type = annex_everything
+			}
+		}
+		BYZ = { set_country_flag = BYZ_malta_war }
+		BYZ = { activate_mission = byz_malta_war_missia }
+	}
+	
+	option = { #Surrend
+		name = chain.7.b
+		ai_chance = {
+			factor = 10
+		}
+		news_event = { id = news.10 days = 1 }
+		SYC = { transfer_state = 116 }
+	}
+}
+
+country_event = { #They want sell it
+	id = chain.8
+	title = chain.8.t
+	desc = chain.8.d
+	picture = GFX_report_event_finnish_letter
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = { #minimum
+		name = chain.8.a
+		ai_chance = {
+			factor = 34
+		}
+		SYC = { set_country_flag = BYZ_minimum }
+		SYC = { country_event = { id = chain.9 days = 1 } }
+	}
+	
+	option = { #medium
+		name = chain.8.b
+		ai_chance = {
+			factor = 33
+		}
+		SYC = { set_country_flag = BYZ_medium }
+		SYC = { country_event = { id = chain.9 days = 1 } }
+	}
+	
+	option = { #hight
+		name = chain.8.c
+		ai_chance = {
+			factor = 33
+		}
+		SYC = { set_country_flag = BYZ_hight }
+		SYC = { country_event = { id = chain.9 days = 1 } }
+	}
+}
+
+country_event = { #They say the price
+	id = chain.9
+	title = chain.9.t
+	desc = chain.9.d
+	picture = GFX_report_event_chinese_japanese_handshake
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = { #yes minimum
+		name = chain.9.a
+		trigger = { has_country_flag = BYZ_minimum }
+		ai_chance = {
+			factor = 50
+		}
+		add_political_power = 50
+		BYZ = { add_political_power = -50 }
+		SYC = { remove_state_core = 116 }
+		BYZ = { add_state_core = 116 }
+	}
+	
+	option = { #yes medium
+		name = chain.9.b
+		trigger = { has_country_flag = BYZ_medium }
+		ai_chance = {
+			factor = 100
+		}
+		add_political_power = 150
+		BYZ = { add_political_power = -150 }
+		SYC = { remove_state_core = 116 }
+		BYZ = { add_state_core = 116 }
+	}
+	
+	option = { #yes hight
+		name = chain.9.c
+		trigger = { has_country_flag = BYZ_hight }
+		ai_chance = {
+			factor = 200
+		}
+		add_political_power = 300
+		BYZ = { add_political_power = -300 }
+		random_state = {
+			limit = { is_core_of = SYC }
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}
+		797 = {
+			remove_building = {
+				type = industrial_complex
+				level = 1
+			}
+		}
+		SYC = { remove_state_core = 116 }
+		BYZ = { add_state_core = 116 }
+	}
+	
+	option = { #No
+		name = chain.9.f 
+		ai_chance = {
+			base = 50
+			modifier = {
+				factor = 0.5
+				has_country_flag = BYZ_minimum
+			}
+			modifier = {
+				factor = 0.25
+				has_country_flag = BYZ_medium
+			}
+			modifier = {
+				factor = 0
+				has_country_flag = BYZ_hight
+			}
+		}
+		BYZ = { country_event = { id = chain.7 days = 1 } }
 	}
 }
