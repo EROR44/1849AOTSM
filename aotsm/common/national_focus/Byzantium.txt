@@ -829,15 +829,6 @@ focus_tree = {
 				add_state_core = 801
 				add_state_core = 803
 			}
-			BUL = {
-				remove_state_core = 48
-				remove_state_core = 77
-				remove_state_core = 106
-				remove_state_core = 211
-				remove_state_core = 212
-				remove_state_core = 801
-				remove_state_core = 803
-			}
 		}
 	}
 	
@@ -1286,9 +1277,6 @@ focus_tree = {
 			BYZ = { 
 				add_state_core = 44
 			}
-			ALB = {
-				remove_state_core = 44
-			}
 		}
 	}
 	
@@ -1319,12 +1307,6 @@ focus_tree = {
 				add_state_core = 107
 				add_state_core = 108
 				add_state_core = 802
-			}
-			SER = {
-				remove_state_core = 105
-				remove_state_core = 107
-				remove_state_core = 108
-				remove_state_core = 802
 			}
 		}
 	}
@@ -1647,10 +1629,6 @@ focus_tree = {
 				add_state_core = 104
 				add_state_core = 804
 			}
-			BOS = {
-				remove_state_core = 104
-				remove_state_core = 804
-			}
 		}
 	}
 	
@@ -1659,8 +1637,8 @@ focus_tree = {
 	focus = {
 		id = BYZ_croatia
 		icon = GFX_focus_yug_banovina_of_croatia
-		x = 20
-		y = 13
+		x = 0
+		y = 11
 		cost = 5
 		#mutually_exclusive = { }
 		#prerequisite = { }
@@ -1688,6 +1666,33 @@ focus_tree = {
 	}
 	
 	#italia
+	
+	focus = {
+		id = BYZ_italia
+		icon = GFX_focus_befriend_italy
+		x = 6
+		y = 11
+		cost = 5
+		#mutually_exclusive = { }
+		#prerequisite = { }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		available = { 
+			has_country_flag = BYZ_secret_protocol
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			
+		}
+	}
 	
 	#Army_reform
 	
@@ -2969,12 +2974,12 @@ focus_tree = {
 			if = { 
 				limit = {
 					RIT = { 
-						has_idea = limit_exports
+						has_idea = limited_exports
 					}
 				}
 				RIT = {
 					swap_ideas = {
-						remove_idea = limit_exports
+						remove_idea = limited_exports
 						add_idea = free_trade
 					} 
 				}
@@ -3008,12 +3013,12 @@ focus_tree = {
 			if = { 
 				limit = {
 					ZUL = { 
-						has_idea = limit_exports
+						has_idea = limited_exports
 					}
 				}
 				ZUL = {
 					swap_ideas = {
-						remove_idea = limit_exports
+						remove_idea = limited_exports
 						add_idea = free_trade
 					} 
 				}
@@ -3499,5 +3504,35 @@ focus_tree = {
 			RIT = {
 				add_manpower = 25000
 			}
+		}
+	}
+	
+	# Imperial Reform
+	
+	focus = {
+		id = BYZ_imperial_reform
+		icon = GFX_goal_generic_propaganda
+		x = 20
+		y = 14
+		cost = 5
+		#mutually_exclusive = { }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		available = { 
+			OR = {
+				has_completed_focus = BYZ_decentralisation
+				has_completed_focus = BYZ_centralization
+			}
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
 		}
 	}
