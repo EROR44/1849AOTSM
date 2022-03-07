@@ -1,4 +1,4 @@
-version="1.11.5"
+version="1.11.8"
 tags={
 	"Alternative History"
 	"Map"
@@ -68,8 +68,11 @@ replace_path="gfx/event_pictures"
 replace_path="map/trategicregions"
 replace_path="map/supplyareas"
 replace_path="map"
+replace_path="music"
+replace_path="music/hoi2"
+replace_path="music/hoi3"
 replace_path="gfx/interface/equipmentdesigner"
 
 picture="aotsm_picture.jpg"
 name="AOTSM"
-supported_version="1.11.5"
+supported_version="1.11.*"
