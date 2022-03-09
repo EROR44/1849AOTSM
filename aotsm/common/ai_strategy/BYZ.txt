@@ -253,7 +253,7 @@ bulgaria_war_preparation = {
 		}
 		NOT = {
 			has_completed_focus = BYZ_bulgaria_war
-			owns_state = 48
+			owns_state = 801
 		}
 		country_exists = BUL
 	}
@@ -267,7 +267,7 @@ bulgaria_war_preparation = {
 				BYZ = { has_war_with = BUL }
 			}
 
-			owns_state = 48
+			owns_state = 801
 		}
 	}
 
@@ -289,7 +289,7 @@ albania_war_preparation = {
 		}
 		NOT = {
 			has_completed_focus = BYZ_albania_war
-			owns_state = 48
+			owns_state = 44
 		}
 		country_exists = ALB
 	}
@@ -325,7 +325,7 @@ serbia_war_preparation = {
 		}
 		NOT = {
 			has_completed_focus = BYZ_serbia_war
-			owns_state = 48
+			owns_state = 107
 		}
 		country_exists = SER
 	}
@@ -339,13 +339,88 @@ serbia_war_preparation = {
 				BYZ = { has_war_with = SER }
 			}
 
-			owns_state = 48
+			owns_state = 107
 		}
 	}
 
 	ai_strategy = {
 		type = conquer
 		id = "SER"
+		value = 100
+	}
+}
+
+bosnia_war_preparation = {
+	allowed = {
+		original_tag = BYZ
+	}
+	enable = {
+		focus_progress = {
+			focus = BYZ_bosnia_war
+			progress > 0.01
+		}
+		NOT = {
+			has_completed_focus = BYZ_bosnia_war
+			owns_state = 104
+		}
+		country_exists = BOS
+	}
+
+	abort = {
+		OR = {
+			NOT = { country_exists = BOS }
+
+			AND = {
+				has_completed_focus = BYZ_bosnia_war
+				BYZ = { has_war_with = BOS }
+			}
+
+			owns_state = 104
+		}
+	}
+
+	ai_strategy = {
+		type = conquer
+		id = "BOS"
+		value = 100
+	}
+}
+
+austria_war_preparation = {
+	allowed = {
+		OR = {
+			original_tag = BYZ
+			original_tag = PRU
+		}
+	}
+	enable = {
+		focus_progress = {
+			focus = PRU_end_of_german_war
+			progress > 0.01
+		}
+		NOT = {
+			has_completed_focus = PRU_end_of_german_war
+			owns_state = 104
+		}
+		country_exists = AUS
+	}
+
+	abort = {
+		OR = {
+			NOT = { country_exists = AUS }
+
+			AND = {
+				PRU = { has_completed_focus = PRU_end_of_german_war }
+				BYZ = { has_war_with = AUS }
+			}
+
+			owns_state = 104
+		}
+	}
+
+	ai_strategy = {
+		type = conquer
+		id = "AUS"
 		value = 100
 	}
 }
