@@ -1,0 +1,866 @@
+focus_tree = {
+	id = minor_germany_south_focus
+	
+	country = {
+		factor = 0
+		modifier = {
+			add = 1000
+			tag = BAV
+		}
+		modifier = {
+			add = 1000
+			tag = BAD
+		}
+		modifier = {
+			add = 1000
+			tag = VUR
+		}
+	}
+	
+	default = no
+	reset_on_civilwar = no
+	
+	initial_show_position = {
+		focus = MGS_begin
+	}
+
+	focus = {
+		id = MGS_begin
+		icon = GFX_focus_generic_self_management
+		x = 10
+		y = 0
+		cost = 7
+		#prerequisite = { }
+		#mutually_exclusive = { }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = {  }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_stability = -0.05
+		}
+	}
+	
+	focus = {
+		id = MGS_begin_infrastructure
+		icon = GFX_goal_generic_construct_infrastructure
+		x = 8
+		y = 1
+		cost = 7
+		prerequisite = { focus = MGS_begin }
+		#mutually_exclusive = { }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = {  }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			random_state = {
+				limit = { is_core_of = ROOT }
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+	
+	focus = {
+		id = MGS_begin_army
+		icon = GFX_goal_generic_allies_build_infantry
+		x = 10
+		y = 1
+		cost = 7
+		prerequisite = { focus = MGS_begin }
+		#mutually_exclusive = { }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = {  }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			army_experience = 15
+		}
+	}
+	
+	focus = {
+		id = MGS_begin_arms_factory
+		icon = GFX_goal_generic_construct_mil_factory
+		x = 12
+		y = 1
+		cost = 7
+		prerequisite = { focus = MGS_begin }
+		#mutually_exclusive = { }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = {  }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			random_state = {
+				limit = { is_core_of = ROOT }
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+	
+	focus = {
+		id = MGS_begin_war_preperation
+		icon = GFX_goal_generic_propaganda
+		x = 10
+		y = 2
+		cost = 7
+		prerequisite = { focus = MGS_begin_infrastructure }
+		prerequisite = { focus = MGS_begin_army }
+		prerequisite = { focus = MGS_begin_arms_factory }
+		#mutually_exclusive = { }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = {  }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_war_support = 0.05
+		}
+	}
+	
+	focus = {
+		id = MGS_begin_war_for_aus_1
+		icon = GFX_goal_generic_major_alliance
+		x = 9
+		y = 3
+		cost = 7
+		prerequisite = { focus = MGS_begin_war_preperation }
+		mutually_exclusive = { focus = MGS_begin_war_anti_aus_1 }
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				add = 9999
+				PRU = { is_ai = no }
+			}
+		}
+		
+		#cancel = { }
+		
+		#available = {  }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			AUS = { 
+				add_stability = 0.01
+				add_war_support = 0.01
+			}
+		}
+	}
+	
+	focus = {
+		id = MGS_begin_war_for_aus_2
+		icon = GFX_goal_generic_intelligence_exchange
+		x = 9
+		y = 4
+		cost = 7
+		prerequisite = { focus = MGS_begin_war_for_aus_1 }
+		#mutually_exclusive = { }
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				add = 9999
+				PRU = { is_ai = no }
+			}
+		}
+		
+		#cancel = { }
+		
+		#available = {  }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			PRU = { 
+				add_stability = -0.02
+				add_war_support = -0.02
+				add_political_power = -50
+			}
+		}
+	}
+	
+	focus = {
+		id = MGS_begin_war_anti_aus_1
+		icon = GFX_goal_generic_demand_territory
+		x = 11
+		y = 3
+		cost = 7
+		prerequisite = { focus = MGS_begin_war_preperation }
+		mutually_exclusive = { focus = MGS_begin_war_for_aus_1 }
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				add = 9999
+				PRU = { is_ai = yes }
+			}
+		}
+		
+		#cancel = { }
+		
+		#available = {  }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			AUS = { 
+				add_stability = -0.02
+				add_war_support = -0.02
+			}
+		}
+	}
+	
+	focus = {
+		id = MGS_begin_war_anti_aus_2
+		icon = GFX_goal_generic_dangerous_deal
+		x = 11
+		y = 4
+		cost = 7
+		prerequisite = { focus = MGS_begin_war_anti_aus_1 }
+		#mutually_exclusive = { }
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				add = 9999
+				PRU = { is_ai = yes }
+			}
+		}
+		
+		#cancel = { }
+		
+		#available = {  }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			PRU = { 
+				add_stability = 0.02
+				add_war_support = 0.02
+				add_political_power = 50
+			}
+		}
+	}
+	
+	#AUS win
+	
+	focus = {
+		id = MGS_begin_north_german_union
+		icon = GFX_focus_ger_return_of_the_kaiser
+		x = 6
+		y = 6
+		cost = 7
+		prerequisite = { focus = MGS_begin_war_anti_aus_2 focus = MGS_begin_war_for_aus_2 }
+		#mutually_exclusive = { }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		available = { AUS = { has_country_flag = victory_R_V_A_1 } }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			custom_effect_tooltip = PRU_WORK_IN_PROGRESS
+		}
+	}
+	
+	#PRU win
+	
+	focus = {
+		id = MGS_lose_first_aus_pru_war
+		icon = GFX_goal_generic_forceful_treaty
+		x = 14
+		y = 6
+		cost = 7
+		prerequisite = { focus = MGS_begin_war_anti_aus_2 focus = MGS_begin_war_for_aus_2 }
+		#mutually_exclusive = { }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		available = { PRU = { has_country_flag = victory_R_V_A_1  } }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_stability = -0.1
+			add_war_support = -0.1
+			add_political_power = -100
+			PRU = {
+				add_political_power = 100
+			}
+		}
+	}
+	
+	#economic
+	
+	focus = {
+		id = MGS_economic_rebuild
+		icon = GFX_goal_generic_construction
+		x = 10
+		y = 7
+		cost = 7
+		prerequisite = { focus = MGS_lose_first_aus_pru_war }
+		#mutually_exclusive = { }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_stability = 0.05
+		}
+	}
+	
+	focus = {
+		id = MGS_infrastructure_rebuild
+		icon = GFX_goal_generic_construct_civilian
+		x = 10
+		y = 8
+		cost = 7
+		prerequisite = { focus = MGS_economic_rebuild }
+		#mutually_exclusive = { }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			random_state = {
+				limit = { is_core_of = ROOT }
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+	
+	focus = {
+		id = MGS_arms_factory_rebuild
+		icon = GFX_goal_generic_army_tanks
+		x = 10
+		y = 9
+		cost = 7
+		prerequisite = { focus = MGS_infrastructure_rebuild }
+		#mutually_exclusive = { }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			random_state = {
+				limit = { is_core_of = ROOT }
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+	
+	#economic-politic
+	
+	focus = {
+		id = MGS_industrial_complex_rebuild
+		icon = GFX_goal_generic_construct_civ_factory
+		x = 12
+		y = 8
+		cost = 7
+		prerequisite = { focus = MGS_economic_rebuild }
+		prerequisite = { focus = MGS_politic_freedom }
+		#mutually_exclusive = { }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			random_state = {
+				limit = { is_core_of = ROOT }
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+	
+	focus = {
+		id = MGS_people_promis
+		icon = GFX_goal_generic_consumer_goods
+		x = 12
+		y = 9
+		cost = 7
+		prerequisite = { focus = MGS_industrial_complex_rebuild }
+		#mutually_exclusive = { }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_ideas = MGS_help_people_idea
+		}
+	}
+	
+	#politic
+	
+	focus = {
+		id = MGS_politic_freedom
+		icon = GFX_focus_generic_treaty
+		x = 14
+		y = 7
+		cost = 7
+		prerequisite = { focus = MGS_lose_first_aus_pru_war }
+		#mutually_exclusive = { }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_political_power = 150
+		}
+	}
+	
+	focus = {
+		id = MGS_first_stability
+		icon = GFX_goal_generic_intelligence_exchange
+		x = 14
+		y = 8
+		cost = 7
+		prerequisite = { focus = MGS_politic_freedom }
+		#mutually_exclusive = { }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_stability = 0.025
+		}
+	}
+	
+	focus = {
+		id = MGS_open_goverment
+		icon = GFX_goal_continuous_increase_nu
+		x = 14
+		y = 9
+		cost = 7
+		prerequisite = { focus = MGS_first_stability }
+		#mutually_exclusive = { }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_ideas = MGS_open_goverment_idea
+		}
+	}
+	
+	#polic-army
+	
+	focus = {
+		id = MGS_reform_police
+		icon = GFX_goal_generic_alliance
+		x = 16
+		y = 8
+		cost = 7
+		prerequisite = { focus = MGS_politic_freedom }
+		prerequisite = { focus = MGS_army_reform }
+		#mutually_exclusive = { }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_stability = 0.025
+			add_war_support = 0.05
+		}
+	}
+	
+	focus = {
+		id = MGS_politic_army
+		icon = GFX_goal_demand_sudetenland
+		x = 16
+		y = 9
+		cost = 7
+		prerequisite = { focus = MGS_reform_police }
+		#mutually_exclusive = { }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_ideas = MGS_politic_army_idea
+		}
+	}
+	
+	#army
+	
+	focus = {
+		id = MGS_army_reform
+		icon = GFX_goal_generic_build_tank
+		x = 18
+		y = 7
+		cost = 7
+		prerequisite = { focus = MGS_lose_first_aus_pru_war }
+		#mutually_exclusive = { }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_war_support = 0.05
+		}
+	}
+	
+	focus = {
+		id = MGS_new_recruitment
+		icon = GFX_goal_generic_axis_build_infantry
+		x = 18
+		y = 8
+		cost = 7
+		prerequisite = { focus = MGS_army_reform }
+		#mutually_exclusive = { }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_manpower = 25000
+			random_state = {
+				limit = { is_core_of = ROOT }
+				add_manpower = -25000
+			}
+		}
+	}
+	
+	focus = {
+		id = MGS_new_textbook
+		icon = GFX_goal_generic_army_doctrines
+		x = 18
+		y = 9
+		cost = 7
+		prerequisite = { focus = MGS_new_recruitment }
+		#mutually_exclusive = { }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_tech_bonus = {
+				name = land_doc_bonus
+				bonus = 1.0
+				uses = 2
+				category = land_doctrine
+			}
+		}
+	}
+	
+	#Second AUS vs PRU
+	
+	focus = {
+		id = MGS_war_on_horizon
+		icon = GFX_goal_generic_dangerous_deal
+		x = 14
+		y = 10
+		cost = 7
+		prerequisite = { focus = MGS_arms_factory_rebuild }
+		prerequisite = { focus = MGS_people_promis }
+		prerequisite = { focus = MGS_open_goverment }
+		prerequisite = { focus = MGS_politic_army }
+		prerequisite = { focus = MGS_new_textbook }
+		#mutually_exclusive = { }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_war_support = 0.05
+		}
+	}
+	
+	focus = {
+		id = MGS_war_for_aus
+		icon = GFX_goal_generic_more_territorial_claims
+		x = 13
+		y = 11
+		cost = 7
+		prerequisite = { focus = MGS_war_on_horizon }
+		mutually_exclusive = { focus = MGS_war_for_freedom }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			AUS = { add_war_support = 0.01 }
+		}
+	}
+	
+	focus = {
+		id = MGS_war_for_freedom
+		icon = GFX_goal_generic_defence
+		x = 15
+		y = 11
+		cost = 7
+		prerequisite = { focus = MGS_war_on_horizon }
+		mutually_exclusive = { focus = MGS_war_for_aus }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_war_support = 0.05
+		}
+	}
+	
+	focus = {
+		id = MGS_war_anti_pru
+		icon = GFX_goal_generic_demand_territory
+		x = 14
+		y = 12
+		cost = 7
+		prerequisite = { focus = MGS_war_for_aus focus = MGS_war_for_freedom }
+		#mutually_exclusive = { }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			PRU = {
+				add_stability = -0.01
+				add_war_support	= -0.01
+				add_manpower = -10000
+			}
+			add_manpower = 10000
+		}
+	}
+	
+	#AUS win
+	
+	focus = {
+		id = MGS_north_german_union
+		icon = GFX_focus_ger_return_of_the_kaiser
+		x = 14
+		y = 13
+		cost = 7
+		prerequisite = { focus = MGS_war_anti_pru }
+		#mutually_exclusive = { }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		available = { AUS = { has_country_flag = victory_R_V_A_2 } }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			custom_effect_tooltip = PRU_WORK_IN_PROGRESS
+		}
+	}
+	
+}
