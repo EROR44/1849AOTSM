@@ -4011,5 +4011,338 @@ focus_tree = {
 		#search_filters = {  }
 		
 		completion_reward = {
+			add_stability = 0.05
+			add_political_power = 150
+		}
+	}
+	
+	focus = {
+		id = BYZ_imperial_reform_senat
+		icon = GFX_focus_usa_voter_registration_act
+		x = 20
+		y = 15
+		cost = 5
+		#mutually_exclusive = { }
+		prerequisite = { focus = BYZ_imperial_reform }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			country_event = { id = byz.1000 days = 1 }
+		}
+	}
+	
+	focus = {
+		id = BYZ_imperial_reform_people
+		icon = GFX_goal_generic_neutrality_focus
+		x = 17
+		y = 16
+		cost = 5
+		#mutually_exclusive = { }
+		prerequisite = { focus = BYZ_imperial_reform_senat }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			country_event = { id = byz.1001 days = 1 }
+		}
+	}
+	
+	focus = {
+		id = BYZ_imperial_reform_slave
+		icon = GFX_goal_generic_national_unity
+		x = 20
+		y = 16
+		cost = 5
+		#mutually_exclusive = { }
+		prerequisite = { focus = BYZ_imperial_reform_senat }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			country_event = { id = byz.1002 days = 1 }
+		}
+	}
+	
+	focus = {
+		id = BYZ_imperial_reform_religion
+		icon = GFX_focus_GRE_an_orthodox_state
+		x = 23
+		y = 16
+		cost = 5
+		#mutually_exclusive = { }
+		prerequisite = { focus = BYZ_imperial_reform_senat }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			country_event = { id = byz.1003 days = 1 }
+		}
+	}
+	
+	focus = {
+		id = BYZ_imperial_reform_economic
+		icon = GFX_goal_generic_positive_trade_relations
+		x = 18
+		y = 17
+		cost = 5
+		#mutually_exclusive = { }
+		prerequisite = { focus = BYZ_imperial_reform_senat }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			country_event = { id = byz.1004 days = 1 }
+		}
+	}
+	
+	focus = {
+		id = BYZ_imperial_reform_law
+		icon = GFX_focus_hol_abandon_the_gold_standard
+		x = 22
+		y = 17
+		cost = 5
+		#mutually_exclusive = { }
+		prerequisite = { focus = BYZ_imperial_reform_senat }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			country_event = { id = byz.1005 days = 1 }
+		}
+	}
+	
+	focus = {
+		id = BYZ_imperial_new_system
+		icon = GFX_focus_hol_the_foundations_of_defense
+		x = 20
+		y = 18
+		cost = 5
+		#mutually_exclusive = { }
+		prerequisite = { focus = BYZ_imperial_reform_people }
+		prerequisite = { focus = BYZ_imperial_reform_economic }
+		prerequisite = { focus = BYZ_imperial_reform_slave }
+		prerequisite = { focus = BYZ_imperial_reform_law }
+		prerequisite = { focus = BYZ_imperial_reform_religion }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			if = {
+				limit = {
+					check_variable = {
+						byz_authoritarian_power_var > 2
+					}
+					NOT = {
+						OR = {
+							check_variable = {
+								byz_socialism_power_var > 2
+							}
+							check_variable = {
+								byz_democratic_power_var > 2
+							}
+						}
+					}
+				}
+				add_stability = 0.15
+			}
+			
+			if = {
+				limit = {
+					check_variable = {
+						byz_socialism_power_var > 2
+					}
+					NOT = {
+						OR = {
+							check_variable = {
+								byz_authoritarian_power_var > 2
+							}
+							check_variable = {
+								byz_democratic_power_var > 2
+							}
+						}
+					}
+				}
+				add_stability = 0.15
+				set_politics = {
+					ruling_party = socialism
+					elections_allowed = no
+					last_election = "1852.1.1"
+					election_frequency = 48
+				}
+				create_country_leader = {
+					name = "BYZ_Mihael_IV_Zachareas"
+					desc = "POLITICS_MIHAEL_IV_ZAHAREAS_SOC_DESC"
+					picture = "gfx/leaders/BYZ/Portrait_Mikhail_IV_Zahareas.dds"
+					expire = "1900.1.1"
+					ideology = natianal_socialsm
+					traits = {
+						red_empire
+					}
+				}
+			}
+			
+			if = {
+				limit = {
+					check_variable = {
+						byz_democratic_power_var > 2
+					}
+					NOT = {
+						OR = {
+							check_variable = {
+								byz_authoritarian_power_var > 2
+							}
+							check_variable = {
+								byz_socialism_power_var > 2
+							}
+						}
+					}
+				}
+				add_stability = 0.15
+				set_politics = {
+					ruling_party = democratic
+					elections_allowed = no
+					last_election = "1852.1.1"
+					election_frequency = 48
+				}
+				create_country_leader = {
+					name = "BYZ_Mihael_IV_Zachareas"
+					desc = "POLITICS_MIHAEL_IV_ZAHAREAS_DEM_DESC"
+					picture = "gfx/leaders/BYZ/Portrait_Mikhail_IV_Zahareas.dds"
+					expire = "1900.1.1"
+					ideology = liberalism
+					traits = {
+						byz_empire
+					}
+				}
+			}
+			
+			if = {
+				limit = {
+					OR = {
+						AND = {
+							check_variable = {
+								byz_authoritarian_power_var > 2
+							}
+							check_variable = {
+								byz_socialism_power_var > 2
+							}
+						}
+						AND = {
+							check_variable = {
+								byz_authoritarian_power_var > 2
+							}
+							check_variable = {
+								byz_democratic_power_var > 2
+							}
+						}
+						AND = {
+							check_variable = {
+								byz_socialism_power_var > 2
+							}
+							check_variable = {
+								byz_democratic_power_var > 2
+							}
+						}
+					}
+				}
+				add_stability = 0.15
+			}
+			
+			if = {
+				limit = {
+					OR = {
+						AND = {
+							check_variable = {
+								byz_authoritarian_power_var < 3
+							}
+							check_variable = {
+								byz_socialism_power_var < 3
+							}
+						}
+						AND = {
+							check_variable = {
+								byz_authoritarian_power_var < 3
+							}
+							check_variable = {
+								byz_democratic_power_var < 3
+							}
+						}
+						AND = {
+							check_variable = {
+								byz_socialism_power_var < 3
+							}
+							check_variable = {
+								byz_democratic_power_var < 3
+							}
+						}
+					}
+				}
+				add_stability = 0.15
+			}
+			
 		}
 	}
