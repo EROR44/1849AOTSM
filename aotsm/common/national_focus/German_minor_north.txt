@@ -1,0 +1,264 @@
+focus_tree = {
+	id = minor_germany_north_focus
+	
+	country = {
+		factor = 0
+		modifier = {
+			add = 1000
+			tag = MCL
+		}
+		modifier = {
+			add = 1000
+			tag = SLG
+		}
+		modifier = {
+			add = 1000
+			tag = HAN
+		}
+		modifier = {
+			add = 1000
+			tag = VES
+		}
+		modifier = {
+			add = 1000
+			tag = FRN
+		}
+		modifier = {
+			add = 1000
+			tag = TYR
+		}
+		modifier = {
+			add = 1000
+			tag = SAK
+		}
+	}
+	
+	default = no
+	reset_on_civilwar = no
+	
+	initial_show_position = {
+		focus = MGN_begin
+	}
+
+	focus = {
+		id = MGN_begin
+		icon = GFX_goal_generic_neutrality_focus
+		x = 10
+		y = 0
+		cost = 7
+		#prerequisite = { }
+		#mutually_exclusive = { }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = {  }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_political_power = 150
+		}
+	}
+	
+	focus = {
+		id = MGN_begin_infrastructure
+		icon = GFX_goal_generic_construct_infrastructure
+		x = 8
+		y = 1
+		cost = 7
+		prerequisite = { focus = MGN_begin }
+		#mutually_exclusive = { }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = {  }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			random_state = {
+				limit = { is_core_of = ROOT }
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+	
+	focus = {
+		id = MGN_begin_army
+		icon = GFX_goal_generic_axis_build_infantry
+		x = 10
+		y = 1
+		cost = 7
+		prerequisite = { focus = MGN_begin }
+		#mutually_exclusive = { }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = {  }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			army_experience = 15
+		}
+	}
+	
+	focus = {
+		id = MGN_begin_industrial_complex
+		icon = GFX_goal_generic_construct_civ_factory
+		x = 12
+		y = 1
+		cost = 7
+		prerequisite = { focus = MGN_begin }
+		#mutually_exclusive = { }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = {  }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			random_state = {
+				limit = { is_core_of = ROOT }
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+	
+	focus = {
+		id = MGN_begin_ready_for_war
+		icon = GFX_goal_generic_small_arms
+		x = 10
+		y = 2
+		cost = 7
+		prerequisite = { focus = MGN_begin_infrastructure }
+		prerequisite = { focus = MGN_begin_army }
+		prerequisite = { focus = MGN_begin_industrial_complex }
+		#mutually_exclusive = { }	
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = {  }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_stability = 0.05
+			add_war_support = 0.05
+		}
+	}
+	
+	focus = {
+		id = MGN_begin_anti_war_movement
+		icon = GFX_goal_generic_major_war
+		x = 9
+		y = 3
+		cost = 7
+		prerequisite = { focus = MGN_begin_ready_for_war }
+		#mutually_exclusive = { }	
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = {  }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			PRU = { add_war_support = -0.01 }
+			AUS = { add_war_support = -0.02 }
+		}
+	}
+	
+	focus = {
+		id = MGN_begin_anti_war_protest
+		icon = GFX_goal_generic_military_deal
+		x = 11
+		y = 3
+		cost = 7
+		prerequisite = { focus = MGN_begin_ready_for_war }
+		#mutually_exclusive = { }	
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = {  }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			PRU = { add_stability = -0.01 }
+			AUS = { add_stability = -0.02 }
+		}
+	}
+	
+	focus = {
+		id = MGN_austria_win
+		icon = GFX_goal_generic_alliance
+		x = 10
+		y = 4
+		cost = 7
+		prerequisite = { focus = MGN_begin_anti_war_protest }
+		prerequisite = { focus = MGN_begin_anti_war_movement }
+		#mutually_exclusive = { }	
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		available = { AUS = { has_country_flag = victory_R_V_A_1  } }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			custom_effect_tooltip = PRU_WORK_IN_PROGRESS
+		}
+	}
+	
+}
