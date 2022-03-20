@@ -12,7 +12,10 @@ country_event = {
 	trigger = {
 		tag = SOS
 		has_defensive_war = no
-		has_government = authoritarian 
+		OR = {
+			has_government = authoritarian 
+			has_government = reactionist
+		}
 		date > 1849.4.16 
 	}
 	
@@ -33,7 +36,14 @@ country_event = {
 		hidden_effect = {
 			SOS = {
 				set_global_flag = somali_civil_war
-				delete_unit_template_and_units = { division_template = "Infantry Division" }
+				delete_unit_template_and_units = { 
+					division_template = "Infantry Division" 
+					}
+				delete_unit_template_and_units = { 
+						division_template = "Cavalry Division" 
+					}
+				load_oob = "SOS_civil_war"
+				add_ideas = SOS_civil_war
 			}
 			SOR = {
 				set_global_flag = somali_civil_war
@@ -44,12 +54,6 @@ country_event = {
 				add_state_core = 830
 				transfer_state = 268
 				transfer_state = 831
-				set_capital = 268
-				load_oob = "SOR_civil_war"
-				declare_war_on = {
-					target = SOS
-					type = annex_everything
-				}
 				set_province_controller = 7980
 				set_province_controller = 12714
 				set_province_controller = 13385
@@ -62,6 +66,13 @@ country_event = {
 				set_province_controller = 11014
 				set_province_controller = 13402
 				set_province_controller = 8133
+				set_capital = 268
+				add_ideas = SOR_civil_war
+				load_oob = "SOR_civil_war"
+				declare_war_on = {
+					target = SOS
+					type = annex_everything
+				}
 			}
 		}
 	}		
