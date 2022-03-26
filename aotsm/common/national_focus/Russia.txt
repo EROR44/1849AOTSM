@@ -376,43 +376,32 @@ focus_tree = {
 				limit = {
 					free_building_slots = {
 						building = arms_factory
-						size > 0
+						size > 1
 						include_locked = yes
 					}
 				}
-				add_extra_state_shared_building_slots = 1
+				add_extra_state_shared_building_slots = 2
 				add_building_construction = {
 					type = arms_factory
-					level = 1
+					level = 2
 					instant_build = yes
 				}
-				set_state_flag = CAN_retool_angus_shops_AF
-			}						
+				set_state_flag = GER_industrial_effort_2IC
+			}				
 		}
 		complete_tooltip = {
-            random_state = {
-				limit = {
-					has_state_flag = CAN_retool_angus_shops_AF
-				}
-				add_extra_state_shared_building_slots = 1
+           every_state = {
+				limit = { has_state_flag = GER_industrial_effort_2IC }
+				add_extra_state_shared_building_slots = 2
 				add_building_construction = {
 					type = arms_factory
-					level = 1
+					level = 2
 					instant_build = yes
 				}
 			}
 		}
 		bypass = {
-			custom_trigger_tooltip = {
-				tooltip = production_effort_tt
-				all_owned_state = {
-					free_building_slots = {
-						building = arms_factory
-						size < 1
-						include_locked = yes
-					}					
-				}
-			}
+		
 		}
 	}
 	
@@ -440,43 +429,32 @@ focus_tree = {
 				limit = {
 					free_building_slots = {
 						building = industrial_complex
-						size > 0
+						size > 1
 						include_locked = yes
 					}
 				}
-				add_extra_state_shared_building_slots = 1
+				add_extra_state_shared_building_slots = 2
 				add_building_construction = {
 					type = industrial_complex
-					level = 1
+					level = 2
 					instant_build = yes
 				}
-				set_state_flag = CAN_national_housing_act_IC
-			}						
+				set_state_flag = GER_industrial_effort_2IC
+			}				
 		}
 		complete_tooltip = {
-            random_state = {
-				limit = {
-					has_state_flag = CAN_national_housing_act_IC
-				}
-				add_extra_state_shared_building_slots = 1
+           every_state = {
+				limit = { has_state_flag = GER_industrial_effort_2IC }
+				add_extra_state_shared_building_slots = 2
 				add_building_construction = {
 					type = industrial_complex
-					level = 1
+					level = 2
 					instant_build = yes
 				}
 			}
 		}
 		bypass = {
-			custom_trigger_tooltip = {
-				tooltip = construction_effort_tt
-				all_owned_state = {
-					free_building_slots = {
-						building = industrial_complex
-						size < 1
-						include_locked = yes
-					}
-				}
-			}
+
 		}
 	}
 	
@@ -796,9 +774,29 @@ focus_tree = {
 			
 		}
 		completion_reward = {
+		if = {
+				limit = { has_idea = modern_industry }
+				add_ideas = ahead_of_time_industry
+			}
+if = {
+				limit = { has_idea = medium_developed_industry }
+				add_ideas = modern_industry
+			}
+if = {
+				limit = { has_idea = backward_industry }
+				add_ideas = medium_developed_industry
+			}
+if = {
+				limit = { has_idea = manufactory_production }
+				add_ideas = backward_industry
+			}
+if = {
+				limit = { has_idea = agrarian_country }
+				add_ideas = manufactory_production
+			}
 									add_tech_bonus = {
     bonus = 0.5
-    uses = 2
+    uses = 1
     category = industry
 }								
 		}
@@ -834,8 +832,8 @@ focus_tree = {
     bonus = 1.0
     uses = 1
     category = electronics
-}							
-		}
+}
+}				
 		complete_tooltip = {
 
 		}
@@ -1380,7 +1378,10 @@ focus_tree = {
 			focus = 
 		}
 		available = {
-			
+			OR = {
+			surrender_progress > 0.10
+			has_manpower < 500000
+			}
 		}
 		completion_reward = {
 			add_ideas = rus_people_s_army								
@@ -1518,10 +1519,7 @@ focus_tree = {
 			focus = 
 		}
 		available = {
-			OR = {
-			surrender_progress > 0.25
-			has_manpower < 10000
-			}
+			
 		}
 		completion_reward = {
 			add_ideas = rus_russian_armys								
@@ -2221,11 +2219,11 @@ add_tech_bonus = {
 	}
 	
 	focus = {
-		id = rus_
+		id = rus_Attention_to_the_steppe
 		icon = GFX_goal_generic_demand_territory
 		cost = 8
-		x = 0
-		y = 0
+		x = 13
+		y = 10
 		ai_will_do = {
 			factor = 5
 		}
@@ -2237,7 +2235,1020 @@ add_tech_bonus = {
 			focus = 
 		}
 		available = {
+			 date > 1850.01.01
+			 exists = yes
+			 is_subject = no
+			 OR = {
+    has_government = reactionist
+    has_government = authoritarian
+}
+		}
+		completion_reward = {	
+			add_state_claim = 587
+            add_state_claim = 402	
+  			add_state_claim = 404
+			add_state_claim = 589
+			add_state_claim = 586
+			add_state_claim = 405
+			add_state_claim = 732
+			add_state_claim = 742
+			add_state_claim = 585
+			add_state_claim = 584
+		}
+		complete_tooltip = {
+
+		}
+		bypass = {
+			
+		}
+	}
+	
+	focus = {
+		id = rus_Conquer_Tashkent
+		icon = GFX_goal_generic_demand_territory
+		cost = 8
+		x = 11
+		y = 11
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+			focus = rus_Attention_to_the_steppe
+		}
+		prerequisite = { focus =  }
+		mutually_exclusive = {
+			focus = 
+		}
+		available = {
+		    exists = yes
+			is_subject = no
+						 OR = {
+    has_government = reactionist
+    has_government = authoritarian
+}
+		}
+		completion_reward = {
+			create_wargoal = {
+    type = annex_everything
+    target = KAZ
+}
+		}
+		complete_tooltip = {
+
+		}
+		bypass = {
+			
+		}
+	}
+	
+	focus = {
+		id = rus_Conquer_Khiva
+		icon = GFX_goal_generic_demand_territory
+		cost = 8
+		x = 9
+		y = 12
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+			focus = rus_Conquer_Tashkent
+		}
+		prerequisite = { focus =  }
+		mutually_exclusive = {
+			focus = 
+		}
+		available = {
+			 exists = yes
+			is_subject = no
+						 OR = {
+    has_government = reactionist
+    has_government = authoritarian
+}
+		}
+		completion_reward = {	
+			create_wargoal = {
+    type = annex_everything
+    target = HIV
+}						
+		}
+		complete_tooltip = {
+
+		}
+		bypass = {
+			
+		}
+	}
+	
+	focus = {
+		id = rus_Conquer_Bukhara
+		icon = GFX_goal_generic_demand_territory
+		cost = 8
+		x = 11
+		y = 12
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+			focus = rus_Conquer_Tashkent
+		}
+		prerequisite = { focus =  }
+		mutually_exclusive = {
+			focus = 
+		}
+		available = {
+			 exists = yes
+			is_subject = no
+						 OR = {
+    has_government = reactionist
+    has_government = authoritarian
+}
+		}
+		completion_reward = {
+			create_wargoal = {
+    type = annex_everything
+    target = BUK
+}						
+		}
+		complete_tooltip = {
+
+		}
+		bypass = {
+			
+		}
+	}
+	
+	focus = {
+		id = rus_Conquer_Kokand
+		icon = GFX_goal_generic_demand_territory
+		cost = 8
+		x = 13
+		y = 12
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+			focus = rus_Conquer_Tashkent
+		}
+		prerequisite = { focus =  }
+		mutually_exclusive = {
+			focus = 
+		}
+		available = {
+			 exists = yes
+			is_subject = no
+						 OR = {
+    has_government = reactionist
+    has_government = authoritarian
+}
+		}
+		completion_reward = {	
+			create_wargoal = {
+    type = annex_everything
+    target = KOK
+}						
+		}
+		complete_tooltip = {
+
+		}
+		bypass = {
+			
+		}
+	}
+	
+	focus = {
+		id = rus_Relocation_to_the_steppe
+		icon = GFX_goal_generic_demand_territory
+		cost = 10
+		x = 11
+		y = 13
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+			focus = rus_Conquer_Khiva
+		}
+		prerequisite = {
+			focus = rus_Conquer_Bukhara
+		}
+		prerequisite = {
+			focus = rus_Conquer_Kokand
+		}
+		prerequisite = { focus =  }
+		mutually_exclusive = {
+			focus = 
+		}
+		available = {
+		 exists = yes
+			is_subject = no
+			owns_state = 587
+            owns_state = 402	
+  			owns_state = 404
+			owns_state = 589
+			owns_state = 586
+			owns_state = 405
+			owns_state = 732
+			owns_state = 742
+			owns_state = 585
+			owns_state = 584
+						 OR = {
+    has_government = reactionist
+    has_government = authoritarian
+}
+		}
+		completion_reward = {
+		    add_stability = -0.1
+			add_state_core = 587
+            add_state_core = 402	
+  			add_state_core = 404
+			add_state_core = 589
+			add_state_core = 586
+			add_state_core = 405
+			add_state_core = 732
+			add_state_core = 742
+			add_state_core = 585
+			add_state_core = 584						
+		}
+		complete_tooltip = {
+
+		}
+		bypass = {
+			
+		}
+	}
+	
+	focus = {
+		id = rus_A_look_at_Afghanistan_and_Persia
+		icon = GFX_goal_generic_demand_territory
+		cost = 8
+		x = 13
+		y = 14
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+			focus = rus_Relocation_to_the_steppe
+		}
+		prerequisite = {
+			focus = rus_Unrest_in_Xinjiang
+		}
+		prerequisite = { focus =  }
+		mutually_exclusive = {
+			focus = 
+		}
+		available = {
+			 exists = yes
+			is_subject = no
+						 OR = {
+    has_government = reactionist
+    has_government = authoritarian
+}
+		}
+		completion_reward = {
+			add_political_power = 250
+		}
+		complete_tooltip = {
+
+		}
+		bypass = {
+			
+		}
+	}
+	
+	focus = {
+		id = rus_The_experience_of_the_Cossacks
+		icon = GFX_goal_generic_demand_territory
+		cost = 8
+		x = 15
+		y = 11
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+			focus = rus_Attention_to_the_steppe
+		}
+		prerequisite = { focus =  }
+		mutually_exclusive = {
+			focus = 
+		}
+		available = {
+			 exists = yes
+			is_subject = no
+						 OR = {
+    has_government = reactionist
+    has_government = authoritarian
+}
+		}
+		completion_reward = {
+			add_timed_idea = {
+    idea = Rus_steppe_Cossacks
+    days = 400
+}									
+		}
+		complete_tooltip = {
+
+		}
+		bypass = {
+			
+		}
+	}
+	
+	focus = {
+		id = rus_Unrest_in_Xinjiang
+		icon = GFX_goal_generic_demand_territory
+		cost = 8
+		x = 15
+		y = 13
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+			focus = rus_The_experience_of_the_Cossacks
+		}
+		prerequisite = {
+			focus = rus_Connection_with_China
+		}
+		prerequisite = { focus =  }
+		mutually_exclusive = {
+			focus = 
+		}
+		available = {
+			exists = yes
+			is_subject = no
+						 OR = {
+    has_government = reactionist
+    has_government = authoritarian
+}
+		}
+		completion_reward = {
+		add_political_power = 100
+			 SDZ = {
+			add_political_power = -100
+			add_stability = -0.1
+			}					
+		}
+		complete_tooltip = {
+
+		}
+		bypass = {
+			
+		}
+	}
+	
+	focus = {
+		id = rus_Attention_to_China
+		icon = GFX_goal_generic_demand_territory
+		cost = 8
+		x = 17
+		y = 10
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+			focus = 
+		}
+		prerequisite = { focus =  }
+		mutually_exclusive = {
+			focus = 
+		}
+		available = {
+		 date > 1850.01.01
+			 exists = yes
+			is_subject = no
+						 NOT = {
+    has_government = socialism
+}
+		}
+		completion_reward = {
+			add_state_claim = 329
+			add_state_claim = 657
+			add_state_claim = 560
+			add_state_claim = 409
+		}
+		complete_tooltip = {
+
+		}
+		bypass = {
+			
+		}
+	}
+	
+	focus = {
+		id = rus_Connection_with_China
+		icon = GFX_goal_generic_demand_territory
+		cost = 8
+		x = 17
+		y = 11
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+			focus = rus_Attention_to_China
+		}
+		prerequisite = { focus =  }
+		mutually_exclusive = {
+			focus = 
+		}
+		available = {
+			exists = yes
+			is_subject = no
+			NOT = {
+    has_government = socialism
+}
+		}
+		completion_reward = {
+					QIN = { 
+			country_event = { id = russia_event_da.11 days = 1 }		
+}							
+		}
+		complete_tooltip = {
+
+		}
+		bypass = {
+			
+		}
+	}
+	
+	focus = {
+		id = rus_Demand_Tuva
+		icon = GFX_goal_generic_demand_territory
+		cost = 8
+		x = 17
+		y = 13
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+			focus = rus_Connection_with_China
+		}
+		prerequisite = { focus =  }
+		mutually_exclusive = {
+			focus = 
+		}
+		available = {
+			exists = yes
+			is_subject = no
+			OR = {
+			MON = {
+			owns_state = 329
+			}
+			QIN = {
+			owns_state = 329
+			}
+			}
+			NOT = {
+    has_government = socialism
+}
+		}
+		completion_reward = {
+		if = {
+				limit = {
+				MON = {
+				owns_state = 329
+				is_subject = no
+				}
+				}
+									MON = {
+			country_event = { id = russia_event_da.12 days = 2 }		
+}	
+			}
+			if = {
+				limit = { 
+				MON = {
+				owns_state = 329
+				is_puppet_of = QIN
+				}
+				}
+									QIN = {
+			country_event = { id = russia_event_da.12 days = 2 }		
+}	
+			}
+			if = {
+				limit = {
+QIN = {
+				owns_state = 329
+				}				
+				}
+									QIN = {
+			country_event = { id = russia_event_da.12 days = 2 }		
+}	
+			}			
+		}
+		complete_tooltip = {
+
+		}
+		bypass = {
+			
+		}
+	}
+	
+	focus = {
+		id = rus_Pavel_Nikolaevich_Ignatiev
+		icon = GFX_goal_generic_demand_territory
+		cost = 1
+		x = 30
+		y = 8
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+			focus = 
+		}
+		prerequisite = { focus =  }
+		mutually_exclusive = {
+			focus = 
+		}
+		available = {
+			has_country_leader = { ruling_only = yes character = RUS_Pavel_Nikolaevich_Ignatievs }
+		}
+		completion_reward = {
+			add_popularity = {
+    ideology = authoritarian
+    popularity = 0.05
+}						
+		}
+		complete_tooltip = {
+
+		}
+		bypass = {
+			
+		}
+	}
+	
+	focus = {
+		id = rus_New_Russia
+		icon = GFX_goal_generic_demand_territory
+		cost = 8
+		x = 30
+		y = 9
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+			focus = rus_Pavel_Nikolaevich_Ignatiev
+		}
+		prerequisite = { focus =  }
+		mutually_exclusive = {
+			focus = 
+		}
+		available = {
+			has_country_leader = { ruling_only = yes character = RUS_Pavel_Nikolaevich_Ignatievs }
+		}
+		completion_reward = {
+			country_event = { id = russia_event_PNI.1 days = 1 }		 				
+		}
+		complete_tooltip = {
+
+		}
+		bypass = {
+			
+		}
+	}
+	
+	focus = {
+		id = rus_Defender_of_all_Slavs
+		icon = GFX_goal_generic_demand_territory
+		cost = 8
+		x = 27
+		y = 10
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+			focus = rus_New_Russia
+		}
+		prerequisite = { focus =  }
+		mutually_exclusive = {
+			focus = 
+		}
+		available = {
+			
+			has_country_leader = { ruling_only = yes character = RUS_Pavel_Nikolaevich_Ignatievs }
+		}
+		completion_reward = {
+			add_ideas = rus_the_power_of_russia_0						
+		}
+		complete_tooltip = {
+
+		}
+		bypass = {
+			
+		}
+	}
+	
+	focus = {
+		id = rus_Defender_of_Christianity
+		icon = GFX_goal_generic_demand_territory
+		cost = 8
+		x = 27
+		y = 11
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+			focus = rus_Defender_of_all_Slavs
+		}
+		prerequisite = { focus =  }
+		mutually_exclusive = {
+			focus = 
+		}
+		available = {
+			
+			has_country_leader = { ruling_only = yes character = RUS_Pavel_Nikolaevich_Ignatievs }
+		}
+		completion_reward = {
+			swap_ideas = {
+    remove_idea = rus_the_power_of_russia_0
+    add_idea = rus_the_power_of_russia_1
+}						
+		}
+		complete_tooltip = {
+
+		}
+		bypass = {
+			
+		}
+	}
+	
+	focus = {
+		id = rus_A_protector_from_bad_thoughts
+		icon = GFX_goal_generic_demand_territory
+		cost = 8
+		x = 27
+		y = 12
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+			focus = rus_Defender_of_Christianity
+		}
+		prerequisite = { focus =  }
+		mutually_exclusive = {
+			focus = 
+		}
+		available = {
+			
+			has_country_leader = { ruling_only = yes character = RUS_Pavel_Nikolaevich_Ignatievs }
+		}
+		completion_reward = {
+			swap_ideas = {
+    remove_idea = rus_the_power_of_russia_1
+    add_idea = rus_the_power_of_russia_2
+}						
+		}
+		complete_tooltip = {
+
+		}
+		bypass = {
+			
+		}
+	}
+	
+	focus = {
+		id = rus_Clear_the_ranks_of_traitors
+		icon = GFX_goal_generic_demand_territory
+		cost = 8
+		x = 26
+		y = 13
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+			focus = rus_A_protector_from_bad_thoughts
+		}
+		prerequisite = { focus =  }
+		mutually_exclusive = {
+			focus = 
+		}
+		available = {
+			has_country_leader = { ruling_only = yes character = RUS_Pavel_Nikolaevich_Ignatievs }
+		}
+		completion_reward = {
+		add_political_power = 250
+		add_popularity = {
+    ideology = authoritarian
+    popularity = 0.1
+}
+add_manpower = -150000
+			add_timed_idea = {
+    idea = rus_cleaning_of_rows
+    days = 280
+}						
+		}
+		complete_tooltip = {
+
+		}
+		bypass = {
+			
+		}
+	}
+	
+	focus = {
+		id = rus_Russian_World
+		icon = GFX_goal_generic_demand_territory
+		cost = 8
+		x = 30
+		y = 10
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+			focus = rus_New_Russia
+		}
+		prerequisite = { focus =  }
+		mutually_exclusive = {
+			focus = 
+		}
+		available = {
 			always = no
+			has_country_leader = { ruling_only = yes character = RUS_Pavel_Nikolaevich_Ignatievs }
+		}
+		completion_reward = {
+									
+		}
+		complete_tooltip = {
+
+		}
+		bypass = {
+			
+		}
+	}
+	
+	focus = {
+		id = rus_New_soldiers
+		icon = GFX_goal_generic_demand_territory
+		cost = 8
+		x = 29
+		y = 11
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+			focus = rus_Russian_World
+		}
+		prerequisite = { focus =  }
+		mutually_exclusive = {
+			focus = 
+		}
+		available = {
+			always = no
+			has_country_leader = { ruling_only = yes character = RUS_Pavel_Nikolaevich_Ignatievs }
+		}
+		completion_reward = {
+									
+		}
+		complete_tooltip = {
+
+		}
+		bypass = {
+			
+		}
+	}
+	
+	focus = {
+		id = rus_New_peasants
+		icon = GFX_goal_generic_demand_territory
+		cost = 8
+		x = 31
+		y = 11
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+			focus = rus_Russian_World
+		}
+		prerequisite = { focus =  }
+		mutually_exclusive = {
+			focus = 
+		}
+		available = {
+			always = no
+			has_country_leader = { ruling_only = yes character = RUS_Pavel_Nikolaevich_Ignatievs }
+		}
+		completion_reward = {
+									
+		}
+		complete_tooltip = {
+
+		}
+		bypass = {
+			
+		}
+	}
+	
+	focus = {
+		id = rus_An_Orthodox_person
+		icon = GFX_goal_generic_demand_territory
+		cost = 8
+		x = 30
+		y = 12
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+			focus = rus_New_soldiers
+		}
+		prerequisite = {
+			focus = rus_New_peasants
+		}
+		prerequisite = { focus =  }
+		mutually_exclusive = {
+			focus = 
+		}
+		available = {
+			always = no
+			has_country_leader = { ruling_only = yes character = RUS_Pavel_Nikolaevich_Ignatievs }
+		}
+		completion_reward = {
+									
+		}
+		complete_tooltip = {
+
+		}
+		bypass = {
+			
+		}
+	}
+	
+	focus = {
+		id = rus_Black_Union
+		icon = GFX_goal_generic_demand_territory
+		cost = 8
+		x = 32
+		y = 10
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+			focus = rus_New_Russia
+		}
+		prerequisite = { focus =  }
+		mutually_exclusive = {
+			focus = 
+		}
+		available = {
+			always = no
+			has_country_leader = { ruling_only = yes character = RUS_Pavel_Nikolaevich_Ignatievs }
+		}
+		completion_reward = {
+									
+		}
+		complete_tooltip = {
+
+		}
+		bypass = {
+			
+		}
+	}
+	
+	focus = {
+		id = rus_The_Greek_Savage
+		icon = GFX_goal_generic_demand_territory
+		cost = 8
+		x = 30
+		y = 13
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+			focus = rus_A_protector_from_bad_thoughts
+		}
+		prerequisite = {
+			focus = rus_An_Orthodox_person
+		}
+		prerequisite = { focus =  }
+		mutually_exclusive = {
+			focus = 
+		}
+		available = {
+			always = no
+			has_country_leader = { ruling_only = yes character = RUS_Pavel_Nikolaevich_Ignatievs }
+		}
+		completion_reward = {
+									
+		}
+		complete_tooltip = {
+
+		}
+		bypass = {
+			
+		}
+	}
+	
+	focus = {
+		id = rus_Poisoned_oceans
+		icon = GFX_goal_generic_demand_territory
+		cost = 8
+		x = 29
+		y = 14
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+			focus = rus_The_Greek_Savage
+		}
+		prerequisite = { focus =  }
+		mutually_exclusive = {
+			focus = 
+		}
+		available = {
+			always = no
+			has_country_leader = { ruling_only = yes character = RUS_Pavel_Nikolaevich_Ignatievs }
+		}
+		completion_reward = {
+									
+		}
+		complete_tooltip = {
+
+		}
+		bypass = {
+			
+		}
+	}
+	
+	focus = {
+		id = rus_Poisoned_Lands
+		icon = GFX_goal_generic_demand_territory
+		cost = 8
+		x = 31
+		y = 14
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+			focus = rus_The_Greek_Savage
+		}
+		prerequisite = { focus =  }
+		mutually_exclusive = {
+			focus = 
+		}
+		available = {
+			always = no
+			has_country_leader = { ruling_only = yes character = RUS_Pavel_Nikolaevich_Ignatievs }
+		}
+		completion_reward = {
+									
+		}
+		complete_tooltip = {
+
+		}
+		bypass = {
+			
+		}
+	}
+	
+	focus = {
+		id = rus_Poisoned_minds
+		icon = GFX_goal_generic_demand_territory
+		cost = 8
+		x = 30
+		y = 15
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+			focus = rus_Poisoned_oceans
+		}
+		prerequisite = {
+			focus = rus_Poisoned_Lands
+		}
+		prerequisite = { focus =  }
+		mutually_exclusive = {
+			focus = 
+		}
+		available = {
+			always = no
+			has_country_leader = { ruling_only = yes character = RUS_Pavel_Nikolaevich_Ignatievs }
+		}
+		completion_reward = {
+									
+		}
+		complete_tooltip = {
+
+		}
+		bypass = {
+			
+		}
+	}
+	
+	focus = {
+		id = rus_War_to_Victory
+		icon = GFX_goal_generic_demand_territory
+		cost = 8
+		x = 30
+		y = 16
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+			focus = rus_Poisoned_minds
+		}
+		prerequisite = { focus =  }
+		mutually_exclusive = {
+			focus = 
+		}
+		available = {
+			always = no
+			has_country_leader = { ruling_only = yes character = RUS_Pavel_Nikolaevich_Ignatievs }
 		}
 		completion_reward = {
 									
