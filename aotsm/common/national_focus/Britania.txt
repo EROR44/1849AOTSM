@@ -122,7 +122,7 @@ focus_tree = {
 }
 
 	focus = {
-		id = focus_В
+		id = focus_CBI_the_great_day
 		available = {
 			}
 		
@@ -142,6 +142,7 @@ focus_tree = {
 
 		available_if_capitulated = yes
 		search_filters = {FOCUS_FILTER_POLITICAL}
+		search_filters = {FOCUS_FILTER_STABILITY}
 		completion_reward = {
 			country_event = {
 			id = CBI.105
@@ -177,9 +178,9 @@ focus_tree = {
 		}
 		
 		icon = GFX_focus_CBI_lord_protector_die
-		x = 11
+		x = 12
 		y = 0
-		cost = 4
+		cost = 1
 		ai_will_do = {
 			factor = 1
 		}
@@ -188,7 +189,11 @@ focus_tree = {
 		search_filters = {FOCUS_FILTER_POLITICAL}
 		
 		completion_reward = {
-
+			add_political_power = -50
+			country_event = {
+			id = CBI.112
+			days = 1
+				}
 			}
 		}
 
@@ -201,13 +206,14 @@ focus_tree = {
 			}
 		
 		bypass = {
+		has_country_flag = choice_Robert_Peel
 		}
 		
 		icon = GFX_focus_CBI_choice_Robert_Peel
 		prerequisite = { focus = focus_CBI_lord_protector_die}		
-		x = 3
+		x = 2
 		y = 1
-		cost = 4
+		cost = 0
 		ai_will_do = {
 			factor = 1
 		}
@@ -220,6 +226,206 @@ focus_tree = {
 			}
 		}
 		
+	focus = {
+		id = focus_CBI_detachments_the_revolution
+		available = {
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_focus_SOV_mobilization_plan
+		prerequisite = { focus = focus_CBI_choice_Robert_Peel }		
+		x = 0
+		y = 2
+		cost = 5
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		search_filters = {FOCUS_FILTER_MANPOWER}
+		
+		completion_reward = {
+			add_manpower = -4170
+			add_popularity = {
+			ideology = reactionist   
+			popularity = 0.04
+				}
+		}
+	}
+
+	focus = {
+		id = focus_CBI_recruit_police_officers
+		available = {
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_focus_secret_rearmament
+		prerequisite = { focus = focus_CBI_choice_Robert_Peel }		
+		x = 2
+		y = 2
+		cost = 5
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+			add_popularity = {
+			ideology = reactionist   
+			popularity = 0.05
+				}
+		}
+	}	
+
+	focus = {
+		id = focus_CBI_request_money_from_tycoons
+		available = {
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_focus_mex_privatisation
+		prerequisite = { focus = focus_CBI_choice_Robert_Peel }		
+		x = 4
+		y = 2
+		cost = 5
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		
+		completion_reward = {
+			add_popularity = {
+			ideology = reactionist   
+			popularity = 0.03
+				}		
+			}
+		}
+
+	focus = {
+		id = focus_CBI_conduct_attacks_military_bases
+		available = {
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_generic_small_arms
+		prerequisite = { focus = focus_CBI_detachments_the_revolution }		
+		prerequisite = { focus = focus_CBI_request_money_from_tycoons }	
+		prerequisite = { focus = focus_CBI_recruit_police_officers }	
+		x = 1
+		y = 3
+		cost = 5
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		search_filters = {FOCUS_FILTER_WAR_SUPPORT}
+		
+		completion_reward = {
+			add_equipment_to_stockpile = {
+			type = infantry_equipment
+			amount = -2000
+			producer = CBI
+			}			
+			add_equipment_to_stockpile = {
+			type = support_equipment
+			amount = -1000
+			producer = CBI
+			}						
+			add_equipment_to_stockpile = {
+			type = artillery_equipment
+			amount = -20
+			producer = CBI
+			}						
+			add_political_power = 15
+			add_popularity = {
+			ideology = reactionist   
+			popularity = 0.04
+				}
+			add_war_support = 0.05
+			}
+		}
+		
+	focus = {
+		id = focus_CBI_start_propaganda
+		available = {
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_generic_propaganda
+		prerequisite = { focus = focus_CBI_detachments_the_revolution }		
+		prerequisite = { focus = focus_CBI_request_money_from_tycoons }	
+		prerequisite = { focus = focus_CBI_recruit_police_officers }	
+		x = 3
+		y = 3
+		cost = 5
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		search_filters = {FOCUS_FILTER_STABILITY}
+		
+		completion_reward = {	
+			add_stability = -0.02
+			add_political_power = -20
+			add_popularity = {
+			ideology = reactionist   
+			popularity = 0.11
+				}
+			}
+		}
+
+	focus = {
+		id = focus_CBI_preparing_for_coup
+		available = {
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_generic_demand_territory
+		prerequisite = { focus = focus_CBI_conduct_attacks_military_bases }		
+		prerequisite = { focus = focus_CBI_start_propaganda }		
+		x = 2
+		y = 4
+		cost = 5
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		search_filters = {FOCUS_FILTER_MANPOWER}
+		
+		completion_reward = {
+			add_manpower = -517
+			add_political_power = -25
+			add_popularity = {
+			ideology = reactionist   
+			popularity = 0.03
+				}
+			}
+		}	
+		
 ### СМИТ-СТЕНЛИ ###
 		
 	focus = {
@@ -229,13 +435,14 @@ focus_tree = {
 			}
 		
 		bypass = {
+		has_country_flag = choice_Edward_Smith_Stanley
 		}
 		
 		icon = GFX_focus_CBI_choice_Edward_Smith_Stanley
 		prerequisite = { focus = focus_CBI_lord_protector_die}		
 		x = 7
 		y = 1
-		cost = 4
+		cost = 0
 		ai_will_do = {
 			factor = 1
 		}
@@ -258,9 +465,9 @@ focus_tree = {
 		
 		icon = GFX_goal_tripartite_pact
 		prerequisite = { focus = focus_CBI_choice_Edward_Smith_Stanley}		
-		x = 5
+		x = 6
 		y = 2
-		cost = 4
+		cost = 6
 		ai_will_do = {
 			factor = 1
 		}
@@ -270,9 +477,9 @@ focus_tree = {
 		
 		completion_reward = {
 			add_popularity = {
-			ideology = conservatism 
-			popularity = 0.05
-			add_political_power = -10
+			ideology = democratic  
+			popularity = 0.02
+			add_political_power = -25
 				}			
 			}
 		}
@@ -287,7 +494,211 @@ focus_tree = {
 		
 		icon = GFX_focus_mex_privatisation
 		prerequisite = { focus = focus_CBI_choice_Edward_Smith_Stanley}		
+		x = 8
+		y = 2
+		cost = 6
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+			add_popularity = {
+			ideology = democratic  
+			popularity = 0.08
+				}	
+			add_political_power = -75				
+			}
+		}
+		
+	focus = {
+		id = focus_CBI_alliance_with_moderates
+		available = {
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_generic_alliance
+		prerequisite = { focus = focus_CBI_give_bribes_governors }		
+		prerequisite = { focus = focus_CBI_visit_capitals }		
+		x = 6
+		y = 3
+		cost = 6
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+			add_popularity = {
+			ideology = democratic  
+			popularity = 0.07
+				}
+			add_political_power = -75				
+			}
+		}	
+
+	focus = {
+		id = focus_CBI_assure_preservation_privileges
+		available = {
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_generic_consumer_goods	
+		prerequisite = { focus = focus_CBI_give_bribes_governors }		
+		prerequisite = { focus = focus_CBI_visit_capitals }			
+		x = 8
+		y = 3
+		cost = 6
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+			add_popularity = {
+			ideology = democratic  
+			popularity = 0.05
+				}
+			add_political_power = -50				
+			}
+		}
+		
+	focus = {
+		id = focus_CBI_enlist_consent_admirals
+		available = {
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_focus_generic_military_dictatorship
+		prerequisite = { focus = focus_CBI_alliance_with_moderates }	
+		prerequisite = { focus = focus_CBI_assure_preservation_privileges }
 		x = 7
+		y = 4
+		cost = 6
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+			add_popularity = {
+			ideology = democratic  
+			popularity = 0.02
+				}	
+			}
+		}	
+	
+### ДЖОРДЖ ГАМИЛЬТОН ###
+		
+	focus = {
+		cancelable = no	
+		id = focus_CBI_choice_George_Hamilton_Gordon
+		available = {
+			}
+		
+		bypass = {
+		has_country_flag = choice_George_Hamilton_Gordon
+		}
+		
+		icon = GFX_focus_CBI_choice_George_Hamilton_Gordon
+		prerequisite = { focus = focus_CBI_lord_protector_die}		
+		x = 12
+		y = 1
+		cost = 0
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+
+			}
+		}
+		
+	focus = {
+		id = focus_CBI_rally_interlayer
+		available = {
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_generic_national_unity
+		prerequisite = { focus = focus_CBI_choice_George_Hamilton_Gordon}		
+		x = 10
+		y = 2
+		cost = 3
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+			add_popularity = {
+			ideology = socialism  
+			popularity = 0.02
+				}	
+			}
+		}	
+
+	focus = {
+		id = focus_CBI_mobilize_support
+		available = {
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_focus_usa_reestablish_the_gold_standard
+		prerequisite = { focus = focus_CBI_choice_George_Hamilton_Gordon}		
+		x = 12
+		y = 2
+		cost = 3
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+		add_political_power = 25
+			add_popularity = {
+			ideology = socialism  
+			popularity = 0.01
+				}		
+			}
+		}
+		
+	focus = {
+		id = focus_CBI_take_out_loans
+		available = {
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_focus_generic_treaty
+		prerequisite = { focus = focus_CBI_choice_George_Hamilton_Gordon}		
+		x = 14
 		y = 2
 		cost = 4
 		ai_will_do = {
@@ -298,26 +709,152 @@ focus_tree = {
 		search_filters = {FOCUS_FILTER_POLITICAL}
 		
 		completion_reward = {
+		add_political_power = 150
 			add_popularity = {
-			ideology = conservatism 
-			popularity = 0.1
-			add_political_power = -50
-				}	
+			ideology = socialism  
+			popularity = 0.02
+				}		
 			}
 		}
-		
+
 	focus = {
-		id = focus_CBI_give_bribes_governors
+		id = focus_CBI_give_bribes_governors_Gamilton
 		available = {
 			}
 		
 		bypass = {
 		}
 		
-		icon = GFX_focus_mex_privatisation
-		prerequisite = { focus = focus_CBI_choice_Edward_Smith_Stanley}		
-		x = 5
+		icon = GFX_goal_molotov_ribbentrop_pact
+		prerequisite = { focus = focus_CBI_rally_interlayer }	
+		prerequisite = { focus = focus_CBI_mobilize_support }
+		prerequisite = { focus = focus_CBI_take_out_loans }		
+		x = 10
 		y = 3
+		cost = 3
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+		add_political_power = -75
+			add_popularity = {
+			ideology = socialism  
+			popularity = 0.04
+				}		
+			}
+		}
+
+	focus = {
+		id = focus_CBI_give_bribes_parliamentarians
+		available = {
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_tripartite_pact
+		prerequisite = { focus = focus_CBI_rally_interlayer }	
+		prerequisite = { focus = focus_CBI_mobilize_support }
+		prerequisite = { focus = focus_CBI_take_out_loans }		
+		x = 12
+		y = 3
+		cost = 3
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+		add_political_power = -50
+			add_popularity = {
+			ideology = socialism  
+			popularity = 0.05
+				}		
+			}
+		}
+
+	focus = {
+		id = focus_CBI_give_bribe_the_aristocracy
+		available = {
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_tripartite_pact
+		prerequisite = { focus = focus_CBI_rally_interlayer }	
+		prerequisite = { focus = focus_CBI_mobilize_support }
+		prerequisite = { focus = focus_CBI_take_out_loans }		
+		x = 14
+		y = 3
+		cost = 3
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+		add_political_power = -45
+			add_popularity = {
+			ideology = socialism  
+			popularity = 0.03
+				}		
+			}
+		}
+
+	focus = {
+		id = focus_CBI_make_promise_to_church
+		available = {
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_focus_mex_restore_the_army_of_christ
+		prerequisite = { focus = focus_CBI_give_bribes_governors_Gamilton }	
+		prerequisite = { focus = focus_CBI_give_bribes_parliamentarians }
+		prerequisite = { focus = focus_CBI_give_bribe_the_aristocracy }		
+		x = 10
+		y = 4
+		cost = 4
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+		add_political_power = -15
+			add_popularity = {
+			ideology = socialism  
+			popularity = 0.02
+				}		
+			}
+		}
+
+	focus = {
+		id = focus_CBI_give_guarantees_to_tycoons_Hamilton
+		available = {
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_generic_military_deal
+		prerequisite = { focus = focus_CBI_give_bribes_governors_Gamilton }	
+		prerequisite = { focus = focus_CBI_give_bribes_parliamentarians }
+		prerequisite = { focus = focus_CBI_give_bribe_the_aristocracy }		
+		x = 12
+		y = 4
 		cost = 4
 		ai_will_do = {
 			factor = 1
@@ -328,10 +865,217 @@ focus_tree = {
 		
 		completion_reward = {
 			add_popularity = {
-			ideology = conservatism 
-			popularity = 0.1
-			add_political_power = -50
-				}	
+			ideology = socialism  
+			popularity = 0.02
+				}		
+			}
+		}
+
+	focus = {
+		id = focus_CBI_promise_workers_changes
+		available = {
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_focus_por_workers_of_iberia
+		prerequisite = { focus = focus_CBI_give_bribes_governors_Gamilton }	
+		prerequisite = { focus = focus_CBI_give_bribes_parliamentarians }
+		prerequisite = { focus = focus_CBI_give_bribe_the_aristocracy }		
+		x = 14
+		y = 4
+		cost = 4
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+			add_popularity = {
+			ideology = socialism  
+			popularity = 0.05
+				}		
+			}
+		}		
+		
+
+### ДЖОН РАССЕЛ ###		
+		
+	focus = {
+		cancelable = no	
+		id = focus_CBI_choice_John_Russell
+		available = {
+			}
+		
+		bypass = {
+		has_country_flag = choice_John_Russell
+		}
+		
+		icon = GFX_focus_CBI_choice_John_Russell
+		prerequisite = { focus = focus_CBI_lord_protector_die}		
+		x = 18
+		y = 1
+		cost = 0
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+
+			}
+		}
+
+	focus = {
+		id = focus_CBI_enlist_support_Moscow_company
+		available = {
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_focus_SOV_third_rome
+		prerequisite = { focus = focus_CBI_choice_John_Russell}		
+		x = 17
+		y = 2
+		cost = 6
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+			add_political_power = 150
+			add_popularity = {
+			ideology = democratic  
+			popularity = 0.04
+				}			
+			}
+		}	
+
+	focus = {
+		id = focus_CBI_enlist_support_Howard_George
+		available = {
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_focus_generic_treaty
+		prerequisite = { focus = focus_CBI_choice_John_Russell}		
+		x = 19
+		y = 2
+		cost = 6
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+			add_political_power = 25
+			add_popularity = {
+			ideology = democratic		
+			popularity = 0.09
+				}
+			}
+		}
+
+	focus = {
+		id = focus_CBI_enlist_support_Portugal
+		available = {
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_focus_generic_befriend_portugal
+		prerequisite = { focus = focus_CBI_enlist_support_Moscow_company }
+		prerequisite = { focus = focus_CBI_enlist_support_William_George }		
+		x = 17
+		y = 3
+		cost = 6
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+		PRT = {
+			country_event = {
+			id = CBI.113
+			days = 1
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = focus_CBI_start_bribing_officials
+		available = {
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_focus_mex_privatisation
+		prerequisite = { focus = focus_CBI_enlist_support_Moscow_company }
+		prerequisite = { focus = focus_CBI_enlist_support_William_George }		
+		x = 19
+		y = 3
+		cost = 6
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+			add_political_power = 10
+			add_popularity = {
+			ideology = democratic		
+			popularity = 0.05
+				}
+			}
+		}
+
+	focus = {
+		id = focus_CBI_enlist_support_admirals_2
+		available = {
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_focus_generic_military_dictatorship
+		prerequisite = { focus = focus_CBI_enlist_support_Portugal }
+		prerequisite = { focus = focus_CBI_start_bribing_officials }		
+		x = 18
+		y = 4
+		cost = 6
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+			add_popularity = {
+			ideology = democratic		
+			popularity = 0.06
+				}
 			}
 		}		
 
@@ -344,13 +1088,14 @@ focus_tree = {
 			}
 		
 		bypass = {
+		has_country_flag = choice_Henry_John_Temple
 		}
 		
 		icon = GFX_focus_CBI_choice_Henry_John_Temple
 		prerequisite = { focus = focus_CBI_lord_protector_die}		
-		x = 19
+		x = 22
 		y = 1
-		cost = 4
+		cost = 0
 		ai_will_do = {
 			factor = 1
 		}
@@ -361,61 +1106,5 @@ focus_tree = {
 		completion_reward = {
 
 			}
-		}
-
-### ДЖОРДЖ ГАМИЛЬТОН ###
-		
-	focus = {
-		cancelable = no	
-		id = focus_CBI_choice_George_Hamilton_Gordon
-		available = {
-			}
-		
-		bypass = {
-		}
-		
-		icon = GFX_focus_CBI_choice_George_Hamilton_Gordon
-		prerequisite = { focus = focus_CBI_lord_protector_die}		
-		x = 11
-		y = 1
-		cost = 4
-		ai_will_do = {
-			factor = 1
-		}
-
-		available_if_capitulated = yes
-		search_filters = {FOCUS_FILTER_POLITICAL}
-		
-		completion_reward = {
-
-			}
-		}
-		
-### ДЖОН РАССЕЛ ###		
-		
-	focus = {
-		cancelable = no	
-		id = focus_CBI_choice_John_Russell
-		available = {
-			}
-		
-		bypass = {
-		}
-		
-		icon = GFX_focus_CBI_choice_John_Russell
-		prerequisite = { focus = focus_CBI_lord_protector_die}		
-		x = 15
-		y = 1
-		cost = 4
-		ai_will_do = {
-			factor = 1
-		}
-
-		available_if_capitulated = yes
-		search_filters = {FOCUS_FILTER_POLITICAL}
-		
-		completion_reward = {
-
-			}
-		}			
+		}		
 }

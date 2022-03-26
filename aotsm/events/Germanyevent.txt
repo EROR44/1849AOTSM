@@ -125,10 +125,11 @@ country_event = {
 		ai_chance = {
 			factor = 99
 		}
-		PRU = { puppet = BEL }
 		BEL = { remove_state_core = 8 }
 		PRU = { add_state_core = 8 }
 		PRU = { transfer_state = 8 }
+		PRU = { add_to_faction = BEL }
+		BEL = { add_ideas = pru_ultimatum }
 	}	
 }
 
@@ -161,8 +162,9 @@ country_event = {
 		ai_chance = {
 			factor = 99
 		}
-		PRU = { puppet = HOL }
-		HOL = { puppet = IND }
+		PRU = { add_to_faction = HOL }
+		PRU = { add_to_faction = IND }
+		HOL = { add_ideas = pru_ultimatum }
 	}
 }
 
@@ -481,6 +483,8 @@ country_event = {
 		}
 		set_politics = { ruling_party = authoritarian elections_allowed = no }
 		add_stability = -0.25
+		news_event = { hours = 24 id = news.5 }
+		RUS = { country_event = ger.9 hours = 48 }
 	}
 }	
 
@@ -588,6 +592,302 @@ country_event = {
 			factor = 90
 		}
 		PRU = { add_to_faction = FRR }
+	}
+}
+
+country_event = {
+	id = ger.6 #revolution
+	title = ger.6.t
+	desc = ger.6.d
+	picture = GFX_report_event_molotov_signing_pact
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = {
+		name = ger.6.a 
+		ai_chance = {
+			factor = 100
+		}
+		SGE = { inherit_technology = PRU }
+		PRU = { delete_unit_template_and_units = { division_template = "Arme Divisia" } }
+		if = {
+			limit = {
+				AUS = { has_country_flag = victory_R_V_A_1 }
+			}
+			all_state = {
+					limit = {
+						is_core_of = PRU
+					}
+				add_core_of = SGE
+			}
+			SGE = {
+				transfer_state = 64
+				transfer_state = 68
+				transfer_state = 63
+				transfer_state = 763
+			}
+			SGE = { load_oob = SGE_RVA_1 }
+			SGE = {
+				declare_war_on = {
+					target = PRU
+					type = annex_everything
+				}
+			}
+		}
+		if = {
+			limit = {
+				AUS = { has_country_flag = victory_R_V_A_2 }
+			}
+			all_state = {
+					limit = {
+						is_core_of = PRU
+					}
+				add_core_of = SGE
+			}
+			SGE = {
+				transfer_state = 55
+				transfer_state = 58
+				transfer_state = 64
+				transfer_state = 68
+				transfer_state = 63
+				transfer_state = 763
+				transfer_state = 829
+			}
+			SGE = { load_oob = SGE_RVA_2 }
+			SGE = {
+				declare_war_on = {
+					target = PRU
+					type = annex_everything
+				}
+			}
+		}
+		if = {
+			limit = {
+				AUS = { has_country_flag = victory_R_V_A_3 }
+			}
+			all_state = {
+					limit = {
+						is_core_of = PRU
+					}
+				add_core_of = SGE
+			}
+			SGE = {
+				transfer_state = 50
+				transfer_state = 52
+				transfer_state = 54
+				transfer_state = 55
+				transfer_state = 58
+				transfer_state = 64
+				transfer_state = 68
+				transfer_state = 63
+				transfer_state = 763
+				transfer_state = 829
+			}
+			SGE = { load_oob = SGE_RVA_3 }
+			SGE = {
+				declare_war_on = {
+					target = PRU
+					type = annex_everything
+				}
+			}
+		}
+	}
+	
+	option = {
+		name = ger.6.b 
+		ai_chance = {
+			factor = 0
+		}
+		delete_unit_template_and_units = { division_template = "Arme Divisia" }
+		SGE = { change_tag_from = PRU }
+		SGE = { inherit_technology = PRU }
+		PRU = { delete_unit_template_and_units = { division_template = "Arme Divisia" } }
+		if = {
+			limit = {
+				AUS = { has_country_flag = victory_R_V_A_1 }
+			}
+			all_state = {
+					limit = {
+						is_core_of = PRU
+					}
+				add_core_of = SGE
+			}
+			SGE = {
+				transfer_state = 64
+				transfer_state = 68
+				transfer_state = 63
+				transfer_state = 763
+			}
+			SGE = { load_oob = SGE_RVA_1 }
+			SGE = {
+				declare_war_on = {
+					target = PRU
+					type = annex_everything
+				}
+			}
+		}
+		if = {
+			limit = {
+				AUS = { has_country_flag = victory_R_V_A_2 }
+			}
+			all_state = {
+					limit = {
+						is_core_of = PRU
+					}
+				add_core_of = SGE
+			}
+			SGE = {
+				transfer_state = 55
+				transfer_state = 58
+				transfer_state = 64
+				transfer_state = 68
+				transfer_state = 63
+				transfer_state = 763
+				transfer_state = 829
+			}
+			SGE = { load_oob = SGE_RVA_2 }
+			SGE = {
+				declare_war_on = {
+					target = PRU
+					type = annex_everything
+				}
+			}
+		}
+		if = {
+			limit = {
+				AUS = { has_country_flag = victory_R_V_A_3 }
+			}
+			all_state = {
+					limit = {
+						is_core_of = PRU
+					}
+				add_core_of = SGE
+			}
+			SGE = {
+				transfer_state = 50
+				transfer_state = 52
+				transfer_state = 54
+				transfer_state = 55
+				transfer_state = 58
+				transfer_state = 64
+				transfer_state = 68
+				transfer_state = 63
+				transfer_state = 763
+				transfer_state = 829
+			}
+			SGE = { load_oob = SGE_RVA_3 }
+			SGE = {
+				declare_war_on = {
+					target = PRU
+					type = annex_everything
+				}
+			}
+		}
+	}
+}
+
+country_event = {
+	id = ger.7 #Bismark or Autharitatian
+	title = ger.7.t
+	desc = ger.7.d
+	picture = GFX_report_event_molotov_signing_pact
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = {
+		name = ger.7.a 
+		ai_chance = {
+			factor = 0
+		}
+		set_country_flag = pru_bismark
+	}
+	
+	option = {
+		name = ger.7.b 
+		ai_chance = {
+			factor = 100
+		}
+		set_country_flag = pru_autharitarian
+		country_event = { id = get.8 days = 14 } 
+	}
+}
+
+country_event = {
+	id = ger.8 #Yunker or Kaiser
+	title = ger.8.t
+	desc = ger.8.d
+	picture = GFX_report_event_molotov_signing_pact
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = {
+		name = ger.8.a 
+		ai_chance = {
+			factor = 0
+		}
+		set_country_flag = pru_junker
+	}
+	
+	option = {
+		name = ger.8.b 
+		ai_chance = {
+			factor = 100
+		}
+		set_country_flag = pru_kaiser
+	}
+}
+
+country_event = {
+	id = ger.9
+	title = ger.9.t
+	desc = ger.9.d
+	picture = GFX_report_event_molotov_signing_pact
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = {
+		name = ger.9.a 
+		ai_chance = {
+			factor = 100
+		}
+		401 = {
+			add_manpower = -232913
+		}
+		251 = {
+			add_manpower = -99733
+		}
+		195 = {
+			add_manpower = -59144
+		}
+		209 = {
+			add_manpower = -41361
+		}
+		64 = {
+			add_manpower = 97151
+		}
+		763 = {
+			add_manpower = 75933
+		}
+		55 = {
+			add_manpower = 57974
+		}
+		52 = { 
+			add_manpower = 79839
+		}
+		59 = {
+			add_manpower = 69894
+		}
+		86 = {
+			add_manpower = 52360
+		}
 	}
 }
 
