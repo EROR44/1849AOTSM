@@ -19,7 +19,7 @@ focus_tree = {
 	reset_on_civilwar = no
 	
 	initial_show_position = {
-		focus = FRA_crisis_in_goverment
+		focus = FRA_extra_goverment_session
 	}
 
 #	focus = {
@@ -60,13 +60,13 @@ focus_tree = {
 	
 	
 	focus = {
-		id = FRA_reorg_economic_plan
-		icon = GFX_goal_generic_production
+		id = FRA_stimulation_of_economic
+		icon = GFX_focus_fra_devalue_the_franc
 		
-		x = -15
+		x = -10
 		y = 0
 		relative_position_id = FRA_crisis_in_goverment
-		cost = 7
+		cost = 5
 		
 		available_if_capitulated = yes
 
@@ -75,75 +75,225 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = FRA_reorg_var_1
+		id = FRA_stimulation_of_prom
+		icon = GFX_goal_generic_construct_civilian
+		
+		x = -1
+		y = 1
+		relative_position_id = FRA_stimulation_of_economic
+		prerequisite = { focus = FRA_stimulation_of_economic }
+		
+		cost = 10
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+			
+		}
+	}
+	focus = {
+		id = FRA_stimulation_of_army_prom
+		icon = GFX_goal_generic_army_artillery
+		
+		x = 1
+		y = 1
+		relative_position_id = FRA_stimulation_of_economic
+		prerequisite = { focus = FRA_stimulation_of_economic }
+		
+		cost = 10
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+			
+		}
+	}
+	focus = {
+		id = FRA_investment_in_paris_prom
+		icon = GFX_focus_generic_industry_2
+		
+		x = -1
+		y = 1
+		relative_position_id = FRA_stimulation_of_prom
+		prerequisite = { focus = FRA_stimulation_of_prom }
+		
+		cost = 10
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+			
+		}
+	}
+	focus = {
+		id = FRA_expand_resourcec_base
+		icon = GFX_goal_generic_construction2
+		
+		x = -3
+		y = 1
+		relative_position_id = FRA_stimulation_of_economic
+		prerequisite = { focus = FRA_stimulation_of_economic }
+		
+		cost = 10
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+			
+		}
+	}
+	focus = {
+		id = FRA_infrastructure_effort
+		icon = GFX_goal_generic_construct_infrastructure
+		
+		x = 1
+		y = 1
+		relative_position_id = FRA_stimulation_of_prom
+		prerequisite = { 
+			focus = FRA_stimulation_of_prom
+			focus = FRA_stimulation_of_army_prom
+		}
+		
+		cost = 10
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+			
+		}
+	}
+	focus = {
+		id = FRA_modernise_alg_prom
 		icon = GFX_prom_expand
 		
-		x = -2
+		x = 0
 		y = 1
-		relative_position_id = FRA_reorg_economic_plan
-		prerequisite = { focus = FRA_reorg_economic_plan }
-		mutually_exclusive = {focus = FRA_reorg_var_2 }
-		cost = 7
+		relative_position_id = FRA_investment_in_paris_prom
+		prerequisite = { focus = FRA_investment_in_paris_prom }
+		
+		cost = 10
 		
 		available_if_capitulated = yes
 
 		completion_reward = {
-			add_political_power = 150
+			
 		}
 	}
 	focus = {
-		id = FRA_reorg_var_2
-		icon = GFX_goal_generic_consumer_goods 
+		id = FRA_expand_mil_production
+		icon = GFX_goal_generic_construct_mil_factory
+		
+		x = 1
+		y = 1
+		relative_position_id = FRA_stimulation_of_army_prom
+		prerequisite = { focus = FRA_stimulation_of_army_prom }
+		
+		cost = 10
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+			
+		}
+	}
+	focus = {
+		id = FRA_militarisation_of_economic
+		icon = GFX_goal_generic_build_tank
+		
+		x = 0
+		y = 1
+		relative_position_id = FRA_expand_mil_production
+		prerequisite = { focus = FRA_expand_mil_production }
+		prerequisite = { focus = FRA_infrastructure_effort }
+		mutually_exclusive = { focus = FRA_civil_economic }
+		
+		cost = 10
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+			
+		}
+	}
+	focus = {
+		id = FRA_civil_economic
+		icon = GFX_goal_generic_consumer_goods
 		
 		x = 2
 		y = 1
-		relative_position_id = FRA_reorg_economic_plan
-		prerequisite = { focus = FRA_reorg_economic_plan }
-		mutually_exclusive = {focus = FRA_reorg_var_1 }
-		cost = 7
+		relative_position_id = FRA_investment_in_paris_prom
+		prerequisite = { focus = FRA_investment_in_paris_prom }
+		prerequisite = { focus = FRA_infrastructure_effort }
+		mutually_exclusive = { focus = FRA_militarisation_of_economic }
+		
+		cost = 10
 		
 		available_if_capitulated = yes
 
 		completion_reward = {
-			add_political_power = 150
+			
 		}
 	}
 	focus = {
-		id = FRA_develop_of_science
+		id = FRA_stimulation_of_science_progress
+		icon = GFX_goal_generic_scientific_exchange
+		
+		x = 4
+		y = 1
+		relative_position_id = FRA_stimulation_of_economic
+		prerequisite = { focus = FRA_stimulation_of_economic }
+		
+		cost = 10
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = low_investment_level
+				add_idea = average_investment_level
+			}
+		}
+	}
+	focus = {
+		id = FRA_subsidii_obrasovaniu
 		icon = GFX_focus_research
 		
 		x = 0
-		y = 2
-		relative_position_id = FRA_reorg_economic_plan
-		prerequisite = { focus = FRA_reorg_economic_plan }
-		prerequisite = { 
-			focus = FRA_reorg_var_1
-			focus = FRA_reorg_var_2
-		}
-		cost = 7
+		y = 1
+		relative_position_id = FRA_stimulation_of_science_progress
+		prerequisite = { focus = FRA_stimulation_of_science_progress }
+		
+		cost = 10
 		
 		available_if_capitulated = yes
 
 		completion_reward = {
-			add_political_power = 150
+			add_research_slot = 1
 		}
 	}
 	focus = {
-		id = FRA_develop_of_science_2
-		icon = GFX_focus_research2
+		id = FRA_socialistic_science
+		icon = GFX_goal_tfv_generic_tech_sharing
 		
 		x = 0
 		y = 1
-		relative_position_id = FRA_develop_of_science
-		prerequisite = { focus = FRA_develop_of_science }
-		cost = 7
+		relative_position_id = FRA_subsidii_obrasovaniu
+		prerequisite = { focus = FRA_subsidii_obrasovaniu }
+		
+		cost = 10
 		
 		available_if_capitulated = yes
 
 		completion_reward = {
-			add_political_power = 150
+			add_research_slot = 1
+			swap_ideas = {
+				remove_idea = average_investment_level
+				add_idea = hight_investment_level
+			}
 		}
 	}
+	
+
 ###############################################################
 #################POLITICAL_SECTION############################
 ##############################################################	
@@ -162,6 +312,8 @@ focus_tree = {
 		
 		available_if_capitulated = yes
 
+		search_filters = {FOCUS_FILTER_POLITICAL}
+
 		completion_reward = {
 			country_event = fren.2
 			add_political_power = 150
@@ -169,7 +321,7 @@ focus_tree = {
 	}
 	focus = {
 		id = FRA_the_plan_of_goverment_reforms
-		icon = GFX_focus_eng_concessions_to_the_trade_unions
+		icon = GFX_focus_generic_treaty
 		
 		x = 0
 		y = 1
@@ -186,7 +338,7 @@ focus_tree = {
 	}
 	focus = {
 		id = FRA_situation_in_army
-		icon = GFX_focus_eng_concessions_to_the_trade_unions
+		icon = GFX_goal_generic_army_doctrines
 		
 		x = -3
 		y = 1
@@ -203,7 +355,7 @@ focus_tree = {
 	}
 	focus = {
 		id = FRA_naladit_dialog_with_promyshlenniks
-		icon = GFX_focus_eng_concessions_to_the_trade_unions
+		icon = GFX_goal_generic_intelligence_exchange
 		
 		x = 0
 		y = 1
@@ -220,7 +372,7 @@ focus_tree = {
 	}
 	focus = {
 		id = FRA_gov_reformation
-		icon = GFX_focus_eng_concessions_to_the_trade_unions
+		icon = GFX_fra_create_coalition
 		
 		x = 3
 		y = 1
@@ -230,6 +382,8 @@ focus_tree = {
 		#search_filters = {   }
 		
 		available_if_capitulated = yes
+		
+		search_filters = {FOCUS_FILTER_POLITICAL}
 
 		completion_reward = {
 			country_event = fren.6
@@ -237,7 +391,7 @@ focus_tree = {
 	}
 	focus = {
 		id = FRA_separate_army_from_goverment
-		icon = GFX_focus_eng_concessions_to_the_trade_unions
+		icon = GFX_goal_generic_forceful_treaty
 		
 		x = 0
 		y = 1
@@ -254,7 +408,7 @@ focus_tree = {
 	}
 	focus = {
 		id = FRA_decline_export_duties
-		icon = GFX_focus_eng_concessions_to_the_trade_unions
+		icon = GFX_fra_end_control_of_trade
 		
 		x = 0
 		y = 1
@@ -271,7 +425,7 @@ focus_tree = {
 	}
 	focus = {
 		id = FRA_dialog_with_opposition
-		icon = GFX_focus_eng_concessions_to_the_trade_unions
+		icon = GFX_goal_generic_major_alliance
 		
 		x = 0
 		y = 1
@@ -283,13 +437,13 @@ focus_tree = {
 		available_if_capitulated = yes
 
 		completion_reward = {
-
+			country_event = fren.7
 		}
 	}
 	
 	focus = {
 		id = FRA_speech_to_the_nation
-		icon = GFX_focus_eng_concessions_to_the_trade_unions
+		icon = GFX_fra_speech_on_the_nation
 		
 		x = 0
 		y = 1
@@ -301,15 +455,17 @@ focus_tree = {
 		#search_filters = {   }
 		
 		available_if_capitulated = yes
+		
+		search_filters = {FOCUS_FILTER_POLITICAL}
 
 		completion_reward = {
-
+			country_event = fren.8
 		}
 	}
 	
 	focus = {
 		id = FRA_organise_army_exercises
-		icon = GFX_focus_eng_concessions_to_the_trade_unions
+		icon = GFX_focus_generic_manpower
 		
 		x = -2
 		y = 1
@@ -321,12 +477,12 @@ focus_tree = {
 		available_if_capitulated = yes
 
 		completion_reward = {
-
+			country_event = fren.9
 		}
 	}
 	focus = {
 		id = FRA_social_guaranties_to_people
-		icon = GFX_focus_eng_concessions_to_the_trade_unions
+		icon = GFX_goal_generic_improve_relations
 		
 		x = 0
 		y = 1
@@ -343,7 +499,7 @@ focus_tree = {
 	}
 	focus = {
 		id = FRA_observers_in_goverment
-		icon = GFX_focus_eng_concessions_to_the_trade_unions
+		icon = GFX_goal_generic_national_unity
 		
 		x = 2
 		y = 1
@@ -360,7 +516,7 @@ focus_tree = {
 	}
 	focus = {
 		id = FRA_updated_french_goverment
-		icon = GFX_focus_eng_concessions_to_the_trade_unions
+		icon = GFX_fra_long_live_the_republick
 		
 		x = 0
 		y = 1
