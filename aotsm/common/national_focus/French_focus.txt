@@ -87,9 +87,11 @@ focus_tree = {
 		cost = 10
 		
 		available_if_capitulated = yes
+		
+		#search_filters = {   }
 
 		completion_reward = {
-			
+			custom_effect_tooltip = FRR_unlock_decilions_prom
 		}
 	}
 	focus = {
@@ -104,9 +106,11 @@ focus_tree = {
 		cost = 10
 		
 		available_if_capitulated = yes
+		
+		#search_filters = {   }
 
 		completion_reward = {
-			
+			custom_effect_tooltip = FRR_unlock_decilions_prom
 		}
 	}
 	focus = {
@@ -121,9 +125,12 @@ focus_tree = {
 		cost = 10
 		
 		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
 
 		completion_reward = {
-			24 = {
+			16 = {
 			add_extra_state_shared_building_slots = 2
 				add_building_construction = {
 				type = arms_factory
@@ -131,7 +138,7 @@ focus_tree = {
 				instant_build = yes
 				}
 			}
-			33 = {
+			24 = {
 			add_extra_state_shared_building_slots = 2
 				add_building_construction = {
 				type = industrial_complex
@@ -155,7 +162,7 @@ focus_tree = {
 		available_if_capitulated = yes
 
 		completion_reward = {
-			
+			custom_effect_tooltip = FRR_unlock_decilions_resourses
 		}
 	}
 	focus = {
@@ -175,7 +182,7 @@ focus_tree = {
 		available_if_capitulated = yes
 
 		completion_reward = {
-			
+			add_ideas = FRR_investment_in_infrastructure
 		}
 	}
 	focus = {
@@ -232,7 +239,7 @@ focus_tree = {
 		available_if_capitulated = yes
 
 		completion_reward = {
-			
+			add_ideas = FRR_improved_mil_production
 		}
 	}
 	focus = {
@@ -248,12 +255,45 @@ focus_tree = {
 		
 		cost = 10
 		
+		available = {
+			NOT = {
+				OR = {
+					has_idea = war_economy
+					has_idea = tot_economic_mobilisation
+				}
+			}
+		}
+		
 		available_if_capitulated = yes
 
 		completion_reward = {
-			swap_ideas = {
-				remove_idea = civilian_economy
-				add_idea = low_economic_mobilisation
+			
+			if = {
+				limit = {
+					has_idea = civilian_economy
+				}
+				swap_ideas = {
+					remove_idea = civilian_economy
+					add_idea = low_economic_mobilisation
+				}
+			}
+			if = {
+				limit = {
+					has_idea = low_economic_mobilisation
+				}
+				swap_ideas = {
+					remove_idea = low_economic_mobilisation
+					add_idea = patrial_economic_mobilisation
+				}
+			}
+			if = {
+				limit = {
+					has_idea = patrial_economic_mobilisation
+				}
+				swap_ideas = {
+					remove_idea = patrial_economic_mobilisation
+					add_idea = war_economy
+				}
 			}
 		}
 	}
@@ -273,7 +313,8 @@ focus_tree = {
 		available_if_capitulated = yes
 
 		completion_reward = {
-			
+			add_political_power = 100
+			add_stability = 0.05
 		}
 	}
 	focus = {
@@ -450,7 +491,11 @@ focus_tree = {
 		available_if_capitulated = yes
 
 		completion_reward = {
-
+			remove_idea = FRR_politisiertest_army
+			add_timed_idea = {
+				idea = FRR_separation_army_from_goverment
+				days = 365
+			}
 		}
 	}
 	focus = {
@@ -467,7 +512,7 @@ focus_tree = {
 		available_if_capitulated = yes
 
 		completion_reward = {
-
+			add_ideas = FRR_low_export_duties
 		}
 	}
 	focus = {
@@ -541,7 +586,8 @@ focus_tree = {
 		available_if_capitulated = yes
 
 		completion_reward = {
-
+			add_stability = 0.1
+			add_war_support = 0.05
 		}
 	}
 	focus = {
@@ -558,7 +604,8 @@ focus_tree = {
 		available_if_capitulated = yes
 
 		completion_reward = {
-
+			add_political_power = 100
+			add_stability = 0.05
 		}
 	}
 	focus = {
@@ -577,8 +624,526 @@ focus_tree = {
 		available_if_capitulated = yes
 
 		completion_reward = {
+			remove_idea = FRR_divided_nation
+		}
+	}
+#######section_vnesh_politic#######	
+	focus = {
+		id = FRA_the_sphere_of_french_influence
+		icon = GFX_focus_generic_treaty
+		
+		x = 0
+		y = 3
+		relative_position_id = FRA_updated_french_goverment
+		
+		available = {
+			NOT = { has_idea = FRR_divided_nation }
+		}
+		
+		cost = 10
+		
+		#search_filters = {   }
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
 
 		}
 	}
+	focus = {
+		id = FRA_update_the_fobers_agreement
+		icon = GFX_focus_generic_treaty
+		
+		x = 0
+		y = 1
+		relative_position_id = FRA_the_sphere_of_french_influence	
+		prerequisite = { focus = FRA_the_sphere_of_french_influence }
+		
+		cost = 10
+		
+		#search_filters = {   }
+		
+		available_if_capitulated = yes
 
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = FRR_forbes_agreement
+				add_idea = FRR_updated_forbes_agreement
+			}
+		}
+	}
+	focus = {
+		id = FRA_affairs_in_iberia
+		icon = GFX_fra_affairs_in_iberia
+		
+		x = -8
+		y = 1
+		relative_position_id = FRA_update_the_fobers_agreement	
+		prerequisite = { focus = FRA_update_the_fobers_agreement }
+		
+		cost = 2
+		
+		#search_filters = {   }
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+
+		}
+	}
+	focus = {
+		id = FRA_support_the_aragon
+		icon = GFX_focus_generic_treaty
+		
+		x = -1
+		y = 1
+		relative_position_id = FRA_affairs_in_iberia	
+		prerequisite = { focus = FRA_affairs_in_iberia }
+		
+		cost = 10
+		
+		#search_filters = {   }
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+
+		}
+	}
+	focus = {
+		id = FRA_relations_with_prt
+		icon = GFX_focus_generic_treaty
+		
+		x = 1
+		y = 1
+		relative_position_id = FRA_affairs_in_iberia	
+		prerequisite = { focus = FRA_affairs_in_iberia }
+		
+		cost = 10
+		
+		#search_filters = {   }
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+
+		}
+	}
+	focus = {
+		id = FRA_socialistic_influence_on_iberia
+		icon = GFX_focus_generic_treaty
+		
+		x = 0
+		y = 2
+		relative_position_id = FRA_affairs_in_iberia	
+		prerequisite = { focus = FRA_support_the_aragon }
+		prerequisite = { focus = FRA_relations_with_prt }
+		
+		cost = 10
+		
+		#search_filters = {   }
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+
+		}
+	}
+	focus = {
+		id = FRA_affairn_in_north_africa
+		icon = GFX_fra_affairs_in_north_afrika
+		
+		x = -4
+		y = 1
+		relative_position_id = FRA_update_the_fobers_agreement	
+		prerequisite = { focus = FRA_update_the_fobers_agreement }
+		
+		cost = 2
+		
+		#search_filters = {   }
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+
+		}
+	}
+	focus = {
+		id = FRA_situatuin_in_alg
+		icon = GFX_focus_generic_treaty
+		
+		x = 0
+		y = 1
+		relative_position_id = FRA_affairn_in_north_africa	
+		prerequisite = { focus = FRA_affairn_in_north_africa }
+		
+		cost = 10
+		
+		#search_filters = {   }
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+
+		}
+	}
+	focus = {
+		id = FRA_get_work_on_diplomats
+		icon = GFX_focus_generic_treaty
+		
+		x = -1
+		y = 1
+		relative_position_id = FRA_situatuin_in_alg	
+		prerequisite = { focus = FRA_situatuin_in_alg }
+		mutually_exclusive = { focus = FRA_get_work_on_army }
+		
+		cost = 10
+		
+		#search_filters = {   }
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+
+		}
+	}
+	focus = {
+		id = FRA_get_work_on_army
+		icon = GFX_focus_generic_treaty
+		
+		x = 1
+		y = 1
+		relative_position_id = FRA_situatuin_in_alg	
+		prerequisite = { focus = FRA_situatuin_in_alg }
+		mutually_exclusive = { focus = FRA_get_work_on_diplomats }
+		
+		cost = 10
+		
+		#search_filters = {   }
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+
+		}
+	}
+	focus = {
+		id = FRA_
+		icon = GFX_focus_generic_treaty
+		
+		x = 0
+		y = 2
+		relative_position_id = FRA_situatuin_in_alg	
+		prerequisite = { 
+			focus = FRA_get_work_on_army 
+			focus = FRA_get_work_on_diplomats 
+		}
+		
+		cost = 10
+		
+		#search_filters = {   }
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+
+		}
+	}
+	
+	focus = {
+		id = FRA_affairs_in_central_europe
+		icon = GFX_fra_affairs_in_europe
+		
+		x = 0
+		y = 1
+		relative_position_id = FRA_update_the_fobers_agreement	
+		prerequisite = { focus = FRA_update_the_fobers_agreement }
+		
+		cost = 2
+		
+		#search_filters = {   }
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+
+		}
+	}
+	focus = {
+		id = FRA_expand_relations_with_pru
+		icon = GFX_focus_generic_treaty
+		
+		x = -1
+		y = 1
+		relative_position_id = FRA_affairs_in_central_europe	
+		prerequisite = { focus = FRA_affairs_in_central_europe }
+		mutually_exclusive = { focus = FRA_expand_relations_with_cbi }
+		
+		cost = 10
+		
+		#search_filters = {   }
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+
+		}
+	}
+	focus = {
+		id = FRA_expand_relations_with_cbi
+		icon = GFX_focus_generic_treaty
+		
+		x = 1
+		y = 1
+		relative_position_id = FRA_affairs_in_central_europe	
+		prerequisite = { focus = FRA_affairs_in_central_europe }
+		mutually_exclusive = { focus = FRA_expand_relations_with_pru }
+		
+		cost = 10
+		
+		#search_filters = {   }
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+
+		}
+	}
+	
+	focus = {
+		id = FRA_affairn_on_balkans_and_anatolia
+		icon = GFX_fra_affairs_on_balkans_and_anatolia
+		
+		x = 4
+		y = 1
+		relative_position_id = FRA_update_the_fobers_agreement	
+		prerequisite = { focus = FRA_update_the_fobers_agreement }
+		
+		cost = 2
+		
+		#search_filters = {   }
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+
+		}
+	}
+	focus = {
+		id = FRA_up_relations_with_byz
+		icon = GFX_focus_generic_treaty
+		
+		x = 1
+		y = 1
+		relative_position_id = FRA_affairn_on_balkans_and_anatolia	
+		prerequisite = { focus = FRA_affairn_on_balkans_and_anatolia }
+		mutually_exclusive = { focus = FRA_up_relations_with_rus }
+		
+		cost = 10
+		
+		#search_filters = {   }
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+
+		}
+	}
+	focus = {
+		id = FRA_up_relations_with_rus
+		icon = GFX_focus_generic_treaty
+		
+		x = -1
+		y = 1
+		relative_position_id = FRA_affairn_on_balkans_and_anatolia	
+		prerequisite = { focus = FRA_affairn_on_balkans_and_anatolia }
+		mutually_exclusive = { focus = FRA_up_relations_with_byz }
+		
+		cost = 10
+		
+		#search_filters = {   }
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+
+		}
+	}
+	focus = {
+		id = FRA_french_claims_on_malta
+		icon = GFX_focus_generic_treaty
+		
+		x = 0
+		y = 1
+		relative_position_id = FRA_up_relations_with_rus	
+		prerequisite = { focus = FRA_up_relations_with_rus }
+		
+		cost = 10
+		
+		#search_filters = {   }
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+
+		}
+	}
+	focus = {
+		id = FRA_affairs_on_african_rog
+		icon = GFX_fra_affairs_on_afrikan_rog
+		
+		x = 8
+		y = 1
+		relative_position_id = FRA_update_the_fobers_agreement	
+		prerequisite = { focus = FRA_update_the_fobers_agreement }
+		
+		cost = 2
+		
+		#search_filters = {   }
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+
+		}
+	}
+	focus = {
+		id = FRA_intervention_in_somali_civil_war
+		icon = GFX_focus_generic_treaty
+		
+		x = 1
+		y = 1
+		relative_position_id = FRA_affairs_on_african_rog	
+		prerequisite = { focus = FRA_affairs_on_african_rog }
+		
+		cost = 10
+		
+		#search_filters = {   }
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+
+		}
+	}
+	focus = {
+		id = FRA_support_the_respublicans
+		icon = GFX_focus_generic_treaty
+		
+		x = 1
+		y = 1
+		relative_position_id = FRA_intervention_in_somali_civil_war	
+		prerequisite = { focus = FRA_intervention_in_somali_civil_war }
+		mutually_exclusive = { focus = FRA_support_old_goverment }
+		cost = 10
+		
+		#search_filters = {   }
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+
+		}
+	}
+	focus = {
+		id = FRA_support_old_goverment
+		icon = GFX_focus_generic_treaty
+		
+		x = -1
+		y = 1
+		relative_position_id = FRA_intervention_in_somali_civil_war	
+		prerequisite = { focus = FRA_intervention_in_somali_civil_war }
+		mutually_exclusive = { focus = FRA_support_the_respublicans }
+		cost = 10
+		
+		#search_filters = {   }
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+
+		}
+	}
+	focus = {
+		id = FRA_claim_the_trade_factories
+		icon = GFX_focus_generic_treaty
+		
+		x = 0
+		y = 2
+		relative_position_id = FRA_intervention_in_somali_civil_war	
+		prerequisite = { 
+			focus = FRA_support_old_goverment 
+			focus = FRA_support_the_respublicans 
+		}
+		
+		cost = 10
+		
+		#search_filters = {   }
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+
+		}
+	}
+	focus = {
+		id = FRA_friendship_with_abs
+		icon = GFX_focus_generic_treaty
+		
+		x = -1
+		y = 1
+		relative_position_id = FRA_affairs_on_african_rog	
+		prerequisite = { focus = FRA_affairs_on_african_rog }
+		
+		cost = 10
+		
+		#search_filters = {   }
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+
+		}
+	}
+	focus = {
+		id = FRA_diplomatic_pressure_on_mad
+		icon = GFX_focus_generic_treaty
+		
+		x = 0
+		y = 2
+		relative_position_id = FRA_friendship_with_abs	
+		prerequisite = { focus = FRA_friendship_with_abs }
+		
+		cost = 10
+		
+		#search_filters = {   }
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+
+		}
+	}
+	focus = {
+		id = FRA_influence_in_mosambiq_bay_region
+		icon = GFX_focus_generic_treaty
+		
+		x = 1
+		y = 1
+		relative_position_id = FRA_diplomatic_pressure_on_mad	
+		prerequisite = { focus = FRA_diplomatic_pressure_on_mad }
+		prerequisite = { focus = FRA_claim_the_trade_factories }
+		
+		cost = 10
+		
+		#search_filters = {   }
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+
+		}
+	}
+	
+	
 }
