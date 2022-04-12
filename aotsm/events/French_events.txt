@@ -4,72 +4,79 @@
 
 add_namespace = fren
 
-country_event = {
+	
+country_event = { #покушение на лагранжа
 	id = fren.1
 	title = fren.1.t
-	desc = { 
-		text = fren.1.d
-		trigger = {
-			tag = FRA
-
-		}
+	desc = fren.1.d
+	picture = GFX_report_event_spain_civil_war_soldiers
+	
+	fire_only_once = yes
+	
+	trigger = {
+		tag = FRR
+		has_government = socialism
+		date > 1849.04.01 
 	}
 	
-	picture = GFX_report_event_fra_ev_read_write
+	mean_time_to_happen = {
+		days = 30
+	}
 
-	is_triggered_only = yes
+
+	#is_triggered_only = yes
 
 	option = {
-		name = fren.1.a
+		name = fren.1.a #лаграндж жив
 		trigger = {
 			
 		}
-		hidden_effect = {
-			if = {
-				limit = {
-					NOT = { has_completed_focus = FRA_opposition_coup 
-					}
-				}
-				complete_national_focus = FRA_opposition_coup
-			}
-			complete_national_focus = FRA_the_party_of_order
+		ai_chance = {
+			factor = 100
 		}
+		add_stability = -0.03
+		hidden_effect = {
+			add_popularity = {
+				ideology = socialism  
+				popularity = 0.1
+			}
+			set_country_flag = FRA_attempt_is_occured
+			news_event = { hours = 24 id = news.6 }
+		}
+	
 	}
 	option = {
-		name = fren.1.b
+		name = fren.1.b#лаграндж убит
 		trigger = {
 			
 		}
+		ai_chance = {
+			factor = 0
+		}
+		recruit_character = FRR_Luis_Blank
+		kill_country_leader = yes
+		
+		add_stability = -0.1
 		hidden_effect = {
-			if = {
-				limit = {
-					NOT = { has_completed_focus = FRA_opposition_coup 
-					}
-				}
-				complete_national_focus = FRA_opposition_coup
+			add_popularity = {
+				ideology = authoritarian  
+				popularity = 0.1
 			}
-			complete_national_focus = FRA_the_conservative_party
-		}
-	}
-	option = {
-		name = fren.1.b
-		trigger = {
-			
-		}
-		hidden_effect = {
-			if = {
-				limit = {
-					NOT = { has_completed_focus = FRA_opposition_coup 
-					}
-				}
-				complete_national_focus = FRA_opposition_coup
+			add_popularity = {
+				ideology = reactionism  
+				popularity = 0.1
 			}
-			complete_national_focus = FRA_the_party_legitimist
+			add_popularity = {
+				ideology = democratic  
+				popularity = 0.1
+			}
+			set_country_flag = FRA_attempt_is_occured
+			news_event = { hours = 24 id = news.7 }
 		}
+
 	}
 	
 }
-#покушение на лагранжа
 country_event = {
 	id = fren.2
 	title = fren.2.t
@@ -80,19 +87,8 @@ country_event = {
 	
 	trigger = {
 		tag = FRR
-		has_defensive_war = no
-		NOT = { has_government = socialism }
-		#NOT = {
-			#OR = {
-			#	has_completed focus = FRA_create_coalition
-			#	has_completed focus = FRA_ban_the_radical_opposition
-			#}
-		#}
 	}
 
-	mean_time_to_happen = {
-		days = 151	# Historical outbreak time after elections
-	}
 
 	is_triggered_only = yes
 
@@ -101,47 +97,13 @@ country_event = {
 		trigger = {
 			
 		}
-		kill_country_leader = yes
-		add_stability = -0.1
 		hidden_effect = {
-			create_country_leader = {
-					name = "Временное правительство"
-					desc = "POLITICS_TEMPORARY_GOVERMENT_DESC"
-					picture = "Portrait_temporary_goverment.dds"
-					expire = "1965.1.1"
-					ideology = social_democracy
-					traits = {
-			
-					}
-				}
-			set_country_flag = FRA_sharl_lagranj_was_killed
-			country_event = { 
-				id = fren.1
-				days = 14
-			}
-			news_event = {
-				id = news.7
-				days = 2
-			}
-		}
-		
-	}
-	option = {
-		name = fren.2.b
-		trigger = {
 			
 		}
-		hidden_effect = {
-			set_country_flag = FRA_sharl_lagranj_is_alive
-			news_event = {
-				id = news.6
-				days = 2
-			}
-		}
-		add_stability = 0.03
-		}
-}
 	
+	}
+	
+}
 country_event = {
 	id = fren.3
 	title = fren.3.t
@@ -155,7 +117,7 @@ country_event = {
 	}
 
 
-	#is_triggered_only = yes
+	is_triggered_only = yes
 
 	option = {
 		name = fren.3.a
@@ -163,29 +125,227 @@ country_event = {
 			
 		}
 		hidden_effect = {
-		
+			
 		}
 	
 	}
-	option = {
-		name = fren.3.b
-		trigger = {
-			
-		}
-		hidden_effect = {
-		
-		}
-
+	
+}
+country_event = {
+	id = fren.4
+	title = fren.4.t
+	desc = fren.4.d
+	picture = GFX_report_event_spain_civil_war_soldiers
+	
+	fire_only_once = yes
+	
+	trigger = {
+		tag = FRR
 	}
+
+
+	is_triggered_only = yes
+
 	option = {
-		name = fren.3.c
+		name = fren.4.a
 		trigger = {
 			
 		}
 		hidden_effect = {
-		
+			
 		}
+	
+	}
+	
+}
+country_event = {
+	id = fren.5
+	title = fren.5.t
+	desc = fren.5.d
+	picture = GFX_report_event_spain_civil_war_soldiers
+	
+	fire_only_once = yes
+	
+	trigger = {
+		tag = FRR
+	}
 
+
+	is_triggered_only = yes
+
+	option = {
+		name = fren.5.a
+		trigger = {
+			
+		}
+		hidden_effect = {
+			
+		}
+	
+	}
+	
+}
+country_event = {
+	id = fren.6
+	title = fren.6.t
+	desc = fren.6.d
+	picture = GFX_report_event_spain_civil_war_soldiers
+	
+	fire_only_once = yes
+	
+	trigger = {
+		tag = FRR
+	}
+
+
+	is_triggered_only = yes
+
+	option = {
+		name = fren.6.a
+		trigger = {
+			
+		}
+		hidden_effect = {
+			
+		}
+	
+	}
+	
+}
+
+country_event = {
+	id = fren.6
+	title = fren.6.t
+	desc = fren.6.d
+	picture = GFX_report_event_spain_civil_war_soldiers
+	
+	fire_only_once = yes
+	
+	trigger = {
+		tag = FRR
+	}
+
+
+	is_triggered_only = yes
+
+	option = {
+		name = fren.6.a
+		trigger = {
+			
+		}
+		hidden_effect = {
+			
+		}
+	
+	}
+	
+}
+
+country_event = {
+	id = fren.7
+	title = fren.7.t
+	desc = fren.7.d
+	picture = GFX_report_event_spain_civil_war_soldiers
+	
+	fire_only_once = yes
+	
+	trigger = {
+		tag = FRR
+	}
+
+
+	is_triggered_only = yes
+
+	option = {
+		name = fren.7.a
+		trigger = {
+			
+		}
+		hidden_effect = {
+			
+		}
+	
+	}
+	
+}
+country_event = {
+	id = fren.8
+	title = fren.8.t
+	desc = fren.8.d
+	picture = GFX_report_event_spain_civil_war_soldiers
+	
+	fire_only_once = yes
+	
+	trigger = {
+		tag = FRR
+	}
+
+
+	is_triggered_only = yes
+
+	option = {
+		name = fren.8.a
+		trigger = {
+			
+		}
+		hidden_effect = {
+			
+		}
+	
+	}
+	
+}
+country_event = {
+	id = fren.9
+	title = fren.9.t
+	desc = fren.9.d
+	picture = GFX_report_event_spain_civil_war_soldiers
+	
+	fire_only_once = yes
+	
+	trigger = {
+		tag = FRR
+	}
+
+
+	is_triggered_only = yes
+
+	option = {
+		name = fren.9.a
+		trigger = {
+			
+		}
+		hidden_effect = {
+			
+		}
+	
+	}
+	
+}
+country_event = {
+	id = fren.10
+	title = fren.10.t
+	desc = fren.10.d
+	picture = GFX_report_event_spain_civil_war_soldiers
+	
+	fire_only_once = yes
+	
+	trigger = {
+		tag = FRR
+	}
+
+
+	is_triggered_only = yes
+
+	option = {
+		name = fren.10.a
+		trigger = {
+			
+		}
+		hidden_effect = {
+			
+		}
+	
 	}
 	
 }
