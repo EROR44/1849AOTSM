@@ -95,13 +95,32 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = FRA_stimulation_of_army_prom
+		id = FRA_civil_economic
+		icon = GFX_goal_generic_consumer_goods
+		
+		x = -1
+		y = 1
+		relative_position_id = FRA_stimulation_of_prom
+		prerequisite = { focus = FRA_stimulation_of_prom }
+		mutually_exclusive = { focus = FRA_militarisation_of_economic }
+		
+		cost = 10
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+			add_political_power = 100
+			add_stability = 0.05
+		}
+	}
+	focus = {
+		id = FRA_develop_civ_prom
 		icon = GFX_goal_generic_army_artillery
 		
-		x = 1
+		x = 0
 		y = 1
-		relative_position_id = FRA_stimulation_of_economic
-		prerequisite = { focus = FRA_stimulation_of_economic }
+		relative_position_id = FRA_civil_economic
+		prerequisite = { focus = FRA_civil_economic }
 		
 		cost = 10
 		
@@ -111,41 +130,6 @@ focus_tree = {
 
 		completion_reward = {
 			custom_effect_tooltip = FRR_unlock_decilions_prom
-		}
-	}
-	focus = {
-		id = FRA_investment_in_paris_prom
-		icon = GFX_focus_generic_industry_2
-		
-		x = -1
-		y = 1
-		relative_position_id = FRA_stimulation_of_prom
-		prerequisite = { focus = FRA_stimulation_of_prom }
-		
-		cost = 10
-		
-		available_if_capitulated = yes
-		
-		search_filters = { FOCUS_FILTER_INDUSTRY }
-
-
-		completion_reward = {
-			16 = {
-			add_extra_state_shared_building_slots = 2
-				add_building_construction = {
-				type = arms_factory
-				level = 1
-				instant_build = yes
-				}
-			}
-			24 = {
-			add_extra_state_shared_building_slots = 2
-				add_building_construction = {
-				type = industrial_complex
-				level = 1
-				instant_build = yes
-				}
-			}
 		}
 	}
 	focus = {
@@ -170,11 +154,11 @@ focus_tree = {
 		icon = GFX_goal_generic_construct_infrastructure
 		
 		x = 1
-		y = 1
+		y = 2
 		relative_position_id = FRA_stimulation_of_prom
 		prerequisite = { 
-			focus = FRA_stimulation_of_prom
-			focus = FRA_stimulation_of_army_prom
+			focus = FRA_civil_economic
+			focus = FRA_militarisation_of_economic
 		}
 		
 		cost = 10
@@ -186,71 +170,32 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = FRA_modernise_alg_prom
-		icon = GFX_prom_expand
-		
-		x = 0
-		y = 1
-		relative_position_id = FRA_investment_in_paris_prom
-		prerequisite = { focus = FRA_investment_in_paris_prom }
-		
-		cost = 10
-		
-		available = {
-			FRR = {
-				has_owned_and_controlled = 459
-				has_owned_and_controlled = 460
-				has_owned_and_controlled = 513
-			}
-		}
-		
-		available_if_capitulated = yes
-
-		completion_reward = {
-			459 = {
-			add_extra_state_shared_building_slots = 2
-				add_building_construction = {
-				type = arms_factory
-				level = 1
-				instant_build = yes
-				}
-			}
-			459 = {
-			add_extra_state_shared_building_slots = 2
-				add_building_construction = {
-				type = industrial_complex
-				level = 1
-				instant_build = yes
-				}
-			}
-		}
-	}
-	focus = {
-		id = FRA_expand_mil_production
-		icon = GFX_goal_generic_construct_mil_factory
+		id = FRA_stimulation_of_army_prom
+		icon = GFX_goal_generic_army_artillery
 		
 		x = 1
 		y = 1
-		relative_position_id = FRA_stimulation_of_army_prom
-		prerequisite = { focus = FRA_stimulation_of_army_prom }
+		relative_position_id = FRA_stimulation_of_economic
+		prerequisite = { focus = FRA_stimulation_of_economic }
 		
 		cost = 10
 		
 		available_if_capitulated = yes
+		
+		#search_filters = {   }
 
 		completion_reward = {
-			add_ideas = FRR_improved_mil_production
+			custom_effect_tooltip = FRR_unlock_decilions_prom
 		}
 	}
 	focus = {
 		id = FRA_militarisation_of_economic
 		icon = GFX_goal_generic_build_tank
 		
-		x = 0
+		x = 1
 		y = 1
-		relative_position_id = FRA_expand_mil_production
-		prerequisite = { focus = FRA_expand_mil_production }
-		prerequisite = { focus = FRA_infrastructure_effort }
+		relative_position_id = FRA_stimulation_of_army_prom
+		prerequisite = { focus = FRA_stimulation_of_army_prom }
 		mutually_exclusive = { focus = FRA_civil_economic }
 		
 		cost = 10
@@ -298,25 +243,107 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = FRA_civil_economic
-		icon = GFX_goal_generic_consumer_goods
+		id = FRA_expand_mil_production
+		icon = GFX_goal_generic_construct_mil_factory
 		
-		x = 2
+		x = 0
 		y = 1
-		relative_position_id = FRA_investment_in_paris_prom
-		prerequisite = { focus = FRA_investment_in_paris_prom }
-		prerequisite = { focus = FRA_infrastructure_effort }
-		mutually_exclusive = { focus = FRA_militarisation_of_economic }
+		relative_position_id = FRA_militarisation_of_economic
+		prerequisite = { focus = FRA_militarisation_of_economic }
 		
 		cost = 10
 		
 		available_if_capitulated = yes
 
 		completion_reward = {
-			add_political_power = 100
-			add_stability = 0.05
+			add_ideas = FRR_improved_mil_production
 		}
 	}
+	focus = {
+		id = FRA_investment_in_paris_prom
+		icon = GFX_focus_generic_industry_2
+		
+		x = 0
+		y = 3
+		relative_position_id = FRA_stimulation_of_prom
+		prerequisite = { focus = FRA_stimulation_of_prom }
+		prerequisite = { focus = FRA_stimulation_of_army_prom }
+		prerequisite = { 
+			focus = FRA_develop_civ_prom
+			focus = FRA_expand_mil_production
+		}
+		
+		cost = 10
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+
+		completion_reward = {
+			16 = {
+			add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+				type = arms_factory
+				level = 1
+				instant_build = yes
+				}
+			}
+			24 = {
+			add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+				}
+			}
+		}
+	}
+	focus = {
+		id = FRA_modernise_alg_prom
+		icon = GFX_prom_expand
+		
+		x = -1
+		y = 1
+		relative_position_id = FRA_expand_mil_production
+		prerequisite = { focus = FRA_stimulation_of_prom }
+		prerequisite = { focus = FRA_stimulation_of_army_prom }
+		prerequisite = { 
+			focus = FRA_develop_civ_prom
+			focus = FRA_expand_mil_production
+		}
+		cost = 10
+		
+		available = {
+			#FRR = {
+			#	has_owned_and_controlled = 459
+			#	has_owned_and_controlled = 460
+			#	has_owned_and_controlled = 513
+			#}
+		}
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+			459 = {
+			add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+				type = arms_factory
+				level = 1
+				instant_build = yes
+				}
+			}
+			459 = {
+			add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+				}
+			}
+		}
+	}
+	
 	focus = {
 		id = FRA_stimulation_of_science_progress
 		icon = GFX_goal_generic_scientific_exchange
@@ -624,9 +651,56 @@ focus_tree = {
 		available_if_capitulated = yes
 
 		completion_reward = {
-			remove_idea = FRR_divided_nation
+			remove_ideas = FRR_divided_nation
 		}
 	}
+#######################################################################
+###################ARMY_SECTION########################################
+#######################################################################
+
+	focus = {
+		id = FRA_army_reorg
+		icon = GFX_goal_generic_improve_relations
+		
+		x = 12
+		y = 0
+		relative_position_id = FRA_extra_goverment_session
+		
+		
+		cost = 10
+		#search_filters = {   }
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+			add_ideas = FRR_army_reorganisation
+		}
+	}
+	focus = {
+		id = FRA_explore_the_alg_campain_expirience
+		icon = GFX_goal_generic_improve_relations
+		
+		x = 0
+		y = 1
+		relative_position_id = FRA_army_reorg
+		prerequisite = { focus = FRA_army_reorg }
+
+		cost = 10
+		#search_filters = {   }
+		
+		available = {
+			
+		}
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+			
+		}
+	}
+	
+	
+	
 #######section_vnesh_politic#######	
 	focus = {
 		id = FRA_the_sphere_of_french_influence
@@ -647,7 +721,8 @@ focus_tree = {
 		available_if_capitulated = yes
 
 		completion_reward = {
-
+			add_political_power = 150
+			create_faction = FRR_french_socialostic_sphere
 		}
 	}
 	focus = {
