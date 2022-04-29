@@ -71,6 +71,7 @@ country_event = {
 			}
 		}
 		BYZ = { set_country_flag = BYZ_vs_BUL_win }
+		BUL = { remove_ideas = balkan_war }
 	}
 }
 
@@ -387,13 +388,13 @@ country_event = {
 	picture = GFX_report_event_molotov_signing_pact
 	
 	fire_only_once = yes
-	
+
 	hidden =  yes
 	
 	trigger = {
 		tag = PRU
 		AUS = {
-			surrender_progress > 0.35
+			surrender_progress > 0.05
 		}
 		PRU = { has_country_flag = PRU_vs_AUS_3 }
 	}
@@ -541,7 +542,7 @@ country_event = {
 	picture = GFX_report_event_molotov_signing_pact
 	
 	fire_only_once = yes
-	
+
 	hidden =  yes
 	
 	trigger = {
@@ -572,7 +573,7 @@ country_event = {
 	picture = GFX_report_event_molotov_signing_pact
 	
 	fire_only_once = yes
-	
+
 	hidden =  yes
 	
 	trigger = {
@@ -685,13 +686,13 @@ country_event = {
 }
 
 country_event = {
-	id = twe.9
+	id = twe.9 #War with Albania
 	title = twe.9.t
 	desc = twe.9.d
 	picture = GFX_report_event_molotov_signing_pact
 	
 	fire_only_once = yes
-	
+
 	hidden =  yes
 	
 	trigger = {
@@ -728,17 +729,18 @@ country_event = {
 			}
 		}
 		BYZ = { set_country_flag = BYZ_vs_ALB_win }
+		ALB = { remove_ideas = balkan_war }
 	}
 }
 
 country_event = {
-	id = twe.10
+	id = twe.10 #War with Serbia
 	title = twe.10.t
 	desc = twe.10.d
 	picture = GFX_report_event_molotov_signing_pact
 	
 	fire_only_once = yes
-	
+
 	hidden =  yes
 	
 	trigger = {
@@ -778,17 +780,18 @@ country_event = {
 			}
 		}
 		BYZ = { set_country_flag = BYZ_vs_SER_win }
+		SER = { remove_ideas = balkan_war }
 	}
 }
 
 country_event = {
-	id = twe.11
+	id = twe.11 #war with Bosnia
 	title = twe.11.t
 	desc = twe.11.d
 	picture = GFX_report_event_molotov_signing_pact
 	
 	fire_only_once = yes
-	
+
 	hidden =  yes
 	
 	trigger = {
@@ -826,6 +829,7 @@ country_event = {
 			}
 		}
 		BYZ = { set_country_flag = BYZ_vs_BOS_win }
+		BOS = { remove_ideas = balkan_war }
 	}
 }
 
@@ -849,7 +853,157 @@ country_event = {
 	
 	option = {
 		name = twe.12.a
-		SGE = { annex_country = { target = SGE transfer_troops = no }
+		SGE = { annex_country = { target = SGE transfer_troops = no } }
 		PRU = { clr_country_flag = PRU_revolution }
+	}
+}
+
+country_event = {
+	id = twe.13 #Cpt vs Kir win CPT
+	title = twe.13.t
+	desc = twe.13.d
+	picture = GFX_report_event_molotov_signing_pact
+	
+	fire_only_once = yes
+	
+	hidden =  yes
+	
+	trigger = {
+		tag = CPT
+		KIR = {
+			surrender_progress > 0.10
+		}
+		CPT = { has_country_flag = CPT_vs_KIR }
+	}
+	
+	option = {
+		name = twe.13.a
+		CPT = {
+			white_peace = {
+				tag = KIR
+				message = CPT_win_KIR
+			}
+		}
+		CPT = {
+			transfer_state = 450
+			transfer_state = 451
+			transfer_state = 552
+			transfer_state = 663
+		}
+		CPT = { clr_country_flag = CPT_vs_KIR }
+		CPT = { set_country_flag = CPT_vs_KIR_win }
+		CPT = { remove_ideas = eqyptian_wars }
+		KIR = { remove_ideas = war_for_freedom }
+		CPT = { set_cosmetic_tag = CPT_NAP }
+	}
+}
+
+country_event = {
+	id = twe.14 #Cpt vs Kir win KIR
+	title = twe.14.t
+	desc = twe.14.d
+	picture = GFX_report_event_molotov_signing_pact
+	
+	fire_only_once = yes
+	
+	hidden =  yes
+	
+	trigger = {
+		tag = KIR
+		CPT = {
+			surrender_progress > 0.50
+		}
+		CPT = { has_country_flag = CPT_vs_KIR }
+	}
+	
+	option = {
+		name = twe.14.a
+		KIT = {
+			white_peace = {
+				tag = CPT
+				message = KIR_win_CPT
+			}
+		}
+		452 = { set_demilitarized_zone = yes }
+		CPT = { clr_country_flag = CPT_vs_KIR }
+		CPT = { set_country_flag = CPT_vs_KIR_lose }
+		CPT = { remove_ideas = eqyptian_wars }
+		KIR = { remove_ideas = war_for_freedom }
+	}
+}
+
+country_event = {
+	id = twe.15 #Cpt vs Tri win CPT
+	title = twe.15.t
+	desc = twe.15.d
+	picture = GFX_report_event_molotov_signing_pact
+	
+	fire_only_once = yes
+	
+	hidden =  yes
+	
+	trigger = {
+		tag = CPT
+		TRI = {
+			surrender_progress > 0.10
+		}
+		CPT = { has_country_flag = CPT_vs_TRI }
+	}
+	
+	option = {
+		name = twe.15.a
+		CPT = {
+			white_peace = {
+				tag = TRI
+				message = CPT_win_TRI
+			}
+		}
+		CPT = {
+			transfer_state = 273
+			transfer_state = 448
+			transfer_state = 449
+			transfer_state = 661
+			transfer_state = 662
+		}
+		CPT = { clr_country_flag = CPT_vs_TIR }
+		CPT = { set_country_flag = CPT_vs_TIR_win }
+		CPT = { remove_ideas = eqyptian_wars }
+		TRI = { remove_ideas = war_for_freedom }
+	}
+}
+
+country_event = {
+	id = twe.16 #Cpt vs Tri win TIR
+	title = twe.16.t
+	desc = twe.16.d
+	picture = GFX_report_event_molotov_signing_pact
+	
+	fire_only_once = yes
+	
+	hidden =  yes
+	
+	trigger = {
+		tag = TIR
+		CPT = {
+			surrender_progress > 0.50
+		}
+		CPT = { has_country_flag = CPT_vs_TIR }
+	}
+	
+	option = {
+		name = twe.16.a
+		TRI = {
+			white_peace = {
+				tag = CPT
+				message = TRI_win_CPT
+			}
+		}
+		450 = { set_demilitarized_zone = yes }
+		451 = { set_demilitarized_zone = yes }
+		663 = { set_demilitarized_zone = yes }
+		CPT = { clr_country_flag = CPT_vs_TRI }
+		CPT = { set_country_flag = CPT_vs_TRI_lose }
+		CPT = { remove_ideas = eqyptian_wars }
+		TRI = { remove_ideas = war_for_freedom }
 	}
 }
