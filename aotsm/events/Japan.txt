@@ -1,0 +1,124 @@
+#################
+# Japan Event   #
+# by Derkyster  #
+#################
+
+add_namespace = jap
+
+country_event = {
+	id = jap.1
+	title = jap.1.t
+	desc = jap.1.d
+	picture = GFX_report_event_molotov_signing_pact
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	hidden =  yes
+
+	option = {
+		name = jap.1.a
+		JAP = {
+			set_autonomy = {
+				target = NIS
+				autonomy_state = autonomy_free
+				end_wars = no
+				end_civil_wars = no
+			}
+		}
+		JAP = {
+			set_autonomy = {
+				target = TUK
+				autonomy_state = autonomy_free
+				end_wars = no
+				end_civil_wars = no
+			}
+		}
+		JAP = {
+			set_autonomy = {
+				target = JAS
+				autonomy_state = autonomy_free
+				end_wars = no
+				end_civil_wars = no
+			}
+		}
+		remove_from_faction = NIS
+		remove_from_faction = TUK
+		remove_from_faction = JAS
+		remove_from_faction = JAP
+		JAP = { dismantle_faction = yes }
+		JAP = { country_event = { id = jap.2 days = 30 } }
+	}
+	
+}
+
+country_event = {
+	id = jap.2
+	title = jap.2.t
+	desc = jap.2.d
+	picture = GFX_report_event_japanese_transport_soldiers
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = {
+		name = jap.2.a
+		JAP = { 
+			declare_war_on = {
+				target = JAS
+				type = annex_everything
+			}
+		}
+		JAP = { set_country_flag = war_for_japan }
+	}
+	
+}
+
+country_event = {
+	id = jap.4
+	title = jap.4.t
+	desc = jap.4.d
+	picture = GFX_report_event_japanese_transport_soldiers
+	
+	trigger = {
+		JAP = {
+			has_country_flag = {
+				flag = war_for_japan
+				days > 120
+			}
+		}
+	}
+	
+	mean_time_to_happen = {
+		days = 120
+	}
+	
+	fire_only_once = yes
+	
+	option = {
+		name = jap.4.a
+		JAP = { 
+			declare_war_on = {
+				target = JAS
+				type = annex_everything
+			}
+		}
+		JAP = { clr_country_flag = war_for_japan }
+		JAP = { set_country_flag = all_japan_war }
+		TUK = {
+			declare_war_on = {
+				target = JAP
+				type = annex_everything
+			}
+		}
+		TUK = {
+			declare_war_on = {
+				target = JAS
+				type = annex_everything
+			}
+		}
+	}
+	
+}
