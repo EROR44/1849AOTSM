@@ -1,0 +1,141 @@
+#################
+# Poland Event  #
+# by Derkyster  #
+#################
+
+add_namespace = pol
+add_namespace = pol_ger
+add_namespace = pol_rus
+
+country_event = {
+	id = pol.1
+	title = pol.1.t
+	desc = pol.1.d
+	picture = GFX_report_event_molotov_signing_pact
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	hidden =  yes
+	
+	immediate = {
+		PLH = {
+			transfer_state = 853
+		}
+	}
+	
+	option = {
+		name = pol.1.a
+		PRU = { country_event = { id = pol_ger.1 days = 7 } }
+		RUS = { country_event = { id = pol_rus.1 days = 28 } }
+		PLH = { inherit_technology = RUS }
+	}
+	
+}
+
+country_event = {
+	id = pol.2
+	title = pol.2.t
+	desc = pol.2.d
+	picture = GFX_report_event_german_italian_pact
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	hidden =  yes
+	
+	immediate = {
+		PRU = { give_guarantee = PLH }
+	}
+	
+	option = {
+		name = pol.2.a
+		PLH = { load_oob = PLH_REVOLUTION }
+		add_stability = 0.05
+		10 = {
+			add_building_construction = {
+				type = bunker
+				level = 5
+				instant_build = yes
+				province = 3544
+			}
+		}
+	}
+	
+}
+
+country_event = {
+	id = pol_ger.1
+	title = pol_ger.1.t
+	desc = pol_ger.1.d
+	picture = GFX_report_event_german_advisors_remain
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = {
+		name = pol_ger.1.a
+		ai_chance = {
+			factor = 50
+		}
+		PLH = { country_event = { id = pol.2 days = 7 } }
+	}
+	
+	option = {
+		name =  pol_ger.1.b 
+		ai_chance = {
+			factor = 50
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+			}
+		}
+	}
+	
+}
+
+country_event = {
+	id = pol_rus.1
+	title = pol_rus.1.t
+	desc = pol_rus.1.d
+	picture = GFX_report_event_american_hunger_march
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = {
+		name = pol_rus.1.a
+		ai_chance = {
+			factor = 50
+		}
+		declare_war_on = {
+			target = PLH
+			type = annex_everything
+		}
+	}
+	
+	option = {
+		name =  pol_rus.1.b 
+		ai_chance = {
+			factor = 50
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+			}
+		}
+		PLH = {
+			transfer_state = 10
+			transfer_state = 87
+			transfer_state = 90
+			transfer_state = 92
+			transfer_state = 97
+			transfer_state = 98
+		}
+		RUS = { add_stability = -0.15 }
+	}
+	
+}
