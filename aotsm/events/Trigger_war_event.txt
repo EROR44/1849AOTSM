@@ -71,6 +71,7 @@ country_event = {
 			}
 		}
 		BYZ = { set_country_flag = BYZ_vs_BUL_win }
+		BUL = { remove_ideas = balkan_war }
 	}
 }
 
@@ -387,13 +388,13 @@ country_event = {
 	picture = GFX_report_event_molotov_signing_pact
 	
 	fire_only_once = yes
-	
+
 	hidden =  yes
 	
 	trigger = {
 		tag = PRU
 		AUS = {
-			surrender_progress > 0.35
+			surrender_progress > 0.05
 		}
 		PRU = { has_country_flag = PRU_vs_AUS_3 }
 	}
@@ -541,7 +542,7 @@ country_event = {
 	picture = GFX_report_event_molotov_signing_pact
 	
 	fire_only_once = yes
-	
+
 	hidden =  yes
 	
 	trigger = {
@@ -572,7 +573,7 @@ country_event = {
 	picture = GFX_report_event_molotov_signing_pact
 	
 	fire_only_once = yes
-	
+
 	hidden =  yes
 	
 	trigger = {
@@ -685,13 +686,13 @@ country_event = {
 }
 
 country_event = {
-	id = twe.9
+	id = twe.9 #War with Albania
 	title = twe.9.t
 	desc = twe.9.d
 	picture = GFX_report_event_molotov_signing_pact
 	
 	fire_only_once = yes
-	
+
 	hidden =  yes
 	
 	trigger = {
@@ -728,17 +729,18 @@ country_event = {
 			}
 		}
 		BYZ = { set_country_flag = BYZ_vs_ALB_win }
+		ALB = { remove_ideas = balkan_war }
 	}
 }
 
 country_event = {
-	id = twe.10
+	id = twe.10 #War with Serbia
 	title = twe.10.t
 	desc = twe.10.d
 	picture = GFX_report_event_molotov_signing_pact
 	
 	fire_only_once = yes
-	
+
 	hidden =  yes
 	
 	trigger = {
@@ -778,17 +780,18 @@ country_event = {
 			}
 		}
 		BYZ = { set_country_flag = BYZ_vs_SER_win }
+		SER = { remove_ideas = balkan_war }
 	}
 }
 
 country_event = {
-	id = twe.11
+	id = twe.11 #war with Bosnia
 	title = twe.11.t
 	desc = twe.11.d
 	picture = GFX_report_event_molotov_signing_pact
 	
 	fire_only_once = yes
-	
+
 	hidden =  yes
 	
 	trigger = {
@@ -826,6 +829,7 @@ country_event = {
 			}
 		}
 		BYZ = { set_country_flag = BYZ_vs_BOS_win }
+		BOS = { remove_ideas = balkan_war }
 	}
 }
 
@@ -849,7 +853,483 @@ country_event = {
 	
 	option = {
 		name = twe.12.a
-		SGE = { annex_country = { target = SGE transfer_troops = no }
+		SGE = { annex_country = { target = SGE transfer_troops = no } }
 		PRU = { clr_country_flag = PRU_revolution }
+	}
+}
+
+country_event = {
+	id = twe.13 #Cpt vs Kir win CPT
+	title = twe.13.t
+	desc = twe.13.d
+	picture = GFX_report_event_molotov_signing_pact
+	
+	fire_only_once = yes
+	
+	hidden =  yes
+	
+	trigger = {
+		tag = CPT
+		KIR = {
+			surrender_progress > 0.10
+		}
+		CPT = { has_country_flag = CPT_vs_KIR }
+	}
+	
+	option = {
+		name = twe.13.a
+		CPT = {
+			white_peace = {
+				tag = KIR
+				message = CPT_win_KIR
+			}
+		}
+		CPT = {
+			transfer_state = 450
+			transfer_state = 451
+			transfer_state = 552
+			transfer_state = 663
+		}
+		CPT = { clr_country_flag = CPT_vs_KIR }
+		CPT = { set_country_flag = CPT_vs_KIR_win }
+		CPT = { remove_ideas = eqyptian_wars }
+		KIR = { remove_ideas = war_for_freedom }
+		CPT = { set_cosmetic_tag = CPT_NAP }
+	}
+}
+
+country_event = {
+	id = twe.14 #Cpt vs Kir win KIR
+	title = twe.14.t
+	desc = twe.14.d
+	picture = GFX_report_event_molotov_signing_pact
+	
+	fire_only_once = yes
+	
+	hidden =  yes
+	
+	trigger = {
+		tag = KIR
+		CPT = {
+			surrender_progress > 0.25
+		}
+		CPT = { has_country_flag = CPT_vs_KIR }
+	}
+	
+	option = {
+		name = twe.14.a
+		KIT = {
+			white_peace = {
+				tag = CPT
+				message = KIR_win_CPT
+			}
+		}
+		452 = { set_demilitarized_zone = yes }
+		CPT = { clr_country_flag = CPT_vs_KIR }
+		CPT = { set_country_flag = CPT_vs_KIR_lose }
+		CPT = { remove_ideas = eqyptian_wars }
+		KIR = { remove_ideas = war_for_freedom }
+	}
+}
+
+country_event = {
+	id = twe.15 #Cpt vs Tri win CPT
+	title = twe.15.t
+	desc = twe.15.d
+	picture = GFX_report_event_molotov_signing_pact
+	
+	fire_only_once = yes
+	
+	hidden =  yes
+	
+	trigger = {
+		tag = CPT
+		TRI = {
+			surrender_progress > 0.10
+		}
+		CPT = { has_country_flag = CPT_vs_TRI }
+	}
+	
+	option = {
+		name = twe.15.a
+		CPT = {
+			white_peace = {
+				tag = TRI
+				message = CPT_win_TRI
+			}
+		}
+		CPT = {
+			transfer_state = 273
+			transfer_state = 448
+			transfer_state = 449
+			transfer_state = 661
+			transfer_state = 662
+		}
+		CPT = { clr_country_flag = CPT_vs_TIR }
+		CPT = { set_country_flag = CPT_vs_TIR_win }
+		CPT = { remove_ideas = eqyptian_wars }
+		TRI = { remove_ideas = war_for_freedom }
+	}
+}
+
+country_event = {
+	id = twe.16 #Cpt vs Tri win TIR
+	title = twe.16.t
+	desc = twe.16.d
+	picture = GFX_report_event_molotov_signing_pact
+	
+	fire_only_once = yes
+	
+	hidden =  yes
+	
+	trigger = {
+		tag = TIR
+		CPT = {
+			surrender_progress > 0.25
+		}
+		CPT = { has_country_flag = CPT_vs_TIR }
+	}
+	
+	option = {
+		name = twe.16.a
+		TRI = {
+			white_peace = {
+				tag = CPT
+				message = TRI_win_CPT
+			}
+		}
+		450 = { set_demilitarized_zone = yes }
+		451 = { set_demilitarized_zone = yes }
+		663 = { set_demilitarized_zone = yes }
+		CPT = { clr_country_flag = CPT_vs_TRI }
+		CPT = { set_country_flag = CPT_vs_TRI_lose }
+		CPT = { remove_ideas = eqyptian_wars }
+		TRI = { remove_ideas = war_for_freedom }
+	}
+}
+
+country_event = {
+	id = twe.17 #JAP vs JAS win JAP
+	title = twe.17.t
+	desc = twe.17.d
+	picture = GFX_report_event_molotov_signing_pact
+	
+	fire_only_once = yes
+	
+	hidden =  yes
+	
+	trigger = {
+		tag = JAP
+		JAS = {
+			surrender_progress > 0.50
+		}
+		JAP = { has_country_flag = war_for_japan }
+	}
+	
+	option = {
+		name = twe.17.a
+		JAP = {
+			white_peace = {
+				tag = JAS
+				message = JAP_win_JAS
+			}
+		}
+		JAP = { annex_country = { target = JAS transfer_troops = no } }
+		JAP = { clr_country_flag = war_for_japan }
+		JAP = {
+			set_autonomy = {
+				target = TUK		
+				autonomy_state = autonomy_aotsm_daimo
+			}
+			set_autonomy = {
+				target = NIS
+			autonomous_state = autonomy_aotsm_trade_company
+			}
+		}
+		JAP = {
+			create_faction = JAP_EMPERIA
+			add_to_faction = JAP
+			add_to_faction = TUK
+			add_to_faction = NIS
+		}
+	}
+}
+
+country_event = {
+	id = twe.18 #JAP vs JAS win JAS
+	title = twe.18.t
+	desc = twe.18.d
+	picture = GFX_report_event_molotov_signing_pact
+	
+	fire_only_once = yes
+	
+	hidden =  yes
+	
+	trigger = {
+		tag = JAS
+		JAP = {
+			surrender_progress > 0.50
+		}
+		JAP = { has_country_flag = war_for_japan }
+	}
+	
+	option = {
+		name = twe.18.a
+		JAS = {
+			white_peace = {
+				tag = JAP
+				message = JAS_win_JAP
+			}
+		}
+		JAS = { annex_country = { target = JAP transfer_troops = no } }
+		JAP = { clr_country_flag = war_for_japan }
+		JAS = {
+			set_autonomy = {
+				target = TUK		
+				autonomy_state = autonomy_aotsm_daimo
+			}
+			set_autonomy = {
+				target = NIS
+			autonomous_state = autonomy_aotsm_trade_company
+			}
+		}
+		JAS = {
+			create_faction = JAP_EMPERIA
+			add_to_faction = JAS
+			add_to_faction = TUK
+			add_to_faction = NIS
+		}
+	}
+}
+
+country_event = {
+	id = twe.19 #JAP vs JAS win JAP
+	title = twe.19.t
+	desc = twe.19.d
+	picture = GFX_report_event_molotov_signing_pact
+	
+	fire_only_once = yes
+	
+	hidden =  yes
+	
+	trigger = {
+		tag = JAP
+		JAS = {
+			surrender_progress > 0.50
+		}
+		JAP = { has_country_flag = all_japan_war }
+	}
+	
+	option = {
+		name = twe.19.a
+		JAP = {
+			white_peace = {
+				tag = JAS
+				message = JAP_win_JAS
+			}
+		}
+		JAP = { annex_country = { target = JAS transfer_troops = no } }
+		JAP = { clr_country_flag = all_japan_war }
+		JAP = { set_country_flag = JAP_WIN }
+	}
+}
+
+country_event = {
+	id = twe.20 #JAP vs JAS win JAS
+	title = twe.20.t
+	desc = twe.20.d
+	picture = GFX_report_event_molotov_signing_pact
+	
+	fire_only_once = yes
+	
+	hidden =  yes
+	
+	trigger = {
+		tag = JAS
+		JAP = {
+			surrender_progress > 0.50
+		}
+		JAP = { has_country_flag = all_japan_war }
+	}
+	
+	option = {
+		name = twe.20.a
+		JAS = {
+			white_peace = {
+				tag = JAP
+				message = JAS_win_JAP
+			}
+		}
+		JAS = { annex_country = { target = JAP transfer_troops = no } }
+		JAP = { clr_country_flag = all_japan_war }
+		JAS = { set_country_flag = JAS_WIN }
+	}
+}
+
+country_event = {
+	id = twe.21 #TUK vs JAP win TUK
+	title = twe.21.t
+	desc = twe.21.d
+	picture = GFX_report_event_molotov_signing_pact
+	
+	fire_only_once = yes
+	
+	hidden =  yes
+	
+	trigger = {
+		tag = TUK
+		JAP = {
+			surrender_progress > 0.50
+		}
+		JAP = { has_country_flag = JAP_WIN }
+	}
+	
+	option = {
+		name = twe.21.a
+		TUK = {
+			white_peace = {
+				tag = JAP
+				message = TUK_win_JAP
+			}
+		}
+		TUK = { annex_country = { target = JAP transfer_troops = no } }
+		JAP = { clr_country_flag = JAP_WIN }
+		TUK = {
+			set_autonomy = {
+				target = NIS
+			autonomous_state = autonomy_aotsm_trade_company
+			}
+		}
+		TUK = {
+			create_faction = JAP_EMPERIA
+			add_to_faction = TUK
+			add_to_faction = NIS
+		}
+	}
+}
+
+country_event = {
+	id = twe.22 #TUK vs JAP win JAP
+	title = twe.22.t
+	desc = twe.22.d
+	picture = GFX_report_event_molotov_signing_pact
+	
+	fire_only_once = yes
+	
+	hidden =  yes
+	
+	trigger = {
+		tag = JAP
+		TUK = {
+			surrender_progress > 0.50
+		}
+		JAP = { has_country_flag = JAP_WIN }
+	}
+	
+	option = {
+		name = twe.22.a
+		JAP = {
+			white_peace = {
+				tag = TUK
+				message = JAP_win_TUK
+			}
+		}
+		JAP = { annex_country = { target = TUK transfer_troops = no } }
+		JAP = { clr_country_flag = JAP_WIN }
+		JAP = {
+			set_autonomy = {
+				target = NIS
+			autonomous_state = autonomy_aotsm_trade_company
+			}
+		}
+		JAP = {
+			create_faction = JAP_EMPERIA
+			add_to_faction = JAP
+			add_to_faction = NIS
+		}
+	}
+}
+
+country_event = {
+	id = twe.23 #TUK vs JAS win TUK
+	title = twe.23.t
+	desc = twe.23.d
+	picture = GFX_report_event_molotov_signing_pact
+	
+	fire_only_once = yes
+	
+	hidden =  yes
+	
+	trigger = {
+		tag = TUK
+		JAS = {
+			surrender_progress > 0.50
+		}
+		JAS = { has_country_flag = JAS_WIN }
+	}
+	
+	option = {
+		name = twe.23.a
+		TUK = {
+			white_peace = {
+				tag = JAS
+				message = TUK_win_JAS
+			}
+		}
+		TUK = { annex_country = { target = JAS transfer_troops = no } }
+		JAS = { clr_country_flag = JAS_WIN }
+		TUK = {
+			set_autonomy = {
+				target = NIS
+			autonomous_state = autonomy_aotsm_trade_company
+			}
+		}
+		TUK = {
+			create_faction = JAP_EMPERIA
+			add_to_faction = TUK
+			add_to_faction = NIS
+		}
+	}
+}
+
+country_event = {
+	id = twe.24 #TUK vs JAS win JAS
+	title = twe.24.t
+	desc = twe.24.d
+	picture = GFX_report_event_molotov_signing_pact
+	
+	fire_only_once = yes
+	
+	hidden =  yes
+	
+	trigger = {
+		tag = JAS
+		TUK = {
+			surrender_progress > 0.50
+		}
+		JAS = { has_country_flag = JAS_WIN }
+	}
+	
+	option = {
+		name = twe.24.a
+		JAS = {
+			white_peace = {
+				tag = TUK
+				message = JAS_win_TUK
+			}
+		}
+		JAS = { annex_country = { target = TUK transfer_troops = no } }
+		JAS = { clr_country_flag = JAS_WIN }
+		JAS = {
+			set_autonomy = {
+				target = NIS
+			autonomous_state = autonomy_aotsm_trade_company
+			}
+		}
+		JAS = {
+			create_faction = JAP_EMPERIA
+			add_to_faction = JAS
+			add_to_faction = NIS
+		}
 	}
 }
