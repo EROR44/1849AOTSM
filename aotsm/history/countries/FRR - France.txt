@@ -1,4 +1,14 @@
 capital = 16
+
+if = {
+	limit = { has_dlc = "Man the Guns" }
+		set_naval_oob = "FRR_1849_naval_mtg"
+	else = {
+		set_naval_oob = "FRR_1849_naval_legacy"
+	}
+}
+
+
 set_technology = {
 	infantry_weapons = 1
 	tech_mountaineers = 1
@@ -11,7 +21,9 @@ set_technology = {
 	early_bomber = 1
 	fuel_silos = 1
 	synth_oil_experiments = 1
+	basic_train = 1
 }
+
 if = {
 	limit = { not = { has_dlc = "Man the Guns" } }
 	set_technology = {
@@ -23,6 +35,7 @@ if = {
 		transport = 1
 	}
 }
+
 if = {
 	limit = { has_dlc = "Man the Guns" }
 	set_technology = {
@@ -43,7 +56,161 @@ if = {
 		mtg_transport = 1
 	}
 }
-set_convoys = 600
+
+if = {
+	limit = { not = { has_dlc = "Man the Guns" } }
+	### Ship Variants ###
+	create_equipment_variant = {
+		name = "Nantos Class"
+		type = destroyer_1
+		upgrades = {
+			ship_torpedo_upgrade = 2
+			destroyer_engine_upgrade = 2
+			ship_ASW_upgrade = 2
+			ship_anti_air_upgrade = 2
+		}
+	}
+}
+
+if = {
+	limit = { has_dlc = "Man the Guns" }
+	# Submarines #
+	create_equipment_variant = {
+		name = "Nantos Class"				
+		type = ship_hull_submarine_1
+		name_group = FRR_SS_HISTORICAL
+		parent_version = 0
+		modules = {
+			fixed_ship_torpedo_slot = ship_torpedo_sub_1
+			fixed_ship_engine_slot = sub_ship_engine_1
+			rear_1_custom_slot = empty
+		}
+		obsolete = yes
+	}
+	create_equipment_variant = {
+		name = "Sherbur Class"				
+		type = ship_hull_submarine_2
+		name_group = FRR_SS_HISTORICAL
+		parent_version = 0
+		modules = {
+			fixed_ship_torpedo_slot = ship_torpedo_sub_1
+			fixed_ship_engine_slot = sub_ship_engine_1
+			rear_1_custom_slot = ship_torpedo_sub_1
+		}
+	}
+	# Destroyers #
+	create_equipment_variant = {
+		name = "Tulusa Class"					
+		type = ship_hull_light_1
+		name_group = FRR_DD_HISTORICAL
+		parent_version = 0
+		modules = {
+			fixed_ship_battery_slot = ship_light_battery_1
+			fixed_ship_anti_air_slot = empty
+			fixed_ship_fire_control_system_slot = ship_fire_control_system_0
+			fixed_ship_radar_slot = empty
+			fixed_ship_engine_slot = light_ship_engine_1
+			fixed_ship_torpedo_slot = ship_torpedo_1
+			mid_1_custom_slot = empty
+			rear_1_custom_slot = empty
+		}
+		obsolete = yes
+	}
+	create_equipment_variant = {
+		name = "Marsel Class"	
+		type = ship_hull_light_1
+		name_group = FRR_DD_HISTORICAL
+		parent_version = 0
+		modules = {
+			fixed_ship_battery_slot = ship_light_battery_1
+			fixed_ship_anti_air_slot = ship_anti_air_1
+			fixed_ship_fire_control_system_slot = ship_fire_control_system_0
+			fixed_ship_radar_slot = empty
+			fixed_ship_engine_slot = light_ship_engine_2
+			fixed_ship_torpedo_slot = ship_torpedo_1
+			mid_1_custom_slot = empty
+			rear_1_custom_slot = ship_mine_layer_1
+		}
+	}
+	# Cruisers #
+	create_equipment_variant = {
+		name = "Orlean Class"				
+		type = ship_hull_cruiser_coastal_defense_ship
+		name_group = FRR_CA_HISTORICAL
+		parent_version = 0
+		modules = {
+			fixed_ship_battery_slot = ship_medium_battery_1
+			fixed_ship_anti_air_slot = ship_anti_air_1
+			fixed_ship_fire_control_system_slot = ship_fire_control_system_0
+			fixed_ship_radar_slot = empty
+			fixed_ship_engine_slot = cruiser_ship_engine_1
+			fixed_ship_armor_slot = ship_armor_cruiser_2
+			fixed_ship_secondaries_slot = ship_secondaries_1
+			mid_1_custom_slot = empty
+			mid_2_custom_slot = empty
+			rear_1_custom_slot = ship_medium_battery_1
+		}
+		obsolete = yes
+	}
+	create_equipment_variant = {
+		name = "Paris Class"				
+		type = ship_hull_cruiser_1
+		name_group = FRR_CL_HISTORICAL
+		parent_version = 0
+		modules = {
+			fixed_ship_battery_slot = ship_light_medium_battery_1
+			fixed_ship_anti_air_slot = ship_anti_air_1
+			fixed_ship_fire_control_system_slot = ship_fire_control_system_0
+			fixed_ship_radar_slot = empty
+			fixed_ship_engine_slot = cruiser_ship_engine_1
+			fixed_ship_armor_slot = empty
+			fixed_ship_secondaries_slot = empty
+			mid_1_custom_slot = ship_torpedo_1
+			mid_2_custom_slot = empty
+			rear_1_custom_slot = ship_mine_layer_1
+		}
+	}
+	# Battleships #
+	create_equipment_variant = {
+		name = "Cordelier Class"	
+		type = ship_hull_pre_dreadnought
+		name_group = FRR_BB_HISTORICAL
+		parent_version = 0
+		modules = {
+			fixed_ship_battery_slot = ship_heavy_battery_1
+			fixed_ship_anti_air_slot = ship_anti_air_1
+			fixed_ship_fire_control_system_slot = ship_fire_control_system_0
+			fixed_ship_radar_slot = empty
+			fixed_ship_engine_slot = heavy_ship_engine_1
+			fixed_ship_secondaries_slot = ship_secondaries_1
+			fixed_ship_armor_slot = ship_armor_bb_1
+			front_1_custom_slot = empty
+			mid_1_custom_slot = empty
+			rear_1_custom_slot = empty
+		}
+		obsolete = yes
+	}
+}
+
+recruit_character = FRR_Mishel_Shevalie
+recruit_character = FRR_Sharl_Lagranj
+recruit_character = FRR_Louis_Napoleon
+recruit_character = FRR_Anri_Sharl_de_Artua
+recruit_character = FRR_Luis_Blank
+recruit_character = FRR_Fransua_Ahil_Baset
+recruit_character = FRR_Eli_Frederick_Forei
+recruit_character = FRR_Pier_Antuan_Berie
+recruit_character = FRR_Benjamin_Konstant
+recruit_character = FRR_Odillon_Baro
+recruit_character = FRR_Ernest_Guen
+recruit_character = FRR_Alfred_Shansi
+recruit_character = FRR_Jan_Frederick_Farr
+recruit_character = FRR_Jul_Lui_Trusho
+recruit_character = FRR_Sharl_Deni_Bourbaki
+recruit_character = FRR_Jan_Fransua_Kai
+recruit_character = FRR_Sharl_Feil
+
+set_convoys = 900
 add_political_power = 0
 set_research_slots = 3
 set_stability = 0.7
@@ -63,24 +230,17 @@ set_popularities = {
 }
 add_ideas = {
 	republic
-	large_country 
+	potential_world_power
 	catolicysm	
 	regional_corruption
 	medium_developed_industry
 	low_investment_level
 	medium_taxation
 	limited_export
-	FRR_shadow_of_the_napoleon
-	FRR_obsolete_army
+	FRR_divided_nation
+	FRR_forbes_agreement
+	FRR_politisiertest_army
 }
-recruit_character = FRR_Mishel_Shevalie
-recruit_character = FRR_Sharl_Lagranj
-recruit_character = FRR_Louis_Napoleon
-recruit_character = FRR_Anri_Sharl_de_Artua
-recruit_character = FRR_Fransua_Ahil_Baset
-recruit_character = FRR_Eli_Frederick_Forei
 
-set_variable = { fra_liberal_support = 30 }
-set_variable = { fra_conservator_support = 30 }
-set_variable = { fra_loyalist_support = 30 }
-set_variable = { fra_tension_in_goverment = 40 }
+
+

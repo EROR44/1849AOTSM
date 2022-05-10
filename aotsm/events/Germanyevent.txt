@@ -117,6 +117,7 @@ country_event = {
 				type = annex_everything
 			}
 		}
+		BEL = { add_ideas = war_for_freedom }
 		PRU = { set_country_flag = P_V_B }
 	}
 	
@@ -125,11 +126,82 @@ country_event = {
 		ai_chance = {
 			factor = 99
 		}
+		HOL = {
+			transfer_state = 6
+		}
+		BEL = { set_cosmetic_tag = BELVAL }
+		PRU = { puppet = BEL }
 		BEL = { remove_state_core = 8 }
 		PRU = { add_state_core = 8 }
 		PRU = { transfer_state = 8 }
-		PRU = { add_to_faction = BEL }
-		BEL = { add_ideas = pru_ultimatum }
+		BEL = {
+			set_popularities = {
+				democratic = 20
+				socialism = 77
+				reactionist = 1
+				authoritarian = 2
+			}
+			set_party_name = { 
+				ideology = democratic 
+				long_name = BEL_democratic_party_long
+				name = BEL_democratic_party
+			}
+			set_party_name = { 
+				ideology = socialism 
+				long_name = BEL_socialism_party_long
+				name = BEL_socialism_party
+			}
+			set_party_name = { 
+				ideology = reactionist 
+				long_name = BEL_reactionist_party_long
+				name = BEL_reactionist_party
+			}
+			set_party_name = { 
+				ideology = authoritarian 
+				long_name = BEL_authoritarian_party_long
+				name = BEL_authoritarian_party
+			}
+			create_country_leader = {
+				name = "PRU_Fridrich_III_wd"
+				desc = "POLITICS_FRIDRICH_III_WD_DESC"
+				picture = "gfx/leaders/PRU/Portrait_Fridrich_III.dds"
+				expire = "1888.1.1"
+				ideology = liberalism
+				traits = {
+					walduke
+				}
+			}
+			create_country_leader = {
+				name = "PRU_Fridrich_III_wd"
+				desc = "POLITICS_FRIDRICH_III_WD_DESC"
+				picture = "gfx/leaders/PRU/Portrait_Fridrich_III.dds"
+				expire = "1888.1.1"
+				ideology = natianal_socialsm
+				traits = {
+					walduke
+				}
+			}
+			create_country_leader = {
+				name = "PRU_Fridrich_III_wd"
+				desc = "POLITICS_FRIDRICH_III_WD_DESC"
+				picture = "gfx/leaders/PRU/Portrait_Fridrich_III.dds"
+				expire = "1888.1.1"
+				ideology = integralism
+				traits = {
+					walduke
+				}
+			}
+			create_country_leader = {
+				name = "PRU_Fridrich_III_wd"
+				desc = "POLITICS_FRIDRICH_III_WD_DESC"
+				picture = "gfx/leaders/PRU/Portrait_Fridrich_III.dds"
+				expire = "1888.1.1"
+				ideology = monarchist
+				traits = {
+					walduke
+				}
+			}
+		}
 	}	
 }
 
@@ -154,6 +226,7 @@ country_event = {
 				type = annex_everything
 			}
 		}
+		HOL = { add_ideas = war_for_freedom }
 		PRU = { set_country_flag = P_V_H }
 	}
 	
@@ -484,7 +557,7 @@ country_event = {
 		set_politics = { ruling_party = authoritarian elections_allowed = no }
 		add_stability = -0.25
 		news_event = { hours = 24 id = news.5 }
-		RUS = { country_event = ger.9 hours = 48 }
+		RUS = { country_event = { id = ger.9 days = 2 } }
 	}
 }	
 
@@ -521,7 +594,31 @@ country_event = {
 	option = {
 		name = ger.3.a #Constitutia
 		PRU = {
-			add_stability = 0.01
+			add_stability = 0.05
+			swap_ideas = {
+				remove_idea = monarchy
+				add_idea = constitutional_monarchy
+			}
+			create_country_leader = {
+				name = "PRU_Fridrich_III"
+				desc = "POLITICS_FRIDRICH_III_DESC"
+				picture = "gfx/leaders/PRU/Portrait_Fridrich_III.dds"
+				expire = "1888.1.1"
+				ideology = natianal_socialsm
+				traits = {
+					red_kaiser
+				}
+			}
+			set_party_name = { 
+				ideology = socialism 
+				long_name = PRU_socialism_party_kaiserreich_long 
+				name = PRU_socialism_party_kaiserreich 
+			}
+			set_politics = { ruling_party = socialism elections_allowed = yes }
+			add_popularity = {
+				ideology = socialism
+				popularity = 0.45
+			}
 		}
 	}
 }
@@ -616,11 +713,10 @@ country_event = {
 			limit = {
 				AUS = { has_country_flag = victory_R_V_A_1 }
 			}
-			all_state = {
-					limit = {
-						is_core_of = PRU
-					}
-				add_core_of = SGE
+			PRU = {
+				every_core_state = {
+					add_core_of = SGE
+				}
 			}
 			SGE = {
 				transfer_state = 64
@@ -640,11 +736,10 @@ country_event = {
 			limit = {
 				AUS = { has_country_flag = victory_R_V_A_2 }
 			}
-			all_state = {
-					limit = {
-						is_core_of = PRU
-					}
-				add_core_of = SGE
+			PRU = {
+				every_core_state = {
+					add_core_of = SGE
+				}
 			}
 			SGE = {
 				transfer_state = 55
@@ -667,11 +762,10 @@ country_event = {
 			limit = {
 				AUS = { has_country_flag = victory_R_V_A_3 }
 			}
-			all_state = {
-					limit = {
-						is_core_of = PRU
-					}
-				add_core_of = SGE
+			PRU = {
+				every_core_state = {
+					add_core_of = SGE
+				}
 			}
 			SGE = {
 				transfer_state = 50
@@ -708,11 +802,10 @@ country_event = {
 			limit = {
 				AUS = { has_country_flag = victory_R_V_A_1 }
 			}
-			all_state = {
-					limit = {
-						is_core_of = PRU
-					}
-				add_core_of = SGE
+			PRU = {
+				every_core_state = {
+					add_core_of = SGE
+				}
 			}
 			SGE = {
 				transfer_state = 64
@@ -732,11 +825,10 @@ country_event = {
 			limit = {
 				AUS = { has_country_flag = victory_R_V_A_2 }
 			}
-			all_state = {
-					limit = {
-						is_core_of = PRU
-					}
-				add_core_of = SGE
+			PRU = {
+				every_core_state = {
+					add_core_of = SGE
+				}
 			}
 			SGE = {
 				transfer_state = 55
@@ -759,11 +851,10 @@ country_event = {
 			limit = {
 				AUS = { has_country_flag = victory_R_V_A_3 }
 			}
-			all_state = {
-					limit = {
-						is_core_of = PRU
-					}
-				add_core_of = SGE
+			PRU = {
+				every_core_state = {
+					add_core_of = SGE
+				}
 			}
 			SGE = {
 				transfer_state = 50
@@ -792,7 +883,7 @@ country_event = {
 	id = ger.7 #Bismark or Autharitatian
 	title = ger.7.t
 	desc = ger.7.d
-	picture = GFX_report_event_molotov_signing_pact
+	picture = GFX_report_event_german_reichstag_gathering
 	
 	is_triggered_only = yes
 	
@@ -801,7 +892,11 @@ country_event = {
 	option = {
 		name = ger.7.a 
 		ai_chance = {
-			factor = 0
+			factor = 50
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+			}
 		}
 		set_country_flag = pru_bismark
 	}
@@ -809,10 +904,10 @@ country_event = {
 	option = {
 		name = ger.7.b 
 		ai_chance = {
-			factor = 100
+			factor = 50
 		}
 		set_country_flag = pru_autharitarian
-		country_event = { id = get.8 days = 14 } 
+		country_event = { id = ger.8 days = 14 } 
 	}
 }
 
@@ -820,7 +915,7 @@ country_event = {
 	id = ger.8 #Yunker or Kaiser
 	title = ger.8.t
 	desc = ger.8.d
-	picture = GFX_report_event_molotov_signing_pact
+	picture = GFX_report_event_german_reichstag_gathering
 	
 	is_triggered_only = yes
 	
@@ -829,7 +924,11 @@ country_event = {
 	option = {
 		name = ger.8.a 
 		ai_chance = {
-			factor = 0
+			factor = 50
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+			}
 		}
 		set_country_flag = pru_junker
 	}
@@ -837,7 +936,7 @@ country_event = {
 	option = {
 		name = ger.8.b 
 		ai_chance = {
-			factor = 100
+			factor = 50
 		}
 		set_country_flag = pru_kaiser
 	}
@@ -847,7 +946,7 @@ country_event = {
 	id = ger.9
 	title = ger.9.t
 	desc = ger.9.d
-	picture = GFX_report_event_molotov_signing_pact
+	picture = GFX_report_event_gathering_protest
 	
 	is_triggered_only = yes
 	
@@ -892,10 +991,39 @@ country_event = {
 }
 
 country_event = {
+	id = ger.10
+	title = ger.10.t
+	desc = ger.10.d
+	picture = GFX_report_event_king_speech
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = {
+		name = ger.10.a 
+		PRU = {
+			set_country_flag = pru_kaiser_death
+			kill_country_leader = yes
+			create_country_leader = {
+				name = "PRU_Fridrich_III"
+				desc = "POLITICS_FRIDRICH_III_DESC"
+				picture = "gfx/leaders/PRU/Portrait_Fridrich_III.dds"
+				expire = "1888.1.1"
+				ideology = monarchist
+				traits = {
+				}
+			}
+		}
+		news_event = { hours = 24 id = news.20 }
+	}
+}
+
+country_event = {
 	id = ger_byz.1
 	title = ger_byz.1.t
 	desc = ger_byz.1.d
-	picture = GFX_report_event_molotov_signing_pact
+	picture = GFX_report_event_hitler_handshake
 	
 	is_triggered_only = yes
 	
