@@ -222,6 +222,243 @@ country_event = {
 }
 
 country_event = {
+	id = te.7
+	title = te.7.t
+	desc = te.7.d
+	picture = GFX_report_event_communist_leader
+	
+	hidden =  yes
+	
+	trigger = {
+		tag = KUR
+		KUR = {
+			controls_state = 291
+		}
+		HAL = {
+			controls_state = 675
+		}
+		HAL = {
+			has_border_war = no
+		}
+		HAL = {
+			has_country_flag = {
+				flag = fed_inv
+				value > -3
+			}
+		}
+		HAL = {
+			has_country_flag = {
+				flag = fed_inv
+				value < 6
+			}
+		}
+	}
+	
+	mean_time_to_happen = {
+		days = 100
+	}
+	
+	option = {
+		name = te.7.a
+		start_border_war = {
+			change_state_after_war = no
+			attacker = {
+				state = 291
+				num_provinces = 4
+				on_win = abw.1
+				on_lose = abw.2
+				on_cancel = abw.3
+			}
+					
+			defender = {
+				state = 675
+				num_provinces = 3
+				on_win = abw.2
+				on_lose = abw.1
+				on_cancel = abw.3
+			}
+		}
+	}
+}
+
+country_event = {
+	id = te.8
+	title = te.8.t
+	desc = te.8.d
+	picture = GFX_report_event_communist_leader
+
+	hidden =  yes
+	
+	trigger = {
+		tag = SYR
+		SYR = {
+			controls_state = 554
+		}
+		HAL = {
+			controls_state = 675
+		}
+		HAL = {
+			has_border_war = no
+		}
+		HAL = {
+			has_country_flag = {
+				flag = fed_inv
+				value > -3
+			}
+		}
+		HAL = {
+			has_country_flag = {
+				flag = fed_inv
+				value < 6
+			}
+		}
+	}
+	
+	mean_time_to_happen = {
+		days = 120
+	}
+	
+	option = {
+		name = te.8.a
+		start_border_war = {
+			change_state_after_war = no
+			attacker = {
+				state = 554
+				num_provinces = 2
+				on_win = abw.1
+				on_lose = abw.2
+				on_cancel = abw.3
+			}
+					
+			defender = {
+				state = 675
+				num_provinces = 2
+				on_win = abw.2
+				on_lose = abw.1
+				on_cancel = abw.3
+			}
+		}
+	}
+}
+
+country_event = {
+	id = te.9
+	title = te.9.t
+	desc = te.9.d
+	picture = GFX_report_event_communist_leader
+	
+	hidden =  yes
+	
+	trigger = {	
+		HAL = {
+			has_country_flag = {
+				flag = fed_inv
+				value > 5
+			}
+		}
+	}
+	
+	mean_time_to_happen = {
+		days = 10
+	}
+	
+	option = {
+		name = te.9.a
+		YPS = {
+			transfer_state = 675
+		}
+		YPS = {
+			add_state_core = 675
+			add_state_core = 656
+		}
+		YPS = { 
+			inherit_technology = BYZ
+		}
+		YPS = {
+			load_oob = FED_INV
+		}
+		hidden_effect = {
+			YPS = { 
+				country_event = { id = te.10 days = 30 }
+			}
+			YPS = {
+				add_ideas = { crusader_state }
+			}
+			SYR = {
+				add_timed_idea = {
+					idea = help_to_crusader_1
+					days = 365
+				}
+			}
+			KUR = {
+				add_timed_idea = {
+					idea = help_to_crusader_1
+					days = 365
+				}
+			}
+			YPS = {
+				add_timed_idea = {
+					idea = help_to_crusader_2
+					days = 365
+				}
+			}
+			BYZ = {
+				set_autonomy = {
+					target = YPS
+					autonomous_state = autonomy_aotsm_province
+				}
+			}
+			YPS = {
+				set_popularities = {
+					democratic = 10
+					socialism = 0
+					reactionist = 15
+					authoritarian = 75
+				}
+			}
+			YPS = {
+				set_politics = {
+					ruling_party = authoritarian
+				}
+			}
+		}
+	}
+}
+
+country_event = {
+	id = te.10
+	title = te.10.t
+	desc = te.10.d
+	picture = GFX_report_event_communist_leader
+
+	hidden =  yes
+
+	is_triggered_only = yes
+	
+	option = {
+		name = te.8.a
+		start_border_war = {
+			change_state_after_war = no
+			attacker = {
+				state = 675
+				num_provinces = 1
+				on_win = abw.4
+				on_lose = abw.5
+				on_cancel = abw.6
+			}
+					
+			defender = {
+				state = 656
+				num_provinces = 1
+				on_win = abw.5
+				on_lose = abw.4
+				on_cancel = abw.6
+			}
+		}
+	}
+}
+
+country_event = {
 	id = te.100
 	title = te.100.t
 	desc = te.100.d
