@@ -347,6 +347,8 @@ country_event = {
 	desc = te.9.d
 	picture = GFX_report_event_communist_leader
 	
+	fire_only_once = yes
+	
 	hidden =  yes
 	
 	trigger = {	
@@ -432,6 +434,8 @@ country_event = {
 	picture = GFX_report_event_communist_leader
 
 	hidden =  yes
+	
+	fire_only_once = yes
 
 	is_triggered_only = yes
 	
@@ -453,6 +457,84 @@ country_event = {
 				on_win = abw.5
 				on_lose = abw.4
 				on_cancel = abw.6
+			}
+		}
+	}
+}
+
+country_event = {
+	id = te.11 #Scandinavia Ultimatum
+	title = te.11.t
+	desc = te.11.d
+	picture = GFX_report_event_communist_leader
+
+	fire_only_once = yes
+	
+	trigger = {
+		tag = SCA
+		RUS = {
+			has_war_with = PRU 
+		}
+		RUS = {
+			surrender_progress > 0.50
+		}
+	}
+	
+	option = {
+		name = te.11.a
+		RUS = { country_event = { id = te.12 days = 2 } }
+	}
+}
+
+country_event = {
+	id = te.12 #Scandinavia Ultimatum Russian answer
+	title = te.12.t
+	desc = te.12.d
+	picture = GFX_report_event_communist_leader
+
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = te.12.a
+		ai_chance = {
+			factor = 50
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+			}
+		}
+		RUS = {
+			add_stability = -0.10
+		}
+		SCA = {
+			transfer_state = 111
+			transfer_state = 145
+			transfer_state = 146
+			transfer_state = 147
+			transfer_state = 149
+			transfer_state = 150
+		}
+	}
+	
+	option = {
+		name = te.12.b
+		ai_chance = {
+			factor = 50
+		}
+		SCA = {
+			add_state_claim = 195
+			add_state_claim = 208
+			add_state_claim = 213
+			add_state_claim = 215
+			add_state_claim = 216
+			add_state_claim = 722
+		}
+		SCA ={
+			declare_war_on = {
+				target = RUS
+				type = annex_everything
 			}
 		}
 	}
