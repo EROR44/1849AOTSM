@@ -21,11 +21,11 @@ focus_tree = {
 	focus = {
 		id = Rus_The_second_branch_of_industrialization           
 		icon = GFX_goal_generic_construct_civilian 
-		cost = 10
+		cost = 8
 		x = 2
 		y = 0
 		ai_will_do = {
-			factor = 5
+			factor = 50
 		}
 		available = {
 		   date > 1850.01.01
@@ -109,26 +109,24 @@ focus_tree = {
 			focus = Rus_New_resources
 		}
 		available = {
-			controls_state = 228
-			controls_state = 218
-			controls_state = 245
+			
 		}
 		completion_reward = {
-							228 = {
+							random_owned_controlled_state = {
 				add_extra_state_shared_building_slots = 1
 				add_resource = {
 					type = oil
 					amount = 5
 				}
 			}
-							218 = {
+							random_owned_controlled_state = {
 				add_extra_state_shared_building_slots = 1
 				add_resource = {
 					type = oil
 					amount = 10
 				}
 			}
-							245 = {
+							random_owned_controlled_state = {
 				add_extra_state_shared_building_slots = 1
 				add_resource = {
 					type = oil
@@ -172,7 +170,7 @@ focus_tree = {
 		x = 9
 		y = 1
 		ai_will_do = {
-			factor = 5
+			factor = 25
 		}
 		prerequisite = {
 			focus = Rus_The_second_branch_of_industrialization
@@ -198,26 +196,24 @@ focus_tree = {
 			focus = Rus_Old_coal
 		}
 		available = {
-			controls_state = 566
-			controls_state = 197
-			controls_state = 214
+			
 		}
 		completion_reward = {
-										566 = {
+										random_owned_controlled_state = {
 				add_extra_state_shared_building_slots = 1
 				add_resource = {
 					type = oil
 					amount = 15
 				}
 			}
-							197 = {
+							random_owned_controlled_state = {
 				add_extra_state_shared_building_slots = 1
 				add_resource = {
 					type = oil
 					amount = 15
 				}
 			}
-							214 = {
+							random_owned_controlled_state = {
 				add_extra_state_shared_building_slots = 1
 				add_resource = {
 					type = oil
@@ -230,11 +226,11 @@ focus_tree = {
 	focus = {
 		id = Rus_Russian_Industrial_School
 		icon = GFX_goal_generic_production2
-		cost = 10
+		cost = 8
 		x = 2
 		y = 2
 		ai_will_do = {
-			factor = 5
+			factor = 25
 		}
 		prerequisite = {
 			focus = Rus_Old_coal
@@ -244,13 +240,84 @@ focus_tree = {
 			
 		}
 		completion_reward = {
-		add_political_power = 100		
-						add_tech_bonus = {
+		custom_effect_tooltip = available_industrial_concern
+	    show_ideas_tooltip = RUS_Russian_Industrial_School	
+								add_tech_bonus = {
 				name = CAN_dollar_a_year_men
 				bonus = 0.5
-				uses = 2
+				uses = 1
 				category = industry
-			}						
+			}		
+		}
+	}
+	
+	focus = {
+		id = Rus_Preparing_for_war
+		icon = GFX_focus_generic_tank_production
+		cost = 8
+		x = -1
+		y = 3
+		ai_will_do = {
+			factor = 25
+		}
+		prerequisite = {
+			focus = Rus_Russian_Industrial_School
+		}
+		available = {
+			 PRU = {
+			 NOT = {
+			 has_war_with = RUS
+			 }
+			 exists = yes
+			 is_subject = no
+			 OR = {
+			 has_completed_focus = PRU_aus_win_2
+			 has_war = yes
+			 }
+			 }
+		}
+		completion_reward = {
+		add_war_support = 0.05
+			random_owned_controlled_state = {
+				limit = {
+					free_building_slots = {
+						building = arms_factory
+						size > 1
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+				add_resource = {
+					type = steel
+					amount = 10
+				}
+				set_state_flag = GER_industrial_effort_2IC
+			}
+			random_owned_controlled_state = {
+				limit = {
+					free_building_slots = {
+						building = arms_factory
+						size > 1
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+				add_resource = {
+					type = steel
+					amount = 10
+				}
+				set_state_flag = GER_industrial_effort_2IC
+			}			
 		}
 	}
 	
@@ -270,7 +337,7 @@ focus_tree = {
 			focus = Rus_Expand_the_network_of_institutes
 		}
 		available = {
-			controls_state = 219
+			
 		}
 		completion_reward = {
 					add_tech_bonus = {
@@ -279,10 +346,10 @@ focus_tree = {
 				uses = 1
 				category = industry
 			}
-										219 = {
+										random_owned_controlled_state = {
 				add_resource = {
 					type = leypoldit
-					amount = 16
+					amount = 10
 				}
 			}						
 		}
@@ -360,7 +427,7 @@ focus_tree = {
 				limit = {
 					free_building_slots = {
 						building = industrial_complex
-						size > 1
+						size > 2
 						include_locked = yes
 					}
 				}
@@ -415,7 +482,7 @@ focus_tree = {
 							dockyard > 0
 							free_building_slots = {
 								building = dockyard
-								size > 2
+								size > 3
 								include_locked = yes
 							}
 						}
@@ -429,7 +496,7 @@ focus_tree = {
 						is_coastal = yes
 						free_building_slots = {
 							building = dockyard
-							size > 2
+							size > 3
 							include_locked = yes
 						}
 					}
@@ -449,7 +516,7 @@ focus_tree = {
 						dockyard > 0
 						free_building_slots = {
 							building = dockyard
-							size > 2
+							size > 3
 							include_locked = yes
 						}
 					}
@@ -459,7 +526,7 @@ focus_tree = {
 						dockyard > 0
 						free_building_slots = {
 							building = dockyard
-							size > 2
+							size > 3
 							include_locked = yes
 						}
 					}
@@ -479,7 +546,7 @@ focus_tree = {
 						any_owned_state = {
 							free_building_slots = {
 								building = dockyard
-								size > 2
+								size > 3
 								include_locked = yes
 							}
 						}
@@ -490,7 +557,7 @@ focus_tree = {
 						controller = { tag = ROOT }
 						free_building_slots = {
 							building = dockyard
-							size > 2
+							size > 3
 							include_locked = yes
 						}
 					}
@@ -541,7 +608,7 @@ focus_tree = {
 		x = 9
 		y = 3
 		ai_will_do = {
-			factor = 5
+			factor = 25
 		}
 		prerequisite = {
 			focus = Rus_Expand_the_network_of_institutes
@@ -564,7 +631,7 @@ focus_tree = {
 		x = 0
 		y = 4
 		ai_will_do = {
-			factor = 5
+			factor = 2
 		}
 		prerequisite = {
 			focus = Rus_Production_for_the_army
@@ -833,7 +900,7 @@ if = {
 		x = 4
 		y = 4
 		ai_will_do = {
-			factor = 5
+			factor = 2
 		}
 		prerequisite = {
 			focus = Rus_Production_for_the_population
@@ -877,7 +944,7 @@ if = {
 		x = 8
 		y = 4
 		ai_will_do = {
-			factor = 5
+			factor = 2
 		}
 		prerequisite = {
 			focus = Rus_Big_jerk
@@ -930,11 +997,11 @@ if = {
 	focus = {
 		id = Rus_Demonstration_maneuvers
 		icon = GFX_focus_generic_combined_arms
-		cost = 10
+		cost = 8
 		x = 19
 		y = 0
 		ai_will_do = {
-			factor = 5
+			factor = 25
 		}
 		available = {
 			date > 1850.01.01
@@ -953,7 +1020,7 @@ if = {
 		x = 13
 		y = 1
 		ai_will_do = {
-			factor = 5
+			factor = 3
 		}
 		prerequisite = {
 			focus = Rus_Demonstration_maneuvers
@@ -973,7 +1040,7 @@ if = {
 		x = 12
 		y = 2
 		ai_will_do = {
-			factor = 5
+			factor = 3
 		}
 		prerequisite = {
 			focus = Rus_Aviation_reforms
@@ -998,7 +1065,7 @@ if = {
 		x = 14
 		y = 2
 		ai_will_do = {
-			factor = 5
+			factor = 3
 		}
 		prerequisite = {
 			focus = Rus_Aviation_reforms
@@ -1023,7 +1090,7 @@ if = {
 		x = 14
 		y = 3
 		ai_will_do = {
-			factor = 5
+			factor = 3
 		}
 		prerequisite = {
 			focus = Rus_Foreign_experience
@@ -1048,7 +1115,7 @@ if = {
 		x = 14
 		y = 4
 		ai_will_do = {
-			factor = 5
+			factor = 3
 		}
 		prerequisite = {
 			focus = Rus_Long_range_fighters
@@ -1072,7 +1139,7 @@ if = {
 		x = 13
 		y = 5
 		ai_will_do = {
-			factor = 5
+			factor = 3
 		}
 		prerequisite = {
 			focus = Rus_Andrey_Murom
@@ -1100,7 +1167,6 @@ if = {
 		prerequisite = {
 			focus = Rus_Demonstration_maneuvers
 		}
-		prerequisite = { focus =  }
 		mutually_exclusive = {
 			focus = Rus_Betting_on_experience
 		}
@@ -1150,7 +1216,7 @@ if = {
 		x = 17
 		y = 2
 		ai_will_do = {
-			factor = 5
+			factor = 15
 		}
 		prerequisite = {
 			focus = Rus_Bet_on_technology
@@ -1233,9 +1299,6 @@ if = {
 			focus = Rus_Bet_on_technology
 			focus = Rus_Betting_on_experience
 		}
-		mutually_exclusive = {
-			focus = 
-		}
 		available = {
 		
 		}
@@ -1251,7 +1314,7 @@ if = {
 		x = 21
 		y = 2
 		ai_will_do = {
-			factor = 5
+			factor = 15
 		}
 		prerequisite = {
 			focus = Rus_Betting_on_experience
@@ -1355,7 +1418,7 @@ if = {
 		x = 24
 		y = 1
 		ai_will_do = {
-			factor = 5
+			factor = 1
 		}
 		prerequisite = {
 			focus = Rus_Demonstration_maneuvers
@@ -1375,7 +1438,7 @@ if = {
 		x = 24
 		y = 2
 		ai_will_do = {
-			factor = 5
+			factor = 1
 		}
 		prerequisite = {
 			focus = Rus_Fleet_reforms
@@ -1401,7 +1464,7 @@ add_doctrine_cost_reduction = {
 		x = 23
 		y = 3
 		ai_will_do = {
-			factor = 5
+			factor = 1
 		}
 		prerequisite = {
 			focus = Rus_The_experience_of_Peter
@@ -1426,7 +1489,7 @@ add_doctrine_cost_reduction = {
 		x = 23
 		y = 4
 		ai_will_do = {
-			factor = 5
+			factor = 1
 		}
 		prerequisite = {
 			focus = Rus_Coast_protection
@@ -1451,7 +1514,7 @@ add_doctrine_cost_reduction = {
 		x = 25
 		y = 3
 		ai_will_do = {
-			factor = 5
+			factor = 1
 		}
 		prerequisite = {
 			focus = Rus_The_experience_of_Peter
@@ -1477,7 +1540,7 @@ add_doctrine_cost_reduction = {
 		x = 25
 		y = 4
 		ai_will_do = {
-			factor = 5
+			factor = 1
 		}
 		prerequisite = {
 			focus = Rus_Breakthrough_Ships
@@ -1502,7 +1565,7 @@ add_doctrine_cost_reduction = {
 		x = 24
 		y = 5
 		ai_will_do = {
-			factor = 5
+			factor = 1
 		}
 		prerequisite = {
 			focus = Rus_The_War_of_Mines
@@ -1521,7 +1584,7 @@ add_doctrine_cost_reduction = {
 	focus = {
 		id = Rus_War_experience
 		icon = GFX_focus_generic_license_production
-		cost = 10
+		cost = 8
 		x = 19
 		y = 6
 		ai_will_do = {
@@ -1529,11 +1592,7 @@ add_doctrine_cost_reduction = {
 		}
 		prerequisite = {
 			focus = Rus_Russian_Aviation
-		}
-		prerequisite = {
 			focus = Rus_Russian_Army
-		}
-		prerequisite = {
 			focus = Rus_Russian_Navy
 		}
 		available = {
@@ -1844,14 +1903,19 @@ add_tech_bonus = {
 		x = 13
 		y = 10
 		ai_will_do = {
-			factor = 5
+			factor = 15
 		}
 		available = {
 			 date > 1850.01.01
 			 exists = yes
 			 is_subject = no
+			 OR = {
+			 has_government = reactionist
+			 has_government = authoritarian
+			 }
 		}
-		completion_reward = {	
+		completion_reward = {
+		add_threat = 5
 			add_state_claim = 587
             add_state_claim = 402	
   			add_state_claim = 404
@@ -1862,6 +1926,9 @@ add_tech_bonus = {
 			add_state_claim = 742
 			add_state_claim = 585
 			add_state_claim = 584
+			hidden_effect = {
+			news_event = { id = mknews.5 hours = 6 }
+		}
 		}
 	}
 	
@@ -1880,6 +1947,10 @@ add_tech_bonus = {
 		available = {
 		    exists = yes
 			is_subject = no
+			OR = {
+			 has_government = reactionist
+			 has_government = authoritarian
+			 }
 		}
 		completion_reward = {
 			create_wargoal = {
@@ -1904,8 +1975,20 @@ add_tech_bonus = {
 		available = {
 			 exists = yes
 			is_subject = no
+			HIV = {
+			 exists = yes
+			NOT = {
+			is_ally_with = RUS
+			is_subject_of = RUS
+			}
+			 }
+			OR = {
+			 has_government = reactionist
+			 has_government = authoritarian
+			 }
 		}
-		completion_reward = {	
+		completion_reward = {
+		add_threat = 2
 			create_wargoal = {
     type = annex_everything
     target = HIV
@@ -1915,7 +1998,7 @@ add_tech_bonus = {
 	
 	focus = {
 		id = Rus_Conquer_Bukhara
-		icon = GFX_goal_generic_military_deal
+		icon = GFX_goal_generic_major_war
 		cost = 8
 		x = 11
 		y = 12
@@ -1928,8 +2011,20 @@ add_tech_bonus = {
 		available = {
 			 exists = yes
 			is_subject = no
+			BUK = {
+			 exists = yes
+			NOT = {
+			is_ally_with = RUS
+			is_subject_of = RUS
+			}
+			 }
+			OR = {
+			 has_government = reactionist
+			 has_government = authoritarian
+			 }
 		}
 		completion_reward = {
+		add_threat = 2
 			create_wargoal = {
     type = annex_everything
     target = BUK
@@ -1939,7 +2034,7 @@ add_tech_bonus = {
 	
 	focus = {
 		id = Rus_Conquer_Kokand
-		icon = GFX_goal_generic_occupy_states_ongoing_war
+		icon = GFX_goal_generic_more_territorial_claims
 		cost = 8
 		x = 13
 		y = 12
@@ -1952,8 +2047,20 @@ add_tech_bonus = {
 		available = {
 			 exists = yes
 			is_subject = no
+			 KOK = {
+			 exists = yes
+			NOT = {
+			is_ally_with = RUS
+			is_subject_of = RUS
+			}
+			 }
+			OR = {
+			 has_government = reactionist
+			 has_government = authoritarian
+			 }
 		}
-		completion_reward = {	
+		completion_reward = {
+		add_threat = 2
 			create_wargoal = {
     type = annex_everything
     target = KOK
@@ -1964,19 +2071,15 @@ add_tech_bonus = {
 	focus = {
 		id = Rus_Relocation_to_the_steppe
 		icon = GFX_goal_generic_territory_or_war
-		cost = 10
+		cost = 8
 		x = 11
 		y = 13
 		ai_will_do = {
-			factor = 5
+			factor = 15
 		}
 		prerequisite = {
 			focus = Rus_Conquer_Khiva
-		}
-		prerequisite = {
 			focus = Rus_Conquer_Bukhara
-		}
-		prerequisite = {
 			focus = Rus_Conquer_Kokand
 		}
 		available = {
@@ -2026,15 +2129,84 @@ add_tech_bonus = {
 		available = {
 			 exists = yes
 			is_subject = no
+			date > 1856.01.01
+			has_country_leader = { ruling_only = yes character = RUS_MIKHAIL_FEDOROVICH_ORLOV}
 		}
 		completion_reward = {
-			add_political_power = 250
+			add_political_power = 50
+			add_war_support = 0.05
 		}
 		complete_tooltip = {
 
 		}
 		bypass = {
 			
+		}
+	}
+	
+	focus = {
+		id = Rus_Conquer_Parthia
+		icon = GFX_goal_generic_occupy_states_ongoing_war
+		cost = 8
+		x = 12
+		y = 15
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+			focus = Rus_A_look_at_Afghanistan_and_Persia
+		}
+		available = {
+			 exists = yes
+			is_subject = no
+			PER = {
+			 exists = yes
+			NOT = {
+			is_ally_with = RUS
+			is_subject_of = RUS
+			}
+			 }
+			has_country_leader = { ruling_only = yes character = RUS_MIKHAIL_FEDOROVICH_ORLOV}
+		}
+		completion_reward = {
+		add_threat = 5
+			create_wargoal = {
+    type = puppet_wargoal_focus
+    target = PER
+}						
+		}
+	}
+	
+	focus = {
+		id = Rus_Conquer_Afghanistan
+		icon = GFX_goal_generic_political_pressure
+		cost = 8
+		x = 14
+		y = 15
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+			focus = Rus_A_look_at_Afghanistan_and_Persia
+		}
+		available = {
+			 exists = yes
+			is_subject = no
+			AFG = {
+			 exists = yes
+			NOT = {
+			is_ally_with = RUS
+			is_subject_of = RUS
+			}
+			 }
+			has_country_leader = { ruling_only = yes character = RUS_MIKHAIL_FEDOROVICH_ORLOV}
+		}
+		completion_reward = {
+		add_threat = 5
+			create_wargoal = {
+    type = puppet_wargoal_focus
+    target = AFG
+}						
 		}
 	}
 	
@@ -2053,6 +2225,10 @@ add_tech_bonus = {
 		available = {
 			 exists = yes
 			is_subject = no
+			OR = {
+			 has_government = reactionist
+			 has_government = authoritarian
+			 }
 		}
 		completion_reward = {
 			add_timed_idea = {
@@ -2080,6 +2256,10 @@ add_tech_bonus = {
 		available = {
 			exists = yes
 			is_subject = no
+			OR = {
+			 has_government = reactionist
+			 has_government = authoritarian
+			 }
 		}
 		completion_reward = {
 		add_political_power = 100
@@ -2094,7 +2274,7 @@ add_tech_bonus = {
 		id = Rus_Attention_to_China
 		icon = GFX_goal_generic_political_pressure
 		cost = 8
-		x = 17
+		x = 18
 		y = 10
 		ai_will_do = {
 			factor = 5
@@ -2103,6 +2283,9 @@ add_tech_bonus = {
 		 date > 1850.01.01
 			 exists = yes
 			is_subject = no
+			NOT = {
+			 has_government = socialism
+			 }
 		}
 		completion_reward = {
 			add_state_claim = 329
@@ -2116,7 +2299,7 @@ add_tech_bonus = {
 		id = Rus_Connection_with_China
 		icon = GFX_focus_prc_infiltration
 		cost = 8
-		x = 17
+		x = 18
 		y = 11
 		ai_will_do = {
 			factor = 5
@@ -2127,6 +2310,9 @@ add_tech_bonus = {
 		available = {
 			exists = yes
 			is_subject = no
+			NOT = {
+			 has_government = socialism
+			 }
 		}
 		completion_reward = {
 					QIN = { 
@@ -2148,8 +2334,9 @@ add_tech_bonus = {
 			focus = Rus_Connection_with_China
 		}
 		available = {
-			exists = yes
 			is_subject = no
+			 exists = yes
+			has_country_leader = { ruling_only = yes character = RUS_MIKHAIL_FEDOROVICH_ORLOV }
 			OR = {
 			MON = {
 			owns_state = 329
@@ -2160,6 +2347,7 @@ add_tech_bonus = {
 			}
 		}
 		completion_reward = {
+		add_threat = 2
 		if = {
 				limit = {
 				MON = {
@@ -2196,6 +2384,72 @@ QIN = {
 	}
 	
 	focus = {
+		id = Rus_Demand_Hedgaria
+		icon = GFX_goal_generic_military_deal
+		cost = 8
+		x = 19
+		y = 13
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+			focus = Rus_Connection_with_China
+		}
+		available = {
+			is_subject = no
+			 exists = yes
+			has_country_leader = { ruling_only = yes character = RUS_MIKHAIL_FEDOROVICH_ORLOV }
+		}
+		completion_reward = {
+		add_threat = 2
+		if = {
+				limit = {
+				HEJ = {
+				OR = {
+				owns_state = 560
+				owns_state = 657
+				owns_state = 329
+				}
+				is_subject = no
+				}
+				}
+									HEJ = {
+			country_event = { id = Russia_event_da.13 days = 2 }		
+}	
+			}
+			if = {
+				limit = { 
+				HEJ = {
+				OR = {
+				owns_state = 560
+				owns_state = 657
+				owns_state = 329
+				}
+				is_puppet_of = QIN
+				}
+				}
+									QIN = {
+			country_event = { id = Russia_event_da.13 days = 2 }		
+}	
+			}
+			if = {
+				limit = {
+QIN = {
+				OR = {
+				owns_state = 560
+				owns_state = 657
+				owns_state = 329
+				}
+				}				
+				}
+									QIN = {
+			country_event = { id = Russia_event_da.13 days = 2 }		
+}	
+			}			
+		}							
+	}
+	
+	focus = {
 		id = Rus_Pavel_Nikolaevich_Ignatiev
 		icon = GFX_goal_generic_demand_territory
 		cost = 1
@@ -2219,7 +2473,7 @@ QIN = {
 	focus = {
 		id = Rus_New_Russia
 		icon = GFX_goal_generic_dangerous_deal
-		cost = 8
+		cost = 7
 		x = 30
 		y = 9
 		ai_will_do = {
@@ -2240,7 +2494,7 @@ QIN = {
 	focus = {
 		id = Rus_Defender_of_all_Slavs
 		icon = GFX_goal_generic_improve_relations
-		cost = 8
+		cost = 7
 		x = 27
 		y = 10
 		ai_will_do = {
@@ -2261,7 +2515,7 @@ QIN = {
 	focus = {
 		id = Rus_Defender_of_Christianity
 		icon = GFX_focus_GRE_an_orthodox_state
-		cost = 8
+		cost = 7
 		x = 27
 		y = 11
 		ai_will_do = {
@@ -2285,7 +2539,7 @@ QIN = {
 	focus = {
 		id = Rus_A_protector_from_bad_thoughts
 		icon = GFX_focus_generic_strike_at_democracy2
-		cost = 8
+		cost = 7
 		x = 27
 		y = 12
 		ai_will_do = {
@@ -2309,7 +2563,7 @@ QIN = {
 	focus = {
 		id = Rus_Clear_the_ranks_of_traitors
 		icon = GFX_focus_eng_move_to_secure_the_dominions
-		cost = 8
+		cost = 7
 		x = 26
 		y = 13
 		ai_will_do = {
@@ -2332,6 +2586,10 @@ add_manpower = -150000
 			add_timed_idea = {
     idea = rus_cleaning_of_rows
     days = 280
+}
+								swap_ideas = {
+    remove_idea = regional_corruption
+    add_idea = local_corruption
 }						
 		}
 	}
@@ -2339,7 +2597,7 @@ add_manpower = -150000
 	focus = {
 		id = Rus_Russian_World
 		icon = GFX_rus_the_mother_russia
-		cost = 8
+		cost = 7
 		x = 30
 		y = 10
 		ai_will_do = {
@@ -2360,7 +2618,7 @@ add_manpower = -150000
 	focus = {
 		id = Rus_New_soldiers
 		icon = GFX_focus_generic_manpower
-		cost = 8
+		cost = 7
 		x = 29
 		y = 11
 		ai_will_do = {
@@ -2381,7 +2639,7 @@ add_manpower = -150000
 	focus = {
 		id = Rus_New_peasants
 		icon = GFX_focus_generic_support_the_left_right
-		cost = 8
+		cost = 7
 		x = 31
 		y = 11
 		ai_will_do = {
@@ -2402,7 +2660,7 @@ add_manpower = -150000
 	focus = {
 		id = Rus_An_Orthodox_person
 		icon = GFX_focus_BUL_restore_the_bulgarian_patriarchate
-		cost = 8
+		cost = 7
 		x = 30
 		y = 12
 		ai_will_do = {
@@ -2426,7 +2684,7 @@ add_manpower = -150000
 	focus = {
 		id = Rus_Black_Union
 		icon = GFX_goal_anschluss
-		cost = 8
+		cost = 7
 		x = 32
 		y = 10
 		ai_will_do = {
@@ -2448,7 +2706,7 @@ add_manpower = -150000
 	focus = {
 		id = Rus_The_Greek_Savage
 		icon = GFX_goal_generic_secret_weapon
-		cost = 8
+		cost = 7
 		x = 30
 		y = 13
 		ai_will_do = {
@@ -2473,7 +2731,7 @@ add_manpower = -150000
 	focus = {
 		id = Rus_Poisoned_bayonets
 		icon = GFX_goal_generic_small_arms
-		cost = 8
+		cost = 7
 		x = 29
 		y = 14
 		ai_will_do = {
@@ -2497,7 +2755,7 @@ add_manpower = -150000
 	focus = {
 		id = Rus_Poisoned_Lands
 		icon = GFX_goal_generic_defence
-		cost = 8
+		cost = 7
 		x = 31
 		y = 14
 		ai_will_do = {
@@ -2521,7 +2779,7 @@ add_manpower = -150000
 	focus = {
 		id = Rus_Poisoned_minds
 		icon = GFX_goal_demand_sudetenland
-		cost = 8
+		cost = 7
 		x = 30
 		y = 15
 		ai_will_do = {
@@ -2549,7 +2807,7 @@ add_manpower = -150000
 	focus = {
 		id = Rus_War_to_Victory
 		icon = GFX_goal_generic_major_war
-		cost = 8
+		cost = 7
 		x = 30
 		y = 16
 		ai_will_do = {
@@ -2574,7 +2832,7 @@ add_manpower = -150000
 	focus = {
 		id = Rus_Discard_atavisms
 		icon = GFX_focus_generic_concessions
-		cost = 10
+		cost = 7
 		x = 32
 		y = 13
 		ai_will_do = {
@@ -2595,7 +2853,7 @@ add_manpower = -150000
 	focus = {
 		id = Rus_Russian_land 
 		icon = GFX_goal_generic_position_armies
-		cost = 10
+		cost = 7
 		x = 32
 		y = 15
 		ai_will_do = {
@@ -2634,11 +2892,11 @@ add_manpower = -150000
 		}
 	}
 	
-	focus = {
-		id = Rus_Expand_the_Petrograd_Stock_Exchange
-		icon = GFX_goal_generic_positive_trade_relations
-		cost = 8
-		x = 38
+	focus = { 
+		id = Rus_Rollback_of_the_Monarchy
+		icon = GFX_focus_rom_abdicate
+		cost = 7
+		x = 43
 		y = 1
 		ai_will_do = {
 			factor = 5
@@ -2651,18 +2909,72 @@ add_manpower = -150000
 			has_country_leader = { ruling_only = yes character = RUS_DMITRY_ALEKSEEVICH_MILYUTIN}
 		}
 		completion_reward = {
-			add_ideas = rus_petrograd_stock_exchange						
+		country_event = { id = russia_event_MIL.11 days = 1 } 						
+		}
+	}
+	
+	focus = {
+		id = Rus_Education_reform
+		icon = GFX_focus_generic_military_academy
+		cost = 7
+		x = 37
+		y = 1
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+			focus = Rus_Dmitry_Alekseevich_Milyutin
+		}
+		available = {
+			is_subject = no
+			has_country_leader = { ruling_only = yes character = RUS_DMITRY_ALEKSEEVICH_MILYUTIN}
+			has_completed_focus = Rus_Expand_the_network_of_institutes
+		}
+		completion_reward = {
+										add_popularity = {
+    ideology = democratic
+    popularity = 0.05
+}
+					swap_ideas = {
+    remove_idea = low_investment_level
+    add_idea = average_investment_level
+}						
+		}
+	}
+	
+	focus = {
+		id = Rus_Expand_the_Petrograd_Stock_Exchange
+		icon = GFX_goal_generic_positive_trade_relations
+		cost = 7
+		x = 39
+		y = 1
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+			focus = Rus_Dmitry_Alekseevich_Milyutin
+		}
+		available = {
+			is_subject = no
+			has_country_leader = { ruling_only = yes character = RUS_DMITRY_ALEKSEEVICH_MILYUTIN}
+		}
+		completion_reward = {
+								add_popularity = {
+    ideology = democratic
+    popularity = 0.05
+}
+			add_ideas = rus_petrograd_stock_exchange	
 		}
 	}
 	
 	focus = {
 		id = Rus_London_Petrograd_Road
 		icon = GFX_goal_generic_intelligence_exchange
-		cost = 8
+		cost = 7
 		x = 37
 		y = 2
 		ai_will_do = {
-			factor = 5
+			factor = 25
 		}
 		prerequisite = {
 			focus = Rus_Expand_the_Petrograd_Stock_Exchange
@@ -2688,7 +3000,7 @@ add_manpower = -150000
 	focus = {
 		id = Rus_Joint_scientific_discoveries
 		icon = GFX_goal_generic_dangerous_deal
-		cost = 8
+		cost = 7
 		x = 37
 		y = 4
 		ai_will_do = {
@@ -2720,7 +3032,7 @@ add_manpower = -150000
 	focus = {
 		id = Rus_Trade_war_with_Germany
 		icon = GFX_goal_generic_forceful_treaty
-		cost = 8
+		cost = 7
 		x = 39
 		y = 2
 		ai_will_do = {
@@ -2747,11 +3059,11 @@ add_manpower = -150000
 	focus = {
 		id = Rus_Alliance_with_Britain
 		icon = GFX_goal_generic_major_alliance
-		cost = 8
+		cost = 7
 		x = 38
 		y = 3
 		ai_will_do = {
-			factor = 5
+			factor = 25
 		}
 		prerequisite = {
 			focus = Rus_London_Petrograd_Road
@@ -2778,7 +3090,7 @@ add_manpower = -150000
 	focus = {
 		id = Rus_Anti_German_Society
 		icon = GFX_goal_generic_propaganda
-		cost = 8
+		cost = 7
 		x = 40
 		y = 3
 		ai_will_do = {
@@ -2804,7 +3116,7 @@ add_manpower = -150000
 	focus = {
 		id = Rus_The_case_of_German_doctors
 		icon = GFX_goal_generic_neutrality_focus
-		cost = 8
+		cost = 7
 		x = 39
 		y = 4
 		ai_will_do = {
@@ -2830,7 +3142,7 @@ add_manpower = -150000
 	focus = {
 		id = Rus_Start_a_hunt_for_heretics
 		icon = GFX_goal_generic_military_deal
-		cost = 8
+		cost = 7
 		x = 39
 		y = 5
 		ai_will_do = {
@@ -2855,7 +3167,7 @@ add_manpower = -150000
 	focus = {
 		id = Rus_Promote_market_reforms
 		icon = GFX_focus_generic_self_management
-		cost = 8
+		cost = 7
 		x = 41
 		y = 1
 		ai_will_do = {
@@ -2869,25 +3181,52 @@ add_manpower = -150000
 			has_country_leader = { ruling_only = yes character = RUS_DMITRY_ALEKSEEVICH_MILYUTIN}
 		}
 		completion_reward = {
-		add_stability = -0.05
-			add_popularity = {
+					add_popularity = {
     ideology = democratic
     popularity = 0.05
+}
+		swap_ideas = {
+    remove_idea = medium_taxation
+    add_idea = low_taxation
 }						
 		}
 	}
 	
 	focus = {
+		id = Rus_Fight_nepotism
+		icon = GFX_focus_eng_move_to_secure_the_dominions
+		cost = 7
+		x = 42
+		y = 2
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+			focus = Rus_Promote_market_reforms
+		}
+		prerequisite = {
+			focus = Rus_Rollback_of_the_Monarchy
+		}
+		completion_reward = {
+		add_political_power = 100
+					swap_ideas = {
+    remove_idea = regional_corruption
+    add_idea = local_corruption
+}												
+		}
+	}
+	
+	focus = {
 		id = Rus_End_the_past
-		icon = GFX_focus_renounce_the_treaty_of_trianon
-		cost = 8
+		icon = GFX_focus_renounce_the_treaty_of_trianon 
+		cost = 7
 		x = 42
 		y = 3
 		ai_will_do = {
 			factor = 5
 		}
 		prerequisite = {
-			focus = Rus_Promote_market_reforms
+			focus = Rus_Fight_nepotism
 		}
 		prerequisite = { focus = Rus_Russian_colonialism }
 		available = {
@@ -2902,7 +3241,7 @@ add_manpower = -150000
 	focus = {
 		id = Rus_Russian_national_production
 		icon = GFX_goal_generic_construction
-		cost = 8
+		cost = 7
 		x = 42
 		y = 4
 		ai_will_do = {
@@ -2954,7 +3293,7 @@ random_owned_controlled_state = {
 	focus = {
 		id = Rus_Defender_against_German_Aggression
 		icon = GFX_goal_generic_defence
-		cost = 8
+		cost = 7
 		x = 42
 		y = 5
 		ai_will_do = {
@@ -2984,8 +3323,8 @@ random_owned_controlled_state = {
 	focus = {
 		id = Rus_Industrial_subsidies
 		icon = GFX_goal_generic_production
-		cost = 8
-		x = 43
+		cost = 7
+		x = 45
 		y = 1
 		ai_will_do = {
 			factor = 5
@@ -3008,7 +3347,7 @@ random_owned_controlled_state = {
 	focus = {
 		id = Rus_Russian_colonialism
 		icon = GFX_goal_generic_position_armies
-		cost = 8
+		cost = 7
 		x = 45
 		y = 2
 		ai_will_do = {
@@ -3027,10 +3366,41 @@ country_event = { id = russia_event_MIL.10 days = 1 }
 	}
 	
 	focus = {
+		id = Rus_Conquer_Selishi
+		icon = GFX_goal_generic_position_armies
+		cost = 7
+		x = 46
+		y = 3
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+			focus = Rus_Russian_colonialism
+		}
+		available = {
+			is_subject = no
+			SEL = {
+			 exists = yes
+			NOT = {
+			is_ally_with = RUS
+			is_subject_of = RUS
+			}
+			 }
+			has_country_leader = { ruling_only = yes character = RUS_DMITRY_ALEKSEEVICH_MILYUTIN}
+		}
+		completion_reward = {
+						create_wargoal = {
+    type = annex_everything
+    target = SEL
+}						
+		}
+	}
+	
+	focus = {
 		id = Rus_Actively_support_RKO
 		icon = GFX_goal_generic_improve_relations
-		cost = 8
-		x = 45
+		cost = 7
+		x = 44
 		y = 3
 		ai_will_do = {
 			factor = 5
@@ -3050,7 +3420,7 @@ country_event = { id = russia_event_MIL.10 days = 1 }
 	focus = {
 		id = Rus_Increase_duties_on_all_goods
 		icon = GFX_goal_generic_consumer_goods
-		cost = 8
+		cost = 7
 		x = 44
 		y = 4
 		ai_will_do = {
@@ -3072,7 +3442,7 @@ country_event = { id = russia_event_MIL.10 days = 1 }
 	focus = {
 		id = Rus_British_experience
 		icon = GFX_goal_generic_political_pressure
-		cost = 8
+		cost = 7
 		x = 44
 		y = 5
 		ai_will_do = {
@@ -3104,7 +3474,7 @@ country_event = { id = russia_event_MIL.10 days = 1 }
 	focus = {
 		id = Rus_The_politics_of_the_Flower_and_the_Gun
 		icon = GFX_goal_generic_small_arms
-		cost = 8
+		cost = 7
 		x = 46
 		y = 4
 		ai_will_do = {
@@ -3130,7 +3500,7 @@ country_event = { id = russia_event_MIL.10 days = 1 }
 	focus = { 
 		id = Rus_Siberian_experience
 		icon = GFX_goal_generic_cavalry
-		cost = 8
+		cost = 7
 		x = 46
 		y = 5
 		ai_will_do = {  
@@ -3155,6 +3525,610 @@ country_event = { id = russia_event_MIL.10 days = 1 }
 	}
 	
 	focus = {
+		id = Rus_Mikhail_Fedorovich_Orlov
+		icon = GFX_goal_generic_demand_territory
+		cost = 1
+		x = 41
+		y = 8
+		ai_will_do = {
+			factor = 5
+		}
+		available = {
+			is_subject = no
+			has_country_leader = { ruling_only = yes character = RUS_MIKHAIL_FEDOROVICH_ORLOV}
+		}
+		completion_reward = {
+			add_popularity = {
+    ideology = reactionist
+    popularity = 0.05
+}						
+		}
+	}
+	
+	focus = {
+		id = Rus_Armed_neutrality
+		icon = GFX_goal_generic_military_sphere
+		cost = 7
+		x = 38
+		y = 9
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+			focus = Rus_Mikhail_Fedorovich_Orlov
+		}
+		available = {
+			is_subject = no
+			has_country_leader = { ruling_only = yes character = RUS_MIKHAIL_FEDOROVICH_ORLOV}
+		}
+		completion_reward = {
+			add_ideas = rus_armed_neutrality								
+		}
+	}
+	
+	focus = {
+		id = Rus_Russian_identity
+		icon = GFX_goal_generic_political_pressure
+		cost = 7
+		x = 41
+		y = 9
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+			focus = Rus_Mikhail_Fedorovich_Orlov
+		}
+		available = {
+			is_subject = no
+			has_country_leader = { ruling_only = yes character = RUS_MIKHAIL_FEDOROVICH_ORLOV}
+		}
+		completion_reward = {
+		country_event = { id = russia_event_ORL.2 days = 1 }	
+		}
+	}
+	
+	focus = {
+		id = Rus_The_course_towards_centralization 
+		icon = GFX_goal_generic_position_armies
+		cost = 7
+		x = 44
+		y = 9
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+			focus = Rus_Mikhail_Fedorovich_Orlov
+		}
+		available = {
+			is_subject = no
+			has_country_leader = { ruling_only = yes character = RUS_MIKHAIL_FEDOROVICH_ORLOV}
+		}
+		completion_reward = {
+			country_event = { id = russia_event_ORL.1 days = 1 }							
+		}
+	}
+	
+	focus = {
+		id = Rus_Mobilize_Republican_patriots
+		icon = GFX_focus_generic_military_mission
+		cost = 7
+		x = 37
+		y = 10
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+			focus = Rus_Armed_neutrality
+		}
+		available = {
+			is_subject = no
+			has_country_leader = { ruling_only = yes character = RUS_MIKHAIL_FEDOROVICH_ORLOV}
+		}
+		completion_reward = {
+			add_ideas = rus_republican_patriots						
+		}
+	}
+	
+	focus = {
+		id = Rus_The_aggressor_in_the_West
+		icon = GFX_focus_generic_strike_at_democracy2
+		cost = 7
+		x = 39
+		y = 10
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+			focus = Rus_Armed_neutrality
+		}
+		available = {
+			is_subject = no
+			has_country_leader = { ruling_only = yes character = RUS_MIKHAIL_FEDOROVICH_ORLOV}
+			PRU = {
+			 exists = yes
+			 is_subject = no
+			 OR = {
+			 has_completed_focus = PRU_aus_win_3
+			 has_war = yes
+			 }
+			 }
+		}
+		completion_reward = {
+		add_political_power = 75
+		add_war_support = 0.05
+			if = {
+				limit = {
+				HUN = {
+			 exists = yes
+			NOT = {
+			has_war_with = RUS
+			is_subject_of = PRU
+			is_guaranteed_by = RUS
+			is_in_faction_with = PRU
+			}
+			 }
+			 }
+			give_guarantee = HUN
+				}
+			if = {
+				limit = {
+				GLA = {
+			 exists = yes
+			NOT = {
+			has_war_with = RUS
+			is_subject_of = PRU
+			is_guaranteed_by = RUS
+			is_in_faction_with = PRU
+			}
+			 }
+			 }
+			give_guarantee = GLA
+				}
+			if = {
+				limit = {
+				VLH = {
+			 exists = yes
+			NOT = {
+			has_war_with = RUS
+			is_subject_of = PRU
+			is_guaranteed_by = RUS
+			is_in_faction_with = PRU
+			}
+			 }
+			 }
+			give_guarantee = VLH
+				}
+			if = {
+				limit = {
+				MOL = {
+			 exists = yes
+			NOT = {
+			has_war_with = RUS
+			is_subject_of = PRU
+			is_guaranteed_by = RUS
+			is_in_faction_with = PRU
+			}
+			 }
+			 }
+			give_guarantee = MOL
+				}	
+			}						
+	}
+	
+	focus = {
+		id = Rus_Moscow_Agreement
+		icon = GFX_focus_generic_treaty
+		cost = 7
+		x = 41
+		y = 10
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+			focus = Rus_Russian_identity
+		}
+		available = {
+			is_subject = no
+			has_country_leader = { ruling_only = yes character = RUS_MIKHAIL_FEDOROVICH_ORLOV}
+		}
+		completion_reward = {
+			create_faction = MOSCOW_AGREEMENT						
+		}
+	}
+	
+	focus = {
+		id = Rus_Destroy_corrupt_officials
+		icon = GFX_focus_rom_parties_end
+		cost = 7
+		x = 43
+		y = 10
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+			focus = Rus_The_course_towards_centralization
+		}
+		available = {
+			is_subject = no
+			has_country_leader = { ruling_only = yes character = RUS_MIKHAIL_FEDOROVICH_ORLOV}
+		}
+		completion_reward = {
+								swap_ideas = {
+    remove_idea = regional_corruption
+    add_idea = local_corruption
+}
+		add_stability = 0.05
+				add_popularity = {
+    ideology = reactionist
+    popularity = 0.05
+}					
+		}
+	}
+	
+	focus = {
+		id = Rus_Reconciliation_with_the_Church
+		icon = GFX_goal_generic_improve_relations
+		cost = 7
+		x = 45
+		y = 10
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+			focus = Rus_The_course_towards_centralization
+		}
+		available = {
+			is_subject = no
+			has_country_leader = { ruling_only = yes character = RUS_MIKHAIL_FEDOROVICH_ORLOV}
+		}
+		completion_reward = {
+		add_political_power = -50
+		add_stability = 0.05
+		add_popularity = {
+    ideology = reactionist
+    popularity = 0.05
+}
+			if = {
+				limit = { has_idea = rus_limitations_of_the_church }
+				remove_ideas = rus_limitations_of_the_church
+			}						
+		}
+	}
+	
+	focus = {
+		id = Rus_Secure_the_rear
+		icon = GFX_goal_generic_fortify_city
+		cost = 7
+		x = 36
+		y = 11
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+			focus = Rus_Mobilize_Republican_patriots
+		}
+		available = {
+			is_subject = no
+			has_country_leader = { ruling_only = yes character = RUS_MIKHAIL_FEDOROVICH_ORLOV}
+		}
+		completion_reward = {
+			add_timed_idea = {
+    idea = rus_cleaning_the_rear
+    days = 280
+}						
+		}
+	}
+	
+	focus = {
+		id = Rus_Ally_in_Bucharest
+		icon = GFX_goal_generic_major_alliance
+		cost = 7
+		x = 38
+		y = 11
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+			focus = Rus_The_aggressor_in_the_West
+		}
+		prerequisite = {
+			focus = Rus_Moscow_Agreement
+		}
+		available = {
+			is_subject = no
+			has_country_leader = { ruling_only = yes character = RUS_MIKHAIL_FEDOROVICH_ORLOV}
+			VLH = {
+			 exists = yes
+			NOT = {
+			has_war_with = RUS
+			is_subject_of = PRU
+			is_in_faction_with = PRU
+			}
+			 }
+		}
+		completion_reward = {
+						VLH =  {
+country_event = { id = russia_event_ORL.5 days = 2 }
+}						
+		}
+	}
+	
+	focus = {
+		id = Rus_Ally_in_Lviv
+		icon = GFX_goal_generic_intelligence_exchange
+		cost = 7
+		x = 40
+		y = 11
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+			focus = Rus_The_aggressor_in_the_West
+		}
+		prerequisite = {
+			focus = Rus_Moscow_Agreement
+		}
+		available = {
+			is_subject = no
+			has_country_leader = { ruling_only = yes character = RUS_MIKHAIL_FEDOROVICH_ORLOV}
+			GLA = {
+			 exists = yes
+			NOT = {
+			has_war_with = RUS
+			is_subject_of = PRU
+			is_in_faction_with = PRU
+			}
+			 }
+		}
+		completion_reward = {
+			GLA =  {
+country_event = { id = russia_event_ORL.4 days = 2 }
+}			
+		}
+	}
+	
+	focus = {
+		id = Rus_To_spread_Republican_sentiments
+		icon = GFX_focus_generic_self_management
+		cost = 7
+		x = 42
+		y = 11
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+			focus = Rus_Moscow_Agreement
+		}
+		prerequisite = {
+			focus = Rus_Reconciliation_with_the_Church
+		}
+		available = {
+			is_subject = no
+			has_country_leader = { ruling_only = yes character = RUS_MIKHAIL_FEDOROVICH_ORLOV}
+		}
+		completion_reward = {
+		add_political_power = 100
+								add_popularity = {
+    ideology = authoritarian
+    popularity = -0.15
+}
+								add_popularity = {
+    ideology = socialism
+    popularity = -0.15
+}
+every_other_country = {
+								limit = {
+										is_in_faction_with = RUS
+									}
+									country_event = {
+										days = 2
+										id = russia_event_ORL.3
+									}
+							}						
+		}
+	}
+	
+	focus = {
+		id = Rus_Minsk_reforms
+		icon = GFX_focus_hol_the_foundations_of_defense
+		cost = 7
+		x = 44
+		y = 11
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+			focus = Rus_Reconciliation_with_the_Church
+		}
+		mutually_exclusive = {
+			focus = Rus_Kiev_reforms
+		}
+		available = {
+			is_subject = no
+			has_country_leader = { ruling_only = yes character = RUS_MIKHAIL_FEDOROVICH_ORLOV}
+			has_completed_focus = Rus_Minsk_Reform_Package
+		}
+		completion_reward = {
+						swap_ideas = {
+    remove_idea = rus_unfinished_reforms
+    add_idea = rus_minsk_reforms
+}			
+		}
+	}
+	
+	focus = {
+		id = Rus_Kiev_reforms
+		icon = GFX_focus_generic_treaty
+		cost = 7
+		x = 46
+		y = 11
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+			focus = Rus_Reconciliation_with_the_Church
+		}
+		mutually_exclusive = {
+			focus = Rus_Minsk_reforms
+		}
+		available = {
+			is_subject = no
+			has_country_leader = { ruling_only = yes character = RUS_MIKHAIL_FEDOROVICH_ORLOV}
+			NOT = {
+			has_completed_focus = Rus_Minsk_Reform_Package
+			}
+		}
+		completion_reward = {
+						swap_ideas = {
+    remove_idea = rus_unfinished_reforms
+    add_idea = rus_kiev_reforms
+}			
+		}
+	}
+	
+	focus = {
+		id = Rus_The_army_is_defending_order
+		icon = GFX_focus_secret_rearmament
+		cost = 7
+		x = 37
+		y = 12
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+			focus = Rus_Secure_the_rear
+		}
+		available = {
+			is_subject = no
+			has_country_leader = { ruling_only = yes character = RUS_MIKHAIL_FEDOROVICH_ORLOV}
+		}
+		completion_reward = {
+											swap_ideas = {
+    remove_idea = rus_republican_patriots
+    add_idea = rus_republican_patriots_1
+}						
+		}
+	}
+	
+	focus = {
+		id = Rus_Forced_union
+		icon = GFX_rus_cbi_union
+		cost = 7
+		x = 39
+		y = 12
+		ai_will_do = {
+			factor = 25
+		}
+		prerequisite = {
+			focus = Rus_Ally_in_Bucharest
+			focus = Rus_Ally_in_Lviv
+		}
+		available = {
+			is_subject = no
+			has_country_leader = { ruling_only = yes character = RUS_MIKHAIL_FEDOROVICH_ORLOV}
+		}
+		completion_reward = {
+									CBI =  {
+country_event = { id = russia_event_ORL.6 days = 2 }
+}						
+		}
+	}
+	
+	focus = {
+		id = Rus_Personal_dictatorship
+		icon = GFX_focus_usa_voter_registration_act
+		cost = 7
+		x = 42
+		y = 12
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+			focus = Rus_To_spread_Republican_sentiments
+		}
+		available = {
+			is_subject = no
+			has_country_leader = { ruling_only = yes character = RUS_MIKHAIL_FEDOROVICH_ORLOV}
+		}
+		completion_reward = {
+			swap_ideas = {
+    remove_idea = oligarhy
+    add_idea = dictature
+}			
+		}
+	}
+	
+	focus = {
+		id = Rus_Reform_the_intelligentsia
+		icon = GFX_goal_generic_forceful_treaty
+		cost = 7
+		x = 45
+		y = 12
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+			focus = Rus_Minsk_reforms
+			focus = Rus_Kiev_reforms
+		}
+		available = {
+			is_subject = no
+			has_country_leader = { ruling_only = yes character = RUS_MIKHAIL_FEDOROVICH_ORLOV}
+		}
+		completion_reward = {
+			swap_ideas = {
+    remove_idea = rus_the_Russian_intelligentsia
+    add_idea = rus_the_Russian_intelligentsia_1
+}						
+		}	
+	}
+	
+	focus = {
+		id = Rus_Russian_Shield 
+		icon = GFX_goal_generic_defence
+		cost = 7
+		x = 38
+		y = 13
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+			focus = Rus_The_army_is_defending_order
+		}
+		prerequisite = { focus = Rus_Forced_union }
+		available = {
+			is_subject = no
+			has_country_leader = { ruling_only = yes character = RUS_MIKHAIL_FEDOROVICH_ORLOV}
+		}
+		completion_reward = {
+			add_ideas = rus_russian_shield						
+		}
+	}
+	
+	focus = {
+		id = Rus_A_New_Era_for_Russia
+		icon = GFX_goal_demand_sudetenland
+		cost = 7
+		x = 44
+		y = 13
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+			focus = Rus_Personal_dictatorship
+		}
+		prerequisite = { focus = Rus_Reform_the_intelligentsia }
+		available = {
+			is_subject = no
+			has_country_leader = { ruling_only = yes character = RUS_MIKHAIL_FEDOROVICH_ORLOV}
+		}
+		completion_reward = {
+			add_political_power = 100
+		    add_stability = 0.10						
+		}
+	}
+	
+	focus = {
 		id = Rus_
 		icon = GFX_goal_generic_demand_territory
 		cost = 8
@@ -3165,913 +4139,6 @@ country_event = { id = russia_event_MIL.10 days = 1 }
 		}
 		prerequisite = {
 			focus = 
-		}
-		prerequisite = { focus =  }
-		mutually_exclusive = {
-			focus = 
-		}
-		available = {
-			always = no
-		}
-		completion_reward = {
-									
-		}
-		complete_tooltip = {
-
-		}
-		bypass = {
-			
-		}
-	}
-}
-
-focus_tree = {
-	id = Russ_focus_sas 
-	
-	country = {
-		factor = 0
-		
-		modifier = {
-			add = 10
-			tag = RUS
-		}
-	}
-	
-	default = no
-	reset_on_civilwar = no
-	
-	focus = {
-		id = Rus_SAS_The_path_of_self_destruction
-		icon = GFX_goal_generic_demand_territory
-		cost = 10
-		x = 0
-		y = 1
-		ai_will_do = {
-			factor = 5
-		}
-		prerequisite = {
-			focus = 
-		}
-		prerequisite = { focus =  }
-		mutually_exclusive = {
-			focus = 
-		}
-		available = {
-			
-		}
-		completion_reward = {
-			remove_ideas = rus_Alexander_2
-			remove_ideas = rus_the_Russian_intelligentsia
-		}
-		complete_tooltip = {
-
-		}
-		bypass = {
-			
-		}
-	}
-	
-	focus = {
-		id = Rus_SAS_Ban_objectionable_books
-		icon = GFX_goal_generic_demand_territory
-		cost = 10
-		x = 0
-		y = 2
-		ai_will_do = {
-			factor = 5
-		}
-		prerequisite = {
-			focus = Rus_SAS_The_path_of_self_destruction
-		}
-		prerequisite = { focus =  }
-		mutually_exclusive = {
-			focus = 
-		}
-		available = {
-			always = no
-		}
-		completion_reward = {
-									
-		}
-		complete_tooltip = {
-
-		}
-		bypass = {
-			
-		}
-	}
-	
-	focus = {
-		id = Rus_SAS_Eternal_slavery
-		icon = GFX_goal_generic_demand_territory
-		cost = 10
-		x = 0
-		y = 3
-		ai_will_do = {
-			factor = 5
-		}
-		prerequisite = {
-			focus = Rus_SAS_Ban_objectionable_books
-		}
-		prerequisite = { focus =  }
-		mutually_exclusive = {
-			focus = 
-		}
-		available = {
-			always = no
-		}
-		completion_reward = {
-									
-		}
-		complete_tooltip = {
-
-		}
-		bypass = {
-			
-		}
-	}
-	
-	focus = {
-		id = Rus_SAS_Destroy_dissent
-		icon = GFX_goal_generic_demand_territory
-		cost = 10
-		x = 0
-		y = 4
-		ai_will_do = {
-			factor = 5
-		}
-		prerequisite = {
-			focus = Rus_SAS_Eternal_slavery
-		}
-		prerequisite = { focus =  }
-		mutually_exclusive = {
-			focus = 
-		}
-		available = {
-			always = no
-		}
-		completion_reward = {
-									
-		}
-		complete_tooltip = {
-
-		}
-		bypass = {
-			
-		}
-	}
-	
-	focus = {
-		id = Rus_SAS_The_Power_of_the_Antichrist
-		icon = GFX_goal_generic_demand_territory
-		cost = 10
-		x = 6
-		y = 0
-		ai_will_do = {
-			factor = 5
-		}
-		prerequisite = {
-			focus = 
-		}
-		prerequisite = { focus =  }
-		mutually_exclusive = {
-			focus = 
-		}
-		available = {
-			always = no
-		}
-		completion_reward = {
-									
-		}
-		complete_tooltip = {
-
-		}
-		bypass = {
-			
-		}
-	}
-	
-	focus = {
-		id = Rus_SAS_False_gods_in_the_West
-		icon = GFX_goal_generic_demand_territory
-		cost = 10
-		x = 3
-		y = 1
-		ai_will_do = {
-			factor = 5
-		}
-		prerequisite = {
-			focus = Rus_SAS_The_Power_of_the_Antichrist
-		}
-		prerequisite = { focus =  }
-		mutually_exclusive = {
-			focus = Rus_SAS_Rus_SAS_United_Faith_in_Satan
-		}
-		available = {
-			always = no
-		}
-		completion_reward = {
-									
-		}
-		complete_tooltip = {
-
-		}
-		bypass = {
-			
-		}
-	}
-	
-	focus = {
-		id = Rus_SAS_New_writing
-		icon = GFX_goal_generic_demand_territory
-		cost = 10
-		x = 2
-		y = 2
-		ai_will_do = {
-			factor = 5
-		}
-		prerequisite = {
-			focus = Rus_SAS_False_gods_in_the_West
-		}
-		prerequisite = { focus =  }
-		mutually_exclusive = {
-			focus = 
-		}
-		available = {
-			always = no
-		}
-		completion_reward = {
-									
-		}
-		complete_tooltip = {
-
-		}
-		bypass = {
-			
-		}
-	}
-	
-	focus = {
-		id = Rus_SAS_A_new_bloody_culture
-		icon = GFX_goal_generic_demand_territory
-		cost = 10
-		x = 2
-		y = 3
-		ai_will_do = {
-			factor = 5
-		}
-		prerequisite = {
-			focus = Rus_SAS_New_writing
-		}
-		prerequisite = { focus =  }
-		mutually_exclusive = {
-			focus = 
-		}
-		available = {
-			always = no
-		}
-		completion_reward = {
-									
-		}
-		complete_tooltip = {
-
-		}
-		bypass = {
-			
-		}
-	}
-	
-	focus = {
-		id = Rus_SAS_Resume_the_sacrifice
-		icon = GFX_goal_generic_demand_territory
-		cost = 10
-		x = 2
-		y = 4
-		ai_will_do = {
-			factor = 5
-		}
-		prerequisite = {
-			focus = Rus_SAS_A_new_bloody_culture
-		}
-		prerequisite = { focus =  }
-		mutually_exclusive = {
-			focus = 
-		}
-		available = {
-			always = no
-		}
-		completion_reward = {
-									
-		}
-		complete_tooltip = {
-
-		}
-		bypass = {
-			
-		}
-	}
-	
-	focus = {
-		id = Rus_SAS_Destroy_the_past_to_build_the_future
-		icon = GFX_goal_generic_demand_territory
-		cost = 10
-		x = 1
-		y = 5
-		ai_will_do = {
-			factor = 5
-		}
-		prerequisite = {
-			focus = Rus_SAS_Resume_the_sacrifice
-		}
-		prerequisite = {
-			focus = Rus_SAS_Destroy_dissent
-		}
-		prerequisite = { focus =  }
-		mutually_exclusive = {
-			focus = 
-		}
-		available = {
-			always = no
-		}
-		completion_reward = {
-									
-		}
-		complete_tooltip = {
-
-		}
-		bypass = {
-			
-		}
-	}
-	
-	focus = {
-		id = Rus_SAS_The_Last_Righteous_War
-		icon = GFX_goal_generic_demand_territory
-		cost = 10
-		x = 2
-		y = 6
-		ai_will_do = {
-			factor = 5
-		}
-		prerequisite = {
-			focus = Rus_SAS_Resume_the_sacrifice
-		}
-		prerequisite = {
-			focus = Rus_SAS_The_Devils_Weapons
-		}
-		prerequisite = { focus =  }
-		mutually_exclusive = {
-			focus = 
-		}
-		available = {
-			always = no
-		}
-		completion_reward = {
-									
-		}
-		complete_tooltip = {
-
-		}
-		bypass = {
-			
-		}
-	}
-	
-	focus = {
-		id = Rus_SAS_Purge_society_of_leeches
-		icon = GFX_goal_generic_demand_territory
-		cost = 10
-		x = 4
-		y = 2
-		ai_will_do = {
-			factor = 5
-		}
-		prerequisite = {
-			focus = Rus_SAS_False_gods_in_the_West
-		}
-		prerequisite = { focus =  }
-		mutually_exclusive = {
-			focus = 
-		}
-		available = {
-			always = no
-		}
-		completion_reward = {
-									
-		}
-		complete_tooltip = {
-
-		}
-		bypass = {
-			
-		}
-	}
-	
-	focus = {
-		id = Rus_SAS_United_Faith_in_Satan
-		icon = GFX_goal_generic_demand_territory
-		cost = 10
-		x = 6
-		y = 3
-		ai_will_do = {
-			factor = 5
-		}
-		prerequisite = {
-			focus = Rus_SAS_Purge_society_of_leeches
-		}
-		prerequisite = {
-			focus = Rus_SAS_Purge_society_of_rats
-		}
-		prerequisite = { focus =  }
-		mutually_exclusive = {
-			focus = 
-		}
-		available = {
-			always = no
-		}
-		completion_reward = {
-									
-		}
-		complete_tooltip = {
-
-		}
-		bypass = {
-			
-		}
-	}
-	
-	focus = {
-		id = Rus_SAS_To_clear_the_country_of_Christians
-		icon = GFX_goal_generic_demand_territory
-		cost = 10
-		x = 4
-		y = 4
-		ai_will_do = {
-			factor = 5 
-		}
-		prerequisite = {
-			focus = Rus_SAS_United_Faith_in_Satan
-		}
-		prerequisite = {
-			focus = Rus_SAS_A_new_bloody_culture
-		}
-		prerequisite = { focus =  }
-		mutually_exclusive = {
-			focus = Rus_SAS_Rus_SAS_United_Faith_in_Satan
-		}
-		available = {
-			always = no
-		}
-		completion_reward = {
-									
-		}
-		complete_tooltip = {
-
-		}
-		bypass = {
-			
-		}
-	}
-	
-	focus = {
-		id = Rus_SAS_The_Devils_Weapons
-		icon = GFX_goal_generic_demand_territory
-		cost = 10
-		x = 4
-		y = 5
-		ai_will_do = {
-			factor = 5
-		}
-		prerequisite = {
-			focus = Rus_SAS_To_clear_the_country_of_Christians
-		}
-		prerequisite = { focus =  }
-		mutually_exclusive = {
-			focus = 
-		}
-		available = {
-			always = no
-		}
-		completion_reward = {
-									
-		}
-		complete_tooltip = {
-
-		}
-		bypass = {
-			
-		}
-	}
-	
-	focus = {
-		id = Rus_SAS_False_gods_in_the_East
-		icon = GFX_goal_generic_demand_territory
-		cost = 10
-		x = 9
-		y = 1
-		ai_will_do = {
-			factor = 5
-		}
-		prerequisite = {
-			focus = Rus_SAS_The_Power_of_the_Antichrist
-		}
-		prerequisite = { focus =  }
-		mutually_exclusive = {
-			focus = 
-		}
-		available = {
-			always = no
-		}
-		completion_reward = {
-									
-		}
-		complete_tooltip = {
-
-		}
-		bypass = {
-			
-		}
-	}
-	
-	focus = {
-		id = Rus_SAS_Purge_society_of_rats
-		icon = GFX_goal_generic_demand_territory
-		cost = 10
-		x = 8
-		y = 2
-		ai_will_do = {
-			factor = 5
-		}
-		prerequisite = {
-			focus = Rus_SAS_False_gods_in_the_East
-		}
-		prerequisite = { focus =  }
-		mutually_exclusive = {
-			focus = 
-		}
-		available = {
-			always = no
-		}
-		completion_reward = {
-									
-		}
-		complete_tooltip = {
-
-		}
-		bypass = {
-			
-		}
-	}
-	
-	focus = {
-		id = Rus_SAS_The_Original_Man
-		icon = GFX_goal_generic_demand_territory
-		cost = 10
-		x = 10
-		y = 2
-		ai_will_do = {
-			factor = 5
-		}
-		prerequisite = {
-			focus = Rus_SAS_False_gods_in_the_East
-		}
-		prerequisite = { focus =  }
-		mutually_exclusive = {
-			focus = 
-		}
-		available = {
-			always = no
-		}
-		completion_reward = {
-									
-		}
-		complete_tooltip = {
-
-		}
-		bypass = {
-			
-		}
-	}
-	
-	focus = {
-		id = Rus_SAS_Snake_and_Apple
-		icon = GFX_goal_generic_demand_territory
-		cost = 10
-		x = 10
-		y = 3
-		ai_will_do = {
-			factor = 5
-		}
-		prerequisite = {
-			focus = Rus_SAS_The_Original_Man
-		}
-		prerequisite = { focus =  }
-		mutually_exclusive = {
-			focus = 
-		}
-		available = {
-			always = no
-		}
-		completion_reward = {
-									
-		}
-		complete_tooltip = {
-
-		}
-		bypass = {
-			
-		}
-	}
-	focus = {
-		id = Rus_SAS_Destroy_the_light
-		icon = GFX_goal_generic_demand_territory
-		cost = 10
-		x = 10
-		y = 4
-		ai_will_do = {
-			factor = 5
-		}
-		prerequisite = {
-			focus = Rus_SAS_Snake_and_Apple
-		}
-		prerequisite = { focus =  }
-		mutually_exclusive = {
-			focus = 
-		}
-		available = {
-			always = no
-		}
-		completion_reward = {
-									
-		}
-		complete_tooltip = {
-
-		}
-		bypass = {
-			
-		}
-	}
-	
-	focus = {
-		id = Rus_SAS_Rus_SAS_United_Faith_in_Satan
-		icon = GFX_goal_generic_demand_territory
-		cost = 10
-		x = 8
-		y = 4
-		ai_will_do = {
-			factor = 5
-		}
-		prerequisite = {
-			focus = Rus_SAS_Snake_and_Apple
-		}
-		prerequisite = {
-			focus = Rus_SAS_United_Faith_in_Satan
-		}
-		prerequisite = { focus =  }
-		mutually_exclusive = {
-			focus = Rus_SAS_To_clear_the_country_of_Christians 
-		}
-		available = {
-			always = no
-		}
-		completion_reward = {
-									
-		}
-		complete_tooltip = {
-
-		}
-		bypass = {
-			
-		}
-	}
-	
-	focus = {
-		id = Rus_SAS_The_words_of_Astarte
-		icon = GFX_goal_generic_demand_territory
-		cost = 10
-		x = 8
-		y = 5
-		ai_will_do = {
-			factor = 5
-		}
-		prerequisite = {
-			focus = Rus_SAS_Rus_SAS_United_Faith_in_Satan
-		}
-		prerequisite = { focus =  }
-		mutually_exclusive = {
-			focus = 
-		}
-		available = {
-			always = no
-		}
-		completion_reward = {
-									
-		}
-		complete_tooltip = {
-
-		}
-		bypass = {
-			
-		}
-	}
-	
-	focus = {
-		id = Rus_SAS_News_from_Satan
-		icon = GFX_goal_generic_demand_territory
-		cost = 10
-		x = 10
-		y = 6
-		ai_will_do = {
-			factor = 5
-		}
-		prerequisite = {
-			focus = Rus_SAS_The_words_of_Astarte
-		}
-		prerequisite = {
-			focus = Rus_SAS_Destroy_the_light
-		}
-		prerequisite = { focus =  }
-		mutually_exclusive = {
-			focus = 
-		}
-		available = {
-			always = no
-		}
-		completion_reward = {
-									
-		}
-		complete_tooltip = {
-
-		}
-		bypass = {
-			
-		}
-	}
-	
-	focus = {
-		id = Rus_SAS_The_Path_of_someone_elses_destruction
-		icon = GFX_goal_generic_demand_territory
-		cost = 10
-		x = 12
-		y = 1
-		ai_will_do = {
-			factor = 5
-		}
-		prerequisite = {
-			focus = 
-		}
-		prerequisite = { focus =  }
-		mutually_exclusive = {
-			focus = 
-		}
-		available = {
-			always = no
-		}
-		completion_reward = {
-									
-		}
-		complete_tooltip = {
-
-		}
-		bypass = {
-			
-		}
-	}
-	
-	focus = {
-		id = Rus_SAS_Chemical_weapons
-		icon = GFX_goal_generic_demand_territory
-		cost = 10
-		x = 12
-		y = 2
-		ai_will_do = {
-			factor = 5
-		}
-		prerequisite = {
-			focus = Rus_SAS_The_Path_of_someone_elses_destruction
-		}
-		prerequisite = { focus =  }
-		mutually_exclusive = {
-			focus = 
-		}
-		available = {
-			always = no
-		}
-		completion_reward = {
-									
-		}
-		complete_tooltip = {
-
-		}
-		bypass = {
-			
-		}
-	}
-	
-	focus = {
-		id = Rus_SAS_The_cult_of_self_sacrifice
-		icon = GFX_goal_generic_demand_territory
-		cost = 10
-		x = 12
-		y = 3
-		ai_will_do = {
-			factor = 5
-		}
-		prerequisite = {
-			focus = Rus_SAS_Chemical_weapons
-		}
-		prerequisite = { focus =  }
-		mutually_exclusive = {
-			focus = 
-		}
-		available = {
-			always = no
-		}
-		completion_reward = {
-									
-		}
-		complete_tooltip = {
-
-		}
-		bypass = {
-			
-		}
-	}
-	
-	focus = {
-		id = Rus_SAS_An_army_of_Sorcerers
-		icon = GFX_goal_generic_demand_territory
-		cost = 10
-		x = 12
-		y = 4
-		ai_will_do = {
-			factor = 5
-		}
-		prerequisite = {
-			focus = Rus_SAS_The_cult_of_self_sacrifice
-		}
-		prerequisite = { focus =  }
-		mutually_exclusive = {
-			focus = 
-		}
-		available = {
-			always = no
-		}
-		completion_reward = {
-									
-		}
-		complete_tooltip = {
-
-		}
-		bypass = {
-			
-		}
-	}
-	
-	focus = {
-		id = Rus_SAS_Eternal_War
-		icon = GFX_goal_generic_demand_territory
-		cost = 10
-		x = 11
-		y = 5
-		ai_will_do = {
-			factor = 5
-		}
-		prerequisite = {
-			focus = Rus_SAS_Destroy_the_light
-		}
-		prerequisite = {
-			focus = Rus_SAS_An_army_of_Sorcerers
-		}
-		prerequisite = { focus =  }
-		mutually_exclusive = {
-			focus = 
-		}
-		available = {
-			always = no
-		}
-		completion_reward = {
-									
-		}
-		complete_tooltip = {
-
-		}
-		bypass = {
-			
-		}
-	}
-	
-	focus = {
-		id = Rus_SAS_End_the_False_Church
-		icon = GFX_goal_generic_demand_territory
-		cost = 10
-		x = 6
-		y = 1
-		ai_will_do = {
-			factor = 5
-		}
-		prerequisite = {
-			focus = Rus_SAS_The_Power_of_the_Antichrist
 		}
 		prerequisite = { focus =  }
 		mutually_exclusive = {
