@@ -540,10 +540,6 @@ country_event = {
 				transfer_state = 736
 			}
 			BYZ = { set_country_flag = BYZ_vs_AUS_win }
-			PRU = { give_guarantee = BOH }
-			PRU = { give_guarantee = HUN }
-			PRU = { give_guarantee = GLA }
-			PRU = { give_guarantee = VEN }
 			PRU = { puppet = VEN }
 			PRU = { puppet = BOH }
 			VEN = {
@@ -557,6 +553,34 @@ country_event = {
 			}
 			GLA = {
 				inherit_technology = AUS
+			}
+			BOH = {
+				load_oob = BOH_oob
+			}
+			HUN = {
+				load_oob = HUN_oob
+			}
+			GLA = {
+				load_oob = GLA_oob
+			}
+			VEN = { 
+				load_oob = VEN_oob
+			}
+			if = {
+				limit = {
+					VLH = {
+						has_country_flag = VLH_CR
+					}
+				}
+				VLH = {
+					create_faction = ANTI-HUNGARY-ALLIENCE
+				}
+				GLA = {
+					country_event = { id = te.13 hours = 12 }
+				}
+				VLH = {
+					country_event = { id = te.14 days = 28 }
+				}
 			}
 		}
 		news_event = { hours = 24 id = news.15 }
@@ -1388,7 +1412,7 @@ country_event = {
 			}
 		}
 		FRR = { annex_country = { target = ALG transfer_troops = no } }
-		FRR = { remove_country_flag = FRR_invasion_in_algeria }
+		FRR = { clr_country_flag = FRR_invasion_in_algeria }
 	}
 }
 
@@ -1414,6 +1438,112 @@ country_event = {
 				message = Frech_lose_ALG
 			}
 		}
-		FRR = { remove_country_flag = FRR_invasion_in_algeria }
+		FRR = { clr_country_flag = FRR_invasion_in_algeria }
+	}
+}
+
+country_event = {
+	id = twe.27 #Hungaria Lose
+	desc = twe.27.d
+	picture = GFX_report_event_molotov_signing_pact
+	
+	fire_only_once = yes
+	
+	hidden =  yes
+	
+	trigger = {
+		tag = VLH
+		HUN = {
+			surrender_progress > 0.50
+		}
+		VLH = { has_country_flag = VLH_war_with_HUN }
+	}
+	
+	option = {
+		name = twe.27.a
+		VLH = {
+			white_peace = {
+				tag = HUN
+				message = Hungaria_lose
+			}
+		}
+		GLA = {
+			white_peace = {
+				tag = HUN
+			}
+		}
+		VLH = {
+			transfer_state = 76
+			transfer_state = 82
+			transfer_state = 83
+			transfer_state = 84
+		}
+		if = {
+			limit = {
+				GLA = {
+					has_country_flag = GLA_with_VLH
+				}
+			}
+			GLA = {
+				transfer_state = 73
+			}
+		}
+		VLH = { clr_country_flag = VLH_war_with_HUN }
+		GLA = { leave_faction = yes }
+		VLH = { leave_faction = yes }
+		VLH = { give_guarantee = GLA }
+		GLA = { give_guarantee = VLH }
+		PRU = { add_to_faction = HUN }
+		CBI = { add_to_faction = VLH }
+		if = {
+			limit = {
+				RUS = {
+					is_faction_leader = yes
+				}
+			}
+			RUS = { add_to_faction = GLA }
+		}
+	}
+}
+
+country_event = {
+	id = twe.28 #Hungaria win
+	desc = twe.28.d
+	picture = GFX_report_event_molotov_signing_pact
+	
+	fire_only_once = yes
+	
+	hidden =  yes
+	
+	trigger = {
+		tag = HUN
+		VLH = {
+			surrender_progress > 0.50
+		}
+		VLH = { has_country_flag = VLH_war_with_HUN }
+	}
+	
+	option = {
+		name = twe.28.a
+		HUN = {
+			white_peace = {
+				tag = VLH
+				message = Hungaria_win
+			}
+		}
+		HUN = {
+			white_peace = {
+				tag = GLA
+			}
+		}
+		VLH = { clr_country_flag = VLH_war_with_HUN }
+		GLA = { leave_faction = yes }
+		VLH = { leave_faction = yes }
+		46 = { set_demilitarized_zone = yes }
+		79 = { set_demilitarized_zone = yes }
+		80 = { set_demilitarized_zone = yes }
+		81 = { set_demilitarized_zone = yes }
+		88 = { set_demilitarized_zone = yes }
+		89 = { set_demilitarized_zone = yes }
 	}
 }
