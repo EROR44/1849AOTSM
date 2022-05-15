@@ -555,6 +555,73 @@ country_event = {
 }
 
 country_event = {
+	id = te.13 #GLA allience with VLH
+	title = te.13.t
+	desc = te.13.d
+	picture = GFX_report_event_communist_leader
+
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = te.13.a
+		ai_chance = {
+			factor = 50
+		}
+		VLH = { add_to_faction =  GLA }
+		GLA = { set_country_flag = GLA_with_VLH }
+	}
+	
+	option = {
+		name = te.13.b
+		ai_chance = {
+			factor = 50
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+			}
+		}
+	}
+}
+
+country_event = {
+	id = te.14 #VLH war with HUN
+	title = te.14.t
+	desc = te.14.d
+	picture = GFX_report_event_communist_leader
+
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = te.14.a
+		VLH = {
+			set_country_flag = VLH_war_with_HUN
+		}
+		VLH = {
+			declare_war_on = {
+				target = HUN
+				type = annex_everything
+			}
+		}
+		if = {
+			limit = {
+				GLA = { has_country_flag = GLA_with_VLH }
+			}
+			GLA = {
+				declare_war_on = {
+					target = HUN
+					type = annex_everything
+				}
+			}
+		}
+	}
+	
+}
+
+country_event = {
 	id = te.100
 	title = te.100.t
 	desc = te.100.d
