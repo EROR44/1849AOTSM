@@ -373,6 +373,10 @@ country_event = { #Reform slave
 			ideology = socialism
 			popularity = 0.05
 		}
+		swap_ideas = {
+			remove_idea = limited_slavery
+			add_idea = slavery_forbidden
+		} 
 		add_stability = 0.05
 		add_to_variable = { byz_socialism_power_var = 1 }
 		clamp_variable = {
@@ -391,6 +395,10 @@ country_event = { #Reform slave
 			ideology = democratic
 			popularity = 0.05
 		}
+		swap_ideas = {
+			remove_idea = limited_slavery
+			add_idea = slavery_forbidden
+		} 
 		add_stability = -0.10
 		add_to_variable = { byz_democratic_power_var = 1 }
 		clamp_variable = {
@@ -588,6 +596,116 @@ country_event = { #Reform law
 	}
 	
 }
+
+country_event = { #Help bot with democrat
+	id = byz.10001
+	title = byz.10001.t
+	desc = byz.10001.d
+	picture = GFX_report_event_gre_allied_diplomacy
+	
+	hidden =  yes
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = {
+		name = byz.10001.a
+		BYZ = {
+			add_political_power = 300
+		}
+	}
+	
+}
+
+country_event = { #Help bot with generals
+	id = byz.10002
+	title = byz.10002.t
+	desc = byz.10002.d
+	picture = GFX_report_event_gre_allied_diplomacy
+	
+	hidden =  yes
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = {
+		name = byz.10002.a
+		BYZ = {
+			load_oob = BYZ_help
+		}
+	}
+	
+}
+
+country_event = { #Help bot with merchant
+	id = byz.10003
+	title = byz.10003.t
+	desc = byz.10003.d
+	picture = GFX_report_event_gre_allied_diplomacy
+	
+	hidden =  yes
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = {
+		name = byz.10003.a
+		if = { 
+			limit = {
+				BYZ = {
+					has_idea = closed_economy
+				}
+			}
+			BYZ = {
+				swap_ideas = {
+					remove_idea = closed_economy
+					add_idea = free_trade
+				}
+			}
+		}
+		if = { 
+			limit = {
+				BYZ = {
+					has_idea = limited_exports
+				}
+			}
+			BYZ = {
+				swap_ideas = {
+					remove_idea = limited_exports
+					add_idea = free_trade
+				}
+			}
+		}
+		if = { 
+			limit = {
+				BYZ = {
+					has_idea = export_focus
+				}
+			}
+			BYZ = {
+				swap_ideas = {
+					remove_idea = export_focus
+					add_idea = free_trade
+				}
+			}
+		}
+		if = { 
+			limit = {
+				BYZ = {
+					has_idea = free_trade
+				}
+			}
+			BYZ = {
+				add_political_power = 150
+			}
+		}
+	}
+	
+}
+	
 
 country_event = {
 	id = byz_ita.1
