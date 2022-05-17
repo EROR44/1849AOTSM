@@ -651,7 +651,10 @@ focus_tree = {
 		available_if_capitulated = yes
 
 		completion_reward = {
-			remove_ideas = FRR_divided_nation
+			swap_ideas = {
+				remove_idea = FRR_divided_nation
+				add_idea = FRR_national_unity
+			}
 		}
 	}
 #######################################################################
@@ -662,10 +665,15 @@ focus_tree = {
 		id = FRA_army_reviev
 		icon = GFX_goal_generic_build_tank
 		
-		x = 14
+		x = 12
 		y = 0
 		relative_position_id = FRA_extra_goverment_session
 		
+		available = {
+			NOT = {
+				has_idea = FRR_divided_nation
+			}
+		}
 		
 		cost = 10
 		#search_filters = {   }
@@ -673,7 +681,10 @@ focus_tree = {
 		available_if_capitulated = yes
 
 		completion_reward = {
-			
+			add_political_power = 150
+			army_experience = 5
+			navy_experience = 5
+			air_experience = 5
 		}
 	}
 	focus = {
@@ -695,7 +706,7 @@ focus_tree = {
 		available_if_capitulated = yes
 
 		completion_reward = {
-			
+			custom_effect_tooltip = FRR_unlock_bertie_manufactirer
 		}
 	}
 	focus = {
@@ -717,7 +728,12 @@ focus_tree = {
 		available_if_capitulated = yes
 
 		completion_reward = {
-			
+			add_tech_bonus = {
+				bonus = 1.0
+				uses = 2
+				name = mech_army_bonus
+				category = infantry_weapons
+			}	
 		}
 	}
 	focus = {
@@ -739,7 +755,7 @@ focus_tree = {
 		available_if_capitulated = yes
 
 		completion_reward = {
-			
+			custom_effect_tooltip = FRR_unlock_guen_manufactirer
 		}
 	}
 	focus = {
@@ -805,7 +821,13 @@ focus_tree = {
 		available_if_capitulated = yes
 
 		completion_reward = {
-			
+			add_tech_bonus = {
+				name = infantry_artillery_bonus
+				bonus = 1.0
+				uses = 1
+				category = motorized_equipment
+				category = cat_mechanized_equipment
+			}			
 		}
 	}
 	focus = {
@@ -827,7 +849,13 @@ focus_tree = {
 		available_if_capitulated = yes
 
 		completion_reward = {
-			
+			army_experience = 20
+			add_doctrine_cost_reduction = {
+				name = land_doc_bonus
+				cost_reduction = 1.0
+				uses = 1
+				category = cat_mobile_warfare
+			}
 		}
 	}
 	focus = {
@@ -849,7 +877,18 @@ focus_tree = {
 		available_if_capitulated = yes
 
 		completion_reward = {
-			
+			add_doctrine_cost_reduction = {
+				name = land_doc_bonus
+				cost_reduction = 0.5
+				uses = 1
+				category = cat_mobile_warfare
+			}
+			add_tech_bonus = {
+				bonus = 1.0
+				uses = 1
+				name = mech_army_bonus
+				category = armor
+			}
 		}
 	}
 	focus = {
@@ -871,7 +910,13 @@ focus_tree = {
 		available_if_capitulated = yes
 
 		completion_reward = {
-			
+			army_experience = 20
+			add_doctrine_cost_reduction = {
+				name = land_doc_bonus
+				cost_reduction = 1.0
+				uses = 1
+				category = cat_superior_firepower
+			}	
 		}
 	}
 	focus = {
@@ -893,7 +938,18 @@ focus_tree = {
 		available_if_capitulated = yes
 
 		completion_reward = {
-			
+			add_doctrine_cost_reduction = {
+				name = land_doc_bonus
+				cost_reduction = 0.5
+				uses = 1
+				category = cat_superior_firepower
+			}
+			add_tech_bonus = {
+				name = infantry_artillery_bonus
+				bonus = 1.0
+				uses = 1
+				category = artillery
+			}
 		}
 	}
 	focus = {
@@ -1004,7 +1060,14 @@ focus_tree = {
 		available_if_capitulated = yes
 
 		completion_reward = {
-			
+			army_experience = 15
+			add_tech_bonus = {
+				name = infantry_artillery_bonus
+				bonus = 1.0
+				uses = 2
+				category = motorized_equipment
+				category = cat_mechanized_equipment
+			}	
 		}
 	}
 #####################################################	
@@ -1023,7 +1086,7 @@ focus_tree = {
 		#search_filters = {   }
 		
 		available = {
-			
+			date > 1854.1.1
 		}
 		
 		available_if_capitulated = yes
@@ -1045,7 +1108,7 @@ focus_tree = {
 		#search_filters = {   }
 		
 		available = {
-			
+			date > 1854.1.1
 		}
 		
 		available_if_capitulated = yes
@@ -1067,7 +1130,7 @@ focus_tree = {
 		#search_filters = {   }
 		
 		available = {
-			
+			date > 1854.1.1
 		}
 		
 		available_if_capitulated = yes
@@ -1076,7 +1139,56 @@ focus_tree = {
 			
 		}
 	}
-	
+	focus = {
+		id = FRA_support_cbi
+		icon = GFX_goal_generic_major_war
+		
+		x = -2
+		y = 1
+		relative_position_id = FRA_own_way
+		prerequisite = { 
+			focus = FRA_be_with_britain 
+			focus = FRA_own_way
+		}
+		mutually_exclusive = { focus = FRA_support_pru }
+		cost = 10
+		#search_filters = {   }
+		
+		available = {
+			date > 1854.1.1
+		}
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+			
+		}
+	}
+	focus = {
+		id = FRA_support_pru
+		icon = GFX_goal_generic_more_territorial_claims
+		
+		x = 2
+		y = 1
+		relative_position_id = FRA_own_way
+		prerequisite = { 
+			focus = FRA_be_with_prussia 
+			focus = FRA_own_way
+		}
+		mutually_exclusive = { focus = FRA_support_cbi }
+		cost = 10
+		#search_filters = {   }
+		
+		available = {
+			date > 1854.1.1
+		}
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+			
+		}
+	}
 #######section_vnesh_politic#######	
 	focus = {
 		id = FRA_the_sphere_of_french_influence
