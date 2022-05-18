@@ -686,6 +686,405 @@ focus_tree = {
 	}
 	
 	focus = {
+		id = ITA_new_way_reform_economic
+		icon = GFX_focus_generic_tank_production
+		x = -4
+		y = 10
+		cost = 5
+		prerequisite = { focus =  ITA_new_way }
+		relative_position_id = ITA_first_italia_congress
+		ai_will_do = {
+			factor = 100000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			if = {
+				limit = {
+					SAR = {
+						has_idea = civilian_economy
+					}
+				}			
+				swap_ideas = {
+					remove_idea = civilian_economy
+					add_idea = war_economy
+				}
+			}
+			if = {
+				limit = {
+					SAR = {
+						has_idea = low_economic_mobilisation
+					}
+				}			
+				swap_ideas = {
+					remove_idea = low_economic_mobilisation
+					add_idea = war_economy
+				}
+			}
+			if = {
+				limit = {
+					SAR = {
+						has_idea = partial_economic_mobilisation
+					}
+				}			
+				swap_ideas = {
+					remove_idea = partial_economic_mobilisation
+					add_idea = war_economy
+				}
+			}
+			if = {
+				limit = {
+					SAR = {
+						has_idea = war_economy
+					}
+				}
+				add_war_support = 0.05
+				add_political_power = 150
+			}
+		}
+	}
+	
+	focus = {
+		id = ITA_new_way_purges_civil
+		icon = GFX_goal_generic_political_pressure
+		x = -5
+		y = 11
+		cost = 5
+		prerequisite = { focus =  ITA_new_way_reform_economic }
+		prerequisite = { focus = ITA_new_way_idea }
+		prerequisite = { focus = ITA_new_way_reform_army }
+		relative_position_id = ITA_first_italia_congress
+		ai_will_do = {
+			factor = 100000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_timed_idea = {
+				idea = italy_purge_civil
+				days = 210
+			}
+		}
+	}
+	
+	focus = {
+		id = ITA_new_way_idea
+		icon = GFX_focus_ger_reichskommisariats
+		x = -6
+		y = 10
+		cost = 5
+		prerequisite = { focus =  ITA_new_way }
+		relative_position_id = ITA_first_italia_congress
+		ai_will_do = {
+			factor = 100000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_ideas = italy_legionism_1
+		}
+	}
+	
+	focus = {
+		id = ITA_new_way_march_on_rome
+		icon = GFX_focus_generic_italy_first
+		x = -6
+		y = 12
+		cost = 5
+		prerequisite = { focus =  ITA_new_way_purges_militaly }
+		prerequisite = { focus = ITA_new_way_purges_civil }
+		relative_position_id = ITA_first_italia_congress
+		ai_will_do = {
+			factor = 100000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			SAR = {
+				set_capital = {
+					state = 2
+					remember_old_capital = no
+				}
+			}
+			swap_ideas = {
+				remove_idea = italy_legionism_1
+				add_idea = italy_legionism_2
+			}
+			SAR = {
+				set_cosmetic_tag = ITAREA
+			}		
+		}
+	}
+	
+	focus = {
+		id = ITA_new_way_purges_militaly
+		icon = GFX_goal_generic_forceful_treaty
+		x = -7
+		y = 11
+		cost = 5
+		prerequisite = { focus =  ITA_new_way_reform_economic }
+		prerequisite = { focus = ITA_new_way_idea }
+		prerequisite = { focus = ITA_new_way_reform_army }
+		relative_position_id = ITA_first_italia_congress
+		ai_will_do = {
+			factor = 100000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_timed_idea = {
+				idea = italy_purge_military
+				days = 210
+			}
+		}
+	}
+	
+	focus = {
+		id = ITA_new_way_reform_army
+		icon = GFX_focus_chi_army_reform
+		x = -8
+		y = 10
+		cost = 5
+		prerequisite = { focus =  ITA_new_way }
+		relative_position_id = ITA_first_italia_congress
+		ai_will_do = {
+			factor = 100000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			if = {
+				limit = {
+					SAR = {
+						has_idea = disarmed_nation
+					}
+				}			
+				swap_ideas = {
+					remove_idea = disarmed_nation
+					add_idea = extensive_conscription
+				}
+			}
+			if = {
+				limit = {
+					SAR = {
+						has_idea = volunteer_only
+					}
+				}			
+				swap_ideas = {
+					remove_idea = volunteer_only
+					add_idea = extensive_conscription
+				}
+			}
+			if = {
+				limit = {
+					SAR = {
+						has_idea = limited_conscription
+					}
+				}			
+				swap_ideas = {
+					remove_idea = limited_conscription
+					add_idea = extensive_conscription
+				}
+			}
+			if = {
+				limit = {
+					SAR = {
+						has_idea = extensive_conscription
+					}
+				}
+				add_war_support = 0.05
+				add_political_power = 150
+			}
+		}
+	}
+	
+	focus = {
+		id = ITA_new_way_venetia_ultimatum
+		icon = GFX_goal_molotov_ribbentrop_pact
+		x = -6
+		y = 13
+		cost = 5
+		prerequisite = { focus =  ITA_new_way_purges_militaly }
+		prerequisite = { focus = ITA_new_way_purges_civil }
+		relative_position_id = ITA_first_italia_congress
+		ai_will_do = {
+			factor = 100000
+		}
+		
+		#cancel = { }
+		
+		available = { 
+			country_exists = VEN
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			if = {
+				limit = {
+					VEN = {
+						is_puppet = yes
+					}
+				}
+				VEN = {
+					overlord = {
+						country_event = { id = itadip.12 hours = 36 }
+					}
+				}
+			}
+			if = {
+				limit = {
+					VEN = {
+						is_puppet = no
+					}
+				}
+				VEN = {
+					country_event = { id = itadip.13 hours = 36 }
+				}
+			}
+		}
+	}
+	
+	focus = {
+		id = ITA_new_way_african_claim
+		icon = GFX_goal_generic_territory_or_war
+		x = -5
+		y = 14
+		cost = 5
+		prerequisite = { focus =  ITA_new_way_venetia_ultimatum }
+		relative_position_id = ITA_first_italia_congress
+		ai_will_do = {
+			factor = 100000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			SAR = {
+				add_state_claim = 273
+				add_state_claim = 447
+				add_state_claim = 448
+				add_state_claim = 449
+				add_state_claim = 450
+				add_state_claim = 451
+				add_state_claim = 452
+				add_state_claim = 458
+				add_state_claim = 552
+				add_state_claim = 661
+				add_state_claim = 662
+				add_state_claim = 663
+				add_state_claim = 665
+				add_state_claim = 822
+			}
+		}
+	}
+	
+	focus = {
+		id = ITA_new_way_europian_claim
+		icon = GFX_goal_generic_more_territorial_claims
+		x = -7
+		y = 14
+		cost = 5
+		prerequisite = { focus =  ITA_new_way_venetia_ultimatum }
+		relative_position_id = ITA_first_italia_congress
+		ai_will_do = {
+			factor = 100000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			SAR = {
+				add_state_claim = 3
+				add_state_claim = 21
+				add_state_claim = 32
+				if = {
+					limit = {
+						NOT = {
+							SAR = {
+								owns_state = 39
+							}
+						}
+					}
+					add_state_claim = 39
+				}
+				if = {
+					limit = {
+						NOT = {
+							SAR = {
+								owns_state = 116
+							}
+						}
+					}
+					add_state_claim = 116
+				}
+				add_state_claim = 103
+				add_state_claim = 117
+				add_state_claim = 151
+				add_state_claim = 153
+				add_state_claim = 163
+				add_state_claim = 736
+			}
+		}
+	}
+	
+	focus = {
 		id = ITA_monarch_rule_again
 		icon = GFX_focus_generic_monarchy_2
 		x = 0
@@ -707,6 +1106,166 @@ focus_tree = {
 		
 		completion_reward = {
 			add_state_core = 2
+			add_state_core = 157
+		}
+	}
+	
+	focus = {
+		id = ITA_monarch_idea
+		icon = GFX_focus_generic_home_defense
+		x = -1
+		y = 10
+		cost = 5
+		prerequisite = { focus =  ITA_monarch_rule_again }
+		relative_position_id = ITA_first_italia_congress
+		ai_will_do = {
+			factor = 100000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_ideas = italy_monarchism_1
+		}
+	}
+	
+	focus = {
+		id = ITA_monarch_new_invest
+		icon = GFX_focus_generic_concessions
+		x = -1
+		y = 11
+		cost = 5
+		prerequisite = { focus =  ITA_monarch_idea }
+		relative_position_id = ITA_first_italia_congress
+		ai_will_do = {
+			factor = 100000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_offsite_building = { type = industrial_complex level = 2 }
+		}
+	}
+	
+	focus = {
+		id = ITA_monarch_politic
+		icon = GFX_goal_generic_propaganda
+		x = 1
+		y = 10
+		cost = 5
+		prerequisite = { focus =  ITA_monarch_rule_again }
+		relative_position_id = ITA_first_italia_congress
+		ai_will_do = {
+			factor = 100000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_political_power = 150
+		}
+	}
+	
+	focus = {
+		id = ITA_monarch_stability
+		icon = GFX_goal_generic_small_arms
+		x = 1
+		y = 11
+		cost = 5
+		prerequisite = { focus =  ITA_monarch_politic }
+		relative_position_id = ITA_first_italia_congress
+		ai_will_do = {
+			factor = 100000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_stability = 0.075
+		}
+	}
+	
+	focus = {
+		id = ITA_monarch_venetion_question
+		icon = GFX_focus_generic_treaty
+		x = 0
+		y = 12
+		cost = 5
+		prerequisite = { focus =  ITA_monarch_new_invest }
+		prerequisite = { focus = ITA_monarch_stability }
+		relative_position_id = ITA_first_italia_congress
+		ai_will_do = {
+			factor = 100000
+		}
+		
+		#cancel = { }
+		
+		available = {
+			country_exists = VEN
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			if = {
+				limit = {
+					VEN = {
+						is_puppet = yes
+					}
+				}
+				VEN = {
+					overlord = {
+						country_event = { id = itadip.12 hours = 36 }
+					}
+				}
+			}
+			if = {
+				limit = {
+					VEN = {
+						is_puppet = no
+					}
+				}
+				VEN = {
+					country_event = { id = itadip.13 hours = 36 }
+				}
+			}
+			if = {
+				limit = {
+					SAR = {
+						owns_state = 116
+					}
+				}
+				add_state_core = 116
+			}
+			add_state_core = 117
+			add_state_core = 156
 			add_state_core = 157
 		}
 	}
@@ -734,6 +1293,249 @@ focus_tree = {
 		completion_reward = {
 			add_state_core = 2
 			add_state_core = 157
+		}
+	}
+	
+	focus = {
+		id = ITA_democratic_idea
+		icon = GFX_focus_generic_the_giant_wakes
+		x = 7
+		y = 10
+		cost = 5
+		prerequisite = { focus =  ITA_democratic_rule_again }
+		relative_position_id = ITA_first_italia_congress
+		ai_will_do = {
+			factor = 100000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_ideas = italy_democratic_1
+		}
+	}
+	
+	focus = {
+		id = ITA_democratic_politic
+		icon = GFX_goal_generic_improve_relations
+		x = 5
+		y = 10
+		cost = 5
+		prerequisite = { focus =  ITA_democratic_rule_again }
+		relative_position_id = ITA_first_italia_congress
+		ai_will_do = {
+			factor = 100000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_political_power = 150
+		}
+	}
+	
+	focus = {
+		id = ITA_democratic_stability
+		icon = GFX_goal_generic_neutrality_focus
+		x = 5
+		y = 11
+		cost = 5
+		prerequisite = { focus =  ITA_democratic_politic }
+		relative_position_id = ITA_first_italia_congress
+		ai_will_do = {
+			factor = 100000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_stability = 0.075
+		}
+	}
+	
+	focus = {
+		id = ITA_democratic_dip_missia
+		icon = GFX_focus_generic_diplomatic_treaty
+		x = 7
+		y = 11
+		cost = 5
+		prerequisite = { focus =  ITA_democratic_idea }
+		relative_position_id = ITA_first_italia_congress
+		ai_will_do = {
+			factor = 100000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			FRR = { 
+				country_event = { id = itadip.13 hours = 36 }
+			}
+			CBI = {
+				country_event = { id = itadip.14 hours = 36 } 
+			}
+		}
+	}
+	
+	focus = {
+		id = ITA_democratic_venetion_question
+		icon = GFX_focus_generic_treaty
+		x = 6
+		y = 12
+		cost = 5
+		prerequisite = { focus = ITA_democratic_stability }
+		prerequisite = { focus = ITA_democratic_dip_missia }
+		relative_position_id = ITA_first_italia_congress
+		ai_will_do = {
+			factor = 100000
+		}
+		
+		#cancel = { }
+		
+		available = {
+			country_exists = VEN
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			if = {
+				limit = {
+					VEN = {
+						is_puppet = yes
+					}
+				}
+				VEN = {
+					overlord = {
+						country_event = { id = itadip.12 hours = 36 }
+					}
+				}
+			}
+			if = {
+				limit = {
+					VEN = {
+						is_puppet = no
+					}
+				}
+				VEN = {
+					country_event = { id = itadip.13 hours = 36 }
+				}
+			}
+			if = {
+				limit = {
+					SAR = {
+						owns_state = 116
+					}
+				}
+				add_state_core = 116
+			}
+			add_state_core = 117
+			add_state_core = 156
+			add_state_core = 157
+		}
+	}
+	
+	#Fourth congress
+	
+	focus = {
+		id = ITA_fourth_italia_congress
+		icon = GFX_focus_befriend_italy
+		x = 3
+		y = 13
+		cost = 20
+		prerequisite = { focus = ITA_monarch_venetion_question } 
+		prerequisite = { focus =  ITA_democratic_venetion_question }
+		relative_position_id = ITA_first_italia_congress
+		ai_will_do = {
+			factor = 100000
+		}
+		
+		#cancel = { }
+		
+		available = { date > 1854.1.1 }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			SAR = { 
+				country_event = { id = itacon.3 hours = 36 }
+			}
+		}
+	}
+	
+	focus = {
+		id = ITA_monarch_federation
+		icon = GFX_goal_tfv_strengthen_commonwealth_ties
+		x = 1
+		y = 14
+		cost = 5
+		prerequisite = { focus = ITA_fourth_italia_congress } 
+		relative_position_id = ITA_first_italia_congress
+		ai_will_do = {
+			factor = 100000
+		}
+		
+		#cancel = { }
+		
+		available = { has_country_flag = FCM }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+		}
+	}
+	
+	focus = {
+		id = ITA_republic_federation
+		icon = GFX_goal_tfv_sever_ties_with_uk
+		x = 5
+		y = 14
+		cost = 5
+		prerequisite = { focus = ITA_fourth_italia_congress } 
+		relative_position_id = ITA_first_italia_congress
+		ai_will_do = {
+			factor = 100000
+		}
+		
+		#cancel = { }
+		
+		available = { has_country_flag = FCD }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
 		}
 	}
 	
@@ -1117,49 +1919,6 @@ focus_tree = {
 	}
 	
 	focus = {
-		id = ITA_economy_industria_complex_2
-		icon = GFX_goal_generic_construct_civ_factory
-		x = 3
-		y = 2
-		cost = 5
-		prerequisite = { focus = ITA_economy_industria_complex_1 }
-		#mutually_exclusive = { }
-		relative_position_id = ITA_economy_1
-		ai_will_do = {
-			factor = 1000
-		}
-		
-		#cancel = { }
-		
-		#available = { }
-		
-		#bypass = { }
-		
-		#search_filters = {  }
-		
-		completion_reward = {
-			random_state = {
-				limit = { is_core_of = SAR }
-				add_extra_state_shared_building_slots = 2
-				add_building_construction = {
-					type = industrial_complex
-					level = 2
-					instant_build = yes
-				}
-			}
-			random_state = {
-				limit = { is_core_of = SAR }
-				add_extra_state_shared_building_slots = 2
-				add_building_construction = {
-					type = industrial_complex
-					level = 2
-					instant_build = yes
-				}
-			}
-		}
-	}
-	
-	focus = {
 		id = ITA_economy_2
 		icon = GFX_focus_generic_industry_2
 		x = 0
@@ -1195,7 +1954,7 @@ focus_tree = {
 	}
 	
 	focus = {
-		id = ITA_economy_research_invest
+		id = ITA_economy_research_invest_1
 		icon = GFX_goal_generic_scientific_exchange
 		x = -2
 		y = 4
@@ -1223,7 +1982,35 @@ focus_tree = {
 	}
 	
 	focus = {
-		id = ITA_economy_research_slot
+		id = ITA_economy_research_invest_2
+		icon = GFX_goal_continuous_research
+		x = -2
+		y = 5
+		cost = 5
+		prerequisite = { focus = ITA_economy_research_invest_1 }
+		relative_position_id = ITA_economy_1
+		ai_will_do = {
+			factor = 1000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = average_investment_level
+				add_idea = hight_investment_level
+			}
+		}
+	}
+	
+	focus = {
+		id = ITA_economy_research_slot_1
 		icon = GFX_focus_research
 		x = 0
 		y = 4
@@ -1248,7 +2035,32 @@ focus_tree = {
 	}
 	
 	focus = {
-		id = ITA_economy_developmet_industry
+		id = ITA_economy_research_slot_2
+		icon = GFX_focus_research2
+		x = 0
+		y = 5
+		cost = 5
+		prerequisite = { focus = ITA_economy_research_slot_1 }
+		relative_position_id = ITA_economy_1
+		ai_will_do = {
+			factor = 1000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_research_slot = 1
+		}
+	}
+	
+	focus = {
+		id = ITA_economy_developmet_industry_1
 		icon = GFX_focus_generic_industry_3
 		x = 2
 		y = 4
@@ -1275,7 +2087,66 @@ focus_tree = {
 		}
 	}
 	
+	focus = {
+		id = ITA_economy_developmet_industry_2
+		icon = GFX_goal_generic_production2
+		x = 2
+		y = 5
+		cost = 5
+		prerequisite = { focus = ITA_economy_developmet_industry_1 }
+		relative_position_id = ITA_economy_1
+		ai_will_do = {
+			factor = 1000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = modern_industry
+				add_idea = ahead_of_time_industry
+			}
+			swap_ideas = {
+				remove_idea = italy_economy_3
+				add_idea = italy_economy_4
+			}
+		}
+	}
+	
 	#Force
+	
+	focus = {
+		id = ITA_army
+		icon = GFX_goal_generic_axis_build_infantry
+		x = 30
+		y = 0
+		cost = 5
+		ai_will_do = {
+			factor = 1000
+		}
+		
+		#cancel = { }
+		
+		available = { has_completed_focus = ITA_monarch_army  }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			army_experience = 15
+			swap_ideas = {
+				remove_idea = italy_army_1
+				add_idea = italy_army_2
+			}
+		}
+	}
 	
 	#navy
 	
@@ -1292,7 +2163,7 @@ focus_tree = {
 		
 		#cancel = { }
 		
-		available = { has_completed_focus = ITA_army  }
+		available = { has_completed_focus = ITA_army 	}
 		
 		#bypass = { }
 		
@@ -1485,33 +2356,6 @@ focus_tree = {
 	}
 	
 	#Army
-	
-	focus = {
-		id = ITA_army
-		icon = GFX_goal_generic_axis_build_infantry
-		x = 30
-		y = 0
-		cost = 5
-		ai_will_do = {
-			factor = 1000
-		}
-		
-		#cancel = { }
-		
-		available = { has_completed_focus = ITA_monarch_army  }
-		
-		#bypass = { }
-		
-		#search_filters = {  }
-		
-		completion_reward = {
-			army_experience = 15
-			swap_ideas = {
-				remove_idea = italy_army_1
-				add_idea = italy_army_2
-			}
-		}
-	}
 	
 	focus = {
 		id = ITA_army_new_doctrine
