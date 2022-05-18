@@ -325,6 +325,218 @@ country_event = { #Byzantium
 	}
 }
 
+country_event = { #Buy venetion fo allience
+	id = itadip.12
+	title = itadip.12.t
+	desc = itadip.12.d
+	picture = GFX_report_event_second_vienna_award_pact
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = {
+		name = itadip.12.a	
+		ai_chance = {
+			factor = 95
+		}
+		SAR = {
+			annex_country = { target = VEN transfer_troops = yes }
+		}
+		if = {
+			limit = {
+				tag = PRU
+			}
+			PRU = {
+				transfer_state = 39
+			}
+		}
+		if = {
+			limit = {
+				tag = AUS
+			}
+			AUS = {
+				transfer_state = 36
+			}
+		}	
+		SAR = {
+			if = {
+				limit = {
+					SAR = {
+						owns_state = 39
+					}
+				}
+				add_state_core = 39
+			}
+			add_state_core = 159
+ 			add_state_core = 160
+		}
+	}
+	
+	option = {
+		name = itadip.12.b
+		ai_chance = {
+			factor = 5
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+			}
+		}
+		SAR = {
+			add_state_claim = 159
+			add_state_claim = 160
+		}
+	}
+}
+
+country_event = { #Welcome venetion in federation
+	id = itadip.13
+	title = itadip.13.t
+	desc = itadip.13.d
+	picture = GFX_report_event_second_vienna_award_pact
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = {
+		name = itadip.13.a	
+		ai_chance = {
+			factor = 95
+		}
+		SAR = {
+			annex_country = { target = VEN transfer_troops = yes }
+		}
+		SAR = {
+			if = {
+				limit = {
+					SAR = {
+						owns_state = 39
+					}
+				}
+				add_state_core = 39
+			}
+			add_state_core = 159
+ 			add_state_core = 160
+		}
+	}
+	
+	option = {
+		name = itadip.13.b
+		ai_chance = {
+			factor = 5
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+			}
+		}
+		SAR = {
+			if = {
+				limit = {
+					VEN = {
+						owns_state = 39
+					}
+				}
+				add_state_claim = 39
+			}
+			add_state_claim = 159
+			add_state_claim = 160
+		}
+		SAR ={
+			declare_war_on = {
+				target = VEN
+				type = annex_everything
+			}
+		}
+	}
+}
+
+country_event = { #France
+	id = itadip.14
+	title = itadip.14.t
+	desc = itadip.14.d
+	picture = GFX_report_event_second_vienna_award_pact
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = {
+		name = itadip.14.a	
+		ai_chance = {
+			factor = 70
+		}
+		FRR = {
+			diplomatic_relation = {
+				country = SAR
+				relation = non_aggression_pact
+				active = no
+			}
+		}
+		SAR = {
+			diplomatic_relation = {
+				country = FRR
+				relation = non_aggression_pact
+				active = no
+			}
+		}
+	}
+	
+	option = {
+		name = itadip.14.b
+		ai_chance = {
+			factor = 30
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+			}
+		}
+	}
+}
+
+country_event = { #CBI
+	id = itadip.14
+	title = itadip.14.t
+	desc = itadip.14.d
+	picture = GFX_report_event_second_vienna_award_pact
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = {
+		name = itadip.14.a	
+		ai_chance = {
+			factor = 70
+		}
+		CBI = {
+			diplomatic_relation = {
+				country = SAR
+				relation = non_aggression_pact
+				active = no
+			}
+		}
+		SAR = {
+			diplomatic_relation = {
+				country = CBI
+				relation = non_aggression_pact
+				active = no
+			}
+		}
+	}
+	
+	option = {
+		name = itadip.14.b
+		ai_chance = {
+			factor = 30
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+			}
+		}
+	}
+}
+
 country_event = { #Second Congress
 	id = itacon.1
 	title = itacon.1.t
@@ -456,6 +668,70 @@ country_event = { #third Congress
 		}
 		SAR = {
 			set_country_flag = TCR
+		}
+	}
+	
+}
+
+country_event = { #fourth Congress
+	id = itacon.3
+	title = itacon.3.t
+	desc = itacon.3.d
+	picture = GFX_report_event_second_vienna_award_pact
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = {
+		name = itacon.3.a	
+		ai_chance = {
+			factor = 70
+		}
+		set_politics = { ruling_party = authoritarian elections_allowed = no }
+		set_popularities = {
+			democratic = 30
+			socialism = 10
+			reactionist = 5
+			authoritarian = 55
+		}
+		SAR = {
+			set_country_flag = FCM
+		}
+	}
+	
+	option = {
+		name = itacon.3.b
+		trigger = {
+			SAR = {
+				owns_state = 2
+			}
+		}
+		ai_chance = {
+			factor = 20
+		}
+		if = {
+			limit = {
+				NOT = {
+					SAR = {
+						OR = {
+							has_country_flag = SCD 
+							has_country_flag = TCD
+						}
+					}
+				}	
+			}
+			recruit_character = SAR_Pius_IX
+		}
+		set_politics = { ruling_party = democratic elections_allowed = no }
+		set_popularities = {
+			democratic = 55
+			socialism = 10
+			reactionist = 5
+			authoritarian = 30
+		}
+		SAR = {
+			set_country_flag = FCD
 		}
 	}
 	
