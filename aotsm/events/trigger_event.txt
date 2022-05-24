@@ -490,7 +490,7 @@ country_event = {
 			has_war_with = PRU 
 		}
 		RUS = {
-			surrender_progress > 0.50
+			surrender_progress > 0.25
 		}
 	}
 	
@@ -545,12 +545,19 @@ country_event = {
 			add_state_claim = 216
 			add_state_claim = 722
 		}
+		VIN = {
+			add_state_claim = 276
+			add_state_claim = 464
+			add_state_claim = 465
+			add_state_claim = 468
+		}
 		SCA ={
 			declare_war_on = {
 				target = RUS
 				type = annex_everything
 			}
 		}
+		PRU = { add_to_faction = SCA }	
 	}
 }
 
@@ -626,6 +633,158 @@ country_event = {
 	}
 	
 }
+
+country_event = {
+	id = te.15 #invasion on Nyfayndland
+	title = te.15.t
+	desc = te.15.d
+	picture = GFX_report_event_ast_navy
+
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = te.15.a
+		SCA = {
+			transfer_state = 331
+		}
+		add_stability = -0.01
+		332 = {
+			controller = {
+				country_event = { id = te.16 days = 90 }
+			}
+		}
+	}
+	
+}
+
+country_event = {
+	id = te.16 #invasion on Labrador
+	title = te.16.t
+	desc = te.16.d
+	picture = GFX_report_event_ast_navy
+
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = te.16.a
+		SCA = {
+			transfer_state = 332
+		}
+		add_stability = -0.01
+		SCA = {
+			country_event = { id = te.17 days = 30 }
+		}
+	}
+	
+}
+
+country_event = {
+	id = te.17 #creat Vinland
+	title = te.17.t
+	desc = te.17.d
+	picture = GFX_report_event_ast_navy
+
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = te.17.a
+		VIN = {
+			transfer_state = 331
+			transfer_state = 332
+			transfer_state = 730
+		}
+		VIN = {
+			add_state_core = 331
+			add_state_core = 332
+			add_state_core = 730
+		}
+		SCA = {
+			remove_state_core = 730
+		}
+		SCA = { puppet = VIN }
+		SCA = {
+			add_manpower = -50000
+		}
+		VIN = {
+			add_manpower = 50000
+		}
+		VIN = {
+			set_politics = { ruling_party = authoritarian elections_allowed = no }
+			set_popularities = {
+				democratic = 3
+				socialism = 1
+				reactionist = 4
+				authoritarian = 92
+			}
+		}
+		VIN = { 
+			inherit_technology = SCA
+		}
+		332 = {
+			set_state_category = city
+		}
+		set_victory_points = {
+			province = 12503
+			value = 10
+		}
+		set_province_name = {
+			id = 12503
+			name = LODBRAG_CITY
+		}
+		332 = {
+			set_state_name = LODBRAG_STATE
+		}
+		331 = {
+			set_state_name = LODBRAG_ISLAND
+		}
+		141 = {
+			add_manpower = -125000
+		}
+		110 = {
+			add_manpower = -125000
+		}
+		37 = {
+			add_manpower = -125000
+		}
+		332 = {
+			add_manpower = 375000
+		}
+		332 = {
+			add_building_construction = {
+				type = infrastructure
+				level = 4
+				instant_build = yes
+			}
+			add_building_construction = {
+				type = industrial_complex
+				level = 3
+				instant_build = yes
+			}
+			add_building_construction = {
+				type = arms_factory
+				level = 2
+				instant_build = yes
+			}
+			add_building_construction = {
+				type = dockyard
+				level = 1
+				instant_build = yes
+			}
+		}
+		VIN = {
+			load_oob = VINLAND
+		}
+	}
+	
+}
+
+
 
 country_event = {
 	id = te.100
