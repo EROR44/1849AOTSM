@@ -1,0 +1,184 @@
+######################
+# Scandinavia event  #
+#    by Derkyster    #
+######################
+
+add_namespace = sca
+add_namespace = scadip
+add_namespace = scawar
+
+country_event = { #Coup
+	id = sca.1
+	title = sca.1.t
+	desc = sca.1.d
+	picture = GFX_report_event_second_vienna_award_pact
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		set_politics = {
+			ruling_party = authoritarian
+			elections_allowed = no
+			last_election = "1848.1.1"
+			election_frequency = 48
+		}
+		add_ideas = new_nordic_ways
+		SCA = { set_country_flag = coup_of_Astrid }
+	}
+	
+	option = {
+		name = sca.1.a	
+		manpower = -133
+		swap_ideas = {
+			remove_idea = republic
+			add_idea = monarchy
+		}
+	}
+}
+
+country_event = {
+	id = scadip.1 #creat Vinland
+	title = scadip.1.t
+	desc = scadip.1.d
+	picture = GFX_report_event_ast_navy
+
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		VIN = {
+			transfer_state = 331
+			transfer_state = 332
+			transfer_state = 730
+		}
+		VIN = {
+			add_state_core = 331
+			add_state_core = 332
+			add_state_core = 730
+		}
+		SCA = {
+			remove_state_core = 730
+		}
+		SCA = { puppet = VIN }
+		SCA = {
+			add_manpower = -50000
+		}
+		VIN = {
+			add_manpower = 50000
+		}
+		VIN = {
+			set_politics = { ruling_party = authoritarian elections_allowed = no }
+			set_popularities = {
+				democratic = 3
+				socialism = 1
+				reactionist = 4
+				authoritarian = 92
+			}
+		}
+		VIN = { 
+			inherit_technology = SCA
+		}
+		332 = {
+			set_state_category = city
+		}
+		set_victory_points = {
+			province = 12503
+			value = 10
+		}
+		set_province_name = {
+			id = 12503
+			name = LODBRAG_CITY
+		}
+		332 = {
+			set_state_name = LODBRAG_STATE
+		}
+		331 = {
+			set_state_name = LODBRAG_ISLAND
+		}
+		VIN = {
+			load_oob = VINLAND
+		}
+	}
+	
+	option = {
+		name = scadip.1.a
+		141 = {
+			add_manpower = -125000
+		}
+		110 = {
+			add_manpower = -125000
+		}
+		37 = {
+			add_manpower = -125000
+		}
+		332 = {
+			add_manpower = 375000
+		}
+		332 = {
+			add_building_construction = {
+				type = infrastructure
+				level = 4
+				instant_build = yes
+			}
+			add_building_construction = {
+				type = industrial_complex
+				level = 3
+				instant_build = yes
+			}
+			add_building_construction = {
+				type = arms_factory
+				level = 2
+				instant_build = yes
+			}
+			add_building_construction = {
+				type = dockyard
+				level = 1
+				instant_build = yes
+			}
+		}
+	}
+	
+}
+
+country_event = {
+	id = scawar.1 #invasion on Nyfayndland
+	title = scawar.1.t
+	desc = scawar.1.d
+	picture = GFX_report_event_ast_navy
+
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = scawar.1.a
+		SCA = {
+			transfer_state = 331
+		}
+		add_stability = -0.01
+	}
+	
+}
+
+country_event = {
+	id = scawar.2 #invasion on Labrador
+	title = scawar.2.t
+	desc = scawar.2.d
+	picture = GFX_report_event_ast_navy
+
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = scawar.2.a
+		SCA = {
+			transfer_state = 332
+		}
+		add_stability = -0.01
+	}
+	
+}

@@ -1,0 +1,373 @@
+search_filter_prios = {
+}
+focus_tree = {
+	id = scandinavia_focus
+	
+	country = {
+		factor = 0
+		
+		modifier = {
+			add = 100
+			tag = SCA
+		}
+	}
+	
+	default = no
+	reset_on_civilwar = no
+	
+	continuous_focus_position = { x = 0 y = 1045 }
+	
+	initial_show_position = {
+		focus = SCA_prepare_feast
+	}
+	
+	focus = {
+		id = SCA_prepare_feast
+		icon = GFX_focus_generic_scandinavia_flags
+		x = 20
+		y = 0
+		cost = 4.3
+		ai_will_do = {
+			factor = 10000000
+		}
+		
+		#cancel = { }
+		
+		#available = {  }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_stability = 0.05
+		}
+	}
+	
+	focus = {
+		id = SCA_feast
+		icon = GFX_focus_hol_the_foundations_of_defense
+		x = 0
+		y = 1
+		cost = 4.3
+		prerequisite = { focus = SCA_prepare_feast }
+		relative_position_id = SCA_prepare_feast
+		ai_will_do = {
+			factor = 10000000
+		}
+		
+		#cancel = { }
+		
+		#available = {  }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			country_event = sca.1
+		}
+	}
+	
+	#Base politic
+	
+	#Tradition
+	
+	focus = {
+		id = SCA_tradition_viking
+		icon = GFX_goal_generic_amphibious_assault
+		x = -4
+		y = 2
+		cost = 4.3
+		prerequisite = { focus = SCA_feast }
+		mutually_exclusive = { focus = SCA_new_viking }
+		relative_position_id = SCA_prepare_feast
+		ai_will_do = {
+			factor = 50000
+		}
+		
+		#cancel = { }
+		
+		#available = {  }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+		}
+	}
+	
+	#Centre
+	
+	focus = {
+		id = SCA_rename_city
+		icon = GFX_focus_generic_self_management
+		x = 0
+		y = 3
+		cost = 4.3
+		prerequisite = { focus = SCA_tradition_viking focus = SCA_new_viking }
+		relative_position_id = SCA_prepare_feast
+		ai_will_do = {
+			factor = 50000
+		}
+		
+		#cancel = { }
+		
+		#available = {  }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			set_province_name = {
+				id = 6287
+				name = KJOBRMANNSHAVN #Кьобмансхавн
+			}
+			set_province_name = {
+				id = 6115
+				name = VIKIA #Викия
+			}
+			set_province_name = {
+				id = 6050
+				name = AGNAFIT #Агнафит
+			}
+			add_stability = 0.05
+		}
+	}
+	
+	focus = {
+		id = SCA_anti_christianity
+		icon = GFX_focus_mex_triumph_over_the_cristeros
+		x = 0
+		y = 4
+		cost = 4.3
+		prerequisite = { focus = SCA_rename_city }
+		relative_position_id = SCA_prepare_feast
+		ai_will_do = {
+			factor = 50000
+		}
+		
+		#cancel = { }
+		
+		#available = {  }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = protestantism
+				add_idea = paganism
+			}
+			add_stability = -0.20
+		}
+	}
+	
+	#New Viking
+	
+	focus = {
+		id = SCA_new_viking
+		icon = GFX_goal_generic_position_armies
+		x = 4
+		y = 2
+		cost = 4.3
+		prerequisite = { focus = SCA_feast }
+		mutually_exclusive = { focus = SCA_tradition_viking }
+		relative_position_id = SCA_prepare_feast
+		ai_will_do = {
+			factor = 50000
+		}
+		
+		#cancel = { }
+		
+		#available = {  }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+		}
+	}
+	
+	#Anti English
+	
+	focus = {
+		id = SCA_revange_for_ragnar
+		icon = GFX_focus_ger_break_anglo_french_colonial_hegemony
+		x = -12
+		y = 2
+		cost = 4.3
+		prerequisite = { focus = SCA_feast }
+		relative_position_id = SCA_prepare_feast
+		ai_will_do = {
+			factor = 10000000
+		}
+		
+		#cancel = { }
+		
+		#available = {  }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_ideas = revange_for_ragnar
+			add_opinion_modifier = {
+				target = CBI
+				modifier = embargo
+			}
+		}
+	}
+	
+	focus = {
+		id = SCA_nyfayndland_operation
+		icon = GFX_goal_generic_forceful_treaty
+		x = -1
+		y = 1
+		cost = 4.3
+		prerequisite = { focus = SCA_revange_for_ragnar }
+		relative_position_id = SCA_revange_for_ragnar
+		ai_will_do = {
+			factor = 10000000
+		}
+		
+		#cancel = { }
+		
+		#available = {  }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			331 = {
+				controller = {
+					country_event = { id = scawar.1 days = 2 }
+				}
+			}
+		}
+	}
+	
+	focus = {
+		id = SCA_labrador_operation
+		icon = GFX_focus_generic_provoke_border_clashes
+		x = 1
+		y = 1
+		cost = 4.3
+		prerequisite = { focus = SCA_revange_for_ragnar }
+		relative_position_id = SCA_revange_for_ragnar
+		ai_will_do = {
+			factor = 10000000
+		}
+		
+		#cancel = { }
+		
+		#available = {  }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			332 = {
+				controller = {
+					country_event = { id = scawar.2 days = 3 }
+				}
+			}
+		}
+	}
+	
+	focus = {
+		id = SCA_creat_vinland
+		icon = GFX_goal_generic_intelligence_exchange
+		x = 0
+		y = 2
+		cost = 4.3
+		prerequisite = { focus = SCA_nyfayndland_operation }
+		prerequisite = { focus = SCA_labrador_operation }
+		relative_position_id = SCA_revange_for_ragnar
+		ai_will_do = {
+			factor = 10000000
+		}
+		
+		#cancel = { }
+		
+		available = { 
+			owns_state = 331
+			owns_state = 332
+			owns_state = 730
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			country_event = scadip.1
+		}
+	}
+	
+	#Anti Russian
+	
+	focus = {
+		id = SCA_revange_for_1712
+		icon = GFX_focus_ger_strike_at_the_source
+		x = 12
+		y = 2
+		cost = 4.3
+		prerequisite = { focus = SCA_feast }
+		relative_position_id = SCA_prepare_feast
+		ai_will_do = {
+			factor = 100000
+		}
+		
+		#cancel = { }
+		
+		#available = {  }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_ideas = revange_for_1712
+			add_opinion_modifier = {
+				target = RUS
+				modifier = embargo
+			}
+		}
+	}
+	
+	focus = {
+		id = SCA_core_finland
+		icon = GFX_focus_EST_national_pride_in_finland
+		x = 0
+		y = 1
+		cost = 4.3
+		prerequisite = { focus = SCA_revange_for_1712 }
+		relative_position_id = SCA_revange_for_1712
+		ai_will_do = {
+			factor = 100000
+		}
+		
+		#cancel = { }
+		
+		#available = {  }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_state_core = 111
+			add_state_core = 146
+			add_state_core = 147
+			add_state_core = 149
+			add_state_core = 150
+		}
+	}

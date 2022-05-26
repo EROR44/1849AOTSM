@@ -87,7 +87,7 @@ focus_tree = {
 		id = FRA_stimulation_of_prom
 		icon = GFX_goal_generic_construct_civilian
 		
-		x = -1
+		x = 0
 		y = 1
 		relative_position_id = FRA_stimulation_of_economic
 		prerequisite = { focus = FRA_stimulation_of_economic }
@@ -106,7 +106,7 @@ focus_tree = {
 		id = FRA_civil_economic
 		icon = GFX_goal_generic_consumer_goods
 		
-		x = -1
+		x = -2
 		y = 1
 		relative_position_id = FRA_stimulation_of_prom
 		prerequisite = { focus = FRA_stimulation_of_prom }
@@ -165,7 +165,7 @@ focus_tree = {
 		id = FRA_infrastructure_effort
 		icon = GFX_goal_generic_construct_infrastructure
 		
-		x = 1
+		x = 0
 		y = 2
 		relative_position_id = FRA_stimulation_of_prom
 		prerequisite = { 
@@ -184,32 +184,13 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = FRA_stimulation_of_army_prom
-		icon = GFX_goal_generic_army_artillery
-		
-		x = 1
-		y = 1
-		relative_position_id = FRA_stimulation_of_economic
-		prerequisite = { focus = FRA_stimulation_of_economic }
-		
-		cost = 10
-		
-		available_if_capitulated = yes
-		
-		search_filters = {FOCUS_FILTER_INDUSTRY}
-
-		completion_reward = {
-			custom_effect_tooltip = FRR_unlock_decilions_prom
-		}
-	}
-	focus = {
 		id = FRA_militarisation_of_economic
 		icon = GFX_goal_generic_build_tank
 		
-		x = 1
+		x = 2
 		y = 1
-		relative_position_id = FRA_stimulation_of_army_prom
-		prerequisite = { focus = FRA_stimulation_of_army_prom }
+		relative_position_id = FRA_stimulation_of_prom
+		prerequisite = { focus = FRA_stimulation_of_prom }
 		mutually_exclusive = { focus = FRA_civil_economic }
 		
 		cost = 10
@@ -281,11 +262,11 @@ focus_tree = {
 		id = FRA_investment_in_paris_prom
 		icon = GFX_focus_generic_industry_2
 		
-		x = 0
+		x = -1
 		y = 3
 		relative_position_id = FRA_stimulation_of_prom
 		prerequisite = { focus = FRA_stimulation_of_prom }
-		prerequisite = { focus = FRA_stimulation_of_army_prom }
+		prerequisite = { focus = FRA_stimulation_of_prom }
 		prerequisite = { 
 			focus = FRA_develop_civ_prom
 			focus = FRA_expand_mil_production
@@ -325,7 +306,7 @@ focus_tree = {
 		y = 1
 		relative_position_id = FRA_expand_mil_production
 		prerequisite = { focus = FRA_stimulation_of_prom }
-		prerequisite = { focus = FRA_stimulation_of_army_prom }
+		prerequisite = { focus = FRA_stimulation_of_prom }
 		prerequisite = { 
 			focus = FRA_develop_civ_prom
 			focus = FRA_expand_mil_production
@@ -333,11 +314,15 @@ focus_tree = {
 		cost = 10
 		
 		available = {
-			#FRR = {
-			#	has_owned_and_controlled = 459
-			#	has_owned_and_controlled = 460
-			#	has_owned_and_controlled = 513
-			#}
+			459 = { 
+					is_owned_and_controlled_by = FRR
+				}
+			460 = { 
+				is_owned_and_controlled_by = FRR
+			}
+			513 = { 
+				is_owned_and_controlled_by = FRR
+			}
 		}
 		
 		available_if_capitulated = yes
@@ -375,6 +360,10 @@ focus_tree = {
 		
 		cost = 10
 		
+		available = {
+			
+		}
+		
 		available_if_capitulated = yes
 		
 		search_filters = {FOCUS_FILTER_RESEARCH}
@@ -397,6 +386,10 @@ focus_tree = {
 		
 		cost = 10
 		
+		available = {
+			NOT = { has_idea = FRR_divided_nation } 
+		}
+		
 		available_if_capitulated = yes
 		
 		search_filters = {FOCUS_FILTER_RESEARCH}
@@ -418,7 +411,7 @@ focus_tree = {
 		
 		available = { 
 			amount_research_slots > 5 
-			date > 1851.1.1
+			date > 1852.1.1
 		}
 		
 		available_if_capitulated = yes
@@ -448,7 +441,7 @@ focus_tree = {
 		cost = 5
 		
 		available = {
-			has_country_flag = FRA_attempt_is_occured
+			has_country_flag = FRA_lagrandj_is_alive
 			has_country_leader = { ruling_only = yes character = FRR_Sharl_Lagranj }
 		}
 		
@@ -553,10 +546,9 @@ focus_tree = {
 		search_filters = {FOCUS_FILTER_POLITICAL}
 		
 		completion_reward = {
-			remove_ideas = FRR_politisiertest_army
-			add_timed_idea = {
-				idea = FRR_separation_army_from_goverment
-				days = 365
+			swap_ideas = {
+				remove_idea = FRR_politisiertest_army
+				add_idea = FRR_separation_army_from_goverment_1
 			}
 		}
 	}
@@ -710,9 +702,9 @@ focus_tree = {
 		id = FRA_army_reviev
 		icon = GFX_goal_generic_build_tank
 		
-		x = 12
-		y = 0
-		relative_position_id = FRA_extra_goverment_session
+		x = 3
+		y = 3
+		relative_position_id = FRA_updated_french_goverment
 		
 		available = {
 			NOT = {
@@ -730,13 +722,19 @@ focus_tree = {
 			army_experience = 5
 			navy_experience = 5
 			air_experience = 5
+			hidden_effect = {
+				swap_ideas = {
+				remove_idea = FRR_separation_army_from_goverment_1
+				add_idea = FRR_separation_army_from_goverment_2
+				}
+			}
 		}
 	}
 	focus = {
 		id = FRA_fond_bertie
 		icon = GFX_goal_generic_small_arms
 		
-		x = 0
+		x = -1
 		y = 1
 		relative_position_id = FRA_army_reviev
 		prerequisite = { focus = FRA_army_reviev }
@@ -785,7 +783,7 @@ focus_tree = {
 		id = FRA_fond_guen
 		icon = GFX_goal_generic_production
 		
-		x = 2
+		x = 1
 		y = 1
 		relative_position_id = FRA_army_reviev
 		prerequisite = { focus = FRA_army_reviev }
@@ -814,14 +812,17 @@ focus_tree = {
 
 		cost = 10
 		#search_filters = {   }
-		
+
 		available = {
 			
 		}
 		
 		available_if_capitulated = yes
 
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		
 		completion_reward = {
+			
 			25 = {
 			add_extra_state_shared_building_slots = 2
 				add_building_construction = {
@@ -842,7 +843,7 @@ focus_tree = {
 		id = FRA_fond_leklerk
 		icon = GFX_goal_generic_improve_relations
 		
-		x = 4
+		x = 3
 		y = 1
 		relative_position_id = FRA_army_reviev
 		prerequisite = { focus = FRA_army_reviev }
@@ -892,7 +893,7 @@ focus_tree = {
 		id = FRA_mobile_war
 		icon = GFX_goal_generic_improve_relations
 		
-		x = -1
+		x = 0
 		y = 3
 		relative_position_id = FRA_army_reviev
 		prerequisite = { focus = FRA_army_reviev }
@@ -953,7 +954,7 @@ focus_tree = {
 		id = FRA_position_war
 		icon = GFX_goal_generic_improve_relations
 		
-		x = 5
+		x = 4
 		y = 3
 		relative_position_id = FRA_army_reviev
 		prerequisite = { focus = FRA_army_reviev }
@@ -1014,7 +1015,7 @@ focus_tree = {
 		id = FRA_explore_the_alg_campain_expirience
 		icon = GFX_goal_generic_position_armies
 		
-		x = -4
+		x = -5
 		y = 1
 		relative_position_id = FRA_army_reviev
 		prerequisite = { focus = FRA_army_reviev }
@@ -1069,13 +1070,16 @@ focus_tree = {
 		#search_filters = {   }
 		
 		available = {
-			
+			has_idea = FRR_separation_army_from_goverment_2
 		}
 		
 		available_if_capitulated = yes
 		
 		completion_reward = {
-			add_ideas = FRR_army_reorganisation
+			swap_ideas = {
+				remove_idea = FRR_separation_army_from_goverment_2
+				add_idea = FRR_separation_army_from_goverment_3
+			}
 		}
 	}
 	focus = {
@@ -1137,6 +1141,33 @@ focus_tree = {
 			}	
 		}
 	}
+	focus = {
+		id = FRA_new_army_structure
+		icon = GFX_goal_generic_military_sphere
+		
+		x = 2
+		y = 1
+		relative_position_id = FRA_motorisation_of_army
+		prerequisite = { focus = FRA_motorisation_of_army }
+		prerequisite = { focus = FRA_create_forein_legion }
+
+		cost = 10
+		#search_filters = {   }
+		
+		available = {
+			
+		}
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = FRR_separation_army_from_goverment_3
+				add_idea = FRR_national_french_army
+			}
+		}
+	}
+	
 ####################################################	
 ################AIR_SECTION#########################
 ####################################################
@@ -1517,9 +1548,9 @@ focus_tree = {
 		id = FRA_be_with_britain
 		icon = GFX_be_friend_with_cbi
 		
-		x = 7
+		x = 13
 		y = 0
-		relative_position_id = FRA_navy
+		relative_position_id = FRA_sharl_lagrange_is_dead
 		mutually_exclusive = { focus = FRA_own_way }
 		mutually_exclusive = { focus = FRA_be_with_prussia }
 		cost = 10
@@ -1682,6 +1713,7 @@ focus_tree = {
 			hidden_effect = {
 				28 = { add_state_core = FRR }
 				828 = { add_state_core = FRR }
+				PRU = { country_event = { id = fren.14 days = 2 } }
 			}
 		}
 	}
@@ -1708,6 +1740,9 @@ focus_tree = {
 		completion_reward = {
 			add_political_power = 150
 			create_faction = FRR_french_socialostic_sphere
+			hidden_effect = {
+				set_country_flag = FRR_own_way
+			}
 		}
 	}
 	focus = {
@@ -1725,7 +1760,7 @@ focus_tree = {
 		#search_filters = {   }
 		
 		available = {
-			
+			has_country_flag = FRR_own_way
 		}
 		
 		available_if_capitulated = yes
@@ -1749,7 +1784,7 @@ focus_tree = {
 		#search_filters = {   }
 		
 		available = {
-			
+			has_country_flag = FRR_own_way
 		}
 		
 		available_if_capitulated = yes
@@ -1946,7 +1981,10 @@ focus_tree = {
 		available_if_capitulated = yes
 
 		completion_reward = {
-			CBI = { add_opinion_modifier = { target = FRR modifier = embargo } }			
+			CBI = { add_opinion_modifier = { target = FRR modifier = embargo } }		
+			hidden_effect = {
+				CBI = { country_event = { id = fren.15 days = 2 } }
+			}
 		}
 	}
 	focus = {
@@ -2036,17 +2074,18 @@ focus_tree = {
 #############################################################
 	focus = {
 		id = FRA_sharl_lagrange_is_dead
-		icon = GFX_goal_generic_major_war
+		icon = GFX_goal_generic_alliance
 		
-		x = 8
-		y = 1
-		relative_position_id = FRA_updated_french_goverment
+		x = 15
+		x = 15
+		y = 0
+		relative_position_id = FRA_extra_goverment_session
 		
 
-		cost = 10
+		cost = 5
 		
 		available = {
-			has_country_flag = FRA_attempt_is_occured
+			has_country_flag = FRA_lagrandj_is_died
 			NOT = { has_country_leader = { ruling_only = yes character = FRR_Sharl_Lagranj } }
 		}
 		
@@ -2055,17 +2094,207 @@ focus_tree = {
 		search_filters = {FOCUS_FILTER_POLITICAL}
 
 		completion_reward = {
-			
+			country_event = { id = fren.21 }
 		}
 	}
+##################LOUIS_BLAN_BLOCK################################	
 	focus = {
 		id = FRA_luis_blan_goverment
-		icon = GFX_goal_generic_major_war
+		icon = GFX_goal_tripartite_pact
 		
-		x = -6
+		x = -8
 		y = 1
 		relative_position_id = FRA_sharl_lagrange_is_dead
 		prerequisite = { focus =  FRA_sharl_lagrange_is_dead}
+
+		cost = 5
+		
+		
+		available = {
+			has_country_leader = { ruling_only = yes character = FRR_Luis_Blank } 
+		}
+		
+		available_if_capitulated = yes
+
+		search_filters = {FOCUS_FILTER_POLITICAL}
+
+		completion_reward = {
+			add_political_power = 100
+			country_event = { id = fren.16 }
+		}
+	}
+	focus = {
+		id = FRA_neo_socialism
+		icon = GFX_focus_por_workers_of_iberia
+		
+		x = -1
+		y = 1
+		relative_position_id = FRA_luis_blan_goverment
+		prerequisite = { focus = FRA_luis_blan_goverment}
+
+		cost = 10
+		
+		
+		available = {
+			has_country_leader = { ruling_only = yes character = FRR_Luis_Blank } 
+		}
+		
+		available_if_capitulated = yes
+
+		search_filters = {FOCUS_FILTER_POLITICAL}
+
+		completion_reward = {
+			ROOT = {
+				add_stability = 0.05
+				add_popularity = {
+					ideology = socialism   
+					popularity = 0.07
+				}		
+			}
+		}
+	}
+	focus = {
+		id = FRA_support_the_workers_class
+		icon = GFX_goal_generic_major_alliance
+		
+		x = 0
+		y = 1
+		relative_position_id = FRA_neo_socialism
+		prerequisite = { focus = FRA_neo_socialism}
+
+		cost = 10
+		
+		
+		available = {
+			has_country_leader = { ruling_only = yes character = FRR_Luis_Blank } 
+		}
+		
+		available_if_capitulated = yes
+
+		search_filters = {FOCUS_FILTER_POLITICAL}
+
+		completion_reward = {
+			add_timed_idea = {
+					idea = FRR_workers_support
+					days = 120
+				}
+		}
+	}
+	focus = {
+		id = FRA_fight_with_opposition
+		icon = GFX_goal_demand_sudetenland
+		
+		x = 1
+		y = 1
+		relative_position_id = FRA_luis_blan_goverment
+		prerequisite = { focus = FRA_luis_blan_goverment}
+
+		cost = 10
+		
+		
+		available = {
+			has_country_leader = { ruling_only = yes character = FRR_Luis_Blank } 
+		}
+		
+		available_if_capitulated = yes
+
+		search_filters = {FOCUS_FILTER_POLITICAL}
+
+		completion_reward = {
+			add_timed_idea = {
+					idea = FRR_fight_with_opposition
+					days = 210
+				}
+		}
+	}
+	focus = {
+		id = FRA_socialistic_trud_propaganda
+		icon = GFX_goal_generic_propaganda
+		
+		x = 0
+		y = 1
+		relative_position_id = FRA_fight_with_opposition
+		prerequisite = { focus = FRA_fight_with_opposition }
+
+		cost = 10
+		
+		
+		available = {
+			has_country_leader = { ruling_only = yes character = FRR_Luis_Blank } 
+		}
+		
+		available_if_capitulated = yes
+
+		search_filters = {FOCUS_FILTER_POLITICAL}
+
+		completion_reward = {
+			add_stability = 0.07
+			add_popularity = {
+					ideology = socialism   
+					popularity = 0.03
+				}	
+		}
+	}
+	focus = {
+		id = FRA_the_reform_of_trud_laws
+		icon = GFX_goal_molotov_ribbentrop_pact
+		
+		x = -1
+		y = 1
+		relative_position_id = FRA_socialistic_trud_propaganda
+		prerequisite = { focus = FRA_socialistic_trud_propaganda }
+		prerequisite = { focus = FRA_support_the_workers_class }
+
+		cost = 10
+		
+		
+		available = {
+			has_country_leader = { ruling_only = yes character = FRR_Luis_Blank } 
+		}
+		
+		available_if_capitulated = yes
+
+		search_filters = {FOCUS_FILTER_POLITICAL}
+
+		completion_reward = {
+			country_event = { id = fren.17 }
+		}
+	}
+	focus = {
+		id = FRA_gain_control_on_army
+		icon = GFX_goal_continuous_suppression
+		
+		x = -2
+		y = 1
+		relative_position_id = FRA_the_reform_of_trud_laws
+		prerequisite = { focus = FRA_the_reform_of_trud_laws }
+
+		cost = 10
+		
+		
+		available = {
+			has_country_leader = { ruling_only = yes character = FRR_Luis_Blank } 
+		}
+		
+		available_if_capitulated = yes
+
+		search_filters = {FOCUS_FILTER_POLITICAL}
+
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = FRR_politisiertest_army
+				add_idea = FRR_separation_army_from_goverment_1
+			}
+		}
+	}
+	focus = {
+		id = FRA_legal_guarantees_for_workers
+		icon = GFX_focus_focus_fra_liberte_egalite_solidarite
+		
+		x = 0
+		y = 1
+		relative_position_id = FRA_the_reform_of_trud_laws
+		prerequisite = { focus = FRA_the_reform_of_trud_laws }
 
 		cost = 10
 		
@@ -2083,13 +2312,139 @@ focus_tree = {
 		}
 	}
 	focus = {
+		id = FRA_peoples_goverment
+		icon = GFX_focus_generic_diplomatic_treaty
+		
+		x = 2
+		y = 1
+		relative_position_id = FRA_the_reform_of_trud_laws
+		prerequisite = { focus = FRA_the_reform_of_trud_laws }
+
+		cost = 10
+		
+		
+		available = {
+			has_country_leader = { ruling_only = yes character = FRR_Luis_Blank } 
+		}
+		
+		available_if_capitulated = yes
+
+		search_filters = {FOCUS_FILTER_POLITICAL}
+
+		completion_reward = {
+			
+		}
+	}
+	focus = {
+		id = FRA_create_peoples_brigades
+		icon = GFX_focus_generic_military_mission
+		
+		x = -1
+		y = 1
+		relative_position_id = FRA_legal_guarantees_for_workers
+		prerequisite = { focus = FRA_gain_control_on_army }
+		prerequisite = { focus = FRA_legal_guarantees_for_workers }
+
+		cost = 10
+		
+		
+		available = {
+			has_country_leader = { ruling_only = yes character = FRR_Luis_Blank } 
+		}
+		
+		available_if_capitulated = yes
+
+		search_filters = {FOCUS_FILTER_POLITICAL}
+
+		completion_reward = {
+			
+		}
+	}
+	focus = {
+		id = FRA_politic_of_national_protectionism
+		icon = GFX_goal_generic_national_unity
+		
+		x = 1
+		y = 1
+		relative_position_id = FRA_legal_guarantees_for_workers
+		prerequisite = { focus = FRA_peoples_goverment }
+		prerequisite = { focus = FRA_legal_guarantees_for_workers }
+
+		cost = 10
+		
+		
+		available = {
+			has_country_leader = { ruling_only = yes character = FRR_Luis_Blank } 
+		}
+		
+		available_if_capitulated = yes
+
+		search_filters = {FOCUS_FILTER_POLITICAL}
+
+		completion_reward = {
+			
+		}
+	} 
+	focus = {
+		id = FRA_together_against_external_threats #вместе против внешних угроз
+		icon = GFX_goal_generic_improve_relations
+		
+		x = -1
+		y = 1
+		relative_position_id = FRA_politic_of_national_protectionism
+		prerequisite = { focus = FRA_create_peoples_brigades }
+		prerequisite = { focus = FRA_politic_of_national_protectionism }
+
+		cost = 5
+		
+		
+		available = {
+			has_country_leader = { ruling_only = yes character = FRR_Luis_Blank } 
+		}
+		
+		available_if_capitulated = yes
+
+		search_filters = {FOCUS_FILTER_POLITICAL}
+
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = FRR_divided_nation
+				add_idea = FRR_homeland_of_socialism
+			}
+		}
+	}
+##################MISHEL_SHEVALIE_BLOCK################################	
+	focus = {
 		id = FRA_mishel_shevalie_goverment
 		icon = GFX_goal_generic_major_war
 		
-		x = -2
+		x = -3
 		y = 1
 		relative_position_id = FRA_sharl_lagrange_is_dead
 		prerequisite = { focus =  FRA_sharl_lagrange_is_dead}
+
+		cost = 5
+		
+		available = {
+			has_country_leader = { ruling_only = yes character = FRR_Mishel_Shevalie } 
+		}
+		
+		available_if_capitulated = yes
+
+		search_filters = {FOCUS_FILTER_POLITICAL}
+
+		completion_reward = {
+			country_event = { id = fren.18 }
+		}
+	}
+	focus = {
+		id = FRA_speech_with_opposition
+		icon = GFX_goal_generic_major_war
+		
+		x = 0
+		y = 1
+		relative_position_id = FRA_mishel_shevalie_goverment
+		prerequisite = { focus =  FRA_mishel_shevalie_goverment}
 
 		cost = 10
 		
@@ -2106,18 +2461,18 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = FRA_anri_de_artua_goverment
+		id = FRA_dialog_witch_amrmy
 		icon = GFX_goal_generic_major_war
 		
-		x = 2
+		x = -1
 		y = 1
-		relative_position_id = FRA_sharl_lagrange_is_dead
-		prerequisite = { focus =  FRA_sharl_lagrange_is_dead}
+		relative_position_id = FRA_speech_with_opposition
+		prerequisite = { focus =  FRA_speech_with_opposition}
 
 		cost = 10
 		
 		available = {
-			has_country_leader = { ruling_only = yes character = FRR_Anri_Sharl_de_Artua } 
+			has_country_leader = { ruling_only = yes character = FRR_Mishel_Shevalie } 
 		}
 		
 		available_if_capitulated = yes
@@ -2129,13 +2484,204 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = FRA_louis_napoleons_goverment
+		id = FRA_concessions_to_industrialists
 		icon = GFX_goal_generic_major_war
 		
-		x = 6
+		x = 1
+		y = 1
+		relative_position_id = FRA_speech_with_opposition
+		prerequisite = { focus =  FRA_speech_with_opposition}
+
+		cost = 10
+		
+		available = {
+			has_country_leader = { ruling_only = yes character = FRR_Mishel_Shevalie } 
+		}
+		
+		available_if_capitulated = yes
+
+		search_filters = {FOCUS_FILTER_POLITICAL}
+
+		completion_reward = {
+			
+		}
+	}
+	focus = {
+		id = FRA_democratisation_of_regime
+		icon = GFX_goal_generic_major_war
+		
+		x = 1
+		y = 1
+		relative_position_id = FRA_dialog_witch_amrmy
+		prerequisite = { focus =  FRA_concessions_to_industrialists }
+		prerequisite = { focus =  FRA_dialog_witch_amrmy}
+
+		cost = 10
+		
+		available = {
+			has_country_leader = { ruling_only = yes character = FRR_Mishel_Shevalie } 
+		}
+		
+		available_if_capitulated = yes
+
+		search_filters = {FOCUS_FILTER_POLITICAL}
+
+		completion_reward = {
+			
+		}
+	}
+##################SHARL_DE_ARTUA_BLOCK################################	
+	focus = {
+		id = FRA_anri_de_artua_goverment
+		icon = GFX_goal_generic_major_war
+		
+		x = 3
 		y = 1
 		relative_position_id = FRA_sharl_lagrange_is_dead
 		prerequisite = { focus =  FRA_sharl_lagrange_is_dead}
+
+		cost = 5
+		
+		available = {
+			has_country_leader = { ruling_only = yes character = FRR_Anri_Sharl_de_Artua } 
+		}
+		
+		available_if_capitulated = yes
+
+		search_filters = {FOCUS_FILTER_POLITICAL}
+
+		completion_reward = {
+			country_event = { id = fren.19 }
+		}
+	}
+##################LOUIS_NAPOLEON_BLOCK################################	
+	focus = {
+		id = FRA_louis_napoleons_goverment
+		icon = GFX_goal_generic_major_war
+		
+		x = 8
+		y = 1
+		relative_position_id = FRA_sharl_lagrange_is_dead
+		prerequisite = { focus =  FRA_sharl_lagrange_is_dead}
+
+		cost = 5
+		
+		available = {
+			has_country_leader = { ruling_only = yes character = FRR_Louis_Napoleon } 
+		}
+		
+		available_if_capitulated = yes
+
+		search_filters = {FOCUS_FILTER_POLITICAL}
+
+		completion_reward = {
+			country_event = { id = fren.20 }
+		}
+	}
+	focus = {
+		id = FRA_militarists_in_goverment
+		icon = GFX_goal_generic_major_war
+		
+		x = 1
+		y = 1
+		relative_position_id = FRA_louis_napoleons_goverment
+		prerequisite = { focus =  FRA_louis_napoleons_goverment }
+
+		cost = 10
+		
+		available = {
+			has_country_leader = { ruling_only = yes character = FRR_Louis_Napoleon } 
+		}
+		
+		available_if_capitulated = yes
+
+		search_filters = {FOCUS_FILTER_POLITICAL}
+
+		completion_reward = {
+			
+		}
+	}
+	focus = {
+		id = FRA_propaganda_french_uniqueness
+		icon = GFX_goal_generic_major_war
+		
+		x = -1
+		y = 1
+		relative_position_id = FRA_louis_napoleons_goverment
+		prerequisite = { focus =  FRA_louis_napoleons_goverment}
+
+		cost = 10
+		
+		available = {
+			has_country_leader = { ruling_only = yes character = FRR_Louis_Napoleon } 
+		}
+		
+		available_if_capitulated = yes
+
+		search_filters = {FOCUS_FILTER_POLITICAL}
+
+		completion_reward = {
+			
+		}
+	}
+	focus = {
+		id = FRA_ban_the_opposition
+		icon = GFX_goal_generic_major_war
+		
+		x = -1
+		y = 1
+		relative_position_id = FRA_militarists_in_goverment
+		prerequisite = { focus =  FRA_propaganda_french_uniqueness }
+		prerequisite = { focus =  FRA_militarists_in_goverment }
+
+		cost = 10
+		
+		available = {
+			has_country_leader = { ruling_only = yes character = FRR_Louis_Napoleon } 
+		}
+		
+		available_if_capitulated = yes
+
+		search_filters = {FOCUS_FILTER_POLITICAL}
+
+		completion_reward = {
+			
+		}
+	}
+	focus = {
+		id = FRA_create_millitary_goverment
+		icon = GFX_goal_generic_major_war
+		
+		x = 0
+		y = 1
+		relative_position_id = FRA_ban_the_opposition
+		prerequisite = { focus =  FRA_ban_the_opposition }
+
+		cost = 10
+		
+		available = {
+			has_country_leader = { ruling_only = yes character = FRR_Louis_Napoleon } 
+		}
+		
+		available_if_capitulated = yes
+
+		search_filters = {FOCUS_FILTER_POLITICAL}
+
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = republic
+				add_idea = dictature
+			}
+		}
+	}
+	focus = {
+		id = FRA_
+		icon = GFX_goal_generic_major_war
+		
+		x = 0
+		y = 1
+		relative_position_id = FRA_create_millitary_goverment
+		prerequisite = { focus =  FRA_create_millitary_goverment }
 
 		cost = 10
 		
