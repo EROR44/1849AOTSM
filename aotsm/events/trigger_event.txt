@@ -240,22 +240,29 @@ country_event = {
 		HAL = {
 			has_border_war = no
 		}
-		HAL = {
-			has_country_flag = {
-				flag = fed_inv
-				value > -3
+		if = {
+			limit = {
+				HAL = {
+					has_country_flag = fed_inv
+				}
 			}
-		}
-		HAL = {
-			has_country_flag = {
-				flag = fed_inv
-				value < 6
+			HAL = {
+				has_country_flag = {
+					flag = fed_inv
+					value > -3
+				}
+			}
+			HAL = {
+				has_country_flag = {
+					flag = fed_inv
+					value < 6
+				}
 			}
 		}
 	}
 	
 	mean_time_to_happen = {
-		days = 100
+		days = 365	
 	}
 	
 	option = {
@@ -300,22 +307,29 @@ country_event = {
 		HAL = {
 			has_border_war = no
 		}
-		HAL = {
-			has_country_flag = {
-				flag = fed_inv
-				value > -3
+		if = {
+			limit = {
+				HAL = {
+					has_country_flag = fed_inv
+				}
 			}
-		}
-		HAL = {
-			has_country_flag = {
-				flag = fed_inv
-				value < 6
+			HAL = {
+				has_country_flag = {
+					flag = fed_inv
+					value > -3
+				}
+			}
+			HAL = {
+				has_country_flag = {
+					flag = fed_inv
+					value < 6
+				}
 			}
 		}
 	}
 	
 	mean_time_to_happen = {
-		days = 120
+		days = 365
 	}
 	
 	option = {
@@ -476,7 +490,7 @@ country_event = {
 			has_war_with = PRU 
 		}
 		RUS = {
-			surrender_progress > 0.50
+			surrender_progress > 0.25
 		}
 	}
 	
@@ -531,13 +545,93 @@ country_event = {
 			add_state_claim = 216
 			add_state_claim = 722
 		}
+		VIN = {
+			add_state_claim = 276
+			add_state_claim = 464
+			add_state_claim = 465
+			add_state_claim = 468
+		}
 		SCA ={
 			declare_war_on = {
 				target = RUS
 				type = annex_everything
 			}
 		}
+		PRU = { add_to_faction = SCA }	
 	}
+}
+
+country_event = {
+	id = te.13 #GLA allience with VLH
+	title = te.13.t
+	desc = te.13.d
+	picture = GFX_report_event_communist_leader
+
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = te.13.a
+		ai_chance = {
+			factor = 50
+		}
+		VLH = { add_to_faction =  GLA }
+		GLA = { set_country_flag = GLA_with_VLH }
+	}
+	
+	option = {
+		name = te.13.b
+		ai_chance = {
+			factor = 50
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+			}
+		}
+	}
+}
+
+country_event = {
+	id = te.14 #VLH war with HUN
+	title = te.14.t
+	desc = te.14.d
+	picture = GFX_report_event_communist_leader
+
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = te.14.a
+		VLH = {
+			set_country_flag = VLH_war_with_HUN
+		}
+		VLH = {
+			declare_war_on = {
+				target = HUN
+				type = annex_everything
+			}
+		}
+		VLH = {
+			add_ideas = russian_help
+		}
+		if = {
+			limit = {
+				GLA = { has_country_flag = GLA_with_VLH }
+			}
+			GLA = {
+				declare_war_on = {
+					target = HUN
+					type = annex_everything
+				}
+			}
+			GLA = {
+				add_ideas = russian_help
+			}
+		}
+	}
+	
 }
 
 country_event = {
@@ -650,7 +744,7 @@ country_event = {
 		NOT = {
 			tag = PRU
 		}
-		has_idea = manufactory_production
+		has_idea = manufactory_production 
 		num_of_factories > 74		
 	}
 	
@@ -677,7 +771,7 @@ country_event = {
 		NOT = {
 			tag = PRU
 		}
-		has_idea = backward_industry
+		has_idea = backward_industry 
 		num_of_factories > 99	
 	}
 	
@@ -756,7 +850,10 @@ country_event = {
 	
 	trigger = {
 		NOT = {
-			tag = PRU
+			OR = {
+				tag = PRU
+				tag = RUS
+			}
 		}
 		has_idea = no_investment
 		amount_research_slots > 2
@@ -783,7 +880,10 @@ country_event = {
 	
 	trigger = {
 		NOT = {
-			tag = PRU
+			OR = {
+				tag = PRU
+				tag = RUS
+			}
 		}
 		has_idea = low_investment_level
 		amount_research_slots > 3
@@ -810,7 +910,10 @@ country_event = {
 	
 	trigger = {
 		NOT = {
-			tag = PRU
+			OR = {
+				tag = PRU
+				tag = RUS
+			}
 		}
 		has_idea = average_investment_level
 		amount_research_slots > 4
