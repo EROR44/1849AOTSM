@@ -1,0 +1,968 @@
+search_filter_prios = {
+	FOCUS_FILTER_POLITICAL = 1010	
+	FOCUS_FILTER_RESEARCH = 522
+	FOCUS_FILTER_INDUSTRY = 509
+}
+focus_tree = {
+	id = Poland_focus_101 
+	
+	country = {
+		factor = 0
+		
+		modifier = {
+			add = 100
+			tag = PLH 
+		}
+	}
+	
+	default = no
+	reset_on_civilwar = no
+	
+	focus = { 
+		id = Pol_Agrarian_reforms
+		icon = GFX_goal_generic_neutrality_focus
+		cost = 8
+		x = 2
+		y = 0
+		ai_will_do = {
+			factor = 5
+		}
+		available = {
+		NOT = {
+has_war_with = RUS
+}		
+		}
+		completion_reward = {
+			add_ideas = pol_agrarian_reforms						
+		}
+	}
+	
+	focus = {
+		id = Pol_The_New_Economy
+		icon = GFX_goal_generic_consumer_goods
+		cost = 8
+		x = 5
+		y = 0
+		ai_will_do = {
+			factor = 5
+		}
+		available = {
+			
+		}
+		completion_reward = {
+			add_political_power = 50
+			add_stability = 0.05
+		}
+	}
+	
+	focus = {
+		id = Pol_Industrial_reforms 
+		icon = GFX_goal_generic_production
+		cost = 8
+		x = 8
+		y = 0
+		ai_will_do = {
+			factor = 5
+		}
+		available = {
+					NOT = {
+has_war_with = RUS
+}
+		}
+		completion_reward = {
+			add_ideas = pol_industrial_reforms									
+		}
+	}
+	
+	focus = {
+		id = Pol_New_landowners
+		icon = GFX_goal_generic_position_armies
+		cost = 8
+		x = 1
+		y = 1
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+			focus = Pol_Agrarian_reforms
+		}
+		available = {
+		
+		}
+		completion_reward = {
+			add_political_power = 100						
+		}
+	}
+	
+	focus = {
+		id = Pol_Introduce_a_market_to_the_village
+		icon = GFX_goal_generic_positive_trade_relations
+		cost = 8
+		x = 3
+		y = 1
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+			focus = Pol_Agrarian_reforms
+		}
+		available = {
+			
+		}
+		completion_reward = {
+			add_stability = 0.05
+			add_political_power = -75
+		}
+	}
+	
+	focus = {
+		id = Pol_Polish_industry
+		icon = GFX_goal_generic_production2
+		cost = 8
+		x = 5
+		y = 1
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+			focus = Pol_The_New_Economy
+		}
+		available = {
+			
+		}
+		completion_reward = {
+								add_tech_bonus = {
+				name = CAN_dollar_a_year_men
+				bonus = 0.5
+				uses = 2
+				category = industry
+			}						
+		}
+	}
+	
+	focus = {
+		id = Pol_Russian_Heritage
+		icon = GFX_goal_generic_construction
+		cost = 8
+		x = 7
+		y = 1
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+			focus = Pol_Industrial_reforms
+		}
+		available = {
+			
+		}
+		completion_reward = {
+			random_owned_controlled_state = {
+				limit = {
+					free_building_slots = {
+						building = industrial_complex
+						size > 1
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+				set_state_flag = GER_industrial_effort_2IC
+			}						
+		}
+	}
+	
+	focus = {
+		id = Pol_Restore_civil_proceedings 
+		icon = GFX_goal_generic_construct_civ_factory
+		cost = 8
+		x = 9
+		y = 1
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+			focus = Pol_Industrial_reforms
+		}
+		available = {
+			
+		}
+		completion_reward = {
+			random_owned_controlled_state = {
+				limit = {
+					free_building_slots = {
+						building = industrial_complex
+						size > 1
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+				set_state_flag = GER_industrial_effort_2IC
+			}			 			
+		}
+	}
+	
+	focus = {
+		id = Pol_Send_military_not_fields
+		icon = GFX_goal_generic_small_arms
+		cost = 8
+		x = 1
+		y = 2
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+			focus = Pol_New_landowners
+		}
+		available = {
+			
+		}
+		completion_reward = {
+			add_timed_idea = {
+    idea = pol_soldiers_in_the_fields
+    days = 200
+}						
+		}
+	}
+	
+	focus = {
+		id = Pol_The_connection_of_the_city_and_the_village
+		icon = GFX_goal_generic_construct_infrastructure
+		cost = 8
+		x = 4
+		y = 2
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+			focus = Pol_Polish_industry
+		}
+		prerequisite = { focus = Pol_Introduce_a_market_to_the_village }
+		available = {
+			
+		}
+		completion_reward = {
+			random_owned_controlled_state = {
+				limit = {
+					free_building_slots = {
+						building = infrastructure
+						size > 0
+					}
+					OR = {
+						is_in_home_area = yes
+						NOT = {
+							owner = {
+								any_owned_state = {
+									free_building_slots = {
+										building = infrastructure
+										size > 0
+									}
+									is_in_home_area = yes
+								}
+							}
+						}
+					}
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+random_owned_controlled_state = {
+				limit = {
+					free_building_slots = {
+						building = infrastructure
+						size > 0
+					}
+					OR = {
+						is_in_home_area = yes
+						NOT = {
+							owner = {
+								any_owned_state = {
+									free_building_slots = {
+										building = infrastructure
+										size > 0
+									}
+									is_in_home_area = yes
+								}
+							}
+						}
+					}
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+random_owned_controlled_state = {
+				limit = {
+					free_building_slots = {
+						building = infrastructure
+						size > 0
+					}
+					OR = {
+						is_in_home_area = yes
+						NOT = {
+							owner = {
+								any_owned_state = {
+									free_building_slots = {
+										building = infrastructure
+										size > 0
+									}
+									is_in_home_area = yes
+								}
+							}
+						}
+					}
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}			
+		}
+	}
+	
+	focus = {
+		id = Pol_Deconservate_the_mines
+		icon = GFX_goal_generic_construction2
+		cost = 8
+		x = 6
+		y = 2
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+			focus = Pol_Polish_industry
+		}
+		prerequisite = { focus = Pol_Russian_Heritage }
+		available = {
+			
+		}
+		completion_reward = {
+										random_owned_controlled_state = {
+				add_extra_state_shared_building_slots = 1
+				add_resource = {
+					type = steel
+					amount = 8
+				}
+			}
+							random_owned_controlled_state = {
+				add_extra_state_shared_building_slots = 1
+				add_resource = {
+					type = tungsten
+					amount = 8
+				}
+			}
+							random_owned_controlled_state = {
+				add_extra_state_shared_building_slots = 1
+				add_resource = {
+					type = steel
+					amount = 8
+				}
+			}			
+		}
+	}
+	
+	focus = {
+		id = Pol_Foreign_specialists
+		icon = GFX_goal_generic_intelligence_exchange
+		cost = 8
+		x = 9
+		y = 2
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+			focus = Pol_Restore_civil_proceedings
+		}
+		available = {
+			
+		}
+		completion_reward = {
+						add_timed_idea = {
+    idea = pol_foreign_specialists
+    days = 200
+}					
+		}
+	}
+	
+	focus = {
+		id = Pol_Mechanization_of_the_peasantry
+		icon = GFX_goal_generic_production
+		cost = 8
+		x = 2
+		y = 3
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+			focus = Pol_Send_military_not_fields
+		}
+		available = {
+			
+		}
+		completion_reward = {
+						swap_ideas = {
+    remove_idea = pol_agrarian_reforms
+    add_idea = pol_agrarian_reforms_1
+}						
+		} 
+	}
+	
+	focus = {
+		id = Pol_The_Polish_Miracle
+		icon = GFX_focus_generic_polish_deal
+		cost = 8
+		x = 5
+		y = 3
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+			focus = Pol_Polish_industry
+		}
+		available = {
+			
+		} 
+		completion_reward = {
+			add_stability = 0.05
+			add_ideas = pol_polish_idea
+		}
+	}
+	
+	focus = { 
+		id = Pol_Modernize_production
+		icon = GFX_goal_generic_production2
+		cost = 8
+		x = 8
+		y = 3
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+			focus = Pol_Foreign_specialists
+		}
+		available = {
+			
+		}
+		completion_reward = {
+									swap_ideas = {
+    remove_idea = pol_industrial_reforms
+    add_idea = pol_industrial_reforms_1
+}						
+		}
+	}
+	
+	focus = {
+		id = Pol_German_investments
+		icon = GFX_goal_generic_improve_relations
+		cost = 8
+		x = 3  
+		y = 4
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+			focus = Pol_The_Polish_Miracle
+		}
+		mutually_exclusive = {
+			focus = Pol_Eastern_Territories
+		}
+		available = {
+			OR = {
+			is_subject_of = PRU
+			is_in_faction_with = PRU
+			}
+		}
+		completion_reward = {
+			swap_ideas = {
+    remove_idea = pol_polish_idea
+    add_idea = pol_polish_idea_1
+}						
+		}
+	}
+	
+	focus = {
+		id = Pol_Western_Capital
+		icon = GFX_goal_generic_consumer_goods
+		cost = 8
+		x = 2
+		y = 5
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+			focus = Pol_German_investments
+		}
+		available = {
+		OR = {
+			is_subject_of = PRU
+			is_in_faction_with = PRU
+			}
+		}
+		completion_reward = {
+			random_owned_controlled_state = {
+				limit = {
+					free_building_slots = {
+						building = industrial_complex
+						size > 1
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+				add_resource = {
+					type = steel
+					amount = 5
+				}
+				set_state_flag = GER_industrial_effort_2IC
+			}						
+		}
+	}
+	
+	focus = {
+		id = Pol_Eastern_Territories
+		icon = GFX_goal_generic_position_armies
+		cost = 8
+		x = 7
+		y = 4
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+			focus = Pol_The_Polish_Miracle
+		}
+		mutually_exclusive = {
+			focus = Pol_German_investments
+		}
+		available = {
+			is_subject = no
+		}
+		completion_reward = {
+			swap_ideas = {
+    remove_idea = pol_polish_idea
+    add_idea = pol_polish_idea_2
+}						
+		}
+	}
+	
+	focus = {
+		id = Pol_Colonies_in_the_East
+		icon = GFX_goal_generic_more_territorial_claims
+		cost = 8
+		x = 8
+		y = 5
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+			focus = Pol_Eastern_Territories
+		}
+		available = {
+			is_subject = no
+		}
+		completion_reward = {
+		    add_political_power = 75
+			add_offsite_building = { type = arms_factory level = 1 }						
+		}
+	}
+	
+	focus = {
+		id = Pol_Full_fledged_Polish_army
+		icon = GFX_focus_POL_beck_ribbentrop
+		cost = 8
+		x = 16
+		y = 0
+		ai_will_do = {
+			factor = 5
+		}
+		available = {
+			always = no
+					NOT = {
+has_war_with = RUS
+}
+		}
+		completion_reward = {
+				add_ideas = pol_polish_army					
+		}
+	}
+	
+	focus = {
+		id = Pol_The_threat_from_the_East
+		icon = GFX_goal_generic_defence
+		cost = 8
+		x = 15
+		y = 1
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+			focus = Pol_Full_fledged_Polish_army
+		}
+		available = {
+			
+		}
+		completion_reward = {
+			add_manpower = 15000
+			army_experience = 15
+		}
+	}
+	
+	focus = {
+		id = Pol_Buy_rifles
+		icon = GFX_goal_generic_small_arms
+		cost = 8
+		x = 14
+		y = 2
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+			focus = Pol_The_threat_from_the_East
+		}
+		available = {
+			
+		}
+		completion_reward = {
+					add_equipment_to_stockpile = {
+    type = infantry_equipment
+    amount = 1000
+    producer = RUS
+}
+			add_tech_bonus = {
+				name = infantry_artillery_bonus
+				bonus = 0.25
+				uses = 1
+				category = infantry_weapons
+			}						
+		}
+	}
+	
+	focus = {
+		id = Pol_National_armament
+		icon = GFX_goal_generic_demand_territory
+		cost = 8
+		x = 14
+		y = 3
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+			focus = Pol_Buy_rifles
+		}
+		available = {
+			always = no
+		}
+		completion_reward = {
+									
+		}
+	}
+	
+	focus = {
+		id = Pol_Underground_Experience
+		icon = GFX_goal_generic_demand_territory
+		cost = 8
+		x = 14
+		y = 4
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+			focus = Pol_National_armament
+		}
+		available = {
+			always = no
+		}
+		completion_reward = {
+									
+		}
+	}
+	
+	focus = {
+		id = Pol_The_politicized_army
+		icon = GFX_goal_generic_intelligence_exchange
+		cost = 8
+		x = 17
+		y = 1
+		ai_will_do = {
+			factor = 5
+		}
+		available = {
+			
+		}
+		completion_reward = {
+			add_political_power = 125
+			add_war_support = 0.025
+			add_stability = -0.05
+		}
+	}
+	
+	focus = {
+		id = Pol_Loyalty_to_the_army
+		icon = GFX_goal_generic_demand_territory
+		cost = 8
+		x = 16
+		y = 2
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+			focus = Pol_The_politicized_army
+		}
+		prerequisite = { focus = Pol_The_threat_from_the_East }
+		available = {
+			always = no
+		}
+		completion_reward = {
+									
+		}
+	}
+	
+	focus = {
+		id = Pol_Commanding_Aristocrats
+		icon = GFX_goal_generic_demand_territory
+		cost = 8
+		x = 16
+		y = 3
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+			focus = Pol_Loyalty_to_the_army
+		}
+		available = {
+			always = no
+		}
+		completion_reward = {
+									
+		}
+	}
+	
+	focus = {
+		id = Pol_Winged_Hussars_of_the_19th_century
+		icon = GFX_goal_generic_demand_territory
+		cost = 8
+		x = 17
+		y = 4
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+			focus = Pol_Commanding_Aristocrats
+		}
+		prerequisite = { focus = Pol_Introduce_tanks }
+		available = {
+			always = no
+		}
+		completion_reward = {
+									
+		}
+	}
+	
+	focus = {
+		id = Pol_Warmed_up_by_blood
+		icon = GFX_goal_generic_secret_weapon
+		cost = 8
+		x = 18
+		y = 0
+		ai_will_do = {
+			factor = 5
+		}
+		available = {
+			
+		}
+		completion_reward = {
+			add_war_support = 0.05
+			army_experience = 10
+		}
+	}
+	
+	focus = {
+		id = Pol_Generational_experience
+		icon = GFX_goal_rhineland
+		cost = 8
+		x = 19
+		y = 1
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+			focus = Pol_Warmed_up_by_blood
+		}
+		available = {
+			
+		}
+		completion_reward = {
+			army_experience = 15
+			add_tech_bonus = {
+				name = infantry_artillery_bonus
+				bonus = 0.75
+				uses = 1
+				category = infantry_weapons
+				category = artillery
+			}	
+		}
+	}
+	
+	focus = {
+		id = Pol_Maneuver_warfare
+		icon = GFX_goal_generic_cavalry
+		cost = 8
+		x = 18
+		y = 2
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+			focus = Pol_Generational_experience
+		}
+		mutually_exclusive = {
+			focus = Pol_The_war_of_guns_with_shells
+		}
+		available = {
+			
+		}
+		completion_reward = {
+			add_doctrine_cost_reduction = {
+				name = land_doc_bonus
+				cost_reduction = 0.5
+				uses = 2
+				category = cat_mobile_warfare
+			}						
+		}
+	}
+	
+	focus = {
+		id = Pol_Introduce_tanks
+		icon = GFX_goal_generic_demand_territory
+		cost = 8
+		x = 18
+		y = 3
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+			focus = Pol_Maneuver_warfare
+		}
+		available = {
+			always = no
+		}
+		completion_reward = {
+		
+		}
+	}
+	
+	focus = {
+		id = Pol_The_war_of_guns_with_shells
+		icon = GFX_goal_generic_political_pressure
+		cost = 8
+		x = 20
+		y = 2
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+			focus = Pol_Generational_experience
+		}
+		mutually_exclusive = {
+			focus = Pol_Maneuver_warfare
+		}
+		available = {
+			
+		}
+		completion_reward = {
+			add_doctrine_cost_reduction = {
+				name = land_doc_bonus
+				cost_reduction = 0.5
+				uses = 2
+				category = cat_superior_firepower
+			}						
+		}
+	}
+	
+	focus = {
+		id = Pol_The_best_artillery
+		icon = GFX_goal_generic_demand_territory
+		cost = 8
+		x = 20
+		y = 3
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+			focus = Pol_The_war_of_guns_with_shells
+		}
+		available = {
+			always = no
+		}
+		completion_reward = {
+						 		
+		}
+	}
+	
+	focus = {
+		id = Pol_The_Invincible_Front
+		icon = GFX_goal_generic_demand_territory
+		cost = 8
+		x = 20
+		y = 4
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+			focus = Pol_The_best_artillery
+		}
+		available = {
+			always = no
+		}
+		completion_reward = {
+									
+		}
+	}
+	
+	focus = {
+		id = Pol_
+		icon = GFX_goal_generic_demand_territory
+		cost = 8
+		x = 0
+		y = 0
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+			focus = 
+		}
+		prerequisite = { focus =  }
+		mutually_exclusive = {
+			focus = 
+		}
+		available = {
+			always = no
+		}
+		completion_reward = {
+									
+		}
+		complete_tooltip = {
+
+		}
+		bypass = {
+			
+		}
+	}
+}
