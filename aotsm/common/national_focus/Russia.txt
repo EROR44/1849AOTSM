@@ -270,10 +270,7 @@ focus_tree = {
 			 }
 			 exists = yes
 			 is_subject = no
-			 OR = {
 			 has_completed_focus = PRU_aus_win_2
-			 has_war = yes
-			 }
 			 }
 		}
 		completion_reward = {
@@ -2471,10 +2468,10 @@ QIN = {
 	}
 	
 	focus = {
-		id = Rus_New_Russia
-		icon = GFX_goal_generic_dangerous_deal
+		id = Rus_Union_with_the_Church
+		icon = GFX_focus_BUL_restore_the_bulgarian_patriarchate
 		cost = 7
-		x = 30
+		x = 29
 		y = 9
 		ai_will_do = {
 			factor = 5
@@ -2483,62 +2480,96 @@ QIN = {
 			focus = Rus_Pavel_Nikolaevich_Ignatiev
 		}
 		available = {
-		is_subject = no
+			is_subject = no
 			has_country_leader = { ruling_only = yes character = RUS_PAVEL_NIKOLAEVICH_IGNATIEVS}
 		}
 		completion_reward = {
-			country_event = { id = Russia_event_PNI.1 days = 1 }		 				
+			add_ideas = rus_the_russian_orthodox_church_0
+			if = {
+				limit = { has_idea = rus_limitations_of_the_church }
+				remove_ideas = rus_limitations_of_the_church
+			}			
 		}
 	}
 	
 	focus = {
-		id = Rus_Defender_of_all_Slavs
-		icon = GFX_goal_generic_improve_relations
+		id = Rus_The_power_of_soldiers
+		icon = GFX_focus_generic_manpower
 		cost = 7
-		x = 27
-		y = 10
+		x = 31
+		y = 9
 		ai_will_do = {
 			factor = 5
 		}
 		prerequisite = {
-			focus = Rus_New_Russia
+			focus = Rus_Pavel_Nikolaevich_Ignatiev
 		}
 		available = {
 			is_subject = no
 			has_country_leader = { ruling_only = yes character = RUS_PAVEL_NIKOLAEVICH_IGNATIEVS}
 		}
 		completion_reward = {
-			add_ideas = rus_the_power_of_russia_0						
-		}
-	}
-	
-	focus = {
-		id = Rus_Defender_of_Christianity
-		icon = GFX_focus_GRE_an_orthodox_state
-		cost = 7
-		x = 27
-		y = 11
-		ai_will_do = {
-			factor = 5
-		}
-		prerequisite = {
-			focus = Rus_Defender_of_all_Slavs
-		}
-		available = {
-			is_subject = no
-			has_country_leader = { ruling_only = yes character = RUS_PAVEL_NIKOLAEVICH_IGNATIEVS}
-		}
-		completion_reward = {
-			swap_ideas = {
-    remove_idea = rus_the_power_of_russia_0
-    add_idea = rus_the_power_of_russia_1
+		add_stability = -0.075
+						add_popularity = {
+    ideology = authoritarian
+    popularity = 0.075
 }						
 		}
 	}
 	
 	focus = {
-		id = Rus_A_protector_from_bad_thoughts
-		icon = GFX_focus_generic_strike_at_democracy2
+		id = Rus_True_Christians
+		icon = GFX_focus_GRE_an_orthodox_state
+		cost = 7
+		x = 28
+		y = 10
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+			focus = Rus_Union_with_the_Church
+		}
+		available = {
+			is_subject = no
+			has_country_leader = { ruling_only = yes character = RUS_PAVEL_NIKOLAEVICH_IGNATIEVS}
+		}
+		completion_reward = {
+		add_war_support = 0.05
+		swap_ideas = {
+    remove_idea = rus_the_russian_orthodox_church_0
+    add_idea = rus_the_russian_orthodox_church_1
+}						
+		}
+	}
+	
+	focus = {
+		id = Rus_Greek_Poison
+		icon = GFX_goal_generic_secret_weapon
+		cost = 7
+		x = 28
+		y = 11
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+			focus = Rus_True_Christians
+		}
+		available = {
+			is_subject = no
+			has_country_leader = { ruling_only = yes character = RUS_PAVEL_NIKOLAEVICH_IGNATIEVS}
+		}
+		completion_reward = {
+		add_war_support = 0.05
+			add_state_claim = 797
+			add_state_claim = 341
+			add_state_claim = 347
+			add_state_claim = 340
+		}
+	}
+	
+	focus = {
+		id = Rus_Strike_first
+		icon = GFX_focus_GRE_reviving_the_double_headed_eagle
 		cost = 7
 		x = 27
 		y = 12
@@ -2546,45 +2577,203 @@ QIN = {
 			factor = 5
 		}
 		prerequisite = {
-			focus = Rus_Defender_of_Christianity
+			focus = Rus_Greek_Poison
+		}
+		mutually_exclusive = {
+			focus = Rus_Wait_for_a_blow
+		}
+		available = {
+			is_subject = no
+			has_country_leader = { ruling_only = yes character = RUS_PAVEL_NIKOLAEVICH_IGNATIEVS}
+			NOT = {
+			has_war_with = BYZ
+			}
+		}
+		completion_reward = {
+					add_threat = 10
+			add_war_support = 0.05	
+			create_wargoal = {
+    type = puppet_wargoal_focus
+    target = BYZ
+}
+		}
+	}
+	
+	focus = {
+		id = Rus_Wait_for_a_blow
+		icon = GFX_goal_generic_military_sphere
+		cost = 7
+		x = 29
+		y = 12
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+			focus = Rus_Greek_Poison
+		}
+		mutually_exclusive = {
+			focus = Rus_Strike_first
 		}
 		available = {
 			is_subject = no
 			has_country_leader = { ruling_only = yes character = RUS_PAVEL_NIKOLAEVICH_IGNATIEVS}
 		}
 		completion_reward = {
-			swap_ideas = {
-    remove_idea = rus_the_power_of_russia_1
-    add_idea = rus_the_power_of_russia_2  
-}						
+			add_political_power = 125
+			add_war_support = 0.05	
 		}
 	}
 	
 	focus = {
-		id = Rus_Clear_the_ranks_of_traitors
-		icon = GFX_focus_eng_move_to_secure_the_dominions
+		id = Rus_Conquer_Tsargrad
+		icon = GFX_goal_generic_political_pressure
 		cost = 7
-		x = 26
+		x = 28
 		y = 13
 		ai_will_do = {
 			factor = 5
 		}
 		prerequisite = {
-			focus = Rus_A_protector_from_bad_thoughts
+			focus = Rus_Strike_first
+			focus = Rus_Wait_for_a_blow
 		}
 		available = {
-			has_country_leader = { ruling_only = yes character = RUS_PAVEL_NIKOLAEVICH_IGNATIEVS}
 			is_subject = no
+			has_country_leader = { ruling_only = yes character = RUS_PAVEL_NIKOLAEVICH_IGNATIEVS}
+			owns_state = 797
+			owns_state = 341
+			owns_state = 347
+			owns_state = 340
 		}
 		completion_reward = {
-		add_political_power = 250
-		add_popularity = {
-    ideology = authoritarian
-    popularity = 0.1
-}
-add_manpower = -150000
+			add_state_core = 797
+			add_state_core = 341
+			add_state_core = 347
+			add_state_core = 340						
+		}
+	}
+	
+	focus = {
+		id = Rus_Russian_National_Orthodox_Way
+		icon = GFX_goal_generic_territory_or_war
+		cost = 7
+		x = 30
+		y = 10
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+			focus = Rus_The_power_of_soldiers
+		}
+		prerequisite = { focus = Rus_Union_with_the_Church }
+		available = {
+			is_subject = no
+			has_country_leader = { ruling_only = yes character = RUS_PAVEL_NIKOLAEVICH_IGNATIEVS}
+		}
+		completion_reward = {
+			add_ideas = rus_the_russian_national_orthodox_way						
+		}
+	}
+	
+	focus = {
+		id = Rus_Rewrite_the_political_system
+		icon = GFX_goal_generic_forceful_treaty
+		cost = 7
+		x = 30
+		y = 11
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+			focus = Rus_Russian_National_Orthodox_Way
+		}
+		available = {
+			is_subject = no
+			has_country_leader = { ruling_only = yes character = RUS_PAVEL_NIKOLAEVICH_IGNATIEVS}
+		}
+		completion_reward = {
+		remove_ideas = rus_unfinished_reforms
 			add_timed_idea = {
-    idea = rus_cleaning_of_rows
+    idea = rus_policy_restructuring
+    days = 200
+}						
+		}
+	}
+	
+	focus = {
+		id = Rus_The_power_of_one_idea
+		icon = GFX_focus_generic_self_management
+		cost = 7
+		x = 32
+		y = 10
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+			focus = Rus_The_power_of_soldiers
+		}
+		available = {
+			is_subject = no
+			has_country_leader = { ruling_only = yes character = RUS_PAVEL_NIKOLAEVICH_IGNATIEVS}
+		}
+		completion_reward = {
+		 remove_ideas = rus_the_Russian_intelligentsia
+									add_popularity = {
+    ideology = authoritarian
+    popularity = 0.075
+}						
+		}
+	}
+	
+	focus = {
+		id = Rus_Update_the_government
+		icon = GFX_goal_generic_dangerous_deal
+		cost = 7
+		x = 32
+		y = 11
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+			focus = Rus_The_power_of_one_idea
+		}
+		available = {
+			is_subject = no
+			has_country_leader = { ruling_only = yes character = RUS_PAVEL_NIKOLAEVICH_IGNATIEVS}
+		}
+		completion_reward = {
+		add_stability = 0.05
+											add_popularity = {
+    ideology = democratic
+    popularity = -0.10
+}
+								add_popularity = {
+    ideology = socialism
+    popularity = -0.10
+}						
+		}
+	}
+	
+	focus = {
+		id = Rus_Clear_the_country_of_traitors
+		icon = GFX_goal_generic_attack_allies
+		cost = 7
+		x = 31
+		y = 12
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+			focus = Rus_Update_the_government
+		}
+		prerequisite = { focus = Rus_Rewrite_the_political_system }
+		available = {
+			is_subject = no
+			has_country_leader = { ruling_only = yes character = RUS_PAVEL_NIKOLAEVICH_IGNATIEVS}
+		}
+		completion_reward = {
+						add_timed_idea = {
+    idea = rus_large_scale_purges
     days = 280
 }
 								swap_ideas = {
@@ -2595,11 +2784,32 @@ add_manpower = -150000
 	}
 	
 	focus = {
-		id = Rus_Russian_World
-		icon = GFX_rus_the_mother_russia
+		id = Rus_New_Russia
+		icon = GFX_focus_generic_military_dictatorship
 		cost = 7
-		x = 30
-		y = 10
+		x = 31
+		y = 13
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+			focus = Rus_Clear_the_country_of_traitors
+		}
+		available = {
+			is_subject = no
+			has_country_leader = { ruling_only = yes character = RUS_PAVEL_NIKOLAEVICH_IGNATIEVS}
+		}
+		completion_reward = {	
+		country_event = { id = russia_event_PNI.1 days = 1 } 	
+		}
+	}
+	
+	focus = {
+		id = Rus_New_workers
+		icon = GFX_goal_generic_production
+		cost = 7
+		x = 28
+		y = 14
 		ai_will_do = {
 			factor = 5
 		}
@@ -2611,82 +2821,16 @@ add_manpower = -150000
 			has_country_leader = { ruling_only = yes character = RUS_PAVEL_NIKOLAEVICH_IGNATIEVS}
 		}
 		completion_reward = {
-			country_event = { id = Russia_event_PNI.2 days = 1 }							
-		}
-	}
-	
-	focus = {
-		id = Rus_New_soldiers
-		icon = GFX_focus_generic_manpower
-		cost = 7
-		x = 29
-		y = 11
-		ai_will_do = {
-			factor = 5
-		}
-		prerequisite = {
-			focus = Rus_Russian_World
-		}
-		available = {
-			is_subject = no
-			has_country_leader = { ruling_only = yes character = RUS_PAVEL_NIKOLAEVICH_IGNATIEVS}
-		}
-		completion_reward = {
-			add_ideas = rus_russian_soldier_0						
+			add_ideas = rus_new_workers								
 		}
 	}
 	
 	focus = {
 		id = Rus_New_peasants
-		icon = GFX_focus_generic_support_the_left_right
-		cost = 7
-		x = 31
-		y = 11
-		ai_will_do = {
-			factor = 5
-		}
-		prerequisite = {
-			focus = Rus_Russian_World
-		}
-		available = {
-			is_subject = no
-			has_country_leader = { ruling_only = yes character = RUS_PAVEL_NIKOLAEVICH_IGNATIEVS}
-		}
-		completion_reward = {
-			add_ideas = rus_russian_peasant_0						
-		}
-	}
-	
-	focus = {
-		id = Rus_An_Orthodox_person
-		icon = GFX_focus_BUL_restore_the_bulgarian_patriarchate
+		icon = GFX_goal_generic_position_armies
 		cost = 7
 		x = 30
-		y = 12
-		ai_will_do = {
-			factor = 5
-		}
-		prerequisite = {
-			focus = Rus_New_soldiers
-		}
-		prerequisite = {
-			focus = Rus_New_peasants
-		}
-		available = {
-			is_subject = no
-			has_country_leader = { ruling_only = yes character = RUS_PAVEL_NIKOLAEVICH_IGNATIEVS}
-		}
-		completion_reward = {
-			country_event = { id = Russia_event_PNI.3 days = 1 }						
-		}
-	}
-	
-	focus = {
-		id = Rus_Black_Union
-		icon = GFX_goal_anschluss
-		cost = 7
-		x = 32
-		y = 10
+		y = 14
 		ai_will_do = {
 			factor = 5
 		}
@@ -2694,182 +2838,34 @@ add_manpower = -150000
 			focus = Rus_New_Russia
 		}
 		available = {
-			is_in_faction = no
 			is_subject = no
-			has_country_leader = { ruling_only = yes character = RUS_PAVEL_NIKOLAEVICH_IGNATIEVS}
-		}
-		completion_reward = { 
-			create_faction = RUS_BLACK_UNIONS		 		 
-		}
-	}
-	
-	focus = {
-		id = Rus_The_Greek_Savage
-		icon = GFX_goal_generic_secret_weapon
-		cost = 7
-		x = 30
-		y = 13
-		ai_will_do = {
-			factor = 5
-		}
-		prerequisite = {
-			focus = Rus_A_protector_from_bad_thoughts
-		}
-		prerequisite = {
-			focus = Rus_An_Orthodox_person
-		}
-		available = {
-			is_subject = no
-			authoritarian > 0.4
 			has_country_leader = { ruling_only = yes character = RUS_PAVEL_NIKOLAEVICH_IGNATIEVS}
 		}
 		completion_reward = {
-			country_event = { id = Russia_event_PNI.4 days = 1 }								
+			add_ideas = rus_new_peasants								
 		}
 	}
 	
 	focus = {
-		id = Rus_Poisoned_bayonets
+		id = Rus_New_soldiers
 		icon = GFX_goal_generic_small_arms
 		cost = 7
-		x = 29
+		x = 32
 		y = 14
 		ai_will_do = {
 			factor = 5
 		}
 		prerequisite = {
-			focus = Rus_The_Greek_Savage
+			focus = Rus_New_Russia
 		}
 		available = {
 			is_subject = no
 			has_country_leader = { ruling_only = yes character = RUS_PAVEL_NIKOLAEVICH_IGNATIEVS}
 		}
 		completion_reward = {
-			swap_ideas = {
-    remove_idea = rus_russian_soldier_0
-    add_idea = rus_russian_soldier_1
-}						
+			add_ideas = rus_new_soldiers								
 		}
-	}
-	
-	focus = {
-		id = Rus_Poisoned_Lands
-		icon = GFX_goal_generic_defence
-		cost = 7
-		x = 31
-		y = 14
-		ai_will_do = {
-			factor = 5
-		}
-		prerequisite = {
-			focus = Rus_The_Greek_Savage
-		}
-		available = {
-			is_subject = no
-			has_country_leader = { ruling_only = yes character = RUS_PAVEL_NIKOLAEVICH_IGNATIEVS}
-		}
-		completion_reward = {
-			swap_ideas = {
-    remove_idea = rus_russian_peasant_0
-    add_idea = rus_russian_peasant_1
-}						
-		}
-	}
-	
-	focus = {
-		id = Rus_Poisoned_minds
-		icon = GFX_goal_demand_sudetenland
-		cost = 7
-		x = 30
-		y = 15
-		ai_will_do = {
-			factor = 5
-		}
-		prerequisite = {
-			focus = Rus_Poisoned_bayonets
-		}
-		prerequisite = {
-			focus = Rus_Poisoned_Lands
-		}
-		available = {
-			is_subject = no
-			has_country_leader = { ruling_only = yes character = RUS_PAVEL_NIKOLAEVICH_IGNATIEVS}
-		}
-		completion_reward = {
-		add_war_support = 0.10
-			add_popularity = {
-    ideology = authoritarian
-    popularity = 0.1
-}						
-		}
-	}
-	
-	focus = {
-		id = Rus_War_to_Victory
-		icon = GFX_goal_generic_major_war
-		cost = 7
-		x = 30
-		y = 16
-		ai_will_do = {
-			factor = 5
-		}
-		prerequisite = {
-			focus = Rus_Poisoned_minds
-		}
-		available = {
-		    date > 1856.01.01
-			is_subject = no
-			has_country_leader = { ruling_only = yes character = RUS_PAVEL_NIKOLAEVICH_IGNATIEVS}
-		}
-		completion_reward = {
-			create_wargoal = {
-    type = puppet_wargoal_focus
-    target = PRU
-}						
-		}
-	}
-	
-	focus = {
-		id = Rus_Discard_atavisms
-		icon = GFX_focus_generic_concessions
-		cost = 7
-		x = 32
-		y = 13
-		ai_will_do = {
-			factor = 5
-		}
-		prerequisite = {
-			focus = Rus_An_Orthodox_person
-		}
-		available = {
-			is_subject = no
-			has_country_leader = { ruling_only = yes character = RUS_PAVEL_NIKOLAEVICH_IGNATIEVS}
-		}
-		completion_reward = {
-			remove_ideas = rus_unfinished_reforms						
-		}
-	}
-	
-	focus = {
-		id = Rus_Russian_land 
-		icon = GFX_goal_generic_position_armies
-		cost = 7
-		x = 32
-		y = 15
-		ai_will_do = {
-			factor = 5
-		}
-		prerequisite = {
-			focus = Rus_Discard_atavisms
-		}
-		available = {
-			is_subject = no
-			has_country_leader = { ruling_only = yes character = RUS_PAVEL_NIKOLAEVICH_IGNATIEVS}
-		}
-		completion_reward = {
-			remove_ideas = rus_an_echo_of_serfdom						
-		}
-	}
+	} 
 	
 	focus = {
 		id = Rus_Dmitry_Alekseevich_Milyutin
@@ -2963,7 +2959,7 @@ add_manpower = -150000
     ideology = democratic
     popularity = 0.05
 }
-			add_ideas = rus_petrograd_stock_exchange	
+			add_ideas = rus_grad_stock_exchange	
 		}
 	}
 	
@@ -3839,10 +3835,10 @@ country_event = { id = russia_event_MIL.10 days = 1 }
 			has_country_leader = { ruling_only = yes character = RUS_MIKHAIL_FEDOROVICH_ORLOV}
 			VLH = {
 			 exists = yes
+			  is_in_faction = no
 			NOT = {
 			has_war_with = RUS
 			is_subject_of = PRU
-			is_in_faction_with = PRU
 			}
 			 }
 		}
@@ -3873,10 +3869,10 @@ country_event = { id = russia_event_ORL.5 days = 2 }
 			has_country_leader = { ruling_only = yes character = RUS_MIKHAIL_FEDOROVICH_ORLOV}
 			GLA = {
 			 exists = yes
+			 is_in_faction = no
 			NOT = {
 			has_war_with = RUS
 			is_subject_of = PRU
-			is_in_faction_with = PRU
 			}
 			 }
 		}

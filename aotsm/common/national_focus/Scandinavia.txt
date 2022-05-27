@@ -15,7 +15,7 @@ focus_tree = {
 	default = no
 	reset_on_civilwar = no
 	
-	continuous_focus_position = { x = 0 y = 1045 }
+	continuous_focus_position = { x = 0 y = 1 }
 	
 	initial_show_position = {
 		focus = SCA_prepare_feast
@@ -95,6 +95,10 @@ focus_tree = {
 		#search_filters = {  }
 		
 		completion_reward = {
+			swap_ideas = {
+				remove_idea = new_nordic_ways
+				add_idea = new_nordic_ways_old_1
+			}
 		}
 	}
 	
@@ -190,6 +194,10 @@ focus_tree = {
 		#search_filters = {  }
 		
 		completion_reward = {
+			swap_ideas = {
+				remove_idea = new_nordic_ways
+				add_idea = new_nordic_ways_new_1
+			}
 		}
 	}
 	
@@ -216,7 +224,7 @@ focus_tree = {
 		#search_filters = {  }
 		
 		completion_reward = {
-			add_ideas = revange_for_ragnar
+			add_ideas = revange_for_ragnar_1
 			add_opinion_modifier = {
 				target = CBI
 				modifier = embargo
@@ -312,6 +320,368 @@ focus_tree = {
 		}
 	}
 	
+	focus = {
+		id = SCA_navy_maneuvers
+		icon = GFX_focus_generic_destroyer
+		x = 0
+		y = 3
+		cost = 4.3
+		prerequisite = { focus = SCA_creat_vinland }
+		relative_position_id = SCA_revange_for_ragnar
+		ai_will_do = {
+			factor = 10000000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			country_event = scawar.3
+		}
+	}
+	
+	focus = {
+		id = SCA_navy_small_navy
+		icon = GFX_goal_generic_navy_anti_submarine
+		x = -1
+		y = 4
+		cost = 4.3
+		prerequisite = { focus = SCA_creat_vinland }
+		mutually_exclusive = { focus = SCA_navy_big_navy }
+		relative_position_id = SCA_revange_for_ragnar
+		ai_will_do = {
+			factor = 10000000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			navy_experience = 25
+			add_ideas = small_nordic_fleet
+		}
+	}
+	
+	focus = {
+		id = SCA_navy_small_navy_submarin
+		icon = GFX_goal_generic_navy_submarine
+		x = -2
+		y = 5
+		cost = 4.3
+		prerequisite = { focus = SCA_navy_small_navy }
+		relative_position_id = SCA_revange_for_ragnar
+		ai_will_do = {
+			factor = 10000000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_tech_bonus = {
+				name = SCA_u_boat_effort
+				bonus = 1.0
+				uses = 2
+				category = ss_tech
+			}
+		}
+	}
+	
+	focus = {
+		id = SCA_navy_small_navy_cruiser
+		icon = GFX_goal_generic_navy_cruiser
+		x = -2
+		y = 6
+		cost = 4.3
+		prerequisite = { focus = SCA_navy_small_navy_submarin }
+		relative_position_id = SCA_revange_for_ragnar
+		ai_will_do = {
+			factor = 10000000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_tech_bonus = {
+				name = SCA_secure_the_imperial_shipping_routes
+				bonus = 1.0
+				uses = 2
+				category = cl_tech
+			}
+		}
+	}
+	
+	focus = {
+		id = SCA_navy_xp
+		icon = GFX_goal_generic_navy_doctrines_tactics
+		x = 0
+		y = 5
+		cost = 4.3
+		prerequisite = { focus = SCA_navy_maneuvers }
+		prerequisite = { focus = SCA_navy_small_navy focus = SCA_navy_big_navy }
+		relative_position_id = SCA_revange_for_ragnar
+		ai_will_do = {
+			factor = 10000000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			navy_experience = 75
+			add_doctrine_cost_reduction = {
+				name = SCA_fund_the_navy
+				uses = 3
+				cost_reduction = 0.75
+				category = naval_doctrine
+			}
+		}
+	}
+	
+	focus = {
+		id = SCA_navy_dockyard
+		icon = GFX_goal_generic_construct_naval_dockyard
+		x = 0
+		y = 6
+		cost = 4.3
+		prerequisite = { focus = SCA_navy_xp }
+		relative_position_id = SCA_revange_for_ragnar
+		ai_will_do = {
+			factor = 10000000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			random_owned_controlled_state = {
+				limit = {
+					is_coastal = yes
+					is_core_of = SCA
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = dockyard
+					level = 2
+					instant_build = yes
+				}
+			}
+			random_owned_controlled_state = {
+				limit = {
+					is_coastal = yes
+					is_core_of = SCA
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = dockyard
+					level = 2
+					instant_build = yes
+				}
+			}
+			random_owned_controlled_state = {
+				limit = {
+					is_coastal = yes
+					is_core_of = SCA
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = dockyard
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+	
+	focus = {
+		id = SCA_nordic_fleet
+		icon = GFX_goal_generic_amphibious_assault
+		x = 0
+		y = 7
+		cost = 4.3
+		prerequisite = { focus = SCA_navy_dockyard }
+		prerequisite = { focus = SCA_navy_small_navy_cruiser focus = SCA_navy_big_navy_carrier }
+		relative_position_id = SCA_revange_for_ragnar
+		ai_will_do = {
+			factor = 10000000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = revange_for_ragnar_1
+				add_idea = revange_for_ragnar_2
+			}
+			if = {
+				limit = {
+					SCA = {
+						NOT = {
+							OR = {
+								has_idea = small_nordic_fleet
+								has_idea = big_nordic_fleet
+							}
+						}
+					}
+				}
+				swap_ideas = {
+					remove_idea = small_nordic_fleet
+					add_idea = small_nordic_fleet_complete
+				}
+				swap_ideas = {
+					remove_idea = big_nordic_fleet
+					add_idea = big_nordic_fleet_complete
+				}
+			}
+			if = {
+				limit = {
+					SCA = {
+						has_idea = small_nordic_fleet
+					}
+				}
+				swap_ideas = {
+					remove_idea = small_nordic_fleet
+					add_idea = small_nordic_fleet_complete
+				}
+			}
+			if = {
+				limit = {
+					SCA = { 
+						has_idea =  big_nordic_fleet
+					}
+				}
+				swap_ideas = {
+					remove_idea = big_nordic_fleet
+					add_idea = big_nordic_fleet_complete
+				}
+			}
+		}
+	}
+	
+	focus = {
+		id = SCA_navy_big_navy
+		icon = GFX_focus_generic_navy_battleship2
+		x = 1
+		y = 4
+		cost = 4.3
+		prerequisite = { focus = SCA_creat_vinland }
+		mutually_exclusive = { focus = SCA_navy_small_navy }
+		relative_position_id = SCA_revange_for_ragnar
+		ai_will_do = {
+			factor = 10000000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			navy_experience = 25
+			add_ideas = big_nordic_fleet
+		}
+	}
+	
+	focus = {
+		id = SCA_navy_big_navy_batleship
+		icon = GFX_goal_generic_navy_battleship
+		x = 2
+		y = 5
+		cost = 4.3
+		prerequisite = { focus = SCA_navy_big_navy }
+		relative_position_id = SCA_revange_for_ragnar
+		ai_will_do = {
+			factor = 10000000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_tech_bonus = {
+				name = sca_battleship_focus
+				bonus = 1.0
+				uses = 2
+				category = bb_tech
+			}
+		}
+	}
+	
+	focus = {
+		id = SCA_navy_big_navy_carrier
+		icon = GFX_goal_generic_navy_carrier
+		x = 2
+		y = 6
+		cost = 4.3
+		prerequisite = { focus = SCA_navy_big_navy_batleship }
+		relative_position_id = SCA_revange_for_ragnar
+		ai_will_do = {
+			factor = 10000000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_tech_bonus = {
+				name = sca_carrier_focus
+				bonus = 1.0
+				uses = 2
+				category = cv_tech
+			}
+		}
+	}
+	
 	#Anti Russian
 	
 	focus = {
@@ -335,7 +705,7 @@ focus_tree = {
 		#search_filters = {  }
 		
 		completion_reward = {
-			add_ideas = revange_for_1712
+			add_ideas = revange_for_1712_1
 			add_opinion_modifier = {
 				target = RUS
 				modifier = embargo
@@ -344,8 +714,56 @@ focus_tree = {
 	}
 	
 	focus = {
-		id = SCA_core_finland
+		id = SCA_destabilisation_finland
 		icon = GFX_focus_EST_national_pride_in_finland
+		x = -2
+		y = 1
+		cost = 4.3
+		prerequisite = { focus = SCA_revange_for_1712 }
+		relative_position_id = SCA_revange_for_1712
+		ai_will_do = {
+			factor = 100000
+		}
+		
+		#cancel = { }
+		
+		#available = {  }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			111 = {
+				add_resistance = 5
+				add_resistance_target = 10
+			}
+			145 = {
+				add_resistance = 20
+				add_resistance_target = 30
+			}
+			146 = {
+				add_resistance = 5
+				add_resistance_target = 10
+			}
+			147 = {
+				add_resistance = 5
+				add_resistance_target = 20
+			}
+			149 = {
+				add_resistance = 5
+				add_resistance_target = 20
+			}
+			150 = {
+				add_resistance = 5
+				add_resistance_target = 10
+			}
+		}
+	}
+	
+	focus = {
+		id = SCA_core_finland
+		icon = GFX_focus_generic_attack_finland
 		x = 0
 		y = 1
 		cost = 4.3
@@ -371,3 +789,423 @@ focus_tree = {
 			add_state_core = 150
 		}
 	}
+	
+	focus = {
+		id = SCA_war_integration_of_finland
+		icon = GFX_focus_invite_finland
+		x = 2
+		y = 1
+		cost = 4.3
+		prerequisite = { focus = SCA_revange_for_1712 }
+		relative_position_id = SCA_revange_for_1712
+		ai_will_do = {
+			factor = 100000
+		}
+		
+		#cancel = { }
+		
+		#available = {  }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			custom_effect_tooltip = sca_integration_of_finland
+		}
+	}
+	
+	focus = {
+		id = SCA_test_russian_army
+		icon = GFX_focus_generic_provoke_border_clashes
+		x = 0
+		y = 2
+		cost = 4.3
+		prerequisite = { focus = SCA_destabilisation_finland }
+		prerequisite = { focus = SCA_core_finland }
+		prerequisite = { focus = SCA_war_integration_of_finland }
+		relative_position_id = SCA_revange_for_1712
+		ai_will_do = {
+			factor = 100000
+		}
+		
+		#cancel = { }
+		
+		#available = {  }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			start_border_war = {
+				change_state_after_war = no
+				attacker = {
+					state = 148
+					num_provinces = 6
+					on_win = abw.7
+					on_lose = abw.8
+				}			
+				defender = {
+					state = 147
+					num_provinces = 6
+					on_win = abw.8
+					on_lose = abw.7
+				}
+			}
+		}
+	}
+	
+	focus = {
+		id = SCA_army_reform
+		icon = GFX_focus_generic_support_the_left_right
+		x = 0
+		y = 3
+		cost = 4.3
+		prerequisite = { focus = SCA_test_russian_army }
+		relative_position_id = SCA_revange_for_1712
+		ai_will_do = {
+			factor = 100000
+		}
+		
+		#cancel = { }
+		
+		#available = {  }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			army_experience = 25
+			add_war_support = 0.05
+		}
+	}
+	
+	focus = {
+		id = SCA_army_wave_of_man
+		icon = GFX_focus_generic_little_entente
+		x = -1
+		y = 4
+		cost = 4.3
+		prerequisite = { focus = SCA_test_russian_army }
+		mutually_exclusive = { focus = SCA_army_tech_warfare }
+		relative_position_id = SCA_revange_for_1712
+		ai_will_do = {
+			factor = 100000
+		}
+		
+		#cancel = { }
+		
+		#available = {  }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_ideas = nordic_man_army
+		}
+	}
+	
+	focus = {
+		id = SCA_army_wave_of_man_weapon
+		icon = GFX_goal_generic_axis_build_infantry
+		x = -2
+		y = 5
+		cost = 4.3
+		prerequisite = { focus = SCA_army_wave_of_man }
+		relative_position_id = SCA_revange_for_1712
+		ai_will_do = {
+			factor = 100000
+		}
+		
+		#cancel = { }
+		
+		#available = {  }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_tech_bonus = {
+				name = land_doc_bonus
+				bonus = 1.0
+				uses = 2
+				category = infantry_weapons
+			}
+		}
+	}
+	
+	focus = {
+		id = SCA_army_wave_of_man_support
+		icon = GFX_goal_generic_military_sphere
+		x = -2
+		y = 6
+		cost = 4.3
+		prerequisite = { focus = SCA_army_wave_of_man_weapon }
+		relative_position_id = SCA_revange_for_1712
+		ai_will_do = {
+			factor = 100000
+		}
+		
+		#cancel = { }
+		
+		#available = {  }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_tech_bonus = {
+				name = land_doc_bonus
+				bonus = 1.0
+				uses = 2
+				category = support_tech
+			}
+		}
+	}
+	
+	focus = {
+		id = SCA_army_xp
+		icon = GFX_goal_generic_army_doctrines
+		x = 0
+		y = 5
+		cost = 4.3
+		prerequisite = { focus = SCA_army_wave_of_man focus = SCA_army_tech_warfare }
+		prerequisite = { focus = SCA_army_reform }
+		relative_position_id = SCA_revange_for_1712
+		ai_will_do = {
+			factor = 100000
+		}
+		
+		#cancel = { }
+		
+		#available = {  }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			army_experience = 50
+			add_tech_bonus = {
+				name = land_doc_bonus
+				bonus = 0.75
+				uses = 3
+				category = land_doctrine
+			}
+		}
+	}
+	
+	focus = {
+		id = SCA_army_fabric
+		icon = GFX_goal_generic_construct_mil_factory
+		x = 0
+		y = 6
+		cost = 4.3
+		prerequisite = { focus = SCA_army_xp }
+		relative_position_id = SCA_revange_for_1712
+		ai_will_do = {
+			factor = 100000
+		}
+		
+		#cancel = { }
+		
+		#available = {  }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			random_state = {
+				limit = { is_core_of = SCA }
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_state = {
+				limit = { is_core_of = SCA }
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_state = {
+				limit = { is_core_of = SCA }
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+	
+	focus = {
+		id = SCA_army_tech_warfare
+		icon = GFX_focus_generic_combined_arms
+		x = 1
+		y = 4
+		cost = 4.3
+		prerequisite = { focus = SCA_test_russian_army }
+		mutually_exclusive = { focus = SCA_army_wave_of_man }
+		relative_position_id = SCA_revange_for_1712
+		ai_will_do = {
+			factor = 100000
+		}
+		
+		#cancel = { }
+		
+		#available = {  }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_ideas = nordic_tech_army
+		}
+	}
+	
+	focus = {
+		id = SCA_army_tech_warfare_artileria
+		icon = GFX_goal_generic_army_artillery
+		x = 2
+		y = 5
+		cost = 4.3
+		prerequisite = { focus = SCA_army_tech_warfare }
+		relative_position_id = SCA_revange_for_1712
+		ai_will_do = {
+			factor = 100000
+		}
+		
+		#cancel = { }
+		
+		#available = {  }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_tech_bonus = {
+				name = infantry_artillery_bonus
+				bonus = 1.0
+				uses = 2
+				category = artillery
+			}
+		}
+	}
+	
+	focus = {
+		id = SCA_army_tech_warfare_tank
+		icon = GFX_goal_generic_build_tank
+		x = 2
+		y = 6
+		cost = 4.3
+		prerequisite = { focus = SCA_army_tech_warfare_artileria }
+		relative_position_id = SCA_revange_for_1712
+		ai_will_do = {
+			factor = 100000
+		}
+		
+		#cancel = { }
+		
+		#available = {  }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 1.0
+				uses = 2
+				name = mech_army_bonus
+				category = armor
+			}
+		}
+	}
+	
+	focus = {
+		id = SCA_nordic_army
+		icon = GFX_focus_generic_manpower
+		x = 0
+		y = 7
+		cost = 4.3
+		prerequisite = { focus = SCA_army_fabric }
+		prerequisite = { focus = SCA_army_wave_of_man_support focus = SCA_army_tech_warfare_tank }
+		relative_position_id = SCA_revange_for_1712
+		ai_will_do = {
+			factor = 100000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = revange_for_1712_1
+				add_idea = revange_for_1712_2
+			}
+			if = {
+				limit = {
+					SCA = {
+						NOT = {
+							OR = {
+								has_idea = nordic_man_army
+								has_idea = nordic_tech_army
+							}
+						}
+					}
+				}
+				swap_ideas = {
+					remove_idea = nordic_man_army
+					add_idea = nordic_man_army_complete
+				}
+				swap_ideas = {
+					remove_idea = nordic_tech_army
+					add_idea = nordic_tech_army_complete
+				}
+			}
+			if = {
+				limit = {
+					SCA = {
+						has_idea = nordic_man_army
+					}
+				}
+				swap_ideas = {
+					remove_idea = nordic_man_army
+					add_idea = nordic_man_army_complete
+				}
+			}
+			if = {
+				limit = {
+					SCA = { 
+						has_idea =  nordic_tech_army
+					}
+				}
+				swap_ideas = {
+					remove_idea = nordic_tech_army
+					add_idea = nordic_tech_army_complete
+				}
+			}
+		}
+	}
+	
+}
