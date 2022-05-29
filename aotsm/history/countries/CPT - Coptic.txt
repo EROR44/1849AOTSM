@@ -26,7 +26,6 @@ if = {
 		transport = 1
 	}
 }
-
 if = {
 	limit = { has_dlc = "Man the Guns" }
 	set_technology = {
@@ -35,45 +34,129 @@ if = {
 		early_ship_hull_light = 1
 		basic_ship_hull_light = 1
 		early_ship_hull_submarine = 1
-		basic_ship_hull_submarine = 1
 		early_ship_hull_cruiser = 1
+		basic_ship_hull_cruiser = 1
 		early_ship_hull_heavy = 1
+		early_ship_hull_carrier = 1
+		basic_ship_hull_carrier = 1
 		basic_battery = 1
+		basic_light_battery = 1
+		basic_medium_battery = 1
+		basic_heavy_battery = 1
+		basic_torpedo = 1
+		sonar = 1
+		smoke_generator = 1
+		basic_depth_charges = 1
 		basic_secondary_battery = 1
 		basic_cruiser_armor_scheme = 1
-		basic_torpedo = 1
-		coastal_defense_ships = 1
-		pre_dreadnoughts = 1
+		basic_heavy_armor_scheme = 1
 		mtg_transport = 1
+		improved_secondary_battery = 1
+		basic_fire_control_system = 1
 	}
 }
 
 set_convoys = 150
-add_political_power = 0
 set_research_slots = 3
 set_stability = 0.6
 set_war_support = 0.5
+
 set_oob = "CPT_1849"
+if = {
+	limit = { has_dlc = "Man the Guns" }
+		set_naval_oob = "CPT_1849_naval_mtg"
+	else = {
+		set_naval_oob = "CPT_1849_naval_legacy"
+	}
+}
+
 set_politics = {
 	ruling_party = authoritarian
 	last_election = "1849.1.1"
 	election_frequency = 48
 	elections_allowed = no
 }
+
 set_popularities = {
-	democratic = 0
-	socialism = 0
-	reactionist = 0
-	authoritarian = 100
+	democratic = 17
+	socialism = 4
+	reactionist = 26
+	authoritarian = 63
 }
+
 add_ideas = {
-	monarchy
+	republic
 	little_country
 	copt_christian
 	
 	regional_corruption
 	medium_developed_industry
 	low_investment_level
+}
+
+if = {
+	limit = { not = { has_dlc = "Man the Guns" } }
+	### Variants ###
+	# Submarines #
+	create_equipment_variant = {
+		name = "Coptic Class"
+		type = submarine_1
+		parent_version = 0
+		upgrades = {
+			ship_reliability_upgrade = 3
+			sub_engine_upgrade = 2
+			sub_stealth_upgrade = 2
+			sub_torpedo_upgrade = 3
+		}
+	}
+	# Destroyers #
+	create_equipment_variant = {
+		name = "Alexandria Class"
+		type = destroyer_1
+		parent_version = 0
+		upgrades = {
+			ship_torpedo_upgrade = 1
+			destroyer_engine_upgrade = 3
+			ship_ASW_upgrade = 2
+			ship_anti_air_upgrade = 1
+		}
+		obsolete = yes
+	}
+}
+
+if = {
+	limit = { has_dlc = "Man the Guns" }
+	### Variants ###
+	# Submarines #
+	create_equipment_variant = {
+		name = "Coptic Class"
+		type = ship_hull_submarine_1
+		name_group = BYZ_SS_HISTORICAL
+		parent_version = 0
+		modules = {
+			fixed_ship_torpedo_slot = ship_torpedo_sub_1
+			fixed_ship_engine_slot = sub_ship_engine_1
+			rear_1_custom_slot = empty
+		}
+	}
+	# Destroyers #
+	create_equipment_variant = {
+		name = "Alexandria Class"
+		type = ship_hull_light_1
+		name_group = BYZ_DD_HISTORICAL
+		parent_version = 0
+		modules = {
+			fixed_ship_battery_slot = ship_light_battery_2
+			fixed_ship_anti_air_slot = empty
+			fixed_ship_fire_control_system_slot = ship_fire_control_system_0
+			fixed_ship_radar_slot = ship_sonar_1
+			fixed_ship_engine_slot = light_ship_engine_2
+			fixed_ship_torpedo_slot = ship_torpedo_1
+			mid_1_custom_slot = ship_torpedo_1
+			rear_1_custom_slot = ship_depth_charge_1
+		}
+		obsolete = yes
+	}
 }
 
 recruit_character = CPT_Alexand_Abdo
