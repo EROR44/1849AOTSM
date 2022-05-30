@@ -918,7 +918,7 @@ focus_tree = {
 		id = GEN_army_reform
 		icon = GFX_goal_generic_allies_build_infantry
 		
-		x = 7
+		x = 6
 		y = 0
 		
 		available = {
@@ -998,7 +998,7 @@ focus_tree = {
 		icon = GFX_focus_generic_manpower
 		prerequisite = { focus = GEN_combat_strategy }
 		mutually_exclusive = { focus = GEN_mechanised_army }
-		x = -2
+		x = -1
 		y = 1
 		
 		available = {
@@ -1013,14 +1013,26 @@ focus_tree = {
 
 		completion_reward = {
 			add_ideas = GEN_infantry_army
+			add_tech_bonus = {
+				bonus = 0.8
+				uses = 1
+				name = mech_army_bonus
+				category = infantry_weapons
+			}
+			add_tech_bonus = {
+				name = infantry_artillery_bonus
+				bonus = 0.8
+				uses = 1
+				category = artillery
+			}
 		}
 	}
 	focus = {
 		id = GEN_mechanised_army
-		icon = GFX_goal_generic_defence
+		icon = GFX_goal_generic_army_motorized
 		prerequisite = { focus = GEN_combat_strategy }
 		mutually_exclusive = { focus = GEN_infantry_army }
-		x = 2
+		x = 1
 		y = 1
 		
 		available = {
@@ -1035,6 +1047,19 @@ focus_tree = {
 
 		completion_reward = {
 			add_ideas = GEN_mechanised_army
+			add_tech_bonus = {
+				name = infantry_artillery_bonus
+				bonus = 0.8
+				uses = 1
+				category = motorized_equipment
+				category = cat_mechanized_equipment
+			}	
+			add_tech_bonus = {
+				name = infantry_artillery_bonus
+				bonus = 0.8
+				uses = 1
+				category = artillery
+			}
 		}
 	}
 
@@ -1047,8 +1072,8 @@ focus_tree = {
 		id = GEN_navy_reform
 		icon = GFX_goal_generic_build_navy
 		
-		x = 7
-		y = 0
+		x = -2
+		y = 4
 		
 		available = {
 			any_state = {
@@ -1057,7 +1082,7 @@ focus_tree = {
 			}
 		}
 		
-		relative_position_id = GEN_army_reform
+		relative_position_id = GEN_air_reform
 		
 		cost = 10
 		
@@ -1072,7 +1097,7 @@ focus_tree = {
 		icon = GFX_goal_generic_navy_doctrines_tactics
 		prerequisite = { focus = GEN_navy_reform}
 		
-		x = 0
+		x = 1
 		y = 1
 		
 		available = {
@@ -1097,16 +1122,16 @@ focus_tree = {
 	focus = {
 		id = GEN_naval_strategy_2 
 		icon = GFX_goal_generic_navy_doctrines_tactics
-		prerequisite = { 
-			focus = GEN_heavy_navy_strategy 
-			focus = GEN_light_navy_strategy 
-		}
+		prerequisite = { focus = GEN_naval_strategy }
 		
 		x = 0
-		y = 2
+		y = 1
 		
 		available = {
-		
+			OR = {
+				has_completed_focus = GEN_light_navy_strategy
+				has_completed_focus = GEN_heavy_navy_strategy
+			}
 		}
 		
 		relative_position_id = GEN_naval_strategy
@@ -1125,18 +1150,75 @@ focus_tree = {
 		}
 	}
 	focus = {
+		id = GEN_develop_dockyard  
+		icon = GFX_goal_generic_construct_naval_dockyard
+		prerequisite = { focus = GEN_navy_reform}
+		
+		x = 3
+		y = 1
+		
+		available = {
+			any_state = {
+				is_coastal = yes
+				is_controlled_by = ROOT  
+			}
+		}
+		
+		relative_position_id = GEN_navy_reform
+		
+		cost = 14
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+			if = {
+				limit = {
+					NOT = {
+						any_owned_state = {
+							dockyard > 0
+							free_building_slots = {
+								building = dockyard
+								size > 2
+								include_locked = yes
+							}
+						}
+					}
+					any_owned_state = {
+						is_coastal = yes
+					}
+				}
+				random_owned_controlled_state = {
+					limit = {
+						is_coastal = yes
+						free_building_slots = {
+							building = dockyard
+							size > 2
+							include_locked = yes
+						}
+					}
+					add_extra_state_shared_building_slots = 3
+					add_building_construction = {
+						type = dockyard
+						level = 3
+						instant_build = yes
+					}
+				}
+			}
+		}
+	}
+	focus = {
 		id = GEN_light_navy_strategy
 		icon = GFX_focus_generic_cruiser2
-		prerequisite = { focus = GEN_naval_strategy }
+		prerequisite = { focus = GEN_navy_reform }
 		mutually_exclusive = { focus = GEN_heavy_navy_strategy }
-		x = -2
+		x = -3
 		y = 1
 		
 		available = {
 		
 		}
 		
-		relative_position_id = GEN_naval_strategy
+		relative_position_id = GEN_navy_reform
 		
 		cost = 10
 		
@@ -1160,16 +1242,76 @@ focus_tree = {
 	focus = {
 		id = GEN_heavy_navy_strategy 
 		icon = GFX_goal_generic_navy_battleship
-		prerequisite = { focus = GEN_naval_strategy }
+		prerequisite = { focus = GEN_navy_reform }
 		mutually_exclusive = { focus = GEN_light_navy_strategy }
-		x = 2
+		x = -1
 		y = 1
 		
 		available = {
 		
 		}
 		
-		relative_position_id = GEN_naval_strategy
+		relative_position_id = GEN_navy_reform
+		
+		cost = 10
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = cr_bonus
+				bonus = 0.5
+				uses = 2
+				category = cl_tech
+				category = ca_tech
+			}
+		}
+	}
+	focus = {
+		id = GEN_light_navy_strategy_2
+		icon = GFX_goal_generic_navy_cruiser
+		prerequisite = { focus = GEN_light_navy_strategy }
+
+		x = 0
+		y = 1
+		
+		available = {
+		
+		}
+		
+		relative_position_id = GEN_light_navy_strategy
+		
+		cost = 10
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = dd_bonus
+				bonus = 0.5
+				uses = 1
+				category = dd_tech
+			}
+			add_tech_bonus = {
+				name = ss_bonus
+				bonus = 0.5
+				uses = 1
+				category = ss_tech
+			}
+		}
+	}
+	focus = {
+		id = GEN_heavy_navy_strategy_2 
+		icon = GFX_focus_generic_navy_battleship2 
+		prerequisite = { focus = GEN_heavy_navy_strategy }
+		x = 0
+		y = 1
+		
+		available = {
+		
+		}
+		
+		relative_position_id = GEN_heavy_navy_strategy
 		
 		cost = 10
 		
@@ -1192,77 +1334,61 @@ focus_tree = {
 #################################################################		
 	
 	focus = {
-		id = GEN_avia_start
-		icon = GFX_goal_generic_air_fighter
+		id = GEN_air_reform
+		icon = GFX_goal_generic_build_airforce
 		
-		x = 20
+		x = 5
 		y = 0
 		
 		available = {
-		
+			
 		}
 		
-		relative_position_id = GEN_on_the_frontier_of_xix_century
+		relative_position_id = GEN_army_reform
 		
 		cost = 10
 		
 		available_if_capitulated = yes
 
 		completion_reward = {
-			air_experience = 15
+			air_experience = 25
 		}
 	}
 	focus = {
-		id = GEN_avia_a
-		icon = GFX_goal_generic_air_fighter
-		prerequisite = { focus = GEN_avia_start}
-		mutually_exclusive = { focus = GEN_avia_b}
-		x = -1
+		id = GEN_air_strategy
+		icon = GFX_goal_generic_air_doctrine
+		prerequisite = { focus = GEN_air_reform }
+		
+		x = 0
 		y = 1
 		
 		available = {
 		
 		}
 		
-		relative_position_id = GEN_avia_start
+		relative_position_id = GEN_air_reform
 		
 		cost = 10
 		
 		available_if_capitulated = yes
 
 		completion_reward = {
-			
-		}
-	}
-	focus = {
-		id = GEN_avia_b
-		icon = GFX_goal_generic_air_fighter
-		prerequisite = { focus = GEN_avia_start}
-		mutually_exclusive = { focus = GEN_avia_a}
-		x = 1
-		y = 1
-		
-		available = {
-		
-		}
-		
-		relative_position_id = GEN_avia_start
-		
-		cost = 10
-		
-		available_if_capitulated = yes
-
-		completion_reward = {
-			
-		}
-	}
-	focus = {
-		id = GEN_avia_end
-		icon = GFX_goal_generic_air_fighter
-		prerequisite = { 
-			focus = GEN_avia_a
-			focus = GEN_avia_b
+			add_doctrine_cost_reduction = {
+				name = air_doc_bonus
+				cost_reduction = 1.0
+				uses = 1
+				category = air_doctrine
 			}
+		}
+	}
+	focus = {
+		id = GEN_air_strategy_2 
+		icon = GFX_goal_generic_air_doctrine
+		prerequisite = { 
+			focus = GEN_heavy_air_strategy 
+			focus = GEN_light_air_strategy 
+		}
+		
 		x = 0
 		y = 2
 		
@@ -1270,14 +1396,82 @@ focus_tree = {
 		
 		}
 		
-		relative_position_id = GEN_avia_start
+		relative_position_id = GEN_air_strategy
 		
 		cost = 10
 		
 		available_if_capitulated = yes
 
 		completion_reward = {
-			
+			add_doctrine_cost_reduction = {
+				name = air_doc_bonus
+				cost_reduction = 1.0
+				uses = 1
+				category = air_doctrine
+			}
+		}
+	}
+	focus = {
+		id = GEN_light_air_strategy
+		icon = GFX_goal_generic_air_fighter
+		prerequisite = { focus = GEN_air_strategy }
+		mutually_exclusive = { focus = GEN_heavy_air_strategy }
+		x = -1
+		y = 1
+		
+		available = {
+		
+		}
+		
+		relative_position_id = GEN_air_strategy
+		
+		cost = 10
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = fighter_bonus
+				bonus = 0.5
+				uses = 2
+				technology = early_fighter
+				technology = fighter1
+				technology = fighter2
+				technology = fighter3
+				technology = heavy_fighter1
+				technology = heavy_fighter2
+				technology = heavy_fighter3
+			}
+		}
+	}
+	focus = {
+		id = GEN_heavy_air_strategy 
+		icon = GFX_goal_generic_air_bomber
+		prerequisite = { focus = GEN_air_strategy }
+		mutually_exclusive = { focus = GEN_light_air_strategy }
+		x = 1
+		y = 1
+		
+		available = {
+		
+		}
+		
+		relative_position_id = GEN_air_strategy
+		
+		cost = 10
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = bomber_bonus
+				bonus = 0.5
+				uses = 2
+				technology = strategic_bomber1
+				technology = strategic_bomber2
+				technology = strategic_bomber3
+				category = tactical_bomber
+			}
 		}
 	}
 	
@@ -1287,7 +1481,7 @@ focus_tree = {
 	focus = {
 		id = political_effort
 		icon = GFX_goal_tripartite_pact
-		x = 28
+		x = 19
 		y = 0
 		cost = 10
 		
