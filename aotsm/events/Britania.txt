@@ -12,29 +12,29 @@ country_event = {
 	
 	trigger = {
     date > 1850.4.25	
-    date > 1850.4.26	
+    date < 1850.4.26	
     date > 1851.4.25	
-    date > 1851.4.26	
+    date < 1851.4.26	
     date > 1852.4.25	
-    date > 1852.4.26
+    date < 1852.4.26
     date > 1853.4.25	
-    date > 1853.4.26
+    date < 1853.4.26
     date > 1854.4.25	
-    date > 1854.4.26
+    date < 1854.4.26
     date > 1855.4.25	
-    date > 1855.4.26
+    date < 1855.4.26
     date > 1856.4.25	
-    date > 1856.4.26
+    date < 1856.4.26
     date > 1857.4.25	
-    date > 1857.4.26
+    date < 1857.4.26
     date > 1858.4.25	
-    date > 1858.4.26
+    date < 1858.4.26
     date > 1859.4.25	
-    date > 1859.4.26
+    date < 1859.4.26
     date > 1860.4.25	
-    date > 1860.4.26
+    date < 1860.4.26
     date > 1861.4.25	
-    date > 1861.4.26	
+    date < 1861.4.26	
 	}
 	
 	option = {
@@ -503,7 +503,7 @@ country_event = { ### ЛОЯЛЬНАЯ АДМИНИСТРАЦИЯ ###
 	option = {
 		name = CBI.176.a
 		add_political_power = 10		
-		add_idea = CBI_loyal_administration
+		add_ideas = CBI_loyal_administration
 	}
 }
 
@@ -572,14 +572,201 @@ country_event = {
 }
 
 country_event = {
-	id = CBI.178 
-	title = CBI.178.t
-	desc = CBI.178.d
-	picture = GFX_CBI_Lam_funeral
+	id = CBI.179 
+	title = CBI.179.t
+	desc = CBI.179.d
+	picture = GFX_CBI_Cromvland_problem_waiting
 	
 	is_triggered_only = yes	
 	
 	option = {
-		name = CBI.178.a
+		name = CBI.179.a
+	}
+}
+
+country_event = {
+	id = CBI.180 
+	title = CBI.180.t
+	desc = CBI.180.d
+	picture = GFX_CBI_socialist_revolution
+	
+	trigger = {
+	has_war = no
+    date > 1850.4.25	
+    date < 1850.5.26
+}	
+	
+	option = {
+		name = CBI.180.a
+		add_political_power = -25
+		add_stability = -0.05
+			add_popularity = {
+			ideology = democratic		
+			popularity = 0.02
+				}
+			country_event = {
+			id = CBI.181
+			days = 5			
+			}
+		add_ideas = CBI_strikes			
+	}
+	
+	option = {
+		name = CBI.180.b
+		add_manpower = -3178
+		add_political_power = -25
+		add_stability = -0.05
+			country_event = {
+			id = CBI.182
+			days = 5
+				}
+		add_ideas = CBI_strikes
+	}	
+}
+
+country_event = {
+	id = CBI.181 
+	title = CBI.181.t
+	desc = CBI.181.d
+	picture = GFX_CBI_socialist_revolution
+	
+	is_triggered_only = yes	
+	
+	option = {
+		name = CBI.181.a
+		remove_ideas = CBI_strikes
+		add_stability = -0.25		
+		add_ideas = CBI_British_socialist_revolution
+		133 = {
+		set_demilitarized_zone = yes
+			}
+		hidden_effect = {
+		set_country_flag = british_socialist_revolution
+		set_country_flag = { flag = british_socialist_revolution_demilitarized_zone_1 value = 1 days = 75 }		
+		}
+	}
+}
+
+country_event = {
+	id = CBI.182 
+	title = CBI.182.t
+	desc = CBI.182.d
+	picture = GFX_CBI_socialist_revolution
+	
+	is_triggered_only = yes	
+	
+	option = {
+		name = CBI.182.a
+		remove_ideas = CBI_strikes
+		add_stability = -0.25
+		add_ideas = CBI_British_socialist_revolution
+		133 = {
+		set_demilitarized_zone = yes
+			}
+		hidden_effect = {
+		set_country_flag = british_socialist_revolution
+		set_country_flag = { flag = british_socialist_revolution_demilitarized_zone_1 value = 1 days = 75 }		
+		}			
+	}
+}
+
+country_event = {
+	id = CBI.183 
+	title = CBI.183.t
+	desc = CBI.183.d
+	picture = GFX_CBI_socialist_revolution
+	
+	is_triggered_only = yes	
+	
+	option = {
+		name = CBI.183.a
+		add_political_power = 25
+		add_stability = 0.03
+	}
+}
+
+country_event = {
+	id = CBI.184 
+	title = CBI.184.t
+	desc = CBI.184.d
+	picture = GFX_CBI_socialist_revolution
+	
+	is_triggered_only = yes	
+	
+	option = {
+		name = CBI.184.a
+	}
+}
+
+country_event = {
+	id = CBI.185 
+	title = CBI.185.t
+	desc = CBI.185.d
+	picture = GFX_report_event_canada_army
+	
+	is_triggered_only = yes	
+	
+	option = {
+		name = CBI.185.a
+		add_political_power = 15
+		add_stability = 0.05
+	}
+}
+
+country_event = {
+	id = CBI.186 
+	title = CBI.186.t
+	desc = CBI.186.d
+	picture = GFX_CBI_socialist_revolution
+	
+	trigger = {
+	NOT = {
+		has_country_flag = british_socialist_revolution_demilitarized_zone_1
+		}
+		has_stability <0.5
+	}
+	
+	option = {
+		name = CBI.186.a
+		add_political_power = -25
+		add_stability = -0.1
+		120 = {
+		set_demilitarized_zone = yes
+			}
+		121 = {
+		set_demilitarized_zone = yes
+			}
+		136 = {
+		set_demilitarized_zone = yes
+			}		
+	}
+}
+
+country_event = {
+	id = CBI.187 
+	title = CBI.187.t
+	desc = CBI.187.d
+	picture = GFX_CBI_socialist_revolution
+	
+	trigger = {
+	NOT = {
+		has_country_flag = british_socialist_revolution_demilitarized_zone_1
+		}
+		has_stability <0.5
+	}
+	
+	option = {
+		name = CBI.187.a
+		add_political_power = -25
+		add_stability = -0.1
+		120 = {
+		set_demilitarized_zone = yes
+			}
+		121 = {
+		set_demilitarized_zone = yes
+			}
+		136 = {
+		set_demilitarized_zone = yes
+			}		
 	}
 }
