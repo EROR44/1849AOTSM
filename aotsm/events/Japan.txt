@@ -49,6 +49,15 @@ country_event = {
 		remove_from_faction = JAP
 		JAP = { dismantle_faction = yes }
 		JAP = { country_event = { id = jap.2 days = 30 } }
+		TUK = {
+			add_ideas = japan_civil_war
+		}
+		JAP = {
+			add_ideas = japan_civil_war
+		}
+		JAS = {
+			add_ideas = japan_civil_war
+		}
 	}
 	
 }
@@ -65,9 +74,9 @@ country_event = {
 	
 	option = {
 		name = jap.2.a
-		JAP = { 
+		JAS = { 
 			declare_war_on = {
-				target = JAS
+				target = JAP
 				type = annex_everything
 			}
 		}
@@ -86,25 +95,19 @@ country_event = {
 		JAP = {
 			has_country_flag = {
 				flag = war_for_japan
-				days > 120
+				days > 60
 			}
 		}
 	}
 	
 	mean_time_to_happen = {
-		days = 120
+		days = 60
 	}
 	
 	fire_only_once = yes
 	
 	option = {
 		name = jap.4.a
-		JAP = { 
-			declare_war_on = {
-				target = JAS
-				type = annex_everything
-			}
-		}
 		JAP = { clr_country_flag = war_for_japan }
 		JAP = { set_country_flag = all_japan_war }
 		TUK = {
@@ -118,6 +121,151 @@ country_event = {
 				target = JAS
 				type = annex_everything
 			}
+		}
+	}
+	
+}
+
+
+country_event = { #JAP victory
+	id = jap.5
+	title = jap.5.t
+	desc = jap.5.d
+	picture = GFX_report_event_generic_read_write
+	
+	trigger = {
+		tag = JAP
+		NOT = {
+			OR = {
+				JAP = {
+					has_war_with = JAS
+				}
+				JAP = {
+					has_war_with = TUK
+				}
+			}
+		}
+		NOT = {
+			country_exists = JAS
+			country_exists = TUK
+		}
+		JAP = {
+			has_country_flag = all_japan_war
+		}
+	}
+	
+	fire_only_once = yes
+	
+	option = {
+		name = jap.5.a
+		JAP = { clr_country_flag = all_japan_war }
+		JAP = {
+			set_autonomy = {
+				target = NIS
+			autonomous_state = autonomy_aotsm_trade_company
+			}
+		}
+		JAP = {
+			create_faction = JAP_EMPERIA
+			add_to_faction = JAP
+			add_to_faction = NIS
+			set_cosmetic_tag = JAPFULL
+		}
+	}
+	
+}
+
+country_event = { #JAS victory
+	id = jap.6
+	title = jap.6.t
+	desc = jap.6.d
+	picture = GFX_report_event_generic_read_write
+	
+	trigger = {
+		tag = JAS
+		NOT = {
+			OR = {
+				JAS = {
+					has_war_with = JAP
+				}
+				JAS = {
+					has_war_with = TUK
+				}
+			}
+		}
+		NOT = {
+			country_exists = JAP
+			country_exists = TUK
+		}
+		JAP = {
+			has_country_flag = all_japan_war
+		}
+	}
+	
+	fire_only_once = yes
+	
+	option = {
+		name = jap.6.a
+		JAP = { clr_country_flag = all_japan_war }
+		JAS = {
+			set_autonomy = {
+				target = NIS
+			autonomous_state = autonomy_aotsm_trade_company
+			}
+		}
+		JAS = {
+			create_faction = JAP_EMPERIA
+			add_to_faction = JAS
+			add_to_faction = NIS
+			set_cosmetic_tag = JAPFULL
+		}
+	}
+	
+}
+
+country_event = { #TUK victory
+	id = jap.7
+	title = jap.7.t
+	desc = jap.7.d
+	picture = GFX_report_event_generic_read_write
+	
+	trigger = {
+		tag = TUK
+		NOT = {
+			OR = {
+				TUK = {
+					has_war_with = JAP
+				}
+				TUK = {
+					has_war_with = JAS
+				}
+			}
+		}
+		NOT = {
+			country_exists = JAP
+			country_exists = JAS
+		}
+		JAP = {
+			has_country_flag = all_japan_war
+		}
+	}
+
+	fire_only_once = yes
+	
+	option = {
+		name = jap.7.a
+		JAP = { clr_country_flag = all_japan_war }
+		TUK = {
+			set_autonomy = {
+				target = NIS
+			autonomous_state = autonomy_aotsm_trade_company
+			}
+		}
+		TUK = {
+			create_faction = JAP_EMPERIA
+			add_to_faction = TUK
+			add_to_faction = NIS
+			set_cosmetic_tag = JAPFULL
 		}
 	}
 	
