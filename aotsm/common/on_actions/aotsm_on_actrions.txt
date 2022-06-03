@@ -9,16 +9,12 @@ on_actions = {
 			FRR = { country_event = { id = fren.11 days = 1221 } }
 			FRR = { country_event = { id = fren.12 days = 1225 } }
 			SOS = { country_event = { id = sos.1 days = 951 } }
-			331 = {
-				controller = {
-					country_event = { id = te.15 days = 120 }
-				}
-			}
 		}
 	}
 	
 	on_capitulation = {
 		effect = {
+			#CRE capitulation
 			if = {
 				limit = {
 					tag = CRE
@@ -31,8 +27,9 @@ on_actions = {
 				}
 				VIN = {
 					white_peace = {
-					tag = CRE
-					message = VIN_win_CRE
+						tag = CRE
+						message = VIN_win_CRE
+					}
 				}
 				VIN = {
 					transfer_state = 466
@@ -40,6 +37,235 @@ on_actions = {
 				}
 				VIN = {
 					clr_country_flag = VIN_vs_CRE
+				}
+			}
+			#TUK capitulation
+			if = {
+				limit = {
+					tag = TUK
+					OR = {
+						TUK = {
+							has_war_with = JAP
+						}
+						TUK = {
+							has_war_with = JAS
+						}
+					}
+					JAP = {
+						has_country_flag = all_japan_war
+					}
+				}
+				if = {
+					limit = {
+						JAP = {
+							controls_state = 282
+						}
+					}
+					JAP = {
+						white_peace = {
+							tag = TUK
+							message = JAP_win_TUK
+						}
+					}
+					JAP = {
+						transfer_state = 282
+						transfer_state = 638
+						transfer_state = 648
+						transfer_state = 728
+						transfer_state = 745
+					}
+					TUK = {
+						remove_state_core = 282
+						remove_state_core = 638
+						remove_state_core = 648
+					}
+				}
+				if = {
+					limit = {
+						JAS = {
+							controls_state = 282
+						}
+					}
+					JAS = {
+						white_peace = {
+							tag = TUK
+							message = JAS_win_TUK
+						}
+					}
+					JAS = {
+						transfer_state = 282
+						transfer_state = 638
+						transfer_state = 648
+						transfer_state = 728
+						transfer_state = 745
+					}
+					TUK = {
+						remove_state_core = 282
+						remove_state_core = 638
+						remove_state_core = 648
+					}
+				}
+			}
+			#JAP capitulation
+			if = {
+				limit = {
+					tag = JAP
+					OR = {
+						JAP = {
+							has_war_with = TUK
+						}
+						JAP = {
+							has_war_with = JAS
+						}
+					}
+					JAP = {
+						has_country_flag = all_japan_war
+					}
+				}
+				if = {
+					limit = {
+						TUK = {
+							controls_state = 531
+						}
+					}
+					TUK = {
+						white_peace = {
+							tag = JAP
+							message = TUK_win_JAP
+						}
+					}
+					TUK = {
+						transfer_state = 526
+						transfer_state = 528
+						transfer_state = 529
+						transfer_state = 530
+						transfer_state = 531
+						transfer_state = 532
+						transfer_state = 535
+						transfer_state = 645
+						transfer_state = 646
+					}
+					JAP = {
+						remove_state_core = 526
+						remove_state_core = 528
+						remove_state_core = 529
+						remove_state_core = 530
+						remove_state_core = 531
+						remove_state_core = 532
+						remove_state_core = 535
+						remove_state_core = 645
+						remove_state_core = 646
+					}
+				}
+				if = {
+					limit = {
+						JAS = {
+							controls_state = 531
+						}
+					}
+					JAS = {
+						white_peace = {
+							tag = JAP
+							message = JAS_win_JAP
+						}
+					}
+					JAS = {
+						transfer_state = 526
+						transfer_state = 528
+						transfer_state = 529
+						transfer_state = 530
+						transfer_state = 531
+						transfer_state = 532
+						transfer_state = 535
+						transfer_state = 645
+						transfer_state = 646
+					}
+					JAP = {
+						remove_state_core = 526
+						remove_state_core = 528
+						remove_state_core = 529
+						remove_state_core = 530
+						remove_state_core = 531
+						remove_state_core = 532
+						remove_state_core = 535
+						remove_state_core = 645
+						remove_state_core = 646
+					}
+				}
+			}
+			#JAS capitulation
+			if = {
+				limit = {
+					tag = JAS
+					OR = {
+						JAS = {
+							has_war_with = TUK
+						}
+						JAS = {
+							has_war_with = JAP
+						}
+					}
+					JAP = {
+						has_country_flag = all_japan_war
+					}
+				}
+				if = {
+					limit = {
+						TUK = {
+							controls_state = 533
+						}
+					}
+					TUK = {
+						white_peace = {
+							tag = JAS
+							message = TUK_win_JAS
+						}
+					}
+					TUK = {
+						transfer_state = 533
+						transfer_state = 534
+						transfer_state = 536
+						transfer_state = 537
+						transfer_state = 555
+						transfer_state = 655
+					}
+					JAS = {
+						remove_state_core = 533
+						remove_state_core = 534
+						remove_state_core = 536
+						remove_state_core = 537
+						remove_state_core = 555
+						remove_state_core = 655
+					}
+				}
+				if = {
+					limit = {
+						JAP = {
+							controls_state = 533
+						}
+					}
+					JAP = {
+						white_peace = {
+							tag = JAS
+							message = JAP_win_JAS
+						}
+					}
+					JAP = {
+						transfer_state = 533
+						transfer_state = 534
+						transfer_state = 536
+						transfer_state = 537
+						transfer_state = 555
+						transfer_state = 655
+					}
+					JAS = {
+						remove_state_core = 533
+						remove_state_core = 534
+						remove_state_core = 536
+						remove_state_core = 537
+						remove_state_core = 555
+						remove_state_core = 655
+					}
 				}
 			}
 		}
