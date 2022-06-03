@@ -227,3 +227,204 @@ pru_prospect_for_resources = {
 			}
 		}
 	}
+}
+
+pru_leypoldit_bomb = {
+	
+	tech_bomb = { 
+		
+		icon = generic_research
+
+		allowed = {
+			
+		}
+
+		available = {
+			num_of_civilian_factories_available_for_projects > 4
+			owns_state = 64
+			controls_state = 64 
+		}
+
+		visible = {
+			owns_state = 64
+			controls_state = 64
+			date > 1851.12.31
+		}
+
+		fire_only_once = yes
+
+		cost = 0
+		days_remove = 365
+
+		modifier = {
+			civilian_factory_use = 5
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+		
+		remove_effect = { 
+			set_technology = {
+				atomic_research = 1
+			}
+			PRU = {
+				set_country_flag = pru_tech_bomb
+			}
+		}
+	}
+	
+	bomb_infrastructure = { 
+		
+		icon = generic_construction
+
+		allowed = {
+			
+		}
+
+		available = {
+			num_of_civilian_factories_available_for_projects > 9
+			owns_state = 64
+			controls_state = 64 
+		}
+
+		visible = {
+			owns_state = 64
+			controls_state = 64
+			date > 1852.12.31
+			has_country_flag = pru_tech_bomb
+		}
+
+		fire_only_once = yes
+
+		cost = 0
+		days_remove = 365
+
+		modifier = {
+			civilian_factory_use = 10
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+		
+		remove_effect = { 
+			set_technology = {
+				nuclear_reactor = 1
+			}
+			64 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = nuclear_reactor
+					level = 1
+					instant_build = yes
+				}
+			}
+			PRU = {
+				set_country_flag = pru_bomb_infrastructure
+			}
+		}
+	}
+	
+	bomb_complete = { 
+		
+		icon = generic_wreckers
+
+		allowed = {
+			
+		}
+
+		available = {
+			num_of_civilian_factories_available_for_projects > 4
+			owns_state = 64
+			controls_state = 64 
+		}
+
+		visible = {
+			owns_state = 64
+			controls_state = 64
+			date > 1853.12.31
+			has_country_flag = pru_bomb_infrastructure
+		}
+
+		fire_only_once = yes
+
+		cost = 0
+		days_remove = 365
+
+		modifier = {
+			civilian_factory_use = 5
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+		
+		remove_effect = { 
+			set_technology = {
+				nukes = 1
+			}
+			PRU = {
+				set_country_flag = pru_bomb_complete
+			}
+		}
+	}
+	
+	bomb_nuke_CBI = { 
+		
+		icon = generic_ignite_civil_war
+
+		allowed = {
+			
+		}
+
+		available = {
+ 
+		}
+
+		visible = {
+			PRU = {
+				has_war_with = CBI
+			}
+			date > 1856.5.17
+			has_country_flag = pru_bomb_complete
+		}
+
+		fire_only_once = yes
+
+		cost = 0
+		days_remove = 12
+
+		ai_will_do = {
+			factor = 100
+		}
+		
+		remove_effect = { 
+			launch_nuke = {
+				province = 6103
+				state = 126
+				use_nuke = yes
+			}
+			launch_nuke = {
+				province = 6384
+				state = 132
+				use_nuke = yes
+			}
+			126 = {
+				add_manpower = -2098732
+				add_victory_points = {
+					province = 6103
+					value = -5
+				}
+			}
+			132 = {
+				add_manpower = -1632911
+				add_victory_points = {
+					province = 6384
+					value = -5
+				}
+			}
+		}
+	}
+	
+}
