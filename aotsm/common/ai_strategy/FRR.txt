@@ -1,0 +1,447 @@
+# befriend
+# conquer
+# antagonize
+# build_ship
+# build_army
+# unit_ratio
+# build_building
+# research_tech
+# garrison
+# protect
+# influence
+
+
+prussia_ally = {
+	allowed = {
+		original_tag = FRR
+	}
+	enable = {
+		has_completed_focus = FRA_be_with_prussia
+		country_exists = PRU
+	}
+	abort = {
+		NOT = { country_exists = PRU }
+	}
+
+	ai_strategy = {
+		type = befriend
+		id = "PRU"
+		value = 100
+	}
+	ai_strategy = {
+		type = alliance
+		id = "PRU"
+		value = 100
+	}
+}
+britain_ally = {
+	allowed = {
+		original_tag = FRR
+	}
+	enable = {
+		has_completed_focus = FRA_be_with_britain
+		country_exists = CBI
+	}
+	abort = {
+		NOT = { country_exists = CBI }
+	}
+
+	ai_strategy = {
+		type = befriend
+		id = "CBI"
+		value = 100
+	}
+	ai_strategy = {
+		type = alliance
+		id = "CBI"
+		value = 100
+	}
+}
+
+FRR_template_design_1 = {
+	allowed = {
+		original_tag = FRR
+	}
+	enable = {
+		date < 1852.1.1
+	}
+	abort = {
+		date > 1852.1.1
+	}
+
+	ai_strategy = {
+		type = template_prio
+		id = motorized
+		value = 10
+	}
+
+	ai_strategy = {
+		type = template_prio
+		id = cavalry
+		value = -100
+	}
+
+	ai_strategy = {
+		type = template_prio
+		id = light_armor
+		value = 40
+	}
+
+	ai_strategy = {
+		type = template_prio
+		id = medium_armor
+		value = 10
+	}
+
+	ai_strategy = {
+		type = template_prio
+		id = heavy_armor
+		value = -50
+	}
+
+	ai_strategy = {
+		type = template_prio
+		id = paratroopers
+		value = -50
+	}
+}
+
+
+FRR_template_design_2 = {
+	allowed = {
+		original_tag = FRR
+	}
+	enable = {
+		date > 1852.1.1
+	}
+
+	ai_strategy = {
+		type = template_prio
+		id = motorized
+		value = 30
+	}
+
+	ai_strategy = {
+		type = template_prio
+		id = cavalry
+		value = -100
+	}
+
+	ai_strategy = {
+		type = template_prio
+		id = light_armor
+		value = -20
+	}
+
+	ai_strategy = {
+		type = template_prio
+		id = medium_armor
+		value = 40
+	}
+
+	ai_strategy = {
+		type = template_prio
+		id = heavy_armor
+		value = 10
+	}
+
+	ai_strategy = {
+		type = template_prio
+		id = paratroopers
+		value = -50
+	}
+
+	ai_strategy = {
+		type = template_prio
+		id = mechanized
+		value = -20
+	}
+}
+
+FRR_defence_britain_borders = {
+	allowed = {
+		original_tag = FRA
+	}
+	enable = {
+		is_in_faction_with = CBI
+		CBI = {
+			going_war_with_GER = yes
+		}
+
+		CBI_should_split_PRU_front_with_FRR = yes
+	}
+	abort = {
+		not = {
+			is_in_faction_with = CBI
+			CBI = {
+				going_war_with_GER = yes
+			}
+			CBI_should_split_PRU_front_with_FRR = yes
+		}
+	}
+
+	ai_strategy = {
+		type = force_defend_ally_borders
+		id = "CBI"
+		value = 100
+	}
+	
+}
+
+FRR_colonialism = {
+	allowed = {
+		original_tag = FRR
+	}
+	enable = {
+		date < 1850.1.1
+	}
+	abort = {
+		any_owned_state = { is_core_of = FRR NOT = { is_controlled_by = FRR } }
+		date > 1850.1.1
+	}
+
+	ai_strategy = {
+		type = theatre_distribution_demand_increase
+		id = 458
+		value = 10
+	}
+	
+	ai_strategy = {
+		type = theatre_distribution_demand_increase
+		id = 459
+		value = 10
+	}
+	
+	ai_strategy = {
+		type = theatre_distribution_demand_increase
+		id = 460
+		value = 10
+	}
+
+	ai_strategy = {
+		type = theatre_distribution_demand_increase
+		id = 513
+		value = 10
+	}
+
+	ai_strategy = {
+		type = theatre_distribution_demand_increase
+		id = 514
+		value = 10
+	}
+	
+	ai_strategy = {
+		type = theatre_distribution_demand_increase
+		id = 557
+		value = 10
+	}
+	
+	ai_strategy = {
+		type = theatre_distribution_demand_increase
+		id = 699
+		value = 10
+	}
+	
+	ai_strategy = {
+		type = theatre_distribution_demand_increase
+		id = 786
+		value = 10
+	}
+	
+	ai_strategy = {
+		type = theatre_distribution_demand_increase
+		id = 809
+		value = 10
+	}
+}
+
+FRR_naval_role_ratios_historical = {
+	allowed = {
+		has_dlc = "Man the Guns"
+		original_tag = FRR
+	}
+	enable = {
+		always = yes
+	}
+
+	ai_strategy = {
+		type = role_ratio
+		id = naval_capital_bb
+		value = 10
+	}
+
+	ai_strategy = {
+		type = role_ratio
+		id = naval_capital_bc
+		value = 0
+	}
+
+	ai_strategy = {
+		type = role_ratio
+		id = naval_carrier
+		value = 25
+	}
+
+	ai_strategy = {
+		type = role_ratio
+		id = naval_submarine
+		value = 25
+	}
+
+	ai_strategy = {
+		type = role_ratio
+		id = naval_screen
+		value = 130
+	}
+
+	ai_strategy = {
+		type = role_ratio
+		id = naval_escort
+		value = 65
+	}
+
+	ai_strategy = {
+		type = role_ratio
+		id = naval_cruiser_light
+		value = 40
+	}
+
+	ai_strategy = {
+		type = role_ratio
+		id = naval_cruiser_heavy
+		value = 5
+	}
+
+	ai_strategy = {
+		type = role_ratio
+		id = naval_mine_sweeper
+		value = 15
+	}
+
+	ai_strategy = {
+		type = role_ratio
+		id = naval_mine_layer
+		value = 10
+	}
+
+	ai_strategy = {
+		type = unit_ratio
+		id = capital_ship
+		value = 1		 #1 to 2
+	}
+	ai_strategy = {
+		type = unit_ratio
+		id = screen_ship
+		value = 100		 #1 to 2
+	}
+	ai_strategy = {
+		type = unit_ratio
+		id = carrier
+		value = 1		 #1 to 2
+	}
+}
+
+FRR_naval_role_ratios_anti_submarine = {
+	allowed = {
+		has_dlc = "Man the Guns"
+		original_tag = FRR
+	}
+	enable = {
+		anti_submarine_strategy_required_trigger = yes
+	}
+
+	abort = {
+		not = { anti_submarine_strategy_required_trigger = yes }
+	}
+
+	ai_strategy = {
+		type = role_ratio
+		id = naval_capital_bb
+		value = -10
+	}
+
+	ai_strategy = {
+		type = role_ratio
+		id = naval_screen
+		value = -20
+	}
+
+	ai_strategy = {
+		type = role_ratio
+		id = naval_escort
+		value = 50
+	}
+
+	ai_strategy = {
+		type = role_ratio
+		id = naval_cruiser_light
+		value = 40
+	}
+
+	ai_strategy = {
+		type = role_ratio
+		id = naval_cruiser_heavy
+		value = -15
+	}
+}
+
+FRR_algirean_invasion = {
+	allowed = {
+		original_tag = FRR
+	}
+	enable = {
+		has_war_with = ALG
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = naval_invasion_focus
+		value = 55
+	}
+}
+
+FRR_prepare_for_war_with_pru = {
+	allowed = {
+		tag = FRR
+	}
+
+	enable = {
+		PRU = {
+			exists = yes
+		}
+		NOT = { is_ally_with = PRU }
+		FRR = { has_completed_focus = FRA_be_with_britain }
+		date > 1854.1.1
+	}
+
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = prepare_for_war
+		id = PRU
+		value = 100
+	}
+}
+
+FRR_prepare_for_war_with_cbi = {
+	allowed = {
+		tag = FRR
+	}
+
+	enable = {
+		CBI = {
+			exists = yes
+		}
+		NOT = { is_ally_with = CBI }
+		FRR = { has_completed_focus = FRA_be_with_prussia }
+		date > 1854.1.1
+	}
+
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = prepare_for_war
+		id = CBI
+		value = 100
+	}
+}
