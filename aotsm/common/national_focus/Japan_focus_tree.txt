@@ -1,0 +1,344 @@
+search_filter_prios = {
+}
+
+focus_tree = {
+	id = jap_empire
+	
+	country = {
+		factor = 0
+		
+		modifier = {
+			add = 100
+			tag = JAP
+		}
+		
+		modifier = {
+			add = 100
+			tag = JAS
+		}
+		
+		modifier = {
+			add = 100
+			tag = TUK
+		}
+	}
+	
+	default = no
+	reset_on_civilwar = no
+	
+	#Japan Empire start
+	
+	focus = {
+		id = JAP_emperor_speach
+		icon = GFX_goal_generic_position_armies
+		cost = 4.3
+		allow_branch = {
+			tag = JAP
+			NOT = { 
+				JAP = {
+					has_country_flag = JAPFULLJAP
+				}
+			}
+		}
+		x = 4
+		y = 0
+		#relative_position_id = 
+		#prerequisite = { focus = }
+		#mutually_exclusive = { focus =  }
+
+		#available = { }
+		
+		#search_filters = { }
+		
+		#bypass = { }
+
+		completion_reward = {
+			country_event = japintl.1
+		}
+	}
+	
+	focus = {
+		id = JAP_retaxation
+		icon = GFX_goal_generic_position_armies
+		cost = 4.3
+		allow_branch = {
+			tag = JAP
+			NOT = { 
+				JAP = {
+					has_country_flag = JAPFULLJAP
+				}
+			}
+		}
+		x = -2
+		y = 1
+		relative_position_id = JAP_emperor_speach
+		prerequisite = { focus = JAP_emperor_speach }
+		#mutually_exclusive = { focus =  }
+
+		#available = { }
+		
+		#search_filters = { }
+		
+		#bypass = { }
+
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = hight_taxation
+				add_idea = medium_taxation
+			}
+		}
+	}
+	
+	focus = {
+		id = JAP_army_prepeare
+		icon = GFX_goal_generic_position_armies
+		cost = 4.3
+		allow_branch = {
+			tag = JAP
+			NOT = { 
+				JAP = {
+					has_country_flag = JAPFULLJAP
+				}
+			}
+		}
+		x = 0
+		y = 1
+		relative_position_id = JAP_emperor_speach
+		prerequisite = { focus = JAP_emperor_speach }
+		#mutually_exclusive = { focus =  }
+
+		#available = { }
+		
+		#search_filters = { }
+		
+		#bypass = { }
+
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = volunteer_only
+				add_idea = limited_conscription
+			}
+			swap_ideas = {
+				remove_idea = civilian_economy
+				add_idea = partial_economic_mobilisation
+			}
+			add_war_support = 0.05
+		}
+	}
+	
+	focus = {
+		id = JAP_cut_the_hand
+		icon = GFX_goal_generic_position_armies
+		cost = 4.3
+		allow_branch = {
+			tag = JAP
+			NOT = { 
+				JAP = {
+					has_country_flag = JAPFULLJAP
+				}
+			}
+		}
+		x = 2
+		y = 1
+		relative_position_id = JAP_emperor_speach
+		prerequisite = { focus = JAP_emperor_speach }
+		#mutually_exclusive = { focus =  }
+
+		#available = { }
+		
+		#search_filters = { }
+		
+		#bypass = { }
+
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = regional_corruption
+				add_idea = local_corruption
+			}
+		}
+	}
+	
+	focus = {
+		id = JAP_chaos_on_street
+		icon = GFX_goal_generic_position_armies
+		cost = 4.3
+		allow_branch = {
+			tag = JAP
+			NOT = { 
+				JAP = {
+					has_country_flag = JAPFULLJAP
+				}
+			}
+		}
+		x = 0
+		y = 2
+		relative_position_id = JAP_emperor_speach
+		prerequisite = { focus = JAP_retaxation }
+		prerequisite = { focus = JAP_army_prepeare }
+		prerequisite = { focus = JAP_cut_the_hand }
+		#mutually_exclusive = { focus =  }
+
+		#available = { }
+		
+		#search_filters = { }
+		
+		#bypass = { }
+		
+		cancel = {
+			has_global_flag = japan_united_by_civilwar
+		}
+
+		completion_reward = {
+			add_war_support = 0.05
+			add_manpower = 65000
+		}
+		
+	}
+	
+	focus = {
+		id = JAP_sabotage
+		icon = GFX_goal_generic_position_armies
+		cost = 4.3
+		allow_branch = {
+			tag = JAP
+			NOT = { 
+				JAP = {
+					has_country_flag = JAPFULLJAP
+				}
+			}
+		}
+		x = 0
+		y = 3
+		relative_position_id = JAP_emperor_speach
+		prerequisite = { focus = JAP_chaos_on_street }
+		#mutually_exclusive = { focus =  }
+
+		#available = { }
+		
+		#search_filters = { }
+		
+		#bypass = { }
+		
+		cancel = {
+			has_global_flag = japan_united_by_civilwar
+		}
+
+		completion_reward = {
+			custom_effect_tooltip = jap_sabotage_decision
+		}
+		
+	}
+	
+	#Japan Shogunate start
+	
+	focus = {
+		id = JAS_military_training
+		icon = GFX_goal_generic_position_armies
+		cost = 4.3
+		allow_branch = {
+			tag = JAS
+			NOT = { 
+				JAS = {
+					has_country_flag = JASFULLJAP
+				}
+			}
+		}
+		x = 4
+		y = 0
+		#relative_position_id = 
+		#prerequisite = { focus = }
+		#mutually_exclusive = { focus =  }
+
+		#available = { }
+		
+		#search_filters = { }
+		
+		#bypass = { }
+
+		completion_reward = {
+			add_manpower = 12500
+		}
+	}
+	
+	#Japan Republic start
+	
+	focus = {
+		id = TUK_invest_in_nisei
+		icon = GFX_goal_generic_position_armies
+		cost = 4.3
+		allow_branch = {
+			tag = TUK
+			NOT = { 
+				TUK = { 
+					has_country_flag = TUKFULLJAP
+				}
+			}
+		}
+		x = 4
+		y = 0
+		#relative_position_id = 
+		#prerequisite = { focus = }
+		#mutually_exclusive = { focus =  }
+
+		#available = { }
+		
+		#search_filters = { }
+		
+		#bypass = { }
+
+		completion_reward = {
+			378 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			812 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+	
+	#Japan unite focus
+	
+	focus = {
+		id = japan_civil_war_end
+		icon = GFX_goal_generic_position_armies
+		cost = 4.3
+		allow_branch = { 
+			OR = {
+				TUK = {
+					has_country_flag = TUKFULLJAP
+				}
+				JAS = {
+					has_country_flag = JASFULLJAP
+				}
+				JAP = {
+					has_country_flag = JAPFULLJAP
+				}
+			}
+		}
+		x = 10
+		y = 0
+		#relative_position_id = 
+		#prerequisite = { focus = }
+		#mutually_exclusive = { focus =  }
+
+		#available = { }
+		
+		#search_filters = { }
+		
+		#bypass = { }
+
+		completion_reward = {
+		}
+	}
+	
+}
