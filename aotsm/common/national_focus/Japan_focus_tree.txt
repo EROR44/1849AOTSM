@@ -30,7 +30,7 @@ focus_tree = {
 	
 	focus = {
 		id = JAP_emperor_speach
-		icon = GFX_goal_generic_position_armies
+		icon = GFX_focus_jap_pacific_guardian
 		cost = 4.3
 		allow_branch = {
 			tag = JAP
@@ -59,7 +59,7 @@ focus_tree = {
 	
 	focus = {
 		id = JAP_retaxation
-		icon = GFX_goal_generic_position_armies
+		icon = GFX_goal_generic_neutrality_focus
 		cost = 4.3
 		allow_branch = {
 			tag = JAP
@@ -91,7 +91,7 @@ focus_tree = {
 	
 	focus = {
 		id = JAP_army_prepeare
-		icon = GFX_goal_generic_position_armies
+		icon = GFX_focus_generic_manpower
 		cost = 4.3
 		allow_branch = {
 			tag = JAP
@@ -128,7 +128,7 @@ focus_tree = {
 	
 	focus = {
 		id = JAP_cut_the_hand
-		icon = GFX_goal_generic_position_armies
+		icon = GFX_goal_generic_political_pressure
 		cost = 4.3
 		allow_branch = {
 			tag = JAP
@@ -160,7 +160,7 @@ focus_tree = {
 	
 	focus = {
 		id = JAP_chaos_on_street
-		icon = GFX_goal_generic_position_armies
+		icon = GFX_goal_generic_demand_territory
 		cost = 4.3
 		allow_branch = {
 			tag = JAP
@@ -196,8 +196,78 @@ focus_tree = {
 	}
 	
 	focus = {
+		id = JAP_prapogand
+		icon = GFX_goal_generic_propaganda
+		cost = 4.3
+		allow_branch = {
+			tag = JAP
+			NOT = { 
+				JAP = {
+					has_country_flag = JAPFULLJAP
+				}
+			}
+		}
+		x = -2
+		y = 3
+		relative_position_id = JAP_emperor_speach
+		prerequisite = { focus = JAP_chaos_on_street }
+		#mutually_exclusive = { focus =  }
+
+		#available = { }
+		
+		#search_filters = { }
+		
+		#bypass = { }
+		
+		cancel = {
+			has_global_flag = japan_united_by_civilwar
+		}
+
+		completion_reward = {
+			add_stability = 0.10
+			add_war_support = 0.10
+		}
+		
+	}
+	
+	focus = {
+		id = JAP_for_emperor
+		icon = GFX_focus_generic_japanese_imperial_glory
+		cost = 4.3
+		allow_branch = {
+			tag = JAP
+			NOT = { 
+				JAP = {
+					has_country_flag = JAPFULLJAP
+				}
+			}
+		}
+		x = -2
+		y = 4
+		relative_position_id = JAP_emperor_speach
+		prerequisite = { focus = JAP_prapogand }
+		#mutually_exclusive = { focus =  }
+
+		#available = { }
+		
+		#search_filters = { }
+		
+		#bypass = { }
+		
+		cancel = {
+			has_global_flag = japan_united_by_civilwar
+		}
+
+		completion_reward = {
+			add_stability = 0.25
+			add_war_support = 0.15
+		}
+		
+	}
+	
+	focus = {
 		id = JAP_sabotage
-		icon = GFX_goal_generic_position_armies
+		icon = GFX_goal_generic_more_territorial_claims
 		cost = 4.3
 		allow_branch = {
 			tag = JAP
@@ -229,11 +299,264 @@ focus_tree = {
 		
 	}
 	
+	focus = {
+		id = JAP_military_base_up
+		icon = GFX_goal_generic_build_nay
+		cost = 4.3
+		allow_branch = {
+			tag = JAP
+			NOT = { 
+				JAP = {
+					has_country_flag = JAPFULLJAP
+				}
+			}
+		}
+		x = 0
+		y = 4
+		relative_position_id = JAP_emperor_speach
+		prerequisite = { focus = JAP_sabotage }
+		#mutually_exclusive = { focus =  }
+
+		#available = { }
+		
+		#search_filters = { }
+		
+		#bypass = { }
+		
+		cancel = {
+			has_global_flag = japan_united_by_civilwar
+		}
+
+		completion_reward = {
+			534 = {
+				add_building_construction = {
+					type = naval_base
+					level = 2
+					instant_build = yes
+					province = 11930
+				}
+			}
+			533 = {
+				add_building_construction = {
+					type = naval_base
+					level = 2
+					instant_build = yes
+					province = 7016
+				}
+			}
+			load_oob = JAP_army_base
+		}
+		
+	}
+	
+	focus = {
+		id = JAP_army_tech
+		icon = GFX_focus_generic_combined_arms
+		cost = 4.3
+		allow_branch = {
+			tag = JAP
+			NOT = { 
+				JAP = {
+					has_country_flag = JAPFULLJAP
+				}
+			}
+		}
+		x = 2
+		y = 3
+		relative_position_id = JAP_emperor_speach
+		prerequisite = { focus = JAP_chaos_on_street }
+		#mutually_exclusive = { focus =  }
+
+		#available = { }
+		
+		#search_filters = { }
+		
+		#bypass = { }
+		
+		cancel = {
+			has_global_flag = japan_united_by_civilwar
+		}
+
+		completion_reward = {
+			add_doctrine_cost_reduction = {
+				cost_reduction = 0.50
+				uses = 2
+				category = land_doctrine
+			}
+			army_experience = 50
+		}
+		
+	}
+	
+	focus = {
+		id = JAP_army_industria
+		icon = GFX_goal_generic_construct_mil_factory
+		cost = 4.3
+		allow_branch = {
+			tag = JAP
+			NOT = { 
+				JAP = {
+					has_country_flag = JAPFULLJAP
+				}
+			}
+		}
+		x = 2
+		y = 4
+		relative_position_id = JAP_emperor_speach
+		prerequisite = { focus = JAP_army_tech }
+		#mutually_exclusive = { focus =  }
+
+		#available = { }
+		
+		#search_filters = { }
+		
+		#bypass = { }
+		
+		cancel = {
+			has_global_flag = japan_united_by_civilwar
+		}
+
+		completion_reward = {
+			random_owned_controlled_state = {
+				limit = {
+					is_fully_controlled_by = JAP
+					industrial_complex > 0
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = industrial_complex
+					level = -1
+					instant_build = yes
+				}
+			}
+			random_owned_controlled_state = {
+				limit = {
+					is_fully_controlled_by = JAP
+					industrial_complex > 0
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = industrial_complex
+					level = -1
+					instant_build = yes
+				}
+			}
+			random_owned_controlled_state = {
+				limit = {
+					is_fully_controlled_by = JAP
+					industrial_complex > 0
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = industrial_complex
+					level = -1
+					instant_build = yes
+				}
+			}
+			random_owned_controlled_state = {
+				limit = {
+					is_fully_controlled_by = JAP
+					industrial_complex > 0
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = industrial_complex
+					level = -1
+					instant_build = yes
+				}
+			}
+		}
+		
+	}
+	
+	focus = {
+		id = JAP_push_to_victory
+		icon = GFX_goal_generic_military_sphere
+		cost = 4.3
+		allow_branch = {
+			tag = JAP
+			NOT = { 
+				JAP = {
+					has_country_flag = JAPFULLJAP
+				}
+			}
+		}
+		x = 0
+		y = 5
+		relative_position_id = JAP_emperor_speach
+		prerequisite = { focus = JAP_for_emperor }
+		prerequisite = { focus = JAP_military_base_up }
+		prerequisite = { focus = JAP_army_industria }
+		#mutually_exclusive = { focus =  }
+
+		#available = { }
+		
+		#search_filters = { }
+		
+		#bypass = { }
+		
+		cancel = {
+			has_global_flag = japan_united_by_civilwar
+		}
+
+		completion_reward = {
+			add_manpower = 90000
+			add_political_power = 450
+		}
+		
+	}
+	
 	#Japan Shogunate start
 	
 	focus = {
+		id = JAS_military_army
+		icon = GFX_focus_generic_military_dictatorship
+		cost = 4.3
+		allow_branch = {
+			tag = JAS
+			NOT = { 
+				JAS = {
+					has_country_flag = JASFULLJAP
+				}
+			}
+		}
+		x = 2
+		y = 0
+		#relative_position_id = 
+		#prerequisite = { focus = }
+		#mutually_exclusive = { focus =  }
+
+		#available = { }
+		
+		#search_filters = { }
+		
+		#bypass = { }
+
+		completion_reward = {
+			add_war_support = 0.05
+			add_manpower = 75000
+		}
+	}
+	
+	focus = {
 		id = JAS_military_training
-		icon = GFX_goal_generic_position_armies
+		icon = GFX_focus_generic_military_mission
 		cost = 4.3
 		allow_branch = {
 			tag = JAS
@@ -256,7 +579,366 @@ focus_tree = {
 		#bypass = { }
 
 		completion_reward = {
-			add_manpower = 12500
+			add_war_support = 0.05
+			army_experience = 75
+		}
+	}
+	
+	focus = {
+		id = JAS_new_military
+		icon = GFX_focus_generic_little_entente
+		cost = 4.3
+		allow_branch = {
+			tag = JAS
+			NOT = { 
+				JAS = {
+					has_country_flag = JASFULLJAP
+				}
+			}
+		}
+		x = 6
+		y = 0
+		#relative_position_id = 
+		#prerequisite = { focus = }
+		#mutually_exclusive = { focus =  }
+
+		#available = { }
+		
+		#search_filters = { }
+		
+		#bypass = { }
+
+		completion_reward = {
+			add_war_support = 0.05
+			swap_ideas = {
+				remove_idea = volunteer_only
+				add_idea = extensive_conscription
+			}
+		}
+	}
+	
+	focus = {
+		id = JAS_start_plan
+		icon = GFX_focus_generic_treaty
+		cost = 4.3
+		allow_branch = {
+			tag = JAS
+			NOT = { 
+				JAS = {
+					has_country_flag = JASFULLJAP
+				}
+			}
+		}
+		x = 0
+		y = 1
+		relative_position_id = JAS_military_training
+		prerequisite = { focus = JAS_military_army }
+		prerequisite = { focus = JAS_military_training }
+		prerequisite = { focus = JAS_new_military }
+		#mutually_exclusive = { focus =  }
+
+		#available = { }
+		
+		#search_filters = { }
+		
+		#bypass = { }
+
+		completion_reward = {
+			add_stability = 0.15
+			add_political_power = 450
+		}
+	}
+	
+	focus = {
+		id = JAS_start_civil_war
+		icon = GFX_focus_generic_support_the_left_right
+		cost = 4.3
+		allow_branch = {
+			tag = JAS
+			NOT = { 
+				JAS = {
+					has_country_flag = JASFULLJAP
+				}
+			}
+		}
+		x = 0
+		y = 2
+		relative_position_id = JAS_military_training
+		prerequisite = { focus = JAS_start_plan }
+		#mutually_exclusive = { focus =  }
+
+		#available = { }
+		
+		#search_filters = { }
+		
+		#bypass = { }
+		
+		cancel = {
+			has_global_flag = japan_united_by_civilwar
+		}
+
+		completion_reward = {
+			532 = {
+				add_manpower = -82
+			}
+			JAP = {
+				add_manpower = -11
+			}
+			JAS = {
+				add_manpower = -452
+			}
+		}
+	}
+	
+	focus = {
+		id = JAS_close_economy
+		icon = GFX_goal_generic_trade
+		cost = 4.3
+		allow_branch = {
+			tag = JAS
+			NOT = { 
+				JAS = {
+					has_country_flag = JASFULLJAP
+				}
+			}
+		}
+		x = -2
+		y = 3
+		relative_position_id = JAS_military_training
+		prerequisite = { focus = JAS_start_civil_war }
+		#mutually_exclusive = { focus =  }
+
+		#available = { }
+		
+		#search_filters = { }
+		
+		#bypass = { }
+		
+		cancel = {
+			has_global_flag = japan_united_by_civilwar
+		}
+
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = export_focus
+				add_idea = closed_economy
+			}
+		}
+	}
+	
+	focus = {
+		id = JAS_autarky
+		icon = GFX_focus_usa_voter_registration_act
+		cost = 4.3
+		allow_branch = {
+			tag = JAS
+			NOT = { 
+				JAS = {
+					has_country_flag = JASFULLJAP
+				}
+			}
+		}
+		x = -2
+		y = 4
+		relative_position_id = JAS_military_training
+		prerequisite = { focus = JAS_close_economy }
+		#mutually_exclusive = { focus =  }
+
+		#available = { }
+		
+		#search_filters = { }
+		
+		#bypass = { }
+		
+		cancel = {
+			has_global_flag = japan_united_by_civilwar
+		}
+
+		completion_reward = {
+			every_other_country = {
+				add_opinion_modifier = {
+					target = JAS
+					modifier = embargo
+				}
+			}
+		}
+	}
+	
+	focus = {
+		id = JAS_mobilisation_economy
+		icon = GFX_focus_generic_manpower
+		cost = 4.3
+		allow_branch = {
+			tag = JAS
+			NOT = { 
+				JAS = {
+					has_country_flag = JASFULLJAP
+				}
+			}
+		}
+		x = 0
+		y = 3
+		relative_position_id = JAS_military_training
+		prerequisite = { focus = JAS_start_civil_war }
+		#mutually_exclusive = { focus =  }
+
+		#available = { }
+		
+		#search_filters = { }
+		
+		#bypass = { }
+		
+		cancel = {
+			has_global_flag = japan_united_by_civilwar
+		}
+
+		completion_reward = {
+			add_war_support = 0.05
+			swap_ideas = {
+				remove_idea = civilian_economy
+				add_idea = war_economy
+			}
+		}
+	}
+	
+	focus = {
+		id = JAS_secret_fabric
+		icon = GFX_goal_generic_construct_mil_factory
+		cost = 4.3
+		allow_branch = {
+			tag = JAS
+			NOT = { 
+				JAS = {
+					has_country_flag = JASFULLJAP
+				}
+			}
+		}
+		x = 0
+		y = 4
+		relative_position_id = JAS_military_training
+		prerequisite = { focus = JAS_mobilisation_economy }
+		#mutually_exclusive = { focus =  }
+
+		#available = { }
+		
+		#search_filters = { }
+		
+		#bypass = { }
+		
+		cancel = {
+			has_global_flag = japan_united_by_civilwar
+		}
+
+		completion_reward = {
+			add_offsite_building = { type = arms_factory level = 3 }
+		}
+	}
+	
+	focus = {
+		id = JAS_manpower_more
+		icon = GFX_goal_generic_allies_build_infantry
+		cost = 4.3
+		allow_branch = {
+			tag = JAS
+			NOT = { 
+				JAS = {
+					has_country_flag = JASFULLJAP
+				}
+			}
+		}
+		x = 2
+		y = 3
+		relative_position_id = JAS_military_training
+		prerequisite = { focus = JAS_start_civil_war }
+		#mutually_exclusive = { focus =  }
+
+		#available = { }
+		
+		#search_filters = { }
+		
+		#bypass = { }
+		
+		cancel = {
+			has_global_flag = japan_united_by_civilwar
+		}
+
+		completion_reward = {
+			add_manpower = 75000
+		}
+	}
+	
+	focus = {
+		id = JAS_doctrine_bonus
+		icon = GFX_goal_generic_army_doctrines
+		cost = 4.3
+		allow_branch = {
+			tag = JAS
+			NOT = { 
+				JAS = {
+					has_country_flag = JASFULLJAP
+				}
+			}
+		}
+		x = 2
+		y = 4
+		relative_position_id = JAS_military_training
+		prerequisite = { focus = JAS_manpower_more }
+		#mutually_exclusive = { focus =  }
+
+		#available = { }
+		
+		#search_filters = { }
+		
+		#bypass = { }
+		
+		cancel = {
+			has_global_flag = japan_united_by_civilwar
+		}
+
+		completion_reward = {
+			add_doctrine_cost_reduction = {
+				cost_reduction = 0.50
+				uses = 2
+				category = land_doctrine
+			}
+		}
+	}
+	
+	focus = {
+		id = JAS_for_the_shogun
+		icon = GFX_goal_generic_small_arms
+		cost = 4.3
+		allow_branch = {
+			tag = JAS
+			NOT = { 
+				JAS = {
+					has_country_flag = JASFULLJAP
+				}
+			}
+		}
+		x = 0
+		y = 5
+		relative_position_id = JAS_military_training
+		prerequisite = { focus = JAS_autarky }
+		prerequisite = { focus = JAS_secret_fabric }
+		prerequisite = { focus = JAS_doctrine_bonus }
+		#mutually_exclusive = { focus =  }
+
+		#available = { }
+		
+		#search_filters = { }
+		
+		#bypass = { }
+		
+		cancel = {
+			has_global_flag = japan_united_by_civilwar
+		}
+
+		completion_reward = {
+			add_stability = 0.15
+			add_war_support = 0.15
+			add_political_power = 450
+			add_manpower = 250000
 		}
 	}
 	
@@ -264,7 +946,7 @@ focus_tree = {
 	
 	focus = {
 		id = TUK_invest_in_nisei
-		icon = GFX_goal_generic_position_armies
+		icon = GFX_focus_chi_collaboration_with_the_japanese
 		cost = 4.3
 		allow_branch = {
 			tag = TUK
@@ -306,11 +988,487 @@ focus_tree = {
 		}
 	}
 	
+	focus = {
+		id = TUK_invest_in_chine
+		icon = GFX_focus_jap_manchurian_project
+		cost = 4.3
+		allow_branch = {
+			tag = TUK
+			NOT = { 
+				TUK = { 
+					has_country_flag = TUKFULLJAP
+				}
+			}
+		}
+		x = -1
+		y = 1
+		relative_position_id = TUK_invest_in_nisei
+		prerequisite = { focus = TUK_invest_in_nisei }
+		#mutually_exclusive = { focus =  }
+
+		#available = { }
+		
+		#search_filters = { }
+		
+		#bypass = { }
+
+		completion_reward = {
+			728 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 3
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = naval_base
+					level = 6
+					instant_build = yes
+					province = 11981
+				}
+			}
+			745 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = naval_base
+					level = 2
+					instant_build = yes
+					province = 1150
+				}
+			}
+		}
+	}
+	
+	focus = {
+		id = TUK_invest_in_island
+		icon = GFX_focus_jap_zaibatsu
+		cost = 4.3
+		allow_branch = {
+			tag = TUK
+			NOT = { 
+				TUK = { 
+					has_country_flag = TUKFULLJAP
+				}
+			}
+		}
+		x = 1
+		y = 1
+		relative_position_id = TUK_invest_in_nisei
+		prerequisite = { focus = TUK_invest_in_nisei }
+		#mutually_exclusive = { focus =  }
+
+		#available = { }
+		
+		#search_filters = { }
+		
+		#bypass = { }
+
+		completion_reward = {
+			638 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = naval_base
+					level = 4
+					instant_build = yes
+					province = 11981
+				}
+			}
+			648 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 3
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = naval_base
+					level = 4
+					instant_build = yes
+					province = 1150
+				}
+			}
+		}
+	}
+	
+	focus = {
+		id = TUK_invest_in_kanto
+		icon = GFX_focus_mex_privatisation
+		cost = 4.3
+		allow_branch = {
+			tag = TUK
+			NOT = { 
+				TUK = { 
+					has_country_flag = TUKFULLJAP
+				}
+			}
+		}
+		x = 0
+		y = 2
+		relative_position_id = TUK_invest_in_nisei
+		prerequisite = { focus = TUK_invest_in_chine }
+		prerequisite = { focus = TUK_invest_in_island }
+		#mutually_exclusive = { focus =  }
+
+		#available = { }
+		
+		#search_filters = { }
+		
+		#bypass = { }
+
+		completion_reward = {
+			282 = {
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = naval_base
+					level = 10
+					instant_build = yes
+					province = 1182
+				}
+			}
+		}
+	}
+	
+	focus = {
+		id = TUK_fire_of_revolution
+		icon = GFX_goal_generic_major_war
+		cost = 4.3
+		allow_branch = {
+			tag = TUK
+			NOT = { 
+				TUK = { 
+					has_country_flag = TUKFULLJAP
+				}
+			}
+		}
+		x = 0
+		y = 3
+		relative_position_id = TUK_invest_in_nisei
+		prerequisite = { focus = TUK_invest_in_kanto }
+		#mutually_exclusive = { focus =  }
+
+		#available = { }
+		
+		#search_filters = { }
+		
+		#bypass = { }
+		
+		cancel = {
+			has_global_flag = japan_united_by_civilwar
+		}
+
+		completion_reward = {
+			add_stability = -0.05
+			add_manpower = -1374
+		}
+	}
+	
+	focus = {
+		id = TUK_seek_socialist_support
+		icon = GFX_goal_demand_sudetenland
+		cost = 4.3
+		allow_branch = {
+			tag = TUK
+			NOT = { 
+				TUK = { 
+					has_country_flag = TUKFULLJAP
+				}
+			}
+		}
+		x = -2
+		y = 4
+		relative_position_id = TUK_invest_in_nisei
+		prerequisite = { focus = TUK_fire_of_revolution }
+		#mutually_exclusive = { focus =  }
+
+		#available = { }
+		
+		#search_filters = { }
+		
+		#bypass = { }
+		
+		cancel = {
+			has_global_flag = japan_united_by_civilwar
+		}
+
+		completion_reward = {
+			add_war_support = 0.025
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = 2500
+				producer = TUK
+			}
+			add_popularity = {
+				ideology = socialism
+				popularity = 0.05
+			}
+		}
+	}
+	
+	focus = {
+		id = TUK_full_socialist_support
+		icon = GFX_goal_generic_dangerous_deal
+		cost = 4.3
+		allow_branch = {
+			tag = TUK
+			NOT = { 
+				TUK = { 
+					has_country_flag = TUKFULLJAP
+				}
+			}
+		}
+		x = -2
+		y = 5
+		relative_position_id = TUK_invest_in_nisei
+		prerequisite = { focus = TUK_seek_socialist_support }
+		#mutually_exclusive = { focus =  }
+
+		#available = { }
+		
+		#search_filters = { }
+		
+		#bypass = { }
+		
+		cancel = {
+			has_global_flag = japan_united_by_civilwar
+		}
+
+		completion_reward = {
+			add_war_support = 0.025
+			add_manpower = 25000
+			add_popularity = {
+				ideology = socialism
+				popularity = 0.10
+			}
+		}
+	}
+	
+	focus = {
+		id = TUK_seek_foreign_support
+		icon = GFX_goal_generic_national_unity
+		cost = 4.3
+		allow_branch = {
+			tag = TUK
+			NOT = { 
+				TUK = { 
+					has_country_flag = TUKFULLJAP
+				}
+			}
+		}
+		x = 0
+		y = 4
+		relative_position_id = TUK_invest_in_nisei
+		prerequisite = { focus = TUK_fire_of_revolution }
+		#mutually_exclusive = { focus =  }
+
+		#available = { }
+		
+		#search_filters = { }
+		
+		#bypass = { }
+		
+		cancel = {
+			has_global_flag = japan_united_by_civilwar
+		}
+
+		completion_reward = {
+			add_war_support = 0.025
+			add_equipment_to_stockpile = {
+				type = artillery_equipment
+				amount = 125
+				producer = CBI
+			}
+			add_equipment_to_stockpile = {
+				type = support_equipment
+				amount = 375
+				producer = PRT
+			}
+		}
+	}
+	
+	focus = {
+		id = TUK_seek_lord_support
+		icon = GFX_goal_generic_improve_relations
+		cost = 4.3
+		allow_branch = {
+			tag = TUK
+			NOT = { 
+				TUK = { 
+					has_country_flag = TUKFULLJAP
+				}
+			}
+		}
+		x = 0
+		y = 5
+		relative_position_id = TUK_invest_in_nisei
+		prerequisite = { focus = TUK_seek_foreign_support }
+		#mutually_exclusive = { focus =  }
+
+		#available = { }
+		
+		#search_filters = { }
+		
+		#bypass = { }
+		
+		cancel = {
+			has_global_flag = japan_united_by_civilwar
+		}
+
+		completion_reward = {
+			add_stability = 0.025
+			add_political_power = 450
+		}
+	}
+	
+	focus = {
+		id = TUK_seek_corporation_support
+		icon = GFX_goal_generic_major_alliance
+		cost = 4.3
+		allow_branch = {
+			tag = TUK
+			NOT = { 
+				TUK = { 
+					has_country_flag = TUKFULLJAP
+				}
+			}
+		}
+		x = 2
+		y = 4
+		relative_position_id = TUK_invest_in_nisei
+		prerequisite = { focus = TUK_fire_of_revolution }
+		#mutually_exclusive = { focus =  }
+
+		#available = { }
+		
+		#search_filters = { }
+		
+		#bypass = { }
+		
+		cancel = {
+			has_global_flag = japan_united_by_civilwar
+		}
+
+		completion_reward = {
+			add_war_support = 0.025
+			add_equipment_to_stockpile = {
+				type = train_equipment
+				amount = 10
+				producer = TUK
+			}
+			add_equipment_to_stockpile = {
+				type = convoy
+				amount = 50
+				producer = TUK
+			}
+			add_popularity = {
+				ideology = reactionist
+				popularity = 0.05
+			}
+		}
+	}
+	
+	focus = {
+		id = TUK_full_corporation_support
+		icon = GFX_goal_generic_intelligence_exchange
+		cost = 4.3
+		allow_branch = {
+			tag = TUK
+			NOT = { 
+				TUK = { 
+					has_country_flag = TUKFULLJAP
+				}
+			}
+		}
+		x = 2
+		y = 5
+		relative_position_id = TUK_invest_in_nisei
+		prerequisite = { focus = TUK_seek_corporation_support }
+		#mutually_exclusive = { focus =  }
+
+		#available = { }
+		
+		#search_filters = { }
+		
+		#bypass = { }
+		
+		cancel = {
+			has_global_flag = japan_united_by_civilwar
+		}
+
+		completion_reward = {
+			add_stability = 0.025
+			swap_ideas = {
+				remove_idea = disarmed_nation
+				add_idea = limited_conscription
+			}
+			add_popularity = {
+				ideology = reactionist
+				popularity = 0.10
+			}
+		}
+	}
+	
+	focus = {
+		id = TUK_for_the_republic
+		icon = GFX_focus_generic_the_giant_wakes
+		cost = 4.3
+		allow_branch = {
+			tag = TUK
+			NOT = { 
+				TUK = { 
+					has_country_flag = TUKFULLJAP
+				}
+			}
+		}
+		x = 0
+		y = 6
+		relative_position_id = TUK_invest_in_nisei
+		prerequisite = { focus = TUK_full_socialist_support }
+		prerequisite = { focus = TUK_seek_lord_support }
+		prerequisite = { focus = TUK_full_corporation_support }
+		#mutually_exclusive = { focus =  }
+
+		#available = { }
+		
+		#search_filters = { }
+		
+		#bypass = { }
+		
+		cancel = {
+			has_global_flag = japan_united_by_civilwar
+		}
+
+		completion_reward = {
+			add_stability = 0.05
+			add_political_power = 150
+			add_manpower = 75000
+		}
+	}
+	
 	#Japan unite focus
 	
 	focus = {
 		id = japan_civil_war_end
-		icon = GFX_goal_generic_position_armies
+		icon = GFX_focus_generic_self_management
 		cost = 4.3
 		allow_branch = { 
 			OR = {
@@ -338,6 +1496,12 @@ focus_tree = {
 		#bypass = { }
 
 		completion_reward = {
+			remove_ideas = japan_civil_war
+			set_stability = 0.50
+			set_war_support = 0.25
+			add_ideas = jap_economica_destroyed
+			add_ideas = jap_army_destroyed
+			add_ideas = jap_stability_destroyed
 		}
 	}
 	
