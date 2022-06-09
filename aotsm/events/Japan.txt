@@ -7,6 +7,9 @@ add_namespace = jap
 add_namespace = japdip
 add_namespace = japwar
 add_namespace = japintl
+add_namespace = japplan
+
+#base (jap)
 
 country_event = {
 	id = jap.1
@@ -297,6 +300,160 @@ country_event = { #TUK victory
 	
 }
 
+#Diplomacy (japdip)
+
+country_event = {
+	id = japdip.1
+	title = japdip.1.t
+	desc = japdip.1.d
+	picture = GFX_report_event_generic_sign_treaty2
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	hidden =  yes
+
+	option = {
+		name = japdip.1.a
+		ai_chance = {
+			factor = 98
+		}
+		if = {
+			limit = {
+				TUK = {
+					has_country_flag = TUKFULLJAP
+				}
+			}
+			MAN = {
+				add_opinion_modifier = {
+					target = TUK
+					modifier = man_jap_pact
+				}
+			}
+			TUK = {
+				add_opinion_modifier = {
+					target = MAN
+					modifier = man_jap_pact
+				}
+			}
+			MAN = {
+				diplomatic_relation = {
+					country = TUK
+					relation = military_access
+					active = yes
+				}
+			}
+			TUK = {
+				diplomatic_relation = {
+					country = MAN
+					relation = military_access
+					active = yes
+				}
+			}
+		}
+		if = {
+			limit = {
+				JAS = {
+					has_country_flag = JASFULLJAP
+				}
+			}
+			MAN = {
+				add_opinion_modifier = {
+					target = JAS
+					modifier = man_jap_pact
+				}
+			}
+			JAS = {
+				add_opinion_modifier = {
+					target = MAN
+					modifier = man_jap_pact
+				}
+			}
+			MAN = {
+				diplomatic_relation = {
+					country = JAS
+					relation = military_access
+					active = yes
+				}
+			}
+			JAS = {
+				diplomatic_relation = {
+					country = MAN
+					relation = military_access
+					active = yes
+				}
+			}
+		}
+		if = {
+			limit = {
+				JAP = {
+					has_country_flag = JAPFULLJAP
+				}
+			}
+			MAN = {
+				add_opinion_modifier = {
+					target = JAP
+					modifier = man_jap_pact
+				}
+			}
+			JAP = {
+				add_opinion_modifier = {
+					target = MAN
+					modifier = man_jap_pact
+				}
+			}
+			MAN = {
+				diplomatic_relation = {
+					country = JAP
+					relation = military_access
+					active = yes
+				}
+			}
+			JAP = {
+				diplomatic_relation = {
+					country = MAN
+					relation = military_access
+					active = yes
+				}
+			}
+		}	
+	}
+	
+	option = {
+		name = japdip.1.b
+		ai_chance = {
+			factor = 2
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+			}
+		}
+	}
+	
+}
+
+#War (japwar)
+
+country_event = { #annex of taiwan
+	id = japwar.1
+	title = japwar.1.t
+	desc = japwar.1.d
+	picture = GFX_report_event_ast_navy
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = {
+		name = japwar.1.a
+		add_war_support = 0.05
+	}
+	
+}
+
+#Intel (japintl)
+
 country_event = { #Empire speach
 	id = japintl.1
 	title = japintl.1.t
@@ -313,3 +470,59 @@ country_event = { #Empire speach
 	}
 	
 }
+
+#Global plan (japplan)
+
+country_event = { #Korea plan
+	id = japplan.1
+	title = japplan.1.t
+	desc = japplan.1.d
+	picture = GFX_report_event_generic_sign_treaty1
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = { #global planing
+		name = japplan.1.a
+		ai_chance = {
+			factor = 95
+		}
+		set_country_flag = jap_kor_gp
+	}
+	
+	option = { #attack from sea
+		name = japplan.1.b
+		ai_chance = {
+			factor = 5
+		}
+		set_country_flag = jap_kor_as
+	}
+	
+	option = { #japan blitzkrig
+		name = japplan.1.c
+		ai_chance = {
+			factor = 0
+		}
+		set_country_flag = jap_kor_jb
+	}
+	
+}
+
+country_event = { #China plan
+	id = japplan.2
+	title = japplan.2.t
+	desc = japplan.2.d
+	picture = GFX_report_event_usa_destroyers
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = { #Chines is main enemy
+		name = japplan.2.a
+		set_country_flag = jap_kor_gp
+	}
+	
+}
+
