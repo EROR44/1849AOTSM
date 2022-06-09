@@ -1468,7 +1468,7 @@ focus_tree = {
 	
 	focus = {
 		id = japan_civil_war_end
-		icon = GFX_focus_generic_self_management
+		icon = GFX_focus_generic_treaty
 		cost = 4.3
 		allow_branch = { 
 			OR = {
@@ -1483,7 +1483,7 @@ focus_tree = {
 				}
 			}
 		}
-		x = 10
+		x = 20
 		y = 0
 		#relative_position_id = 
 		#prerequisite = { focus = }
@@ -1494,6 +1494,10 @@ focus_tree = {
 		#search_filters = { }
 		
 		#bypass = { }
+		
+		ai_will_do = {
+			factor = 100
+		}
 
 		completion_reward = {
 			remove_ideas = japan_civil_war
@@ -1505,4 +1509,503 @@ focus_tree = {
 		}
 	}
 	
+	focus = {
+		id = japan_new_capital
+		icon = GFX_goal_generic_construct_infrastructure
+		cost = 4.3
+		allow_branch = { 
+			OR = {
+				TUK = {
+					has_country_flag = TUKFULLJAP
+				}
+				JAS = {
+					has_country_flag = JASFULLJAP
+				}
+				JAP = {
+					has_country_flag = JAPFULLJAP
+				}
+			}
+		}
+		x = -1
+		y = 1
+		relative_position_id = japan_civil_war_end
+		prerequisite = { focus = japan_civil_war_end }
+		#mutually_exclusive = { focus =  }
+
+		#available = { }
+		
+		#search_filters = { }
+		
+		#bypass = { }
+		
+		ai_will_do = {
+			factor = 100
+		}
+
+		completion_reward = {
+			if = {
+				limit = {
+					282 = {
+						is_capital = no
+					}
+				}
+				set_capital = {
+					state = 282
+					remember_old_capital = no
+				}
+			}
+			282 = {
+				set_state_category = megalopolis
+				add_state_modifier  = {
+					modifier = {
+						monthly_population = 0.50
+						local_supplies = 0.75
+					}
+				}
+				add_extra_state_shared_building_slots = 4
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = naval_base
+					level = 4
+					instant_build = yes
+					province = 9998
+				}
+			}
+			add_victory_points = {
+				province = 1182
+				value = 15
+			}
+		}
+	}
+	
+	
+	focus = {
+		id = japan_invest_in_reconstruction
+		icon = GFX_goal_generic_construct_civilian
+		cost = 4.3
+		allow_branch = { 
+			OR = {
+				TUK = {
+					has_country_flag = TUKFULLJAP
+				}
+				JAS = {
+					has_country_flag = JASFULLJAP
+				}
+				JAP = {
+					has_country_flag = JAPFULLJAP
+				}
+			}
+		}
+		x = -1
+		y = 2
+		relative_position_id = japan_civil_war_end
+		prerequisite = { focus = japan_new_capital }
+		#mutually_exclusive = { focus =  }
+
+		#available = { }
+		
+		#search_filters = { }
+		
+		#bypass = { }
+		
+		ai_will_do = {
+			factor = 100
+		}
+
+		completion_reward = {
+			add_timed_idea = {
+				idea = japan_reconstruction
+				days = 120
+			}
+		}
+	}
+	
+	focus = {
+		id = japan_new_enemy
+		icon = GFX_goal_generic_propaganda
+		cost = 4.3
+		allow_branch = { 
+			OR = {
+				TUK = {
+					has_country_flag = TUKFULLJAP
+				}
+				JAS = {
+					has_country_flag = JASFULLJAP
+				}
+				JAP = {
+					has_country_flag = JAPFULLJAP
+				}
+			}
+		}
+		x = 1
+		y = 1
+		relative_position_id = japan_civil_war_end
+		prerequisite = { focus = japan_civil_war_end }
+		#mutually_exclusive = { focus =  }
+
+		#available = { }
+		
+		#search_filters = { }
+		
+		#bypass = { }
+		
+		ai_will_do = {
+			factor = 100
+		}
+
+		completion_reward = {
+			QIN = {
+				add_opinion_modifier = {
+					target = ROOT
+					modifier = embargo
+				}
+			}
+			ROOT = {
+				add_opinion_modifier = {
+					target = QIN
+					modifier = embargo
+				}
+			}
+		}
+	}
+	
+	focus = {
+		id = japan_manchuria_pact
+		icon = GFX_goal_generic_intelligence_exchange
+		cost = 4.3
+		allow_branch = { 
+			OR = {
+				TUK = {
+					has_country_flag = TUKFULLJAP
+				}
+				JAS = {
+					has_country_flag = JASFULLJAP
+				}
+				JAP = {
+					has_country_flag = JAPFULLJAP
+				}
+			}
+		}
+		x = 1
+		y = 2
+		relative_position_id = japan_civil_war_end
+		prerequisite = { focus = japan_new_enemy }
+		#mutually_exclusive = { focus =  }
+
+		#available = { }
+		
+		#search_filters = { }
+		
+		#bypass = { }
+		
+		ai_will_do = {
+			factor = 100
+		}
+
+		completion_reward = {
+			MAN = {
+				country_event = japdip.1
+			}
+		}
+	}
+	
+	focus = {
+		id = japan_reborn_start
+		icon = GFX_goal_generic_construct_civ_factory
+		cost = 4.3
+		allow_branch = { 
+			OR = {
+				TUK = {
+					has_country_flag = TUKFULLJAP
+				}
+				JAS = {
+					has_country_flag = JASFULLJAP
+				}
+				JAP = {
+					has_country_flag = JAPFULLJAP
+				}
+			}
+		}
+		x = 0
+		y = 3
+		relative_position_id = japan_civil_war_end
+		prerequisite = { focus = japan_invest_in_reconstruction }
+		prerequisite = { focus = japan_manchuria_pact }
+		#mutually_exclusive = { focus =  }
+
+		#available = { }
+		
+		#search_filters = { }
+		
+		#bypass = { }
+		
+		ai_will_do = {
+			factor = 100
+		}
+
+		completion_reward = {
+			add_ideas = japan_reborn_1
+			swap_ideas = {
+				remove_idea = medium_country
+				add_idea = large_country
+			}
+			hidden_effect = {
+				ROOT = {
+					set_country_flag = jap_open_global_plan
+				}
+				remove_ideas = jap_economica_destroyed
+				remove_ideas = jap_army_destroyed
+				remove_ideas = jap_stability_destroyed
+				mark_focus_tree_layout_dirty = yes
+			}
+		}
+	}
+	
+	
+	#Korea Global plan
+	
+	focus = {
+		id = japan_korea_plan
+		icon = GFX_goal_generic_position_armies
+		cost = 2.2
+		allow_branch = { 
+			OR = {
+				TUK = {
+					has_country_flag = jap_open_global_plan
+				}
+				JAS = {
+					has_country_flag = jap_open_global_plan
+				}
+				JAP = {
+					has_country_flag = jap_open_global_plan
+				}
+			}
+		}
+		x = 10
+		y = 0
+		#relative_position_id = japan_civil_war_end
+		#prerequisite = { focus = japan_invest_in_reconstruction }
+		#prerequisite = { focus = japan_manchuria_pact }
+		#mutually_exclusive = { focus =  }
+
+		#available = { }
+		
+		#search_filters = { }
+		
+		#bypass = { }
+		
+		ai_will_do = {
+			factor = 10000
+		}
+
+		completion_reward = {
+			ROOT = {
+				country_event = japplan.1
+			}
+		}
+	}
+	
+	focus = {
+		id = japan_korea_prepear
+		icon = GFX_goal_generic_small_arms
+		cost = 2.2
+		allow_branch = { 
+			OR = {
+				TUK = {
+					has_country_flag = jap_open_global_plan
+				}
+				JAS = {
+					has_country_flag = jap_open_global_plan
+				}
+				JAP = {
+					has_country_flag = jap_open_global_plan
+				}
+			}
+		}
+		x = 0
+		y = 1
+		relative_position_id = japan_korea_plan
+		prerequisite = { focus = japan_korea_plan }
+		#mutually_exclusive = { focus =  }
+
+		#available = { }
+		
+		#search_filters = { }
+		
+		#bypass = { }
+		
+		ai_will_do = {
+			factor = 100000
+		}
+
+		completion_reward = {
+			if = {
+				limit = {
+					ROOT = {
+						has_country_flag = jap_kor_gp
+					}
+				}
+				add_timed_idea = {
+					idea = jap_gp
+					days = 135
+				}
+			}
+			if = {
+				limit = {
+					ROOT = {
+						has_country_flag = jap_kor_as
+					}
+				}
+				add_timed_idea = {
+					idea = jap_as
+					days = 135
+				}
+			}
+			if = {
+				limit = {
+					ROOT = { 
+						has_country_flag = jap_kor_jb
+					}
+				}
+				add_timed_idea = {
+					idea = jap_jb
+					days = 135
+				}
+			}
+		}
+	}
+	
+	focus = {
+		id = japan_korea_begin
+		icon = GFX_goal_generic_wolf_pack
+		cost = 2.2
+		allow_branch = { 
+			OR = {
+				TUK = {
+					has_country_flag = jap_open_global_plan
+				}
+				JAS = {
+					has_country_flag = jap_open_global_plan
+				}
+				JAP = {
+					has_country_flag = jap_open_global_plan
+				}
+			}
+		}
+		x = 0
+		y = 2
+		relative_position_id = japan_korea_plan
+		prerequisite = { focus = japan_korea_prepear }
+		#mutually_exclusive = { focus =  }
+
+		#available = { }
+		
+		#search_filters = { }
+		
+		#bypass = { }
+		
+		ai_will_do = {
+			factor = 100000
+		}
+
+		completion_reward = {
+			declare_war_on = {
+				target = KOR
+				type = annex_everything
+			}
+			load_oob = jap_kor_marin
+			hidden_effect = {
+				set_global_flag = jap_invasion_kor
+			}
+		}
+	}
+	
+	#China Global plan
+	
+	focus = {
+		id = japan_china_plan
+		icon = GFX_focus_chi_one_china_policy
+		cost = 2.2
+		allow_branch = { 
+			OR = {
+				TUK = {
+					has_country_flag = jap_open_global_plan
+				}
+				JAS = {
+					has_country_flag = jap_open_global_plan
+				}
+				JAP = {
+					has_country_flag = jap_open_global_plan
+				}
+			}
+		}
+		x = 30
+		y = 0
+		#relative_position_id = japan_civil_war_end
+		#prerequisite = { focus = japan_invest_in_reconstruction }
+		#prerequisite = { focus = japan_manchuria_pact }
+		#mutually_exclusive = { focus =  }
+
+		#available = { }
+		
+		#search_filters = { }
+		
+		#bypass = { }
+		
+		ai_will_do = {
+			factor = 10000
+		}
+
+		completion_reward = {
+			ROOT = {
+				country_event = japplan.2
+			}
+			custom_effect_tooltip = jap_china_game
+		}
+	}
+	
+	focus = {
+		id = japan_taiwan_maneur
+		icon = GFX_goal_generic_amphibious_assault
+		cost = 2.2
+		allow_branch = { 
+			OR = {
+				TUK = {
+					has_country_flag = jap_open_global_plan
+				}
+				JAS = {
+					has_country_flag = jap_open_global_plan
+				}
+				JAP = {
+					has_country_flag = jap_open_global_plan
+				}
+			}
+		}
+		x = 0
+		y = 1
+		relative_position_id = japan_china_plan
+		prerequisite = { focus = japan_china_plan }
+		#mutually_exclusive = { focus =  }
+
+		#available = { }
+		
+		#search_filters = { }
+		
+		#bypass = { }
+		
+		ai_will_do = {
+			factor = 10000
+		}
+
+		completion_reward = {
+			transfer_state = 524
+			QIN = {
+				country_event = japwar.1
+			}
+		}
+	}
 }
