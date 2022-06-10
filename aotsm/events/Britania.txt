@@ -126,8 +126,14 @@ country_event = {
 	
 	option = {
 		name = CBI.106.a
-		kill_country_leader = yes 
-		
+		retire_character = CBI_Uillem_Lem
+		CBI = {
+			recruit_character = CBI_Eduard_Smit_Stenli
+			}
+		add_trait = {
+			character = CBI_Eduard_Smit_Stenli
+			trait = temporary_acting
+			}
 		load_focus_tree = british_lord_protector_election	
 		add_political_power = -150
 			hidden_effect = {
@@ -140,16 +146,7 @@ country_event = {
 		ideology = authoritarian  
 		popularity = 0.2
 			}
-		create_country_leader = {
-			name = "Эдуард Смит-Стенли"
-			desc = "POLITICS_EDUARD_SMIT_STENLI_DESC"
-			picture = "Portrait_Eduard_Smit_Stenli.dds"
-			expire = "1865.1.1"
-			ideology = conservatism  
-			traits = {
-			temporary_acting
-				}
-			}			
+			
 	}
 }
 
@@ -413,11 +410,7 @@ country_event = { ### ПРИХОД К ВЛАСТИ СМИТ-СТЕНЛИ 30 НО
 			ideology = democratic		
 			popularity = 0.05
 				}
-		remove_trait = {
-			character = TAG_jane_smith
-			trait = temporary_acting
-				}				
-		load_focus_tree = british_lord_protector_eduard_smith			
+		remove_country_leader_trait = temporary_acting						
 	}
 }
 
@@ -590,12 +583,7 @@ country_event = {
 	desc = CBI.180.d
 	picture = GFX_CBI_socialist_revolution
 	
-	trigger = {
-		tag = CBI
-		has_war = no
-		date > 1850.4.25	
-		date < 1850.5.26
-	}	
+	is_triggered_only = yes		
 	
 	option = {
 		name = CBI.180.a
@@ -721,11 +709,11 @@ country_event = {
 	picture = GFX_CBI_socialist_revolution
 	
 	trigger = {
-		NOT = {
-			has_country_flag = british_socialist_revolution_demilitarized_zone_1
+	has_country_flag = british_socialist_revolution
+	NOT = {
+		has_country_flag = british_socialist_revolution_demilitarized_zone_1
 		}
-		has_stability <0.5
-		tag = CBI
+	has_stability < 0.5		
 	}
 	
 	option = {
@@ -744,32 +732,152 @@ country_event = {
 	}
 }
 
-country_event = {
+country_event = { ### ЗАПРОС НА ОРУЖИЕ ###
 	id = CBI.187 
 	title = CBI.187.t
 	desc = CBI.187.d
-	picture = GFX_CBI_socialist_revolution
+	picture = GFX_report_event_generic_rifles
 	
-	trigger = {
-		NOT = {
-			has_country_flag = british_socialist_revolution_demilitarized_zone_1
+	is_triggered_only = yes	
+	
+	option = {
+	name = CBI.186.a
+	CBI = {	
+			country_event = {
+			id = CBI.188 
+			days = 3
+				}
+			}
+	hidden_effect = {
+	set_country_flag = promise_colonial_reform
 		}
-		has_stability <0.5
-		tag = CBI
 	}
 	
 	option = {
-		name = CBI.187.a
-		add_political_power = -25
-		add_stability = -0.1
-		120 = {
-			set_demilitarized_zone = yes
-		}
-		121 = {
-			set_demilitarized_zone = yes
-		}
-		136 = {
-			set_demilitarized_zone = yes
-		}		
+	name = CBI.186.b
+	CBI = {
+			country_event = {
+			id = CBI.189 
+			days = 3
+				}
+			}
+	}	
+}
+
+country_event = { ### СОГЛАСИЕ ###
+	id = CBI.188 
+	title = CBI.188.t
+	desc = CBI.188.d
+	picture = GFX_report_event_generic_rifles
+	
+	is_triggered_only = yes	
+	
+	option = {
+	name = CBI.188.a	
+		completion_reward = {
+			add_equipment_to_stockpile = {
+			type = infantry_equipment
+			amount = 5650
+			producer = CBI
+				}			
+			add_equipment_to_stockpile = {
+			type = support_equipment
+			amount = 2550
+			producer = CBI
+				}						
+			add_equipment_to_stockpile = {
+			type = artillery_equipment
+			amount = 365
+			producer = CBI
+				}						
+			}		
+	}
+}
+
+country_event = { ### ОТКАЗ ###
+	id = CBI.189 
+	title = CBI.189.t
+	desc = CBI.189.d
+	picture = GFX_report_event_generic_rifles
+	
+	is_triggered_only = yes	
+	
+	option = {
+	name = CBI.189.b		
+	}
+}
+
+country_event = { ### ЗАПРОС НА ОРУЖИЕ ###
+	id = CBI.190 
+	title = CBI.190.t
+	desc = CBI.190.d
+	picture = GFX_report_event_generic_rifles
+	
+	is_triggered_only = yes	
+	
+	option = {
+	name = CBI.190.a
+	CBI = {
+			country_event = {
+			id = CBI.191 
+			days = 3
+				}
+			}
+	hidden_effect = {
+	set_country_flag = promise_colonial_reform
+		}				
+	}
+	
+	option = {
+	name = CBI.190.b
+	CBI = {	
+			country_event = {
+			id = CBI.192 
+			days = 3
+				}	
+			}
+	}
+}
+
+country_event = { ### СОГЛАСИЕ ###
+	id = CBI.191 
+	title = CBI.191.t
+	desc = CBI.191.d
+	picture = GFX_report_event_generic_rifles
+	
+	is_triggered_only = yes	
+	
+	option = {
+	name = CBI.191.b
+		completion_reward = {
+			add_equipment_to_stockpile = {
+			type = infantry_equipment
+			amount = 1250
+			producer = CBI
+				}			
+			add_equipment_to_stockpile = {
+			type = support_equipment
+			amount = 150
+			producer = CBI
+				}						
+			add_equipment_to_stockpile = {
+			type = artillery_equipment
+			amount = 17
+			producer = CBI
+				}						
+			}	
+	}
+}
+
+country_event = { ### ОТКАЗ ###
+	id = CBI.192 
+	title = CBI.192.t
+	desc = CBI.192.d
+	picture = GFX_report_event_generic_rifles
+	
+	is_triggered_only = yes	
+	
+	option = {
+	name = CBI.192.b		
 	}
 }
