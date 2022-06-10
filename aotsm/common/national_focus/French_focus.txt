@@ -2458,7 +2458,7 @@ focus_tree = {
 		cost = 5
 		
 		available = {
-			has_country_leader = { ruling_only = yes character = FRR_Mishel_Shevalie } 
+			has_country_flag = FRR_Mishel_Shevalie_choosen
 		}
 		
 		available_if_capitulated = yes
@@ -2575,7 +2575,7 @@ focus_tree = {
 		cost = 5
 		
 		available = {
-			has_country_leader = { ruling_only = yes character = FRR_Anri_Sharl_de_Artua } 
+			has_country_flag = FRR_Аnri_de_Аrtua_choosen
 		}
 		
 		available_if_capitulated = yes
@@ -2586,12 +2586,88 @@ focus_tree = {
 			country_event = { id = fren.19 }
 		}
 	}
+	focus = {
+		id = FRA_auth_politic
+		icon = GFX_goal_generic_major_war
+		
+		x = 2
+		y = 1
+		relative_position_id = FRA_anri_de_artua_goverment
+		prerequisite = { 
+			focus =  FRA_louis_napoleons_goverment 
+			focus =  FRA_anri_de_artua_goverment 
+		}
+		mutually_exclusive = { focus = FRA_militarists_politic }
+		cost = 10
+		
+		available = {
+			
+		}
+		
+		available_if_capitulated = yes
+
+		search_filters = {FOCUS_FILTER_POLITICAL}
+
+		completion_reward = {
+			
+		}
+	}
+	focus = {
+		id = FRA_defence_french_interests
+		icon = GFX_goal_generic_major_war
+		
+		x = 0
+		y = 2
+		relative_position_id = FRA_auth_politic
+		prerequisite = { focus =  FRA_auth_politic }
+		prerequisite = { focus =  FRA_new_constitution }
+
+		cost = 10
+		
+		available = {
+			
+		}
+		
+		available_if_capitulated = yes
+
+		search_filters = {FOCUS_FILTER_POLITICAL}
+
+		completion_reward = {
+			
+		}
+	}
+	focus = {
+		id = FRA_creat_national_guards #национальная гвардия
+		icon = GFX_goal_generic_major_war
+		
+		x = 0
+		y = 2
+		relative_position_id = FRA_new_constitution
+		prerequisite = { 
+			focus =  FRA_defence_french_interests
+			focus =  FRA_militarists_in_goverment 
+		}
+
+		cost = 10
+		
+		available = {
+			
+		}
+		
+		available_if_capitulated = yes
+
+		search_filters = {FOCUS_FILTER_POLITICAL}
+
+		completion_reward = {
+			
+		}
+	}
 ##################LOUIS_NAPOLEON_BLOCK################################	
 	focus = {
 		id = FRA_louis_napoleons_goverment
 		icon = GFX_goal_generic_major_war
 		
-		x = 8
+		x = 9
 		y = 1
 		relative_position_id = FRA_sharl_lagrange_is_dead
 		prerequisite = { focus =  FRA_sharl_lagrange_is_dead}
@@ -2599,7 +2675,7 @@ focus_tree = {
 		cost = 5
 		
 		available = {
-			has_country_leader = { ruling_only = yes character = FRR_Louis_Napoleon } 
+			has_country_flag = FRR_Luis_Napoleon_choosen
 		}
 		
 		available_if_capitulated = yes
@@ -2611,13 +2687,66 @@ focus_tree = {
 		}
 	}
 	focus = {
+		id = FRA_militarists_politic
+		icon = GFX_goal_generic_major_war
+		
+		x = -2
+		y = 1
+		relative_position_id = FRA_louis_napoleons_goverment
+		prerequisite = { 
+			focus =  FRA_louis_napoleons_goverment 
+			focus =  FRA_anri_de_artua_goverment 
+		}
+		mutually_exclusive = { focus = FRA_auth_politic }
+		cost = 10
+		
+		available = {
+			
+		}
+		
+		available_if_capitulated = yes
+
+		search_filters = {FOCUS_FILTER_POLITICAL}
+
+		completion_reward = {
+			
+		}
+	}
+	focus = {
+		id = FRA_new_constitution
+		icon = GFX_goal_generic_major_war
+		
+		x = -1
+		y = 1
+		relative_position_id = FRA_militarists_politic
+		prerequisite = { 
+			focus =  FRA_militarists_politic 
+			focus =  FRA_auth_politic
+		}
+		
+		cost = 10
+		
+		available = {
+			
+		}
+		
+		available_if_capitulated = yes
+
+		search_filters = {FOCUS_FILTER_POLITICAL}
+
+		completion_reward = {
+			
+		}
+	}
+	focus = {
 		id = FRA_militarists_in_goverment
 		icon = GFX_goal_generic_major_war
 		
-		x = 1
-		y = 1
-		relative_position_id = FRA_louis_napoleons_goverment
-		prerequisite = { focus =  FRA_louis_napoleons_goverment }
+		x = 0
+		y = 2
+		relative_position_id = FRA_militarists_politic
+		prerequisite = { focus =  FRA_militarists_politic }
+		prerequisite = { focus =  FRA_new_constitution }
 
 		cost = 10
 		
@@ -2637,7 +2766,7 @@ focus_tree = {
 		id = FRA_propaganda_french_uniqueness
 		icon = GFX_goal_generic_major_war
 		
-		x = -1
+		x = 0
 		y = 1
 		relative_position_id = FRA_louis_napoleons_goverment
 		prerequisite = { focus =  FRA_louis_napoleons_goverment}
@@ -2657,14 +2786,107 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = FRA_ban_the_opposition
+		id = FRA_propaganda_french_uniqueness
+		icon = GFX_goal_generic_major_war
+		
+		x = 0
+		y = 1
+		relative_position_id = FRA_louis_napoleons_goverment
+		prerequisite = { focus =  FRA_louis_napoleons_goverment}
+
+		cost = 10
+		
+		available = {
+			has_country_leader = { ruling_only = yes character = FRR_Louis_Napoleon } 
+		}
+		
+		available_if_capitulated = yes
+
+		search_filters = {FOCUS_FILTER_POLITICAL}
+
+		completion_reward = {
+			
+		}
+	}
+	focus = {
+		id = FRA_promote_revanchist_ideas
 		icon = GFX_goal_generic_major_war
 		
 		x = -1
 		y = 1
-		relative_position_id = FRA_militarists_in_goverment
-		prerequisite = { focus =  FRA_propaganda_french_uniqueness }
-		prerequisite = { focus =  FRA_militarists_in_goverment }
+		relative_position_id = FRA_propaganda_french_uniqueness
+		prerequisite = { focus =  FRA_propaganda_french_uniqueness}
+
+		cost = 10
+		
+		available = {
+			has_country_leader = { ruling_only = yes character = FRR_Louis_Napoleon } 
+		}
+		
+		available_if_capitulated = yes
+
+		search_filters = {FOCUS_FILTER_POLITICAL}
+
+		completion_reward = {
+			
+		}
+	}
+	focus = {
+		id = FRA_fight_with_the_pacifism
+		icon = GFX_goal_generic_major_war
+		
+		x = 1
+		y = 1
+		relative_position_id = FRA_propaganda_french_uniqueness
+		prerequisite = { focus =  FRA_propaganda_french_uniqueness}
+
+		cost = 10
+		
+		available = {
+			has_country_leader = { ruling_only = yes character = FRR_Louis_Napoleon } 
+		}
+		
+		available_if_capitulated = yes
+
+		search_filters = {FOCUS_FILTER_POLITICAL}
+
+		completion_reward = {
+			
+		}
+	}
+	focus = {
+		id = FRA_ban_the_opposition
+		icon = GFX_goal_generic_major_war
+		
+		x = 0
+		y = 2
+		relative_position_id = FRA_propaganda_french_uniqueness
+		prerequisite = { focus =  FRA_promote_revanchist_ideas }
+		prerequisite = { focus =  FRA_fight_with_the_pacifism }
+		
+
+		cost = 10
+		
+		available = {
+			has_country_leader = { ruling_only = yes character = FRR_Louis_Napoleon } 
+		}
+		
+		available_if_capitulated = yes
+
+		search_filters = {FOCUS_FILTER_POLITICAL}
+
+		completion_reward = {
+			
+		}
+	}
+	focus = {
+		id = FRA_state_media #государственные сми
+		icon = GFX_goal_generic_major_war
+		
+		x = 1
+		y = 1
+		relative_position_id = FRA_ban_the_opposition
+		prerequisite = { focus =  FRA_ban_the_opposition }	
 
 		cost = 10
 		
@@ -2684,11 +2906,12 @@ focus_tree = {
 		id = FRA_create_millitary_goverment
 		icon = GFX_goal_generic_major_war
 		
-		x = 0
+		x = -1
 		y = 1
 		relative_position_id = FRA_ban_the_opposition
 		prerequisite = { focus =  FRA_ban_the_opposition }
-
+		prerequisite = { focus =  FRA_militarists_in_goverment }
+		
 		cost = 10
 		
 		available = {
@@ -2707,13 +2930,38 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = FRA_
+		id = FRA_goals_on_historical_territiries
 		icon = GFX_goal_generic_major_war
 		
-		x = 0
+		x = -1
 		y = 1
 		relative_position_id = FRA_create_millitary_goverment
 		prerequisite = { focus =  FRA_create_millitary_goverment }
+		prerequisite = { focus =  FRA_militarists_in_goverment }
+
+		cost = 10
+		
+		available = {
+			has_country_leader = { ruling_only = yes character = FRR_Louis_Napoleon } 
+		}
+		
+		available_if_capitulated = yes
+
+		search_filters = {FOCUS_FILTER_POLITICAL}
+
+		completion_reward = {
+			
+		}
+	}
+	focus = {
+		id = FRA_militarist_society
+		icon = GFX_goal_generic_major_war
+		
+		x = 1
+		y = 1
+		relative_position_id = FRA_create_millitary_goverment
+		prerequisite = { focus =  FRA_create_millitary_goverment }
+		prerequisite = { focus =  FRA_militarists_in_goverment }
 
 		cost = 10
 		
