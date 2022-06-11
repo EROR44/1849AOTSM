@@ -449,6 +449,14 @@ pru_diplomat_missia = {
 		visible = {
 			original_tag = PRU
 			has_global_flag = russian_capitulation
+			OR = {
+				country_exists = GLA
+				NOT = {
+					VLH = {
+						is_puppet = yes
+					}
+				}
+			}
 		}
 
 		fire_only_once = yes
@@ -461,26 +469,40 @@ pru_diplomat_missia = {
 		}
 		
 		remove_effect = {
-			PRU = {
-				declare_war_on = {
-					target = GLA
-					type = annex_everything
+			if = {
+				limit = {
+					country_exists = GLA
+				}
+				PRU = {
+					declare_war_on = {
+						target = GLA
+						type = annex_everything
+					}
+				}
+				hidden_effect = {
+					GLA = {
+						set_country_flag = revenge_for_hungary_gla
+					}
 				}
 			}
-			hidden_effect = {
-				GLA = {
-					set_country_flag = revenge_for_hungary_gla
+			if = {
+				limit = {
+					NOT = {
+						VLH = {
+							is_puppet = yes
+						}
+					}
 				}
-			}
-			PRU = {
-				declare_war_on = {
-					target = VLH
-					type = annex_everything
+				PRU = {
+					declare_war_on = {
+						target = VLH
+						type = annex_everything
+					}
 				}
-			}
-			hidden_effect = {
-				VLH = {
-					set_country_flag = revenge_for_hungary_vlh
+				hidden_effect = {
+					VLH = {
+						set_country_flag = revenge_for_hungary_vlh
+					}
 				}
 			}
 		}
