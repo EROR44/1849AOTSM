@@ -1604,7 +1604,7 @@ focus_tree = {
 		relative_position_id = FRA_sharl_lagrange_is_dead
 		mutually_exclusive = { focus = FRA_own_way }
 		mutually_exclusive = { focus = FRA_be_with_prussia }
-		cost = 10
+		cost = 5
 		#search_filters = {   }
 		
 		available = {
@@ -1624,8 +1624,8 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = FRA_create_the_ebers_line
-		icon = GFX_goal_generic_fortify_city
+		id = FRR_embargo_pru
+		icon = GFX_goal_generic_forceful_treaty
 		
 		x = 0
 		y = 1
@@ -1634,11 +1634,46 @@ focus_tree = {
 			focus = FRA_be_with_britain 
 		}
 		
-		cost = 10
+		cost = 5
 		#search_filters = {   }
 		
 		available = {
 			has_country_flag = FRR_cbi_choosen
+		}
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+			PRU = { add_opinion_modifier = { target = FRR modifier = embargo } }
+			if = {
+				limit = {
+					BYZ = { in_faction_with = PRU }
+				}
+				BYZ = { add_opinion_modifier = { target = FRR modifier = embargo } }
+			}			
+			hidden_effect = {
+				PRU = { country_event = { id = fren.23 days = 2 } }
+			}
+		}
+	}
+	focus = {
+		id = FRA_create_the_ebers_line
+		icon = GFX_goal_generic_fortify_city
+		mutually_exclusive = { focus = FRA_create_coastal_defence_line }
+		x = 2
+		y = 4
+		relative_position_id = FRA_be_with_britain
+		prerequisite = { 
+			focus = FRA_be_with_britain 
+			focus = FRA_french_entente
+			focus = FRA_own_aliance
+		}	
+		
+		cost = 10
+		#search_filters = {   }
+		
+		available = {
+			
 		}
 		
 		available_if_capitulated = yes
@@ -1740,15 +1775,16 @@ focus_tree = {
 	focus = {
 		id = FRA_french_claims_on_elsas_lotaringia
 		icon = GFX_goal_generic_political_pressure
-		
-		x = 0
-		y = 1
-		relative_position_id = FRA_create_the_ebers_line
+		mutually_exclusive = { focus = FRR_colonial_goals }
+		x = 1
+		y = 2
+		relative_position_id = FRA_be_with_britain
 		prerequisite = { 
-			focus = FRA_create_the_ebers_line 
+			focus = FRA_be_with_britain
+			focus = FRA_own_way
 		}
 		
-		cost = 10
+		cost = 5
 		#search_filters = {   }
 		
 		bypass = {
@@ -1756,7 +1792,7 @@ focus_tree = {
 		}
 		
 		available = {
-			has_country_flag = FRR_cbi_choosen
+			
 		}
 		
 		available_if_capitulated = yes
@@ -1779,7 +1815,8 @@ focus_tree = {
 		id = FRA_own_way
 		icon = GFX_goal_generic_neutrality_focus
 		
-		x = 4
+		x = 3
+		x = 3
 		y = 0 
 		relative_position_id = FRA_be_with_britain
 		mutually_exclusive = { focus = FRA_be_with_britain }
@@ -1797,24 +1834,23 @@ focus_tree = {
 		
 		completion_reward = {
 			add_political_power = 150
-			create_faction = FRR_french_socialostic_sphere
 			hidden_effect = {
 				set_country_flag = FRR_own_way
 			}
 		}
 	}
 	focus = {
-		id = FRA_french_interests
-		icon = GFX_goal_generic_dangerous_deal
-		
-		x = 0
+		id = FRA_french_entente 
+		icon = GFX_focus_generic_little_entente
+		mutually_exclusive = { focus = FRA_own_aliance }
+		x = -1
 		y = 1
 		relative_position_id = FRA_own_way
 		prerequisite = { 
 			focus = FRA_own_way 
 		}
 		
-		cost = 10
+		cost = 5
 		#search_filters = {   }
 		
 		available = {
@@ -1824,21 +1860,47 @@ focus_tree = {
 		available_if_capitulated = yes
 
 		completion_reward = {
-			
+			create_faction = FRR_entente  
+			RUS = { country_event = { id = fren.22 } }
+		}
+	}
+	focus = {
+		id = FRA_own_aliance
+		icon = GFX_goal_generic_national_unity
+		mutually_exclusive = { focus = FRA_french_entente }
+		x = 1
+		y = 1
+		relative_position_id = FRA_own_way
+		prerequisite = { 
+			focus = FRA_own_way 
+		}
+		
+		cost = 5
+		#search_filters = {   }
+		
+		available = {
+			has_country_flag = FRR_own_way
+		}
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+			create_faction = FRR_french_socialostic_sphere
 		}
 	}
 	focus = {
 		id = FRA_intervencionism
 		icon = GFX_goal_generic_defence
 		
-		x = 0
-		y = 1
-		relative_position_id = FRA_french_interests
+		x = 1
+		y = 2
+		relative_position_id = FRA_french_entente
 		prerequisite = { 
-			focus = FRA_french_interests 
+			focus = FRA_own_aliance 
+			focus = FRA_french_entente 
 		}
 		
-		cost = 10
+		cost = 5
 		#search_filters = {   }
 		
 		available = {
@@ -1855,12 +1917,12 @@ focus_tree = {
 		id = FRA_be_with_prussia
 		icon = GFX_be_friend_with_pru
 		
-		x = 4
+		x = 3
 		y = 0
 		relative_position_id = FRA_own_way
 		mutually_exclusive = { focus = FRA_be_with_britain }
 		mutually_exclusive = { focus = FRA_own_way }
-		cost = 10
+		cost = 5
 		#search_filters = {   }
 		
 		available = {
@@ -1882,19 +1944,21 @@ focus_tree = {
 	focus = {
 		id = FRA_create_coastal_defence_line
 		icon = GFX_goal_generic_fortify_city
-		
-		x = 0
-		y = 1
+		mutually_exclusive = { focus = FRA_create_the_ebers_line }
+		x = -2
+		y = 4
 		relative_position_id = FRA_be_with_prussia
 		prerequisite = { 
 			focus = FRA_be_with_prussia 
+			focus = FRA_own_aliance
+			focus = FRA_french_entente
 		}
 		
 		cost = 10
 		#search_filters = {   }
 		
-		available = {
-			has_country_flag = FRR_pru_choosen
+		available = { 
+			
 		}
 		
 		available_if_capitulated = yes
@@ -2024,12 +2088,12 @@ focus_tree = {
 		
 		x = 0
 		y = 1
-		relative_position_id = FRA_create_coastal_defence_line
+		relative_position_id = FRA_be_with_prussia
 		prerequisite = { 
-			focus = FRA_create_coastal_defence_line 
+			focus = FRA_be_with_prussia 
 		}
 		
-		cost = 10
+		cost = 5
 		#search_filters = {   }
 		
 		available = {
@@ -2046,27 +2110,58 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = FRA_support_cbi
-		icon = GFX_goal_generic_major_war
+		id = FRR_colonial_goals
+		icon = GFX_goal_tfv_saf_anti_colonialist_crusade 
 		
-		x = -2
-		y = 3
-		relative_position_id = FRA_own_way
+		x = -1
+		y = 2
+		relative_position_id = FRA_be_with_prussia
 		prerequisite = { 
-			focus = FRA_be_with_britain 
-			focus = FRA_own_way
+			focus = FRA_be_with_prussia 
+			focus = FRA_own_aliance
+			focus = FRA_french_entente
 		}
-		mutually_exclusive = { focus = FRA_support_pru }
-		cost = 10
+		
+		cost = 5
 		#search_filters = {   }
 		
 		available = {
-			OR = { 
-				has_completed_focus = FRA_intervencionism
-				has_completed_focus = FRA_french_claims_on_elsas_lotaringia
+			
+		}
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+				
+			hidden_effect = {
+				
 			}
+		}
+	}
+	focus = {
+		id = FRA_support_cbi
+		icon = GFX_goal_generic_major_war
+		
+		x = 0
+		y = 1
+		relative_position_id = FRA_create_the_ebers_line
+		prerequisite = { 
+			focus = FRA_create_the_ebers_line
+		}
+		
+		cost = 5
+		#search_filters = {   }
+		
+		bypass = {
+			ROOT = has_war_with = PRU 
+		}
+		
+		available = {
 			FRR = { NOT = { has_war = yes } }
-			PRU = { has_war_with = CBI }
+			OR = {
+				PRU = { has_war_with = CBI }
+				PRU = { has_war_with = RUS }
+			}
 		}
 		
 		available_if_capitulated = yes
@@ -2090,22 +2185,20 @@ focus_tree = {
 		id = FRA_support_pru
 		icon = GFX_goal_generic_more_territorial_claims
 		
-		x = 2
-		y = 3
-		relative_position_id = FRA_own_way
+		x = 0
+		y = 1
+		relative_position_id = FRA_create_coastal_defence_line
 		prerequisite = { 
-			focus = FRA_be_with_prussia 
-			focus = FRA_own_way
+			focus = FRA_create_coastal_defence_line
 		}
-		mutually_exclusive = { focus = FRA_support_cbi }
-		cost = 10
-		#search_filters = {   }
+		
+		cost = 5
+		
+		bypass = {
+			ROOT = has_war_with = CBI
+		}
 		
 		available = {
-			OR = { 
-				has_completed_focus = FRA_intervencionism
-				has_completed_focus = FRR_embargo_cbi
-			}
 			FRR = { NOT = { has_war = yes } }
 			CBI = { has_war_with = PRU }
 		}
