@@ -1032,66 +1032,77 @@ country_event = {
 	
 	option = {
 		name = ger.11.a 
-		BYZ = {
-			transfer_state = 123
-			transfer_state = 709
-			transfer_state = 710
-			transfer_state = 712
-		}
-		IND = {
-			transfer_state = 523
-			transfer_state = 711
-			transfer_state = 721
-		}
-		IRE = {
-			transfer_state = 113
-			transfer_state = 119
-			transfer_state = 134
-			transfer_state = 135
-		}
-		PRU = {
-			add_to_faction = IRE
-		}
-		CBI = {
-			remove_state_core = 113
-			remove_state_core = 119
-			remove_state_core = 123
-			remove_state_core = 134
-			remove_state_core = 135
-		}
-		ZUL = {
-			transfer_state = 681
-			transfer_state = 850
-		}
-		RIT = {
-			annex_country = {
-				target = OIC
-				transfer_troops = no
+		if = {
+			limit = {
+				CBI = {
+					has_war_with = IND
+				}
 			}
-		}
-		PRU = {
-			transfer_state = 299
-			transfer_state = 540
-			transfer_state = 691
-			transfer_state = 694
-			transfer_state = 696
-			transfer_state = 702
-			transfer_state = 703
-			transfer_state = 704
-			transfer_state = 720
-			transfer_state = 796
-			transfer_state = 825
-			transfer_state = 826
-			transfer_state = 839
-			transfer_state = 841
-			transfer_state = 842
-			transfer_state = 843
-			transfer_state = 844
-			transfer_state = 847
+			IND = {
+				transfer_state = 711
+			}
 		}
 		if = {
 			limit = {
-				VIN = {
+				CBI = {
+					has_war_with = PRU
+				}
+			}
+			IRE = {
+				transfer_state = 113
+				transfer_state = 119
+				transfer_state = 134
+				transfer_state = 135
+			}
+			PRU = {
+				add_to_faction = IRE
+			}
+			CBI = {
+				remove_state_core = 113
+				remove_state_core = 119
+				remove_state_core = 134
+				remove_state_core = 135
+			}
+			PRU = {
+				transfer_state = 299
+				transfer_state = 696
+				transfer_state = 703
+				transfer_state = 704
+				transfer_state = 720
+				transfer_state = 826
+				transfer_state = 841
+				transfer_state = 842
+				transfer_state = 843
+				transfer_state = 844
+			}
+		}
+		if = {
+			limit = {
+				CBI = {
+					has_war_with = BYZ
+				}
+			}
+			BYZ = {
+				transfer_state = 123
+				transfer_state = 709
+				transfer_state = 710
+			}
+			CBI = {
+				remove_state_core = 123
+			}
+			ZUL = {
+				transfer_state = 681
+			}
+			RIT = {
+				annex_country = {
+					target = OIC
+					transfer_troops = no
+				}
+			}
+		}
+		if = {
+			limit = {
+				SCA = {
 					has_war_with = CBI
 				}
 				NOT = {
@@ -1110,22 +1121,6 @@ country_event = {
 				set_country_flag = vin_new_land
 			}
 		}
-		if = {
-			limit = {
-				SCA = {
-					has_war_with = CBI
-				}
-			}
-			every_country = {
-				limit = {
-					has_war_with = SCA
-				}
-				white_peace = SCA
-			}
-			SCA = {
-				leave_faction = yes
-			}
-		}
 		CBI = {
 			set_autonomy = {
 				target = NEN
@@ -1141,29 +1136,29 @@ country_event = {
 				}
 				white_peace = NEN
 			}
-			NEN = {
-				leave_faction = yes
-			}
+		}
+		NEN = {
+			leave_faction = yes
 		}
 		if = {
 			limit = {
 				NOT = {
-					CBI = {
-						has_war_with = JAP
+					OR = {
+						CBI = {
+							has_war_with = JAP
+						}
+						CBI = {
+							has_war_with = JAS
+						}
+						CBI = {
+							has_war_with = TUK
+						}
 					}
 				}
 			}
 			CBI = {
 				set_autonomy = {
 					target = BAS
-					autonomy_state = autonomy_free
-					end_wars = yes
-					end_civil_wars = yes
-				}
-			}
-			PRT = {
-				set_autonomy = {
-					target = PAS
 					autonomy_state = autonomy_free
 					end_wars = yes
 					end_civil_wars = yes
@@ -1180,67 +1175,6 @@ country_event = {
 					leave_faction = yes
 				}
 			}
-			PAS = {
-				every_country = {
-					limit = {
-						has_war_with = PAS
-					}
-					white_peace = PAS
-				}
-				PAS = {
-					leave_faction = yes
-				}
-			}
-		}
-		if = {
-			limit = {
-				NOT = {
-					CBI = {
-						has_war_with = JAS
-					}
-				}
-			}
-			CBI = {
-				set_autonomy = {
-					target = BAS
-					autonomy_state = autonomy_free
-					end_wars = yes
-					end_civil_wars = yes
-				}
-			}
-			PRT = {
-				set_autonomy = {
-					target = PAS
-					autonomy_state = autonomy_free
-					end_wars = yes
-					end_civil_wars = yes
-				}
-			}
-		}
-		if = {
-			limit = {
-				NOT = {
-					CBI = {
-						has_war_with = TUK
-					}
-				}
-			}
-			CBI = {
-				set_autonomy = {
-					target = BAS
-					autonomy_state = autonomy_free
-					end_wars = yes
-					end_civil_wars = yes
-				}
-			}
-			PRT = {
-				set_autonomy = {
-					target = PAS
-					autonomy_state = autonomy_free
-					end_wars = yes
-					end_civil_wars = yes
-				}
-			}
 		}
 		if = {
 			limit = {
@@ -1249,38 +1183,20 @@ country_event = {
 				}
 			}
 			JAP = {
-				transfer_state = 270
-				transfer_state = 629
 				transfer_state = 630
-				transfer_state = 631
 				transfer_state = 632
 				transfer_state = 633
+				transfer_state = 634
 				transfer_state = 635
-				transfer_state = 636
 				transfer_state = 643
-				transfer_state = 649
-				transfer_state = 725
 				transfer_state = 726
 				transfer_state = 727
 				transfer_state = 734
-				transfer_state = 737
 				set_autonomy = {
 					target = BAS
 					autonomy_state = autonomy_occupationzone
 					end_wars = yes
 					end_civil_wars = yes
-				}
-			}
-			NIS = {
-				annex_country = {
-					target = SON
-					transfer_troops = no
-				}
-			}
-			BAS = {
-				annex_country = {
-					target = PAS
-					transfer_troops = no
 				}
 			}
 		}
@@ -1291,38 +1207,20 @@ country_event = {
 				}
 			}
 			JAS = {
-				transfer_state = 270
-				transfer_state = 629
 				transfer_state = 630
-				transfer_state = 631
 				transfer_state = 632
 				transfer_state = 633
+				transfer_state = 634
 				transfer_state = 635
-				transfer_state = 636
 				transfer_state = 643
-				transfer_state = 649
-				transfer_state = 725
 				transfer_state = 726
 				transfer_state = 727
 				transfer_state = 734
-				transfer_state = 737
 				set_autonomy = {
 					target = BAS
 					autonomy_state = autonomy_occupationzone
 					end_wars = yes
 					end_civil_wars = yes
-				}
-			}
-			NIS = {
-				annex_country = {
-					target = SON
-					transfer_troops = no
-				}
-			}
-			BAS = {
-				annex_country = {
-					target = PAS
-					transfer_troops = no
 				}
 			}
 		}
@@ -1333,50 +1231,21 @@ country_event = {
 				}
 			}
 			TUK = {
-				transfer_state = 270
-				transfer_state = 629
 				transfer_state = 630
-				transfer_state = 631
 				transfer_state = 632
 				transfer_state = 633
+				transfer_state = 634
 				transfer_state = 635
-				transfer_state = 636
 				transfer_state = 643
-				transfer_state = 649
-				transfer_state = 725
 				transfer_state = 726
 				transfer_state = 727
 				transfer_state = 734
-				transfer_state = 737
 				set_autonomy = {
 					target = BAS
 					autonomy_state = autonomy_occupationzone
 					end_wars = yes
 					end_civil_wars = yes
 				}
-			}
-			NIS = {
-				annex_country = {
-					target = SON
-					transfer_troops = no
-				}
-			}
-			BAS = {
-				annex_country = {
-					target = PAS
-					transfer_troops = no
-				}
-			}
-		}
-		PRT = {
-			every_country = {
-				limit = {
-					has_war_with = PRT
-				}
-				white_peace = PRT
-			}
-			PRT = {
-				leave_faction = yes
 			}
 		}
 		CBI = {
@@ -1391,6 +1260,206 @@ country_event = {
 			leave_faction = yes
 		}
 		set_global_flag = cbi_capitulation
+		if = {
+			limit = {
+				NOT = {
+					has_global_flag = prt_capitulation
+				}
+			}
+			if = {
+				limit = {
+					PRT = {
+						has_war_with = PRU
+					}
+				}
+				PRU = {
+					transfer_state = 540
+					transfer_state = 691
+					transfer_state = 694
+					transfer_state = 702
+					transfer_state = 796
+					transfer_state = 825
+					transfer_state = 839
+					transfer_state = 847
+				}
+			}
+			if = {
+				limit = {
+					PRT = {
+						has_war_with = BYZ
+					}
+				}
+				BYZ = {
+					transfer_state = 712
+				}
+				ZUL = {
+					transfer_state = 846
+					transfer_state = 850
+				}
+			}
+			if = {
+				limit = {
+					PRT = {
+						has_war_with = IND
+					}
+				}
+				IND = {
+					transfer_state = 523
+					transfer_state = 721
+				}
+			}
+			if = {
+				limit = {
+					OR = {
+						PRT = {
+							has_war_with = JAP
+						}
+						PRT = {
+							has_war_with = JAS
+						}
+						PRT = {
+							has_war_with = TUK
+						}
+					}
+				}
+				if = {
+					limit = {
+						PRT = {
+							has_war_with = JAP
+						}
+					}
+					JAP = {
+						transfer_state = 270
+						transfer_state = 629
+						transfer_state = 630
+						transfer_state = 631
+						transfer_state = 636
+						transfer_state = 649
+						transfer_state = 725
+						transfer_state = 734
+						transfer_state = 737
+						set_autonomy = {
+							target = PAS
+							autonomy_state = autonomy_occupationzone
+							end_wars = yes
+							end_civil_wars = yes
+						}
+					}
+					NIS = {
+						annex_country = {
+							target = SON
+							transfer_troops = no
+						}
+					}
+				}
+				if = {
+					limit = {
+						PRT = {
+							has_war_with = JAS
+						}
+					}
+					JAS = {
+						transfer_state = 270
+						transfer_state = 629
+						transfer_state = 630
+						transfer_state = 631
+						transfer_state = 636
+						transfer_state = 649
+						transfer_state = 725
+						transfer_state = 734
+						transfer_state = 737
+						set_autonomy = {
+							target = PAS
+							autonomy_state = autonomy_occupationzone
+							end_wars = yes
+							end_civil_wars = yes
+						}
+					}
+					NIS = {
+						annex_country = {
+							target = SON
+							transfer_troops = no
+						}
+					}
+				}
+				if = {
+					limit = {
+						PRT = {
+							has_war_with = TUK
+						}
+					}
+					TUK = {
+						transfer_state = 270
+						transfer_state = 629
+						transfer_state = 630
+						transfer_state = 631
+						transfer_state = 636
+						transfer_state = 649
+						transfer_state = 725
+						transfer_state = 734
+						transfer_state = 737
+						set_autonomy = {
+							target = PAS
+							autonomy_state = autonomy_occupationzone
+							end_wars = yes
+							end_civil_wars = yes
+						}
+					}
+					NIS = {
+						annex_country = {
+							target = SON
+							transfer_troops = no
+						}
+					}
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						OR = {
+							PRT = {
+								has_war_with = JAP
+							}
+							PRT = {
+								has_war_with = JAS
+							}
+							PRT = {
+								has_war_with = TUK
+							}
+						}
+					}
+				}
+				PRT = {
+					set_autonomy = {
+						target = PAS
+						autonomy_state = autonomy_free
+						end_wars = yes
+						end_civil_wars = yes
+					}
+				}
+				every_country = {
+					limit = {
+						has_war_with = PAS
+					}
+					white_peace = PAS
+				}
+				PAS = {
+					leave_faction = yes
+				}
+			}
+			PRT = {
+				every_country = {
+					limit = {
+						has_war_with = PRT
+					}
+					white_peace = PRT
+				}
+			}
+			PRT = {
+				leave_faction = yes
+			}
+			set_global_flag = prt_capitulation
+		}
 		news_event = { hours = 24 id = news.22 }
 	}
 }
