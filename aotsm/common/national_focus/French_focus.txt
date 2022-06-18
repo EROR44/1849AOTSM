@@ -609,6 +609,7 @@ focus_tree = {
 		
 		completion_reward = {
 			country_event = fren.4
+			custom_effect_tooltip = FRR_reduce_chanses_on_militarists_uprising
 		}
 	}
 	focus = {
@@ -1592,8 +1593,8 @@ focus_tree = {
 		
 		
 		completion_reward = {
-			navy_experience = 10
-			
+			navy_experience = 15
+			add_ideas = FRR_updated_navy
 		}
 	}
 	
@@ -1926,7 +1927,7 @@ focus_tree = {
 		available_if_capitulated = yes
 
 		completion_reward = {
-			create_faction = FRR_french_socialostic_sphere
+			create_faction = FRR_french_continental_system
 		}
 	}
 	focus = {
@@ -2175,7 +2176,6 @@ focus_tree = {
 		available_if_capitulated = yes
 
 		completion_reward = {	
-			custom_effect_tooltip = FRR_claims_on_colonial_areas 
 			custom_effect_tooltip = FRR_claims_on_colonial_areas 
 			hidden_effect = {
 				add_country_flag = FRR_claims_on_colonial_areas_add
@@ -2445,6 +2445,7 @@ focus_tree = {
 		search_filters = {FOCUS_FILTER_POLITICAL}
 
 		completion_reward = {
+			custom_effect_tooltip = FRR_reduce_chanses_on_militarists_uprising
 			add_timed_idea = {
 				idea = FRR_fight_with_opposition
 				days = 210
@@ -2661,7 +2662,7 @@ focus_tree = {
 		search_filters = {FOCUS_FILTER_POLITICAL}
 
 		completion_reward = {
-			
+			country_event = { id = fren.26 }
 		}
 	}
 	focus = {
@@ -2684,7 +2685,8 @@ focus_tree = {
 		search_filters = {FOCUS_FILTER_POLITICAL}
 
 		completion_reward = {
-			
+			custom_effect_tooltip = FRR_reduce_chanses_on_militarists_uprising
+			country_event = { id = fren.27 }
 		}
 	}
 	focus = {
@@ -2707,7 +2709,7 @@ focus_tree = {
 		search_filters = {FOCUS_FILTER_POLITICAL}
 
 		completion_reward = {
-			
+			country_event = { id = fren.28 }
 		}
 	}
 	focus = {
@@ -2731,7 +2733,11 @@ focus_tree = {
 		search_filters = {FOCUS_FILTER_POLITICAL}
 
 		completion_reward = {
-			
+			add_stability = 0.05
+			add_popularity = {
+				ideology = democratic
+				popularity = 0.05
+			}
 		}
 	}
 	focus = {
@@ -2757,7 +2763,7 @@ focus_tree = {
 		search_filters = {FOCUS_FILTER_POLITICAL}
 
 		completion_reward = {
-			
+			add_ideas = FRR_free_press
 		}
 	}
 	focus = {
@@ -2780,7 +2786,11 @@ focus_tree = {
 		search_filters = {FOCUS_FILTER_POLITICAL}
 
 		completion_reward = {
-			
+			add_stability = -0.1
+			add_popularity = {
+				ideology = democratic
+				popularity = 0.05
+			}
 		}
 	}
 	focus = {
@@ -2803,7 +2813,8 @@ focus_tree = {
 		search_filters = {FOCUS_FILTER_POLITICAL}
 
 		completion_reward = {
-			
+			custom_effect_tooltip = FRR_reduce_chanses_on_militarists_uprising
+			add_stability = 0.1
 		}
 	}
 	focus = {
@@ -2826,7 +2837,11 @@ focus_tree = {
 		search_filters = {FOCUS_FILTER_POLITICAL}
 
 		completion_reward = {
-			
+			add_ideas = FRR_social_guaranties
+			add_popularity = {
+				ideology = democratic
+				popularity = 0.05
+			}
 		}
 	}
 	focus = {
@@ -2850,7 +2865,11 @@ focus_tree = {
 		search_filters = {FOCUS_FILTER_POLITICAL}
 
 		completion_reward = {
-			
+			add_popularity = {
+				ideology = democratic
+				popularity = 0.08
+			}
+			set_cosmetic_tag = FRRDEM
 		}
 	}
 	focus = {
@@ -2873,7 +2892,7 @@ focus_tree = {
 		search_filters = {FOCUS_FILTER_POLITICAL}
 
 		completion_reward = {
-			
+			remove_ideas = FRR_divided_nation
 		}
 	}
 	focus = {
@@ -2912,7 +2931,7 @@ focus_tree = {
 		cost = 5
 		
 		available = {
-			has_country_flag = FRR_Аnri_de_Аrtua_choosen
+			has_country_flag = FRR_Anri_Sharl_de_Artua_choosen 
 		}
 		
 		available_if_capitulated = yes
@@ -3115,7 +3134,8 @@ focus_tree = {
 		search_filters = {FOCUS_FILTER_POLITICAL}
 
 		completion_reward = {
-			
+			custom_effect_tooltip = FRR_reduce_chanses_on_militarists_uprising
+			add_ideas = FRR_censured_press
 		}
 	}
 	focus = {
@@ -3190,7 +3210,7 @@ focus_tree = {
 		search_filters = {FOCUS_FILTER_POLITICAL}
 
 		completion_reward = {
-			
+			add_ideas = FRR_bastion_of_democracy
 		}
 	}
 	focus = {
@@ -3336,7 +3356,10 @@ focus_tree = {
 		search_filters = {FOCUS_FILTER_POLITICAL}
 
 		completion_reward = {
-
+			add_timed_idea = {
+				idea = FRR_french_uniquess
+				days = 420
+			}
 		}
 	}
 	focus = {
@@ -3415,7 +3438,71 @@ focus_tree = {
 		search_filters = {FOCUS_FILTER_POLITICAL}
 
 		completion_reward = {
+			hidden_effect = {
+				set_temp_variable = {
+					var = ban_ideology_var
+					value = party_popularity@democratic
+				}
+				multiply_temp_variable = {
+					var = ban_ideology_var
+					value = -1
+				}
+				add_popularity = {
+					ideology = democratic
+					popularity = ban_ideology_var
+				}
+				multiply_temp_variable = {
+					var = ban_ideology_var
+					value = 0.66
+				}
+				set_country_flag = banned_democratic_flag
+			}
+			custom_effect_tooltip = ban_democratic_party_tt
+			add_stability = ban_ideology_var
 			
+			hidden_effect = {
+				set_temp_variable = {
+					var = ban_ideology_var
+					value = party_popularity@authoritarian
+				}
+				multiply_temp_variable = {
+					var = ban_ideology_var
+					value = -1
+				}
+				add_popularity = {
+					ideology = authoritarian
+					popularity = ban_ideology_var
+				}
+				multiply_temp_variable = {
+					var = ban_ideology_var
+					value = 0.66
+				}
+				set_country_flag = banned_authoritarian_flag
+			}
+			custom_effect_tooltip = ban_authoritarian_party_tt
+			add_stability = ban_ideology_var
+			
+			hidden_effect = {
+				set_temp_variable = {
+					var = ban_ideology_var
+					value = party_popularity@socialism
+				}
+				multiply_temp_variable = {
+					var = ban_ideology_var
+					value = -1
+				}
+				add_popularity = {
+					ideology = socialism
+					popularity = ban_ideology_var
+				}
+				multiply_temp_variable = {
+					var = ban_ideology_var
+					value = 0.66
+				}
+				set_country_flag = banned_socialism_flag
+			}
+			custom_effect_tooltip = ban_socialism_party_tt
+			add_stability = ban_ideology_var
 		}
 	}
 	focus = {
@@ -3438,7 +3525,7 @@ focus_tree = {
 		search_filters = {FOCUS_FILTER_POLITICAL}
 
 		completion_reward = {
-			
+			add_ideas = FRR_state_press
 		}
 	}
 	focus = {
