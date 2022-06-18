@@ -8997,6 +8997,14 @@ country_event = {
 			id = te.91
 			days = 30
 		}
+		country_event = {
+			id = te.92
+			days = 60
+		}
+		country_event = {
+			id = te.93
+			days = 90
+		}
 	}
 	
 }
@@ -9020,6 +9028,57 @@ country_event = {
 		}
 		BYZ = {
 			create_faction = PURPLE_DAWN
+		}
+	}
+	
+}
+
+country_event = {
+	id = te.91 #HOL leave faction
+	title = te.91.t
+	desc = te.91.d
+	picture =  GFX_report_event_generic_sign_treaty1
+	
+	fire_only_once = yes
+	
+	hidden = yes
+	
+	is_triggered_only = yes
+	
+	option = { #effect
+		name = te.91.a
+		HOL = {
+			leave_faction = yes
+		}
+		HOL = {
+			set_country_flag = leave_pru_allience
+		}
+	}
+	
+}
+
+country_event = {
+	id = te.92 #SCA war with PRU
+	title = te.92.t
+	desc = te.92.d
+	picture =  GFX_report_event_generic_sign_treaty1
+	
+	fire_only_once = yes
+	
+	hidden = yes
+	
+	is_triggered_only = yes
+	
+	option = { #effect
+		name = te.92.a
+		SCA = {
+			declare_war_on = {
+				target = PRU
+				type = annex_everything
+			}
+		}
+		PRU = {
+			add_ideas = pru_no_war_movement
 		}
 	}
 	
@@ -9096,6 +9155,197 @@ country_event = {
 		CPT = { add_ideas = eqyptian_wars }
 		CPT = { set_country_flag = CPT_vs_TRI }
 	}
+}
+
+country_event = {
+	id = te.102 #SCA win PRU
+	title = te.102.t
+	desc = te.102.d
+	picture =  GFX_report_event_generic_sign_treaty1
+	
+	fire_only_once = yes
+	
+	hidden = yes
+	
+	mean_time_to_happen = {
+		days = 2
+	}
+	
+	trigger = {
+		PRU = {
+			has_war_with = SCA
+		}
+		PRU = {
+			has_idea = pru_no_war_movement
+		}
+		SCA = {
+			controls_state = 58
+			controls_state = 829
+		}
+	}
+	
+	option = { #effect
+		name = te.102.a
+		SCA = {
+			white_peace = PRU
+		}
+		PRU = {
+			country_event = te.104
+		}
+		SCA = {
+			country_event = te.104
+		}
+		SCA = {
+			transfer_state = 58
+			add_state_core = 58
+			transfer_state = 829
+			add_state_core = 829
+		}
+		PRU = {
+			remove_state_core = 58
+			remove_state_core = 829
+		}
+		PRU = {
+			remove_ideas = pru_no_war_movement
+		}
+		news_event = {
+			id = news.31
+			days = 2
+		}
+	}
+	
+}
+
+country_event = {
+	id = te.103 #PRU win SCa
+	title = te.103.t
+	desc = te.103.d
+	picture =  GFX_report_event_generic_sign_treaty1
+	
+	fire_only_once = yes
+	
+	hidden = yes
+	
+	mean_time_to_happen = {
+		days = 2
+	}
+	
+	trigger = {
+		PRU = {
+			has_war_with = SCA
+		}
+		PRU = {
+			has_idea = pru_no_war_movement
+		}
+		PRU = {
+			controls_state = 99
+		}
+	}
+	
+	option = { #effect
+		name = te.103.a
+		PRU = {
+			white_peace = SCA
+		}
+		PRU = {
+			country_event = te.105
+		}
+		SCA = {
+			country_event = te.105
+		}
+		PRU = {
+			transfer_state = 99
+			add_state_core = 99
+		}
+		SCA = {
+			remove_state_core = 99
+		}
+		39 = {
+			set_demilitarized_zone = yes
+		}
+		PRU = {
+			remove_ideas = pru_no_war_movement
+		}
+		news_event = {
+			id = news.32
+			days = 2
+		}
+	}
+	
+}
+
+country_event = {
+	id = te.104 #SCA win PRU
+	title = te.104.t
+	desc = {
+		text = te.104.pru
+		trigger = {
+			tag = PRU
+		}
+	}
+	desc = {
+		text = te.104.sca
+		trigger = {
+			tag = SCA
+		}
+	}
+	picture =  GFX_report_event_generic_sign_treaty1
+	
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	option = { #PRU
+		name = te.104.a
+		trigger = {
+			tag = PRU
+		}
+	}
+	
+	option = { #SCA
+		name = te.104.b
+		trigger = {
+			tag = SCA
+		}
+	}
+	
+}
+
+country_event = {
+	id = te.105 #PRU win SCA
+	title = te.105.t
+	desc = {
+		text = te.105.pru
+		trigger = {
+			tag = PRU
+		}
+	}
+	desc = {
+		text = te.105.sca
+		trigger = {
+			tag = SCA
+		}
+	}
+	picture =  GFX_report_event_generic_sign_treaty1
+	
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	option = { #PRU
+		name = te.105.a
+		trigger = {
+			tag = PRU
+		}
+	}
+	
+	option = { #SCA
+		name = te.105.b
+		trigger = {
+			tag = SCA
+		}
+	}
+	
 }
 
 country_event = {
