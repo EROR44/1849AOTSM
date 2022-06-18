@@ -4,6 +4,7 @@
 
 add_namespace = fren
 add_namespace = fren_colonial
+add_namespace = fren_mil_up
 
 	
 country_event = { #покушение на лагранжа
@@ -47,7 +48,7 @@ country_event = { #покушение на лагранжа
 	
 	}
 	option = {
-		name = fren.1.b#лаграндж убит
+		name = fren.1.b #лаграндж убит
 		trigger = {
 			
 		}
@@ -75,9 +76,9 @@ country_event = { #покушение на лагранжа
 			news_event = { hours = 24 id = news.7 }
 		}
 
-	}
-	
+	}	
 }
+
 country_event = {#экстренная сессия правительства
 	id = fren.2
 	title = fren.2.t
@@ -103,7 +104,7 @@ country_event = {#экстренная сессия правительства
 		}
 	
 	}
-	ption = {
+	option = {
 		name = fren.2.a
 		trigger = {
 			
@@ -720,7 +721,7 @@ country_event = { #Шарль Лаграндж мертв
 	
 	}	
 }
-ountry_event = { #Создание Антанты - Ивент приглашение для России
+country_event = { #Создание Антанты - Ивент приглашение для России
 	id = fren.22
 	title = fren.22.t
 	desc = fren.22.d
@@ -736,17 +737,30 @@ ountry_event = { #Создание Антанты - Ивент приглаше�
 
 	option = {
 		name = fren.22.a #Согласиться
-		trigger = {
-			
+		trigger = { 
+			RUS = { is_in_faction = no }
+		}
+		hidden_effect = {
+			FRR = { create_faction = FRR_entente } 
 		}
 		FRR = { add_to_faction = RUS }
-		hidden_effect = {
-			
-		}
+		
 	
 	}	
 	option = {
-		name = fren.22.b #Отказаться
+		name = fren.22.b #Согласиться
+		trigger = { 
+			RUS = { is_in_faction = yes }
+		}
+		hidden_effect = {
+			
+		}
+		RUS = { add_to_faction = FRR }
+		
+	
+	}	
+	option = {
+		name = fren.22.c #Отказаться
 		trigger = {
 			
 		}
@@ -779,6 +793,134 @@ country_event = { #Эмбарго Прссии
 		
 		hidden_effect = {
 			
+		}
+	
+	}	
+}
+
+country_event = { #Народное правительство
+	id = fren.24
+	title = fren.24.t
+	desc = fren.24.d
+	picture = GFX_report_event_generic_read_write
+	
+	fire_only_once = yes
+	
+	trigger = {
+		
+	}
+	
+	is_triggered_only = yes
+
+	option = {
+		name = fren.24.a
+		trigger = {
+			
+		}
+		add_political_power = 150
+		hidden_effect = {
+			add_stability = 0.1
+		}
+	
+	}	
+}
+
+country_event = { #Лаграндж остается главой правительства
+	id = fren.25
+	title = fren.25.t
+	desc = fren.25.d
+	picture = GFX_report_event_generic_read_write
+	
+	fire_only_once = yes
+	
+	trigger = {
+		
+	}
+	
+	is_triggered_only = yes
+
+	option = {
+		name = fren.25.a
+		trigger = {
+			
+		}
+		hidden_effect = {
+			add_stability = 0.05
+		}
+	
+	}	
+}
+country_event = { #Диалог с оппозицией
+	id = fren.26
+	title = fren.26.t
+	desc = fren.26.d
+	picture = GFX_report_event_generic_read_write
+	
+	fire_only_once = yes
+	
+	trigger = {
+		
+	}
+	
+	is_triggered_only = yes
+
+	option = {
+		name = fren.26.a
+		trigger = {
+			
+		}
+		hidden_effect = {
+		
+		}
+	
+	}	
+}
+country_event = { #Встреча с офицерами
+	id = fren.27
+	title = fren.27.t
+	desc = fren.27.d
+	picture = GFX_report_event_generic_read_write
+	
+	fire_only_once = yes
+	
+	trigger = {
+		
+	}
+	
+	is_triggered_only = yes
+
+	option = {
+		name = fren.27.a
+		trigger = {
+			
+		}
+		hidden_effect = {
+		
+		}
+	
+	}	
+}
+country_event = { #Встреча с промышленниками
+	id = fren.28
+	title = fren.28.t
+	desc = fren.28.d
+	picture = GFX_report_event_generic_read_write
+	
+	fire_only_once = yes
+	
+	trigger = {
+		
+	}
+	
+	is_triggered_only = yes
+
+	option = {
+		name = fren.28.a
+		trigger = {
+			
+		}
+		hidden_effect = {
+		
 		}
 	
 	}	
@@ -1004,4 +1146,310 @@ country_event = {
 		}
 	
 	}	
+}
+
+#########################################################################
+#######################MILITARY_UPRISING_EVENTS##########################
+#########################################################################
+
+country_event = { 
+	id = fren_mil_up.1
+	title = fren_mil_up.1.t
+	desc = fren_mil_up.1.d
+	picture = GFX_report_event_spain_civil_war_soldiers
+	
+	fire_only_once = yes
+	
+	trigger = {
+		FRR = {
+			has_ideas = FRR_divided_nation
+		}
+		date > 1851.07.01 
+	}
+	
+	#is_triggered_only = yes
+
+	option = {
+		name = fren_mil_up.1.a
+		trigger = {
+			
+		}
+		hidden_effect = {
+			FRR = {
+				FRR_Louis_Napoleon = {
+					set_nationality = FRM
+				}
+			}
+			FRM = {
+				transfer_state = 19
+				transfer_state = 21
+				transfer_state = 22
+				transfer_state = 29
+				transfer_state = 32
+				transfer_state = 785
+				transfer_state = 806
+				transfer_state = 861
+				add_state_core = 1
+				add_state_core = 14
+				add_state_core = 15
+				add_state_core = 16
+				add_state_core = 18
+				add_state_core = 19
+				add_state_core = 20
+				add_state_core = 21
+				add_state_core = 22
+				add_state_core = 23
+				add_state_core = 25
+				add_state_core = 26
+				add_state_core = 27
+				add_state_core = 29
+				add_state_core = 30
+				add_state_core = 31
+				add_state_core = 32
+				add_state_core = 33
+				add_state_core = 785
+				add_state_core = 806
+				add_state_core = 861
+				add_state_core = 862
+			}
+			FRM = {
+				inherit_technology = FRR
+			}
+			FRR = {
+				transfer_units_fraction= {
+					target = FRM
+					size = 0.60
+					stockpile_ratio = 0.50
+					army_ratio = 0.50
+					navy_ratio = 0.50
+					air_ratio = 0.50
+				}
+			}
+			FRM = { 
+				load_oob = FRM_uprising
+				declare_war_on = {
+					target = FRR
+					type = annex_everything
+				}
+			}		
+		}
+		FRM = { change_tag_from = ROOT }
+	
+	}
+	option = {
+		name = fren_mil_up.1.b
+		trigger = {
+			
+		}
+		hidden_effect = {
+			FRR = {
+				FRR_Louis_Napoleon = {
+					set_nationality = FRM
+				}
+			}
+			FRM = {
+				transfer_state = 1
+				transfer_state = 19
+				transfer_state = 21
+				transfer_state = 22
+				transfer_state = 29
+				transfer_state = 32
+				transfer_state = 785
+				transfer_state = 806
+				transfer_state = 861
+				add_state_core = 1
+				add_state_core = 14
+				add_state_core = 15
+				add_state_core = 16
+				add_state_core = 18
+				add_state_core = 19
+				add_state_core = 20
+				add_state_core = 21
+				add_state_core = 22
+				add_state_core = 23
+				add_state_core = 25
+				add_state_core = 26
+				add_state_core = 27
+				add_state_core = 29
+				add_state_core = 30
+				add_state_core = 31
+				add_state_core = 32
+				add_state_core = 33
+				add_state_core = 785
+				add_state_core = 806
+				add_state_core = 861
+				add_state_core = 862
+			}
+			FRM = {
+				inherit_technology = FRR
+			}
+			FRR = {
+				transfer_units_fraction= {
+					target = FRM
+					size = 0.60
+					stockpile_ratio = 0.50
+					army_ratio = 0.50
+					navy_ratio = 0.50
+					air_ratio = 0.50
+				}
+			}
+			FRM = { 
+				load_oob = FRM_uprising
+				declare_war_on = {
+					target = FRR
+					type = annex_everything
+				}
+			}		
+		}
+	
+	}	
+}
+
+country_event = { #Победа правительства
+	id = fren_mil_up.2
+	title = fren_mil_up.2.t
+	desc = fren_mil_up.2.d
+	picture = GFX_report_event_spain_civil_war_soldiers
+	
+	fire_only_once = yes
+	
+	trigger = {
+		FRM = {
+			surrender_progress > 0.50
+		}
+	}
+	
+	#is_triggered_only = yes
+
+	option = {
+		name = fren_mil_up.2.a
+		trigger = {
+			
+		}
+		hidden_effect = {
+			FRM = {
+				transfer_units_fraction= {
+					target = FRR
+					size = 1.0
+					stockpile_ratio = 1.0
+					army_ratio = 1.0
+					navy_ratio = 1.0
+					air_ratio = 1.0
+				}
+			}
+			FRR = {
+				transfer_state = 1
+				transfer_state = 19
+				transfer_state = 21
+				transfer_state = 22
+				transfer_state = 29
+				transfer_state = 32
+				transfer_state = 785
+				transfer_state = 806
+				transfer_state = 861
+			}
+			FRM = {
+				remove_state_core = 1
+				remove_state_core = 14
+				remove_state_core = 15
+				remove_state_core = 16
+				remove_state_core = 18
+				remove_state_core = 19
+				remove_state_core = 20
+				remove_state_core = 21
+				remove_state_core = 22
+				remove_state_core = 23
+				remove_state_core = 25
+				remove_state_core = 26
+				remove_state_core = 27
+				remove_state_core = 29
+				remove_state_core = 30
+				remove_state_core = 31
+				remove_state_core = 32
+				remove_state_core = 33
+				remove_state_core = 785
+				remove_state_core = 806
+				remove_state_core = 861
+				remove_state_core = 862
+			}
+
+		}
+	}
+}
+
+country_event = { #Победа правительства
+	id = fren_mil_up.2
+	title = fren_mil_up.2.t
+	desc = fren_mil_up.2.d
+	picture = GFX_report_event_spain_civil_war_soldiers
+	
+	fire_only_once = yes
+	
+	trigger = {
+		FRR = {
+			surrender_progress > 0.60
+		}
+	}
+	
+	#is_triggered_only = yes
+
+	option = {
+		name = fren_mil_up.2.a
+		trigger = {
+			
+		}
+		hidden_effect = {
+			FRR = {
+				transfer_units_fraction= {
+					target = FRM
+					size = 1.0
+					stockpile_ratio = 1.0
+					army_ratio = 1.0
+					navy_ratio = 1.0
+					air_ratio = 1.0
+				}
+			}
+			FRM = {
+				transfer_state = 14
+				transfer_state = 15
+				transfer_state = 16
+				transfer_state = 18
+				transfer_state = 20
+				transfer_state = 23
+				transfer_state = 25
+				transfer_state = 26
+				transfer_state = 27
+				transfer_state = 30
+				transfer_state = 31
+				transfer_state = 33
+				transfer_state = 862
+			}
+			FRR = {
+				remove_state_core = 1
+				remove_state_core = 14
+				remove_state_core = 15
+				remove_state_core = 16
+				remove_state_core = 18
+				remove_state_core = 19
+				remove_state_core = 20
+				remove_state_core = 21
+				remove_state_core = 22
+				remove_state_core = 23
+				remove_state_core = 25
+				remove_state_core = 26
+				remove_state_core = 27
+				remove_state_core = 29
+				remove_state_core = 30
+				remove_state_core = 31
+				remove_state_core = 32
+				remove_state_core = 33
+				remove_state_core = 785
+				remove_state_core = 806
+				remove_state_core = 861
+				remove_state_core = 862
+			}
+
+		}
+	}
+	
 }
