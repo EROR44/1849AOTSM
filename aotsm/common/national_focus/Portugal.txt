@@ -106,35 +106,6 @@ focus_tree = {
 	}
 	
 	focus = {
-		id = PRT_sal1_septemb_end2
-		icon = GFX_focus_spr_masters_of_our_own_fate
-		prerequisite = {
-		    focus = PRT_sal1_septemb_end1
-		}
-		x = 14
-		y = 4
-		cost = 7
-		ai_will_do = {
-			factor = 100
-		}
-		
-		#cancel = { }
-		
-		available = { 
-		}
-		
-		#bypass = { }
-		
-		#search_filters = {  }
-		
-		completion_reward = {
-		     country_event = {
-			        id = prt_sal.3
-				}
-		}
-	}
-	
-	focus = {
 		id = PRT_sal1_economic1
 		icon = GFX_focus_generic_treaty
 		prerequisite = {
@@ -186,9 +157,8 @@ focus_tree = {
 		#search_filters = {  }
 		
 		completion_reward = {
-		     country_event = {
-			        id = prt_sal.5
-		    }
+		
+		
 		}
 	}
 	
@@ -225,8 +195,10 @@ focus_tree = {
 		id = PRT_sal1_economic4
 		icon = GFX_focus_hol_abandon_the_gold_standard
 		prerequisite = {
-		    focus = PRT_sal1_economic2
-			focus = PRT_sal1_economic3
+		    AND = {
+		        focus = PRT_sal1_economic2
+			    focus = PRT_sal1_economic3
+			}
 		}
 		x = 16
 		y = 4
@@ -316,9 +288,11 @@ focus_tree = {
 		id = PRT_sal1_2
 		icon = 
 		prerequisite = {
-		    focus = PRT_sal1_economic4
-			focus = PRT_sal1_septemb_end2
-			focus = PRT_sal1_colonial2
+		    AND = {
+		        focus = PRT_sal1_economic4
+			    focus = PRT_sal1_septemb_end2
+			    focus = PRT_sal1_colonial2
+			}
 		}
 		x = 16
 		y = 5
@@ -341,6 +315,410 @@ focus_tree = {
 			    id = prt_sal.10
 			}
 		}
+	}
+	
+    focus = {
+		id = PRT_sal2_economy
+		icon = 
+		prerequisite = {
+		   focus = PRT_sal1_2
+		}
+		x = 15
+		y = 6
+		cost = 7
+		ai_will_do = {
+			factor = 100
+		}
+		
+		#cancel = { }
+		
+		available = { 
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+		    PRT = {
+			    complete_national_focus = PRT_right_economy1
+			}
+		}
+	}
+	
+	focus = {
+		id = PRT_sal2_army
+		icon = 
+		prerequisite = {
+		   focus = PRT_sal1_2
+		}
+		x = 17
+		y = 6
+		cost = 7
+		ai_will_do = {
+			factor = 100
+		}
+		
+		#cancel = { }
+		
+		available = { 
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+		    PRT = {
+			    complete_national_focus = PRT_right_economy1
+			}
+		}
+	}
+	
+	focus = {
+		id = PRT_sal2_colony
+		icon = 
+		prerequisite = {
+		   focus = PRT_sal1_2
+		}
+		x = 12
+		y = 6
+		cost = 7
+		ai_will_do = {
+			factor = 100
+		}
+		
+		#cancel = { }
+		
+		available = { 
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+		    PRT = {
+			    complete_national_focus = PRT_right_colony1
+			}
+		}
+	}
+	
+	focus = {
+		id = PRT_sal2_marocco_war
+		icon = 
+		prerequisite = {
+		   focus = PRT_sal2_colony
+		}
+		mutually_exclusive = {
+		    focus = PRT_sal2_spain_ultimate
+		}
+		x = 11
+		y = 7
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		
+		cancel = { 
+		    OR = {
+			    GRA = {
+			        AND = {
+			            owns_state = 290
+					    owns_state = 461
+					    owns_state = 462
+					    owns_state = 783
+				    }
+			    }
+				CAS = {
+			        AND = {
+			            owns_state = 290
+					    owns_state = 461
+					    owns_state = 462
+					    owns_state = 783
+				    }
+			    }
+			}
+		}
+				
+		available = { 
+		    MOR = {
+			    AND = {
+			        owns_state = 290
+					owns_state = 461
+					owns_state = 462
+					owns_state = 783
+				}
+			}
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+		    PRT = { 
+			    declare_war_on = {
+                    target = MOR
+                    type = annex_everything
+                }
+			}
+		    hidden_effect = {
+			    PRT = {
+				    set_country_flag = PRT_marocco_warr
+				}
+			}
+		}
+	}
+	
+	focus = {
+		id = PRT_sal2_spain_ultimate
+		icon = 
+		prerequisite = {
+		   focus = PRT_sal2_colony
+		}
+		mutually_exclusive = {
+		    focus = PRT_sal2_marocco_war
+		}
+		x = 13
+		y = 7
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		
+		cancel = { 
+		     MOR = {
+			    AND = {
+			        owns_state = 290
+					owns_state = 461
+					owns_state = 462
+					owns_state = 783
+				}
+			}
+		}
+				
+		available = {
+            OR = {
+			    GRA = {
+			        AND = {
+			            owns_state = 290
+					    owns_state = 461
+					    owns_state = 462
+					    owns_state = 783
+				    }
+			    }
+				CAS = {
+			        AND = {
+			            owns_state = 290
+					    owns_state = 461
+					    owns_state = 462
+					    owns_state = 783
+				    }
+			    }
+			}   
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+		    CAS = {
+			    if = {
+                    limit = {
+                        AND = {
+			                owns_state = 290
+					        owns_state = 461
+					        owns_state = 462
+					        owns_state = 783
+				        } 
+                    }
+                    CAS = {
+				        country_event = {
+					        id = cas_prt_ult.1
+					    }
+				    }
+			    }
+             else = {
+                    CAS = {
+				        country_event = {
+					        id = cas_prt_agr.1
+					    }
+				    }
+                }
+            }
+			
+	        GRA = {
+			    if = {
+                    limit = {
+                        AND = {
+			                owns_state = 290
+					        owns_state = 461
+					        owns_state = 462
+					        owns_state = 783
+				        } 
+                    }
+                    GRA = {
+				        country_event = {
+					        id = gra_prt_ult.1
+					    }
+				    }
+			    }
+                else = {
+                    GRA = {
+				        country_event = {
+					        id = gra_prt_agr.1
+					    }
+				    }
+                }
+	        }
+        }
+	}
+	
+	focus = {
+		id = PRT_sal2_marocco_war2
+		icon = 
+		prerequisite = {
+		   focus = PRT_sal2_marocco_war
+		}
+		x = 11
+		y = 8
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		
+		cancel = { 
+		    OR = {
+			    GRA = {
+			        AND = {
+			            owns_state = 290
+					    owns_state = 461
+					    owns_state = 462
+					    owns_state = 783
+				    }
+			    }
+				CAS = {
+			        AND = {
+			            owns_state = 290
+					    owns_state = 461
+					    owns_state = 462
+					    owns_state = 783
+				    }
+			    }
+				
+				MOR = {
+			        AND = {
+			            owns_state = 290
+					    owns_state = 461
+					    owns_state = 462
+					    owns_state = 783
+				    }
+			    }
+			}
+		}
+				
+		available = { 
+		   
+		}
+		
+		bypass = { 
+		    PRT = {
+			    AND = {
+			        owns_state = 290
+					owns_state = 461
+					owns_state = 462
+					owns_state = 783
+				}
+			}
+		}
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+		    hidden_effect = {
+			    PRT = {
+				    set_country_flag = PRT_marocco_warr2
+				}
+			}
+		}
+	}
+	
+	focus = {
+		id = PRT_sal2_spain_diplomacy
+		icon = 
+		prerequisite = {
+		   focus = PRT_sal2_spain_ultimate
+		}
+		x = 13
+		y = 8
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		
+		#cancel = { 
+		
+		}
+				
+		#available = {
+        
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+		    PRT = {
+			    country_event = {
+				    id = prt_spain_quest
+				}
+            }				
+        }
+	}
+	
+	focus = {
+		id = PRT_sal2_marocco_man
+		icon = 
+		prerequisite = {
+		   focus = PRT_sal2_spain_diplomacy
+		   focus = PRT_sal2_marocco_war2
+		}
+		x = 12
+		y = 9
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		
+		#cancel = { 
+		
+		}
+				
+		available = {
+		    PRT = {
+			    AND = {
+			        owns_state = 290
+					owns_state = 461
+					owns_state = 462
+					owns_state = 783
+				}
+			}
+        }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+		    PRT = {
+			    country_event = {
+				    id = prt_marocco_guest
+				}
+            }				
+        }
 	}
 	
 	focus = {
