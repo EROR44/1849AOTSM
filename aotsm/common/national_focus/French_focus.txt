@@ -66,7 +66,7 @@ focus_tree = {
 		id = FRA_stimulation_of_economic
 		icon = GFX_focus_fra_devalue_the_franc
 		
-		x = -10
+		x = -8
 		y = 0
 		relative_position_id = FRA_crisis_in_goverment
 		cost = 5
@@ -82,12 +82,12 @@ focus_tree = {
 		id = FRA_stimulation_of_prom
 		icon = GFX_goal_generic_construct_civilian
 		
-		x = 0
+		x = -1
 		y = 1
 		relative_position_id = FRA_stimulation_of_economic
 		prerequisite = { focus = FRA_stimulation_of_economic }
 		
-		cost = 10
+		cost = 7
 		
 		available_if_capitulated = yes
 		
@@ -95,48 +95,30 @@ focus_tree = {
 
 		completion_reward = {
 			custom_effect_tooltip = FRR_unlock_decilions_prom
+			hidden_effect = {
+				add_political_power = 100
+			}
 		}
-	}
+	}	
 	focus = {
-		id = FRA_civil_economic
-		icon = GFX_goal_generic_consumer_goods
+		id = FRA_researches_in_leypoldit_techs
+		icon = GFX_focus_wonderweapons
 		
-		x = -2
+		x = 1
 		y = 1
-		relative_position_id = FRA_stimulation_of_prom
-		prerequisite = { focus = FRA_stimulation_of_prom }
-		mutually_exclusive = { focus = FRA_militarisation_of_economic }
+		relative_position_id = FRA_stimulation_of_economic
+		prerequisite = { focus = FRA_stimulation_of_economic }
 		
-		cost = 10
-		
-		available_if_capitulated = yes
-
-		search_filters = {FOCUS_FILTER_INDUSTRY}
-		
-		completion_reward = {
-			add_political_power = 100
-			add_stability = 0.05
-		}
-	}
-	focus = {
-		id = FRA_develop_civ_prom
-		icon = GFX_goal_generic_army_artillery
-		
-		x = 0
-		y = 1
-		relative_position_id = FRA_civil_economic
-		prerequisite = { focus = FRA_civil_economic }
-		
-		cost = 10
+		cost = 7
 		
 		available_if_capitulated = yes
 		
 		search_filters = {FOCUS_FILTER_INDUSTRY}
 
 		completion_reward = {
-			custom_effect_tooltip = FRR_unlock_decilions_prom
+			custom_effect_tooltip = FRR_unlock_decilions_to_create_leypoldit_lab
 		}
-	}
+	}	
 	focus = {
 		id = FRA_expand_resourcec_base
 		icon = GFX_goal_generic_construction2
@@ -154,8 +136,246 @@ focus_tree = {
 		
 		completion_reward = {
 			custom_effect_tooltip = FRR_unlock_decilions_resourses
+			hidden_effect = {
+				add_political_power = 100
+			}
 		}
 	}
+	focus = {
+		id = FRA_expand_colonial_prom
+		icon = GFX_goal_generic_construction2
+		
+		x = -1
+		y = 1
+		relative_position_id = FRA_stimulation_of_prom
+		prerequisite = { focus = FRA_stimulation_of_prom }
+		
+		cost = 3
+		
+		available = {
+			has_country_flag = FRR_invasion_in_algeria_end
+		}
+		
+		available_if_capitulated = yes
+		
+		search_filters = {FOCUS_FILTER_INDUSTRY}
+		
+		completion_reward = {
+			custom_effect_tooltip = FRR_unlock_decisions_developed_colonial_prom
+			hidden_effect = {
+				add_political_power = 100
+			}
+		}
+	}
+	focus = {
+		id = FRA_modernise_alg_prom
+		icon = GFX_prom_expand
+		
+		x = -1
+		y = 1
+		relative_position_id = FRA_expand_colonial_prom
+		prerequisite = { focus = FRA_expand_colonial_prom }
+		
+		cost = 7
+		
+		available = {
+			459 = { 
+					OR = {
+					is_owned_and_controlled_by = FRR
+					is_owned_and_controlled_by = NWA
+				}
+			}
+			460 = { 
+				OR = {
+					is_owned_and_controlled_by = FRR
+					is_owned_and_controlled_by = NWA
+				}
+			}
+			513 = { 
+				OR = {
+					is_owned_and_controlled_by = FRR
+					is_owned_and_controlled_by = NWA
+				}
+			}
+		}
+		
+		available_if_capitulated = yes
+		
+		search_filters = {FOCUS_FILTER_INDUSTRY}
+		
+		completion_reward = {
+			459 = {
+			add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+				type = arms_factory
+				level = 1
+				instant_build = yes
+				}
+			}
+			459 = {
+			add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+				}
+			}
+		}
+	}
+	focus = {
+		id = FRA_develop_the_mauvritanian_coast
+		icon = GFX_goal_generic_construct_naval_dockyard
+		
+		x = 0
+		y = 1
+		relative_position_id = FRA_modernise_alg_prom
+		prerequisite = { focus = FRA_modernise_alg_prom }
+		
+		cost = 7
+		
+		available = {
+			699 = { 
+				OR = {
+					is_owned_and_controlled_by = FRR
+					is_owned_and_controlled_by = NWA
+				}
+			}
+			557 = { 
+				OR = {
+					is_owned_and_controlled_by = FRR
+					is_owned_and_controlled_by = NWA
+				}
+			}
+		}
+		
+		available_if_capitulated = yes
+		
+		search_filters = {FOCUS_FILTER_INDUSTRY}
+		
+		completion_reward = {
+			699 = {
+				add_extra_state_shared_building_slots = 2
+					add_building_construction = {
+					type = dockyard
+					level = 1
+					instant_build = yes
+				}
+			}
+			459 = {
+				add_extra_state_shared_building_slots = 2
+					add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+	focus = {
+		id = FRA_expand_continental_prom
+		icon = GFX_goal_generic_construction2
+		
+		x = 1
+		y = 1
+		relative_position_id = FRA_stimulation_of_prom
+		prerequisite = { focus = FRA_stimulation_of_prom }
+		
+		cost = 3
+		
+		available_if_capitulated = yes
+		
+		search_filters = {FOCUS_FILTER_INDUSTRY}
+		
+		completion_reward = {
+			custom_effect_tooltip = FRR_unlock_decisions_developed_continental_prom
+			hidden_effect = {
+				add_political_power = 100
+			}
+		}
+	}
+	focus = {
+		id = FRA_create_new_factories_in_paris
+		icon = GFX_focus_generic_industry_2
+		
+		x = 1
+		y = 1
+		relative_position_id = FRA_expand_continental_prom
+		prerequisite = { focus = FRA_expand_continental_prom }
+		
+		cost = 7
+		
+		available = {
+			16 = { 
+				is_owned_and_controlled_by = FRR
+			}
+			24 = { 
+				is_owned_and_controlled_by = FRR
+			}
+		}
+		
+		available_if_capitulated = yes
+		
+		search_filters = {FOCUS_FILTER_INDUSTRY}
+		
+		completion_reward = {
+			16 = {
+				add_extra_state_shared_building_slots = 2
+					add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+			24 = {
+				add_extra_state_shared_building_slots = 2
+					add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+	focus = {
+		id = FRA_develop_marsel_prom_base
+		icon = GFX_goal_generic_construct_naval_dockyard
+		
+		x = 0
+		y = 1
+		relative_position_id = FRA_create_new_factories_in_paris
+		prerequisite = { focus = FRA_create_new_factories_in_paris }
+		
+		cost = 7
+		
+		available = {
+			21 = { 
+				is_owned_and_controlled_by = FRR
+			}
+		}
+		
+		available_if_capitulated = yes
+		
+		search_filters = {FOCUS_FILTER_INDUSTRY}
+		
+		completion_reward = {
+			21 = {
+				add_extra_state_shared_building_slots = 2
+					add_building_construction = {
+					type = dockyard
+					level = 1
+					instant_build = yes
+				}
+			}
+			21 = {
+				add_extra_state_shared_building_slots = 2
+					add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}	
 	focus = {
 		id = FRA_infrastructure_effort
 		icon = GFX_goal_generic_construct_infrastructure
@@ -164,8 +384,8 @@ focus_tree = {
 		y = 2
 		relative_position_id = FRA_stimulation_of_prom
 		prerequisite = { 
-			focus = FRA_civil_economic
-			focus = FRA_militarisation_of_economic
+			focus = FRA_expand_colonial_prom
+			focus = FRA_expand_continental_prom
 		}
 		
 		cost = 10
@@ -179,18 +399,19 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = FRA_militarisation_of_economic
+		id = FRA_prepare_country_for_new_threats
 		icon = GFX_goal_generic_build_tank
 		
-		x = 2
-		y = 1
-		relative_position_id = FRA_stimulation_of_prom
-		prerequisite = { focus = FRA_stimulation_of_prom }
-		mutually_exclusive = { focus = FRA_civil_economic }
+		x = 0
+		y = 2
+		relative_position_id = FRA_infrastructure_effort
+		prerequisite = { focus = FRA_develop_marsel_prom_base }
+		prerequisite = { focus = FRA_develop_the_mauvritanian_coast }
 		
-		cost = 10
+		cost = 7
 		
 		available = {
+			date > 1853.1.1
 			NOT = {
 				OR = {
 					has_idea = war_economy
@@ -238,12 +459,16 @@ focus_tree = {
 		id = FRA_expand_mil_production
 		icon = GFX_goal_generic_construct_mil_factory
 		
-		x = 0
+		x = 1
 		y = 1
-		relative_position_id = FRA_militarisation_of_economic
-		prerequisite = { focus = FRA_militarisation_of_economic }
+		relative_position_id = FRA_prepare_country_for_new_threats
+		prerequisite = { focus = FRA_prepare_country_for_new_threats }
 		
-		cost = 10
+		cost = 7
+		
+		available = {
+			has_war = yes
+		}
 		
 		available_if_capitulated = yes
 		
@@ -254,69 +479,20 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = FRA_investment_in_paris_prom
-		icon = GFX_focus_generic_industry_2
-		
-		x = -1
-		y = 3
-		relative_position_id = FRA_stimulation_of_prom
-		prerequisite = { focus = FRA_stimulation_of_prom }
-		prerequisite = { focus = FRA_stimulation_of_prom }
-		prerequisite = { 
-			focus = FRA_develop_civ_prom
-			focus = FRA_expand_mil_production
-		}
-		
-		cost = 10
-		
-		available_if_capitulated = yes
-		
-		search_filters = { FOCUS_FILTER_INDUSTRY }
-
-
-		completion_reward = {
-			16 = {
-			add_extra_state_shared_building_slots = 2
-				add_building_construction = {
-				type = arms_factory
-				level = 1
-				instant_build = yes
-				}
-			}
-			24 = {
-			add_extra_state_shared_building_slots = 2
-				add_building_construction = {
-				type = industrial_complex
-				level = 1
-				instant_build = yes
-				}
-			}
-		}
-	}
-	focus = {
-		id = FRA_modernise_alg_prom
-		icon = GFX_prom_expand
+		id = FRA_the_law_about_the_defence_of_homeland 
+		icon = GFX_goal_generic_fortify_city
 		
 		x = -1
 		y = 1
-		relative_position_id = FRA_expand_mil_production
-		prerequisite = { focus = FRA_stimulation_of_prom }
-		prerequisite = { focus = FRA_stimulation_of_prom }
-		prerequisite = { 
-			focus = FRA_develop_civ_prom
-			focus = FRA_expand_mil_production
-		}
-		cost = 10
+		relative_position_id = FRA_prepare_country_for_new_threats
+		prerequisite = { focus = FRA_prepare_country_for_new_threats }
+		
+		cost = 3
 		
 		available = {
-			459 = { 
-					is_owned_and_controlled_by = FRR
-				}
-			460 = { 
-				is_owned_and_controlled_by = FRR
-			}
-			513 = { 
-				is_owned_and_controlled_by = FRR
+			has_war = yes
+			FRR = {
+				surrender_progress > 0.50
 			}
 		}
 		
@@ -325,31 +501,18 @@ focus_tree = {
 		search_filters = {FOCUS_FILTER_INDUSTRY}
 		
 		completion_reward = {
-			459 = {
-			add_extra_state_shared_building_slots = 2
-				add_building_construction = {
-				type = arms_factory
-				level = 1
-				instant_build = yes
-				}
-			}
-			459 = {
-			add_extra_state_shared_building_slots = 2
-				add_building_construction = {
-				type = industrial_complex
-				level = 1
-				instant_build = yes
-				}
+			add_timed_idea = {
+				idea = FRR_defence_of_homeland
+				days = 90
 			}
 		}
 	}
-	
 	focus = {
 		id = FRA_stimulation_of_science_progress
 		icon = GFX_goal_generic_scientific_exchange
 		
-		x = 4
-		y = 1
+		x = 3
+		y = 2
 		relative_position_id = FRA_stimulation_of_economic
 		prerequisite = { focus = FRA_stimulation_of_economic }
 		
@@ -375,7 +538,7 @@ focus_tree = {
 		icon = GFX_focus_research
 		
 		x = 0
-		y = 1
+		y = 2
 		relative_position_id = FRA_stimulation_of_science_progress
 		prerequisite = { focus = FRA_stimulation_of_science_progress }
 		
@@ -397,16 +560,16 @@ focus_tree = {
 		id = FRA_socialistic_science
 		icon = GFX_goal_tfv_generic_tech_sharing
 		
-		x = 0
-		y = 1
+		x = -1
+		y = 2
 		relative_position_id = FRA_subsidii_obrasovaniu
 		prerequisite = { focus = FRA_subsidii_obrasovaniu }
+		prerequisite = { focus = FRA_prepare_country_for_new_threats }
 		
 		cost = 10
 		
 		available = { 
 			amount_research_slots > 5 
-			date > 1852.1.1
 		}
 		
 		available_if_capitulated = yes
@@ -1999,7 +2162,7 @@ focus_tree = {
 		completion_reward = {
 			custom_effect_tooltip = FRR_claims_on_elsas_and_lotaringia
 			hidden_effect = {
-				add_country_flag = FRR_claims_on_elsas_and_lotaringia_add
+				set_country_flag = FRR_claims_on_elsas_and_lotaringia_add
 				FRR = { 
 					add_state_claim = 28
 					add_state_claim = 828
@@ -2018,15 +2181,15 @@ focus_tree = {
 		relative_position_id = FRA_be_with_britain
 		mutually_exclusive = { focus = FRA_be_with_britain }
 		mutually_exclusive = { focus = FRA_be_with_prussia}
-		cost = 10
+		cost = 3
 		
-		ai_will_do = {
-			factor = 0
-			modifier = {
-				RUS = { NOT = { in_faction_with = CBI } }
-				factor = 600
-			}
-		}
+		#ai_will_do = {
+		#	factor = 0
+		#	modifier = {
+		#		RUS = { NOT = { in_faction_with = CBI } }
+		#		factor = 600
+		#	}
+		#}
 		
 		available = {
 			date > 1854.1.1
@@ -2054,15 +2217,15 @@ focus_tree = {
 			focus = FRA_own_way 
 		}
 		
-		ai_will_do = {
-			factor = 0
-			modifier = {
-				RUS = { NOT = { in_faction_with = CBI }
-				factor = 600
-			}
-		}
+		#ai_will_do = {
+		#	factor = 0
+		#	modifier = {
+		#		RUS = { NOT = { in_faction_with = CBI }
+		#		factor = 600
+		#	}
+		#}
 		
-		cost = 5
+		cost = 2
 		#search_filters = {   }
 		
 		available = {
@@ -2087,7 +2250,7 @@ focus_tree = {
 			focus = FRA_own_way 
 		}
 		
-		cost = 5
+		cost = 2
 		#search_filters = {   }
 		
 		available = {
@@ -2348,7 +2511,7 @@ focus_tree = {
 		completion_reward = {	
 			custom_effect_tooltip = FRR_claims_on_colonial_areas 
 			hidden_effect = {
-				add_country_flag = FRR_claims_on_colonial_areas_add
+				set_country_flag = FRR_claims_on_colonial_areas_add
 				FRR = { 
 					add_state_claim = 178
 					add_state_claim = 321
@@ -3757,7 +3920,7 @@ focus_tree = {
 		completion_reward = {
 			custom_effect_tooltip = FRR_claims_on_historical_territories
 			hidden_effect = {
-				add_country_flag = FRR_claims_on_historical_territories
+				set_country_flag = FRR_claims_on_historical_territories
 				FRR = { 
 					add_state_claim = 6
 					add_state_claim = 7
