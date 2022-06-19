@@ -9307,6 +9307,14 @@ country_event = {
 		trigger = {
 			tag = SCA
 		}
+		hidden_effect = {
+			SCA = {
+				country_event = {
+					id = te.106
+					days = 30
+				}
+			}
+		}
 	}
 	
 }
@@ -9346,6 +9354,82 @@ country_event = {
 		}
 	}
 	
+}
+
+country_event = {
+	id = te.106 #SCA attack CBI
+	title = te.106.t
+	desc = te.106.d
+	picture =  GFX_report_event_soldiers_marching
+	
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	option = { #attack
+		name = te.106.a
+		ai_chance = {
+			factor = 50
+			modifier = {
+				factor = 50
+				is_historical_focus_on = yes
+			}
+		}
+		SCA = {
+			declare_war_on = {
+				target = CBI
+				type = annex_everything
+			}
+		}
+		CBI = {
+			set_country_flag = CBI_vs_SCA
+		}
+		hidden_effect = {
+			CBI = {
+				leave_faction = yes
+				create_faction  = DEFEND_ALLIENCE_OF_BRITANIA
+				if = {
+					limit ={
+						country_exists = COR
+					}
+					BYZ  = {
+						set_autonomy = {
+							target = COR
+							autonomy_state = autonomy_free
+							end_wars = no
+							end_civil_wars = no
+						}
+					}
+					COR = {
+						leave_faction = yes
+					}
+					CBI = {
+						add_to_faction = COR
+					}
+					COR = {
+						add_to_war = {
+							targeted_alliance = CBI
+							enemy = SCA
+						}
+					}
+				}
+			}
+			SCA = {
+				load_oob = SCA_invasion_cbi
+			}
+		}
+	}
+	
+	option = { #No
+		name = te.106.b
+		ai_chance = {
+			factor = 50
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+			}
+		}
+	}
 }
 
 country_event = {
