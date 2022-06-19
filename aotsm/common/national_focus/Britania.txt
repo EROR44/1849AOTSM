@@ -1317,11 +1317,12 @@ focus_tree = {
 			}
 		}
 
-  ### ЭДУАРД СМИТ-СТЕНЛИ ###
+  ### ЭДУАРД СМИТ-СТЕНЛИ / ДЖОН РАССЕЛ ###
 
 	focus = {
 		id = focus_CBI_London_new_boss
 		available = {
+		has_completed_focus = focus_CBI_and_next_lord_protector
 			}
 		
 		bypass = {
@@ -1837,7 +1838,10 @@ focus_tree = {
 		cancelable = no			
 		available = {
 		has_war = no
-		date > 1851.01.01		
+		date > 1851.01.01
+		NOT = {
+		has_global_flag = british_socialist_revolution
+		}
 			}
 		
 		bypass = {
@@ -1877,7 +1881,7 @@ focus_tree = {
 		prerequisite = { focus = focus_CBI_colony_reform }			
 		x = 12
 		y = 11
-		cost = 5
+		cost = 1
 		ai_will_do = {
 			factor = 1
 		}
@@ -1917,7 +1921,12 @@ focus_tree = {
 		search_filters = {FOCUS_FILTER_STABILITY}
 		
 		completion_reward = {
-				
+		NEN = {
+			add_opinion_modifier = {
+			target = CBI
+			modifier = CBI_reassure_governorship
+					}
+				}
 			}
 		}
 
@@ -1944,7 +1953,20 @@ focus_tree = {
 		search_filters = {FOCUS_FILTER_STABILITY}
 		
 		completion_reward = {
-				
+		add_political_power = 25
+		navy_experience = 10
+		add_mines = {
+		region = 54
+		amount = 100 
+				}
+		add_mines = {
+		region = 55
+		amount = 100 
+				}
+		add_mines = {
+		region = 170
+		amount = 100 
+				}				
 			}
 		}
 		
@@ -1961,7 +1983,7 @@ focus_tree = {
 		prerequisite = { focus = focus_CBI_reassure_governorship }
 		prerequisite = { focus = focus_CBI_direct_fleet }				
 		x = 12
-		y = 13
+		y = 15
 		cost = 5
 		ai_will_do = {
 			factor = 1
@@ -1972,7 +1994,11 @@ focus_tree = {
 		search_filters = {FOCUS_FILTER_STABILITY}
 		
 		completion_reward = {
-				
+			release_autonomy = {
+				target = NEN
+				autonomy_state = autonomy_puppet
+				freedom_level = 0.5
+				}	
 			}
 		}
 
@@ -1991,9 +2017,9 @@ focus_tree = {
 		
 		icon = GFX_goal_generic_national_unity
 		prerequisite = { focus = focus_CBI_colony_reform }			
-		x = 18
+		x = 17
 		y = 11
-		cost = 5
+		cost = 1
 		ai_will_do = {
 			factor = 1
 		}
@@ -2009,9 +2035,9 @@ focus_tree = {
 				}
 			}
 		}	
-
+		
 	focus = {
-		id = focus_CBI_cromwland_integration		
+		id = focus_CBI_London_Conference	
 		available = {
 		has_war = no
 			}
@@ -2019,10 +2045,10 @@ focus_tree = {
 		bypass = {
 		}
 		
-		icon = GFX_goal_generic_national_unity
-		prerequisite = { focus = focus_CBI_colony_reform }			
-		x = 18
-		y = 11
+		icon = GFX_goal_generic_propaganda
+		prerequisite = { focus = focus_CBI_cromwland_integration }			
+		x = 15
+		y = 12
 		cost = 5
 		ai_will_do = {
 			factor = 1
@@ -2034,11 +2060,370 @@ focus_tree = {
 		
 		completion_reward = {
 			country_event = {
-			id = CBI.178
+			id = CBI.198
 			days = 1
 				}
-			}
 		}		
+	}
+	
+	focus = {
+		id = focus_CBI_seat_in_parliament_NEN
+		available = {
+		has_war = no
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_focus_POL_complete_april_constitution
+		prerequisite = { focus = focus_CBI_cromwland_integration }			
+		x = 17
+		y = 12
+		cost = 5
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		search_filters = {FOCUS_FILTER_STABILITY}
+		
+		completion_reward = {
+			add_popularity = {
+			ideology = authoritarian  
+			popularity = -0.02
+				}	
+			add_popularity = {
+			ideology = reactionist   
+			popularity = -0.05
+				}
+			add_popularity = {
+			ideology = socialism  
+			popularity = -0.03
+				}
+			add_popularity = {
+			ideology = democratic  
+			popularity = 0.08
+				}				
+		}		
+	}	
+	
+	focus = {
+		id = focus_CBI_economic_unification
+		available = {
+		has_war = no
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_generic_consumer_goods
+		prerequisite = { focus = focus_CBI_cromwland_integration focus = focus_CBI_British_Commonwealth }			
+		x = 20
+		y = 12
+		cost = 5
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		search_filters = {FOCUS_FILTER_STABILITY}
+		
+		completion_reward = {
+		NEN = {
+		add_political_power = 75
+			}
+		}	
+	}
+	
+	focus = {
+		id = focus_CBI_help_in_opening_resources
+		available = {
+		has_war = no
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_generic_construction2
+		prerequisite = { focus = focus_CBI_economic_unification }			
+		x = 18
+		y = 13
+		cost = 4
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		search_filters = {FOCUS_FILTER_STABILITY}
+		
+		completion_reward = {
+		add_resource = {
+			type = oil
+			amount = 8
+			state = 362 
+			}
+		add_resource = {
+			type = oil
+			amount = 5
+			state = 360 
+			}					
+		}	
+	}
+	
+	focus = {
+		id = focus_CBI_infrastructure_construction
+		available = {
+		has_war = no
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_generic_construction2
+		prerequisite = { focus = focus_CBI_economic_unification }			
+		x = 20
+		y = 13
+		cost = 4
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_INDUSTRY}
+		
+		completion_reward = {
+		357 = {
+		add_extra_state_shared_building_slots = 2		
+		add_building_construction = {
+		type = infrastructure
+		level = 2
+		instant_build = yes
+				}
+			}
+		358 = {
+		add_extra_state_shared_building_slots = 2	
+		add_building_construction = {
+		type = infrastructure
+		level = 2
+		instant_build = yes
+				}
+			}
+		360 = {
+		add_extra_state_shared_building_slots = 3	
+		add_building_construction = {
+		type = infrastructure
+		level = 3
+		instant_build = yes
+				}
+			}			
+		}	
+	}
+
+	focus = {
+		id = focus_CBI_improve_communication_with_metropolis
+		available = {
+		has_war = no
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_generic_construction2
+		prerequisite = { focus = focus_CBI_economic_unification }			
+		x = 22
+		y = 13
+		cost = 4
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_INDUSTRY}
+		
+		completion_reward = {
+		357 = {
+		add_extra_state_shared_building_slots = 3	
+		add_building_construction = {
+		type = dockyard
+		level = 1
+		instant_build = yes
+				}
+			}
+		358 = {
+		add_extra_state_shared_building_slots = 3	
+		add_building_construction = {
+		type = dockyard
+		level = 1
+		instant_build = yes
+				}
+			}
+		360 = {
+		add_extra_state_shared_building_slots = 3	
+		add_building_construction = {
+		type = dockyard
+		level = 2
+		instant_build = yes
+				}
+			}			
+		}	
+	}	
+
+	focus = {
+		id = focus_CBI_investments_in_emerging_industry
+		available = {
+		has_war = no
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_generic_construct_civ_factory
+		prerequisite = { focus = focus_CBI_help_in_opening_resources }
+		prerequisite = { focus = focus_CBI_infrastructure_construction }
+		prerequisite = { focus = focus_CBI_improve_communication_with_metropolis }	
+		x = 19
+		y = 14
+		cost = 4
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_INDUSTRY}
+		
+		completion_reward = {
+		357 = {
+		add_extra_state_shared_building_slots = 1	
+		add_building_construction = {
+		type = industrial_complex
+		level = 1
+		instant_build = yes
+				}
+			}
+		358 = {
+		add_extra_state_shared_building_slots = 1	
+		add_building_construction = {
+		type = industrial_complex
+		level = 1
+		instant_build = yes
+				}
+			}
+		360 = {
+		add_extra_state_shared_building_slots = 2	
+		add_building_construction = {
+		type = industrial_complex
+		level = 2
+		instant_build = yes
+				}
+			}			
+		}	
+	}	
+		
+	focus = {
+		id = focus_CBI_Cromwland_arsenal
+		available = {
+		has_war = no
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_generic_construct_mil_factory
+		prerequisite = { focus = focus_CBI_help_in_opening_resources }
+		prerequisite = { focus = focus_CBI_infrastructure_construction }
+		prerequisite = { focus = focus_CBI_improve_communication_with_metropolis }		
+		x = 21
+		y = 14
+		cost = 4
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_INDUSTRY}
+		
+		completion_reward = {
+		359 = {
+		add_extra_state_shared_building_slots = 1	
+		add_building_construction = {
+		type = industrial_complex
+		level = 1
+		instant_build = yes
+				}
+			}
+		362 = {
+		add_extra_state_shared_building_slots = 1	
+		add_building_construction = {
+		type = industrial_complex
+		level = 1
+		instant_build = yes
+				}
+			}			
+		}	
+	}
+
+	focus = {
+		id = focus_CBI_support_by_metropolis
+		available = {
+		has_war = no
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_generic_construct_mil_factory
+		prerequisite = { focus = focus_CBI_investments_in_emerging_industry }
+		prerequisite = { focus = focus_CBI_Cromwland_arsenal }
+		x = 20
+		y = 15
+		cost = 4
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+			add_ideas = CBI_support_of_metropolis_CBI
+			NEN = {
+			add_ideas = CBI_support_of_metropolis_NEN
+			}
+			remove_ideas = CBI_relaxation_control
+		}	
+	}	
+		
+	focus = {
+		id = focus_CBI_permission_for_your_army		
+		available = {
+		has_war = no
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_generic_national_unity
+		prerequisite = { focus = focus_CBI_seat_in_parliament_NEN }	
+		prerequisite = { focus = focus_CBI_London_Conference }		
+		x = 16
+		y = 14
+		cost = 1
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+			remove_ideas = NEN_ban_on_fullfledged_army
+			}
+		}
+
+		
 		
 	focus = {
 		id = focus_CBI_British_Commonwealth		
@@ -2051,9 +2436,9 @@ focus_tree = {
 		
 		icon = GFX_focus_eng_imperial_federation
 		prerequisite = { focus = focus_CBI_colony_reform }			
-		x = 22
+		x = 28
 		y = 11
-		cost = 5
+		cost = 1
 		ai_will_do = {
 			factor = 1
 		}
