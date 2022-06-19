@@ -755,7 +755,7 @@ focus_tree = {
 		icon = GFX_goal_generic_build_tank
 		
 		x = 3
-		y = 3
+		y = 2
 		relative_position_id = FRA_updated_french_goverment
 		
 		available = {
@@ -1247,12 +1247,12 @@ focus_tree = {
 		available_if_capitulated = yes
 
 		completion_reward = {
-			air_experience = 20
+			air_experience = 30
 		}
 	}
 	focus = {
 		id = FRA_air_war_strategy
-		icon = GFX_goal_generic_build_airforce
+		icon = GFX_goal_generic_army_doctrines
 		
 		x = 0
 		y = 1
@@ -1278,10 +1278,64 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = FRA_light_aviation_prior
-		icon = GFX_goal_generic_build_airforce
+		id = FRA_build_air_bases
+		icon = GFX_goal_generic_construct_civilian
 		
-		x = -1
+		x = 0
+		y = 2
+		relative_position_id = FRA_air_war_strategy
+		prerequisite = { focus = FRA_air_war_strategy }
+
+		cost = 10
+		#search_filters = {   }
+		
+		available = {
+			
+		}
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+			16 = {
+				add_building_construction = {
+					type = air_base
+					level = 2
+					instant_build = yes
+				}
+			}
+			random_owned_controlled_state = {
+				limit = {
+					free_building_slots = {
+						building = air_base
+						size > 1
+					}
+				}
+				add_building_construction = {
+					type = air_base
+					level = 2
+					instant_build = yes
+				}	
+			}
+			random_owned_controlled_state = {
+				limit = {
+					free_building_slots = {
+						building = air_base
+						size > 1
+					}
+				}
+				add_building_construction = {
+					type = air_base
+					level = 2
+					instant_build = yes
+				}	
+			}
+		}
+	}
+	focus = {
+		id = FRA_light_aviation_prior
+		icon = GFX_goal_generic_air_fighter
+		
+		x = -2
 		y = 1
 		relative_position_id = FRA_air_war_strategy
 		prerequisite = { focus = FRA_air_war_strategy }
@@ -1297,14 +1351,58 @@ focus_tree = {
 		available_if_capitulated = yes
 
 		completion_reward = {
+			add_tech_bonus = {
+				name = fighter_bonus
+				bonus = 0.8
+				uses = 2
+				technology = early_fighter
+				technology = fighter1
+				technology = fighter2
+				technology = fighter3
+				technology = heavy_fighter1
+				technology = heavy_fighter2
+				technology = heavy_fighter3
+			}
+		}
+	}
+	focus = {
+		id = FRA_development_of_light_aviation
+		icon = GFX_goal_generic_air_fighter2
+		
+		x = 0
+		y = 1
+		relative_position_id = FRA_light_aviation_prior
+		prerequisite = { focus = FRA_light_aviation_prior }
+
+		cost = 10
+		#search_filters = {   }
+		
+		available = {
 			
+		}
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = fighter_bonus
+				bonus = 0.8
+				uses = 2
+				technology = early_fighter
+				technology = fighter1
+				technology = fighter2
+				technology = fighter3
+				technology = heavy_fighter1
+				technology = heavy_fighter2
+				technology = heavy_fighter3
+			}
 		}
 	}
 	focus = {
 		id = FRA_heavy_aviation_prior
-		icon = GFX_goal_generic_build_airforce
+		icon = GFX_goal_generic_air_bomber
 		
-		x = 1
+		x = 2
 		y = 1
 		relative_position_id = FRA_air_war_strategy
 		prerequisite = { focus = FRA_air_war_strategy }
@@ -1320,7 +1418,79 @@ focus_tree = {
 		available_if_capitulated = yes
 
 		completion_reward = {
+			add_tech_bonus = {
+				name = bomber_bonus
+				bonus = 0.8
+				uses = 2
+				technology = strategic_bomber1
+				technology = strategic_bomber2
+				technology = strategic_bomber3
+				category = tactical_bomber
+			}
+		}
+	}
+	focus = {
+		id = FRA_development_of_heavy_aviation
+		icon = GFX_goal_generic_air_naval_bomber
+		
+		x = 0
+		y = 1
+		relative_position_id = FRA_heavy_aviation_prior
+		prerequisite = { focus = FRA_heavy_aviation_prior }
+
+
+		cost = 10
+		#search_filters = {   }
+		
+		available = {
 			
+		}
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = bomber_bonus
+				bonus = 0.8
+				uses = 2
+				technology = strategic_bomber1
+				technology = strategic_bomber2
+				technology = strategic_bomber3
+				category = tactical_bomber
+			}
+		}
+	}
+	focus = {
+		id = FRA_french_air_forces 
+		icon = GFX_goal_generic_air_doctrine
+		
+		x = 0
+		y = 1
+		relative_position_id = FRA_build_air_bases
+		prerequisite = { focus = FRA_build_air_bases }
+		prerequisite = { 
+			focus = FRA_development_of_light_aviation
+			focus = FRA_development_of_heavy_aviation
+		}
+
+
+		cost = 10
+		#search_filters = {   }
+		
+		available = {
+			
+		}
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+			air_experience = 30
+			add_doctrine_cost_reduction = {
+				name = air_doc_bonus
+				cost_reduction = 1.0
+				uses = 1
+				category = air_doctrine
+			}
 		}
 	}
 
@@ -1798,7 +1968,7 @@ focus_tree = {
 	}
 	focus = {
 		id = FRA_french_claims_on_elsas_lotaringia
-		icon = GFX_goal_generic_political_pressure
+		icon = GFX_goal_elas_and_lotaringia
 		mutually_exclusive = { focus = FRR_colonial_goals }
 		x = 1
 		y = 2
@@ -1875,7 +2045,7 @@ focus_tree = {
 	}
 	focus = {
 		id = FRA_french_entente 
-		icon = GFX_focus_generic_little_entente
+		icon = GFX_goal_frr_aliance_with_rus
 		mutually_exclusive = { focus = FRA_own_aliance }
 		x = -1
 		y = 1
