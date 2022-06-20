@@ -709,6 +709,20 @@ country_event = {
 		SCA = {
 			clr_country_flag = SCA_vs_RUS
 		}
+		SCA = {
+			diplomatic_relation = {
+			country = CBI
+			relation = non_aggression_pact
+			active = yes
+			}
+		}
+		CBI = {
+			diplomatic_relation = {
+			country = SCA
+			relation = non_aggression_pact
+			active = yes
+			}
+		}
 	}
 	
 	option = {
@@ -816,6 +830,20 @@ country_event = {
 			add_opinion_modifier = {
 				target = SCA
 				modifier = embargo
+			}
+		}
+		SCA = {
+			diplomatic_relation = {
+			country = CBI
+			relation = non_aggression_pact
+			active = yes
+			}
+		}
+		CBI = {
+			diplomatic_relation = {
+			country = SCA
+			relation = non_aggression_pact
+			active = yes
 			}
 		}
 	}
@@ -8972,9 +9000,31 @@ country_event = {
 	
 	trigger = {
 		has_global_flag = russian_capitulation
-		has_global_flag = prt_capitulation
-		has_global_flag = cbi_capitulation
-		has_global_flag = france_capitulation
+		if = {
+			limit = {
+				OR = {
+					RUS = {
+						has_completed_focus = Rus_Dmitry_Alekseevich_Milyutin
+					}
+					RUS = {
+						has_completed_focus = Rus_Konstantin_Nikolaevich
+					}
+					RUS = {
+						has_completed_focus = Rus_Mikhail_Fedorovich_Orlov
+					}
+				}
+			}
+			has_global_flag = prt_capitulation
+			has_global_flag = cbi_capitulation
+		}
+		if = {
+			limit = {
+				FRR = {
+					has_completed_focus = FRA_support_cbi
+				}
+			}
+			has_global_flag = france_capitulation
+		}
 		is_historical_focus_on = yes
 	}
 
@@ -9023,6 +9073,18 @@ country_event = {
 	
 	option = { #effect
 		name = te.91.a
+		BYZ = {
+			remove_opinion_modifier = { 
+				target = PRU 
+				modifier = history_friend 
+			} 
+		}
+		PRU = { 
+			remove_opinion_modifier = { 
+				target = BYZ 
+				modifier = history_friend 
+			}	
+		}
 		BYZ = {
 			leave_faction = yes
 		}
