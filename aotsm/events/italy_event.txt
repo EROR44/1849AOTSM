@@ -590,9 +590,65 @@ country_event = { #Venetia unltimatum
 		ai_chance = {
 			factor = 95
 		}
-		SAR = {
-			transfer_state = 159
-			transfer_state = 160
+		if = {
+			limit = {
+				VEN = {
+					is_puppet_of = PRU
+				}
+			}
+			PRU = {
+				transfer_state = 39
+			}
+			SAR = {
+				transfer_state = 159
+				transfer_state = 160
+			}
+		}
+		if = {
+			limit = {
+				VEN = {
+					is_puppet_of = AUS
+				}
+			}
+			AUS = {
+				transfer_state = 39
+			}
+			SAR = {
+				transfer_state = 159
+				transfer_state = 160
+			}
+		}
+		if = {
+			limit = {
+				VEN = {
+					is_puppet = yes
+					NOT = {
+						OR = {
+							is_puppet_of = PRU
+							is_puppet_of = AUS
+						}
+					}
+				}
+			}
+			SAR = {
+				annex_country = {
+					target = VEN
+					transfer_troops = yes
+				}
+			}
+		}
+		if = {
+			limit = {
+				VEN = {
+					is_puppet = no
+				}
+			}
+			SAR = {
+				annex_country = {
+					target = VEN
+					transfer_troops = yes
+				}
+			}
 		}
 	}
 	
@@ -823,7 +879,7 @@ country_event = { #fourth Congress
 			create_country_leader = {
 				name = "SAR_Pius_IX"
 				desc = "POLITICS_PIUS_IX_DESC"
-				picture = "gfx/leaders/SAR/Portrait_Pius_IX.dds"
+				picture = "gfx/leaders/PAP/Portrait_Pius_IX.dds"
 				expire = "1888.1.1"
 				ideology = federalism
 				traits = {
