@@ -519,7 +519,7 @@ focus_tree = {
 		cost = 10
 		
 		available = {
-			
+			has_ideas = low_investment_level
 		}
 		
 		available_if_capitulated = yes
@@ -794,6 +794,7 @@ focus_tree = {
 		search_filters = {FOCUS_FILTER_POLITICAL}
 		
 		completion_reward = {
+			custom_effect_tooltip = FRR_reduce_chanses_on_militarists_uprising
 			swap_ideas = {
 				remove_idea = FRR_politisiertest_army
 				add_idea = FRR_separation_army_from_goverment_1
@@ -840,6 +841,7 @@ focus_tree = {
 		search_filters = {FOCUS_FILTER_POLITICAL}
 
 		completion_reward = {
+			custom_effect_tooltip = FRR_reduce_chanses_on_militarists_uprising
 			country_event = fren.8
 		}
 	}
@@ -903,6 +905,7 @@ focus_tree = {
 		search_filters = {FOCUS_FILTER_POLITICAL}
 		
 		completion_reward = {
+			custom_effect_tooltip = FRR_block_militarists_uprising
 			swap_ideas = {
 				remove_idea = FRR_divided_nation
 				add_idea = FRR_national_unity
@@ -927,16 +930,16 @@ focus_tree = {
 			}
 		}
 		
-		cost = 10
+		cost = 5
 		#search_filters = {   }
 		
 		available_if_capitulated = yes
 
 		completion_reward = {
 			add_political_power = 200
-			army_experience = 15
-			navy_experience = 15
-			air_experience = 15
+			army_experience = 25
+			navy_experience = 25
+			air_experience = 25
 			hidden_effect = {
 				swap_ideas = {
 				remove_idea = FRR_separation_army_from_goverment_1
@@ -1240,7 +1243,7 @@ focus_tree = {
 		relative_position_id = FRA_army_reviev
 		prerequisite = { focus = FRA_army_reviev }
 
-		cost = 10
+		cost = 7
 		#search_filters = {   }
 		
 		available = {
@@ -1262,7 +1265,7 @@ focus_tree = {
 		relative_position_id = FRA_explore_the_alg_campain_expirience
 		prerequisite = { focus = FRA_explore_the_alg_campain_expirience }
 
-		cost = 10
+		cost = 7
 		#search_filters = {   }
 		
 		available = {
@@ -1286,7 +1289,7 @@ focus_tree = {
 		relative_position_id = FRA_explore_the_alg_campain_expirience
 		prerequisite = { focus = FRA_explore_the_alg_campain_expirience }
 
-		cost = 10
+		cost = 7
 		#search_filters = {   }
 		
 		available = {
@@ -1311,7 +1314,7 @@ focus_tree = {
 		relative_position_id = FRA_explore_the_alg_campain_expirience
 		prerequisite = { focus = FRA_explore_the_alg_campain_expirience }
 
-		cost = 10
+		cost = 7
 		#search_filters = {   }
 		
 		available = {
@@ -1341,7 +1344,7 @@ focus_tree = {
 		prerequisite = { focus = FRA_update_war_prom }
 		prerequisite = { focus = FRA_reorganisation_of_army }
 
-		cost = 10
+		cost = 7
 		#search_filters = {   }
 		
 		available = {
@@ -1371,7 +1374,7 @@ focus_tree = {
 		prerequisite = { focus = FRA_motorisation_of_army }
 		prerequisite = { focus = FRA_create_forein_legion }
 
-		cost = 10
+		cost = 7
 		#search_filters = {   }
 		
 		available = {
@@ -1400,7 +1403,7 @@ focus_tree = {
 		relative_position_id = FRA_army_reviev
 		
 
-		cost = 10
+		cost = 5
 		#search_filters = {   }
 		
 		available = {
@@ -1668,7 +1671,7 @@ focus_tree = {
 		y = 0
 		relative_position_id = FRA_air
 		
-		cost = 10
+		cost = 5
 		#search_filters = {   }
 		
 		available = {
@@ -2001,6 +2004,8 @@ focus_tree = {
 					BYZ = { in_faction_with = PRU }
 				}
 				BYZ = { add_opinion_modifier = { target = FRR modifier = embargo } }
+				FRR = { remove_opinion_modifier = { target = BYZ modifier = history_friend } }
+				BYZ = { remove_opinion_modifier = { target = FRR modifier = history_friend } }
 			}			
 			hidden_effect = {
 				PRU = { country_event = { id = fren.23 days = 2 } }
@@ -2490,7 +2495,7 @@ focus_tree = {
 	focus = {
 		id = FRR_colonial_goals
 		icon = GFX_goal_tfv_saf_anti_colonialist_crusade 
-		
+		mutually_exclusive = { focus = FRA_french_claims_on_elsas_lotaringia }
 		x = -1
 		y = 2
 		relative_position_id = FRA_be_with_prussia
@@ -2814,7 +2819,7 @@ focus_tree = {
 	focus = {
 		id = FRA_gain_control_on_army
 		icon = GFX_goal_continuous_suppression
-		
+		mutually_exclusive = { focus = FRA_separate_army_from_goverment }
 		x = 1
 		y = 1
 		relative_position_id = FRA_situation_in_army
@@ -3986,7 +3991,10 @@ focus_tree = {
 		search_filters = {FOCUS_FILTER_POLITICAL}
 
 		completion_reward = {
-			
+			add_ideas = FRR_militarists_society
+			hidden_effect = {
+				add_manpower = 20000
+			}
 		}
 	}
 }
