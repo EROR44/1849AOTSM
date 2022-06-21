@@ -709,6 +709,20 @@ country_event = {
 		SCA = {
 			clr_country_flag = SCA_vs_RUS
 		}
+		SCA = {
+			diplomatic_relation = {
+			country = CBI
+			relation = non_aggression_pact
+			active = yes
+			}
+		}
+		CBI = {
+			diplomatic_relation = {
+			country = SCA
+			relation = non_aggression_pact
+			active = yes
+			}
+		}
 	}
 	
 	option = {
@@ -816,6 +830,20 @@ country_event = {
 			add_opinion_modifier = {
 				target = SCA
 				modifier = embargo
+			}
+		}
+		SCA = {
+			diplomatic_relation = {
+			country = CBI
+			relation = non_aggression_pact
+			active = yes
+			}
+		}
+		CBI = {
+			diplomatic_relation = {
+			country = SCA
+			relation = non_aggression_pact
+			active = yes
 			}
 		}
 	}
@@ -8972,9 +9000,31 @@ country_event = {
 	
 	trigger = {
 		has_global_flag = russian_capitulation
-		has_global_flag = prt_capitulation
-		has_global_flag = cbi_capitulation
-		has_global_flag = france_capitulation
+		if = {
+			limit = {
+				OR = {
+					RUS = {
+						has_completed_focus = Rus_Dmitry_Alekseevich_Milyutin
+					}
+					RUS = {
+						has_completed_focus = Rus_Konstantin_Nikolaevich
+					}
+					RUS = {
+						has_completed_focus = Rus_Mikhail_Fedorovich_Orlov
+					}
+				}
+			}
+			has_global_flag = prt_capitulation
+			has_global_flag = cbi_capitulation
+		}
+		if = {
+			limit = {
+				FRR = {
+					has_completed_focus = FRA_support_cbi
+				}
+			}
+			has_global_flag = france_capitulation
+		}
 		is_historical_focus_on = yes
 	}
 
@@ -9024,6 +9074,18 @@ country_event = {
 	option = { #effect
 		name = te.91.a
 		BYZ = {
+			remove_opinion_modifier = { 
+				target = PRU 
+				modifier = history_friend 
+			} 
+		}
+		PRU = { 
+			remove_opinion_modifier = { 
+				target = BYZ 
+				modifier = history_friend 
+			}	
+		}
+		BYZ = {
 			leave_faction = yes
 		}
 		BYZ = {
@@ -9034,9 +9096,9 @@ country_event = {
 }
 
 country_event = {
-	id = te.91 #HOL leave faction
-	title = te.91.t
-	desc = te.91.d
+	id = te.92 #HOL leave faction
+	title = te.92.t
+	desc = te.92.d
 	picture =  GFX_report_event_generic_sign_treaty1
 	
 	fire_only_once = yes
@@ -9046,7 +9108,7 @@ country_event = {
 	is_triggered_only = yes
 	
 	option = { #effect
-		name = te.91.a
+		name = te.92.a
 		HOL = {
 			leave_faction = yes
 		}
@@ -9058,9 +9120,9 @@ country_event = {
 }
 
 country_event = {
-	id = te.92 #SCA war with PRU
-	title = te.92.t
-	desc = te.92.d
+	id = te.93 #SCA war with PRU
+	title = te.93.t
+	desc = te.93.d
 	picture =  GFX_report_event_generic_sign_treaty1
 	
 	fire_only_once = yes
@@ -9291,8 +9353,6 @@ country_event = {
 	}
 	picture =  GFX_report_event_generic_sign_treaty1
 	
-	fire_only_once = yes
-	
 	is_triggered_only = yes
 	
 	option = { #PRU
@@ -9335,8 +9395,6 @@ country_event = {
 		}
 	}
 	picture =  GFX_report_event_generic_sign_treaty1
-	
-	fire_only_once = yes
 	
 	is_triggered_only = yes
 	
@@ -9413,6 +9471,11 @@ country_event = {
 						}
 					}
 				}
+			}
+			SCA = {
+				set_province_controller = 11064
+				set_province_controller = 131
+				set_province_controller = 3159
 			}
 			SCA = {
 				load_oob = SCA_invasion_cbi
