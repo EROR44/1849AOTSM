@@ -727,6 +727,27 @@ on_actions = {
 					clr_country_flag = nis_vs_uta
 				}
 			}
+			#NAV capitulation
+			if = {
+				limit = {
+					tag = NAV
+					NIS = {
+						has_country_flag = nis_vs_nav
+					}
+					NAV = {
+						has_war_with = NIS
+					}
+				}
+				NIS = {
+					annex_country = {
+						target = NAV
+						transfer_troops = no
+					}
+				}
+				NIS = {
+					clr_country_flag = nis_vs_nav
+				}
+			}
 			#FRR capitulation 
 			if = {
 				limit = {
@@ -734,6 +755,39 @@ on_actions = {
 					has_global_flag = firts_world_war
 					FRR = {
 						has_war_with = PRU
+					}
+				}
+				if = {
+					limit = {
+						FRR = {
+							has_war_with = JAP
+						}
+						country_existss = JAP
+					}
+					JAP = {
+						transfer_state = 641
+					}
+				}
+				if = {
+					limit = {
+						FRR = {
+							has_war_with = JAS
+						}
+						country_existss = JAS
+					}
+					JAS = {
+						transfer_state = 641
+					}
+				}
+				if = {
+					limit = {
+						FRR = {
+							has_war_with = TUK
+						}
+						country_existss = TUK
+					}
+					TUK = {
+						transfer_state = 641
 					}
 				}
 				if = {
@@ -1199,19 +1253,19 @@ on_actions = {
 									CBI = {
 										has_war_with = JAP
 									}
-									contry_exist = JAP
+									country_exists = JAP
 								}
 								AND = {
 									CBI = {
 										has_war_with = JAS
 									}
-									contry_exist = JAS
+									country_exists = JAS
 								}
 								AND = {
 									CBI = {
 										has_war_with = TUK
 									}
-									contry_exist = TUK
+									country_exists = TUK
 								}
 							}
 						}
@@ -1241,7 +1295,7 @@ on_actions = {
 						CBI = {
 							has_war_with = JAP
 						}
-						contry_exists = JAP
+						country_existss = JAP
 					}
 					JAP = {
 						transfer_state = 630
@@ -1265,7 +1319,7 @@ on_actions = {
 						CBI = {
 							has_war_with = JAS
 						}
-						contry_exists = JAS
+						country_existss = JAS
 					}
 					JAS = {
 						transfer_state = 630
@@ -1289,7 +1343,7 @@ on_actions = {
 						CBI = {
 							has_war_with = TUK
 						}
-						contry_exists = TUK
+						country_existss = TUK
 					}
 					TUK = {
 						transfer_state = 630
@@ -1351,6 +1405,16 @@ on_actions = {
 				if = {
 					limit = {
 						PRT = {
+							has_war_with = IND
+						}
+					}
+					IND = {
+						transfer_state = 712
+					}
+				}
+				if = {
+					limit = {
+						PRT = {
 							has_war_with = PRU
 						}
 					}
@@ -1372,7 +1436,14 @@ on_actions = {
 						}
 					}
 					BYZ = {
-						transfer_state = 712
+						if = {
+							limit = {
+								FRR = {
+									owns_state = 712
+								}
+							}
+							transfer_state = 712
+						}
 					}
 					ZUL = {
 						transfer_state = 846
