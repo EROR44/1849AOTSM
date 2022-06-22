@@ -10,6 +10,247 @@
 # protect
 # influence
 
+FRA_area_priority = {
+	enable = {
+		original_tag = FRR
+	}
+
+	ai_strategy = {
+		type = area_priority
+		id = europe
+		value = 150 #more focus here
+	}
+	
+	ai_strategy = {
+		type = area_priority
+		id = north_america
+		value = 1
+	}
+	
+	ai_strategy = {
+		type = area_priority
+		id = south_america
+		value = 1
+	}
+	
+	ai_strategy = {
+		type = area_priority
+		id = asia
+		value = 5
+	}
+	
+	ai_strategy = {
+		type = area_priority
+		id = middle_east
+		value = 1
+	}
+	
+	ai_strategy = {
+		type = area_priority
+		id = africa
+		value = 30
+	}
+
+	ai_strategy = {
+		type = area_priority
+		id = pacific
+		value = 3 #less focus here
+	}
+	
+	ai_strategy = {
+		type = area_priority
+		id = oceania
+		value = 3
+	}
+
+	ai_strategy = {
+		type = consider_weak
+		id = ALG
+	}
+
+	ai_strategy = {
+		type = consider_weak
+		id = TUN
+	}
+
+	ai_strategy = {
+		type = consider_weak
+		id = MAV
+	}
+  
+	ai_strategy = {
+		type = ignore
+		id = SOR
+	}
+	ai_strategy = {
+		type = ignore
+		id = SOS
+	}
+	
+#	ai_strategy = {
+#		type = dont_defend_ally_borders
+#		id = NWA
+# 	}
+
+}
+
+french_wants_civ = {
+	allowed = {
+		original_tag = FRR
+	}
+	enable = {
+		date < 1851.3.1
+		has_war = no
+	}
+	abort_when_not_enabled = yes
+	
+	ai_strategy = {
+		type = building_target
+		id = industrial_complex
+		value = 59
+	}
+}
+
+french_wants_arms_factory = {
+	allowed = {
+		original_tag = FRR
+	}
+	enable = {
+		date < 1851.1.1
+	}
+	abort_when_not_enabled = yes
+	
+	ai_strategy = {
+		type = building_target
+		id = arms_factory
+		value = 45
+	}
+}
+
+french_wants_coal = {
+	allowed = {
+		original_tag = FRR
+	}
+	enable = {
+		date < 1851.1.1
+		has_war = no
+	}
+	abort_when_not_enabled = yes
+	
+	ai_strategy = {
+		type = building_target
+		id = synthetic_refinery
+		value = 8
+	}
+}
+
+prepare_for_great_war = {
+	allowed = {
+		original_tag = FRR
+	}
+	enable = {
+		date > 1853.1.1
+	}
+	abort = {
+		date < 1853.1.1
+	}
+	
+	ai_strategy = {
+		type = build_army
+		id = infantry
+		value = 200
+	}
+	
+	ai_strategy = {
+		type = build_army
+		id = motorized
+		value = 50
+	}
+	
+	ai_strategy = {
+		type = build_army
+		id = mechanized
+		value = 10
+	}
+
+	ai_strategy = {
+		type = build_army
+		id = armor
+		value = 20
+	}
+	
+	ai_strategy = {
+		type = equipment_production_factor
+		id = infantry
+		value = 30 
+	}
+	
+	ai_strategy = {
+		type = equipment_production_factor
+		id = artillery
+		value = 100 #20 to 40
+	}
+	
+	ai_strategy = {
+		type = equipment_variant_production_factor
+		id = support_equipment
+		value = 30
+	}
+	
+}
+
+invasion_in_algeria = {
+	allowed = {
+		original_tag = FRR
+	}
+	enable = {
+		has_country_flag = FRR_invasion_in_algeria
+		country_exists = MOR
+	}
+	abort = {
+		NOT = { country_exists = MOR }
+	}
+	
+	ai_strategy = {
+		type = ai_strategy_invade
+		id = "MOR"
+		value = 100
+	}
+	
+}
+
+colonial_invasion_on_afrika = {
+	allowed = {
+		original_tag = FRR
+	}
+	enable = {
+		has_country_flag = FRR_invasion_in_algeria_end
+	}
+	abort = {
+		NOT = { has_country_flag = FRR_invasion_in_algeria_end }
+	}
+	
+	ai_strategy = {
+		type = ai_strategy_invade
+		id = "TUN"
+		value = 100
+	}
+	ai_strategy = {
+		type = ai_strategy_invade
+		id = "MAV"
+		value = 100
+	}
+	ai_strategy = {
+		type = ai_strategy_invade
+		id = "BNI"
+		value = 20
+	}
+	ai_strategy = {
+		type = ai_strategy_invade
+		id = "MOR"
+		value = 40
+	}
+}
 
 prussia_ally = {
 	allowed = {
@@ -33,7 +274,13 @@ prussia_ally = {
 		id = "PRU"
 		value = 100
 	}
+	ai_strategy = {
+		type = antagonize
+		id = "CBI"
+		value = 200
+	}
 }
+
 britain_ally = {
 	allowed = {
 		original_tag = FRR
@@ -55,6 +302,40 @@ britain_ally = {
 		type = alliance
 		id = "CBI"
 		value = 100
+	}
+	ai_strategy = {
+		type = antagonize
+		id = "PRU"
+		value = 200
+	}
+}
+
+russia_ally = {
+	allowed = {
+		original_tag = FRR
+	}
+	enable = {
+		has_completed_focus = FRA_french_entente
+		country_exists = CBI
+	}
+	abort = {
+		NOT = { country_exists = CBI }
+	}
+
+	ai_strategy = {
+		type = befriend
+		id = "RUS"
+		value = 100
+	}
+	ai_strategy = {
+		type = alliance
+		id = "RUS"
+		value = 100
+	}
+	ai_strategy = {
+		type = antagonize
+		id = "PRU"
+		value = 200
 	}
 }
 
@@ -160,7 +441,7 @@ FRR_template_design_2 = {
 
 FRR_defence_britain_borders = {
 	allowed = {
-		original_tag = FRA
+		original_tag = FRR
 	}
 	enable = {
 		is_in_faction_with = CBI
