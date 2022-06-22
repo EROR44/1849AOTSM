@@ -155,10 +155,15 @@ prepare_for_great_war = {
 		date < 1853.1.1
 	}
 	
+	ai_strategy = {   #заставляет ии нанимать больше дивизий
+		type = force_build_armies 
+		value = 100 
+	}
+	
 	ai_strategy = {
 		type = build_army
 		id = infantry
-		value = 200
+		value = 100
 	}
 	
 	ai_strategy = {
@@ -170,7 +175,7 @@ prepare_for_great_war = {
 	ai_strategy = {
 		type = build_army
 		id = mechanized
-		value = 10
+		value = 30
 	}
 
 	ai_strategy = {
@@ -212,7 +217,7 @@ invasion_in_algeria = {
 	}
 	
 	ai_strategy = {
-		type = ai_strategy_invade
+		type = invade
 		id = "MOR"
 		value = 100
 	}
@@ -231,22 +236,29 @@ colonial_invasion_on_afrika = {
 	}
 	
 	ai_strategy = {
-		type = ai_strategy_invade
+        type = front_control
+        area = africa
+        ordertype = invasion
+        execute_order = yes
+    }
+	
+	ai_strategy = {
+		type = invade
 		id = "TUN"
 		value = 100
 	}
 	ai_strategy = {
-		type = ai_strategy_invade
+		type = invade
 		id = "MAV"
 		value = 100
 	}
 	ai_strategy = {
-		type = ai_strategy_invade
+		type = invade
 		id = "BNI"
 		value = 20
 	}
 	ai_strategy = {
-		type = ai_strategy_invade
+		type = invade
 		id = "MOR"
 		value = 40
 	}
@@ -337,6 +349,67 @@ russia_ally = {
 		id = "PRU"
 		value = 200
 	}
+}
+
+war_witch_pru = {
+	allowed = {
+		original_tag = FRR
+	}
+	enable = {
+		has_war_with = PRU
+	}
+	abort = {
+		NOT = { has_war_with = PRU }
+	}
+	
+	ai_strategy = {
+		type = front_unit_request
+		tag = PRU               
+		state = 28                
+		strategic_region = 232  
+		area = europe            
+		country_trigger = { always = no }     
+		state_trigger = { always = no }    
+		value = 40               
+	}
+	
+	ai_strategy = {
+		type = front_unit_request
+		tag = PRU               
+		state = 828                
+		strategic_region = 228  
+		area = europe            
+		country_trigger = { always = no }     
+		state_trigger = { always = no }    
+		value = 40               
+	}
+	
+	ai_strategy = {
+		type = front_unit_request
+		tag = PRU               
+		state = 863              
+		strategic_region = 5  
+		area = europe            
+		country_trigger = { always = no }     
+		state_trigger = { always = no }    
+		value = 40               
+	}
+	
+	ai_strategy = { 
+		type = garrison
+		value = 50
+	}
+	
+	ai_strategy = {
+        type = front_control
+        tag = "PRU"
+        priority = 1 
+        ordertype = front # front or invasion
+        execution_type = balanced # one of careful balanced rush rush_weak (осторожно, сбалансированно, агрессивно, прорыв)
+        execute_order = yes # испольнять приказ или нет, если нет то просто будут стоять в обороне
+        manual_attack = yes # точечные атаки, если нет, то ИИ не будет совершать никаких отдельных атак, кроме батлплана (да да ИИ тоже умеет ручками)
+    }
+
 }
 
 FRR_template_design_1 = {
@@ -461,7 +534,7 @@ FRR_defence_britain_borders = {
 	ai_strategy = {
 		type = force_defend_ally_borders
 		id = "CBI"
-		value = 100
+		value = 20
 	}
 	
 }
