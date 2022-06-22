@@ -1,37 +1,5 @@
-﻿# Division template historical names system. Is a new method of naming the divisions based on the names-group assigned to it's template.
-# If we run out of all historical names, the names will be assigned in the old way.
-#
-# Each group has a made up tag. Use it if you want to append more, or replace existing names with the extra txt files (modding).
-#
-# for_countries - lists all countries that can use it. If empty, or entire tag is missing, all countries in the world can use it.
-#
-# can_use - is a trigger that locks/unlocks the group under specific circumstances. The trigger is in a country scope.
-#
-# division_types - is a list of tokens to corresponding unit types. A player can in fact use any group of names for a div.template
-#                  however this tag is a helper for an automated choice (for AI, or if the group must switch on it's own, because
-#                  for example the current one is no longer available due to the can_use trigger saying so).
-#                  In automated choice, the division template must have at least 1 of the following types for it to be chosen.
-#
-# fallback_name - Is going to be used if we run out of the scripted historical names. If you want to use the old division naming
-#                 mechanics to be used for fallbacks, then just skip this option.
-#
-# unordered - It's a list of historical division names that did not have a number. Regardless if such names happened in history or not
-#             this option is available here mainly for a mods.
-#
-# ordered - Is a list of all historical names. 
-#           Numbers must start from 1 and up. 
-#           Numbers can't repeat in one scope.
-#           If you script the name for this group, at the same number (for example in a mod in another file), the name will be override.
-#           All arguments between the brackets must be separated by spaces. Each argument is wrapped in "quotas".
-#           1st argument = The name. It must contain either: 
-#                          %d (for decimal number placement)
-#                          %s (for string number placement - ROMAN numbers like XIV).
-#           2nd argument is optional = A localizable text describing this historical division. The text will be visible in the tooltip
-#                                      where you choose the historical division name.
-#           3rd argument is optional = An URL preferably pointing to the WIKI. It's a future feature that is not currently working in
-#                                      the current game version.
-CHI_INF_01 = 
-{
+﻿
+QIN_INF_01 = {
 	name = "Infantry Unit"
 
 	for_countries = { QIN MAN HEJ CHN YUN GNS CND SIC SHA SHN SDZ MON }
@@ -40,16 +8,10 @@ CHI_INF_01 =
 
 	division_types = { "infantry" }
 
-	# Number reservation system will tie to another group.
-	#link_numbering_with = { QIN_INF_01 }
-
 	fallback_name = "%d Juntuán"
 
-	# Names with numbers (only one number per entry). 
-	# It's okay to have gaps in numbering.
-	ordered =
-	{
-		1 = { "%d Juntuán" }			# QINnese "corps" were division-strength units (2-3 QINnese "divisions" = 2-3 HOI4 regiments)
+	ordered = {
+		1 = { "%d Juntuán" }			
 		2 = { "%d Juntuán" }
 		3 = { "%d Juntuán" }
 		4 = { "%d Juntuán" }
@@ -67,7 +29,7 @@ CHI_INF_01 =
 		54 = { "%d Juntuán" }
 		73 = { "%d Juntuán" }
 		74 = { "%d Juntuán" }
-		403 = { "3 Bubing Shi" }		# German-trained divisions (traditional division strength)
+		403 = { "3 Bubing Shi" }	
 		406 = { "6 Bubing Shi" }		
 		409 = { "9 Bubing Shi" }		
 		414 = { "14 Bubing Shi" }		
@@ -171,7 +133,7 @@ CHI_INF_01 =
 		36 = { "%d Juntuán" }
 		301 = { "1 Juntuán Linshi" }
 		302 = { "2 Juntuán Linshi" }
-		430 = { "Xin 30 Bubing Shi" }		# American-trained (full) divisions of historical 'X Force'
+		430 = { "Xin 30 Bubing Shi" }	
 		438 = { "Xin 38 Bubing Shi" }		
 		422 = { "Xin 22 Bubing Shi" }		
 		450 = { "50 Bubing Shi" }		
@@ -185,7 +147,7 @@ CHI_INF_01 =
 		208 = { "Xin 8 Juntuán" }
 		303 = { "3 Juntuán Linshi" }
 		315 = { "15 Juntuán Linshi" }
-		209 = { "Xin 9 Juntuán" }			# fictional additional corps here
+		209 = { "Xin 9 Juntuán" }	
 		210 = { "Xin 10 Juntuán" }
 		211 = { "Xin 11 Juntuán" }
 		212 = { "Xin 12 Juntuán" }
@@ -203,8 +165,7 @@ CHI_INF_01 =
 	}
 }
 
-QIN_CAV_01 = 
-{
+QIN_CAV_01 = {
 	name = "Cavalry Unit"
 
 	for_countries = { QIN MAN HEJ CHN YUN GNS CND SIC SHA SHN SDZ MON }
@@ -213,15 +174,9 @@ QIN_CAV_01 =
 
 	division_types = { "cavalry" }
 
-	# Number reservation system will tie to another group.
-	#link_numbering_with = { QIN_INF_01 }
-
 	fallback_name = "%d Qibing Jun"
 
-	# Names with numbers (only one number per entry). 
-	# It's okay to have gaps in numbering.
-	ordered =
-	{
+	ordered = {
 		1 = { "%d Qibing Jun" }
 		2 = { "%d Qibing Jun" }
 		3 = { "%d Qibing Jun" }
@@ -239,8 +194,7 @@ QIN_CAV_01 =
 	}
 }
 
-QIN_MOT_01 = 
-{
+QIN_MOT_01 = {
 	name = "Motorized Unit"
 
 	for_countries = { QIN MAN HEJ CHN YUN GNS CND SIC SHA SHN SDZ MON }
@@ -249,22 +203,18 @@ QIN_MOT_01 =
 
 	division_types = { "motorized" }
 
-	# Number reservation system will tie to another group.
 	link_numbering_with = { QIN_INF_01 }
 
 	fallback_name = "%d Jidonghua Juntuán"
 
-	# Names with numbers (only one number per entry). 
-	# It's okay to have gaps in numbering.
-	ordered =
-	{
-		500 = { "200 Jidonghua Bubing Shi" }		# only historical motorized division for NRA
-		430 = { "Xin 30 Jidonghua Bubing Shi" }		# American-trained (full) divisions of historical 'X Force'
+	ordered = {
+		500 = { "200 Jidonghua Bubing Shi" }	
+		430 = { "Xin 30 Jidonghua Bubing Shi" }
 		438 = { "Xin 38 Jidonghua Bubing Shi" }		
 		422 = { "Xin 22 Jidonghua Bubing Shi" }		
 		414 = { "14 Jidonghua Bubing Shi" }		
 		450 = { "50 Jidonghua Bubing Shi" }		
-		403 = { "3 Jidonghua Bubing Shi" }			# German-trained divisions (traditional division strength)
+		403 = { "3 Jidonghua Bubing Shi" }		
 		406 = { "6 Jidonghua Bubing Shi" }		
 		409 = { "9 Jidonghua Bubing Shi" }		
 		436 = { "36 Jidonghua Bubing Shi" }		
@@ -281,7 +231,7 @@ QIN_MOT_01 =
 		480 = { "80 Jidonghua Bubing Shi" }		
 		483 = { "83 Jidonghua Bubing Shi" }		
 		489 = { "89 Jidonghua Bubing Shi" }		
-		5 = { "%d Jidonghua Juntuán" }						# fictional names for motorized corps
+		5 = { "%d Jidonghua Juntuán" }		
 		1 = { "%d Jidonghua Juntuán" }						
 		2 = { "%d Jidonghua Juntuán" }
 		3 = { "%d Jidonghua Juntuán" }
@@ -304,8 +254,7 @@ QIN_MOT_01 =
 	}
 }
 
-QIN_MEC_01 = 
-{
+QIN_MEC_01 = {
 	name = "Mechanized Unit"
 
 	for_countries = { QIN MAN HEJ CHN YUN GNS CND SIC SHA SHN SDZ MON }
@@ -314,22 +263,18 @@ QIN_MEC_01 =
 
 	division_types = { "mechanized" }
 
-	# Number reservation system will tie to another group.
 	link_numbering_with = { QIN_INF_01 }
 
 	fallback_name = "%d Jixiehua Juntuán"
 
-	# Names with numbers (only one number per entry). 
-	# It's okay to have gaps in numbering.
-	ordered =
-	{
+	ordered = {
 		500 = { "200 Jixiehua Bubing Shi" }
-		430 = { "Xin 30 Jixiehua Bubing Shi" }		# American-trained (full) divisions of historical 'X Force'
+		430 = { "Xin 30 Jixiehua Bubing Shi" }		
 		438 = { "Xin 38 Jixiehua Bubing Shi" }		
 		422 = { "Xin 22 Jixiehua Bubing Shi" }		
 		414 = { "14 Jixiehua Bubing Shi" }		
 		450 = { "50 Jixiehua Bubing Shi" }		
-		403 = { "3 Jixiehua Bubing Shi" }			# German-trained divisions (traditional division strength)
+		403 = { "3 Jixiehua Bubing Shi" }			
 		406 = { "6 Jixiehua Bubing Shi" }		
 		409 = { "9 Jixiehua Bubing Shi" }		
 		436 = { "36 Jixiehua Bubing Shi" }		
@@ -346,7 +291,7 @@ QIN_MEC_01 =
 		480 = { "80 Jixiehua Bubing Shi" }		
 		483 = { "83 Jixiehua Bubing Shi" }		
 		489 = { "89 Jixiehua Bubing Shi" }		
-		5 = { "%d Jixiehua Juntuán" }				# fictional names for mechanized corps
+		5 = { "%d Jixiehua Juntuán" }			
 		1 = { "%d Jixiehua Juntuán" }						
 		2 = { "%d Jixiehua Juntuán" }
 		3 = { "%d Jixiehua Juntuán" }
@@ -369,8 +314,7 @@ QIN_MEC_01 =
 	}
 }
 
-QIN_ARM_01 = 
-{
+QIN_ARM_01 = {
 	name = "Armored Unit"
 
 	for_countries = { QIN MAN HEJ CHN YUN GNS CND SIC SHA SHN SDZ MON }
@@ -379,15 +323,9 @@ QIN_ARM_01 =
 
 	division_types = { "light_armor" "medium_armor" "heavy_armor" "modern_armor" }
 
-	# Number reservation system will tie to another group.
-	#link_numbering_with = { QIN_INF_01 }
-
 	fallback_name = "%d Zhuangjia Shi"
-
-	# Names with numbers (only one number per entry). 
-	# It's okay to have gaps in numbering.
-	ordered =
-	{
+	
+	ordered = {
 		1 = { "%d Zhuangjia Shi" }
 		2 = { "%d Zhuangjia Shi" }
 		3 = { "%d Zhuangjia Shi" }
@@ -406,8 +344,7 @@ QIN_ARM_01 =
 	}
 }
 
-QIN_PAR_01 = 
-{
+QIN_PAR_01 = {
 	name = "Paratrooper Unit"
 
 	for_countries = { QIN MAN HEJ CHN YUN GNS CND SIC SHA SHN SDZ MON }
@@ -416,15 +353,9 @@ QIN_PAR_01 =
 
 	division_types = { "paratrooper" }
 
-	# Number reservation system will tie to another group.
-	#link_numbering_with = { QIN_INF_01 }
-
 	fallback_name = "%d Sanbing Shi"
 
-	# Names with numbers (only one number per entry). 
-	# It's okay to have gaps in numbering.
-	ordered =
-	{
+	ordered = {
 		1 = { "%d Sanbing Shi" }
 		2 = { "%d Sanbing Shi" }
 		3 = { "%d Sanbing Shi" }
@@ -438,8 +369,7 @@ QIN_PAR_01 =
 	}
 }
 
-QIN_MAR_01 = 
-{
+QIN_MAR_01 = {
 	name = "Marine Unit"
 
 	for_countries = { QIN MAN HEJ CHN YUN GNS CND SIC SHA SHN SDZ MON }
@@ -448,15 +378,9 @@ QIN_MAR_01 =
 
 	division_types = { "marine" }
 
-	# Number reservation system will tie to another group.
-	#link_numbering_with = { QIN_INF_01 }
-
 	fallback_name = "%d Luzhan Dui Shi"
 
-	# Names with numbers (only one number per entry). 
-	# It's okay to have gaps in numbering.
-	ordered =
-	{
+	ordered = {
 		1 = { "%d Luzhan Dui Shi" }
 		2 = { "%d Luzhan Dui Shi" }
 		3 = { "%d Luzhan Dui Shi" }
@@ -470,8 +394,7 @@ QIN_MAR_01 =
 	}
 }
 
-QIN_MNT_01 = 
-{
+QIN_MNT_01 = {
 	name = "Mountain Unit"
 
 	for_countries = { QIN MAN HEJ CHN YUN GNS CND SIC SHA SHN SDZ MON }
@@ -480,21 +403,17 @@ QIN_MNT_01 =
 
 	division_types = { "mountaineers" }
 
-	# Number reservation system will tie to another group.
 	link_numbering_with = { QIN_INF_01 }
 
 	fallback_name = "%d Juntuán"
 
-	# Names with numbers (only one number per entry). 
-	# It's okay to have gaps in numbering.
-	ordered =
-	{
-		430 = { "Xin 30 Bubing Shi" }		# American-trained (full) divisions of historical 'X Force'
+	ordered = {
+		430 = { "Xin 30 Bubing Shi" }
 		438 = { "Xin 38 Bubing Shi" }		
 		422 = { "Xin 22 Bubing Shi" }		
 		414 = { "14 Bubing Shi" }		
 		450 = { "50 Bubing Shi" }		
-		403 = { "3 Bubing Shi" }		# German-trained divisions (traditional division strength)
+		403 = { "3 Bubing Shi" }
 		406 = { "6 Bubing Shi" }		
 		409 = { "9 Bubing Shi" }		
 		436 = { "36 Bubing Shi" }		
@@ -513,7 +432,7 @@ QIN_MNT_01 =
 		483 = { "83 Bubing Shi" }		
 		489 = { "89 Bubing Shi" }		
 		499 = { "Shui Jing Tuan" }		
-		1 = { "%d Juntuán" }			# QINnese "corps" were division-strength units (2-3 QINnese "divisions" = 2-3 HOI4 regiments)
+		1 = { "%d Juntuán" }
 		2 = { "%d Juntuán" }
 		3 = { "%d Juntuán" }
 		4 = { "%d Juntuán" }
@@ -618,7 +537,7 @@ QIN_MNT_01 =
 		11 = { "%d Juntuán" }
 		95 = { "%d Juntuán" }
 		208 = { "Xin 8 Juntuán" }
-		209 = { "Xin 9 Juntuán" }			# fictional additional corps here
+		209 = { "Xin 9 Juntuán" }	
 		210 = { "Xin 10 Juntuán" }
 		211 = { "Xin 11 Juntuán" }
 		212 = { "Xin 12 Juntuán" }
@@ -628,8 +547,7 @@ QIN_MNT_01 =
 	}
 }
 
-QIN_GAR_01 = 
-{
+QIN_GAR_01 = {
 	name = "Garrison Unit"
 
 	for_countries = { QIN MAN HEJ CHN YUN GNS CND SIC SHA SHN SDZ MON }
@@ -638,16 +556,10 @@ QIN_GAR_01 =
 
 	division_types = { "infantry" }
 
-	# Number reservation system will tie to another group.
-	#link_numbering_with = { QIN_INF_01 }
-
 	fallback_name = "%d Baoan Zongdui"
 
-	# Names with numbers (only one number per entry). 
-	# It's okay to have gaps in numbering.
-	ordered =
-	{
-		101 = { "Shanghai Jingbei" }		# All fictional names for local militias
+	ordered = {
+		101 = { "Shanghai Jingbei" }		
 		102 = { "1 Fujian Jingbei" }
 		103 = { "1 Nanking Jingbei" }
 		104 = { "Wuhan Jingbei" }
