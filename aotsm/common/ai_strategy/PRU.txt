@@ -413,7 +413,6 @@ PRU_super_boost_light_for_modern_armor = {
 	}
 }
 
-
 PRU_template_design = {
 	allowed = {
 		original_tag = PRU
@@ -466,4 +465,98 @@ PRU_template_design = {
 		id = paratroopers
 		value = -50
 	}
+}
+
+pru_attack_fra = {
+
+	allowed = {
+		tag = PRU
+	}
+	
+	enable = {
+		PRU = {
+			has_war_with = FRR
+		}
+	}
+	
+	abort = {
+		has_global_flag = france_capitulation
+	}
+	
+	ai_strategy = {
+		type = front_control
+		tag = FRR                
+		ratio = 1.0
+		priority = 10
+		ordertype = front
+		execution_type = rush
+		execute_order = yes
+		manual_attack = yes
+	}
+	
+}
+
+pru_attack_rus = {
+
+	allowed = {
+		tag = PRU
+	}
+	
+	enable = {
+		PRU = {
+			has_war_with = RUS
+		}
+	}
+	
+	abort = {
+		has_global_flag = russian_capitulation
+	}
+	
+	ai_strategy = {
+		type = front_control
+		tag = RUS                
+		ratio = 1.0
+		priority = 10
+		ordertype = front
+		execution_type = balanced
+		execute_order = yes
+		manual_attack = yes
+	}
+	
+}
+
+pru_attack_no_defende = {
+
+	allowed = {
+		tag = PRU
+	}
+	
+	enable = {
+		OR =  {
+			PRU = {
+				has_war_with = RUS
+			}
+			PRU = {
+				has_war_with = CBI
+			}
+			PRU = {
+				has_war_with = PRT
+			}
+			PRU = {
+				has_war_with = FRR
+			}
+		}
+	}
+	
+	abort = {
+		PRU = {
+			has_country_flag = first_world_war_won
+		}
+	}
+	
+	ai_strategy = { 
+		type = garrison 
+		value = 10 
+	}
+	
 }
