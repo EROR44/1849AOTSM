@@ -15,13 +15,6 @@ BYZ_unit_production = {
 		value = 4
 	}
 
-	# Old garrison system against resistance
-	# ai_strategy = {
-	# 	type = role_ratio
-	# 	id = suppression
-	# 	value = 6
-	# }
-
 	ai_strategy = {
 		type = role_ratio
 		id = paratroopers
@@ -49,19 +42,19 @@ BYZ_unit_production = {
 	ai_strategy = {
 		type = role_ratio
 		id = motorized
-		value = 0 #because doctrine this = 2
+		value = 0 
 	}
 
 	ai_strategy = {
 		type = role_ratio
 		id = mechanized
-		value = -5 #because doctrine this = 0
+		value = -5
 	}
 
 	ai_strategy = {
 		type = role_ratio
 		id = armor
-		value = -17 #because doctrine this = 3
+		value = -17
 	}
 
 	ai_strategy = {
@@ -80,7 +73,7 @@ BYZ_unit_production = {
 	ai_strategy = {
 		type = unit_ratio
 		id = cas
-		value = -35 #because doctrine this = 15
+		value = -35
 	}
 
 	ai_strategy = {
@@ -101,8 +94,6 @@ BYZ_unit_production = {
 		value = 5
 	}
 
-
-	# Naval unit factors
 	ai_strategy = {
 		type = unit_ratio
 		id = capital_ship
@@ -112,7 +103,7 @@ BYZ_unit_production = {
 	ai_strategy = {
 		type = unit_ratio
 		id = submarine
-		value = -50 #because doctrine this = 50
+		value = -50 
 	}
 
 	ai_strategy = {
@@ -160,7 +151,7 @@ BYZ_unit_production = {
 	ai_strategy = {
 		type = equipment_production_factor
 		id = infantry
-		value = 11 #30 to 50
+		value = 11
 	}
 
 	ai_strategy = {
@@ -178,7 +169,7 @@ BYZ_unit_production = {
 	ai_strategy = {
 		type = equipment_production_factor
 		id = artillery
-		value = 100 #20 to 40
+		value = 100
 	}
 
 	ai_strategy = {
@@ -192,7 +183,7 @@ BYZ_unit_production = {
 		value = -10
 	}
 	ai_strategy = {
-		type = equipment_production_min_factories #Build these up over time, don't stall
+		type = equipment_production_min_factories
 		id = anti_air
 		value = 2
 	}
@@ -217,29 +208,9 @@ BYZ_unit_production = {
 		value = 30
 	}
 
-	ai_strategy = { #added to railway gun define (set to 0 by default, increased in default strategies)
+	ai_strategy = { 
 		type = railway_gun_divisions_ratio
 		value = 1
-	}
-}
-
-BYZ_division_production = {
-	allowed = {
-		original_tag = BYZ
-		num_divisions < 121
-	}
-	enable = {
-		date > 1848.1.1
-		num_divisions > 121 #Decreasing the amount of tanks the AI wants
-	}
-	abort = {
-		num_divisions < 121 #Decreasing the amount of tanks the AI wants
-	}
-
-	ai_strategy = {
-		type = role_ratio
-		id = infantry
-		value = 9
 	}
 }
 
@@ -423,5 +394,117 @@ austria_war_preparation = {
 		type = conquer
 		id = "AUS"
 		value = 100
+	}
+}
+
+italia_war_preparation = {
+	allowed = {
+		OR = {
+			original_tag = BYZ
+			original_tag = PRU
+		}
+	}
+	enable = {
+		BYZ = {
+			focus_progress = {
+				focus = BYZ_italia_war_declare
+				progress > 0.01
+			}
+		}
+		NOT = {
+			has_completed_focus = BYZ_italia_war_declare
+		}
+		OR = {
+			country_exists = SAR
+			country_exists = PAP
+			country_exists = SYC
+		}
+	}
+
+	abort = {
+		AND = {
+			BYZ = { has_completed_focus = BYZ_italia_war_declare }
+			OR = {
+				OR = {
+					BYZ = { has_war_with = SAR }
+					PRU = { has_war_with = SAR }
+				}
+				OR = {
+					BYZ = { has_war_with = PAP }
+					PRU = { has_war_with = PAP }
+				}
+				OR = {
+					BYZ = { has_war_with = SYC }
+					PRU = { has_war_with = SYC }
+				}
+			}
+		}
+	}
+
+	ai_strategy = {
+		type = conquer
+		id = "SAR"
+		value = 100
+	}
+	
+	ai_strategy = {
+		type = conquer
+		id = "PAP"
+		value = 100
+	}
+	
+	ai_strategy = {
+		type = conquer
+		id = "SYC"
+		value = 100
+	}
+}
+
+byz_invasion_in_italy = {
+	
+	allowed = {
+		original_tag = BYZ
+	}
+	
+	enable = {
+		focus_progress = {
+			focus = BYZ_italia_war_declare
+			progress > 0.01
+		}
+	}
+
+	abort = {
+		AND = {
+			BYZ = { has_completed_focus = BYZ_italia_war_declare }
+			OR = {
+				BYZ = { has_war_with = SAR }
+				BYZ = { has_war_with = PAP }
+				BYZ = { has_war_with = SYC }
+			}
+		}
+	}
+
+	ai_strategy = {
+		type = front_control
+		ordertype = invasion
+        execute_order = yes
+		tag = "SAR"
+		priority = 10
+	}
+	
+	ai_strategy = {
+		type = front_control
+		ordertype = invasion
+        execute_order = yes
+		tag = "PAP"
+		priority = 10
+	}
+	
+	ai_strategy = {
+		type = front_control
+		ordertype = invasion
+        execute_order = yes
+		tag = "SYC"
+		priority = 10
 	}
 }
