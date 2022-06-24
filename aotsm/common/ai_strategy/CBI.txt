@@ -1,0 +1,301 @@
+# befriend
+# conquer
+# antagonize
+# build_ship
+# build_army
+# unit_ratio
+# build_building
+# research_tech
+# garrison
+# protect
+# influence
+
+CBI_area_priority = {
+	enable = {
+		original_tag = CBI
+	}
+
+	ai_strategy = {
+		type = area_priority
+		id = europe
+		value = 200 #more focus here
+	}
+	
+	ai_strategy = {
+		type = area_priority
+		id = north_america
+		value = 35
+	}
+	
+	ai_strategy = {
+		type = area_priority
+		id = south_america
+		value = 0
+	}
+	
+	ai_strategy = {
+		type = area_priority
+		id = asia
+		value = 30
+	}
+	
+	ai_strategy = {
+		type = area_priority
+		id = middle_east
+		value = 15
+	}
+	
+	ai_strategy = {
+		type = area_priority
+		id = africa
+		value = 30
+	}
+
+	ai_strategy = {
+		type = area_priority
+		id = pacific
+		value = 15 #less focus here
+	}
+	
+	ai_strategy = {
+		type = area_priority
+		id = oceania
+		value = 15
+	}
+  
+	ai_strategy = {
+		type = ignore
+		id = SOR
+	}
+	ai_strategy = {
+		type = ignore
+		id = SOS
+	}
+	
+	ai_strategy = {
+		type = dont_defend_ally_borders
+		id = NEN
+	}
+	
+	ai_strategy = {
+		type = dont_defend_ally_borders
+		id = BAS
+	}
+	
+	ai_strategy = {
+		type = dont_defend_ally_borders
+		id = OIC
+	}
+
+}
+
+britain_wants_civ = {
+	allowed = {
+		original_tag = CBI
+	}
+	enable = {
+		date < 1851.3.1
+		has_war = no
+	}
+	abort_when_not_enabled = yes
+	
+	ai_strategy = {
+		type = building_target
+		id = industrial_complex
+		value = 49
+	}
+}
+
+britain_wants_arms_factory = {
+	allowed = {
+		original_tag = CBI
+	}
+	enable = {
+		date < 1851.1.1
+	}
+	abort_when_not_enabled = yes
+	
+	ai_strategy = {
+		type = building_target
+		id = arms_factory
+		value = 45
+	}
+}
+
+prepare_for_great_war = {
+	allowed = {
+		original_tag = CBI
+	}
+	enable = {
+		date > 1853.1.1
+	}
+	abort = {
+		date < 1853.1.1
+	}
+	
+	ai_strategy = {   #заставляет ии нанимать больше дивизий
+		type = force_build_armies 
+		value = 200 
+	}
+	
+	ai_strategy = {
+		type = build_army
+		id = infantry
+		value = 100
+	}
+	
+	ai_strategy = {
+		type = build_army
+		id = motorized
+		value = 70
+	}
+	
+	ai_strategy = {
+		type = build_army
+		id = mechanized
+		value = 20
+	}
+
+	ai_strategy = {
+		type = build_army
+		id = armor
+		value = 40
+	}
+	
+	ai_strategy = {
+		type = equipment_production_factor
+		id = infantry
+		value = 30 
+	}
+	
+	ai_strategy = {
+		type = equipment_production_factor
+		id = artillery
+		value = 100 #20 to 40
+	}
+	
+	ai_strategy = {
+		type = equipment_variant_production_factor
+		id = support_equipment
+		value = 30
+	}
+	
+}
+
+britain_has_war_witch_germany = {
+	allowed = {
+		original_tag = CBI
+	}
+	enable = {
+		has_war_with = PRU
+	}
+	abort = {
+		NOT = { has_war_with = PRU }
+	}
+	
+	ai_strategy = { 
+		type = invade 
+		id = "PRU" 
+		value = 200
+	}
+	
+	ai_strategy = { 
+		type = strike_force_home_base 
+		id = 56
+	}
+	
+	ai_strategy = { 
+		type = strike_force_home_base 
+		id = 59
+	}
+	
+	ai_strategy = {
+        type = front_control
+        tag = "PRU"
+        priority = 7
+        ordertype = front 
+        execution_type = balanced 
+        execute_order = yes 
+        manual_attack = yes 
+    }
+	
+	ai_strategy = {
+        type = front_control
+        tag = "PRU"
+        priority = 4 
+        ordertype = invasion 
+        execution_type = rush  
+        execute_order = yes 
+        manual_attack = yes 
+    }
+	
+}
+
+britain_help_continental_france = {
+	allowed = {
+		original_tag = CBI
+	}
+	enable = {
+		#is_in_faction_with
+		is_in_faction_with = FRR
+	}
+	abort = {
+		#NOT = { has_war_with = PRU }
+		OR = {
+			NOT = { is_in_faction_with = FRR }
+			any_owned_state = { is_core_of = CBI NOT = { is_controlled_by = CBI } }
+		}
+	}
+	ai_strategy = {
+		type = force_defend_ally_borders
+		id = "FRR"
+		value = 100
+	}
+	
+}
+
+britain_help_russian_front = {
+	allowed = {
+		original_tag = CBI
+	}
+	enable = {
+		#is_in_faction_with
+		is_in_faction_with = RUS
+	}
+	abort = {
+		#NOT = { has_war_with = PRU }
+		OR = {
+			NOT = { is_in_faction_with = RUS }
+			any_owned_state = { is_core_of = CBI NOT = { is_controlled_by = CBI } }
+		}
+	}
+	ai_strategy = {
+		type = force_defend_ally_borders
+		id = "RUS"
+		value = 200
+	}
+}
+
+britain_defaulte_core_defence = {
+	allowed = {
+		original_tag = CBI
+	}
+	enable = {
+		date > 1851.1.1
+	}
+	abort = {
+		any_owned_state = { is_core_of = CBI NOT = { is_controlled_by = CBI } }
+	}
+	
+	ai_strategy = { 
+		type = garrison
+		value = 20
+	}
+	
+	ai_strategy = {
+		type = force_defend_ally_borders
+		id = "NEN"
+		value = -60
+	}
+	
+}
