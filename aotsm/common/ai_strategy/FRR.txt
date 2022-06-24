@@ -144,6 +144,46 @@ french_wants_coal = {
 	}
 }
 
+#defence_core_states = {
+#	allowed = {
+#		original_tag = FRR
+#	}
+#	enable = {
+#		always = yes
+#	}
+#	abort_when_not_enabled = yes
+#	
+#	ai_strategy = { 
+#		type = garrison
+#		value = 45
+#	}
+#}	
+
+#french__default_production_balance = {
+#	allowed = {
+#		original_tag = FRR
+#	}
+#	enable = {
+#		always = yes
+#	}
+#	abort_when_not_enabled = yes
+#	
+#	ai_strategy = { 
+#		type = equipment_production_factor 
+#		id = tactical_bomber value = -30  
+##	}
+#	
+##	ai_strategy = { 
+#		type = equipment_production_factor 
+#		id = fighter  value = 20  
+#	}
+#	
+#	ai_strategy = { 
+#		type = equipment_production_factor 
+#		id = infantry   value = 50  
+#	}
+#}	
+
 prepare_for_great_war = {
 	allowed = {
 		original_tag = FRR
@@ -204,6 +244,41 @@ prepare_for_great_war = {
 	
 	
 }
+
+fronts_priority = {
+	ai_strategy = { # ИИ не будет создавать никаких фронтов вдоль границ с указанными странами, если они также управляются ИИ, а не являются игроком.
+		type = front_unit_request
+
+		country_trigger = {
+			is_ai = yes
+			OR = {
+				tag = SWI
+			}
+		}
+		value = -1000
+	}
+	ai_strategy = { 
+
+		country_trigger = {
+			is_ai = yes
+			OR = {
+				tag = PRU
+			}
+		}
+		value = 200
+	}
+	ai_strategy = { 
+
+		country_trigger = {
+			is_ai = not
+			OR = {
+				tag = PRU
+			}
+		}
+		value = 600
+	}
+}
+
 
 invasion_in_algeria = {
 	allowed = {
@@ -398,7 +473,7 @@ war_witch_pru = {
 	
 	ai_strategy = { 
 		type = garrison
-		value = 50
+		value = 70
 	}
 	
 	ai_strategy = {
