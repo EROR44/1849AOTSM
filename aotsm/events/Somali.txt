@@ -1,5 +1,5 @@
 #######################
-	French events
+####Somali_events#####
 #######################
 
 add_namespace = sos
@@ -37,13 +37,22 @@ country_event = {
 		hidden_effect = {
 			SOS = {
 				set_global_flag = somali_civil_war
-				delete_unit_template_and_units = { 
-					division_template = "Infantry Division" 
-					}
-				delete_unit_template_and_units = { 
-						division_template = "Cavalry Division" 
-					}
-				load_oob = "SOS_civil_war"
+			}
+			SOR = {
+				inherit_technology = FRR
+			}
+			SOS = {
+				transfer_units_fraction= {
+					target = SOR
+					size = 0.60
+					stockpile_ratio = 0.50
+					army_ratio = 0.50
+					navy_ratio = 0.50
+					air_ratio = 0.50
+				}
+			}
+			SOS = {
+				#load_oob = "SOS_civil_war"
 				add_ideas = SOS_civil_war
 			}
 			SOR = {
@@ -67,9 +76,68 @@ country_event = {
 				set_province_controller = 11014
 				set_province_controller = 13402
 				set_province_controller = 8133
-				set_capital = 268
+				#set_capital = 268
 				add_ideas = SOR_civil_war
-				load_oob = "SOR_civil_war"
+				#load_oob = "SOR_civil_war"
+				declare_war_on = {
+					target = SOS
+					type = annex_everything
+				}
+			}
+		}
+	}
+	option = {
+		name = sos.1.a
+		trigger = {
+			tag = SOS
+			#is_ai = no
+		}
+		SOR = { change_tag_from = ROOT }
+		hidden_effect = {
+			SOS = {
+				set_global_flag = somali_civil_war
+			}
+			SOR = {
+				inherit_technology = FRR
+			}
+			SOS = {
+				transfer_units_fraction= {
+					target = SOR
+					size = 0.60
+					stockpile_ratio = 0.50
+					army_ratio = 0.50
+					navy_ratio = 0.50
+					air_ratio = 0.50
+				}
+			}
+			SOS = {
+				#load_oob = "SOS_civil_war"
+				add_ideas = SOS_civil_war
+			}
+			SOR = {
+				set_global_flag = somali_civil_war
+				add_state_core = 268
+				add_state_core = 269
+				add_state_core = 831
+				add_state_core = 559
+				add_state_core = 830
+				transfer_state = 268
+				transfer_state = 831
+				set_province_controller = 7980
+				set_province_controller = 12714
+				set_province_controller = 13385
+				set_province_controller = 10833
+				set_province_controller = 13226
+				set_province_controller = 13322
+				set_province_controller = 13318
+				set_province_controller = 13298
+				set_province_controller = 13317
+				set_province_controller = 11014
+				set_province_controller = 13402
+				set_province_controller = 8133
+				#set_capital = 268
+				add_ideas = SOR_civil_war
+				#load_oob = "SOR_civil_war"
 				declare_war_on = {
 					target = SOS
 					type = annex_everything
@@ -145,7 +213,7 @@ country_event = {
 			remove_state_core = 831
 			remove_state_core = 559
 			remove_state_core = 830
-			set_capital = 559
+			#set_capital = 559
 			if = {
 				limit = { has_idea = war_economy}
 				swap_ideas = {
