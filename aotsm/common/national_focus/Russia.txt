@@ -1,11 +1,8 @@
-### search_filters = {FOCUS_FILTER_POLITICAL}
-### search_filters = {FOCUS_FILTER_RESEARCH}
-### search_filters = {FOCUS_FILTER_INDUSTRY}
-### search_filters = {FOCUS_FILTER_STABILITY}
-### search_filters = {FOCUS_FILTER_WAR_SUPPORT}
-### search_filters = {FOCUS_FILTER_MANPOWER}
-### search_filters = {FOCUS_FILTER_ANNEXATION}
-
+search_filter_prios = {
+	FOCUS_FILTER_POLITICAL = 1010	
+	FOCUS_FILTER_RESEARCH = 522
+	FOCUS_FILTER_INDUSTRY = 509
+}
 focus_tree = {
 	id = Russ_focus_1
 	
@@ -20,42 +17,6 @@ focus_tree = {
 	
 	default = no
 	reset_on_civilwar = no
-
-#	focus = {
-#		id = RUS_
-#		icon = GFX_
-#		prerequisite = { focus = }
-#		mutually_exclusive = { focus =  }
-#		x = -3
-#		y = 0
-#		relative_position_id =
-#
-#		cost = 10
-#
-#		ai_will_do = {
-#			factor = 1
-#		}
-#
-#		available = {
-#
-#		}
-#		
-#		bypass = {
-#
-#		}
-#
-#		cancel_if_invalid = yes
-#		continue_if_invalid = no
-#		available_if_capitulated = no
-#
-#		complete_tooltip = {
-#
-#		}
-#
-#		completion_reward = {
-#
-#		}
-#	}
 	
 	focus = {
 		id = Rus_The_second_branch_of_industrialization           
@@ -385,7 +346,7 @@ focus_tree = {
 										random_owned_controlled_state = {
 				add_resource = {
 					type = leypoldit
-					amount = 10
+					amount = 26
 				}
 			}						
 		}
@@ -543,7 +504,6 @@ focus_tree = {
 						instant_build = yes
 					}
 				}
-				set_country_flag = naval_effort_built
 			}
 			if = {
 				limit = {
@@ -573,7 +533,6 @@ focus_tree = {
 						instant_build = yes
 					}
 				}
-				set_country_flag = naval_effort_built
 			}
 			if = {
 				limit = {
@@ -613,6 +572,125 @@ focus_tree = {
 				level = 3
 				instant_build = yes
 			}
+		}
+	}
+	
+	focus = {
+		id = Rus_Fleet_of_many_seas
+		icon = GFX_goal_generic_navy_doctrines_tactics
+		cost = 8
+		x = 5
+		y = 5
+		ai_will_do = {
+			factor = 10
+		}
+		prerequisite = {
+			focus = Rus_Expand_ports_and_shipyards
+		}
+		available = {
+		has_completed_focus = Rus_The_experience_of_Peter
+			any_state = {
+				is_coastal = yes
+				is_controlled_by = ROOT
+			}
+		}
+		completion_reward = {
+		add_timed_idea = {
+    idea = rus_ships_for_victory
+    days = 365
+}
+			if = {
+				limit = {
+					NOT = {
+						any_owned_state = {
+							dockyard > 0
+							free_building_slots = {
+								building = dockyard
+								size > 1
+								include_locked = yes
+							}
+						}
+					}
+					any_owned_state = {
+						is_coastal = yes
+					}
+				}
+				random_owned_controlled_state = {
+					limit = {
+						is_coastal = yes
+						free_building_slots = {
+							building = dockyard
+							size > 1
+							include_locked = yes
+						}
+					}
+					add_extra_state_shared_building_slots = 1
+					add_building_construction = {
+						type = dockyard
+						level = 1
+						instant_build = yes
+					}
+				}
+			}
+			if = {
+				limit = {
+					NOT = { has_country_flag = naval_effort_built }
+					any_owned_state = {
+						dockyard > 0
+						free_building_slots = {
+							building = dockyard
+							size > 1
+							include_locked = yes
+						}
+					}
+				}
+				random_owned_controlled_state = {
+					limit = {
+						dockyard > 0
+						free_building_slots = {
+							building = dockyard
+							size > 1
+							include_locked = yes
+						}
+					}
+					add_extra_state_shared_building_slots = 1
+					add_building_construction = {
+						type = dockyard
+						level = 1
+						instant_build = yes
+					}
+				}
+			}
+			if = {
+				limit = {
+					NOT = { has_country_flag = naval_effort_built }
+					NOT = {
+						any_owned_state = {
+							free_building_slots = {
+								building = dockyard
+								size > 1
+								include_locked = yes
+							}
+						}
+					}
+				}
+				random_state = {
+					limit = {
+						controller = { tag = ROOT }
+						free_building_slots = {
+							building = dockyard
+							size > 1
+							include_locked = yes
+						}
+					}
+					add_extra_state_shared_building_slots = 1
+					add_building_construction = {
+						type = dockyard
+						level = 1
+						instant_build = yes
+					}
+				}
+			}												
 		}
 	}
 	
@@ -1015,17 +1093,14 @@ if = {
 			focus = Rus_Modernize_production
 		}
 		available = {
-			has_war = yes
-			OR = {
-			 surrender_progress > 0.25
-			 has_war_support > 0.75
-			}
+			has_defensive_war = yes
+			surrender_progress > 0.30
 			is_subject = no
 		}
 		completion_reward = { 
 			add_timed_idea = {
     idea = rus_concentration_on_armament 
-    days = 140
+    days = 280
 }						
 		}
 	}
@@ -1085,6 +1160,8 @@ if = {
 			
 		}
 		completion_reward = {
+		custom_effect_tooltip = available_theorist
+	    show_ideas_tooltip = RUS_ANDREY_NIKOLAEVICH_MUROM	
 									add_tech_bonus = {
     bonus = 0.75
     uses = 1
@@ -1223,7 +1300,7 @@ if = {
 		x = 21
 		y = 1
 		ai_will_do = {
-			factor = 5
+			factor = 15
 		}
 		prerequisite = {
 			focus = Rus_Demonstration_maneuvers
@@ -1712,7 +1789,9 @@ add_tech_bonus = {
 			focus = Rus_War_experience
 		}
 		available = {
-			surrender_progress > 0.45
+		    has_defensive_war = yes
+			surrender_progress > 0.30
+			is_subject = no 
 		}
 		completion_reward = {
 			add_timed_idea = { 
@@ -2511,7 +2590,7 @@ QIN = {
 	
 	focus = {
 		id = Rus_Pavel_Nikolaevich_Ignatiev
-		icon = GFX_goal_ignatiev
+		icon = GFX_goal_generic_demand_territory
 		cost = 1
 		x = 30
 		y = 8
@@ -2933,7 +3012,7 @@ QIN = {
 	
 	focus = {
 		id = Rus_Dmitry_Alekseevich_Milyutin
-		icon = GFX_goal_milutin
+		icon = GFX_goal_generic_demand_territory
 		cost = 1
 		x = 41
 		y = 0
@@ -3131,6 +3210,7 @@ QIN = {
 		prerequisite = { focus = Rus_Trade_war_with_Germany }
 		available = {
 			is_subject = no
+			is_in_faction = no
 			has_country_leader = { ruling_only = yes character = RUS_DMITRY_ALEKSEEVICH_MILYUTIN}
 			 CBI = {
 			 exists = yes
@@ -3394,11 +3474,12 @@ random_owned_controlled_state = {
 		available = {
 			is_subject = no
 			has_country_leader = { ruling_only = yes character = RUS_DMITRY_ALEKSEEVICH_MILYUTIN}
+			has_completed_focus = Rus_Russian_Industrial_School
 		}
 		completion_reward = {
 			add_timed_idea = {
     idea = rus_investments_in_industry
-    days = 200
+    days = 280
 }						
 		}
 	}
@@ -4195,7 +4276,7 @@ country_event = { id = russia_event_ORL.6 days = 2 }
 	
 	focus = {
 		id = Rus_Konstantin_Nikolaevich
-		icon = GFX_goal_romanov_kn
+		icon = GFX_goal_generic_demand_territory
 		cost = 1
 		x = 54
 		y = 0
@@ -4328,6 +4409,7 @@ swap_ideas = {
 		}
 		available = {
 			is_subject = no
+			is_in_faction = no
 			has_country_leader = { ruling_only = yes character = RUS_Konstantin_Nikolaevich}
 			CBI = {
 			 exists = yes
@@ -4774,123 +4856,33 @@ add_popularity = {
 		}
 	}
 	
-#	focus = {
-#		id = Rus_
-#		icon = GFX_goal_generic_demand_territory
-#		cost = 8
-#		x = 0
-#		y = 0
-#		ai_will_do = {
-#			factor = 5
-#		}
-#		prerequisite = {
-#			focus = 
-#		}
-#		prerequisite = { focus =  }
-#		mutually_exclusive = {
-#			focus = 
-#		}
-#		available = {
-#			always = no
-#		}
-#		completion_reward = {
-#									
-#		}
-#		complete_tooltip = {
-#
-#		}
-#		bypass = {
-#			
-#		}
-#	}
-	
-#	focus = {
-#		id = Rus_
-#		icon = GFX_goal_generic_demand_territory
-#		cost = 8
-#		x = 0
-#		y = 0
-#		ai_will_do = {
-#			factor = 5
-#		}
-#		prerequisite = {
-#			focus = 
-#		}
-#		prerequisite = { focus =  }
-#		mutually_exclusive = {
-#			focus = 
-#		}
-#		available = {
-#			always = no
-#		}
-#		completion_reward = {
-#									
-#		}
-#		complete_tooltip = {
-#
-#		}
-#		bypass = {
-#			
-#		}
-#	}
-	
-#	focus = {
-#		id = Rus_
-#		icon = GFX_goal_generic_demand_territory
-#		cost = 8
-#		x = 0
-#		y = 0
-#		ai_will_do = {
-#			factor = 5
-#		}
-#		prerequisite = {
-#			focus = 
-#		}
-#		prerequisite = { focus =  }
-#		mutually_exclusive = {
-#			focus = 
-#		}
-#		available = {
-#			always = no
-#		}
-#		completion_reward = {
-#									
-#		}
-#		complete_tooltip = {
-#
-#		}
-#		bypass = {
-#			
-#		}
-#	}
+	focus = {
+		id = Rus_
+		icon = GFX_goal_generic_demand_territory
+		cost = 8
+		x = 0
+		y = 0
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+			focus = 
+		}
+		prerequisite = { focus =  }
+		mutually_exclusive = {
+			focus = 
+		}
+		available = {
+			always = no
+		}
+		completion_reward = {
+									
+		}
+		complete_tooltip = {
 
-#	focus = {
-#		id = Rus_
-#		icon = GFX_goal_generic_demand_territory
-#		cost = 8
-#		x = 0
-#		y = 0
-#		ai_will_do = {
-#			factor = 5
-#		}
-#		prerequisite = {
-#			focus = 
-#		}
-#		prerequisite = { focus =  }
-#		mutually_exclusive = {
-#			focus = 
-#		}
-#		available = {
-#			always = no
-#		}
-#		completion_reward = {
-#									
-#		}
-#		complete_tooltip = {
-#
-#		}
-#		bypass = {
-#			
-#		}
-#	}
+		}
+		bypass = {
+			
+		}
+	}
 }
