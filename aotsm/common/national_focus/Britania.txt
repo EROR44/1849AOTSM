@@ -2066,7 +2066,7 @@ focus_tree = {
 		prerequisite = { focus = focus_CBI_freedom_to_economy }			
 		x = 7
 		y = 17
-		cost = 1
+		cost = 4
 		ai_will_do = {
 			factor = 1
 		}
@@ -2095,7 +2095,7 @@ focus_tree = {
 		prerequisite = { focus = focus_CBI_freedom_to_economy }			
 		x = 9
 		y = 17
-		cost = 1
+		cost = 4
 		ai_will_do = {
 			factor = 1
 		}
@@ -2122,7 +2122,7 @@ focus_tree = {
 		prerequisite = { focus = focus_CBI_self_government_reform }			
 		x = 7
 		y = 18
-		cost = 1
+		cost = 4
 		ai_will_do = {
 			factor = 1
 		}
@@ -2149,7 +2149,7 @@ focus_tree = {
 		prerequisite = { focus = focus_CBI_self_government_reform }			
 		x = 9
 		y = 18
-		cost = 1
+		cost = 4
 		ai_will_do = {
 			factor = 1
 		}
@@ -2159,7 +2159,7 @@ focus_tree = {
 		search_filters = {FOCUS_FILTER_STABILITY}
 		
 		completion_reward = {
-			add_political_power = 100 
+			add_political_power = 50 
 			}
 		}
 
@@ -2176,7 +2176,7 @@ focus_tree = {
 		prerequisite = { focus = focus_CBI_elimination_of_rotten_places }			
 		x = 8
 		y = 19
-		cost = 1
+		cost = 4
 		ai_will_do = {
 			factor = 1
 		}
@@ -2921,7 +2921,7 @@ focus_tree = {
 		search_filters = {FOCUS_FILTER_STABILITY}
 		
 		completion_reward = {
-		add_political_power = 100
+		add_political_power = 50
 		add_stability = 0.05
 			}
 		}
@@ -2951,7 +2951,7 @@ focus_tree = {
 		completion_reward = {
 		add_timed_idea = {
 			idea = CBI_bloated_bureaucracy
-			days = 730
+			days = 1460
 				}			
 			}
 		}
@@ -3163,14 +3163,11 @@ focus_tree = {
 		search_filters = {FOCUS_FILTER_INDUSTRY}
 		
 		completion_reward = {
-		126 = {
-		add_extra_state_shared_building_slots = 2	
-		add_building_construction = {
-		type = arms_factory
-		level = 2
-		instant_build = yes
-					}
-				}
+			add_tech_bonus = {
+			bonus = 1.0
+			uses = 2
+			category = industry
+				}		
 			}
 		}
 
@@ -3489,6 +3486,8 @@ focus_tree = {
 		}
 	}
 
+	###  ###
+
 	focus = {
 		id = focus_CBI_Confederate_Military_Academy
 		available = {		
@@ -3497,7 +3496,7 @@ focus_tree = {
 		bypass = {
 		}
 		
-		icon = GFX_focus_research2
+		icon = GFX_focus_generic_military_academy
 		prerequisite = { focus = focus_CBI_course_for_urbanization focus = focus_CBI_specialization_of_local_autonomies }	
 		prerequisite = { focus = focus_CBI_Research_within_Confederation }
 		mutually_exclusive = { focus = focus_CBI_London_Military_Academy }		
@@ -3517,16 +3516,16 @@ focus_tree = {
 	}
 	
 	focus = {
-		id = focus_CBI_subsidies_to_scientists_of_entire_confederation
+		id = focus_CBI_large_scholarships
 		available = {		
 			}
 		
 		bypass = {
 		}
 		
-		icon = GFX_goal_generic_scientific_exchange
-		prerequisite = { focus = focus_CBI_Confederate_Military_Academy }		
-		x = 28
+		icon = GFX_focus_mex_privatisation
+		prerequisite = { focus = focus_CBI_Confederate_Military_Academy focus = focus_CBI_London_Military_Academy }		
+		x = 31
 		y = 16
 		cost = 4
 		ai_will_do = {
@@ -3542,19 +3541,19 @@ focus_tree = {
 			add_idea = average_investment_level
 				}
 		}
-	}	
+	}		
 	
 	focus = {
-		id = focus_CBI_large_scholarships
+		id = focus_CBI_subsidies_to_scientists_of_entire_confederation
 		available = {		
 			}
 		
 		bypass = {
 		}
 		
-		icon = GFX_focus_research2
+		icon = GFX_goal_generic_scientific_exchange
 		prerequisite = { focus = focus_CBI_Confederate_Military_Academy }		
-		x = 30
+		x = 29
 		y = 16
 		cost = 4
 		ai_will_do = {
@@ -3570,8 +3569,8 @@ focus_tree = {
 			add_idea = CBI_Research_within_Confederation_2
 				}
 		}
-	}	
-
+	}		
+	
 	focus = {
 		id = focus_CBI_London_Military_Academy
 		available = {		
@@ -3580,9 +3579,9 @@ focus_tree = {
 		bypass = {
 		}
 		
-		icon = GFX_focus_research2
+		icon = GFX_focus_generic_military_academy
 		prerequisite = { focus = focus_CBI_course_for_urbanization focus = focus_CBI_specialization_of_local_autonomies }	
-		mutually_exclusive = { focus = focus_CBI_Confederate_Military_Academy }		
+		mutually_exclusive = { focus = focus_CBI_Confederate_Military_Academy }
 		x = 32
 		y = 15
 		cost = 4
@@ -3596,7 +3595,743 @@ focus_tree = {
 		completion_reward = {
 			add_research_slot = 1
 		}
+	}
+	
+	focus = {
+		id = focus_CBI_expand_Cambridge_and_Oxford_universities
+		available = {		
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_tfv_generic_tech_sharing
+		prerequisite = { focus = focus_CBI_London_Military_Academy  }			
+		x = 33
+		y = 16
+		cost = 4
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_RESEARCH}
+		
+		completion_reward = {
+			add_research_slot = 1
+		}
 	}	
+
+	focus = {
+		id = focus_CBI_innovations_in_electrical_engineering
+		available = {		
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_generic_radar
+		prerequisite = { focus = focus_CBI_subsidies_to_scientists_of_entire_confederation focus = focus_CBI_expand_Cambridge_and_Oxford_universities }
+		prerequisite = { focus = focus_CBI_large_scholarships }
+		x = 31
+		y = 17
+		cost = 4
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_RESEARCH}
+		
+		completion_reward = {
+			add_tech_bonus = {
+			bonus = 1.0
+			uses = 2
+			category = electronics
+			}
+		}
+	}	
+	
+	### АРМИЯ ###
+	
+	focus = {
+		id = focus_CBI_army
+		available = {		
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_generic_build_tank
+		prerequisite = { focus = focus_CBI_military_reform }	
+		x = 37
+		y = 11
+		cost = 1
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_INDUSTRY}
+		
+		completion_reward = {
+			army_experience = 25
+			}
+		}	
+
+	focus = {
+		id = focus_CBI_cromwells_testaments
+		available = {		
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_generic_attack_allies
+		prerequisite = { focus = focus_CBI_army }	
+		mutually_exclusive = { focus = focus_CBI_modern_warfare }		
+		x = 35
+		y = 12
+		cost = 5
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_INDUSTRY}
+		
+		completion_reward = {
+			swap_ideas = {
+			remove_idea = CBI_outdated_army
+			add_idea = CBI_outdated_army_cromwells_testaments_1
+				}
+			}
+		}
+		
+	focus = {
+		id = focus_CBI_establishing_strict_discipline
+		available = {		
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_focus_generic_military_mission
+		prerequisite = { focus = focus_CBI_cromwells_testaments }		
+		x = 35
+		y = 13
+		cost = 5
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_INDUSTRY}
+		
+		completion_reward = {
+			swap_ideas = {
+			remove_idea = CBI_outdated_army_cromwells_testaments_1
+			add_idea = CBI_outdated_army_cromwells_testaments_2
+				}
+			}
+		}
+
+	focus = {
+		id = focus_CBI_constant_training
+		available = {		
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_continuous_reduce_training_time
+		prerequisite = { focus = focus_CBI_establishing_strict_discipline }		
+		prerequisite = { focus = focus_CBI_introduction_of_innovations }			
+		x = 35
+		y = 14
+		cost = 5
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_INDUSTRY}
+		
+		completion_reward = {
+			swap_ideas = {
+			remove_idea = CBI_outdated_army_cromwells_testaments_2
+			add_idea = CBI_outdated_army_cromwells_testaments_3
+				}
+			}
+		}
+
+	focus = {
+		id = focus_CBI_piety
+		available = {		
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_generic_attack_allies
+		prerequisite = { focus = focus_CBI_constant_training }	
+		prerequisite = { focus = focus_CBI_revive_faith_in_army }			
+		x = 35
+		y = 15
+		cost = 5
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_INDUSTRY}
+		
+		completion_reward = {
+			add_tech_bonus = {
+			bonus = 1.0
+			uses = 2
+			category = land_doctrine
+				}
+			recruit_character = CBI_Henry_Havelock	
+			}
+		}		
+
+
+
+	focus = {
+		id = focus_CBI_modern_warfare
+		available = {		
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_generic_army_artillery
+		prerequisite = { focus = focus_CBI_army }	
+		mutually_exclusive = { focus = focus_CBI_cromwells_testaments }		
+		x = 39
+		y = 12
+		cost = 5
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+			army_experience = 50
+			}
+		}
+		
+	focus = {
+		id = focus_CBI_bet_on_artillery
+		available = {		
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_generic_army_artillery2
+		prerequisite = { focus = focus_CBI_modern_warfare }	
+		prerequisite = { focus = focus_CBI_introduction_of_innovations }			
+		x = 39
+		y = 14
+		cost = 5
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+			add_tech_bonus = {
+			bonus = 1.0
+			uses = 2
+			category = artillery
+				}
+			}
+		}
+
+	focus = {
+		id = focus_CBI_introduction_of_innovations_art
+		available = {		
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_rhineland
+		prerequisite = { focus = focus_CBI_bet_on_artillery }	
+		prerequisite = { focus = focus_CBI_revive_faith_in_army }			
+		x = 39
+		y = 15
+		cost = 5
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+			remove_ideas = CBI_outdated_army
+			}
+		}
+
+	focus = {
+		id = focus_CBI_introduction_of_innovations
+		available = {		
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_demand_sudetenland
+		prerequisite = { focus = focus_CBI_cromwells_testaments focus = focus_CBI_modern_warfare }	
+		x = 37
+		y = 13
+		cost = 5
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+			add_tech_bonus = {
+			bonus = 1.0
+			uses = 2
+			category = infantry
+				}
+			add_tech_bonus = {
+			bonus = 1.0
+			uses = 2
+			category = support
+				}			
+			}
+		}
+		
+	focus = {
+		id = focus_CBI_revive_faith_in_army
+		available = {		
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_generic_demand_territory
+		prerequisite = { focus = focus_CBI_establishing_strict_discipline }			
+		prerequisite = { focus = focus_CBI_introduction_of_innovations }		
+		x = 37
+		y = 14
+		cost = 5
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+			add_war_support = 0.1				
+			}
+		}		
+
+		### ФЛОТ ###
+
+	focus = {
+		id = focus_CBI_navy
+		available = {		
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_generic_build_nay
+		prerequisite = { focus = focus_CBI_military_reform }	
+		x = 44
+		y = 11
+		cost = 1
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOC}
+		
+		completion_reward = {
+			navy_experience = 25
+			}
+		}		
+
+	focus = {
+		id = focus_CBI_fleet_rearmament
+		available = {
+			has_completed_focus = focus_CBI_depoliticize_fleet
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_generic_navy_battleship
+		prerequisite = { focus = focus_CBI_navy }		
+		x = 41
+		y = 12
+		cost = 5
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_RESEARCH}
+		
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 1.0
+				uses = 2
+				category = bb_tech
+				}
+			}
+		}
+
+	focus = {
+		id = focus_CBI_show_interest_in_submarines
+		available = {		
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_generic_navy_submarine
+		prerequisite = { focus = focus_CBI_fleet_rearmament }		
+		x = 41
+		y = 13
+		cost = 5
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_RESEARCH}
+		
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 1.0
+				uses = 2
+				category = ss_tech
+				}
+			}
+		}		
+		
+	focus = {
+		id = focus_CBI_accelerated_rearmament
+		available = {
+			has_completed_focus = focus_CBI_depoliticize_fleet		
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_generic_construct_naval_dockyard
+		prerequisite = { focus = focus_CBI_navy }		
+		x = 43
+		y = 12
+		cost = 5
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_INDUSTRY}
+		
+		completion_reward = {
+			122 = {
+					add_extra_state_shared_building_slots = 2
+					add_building_construction = {
+						type = dockyard
+						level = 2
+						instant_build = yes
+					}
+				}
+			123 = {
+					add_extra_state_shared_building_slots = 2
+					add_building_construction = {
+						type = dockyard
+						level = 2
+						instant_build = yes
+					}
+				}
+			127 = {
+					add_extra_state_shared_building_slots = 2
+					add_building_construction = {
+						type = dockyard
+						level = 2
+						instant_build = yes
+					}
+				}				
+			}
+		}
+		
+	focus = {
+		id = focus_CBI_increasing_ports
+		available = {		
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_generic_navy_cruiser
+		prerequisite = { focus = focus_CBI_accelerated_rearmament }		
+		x = 43
+		y = 13
+		cost = 5
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_INDUSTRY}
+		
+		completion_reward = {
+							
+			}
+		}		
+		
+	focus = {
+		id = focus_CBI_traditions_of_republican_fleet
+		available = {		
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_generic_navy_doctrines_tactics
+		prerequisite = { focus = focus_CBI_show_interest_in_submarines }
+		prerequisite = { focus = focus_CBI_increasing_ports }		
+		x = 42
+		y = 14
+		cost = 5
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_RESEARCH}
+		
+		completion_reward = {
+			add_doctrine_cost_reduction = {
+				cost_reduction = 1.0
+				uses = 2
+				category = naval_doctrine
+				}
+			}
+		}			
+
+	focus = {
+		id = focus_CBI_abrupt_arrest_of_admirals
+		available = {		
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_generic_major_war
+		prerequisite = { focus = focus_CBI_navy }		
+		mutually_exclusive = { focus = focus_CBI_agreement_with_admirals }
+		x = 45
+		y = 12
+		cost = 5
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+				country_event = {
+				id = CBI.202
+				days = 2
+				}
+			}
+		}	
+
+	focus = {
+		id = focus_CBI_agreement_with_admirals
+		available = {		
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_generic_improve_relations
+		prerequisite = { focus = focus_CBI_navy }		
+		mutually_exclusive = { focus = focus_CBI_abrupt_arrest_of_admirals }
+		x = 47
+		y = 12
+		cost = 5
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+				country_event = {
+				id = CBI.203
+				days = 2
+				}
+			}
+		}
+
+	focus = {
+		id = focus_CBI_give_Napier_right_to_his_own_party
+		available = {		
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_focus_generic_diplomatic_treaty
+		prerequisite = { focus = focus_CBI_agreement_with_admirals }		
+		x = 47
+		y = 13
+		cost = 5
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+		set_party_name = {
+			ideology = authoritarian 
+			long_name = CBI_authoritarian_party_reform_long
+			name = CBI_authoritarian_party_reform 
+				}	
+			add_popularity = {
+			ideology = authoritarian 		
+			popularity = 0.07
+				}				
+			}
+		}		
+
+	focus = {
+		id = focus_CBI_depoliticize_fleet
+		available = {		
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_generic_position_armies
+		prerequisite = { focus = focus_CBI_abrupt_arrest_of_admirals focus = focus_CBI_agreement_with_admirals }	
+		x = 46
+		y = 14
+		cost = 5
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+			add_political_power = 50
+			}
+		}		
+			
+		### АВИАЦИЯ ###
+		
+	focus = {
+		id = focus_CBI_creation_of_aviation
+		available = {		
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_generic_build_airforce
+		prerequisite = { focus = focus_CBI_military_reform }	
+		x = 51
+		y = 11
+		cost = 1
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOC}
+		
+		completion_reward = {
+			air_experience = 25
+			}
+		}		
+
+	focus = {
+		id = focus_CBI_strategic_ombers
+		available = {
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_generic_navy_battleship
+		prerequisite = { focus = focus_CBI_creation_of_aviation }
+		mutually_exclusive = { focus = focus_CBI_radical_changes }		
+		x = 49
+		y = 12
+		cost = 5
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_RESEARCH}
+		
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 1.0
+				uses = 2
+				category = bb_tech
+				}
+			}
+		}
+
+	focus = {
+		id = focus_CBI_aviation_support
+		available = {
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_generic_navy_battleship
+		prerequisite = { focus = focus_CBI_creation_of_aviation }
+		mutually_exclusive = { focus = focus_CBI_strategic_ombers }		
+		x = 53
+		y = 12
+		cost = 5
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_RESEARCH}
+		
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 1.0
+				uses = 2
+				category = bb_tech
+				}
+			}
+		}
 		
 	### РЕВОЛЮЦИЯ ###
 		
@@ -3619,14 +4354,13 @@ focus_tree = {
 
 		available_if_capitulated = yes
 		search_filters = {FOCUS_FILTER_POLITICAL}
-		search_filters = {FOCUS_FILTER_STABILITY}
 		
 		completion_reward = {
 		custom_effect_tooltip = CBI_BRITISH_REVOLUTION	
 			hidden_effect = {
 			country_event = {
 				id = CBI.183 
-				days = 0
+				days = 2
 				}
 			}
 		}
@@ -3649,7 +4383,6 @@ focus_tree = {
 		}
 
 		available_if_capitulated = yes
-		search_filters = {FOCUS_FILTER_POLITICAL}
 		search_filters = {FOCUS_FILTER_STABILITY}
 		
 		completion_reward = {
@@ -3674,7 +4407,6 @@ focus_tree = {
 		}
 
 		available_if_capitulated = yes
-		search_filters = {FOCUS_FILTER_POLITICAL}
 		search_filters = {FOCUS_FILTER_STABILITY}
 		
 		completion_reward = {
@@ -3702,31 +4434,31 @@ focus_tree = {
 		search_filters = {FOCUS_FILTER_POLITICAL}
 		
 		completion_reward = {
-			division_template = {
-				name = "Emergency Response Division"
-				division_names_group = CBI_INF_01
-				priority = 2
-				regiments = {
-					infantry  = { x = 0 y = 0 }
-					infantry  = { x = 0 y = 1 }
-					infantry  = { x = 0 y = 2 }
-					infantry  = { x = 0 y = 3 } 
-		
-					infantry  = { x = 1 y = 0 }
-					infantry  = { x = 1 y = 1 }
-					infantry  = { x = 1 y = 2 }
-					infantry  = { x = 1 y = 3 }
+				division_template = {
+					name = "Emergency Response Division"
+					division_names_group = CBI_INF_01
+					priority = 2
+					regiments = {
+						infantry  = { x = 0 y = 0 }
+						infantry  = { x = 0 y = 1 }
+						infantry  = { x = 0 y = 2 }
+						infantry  = { x = 0 y = 3 } 
+			
+						infantry  = { x = 1 y = 0 }
+						infantry  = { x = 1 y = 1 }
+						infantry  = { x = 1 y = 2 }
+						infantry  = { x = 1 y = 3 }
 						
-					infantry  = { x = 2 y = 0 }
-					infantry  = { x = 2 y = 1 }
-					infantry  = { x = 2 y = 2 }
-					infantry  = { x = 2 y = 3 }
-				}
-				support = {
-					military_police = { x = 0 y = 0 }						
-					artillery = { x = 0 y = 1 }
-				}
-			}		
+						infantry  = { x = 2 y = 0 }
+						infantry  = { x = 2 y = 1 }
+						infantry  = { x = 2 y = 2 }
+						infantry  = { x = 2 y = 3 }
+					}
+					support = {
+						military_police = { x = 0 y = 0 }						
+						artillery = { x = 0 y = 1 }
+					}
+				}		
 			129 = {
 				create_unit = {
 					division = "name = \"Emergency Response Division\" division_template = \"Emergency Response Division\" start_experience_factor = 0.5" 
@@ -3748,17 +4480,17 @@ focus_tree = {
 				}
 			}
 			131 = {
-				create_unit = {
-					division = "name = \"Emergency Response Division\" division_template = \"Emergency Response Division\" start_experience_factor = 0.5" 
-					owner = CBI
-				}
-				create_unit = {
-					division = "name = \"Emergency Response Division\" division_template = \"Emergency Response Division\" start_experience_factor = 0.5" 
-					owner = CBI
-				}				
+					create_unit = {
+						division = "name = \"Emergency Response Division\" division_template = \"Emergency Response Division\" start_experience_factor = 0.5" 
+						owner = CBI
+					}
+					create_unit = {
+						division = "name = \"Emergency Response Division\" division_template = \"Emergency Response Division\" start_experience_factor = 0.5" 
+						owner = CBI
+					}				
+				}	
 			}
-		country_event = CBI.185
-		}
+		сountry_event = CBI.185
 	}
 	
 
@@ -3800,10 +4532,10 @@ focus_tree = {
 					id = CBI.186 
 					days = 40
 				}
-				#country_event = {
-				#	id = CBI.194 
-				#	days = 90
-				#}				
+				country_event = {
+					id = CBI.194 
+					days = 90
+				}				
 			}
 		}
 	}	
@@ -3989,13 +4721,16 @@ focus_tree = {
 
 		available_if_capitulated = yes
 		search_filters = {FOCUS_FILTER_POLITICAL}
-		search_filters = {FOCUS_FILTER_STABILITY}
 		
 		completion_reward = {
 		add_political_power = 25
 		navy_experience = 10
 		add_mines = {
-		region = 42
+		region = 16
+		amount = 100 
+				}		
+		add_mines = {
+		region = 43
 		amount = 100 
 				}		
 			}
@@ -4024,7 +4759,11 @@ focus_tree = {
 		search_filters = {FOCUS_FILTER_STABILITY}
 		
 		completion_reward = {
-		
+		add_war_support = 0.1
+		declare_war_on = {
+		target = BRS
+		type = annex_everything
+				}
 			}
 		}		
 	
@@ -4055,7 +4794,6 @@ focus_tree = {
 
 		available_if_capitulated = yes
 		search_filters = {FOCUS_FILTER_POLITICAL}
-		search_filters = {FOCUS_FILTER_STABILITY}
 		
 		completion_reward = {
 		custom_effect_tooltip = CBI_MODERATE_CONCESSIONS
@@ -4080,7 +4818,6 @@ focus_tree = {
 		}
 
 		available_if_capitulated = yes
-		search_filters = {FOCUS_FILTER_POLITICAL}
 		search_filters = {FOCUS_FILTER_STABILITY}
 		
 		completion_reward = {
@@ -4106,7 +4843,6 @@ focus_tree = {
 		}
 
 		available_if_capitulated = yes
-		search_filters = {FOCUS_FILTER_POLITICAL}
 		search_filters = {FOCUS_FILTER_STABILITY}
 		
 		completion_reward = {
@@ -4162,7 +4898,6 @@ focus_tree = {
 
 		available_if_capitulated = yes
 		search_filters = {FOCUS_FILTER_POLITICAL}
-		search_filters = {FOCUS_FILTER_STABILITY}
 		
 		completion_reward = {
 		add_ideas = CBI_right_to_strike
@@ -4189,7 +4924,6 @@ focus_tree = {
 
 		available_if_capitulated = yes
 		search_filters = {FOCUS_FILTER_POLITICAL}
-		search_filters = {FOCUS_FILTER_STABILITY}
 		
 		completion_reward = {
 		set_party_name = {
@@ -4221,7 +4955,6 @@ focus_tree = {
 
 		available_if_capitulated = yes
 		search_filters = {FOCUS_FILTER_POLITICAL}
-		search_filters = {FOCUS_FILTER_STABILITY}
 		
 		completion_reward = {
 			country_event = {
@@ -4254,7 +4987,6 @@ focus_tree = {
 
 		available_if_capitulated = yes
 		search_filters = {FOCUS_FILTER_POLITICAL}
-		search_filters = {FOCUS_FILTER_STABILITY}
 		
 		completion_reward = {
 		custom_effect_tooltip = CBI_RADICAL_CHANGES
@@ -4279,7 +5011,6 @@ focus_tree = {
 		}
 
 		available_if_capitulated = yes
-		search_filters = {FOCUS_FILTER_POLITICAL}
 		search_filters = {FOCUS_FILTER_STABILITY}
 		
 		completion_reward = {
@@ -4331,7 +5062,6 @@ focus_tree = {
 
 		available_if_capitulated = yes
 		search_filters = {FOCUS_FILTER_POLITICAL}
-		search_filters = {FOCUS_FILTER_STABILITY}
 		
 		completion_reward = {
 		add_ideas = CBI_right_to_strike
@@ -4357,7 +5087,7 @@ focus_tree = {
 		}
 
 		available_if_capitulated = yes
-		search_filters = {FOCUS_FILTER_POLITICAL}
+		search_filters = {FOCUS_FILTER_STABILITY}
 		
 		completion_reward = {
 		add_stability = 0.05
@@ -4415,7 +5145,7 @@ focus_tree = {
 		search_filters = {FOCUS_FILTER_POLITICAL}
 		
 		completion_reward = {
-		add_political_power = 150
+		add_political_power = 50
 		add_stability = 0.05
 			add_popularity = {
 			ideology = democratic  
@@ -4447,7 +5177,6 @@ focus_tree = {
 
 		available_if_capitulated = yes
 		search_filters = {FOCUS_FILTER_POLITICAL}
-		search_filters = {FOCUS_FILTER_STABILITY}
 		
 		completion_reward = {
 			country_event = CBI.193
@@ -4473,7 +5202,6 @@ focus_tree = {
 
 		available_if_capitulated = yes
 		search_filters = {FOCUS_FILTER_POLITICAL}
-		search_filters = {FOCUS_FILTER_STABILITY}
 		
 		completion_reward = {
 			country_event = CBI.196  
@@ -4499,7 +5227,6 @@ focus_tree = {
 
 		available_if_capitulated = yes
 		search_filters = {FOCUS_FILTER_POLITICAL}
-		search_filters = {FOCUS_FILTER_STABILITY}
 		
 		completion_reward = {
 			country_event = CBI.197 
@@ -4528,7 +5255,7 @@ focus_tree = {
 		search_filters = {FOCUS_FILTER_STABILITY}
 		
 		completion_reward = {
-		add_political_power = 150
+		add_political_power = 50
 		add_stability = 0.05
 			add_popularity = {
 			ideology = democratic  
@@ -4590,7 +5317,8 @@ focus_tree = {
 		search_filters = {FOCUS_FILTER_STABILITY}
 		
 		completion_reward = {
-			custom_effect_tooltip = CBI_WORK_IN_PROGRESS	
+
 		}
+		custom_effect_tooltip = CBI_WORK_IN_PROGRESS	
 	}
 }
