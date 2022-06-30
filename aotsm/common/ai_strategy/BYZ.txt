@@ -12,7 +12,7 @@ BYZ_unit_production = {
 	ai_strategy = {
 		type = role_ratio
 		id = garrison
-		value = 2
+		value = -5
 	}
 
 	ai_strategy = {
@@ -24,7 +24,7 @@ BYZ_unit_production = {
 	ai_strategy = {
 		type = role_ratio
 		id = mountaineers
-		value = 1
+		value = 0
 	}
 
 	ai_strategy = {
@@ -42,7 +42,7 @@ BYZ_unit_production = {
 	ai_strategy = {
 		type = role_ratio
 		id = motorized
-		value = 10 
+		value = 5 
 	}
 
 	ai_strategy = {
@@ -73,13 +73,13 @@ BYZ_unit_production = {
 	ai_strategy = {
 		type = unit_ratio
 		id = cas
-		value = -35
+		value = 50
 	}
 
 	ai_strategy = {
 		type = unit_ratio
 		id = tactical_bomber
-		value = -40
+		value = -50
 	}
 
 	ai_strategy = {
@@ -214,49 +214,25 @@ BYZ_unit_production = {
 	}
 }
 
-byz_anti_armor = {
+byz_not_only_infantry = {
+
 	allowed = {
 		original_tag = BYZ
 	}
+	
 	enable = {
-		ai_wants_divisions > 24 #Decreasing the amount of motorized the AI wants
-
-		any_enemy_country = {
-			ROOT = {
-				estimated_intel_max_armor = {
-					tag = PREV
-					value > 25
-				}
-			}
+		has_army_size = {
+			size > 80
+			type = infantry
 		}
 	}
-	abort = {
-		ai_wants_divisions < 25 #Decreasing the amount of motorized the AI wants
-	}
-
+	
+	abort_when_not_enabled = yes
+	
 	ai_strategy = {
 		type = role_ratio
-		id = motorized
-		value = 15
-	}
-}
-
-byz_armored_production = {
-	allowed = {
-		original_tag = BYZ
-	}
-	enable = {
-		date > 1850.1.1
-		ai_wants_divisions > 24 #Decreasing the amount of tanks the AI wants
-	}
-	abort = {
-		ai_wants_divisions < 25 #Decreasing the amount of tanks the AI wants
-	}
-
-	ai_strategy = {
-		type = role_ratio
-		id = armor
-		value = 20
+		id = infantry
+		value = -100
 	}
 }
 
@@ -266,14 +242,10 @@ byz_halt_light_armor_production_in_transitioning = {
 	}
 	enable = {
 		has_template_majority_unit = medium_armor
-		OR = {
-			has_equipment = { light_tank_chassis > 600 }
-			date > 1852.1.1
-		}
+		has_equipment = { light_tank_chassis > 500 }
 	}
-	abort = {
-		# once we start we never go back to light armor
-	}
+	
+	abort_when_not_enabled = yes
 
 	ai_strategy = {
 		type = equipment_variant_production_factor
