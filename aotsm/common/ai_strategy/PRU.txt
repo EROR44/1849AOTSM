@@ -42,13 +42,13 @@ PRU_unit_production = {
 	ai_strategy = {
 		type = role_ratio
 		id = motorized
-		value = 10 
+		value = 20 
 	}
 
 	ai_strategy = {
 		type = role_ratio
 		id = mechanized
-		value = 15 
+		value = 30
 	}
 
 	ai_strategy = {
@@ -84,7 +84,7 @@ PRU_unit_production = {
 	ai_strategy = {
 		type = unit_ratio
 		id = strategic_bomber
-		value = 25
+		value = 30
 	}
 
 	ai_strategy = {
@@ -144,7 +144,7 @@ PRU_unit_production = {
 	ai_strategy = {
 		type = equipment_production_factor
 		id = strategic_bomber
-		value = 50
+		value = 100
 	}
 
 	ai_strategy = {
@@ -245,11 +245,11 @@ PRU_armored_production = {
 		original_tag = PRU
 	}
 	enable = {
-		date > 1841.1.1
-		ai_wants_divisions > 24
+		date > 1849.1.1
+		ai_wants_divisions > 1
 	}
 	abort = {
-		ai_wants_divisions < 25 
+		ai_wants_divisions < 90 
 	}
 
 	ai_strategy = {
@@ -265,7 +265,7 @@ PRU_halt_light_armor_production_in_transitioning = {
 	}
 	enable = {
 		has_template_majority_unit = medium_armor
-		has_equipment = { light_tank_chassis > 6000 }
+		has_equipment = { light_tank_chassis > 600 }
 	}
 	abort = {
 		# once we start we never go back to light armor
@@ -480,7 +480,14 @@ pru_attack_fra = {
 	}
 	
 	abort = {
-		has_global_flag = france_capitulation
+		OR = {
+			NOT = {
+				PRU = {
+					has_war_with = FRR
+				}
+			}
+			has_global_flag = france_capitulation
+		}
 	}
 	
 	ai_strategy = {
