@@ -1,1062 +1,5759 @@
-###########################
-# British Events
-###########################
+﻿### search_filters = {FOCUS_FILTER_POLITICAL}
+### search_filters = {FOCUS_FILTER_RESEARCH}
+### search_filters = {FOCUS_FILTER_INDUSTRY}
+### search_filters = {FOCUS_FILTER_STABILITY}
+### search_filters = {FOCUS_FILTER_WAR_SUPPORT}
+### search_filters = {FOCUS_FILTER_MANPOWER}
+### search_filters = {FOCUS_FILTER_ANNEXATION}
 
-add_namespace = CBI
-
-country_event = {
-	id = CBI.100
-	title = CBI.100.t
-	desc = CBI.100.d
-	picture = GFX_CBI_Oliver_Cromwell
+focus_tree = {
+	id = british_focus
 	
-	is_triggered_only = yes
-	
-	option = {
-		name = CBI.100.a
-		add_political_power = 25
-		hidden_effect = {
-			country_event = { id = CBI.100 days = 365}
+	country = {
+		factor = 0
+		
+		modifier = {
+			add = 10
+			tag = CBI
 		}
 	}
-}
+	default = no
 
-country_event = {
-	id = CBI.101
-	title = CBI.101.t
-	desc = CBI.101.d
-	picture = GFX_CBI_Oliver_Cromwell
-	
-	is_triggered_only = yes	
-	
-	option = {
-		name = CBI.101.a
-	}
-}
+	continuous_focus_position = { x = 1000 y = 1000 }
 
-country_event = {
-	id = CBI.102
-	title = CBI.102.t
-	desc = CBI.102.d
-	picture = GFX_CBI_economic_downturnl
-	
-	is_triggered_only = yes	
-	
-	option = {
-		name = CBI.102.a
-	}
-}
-
-country_event = {
-	id = CBI.103
-	title = CBI.103.t
-	desc = CBI.103.d
-	picture = GFX_CBI_stop_war_conservator_vs_liberal
-	
-	is_triggered_only = yes	
-	
-	option = {
-		name = CBI.103.a
-	}
-}
-
-country_event = {
-	id = CBI.104
-	title = CBI.104.t
-	desc = CBI.104.d
-	picture = GFX_CBI_Cromvland_problem_waiting  
-	
-	is_triggered_only = yes	
-	
-	option = {
-		name = CBI.104.a
-	}
-}
-
-country_event = {
-	id = CBI.105
-	title = CBI.105.t
-	desc = CBI.105.d
-	picture = GFX_CBI_the_great_day
-	
-	is_triggered_only = yes	
-	
-	option = {
-		name = CBI.105.a
-		add_political_power = 150
-		add_stability = 0.25
-		hidden_effect = {
-		country_event = {
-		id = CBI.106
-		days = 1
+	focus = {
+		id = focus_CBI_new_1849
+		available = {
 			}
+		
+		bypass = {
 		}
+		
+		icon = GFX_focus_CBI_new_1849
+		x = 3
+		y = 0
+		cost = 3
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+			add_political_power = 10
 	}
 }
-
-### КРИЗИСНЫЕ ИВЕНТЫ ###
-
-country_event = {
-	id = CBI.106
-	title = CBI.106.t
-	desc = CBI.106.d
-	picture = GFX_CBI_Oliver_Cromwell
 	
-	is_triggered_only = yes	
-	
-	option = {
-		name = CBI.106.a
-		retire_character = CBI_Uillem_Lem
-		CBI = {
-			promote_character = CBI_Eduard_Smit_Stenli
+	focus = {
+		id = focus_CBI_economic_problem_waiting
+		available = {
 			}
-		add_trait = {
-			character = CBI_Eduard_Smit_Stenli
-			trait = temporary_acting
-			}
-		load_focus_tree = british_lord_protector_election	
-		add_political_power = -150
-			hidden_effect = {
+		
+		bypass = {
+		}
+		
+		icon = GFX_focus_CBI_economic_problem_waiting
+		prerequisite = { focus = focus_CBI_new_1849 }		
+		x = 1
+		y = 1
+		cost = 3
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		completion_reward = {
 			country_event = {
-			id = CBI.107
+			id = CBI.102
+				}		
+		}
+	}
+
+	focus = {
+		id = focus_CBI_stop_war_conservator_vs_liberal
+		available = {
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_focus_CBI_stop_war_conservator_vs_liberal
+		prerequisite = { focus = focus_CBI_new_1849 }		
+		x = 3
+		y = 1
+		cost = 3
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		completion_reward = {
+			country_event = {
+			id = CBI.103
+				}
+	}
+}
+	
+	focus = {
+		id = focus_CBI_Cromvland_problem_waiting
+		available = {
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_focus_CBI_Cromvland_problem_waiting
+		prerequisite = { focus = focus_CBI_new_1849 }		
+		x = 5
+		y = 1
+		cost = 3
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		completion_reward = {
+			country_event = {
+			id = CBI.104
+				}
+	}
+}
+
+	focus = {
+		id = focus_CBI_the_great_day
+		available = {
+			}
+		
+		bypass = {
+		}
+		
+		icon =  GFX_focus_CBI_the_great_day
+		prerequisite = { focus = focus_CBI_economic_problem_waiting }		
+		prerequisite = { focus = focus_CBI_stop_war_conservator_vs_liberal }
+		prerequisite = { focus = focus_CBI_Cromvland_problem_waiting}
+		x = 3
+		y = 2
+		cost = 4
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		search_filters = {FOCUS_FILTER_STABILITY}
+		completion_reward = {
+			country_event = {
+			id = CBI.105
+			days = 3			
+				}
+		}
+	}	
+}
+
+### ВЫБОРЫ ЛОРДА-ПРОТЕКТОРА ###
+
+focus_tree = {
+	id = british_lord_protector_election
+
+	continuous_focus_position = { x = 1500 y = 5500 }
+	
+	country = {
+		factor = 0
+		
+		modifier = {
+			add = 10
+			tag = CBI
+		}
+	}
+	default = no
+
+	focus = {
+		id = focus_CBI_lord_protector_die
+		available = {
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_focus_CBI_lord_protector_die
+		x = 12
+		y = 0
+		cost = 1
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+			add_political_power = -50
+			country_event = {
+			id = CBI.112
 			days = 1
+				}
+			}
+		}
+
+### РОБЕРТ ПИЛЬ ###
+
+	focus = {
+		cancelable = no	
+		id = focus_CBI_choice_Robert_Peel
+		available = {
+		has_country_flag = choice_Robert_Peel		
+			}
+		
+		bypass = {
+		has_country_flag = choice_Robert_Peel
+		}
+		
+		icon = GFX_focus_CBI_choice_Robert_Peel
+		prerequisite = { focus = focus_CBI_lord_protector_die}		
+		x = 2
+		y = 1
+		cost = 0
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+			country_event = {
+			id = CBI.116
+			days = 1
+					}
+			}
+		}
+		
+	focus = {
+		id = focus_CBI_detachments_the_revolution
+		available = {
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_focus_SOV_mobilization_plan
+		prerequisite = { focus = focus_CBI_choice_Robert_Peel }		
+		x = 0
+		y = 2
+		cost = 5
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		search_filters = {FOCUS_FILTER_MANPOWER}
+		
+		completion_reward = {
+			add_manpower = -4170
+			add_popularity = {
+			ideology = reactionist   
+			popularity = 0.04
+				}
+		}
+	}
+
+	focus = {
+		id = focus_CBI_recruit_police_officers
+		available = {
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_focus_secret_rearmament
+		prerequisite = { focus = focus_CBI_choice_Robert_Peel }		
+		x = 2
+		y = 2
+		cost = 5
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+			add_popularity = {
+			ideology = reactionist   
+			popularity = 0.05
+				}
+		}
+	}	
+
+	focus = {
+		id = focus_CBI_request_money_from_tycoons
+		available = {
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_CBI_request_help_from_industrialists
+		prerequisite = { focus = focus_CBI_choice_Robert_Peel }		
+		x = 4
+		y = 2
+		cost = 5
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		
+		completion_reward = {
+			add_political_power = 75
+			add_popularity = {
+			ideology = reactionist   
+			popularity = 0.03
 				}		
 			}
-		add_popularity = {
-		ideology = authoritarian  
-		popularity = 0.2
+		}
+
+	focus = {
+		id = focus_CBI_conduct_attacks_military_bases
+		available = {
 			}
-			
-	}
-}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_generic_small_arms
+		prerequisite = { focus = focus_CBI_detachments_the_revolution }		
+		prerequisite = { focus = focus_CBI_request_money_from_tycoons }	
+		prerequisite = { focus = focus_CBI_recruit_police_officers }	
+		x = 1
+		y = 3
+		cost = 5
+		ai_will_do = {
+			factor = 1
+		}
 
-country_event = {
-	id = CBI.107
-	title = CBI.107.t
-	desc = CBI.107.d
-	picture = GFX_CBI_stop_war_conservator_vs_liberal
-	
-	is_triggered_only = yes	
-	
-	option = {
-		ai_chance = {
-			factor = 50
-		}	
-		name = CBI.107.a
-		add_political_power = -150		
-		country_event = {
-		id = CBI.108
-		days = 1
-			}		
-	}
-	option = {
-		ai_chance = {
-			factor = 0
-			}		
-		name = CBI.107.b
-		add_political_power = -150		
-		country_event = {
-		id = CBI.109
-		days = 1
-			}		
-	}
-	option = {
-		ai_chance = {
-			factor = 30
-		}	
-		name = CBI.107.c	
-		add_political_power = -150		
-		country_event = {
-		id = CBI.111
-		days = 1
-			}		
-	}	
-}
-
-country_event = {
-	id = CBI.108
-	title = CBI.108.t
-	desc = CBI.108.d
-	picture = GFX_CBI_party_Tories
-	
-	is_triggered_only = yes	
-	
-	option = {
-		ai_chance = {
-			factor = 160
-		}		
-		name = CBI.108.a	
-		hidden_effect = {
-		set_country_flag = choice_Edward_Smith_Stanley	
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		search_filters = {FOCUS_FILTER_WAR_SUPPORT}
+		
+		completion_reward = {
+			add_equipment_to_stockpile = {
+			type = infantry_equipment
+			amount = -2000
+			producer = CBI
+			}			
+			add_equipment_to_stockpile = {
+			type = support_equipment
+			amount = -1000
+			producer = CBI
+			}						
+			add_equipment_to_stockpile = {
+			type = artillery_equipment
+			amount = -20
+			producer = CBI
+			}						
+			add_political_power = 15
+			add_popularity = {
+			ideology = reactionist   
+			popularity = 0.04
+				}
+			add_war_support = 0.05
 			}
 		}
-	option = {
-		ai_chance = {
-			factor = 0
-			}		
-		name = CBI.108.b	
-		hidden_effect = {
-		set_country_flag = choice_Robert_Peel	
-			}			
+		
+	focus = {
+		id = focus_CBI_start_propaganda
+		available = {
+			}
+		
+		bypass = {
 		}
-}
-
-country_event = {
-	id = CBI.109
-	title = CBI.109.t
-	desc = CBI.109.d
-	picture = GFX_CBI_George_Hamilton_Gordon
-	
-	is_triggered_only = yes	
-	
-	option = {
-		name = CBI.109.a	
-		hidden_effect = {
-		set_country_flag = choice_George_Hamilton_Gordon	
-			}		
+		
+		icon = GFX_goal_generic_propaganda
+		prerequisite = { focus = focus_CBI_detachments_the_revolution }		
+		prerequisite = { focus = focus_CBI_request_money_from_tycoons }	
+		prerequisite = { focus = focus_CBI_recruit_police_officers }	
+		x = 3
+		y = 3
+		cost = 5
+		ai_will_do = {
+			factor = 1
 		}
-}
 
-country_event = {
-	id = CBI.111
-	title = CBI.111.t
-	desc = CBI.111.d
-	picture = GFX_CBI_party_Whigs
-	
-	is_triggered_only = yes	
-	
-	option = {
-		ai_chance = {
-			factor = 160
-		}		
-		name = CBI.111.a
-		hidden_effect = {
-		set_country_flag = choice_John_Russell	
-			}		
-		}		
-	
-	option = {
-		ai_chance = {
-			factor = 0
-			}	
-		name = CBI.111.b
-		hidden_effect = {
-		set_country_flag = choice_Henry_John_Temple	
-			}			
-		}		
-}
-
-country_event = {
-	id = CBI.112
-	title = CBI.112.t
-	desc = CBI.112.d
-	picture = GFX_CBI_stop_war_conservator_vs_liberal
-	
-	is_triggered_only = yes	
-	
-	option = {
-		name = CBI.112.a
-	}	
-}
-
-### ОТПРАВКА ПРЕДЛОЖЕНИЯ В ПОРТУГАЛИЮ ###
-
-country_event = { ### ИВЕНТ О ПРЕДЛОЖЕНИЕ ПОРТУГАЛИИ ###
-	id = CBI.113
-	title = CBI.113.t
-	desc = CBI.113.d
-	picture = GFX_CBI_stop_war_conservator_vs_liberal
-	
-	is_triggered_only = yes	
-	
-	option = {
-		ai_chance = {
-		factor = 160
-		}
-		name = CBI.113.a
-		CBI = {
-			country_event = {
-			id = CBI.114
-			days = 1
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		search_filters = {FOCUS_FILTER_STABILITY}
+		
+		completion_reward = {	
+			add_stability = -0.02
+			add_political_power = -20
+			add_popularity = {
+			ideology = reactionist   
+			popularity = 0.11
 				}
-		}		
-	}
+			}
+		}
 
-	option = {
-		ai_chance = {
-		factor = 10
+	focus = {
+		id = focus_CBI_preparing_for_coup
+		available = {
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_generic_demand_territory
+		prerequisite = { focus = focus_CBI_conduct_attacks_military_bases }		
+		prerequisite = { focus = focus_CBI_start_propaganda }		
+		x = 2
+		y = 4
+		cost = 5
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		search_filters = {FOCUS_FILTER_MANPOWER}
+		
+		completion_reward = {
+			add_manpower = -517
+			add_political_power = -25
+			add_popularity = {
+			ideology = reactionist   
+			popularity = 0.03
+				}
+			hidden_effect = {
+			country_event = {
+			id = CBI.125
+			days = 7
+					}
+				}
+			}
 		}	
-		name = CBI.113.b
-		CBI = {
-			country_event = {
-			id = CBI.115
-			days = 1
-				}
+		
+### СМИТ-СТЕНЛИ ###
+		
+	focus = {
+		cancelable = no	
+		id = focus_CBI_choice_Edward_Smith_Stanley
+		available = {
+		has_country_flag = choice_Edward_Smith_Stanley		
+			}
+		
+		bypass = {
+		has_country_flag = choice_Edward_Smith_Stanley
 		}
-	}	
-}
+		
+		icon = GFX_focus_CBI_choice_Edward_Smith_Stanley
+		prerequisite = { focus = focus_CBI_lord_protector_die}		
+		x = 7
+		y = 1
+		cost = 0
+		ai_will_do = {
+			factor = 1
+		}
 
-country_event = { ### СОГЛАСИЕ НА ПОДДЕРЖКУ ###
-	id = CBI.114
-	title = CBI.114.t
-	desc = CBI.114.d
-	picture = GFX_CBI_stop_war_conservator_vs_liberal
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+			country_event = {
+			id = CBI.117
+			days = 2
+					}
+			}
+		}
+
+	focus = {
+		id = focus_CBI_visit_capitals
+		available = {
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_cbi_visit_the_capitals_of_respublicks
+		prerequisite = { focus = focus_CBI_choice_Edward_Smith_Stanley}		
+		x = 6
+		y = 2
+		cost = 6
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+			add_popularity = {
+			ideology = democratic  
+			popularity = 0.02
+			add_political_power = -15
+				}			
+			}
+		}
+		
+	focus = {
+		id = focus_CBI_give_bribes_governors
+		available = {
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_focus_mex_privatisation
+		prerequisite = { focus = focus_CBI_choice_Edward_Smith_Stanley}		
+		x = 8
+		y = 2
+		cost = 6
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+			add_popularity = {
+			ideology = democratic  
+			popularity = 0.08
+				}	
+			add_political_power = -25				
+			}
+		}
+		
+	focus = {
+		id = focus_CBI_alliance_with_moderates
+		available = {
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_generic_alliance
+		prerequisite = { focus = focus_CBI_give_bribes_governors }		
+		prerequisite = { focus = focus_CBI_visit_capitals }		
+		x = 6
+		y = 3
+		cost = 6
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+			add_popularity = {
+			ideology = democratic  
+			popularity = 0.07
+				}
+			add_political_power = -25				
+			}
+		}	
+
+	focus = {
+		id = focus_CBI_assure_preservation_privileges
+		available = {
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_cbi_garant_of_prom_privilegii	
+		prerequisite = { focus = focus_CBI_give_bribes_governors }		
+		prerequisite = { focus = focus_CBI_visit_capitals }			
+		x = 8
+		y = 3
+		cost = 6
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+			add_popularity = {
+			ideology = democratic  
+			popularity = 0.05
+				}
+			add_political_power = -10				
+			}
+		}
+		
+	focus = {
+		id = focus_CBI_enlist_consent_admirals
+		available = {
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_focus_generic_military_dictatorship
+		prerequisite = { focus = focus_CBI_alliance_with_moderates }	
+		prerequisite = { focus = focus_CBI_assure_preservation_privileges }
+		x = 7
+		y = 4
+		cost = 6
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+			add_popularity = {
+			ideology = democratic  
+			popularity = 0.02 
+				}
+			hidden_effect = {				
+			country_event = {
+			id = CBI.170
+			days = 1
+					}	
+				}
+			}
+		}	
 	
-	is_triggered_only = yes	
-	
-	option = {
-		name = CBI.114.a
+### ДЖОРДЖ ГАМИЛЬТОН ###
+		
+	focus = {
+		cancelable = no	
+		id = focus_CBI_choice_George_Hamilton_Gordon
+		available = {
+		has_country_flag = choice_George_Hamilton_Gordon		
+			}
+		
+		bypass = {
+		has_country_flag = choice_George_Hamilton_Gordon
+		}
+		
+		icon = GFX_focus_CBI_choice_George_Hamilton_Gordon
+		prerequisite = { focus = focus_CBI_lord_protector_die}		
+		x = 12
+		y = 1
+		cost = 0
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+
+			}
+		}
+		
+	focus = {
+		id = focus_CBI_rally_interlayer
+		available = {
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_generic_national_unity
+		prerequisite = { focus = focus_CBI_choice_George_Hamilton_Gordon}		
+		x = 10
+		y = 2
+		cost = 3
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+			add_popularity = {
+			ideology = socialism  
+			popularity = 0.02
+				}	
+			}
+		}	
+
+	focus = {
+		id = focus_CBI_mobilize_support
+		available = {
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_focus_usa_reestablish_the_gold_standard
+		prerequisite = { focus = focus_CBI_choice_George_Hamilton_Gordon}		
+		x = 12
+		y = 2
+		cost = 3
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+		add_political_power = 25
+			add_popularity = {
+			ideology = socialism  
+			popularity = 0.01
+				}		
+			}
+		}
+		
+	focus = {
+		id = focus_CBI_take_out_loans
+		available = {
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_focus_generic_treaty
+		prerequisite = { focus = focus_CBI_choice_George_Hamilton_Gordon}		
+		x = 14
+		y = 2
+		cost = 3
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+		add_political_power = 150
+			add_popularity = {
+			ideology = socialism  
+			popularity = 0.02
+				}		
+			}
+		}
+
+	focus = {
+		id = focus_CBI_give_bribes_governors_Gamilton
+		available = {
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_molotov_ribbentrop_pact
+		prerequisite = { focus = focus_CBI_rally_interlayer }	
+		prerequisite = { focus = focus_CBI_mobilize_support }
+		prerequisite = { focus = focus_CBI_take_out_loans }		
+		x = 10
+		y = 3
+		cost = 3
+		ai_will_do = {
+			factor = 1 
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+		add_political_power = -75
+			add_popularity = {
+			ideology = socialism  
+			popularity = 0.04
+				}		
+			}
+		}
+
+	focus = {
+		id = focus_CBI_give_bribes_parliamentarians
+		available = {
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_tripartite_pact
+		prerequisite = { focus = focus_CBI_rally_interlayer }	
+		prerequisite = { focus = focus_CBI_mobilize_support }
+		prerequisite = { focus = focus_CBI_take_out_loans }		
+		x = 12
+		y = 3
+		cost = 4
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+		add_political_power = -50
+			add_popularity = {
+			ideology = socialism  
+			popularity = 0.05
+				}		
+			}
+		}
+
+	focus = {
+		id = focus_CBI_give_bribe_the_aristocracy
+		available = {
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_tripartite_pact
+		prerequisite = { focus = focus_CBI_rally_interlayer }	
+		prerequisite = { focus = focus_CBI_mobilize_support }
+		prerequisite = { focus = focus_CBI_take_out_loans }		
+		x = 14
+		y = 3
+		cost = 3
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+		add_political_power = -45
+			add_popularity = {
+			ideology = socialism  
+			popularity = 0.03
+				}		
+			}
+		}
+
+	focus = {
+		id = focus_CBI_make_promise_to_church
+		available = {
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_focus_mex_restore_the_army_of_christ
+		prerequisite = { focus = focus_CBI_give_bribes_governors_Gamilton }	
+		prerequisite = { focus = focus_CBI_give_bribes_parliamentarians }
+		prerequisite = { focus = focus_CBI_give_bribe_the_aristocracy }		
+		x = 10
+		y = 4
+		cost = 4
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+		add_political_power = -15
+			add_popularity = {
+			ideology = socialism  
+			popularity = 0.02
+				}		
+			}
+		}
+
+	focus = {
+		id = focus_CBI_give_guarantees_to_tycoons_Hamilton
+		available = {
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_cbi_garant_of_prom_privilegii
+		prerequisite = { focus = focus_CBI_give_bribes_governors_Gamilton }	
+		prerequisite = { focus = focus_CBI_give_bribes_parliamentarians }
+		prerequisite = { focus = focus_CBI_give_bribe_the_aristocracy }		
+		x = 12
+		y = 4
+		cost = 4
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+			add_popularity = {
+			ideology = socialism  
+			popularity = 0.02
+				}		
+			}
+		}
+
+	focus = {
+		id = focus_CBI_promise_workers_changes
+		available = {
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_focus_por_workers_of_iberia
+		prerequisite = { focus = focus_CBI_give_bribes_governors_Gamilton }	
+		prerequisite = { focus = focus_CBI_give_bribes_parliamentarians }
+		prerequisite = { focus = focus_CBI_give_bribe_the_aristocracy }		
+		x = 14
+		y = 4
+		cost = 4
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+			add_popularity = {
+			ideology = socialism  
+			popularity = 0.05
+				}		
+			}
+		}		
+		
+
+### ДЖОН РАССЕЛ ###		
+		
+	focus = {
+		cancelable = no	
+		id = focus_CBI_choice_John_Russell
+		available = {
+		has_country_flag = choice_John_Russell		
+			}
+		
+		bypass = {
+		has_country_flag = choice_John_Russell
+		}
+		
+		icon = GFX_focus_CBI_choice_John_Russell
+		prerequisite = { focus = focus_CBI_lord_protector_die}		
+		x = 17
+		y = 1
+		cost = 0
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+
+			}
+		}
+
+	focus = {
+		id = focus_CBI_enlist_support_Moscow_company
+		available = {
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_focus_SOV_third_rome
+		prerequisite = { focus = focus_CBI_choice_John_Russell}		
+		x = 16
+		y = 2
+		cost = 6
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+			add_political_power = 150
+			add_popularity = {
+			ideology = democratic  
+			popularity = 0.04
+				}			
+			}
+		}	
+
+	focus = {
+		id = focus_CBI_enlist_support_Howard_George
+		available = {
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_focus_generic_treaty
+		prerequisite = { focus = focus_CBI_choice_John_Russell}		
+		x = 18
+		y = 2
+		cost = 6
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+			add_political_power = 25
 			add_popularity = {
 			ideology = democratic		
 			popularity = 0.09
 				}
-	}
-}
-
-country_event = { ### ОТКАЗ О ПОДДЕРЖКЕ ###
-	id = CBI.115
-	title = СBI.115.t
-	desc = CBI.115.d
-	picture = GFX_CBI_stop_war_conservator_vs_liberal
-	
-	is_triggered_only = yes	
-	
-	option = {
-		name = CBI.115.a
-	}
-}
-
-country_event = { ### РОБЕРТ ПИЛЬ ###
-	id = CBI.116
-	title = СBI.116.t
-	desc = CBI.116.d
-	picture = GFX_CBI_stop_war_conservator_vs_liberal
-	
-	is_triggered_only = yes	
-	
-	option = {
-		name = CBI.116.a
-	}
-}
-
-country_event = { ### РОБЕРТ ПИЛЬ ###
-	id = CBI.117
-	title = СBI.117.t
-	desc = CBI.117.d
-	picture = GFX_CBI_stop_war_conservator_vs_liberal
-	
-	is_triggered_only = yes	
-	
-	option = {
-		name = CBI.117.a
-	}
-}
-
-country_event = { ### ПЕРЕВОРОТ РОБЕРТА ПИЛЯ ###
-	id = CBI.125
-	title = CBI.125.t
-	desc = CBI.125.d
-	picture = GFX_CBI_Robert_Pils_coup
-	
-	is_triggered_only = yes	
-	
-	option = {
-		name = CBI.125.a
-		add_stability = -0.1
-		add_political_power = 25
-		add_popularity = {
-			ideology = reactionist		
-			popularity = 0.05
-		}
-		set_politics = {
-			ruling_party = reactionist
-			elections_allowed = no
-			last_election = "1849.01.01"
-		}
-		set_party_name = { 
-			ideology = reactionist 
-			long_name = CBI_party_Cromwell_long 
-			name = CBI_party_Cromwell 
-		}
-		create_country_leader = {
-			name = "Роберт Пиль"
-			desc = "POLITICS_ROBERT_PIL_DESC"
-			picture = "Portrait_Robert_Pil.dds"
-			expire = "1865.1.1"
-			ideology = integralism 
-			traits = {
-				#
 			}
 		}
-		news_event = { 
-			id = news.21 
-			days = 2 
+
+	focus = {
+		id = focus_CBI_enlist_support_Portugal
+		available = {
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_be_friend_with_prt_alt
+		prerequisite = { focus = focus_CBI_enlist_support_Moscow_company }
+		prerequisite = { focus = focus_CBI_enlist_support_Howard_George }		
+		x = 16
+		y = 3
+		cost = 6
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+		PRT = {
+			country_event = {
+			id = CBI.113
+			days = 1
+				}
+			}
 		}
 	}
-}
 
-country_event = { ### ПРИХОД К ВЛАСТИ СМИТ-СТЕНЛИ 30 НОЯБРЯ ### 
-	id = CBI.170 
-	title = CBI.170.t
-	desc = CBI.170.d
-	picture = GFX_CBI_Smith_Stanley
-	
-	is_triggered_only = yes	
-	
-	option = {
-		name = CBI.170.a
-		add_political_power = 300
+	focus = {
+		id = focus_CBI_start_bribing_officials
+		available = {
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_focus_mex_privatisation
+		prerequisite = { focus = focus_CBI_enlist_support_Moscow_company }
+		prerequisite = { focus = focus_CBI_enlist_support_Howard_George }		
+		x = 18
+		y = 3
+		cost = 6
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+			add_political_power = 10
 			add_popularity = {
 			ideology = democratic		
 			popularity = 0.05
 				}
-		add_stability = 0.15
-		remove_country_leader_trait = temporary_acting						
-	}
-}
-
-country_event = { ### ПОХОРОНЫ ЛЭМА ###
-	id = CBI.171 
-	title = CBI.171.t
-	desc = CBI.171.d
-	picture = GFX_CBI_Lam_funeral
-	
-	is_triggered_only = yes	
-	
-	option = {
-		name = CBI.171.a
-		add_political_power = 5
-		add_stability = 0.05
-	}
-}
-
-country_event = { 
-	id = CBI.172 
-	title = CBI.172.t
-	desc = CBI.172.d
-	picture = GFX_CBI_Lam_funeral
-	
-	is_triggered_only = yes	
-	
-	option = {
-		name = CBI.172.a
-		add_political_power = 50
-	}
-}
-
-country_event = {
-	id = CBI.173 
-	title = CBI.173.t
-	desc = CBI.173.d
-	picture = GFX_CBI_corruption
-	
-	is_triggered_only = yes	
-	
-	option = {
-		name = CBI.173.a
-		complete_national_focus = focus_CBI_brutal_fight_against_corruption
-	}
-	
-	option = {
-		name = CBI.173.b
-		complete_national_focus = focus_CBI_systematic_approach
-	}
-}
-
-country_event = { ### ИТОГИ АНТИКОРРУПЦИОННЫХ ЖЁСТКИХ РЕФОРМ ###
-	id = CBI.174 
-	title = CBI.174.t
-	desc = CBI.174.d
-	picture = GFX_CBI_corruption
-	
-	is_triggered_only = yes	
-	
-	option = {
-		name = CBI.174.a
-		add_timed_idea = {
-		idea = CBI_fragmented_state_apparatus
-		days = 550
 			}
-	swap_ideas = {
-		remove_idea = state_corruption
-		add_idea = local_corruption
-			}			
-	swap_ideas = {
-		remove_idea = CBI_financial_collapse_1
-		add_idea = CBI_financial_collapse_2
-			}						
-		hidden_effect = {
-			country_event = {
-			id = CBI.176 
-			days = 551
-				}		
 		}
-	}
-}
 
-country_event = { ### ЛОЯЛЬНАЯ АДМИНИСТРАЦИЯ ###
-	id = CBI.176 
-	title = CBI.176.t
-	desc = CBI.176.d
-	picture = GFX_CBI_loyal_administration	
-	
-	is_triggered_only = yes	
-	
-	option = {
-		name = CBI.176.a
-		add_political_power = 10		
-		add_ideas = CBI_loyal_administration	
-	}
-}
-
-country_event = { ### ИТОГИ АНТИКОРРУПЦИОННЫХ УМЕРЕННЫХ РЕФОРМ ###
-	id = CBI.175 
-	title = CBI.175.t
-	desc = CBI.175.d
-	picture = GFX_CBI_corruption
-	
-	is_triggered_only = yes	
-	
-	option = {
-		name = CBI.175.a		
-		add_timed_idea = {
-		idea = CBI_fragmented_state_apparatus
-		days = 100
-		}
-	swap_ideas = {
-		remove_idea = CBI_financial_collapse_1
-		add_idea = CBI_financial_collapse_2
+	focus = {
+		id = focus_CBI_enlist_support_admirals_2
+		available = {
 			}
-	}
-}
-
-
-country_event = {
-	id = CBI.177 
-	title = CBI.177.t
-	desc = CBI.177.d
-	picture = GFX_CBI_Cromvland_problem_waiting
-	
-	is_triggered_only = yes	
-	
-	option = {
-		name = CBI.177.a
-		ai_chance = {
-			factor = 8
+		
+		bypass = {
 		}
-		complete_national_focus = focus_CBI_legalize_status	
-	}
-	
-	option = {
-		name = CBI.177.b
-		ai_chance = {
-			factor = 90
+		
+		icon = GFX_focus_generic_military_dictatorship
+		prerequisite = { focus = focus_CBI_enlist_support_Portugal }
+		prerequisite = { focus = focus_CBI_start_bribing_officials }		
+		x = 17
+		y = 4
+		cost = 6
+		ai_will_do = {
+			factor = 1
 		}
-		complete_national_focus = focus_CBI_cromwland_integration	
-	}	
-	
-	option = {
-		name = CBI.177.c
-		ai_chance = {
-			factor = 2
-		}
-		complete_national_focus = focus_CBI_British_Commonwealth		
-	}	
-}
 
-country_event = {
-	id = CBI.178 
-	title = CBI.178.t
-	desc = CBI.178.d
-	picture = GFX_CBI_Cromvland_problem_waiting
-	
-	is_triggered_only = yes	
-	
-	option = {
-		name = CBI.178.a
-	}
-}
-
-country_event = {
-	id = CBI.179 
-	title = CBI.179.t
-	desc = CBI.179.d
-	picture = GFX_CBI_Cromvland_problem_waiting
-	
-	is_triggered_only = yes	
-	
-	option = {
-		name = CBI.179.a
-	}
-}
-
-country_event = {
-	id = CBI.180 
-	title = CBI.180.t
-	desc = CBI.180.d
-	picture = GFX_CBI_socialist_revolution
-	
-	is_triggered_only = yes		
-	
-	option = {
-		name = CBI.180.a
-		add_political_power = -25
-		add_stability = -0.05
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
 			add_popularity = {
 			ideology = democratic		
+			popularity = 0.06
+				}
+			}
+		}		
+
+### ГЕНРИ ТЕМПЛ ###	
+
+	focus = {
+		cancelable = no	
+		id = focus_CBI_choice_Henry_John_Temple
+		available = {
+		has_country_flag = choice_Henry_John_Temple		
+			}
+		
+		bypass = {
+		has_country_flag = choice_Henry_John_Temple
+		}
+		
+		icon = GFX_focus_CBI_choice_Henry_John_Temple
+		prerequisite = { focus = focus_CBI_lord_protector_die}		
+		x = 22
+		y = 1
+		cost = 0
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+
+			}
+		}	
+
+	focus = {
+		id = focus_CBI_summon_liberal_aristocracy
+		available = {
+			}
+		
+		icon = GFX_focus_generic_royal_wedding
+		prerequisite = { focus = focus_CBI_choice_Henry_John_Temple }				
+		x = 20
+		y = 2
+		cost = 5
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+			add_popularity = {
+			ideology = authoritarian 		
+			popularity = 0.04
+				}
+			}
+		}
+	
+	focus = {
+		id = focus_CBI_call_decentralizers_to_your_side
+		available = {
+			}
+		
+		icon = GFX_focus_generic_support_the_left_right
+		prerequisite = { focus = focus_CBI_choice_Henry_John_Temple }				
+		x = 22
+		y = 2
+		cost = 5
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+			add_popularity = {
+			ideology = authoritarian 		
 			popularity = 0.02
 				}
-			country_event = {
-			id = CBI.181
-			days = 5			
 			}
-		add_ideas = CBI_strikes			
-	}
-	
-	option = {
-		name = CBI.180.b
-		add_manpower = -3178
-		add_political_power = -25
-		add_stability = -0.05
-			country_event = {
-			id = CBI.182
-			days = 5
-				}
-		add_ideas = CBI_strikes
-	}	
-}
-
-country_event = {
-	id = CBI.181 
-	title = CBI.181.t
-	desc = CBI.181.d
-	picture = GFX_CBI_socialist_revolution
-	
-	is_triggered_only = yes	
-	
-	option = {
-		name = CBI.181.a
-		remove_ideas = CBI_strikes
-		add_stability = -0.25		
-		add_ideas = CBI_British_socialist_revolution
-		133 = {
-		set_demilitarized_zone = yes
-			}
-		hidden_effect = {
-		set_country_flag = british_socialist_revolution
-		set_country_flag = { flag = british_socialist_revolution_demilitarized_zone_1 value = 1 days = 75 }		
 		}
-	}
-}
 
-country_event = {
-	id = CBI.182 
-	title = CBI.182.t
-	desc = CBI.182.d
-	picture = GFX_CBI_socialist_revolution
-	
-	is_triggered_only = yes	
-	
-	option = {
-		name = CBI.182.a
-		remove_ideas = CBI_strikes
-		add_stability = -0.25
-		add_ideas = CBI_British_socialist_revolution
-		133 = {
-		set_demilitarized_zone = yes
+	focus = {
+		id = focus_CBI_declare_wrongness_of_unitarians
+		available = {
 			}
-		hidden_effect = {
-		set_country_flag = british_socialist_revolution
-		set_country_flag = { flag = british_socialist_revolution_demilitarized_zone_1 value = 1 days = 75 }		
-		}			
-	}
-}
-
-country_event = {
-	id = CBI.183 
-	title = CBI.183.t
-	desc = CBI.183.d
-	picture = GFX_CBI_socialist_revolution
-	
-	is_triggered_only = yes	
-	
-	option = {
-		name = CBI.183.a
-		add_political_power = 25
-		add_stability = 0.03
-	}
-}
-
-country_event = {
-	id = CBI.184 
-	title = CBI.184.t
-	desc = CBI.184.d
-	picture = GFX_CBI_socialist_revolution
-	
-	is_triggered_only = yes	
-	
-	option = {
-		name = CBI.184.a
-	}
-}
-
-country_event = {
-	id = CBI.185 
-	title = CBI.185.t
-	desc = CBI.185.d
-	picture = GFX_report_event_canada_army
-	
-	is_triggered_only = yes	
-	
-	option = {
-		name = CBI.185.a
-		add_political_power = 15
-		add_stability = 0.05
-	}
-}
-
-country_event = {
-	id = CBI.186 
-	title = CBI.186.t
-	desc = CBI.186.d
-	picture = GFX_CBI_socialist_revolution
-	
-	is_triggered_only = yes	
-	
-	option = {
-		name = CBI.186.a
-		add_political_power = -25
-		add_stability = -0.1
-		120 = {
-		set_demilitarized_zone = yes
-			}
-		121 = {
-		set_demilitarized_zone = yes
-			}
-		136 = {
-		set_demilitarized_zone = yes
-			}		
-	}
-}
-
-country_event = { ### ЗАПРОС НА ОРУЖИЕ ###
-	id = CBI.187 
-	title = CBI.187.t
-	desc = CBI.187.d
-	picture = GFX_report_event_generic_rifles
-	
-	is_triggered_only = yes	
-	
-	option = {
-	name = CBI.187.a
-	CBI = {	
-			country_event = {
-			id = CBI.188 
-			days = 3
-				}
-			}
-	hidden_effect = {
-	set_country_flag = promise_colonial_reform
+		
+		icon = GFX_cbi_conservators_were_wrong
+		prerequisite = { focus = focus_CBI_choice_Henry_John_Temple }				
+		x = 24
+		y = 2
+		cost = 5
+		ai_will_do = {
+			factor = 1
 		}
-	}
-	
-	option = {
-	name = CBI.186.b
-	CBI = {
-			country_event = {
-			id = CBI.189 
-			days = 3
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+			add_popularity = {
+			ideology = authoritarian 		
+			popularity = 0.03
 				}
 			}
-	}	
-}
+		}
+		
+	focus = {
+		id = focus_CBI_assure_republics_incredible_freedoms
+		available = {
+			}
+		
+		icon = GFX_goal_generic_consumer_goods
+		prerequisite = { focus = focus_CBI_summon_liberal_aristocracy }	
+		prerequisite = { focus = focus_CBI_call_decentralizers_to_your_side }		
+		prerequisite = { focus = focus_CBI_declare_wrongness_of_unitarians }			
+		x = 21
+		y = 3
+		cost = 5
+		ai_will_do = {
+			factor = 1
+		}
 
-country_event = { ### СОГЛАСИЕ ###
-	id = CBI.188 
-	title = CBI.188.t
-	desc = CBI.188.d
-	picture = GFX_report_event_generic_rifles
-	
-	is_triggered_only = yes	
-	
-	option = {
-	name = CBI.188.a	
-			add_equipment_to_stockpile = {
-			type = infantry_equipment
-			amount = 5650
-			producer = CBI
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		search_filters = {FOCUS_FILTER_STABILITY}		
+		
+		completion_reward = {
+			add_stability = -0.05
+			add_popularity = {
+			ideology = authoritarian 		
+			popularity = 0.13
+				}
+			}
+		}
+
+	focus = {
+		id = focus_CBI_promise_tycoons_all_kinds_freedoms
+		available = {
+			}
+		
+		icon = GFX_cbi_garant_of_prom_privilegii
+		prerequisite = { focus = focus_CBI_summon_liberal_aristocracy }	
+		prerequisite = { focus = focus_CBI_call_decentralizers_to_your_side }		
+		prerequisite = { focus = focus_CBI_declare_wrongness_of_unitarians }	
+		x = 23
+		y = 3
+		cost = 5
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+			add_political_power = 75
+			add_popularity = {
+			ideology = authoritarian 		
+			popularity = 0.05
+				}
+			}
+		}	
+
+	focus = {
+		id = focus_CBI_appeal_to_liberal_parties
+		available = {
+			}
+		
+		icon = GFX_goal_support_democracy
+		prerequisite = { focus = focus_CBI_assure_republics_incredible_freedoms }	
+		prerequisite = { focus = focus_CBI_promise_tycoons_all_kinds_freedoms }			
+		x = 22
+		y = 4
+		cost = 5
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+			add_popularity = {
+			ideology = authoritarian 		
+			popularity = 0.05
+				}
+			}
+		}
+
+### КТО СЛЕДУЮЩИЙ ЛОРД-ПРОТЕКТОР? ###
+
+	focus = {
+		id = focus_CBI_and_next_lord_protector
+		available = {
+			}
+		
+		icon = GFX_goal_unknown
+		prerequisite = { focus = focus_CBI_preparing_for_coup focus = focus_CBI_enlist_consent_admirals focus = focus_CBI_make_promise_to_church focus = focus_CBI_give_guarantees_to_tycoons_Hamilton focus = focus_CBI_promise_workers_changes focus = focus_CBI_enlist_support_admirals_2 focus = focus_CBI_appeal_to_liberal_parties }		
+		x = 12
+		y = 5
+		cost = 1
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+			}
+		}
+
+  ### ЭДУАРД СМИТ-СТЕНЛИ / ДЖОН РАССЕЛ ###
+
+	focus = {
+		id = focus_CBI_London_new_boss
+		available = {
+		has_completed_focus = focus_CBI_and_next_lord_protector
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_focus_CBI_choice_Edward_Smith_Stanley
+		x = 17
+		y = 8
+		cost = 1
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+			country_event = {
+			id = CBI.171
+			days = 2
+				}
+			}
+		}
+
+	focus = {
+		id = focus_CBI_year_of_Great_Reforms
+		available = {
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_focus_generic_treaty
+		prerequisite = { focus = focus_CBI_London_new_boss }		
+		x = 17
+		y = 9
+		cost = 1
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+			country_event = {
+			id = CBI.172
+			days = 2
+				}
+			}
+		}
+		
+	### ЭКОНОМИЧЕСКАЯ ПОЛИТИКА ###
+		
+	focus = {
+		id = focus_CBI_economic_problems
+		available = {
+		has_war = no
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_focus_rom_parties_end
+		prerequisite = { focus = focus_CBI_year_of_Great_Reforms }		
+		x = 5
+		y = 10
+		cost = 1
+		ai_will_do = {
+			factor = 3
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+			}
+		}
+
+	focus = {
+		id = focus_CBI_brutal_fight_against_corruption
+		cancelable = no			
+		available = {
+		has_war = no
+		has_country_leader = {
+			character = CBI_Eduard_Smit_Stenli
+			ruling_only = yes
+				}		
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_generic_major_war
+		mutually_exclusive = { focus = focus_CBI_systematic_approach }		
+		prerequisite = { focus = focus_CBI_economic_problems }		
+		x = 2
+		y = 11
+		cost = 1
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		search_filters = {FOCUS_FILTER_STABILITY}
+		
+		completion_reward = {
+			add_stability = -0.03
+			}
+		}	
+
+	focus = {
+		id = focus_CBI_make_arrests
+		available = {
+		has_war = no		
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_tfv_saf_anti_colonialist_crusade
+		prerequisite = { focus = focus_CBI_brutal_fight_against_corruption }		
+		x = 0
+		y = 12
+		cost = 4
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		search_filters = {FOCUS_FILTER_STABILITY}
+		
+		completion_reward = {
+			add_stability = -0.02
+			}
+		}
+		
+	focus = {
+		id = focus_CBI_arrest_William_Howard
+		available = {
+		has_war = no		
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_focus_spr_masters_of_our_own_fate
+		prerequisite = { focus = focus_CBI_brutal_fight_against_corruption }		
+		x = 2
+		y = 12
+		cost = 4
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		search_filters = {FOCUS_FILTER_STABILITY}
+		
+		completion_reward = {
+			add_stability = -0.08
+			add_popularity = {
+			ideology = democratic 		
+			popularity = 0.03
+				}
+			add_political_power = 25
+			}
+		}	
+		
+	focus = {
+		id = focus_CBI_dismiss_old_officials
+		available = {
+		has_war = no		
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_tfv_saf_anti_colonialist_crusade
+		prerequisite = { focus = focus_CBI_brutal_fight_against_corruption }		
+		x = 4
+		y = 12
+		cost = 4
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+			add_political_power = 15
+			}
+		}
+		
+	focus = {
+		id = focus_CBI_expedited_trials
+		available = {
+		has_war = no		
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_focus_generic_support_the_left_right
+		prerequisite = { focus = focus_CBI_make_arrests }		
+		prerequisite = { focus = focus_CBI_arrest_William_Howard }
+		prerequisite = { focus = focus_CBI_dismiss_old_officials }
+		x = 1
+		y = 13
+		cost = 4
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+			add_political_power = 15
+			}
+		}		
+
+	focus = {
+		id = focus_CBI_replacement_with_loyal
+		available = {
+		has_war = no		
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_faction_production
+		prerequisite = { focus = focus_CBI_make_arrests }		
+		prerequisite = { focus = focus_CBI_arrest_William_Howard }
+		prerequisite = { focus = focus_CBI_dismiss_old_officials }		
+		x = 3
+		y = 13
+		cost = 4
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		search_filters = {FOCUS_FILTER_STABILITY}
+		
+		completion_reward = {
+				add_stability = 0.04
+				add_political_power = 35
+			}
+		}
+		
+	focus = {
+		id = focus_CBI_proclamation_course_to_fight_corruption
+		available = {
+		has_war = no		
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_focus_spr_torchbearers_of_tomorrow
+		prerequisite = { focus = focus_CBI_expedited_trials }		
+		prerequisite = { focus = focus_CBI_replacement_with_loyal }		
+		x = 2
+		y = 14
+		cost = 1
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+			country_event = {
+			id = CBI.174
+			days = 2
+				}
+			hidden_effect = {
+			country_event = {
+			id = CBI.180
+			days = 2
+					}				
+			}
+		}		
+	}
+
+	focus = {
+		id = focus_CBI_systematic_approach
+		cancelable = no			
+		available = {
+		has_war = no
+		has_country_leader = {
+			character = CBI_Jordj_Rassel
+			ruling_only = yes
 				}			
-			add_equipment_to_stockpile = {
-			type = support_equipment
-			amount = 2550
-			producer = CBI
-				}						
-			add_equipment_to_stockpile = {
-			type = artillery_equipment
-			amount = 365
-			producer = CBI
-				}						
-			}		
-}
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_generic_intelligence_exchange
+		prerequisite = { focus = focus_CBI_economic_problems }	
+		mutually_exclusive = { focus = focus_CBI_brutal_fight_against_corruption }		
+		x = 8
+		y = 11
+		cost = 1
+		ai_will_do = {
+			factor = 1
+		}
 
-country_event = { ### ОТКАЗ ###
-	id = CBI.189 
-	title = CBI.189.t
-	desc = CBI.189.d
-	picture = GFX_report_event_generic_rifles
-	
-	is_triggered_only = yes	
-	
-	option = {
-	name = CBI.189.a		
-	}
-}
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		search_filters = {FOCUS_FILTER_STABILITY}
+		
+		completion_reward = {
+			add_stability = 0.02
+			}
+		}	
+		
+	focus = {
+		id = focus_CBI_mass_checks
+		available = {
+		has_war = no		
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_focus_eng_concessions_to_the_trade_unions
+		prerequisite = { focus = focus_CBI_systematic_approach }			
+		x = 7
+		y = 12
+		cost = 5
+		ai_will_do = {
+			factor = 1
+		}
 
-country_event = { ### ЗАПРОС НА ОРУЖИЕ ###
-	id = CBI.190 
-	title = CBI.190.t
-	desc = CBI.190.d
-	picture = GFX_report_event_generic_rifles
-	
-	is_triggered_only = yes	
-	
-	option = {
-	name = CBI.190.a
-	CBI = {
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		search_filters = {FOCUS_FILTER_STABILITY}
+		
+		completion_reward = {
+			add_stability = 0.02
+			add_political_power = 10
+			}
+		}		
+
+	focus = {
+		id = focus_CBI_interview_local_population
+		available = {
+		has_war = no		
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_generic_major_alliance
+		prerequisite = { focus = focus_CBI_systematic_approach }		
+		x = 9
+		y = 12
+		cost = 5
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		search_filters = {FOCUS_FILTER_STABILITY}
+		
+		completion_reward = {
+			add_stability = 0.02
+			add_political_power = 15
+			add_popularity = {
+			ideology = democratic 		
+			popularity = 0.05
+				}			
+			}
+		}
+		
+	focus = {
+		id = focus_CBI_remove_the_brightest
+		available = {
+		has_war = no		
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_generic_improve_relations
+		prerequisite = { focus = focus_CBI_mass_checks }
+		prerequisite = { focus = focus_CBI_interview_local_population }		
+		x = 7
+		y = 13
+		cost = 5
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		search_filters = {FOCUS_FILTER_STABILITY}
+		
+		completion_reward = {
+			add_stability = 0.02
+			add_political_power = 15	
+			}
+		}		
+		
+	focus = {
+		id = focus_CBI_intimidation
+		available = {
+		has_war = no		
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_generic_political_pressure
+		prerequisite = { focus = focus_CBI_mass_checks }
+		prerequisite = { focus = focus_CBI_interview_local_population }		
+		x = 9
+		y = 13
+		cost = 5
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		search_filters = {FOCUS_FILTER_STABILITY}
+		
+		completion_reward = {
+			add_stability = 0.02
+			add_political_power = 15	
+			}
+		}
+		
+	focus = {
+		id = focus_CBI_introduction_telegraphs
+		available = {
+		has_war = no		
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_generic_political_pressure
+		prerequisite = { focus = focus_CBI_remove_the_brightest }
+		prerequisite = { focus = focus_CBI_intimidation }		
+		x = 8
+		y = 14
+		cost = 1
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
 			country_event = {
-			id = CBI.191 
-			days = 3
+			id = CBI.175
+			days = 2
+				}
+			hidden_effect = {
+			country_event = {
+			id = CBI.180
+			days = 2
+					}			
 				}
 			}
-	hidden_effect = {
-	set_country_flag = promise_colonial_reform
-		}				
+		}		
+
+	focus = {
+		id = focus_CBI_financial_issue
+		available = {
+		has_war = no
+		date > 1851.06.01
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_focus_fra_devalue_the_franc
+		prerequisite = { focus = focus_CBI_proclamation_course_to_fight_corruption focus = focus_CBI_introduction_telegraphs }			
+		x = 5
+		y = 15
+		cost = 1
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		search_filters = {FOCUS_FILTER_STABILITY}
+		
+		completion_reward = {
+				add_stability = 0.1
+			}
+		}	
+
+	focus = {
+		id = focus_CBI_favor_of_social_change
+		available = {
+		has_country_leader = {
+			character = CBI_Eduard_Smit_Stenli
+			ruling_only = yes
+				}		
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_tripartite_pact
+		prerequisite = { focus = focus_CBI_financial_issue }			
+		x = 2
+		y = 16
+		cost = 1
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		search_filters = {FOCUS_FILTER_STABILITY}
+		
+		completion_reward = {
+
+			}
+		}
+
+	focus = {
+		id = focus_CBI_helping_poor
+		available = {
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_generic_improve_relations
+		prerequisite = { focus = focus_CBI_favor_of_social_change }			
+		x = 1
+		y = 17
+		cost = 3
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		search_filters = {FOCUS_FILTER_STABILITY}
+		
+		completion_reward = {
+			add_ideas = CBI_helping_people_1
+		}
 	}
 	
-	option = {
-	name = CBI.190.a
-	CBI = {	
+	focus = {
+		id = focus_CBI_extend_pound_to_entire_territory
+		available = {
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_focus_usa_reestablish_the_gold_standard
+		prerequisite = { focus = focus_CBI_favor_of_social_change }			
+		x = 3
+		y = 17
+		cost = 3
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		search_filters = {FOCUS_FILTER_STABILITY}
+		
+		completion_reward = {
+			add_political_power = 150
+		}
+	}
+
+	focus = {
+		id = focus_CBI_tax_cuts
+		available = {
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_generic_demand_territory
+		prerequisite = { focus = focus_CBI_helping_poor }
+		prerequisite = { focus = focus_CBI_extend_pound_to_entire_territory }		
+		x = 0
+		y = 18
+		cost = 3
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+			swap_ideas = {
+			remove_idea = hight_taxation
+			add_idea = medium_taxation
+				}
+		}
+	}	
+
+	focus = {
+		id = focus_CBI_social_credit
+		available = {
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_focus_TUR_ratify_the_six_arrows
+		prerequisite = { focus = focus_CBI_helping_poor }		
+		prerequisite = { focus = focus_CBI_extend_pound_to_entire_territory }				
+		x = 2
+		y = 18
+		cost = 3
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+			swap_ideas = {
+			remove_idea = CBI_helping_people_1
+			add_idea = CBI_helping_people_2
+				}				
+			}
+		}	
+
+	focus = {
+		id = focus_CBI_business_subsidies
+		available = {
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_focus_mex_privatisation
+		prerequisite = { focus = focus_CBI_helping_poor }		
+		prerequisite = { focus = focus_CBI_extend_pound_to_entire_territory }				
+		x = 4
+		y = 18
+		cost = 3
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		search_filters = {FOCUS_FILTER_STABILITY}
+		
+		completion_reward = {
+			add_stability = 0.05
+			}
+		}		
+		
+	focus = {
+		id = focus_CBI_state_controls_economy
+		available = {
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_generic_consumer_goods
+		prerequisite = { focus = focus_CBI_social_credit }		
+		prerequisite = { focus = focus_CBI_business_subsidies }	
+		prerequisite = { focus = focus_CBI_tax_cuts }			
+		x = 2
+		y = 19
+		cost = 3
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+		swap_ideas = {
+		remove_idea = CBI_financial_collapse_2
+		add_idea = CBI_financial_collapse_3
+				}
+			}
+		}
+
+	focus = {
+		id = focus_CBI_freedom_to_economy
+		available = {
+		has_country_leader = {
+			character = CBI_Jordj_Rassel
+			ruling_only = yes
+				}		
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_coop_with_liberal
+		prerequisite = { focus = focus_CBI_financial_issue }			
+		x = 8
+		y = 16
+		cost = 1
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+
+			}
+		}
+		
+	focus = {
+		id = focus_CBI_remove_economic_restrictions
+		available = {		
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_focus_generic_support_the_left_right
+		prerequisite = { focus = focus_CBI_freedom_to_economy }			
+		x = 7
+		y = 17
+		cost = 4
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+			swap_ideas = {
+			remove_idea = hight_taxation
+			add_idea = low_taxation
+				}
+			}
+		}
+
+	focus = {
+		id = focus_CBI_self_government_reform
+		available = {		
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_focus_hol_the_foundations_of_defense
+		prerequisite = { focus = focus_CBI_freedom_to_economy }			
+		x = 9
+		y = 17
+		cost = 4
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_STABILITY}
+		
+		completion_reward = {
+			add_stability = 0.1 
+			}
+		}
+
+	focus = {
+		id = focus_CBI_Banking_Charter_Law
+		available = {		
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_focus_hol_abandon_the_gold_standard
+		prerequisite = { focus = focus_CBI_remove_economic_restrictions }	
+		prerequisite = { focus = focus_CBI_self_government_reform }			
+		x = 7
+		y = 18
+		cost = 4
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+			add_ideas = CBI_banking_reform
+			}
+		}
+
+	focus = {
+		id = focus_CBI_elimination_of_rotten_places
+		available = {		
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_focus_generic_self_management
+		prerequisite = { focus = focus_CBI_remove_economic_restrictions }	
+		prerequisite = { focus = focus_CBI_self_government_reform }			
+		x = 9
+		y = 18
+		cost = 4
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+			add_political_power = 50 
+			}
+		}
+
+	focus = {
+		id = focus_CBI_free_economy
+		available = {		
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_focus_generic_self_management
+		prerequisite = { focus = focus_CBI_Banking_Charter_Law }	
+		prerequisite = { focus = focus_CBI_elimination_of_rotten_places }			
+		x = 8
+		y = 19
+		cost = 4
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+		swap_ideas = {
+		remove_idea = CBI_financial_collapse_2
+		add_idea = CBI_financial_collapse_3
+				}
+			}
+		}
+		
+	focus = {
+		id = focus_CBI_economic_policy_industry
+		available = {
+			date > 01.01.1852
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_generic_construct_civ_factory
+		prerequisite = { focus = focus_CBI_state_controls_economy focus = focus_CBI_free_economy }		
+		x = 5
+		y = 20
+		cost = 1
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		search_filters = {FOCUS_FILTER_STABILITY}
+		
+		completion_reward = {
+		
+			}
+		}
+		
+	focus = {
+		id = focus_CBI_edit_position_of_of_Pelham_Holles
+		available = {		
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_generic_forceful_treaty
+		prerequisite = { focus = focus_CBI_economic_policy_industry }	
+		mutually_exclusive = { focus = focus_CBI_cancel_position_of_Pelham_Holles }
+		x = 2
+		y = 21
+		cost = 4
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		search_filters = {FOCUS_FILTER_STABILITY}
+		
+		completion_reward = {
+			add_political_power = 50
+			}
+		}
+		
+	focus = {
+		id = focus_CBI_meeting_with_tycoons
+		available = {		
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_generic_intelligence_exchange
+		prerequisite = { focus = focus_CBI_edit_position_of_of_Pelham_Holles }	
+		x = 1
+		y = 22
+		cost = 4
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		search_filters = {FOCUS_FILTER_STABILITY}
+		
+		completion_reward = {
 			country_event = {
-			id = CBI.192 
-			days = 3
+			id = CBI.204
+			days = 1
+				}
+			}
+		}
+
+	focus = {
+		id = focus_CBI_different_goals_common_methods
+		available = {		
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_generic_military_deal
+		prerequisite = { focus = focus_CBI_edit_position_of_of_Pelham_Holles }	
+		x = 3
+		y = 22
+		cost = 4
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		search_filters = {FOCUS_FILTER_STABILITY}
+		
+		completion_reward = {
+			add_popularity = {
+			ideology = democratic  
+			popularity = 0.05
 				}	
 			}
-	}
-}
+		}
 
-country_event = { ### СОГЛАСИЕ ###
-	id = CBI.191 
-	title = CBI.191.t
-	desc = CBI.191.d
-	picture = GFX_report_event_generic_rifles
+	focus = {
+		id = focus_CBI_show_whose_factories_these_are
+		available = {		
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_continuous_suppression
+		prerequisite = { focus = focus_CBI_meeting_with_tycoons }	
+		prerequisite = { focus = focus_CBI_different_goals_common_methods }			
+		x = 1
+		y = 23
+		cost = 4
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		search_filters = {FOCUS_FILTER_STABILITY}
+		
+		completion_reward = {
+		338 = {
+		add_extra_state_shared_building_slots = 2	
+		add_building_construction = {
+		type = arms_factory
+		level = 2
+		instant_build = yes
+					}
+				}	
+		113 = {
+		add_extra_state_shared_building_slots = 2	
+		add_building_construction = {
+		type = arms_factory
+		level = 2
+		instant_build = yes
+					}
+				}
+		121 = {
+		add_extra_state_shared_building_slots = 2	
+		add_building_construction = {
+		type = arms_factory
+		level = 2
+		instant_build = yes
+					}
+				}				
+			}
+		}
+
+	focus = {
+		id = focus_CBI_Antimonopoly_Commission
+		available = {		
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_generic_consumer_goods
+		prerequisite = { focus = focus_CBI_meeting_with_tycoons }	
+		prerequisite = { focus = focus_CBI_different_goals_common_methods }			
+		x = 3
+		y = 23
+		cost = 4
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		search_filters = {FOCUS_FILTER_STABILITY}
+		
+		completion_reward = {
+			
+			}
+		}	
+
+	focus = {
+		id = focus_CBI_forced_transaction
+		available = {		
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_generic_demand_territory
+		prerequisite = { focus = focus_CBI_show_whose_factories_these_are }	
+		prerequisite = { focus = focus_CBI_Antimonopoly_Commission }			
+		x = 2
+		y = 24
+		cost = 4
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		search_filters = {FOCUS_FILTER_STABILITY}
+		
+		completion_reward = {
+			remove_ideas = CBI_financial_collapse_3
+			add_ideas = CBI_forced_transaction_1
+			}
+		}		
+
+	focus = {
+		id = focus_CBI_cancel_position_of_Pelham_Holles
+		available = {		
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_generic_construct_civ_factory
+		prerequisite = { focus = focus_CBI_economic_policy_industry }	
+		mutually_exclusive = { focus = focus_CBI_edit_position_of_of_Pelham_Holles }
+		x = 8
+		y = 21
+		cost = 4
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		search_filters = {FOCUS_FILTER_STABILITY}
+		
+		completion_reward = {
+			add_stability = 0.05
+			}
+		}		
+		
+		
+		
+	### КОЛОНИАЛЬНАЯ РЕФОРМА ###		
+		
+		
+	focus = {
+		id = focus_CBI_colony_reform
+		cancelable = no			
+		available = {
+		has_war = no
+		date > 1851.01.01
+		NOT = {
+		has_global_flag = british_socialist_revolution
+		}
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_focus_por_luso_tropicalism
+		prerequisite = { focus = focus_CBI_year_of_Great_Reforms }			
+		x = 17
+		y = 10
+		cost = 1
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		search_filters = {FOCUS_FILTER_STABILITY}
+		
+		completion_reward = {
+			country_event = {
+			id = CBI.177 
+			days = 1
+				}
+			}
+		}	
+		
+	focus = {
+		id = focus_CBI_legalize_status		
+		available = {
+		has_war = no
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_focus_CZE_german_puppet
+		prerequisite = { focus = focus_CBI_colony_reform }
+		mutually_exclusive = { focus = focus_CBI_cromwland_integration }
+		mutually_exclusive = { focus = focus_CBI_British_Commonwealth }
+		x = 12
+		y = 11
+		cost = 3
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		search_filters = {FOCUS_FILTER_STABILITY}
+		
+		completion_reward = {
+			country_event = {
+			id = CBI.178 
+			days = 1
+				}
+			}
+		}
+
+	focus = {
+		id = focus_CBI_reassure_governorship
+		available = {
+		has_war = no
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_focus_generic_self_management
+		prerequisite = { focus = focus_CBI_legalize_status }			
+		x = 13
+		y = 14
+		cost = 6
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		search_filters = {FOCUS_FILTER_STABILITY}
+		
+		completion_reward = {
+		NEN = {
+			add_opinion_modifier = {
+			target = CBI
+			modifier = CBI_reassure_governorship
+					}
+				}
+			}
+		}
+
+	focus = {
+		id = focus_CBI_direct_fleet
+		available = {
+		has_war = no
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_focus_generic_navy_battleship2
+		prerequisite = { focus = focus_CBI_legalize_status }		
+		x = 11
+		y = 14
+		cost = 6
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		search_filters = {FOCUS_FILTER_STABILITY}
+		
+		completion_reward = {
+		add_political_power = 25
+		navy_experience = 10
+		add_mines = {
+		region = 54
+		amount = 100 
+				}
+		add_mines = {
+		region = 55
+		amount = 100 
+				}
+		add_mines = {
+		region = 170
+		amount = 100 
+				}				
+			}
+		}
+		
+	focus = {
+		id = focus_CBI_visit_to_philadelphia
+		available = {
+		has_war = no
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_focus_eng_move_to_secure_the_dominions
+		prerequisite = { focus = focus_CBI_reassure_governorship }
+		prerequisite = { focus = focus_CBI_direct_fleet }				
+		x = 12
+		y = 16
+		cost = 6
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		search_filters = {FOCUS_FILTER_STABILITY}
+		
+		completion_reward = {
+			release_autonomy = {
+				target = NEN
+				autonomy_state = autonomy_puppet
+				freedom_level = 0.5
+				}	
+			}
+		}
+
+
+	focus = {
+		id = focus_CBI_cromwland_integration		
+		available = {
+		has_war = no
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_generic_national_unity
+		prerequisite = { focus = focus_CBI_colony_reform }
+		mutually_exclusive = { focus = focus_CBI_legalize_status }
+		mutually_exclusive = { focus = focus_CBI_British_Commonwealth }		
+		x = 17
+		y = 11
+		cost = 3
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+			country_event = {
+			id = CBI.178
+			days = 1
+				}
+			}
+		}	
+		
+	focus = {
+		id = focus_CBI_London_Conference	
+		available = {
+		has_war = no
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_generic_propaganda
+		prerequisite = { focus = focus_CBI_cromwland_integration }			
+		x = 15
+		y = 12
+		cost = 5
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+			country_event = {
+			id = CBI.198
+			days = 1
+				}
+		}		
+	}
 	
-	is_triggered_only = yes	
+	focus = {
+		id = focus_CBI_seat_in_parliament_NEN
+		available = {
+		has_war = no
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_focus_POL_complete_april_constitution
+		prerequisite = { focus = focus_CBI_cromwland_integration }			
+		x = 17
+		y = 12
+		cost = 5
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+			add_popularity = {
+			ideology = authoritarian  
+			popularity = -0.02
+				}	
+			add_popularity = {
+			ideology = reactionist   
+			popularity = -0.05
+				}
+			add_popularity = {
+			ideology = socialism  
+			popularity = -0.03
+				}
+			add_popularity = {
+			ideology = democratic  
+			popularity = 0.08
+				}				
+		}		
+	}	
 	
-	option = {
-	name = CBI.191.a
-		add_equipment_to_stockpile = {
-			type = infantry_equipment
-			amount = 1250
-			producer = CBI
+	focus = {
+		id = focus_CBI_economic_unification
+		available = {
+		has_war = no
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_generic_consumer_goods
+		prerequisite = { focus = focus_CBI_cromwland_integration focus = focus_CBI_British_Commonwealth }			
+		x = 20
+		y = 12
+		cost = 5
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+		NEN = {
+		add_political_power = 75
+			}
+		}	
+	}
+	
+	focus = {
+		id = focus_CBI_help_in_opening_resources
+		available = {
+		has_war = no
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_generic_construction2
+		prerequisite = { focus = focus_CBI_economic_unification }			
+		x = 18
+		y = 13
+		cost = 1
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+		add_resource = {
+			type = oil
+			amount = 8
+			state = 362 
+			}
+		add_resource = {
+			type = oil
+			amount = 5
+			state = 360 
+			}					
+		}	
+	}
+	
+	focus = {
+		id = focus_CBI_infrastructure_construction
+		available = {
+		has_war = no
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_generic_construct_infrastructure
+		prerequisite = { focus = focus_CBI_economic_unification }			
+		x = 20
+		y = 13
+		cost = 4
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_INDUSTRY}
+		
+		completion_reward = {
+		357 = {
+		add_extra_state_shared_building_slots = 2		
+		add_building_construction = {
+		type = infrastructure
+		level = 2
+		instant_build = yes
+				}
+			}
+		358 = {
+		add_extra_state_shared_building_slots = 2	
+		add_building_construction = {
+		type = infrastructure
+		level = 2
+		instant_build = yes
+				}
+			}
+		360 = {
+		add_extra_state_shared_building_slots = 3	
+		add_building_construction = {
+		type = infrastructure
+		level = 3
+		instant_build = yes
+				}
+			}			
+		}	
+	}
+
+	focus = {
+		id = focus_CBI_improve_communication_with_metropolis
+		available = {
+		has_war = no
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_generic_construct_naval_dockyard
+		prerequisite = { focus = focus_CBI_economic_unification }			
+		x = 22
+		y = 13
+		cost = 4
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_INDUSTRY}
+		
+		completion_reward = {
+		357 = {
+		add_extra_state_shared_building_slots = 1	
+		add_building_construction = {
+		type = dockyard
+		level = 1
+		instant_build = yes
+				}
+			}
+		360 = {
+		add_extra_state_shared_building_slots = 2	
+		add_building_construction = {
+		type = dockyard
+		level = 2
+		instant_build = yes
+				}
+			}			
+		}	
+	}	
+
+	focus = {
+		id = focus_CBI_investments_in_emerging_industry
+		available = {
+		has_war = no
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_generic_construct_civ_factory
+		prerequisite = { focus = focus_CBI_help_in_opening_resources }
+		prerequisite = { focus = focus_CBI_infrastructure_construction }
+		prerequisite = { focus = focus_CBI_improve_communication_with_metropolis }	
+		x = 19
+		y = 14
+		cost = 4
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_INDUSTRY}
+		
+		completion_reward = {
+		358 = {
+		add_extra_state_shared_building_slots = 1	
+		add_building_construction = {
+		type = industrial_complex
+		level = 1
+		instant_build = yes
+				}
+			}
+		360 = {
+		add_extra_state_shared_building_slots = 2	
+		add_building_construction = {
+		type = industrial_complex
+		level = 2
+		instant_build = yes
+				}
+			}			
+		}	
+	}	
+		
+	focus = {
+		id = focus_CBI_Cromwland_arsenal
+		available = {
+		has_war = no
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_generic_construct_mil_factory
+		prerequisite = { focus = focus_CBI_help_in_opening_resources }
+		prerequisite = { focus = focus_CBI_infrastructure_construction }
+		prerequisite = { focus = focus_CBI_improve_communication_with_metropolis }		
+		x = 21
+		y = 14
+		cost = 4
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_INDUSTRY}
+		
+		completion_reward = {
+		359 = {
+		add_extra_state_shared_building_slots = 1	
+		add_building_construction = {
+		type = arms_factory
+		level = 1
+		instant_build = yes
+				}
+			}
+		362 = {
+		add_extra_state_shared_building_slots = 1	
+		add_building_construction = {
+		type = arms_factory
+		level = 1
+		instant_build = yes
+				}
+			}			
+		}	
+	}
+
+	focus = {
+		id = focus_CBI_support_by_metropolis
+		available = {
+		has_war = no
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_generic_major_alliance
+		prerequisite = { focus = focus_CBI_investments_in_emerging_industry }
+		prerequisite = { focus = focus_CBI_Cromwland_arsenal }
+		x = 20
+		y = 15
+		cost = 4
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+			add_ideas = CBI_support_of_metropolis_CBI
+			NEN = {
+			add_ideas = CBI_support_of_metropolis_NEN
+			}
+			remove_ideas = CBI_relaxation_control
+		}	
+	}	
+		
+	focus = {
+		id = focus_CBI_permission_for_your_army		
+		available = {
+		has_war = no
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_focus_generic_little_entente
+		prerequisite = { focus = focus_CBI_seat_in_parliament_NEN }	
+		prerequisite = { focus = focus_CBI_London_Conference }		
+		x = 16
+		y = 13
+		cost = 5
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+			remove_ideas = NEN_ban_on_fullfledged_army
+			}
+		}
+		
+	focus = {
+		id = focus_CBI_Cromwland_Constitution_1851	
+		available = {
+		has_war = no
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_focus_hol_the_foundations_of_defense
+		prerequisite = { focus = focus_CBI_permission_for_your_army }		
+		x = 16
+		y = 15
+		cost = 5
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+			release_autonomy = {
+				target = NEN
+				autonomy_state = autonomy_dominion
+				freedom_level = 0.3
+				}
+			}
+		}		
+
+		
+		
+	focus = {
+		id = focus_CBI_British_Commonwealth		
+		available = {
+		has_war = no
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_focus_eng_imperial_federation
+		prerequisite = { focus = focus_CBI_colony_reform }	
+		mutually_exclusive = { focus = focus_CBI_legalize_status }
+		mutually_exclusive = { focus = focus_CBI_cromwland_integration }		
+		x = 25
+		y = 11
+		cost = 3
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+			country_event = {
+			id = CBI.178 
+			days = 1
+				}
+			}
+		}
+		
+	focus = {
+		id = focus_CBI_hold_meetings_with_governors	
+		available = {
+		has_war = no
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_generic_intelligence_exchange
+		prerequisite = { focus = focus_CBI_British_Commonwealth }			
+		x = 24
+		y = 12
+		cost = 3
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+			country_event = {
+			id = CBI.199 
+			days = 1
+				}
+			}
+		}
+
+	focus = {
+		id = focus_CBI_strengthen_ties
+		available = {
+		has_war = no
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_generic_national_unity	
+		prerequisite = { focus = focus_CBI_British_Commonwealth }			
+		x = 26
+		y = 12
+		cost = 3
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+		NEN = {
+			add_opinion_modifier = {
+			target = CBI
+			modifier = CBI_strengthen_ties
+					}
+				}
+		BAS = {
+			add_opinion_modifier = {
+			target = CBI
+			modifier = CBI_strengthen_ties
+					}
+				}				
+			}
+		}
+
+	focus = {
+		id = focus_CBI_spread_unity_law
+		available = {
+		has_war = no
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_generic_support_democracy
+		prerequisite = { focus = focus_CBI_hold_meetings_with_governors }
+		prerequisite = { focus = focus_CBI_strengthen_ties }		
+		x = 24
+		y = 13
+		cost = 3
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		search_filters = {FOCUS_FILTER_STABILITY}
+		
+		completion_reward = {
+		add_political_power = 50
+		add_stability = 0.05
+			}
+		}
+		
+	focus = {
+		id = focus_CBI_centralize_management
+		available = {
+		has_war = no
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_generic_demand_territory
+		prerequisite = { focus = focus_CBI_hold_meetings_with_governors }
+		prerequisite = { focus = focus_CBI_strengthen_ties }			
+		x = 26
+		y = 13
+		cost = 3
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+		add_timed_idea = {
+			idea = CBI_bloated_bureaucracy
+			days = 1460
+				}			
+			}
+		}
+
+	focus = {
+		id = focus_CBI_Research_within_Confederation
+		available = {
+		has_war = no
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_generic_scientific_exchange
+		prerequisite = { focus = focus_CBI_spread_unity_law }
+		prerequisite = { focus = focus_CBI_centralize_management }			
+		x = 25
+		y = 14
+		cost = 3
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_RESEARCH}
+		
+		completion_reward = {
+		remove_ideas = CBI_scientific_stagnation
+		add_timed_idea = {
+			idea = CBI_Research_within_Confederation_2
+			days = 1460
+				}			
+			}
+		}		
+		
+		
+	focus = {
+		id = focus_CBI_All_British_Conference	
+		available = {
+		has_war = no
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_generic_propaganda
+		prerequisite = { focus = focus_CBI_Research_within_Confederation }			
+		x = 23
+		y = 15
+		cost = 3
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		search_filters = {FOCUS_FILTER_STABILITY}
+		
+		completion_reward = {
+		CBI = {
+			annex_country = {
+			target = NEN
+			transfer_troops = yes
+					}		
+				}
+		CBI = {
+			annex_country = {
+			target = BAS
+			transfer_troops = yes
+					}		
+				}		
+			}
+		}
+
+	focus = {
+		id = focus_CBI_new_day_of_new_empire
+		available = {
+		has_war = no
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_focus_hol_united_netherlands
+		prerequisite = { focus = focus_CBI_All_British_Conference focus = focus_CBI_Cromwland_Constitution_1851 }		
+		prerequisite = { focus = focus_CBI_support_by_metropolis }			
+		x = 20
+		y = 16
+		cost = 1
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		search_filters = {FOCUS_FILTER_STABILITY}
+		
+		completion_reward = {
+			country_event = {
+			id = CBI.200 
+			days = 1
+				}
+			}
+		}
+
+	focus = {
+		id = focus_CBI_expansion_of_confederation
+		available = {
+		has_war = no
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_focus_eng_decolonization
+		prerequisite = { focus = focus_CBI_new_day_of_new_empire }		
+		prerequisite = { focus = focus_CBI_visit_to_philadelphia }			
+		x = 14
+		y = 17
+		cost = 1
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		search_filters = {FOCUS_FILTER_STABILITY}
+		
+		completion_reward = {
+
+			}
+		}
+
+	focus = {
+		id = focus_CBI_defense_of_confederacy
+		available = {
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_generic_construct_military
+		prerequisite = { focus = focus_CBI_new_day_of_new_empire }		
+		prerequisite = { focus = focus_CBI_visit_to_philadelphia }		
+		x = 19
+		y = 17
+		cost = 1
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		search_filters = {FOCUS_FILTER_STABILITY}
+		
+		completion_reward = {
+
+			}
+		}
+
+	### ВОЕННАЯ РЕФОРМА ###
+
+	focus = {
+		id = focus_CBI_military_reform
+		available = {
+		date > 1852.01.01		
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_generic_small_arms
+		prerequisite = { focus = focus_CBI_year_of_Great_Reforms }	
+		x = 40
+		y = 10
+		cost = 1
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		search_filters = {FOCUS_FILTER_STABILITY}
+		
+		completion_reward = {
+			country_event = {
+			id = CBI.200 
+			days = 1
+				}
+			}
+		}
+
+	focus = {
+		id = focus_CBI_military_industrial_complex
+		available = {		
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_generic_construct_mil_factory
+		prerequisite = { focus = focus_CBI_military_reform }	
+		x = 31
+		y = 11
+		cost = 1
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_INDUSTRY}
+		
+		completion_reward = {
+			add_tech_bonus = {
+			bonus = 1.0
+			uses = 2
+			category = industry
+				}		
+			}
+		}
+
+	focus = {
+		id = focus_CBI_Arsenal_liverpool_Manchester
+		available = {		
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_generic_construct_mil_factory
+		prerequisite = { focus = focus_CBI_military_industrial_complex }
+		mutually_exclusive = { focus = focus_CBI_autonomous_production_facilities_throughout_country }
+		x = 29
+		y = 12
+		cost = 4
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_INDUSTRY}
+		
+		completion_reward = {
+		130 = {
+		add_extra_state_shared_building_slots = 2	
+		add_building_construction = {
+		type = arms_factory
+		level = 2
+		instant_build = yes
+					}
+				}
+		132 = {
+		add_extra_state_shared_building_slots = 3	
+		add_building_construction = {
+		type = arms_factory
+		level = 3
+		instant_build = yes
+					}
+				}				
+			}
+		}
+		
+	focus = {
+		id = focus_CBI_development_of_metallurgy
+		available = {		
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_focus_generic_steel
+		prerequisite = { focus = focus_CBI_Arsenal_liverpool_Manchester }		
+		x = 28
+		y = 13
+		cost = 4
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_INDUSTRY}
+		
+		completion_reward = {
+			add_resource = {
+			type = steel
+			amount = 30
+			state = 130
+				}
+			add_resource = {
+			type = steel
+			amount = 50
+			state = 132
+				}
+			add_resource = {
+			type = oil
+			amount = 20
+			state = 132
+				}
+			add_resource = {
+			type = aluminium
+			amount = 25
+			state = 132
+				}				
+			}
+		}
+
+	focus = {
+		id = focus_CBI_improve_transport_infrastructure
+		available = {		
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_generic_construct_infrastructure
+		prerequisite = { focus = focus_CBI_Arsenal_liverpool_Manchester }		
+		x = 30
+		y = 13
+		cost = 4
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_INDUSTRY}
+		
+		completion_reward = {			
+		130 = {
+		add_building_construction = {
+		type = infrastructure
+		level = 2
+		instant_build = yes
+					}
+				}
+		132 = {				
+		add_building_construction = {
+		type = infrastructure
+		level = 2
+		instant_build = yes
+					}
+				}				
+			}
+		}
+
+	focus = {
+		id = focus_CBI_course_for_urbanization
+		available = {		
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_focus_generic_steel
+		prerequisite = { focus = focus_CBI_development_of_metallurgy }
+		prerequisite = { focus = focus_CBI_improve_transport_infrastructure }		
+		x = 29
+		y = 14
+		cost = 4
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_INDUSTRY}
+		
+		completion_reward = {			
+			311 = {
+				add_manpower = -25000
+				}
+			128 = {
+				add_manpower = -25000
+				}	
+			129 = {
+				add_manpower = -25000
+				}
+			131 = {
+				add_manpower = -25000
+				}
+			130 = {
+				add_manpower = 50000
+				}
+			132 = {
+				add_manpower = 50000
+				}				
+			}
+		}		
+
+	focus = {
+		id = focus_CBI_autonomous_production_facilities_throughout_country
+		available = {		
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_generic_production2
+		prerequisite = { focus = focus_CBI_military_industrial_complex }
+		mutually_exclusive = { focus = focus_CBI_Arsenal_liverpool_Manchester }		
+		x = 33
+		y = 12
+		cost = 5
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_INDUSTRY}
+		
+		completion_reward = {
+		126 = {
+		add_extra_state_shared_building_slots = 1	
+		add_building_construction = {
+		type = arms_factory
+		level = 1
+		instant_build = yes
+					}
+				}
+		128 = {
+		add_extra_state_shared_building_slots = 1	
+		add_building_construction = {
+		type = arms_factory
+		level = 1
+		instant_build = yes
+					}
+				}
+		130 = {
+		add_extra_state_shared_building_slots = 1	
+		add_building_construction = {
+		type = arms_factory
+		level = 1
+		instant_build = yes
+					}
+				}
+		132 = {
+		add_extra_state_shared_building_slots = 1	
+		add_building_construction = {
+		type = arms_factory
+		level = 1
+		instant_build = yes
+					}
+				}
+		133 = {
+		add_extra_state_shared_building_slots = 1	
+		add_building_construction = {
+		type = arms_factory
+		level = 1
+		instant_build = yes
+					}
+				}				
+		}
+	}
+
+	focus = {
+		id = focus_CBI_developing_connections
+		available = {		
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_generic_construction
+		prerequisite = { focus = focus_CBI_autonomous_production_facilities_throughout_country }	
+		x = 33
+		y = 13
+		cost = 5
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_INDUSTRY}
+		
+		completion_reward = {
+		126 = {
+		add_building_construction = {
+		type = infrastructure
+		level = 1
+		instant_build = yes
+					}
+				}
+		128 = {	
+		add_building_construction = {
+		type = infrastructure
+		level = 1
+		instant_build = yes
+					}
+				}
+		130 = {	
+		add_building_construction = {
+		type = infrastructure
+		level = 1
+		instant_build = yes
+					}
+				}
+		132 = {
+		add_building_construction = {
+		type = infrastructure
+		level = 1
+		instant_build = yes
+					}
+				}
+		133 = {
+		add_building_construction = {
+		type = infrastructure
+		level = 1
+		instant_build = yes
+					}
+				}				
+		}
+	}	
+	
+	focus = {
+		id = focus_CBI_specialization_of_local_autonomies
+		available = {		
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_generic_production
+		prerequisite = { focus = focus_CBI_developing_connections }	
+		x = 33
+		y = 14
+		cost = 5
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_INDUSTRY}
+		
+		completion_reward = {
+			add_ideas = CBI_specialization_of_local_autonomies
+		}
+	}
+
+	###  ###
+
+	focus = {
+		id = focus_CBI_Confederate_Military_Academy
+		available = {		
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_focus_generic_military_academy
+		prerequisite = { focus = focus_CBI_course_for_urbanization focus = focus_CBI_specialization_of_local_autonomies }	
+		prerequisite = { focus = focus_CBI_Research_within_Confederation }
+		mutually_exclusive = { focus = focus_CBI_London_Military_Academy }		
+		x = 30
+		y = 15
+		cost = 4
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_RESEARCH}
+		
+		completion_reward = {
+			add_research_slot = 1
+		}
+	}
+	
+	focus = {
+		id = focus_CBI_large_scholarships
+		available = {		
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_focus_mex_privatisation
+		prerequisite = { focus = focus_CBI_Confederate_Military_Academy focus = focus_CBI_London_Military_Academy }		
+		x = 31
+		y = 16
+		cost = 4
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_RESEARCH}
+		
+		completion_reward = {
+			swap_ideas = {
+			remove_idea = low_investment_level
+			add_idea = average_investment_level
+				}
+		}
+	}		
+	
+	focus = {
+		id = focus_CBI_subsidies_to_scientists_of_entire_confederation
+		available = {		
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_generic_scientific_exchange
+		prerequisite = { focus = focus_CBI_Confederate_Military_Academy }		
+		x = 29
+		y = 16
+		cost = 4
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_RESEARCH}
+		
+		completion_reward = {
+			swap_ideas = {
+			remove_idea = CBI_Research_within_Confederation_1
+			add_idea = CBI_Research_within_Confederation_2
+				}
+		}
+	}		
+	
+	focus = {
+		id = focus_CBI_London_Military_Academy
+		available = {		
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_focus_generic_military_academy
+		prerequisite = { focus = focus_CBI_course_for_urbanization focus = focus_CBI_specialization_of_local_autonomies }	
+		mutually_exclusive = { focus = focus_CBI_Confederate_Military_Academy }
+		x = 32
+		y = 15
+		cost = 4
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_RESEARCH}
+		
+		completion_reward = {
+			add_research_slot = 1
+		}
+	}
+	
+	focus = {
+		id = focus_CBI_expand_Cambridge_and_Oxford_universities
+		available = {		
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_tfv_generic_tech_sharing
+		prerequisite = { focus = focus_CBI_London_Military_Academy  }			
+		x = 33
+		y = 16
+		cost = 4
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_RESEARCH}
+		
+		completion_reward = {
+			add_research_slot = 1
+		}
+	}	
+
+	focus = {
+		id = focus_CBI_innovations_in_electrical_engineering
+		available = {		
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_generic_radar
+		prerequisite = { focus = focus_CBI_subsidies_to_scientists_of_entire_confederation focus = focus_CBI_expand_Cambridge_and_Oxford_universities }
+		prerequisite = { focus = focus_CBI_large_scholarships }
+		x = 31
+		y = 17
+		cost = 4
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_RESEARCH}
+		
+		completion_reward = {
+			add_tech_bonus = {
+			bonus = 1.0
+			uses = 2
+			category = electronics
+			}
+		}
+	}	
+	
+	### АРМИЯ ###
+	
+	focus = {
+		id = focus_CBI_army
+		available = {		
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_generic_build_tank
+		prerequisite = { focus = focus_CBI_military_reform }	
+		x = 37
+		y = 11
+		cost = 1
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_INDUSTRY}
+		
+		completion_reward = {
+			army_experience = 25
+			}
+		}	
+
+	focus = {
+		id = focus_CBI_cromwells_testaments
+		available = {		
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_generic_attack_allies
+		prerequisite = { focus = focus_CBI_army }	
+		mutually_exclusive = { focus = focus_CBI_modern_warfare }		
+		x = 35
+		y = 12
+		cost = 5
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_INDUSTRY}
+		
+		completion_reward = {
+			swap_ideas = {
+			remove_idea = CBI_outdated_army
+			add_idea = CBI_outdated_army_cromwells_testaments_1
+				}
+			}
+		}
+		
+	focus = {
+		id = focus_CBI_establishing_strict_discipline
+		available = {		
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_focus_generic_military_mission
+		prerequisite = { focus = focus_CBI_cromwells_testaments }		
+		x = 35
+		y = 13
+		cost = 5
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_INDUSTRY}
+		
+		completion_reward = {
+			swap_ideas = {
+			remove_idea = CBI_outdated_army_cromwells_testaments_1
+			add_idea = CBI_outdated_army_cromwells_testaments_2
+				}
+			}
+		}
+
+	focus = {
+		id = focus_CBI_constant_training
+		available = {		
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_continuous_reduce_training_time
+		prerequisite = { focus = focus_CBI_establishing_strict_discipline }		
+		prerequisite = { focus = focus_CBI_introduction_of_innovations }			
+		x = 35
+		y = 14
+		cost = 5
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_INDUSTRY}
+		
+		completion_reward = {
+			swap_ideas = {
+			remove_idea = CBI_outdated_army_cromwells_testaments_2
+			add_idea = CBI_outdated_army_cromwells_testaments_3
+				}
+			}
+		}
+
+	focus = {
+		id = focus_CBI_piety
+		available = {		
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_generic_attack_allies
+		prerequisite = { focus = focus_CBI_constant_training }	
+		prerequisite = { focus = focus_CBI_revive_faith_in_army }			
+		x = 35
+		y = 15
+		cost = 5
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_INDUSTRY}
+		
+		completion_reward = {
+			add_tech_bonus = {
+			bonus = 1.0
+			uses = 2
+			category = land_doctrine
+				}
+			}
+		}		
+
+
+
+	focus = {
+		id = focus_CBI_modern_warfare
+		available = {		
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_generic_army_artillery
+		prerequisite = { focus = focus_CBI_army }	
+		mutually_exclusive = { focus = focus_CBI_cromwells_testaments }		
+		x = 39
+		y = 12
+		cost = 5
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+			army_experience = 50
+			}
+		}
+		
+	focus = {
+		id = focus_CBI_bet_on_artillery
+		available = {		
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_generic_army_artillery2
+		prerequisite = { focus = focus_CBI_modern_warfare }	
+		prerequisite = { focus = focus_CBI_introduction_of_innovations }			
+		x = 39
+		y = 14
+		cost = 5
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+			add_tech_bonus = {
+			bonus = 1.0
+			uses = 2
+			category = artillery
+				}
+			add_tech_bonus = {
+				uses = 2
+				bonus = 1.0
+				category = motorized_equipment
+				}				
+			}
+		}
+
+	focus = {
+		id = focus_CBI_introduction_of_innovations_art
+		available = {		
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_rhineland
+		prerequisite = { focus = focus_CBI_bet_on_artillery }	
+		prerequisite = { focus = focus_CBI_revive_faith_in_army }			
+		x = 39
+		y = 15
+		cost = 5
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+			remove_ideas = CBI_outdated_army
+			}
+		}
+
+	focus = {
+		id = focus_CBI_introduction_of_innovations
+		available = {		
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_demand_sudetenland
+		prerequisite = { focus = focus_CBI_cromwells_testaments focus = focus_CBI_modern_warfare }	
+		x = 37
+		y = 13
+		cost = 5
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+			
+			}
+		}
+		
+	focus = {
+		id = focus_CBI_revive_faith_in_army
+		available = {		
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_generic_demand_territory
+		prerequisite = { focus = focus_CBI_establishing_strict_discipline }			
+		prerequisite = { focus = focus_CBI_introduction_of_innovations }		
+		x = 37
+		y = 14
+		cost = 5
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+			add_war_support = 0.1				
+			}
+		}	
+
+	focus = {
+		id = focus_CBI_land_maneuvers
+		available = {		
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_generic_army_doctrines
+		prerequisite = { focus = focus_CBI_revive_faith_in_army }			
+		prerequisite = { focus = focus_CBI_constant_training focus = focus_CBI_bet_on_artillery }		
+		x = 37
+		y = 15
+		cost = 5
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 1.0
+				uses = 2
+				category = land_doctrine
+			}			
+			}
+		}		
+
+		### ФЛОТ ###
+
+	focus = {
+		id = focus_CBI_navy
+		available = {		
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_generic_build_nay
+		prerequisite = { focus = focus_CBI_military_reform }	
+		x = 44
+		y = 11
+		cost = 1
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOC}
+		
+		completion_reward = {
+			navy_experience = 25
+			}
+		}		
+
+	focus = {
+		id = focus_CBI_fleet_rearmament
+		available = {
+			has_completed_focus = focus_CBI_depoliticize_fleet
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_generic_navy_battleship
+		prerequisite = { focus = focus_CBI_navy }		
+		x = 41
+		y = 12
+		cost = 5
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_RESEARCH}
+		
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 1.0
+				uses = 2
+				category = bb_tech
+				}
+			}
+		}
+
+	focus = {
+		id = focus_CBI_show_interest_in_submarines
+		available = {		
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_generic_navy_submarine
+		prerequisite = { focus = focus_CBI_fleet_rearmament }		
+		x = 41
+		y = 13
+		cost = 5
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_RESEARCH}
+		
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 1.0
+				uses = 2
+				category = ss_tech
+				}
+			}
+		}		
+		
+	focus = {
+		id = focus_CBI_accelerated_rearmament
+		available = {
+			has_completed_focus = focus_CBI_depoliticize_fleet		
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_generic_construct_naval_dockyard
+		prerequisite = { focus = focus_CBI_navy }		
+		x = 43
+		y = 12
+		cost = 5
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_INDUSTRY}
+		
+		completion_reward = {
+			122 = {
+					add_extra_state_shared_building_slots = 2
+					add_building_construction = {
+						type = dockyard
+						level = 2
+						instant_build = yes
+					}
+				}
+			123 = {
+					add_extra_state_shared_building_slots = 2
+					add_building_construction = {
+						type = dockyard
+						level = 2
+						instant_build = yes
+					}
+				}
+			127 = {
+					add_extra_state_shared_building_slots = 2
+					add_building_construction = {
+						type = dockyard
+						level = 2
+						instant_build = yes
+					}
+				}				
+			}
+		}
+		
+	focus = {
+		id = focus_CBI_increasing_ports
+		available = {		
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_generic_navy_cruiser
+		prerequisite = { focus = focus_CBI_accelerated_rearmament }		
+		x = 43
+		y = 13
+		cost = 5
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_INDUSTRY}
+		
+		completion_reward = {
+							
+			}
+		}		
+		
+	focus = {
+		id = focus_CBI_traditions_of_republican_fleet
+		available = {		
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_generic_navy_doctrines_tactics
+		prerequisite = { focus = focus_CBI_show_interest_in_submarines }
+		prerequisite = { focus = focus_CBI_increasing_ports }		
+		x = 42
+		y = 14
+		cost = 5
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_RESEARCH}
+		
+		completion_reward = {
+			add_doctrine_cost_reduction = {
+				cost_reduction = 1.0
+				uses = 2
+				category = naval_doctrine
+				}
+			}
 		}			
-		add_equipment_to_stockpile = {
-			type = support_equipment
-			amount = 150
-			producer = CBI
-		}						
-		add_equipment_to_stockpile = {
-			type = artillery_equipment
-			amount = 17
-			producer = CBI
-		}						
-	}	
-}
 
-country_event = { ### ОТКАЗ ###
-	id = CBI.192 
-	title = CBI.192.t
-	desc = CBI.192.d
-	picture = GFX_report_event_generic_rifles
-	
-	is_triggered_only = yes	
-	
-	option = {
-	name = CBI.192.a		
-	}
-}
+	focus = {
+		id = focus_CBI_abrupt_arrest_of_admirals
+		available = {		
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_generic_major_war
+		prerequisite = { focus = focus_CBI_navy }		
+		mutually_exclusive = { focus = focus_CBI_agreement_with_admirals }
+		x = 45
+		y = 12
+		cost = 5
+		ai_will_do = {
+			factor = 1
+		}
 
-country_event = {
-	id = CBI.193 
-	title = CBI.193.t
-	desc = CBI.193.d
-	picture = GFX_CBI_socialist_revolution
-	
-	is_triggered_only = yes	
-	
-	option = {
-	name = CBI.193.a
-	add_political_power = 25
-	}
-}
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+				country_event = {
+				id = CBI.202
+				days = 2
+				}
+			}
+		}	
 
-country_event = {
-	id = CBI.194
-	title = CBI.194.t
-	desc = CBI.194.d
-	picture = GFX_CBI_socialist_revolution
-	
-	is_triggered_only = yes	
-	
-	option = {
-	name = CBI.194.a
-		BRS = {
-		set_state_owner = 133
-		set_state_owner = 136
-		set_state_owner = 120
-		set_state_owner = 121
+	focus = {
+		id = focus_CBI_agreement_with_admirals
+		available = {		
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_generic_improve_relations
+		prerequisite = { focus = focus_CBI_navy }		
+		mutually_exclusive = { focus = focus_CBI_abrupt_arrest_of_admirals }
+		x = 47
+		y = 12
+		cost = 5
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+				country_event = {
+				id = CBI.203
+				days = 2
+				}
+			}
+		}
+
+	focus = {
+		id = focus_CBI_give_Napier_right_to_his_own_party
+		available = {		
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_focus_generic_diplomatic_treaty
+		prerequisite = { focus = focus_CBI_agreement_with_admirals }		
+		x = 47
+		y = 13
+		cost = 5
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+		set_party_name = {
+			ideology = authoritarian 
+			long_name = CBI_authoritarian_party_reform_long
+			name = CBI_authoritarian_party_reform 
+				}	
+			add_popularity = {
+			ideology = authoritarian 		
+			popularity = 0.07
+				}				
+			}
+		}		
+
+	focus = {
+		id = focus_CBI_depoliticize_fleet
+		available = {		
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_generic_position_armies
+		prerequisite = { focus = focus_CBI_abrupt_arrest_of_admirals focus = focus_CBI_agreement_with_admirals }	
+		x = 46
+		y = 14
+		cost = 5
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+			add_political_power = 50
+			}
+		}		
+			
+		### АВИАЦИЯ ###
+		
+	focus = {
+		id = focus_CBI_creation_of_aviation
+		available = {		
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_generic_build_airforce
+		prerequisite = { focus = focus_CBI_military_reform }	
+		x = 50
+		y = 11
+		cost = 1
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOC}
+		
+		completion_reward = {
+			air_experience = 25
+			}
+		}		
+
+	focus = {
+		id = focus_CBI_strategic_bombers
+		available = {
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_generic_air_bomber
+		prerequisite = { focus = focus_CBI_creation_of_aviation }
+		mutually_exclusive = { focus = focus_CBI_aviation_support }		
+		x = 49
+		y = 12
+		cost = 5
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_RESEARCH}
+		
+		completion_reward = {
+			air_experience = 50		
+			add_tech_bonus = {
+				bonus = 1.0
+				uses = 2
+				category = heavy_air
+				}		
+			add_ideas = CBI_strategic_bombing_focus_1
+			}
+		}
+		
+	focus = {
+		id = focus_CBI_offensive_destruction
+		available = {
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_generic_occupy_start_war
+		prerequisite = { focus = focus_CBI_strategic_bombers }
+		x = 49
+		y = 14
+		cost = 5
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_RESEARCH}
+		
+		completion_reward = {
+			swap_ideas = {
+			remove_idea = CBI_strategic_bombing_focus_1
+			add_idea = CBI_strategic_bombing_focus_2
+				}
+			}
+		}
+
+	focus = {
+		id = focus_CBI_start_building_airports
+		available = {
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_generic_construct_civilian
+		prerequisite = { focus = focus_CBI_strategic_bombers focus = focus_CBI_aviation_support }	
+		x = 50
+		y = 13
+		cost = 5
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_RESEARCH}
+		
+		completion_reward = {
+		126 = {
+		add_extra_state_shared_building_slots = 3	
+		add_building_construction = {
+		type = air_base
+		level = 3
+		instant_build = yes
+					}
+				}
+		129 = {
+		add_extra_state_shared_building_slots = 2	
+		add_building_construction = {
+		type = air_base
+		level = 2
+		instant_build = yes
+					}
+				}
+		338 = {
+		add_extra_state_shared_building_slots = 2	
+		add_building_construction = {
+		type = air_base
+		level = 2
+		instant_build = yes
+					}
+				}				
+				
+			}
+		}		
+
+	focus = {
+		id = focus_CBI_aviation_support
+		available = {
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_generic_air_fighter
+		prerequisite = { focus = focus_CBI_creation_of_aviation }
+		mutually_exclusive = { focus = focus_CBI_strategic_bombers }		
+		x = 51
+		y = 12
+		cost = 5
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_RESEARCH}
+		
+		completion_reward = {
+			air_experience = 50			
+			add_tech_bonus = {
+				uses = 2
+				bonus = 1.0
+				category = cas_bomber
+				}				
+			}
+		}
+		
+	focus = {
+		id = focus_CBI_ground_force_support
+		available = {
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_generic_air_fighter2
+		prerequisite = { focus = focus_CBI_aviation_support }
+		x = 51
+		y = 14
+		cost = 5
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_RESEARCH}
+		
+		completion_reward = {
+			add_tech_bonus = {
+				uses = 2
+				bonus = 1.0
+				category = tactical_bomber
+				}					
+			}
+		}	
+
+	focus = {
+		id = focus_CBI_foreign_experience
+		available = {
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_generic_air_doctrine
+		prerequisite = { focus = focus_CBI_offensive_destruction }
+		prerequisite = { focus = focus_CBI_ground_force_support }		
+		x = 50
+		y = 15
+		cost = 5
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_RESEARCH}
+		
+		completion_reward = {
+			add_doctrine_cost_reduction = {
+				uses = 2
+				cost_reduction = 1.0
+				category = air_doctrine
+				}					
+			}
+		}	
+
+	focus = {
+		id = focus_CBI_general_staff_CBI
+		available = {
+			has_army_experience > 75
+			has_air_experience > 75
+			has_navy_experience > 75		
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_focus_eng_special_air_service
+		prerequisite = { focus = focus_CBI_land_maneuvers }
+		prerequisite = { focus = focus_CBI_piety focus = focus_CBI_introduction_of_innovations_art }		
+		prerequisite = { focus = focus_CBI_traditions_of_republican_fleet }
+		prerequisite = { focus = focus_CBI_depoliticize_fleet }		
+		prerequisite = { focus = focus_CBI_foreign_experience }		
+		x = 43
+		y = 16
+		cost = 5
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_RESEARCH}
+		
+		completion_reward = {
+			add_ideas = CBI_british_headquarters					
+			}
+		}
+		
+	### РЕВОЛЮЦИЯ ###
+		
+	focus = {
+		id = focus_CBI_red_chaos	
+		available = {
+		has_country_flag = british_socialist_revolution			
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_generic_war_with_comintern			
+		x = 55
+		y = 2
+		cost = 1
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+		custom_effect_tooltip = CBI_BRITISH_REVOLUTION	
+			hidden_effect = {
+			country_event = {
+				id = CBI.183 
+				days = 2
+				}
+			}
 		}
 	}
-}
+	focus = {
+		id = focus_CBI_start_your_propaganda	
+		available = {
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_cbi_conservators_were_wrong
+		prerequisite = { focus = focus_CBI_red_chaos }		
+		x = 53
+		y = 3
+		cost = 3
+		ai_will_do = {
+			factor = 1
+		}
 
-country_event = {
-	id = CBI.195
-	title = CBI.195.t
-	desc = CBI.195.d
-	picture = GFX_CBI_socialist_revolution
-	
-	is_triggered_only = yes	
-	
-	option = {
-	name = CBI.195.a
-	add_stability = 0.08
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_STABILITY}
+		
+		completion_reward = {
+		add_stability = 0.02
+		}
+	}	
+	focus = {
+		id = focus_CBI_try_split_workers
+		available = {
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_generic_political_pressure
+		prerequisite = { focus = focus_CBI_red_chaos }		
+		x = 55
+		y = 3
+		cost = 3
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_STABILITY}
+		
+		completion_reward = {
+			add_stability = 0.02
+		}
 	}
-}
+	focus = {
+		id = focus_CBI_relocate_army
+		available = {
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_generic_small_arms
+		prerequisite = { focus = focus_CBI_red_chaos }		
+		x = 57
+		y = 3
+		cost = 3
+		ai_will_do = {
+			factor = 1
+		}
 
-country_event = {
-	id = CBI.196
-	title = CBI.196.t
-	desc = CBI.196.d
-	picture = GFX_CBI_socialist_revolution
-	
-	is_triggered_only = yes	
-	
-	option = {
-	name = CBI.196.a
-	add_political_power = 25
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+				division_template = {
+					name = "Emergency Response Division"
+					division_names_group = CBI_INF_01
+					priority = 2
+					regiments = {
+						infantry  = { x = 0 y = 0 }
+						infantry  = { x = 0 y = 1 }
+						infantry  = { x = 0 y = 2 }
+						infantry  = { x = 0 y = 3 } 
+			
+						infantry  = { x = 1 y = 0 }
+						infantry  = { x = 1 y = 1 }
+						infantry  = { x = 1 y = 2 }
+						infantry  = { x = 1 y = 3 }
+						
+						infantry  = { x = 2 y = 0 }
+						infantry  = { x = 2 y = 1 }
+						infantry  = { x = 2 y = 2 }
+						infantry  = { x = 2 y = 3 }
+					}
+					support = {
+						military_police = { x = 0 y = 0 }						
+						artillery = { x = 0 y = 1 }
+					}
+				}		
+			129 = {
+				create_unit = {
+					division = "name = \"Emergency Response Division\" division_template = \"Emergency Response Division\" start_experience_factor = 0.5" 
+					owner = CBI
+				}
+				create_unit = {
+					division = "name = \"Emergency Response Division\" division_template = \"Emergency Response Division\" start_experience_factor = 0.5" 
+					owner = CBI
+				}				
+			}
+			130 = {
+				create_unit = {
+					division = "name = \"Emergency Response Division\" division_template = \"Emergency Response Division\" start_experience_factor = 0.5" 
+					owner = CBI
+				}
+				create_unit = {
+					division = "name = \"Emergency Response Division\" division_template = \"Emergency Response Division\" start_experience_factor = 0.5" 
+					owner = CBI
+				}
+			}
+			131 = {
+					create_unit = {
+						division = "name = \"Emergency Response Division\" division_template = \"Emergency Response Division\" start_experience_factor = 0.5" 
+						owner = CBI
+					}
+					create_unit = {
+						division = "name = \"Emergency Response Division\" division_template = \"Emergency Response Division\" start_experience_factor = 0.5" 
+						owner = CBI
+					}				
+				}	
+			}
+		сountry_event = CBI.185
 	}
-}
+	
 
-country_event = {
-	id = CBI.197
-	title = CBI.197.t
-	desc = CBI.197.d
-	picture = GFX_CBI_socialist_revolution
-	
-	is_triggered_only = yes	
-	
-	option = {
-	name = CBI.197.a
-	add_political_power = 25
-	}
-}
+	focus = {
+		id = focus_CBI_no_compromises
+		icon = GFX_focus_spr_crush_the_revolution
+		
+		x = 48
+		y = 4
+		
+		prerequisite = { focus = focus_CBI_start_your_propaganda }
+		prerequisite = { focus = focus_CBI_try_split_workers }
+		prerequisite = { focus = focus_CBI_relocate_army }
+		
+		mutually_exclusive = { focus = focus_CBI_radical_changes }
+		mutually_exclusive = { focus = focus_CBI_moderate_concessions }		
+		
+		available = {
+		
+		}
+		
+		bypass = {
+		
+		}
+		
+		cost = 1
+		
+		ai_will_do = {
+			factor = 4
+		}
 
-country_event = {
-	id = CBI.198
-	title = CBI.198.t
-	desc = CBI.198.d
-	picture = GFX_CBI_socialist_revolution
-	
-	is_triggered_only = yes	
-	
-	option = {
-	name = CBI.198.a
-	add_stability = 0.05
-	NEN = {
-	remove_ideas = NEN_British_control_of_economy
-	add_ideas = CBI_relaxation_control
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+			custom_effect_tooltip = CBI_NO_COMPROMISES	
+			hidden_effect = {
+				country_event = {
+					id = CBI.186 
+					days = 40
+				}
+				country_event = {
+					id = CBI.194 
+					days = 90
+				}				
+			}
+		}
+	}	
+		
+	focus = {
+		id = focus_CBI_prepare_weapons
+		available = {
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_focus_secret_rearmament
+		prerequisite = { focus = focus_CBI_no_compromises }		
+		x = 47
+		y = 5
+		cost = 5
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = 3500
+				producer = CBI
+			}			
+			add_equipment_to_stockpile = {
+				type = support_equipment
+				amount = 1200
+				producer = CBI
+			}						
+			add_equipment_to_stockpile = {
+				type = artillery_equipment
+				amount = 150
+				producer = CBI							
+			}
 		}
 	}
 	
-	option = {
-	name = CBI.198.b
-	add_political_power = 150
+	focus = {
+		id = focus_CBI_weapons_colony_assistance
+		available = {
+		has_war = yes		
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_focus_POL_beck_ribbentrop
+		prerequisite = { focus = focus_CBI_prepare_weapons }		
+		x = 43
+		y = 6
+		cost = 2
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+			NEN = { country_event = { id = CBI.187 days = 2 } }
+			BAS = { country_event = { id = CBI.190 days = 2 } }			
+		}
+	}		
+
+	focus = {
+		id = focus_CBI_mobilize_conscripts
+		available = {
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_generic_axis_build_infantry
+		prerequisite = { focus = focus_CBI_no_compromises }			
+		x = 49
+		y = 5
+		cost = 5
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		search_filters = {FOCUS_FILTER_MANPOWER}
+		
+		completion_reward = {
+			129 = {
+				create_unit = {
+					division = "name = \"Emergency Response Division\" division_template = \"Emergency Response Division\" start_experience_factor = 0.5" 
+					owner = CBI
+				}				
+			}
+			130 = {
+				create_unit = {
+					division = "name = \"Emergency Response Division\" division_template = \"Emergency Response Division\" start_experience_factor = 0.5" 
+					owner = CBI
+				}
+			}
+			131 = {
+				create_unit = {
+					division = "name = \"Emergency Response Division\" division_template = \"Emergency Response Division\" start_experience_factor = 0.5" 
+					owner = CBI				
+				}
+			}
+			122 = {
+				create_unit = {
+					division = "name = \"Emergency Response Division\" division_template = \"Emergency Response Division\" start_experience_factor = 0.5" 
+					owner = CBI				
+				}
+			}
+			128 = {
+				create_unit = {
+					division = "name = \"Emergency Response Division\" division_template = \"Emergency Response Division\" start_experience_factor = 0.5" 
+					owner = CBI				
+				}
+			}
+			add_manpower = 11650
+		}
+	}
+		
+	focus = {
+		id = focus_CBI_prepare_production
+		available = {
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_generic_construct_mil_factory
+		prerequisite = { focus = focus_CBI_prepare_weapons }
+		prerequisite = { focus = focus_CBI_mobilize_conscripts }		
+		x = 47
+		y = 6
+		cost = 5
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_INDUSTRY}
+		
+		completion_reward = {
+		128 = {
+		add_building_construction = {
+		type = arms_factory
+		level = 1
+		instant_build = yes
+					}
+				}
+		129 = {	
+		add_building_construction = {
+		type = arms_factory
+		level = 2
+		instant_build = yes
+					}
+				}
+			}
+		}
+
+	focus = {
+		id = focus_CBI_enlist_support_fleet
+		available = {
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_generic_amphibious_assault
+		prerequisite = { focus = focus_CBI_prepare_weapons }
+		prerequisite = { focus = focus_CBI_mobilize_conscripts }		
+		x = 49
+		y = 6
+		cost = 5
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+		add_political_power = 25
+		navy_experience = 10
+		add_mines = {
+		region = 16
+		amount = 100 
+				}		
+		add_mines = {
+		region = 43
+		amount = 100 
+				}		
+			}
+		}	
+
+	focus = {
+		id = focus_CBI_crush_revolution
+		available = {
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_focus_spr_crush_the_revolution
+		prerequisite = { focus = focus_CBI_prepare_production }
+		prerequisite = { focus = focus_CBI_enlist_support_fleet }		
+		x = 48
+		y = 7
+		cost = 1
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		search_filters = {FOCUS_FILTER_STABILITY}
+		
+		completion_reward = {
+		add_war_support = 0.1
+		declare_war_on = {
+		target = BRS
+		type = annex_everything
+				}
+			}
+		}		
+	
+	
+	###  ###
+	
+	
+	focus = {
+		id = focus_CBI_moderate_concessions
+		available = {
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_focus_eng_concessions_to_the_trade_unions
+		prerequisite = { focus = focus_CBI_start_your_propaganda }		
+		prerequisite = { focus = focus_CBI_try_split_workers }
+		prerequisite = { focus = focus_CBI_relocate_army }
+		mutually_exclusive = { focus = focus_CBI_no_compromises }
+		mutually_exclusive = { focus = focus_CBI_radical_changes }			
+		x = 55
+		y = 4
+		cost = 1
+		ai_will_do = {
+			factor = 20
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+		custom_effect_tooltip = CBI_MODERATE_CONCESSIONS
+			}
+		}
+		
+	focus = {
+		id = focus_CBI_debates_in_parliament
+		available = {
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_focus_eng_concessions_to_the_trade_unions
+		prerequisite = { focus = focus_CBI_moderate_concessions }			
+		x = 54
+		y = 5
+		cost = 4
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_STABILITY}
+		
+		completion_reward = {
+		add_stability = -0.02
+			}
+		}
+
+	focus = {
+		id = focus_CBI_guarantee_minimum_rights
+		available = {
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_focus_generic_support_the_left_right
+		prerequisite = { focus = focus_CBI_moderate_concessions }			
+		x = 56
+		y = 5
+		cost = 4
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_STABILITY}
+		
+		completion_reward = {
+		add_stability = 0.04
+			}
+		}
+
+	focus = {
+		id = focus_CBI_protection_from_arbitrariness
+		available = {
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_focus_spr_class_war
+		prerequisite = { focus = focus_CBI_debates_in_parliament }
+		prerequisite = { focus = focus_CBI_guarantee_minimum_rights }		
+		x = 53
+		y = 6
+		cost = 4
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		search_filters = {FOCUS_FILTER_STABILITY}
+		
+		completion_reward = {
+		add_political_power = 25
+		add_stability = 0.04
+			}
+		}
+
+	focus = {
+		id = focus_CBI_right_to_strike
+		available = {
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_focus_por_workers_of_iberia
+		prerequisite = { focus = focus_CBI_debates_in_parliament }
+		prerequisite = { focus = focus_CBI_guarantee_minimum_rights }		
+		x = 55
+		y = 6
+		cost = 4
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+		add_ideas = CBI_right_to_strike
+			}
+		}
+		
+	focus = {
+		id = focus_CBI_seat_in_parliament
+		available = {
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_focus_POL_complete_april_constitution
+		prerequisite = { focus = focus_CBI_debates_in_parliament }
+		prerequisite = { focus = focus_CBI_guarantee_minimum_rights }		
+		x = 57
+		y = 6
+		cost = 4
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+		set_party_name = {
+			ideology = socialism 
+			long_name = CBI_socialism_party_reform_long
+			name = CBI_socialism_party_reform 
+			}
+		}	
+	} 
+
+	focus = {
+		id = focus_CBI_British_Congress
+		available = {
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_molotov_ribbentrop_pact
+		prerequisite = { focus = focus_CBI_protection_from_arbitrariness }
+		prerequisite = { focus = focus_CBI_right_to_strike }	
+		prerequisite = { focus = focus_CBI_seat_in_parliament }		
+		x = 55
+		y = 7
+		cost = 1
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+			country_event = {
+			id = CBI.195
+				}
+			remove_ideas = CBI_British_socialist_revolution	
+			}
+		}		
+
+	focus = {
+		id = focus_CBI_radical_changes
+		available = {
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_focus_generic_soviet_politics
+		prerequisite = { focus = focus_CBI_start_your_propaganda }
+		prerequisite = { focus = focus_CBI_try_split_workers }
+		prerequisite = { focus = focus_CBI_relocate_army }
+		mutually_exclusive = { focus = focus_CBI_no_compromises }		
+		mutually_exclusive = { focus = focus_CBI_moderate_concessions }			
+		x = 62
+		y = 4
+		cost = 1
+		ai_will_do = {
+			factor = 80
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+		custom_effect_tooltip = CBI_RADICAL_CHANGES
+			}
+		}	
+
+	focus = {
+		id = focus_CBI_workers_rights
+		available = {
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_support_communism
+		prerequisite = { focus = focus_CBI_radical_changes }		
+		x = 60
+		y = 5
+		cost = 2
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_STABILITY}
+		
+		completion_reward = {
+		add_stability = 0.05
+			}
+		}
+		
+	focus = {
+		id = focus_CBI_8_hour_working_day
+		available = {
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_generic_production
+		prerequisite = { focus = focus_CBI_workers_rights }		
+		x = 59
+		y = 6
+		cost = 2
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+			add_ideas = CBI_8_hour_working_day
+			}
+		}			
+
+	focus = {
+		id = focus_CBI_right_to_strike_2
+		available = {
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_generic_forceful_treaty
+		prerequisite = { focus = focus_CBI_workers_rights }		
+		x = 61
+		y = 6
+		cost = 2
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+		add_ideas = CBI_right_to_strike
+			}
+		}
+		
+	focus = {
+		id = focus_CBI_right_to_rest
+		available = {
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_tripartite_pact
+		prerequisite = { focus = focus_CBI_8_hour_working_day }	
+		prerequisite = { focus = focus_CBI_right_to_strike_2 }			
+		x = 59
+		y = 7
+		cost = 2
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_STABILITY}
+		
+		completion_reward = {
+		add_stability = 0.05
+		}		
+	}
+	
+	focus = {
+		id = focus_CBI_superiority_working_class
+		available = {
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_generic_demand_territory
+		prerequisite = { focus = focus_CBI_8_hour_working_day }	
+		prerequisite = { focus = focus_CBI_right_to_strike_2 }			
+		x = 61
+		y = 7
+		cost = 2
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+		add_political_power = 75			
+		}		
 	}
 
-}
+	focus = {
+		id = focus_CBI_state_protected_workers
+		available = {
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_fra_speech_on_the_nation
+		prerequisite = { focus = focus_CBI_8_hour_working_day }	
+		prerequisite = { focus = focus_CBI_right_to_strike_2 }	
+		prerequisite = { focus = focus_CBI_workers_rights }	
+		prerequisite = { focus = focus_CBI_right_to_rest }	
+		prerequisite = { focus = focus_CBI_superiority_working_class }		
+		x = 60      
+		y = 8
+		cost = 2
+		ai_will_do = {
+			factor = 1
+		}
 
-country_event = {
-	id = CBI.199
-	title = CBI.199.t
-	desc = CBI.199.d
-	picture = GFX_CBI_socialist_revolution
-	
-	is_triggered_only = yes	
-	
-	option = {
-	name = CBI.199.a
-	add_political_power = 150
-	}
-}
-
-country_event = {
-	id = CBI.200
-	title = CBI.200.t
-	desc = CBI.200.d
-	picture = GFX_CBI_socialist_revolution
-	
-	is_triggered_only = yes	
-	
-	option = {
-	name = CBI.200.a
-	add_political_power = 15
-	}
-}
-
-country_event = {
-	id = CBI.201
-	title = CBI.201.t
-	desc = CBI.201.d
-	picture = GFX_CBI_socialist_revolution
-	
-	is_triggered_only = yes	
-	
-	option = {
-	name = CBI.201.a
-	add_political_power = 15
-	}
-}
-
-country_event = {
-	id = CBI.202
-	title = CBI.202.t
-	desc = CBI.202.d
-	picture = GFX_CBI_Charles_John_Napier
-	
-	is_triggered_only = yes	
-	
-	option = {
-	name = CBI.202.a
-	remove_ideas = CBI_old_guard
-	}
-	
-	option = {
-	name = CBI.202.b
-	remove_ideas = CBI_old_guard	
-	add_political_power = 75
-	add_stability = -0.1
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+		add_political_power = 50
+		add_stability = 0.05
+			add_popularity = {
+			ideology = democratic  
+			popularity = 0.05
+				}
+			add_popularity = {
+			ideology = socialism  
+			popularity = 0.03
+				}				
+		}		
 	}	
-}
 
-country_event = {
-	id = CBI.203
-	title = CBI.203.t
-	desc = CBI.203.d
-	picture = GFX_CBI_Charles_John_Napier
-	
-	is_triggered_only = yes	
-	
-	option = {
-	name = CBI.203.a
-	add_ideas = 
+	focus = {
+		id = focus_CBI_working_commissions
+		available = {
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_generic_soviet_construction
+		prerequisite = { focus = focus_CBI_radical_changes }		
+		x = 64
+		y = 5
+		cost = 2
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+			country_event = CBI.193
+			}
+		}
+
+	focus = {
+		id = focus_CBI_checking_factories
+		available = {
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_generic_construct_civ_factory
+		prerequisite = { focus = focus_CBI_working_commissions }		
+		x = 64
+		y = 6
+		cost = 2
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+			country_event = CBI.196  
+			}
+		}
+
+	focus = {
+		id = focus_CBI_checking_places_residence
+		available = {
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_goal_generic_consumer_goods
+		prerequisite = { focus = focus_CBI_checking_factories }		
+		x = 64
+		y = 7
+		cost = 2
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		
+		completion_reward = {
+			country_event = CBI.197 
+			}
+		}
+
+	focus = {
+		id = focus_CBI_labor_protection
+		available = {
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_fra_speech_on_the_nation		
+		prerequisite = { focus = focus_CBI_checking_places_residence }	
+		x = 64
+		y = 8
+		cost = 2
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		search_filters = {FOCUS_FILTER_STABILITY}
+		
+		completion_reward = {
+		add_political_power = 50
+		add_stability = 0.05
+			add_popularity = {
+			ideology = democratic  
+			popularity = 0.05
+				}
+			add_popularity = {
+			ideology = socialism  
+			popularity = 0.03
+				}				
+			}
+		}
+
+	focus = {
+		id = focus_CBI_state_workers
+		available = {
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_focus_por_workers_of_iberia		
+		prerequisite = { focus = focus_CBI_state_protected_workers }	
+		prerequisite = { focus = focus_CBI_labor_protection }			
+		x = 62
+		y = 9
+		cost = 1
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		search_filters = {FOCUS_FILTER_STABILITY}
+		
+		completion_reward = {
+			remove_ideas = CBI_British_socialist_revolution	
+			}
+		}
+
+	focus = {
+		id = focus_CBI_welfare_state
+		available = {
+			}
+		
+		bypass = {
+		}
+		
+		icon = GFX_focus_prc_agrarian_socialism		
+		prerequisite = { focus = focus_CBI_British_Congress focus = focus_CBI_state_workers }			
+		x = 58
+		y = 10
+		cost = 1
+		ai_will_do = {
+			factor = 1
+		}
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		search_filters = {FOCUS_FILTER_STABILITY}
+		
+		completion_reward = {
+
+		}
 	}
 }
