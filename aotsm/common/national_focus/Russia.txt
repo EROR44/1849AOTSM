@@ -2095,10 +2095,18 @@ add_tech_bonus = {
 			 }
 		}
 		completion_reward = {
-			create_wargoal = {
-    type = annex_everything
-    target = KAZ
-}
+			declare_war_on = {
+				type = annex_everything
+				target = KAZ
+			}	
+			hidden_effect = {
+				add_threat = 2
+				set_country_flag = RUS_konquer_kaz_was_started
+				add_timed_idea = {
+					idea = RUS_conquer_kaz
+					days = 90
+				}
+			}
 		}
 	}
 	
@@ -2115,26 +2123,28 @@ add_tech_bonus = {
 			focus = Rus_Conquer_Tashkent
 		}
 		available = {
-			 exists = yes
-			is_subject = no
+			
 			HIV = {
-			 exists = yes
-			NOT = {
-			is_ally_with = RUS
-			is_subject_of = RUS
+				exists = yes
+				NOT = {
+					is_ally_with = RUS
+					is_subject_of = RUS
+				}
 			}
-			 }
 			OR = {
-			 has_government = reactionist
-			 has_government = authoritarian
-			 }
+				has_government = reactionist
+				has_government = authoritarian
+			}
+			has_country_flag = RUS_kaz_was_konquered 
 		}
 		completion_reward = {
-		add_threat = 2
 			create_wargoal = {
-    type = annex_everything
-    target = HIV
-}						
+				type = annex_everything
+				target = HIV
+			}
+			hidden_effect = {
+				add_threat = 2	
+			}
 		}
 	}
 	
@@ -2151,26 +2161,27 @@ add_tech_bonus = {
 			focus = Rus_Conquer_Tashkent
 		}
 		available = {
-			 exists = yes
-			is_subject = no
 			BUK = {
-			 exists = yes
-			NOT = {
-			is_ally_with = RUS
-			is_subject_of = RUS
+				exists = yes
+				NOT = {
+					is_ally_with = RUS
+					is_subject_of = RUS
+				}
 			}
-			 }
 			OR = {
-			 has_government = reactionist
-			 has_government = authoritarian
-			 }
+				has_government = reactionist
+				has_government = authoritarian
+			}
+			has_country_flag = RUS_kaz_was_konquered 
 		}
 		completion_reward = {
-		add_threat = 2
 			create_wargoal = {
-    type = annex_everything
-    target = BUK
-}						
+				type = annex_everything
+				target = BUK
+			}
+			hidden_effect = {
+				add_threat = 2	
+			}
 		}
 	}
 	
@@ -2187,26 +2198,27 @@ add_tech_bonus = {
 			focus = Rus_Conquer_Tashkent
 		}
 		available = {
-			 exists = yes
-			is_subject = no
-			 KOK = {
-			 exists = yes
-			NOT = {
-			is_ally_with = RUS
-			is_subject_of = RUS
+			KOK = {
+				exists = yes
+				NOT = {
+					is_ally_with = RUS
+					is_subject_of = RUS
+				}
 			}
-			 }
 			OR = {
-			 has_government = reactionist
-			 has_government = authoritarian
-			 }
+				has_government = reactionist
+				has_government = authoritarian
+			}
+			has_country_flag = RUS_kaz_was_konquered 
 		}
 		completion_reward = {
-		add_threat = 2
 			create_wargoal = {
-    type = annex_everything
-    target = KOK
-}						
+				type = annex_everything
+				target = KOK
+			}
+			hidden_effect = {
+				add_threat = 2	
+			}
 		}
 	}
 	
@@ -2299,23 +2311,25 @@ add_tech_bonus = {
 			focus = Rus_A_look_at_Afghanistan_and_Persia
 		}
 		available = {
-			 exists = yes
+			exists = yes
 			is_subject = no
 			PER = {
-			 exists = yes
-			NOT = {
-			is_ally_with = RUS
-			is_subject_of = RUS
+				exists = yes
+				NOT = {
+					is_ally_with = RUS
+					is_subject_of = RUS
+				}
 			}
-			 }
 			has_country_leader = { ruling_only = yes character = RUS_MIKHAIL_FEDOROVICH_ORLOV}
 		}
 		completion_reward = {
-		add_threat = 5
 			create_wargoal = {
-    type = puppet_wargoal_focus
-    target = PER
-}						
+				type = puppet_wargoal_focus
+				target = PER
+			}	
+			hidden_effect = {
+				add_threat = 5
+			}
 		}
 	}
 	
@@ -2545,49 +2559,49 @@ QIN = {
 		completion_reward = {
 		add_threat = 2
 		if = {
-				limit = {
+			limit = {
 				HEJ = {
-				OR = {
-				owns_state = 560
-				owns_state = 657
-				owns_state = 329
-				}
+					OR = {
+					owns_state = 560
+					owns_state = 657
+					owns_state = 329
+					}
 				is_subject = no
 				}
-				}
-									HEJ = {
-			country_event = { id = Russia_event_da.13 days = 2 }		
-}	
 			}
-			if = {
-				limit = { 
+			HEJ = {
+				country_event = { id = Russia_event_da.13 days = 2 }		
+			}	
+		}
+		if = {
+			limit = { 
 				HEJ = {
-				OR = {
-				owns_state = 560
-				owns_state = 657
-				owns_state = 329
-				}
+					OR = {
+						owns_state = 560
+						owns_state = 657
+						owns_state = 329
+					}
 				is_puppet_of = QIN
 				}
-				}
-									QIN = {
-			country_event = { id = Russia_event_da.13 days = 2 }		
-}	
 			}
-			if = {
-				limit = {
-QIN = {
-				OR = {
-				owns_state = 560
-				owns_state = 657
-				owns_state = 329
-				}
-				}				
-				}
-									QIN = {
+		QIN = {
 			country_event = { id = Russia_event_da.13 days = 2 }		
-}	
-			}			
+			}	
+		}
+		if = {
+			limit = {
+				QIN = {
+					OR = {
+						owns_state = 560
+						owns_state = 657
+						owns_state = 329
+					}
+				}				
+			}
+		QIN = {
+			country_event = { id = Russia_event_da.13 days = 2 }		
+		}	
+		}			
 		}							
 	}
 	
@@ -3669,7 +3683,7 @@ country_event = { id = russia_event_MIL.10 days = 1 }
 	
 	focus = {
 		id = Rus_Mikhail_Fedorovich_Orlov
-		icon = GFX_goal_generic_demand_territory
+		icon = GFX_goal_orlov
 		cost = 1
 		x = 41
 		y = 8

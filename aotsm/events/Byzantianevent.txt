@@ -131,6 +131,138 @@ country_event = { #Sell of Seyta
 	}
 }
 
+country_event = { #Join war
+	id = byz.7
+	title = byz.7.t
+	desc = byz.7.d
+	picture = GFX_report_event_gre_george_ii_victorious
+	
+	is_triggered_only = yes
+	
+	option = { #Join
+		name = byz.7.a
+		ai_chance = {
+			factor = 99
+		}
+		BYZ = {
+			declare_war_on = {
+				target = AUS
+				type = annex_everything
+			}
+		}
+	}
+	
+	option = { #No
+		name = byz.7.b
+		ai_chance = {
+			factor = 1
+		}
+	}
+}
+
+country_event = { #Persian Civil war
+	id = byz.8
+	title = byz.8.t
+	desc = byz.8.d
+	picture = GFX_report_event_saf_civil_war
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		set_global_flag = persia_civil_war_flag
+		news_event = {
+			id = news.45
+			days = 1
+		}
+		hidden_effect = {
+			PAR = {
+				add_state_core = 266
+				add_state_core = 411
+				add_state_core = 412
+				add_state_core = 414
+				add_state_core = 416
+				add_state_core = 417
+				add_state_core = 418	
+				add_state_core = 420
+				add_state_core = 852
+			}
+			PAR = {
+				transfer_state = 417
+				transfer_state = 420
+			}
+			IRA = {
+				add_state_core = 266
+				add_state_core = 411
+				add_state_core = 412
+				add_state_core = 414
+				add_state_core = 416
+				add_state_core = 417
+				add_state_core = 418	
+				add_state_core = 420
+				add_state_core = 852
+			}
+			IRA = {
+				transfer_state = 412
+				transfer_state = 414
+				transfer_state = 852
+			}
+			PER = {
+				transfer_units_fraction= {
+					target = PAR
+					size = 0.4
+					stockpile_ratio = 0.6
+					army_ratio = 0.4
+					navy_ratio = 0.0
+					air_ratio = 0.0
+				}
+				transfer_units_fraction= {
+					target = IRA
+					size = 0.5
+					stockpile_ratio = 0.5
+					army_ratio = 0.5
+					navy_ratio = 1.0
+					air_ratio = 0.0
+				}
+			}
+			PAR = {
+				load_oob = PAR_army
+			}
+			IRA = {
+				load_oob = IRA_army
+			}
+			PER = {
+				add_ideas = persian_civil_war_idea
+			}
+			PAR = {
+				add_ideas = persian_civil_war_idea
+			}
+			IRA = {
+				add_ideas = persian_civil_war_idea 
+			}
+		}
+	}
+	
+	option = { #war
+		name = byz.8.a
+		PER = {
+			declare_war_on = {
+				target = PAR
+				type = annex_everything
+			}
+			declare_war_on = {
+				target = IRA
+				type = annex_everything
+			}
+		}
+		IRA = {
+			declare_war_on = {
+				target = PAR
+				type = annex_everything
+			}
+		}
+	}
+}
+
 country_event = { #Maratha deal
 	id = byz.10
 	title = byz.10.t

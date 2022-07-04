@@ -924,12 +924,19 @@ on_actions = {
 									}
 								}
 							}
-							transfer_state = 290
+							CPT = { 
+								transfer_state = 290
+							}
 						}
 						if = {
 							limit = {
-								FRR = {
-									owns_state = 543
+								OR = {
+									FRR = {
+										owns_state = 543
+									}
+									EAP = {
+										owns_state = 543
+									}
 								}
 							}
 							ZUL = {
@@ -938,58 +945,140 @@ on_actions = {
 						}
 						if = {
 							limit = {
-								FRR = {
-									owns_state = 706
+								OR = {
+									FRR = {
+										owns_state = 546
+									}
+									EAP = {
+										owns_state = 546
+									}
+								}
+							}
+							ZUL = {
+								transfer_state = 546
+							}
+						}
+						if = {
+							limit = {
+								OR = {
+									FRR = {
+										owns_state = 547
+									}
+									EAP = {
+										owns_state = 547
+									}
+								}
+							}
+							ZUL = {
+								transfer_state = 547
+							}
+						}
+						if = {
+							limit = {
+								OR = {
+									FRR = {
+										owns_state = 706
+									}
+									EAP = {
+										owns_state = 706
+									}
 								}
 							}
 							transfer_state = 706
 						}
 						if = {
 							limit = {
-								FRR = {
-									owns_state = 707
+								OR = {
+									FRR = {
+										owns_state = 707
+									}
+									EAP = {
+										owns_state = 707
+									}
 								}
 							}
 							transfer_state = 707
 						}
 						if = {
 							limit = {
-								FRR = {
-									owns_state = 708
+								OR = {
+									FRR = {
+										owns_state = 708
+									}
+									EAP = {
+										owns_state = 708
+									}
 								}
 							}
-							ZUL = {
-								transfer_state = 708
-							}
+							transfer_state = 708
 						}
 						if = {
 							limit = {
-								FRR = {
-									owns_state = 713
+								OR = {
+									FRR = {
+										owns_state = 713
+									}
+									EAP = {
+										owns_state = 713
+									}
 								}
 							}
 							transfer_state = 713
 						}
 						if = {
 							limit = {
-								FRR = {
-									owns_state = 832
+								OR = {
+									FRR = {
+										owns_state = 786
+									}
+									NWA = {
+										owns_state = 786
+									}
 								}
 							}
-							transfer_state = 832
+							CPT = {
+								transfer_state = 786
+							}
 						}
 						if = {
 							limit = {
-								FRR = {
-									owns_state = 833
+								OR = {
+									FRR = {
+										owns_state = 832
+									}
+									EAP = {
+										owns_state = 832
+									}
 								}
 							}
-							transfer_state = 833
+							ZUL = {
+								transfer_state = 832
+							}
 						}
 						if = {
 							limit = {
-								FRR = {
-									owns_state = 845
+								OR = {
+									FRR = {
+										owns_state = 833
+									}
+									EAP = {
+										owns_state = 833
+									}
+								}
+							}
+							ZUL = {
+								transfer_state = 833
+							}
+						}
+						if = {
+							limit = {
+								OR = {
+									FRR = {
+										owns_state = 845
+									}
+									EAP = {
+										owns_state = 845
+									}
 								}
 							}
 							ZUL = {
@@ -1966,6 +2055,551 @@ on_actions = {
 				}
 				SAR = {
 					set_country_flag = SARBYZ
+				}
+			}
+			#BUL capitulation
+			if = {
+				limit = {
+					tag = BUL
+					BUL = {
+						has_war_with = BYZ
+					}
+					BYZ = {
+						has_country_flag = BYZ_vs_BUL
+					}
+				}
+				BYZ = { 
+					transfer_state = 48
+					transfer_state = 106
+					transfer_state = 211
+					transfer_state = 212
+					transfer_state = 801
+					transfer_state = 803
+				}
+				VLH = {
+					create_country_leader = {
+						name = "BUL_Alexandr_Battenberg"
+						desc = "POLITICS_ALEXANDR_BATTENBERG_DESC"
+						picture = "gfx/leaders/BUL/Portrait_Alexandr_Battenberg.dds"
+						expire = "1900.1.1"
+						ideology = monarchist
+						traits = {
+							hate_byzantium
+						}
+					}
+				}
+				VLH = {
+					transfer_state = 46
+					transfer_state = 77
+					transfer_state = 81
+				}
+				BYZ = { clr_country_flag = BYZ_vs_BUL }
+				BYZ = {
+					white_peace = {
+						tag = BUL
+						message = BYZ_win_BUL
+					}
+				}
+				BYZ = { set_country_flag = BYZ_vs_BUL_win }
+				BUL = { remove_ideas = balkan_wars }
+				if = {
+					limit = {
+						tag = BYZ
+						is_ai = no
+					}
+					BYZ = {
+						army_experience = 50
+					}
+				}
+				if = {
+					limit = {
+						tag = BYZ
+						is_ai = yes
+					}
+					BYZ = {
+						army_experience = 75
+					}
+				}
+			}
+			#ALB capitulation
+			if = {
+				limit = {
+					tag = ALB
+					ALB = {
+						has_war_with = BYZ
+					}
+					BYZ = {
+						has_country_flag =  BYZ_vs_ALB
+					}
+				}
+				BYZ = { 
+					transfer_state = 44
+				}
+				BYZ = { clr_country_flag = BYZ_vs_ALB }
+				BYZ = {
+					white_peace = {
+						tag = ALB
+						message = BYZ_win_ALB
+					}
+				}
+				BYZ = { set_country_flag = BYZ_vs_ALB_win }
+				ALB = { remove_ideas = balkan_wars }
+				if = {
+					limit = {
+						tag = BYZ
+						is_ai = no
+					}
+					BYZ = {
+						army_experience = 50
+					}
+				}
+				if = {
+					limit = {
+						tag = BYZ
+						is_ai = yes
+					}
+					BYZ = {
+						army_experience = 75
+					}
+				}
+			}
+			#SER capitulation
+			if = {
+				limit = {
+					tag = SER
+					SER = {
+						has_war_with = BYZ
+					}
+					BYZ = {
+						has_country_flag = BYZ_vs_SER
+					}
+				}
+				BYZ = { 
+					transfer_state = 105
+					transfer_state = 107
+					transfer_state = 108
+					transfer_state = 802
+				}
+				BYZ = { clr_country_flag = BYZ_vs_SER }
+				BYZ = {
+					white_peace = {
+						tag = SER
+						message = BYZ_win_SER
+					}
+				}
+				BYZ = { set_country_flag = BYZ_vs_SER_win }
+				SER = { remove_ideas = balkan_wars }
+				if = {
+					limit = {
+						tag = BYZ
+						is_ai = no
+					}
+					BYZ = {
+						army_experience = 50
+					}
+				}
+				if = {
+					limit = {
+						tag = BYZ
+						is_ai = yes
+					}
+					BYZ = {
+						army_experience = 75
+					}
+				}
+			}
+			#BOS capitulation
+			if = {
+				limit = {
+					tag = BOS
+					BOS = {
+						has_war_with = BYZ
+					}
+					BYZ = {
+						has_country_flag = BYZ_vs_BOS
+					}
+				}
+				BYZ = { 
+					transfer_state = 104
+					transfer_state = 804
+				}
+				BYZ = { clr_country_flag = BYZ_vs_BOS }
+				BYZ = {
+					white_peace = {
+						tag = BOS
+						message = BYZ_win_BOS
+					}
+				}
+				BYZ = { set_country_flag = BYZ_vs_BOS_win }
+				BOS = { remove_ideas = balkan_wars }
+				if = {
+					limit = {
+						tag = BYZ
+						is_ai = no
+					}
+					BYZ = {
+						army_experience = 50
+					}
+				}
+				if = {
+					limit = {
+						tag = BYZ
+						is_ai = yes
+					}
+					BYZ = {
+						army_experience = 75
+					}
+				}
+			}
+			#HOL capitulation
+			if = {
+				limit = {
+					tag = HOL
+					HOL = {
+						has_war_with = PRU
+					}
+					PRU = {
+						has_country_flag = P_V_H
+					}
+				}
+				PRU = {
+					transfer_state = 308
+					transfer_state = 539
+					transfer_state = 660
+					transfer_state = 695
+				}
+				PRU = {
+					white_peace = {
+						tag = HOL
+						message = PRU_win_HOL
+					}
+				}
+				HOL = { puppet = IND }
+				PRU = {
+					clr_country_flag = P_V_H
+					add_to_faction = HOL
+					add_to_faction = IND
+				}
+			}
+			#PAR capitulation 
+			if = {
+				limit = {
+					tag = PAR
+					OR = {
+						PAR = {
+							has_war_with = PER
+						}
+						PAR = {
+							has_war_with = IRA
+						}
+					}
+					has_global_flag = persia_civil_war_flag
+				}
+				if = {
+					limit = {
+						PER = {
+							controls_province = 2065
+						}
+					}
+					PER = {
+						annex_country = {
+							target = PAR
+							transfer_troops = no
+						}
+					}
+					PAR = {
+						remove_state_core = 266
+						remove_state_core = 411
+						remove_state_core = 412
+						remove_state_core = 414
+						remove_state_core = 416
+						remove_state_core = 417
+						remove_state_core = 418	
+						remove_state_core = 420
+						remove_state_core = 852
+					}
+				}
+				if = {
+					limit = {
+						NOT = {
+							country_exists = IRA
+							country_exists = PAR
+						}
+					}
+					clr_global_flag = persia_civil_war_flag
+					PER = {
+						remove_ideas = persian_civil_war_idea
+					}
+					PAR = {
+						remove_ideas = persian_civil_war_idea
+					}
+					IRA = {
+						remove_ideas = persian_civil_war_idea
+					}
+					news_event = {
+						id = news.47
+						days = 1
+					}
+				}
+				if = {
+					limit = {
+						IRA = {
+							controls_province = 2065
+						}
+					}
+					IRA = {
+						annex_country = {
+							target = PAR
+							transfer_troops = no
+						}
+					}
+					PAR = {
+						remove_state_core = 266
+						remove_state_core = 411
+						remove_state_core = 412
+						remove_state_core = 414
+						remove_state_core = 416
+						remove_state_core = 417
+						remove_state_core = 418	
+						remove_state_core = 420
+						remove_state_core = 852
+					}
+				}
+				if = {
+					limit = {
+						NOT = {
+							country_exists = PER
+							country_exists = PAR
+						}
+					}
+					clr_global_flag = persia_civil_war_flag
+					PER = {
+						remove_ideas = persian_civil_war_idea
+					}
+					PAR = {
+						remove_ideas = persian_civil_war_idea
+					}
+					IRA = {
+						remove_ideas = persian_civil_war_idea
+					}
+					news_event = {
+						id = news.46
+						days = 1
+					}
+				}
+			}
+			#PER capitulation
+			if = {
+				limit = {
+					tag = PER
+					OR = {
+						PER = {
+							has_war_with = PAR
+						}
+						PER = {
+							has_war_with = IRA
+						}
+					}
+					has_global_flag = persia_civil_war_flag
+				}
+				if = {
+					limit = {
+						PAR = {
+							controls_province = 10837
+						}
+					}
+					PAR = {
+						annex_country = {
+							target = PER
+							transfer_troops = no
+						}
+					}
+					PER = {
+						remove_state_core = 266
+						remove_state_core = 411
+						remove_state_core = 412
+						remove_state_core = 414
+						remove_state_core = 416
+						remove_state_core = 417
+						remove_state_core = 418	
+						remove_state_core = 420
+						remove_state_core = 852
+					}
+				}
+				if = {
+					limit = {
+						NOT = {
+							country_exists = PER
+							country_exists = IRA
+						}
+					}
+					clr_global_flag = persia_civil_war_flag
+					PER = {
+						remove_ideas = persian_civil_war_idea
+					}
+					PAR = {
+						remove_ideas = persian_civil_war_idea
+					}
+					IRA = {
+						remove_ideas = persian_civil_war_idea
+					}
+					news_event = {
+						id = news.48
+						days = 1
+					}
+				}
+				if = {
+					limit = {
+						IRA = {
+							controls_province = 10837
+						}
+					}
+					IRA = {
+						annex_country = {
+							target = PER
+							transfer_troops = no
+						}
+					}
+					PER = {
+						remove_state_core = 266
+						remove_state_core = 411
+						remove_state_core = 412
+						remove_state_core = 414
+						remove_state_core = 416
+						remove_state_core = 417
+						remove_state_core = 418	
+						remove_state_core = 420
+						remove_state_core = 852
+					}
+				}
+				if = {
+					limit = {
+						NOT = {
+							country_exists = PER
+							country_exists = PAR
+						}
+					}
+					clr_global_flag = persia_civil_war_flag
+					PER = {
+						remove_ideas = persian_civil_war_idea
+					}
+					PAR = {
+						remove_ideas = persian_civil_war_idea
+					}
+					IRA = {
+						remove_ideas = persian_civil_war_idea
+					}
+					news_event = {
+						id = news.46
+						days = 1
+					}
+				}
+			}
+			#IRA capitulation 
+			if = {
+				limit = {
+					tag = IRA
+					OR = {
+						IRA = {
+							has_war_with = PAR
+						}
+						IRA = {
+							has_war_with = PER
+						}
+					}
+					has_global_flag = persia_civil_war_flag
+				}
+				if = {
+					limit = {
+						PAR = {
+							controls_province = 12832
+						}
+					}
+					PAR = {
+						annex_country = {
+							target = IRA
+							transfer_troops = no
+						}
+					}
+					IRA = {
+						remove_state_core = 266
+						remove_state_core = 411
+						remove_state_core = 412
+						remove_state_core = 414
+						remove_state_core = 416
+						remove_state_core = 417
+						remove_state_core = 418	
+						remove_state_core = 420
+						remove_state_core = 852
+					}
+				}
+				if = {
+					limit = {
+						NOT = {
+							country_exists = PER
+							country_exists = IRA
+						}
+					}
+					clr_global_flag = persia_civil_war_flag
+					PER = {
+						remove_ideas = persian_civil_war_idea
+					}
+					PAR = {
+						remove_ideas = persian_civil_war_idea
+					}
+					IRA = {
+						remove_ideas = persian_civil_war_idea
+					}
+					news_event = {
+						id = news.48
+						days = 1
+					}
+				}
+				if = {
+					limit = {
+						PER = {
+							controls_province = 12832
+						}
+					}
+					PER = {
+						annex_country = {
+							target = IRA
+							transfer_troops = no
+						}
+					}
+					IRA = {
+						remove_state_core = 266
+						remove_state_core = 411
+						remove_state_core = 412
+						remove_state_core = 414
+						remove_state_core = 416
+						remove_state_core = 417
+						remove_state_core = 418	
+						remove_state_core = 420
+						remove_state_core = 852
+					}
+				}
+				if = {
+					limit = {
+						NOT = {
+							country_exists = IRA
+							country_exists = PAR
+						}
+					}
+					clr_global_flag = persia_civil_war_flag
+					PER = {
+						remove_ideas = persian_civil_war_idea
+					}
+					PAR = {
+						remove_ideas = persian_civil_war_idea
+					}
+					IRA = {
+						remove_ideas = persian_civil_war_idea
+					}
+					news_event = {
+						id = news.47
+						days = 1
+					}
 				}
 			}
 		}

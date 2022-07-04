@@ -601,8 +601,8 @@ fren_build_prom_cat = {
 					
 		available = {
 			num_of_civilian_factories_available_for_projects > 2
-			owns_state = 33
-			controls_state = 33
+			owns_state = 15
+			controls_state = 15
 			NOT = { has_country_flag = FRR_build_new_ic}
 		}
 		
@@ -631,7 +631,7 @@ fren_build_prom_cat = {
 		}
 
 		remove_effect = {
-			33 = {
+			15 = {
 				add_extra_state_shared_building_slots = 1
 					add_building_construction = {
 					type = industrial_complex
@@ -1437,7 +1437,7 @@ fren_build_prom_cat = {
 					instant_build = yes
 				}
 			}
-			clr_country_flag = FRR_build_new_d
+			clr_country_flag = FRR_build_new_ic
 		}
 	}
 	FRR_build_indutrial_complex_in_459 = {
@@ -1724,7 +1724,7 @@ fren_build_prom_cat = {
 					controls_state = 461
 				}
 			}
-			NOT = { has_country_flag = FRR_build_new_af}
+			NOT = { has_country_flag = FRR_build_new_af }
 		}
 		
 		allowed = { 
@@ -1778,7 +1778,7 @@ fren_build_prom_cat = {
 					controls_state = 699
 				}
 			}
-			NOT = { has_country_flag = FRR_build_new_d}
+			NOT = { has_country_flag = FRR_build_new_d }
 		}
 		
 		allowed = { 
@@ -2527,6 +2527,7 @@ fren_colonail_deals_cat = {
 		available = {
 			tag = FRR
 			has_country_flag = FRR_invasion_in_algeria_end
+			NOT = { has_country_flag = FRR_dip_mis_in_process }
 		}
 		
 		allowed = { 
@@ -2537,8 +2538,8 @@ fren_colonail_deals_cat = {
 			has_country_flag = FRR_invasion_in_algeria_end
 		}
 
-		cost = 15
-		#days_remove = 30
+		cost = 60
+		days_remove = 30
 		fire_only_once = yes
 
 		modifier = {
@@ -2550,9 +2551,13 @@ fren_colonail_deals_cat = {
 		}
 		
 		complete_effect = {
-			TUN = { country_event = fren_colonial.1 }
+			FRR = { set_country_flag = FRR_dip_mis_in_process }
 		}
-		
+
+		remove_effect = {
+			TUN = { country_event = fren_colonial.1 } 
+			FRR = { clr_country_flag = FRR_dip_mis_in_process }
+		}
 		
 	}
 	FRR_mauvritanian_expedition = {
@@ -2561,6 +2566,7 @@ fren_colonail_deals_cat = {
 		available = {
 			tag = FRR
 			has_country_flag = FRR_invasion_in_algeria_end
+			NOT = { has_country_flag = FRR_dip_mis_in_process }
 		}
 		
 		allowed = { 
@@ -2571,7 +2577,7 @@ fren_colonail_deals_cat = {
 			has_country_flag = FRR_invasion_in_algeria_end
 		}
 
-		cost = 50
+		cost = 60
 		days_remove = 30
 		fire_only_once = yes
 
@@ -2580,55 +2586,61 @@ fren_colonail_deals_cat = {
 		}
 
 		ai_will_do = {
-			factor = 35
+			factor = 7
+		}
+		
+		complete_effect = {
+			FRR = { set_country_flag = FRR_dip_mis_in_process }
 		}
 
 		remove_effect = {
 			MAV = { country_event = { id = fren_colonial.4 } }
+			FRR = { clr_country_flag = FRR_dip_mis_in_process }
 		}
 	}
-	FRR_pembskiy_incident = {
-		icon = usa_congress
-					
-		available = {
-			tag = FRR
-			has_country_flag = FRR_invasion_in_algeria_end
-		}
+	#FRR_pembskiy_incident = {
+	#	icon = usa_congress
+	#				
+	#	available = {
+	#		tag = FRR
+	#		has_country_flag = FRR_invasion_in_algeria_end
+	#	}
+	#
+	#	visible = {
+	#		has_country_flag = FRR_invasion_in_algeria_end
+	#		NOT = { has_war_with = CBI }
+	#	}
 
-		visible = {
-			has_country_flag = FRR_invasion_in_algeria_end
-			NOT = { has_war_with = CBI }
-		}
+	#	cost = 10
+		#days_remove = 30
+	#	fire_only_once = yes
 
-		cost = 50
-		days_remove = 30
-		fire_only_once = yes
-
-		modifier = {
+	#	modifier = {
 			
-		}
+	#	}
 
-		ai_will_do = {
-			factor = -100
-		}
+	#	ai_will_do = {
+	#		factor = -100
+	#	}
 
-		remove_effect = {
-			
-		}
-	}
+	#	remove_effect = {
+	#		
+	#	}
+	#}
 	FRR_create_malagasiysk_protectorat = {
 		icon = usa_congress
 					
 		available = {
 			tag = FRR
 			has_country_flag = FRR_invasion_in_algeria_end
+			NOT = { has_country_flag = FRR_dip_mis_in_process }
 		}
 
 		visible = {
 			has_country_flag = FRR_invasion_in_algeria_end
 		}
 
-		cost = 50
+		cost = 60
 		days_remove = 30
 		fire_only_once = yes
 
@@ -2637,26 +2649,32 @@ fren_colonail_deals_cat = {
 		}
 
 		ai_will_do = {
-			factor = 3
+			factor = 5
+		}
+		
+		complete_effect = {
+			FRR = { set_country_flag = FRR_dip_mis_in_process }
 		}
 
 		remove_effect = {
-			MAD = { country_event = { id = fren_colonial.6 } }
+			MAD = { country_event = { id = fren_colonial.7 } }
+			FRR = { clr_country_flag = FRR_dip_mis_in_process }
 		}
 	}
-	FRR_create_zanzibarsk_protectorat = {
+	FRR_create_zanzibarsk_protectorat = {  
 		icon = usa_congress
 					
 		available = {
 			tag = FRR
 			has_country_flag = FRR_invasion_in_algeria_end
+			NOT = { has_country_flag = FRR_dip_mis_in_process }
 		}
 
 		visible = {
 			has_country_flag = FRR_invasion_in_algeria_end
 		}
 
-		cost = 50
+		cost = 60
 		days_remove = 30
 		fire_only_once = yes
 
@@ -2665,70 +2683,75 @@ fren_colonail_deals_cat = {
 		}
 
 		ai_will_do = {
-			factor = 3
+			factor = 7
+		}
+		
+		complete_effect = {
+			FRR = { set_country_flag = FRR_dip_mis_in_process }
 		}
 
 		remove_effect = {
 			ZAN = { country_event = { id = fren_colonial.10 } }
+			FRR = { clr_country_flag = FRR_dip_mis_in_process }
 		}
 	}
-	FRR_buy_the_goa = {
-		icon = usa_congress
+	#FRR_buy_the_goa = {
+	#	icon = usa_congress
 					
-		available = {
-			tag = FRR
-			has_country_flag = FRR_invasion_in_algeria_end
-			NOT = { has_war_with = CBI }
-		}
+	#	available = {
+	#		tag = FRR
+	#		has_country_flag = FRR_invasion_in_algeria_end
+	#		NOT = { has_war_with = CBI }
+	#	}
 
-		visible = {
-			has_country_flag = FRR_invasion_in_algeria_end
-		}
+	#	visible = {
+	#		has_country_flag = FRR_invasion_in_algeria_end
+	#	}
 
-		cost = 50
-		days_remove = 30
-		fire_only_once = yes
+	#	cost = 50
+	#	days_remove = 30
+	#	fire_only_once = yes
 
-		modifier = {
+	#	modifier = {
 			
-		}
+	#	}
 
-		ai_will_do = {
-			factor = 7
-		}
+	#	ai_will_do = {
+	#		factor = 7
+	#	}
 
-		remove_effect = {
+	#	remove_effect = {
 			
-		}
-	}
-	FRR_the_beninsk_expedition = {
-		icon = usa_congress
-					
-		available = {
-			tag = FRR
-			has_country_flag = FRR_invasion_in_algeria_end
-		}
+	#	}
+	#}
+	#FRR_the_beninsk_expedition = {
+	#	icon = usa_congress
+	#				
+	#	available = {
+	#		tag = FRR
+	#		has_country_flag = FRR_invasion_in_algeria_end
+	#	}
 
-		visible = {
-			has_country_flag = FRR_invasion_in_algeria_end
-		}
+	#	visible = {
+	#		has_country_flag = FRR_invasion_in_algeria_end
+	##	}
 
-		cost = 50
-		days_remove = 30
-		fire_only_once = yes
+	#	cost = 50
+	#	days_remove = 30
+	#	fire_only_once = yes
 
-		modifier = {
-			
-		}
+	#	modifier = {
+	#		
+	#	}
 
-		ai_will_do = {
-			factor = 7
-		}
-
-		remove_effect = {
-			
-		}
-	}
+	#	ai_will_do = {
+	#		factor = 7
+	#	}
+#
+	#	remove_effect = {
+	#		
+	#	}
+	#}
 	
 }
 fren_territorial_claims_cat = {
@@ -2856,6 +2879,9 @@ fren_territorial_claims_cat = {
 						autonomous_state = autonomy_dominion
 					}
 				}
+				NWA = {
+					inherit_technology = FRR
+				}
 			}
 		}
 	}
@@ -2875,10 +2901,11 @@ fren_territorial_claims_cat = {
 
 		visible = {
 			original_tag = FRR
+			country_exists = NWA
 			controls_state = 290
 			controls_state = 461
 			controls_state = 462
-			controls_state = 783
+			controls_state = 783			
 		}
 
 		cost = 50
@@ -2908,6 +2935,723 @@ fren_territorial_claims_cat = {
 					add_state_core = 783			
 				}	
 			}
+		}
+	}
+	FRR_create_east_africa_protectorate = { 
+		icon = usa_congress
+		
+		available = {
+			tag = FRR
+			custom_trigger_tooltip = {
+				tooltip = FRR_control_territory_zan_mad
+				controls_state = 543
+				controls_state = 546
+				controls_state = 547
+				controls_state = 708
+				controls_state = 845
+			}
+		}
+
+		visible = {
+			original_tag = FRR
+			controls_state = 543
+			controls_state = 546
+			controls_state = 547
+			controls_state = 708
+			controls_state = 845
+		}
+
+		cost = 0
+		
+		fire_only_once = yes
+
+		modifier = {
+			
+		}
+
+		ai_will_do = {
+			factor = 0
+			modifier = {
+				factor = 20
+				date > 1853.1.1
+			}
+		}
+
+		complete_effect = {
+			custom_effect_tooltip = FRR_east_africa_protectorate_was_created
+			
+			hidden_effect = {
+				EAP = {
+					transfer_state = 543
+					transfer_state = 546
+					transfer_state = 547		
+					transfer_state = 708		
+					transfer_state = 845		
+					add_state_core = 543
+					add_state_core = 546
+					add_state_core = 547					
+					add_state_core = 708					
+					add_state_core = 845					
+				}	
+				ROOT = {  
+					set_autonomy = {
+						target = EAP
+						autonomous_state = autonomy_dominion
+					}
+				}
+				EAP = {
+					inherit_technology = FRR
+				}
+			}
+		}
+	}
+	FRR_transfer_to_eap_factories_in_somali = { 
+		icon = usa_congress
+		
+		available = {
+			tag = FRR
+			custom_trigger_tooltip = {
+				tooltip = FRR_control_territory_factories_in_somali
+				controls_state = 832
+				controls_state = 833
+			}
+		}
+
+		visible = {
+			original_tag = FRR
+			country_exists = EAP
+			controls_state = 832
+			controls_state = 833
+		}
+
+		cost = 20
+		
+		fire_only_once = yes
+
+		modifier = {
+			
+		}
+
+		ai_will_do = {
+			factor = 0
+			modifier = {
+				factor = 7
+				date > 1854.1.1
+			}
+		}
+
+		complete_effect = {
+			custom_effect_tooltip = FRR_east_africa_protectorate_gain_control_on_factories_in_somali
+			
+			hidden_effect = {
+				EAP = {
+					transfer_state = 832
+					transfer_state = 833
+					add_state_core = 832
+					add_state_core = 833					
+				}	
+			}
+		}
+	}
+	FRR_transfer_to_eap_renion_and_mavrikiy = { 
+		icon = usa_congress
+		
+		available = {
+			tag = FRR
+			custom_trigger_tooltip = {
+				tooltip = FRR_control_territory_renion_and_mavrikiy
+				controls_state = 706
+				controls_state = 707
+			}
+		}
+
+		visible = {
+			original_tag = FRR
+			controls_state = 706
+			controls_state = 707
+			country_exists = EAP
+		}
+
+		cost = 20
+		
+		fire_only_once = yes
+
+		modifier = {
+			
+		}
+
+		ai_will_do = {
+			factor = 0
+			modifier = {
+				factor = 7
+				date > 1854.1.1
+			}
+		}
+
+		complete_effect = {
+			custom_effect_tooltip = FRR_east_africa_protectorate_gain_control_on_renion_and_mavrikiy
+			
+			hidden_effect = {
+				EAP = {
+					transfer_state = 706
+					transfer_state = 707
+					add_state_core = 706
+					add_state_core = 707					
+				}	
+			}
+		}
+	}
+}
+
+NWA_prom_expand_cat = {
+	NWA_confiscate_army_alg_equipment = {
+		icon = usa_congress
+					
+		available = {
+
+		}
+		
+		allowed = { 
+			
+		}
+		
+		visible = {
+			
+		}
+
+		cost = 50
+		days_remove = 30
+		fire_only_once = yes
+
+		modifier = {
+
+		}
+
+		ai_will_do = {
+			factor = 30
+		}
+		
+		complete_effect = {
+			
+		}
+		
+		remove_effect = {
+			add_equipment_to_stockpile = {
+				type = infantry_equipment_0
+				amount = 1500
+				producer = ALG
+			}
+		}
+	}
+	NWA_confiscate_army_tun_equipment = {
+		icon = usa_congress
+					
+		available = {
+
+		}
+		
+		allowed = { 
+			
+		}
+		
+		visible = {
+			
+		}
+
+		cost = 50
+		days_remove = 30
+		fire_only_once = yes
+
+		modifier = {
+
+		}
+
+		ai_will_do = {
+			factor = 30
+		}
+		
+		complete_effect = {
+			
+		}
+		
+		remove_effect = {
+			add_equipment_to_stockpile = {
+				type = infantry_equipment_0
+				amount = 1000
+				producer = TUN
+			}
+		}
+	}
+	NWA_confiscate_army_mav_equipment = {
+		icon = usa_congress
+					
+		available = {
+
+		}
+		
+		allowed = { 
+			
+		}
+		
+		visible = {
+			
+		}
+
+		cost = 50
+		days_remove = 30
+		fire_only_once = yes
+
+		modifier = {
+
+		}
+
+		ai_will_do = {
+			factor = 30
+		}
+		
+		complete_effect = {
+			
+		}
+		
+		remove_effect = {
+			add_equipment_to_stockpile = {
+				type = infantry_equipment_0
+				amount = 800
+				producer = MAV
+			}
+		}
+	}
+	NWA_build_indutrial_complex_in_460 = {
+		icon = usa_congress
+					
+		available = {
+			num_of_civilian_factories_available_for_projects > 2
+			NWA = {
+				owns_state = 460
+				controls_state = 460
+			}
+
+			NOT = { has_country_flag = FRR_build_new_ic}
+		}
+		
+		allowed = { 
+			
+		}
+		
+		visible = {
+			
+		}
+
+		cost = 30
+		days_remove = 80
+		fire_only_once = yes
+
+		modifier = {
+			civilian_factory_use = 3
+		}
+
+		ai_will_do = {
+			factor = 30
+		}
+		
+		complete_effect = {
+			set_country_flag = FRR_build_new_ic
+		}
+		
+		remove_effect = {
+			460 = {
+				add_extra_state_shared_building_slots = 1
+					add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			clr_country_flag = FRR_build_new_ic
+		}
+	}
+	NWA_build_dockyard_in_460 = {
+		icon = usa_congress
+					
+		available = {
+			num_of_civilian_factories_available_for_projects > 2
+			NWA = {
+				owns_state = 460
+				controls_state = 460
+			}
+
+			NOT = { has_country_flag = FRR_build_new_ic}
+		}
+		
+		allowed = { 
+			
+		}
+		
+		visible = {
+			
+		}
+
+		cost = 30
+		days_remove = 80
+		fire_only_once = yes
+
+		modifier = {
+			civilian_factory_use = 3
+		}
+
+		ai_will_do = {
+			factor = 30
+		}
+		
+		complete_effect = {
+			set_country_flag = FRR_build_new_ic
+		}
+
+		remove_effect = {
+			460 = {
+				add_extra_state_shared_building_slots = 1
+					add_building_construction = {
+					type = dockyard
+					level = 1
+					instant_build = yes
+				}
+			}
+			clr_country_flag = FRR_build_new_ic
+		}
+	}
+	NWA_build_indutrial_complex_in_459 = {
+		icon = usa_congress
+					
+		available = {
+			num_of_civilian_factories_available_for_projects > 2
+			NWA = {
+				owns_state = 459
+				controls_state = 459
+			}
+			NOT = { has_country_flag = FRR_build_new_ic}
+		}
+		
+		allowed = { 
+			
+		}
+		
+		visible = {
+			
+		}
+
+		cost = 30
+		days_remove = 80
+		fire_only_once = yes
+
+		modifier = {
+			civilian_factory_use = 3
+		}
+
+		ai_will_do = {
+			factor = 30
+		}
+		
+		complete_effect = {
+			set_country_flag = FRR_build_new_ic
+		}
+
+		remove_effect = {
+			459 = {
+				add_extra_state_shared_building_slots = 1
+					add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			clr_country_flag = FRR_build_new_ic
+		}
+	}
+	NWA_build_arms_factory_in_459 = {
+		icon = usa_congress
+					
+		available = {
+			num_of_civilian_factories_available_for_projects > 2
+			NWA = {
+				owns_state = 459
+				controls_state = 459
+			}
+			NOT = { has_country_flag = FRR_build_new_af}
+		}
+		
+		allowed = { 
+			
+		}
+		
+		visible = {
+			
+		}
+
+		cost = 30
+		days_remove = 80
+		fire_only_once = yes
+
+		modifier = {
+			civilian_factory_use = 3
+		}
+
+		ai_will_do = {
+			factor = 30
+		}
+		
+		complete_effect = {
+			set_country_flag = FRR_build_new_af
+		}
+
+		remove_effect = {
+			459 = {
+				add_extra_state_shared_building_slots = 1
+					add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+			clr_country_flag = FRR_build_new_af
+		}
+	}
+	NWA_build_indutrial_complex_in_462 = {
+		icon = usa_congress
+					
+		available = {
+			num_of_civilian_factories_available_for_projects > 2
+			NWA = {
+					owns_state = 462
+					controls_state = 462
+				}
+			NOT = { has_country_flag = FRR_build_new_ic}
+		}
+		
+		allowed = { 
+			
+		}
+		
+		visible = {
+			
+		}
+
+		cost = 30
+		days_remove = 80
+		fire_only_once = yes
+
+		modifier = {
+			civilian_factory_use = 3
+		}
+
+		ai_will_do = {
+			factor = 30
+		}
+		complete_effect = {
+			set_country_flag = FRR_build_new_ic
+		}
+
+		remove_effect = {
+			462 = {
+				add_extra_state_shared_building_slots = 1
+					add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			clr_country_flag = FRR_build_new_ic
+		}
+	}
+	NWA_build_arms_factory_in_462 = {
+		icon = usa_congress
+					
+		available = {
+			num_of_civilian_factories_available_for_projects > 2
+			NWA = {
+					owns_state = 462
+					controls_state = 462
+				}
+			NOT = { has_country_flag = FRR_build_new_af}
+		}
+		
+		allowed = { 
+			
+		}
+		
+		visible = {
+			
+		}
+
+		cost = 30
+		days_remove = 80
+		fire_only_once = yes
+
+		modifier = {
+			civilian_factory_use = 3
+		}
+
+		ai_will_do = {
+			factor = 30
+		}
+		
+		complete_effect = {
+			set_country_flag = FRR_build_new_af
+		}
+
+		remove_effect = {
+			462 = {
+				add_extra_state_shared_building_slots = 1
+					add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+			clr_country_flag = FRR_build_new_af
+		}
+	}
+	NWA_build_dockyard_in_665 = {
+		icon = usa_congress
+					
+		available = {
+			num_of_civilian_factories_available_for_projects > 2
+			NWA = {
+					owns_state = 665
+					controls_state = 665
+				}
+			NOT = { has_country_flag = FRR_build_new_d}
+		}
+		
+		allowed = { 
+			
+		}
+		
+		visible = {
+			
+		}
+
+		cost = 30
+		days_remove = 80
+		fire_only_once = yes
+
+		modifier = {
+			civilian_factory_use = 3
+		}
+
+		ai_will_do = {
+			factor = 30
+		}
+		
+		complete_effect = {
+			set_country_flag = FRR_build_new_d
+		}
+
+		remove_effect = {
+			665 = {
+				add_extra_state_shared_building_slots = 1
+					add_building_construction = {
+					type = dockyard
+					level = 1
+					instant_build = yes
+				}
+			}
+			clr_country_flag = FRR_build_new_d
+		}
+	}
+	NWA_build_arms_factory_in_461 = {
+		icon = usa_congress
+					
+		available = {
+			num_of_civilian_factories_available_for_projects > 2
+			NWA = {
+					owns_state = 461
+					controls_state = 461
+				}
+			NOT = { has_country_flag = FRR_build_new_af }
+		}
+		
+		allowed = { 
+			
+		}
+		
+		visible = {
+			
+		}
+
+		cost = 30
+		days_remove = 80
+		fire_only_once = yes
+
+		modifier = {
+			civilian_factory_use = 3
+		}
+
+		ai_will_do = {
+			factor = 30
+		}
+		
+		complete_effect = {
+			set_country_flag = FRR_build_new_af
+		}
+
+		remove_effect = {
+			461 = {
+				add_extra_state_shared_building_slots = 1
+					add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+			clr_country_flag = FRR_build_new_af
+		}
+	}
+	NWA_build_dockyard_in_699 = {
+		icon = usa_congress
+					
+		available = {
+			num_of_civilian_factories_available_for_projects > 2
+			NWA = {
+					owns_state = 699
+					controls_state = 699
+				}
+			NOT = { has_country_flag = FRR_build_new_d }
+		}
+		
+		allowed = { 
+			
+		}
+		
+		visible = {
+			
+		}
+
+		cost = 30
+		days_remove = 80
+		fire_only_once = yes
+
+		modifier = {
+			civilian_factory_use = 3
+		}
+
+		ai_will_do = {
+			factor = 60
+		}
+		
+		complete_effect = {
+			set_country_flag = FRR_build_new_d
+		}
+
+		remove_effect = {
+			699 = {
+				add_extra_state_shared_building_slots = 1
+					add_building_construction = {
+					type = dockyard
+					level = 1
+					instant_build = yes
+				}
+			}
+			clr_country_flag = FRR_build_new_d
 		}
 	}
 }

@@ -72,6 +72,24 @@ country_event = {
 		}
 		BYZ = { set_country_flag = BYZ_vs_BUL_win }
 		BUL = { remove_ideas = balkan_wars }
+		if = {
+			limit = {
+				tag = BYZ
+				is_ai = no
+			}
+			BYZ = {
+				army_experience = 50
+			}
+		}
+		if = {
+			limit = {
+				tag = BYZ
+				is_ai = yes
+			}
+			BYZ = {
+				army_experience = 75
+			}
+		}
 	}
 }
 
@@ -366,35 +384,35 @@ country_event = {
 	}
 }
 
-country_event = {
-	id = twe.5 #PRU vs HOL
-	title = twe.5.t
-	desc = twe.5.d
-	picture = GFX_report_event_molotov_signing_pact
-	
-	fire_only_once = yes
-	
-	hidden =  yes
-	
-	trigger = {
-		tag = PRU
-		HOL = {
-			surrender_progress > 0.20
-		}
-		PRU = { has_country_flag = P_V_H }
-	}
-	option = {
-		name = twe.5.a
-		hidden_effect = {
-			PRU = { clr_country_flag = P_V_H }
-			PRU = { white_peace = HOL }
-			PRU = { white_peace = IND }
-			PRU = { puppet = HOL }
-			HOL = { puppet = IND }
-			HOL = { remove_ideas = war_for_freedom }
-		}
-	}
-}
+#country_event = {
+#	id = twe.5 #PRU vs HOL
+#	title = twe.5.t
+#	desc = twe.5.d
+#	picture = GFX_report_event_molotov_signing_pact
+#	
+#	fire_only_once = yes
+#	
+#	hidden =  yes
+#	
+#	trigger = {
+#		tag = PRU
+#		HOL = {
+#			surrender_progress > 0.20
+#		}
+#		PRU = { has_country_flag = P_V_H }
+#	}
+#	option = {
+#		name = twe.5.a
+#		hidden_effect = {
+#			PRU = { clr_country_flag = P_V_H }
+#			PRU = { white_peace = HOL }
+#			PRU = { white_peace = IND }
+#			PRU = { puppet = HOL }
+#			HOL = { puppet = IND }
+#			HOL = { remove_ideas = war_for_freedom }
+#		}
+#	}
+#}
 
 country_event = {
 	id = twe.6 #Second AUS vs PRU(Pru win)
@@ -874,6 +892,24 @@ country_event = {
 		}
 		BYZ = { set_country_flag = BYZ_vs_ALB_win }
 		ALB = { remove_ideas = balkan_wars }
+		if = {
+			limit = {
+				tag = BYZ
+				is_ai = no
+			}
+			BYZ = {
+				army_experience = 50
+			}
+		}
+		if = {
+			limit = {
+				tag = BYZ
+				is_ai = yes
+			}
+			BYZ = {
+				army_experience = 75
+			}
+		}
 	}
 }
 
@@ -925,6 +961,24 @@ country_event = {
 		}
 		BYZ = { set_country_flag = BYZ_vs_SER_win }
 		SER = { remove_ideas = balkan_wars }
+		if = {
+			limit = {
+				tag = BYZ
+				is_ai = no
+			}
+			BYZ = {
+				army_experience = 50
+			}
+		}
+		if = {
+			limit = {
+				tag = BYZ
+				is_ai = yes
+			}
+			BYZ = {
+				army_experience = 75
+			}
+		}
 	}
 }
 
@@ -974,6 +1028,24 @@ country_event = {
 		}
 		BYZ = { set_country_flag = BYZ_vs_BOS_win }
 		BOS = { remove_ideas = balkan_wars }
+		if = {
+			limit = {
+				tag = BYZ
+				is_ai = no
+			}
+			BYZ = {
+				army_experience = 50
+			}
+		}
+		if = {
+			limit = {
+				tag = BYZ
+				is_ai = yes
+			}
+			BYZ = {
+				army_experience = 75
+			}
+		}
 	}
 }
 
@@ -1506,6 +1578,10 @@ country_event = {
 		FRR = { annex_country = { target = ALG transfer_troops = no } }
 		FRR = { clr_country_flag = FRR_invasion_in_algeria }
 		FRR = { set_country_flag = FRR_invasion_in_algeria_end }
+		add_named_threat = { 
+			threat = 5 
+			name = FRR_algerian_invasion
+		}
 	}
 }
 
@@ -1631,5 +1707,44 @@ country_event = {
 		81 = { set_demilitarized_zone = yes }
 		88 = { set_demilitarized_zone = yes }
 		89 = { set_demilitarized_zone = yes }
+	}
+}
+country_event = {
+	id = twe.29 #Покорение казахстана
+	desc = twe.29.d
+	picture = GFX_report_event_molotov_signing_pact
+	
+	fire_only_once = yes
+	
+	hidden =  yes
+	
+	trigger = {
+		tag = RUS
+		KAZ = {
+			surrender_progress > 0.60
+		}
+		RUS = { has_country_flag = RUS_konquer_kaz_was_started }
+	}
+	
+	option = {
+		name = twe.29.a
+		RUS = {
+			white_peace = {
+				tag = KAZ
+				message = RUS_konquer_kaz
+			}
+		}
+		RUS = {
+			transfer_state = 402
+			transfer_state = 404
+			transfer_state = 405
+			transfer_state = 586
+			transfer_state = 587
+			transfer_state = 589
+		}	
+		hidden_effect = {
+			RUS = { clr_country_flag = RUS_konquer_kaz_was_started }
+			RUS = { set_country_flag = RUS_kaz_was_konquered }
+		}
 	}
 }

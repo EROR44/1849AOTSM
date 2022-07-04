@@ -34,7 +34,11 @@ country_event = { #покушение на лагранжа
 			
 		}
 		ai_chance = {
-			factor = 110
+			factor = 20
+			modifier = {
+				factor = 100
+				is_historical_focus_on = yes
+			}
 		}
 		add_stability = -0.03
 		hidden_effect = {
@@ -47,36 +51,40 @@ country_event = { #покушение на лагранжа
 		}
 	
 	}
-	option = {
-		name = fren.1.b #лаграндж убит
-		trigger = {
-			
-		}
-		ai_chance = {
-			factor = 0
-		}
-		retire_character = FRR_Sharl_Lagranj
-		promote_character = FRR_Luis_Blank
-		
-		add_stability = -0.1
-		hidden_effect = {
-			add_popularity = {
-				ideology = authoritarian  
-				popularity = 0.1
-			}
-			add_popularity = {
-				ideology = reactionist 
-				popularity = 0.1
-			}
-			add_popularity = {
-				ideology = democratic  
-				popularity = 0.1
-			}
-			set_country_flag = FRA_lagrandj_is_died
-			news_event = { hours = 24 id = news.7 }
-		}
-
-	}	
+	#option = {
+	#	name = fren.1.b #лаграндж убит
+	#	trigger = {
+	#		
+	#	}
+	#	ai_chance = {
+	#		factor = 0
+	#		modifier = {
+	#			factor = 100
+	#			is_historical_focus_on = no
+	#		}
+	#	}
+	#	retire_character = FRR_Sharl_Lagranj
+	#	promote_character = FRR_Temporary_geverment
+	#	
+	#	add_stability = -0.1
+	#	hidden_effect = {
+	#		add_popularity = {
+	#			ideology = authoritarian  
+	#			popularity = 0.1
+	#		}
+	#		add_popularity = {
+	#			ideology = reactionist 
+	#			popularity = 0.1
+	#		}
+	#		add_popularity = {
+	#			ideology = democratic  
+	#			popularity = 0.1
+	#		}
+	#		set_country_flag = FRA_lagrandj_is_died
+	#		news_event = { hours = 24 id = news.7 }
+	#	}
+	#
+	#}	
 }
 
 country_event = {#экстренная сессия правительства
@@ -100,28 +108,36 @@ country_event = {#экстренная сессия правительства
 			
 		}
 		ai_chance = {
-			factor = 100
+			factor = 40
+			modifier = {
+				factor = 100
+				is_historical_focus_on = yes
+			}
 		}
 		hidden_effect = {
 			set_country_flag = FRR_sharl_lagranj_choosen
 		}
 	
 	}
-	option = {
-		name = fren.2.a
-		trigger = {
-			
-		}
-		ai_chance = {
-			factor = 0
-		}
-		hidden_effect = {
-			set_country_flag = FRR_Luis_Blan_choosen
-			retire_character = FRR_Sharl_Lagranj
-			promote_character = FRR_Luis_Blank
-		}
-	
-	}
+	#option = {
+	#	name = fren.2.a
+	#	trigger = {
+	#		
+	#	}
+	#	ai_chance = {
+	#		factor = 0
+	#		modifier = {
+	#			factor = 40
+	#			is_historical_focus_on = no
+	#		}
+	#	}
+	#	hidden_effect = {
+	#		set_country_flag = FRR_Luis_Blan_choosen
+	#		retire_character = FRR_Sharl_Lagranj
+	#		promote_character = FRR_Luis_Blank
+	#	}
+	#
+	#}
 	
 }
 country_event = {
@@ -311,9 +327,15 @@ country_event = {
 		army_experience = 1515
 		air_experience = 15
 		navy_experience = 15
-		add_ideas = FRR_army_reorganisation
+		add_timed_idea = {
+			idea = FRR_army_reorganisation
+			days = 90
+		}
 		hidden_effect = {
-			
+			add_timed_idea = {
+				idea = FRR_army_reorganisation
+				days = 90
+			}
 		}
 	
 	}
@@ -406,12 +428,17 @@ country_event = { #выскадка французских войск в Алж�
 		trigger = {
 			
 		}
-		FRR = {
-			load_oob = "FRR_ALGERIAN_WAR"
-		}
-		
+		custom_effect_tooltip = FRR_landing_in_annaba
 		hidden_effect = {
-			
+			FRR = {
+				set_province_controller = 10078
+				set_province_controller = 12051
+				set_province_controller = 7081
+				set_province_controller = 1160
+			}
+			FRR = {
+				load_oob = "FRR_ALGERIAN_WAR"
+			}
 		}
 	
 	}	
@@ -467,7 +494,7 @@ country_event = { #Претензии на Элтьзас-Лотарингию
 		}
 		
 		hidden_effect = {
-			
+			news_event = { hours = 24 id = news.44}
 		}
 	
 	}	
@@ -575,7 +602,8 @@ country_event = { #Правительство Мишеля Шевалье
 		}
 	
 	}	
-}country_event = { #Правительстов Анри де Артуа
+}
+country_event = { #Правительстов Анри де Артуа
 	id = fren.19
 	title = fren.19.t
 	desc = fren.19.d
@@ -627,7 +655,7 @@ country_event = { #Правительство Луи Наполеона
 	
 	}	
 }
-country_event = { #Шарль Лаграндж мертв
+country_event = { #Шарль Лаграндж мертв - выборы нового главы правительства
 	id = fren.21
 	title = fren.21.t
 	desc = fren.21.d
@@ -646,7 +674,7 @@ country_event = { #Шарль Лаграндж мертв
 		trigger = {
 			
 		}
-		retire_character = FRR_Sharl_Lagranj
+		retire_character = FRR_Temporary_geverment
 		promote_character = FRR_Luis_Blank
 		hidden_effect = {
 			add_popularity = {
@@ -662,7 +690,7 @@ country_event = { #Шарль Лаграндж мертв
 		trigger = {
 			
 		}
-		retire_character = FRR_Sharl_Lagranj
+		retire_character = FRR_Temporary_geverment
 		promote_character = FRR_Mishel_Shevalie
 		hidden_effect = {
 			add_popularity = {
@@ -679,7 +707,7 @@ country_event = { #Шарль Лаграндж мертв
 		trigger = {
 			
 		}
-		retire_character = FRR_Sharl_Lagranj
+		retire_character = FRR_Temporary_geverment
 		promote_character = FRR_Anri_Sharl_de_Artua
 		hidden_effect = {
 			add_popularity = {
@@ -695,7 +723,7 @@ country_event = { #Шарль Лаграндж мертв
 		trigger = {
 			
 		}
-		retire_character = FRR_Sharl_Lagranj
+		retire_character = FRR_Temporary_geverment
 		promote_character = FRR_Louis_Napoleon		
 		hidden_effect = {
 			add_popularity = {
@@ -726,6 +754,13 @@ country_event = { #Создание Антанты - Ивент приглаше
 		trigger = { 
 			RUS = { is_in_faction = no }
 		}
+		ai_chance = {
+			factor = 40
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+			}
+		}
 		hidden_effect = {
 			FRR = { create_faction = FRR_entente } 
 		}
@@ -737,6 +772,13 @@ country_event = { #Создание Антанты - Ивент приглаше
 		name = fren.22.b #Согласиться
 		trigger = { 
 			RUS = { is_in_faction = yes }
+		}
+		ai_chance = {
+			factor = 40
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+			}
 		}
 		hidden_effect = {
 			
@@ -750,7 +792,13 @@ country_event = { #Создание Антанты - Ивент приглаше
 		trigger = {
 			
 		}
-		
+		ai_chance = {
+			factor = 40
+			modifier = {
+				factor = 20
+				is_historical_focus_on = yes
+			}
+		}
 		hidden_effect = {
 			
 		}
@@ -911,6 +959,57 @@ country_event = { #Встреча с промышленниками
 	
 	}	
 }
+country_event = { #Диалог с социалистами
+	id = fren.29
+	title = fren.29.t
+	desc = fren.29.d
+	picture = GFX_report_event_generic_read_write
+	
+	fire_only_once = yes
+	
+	trigger = {
+		
+	}
+	
+	is_triggered_only = yes
+
+	option = {
+		name = fren.29.a
+		trigger = {
+			
+		}
+		hidden_effect = {
+		
+		}
+	
+	}	
+}
+country_event = { #Диалог с демократами
+	id = fren.30
+	title = fren.30.t
+	desc = fren.30.d
+	picture = GFX_report_event_generic_read_write
+	
+	fire_only_once = yes
+	
+	trigger = {
+		
+	}
+	
+	is_triggered_only = yes
+
+	option = {
+		name = fren.30.a
+		trigger = {
+			
+		}
+		hidden_effect = {
+		
+		}
+	
+	}	
+}
+
 
 ######COLONIAL_EVENTS_SECTION################
 country_event = { 
@@ -932,12 +1031,13 @@ country_event = {
 		ai_chance = {
 			factor = 100
 		}
-		trigger = {
+		trigger = { 
 			
 		}
-		annex_country = { target = TUN transfer_troops = yes }
+		FRR = { annex_country = { target = TUN transfer_troops = yes } }
 		hidden_effect = {
-			FRR = { country_event = { id = fren_colonial.2 hours = 24 } }
+			FRR = { country_event = { id = fren_colonial.2 hours = 24 } } 
+			add_threat = 1
 		}
 	
 	}
@@ -978,7 +1078,7 @@ country_event = {
 		}
 		add_stability = 0.03
 		hidden_effect = {
-			
+			news_event = { hours = 24 id = news.41}
 		}
 	
 	}	
@@ -1002,9 +1102,11 @@ country_event = {
 		trigger = {
 			
 		}
-		declare_war_on = {
-			target = TUN
-			type = annex_everything  
+		FRR = {
+			declare_war_on = {
+				target = TUN
+				type = annex_everything  
+			}
 		}
 		hidden_effect = {
 			
@@ -1045,9 +1147,10 @@ country_event = {
 		trigger = {
 			
 		}
-		annex_country = { target = MAV transfer_troops = yes }
+		FRR = { annex_country = { target = MAV transfer_troops = yes } }
 		hidden_effect = {
 			FRR = { country_event = { id = fren_colonial.5 hours = 24 } }
+			add_threat = 1
 		}
 	
 	}
@@ -1088,7 +1191,7 @@ country_event = {
 		}
 		add_stability = 0.03
 		hidden_effect = {
-			
+			news_event = { hours = 24 id = news.42}
 		}
 	
 	}	
@@ -1112,9 +1215,11 @@ country_event = {
 		trigger = {
 			
 		}
-		declare_war_on = {
-			target = MAV
-			type = annex_everything  
+		FRR = {
+			declare_war_on = {
+				target = MAV
+				type = annex_everything  
+			}
 		}
 		hidden_effect = {
 			
@@ -1155,9 +1260,10 @@ country_event = {
 		trigger = {
 			
 		}
-		annex_country = { target = MAD transfer_troops = yes }
+		FRR = { annex_country = { target = MAD transfer_troops = yes } }
 		hidden_effect = {
 			FRR = { country_event = { id = fren_colonial.8 hours = 24 } }
+			add_threat = 1
 		}
 	
 	}
@@ -1198,7 +1304,7 @@ country_event = {
 		}
 		add_stability = 0.03
 		hidden_effect = {
-			
+			news_event = { hours = 24 id = news.43}
 		}
 	
 	}	
@@ -1222,9 +1328,11 @@ country_event = {
 		trigger = {
 			
 		}
-		declare_war_on = {
-			target = MAD
-			type = annex_everything  
+		FRR = {
+			declare_war_on = {
+				target = MAD
+				type = annex_everything  
+			}
 		}
 		hidden_effect = {
 			
@@ -1265,9 +1373,10 @@ country_event = {
 		trigger = {
 			
 		}
-		annex_country = { target = ZAN transfer_troops = yes }
+		FRR = { annex_country = { target = ZAN transfer_troops = yes } }
 		hidden_effect = {
 			FRR = { country_event = { id = fren_colonial.11 hours = 24 } }
+			add_threat = 1
 		}
 	
 	}
@@ -1332,9 +1441,11 @@ country_event = {
 		trigger = {
 			
 		}
-		declare_war_on = {
-			target = ZAN
-			type = annex_everything  
+		FRR = {
+			declare_war_on = {
+				target = ZAN
+				type = annex_everything  
+			}
 		}
 		hidden_effect = {
 			
