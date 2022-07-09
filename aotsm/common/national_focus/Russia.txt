@@ -1973,9 +1973,9 @@ add_tech_bonus = {
 			 }
 		}
 		completion_reward = {
-		PRU = {
-			country_event = { id = Russia_event_da.8 days = 1 }		
-}			
+			PRU = {
+				country_event = { id = Russia_event_da.8 days = 1 }		
+			}			
 		}
 	}
 	
@@ -1993,19 +1993,19 @@ add_tech_bonus = {
 			focus = Rus_Exacerbate_contradictions
 		}
 		available = {
-			 has_country_leader = { ruling_only = yes character = RUS_TRYBETSKOY_SERGEY_PETROVICH}
-			 CBI = {
-			 exists = yes
-			 is_subject = no
-			 NOT = {
-			 has_war_with = RUS
-			 }
-			 }
+			has_country_leader = { ruling_only = yes character = RUS_TRYBETSKOY_SERGEY_PETROVICH}
+			CBI = {
+				exists = yes
+				is_subject = no
+				NOT = {
+				has_war_with = RUS
+				}
+			}
 		}
 		completion_reward = {
-		CBI = {
-			country_event = { id = Russia_event_da.9 days = 1 }	
-}			
+			CBI = {
+				country_event = { id = Russia_event_da.9 days = 1 }	
+			}			
 		}
 	}
 	
@@ -2032,9 +2032,9 @@ add_tech_bonus = {
 			 }
 		}
 		completion_reward = { 
-		AUS = {
-			country_event = { id = Russia_event_da.10 days = 1 }
-}			
+			AUS = {
+				country_event = { id = Russia_event_da.10 days = 1 }
+			}			
 		}
 	}
 	
@@ -2048,16 +2048,15 @@ add_tech_bonus = {
 			factor = 15
 		}
 		available = {
-			 date > 1850.01.01
-			 exists = yes
-			 is_subject = no
-			 OR = {
-			 has_government = reactionist
-			 has_government = authoritarian
-			 }
+			date > 1850.01.01
+			exists = yes
+			is_subject = no
+			OR = {
+			has_government = reactionist
+			has_government = authoritarian
+			}
 		}
 		completion_reward = {
-		add_threat = 5
 			add_state_claim = 587
             add_state_claim = 402	
   			add_state_claim = 404
@@ -2069,8 +2068,9 @@ add_tech_bonus = {
 			add_state_claim = 585
 			add_state_claim = 584
 			hidden_effect = {
-			news_event = { id = mknews.5 hours = 6 }
-		}
+				add_threat = 5
+				news_event = { id = news.52 hours = 6 }
+			}
 		}
 	}
 	
@@ -2279,9 +2279,9 @@ add_tech_bonus = {
 		}
 		prerequisite = {
 			focus = Rus_Unrest_in_Xinjiang
-}
+		}
 		available = {
-			 exists = yes
+			exists = yes
 			is_subject = no
 			date > 1856.01.01
 			has_country_leader = { ruling_only = yes character = RUS_MIKHAIL_FEDOROVICH_ORLOV}
@@ -2314,7 +2314,18 @@ add_tech_bonus = {
 			exists = yes
 			is_subject = no
 			PER = {
-				exists = yes
+				NOT = {
+					is_ally_with = RUS
+					is_subject_of = RUS
+				}
+			}
+			PAR = {
+				NOT = {
+					is_ally_with = RUS
+					is_subject_of = RUS
+				}
+			}
+			IRA = {
 				NOT = {
 					is_ally_with = RUS
 					is_subject_of = RUS
@@ -2323,10 +2334,33 @@ add_tech_bonus = {
 			has_country_leader = { ruling_only = yes character = RUS_MIKHAIL_FEDOROVICH_ORLOV}
 		}
 		completion_reward = {
-			create_wargoal = {
-				type = puppet_wargoal_focus
-				target = PER
-			}	
+			if = {
+				limit = {
+					PER = { exists = yes }
+				}
+				create_wargoal = {
+					type = puppet_wargoal_focus
+					target = PER
+				}
+			}
+			if = {
+				limit = {
+					PAR = { exists = yes }
+				}
+				create_wargoal = {
+					type = puppet_wargoal_focus
+					target = PAR
+				}
+			}
+			if = {
+				limit = {
+					IRA = { exists = yes }
+				}
+				create_wargoal = {
+					type = puppet_wargoal_focus
+					target = IRA
+				}
+			}
 			hidden_effect = {
 				add_threat = 5
 			}
@@ -2358,11 +2392,13 @@ add_tech_bonus = {
 			has_country_leader = { ruling_only = yes character = RUS_MIKHAIL_FEDOROVICH_ORLOV}
 		}
 		completion_reward = {
-		add_threat = 5
 			create_wargoal = {
-    type = puppet_wargoal_focus
-    target = AFG
-}						
+				type = puppet_wargoal_focus
+				target = AFG
+			}
+			hidden_effect = {
+				add_threat = 5
+			}			
 		}
 	}
 	
@@ -2379,18 +2415,18 @@ add_tech_bonus = {
 			focus = Rus_Attention_to_the_steppe
 		}
 		available = {
-			 exists = yes
+			exists = yes
 			is_subject = no
 			OR = {
-			 has_government = reactionist
-			 has_government = authoritarian
-			 }
+				has_government = reactionist
+				has_government = authoritarian
+			}
 		}
 		completion_reward = {
 			add_timed_idea = {
-    idea = Rus_steppe_Cossacks
-    days = 600
-}									
+				idea = Rus_steppe_Cossacks
+				days = 600
+			}									
 		}
 	}
 	
@@ -2413,15 +2449,15 @@ add_tech_bonus = {
 			exists = yes
 			is_subject = no
 			OR = {
-			 has_government = reactionist
-			 has_government = authoritarian
-			 }
+				has_government = reactionist
+				has_government = authoritarian
+			}
 		}
 		completion_reward = {
-		add_political_power = 100
-			 SDZ = {
-			add_political_power = -100
-			add_stability = -0.1
+			add_political_power = 100
+			SDZ = {
+				add_political_power = -100
+				add_stability = -0.1
 			}					
 		}
 	}
@@ -2467,13 +2503,13 @@ add_tech_bonus = {
 			exists = yes
 			is_subject = no
 			NOT = {
-			 has_government = socialism
-			 }
+				has_government = socialism
+			}
 		}
 		completion_reward = {
-					QIN = { 
-			country_event = { id = Russia_event_da.11 days = 1 }		
-}							
+			QIN = { 
+				country_event = { id = Russia_event_da.11 days = 1 }		
+			}							
 		}
 	}
 	
@@ -2491,51 +2527,53 @@ add_tech_bonus = {
 		}
 		available = {
 			is_subject = no
-			 exists = yes
+			exists = yes
 			has_country_leader = { ruling_only = yes character = RUS_MIKHAIL_FEDOROVICH_ORLOV }
 			OR = {
-			MON = {
-			owns_state = 329
-			}
-			QIN = {
-			owns_state = 329
-			}
+				MON = {
+					owns_state = 329
+				}
+				QIN = {
+					owns_state = 329
+				}
 			}
 		}
 		completion_reward = {
-		add_threat = 2
-		if = {
+			if = {
 				limit = {
+					MON = {
+						owns_state = 329
+						is_subject = no
+					}
+				}
 				MON = {
-				owns_state = 329
-				is_subject = no
-				}
-				}
-									MON = {
-			country_event = { id = Russia_event_da.12 days = 2 }		
-}	
+					country_event = { id = Russia_event_da.12 days = 2 }		
+				}	
 			}
 			if = {
 				limit = { 
-				MON = {
-				owns_state = 329
-				is_puppet_of = QIN
+					MON = {
+						owns_state = 329
+						is_puppet_of = QIN
+					}
 				}
-				}
-									QIN = {
-			country_event = { id = Russia_event_da.12 days = 2 }		
-}	
+				QIN = {
+					country_event = { id = Russia_event_da.12 days = 2 }		
+				}	
 			}
 			if = {
 				limit = {
-QIN = {
-				owns_state = 329
-				}				
+					QIN = {
+						owns_state = 329
+					}				
 				}
-									QIN = {
-			country_event = { id = Russia_event_da.12 days = 2 }		
-}	
-			}			
+				QIN = {
+					country_event = { id = Russia_event_da.12 days = 2 }		
+				}	
+			}
+			hidden_effect = {
+				add_threat = 2
+			}
 		}
 	}
 	
@@ -2553,11 +2591,10 @@ QIN = {
 		}
 		available = {
 			is_subject = no
-			 exists = yes
+			exists = yes
 			has_country_leader = { ruling_only = yes character = RUS_MIKHAIL_FEDOROVICH_ORLOV }
 		}
 		completion_reward = {
-		add_threat = 2
 		if = {
 			limit = {
 				HEJ = {
@@ -2584,7 +2621,7 @@ QIN = {
 				is_puppet_of = QIN
 				}
 			}
-		QIN = {
+			QIN = {
 			country_event = { id = Russia_event_da.13 days = 2 }		
 			}	
 		}
@@ -2598,10 +2635,13 @@ QIN = {
 					}
 				}				
 			}
-		QIN = {
+			QIN = {
 			country_event = { id = Russia_event_da.13 days = 2 }		
-		}	
-		}			
+			}	
+		}
+		hidden_effect = {
+				add_threat = 2
+			}	
 		}							
 	}
 	
@@ -4694,7 +4734,7 @@ if = {
 		completion_reward = {
 	country_event = { id = russia_event_KN.2 days = 1 }	
 			hidden_effect = {
-			news_event = { id = mknews.10 hours = 6 }
+			news_event = { id = news.58 hours = 6 }
 		}						
 		}
 	}
@@ -4774,13 +4814,13 @@ add_popularity = {
 			has_country_leader = { ruling_only = yes character = RUS_Konstantin_Nikolaevich}
 		}
 		completion_reward = {
-		hidden_effect = {
-			news_event = { id = mknews.9 hours = 6 }
-		}
+			hidden_effect = {
+				news_event = { id = news.57 hours = 6 }
+			}
 			swap_ideas = {
-    remove_idea = oligarhy
-    add_idea = constitutional_monarchy
-}						
+				remove_idea = oligarhy
+				add_idea = constitutional_monarchy
+			}						
 		}
 	}
 	

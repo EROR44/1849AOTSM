@@ -3655,3 +3655,110 @@ NWA_prom_expand_cat = {
 		}
 	}
 }
+
+fren_hired_army = {
+	FRR_form_mercenary_div_plan = {
+		icon = usa_congress
+					
+		available = {
+			has_completed_focus = FRA_mercenary_divisions
+		}
+		
+		allowed = { 
+			
+		}
+		
+		visible = {
+			has_completed_focus = FRA_mercenary_divisions
+		}
+
+		cost = 100
+		days_remove = 120
+		#fire_only_once = no
+
+		modifier = {
+			
+		}
+
+		ai_will_do = {
+			factor = 0#20
+		}
+
+		remove_effect = {
+			division_template = {
+					name = "Mercenary division"
+					division_names_group = FRR_INF_01
+					priority = 2
+					regiments = {
+						infantry  = { x = 0 y = 0 }
+						infantry  = { x = 0 y = 1 }
+						infantry  = { x = 0 y = 2 }
+			
+						infantry  = { x = 1 y = 0 }
+						infantry  = { x = 1 y = 1 }
+						infantry  = { x = 1 y = 2 }
+						
+						infantry  = { x = 2 y = 0 }
+						infantry  = { x = 2 y = 1 }
+						infantry  = { x = 2 y = 2 }
+					}
+					support = {					
+						artillery = { x = 0 y = 1 }
+					}
+				}
+			hidden_effect = {
+				set_division_template_lock = {
+				division_template = "Mercenary division"
+				is_locked = yes
+				}
+			}
+			set_country_flag = FRR_mercenary_div_formed
+		}
+	}
+	FRR_create_mercenary_div_in_paris = {
+		icon = usa_congress
+					
+		available = {
+			owns_state = 16
+			controls_state = 16
+			has_country_flag = FRR_mercenary_div_formed
+			NOT = { has_country_flag = FRR_mercenaring_div }
+		}
+		
+		allowed = { 
+			
+		}
+		
+		visible = {
+			
+		}
+
+		cost = 100
+		days_remove = 120
+		#fire_only_once = no
+
+		modifier = {
+			
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+		
+		complete_effect = {
+			set_country_flag = FRR_mercenaring_div
+		}
+
+		remove_effect = {
+			16 = {
+				create_unit = { 
+					division = "name = \ "Mercenary division\" 
+					division_template = \ "Mercenary division\" 
+					start_experience_factor = 0.5"  
+					owner = FRR 
+				}
+			}
+			clr_country_flag = FRR_mercenaring_div
+		}
+	}
+}
