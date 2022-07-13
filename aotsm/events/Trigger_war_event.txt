@@ -1709,3 +1709,42 @@ country_event = {
 		89 = { set_demilitarized_zone = yes }
 	}
 }
+country_event = {
+	id = twe.29 #Покорение казахстана
+	desc = twe.29.d
+	picture = GFX_report_event_molotov_signing_pact
+	
+	fire_only_once = yes
+	
+	hidden =  yes
+	
+	trigger = {
+		tag = RUS
+		KAZ = {
+			surrender_progress > 0.60
+		}
+		RUS = { has_country_flag = RUS_konquer_kaz_was_started }
+	}
+	
+	option = {
+		name = twe.29.a
+		RUS = {
+			white_peace = {
+				tag = KAZ
+				message = RUS_konquer_kaz
+			}
+		}
+		RUS = {
+			transfer_state = 402
+			transfer_state = 404
+			transfer_state = 405
+			transfer_state = 586
+			transfer_state = 587
+			transfer_state = 589
+		}	
+		hidden_effect = {
+			RUS = { clr_country_flag = RUS_konquer_kaz_was_started }
+			RUS = { set_country_flag = RUS_kaz_was_konquered }
+		}
+	}
+}
