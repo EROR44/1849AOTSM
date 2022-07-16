@@ -23,11 +23,30 @@ on_actions = {
 	
 	on_capitulation = {
 		effect = {
-			#ALG capitulation
-			if = {
+			if = {	#France annex Algeria
 				limit = {
 					tag = ALG
 					FRR = { has_country_flag = FRR_invasion_in_algeria }
+				}				
+				FRR = { 
+					clr_country_flag = FRR_invasion_in_algeria
+					set_country_flag = FRR_invasion_in_algeria_end 
+				}
+				FRR = {
+					annex_country = {
+						target = ALG
+						transfer_troops = no
+					}
+				}
+				add_named_threat = { 
+					threat = 5 
+					name = FRR_algerian_invasion
+				}
+			}
+			if = {	#France annex Tunisia
+				limit = {
+					tag = TUN
+					FRR = { has_country_flag = FRR_invasion_in_algeria_end }
 				}				
 				FRR = { 
 					clr_country_flag = FRR_invasion_in_algeria

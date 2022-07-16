@@ -3579,7 +3579,7 @@ fren_hired_army = {
 		}
 		
 		visible = {
-			
+			has_country_flag = FRR_mercenary_div_formed
 		}
 	
 		cost = 100
@@ -3610,6 +3610,94 @@ fren_hired_army = {
 				}
 			}
 			clr_country_flag = FRR_mercenaring_div
+		}
+	}
+}
+
+FRR_war_time_decisions_cat = {
+
+	FRR_expand_military_production = {
+		icon = usa_congress
+					
+		available = {
+			FRR = { has_war = yes }
+			NOT = { has_idea = FRR_improved_mil_production}
+		}
+		
+		allowed = { 
+			
+		}
+		
+		visible = {
+			FRR = { has_war = yes }
+		}
+	
+		#cost = 20
+		days_remove = 10
+		#fire_only_once = no
+	
+		modifier = {
+			
+		}
+
+		ai_will_do = {
+			factor = 20
+		}
+		
+		complete_effect = {
+			
+		}
+
+		remove_effect = {
+			add_ideas = FRR_improved_mil_production
+		}
+	}
+	FRR_defence_of_homeland_decision = {
+		icon = usa_congress
+					
+		available = {
+			FRR = { has_war = yes }
+			NOT = { has_idea = FRR_improved_mil_production}
+			surrender_progress > 0.50
+		}
+		
+		allowed = { 
+			
+		}
+		
+		visible = {
+			FRR = { has_war = yes }
+		}
+	
+		#cost = 20
+		#days_remove = 10
+		#fire_only_once = no
+	
+		modifier = {
+			
+		}
+
+		ai_will_do = {
+			factor = 0
+			modifier = {
+				factor = 10
+				surrender_progress > 0.50
+			}
+			modifier = {
+				factor = 20
+				surrender_progress > 0.70
+			}
+		}
+		
+		complete_effect = {
+			add_timed_idea = {
+				idea = FRR_defence_of_homeland
+				days = 90
+			}
+		}
+
+		remove_effect = {
+			
 		}
 	}
 }
