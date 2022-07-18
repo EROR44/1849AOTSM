@@ -83,7 +83,7 @@ country_event = { #покушение на лагранжа
 			set_country_flag = FRA_lagrandj_is_died
 			news_event = { hours = 24 id = news.7 }
 		}
-
+	
 	}	
 }
 
@@ -327,9 +327,15 @@ country_event = {
 		army_experience = 1515
 		air_experience = 15
 		navy_experience = 15
-		add_ideas = FRR_army_reorganisation
+		add_timed_idea = {
+			idea = FRR_army_reorganisation
+			days = 90
+		}
 		hidden_effect = {
-			
+			add_timed_idea = {
+				idea = FRR_army_reorganisation
+				days = 90
+			}
 		}
 	
 	}
@@ -668,6 +674,9 @@ country_event = { #Шарль Лаграндж мертв - выборы нов�
 		trigger = {
 			
 		}
+		ai_chance = {
+			factor = 20
+		}
 		retire_character = FRR_Temporary_geverment
 		promote_character = FRR_Luis_Blank
 		hidden_effect = {
@@ -684,9 +693,13 @@ country_event = { #Шарль Лаграндж мертв - выборы нов�
 		trigger = {
 			
 		}
+		ai_chance = {
+			factor = 20
+		}
 		retire_character = FRR_Temporary_geverment
 		promote_character = FRR_Mishel_Shevalie
 		hidden_effect = {
+			set_politics = { ruling_party = democratic elections_allowed = yes }
 			add_popularity = {
 				ideology = democratic
 				popularity = 0.1
@@ -701,9 +714,13 @@ country_event = { #Шарль Лаграндж мертв - выборы нов�
 		trigger = {
 			
 		}
+		ai_chance = {
+			factor = 40
+		}
 		retire_character = FRR_Temporary_geverment
 		promote_character = FRR_Anri_Sharl_de_Artua
 		hidden_effect = {
+			set_politics = { ruling_party = authoritarian elections_allowed = yes }
 			add_popularity = {
 				ideology = authoritarian
 				popularity = 0.1
@@ -713,13 +730,17 @@ country_event = { #Шарль Лаграндж мертв - выборы нов�
 	
 	}
 	option = {
-		name = fren.21.d
+		name = fren.21.f
 		trigger = {
 			
+		}
+		ai_chance = {
+			factor = 60
 		}
 		retire_character = FRR_Temporary_geverment
 		promote_character = FRR_Louis_Napoleon		
 		hidden_effect = {
+			set_politics = { ruling_party = reactionist elections_allowed = yes }
 			add_popularity = {
 				ideology = reactionist
 				popularity = 0.1
@@ -763,7 +784,7 @@ country_event = { #Создание Антанты - Ивент приглаше
 	
 	}	
 	option = {
-		name = fren.22.b #Согласиться
+		name = fren.22.b #Принять Францию к себе в альянс
 		trigger = { 
 			RUS = { is_in_faction = yes }
 		}
@@ -799,7 +820,7 @@ country_event = { #Создание Антанты - Ивент приглаше
 	
 	}	
 }
-country_event = { #Эмбарго Прссии
+country_event = { #Эмбарго Пруссии
 	id = fren.23
 	title = fren.23.t
 	desc = fren.23.d
@@ -1003,6 +1024,31 @@ country_event = { #Диалог с демократами
 	
 	}	
 }
+country_event = { #Дела на африканском континенте
+	id = fren.31
+	title = fren.31.t
+	desc = fren.31.d
+	picture = GFX_report_event_generic_read_write
+	
+	fire_only_once = yes
+	
+	trigger = {
+		
+	}
+	
+	is_triggered_only = yes
+
+	option = {
+		name = fren.31.a
+		trigger = {
+			
+		}
+		hidden_effect = {
+		
+		}
+	
+	}	
+}
 
 
 ######COLONIAL_EVENTS_SECTION################
@@ -1028,7 +1074,7 @@ country_event = {
 		trigger = { 
 			
 		}
-		FRR = { annex_country = { target = TUN transfer_troops = yes } }
+		FRR = { annex_country = { target = TUN transfer_troops = no } }
 		hidden_effect = {
 			FRR = { country_event = { id = fren_colonial.2 hours = 24 } } 
 			add_threat = 1
@@ -1141,7 +1187,7 @@ country_event = {
 		trigger = {
 			
 		}
-		FRR = { annex_country = { target = MAV transfer_troops = yes } }
+		FRR = { annex_country = { target = MAV transfer_troops = no } }
 		hidden_effect = {
 			FRR = { country_event = { id = fren_colonial.5 hours = 24 } }
 			add_threat = 1
@@ -1254,7 +1300,7 @@ country_event = {
 		trigger = {
 			
 		}
-		FRR = { annex_country = { target = MAD transfer_troops = yes } }
+		FRR = { annex_country = { target = MAD transfer_troops = no } }
 		hidden_effect = {
 			FRR = { country_event = { id = fren_colonial.8 hours = 24 } }
 			add_threat = 1
@@ -1367,7 +1413,7 @@ country_event = {
 		trigger = {
 			
 		}
-		FRR = { annex_country = { target = ZAN transfer_troops = yes } }
+		FRR = { annex_country = { target = MOR transfer_troops = no } }
 		hidden_effect = {
 			FRR = { country_event = { id = fren_colonial.11 hours = 24 } }
 			add_threat = 1
@@ -1437,7 +1483,7 @@ country_event = {
 		}
 		FRR = {
 			declare_war_on = {
-				target = ZAN
+				target = MOR
 				type = annex_everything  
 			}
 		}
