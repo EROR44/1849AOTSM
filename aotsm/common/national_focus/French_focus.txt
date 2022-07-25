@@ -996,7 +996,7 @@ focus_tree = {
 			if = {
 				limit = {
 					FRR = {
-						is_faction_leader = yes
+						is_faction_leader = yes 
 					}
 				}
 				add_to_faction = MAD
@@ -2341,9 +2341,10 @@ focus_tree = {
 		id = FRA_be_with_britain
 		icon = GFX_be_friend_with_cbi
 		
-		x = 29
+		x = 28
 		y = 0
-		mutually_exclusive = { focus = FRA_own_way }
+		mutually_exclusive = { focus = FRA_french_entente }
+		mutually_exclusive = { focus = FRA_own_aliance }
 		mutually_exclusive = { focus = FRA_be_with_prussia }
 		cost = 2
 		
@@ -2416,7 +2417,7 @@ focus_tree = {
 		icon = GFX_goal_generic_fortify_city
 		mutually_exclusive = { focus = FRA_create_coastal_defence_line }
 		x = 2
-		y = 4
+		y = 3
 		relative_position_id = FRA_be_with_britain
 		prerequisite = { 
 			focus = FRA_be_with_britain 
@@ -2542,7 +2543,8 @@ focus_tree = {
 		relative_position_id = FRA_be_with_britain
 		prerequisite = { 
 			focus = FRA_be_with_britain
-			focus = FRA_own_way
+			focus = FRA_own_aliance
+			focus = FRA_french_entente
 		}
 		
 		cost = 3
@@ -2576,95 +2578,50 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = FRA_own_way
-		icon = GFX_goal_generic_neutrality_focus
-		
-		x = 3
-		x = 3
-		y = 0 
-		relative_position_id = FRA_be_with_britain
+		id = FRA_french_entente 
+		icon = GFX_goal_frr_aliance_with_rus
 		mutually_exclusive = { focus = FRA_be_with_britain }
-		mutually_exclusive = { focus = FRA_be_with_prussia}
-		cost = 2
+		mutually_exclusive = { focus = FRA_own_aliance }
+		mutually_exclusive = { focus = FRA_be_with_prussia }
+		x = 2
+		y = 0
+		relative_position_id = FRA_be_with_britain
 		
-		#ai_will_do = {
-		#	factor = 0
-		#	modifier = {
-		#		RUS = { NOT = { is_in_faction_with = CBI } }
-		#		factor = 600
-		#	}
-		#}
+		cost = 2
+		#search_filters = {   }
 		
 		available = {
 			date > 1854.1.1
 		}
 		
 		available_if_capitulated = yes
-		
-		search_filters = {FOCUS_FILTER_POLITICAL}
-		
-		completion_reward = {
-			add_political_power = 150
-			hidden_effect = {
-				set_country_flag = FRR_own_way
-			}
-		}
-	}
-	focus = {
-		id = FRA_french_entente 
-		icon = GFX_goal_frr_aliance_with_rus
-		mutually_exclusive = { focus = FRA_own_aliance }
-		x = -1
-		y = 1
-		relative_position_id = FRA_own_way
-		prerequisite = { 
-			focus = FRA_own_way 
-		}
-		
-		#ai_will_do = {
-		#	factor = 0
-		#	modifier = {
-		#		RUS = { NOT = { is_in_faction_with = CBI }
-		#		factor = 600
-		#	}
-		#}
-		
-		cost = 2
-		#search_filters = {   }
-		
-		available = {
-			has_country_flag = FRR_own_way
-		}
-		
-		available_if_capitulated = yes
 
-		completion_reward = {
-			
+		completion_reward = {			
 			RUS = { country_event = { id = fren.22 } }
 		}
 	}
 	focus = {
 		id = FRA_own_aliance
 		icon = GFX_goal_generic_national_unity
+		mutually_exclusive = { focus = FRA_be_with_britain }
 		mutually_exclusive = { focus = FRA_french_entente }
-		x = 1
-		y = 1
-		relative_position_id = FRA_own_way
-		prerequisite = { 
-			focus = FRA_own_way 
-		}
+		mutually_exclusive = { focus = FRA_be_with_prussia }
+		x = 2
+		y = 0
+		relative_position_id = FRA_french_entente
 		
 		cost = 2
 		#search_filters = {   }
 		
 		available = {
-			has_country_flag = FRR_own_way
+			date > 1854.1.1
 		}
 		
 		available_if_capitulated = yes
 
 		completion_reward = {
 			create_faction = FRR_french_continental_system
+
 		}
 	}
 	focus = {
@@ -2672,7 +2629,7 @@ focus_tree = {
 		icon = GFX_goal_generic_defence
 		
 		x = 1
-		y = 2
+		y = 1
 		relative_position_id = FRA_french_entente
 		prerequisite = { 
 			focus = FRA_own_aliance 
@@ -2683,7 +2640,7 @@ focus_tree = {
 		#search_filters = {   }
 		
 		available = {
-			has_country_flag = FRR_own_way
+
 		}
 		
 		available_if_capitulated = yes
@@ -2696,11 +2653,12 @@ focus_tree = {
 		id = FRA_be_with_prussia
 		icon = GFX_be_friend_with_pru
 		
-		x = 3
+		x = 2
 		y = 0
-		relative_position_id = FRA_own_way
+		relative_position_id = FRA_own_aliance
 		mutually_exclusive = { focus = FRA_be_with_britain }
-		mutually_exclusive = { focus = FRA_own_way }
+		mutually_exclusive = { focus = FRA_french_entente }
+		mutually_exclusive = { focus = FRA_own_aliance }
 		cost = 5
 		#search_filters = {   }
 		
@@ -2725,7 +2683,7 @@ focus_tree = {
 		icon = GFX_focus_generic_coastal_fort
 		mutually_exclusive = { focus = FRA_create_the_ebers_line }
 		x = -2
-		y = 4
+		y = 3
 		relative_position_id = FRA_be_with_prussia
 		prerequisite = { 
 			focus = FRA_be_with_prussia 
@@ -2900,7 +2858,8 @@ focus_tree = {
 		relative_position_id = FRA_be_with_prussia
 		prerequisite = { 
 			focus = FRA_be_with_prussia 
-			focus = FRA_own_way
+			focus = FRA_own_aliance
+			focus = FRA_french_entente
 		}
 		
 		cost = 3
