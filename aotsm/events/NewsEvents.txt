@@ -1727,3 +1727,59 @@ news_event = {
 	}
 	
 }
+
+news_event = {
+	id = news.86 #Leypoldit Bomb Success
+	title = news.86.t
+	desc = news.86.d
+	picture = GFX_news_event_nuke
+	
+	major = yes
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = news.86.a
+
+	}
+	
+}
+
+news_event = {
+	id = news.87 #Leypoldit Bomb Fail
+	title = news.87.t
+	desc = news.87.d
+	picture = GFX_news_event_nuke
+	
+	major = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		hidden_effect = {
+			every_country = {
+				limit = {
+					is_ai = no
+				}
+				goto_state = 720
+			}
+			launch_nuke = {
+				province = 10995
+				state = 720
+				use_nuke = yes
+			}
+			720 = {
+				remove_building = {
+					type = nuclear_reactor
+					level = 1
+				}
+			}
+		}
+	}
+	
+	option = {
+		name = news.87.a
+
+	}
+	
+}
