@@ -248,7 +248,7 @@ pru_leypoldit_bomb = {
 		visible = {
 			owns_state = 64
 			controls_state = 64
-			date > 1851.12.31
+			date > 1850.12.31
 		}
 
 		fire_only_once = yes
@@ -292,7 +292,7 @@ pru_leypoldit_bomb = {
 		visible = {
 			owns_state = 64
 			controls_state = 64
-			date > 1852.12.31
+			date > 1851.12.31
 			has_country_flag = pru_tech_bomb
 		}
 
@@ -313,7 +313,7 @@ pru_leypoldit_bomb = {
 			set_technology = {
 				nuclear_reactor = 1
 			}
-			64 = {
+			720 = {
 				add_extra_state_shared_building_slots = 1
 				add_building_construction = {
 					type = nuclear_reactor
@@ -365,6 +365,37 @@ pru_leypoldit_bomb = {
 		remove_effect = { 
 			set_technology = {
 				nukes = 1
+			}
+			random_list = {
+				50 = { #Success
+					modifier = {
+						PRU = {
+							is_ai = no
+						}
+					}
+					PRU = {
+						country_event = ger.13
+					}
+					hidden_effect = {
+						PRU = {
+							country_event = {
+								id = script_event.4
+								days = 14
+							}
+						}
+					}
+				}
+				50 = { #Fail
+					PRU = {
+						country_event = ger.12
+					}
+					hidden_effect = {
+						news_event = {
+							id = news.87
+							days = 2
+						}
+					}
+				}
 			}
 			PRU = {
 				set_country_flag = pru_bomb_complete
@@ -443,6 +474,9 @@ pru_leypoldit_bomb = {
 						days = 14
 					}
 				}
+			}
+			hidden_effect = {
+				set_global_flag = leypoldit_bombing
 			}
 		}
 	}
@@ -587,6 +621,10 @@ pru_diplomat_missia = {
 		}
 
 		visible = {
+			OR = {
+				has_war_with = RUS
+				has_war_with = FRR
+			}
 		}
 
 		fire_only_once = yes
@@ -658,6 +696,10 @@ pru_diplomat_missia = {
 		}
 
 		visible = {
+			OR = {
+				has_war_with = RUS
+				has_war_with = FRR
+			}
 		}
 
 		fire_only_once = yes
