@@ -283,6 +283,104 @@ country_event = { #Persian Civil war
 	}
 }
 
+country_event = { #Senat meeting
+	id = byz.9
+	title = byz.9.t
+	desc = byz.9.d
+	picture = GFX_report_event_baltic_entente_one
+	
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	option = { #centralis
+		name = byz.9.a
+		ai_chance = {
+			factor = 50
+		}
+		BYZ = {
+			country_event = byz.11
+		}
+	}
+	
+	option = { #decentralis
+		name = byz.9.b
+		ai_chance = {
+			factor = 50
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+			}
+		}
+		BYZ = {
+			country_event = byz.12
+		}
+	}
+	
+}
+
+country_event = { #Emperor speach
+	id = byz.11
+	title = byz.11.t
+	desc = byz.11.d
+	picture = GFX_report_event_king_speech
+	
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = byz.11.a
+		BYZ = {
+			set_country_flag = byz_imperia_politic
+			set_country_flag = byz_rulling_impgov
+		}
+		custom_effect_tooltip = byz_10i_m5_d5
+		add_to_variable = { byz_imperial_faction_support = 10 }
+		clamp_variable = {
+			var = byz_imperial_faction_support
+			min = 0
+			max = 200
+		}
+		add_to_variable = { byz_merchants_faction_support = -5 }
+		clamp_variable = {
+			var = byz_merchants_faction_support
+			min = 0
+			max = 200
+		}
+		add_to_variable = { byz_democrats_faction_support = -5 }
+		clamp_variable = {
+			var = byz_democrats_faction_support
+			min = 0
+			max = 200
+		}
+	}
+	
+}
+
+country_event = { #Emperor doesn't challeng fate
+	id = byz.12
+	title = byz.12.t
+	desc = byz.12.d
+	picture = GFX_report_event_generic_sign_treaty2
+	
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = byz.12.a
+		BYZ = {
+			set_country_flag = byz_democratic_politic
+			set_country_flag = byz_rulling_demmer
+		}
+		custom_effect_tooltip = imperialist_angry
+		custom_effect_tooltip = generals_angry
+	}
+	
+}
+	
+
 country_event = { #Maratha deal
 	id = byz.10
 	title = byz.10.t

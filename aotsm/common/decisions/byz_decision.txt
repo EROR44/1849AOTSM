@@ -1,14 +1,18 @@
 byz_hellenization_of_bulgaria_categories = {
+
 	byz_hellenization_of_bulgaria_complet_decision = {
 		icon = eng_trade_unions_demand
+		
 		allowed = {
 			tag = BYZ
 		}
+		
 		available = {
 			check_variable = {
 				byz_hellenization_of_bulgaria_var > 99
 			}
 		}
+		
 		visible = {
 			tag = BYZ
 			has_country_flag = BYZ_vs_BUL_win 
@@ -26,11 +30,543 @@ byz_hellenization_of_bulgaria_categories = {
 		fire_only_once = yes
 		
 		complete_effect = {		
-			set_country_flag = hellenization_of_bulgaria_complete
+			BYZ = { 
+				add_state_core = 48
+				add_state_core = 77
+				add_state_core = 106
+				add_state_core = 211
+				add_state_core = 212
+				add_state_core = 801
+				add_state_core = 803
+			}
 		}
 		
 		remove_effect = {
 		}
+	}
+	
+	byz_annex_of_dobruja_decision = {
+		icon = generic_operation
+		
+		allowed = {
+			tag = BYZ
+		}
+		
+		available = {
+			BYZ = {
+				has_army_manpower = { size > 149999 }
+			}
+		}
+		
+		visible = {
+			tag = BYZ
+			has_country_flag = BYZ_vs_BUL_win 
+		}		
+			
+		cost = 0		
+		
+		ai_will_do = {
+			factor = 50
+			modifier = {
+				factor = 100
+				is_historical_focus_on = yes
+			}
+		}
+		
+		fire_only_once = yes
+		
+		complete_effect = {		
+			BYZ = {
+				country_event = BYZ.1	
+			}
+		}
+	}
+	
+	byz_invest_in_bulgaria_land = {
+		icon = generic_factory
+		
+		allowed = {
+			tag = BYZ
+		}
+		
+		available = {
+			num_of_civilian_factories_available_for_projects > 4
+			NOT = {
+				has_country_flag = BYZ_decision_with_bulgaria
+			}
+		}
+		
+		visible = {
+			tag = BYZ
+			has_country_flag = BYZ_vs_BUL_win 
+		}
+
+		modifier = {
+			civilian_factory_use = 5
+		}
+			
+		cost = 0		
+		
+		ai_will_do = {
+			factor = 50
+			modifier = {
+				factor = 100
+				is_historical_focus_on = yes
+			}
+		}
+		
+		fire_only_once = yes
+		
+		days_remove = 30
+		
+		complete_effect = {
+			hidden_effect = {
+				set_country_flag = BYZ_decision_with_bulgaria
+			}
+		}
+		
+		remove_effect = {
+			48 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+			801 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+			custom_effect_tooltip = byz_hellen_bul_15
+			add_to_variable = { byz_hellenization_of_bulgaria_var = 15 }
+			clamp_variable = {
+				var = byz_hellenization_of_bulgaria_var
+				min = 0
+				max = 100
+			}
+			hidden_effect = {
+				remove_country_flga = BYZ_decision_with_bulgaria
+			}
+		}
+	}
+	
+	byz_reorganis_bulgaria_land = {
+		icon = generic_construction
+		
+		allowed = {
+			tag = BYZ
+		}
+		
+		available = {
+			num_of_civilian_factories_available_for_projects > 4
+			NOT = {
+				has_country_flag = BYZ_decision_with_bulgaria
+			}
+		}
+		
+		visible = {
+			tag = BYZ
+			has_country_flag = BYZ_vs_BUL_win 
+		}
+
+		modifier = {
+			civilian_factory_use = 5
+		}
+			
+		cost = 0		
+		
+		ai_will_do = {
+			factor = 50
+			modifier = {
+				factor = 100
+				is_historical_focus_on = yes
+			}
+		}
+		
+		fire_only_once = yes
+		
+		days_remove = 30
+		
+		complete_effect = {
+			hidden_effect = {
+				set_country_flag = BYZ_decision_with_bulgaria
+			}
+		}
+		
+		remove_effect = {
+			48 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			if = {
+				limit = {
+					owns_state = 77
+				}
+				77 = {
+					add_extra_state_shared_building_slots = 1
+					add_building_construction = {
+						type = infrastructure
+						level = 1
+						instant_build = yes
+					}
+				}
+			}
+			106 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			211 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			212 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			801 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			803 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			custom_effect_tooltip = byz_hellen_bul_15
+			add_to_variable = { byz_hellenization_of_bulgaria_var = 15 }
+			clamp_variable = {
+				var = byz_hellenization_of_bulgaria_var
+				min = 0
+				max = 100
+			}
+			hidden_effect = {
+				remove_country_flga = BYZ_decision_with_bulgaria
+			}
+		}
+	}
+	
+	byz_change_education_bulgaria = {
+		icon = generic_brainwash
+		
+		allowed = {
+			tag = BYZ
+		}
+		
+		available = {
+			num_of_civilian_factories_available_for_projects > 4
+			NOT = {
+				has_country_flag = BYZ_decision_with_bulgaria
+			}
+		}
+		
+		visible = {
+			tag = BYZ
+			has_country_flag = BYZ_vs_BUL_win 
+		}
+
+		modifier = {
+			civilian_factory_use = 5
+		}
+			
+		cost = 0		
+		
+		ai_will_do = {
+			factor = 50
+			modifier = {
+				factor = 100
+				is_historical_focus_on = yes
+			}
+		}
+		
+		fire_only_once = yes
+		
+		days_remove = 30
+		
+		complete_effect = {
+			hidden_effect = {
+				set_country_flag = BYZ_decision_with_bulgaria
+			}
+		}
+		
+		remove_effect = {
+			custom_effect_tooltip = byz_hellen_bul_10
+			add_to_variable = { byz_hellenization_of_bulgaria_var = 10 }
+			clamp_variable = {
+				var = byz_hellenization_of_bulgaria_var
+				min = 0
+				max = 100
+			}
+			hidden_effect = {
+				remove_country_flga = BYZ_decision_with_bulgaria
+			}
+		}
+	}
+	
+	byz_change_laws_bulgaria = {
+		icon = eng_trade_unions_support
+		
+		allowed = {
+			tag = BYZ
+		}
+		
+		available = {
+			NOT = {
+				has_country_flag = BYZ_decision_with_bulgaria
+			}
+		}
+		
+		visible = {
+			tag = BYZ
+			has_country_flag = BYZ_vs_BUL_win 
+		}
+			
+		cost = 0		
+		
+		ai_will_do = {
+			factor = 50
+			modifier = {
+				factor = 100
+				is_historical_focus_on = yes
+			}
+		}
+		
+		fire_only_once = yes
+		
+		days_remove = 30
+		
+		complete_effect = {
+			hidden_effect = {
+				set_country_flag = BYZ_decision_with_bulgaria
+			}
+		}
+		
+		remove_effect = {
+			add_political_power = -150
+			custom_effect_tooltip = byz_hellen_bul_15
+			add_to_variable = { byz_hellenization_of_bulgaria_var = 15 }
+			clamp_variable = {
+				var = byz_hellenization_of_bulgaria_var
+				min = 0
+				max = 100
+			}
+			hidden_effect = {
+				remove_country_flga = BYZ_decision_with_bulgaria
+			}
+		}
+	}
+	
+	byz_translation_book_bulgaria = {
+		icon = hol_radio_oranje
+		
+		allowed = {
+			tag = BYZ
+		}
+		
+		available = {
+			NOT = {
+				has_country_flag = BYZ_decision_with_bulgaria
+			}
+		}
+		
+		visible = {
+			tag = BYZ
+			has_country_flag = BYZ_vs_BUL_win 
+		}
+			
+		cost = 0		
+		
+		ai_will_do = {
+			factor = 50
+			modifier = {
+				factor = 100
+				is_historical_focus_on = yes
+			}
+		}
+		
+		fire_only_once = yes
+		
+		days_remove = 30
+		
+		complete_effect = {
+			hidden_effect = {
+				set_country_flag = BYZ_decision_with_bulgaria
+			}
+		}
+		
+		remove_effect = {
+			add_stability = -0.025
+			custom_effect_tooltip = byz_hellen_bul_5
+			add_to_variable = { byz_hellenization_of_bulgaria_var = 5 }
+			clamp_variable = {
+				var = byz_hellenization_of_bulgaria_var
+				min = 0
+				max = 100
+			}
+			hidden_effect = {
+				remove_country_flga = BYZ_decision_with_bulgaria
+			}
+		}
+	}
+	
+	byz_change_religion_bulgaria = {
+		icon = eng_propaganda_campaigns
+		
+		allowed = {
+			tag = BYZ
+		}
+		
+		available = {
+			NOT = {
+				has_country_flag = BYZ_decision_with_bulgaria
+			}
+		}
+		
+		visible = {
+			tag = BYZ
+			has_country_flag = BYZ_vs_BUL_win 
+		}
+			
+		cost = 0		
+		
+		ai_will_do = {
+			factor = 50
+			modifier = {
+				factor = 100
+				is_historical_focus_on = yes
+			}
+		}
+		
+		fire_only_once = yes
+		
+		days_remove = 30
+		
+		complete_effect = {
+			hidden_effect = {
+				set_country_flag = BYZ_decision_with_bulgaria
+			}
+		}
+		
+		remove_effect = {
+			add_stability = -0.025
+			custom_effect_tooltip = byz_hellen_bul_10
+			add_to_variable = { byz_hellenization_of_bulgaria_var = 10 }
+			clamp_variable = {
+				var = byz_hellenization_of_bulgaria_var
+				min = 0
+				max = 100
+			}
+			hidden_effect = {
+				remove_country_flga = BYZ_decision_with_bulgaria
+			}
+		}
+	}
+	
+	byz_timed_hellenize_bulgaria = {
+	
+		activation = {
+			has_country_flag = BYZ_vs_BUL_win 
+			NOT = {
+				check_variable = {
+					byz_hellenization_of_bulgaria_var > 99
+				}
+			}
+		}
+		
+		available = {
+			check_variable = {
+				byz_hellenization_of_bulgaria_var > 99
+			}
+		}
+		
+		cancel_trigger = {
+			check_variable = {
+				byz_hellenization_of_bulgaria_var > 99
+			}
+		}
+		
+		visible = {
+			tag = BYZ
+			has_country_flag = BYZ_vs_BUL_win 
+		}
+		
+		icon = generic_civil_support
+		
+		days_mission_timeout = 29
+		
+		fire_only_once = no
+		
+		timeout_effect = {
+			48 = {
+				add_compliance = 5
+				add_resistance = -5
+			}
+			if = {
+				limit = {
+					owns_state = 77
+				}
+				77 = {
+					add_compliance = 5
+					add_resistance = -5
+				}
+			}
+			106 = {
+				add_compliance = 5
+				add_resistance = -5
+			}
+			211 = {
+				add_compliance = 5
+				add_resistance = -5
+			}
+			212 = {
+				add_compliance = 5
+				add_resistance = -5
+			}
+			801 = {
+				add_compliance = 5
+				add_resistance = -5
+			}
+			803 = {
+				add_compliance = 5
+				add_resistance = -5
+			}
+			activate_mission = byz_timed_hellenize_bulgaria
+			custom_effect_tooltip = byz_hellen_bul_5
+			add_to_variable = { byz_hellenization_of_bulgaria_var = 5 }
+			clamp_variable = {
+				var = byz_hellenization_of_bulgaria_var
+				min = 0
+				max = 100
+			}
+		}
+		
 	}
 }
 
