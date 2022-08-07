@@ -11,6 +11,7 @@
 #	FOCUS_FILTER_INDUSTRY = 509
 #
 #}
+
 focus_tree = {
 	id = byzantium_focus
 	
@@ -91,12 +92,15 @@ focus_tree = {
 		}
 	}
 	
+	#power to senat
+	
 	focus = {
 		id = BYZ_power_to_senat
 		icon = GFX_focus_rom_handle_king
-		x = 15
-		y = 0
-		cost = 5
+		relative_position_id = BYZ_first_senat_meeting
+		x = -5
+		y = 2
+		cost = 4.3
 		mutually_exclusive = { focus = BYZ_counteraction_of_senat }
 		prerequisite = { focus = BYZ_first_senat_meeting }
 		ai_will_do = {
@@ -120,9 +124,10 @@ focus_tree = {
 	focus = {
 		id = BYZ_support_of_merchants
 		icon = GFX_goal_generic_intelligence_exchange
-		x = 13
+		relative_position_id = BYZ_power_to_senat
+		x = -2
 		y = 1
-		cost = 5
+		cost = 4.3
 		prerequisite = { focus = BYZ_power_to_senat }
 		ai_will_do = {
 			factor = 10000
@@ -157,9 +162,10 @@ focus_tree = {
 	focus = {
 		id = BYZ_suppression_generals
 		icon = GFX_goal_tfv_saf_anti_colonialist_crusade
-		x = 15
+		relative_position_id = BYZ_power_to_senat
+		x = 0
 		y = 1
-		cost = 5
+		cost = 4.3
 		prerequisite = { focus = BYZ_power_to_senat }
 		ai_will_do = {
 			factor = 10000
@@ -200,9 +206,10 @@ focus_tree = {
 	focus = {
 		id = BYZ_support_of_democrats
 		icon = GFX_goal_generic_improve_relations
-		x = 17
+		relative_position_id = BYZ_power_to_senat
+		x = 2
 		y = 1
-		cost = 5
+		cost = 4.3
 		prerequisite = { focus = BYZ_power_to_senat }
 		ai_will_do = {
 			factor = 10000
@@ -234,14 +241,13 @@ focus_tree = {
 		}
 	}
 	
-	#Decentralisation
-	
 	focus = {
 		id = BYZ_decentralisation
 		icon = GFX_focus_generic_support_the_left_right
-		x = 15
+		relative_position_id = BYZ_power_to_senat
+		x = 0
 		y = 2
-		cost = 5
+		cost = 4.3
 		prerequisite = { focus = BYZ_support_of_merchants }
 		prerequisite = { focus = BYZ_suppression_generals }
 		prerequisite = { focus = BYZ_support_of_democrats }
@@ -263,12 +269,15 @@ focus_tree = {
 		}
 	}
 	
+	#counteraction senat
+	
 	focus = {
 		id = BYZ_counteraction_of_senat
 		icon = GFX_focus_usa_voter_registration_act
-		x = 25
-		y = 0
-		cost = 5
+		relative_position_id = BYZ_first_senat_meeting
+		x = 5
+		y = 2
+		cost = 4.3
 		mutually_exclusive = { focus = BYZ_power_to_senat }
 		prerequisite = { focus = BYZ_first_senat_meeting }
 		ai_will_do = {
@@ -292,9 +301,10 @@ focus_tree = {
 	focus = {
 		id = BYZ_support_from_democrats
 		icon = GFX_focus_generic_treaty
-		x = 23
+		relative_position_id = BYZ_counteraction_of_senat
+		x = -2
 		y = 1
-		cost = 5
+		cost = 4.3
 		#mutually_exclusive = { }
 		prerequisite = { focus = BYZ_counteraction_of_senat }
 		ai_will_do = {
@@ -330,9 +340,10 @@ focus_tree = {
 	focus = {
 		id = BYZ_support_from_generals
 		icon = GFX_focus_generic_little_entente
-		x = 25
+		relative_position_id = BYZ_counteraction_of_senat
+		x = 0
 		y = 1
-		cost = 5
+		cost = 4.3
 		#mutually_exclusive = { }
 		prerequisite = { focus = BYZ_counteraction_of_senat }
 		ai_will_do = {
@@ -368,9 +379,10 @@ focus_tree = {
 	focus = {
 		id = BYZ_support_from_merchants
 		icon = GFX_focus_mex_privatisation
-		x = 27
+		relative_position_id = BYZ_counteraction_of_senat
+		x = 2
 		y = 1
-		cost = 5
+		cost = 4.3
 		#mutually_exclusive = { }
 		prerequisite = { focus = BYZ_counteraction_of_senat }
 		ai_will_do = {
@@ -403,14 +415,13 @@ focus_tree = {
 		}
 	}
 	
-	#Centralization
-	
 	focus = {
 		id = BYZ_centralization
 		icon = GFX_focus_generic_self_management
-		x = 25
+		relative_position_id = BYZ_counteraction_of_senat
+		x = 0
 		y = 2
-		cost = 5
+		cost = 4.3
 		#mutually_exclusive = { }
 		prerequisite = { focus = BYZ_support_from_democrats }
 		prerequisite = { focus = BYZ_support_from_generals }
@@ -488,12 +499,11 @@ focus_tree = {
 	
 	#Balkan War
 	
-	#Bulgaria
-	
 	focus = {
 		id = BYZ_bulgaria_war
 		icon = GFX_BYZ_bulgaria_war
-		x = 20
+		relative_position_id = BYZ_first_senat_meeting
+		x = 0
 		y = 1
 		cost = 4.3
 		#mutually_exclusive = { }
@@ -534,51 +544,13 @@ focus_tree = {
 	}
 	
 	focus = {
-		id = BYZ_hellenization_of_bulgaria_complete
-		icon = GFX_focus_generic_self_management
-		x = 20
-		y = 4
-		cost = 4.3
-		#mutually_exclusive = { }
-		ai_will_do = {
-			factor = 10000
-		}
-		
-		#cancel = { }
-		
-		available = {
-			has_country_flag = hellenization_of_bulgaria_complete
-		}
-		
-		#bypass = { }
-		
-		#search_filters = {  }
-		
-		completion_reward = {
-			BYZ = { 
-				add_state_core = 48
-				add_state_core = 77
-				add_state_core = 106
-				add_state_core = 211
-				add_state_core = 212
-				add_state_core = 801
-				add_state_core = 803
-			}
-		}
-	}
-	
-	#Albania
-	
-	focus = {
 		id = BYZ_albania_war
 		icon = GFX_BYZ_albania_war
 		x = 18
 		y = 5
 		cost = 4.3
 		#mutually_exclusive = { }
-		prerequisite = { focus = BYZ_departation_of_bulgar }
-		prerequisite = { focus = BYZ_annex_of_dobruja }
-		prerequisite = { focus = BYZ_greck_industry }
+		#prerequisite = { focus = }
 		ai_will_do = {
 			factor = 10000
 		}
@@ -610,132 +582,13 @@ focus_tree = {
 	}
 	
 	focus = {
-		id = BYZ_albania_deportation
-		icon = GFX_focus_generic_support_the_left_right
-		x = 18
-		y = 6
-		cost = 4.3
-		#mutually_exclusive = { }
-		prerequisite = { focus = BYZ_albania_war }
-		ai_will_do = {
-			factor = 10000
-		}
-		
-		#cancel = { }
-		
-		available = { has_country_flag = BYZ_vs_ALB_win }
-		
-		#bypass = { }
-		
-		#search_filters = {  }
-		
-		completion_reward = {
-			random_state = {
-				limit = { 
-					is_core_of = BYZ 
-				}
-				add_manpower = -25000
-			}
-			random_state = {
-				limit = { 
-					is_core_of = BYZ 
-				}
-				add_manpower = -25000
-			}
-			random_state = {
-				limit = { 
-					is_core_of = BYZ 
-				}
-				add_manpower = -25000
-			}
-			random_state = {
-				limit = { 
-					is_core_of = BYZ 
-				}
-				add_manpower = -25000
-			}
-			random_state = {
-				limit = { 
-					is_core_of = BYZ 
-				}
-				add_manpower = -25000
-			}
-			44 = {
-				add_manpower = -341710
-				add_manpower = 125000
-			}
-			235 = {
-				add_manpower = 170855
-			}
-			234 = {
-				add_manpower = 170855
-			}
-			custom_effect_tooltip = byz_hellen_alb_50
-			add_to_variable = { byz_hellenization_of_albania_var = 50 }
-			clamp_variable = {
-				var = byz_hellenization_of_albania_var
-				min = 0
-				max = 100
-			}
-		}
-	}
-	
-	focus = {
-		id = BYZ_albania_investments
-		icon = GFX_focus_generic_industry_2
-		x = 18
-		y = 7
-		cost = 4.3
-		#mutually_exclusive = { }
-		prerequisite = { focus = BYZ_albania_deportation }
-		ai_will_do = {
-			factor = 10000
-		}
-		
-		#cancel = { }
-		
-		#available = { }
-		
-		#bypass = { }
-		
-		#search_filters = {  }
-		
-		completion_reward = {
-			44 = {
-				add_extra_state_shared_building_slots = 2
-				add_building_construction = {
-					type = industrial_complex
-					level = 2
-					instant_build = yes
-				}
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-					instant_build = yes
-				}
-			}
-			custom_effect_tooltip = byz_hellen_alb_50
-			add_to_variable = { byz_hellenization_of_albania_var = 50 }
-			clamp_variable = {
-				var = byz_hellenization_of_albania_var
-				min = 0
-				max = 100
-			}
-		}
-	}
-	
-	#Serbia
-	
-	focus = {
 		id = BYZ_serbia_war
 		icon = GFX_BYZ_serbia_war
 		x = 22
 		y = 5
 		cost = 4.3
 		#mutually_exclusive = { }
-		prerequisite = { focus = BYZ_departation_of_bulgar }
-		prerequisite = { focus = BYZ_annex_of_dobruja }
-		prerequisite = { focus = BYZ_greck_industry }
+		#prerequisite = { focus = }
 		ai_will_do = {
 			factor = 10000
 		}
@@ -767,297 +620,13 @@ focus_tree = {
 	}
 	
 	focus = {
-		id = BYZ_serbia_deportation
-		icon = GFX_goal_generic_political_pressure
-		x = 22
-		y = 6
-		cost = 4.3
-		#mutually_exclusive = { }
-		prerequisite = { focus = BYZ_serbia_war }
-		ai_will_do = {
-			factor = 10000
-		}
-		
-		#cancel = { }
-		
-		available = { has_country_flag = BYZ_vs_SER_win }
-
-		#bypass = { }
-		
-		#search_filters = {  }
-		
-		completion_reward = {
-			random_state = {
-				limit = { 
-					is_core_of = BYZ 
-				}
-				add_manpower = -25000
-			}
-			random_state = {
-				limit = { 
-					is_core_of = BYZ 
-				}
-				add_manpower = -25000
-			}
-			random_state = {
-				limit = { 
-					is_core_of = BYZ 
-				}
-				add_manpower = -25000
-			}
-			random_state = {
-				limit = { 
-					is_core_of = BYZ 
-				}
-				add_manpower = -25000
-			}
-			105 = {
-				add_manpower = -196600
-				add_manpower = 25000
-			}
-			107 = {
-				add_manpower = -288000
-				add_manpower = 25000
-			}
-			108 = {
-				add_manpower = -107900
-				add_manpower = 25000
-			}
-			802 = {
-				add_manpower = -66800
-				add_manpower = 25000
-			}
-			random_state = {
-				limit = {
-					is_core_of = RUS
-					is_controlled_by = RUS
-				}
-				add_manpower = 196600
-			}
-			random_state = {
-				limit = {
-					is_core_of = RUS
-					is_controlled_by = RUS
-				}
-				add_manpower = 288000
-			}
-			random_state = {
-				limit = {
-					is_core_of = RUS
-					is_controlled_by = RUS
-				}
-				add_manpower = 107900
-			}
-			random_state = {
-				limit = {
-					is_core_of = RUS
-					is_controlled_by = RUS
-				}
-				add_manpower = 66800
-			}
-			custom_effect_tooltip = byz_hellen_ser_25
-			add_to_variable = { byz_hellenization_of_serbia_var = 25 }
-			clamp_variable = {
-				var = byz_hellenization_of_serbia_var
-				min = 0
-				max = 100
-			}
-		}
-	}
-	
-	focus = {
-		id = BYZ_serbia_investment
-		icon = GFX_focus_generic_industry_1
-		x = 22
-		y = 7
-		cost = 4.3
-		#mutually_exclusive = { }
-		prerequisite = { focus = BYZ_serbia_deportation }
-		ai_will_do = {
-			factor = 10000
-		}
-		
-		#cancel = { }
-		
-		#available = { }
-
-		#bypass = { }
-		
-		#search_filters = {  }
-		
-		completion_reward = {
-			105 = {
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-					instant_build = yes
-				}
-			}
-			107 = {
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-					instant_build = yes
-				}
-			}
-			108 = {
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-					instant_build = yes
-				}
-			}
-			802 = {
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-					instant_build = yes
-				}
-			}
-			custom_effect_tooltip = byz_hellen_ser_25
-			add_to_variable = { byz_hellenization_of_serbia_var = 25 }
-			clamp_variable = {
-				var = byz_hellenization_of_serbia_var
-				min = 0
-				max = 100
-			}
-		}
-	}
-	
-	focus = {
-		id = BYZ_hellenization_of_north_balkan
-		icon = GFX_focus_GRE_reviving_the_spartan_warrior_spirit
-		x = 20
-		y = 6
-		cost = 4.3
-		#mutually_exclusive = { }
-		prerequisite = { focus = BYZ_serbia_war }
-		ai_will_do = {
-			factor = 10000
-		}
-		
-		#cancel = { }
-		
-		available = { has_country_flag = BYZ_vs_SER_win }
-
-		#bypass = { }
-		
-		#search_filters = {  }
-		
-		completion_reward = {
-			add_stability = -0.05
-			custom_effect_tooltip = byz_hellen_ser_25
-			add_to_variable = { byz_hellenization_of_serbia_var = 25 }
-			clamp_variable = {
-				var = byz_hellenization_of_serbia_var
-				min = 0
-				max = 100
-			}
-		}
-	}
-	
-	focus = {
-		id = BYZ_forced_rebaptize_north_balkna
-		icon = GFX_focus_GRE_an_orthodox_state
-		x = 20
-		y = 7
-		cost = 4.3
-		#mutually_exclusive = { }
-		prerequisite = { focus = BYZ_hellenization_of_north_balkan }
-		ai_will_do = {
-			factor = 10000
-		}
-		
-		#cancel = { }
-		
-		#available = { }
-
-		#bypass = { }
-		
-		#search_filters = {  }
-		
-		completion_reward = {
-			country_event = byz.2
-			custom_effect_tooltip = byz_hellen_ser_25
-			add_to_variable = { byz_hellenization_of_serbia_var = 25 }
-			clamp_variable = {
-				var = byz_hellenization_of_serbia_var
-				min = 0
-				max = 100
-			}
-		}
-	}
-	
-	focus = {
-		id = BYZ_hellenization_of_albania_complete
-		icon = GFX_goal_generic_intelligence_exchange
-		x = 19
-		y = 8
-		cost = 4.3
-		#mutually_exclusive = { }
-		prerequisite = { focus = BYZ_albania_investments }
-		ai_will_do = {
-			factor = 10000
-		}
-		
-		#cancel = { }
-		
-		available = { has_country_flag = hellenization_of_albania_complete }
-
-		#bypass = { }
-		
-		#search_filters = {  }
-		
-		completion_reward = {
-			BYZ = { 
-				add_state_core = 44
-			}
-		}
-	}
-	
-	focus = {
-		id = BYZ_hellenization_of_serbia_complete
-		icon = GFX_goal_generic_major_alliance
-		x = 21
-		y = 8
-		cost = 4.3
-		#mutually_exclusive = { }
-		prerequisite = { focus = BYZ_forced_rebaptize_north_balkna }
-		prerequisite = { focus = BYZ_serbia_investment }
-		ai_will_do = {
-			factor = 10000
-		}
-		
-		#cancel = { }
-		
-		available = { has_country_flag = hellenization_of_serbia_complete }
-
-		#bypass = { }
-		
-		#search_filters = {  }
-		
-		completion_reward = {
-			BYZ = { 
-				add_state_core = 105
-				add_state_core = 107
-				add_state_core = 108
-				add_state_core = 802
-			}
-		}
-	}
-	
-	#Bosnia
-	
-	focus = {
 		id = BYZ_bosnia_war
 		icon = GFX_BYZ_bosnia_war
 		x = 20
 		y = 9
 		cost = 4.3
 		#mutually_exclusive = { }
-		prerequisite = { focus = BYZ_albania_investments }
-		prerequisite = { focus = BYZ_forced_rebaptize_north_balkna }
-		prerequisite = { focus = BYZ_serbia_investment }
+		#prerequisite = { focus = }
 		ai_will_do = {
 			factor = 10000
 		}
@@ -1080,706 +649,6 @@ focus_tree = {
 				BYZ = { 
 					set_country_flag = BYZ_vs_BOS
 				}
-			}
-		}
-	}
-	
-	focus = {
-		id = BYZ_bosnia_dissenters
-		icon = GFX_focus_eng_move_to_secure_the_dominions
-		x = 18
-		y = 10
-		cost = 4.3
-		#mutually_exclusive = { }
-		prerequisite = { focus = BYZ_bosnia_war }
-		ai_will_do = {
-			factor = 10000
-		}
-		
-		#cancel = { }
-		
-		available = { has_country_flag = BYZ_vs_BOS_win }
-		
-		#bypass = { }
-		
-		#search_filters = {  }
-		
-		completion_reward = {
-			104 = {
-				add_manpower = -11912
-			}
-			804 = {
-				add_manpower = -7999
-			}
-			custom_effect_tooltip = byz_hellen_bos_20
-			add_to_variable = { byz_hellenization_of_bosnia_var = 20 }
-			clamp_variable = {
-				var = byz_hellenization_of_bosnia_var
-				min = 0
-				max = 100
-			}
-		}
-	}
-	
-	focus = {
-		id = BYZ_bosnia_deportation
-		icon = GFX_goal_generic_position_armies
-		x = 18
-		y = 11
-		cost = 4.3
-		#mutually_exclusive = { }
-		prerequisite = { focus = BYZ_bosnia_dissenters }
-		ai_will_do = {
-			factor = 10000
-		}
-		
-		#cancel = { }
-		
-		#available = { }
-		
-		#bypass = { }
-		
-		#search_filters = {  }
-		
-		completion_reward = {
-			random_state = {
-				limit = { 
-					is_core_of = BYZ 
-				}
-				add_manpower = -25000
-			}
-			104 = {
-				add_manpower = -109321
-			}
-			104 = {
-				add_manpower = 25000
-			}
-			random_state = {
-				limit = { 
-					is_core_of = RUS 
-				}
-				add_manpower = 109321
-			}
-			random_state = {
-				limit = { 
-					is_core_of = BYZ 
-				}
-				add_manpower = -25000
-			}
-			804 = {
-				add_manpower = -41013
-			}
-			804 = {
-				add_manpower = 25000
-			}
-			random_state = {
-				limit = { 
-					is_core_of = RUS
-				}
-				add_manpower = 41013
-			}
-			custom_effect_tooltip = byz_hellen_bos_20
-			add_to_variable = { byz_hellenization_of_bosnia_var = 20 }
-			clamp_variable = {
-				var = byz_hellenization_of_bosnia_var
-				min = 0
-				max = 100
-			}
-		}
-	}
-	
-	focus = {
-		id = BYZ_hellenization_of_bosnia
-		icon = GFX_focus_GRE_following_in_the_footsteps_of_giants
-		x = 20
-		y = 10
-		cost = 4.3
-		#mutually_exclusive = { }
-		prerequisite = { focus = BYZ_bosnia_war }
-		ai_will_do = {
-			factor = 10000
-		}
-		
-		#cancel = { }
-		
-		available = { has_country_flag = BYZ_vs_BOS_win }
-		
-		#bypass = { }
-		
-		#search_filters = {  }
-		
-		completion_reward = {
-			add_stability = -0.05
-			custom_effect_tooltip = byz_hellen_bos_20
-			add_to_variable = { byz_hellenization_of_bosnia_var = 20 }
-			clamp_variable = {
-				var = byz_hellenization_of_bosnia_var
-				min = 0
-				max = 100
-			}
-		}
-	}
-	
-	focus = {
-		id = BYZ_bosnia_not_bosnia
-		icon = GFX_focus_YUG_safeguard_bosnia
-		x = 20
-		y = 11
-		cost = 4.3
-		#mutually_exclusive = { }
-		prerequisite = { focus = BYZ_hellenization_of_bosnia }
-		ai_will_do = {
-			factor = 10000
-		}
-		
-		#cancel = { }
-		
-		#available = { }
-		
-		#bypass = { }
-		
-		#search_filters = {  }
-		
-		completion_reward = {
-			country_event = { id = byz.3 hours = 14 }
-		}
-	}
-	
-	focus = {
-		id = BYZ_bosnia_investments
-		icon = GFX_goal_generic_construction2
-		x = 22
-		y = 10
-		cost = 4.3
-		#mutually_exclusive = { }
-		prerequisite = { focus = BYZ_bosnia_war }
-		ai_will_do = {
-			factor = 10000
-		}
-		
-		#cancel = { }
-		
-		available = { has_country_flag = BYZ_vs_BOS_win }
-		
-		#bypass = { }
-		
-		#search_filters = {  }
-		
-		completion_reward = {
-			104 = {
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-					instant_build = yes
-				}
-			}
-			804 = {
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-					instant_build = yes
-				}
-			}
-			custom_effect_tooltip = byz_hellen_bos_20
-			add_to_variable = { byz_hellenization_of_bosnia_var = 20 }
-			clamp_variable = {
-				var = byz_hellenization_of_bosnia_var
-				min = 0
-				max = 100
-			}
-		}
-	}
-	
-	focus = {
-		id = BYZ_bosnia_industry
-		icon = GFX_focus_generic_industry_3
-		x = 22
-		y = 11
-		cost = 4.3
-		#mutually_exclusive = { }
-		prerequisite = { focus = BYZ_bosnia_investments }
-		ai_will_do = {
-			factor = 10000
-		}
-		
-		#cancel = { }
-		
-		#available = { }
-		
-		#bypass = { }
-		
-		#search_filters = {  }
-		
-		completion_reward = {
-			104 = {
-				add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-					type = industrial_complex
-					level = 1
-					instant_build = yes
-				}
-			}
-			804 = {
-				add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-					type = industrial_complex
-					level = 1
-					instant_build = yes
-				}
-			}
-			custom_effect_tooltip = byz_hellen_bos_20
-			add_to_variable = { byz_hellenization_of_bosnia_var = 20 }
-			clamp_variable = {
-				var = byz_hellenization_of_bosnia_var
-				min = 0
-				max = 100
-			}
-		}
-	}
-	
-	focus = {
-		id = BYZ_hellenization_of_bosnia_complete
-		icon = GFX_focus_generic_home_defense
-		x = 20
-		y = 12
-		cost = 4.3
-		#mutually_exclusive = { }
-		prerequisite = { focus = BYZ_bosnia_deportation }
-		prerequisite = { focus = BYZ_bosnia_not_bosnia }
-		prerequisite = { focus = BYZ_bosnia_industry }
-		ai_will_do = {
-			factor = 10000
-		}
-		
-		#cancel = { }
-		
-		available = { has_country_flag = hellenization_of_bosnia_complete }
-		
-		#bypass = { }
-		
-		#search_filters = {  }
-		
-		completion_reward = {
-			BYZ = { 
-				add_state_core = 104
-				add_state_core = 804
-				swap_ideas = {
-					remove_idea = potential_world_power
-					add_idea = world_power
-				}
-			}
-		}
-	}
-	
-	#Croatia
-	
-	focus = {
-		id = BYZ_croatia
-		icon = GFX_focus_yug_banovina_of_croatia
-		x = 0
-		y = 11
-		cost = 4.3
-		#mutually_exclusive = { }
-		#prerequisite = { }
-		ai_will_do = {
-			factor = 10000
-		}
-		
-		#cancel = { }
-		
-		available = { 
-			owns_state = 102
-			owns_state = 103
-			owns_state = 109
-			owns_state = 163
-			owns_state = 736
-		}
-		
-		#bypass = { }
-		
-		#search_filters = {  }
-		
-		completion_reward = {
-			country_event = { id = byz.4 hours = 7 } 
-		}
-	}
-	
-	focus = {
-		id = BYZ_croatia_dissenters
-		icon = GFX_goal_generic_political_pressure
-		x = -2
-		y = 12
-		cost = 4.3
-		#mutually_exclusive = { }
-		prerequisite = { focus = BYZ_croatia }
-		ai_will_do = {
-			factor = 10000
-		}
-		
-		#cancel = { }
-		
-		#available = { }
-		
-		#bypass = { }
-		
-		#search_filters = {  }
-		
-		completion_reward = {
-			102 = {
-				add_manpower = -40932
-			}
-			103 = {
-				add_manpower = -30912
-			}
-			109 = {
-				add_manpower = -10921
-			}
-			163 = {
-				add_manpower = -2500
-			}
-			736 = {
-				add_manpower = -5999
-			}
-			custom_effect_tooltip = byz_hellen_cro_20
-			add_to_variable = { byz_hellenization_of_croatia_var = 20 }
-			clamp_variable = {
-				var = byz_hellenization_of_croatia_var
-				min = 0
-				max = 100
-			}
-		}
-	}
-	
-	focus = {
-		id = BYZ_croatia_departation
-		icon = GFX_focus_generic_support_the_left_right
-		x = -2
-		y = 13
-		cost = 4.3
-		#mutually_exclusive = { }
-		prerequisite = { focus = BYZ_croatia_dissenters }
-		ai_will_do = {
-			factor = 10000
-		}
-		
-		#cancel = { }
-		
-		#available = { }
-		
-		#bypass = { }
-		
-		#search_filters = {  }
-		
-		completion_reward = {
-			random_state = {
-				limit = { 
-					is_core_of = BYZ 
-				}
-				add_manpower = -25000
-			}
-			random_state = {
-				limit = { 
-					is_core_of = BYZ 
-				}
-				add_manpower = -25000
-			}
-			random_state = {
-				limit = { 
-					is_core_of = BYZ 
-				}
-				add_manpower = -25000
-			}
-			random_state = {
-				limit = { 
-					is_core_of = BYZ 
-				}
-				add_manpower = -25000
-			}
-			random_state = {
-				limit = { 
-					is_core_of = BYZ 
-				}
-				add_manpower = -25000
-			}
-			102 = {
-				add_manpower = -100000
-				add_manpower = 25000
-			}
-			103 = {
-				add_manpower = -75000
-				add_manpower = 25000
-			}
-			109 = {
-				add_manpower = -100000
-				add_manpower = 25000
-			}
-			163 = {
-				add_manpower = -10000	
-				add_manpower = 25000
-			}
-			736 = {
-				add_manpower = -73000
-				add_manpower = 25000
-			}
-			random_state = {
-				limit = {
-					is_core_of = RUS
-					is_controlled_by = RUS
-				}
-				add_manpower = 100000
-			}
-			random_state = {
-				limit = {
-					is_core_of = RUS
-					is_controlled_by = RUS
-				}
-				add_manpower = 75000
-			}
-			random_state = {
-				limit = {
-					is_core_of = RUS
-					is_controlled_by = RUS
-				}
-				add_manpower = 100000
-			}
-			random_state = {
-				limit = {
-					is_core_of = RUS
-					is_controlled_by = RUS
-				}
-				add_manpower = 10000
-			}
-			random_state = {
-				limit = {
-					is_core_of = RUS
-					is_controlled_by = RUS
-				}
-				add_manpower = 73000
-			}
-			custom_effect_tooltip = byz_hellen_cro_20
-			add_to_variable = { byz_hellenization_of_croatia_var = 20 }
-			clamp_variable = {
-				var = byz_hellenization_of_croatia_var
-				min = 0
-				max = 100
-			}
-		}
-	}
-	
-	focus = {
-		id = BYZ_hellenization_of_croatia
-		icon = GFX_focus_GRE_byzantine_themata
-		x = 0
-		y = 12
-		cost = 4.3
-		#mutually_exclusive = { }
-		prerequisite = { focus = BYZ_croatia }
-		ai_will_do = {
-			factor = 10000
-		}
-		
-		#cancel = { }
-		
-		#available = { }
-		
-		#bypass = { }
-		
-		#search_filters = {  }
-		
-		completion_reward = {
-			add_stability = -0.05
-			custom_effect_tooltip = byz_hellen_cro_20
-			add_to_variable = { byz_hellenization_of_croatia_var = 20 }
-			clamp_variable = {
-				var = byz_hellenization_of_croatia_var
-				min = 0
-				max = 100
-			}
-		}
-	}
-	
-	focus = {
-		id = BYZ_open_border_with_allies
-		icon = GFX_goal_generic_major_alliance
-		x = 0
-		y = 13
-		cost = 4.3
-		#mutually_exclusive = { }
-		prerequisite = { focus = BYZ_hellenization_of_croatia }
-		ai_will_do = {
-			factor = 10000
-		}
-		
-		#cancel = { }
-		
-		#available = { }
-		
-		#bypass = { }
-		
-		#search_filters = {  }
-		
-		completion_reward = {
-			if = {
-				limit = {
-					is_in_faction_with = BYZ
-					is_puppet = no
-				}
-			add_manpower = 25000
-			add_stability = -0.01
-			BYZ = { add_manpower = -25000 }
-			BYZ = { add_stability = 0.01 }
-			}
-		}
-	}
-	
-	focus = {
-		id = BYZ_hellenization_of_croatia_complete
-		icon = GFX_focus_generic_home_defense
-		x = 0
-		y = 14
-		cost = 4.3
-		#mutually_exclusive = { }
-		prerequisite = { focus = BYZ_croatia_departation }
-		prerequisite = { focus = BYZ_open_border_with_allies }
-		prerequisite = { focus = BYZ_croatia_industry }
-		ai_will_do = {
-			factor = 10000
-		}
-		
-		#cancel = { }
-		
-		available = { has_country_flag = hellenization_of_croatia_complete }
-		
-		#bypass = { }
-		
-		#search_filters = {  }
-		
-		completion_reward = {
-			add_state_core = 102
-			add_state_core = 103
-			add_state_core = 109
-			add_state_core = 163
-			add_state_core = 736
-		}
-	}
-	
-	focus = {
-		id = BYZ_croatia_investment
-		icon = GFX_goal_generic_construct_civilian
-		x = 2
-		y = 12
-		cost = 4.3
-		#mutually_exclusive = { }
-		prerequisite = { focus = BYZ_croatia }
-		ai_will_do = {
-			factor = 10000
-		}
-		
-		#cancel = { }
-		
-		#available = { }
-		
-		#bypass = { }
-		
-		#search_filters = {  }
-		
-		completion_reward = {
-			102 = {
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-					instant_build = yes
-				}
-			}
-			103 = {
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-					instant_build = yes
-				}
-			}
-			109 = {
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-					instant_build = yes
-				}
-			}
-			163 = {
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-					instant_build = yes
-				}
-			}
-			736 = {
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-					instant_build = yes
-				}
-			}
-			custom_effect_tooltip = byz_hellen_cro_20
-			add_to_variable = { byz_hellenization_of_croatia_var = 20 }
-			clamp_variable = {
-				var = byz_hellenization_of_croatia_var
-				min = 0
-				max = 100
-			}
-		}
-	}
-	
-	focus = {
-		id = BYZ_croatia_industry
-		icon = GFX_goal_generic_construct_civ_factory	
-		x = 2
-		y = 13
-		cost = 4.3
-		#mutually_exclusive = { }
-		prerequisite = { focus = BYZ_croatia_investment }
-		ai_will_do = {
-			factor = 10000
-		}
-		
-		#cancel = { }
-		
-		#available = { }
-		
-		#bypass = { }
-		
-		#search_filters = {  }
-		
-		completion_reward = {
-			102 = {
-				add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-					type = industrial_complex
-					level = 1
-					instant_build = yes
-				}
-			}
-			103 = {
-				add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-					type = industrial_complex
-					level = 1
-					instant_build = yes
-				}
-			}
-			109 = {
-				add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-					type = industrial_complex
-					level = 1
-					instant_build = yes
-				}
-			}
-			custom_effect_tooltip = byz_hellen_cro_20
-			add_to_variable = { byz_hellenization_of_croatia_var = 20 }
-			clamp_variable = {
-				var = byz_hellenization_of_croatia_var
-				min = 0
-				max = 100
 			}
 		}
 	}
@@ -2402,6 +1271,36 @@ focus_tree = {
 			set_cosmetic_tag = BYZROM
 		}
 		
+	}
+	
+	#Senat meeting
+	
+	focus = {
+		id = BYZ_second_senat_meeting
+		icon = GFX_
+		relative_position_id = BYZ_first_senat_meeting
+		x = 0
+		y = 3
+		cost = 4.3
+		#mutually_exclusive = { }
+		prerequisite = { focus = BYZ_bulgaria_war }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		available = { 
+			has_country_flag = byz_senat_meeting
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			custom_effect_tooltip = byz_senat_meeting_event
+		}
 	}
 	
 	#Army_reform
