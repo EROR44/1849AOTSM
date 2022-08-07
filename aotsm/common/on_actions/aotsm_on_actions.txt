@@ -2282,17 +2282,49 @@ on_actions = {
 						has_country_flag = BYZ_vs_BOS
 					}
 				}
-				BYZ = { 
-					transfer_state = 104
-					transfer_state = 804
-				}
-				BYZ = { clr_country_flag = BYZ_vs_BOS }
 				BYZ = {
 					white_peace = {
 						tag = BOS
 						message = BYZ_win_BOS
 					}
 				}
+				if = {
+					limit = {
+						BYZ = {
+							has_country_flag = byz_imperia_politic
+						}
+					}
+					BYZ = { 
+						transfer_state = 104
+						transfer_state = 804
+					}
+				}
+				if = {
+					limit = {
+						BYZ = {
+							has_country_flag = byz_democratic_politic
+						}
+					}
+					DAL = {
+						transfer_state = 104
+						transfer_state = 804
+					}
+					BYZ = {
+						set_autonomy = {
+							target = DAL
+							autonomy_state = autonomy_aotsm_province
+							end_wars = no
+							end_civil_wars = no
+						}
+					}
+					DAL ={
+						set_cosmetic_tag = BYZ_DAL
+					}
+					DAL = {
+						inherit_technology = BYZ
+					}
+				}
+				BYZ = { clr_country_flag = BYZ_vs_BOS }
 				BYZ = { set_country_flag = BYZ_vs_BOS_win }
 				BOS = { remove_ideas = balkan_wars }
 				if = {
@@ -2449,10 +2481,7 @@ on_actions = {
 					IRA = {
 						remove_ideas = persian_civil_war_idea
 					}
-					news_event = {
-						id = news.46
-						days = 1
-					}
+					news_event =  news.46
 				}
 			}
 			#PER capitulation
@@ -2560,10 +2589,7 @@ on_actions = {
 					IRA = {
 						remove_ideas = persian_civil_war_idea
 					}
-					news_event = {
-						id = news.46
-						days = 1
-					}
+					news_event = news.48
 				}
 			}
 			#IRA capitulation 
@@ -2671,11 +2697,33 @@ on_actions = {
 					IRA = {
 						remove_ideas = persian_civil_war_idea
 					}
-					news_event = {
-						id = news.47
-						days = 1
+					news_event =  news.47
+				}
+			}
+			#SEL capitulation
+			if = {
+				limit = {
+					tag = SEL
+					RUS = {
+						has_completed_focus = Rus_Conquer_Selishi
+					}
+					NOT = {
+						has_global_flag = SEL_capitulation
 					}
 				}
+				RUS = {
+					white_peace = {
+						tag = SEL
+						message = PUS_win_SEL
+					}
+				}
+				RUS = {
+					annex_country = {
+						target = SEL
+						transfer_troops = no
+					}
+				}
+				set_global_flag = SEL_capitulation
 			}
 		}
 	}			
