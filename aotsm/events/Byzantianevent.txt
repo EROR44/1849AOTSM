@@ -307,9 +307,19 @@ country_event = { #Senat meeting 1849
 	
 	option = { #centralis
 		name = byz.9.a
+		
 		ai_chance = {
 			factor = 50
+			
+			modifier = {
+				factor = 0
+				has_game_rule = {
+					rule = BYZ_ai_behavior 
+					option = ROMAN_SENAT_WAY
+				}
+			}
 		}
+		
 		BYZ = {
 			country_event = byz.11
 		}
@@ -317,13 +327,22 @@ country_event = { #Senat meeting 1849
 	
 	option = { #decentralis
 		name = byz.9.b
+		
 		ai_chance = {
 			factor = 50
+			
 			modifier = {
 				factor = 0
-				is_historical_focus_on = yes
+				OR = {
+					is_historical_focus_on = yes
+					has_game_rule = {
+						rule = BYZ_ai_behavior 
+						option = TRUE_ROMAN_WAY
+					}
+				}
 			}
 		}
+		
 		BYZ = {
 			country_event = byz.12
 		}
@@ -1541,6 +1560,9 @@ country_event = { #Senat meeting 1851
 	immediate = {
 		hidden_effect = {
 			BYZ = {
+				complete_national_focus = BYZ_third_senat_meeting
+			}
+			BYZ = {
 				country_event = {
 					id = byz_senat.3
 					days = 364
@@ -1675,6 +1697,9 @@ country_event = { #Senat meeting 1856
 	
 	immediate = {
 		hidden_effect = {
+			BYZ = {
+				complete_national_focus = BYZ_seventh_senat_meeting
+			}
 			BYZ = {
 				country_event = {
 					id = byz_senat.8
