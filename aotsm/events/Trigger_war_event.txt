@@ -38,6 +38,12 @@ country_event = {
 	
 	option = {
 		name = twe.1.a
+		BYZ = {
+			white_peace = {
+				tag = BUL
+				message = BYZ_win_BUL
+			}
+		}
 		BYZ = { 
 			transfer_state = 48
 			transfer_state = 106
@@ -64,12 +70,6 @@ country_event = {
 			transfer_state = 81
 		}
 		BYZ = { clr_country_flag = BYZ_vs_BUL }
-		BYZ = {
-			white_peace = {
-				tag = BUL
-				message = BYZ_win_BUL
-			}
-		}
 		BYZ = { set_country_flag = BYZ_vs_BUL_win }
 		BUL = { remove_ideas = balkan_wars }
 		if = {
@@ -549,6 +549,8 @@ country_event = {
 				add_state_core = 82
 				add_state_core = 83
 				add_state_core = 84
+				add_state_core = 103
+				add_state_core = 109
 				add_state_core = 154
 				add_state_core = 155
 				add_state_core = 664
@@ -624,12 +626,33 @@ country_event = {
 				transfer_state = 152
 				transfer_state = 153
 			}
-			BYZ = {
-				transfer_state = 102
-				transfer_state = 103
-				transfer_state = 109
-				transfer_state = 163
-				transfer_state = 736
+			if = {
+				limit = {
+					BYZ = {
+						has_country_flag = byz_imperia_politic
+					}
+				}
+				BYZ = { 
+					transfer_state = 102
+					transfer_state = 103
+					transfer_state = 109
+					transfer_state = 163
+					transfer_state = 736
+				}
+			}
+			if = {
+				limit = {
+					BYZ = {
+						has_country_flag = byz_democratic_politic
+					}
+				}
+				DAL = {
+					transfer_state = 102
+					transfer_state = 103
+					transfer_state = 109
+					transfer_state = 163
+					transfer_state = 736
+				}
 			}
 			BYZ = { set_country_flag = BYZ_vs_AUS_win }
 			PRU = { puppet = VEN }
@@ -880,16 +903,16 @@ country_event = {
 	
 	option = {
 		name = twe.9.a
-		BYZ = { 
-			transfer_state = 44
-		}
-		BYZ = { clr_country_flag = BYZ_vs_ALB }
 		BYZ = {
 			white_peace = {
 				tag = ALB
 				message = BYZ_win_ALB
 			}
 		}
+		BYZ = { 
+			transfer_state = 44
+		}
+		BYZ = { clr_country_flag = BYZ_vs_ALB }
 		BYZ = { set_country_flag = BYZ_vs_ALB_win }
 		ALB = { remove_ideas = balkan_wars }
 		if = {
@@ -946,6 +969,12 @@ country_event = {
 	
 	option = {
 		name = twe.10.a
+		BYZ = {
+			white_peace = {
+				tag = SER
+				message = BYZ_win_SER
+			}
+		}
 		BYZ = { 
 			transfer_state = 105
 			transfer_state = 107
@@ -953,12 +982,6 @@ country_event = {
 			transfer_state = 802
 		}
 		BYZ = { clr_country_flag = BYZ_vs_SER }
-		BYZ = {
-			white_peace = {
-				tag = SER
-				message = BYZ_win_SER
-			}
-		}
 		BYZ = { set_country_flag = BYZ_vs_SER_win }
 		SER = { remove_ideas = balkan_wars }
 		if = {
@@ -1015,17 +1038,49 @@ country_event = {
 	
 	option = {
 		name = twe.11.a
-		BYZ = { 
-			transfer_state = 104
-			transfer_state = 804
-		}
-		BYZ = { clr_country_flag = BYZ_vs_BOS }
 		BYZ = {
 			white_peace = {
 				tag = BOS
 				message = BYZ_win_BOS
 			}
 		}
+		if = {
+			limit = {
+				BYZ = {
+					has_country_flag = byz_imperia_politic
+				}
+			}
+			BYZ = { 
+				transfer_state = 104
+				transfer_state = 804
+			}
+		}
+		if = {
+			limit = {
+				BYZ = {
+					has_country_flag = byz_democratic_politic
+				}
+			}
+			DAL = {
+				transfer_state = 104
+				transfer_state = 804
+			}
+			BYZ = {
+				set_autonomy = {
+					target = DAL
+					autonomy_state = autonomy_aotsm_province
+					end_wars = no
+					end_civil_wars = no
+				}
+			}
+			DAL ={
+				set_cosmetic_tag = BYZ_DAL
+			}
+			DAL = {
+				inherit_technology = BYZ
+			}
+		}
+		BYZ = { clr_country_flag = BYZ_vs_BOS }
 		BYZ = { set_country_flag = BYZ_vs_BOS_win }
 		BOS = { remove_ideas = balkan_wars }
 		if = {
