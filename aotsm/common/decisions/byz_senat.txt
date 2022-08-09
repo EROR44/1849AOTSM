@@ -6,74 +6,188 @@ byz_senat_decision_category = {
 			tag = BYZ
 		}
 		available = {
-			
+			NOT = {
+				check_variable = { byz_imperial_faction_support > 199 }
+			}
 		}
 		visible = {
 			tag = BYZ
-			
+			has_country_flag = byz_imperia_politic
+			NOT = {
+				check_variable = { byz_imperial_faction_support > 199 }
+			}
 		}		
 			
-		cost = 75		
+		cost = 0	
+		
 		ai_will_do = {
 			factor = 40
 			modifier = {
-				factor = 0
+				factor = 0	
 				is_historical_focus_on = yes
 			}
 		}
 		
-		days_remove = 35
-		days_re_enable = 35
+		days_remove = 30
+		days_re_enable = 120
 		fire_only_once = no
 		
 		complete_effect = {		
 		}
 		
 		remove_effect = {
-			custom_effect_tooltip = byz_imperium_donat_1
-			add_to_variable = { byz_imperial_faction_support = 15 }
-			add_to_array = { parliament_seat_array = 15 }
-			add_to_variable = { byz_generals_faction_support = -5 }
-			remove_from_array = { parliament_seat_array = -5 }
-			add_to_variable = { byz_merchants_faction_support = -5 }
-			remove_from_array = { parliament_seat_array = -5 }
-			add_to_variable = { byz_democrats_faction_support = -5 }
-			remove_from_array = { parliament_seat_array = -5 }
-			clamp_variable = {
-				var = byz_imperial_faction_support
-				min = 0
-				max = 200
+			if = {
+				limit = {
+					check_variable = { byz_generals_faction_support > 4 }
+				}
+				add_to_variable = { byz_imperial_faction_support = 5 }
+				clamp_variable = {
+					var = byz_imperial_faction_support
+					min = 0
+					max = 200
+				}
+				add_to_variable = { byz_generals_faction_support = -5 }
+				clamp_variable = {
+					var = byz_generals_faction_support
+					min = 0
+					max = 200
+				}
 			}
-			clamp_variable = {
-				var = byz_generals_faction_support
-				min = 0
-				max = 200
+			if = {
+				limit = {
+					check_variable = { byz_merchants_faction_support > 4 }
+				}
+				add_to_variable = { byz_imperial_faction_support = 5 }
+				clamp_variable = {
+					var = byz_imperial_faction_support
+					min = 0
+					max = 200
+				}
+				add_to_variable = { byz_merchants_faction_support = -5 }
+				clamp_variable = {
+					var = byz_merchants_faction_support
+					min = 0
+					max = 200
+				}
 			}
-			clamp_variable = {
-				var = byz_merchants_faction_support
-				min = 0
-				max = 200
+			if = {
+				limit = {
+					check_variable = { byz_democrats_faction_support > 4 }
+				}
+				add_to_variable = { byz_imperial_faction_support = 5 }
+				clamp_variable = {
+					var = byz_imperial_faction_support
+					min = 0
+					max = 200
+				}
+				add_to_variable = { byz_democrats_faction_support = -5 }
+				clamp_variable = {
+					var = byz_democrats_faction_support
+					min = 0
+					max = 200
+				}
 			}
-			clamp_variable = {
-				var = byz_democrats_faction_support
-				min = 0
-				max = 200
+			if = {
+				limit = {
+					AND = {
+						check_variable = { byz_generals_faction_support > 4 }
+						check_variable = { byz_merchants_faction_support > 4 }
+						check_variable = { byz_democrats_faction_support > 4 }
+					}	
+				}
+				custom_effect_tooltip = byz_imperium_donat_1
+				else = {
+					if = {
+						limit = {
+							OR = {
+								AND = {
+									AND = {
+										check_variable = { byz_generals_faction_support > 4 }
+										check_variable = { byz_merchants_faction_support > 4 }
+									}
+									NOT = {
+										check_variable = { byz_democrats_faction_support > 4 }
+									}
+								}
+								AND = {
+									AND = {
+										check_variable = { byz_generals_faction_support > 4 }
+										check_variable = { byz_democrats_faction_support > 4 }
+									}
+									NOT = {
+										check_variable = { byz_merchants_faction_support > 4 }
+									}
+								}
+								AND = {
+									AND = {
+										check_variable = { byz_merchants_faction_support > 4 }
+										check_variable = { byz_democrats_faction_support > 4 }
+									}
+									NOT = {
+										check_variable = { byz_generals_faction_support > 4 }
+									}
+								}
+							}
+						}
+						custom_effect_tooltip = byz_imperium_donat_2
+						else = {
+							if = {
+								limit = {
+									OR = {
+										AND = {
+											NOT = {
+												AND = {
+													check_variable = { byz_generals_faction_support > 4 }
+													check_variable = { byz_merchants_faction_support > 4 }
+												}
+											}
+											check_variable = { byz_democrats_faction_support > 4 }
+										}
+										AND = {
+											NOT = {
+												AND = {
+													check_variable = { byz_generals_faction_support > 4 }
+													check_variable = { byz_democrats_faction_support > 4 }
+												}
+											}
+											check_variable = { byz_merchants_faction_support > 4 }
+										}
+										AND = {
+											NOT = {
+												AND = {
+													check_variable = { byz_merchants_faction_support > 4 }
+													check_variable = { byz_democrats_faction_support > 4 }
+												}
+											}
+											check_variable = { byz_generals_faction_support > 4 }
+										}
+									}
+								}
+								custom_effect_tooltip = byz_imperium_donat_3
+							}
+						}
+					}
+				}
 			}
 		}
 	}
 	
 	byz_civil_donation = {
+	
 		icon = generic_political_discourse
+		
 		allowed = {
 			always = no
 		}
+		
 		available = {
-			has_political_power > 150
+			has_political_power < 0
 		}
+		
 		visible = {
 			has_completed_focus = BYZ_support_from_democrats
 		}		
-				
+		
 		ai_will_do = {
 			factor = 40
 			modifier = {
@@ -82,12 +196,15 @@ byz_senat_decision_category = {
 			}
 		}
 		
-		days_mission_timeout = 120
-		fire_only_once = yes
+		days_mission_timeout = 90
 		
-		complete_effect = {
+		is_good = yes
+		
+		fire_only_once = yes
+
+		timeout_effect = {
 			add_political_power = -150
-			custom_effect_tooltip = byz_civil_donation_c
+			custom_effect_tooltip = byz_civil_donation_succed
 			add_to_variable = { byz_imperial_faction_support = 5 }
 			add_to_variable = { byz_democrats_faction_support = -5 }
 			clamp_variable = {
@@ -102,19 +219,36 @@ byz_senat_decision_category = {
 			}
 		}
 		
-		timeout_effect = {
-			add_stability = -0.05
+		complete_effect = {
+			add_stability = -0.10
+			custom_effect_tooltip = byz_civil_donation_fail
+			add_to_variable = { byz_imperial_faction_support = -5 }
+			add_to_variable = { byz_democrats_faction_support = 5 }
+			clamp_variable = {
+				var = byz_imperial_faction_support
+				min = 0
+				max = 200
+			}
+			clamp_variable = {
+				var = byz_democrats_faction_support
+				min = 0
+				max = 200
+			}
 		}
 	}
 	
 	byz_grow_army = {
+	
 		icon = generic_political_discourse
+		
 		allowed = {
 			always = no
 		}
+		
 		available = {
-			has_army_manpower = { size > 149999 }
+			has_army_manpower = { size < 109999 }
 		}
+		
 		visible = {
 			has_completed_focus = BYZ_support_from_generals
 		}		
@@ -127,11 +261,14 @@ byz_senat_decision_category = {
 			}
 		}
 		
-		days_mission_timeout = 120
-		fire_only_once = yes
+		days_mission_timeout = 90
 		
-		complete_effect = {
-			custom_effect_tooltip = byz_grow_army_c
+		is_good = yes
+		
+		fire_only_once = yes
+
+		timeout_effect = {
+			custom_effect_tooltip = byz_grow_army_succed
 			add_to_variable = { byz_imperial_faction_support = 5 }
 			add_to_variable = { byz_generals_faction_support = -5 }
 			clamp_variable = {
@@ -144,10 +281,33 @@ byz_senat_decision_category = {
 				min = 0
 				max = 200
 			}
+			if = {
+				limit = {
+					has_country_flag = byz_democratic_politic
+				}
+				custom_effect_tooltip = byz_general_more_peace
+			}
 		}
 		
-		timeout_effect = {
-			add_war_support = -0.05
+		complete_effect = {
+			custom_effect_tooltip = byz_grow_army_fail
+			add_to_variable = { byz_imperial_faction_support = -5 }
+			add_to_variable = { byz_generals_faction_support = 5 }
+			clamp_variable = {
+				var = byz_imperial_faction_support
+				min = 0
+				max = 200
+			}
+			clamp_variable = {
+				var = byz_generals_faction_support
+				min = 0
+				max = 200
+			}
+			custom_effect_tooltip = byz_lose_coalitia
+			BYZ = {
+				clr_country_flag = byz_rulling_impgov
+				set_country_flag = byz_rulling_imp
+			}
 		}
 	}
 	
@@ -157,7 +317,10 @@ byz_senat_decision_category = {
 			always = no
 		}
 		available = {
-			has_idea = free_trade
+			OR = {
+				has_idea = limited_exports
+				has_idea = closed_economy
+			}
 		}
 		visible = {
 			has_completed_focus = BYZ_support_from_merchants
@@ -171,11 +334,12 @@ byz_senat_decision_category = {
 			}
 		}
 		
-		days_mission_timeout = 120
+		days_mission_timeout = 90
 		fire_only_once = yes
 		
-		complete_effect = {		
-			custom_effect_tooltip = byz_trade_next_c
+		timeout_effect = {
+			add_political_power = 75
+			custom_effect_tooltip = byz_trade_next_succed
 			add_to_variable = { byz_imperial_faction_support = 5 }
 			add_to_variable = { byz_merchants_faction_support = -5 }
 			clamp_variable = {
@@ -190,24 +354,70 @@ byz_senat_decision_category = {
 			}
 		}
 		
-		timeout_effect = {
-			add_stability = -0.05
+		complete_effect = {
+			add_political_power = -150
+			custom_effect_tooltip = byz_trade_next_fail
+			add_to_variable = { byz_imperial_faction_support = -5 }
+			add_to_variable = { byz_merchants_faction_support = 5 }
+			clamp_variable = {
+				var = byz_imperial_faction_support
+				min = 0
+				max = 200
+			}
+			clamp_variable = {
+				var = byz_merchants_faction_support
+				min = 0
+				max = 200
+			}
+			if = {
+				limit = {
+					has_idea = closed_economy
+				}
+				swap_ideas = {
+					remove_idea = closed_economy
+					add_idea = free_trade
+				}
+			}
+			if = {
+				limit = {
+					has_idea = limited_exports
+				}
+				swap_ideas = {
+					remove_idea = limited_exports
+					add_idea = free_trade
+				}
+			}
+			if = {
+				limit = {
+					has_idea = export_focus
+				}
+				swap_ideas = {
+					remove_idea = export_focus
+					add_idea = free_trade
+				}
+			}
 		}
 	}
 	
 	byz_bulgaria_war_missia = {
+	
 		icon = generic_ignite_civil_war
+		
 		allowed = {
 			always = no
 		}
+		
 		available = {
-			owns_state = 48
-			owns_state = 106
-			owns_state = 211
-			owns_state = 212
-			owns_state = 801
-			owns_state = 803
+			hidden_trigger = {
+				owns_state = 48
+				owns_state = 106
+				owns_state = 211
+				owns_state = 212
+				owns_state = 801
+				owns_state = 803
+			}
 		}
+		
 		visible = {
 			has_completed_focus = BYZ_bulgaria_war
 		}		
@@ -220,7 +430,7 @@ byz_senat_decision_category = {
 			}
 		}
 		
-		days_mission_timeout = 105
+		days_mission_timeout = 60
 		fire_only_once = yes
 		
 		complete_effect = {		
@@ -228,26 +438,48 @@ byz_senat_decision_category = {
 		}
 		
 		timeout_effect = {
-			add_stability = -0.15
-			add_war_support = -0.15
-			white_peace = {
-				tag = BUL
-				message = BYZ_lose_BUL
+			add_war_support = -0.05
+			add_manpower = -25000
+			if = {
+				limit = {
+					BUL = {
+						has_idea = balkan_wars
+					}
+				}
+				BUL = {
+					swap_ideas = {
+						remove_idea = balkan_wars
+						add_idea = balkan_wars_1
+					}
+				}
 			}
-			hidden_effect = {
-				clr_country_flag = BYZ_vs_BUL
+			custom_effect_tooltip = byz_losses_hight
+			if = {
+				limit = {
+					BYZ = {
+						has_country_flag = byz_democratic_politic
+					}
+				}
+				custom_effect_tooltip = byz_general_more_angry
 			}
+			activate_mission = byz_bulgaria_war_missia
 		}
 	}
 	
 	byz_albania_war_missia = {
+	
 		icon = generic_ignite_civil_war
+		
 		allowed = {
 			always = no
 		}
+		
 		available = {
-			owns_state = 44
+			hidden_trigger = {
+				owns_state = 44
+			}
 		}
+		
 		visible = {
 			has_completed_focus = BYZ_albania_war
 		}		
@@ -260,7 +492,7 @@ byz_senat_decision_category = {
 			}
 		}
 		
-		days_mission_timeout = 105
+		days_mission_timeout = 30
 		fire_only_once = yes
 		
 		complete_effect = {		
@@ -268,29 +500,51 @@ byz_senat_decision_category = {
 		}
 		
 		timeout_effect = {
-			add_stability = -0.15
-			add_war_support = -0.15
-			white_peace = {
-				tag = ALB
-				message = BYZ_lose_ALB
+			add_war_support = -0.05
+			add_manpower = -25000
+			if = {
+				limit = {
+					ALB = {
+						has_idea = balkan_wars
+					}
+				}
+				ALB = {
+					swap_ideas = {
+						remove_idea = balkan_wars
+						add_idea = balkan_wars_1
+					}
+				}
 			}
-			hidden_effect = {
-				clr_country_flag = BYZ_vs_ALB
+			custom_effect_tooltip = byz_losses_hight
+			if = {
+				limit = {
+					BYZ = {
+						has_country_flag = byz_democratic_politic
+					}
+				}
+				custom_effect_tooltip = byz_general_more_angry
 			}
+			activate_mission = byz_albania_war_missia
 		}
 	}
 	
 	byz_serbia_war_missia = {
+	
 		icon = generic_ignite_civil_war
+		
 		allowed = {
 			always = no
 		}
+		
 		available = {
-			owns_state = 105
-			owns_state = 107
-			owns_state = 108
-			owns_state = 802
+			hidden_trigger = {
+				owns_state = 105
+				owns_state = 107
+				owns_state = 108
+				owns_state = 802
+			}
 		}
+		
 		visible = {
 			has_completed_focus = BYZ_serbia_war
 		}		
@@ -303,7 +557,7 @@ byz_senat_decision_category = {
 			}
 		}
 		
-		days_mission_timeout = 105
+		days_mission_timeout = 45
 		fire_only_once = yes
 		
 		complete_effect = {		
@@ -311,27 +565,57 @@ byz_senat_decision_category = {
 		}
 		
 		timeout_effect = {
-			add_stability = -0.15
-			add_war_support = -0.15
-			white_peace = {
-				tag = SER
-				message = BYZ_lose_SER
+			add_war_support = -0.05
+			add_manpower = -25000
+			if = {
+				limit = {
+					SER = {
+						has_idea = balkan_wars
+					}
+				}
+				SER = {
+					swap_ideas = {
+						remove_idea = balkan_wars
+						add_idea = balkan_wars_1
+					}
+				}
 			}
-			hidden_effect = {
-				clr_country_flag = BYZ_vs_SER
+			custom_effect_tooltip = byz_losses_hight
+			if = {
+				limit = {
+					BYZ = {
+						has_country_flag = byz_democratic_politic
+					}
+				}
+				custom_effect_tooltip = byz_general_more_angry
 			}
+			activate_mission = byz_serbia_war_missia
 		}
 	}
 	
 	byz_bosnia_war_missia = {
+	
 		icon = generic_ignite_civil_war
+		
 		allowed = {
 			always = no
 		}
+		
 		available = {
-			owns_state = 104
-			owns_state = 804
+			hidden_trigger = {
+				OR = {
+					BYZ = {
+						owns_state = 104
+						owns_state = 804
+					}
+					DAL = {
+						owns_state = 104
+						owns_state = 804
+					}
+				}
+			}
 		}
+		
 		visible = {
 			has_completed_focus = BYZ_bosnia_war
 		}		
@@ -344,7 +628,7 @@ byz_senat_decision_category = {
 			}
 		}
 		
-		days_mission_timeout = 105
+		days_mission_timeout = 45
 		fire_only_once = yes
 		
 		complete_effect = {		
@@ -352,29 +636,49 @@ byz_senat_decision_category = {
 		}
 		
 		timeout_effect = {
-			add_stability = -0.15
-			add_war_support = -0.15
-			white_peace = {
-				tag = BOS
-				message = BYZ_lose_BOS
+			add_war_support = -0.05
+			add_manpower = -25000
+			if = {
+				limit = {
+					BOS = {
+						has_idea = balkan_wars
+					}
+				}
+				BOS = {
+					swap_ideas = {
+						remove_idea = balkan_wars
+						add_idea = balkan_wars_1
+					}
+				}
 			}
-			hidden_effect = {
-				clr_country_flag = BYZ_vs_BOS
+			custom_effect_tooltip = byz_losses_hight
+			if = {
+				limit = {
+					BYZ = {
+						has_country_flag = byz_democratic_politic
+					}
+				}
+				custom_effect_tooltip = byz_general_more_angry
 			}
+			activate_mission = byz_bosnia_war_missia
 		}
 	}
 	
 	byz_malta_war_missia = {
+	
 		icon = generic_ignite_civil_war
+		
 		allowed = {
 			always = no
 		}
+		
 		available = {
 			controls_state = 116 
 			SYC = {
 				surrender_progress > 0.20
 			}
 		}
+		
 		visible = {
 			has_country_flag = BYZ_malta_war
 			has_completed_focus = BYZ_malta_operation
@@ -414,7 +718,9 @@ byz_senat_decision_category = {
 	}
 	
 	byz_persia_civil_war = {
+	
 		icon = generic_ignite_civil_war
+		
 		allowed = {
 		}
 		
