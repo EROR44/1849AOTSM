@@ -12,7 +12,10 @@ byz_senat_decision_category = {
 		}
 		visible = {
 			tag = BYZ
-			has_country_flag = byz_imperia_politic
+			OR = {
+				has_country_flag = byz_rulling_imp
+				has_country_flag = byz_rulling_impgov
+			}
 			NOT = {
 				check_variable = { byz_imperial_faction_support > 199 }
 			}
@@ -166,6 +169,114 @@ byz_senat_decision_category = {
 								custom_effect_tooltip = byz_imperium_donat_3
 							}
 						}
+					}
+				}
+			}
+		}
+	}
+	
+	byz_people_help = {
+		icon = decision_generic_speech
+		allowed = {
+			tag = BYZ
+		}
+		available = {
+			NOT = {
+				check_variable = { byz_imperial_faction_support < 4 }
+				check_variable = { byz_generals_faction_support < 4 }
+			}
+		}
+		visible = {
+			tag = BYZ
+			has_country_flag = byz_rulling_demmer
+			NOT = {
+				check_variable = { byz_imperial_faction_support < 4 }
+				check_variable = { byz_generals_faction_support < 4 }
+			}
+		}		
+			
+		cost = 0	
+		
+		ai_will_do = {
+			factor = 40
+			modifier = {
+				factor = 0	
+				is_historical_focus_on = yes
+			}
+		}
+		
+		days_remove = 30
+		days_re_enable = 120
+		fire_only_once = no
+		
+		complete_effect = {		
+		}
+		
+		remove_effect = {
+			if = {
+				limit = {
+					check_variable = { byz_generals_faction_support > 4 }
+				}
+				add_to_variable = { byz_generals_faction_support = -5 }
+				clamp_variable = {
+					var = byz_generals_faction_support
+					min = 0
+					max = 200
+				}
+				add_to_variable = { byz_democrats_faction_support = 5 }
+				clamp_variable = {
+					var = byz_democrats_faction_support
+					min = 0
+					max = 200
+				}
+			}
+			if = {
+				limit = {
+					check_variable = { byz_imperial_faction_support > 4 }
+				}
+				add_to_variable = { byz_imperial_faction_support = -5 }
+				clamp_variable = {
+					var = byz_imperial_faction_support
+					min = 0
+					max = 200
+				}
+				add_to_variable = { byz_merchants_faction_support = 5 }
+				clamp_variable = {
+					var = byz_merchants_faction_support
+					min = 0
+					max = 200
+				}
+			}
+			if = {
+				limit = {
+					AND = {
+						check_variable = { byz_generals_faction_support > 4 }
+						check_variable = { byz_imperial_faction_support > 4 }
+					}	
+				}
+				custom_effect_tooltip = byz_people_help_1
+				else = {
+					if = {
+						limit = {
+							AND = {
+								check_variable = { byz_generals_faction_support > 4 }
+								NOT = {
+									check_variable = { byz_imperial_faction_support > 4 }
+								}
+							}
+						}	
+						custom_effect_tooltip = byz_people_help_2
+					}
+					if = {
+						limit = {
+							AND = {
+								check_variable = { byz_imperial_faction_support > 4 }
+								NOT = {
+									check_variable = { byz_generals_faction_support > 4 }
+								}
+							}
+						}
+						custom_effect_tooltip = byz_people_help_3
 					}
 				}
 			}
