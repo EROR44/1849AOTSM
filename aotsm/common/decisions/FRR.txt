@@ -2521,41 +2521,41 @@ fren_expand_resourses_cat = {
 }
 
 fren_colonail_deals_cat = {
-	FRR_create_malagasiysk_protectorat = {
-		icon = usa_congress
-					
-		available = {
-			tag = FRR
-			has_country_flag = FRR_invasion_in_algeria_end
-			NOT = { has_country_flag = FRR_dip_mis_in_process }
-		}
+	#FRR_create_malagasiysk_protectorat = {
+	#	icon = usa_congress
+	#				
+	#	available = {
+	#		tag = FRR
+	#		has_country_flag = FRR_invasion_in_algeria_end
+	#		NOT = { has_country_flag = FRR_dip_mis_in_process }
+	#	}
+#
+	#	visible = {
+	#		has_completed_focus = FRA_friendship_witch_mad
+	#		has_country_flag = FRR_invasion_in_algeria_end
+	#	}
 
-		visible = {
-			has_completed_focus = FRA_friendship_witch_mad
-			has_country_flag = FRR_invasion_in_algeria_end
-		}
+	#	cost = 60
+	#	days_remove = 30
+	#	fire_only_once = yes
 
-		cost = 60
-		days_remove = 30
-		fire_only_once = yes
-
-		modifier = {
+	#	modifier = {
 			
-		}
+	#	}
 
-		ai_will_do = {
-			factor = 5
-		}
+	#	ai_will_do = {
+	#		factor = 5
+	#	}
 		
-		complete_effect = {
-			FRR = { set_country_flag = FRR_dip_mis_in_process }
-		}
+	#	complete_effect = {
+	#		FRR = { set_country_flag = FRR_dip_mis_in_process }
+	#	}
 
-		remove_effect = {
-			MAD = { country_event = { id = fren_colonial.7 } }
-			FRR = { clr_country_flag = FRR_dip_mis_in_process }
-		}
-	}
+	#	remove_effect = {
+	#		MAD = { country_event = { id = fren_colonial.7 } }
+	#		FRR = { clr_country_flag = FRR_dip_mis_in_process }
+	#	}
+	#}
 	#FRR_create_zanzibarsk_protectorat = {  
 	#	icon = usa_congress
 	#				
@@ -3473,6 +3473,8 @@ fren_hired_army = {
 		icon = usa_congress
 					
 		available = {
+			owns_state = 16
+			controls_state = 16
 			has_completed_focus = FRA_mercenary_divisions
 		}
 		
@@ -3520,8 +3522,22 @@ fren_hired_army = {
 				}
 			hidden_effect = {
 				set_division_template_lock = {
-				division_template = "Mercenary division"
-				is_locked = yes
+					division_template = "Mercenary division"
+					is_locked = yes
+				}
+				16 = {
+					create_unit = {
+						division = "division_template = \"Mercenary division\" start_experience_factor = 0.2"
+						owner = FRR
+					}
+					create_unit = {
+						division = "division_template = \"Mercenary division\" start_experience_factor = 0.2"
+						owner = FRR
+					}
+					create_unit = {
+						division = "division_template = \"Mercenary division\" start_experience_factor = 0.2"
+						owner = FRR
+					}
 				}
 			}
 			set_country_flag = FRR_mercenary_div_formed
@@ -3564,12 +3580,10 @@ fren_hired_army = {
 		}
 	}
 	
-	FRR_create_mercenary_div_in_paris = {
+	FRR_create_mercenary_div = {
 		icon = usa_congress
 					
 		available = {
-			owns_state = 16
-			controls_state = 16
 			has_country_flag = FRR_mercenary_div_formed
 			NOT = { has_country_flag = FRR_mercenaring_div }
 		}
