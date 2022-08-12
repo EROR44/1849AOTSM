@@ -7,6 +7,7 @@ add_namespace = byz
 add_namespace = byz_ita
 add_namespace = byz_pru
 add_namespace = byz_senat
+add_namespace = byz_goverment_idea
 
 country_event = {
 	id = byz.1
@@ -1572,7 +1573,90 @@ country_event = { #Senat meeting 1851
 	}
 
 	option = {
-		name = byz_senat.2.a
+		name = byz_senat.2.a #democrat
+		ai_chance = {
+            base = 33
+        }
+		trigger = {
+			has_country_flag = byz_democratic_politic
+		}
+		BYZ = {
+			clr_country_flag = byz_rulling_demmer
+			set_country_flag = byz_rulling_dem
+		}
+		custom_effect_tooltip = byz_coalitia_died
+		hidden_effect = {
+			BYZ = {
+				complete_national_focus = BYZ_dem_goverment
+			}
+		}
+	}
+	
+	option = {
+		name = byz_senat.2.b #coalitia
+		ai_chance = {
+            base = 34
+        }
+		trigger = {
+			has_country_flag = byz_democratic_politic
+		}
+		BYZ = {
+			add_stability = -0.05
+		}
+		custom_effect_tooltip = byz_coalitia_survave
+		hidden_effect = {
+			BYZ = {
+				complete_national_focus = BYZ_demmer_goverment
+			}
+		}
+	}
+	
+	option = {
+		name = byz_senat.2.c #merchant
+		ai_chance = {
+            base = 33
+        }
+		trigger = {
+			has_country_flag = byz_democratic_politic
+		}
+		BYZ = {
+			clr_country_flag = byz_rulling_demmer
+			set_country_flag = byz_rulling_mer
+		}
+		custom_effect_tooltip = byz_coalitia_died
+		hidden_effect = {
+			BYZ = {
+				complete_national_focus = BYZ_mer_goverment
+			}
+		}
+	}
+	
+	option = {
+		name = byz_senat.2.f #general and imperia
+		trigger = {
+			has_country_flag = byz_rulling_impgov
+		}
+		add_stability = 0.025
+		add_war_support = 0.025
+		hidden_effect = {
+			BYZ = {
+				complete_national_focus = BYZ_impgov_goverment
+			}
+		}
+	}
+	
+	option = {
+		name = byz_senat.2.j #imperial
+		trigger = {
+			has_country_flag = byz_rulling_imp
+		}
+		add_stability = 0.025
+		add_war_support = 0.025
+		hidden_effect = {
+			BYZ = {
+				complete_national_focus = BYZ_imp_goverment
+			}
+		}
 	}
 	
 }
@@ -1589,6 +1673,9 @@ country_event = { #Senat meeting 1852
 	
 	immediate = {
 		hidden_effect = {
+			BYZ = {
+				complete_national_focus = BYZ_fourth_senat_meeting
+			}
 			BYZ = {
 				country_event = {
 					id = byz_senat.4
@@ -1698,7 +1785,7 @@ country_event = { #Senat meeting 1856
 	immediate = {
 		hidden_effect = {
 			BYZ = {
-				complete_national_focus = BYZ_seventh_senat_meeting
+				complete_national_focus = BYZ_eighth_senat_meeting
 			}
 			BYZ = {
 				country_event = {
@@ -1811,6 +1898,388 @@ country_event = { #Senat meeting 1860
 
 	option = {
 		name = byz_senat.11.a
+	}
+	
+}
+
+#Govermetn idea event
+
+#democratic
+
+country_event = { #help people
+	id = byz_goverment_idea.1
+	title = byz_goverment_idea.1.t
+	desc = byz_goverment_idea.1.d
+	picture = GFX_report_event_finnish_letter
+	
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {
+	}
+
+	option = { #help a bit
+		name = byz_goverment_idea.1.a
+		ai_chance = {
+            base = 50
+        }
+		BYZ = {
+			set_country_flag = byz_help_people_stab
+		}
+		custom_effect_tooltip = byz_help_people_stab_effect
+	}
+	
+	option = { #not help evrybody, but a lot
+		name = byz_goverment_idea.1.b
+		ai_chance = {
+            base = 50
+        }
+		BYZ = {
+			set_country_flag = byz_help_people_politica
+		}
+		custom_effect_tooltip = byz_help_people_politica_effect
+	}
+	
+}
+
+country_event = { #medicine
+	id = byz_goverment_idea.2
+	title = byz_goverment_idea.2.t
+	desc = byz_goverment_idea.2.d
+	picture = GFX_report_event_poland_rejects
+	
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {
+	}
+
+	option = { #free_medicine
+		name = byz_goverment_idea.2.a
+		ai_chance = {
+            base = 50
+        }
+		BYZ = {
+			set_country_flag = byz_help_people_population
+		}
+		custom_effect_tooltip = byz_help_people_population_effect
+	}
+	
+	option = { #paid medicine
+		name = byz_goverment_idea.2.b
+		ai_chance = {
+            base = 50
+        }
+		BYZ = {
+			set_country_flag = byz_help_people_politica_2
+		}
+		custom_effect_tooltip = byz_help_people_politica_effect
+	}
+	
+}
+
+#demmer
+
+country_event = { #resourse for how?
+	id = byz_goverment_idea.3
+	title = byz_goverment_idea.3.t
+	desc = byz_goverment_idea.3.d
+	picture = GFX_report_event_communist_leader
+	
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {
+	}
+
+	option = { #For people
+		name = byz_goverment_idea.3.a
+		ai_chance = {
+            base = 50
+        }
+		BYZ = {
+			set_country_flag = byz_help_people_prom
+		}
+		custom_effect_tooltip = byz_help_people_prom_effect
+	}
+	
+	option = { #For trade
+		name = byz_goverment_idea.3.b
+		ai_chance = {
+            base = 50
+        }
+		BYZ = {
+			set_country_flag = byz_help_people_trade
+		}
+		custom_effect_tooltip = byz_help_people_trade_effect
+	}
+	
+}
+
+country_event = { #Free market
+	id = byz_goverment_idea.4
+	title = byz_goverment_idea.4.t
+	desc = byz_goverment_idea.4.d
+	picture = GFX_report_event_partition_of_india
+	
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {
+	}
+
+	option = { #For people
+		name = byz_goverment_idea.4.a
+		ai_chance = {
+            base = 50
+        }
+		BYZ = {
+			set_country_flag = byz_help_people_tnp
+		}
+		custom_effect_tooltip = byz_help_people_tnp_effect
+	}
+	
+	option = { #For industria
+		name = byz_goverment_idea.4.b
+		ai_chance = {
+            base = 50
+        }
+		BYZ = {
+			set_country_flag = byz_help_people_construction_speed
+		}
+		custom_effect_tooltip = byz_help_people_constraction_effect
+	}
+	
+}
+
+#merchant
+
+country_event = { #Sell resourse
+	id = byz_goverment_idea.5
+	title = byz_goverment_idea.5.t
+	desc = byz_goverment_idea.5.d
+	picture = GFX_report_event_hitler_handshake
+	
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {
+	}
+
+	option = { #All
+		name = byz_goverment_idea.5.a
+		ai_chance = {
+            base = 50
+        }
+		BYZ = {
+			set_country_flag = byz_help_people_economy
+		}
+		custom_effect_tooltip = byz_help_people_economy_effect
+	}
+	
+	option = { #Not fully
+		name = byz_goverment_idea.5.b
+		ai_chance = {
+            base = 50
+        }
+		BYZ = {
+			set_country_flag = byz_help_people_prom_bonus
+		}
+		custom_effect_tooltip = byz_help_people_prom_bonus_effect
+	}
+	
+}
+
+country_event = { #trade evrywhere
+	id = byz_goverment_idea.6
+	title = byz_goverment_idea.6.t
+	desc = byz_goverment_idea.6.d
+	picture = GFX_report_event_pierre_laval
+	
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {
+	}
+
+	option = { #Yes
+		name = byz_goverment_idea.6.a
+		ai_chance = {
+            base = 50
+        }
+		BYZ = {
+			set_country_flag = byz_help_people_megatrade
+		}
+		custom_effect_tooltip = byz_help_people_megatrade_effect
+	}
+	
+	option = { #No, but yes
+		name = byz_goverment_idea.6.b
+		ai_chance = {
+            base = 50
+        }
+		BYZ = {
+			set_country_flag = byz_help_people_trade_bonus
+		}
+		custom_effect_tooltip = byz_help_people_prom_trade_effect
+	}
+	
+}
+
+#impgov
+
+country_event = { #help_army
+	id = byz_goverment_idea.7
+	title = byz_goverment_idea.7.t
+	desc = byz_goverment_idea.7.d
+	picture = GFX_report_event_lithuania_army
+	
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {
+	}
+
+	option = { #people
+		name = byz_goverment_idea.7.a
+		ai_chance = {
+            base = 50
+        }
+		BYZ = {
+			set_country_flag = byz_help_people_recrute
+		}
+		custom_effect_tooltip = byz_help_people_recrute_effect
+	}
+	
+	option = { #bonus
+		name = byz_goverment_idea.7.b
+		ai_chance = {
+            base = 50
+        }
+		BYZ = {
+			set_country_flag = byz_help_people_army_bonus
+		}
+		custom_effect_tooltip = byz_help_people_army_bonus_effect
+	}
+	
+}
+
+country_event = { #nova politic
+	id = byz_goverment_idea.8
+	title = byz_goverment_idea.8.t
+	desc = byz_goverment_idea.8.d
+	picture = GFX_report_event_generic_military_parade
+	
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {
+	}
+
+	option = { #stab and war
+		name = byz_goverment_idea.8.a
+		ai_chance = {
+            base = 50
+        }
+		BYZ = {
+			set_country_flag = byz_help_people_stab_and_war
+		}
+		custom_effect_tooltip = byz_help_people_stab_and_war_effect
+	}
+	
+	option = { #defend in war
+		name = byz_goverment_idea.8.b
+		ai_chance = {
+            base = 50
+        }
+		BYZ = {
+			set_country_flag = byz_help_people_warstab
+		}
+		custom_effect_tooltip = byz_help_people_warstab_bonus_effect
+	}
+	
+}
+
+#Imperia
+
+country_event = { #Politic
+	id = byz_goverment_idea.9
+	title = byz_goverment_idea.9.t
+	desc = byz_goverment_idea.9.d
+	picture = GFX_report_event_generic_military_parade
+	
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {
+	}
+
+	option = { #stab and politic
+		name = byz_goverment_idea.9.a
+		ai_chance = {
+            base = 50
+        }
+		BYZ = {
+			set_country_flag = byz_help_people_stab_and_politic
+		}
+		custom_effect_tooltip = byz_help_people_stab_and_politic_effect
+	}
+	
+	option = { #stab a lot
+		name = byz_goverment_idea.9.b
+		ai_chance = {
+            base = 50
+        }
+		BYZ = {
+			set_country_flag = byz_help_people_stab_alot
+		}
+		custom_effect_tooltip = byz_help_people_stab_alot_effect
+	}
+	
+}
+
+country_event = { #Power
+	id = byz_goverment_idea.10
+	title = byz_goverment_idea.10.t
+	desc = byz_goverment_idea.10.d
+	picture = GFX_report_event_czech_soldiers_01
+	
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {
+	}
+
+	option = { #attack on core
+		name = byz_goverment_idea.10.a
+		ai_chance = {
+            base = 50
+        }
+		BYZ = {
+			set_country_flag = byz_help_people_attack_core
+		}
+		custom_effect_tooltip = byz_help_people_attack_effect
+	}
+	
+	option = { #defend on core
+		name = byz_goverment_idea.10.b
+		ai_chance = {
+            base = 50
+        }
+		BYZ = {
+			set_country_flag = byz_help_people_defense_core
+		}
+		custom_effect_tooltip = byz_help_people_defense_effect
 	}
 	
 }
