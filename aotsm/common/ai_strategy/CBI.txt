@@ -212,7 +212,7 @@ britain_has_war_witch_germany = {
 	ai_strategy = {
         type = front_control
         tag = "PRU"
-        priority = 7
+        priority = 25
         ordertype = front 
         execution_type = balanced 
         execute_order = yes 
@@ -222,7 +222,57 @@ britain_has_war_witch_germany = {
 	ai_strategy = {
         type = front_control
         tag = "PRU"
-        priority = 4 
+        priority = 10 
+        ordertype = invasion 
+        execution_type = rush  
+        execute_order = yes 
+        manual_attack = yes 
+    }
+	
+}
+
+
+britain_has_war_witch_scandinavy = {
+	allowed = {
+		original_tag = CBI
+	}
+	enable = {
+		has_war_with = SCA
+	}
+	abort = {
+		NOT = { has_war_with = SCA }
+	}
+	
+	ai_strategy = { 
+		type = invade 
+		id = "SCA" 
+		value = 200
+	}
+	
+	ai_strategy = { 
+		type = strike_force_home_base 
+		id = 142
+	}
+	
+	ai_strategy = { 
+		type = strike_force_home_base 
+		id = 99
+	}
+	
+	ai_strategy = {
+        type = front_control
+        tag = "PRU"
+        priority = 5
+        ordertype = front 
+        execution_type = balanced 
+        execute_order = yes 
+        manual_attack = yes 
+    }
+	
+	ai_strategy = {
+        type = front_control
+        tag = "PRU"
+        priority = 25 
         ordertype = invasion 
         execution_type = rush  
         execute_order = yes 
@@ -249,7 +299,7 @@ britain_help_continental_france = {
 	ai_strategy = {
 		type = force_defend_ally_borders
 		id = "FRR"
-		value = 100
+		value = 400
 	}
 	
 }
@@ -272,7 +322,7 @@ britain_help_russian_front = {
 	ai_strategy = {
 		type = force_defend_ally_borders
 		id = "RUS"
-		value = 200
+		value = 800
 	}
 }
 
@@ -289,7 +339,7 @@ britain_defaulte_core_defence = {
 	
 	ai_strategy = { 
 		type = garrison
-		value = 20
+		value = 10
 	}
 	
 	ai_strategy = {
@@ -298,5 +348,27 @@ britain_defaulte_core_defence = {
 		value = -60
 	}
 	
+}
+
+FRR_prepare_for_war_with_pru = {
+	allowed = {
+		tag = FRR
+	}
+
+	enable = {
+		PRU = {
+			exists = yes
+		}
+		NOT = { is_ally_with = PRU }
+		date > 1853.1.1
+	}
+
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = prepare_for_war
+		id = PRU
+		value = 900
+	}
 }
  
