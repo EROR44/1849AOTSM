@@ -432,10 +432,10 @@ war_witch_pru = {
 		original_tag = FRR
 	}
 	enable = {
-		has_war_with = PRU
+		has_completed_focus = FRA_be_with_britain
 	}
 	abort = {
-		NOT = { has_war_with = PRU }
+		NOT = { has_completed_focus = FRA_be_with_britain }
 	}
 	
 	ai_strategy = {
@@ -463,6 +463,17 @@ war_witch_pru = {
 	ai_strategy = {
 		type = front_unit_request
 		tag = PRU               
+		state = 862              
+		strategic_region = 5  
+		area = europe            
+		country_trigger = { always = no }     
+		state_trigger = { always = no }    
+		value = 40               
+	}
+	
+	ai_strategy = {
+		type = front_unit_request
+		tag = PRU               
 		state = 863              
 		strategic_region = 5  
 		area = europe            
@@ -473,7 +484,7 @@ war_witch_pru = {
 	
 	ai_strategy = { 
 		type = garrison
-		value = 70
+		value = 50
 	}
 	
 	ai_strategy = {
@@ -588,32 +599,32 @@ FRR_template_design_2 = {
 	}
 }
 
-FRR_defence_britain_borders = {
-	allowed = {
-		original_tag = FRR
-	}
-	enable = {
-		is_in_faction_with = CBI
-		CBI = {
-			has_war_with = PRU
-		}
-	}
-	abort = {
-		not = {
-			is_in_faction_with = CBI
-			CBI = {
-				has_war_with = PRU
-			}
-		}
-	}
-
-	ai_strategy = {
-		type = force_defend_ally_borders
-		id = "CBI"
-		value = 20
-	}
-	
-}
+#FRR_defence_britain_borders = {
+#	allowed = {
+#		original_tag = FRR
+#	}
+#	enable = {
+#		is_in_faction_with = CBI
+#		CBI = {
+#			has_war_with = PRU
+#		}
+#	}
+#	abort = {
+#		not = {
+#			is_in_faction_with = CBI
+#			CBI = {
+#				has_war_with = PRU
+#			}
+#		}
+#	}
+#
+#	ai_strategy = {
+#		type = force_defend_ally_borders
+#		id = "CBI"
+#		value = 20
+#	}
+#	
+#}
 
 FRR_colonialism = {
 	allowed = {
@@ -837,7 +848,7 @@ FRR_prepare_for_war_with_pru = {
 			exists = yes
 		}
 		NOT = { is_ally_with = PRU }
-		FRR = { has_completed_focus = FRA_be_with_britain }
+		FRR = { NOT = { has_completed_focus = FRA_be_with_prussia } }
 		date > 1854.1.1
 	}
 
@@ -846,7 +857,7 @@ FRR_prepare_for_war_with_pru = {
 	ai_strategy = {
 		type = prepare_for_war
 		id = PRU
-		value = 400
+		value = 900
 	}
 }
 
@@ -860,7 +871,7 @@ FRR_prepare_for_war_with_cbi = {
 			exists = yes
 		}
 		NOT = { is_ally_with = CBI }
-		FRR = { has_completed_focus = FRA_be_with_prussia }
+		FRR = { NOT = { has_completed_focus = FRA_be_with_britain } }
 		date > 1854.1.1
 	}
 
@@ -870,5 +881,53 @@ FRR_prepare_for_war_with_cbi = {
 		type = prepare_for_war
 		id = CBI
 		value = 100
+	}
+}
+
+FRR_xp_upgrade_spending_land = {
+	allowed = {
+		original_tag = FRR
+	}
+
+	enable = {
+		date < 1851.6.1
+	}
+	
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = land_xp_spend_priority
+		id = upgrade_xp_cutoff
+		value = 100
+	}
+}
+
+FRR_support_sor_in_civil_war = {
+	allowed = {
+		original_tag = FRR
+	}
+
+	enable = {
+		SOR = { has_war_with = SOS }
+	}
+	
+	abort_when_not_enabled = yes
+
+	ai_strategy = { 
+		type = support  
+		id = SOR 
+		value = 35
+	}
+	
+	ai_strategy = { 
+		type = send_lend_lease_desire 
+		id = SOR 
+		value = 50 
+	}
+	
+	ai_strategy = { 
+		type = send_volunteers_desire  
+		id = SOR 
+		value = 20 
 	}
 }
