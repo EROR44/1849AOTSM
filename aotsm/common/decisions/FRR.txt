@@ -3672,7 +3672,10 @@ FRR_war_time_decisions_cat = {
 					
 		available = {
 			FRR = { has_war = yes }
-			has_manpower < 50000
+			OR = {
+				has_manpower < 50000
+				surrender_progress > 0.20
+			}
 		}
 		
 		allowed = { 
@@ -3683,7 +3686,7 @@ FRR_war_time_decisions_cat = {
 			FRR = { has_war = yes }
 		}
 	
-		cost = 15
+		#cost = 15
 		days_remove = 30
 		#fire_only_once = no
 	
@@ -3700,7 +3703,36 @@ FRR_war_time_decisions_cat = {
 		}
 
 		remove_effect = {
-			add_manpower = 15000
+			random_state = {
+				limit = {
+					is_core_of = FRR
+					is_fully_controlled_by = FRR
+					state_population > 5000
+				}
+				add_manpower = -5000
+				
+			}
+			random_state = {
+				limit = {
+					is_core_of = FRR
+					is_fully_controlled_by = FRR
+					state_population > 5000
+				}
+				add_manpower = -5000
+				
+			}
+			random_state = {
+				limit = {
+					is_core_of = FRR
+					is_fully_controlled_by = FRR
+					state_population > 5000
+				}
+				add_manpower = -5000
+				
+			}
+			FRR = {
+				add_manpower = 15000
+			}
 		}
 	}
 	FRR_defence_of_homeland_decision = {
