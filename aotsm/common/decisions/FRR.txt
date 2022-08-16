@@ -2940,7 +2940,7 @@ NWA_prom_expand_cat = {
 		}
 
 		ai_will_do = {
-			factor = 30
+			factor = 90
 		}
 		
 		complete_effect = {
@@ -2979,7 +2979,7 @@ NWA_prom_expand_cat = {
 		}
 
 		ai_will_do = {
-			factor = 30
+			factor = 90
 		}
 		
 		complete_effect = {
@@ -3018,7 +3018,7 @@ NWA_prom_expand_cat = {
 		}
 
 		ai_will_do = {
-			factor = 30
+			factor = 90
 		}
 		
 		complete_effect = {
@@ -3597,7 +3597,7 @@ fren_hired_army = {
 		}
 	
 		cost = 100
-		days_remove = 120
+		days_remove = 50
 		#fire_only_once = no
 	
 		modifier = {
@@ -3630,6 +3630,46 @@ fren_hired_army = {
 
 FRR_war_time_decisions_cat = {
 
+	FRR_war_time_army_xp_bost = { 
+		
+		icon = generic_form_nation
+
+		allowed = {
+			tag = FRR
+		}
+
+		available = {
+			tag = FRR
+			FRR = { has_war = yes}
+		}
+
+		visible = {
+			tag = FRR
+			is_ai = yes
+			FRR = { has_war = yes }
+		}
+		
+		is_good = yes
+		
+		selectable_mission = no
+		
+		#fire_only_once = yes
+		
+		days_remove = 300
+		
+		days_re_enable = 30
+
+		ai_will_do = {
+			factor = 100
+		}
+		
+		modifier = {
+			experience_gain_army = 0.05
+			experience_gain_navy = 0.05
+			experience_gain_air	= 0.05
+		}
+		
+	}
 	FRR_expand_military_production = {
 		icon = usa_congress
 					
@@ -3645,6 +3685,7 @@ FRR_war_time_decisions_cat = {
 		
 		visible = {
 			FRR = { has_war = yes }
+			NOT = { has_idea = FRR_improved_mil_production}
 		}
 	
 		#cost = 20
@@ -3778,4 +3819,82 @@ FRR_war_time_decisions_cat = {
 			
 		}
 	}
+}
+
+FRR_country_situation_cat = {
+
+	FFR_population_boom = { 
+		
+		icon = generic_form_nation
+
+		allowed = {
+			tag = FRR	
+		}
+
+		available = {
+			tag = FRR
+		}
+
+		visible = {
+			tag = FRR
+			is_ai = yes
+		}
+		
+		is_good = yes
+		
+		selectable_mission = no
+		
+		fire_only_once = yes
+		
+		days_remove = 1825
+
+		ai_will_do = {
+			factor = 100
+		}
+		
+		modifier = {
+			monthly_population = 0.40
+		}
+		
+	}
+	
+	FRR_army_xp_bost = { 
+		
+		icon = generic_form_nation
+
+		allowed = {
+			tag = FRR
+		}
+
+		available = {
+			tag = FRR
+			has_country_flag = FRR_invasion_in_algeria_end
+		}
+
+		visible = {
+			tag = FRR
+			is_ai = yes
+			has_country_flag = FRR_invasion_in_algeria_end
+		}
+		
+		is_good = yes
+		
+		selectable_mission = no
+		
+		fire_only_once = yes
+		
+		days_remove = 600
+
+		ai_will_do = {
+			factor = 100
+		}
+		
+		modifier = {
+			experience_gain_army = 0.25
+			experience_gain_navy = 0.3
+			experience_gain_air	= 0.1
+		}
+		
+	}
+
 }
