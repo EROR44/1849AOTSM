@@ -21,14 +21,54 @@ on_actions = {
 		}
 	}
 	
+	on_daily_BYZ = {
+		effect = {	
+			if = {
+				limit = {
+					BYZ = {
+						has_country_flag = byz_rulling_demmer
+					}
+				}
+				clear_variable = byz_demmer_faction_support
+				add_to_variable = { byz_demmer_faction_support = byz_merchants_faction_support }
+				add_to_variable = { byz_demmer_faction_support = byz_democrats_faction_support }
+				clamp_variable = {
+					var = byz_demmer_faction_support
+					min = 0
+					max = 200
+				}
+			}
+			if = {
+				limit = {
+					BYZ = {
+						has_country_flag = byz_rulling_impgov
+					}
+				}
+				clear_variable = byz_impgov_faction_support
+				add_to_variable = { byz_impgov_faction_support = byz_imperial_faction_support }
+				add_to_variable = { byz_impgov_faction_support = byz_generals_faction_support }
+				clamp_variable = {
+					var = byz_impgov_faction_support
+					min = 0
+					max = 200
+				}
+			}
+		}
+	}
+	
 	on_capitulation = {
 		effect = {
-			if = {#French invasion in Algeria
+			#ALG capitulation
+			if = {
 				limit = {
 					tag = ALG
 					FRR = { has_country_flag = FRR_invasion_in_algeria }
 				}				
 				FRR = { 
+					white_peace = {
+						tag = ALG
+						message = French_win_ALG
+					}
 					clr_country_flag = FRR_invasion_in_algeria
 					set_country_flag = FRR_invasion_in_algeria_end 
 				}
@@ -42,6 +82,7 @@ on_actions = {
 					threat = 5 
 					name = FRR_algerian_invasion
 				}
+				news_event = { id = news.42 hours = 24 }
 			}		
 			if = {#French annexation Tunisia
 				limit = {
@@ -49,6 +90,10 @@ on_actions = {
 					FRR = { has_country_flag = FRR_tunisian_company }
 				}				
 				FRR = { 
+					white_peace = {
+						tag = TUN
+						message = French_win_TUN
+					}
 					clr_country_flag = FRR_tunisian_company
 					set_country_flag = FRR_tunisian_company_end 
 				}
@@ -59,12 +104,17 @@ on_actions = {
 					}
 				}
 			}
-			if = {#French annexation Mauvritania
+			#MAV capitulation
+			if = {
 				limit = {
 					tag = MAV
 					FRR = { has_country_flag = FRR_mauvritanian_company }
 				}				
-				FRR = { 
+				FRR = {
+					white_peace = {
+						tag = MAV
+						message = French_win_MAV
+					}
 					clr_country_flag = FRR_mauvritanian_company
 					set_country_flag = FRR_mauvritanian_company_end 
 				}
@@ -447,7 +497,16 @@ on_actions = {
 				}
 				PRU = {
 					transfer_state = 78
-					transfer_state = 766
+					if = {
+						limit = {
+							NOT = {
+								BYZ = {
+									is_in_faction_with = PRU
+								}
+							}
+						}
+						transfer_state = 766
+					}
 				}
 				HUN = {
 					transfer_state = 76
@@ -455,8 +514,30 @@ on_actions = {
 					transfer_state = 83
 					transfer_state = 84
 				}
-				PRU = {
-					puppet = VLH
+				BYZ = {
+					set_autonomy = {
+						target = VLH
+						autonomy_state = autonomy_aotsm_province
+						end_wars = no
+						end_civil_wars = no
+					}
+				}
+				VLH = {
+					set_cosmetic_tag = BYZ_ROM
+				}
+				VLH = {
+					set_country_flag = VLHBYZ
+				}
+				if = {
+					limit = {
+						BYZ = {
+							is_in_faction_with = PRU
+						}
+					}
+					BCH = {
+						transfer_state = 766
+						add_state_core = 766
+					}
 				}
 			}
 			#KOR capitulation
@@ -1354,6 +1435,7 @@ on_actions = {
 					leave_faction = yes
 				}
 				set_global_flag = france_capitulation
+				news_event = news.79
 			}
 			#CBI capitulation
 			if = {
@@ -1439,7 +1521,6 @@ on_actions = {
 						transfer_state = 696
 						transfer_state = 703
 						transfer_state = 704
-						transfer_state = 720
 						transfer_state = 826
 						transfer_state = 841
 						transfer_state = 842
@@ -1651,6 +1732,7 @@ on_actions = {
 					}
 				}
 				set_global_flag = cbi_capitulation
+				news_event = news.77
 			}
 			#PRT capitulation
 			if = {
@@ -1869,6 +1951,381 @@ on_actions = {
 					}
 				}
 				set_global_flag = prt_capitulation
+				news_event = news.78
+			}
+			if = {
+				limit = {
+					tag = RUS
+					has_global_flag = firts_world_war
+					OR = {
+						RUS = {
+							has_war_with = PRU
+						}
+						RUS = {
+							has_war_with = BYZ
+						}
+					}
+					NOT = {
+						has_global_flag = russian_capitulation
+					}
+				}
+				PLH = {
+					transfer_state = 10
+					transfer_state = 87
+					transfer_state = 90
+					transfer_state = 92
+					transfer_state = 97
+					transfer_state = 98
+					if = {
+						limit = {
+							RUS = {
+								owns_state = 853
+							}
+						}
+						transfer_state = 853
+						RUS = {
+							remove_state_core = 853
+						}
+					}
+				}
+				if = {
+					limit = {
+						RUS = {
+							has_war_with = PRU
+						}
+					}
+					BLT = {
+						transfer_state = 11
+						add_state_core = 11
+						transfer_state = 12
+						add_state_core = 12
+						transfer_state = 13
+						add_state_core = 13
+						transfer_state = 189
+						add_state_core = 189
+						transfer_state = 190
+						add_state_core = 190
+						transfer_state = 191
+						add_state_core = 191
+						transfer_state = 784
+						add_state_core = 784
+					}
+					hidden_effect = {
+						PRU = {
+							set_autonomy = {
+								target = BLT
+								autonomy_state = autonomy_integrated_puppet
+								end_wars = yes
+								end_civil_wars = yes
+							}
+						}
+						BLT = {
+							set_politics = { ruling_party = authoritarian elections_allowed = no }
+							set_popularities = {
+								democratic = 11
+								socialism = 14
+								reactionist = 19
+								authoritarian = 56
+							}
+						}
+						BLT = {
+							load_oob = BLT_army
+						}
+						BLT = {
+							inherit_technology = PRU
+						}
+					}
+					WRT = {
+						transfer_state = 94
+						add_state_core = 94
+						transfer_state = 95
+						add_state_core = 95
+						transfer_state = 96
+						add_state_core = 96
+						transfer_state = 194
+						add_state_core = 194
+						transfer_state = 204
+						add_state_core = 204
+						transfer_state = 206
+						add_state_core = 206
+						transfer_state = 207
+						add_state_core = 207
+						transfer_state = 224
+						add_state_core = 224
+						transfer_state = 241
+						add_state_core = 241
+						transfer_state = 243
+						add_state_core = 243
+						transfer_state = 823
+						add_state_core = 823
+					}
+					hidden_effect = {
+						PRU = {
+							set_autonomy = {
+								target = WRT
+								autonomy_state = autonomy_dominion
+								end_wars = yes
+								end_civil_wars = yes
+							}
+						}
+						WRT = {
+							set_politics = { ruling_party = democratic elections_allowed = no }
+							set_popularities = {
+								democratic = 63
+								socialism = 7
+								reactionist = 24
+								authoritarian = 6
+								}
+							}
+							WRT = {
+								load_oob = WRT_army
+							}
+							WRT = {
+								inherit_technology = PRU
+							}
+						}
+						UKR = {
+							transfer_state = 93
+							add_state_core = 93
+							transfer_state = 192
+							add_state_core = 192
+							transfer_state = 193
+							add_state_core = 193
+							transfer_state = 197
+							add_state_core = 197
+							transfer_state = 198
+							add_state_core = 198
+							transfer_state = 199
+							add_state_core = 199
+							transfer_state = 201
+							add_state_core = 201
+							transfer_state = 202
+							add_state_core = 202
+							transfer_state = 203
+							add_state_core = 203
+							transfer_state = 220
+							add_state_core = 220
+							transfer_state = 221
+							add_state_core = 221
+							transfer_state = 225
+							add_state_core = 225
+							transfer_state = 226
+							add_state_core = 226
+							transfer_state = 228
+							add_state_core = 228
+							transfer_state = 240
+							add_state_core = 240
+							transfer_state = 259
+							add_state_core = 259
+							transfer_state = 859
+							add_state_core = 859
+						}
+					hidden_effect = {
+						PRU = {
+							add_to_faction = UKR
+						}
+						UKR = {
+							set_politics = { ruling_party = reactionist elections_allowed = no }
+							set_popularities = {
+								democratic = 6
+								socialism = 1
+								reactionist = 84
+								authoritarian = 9
+							}
+						}
+						UKR = {
+							load_oob = UKR_army
+						}
+						UKR = {
+							inherit_technology = PRU
+						}
+					}
+					RUS = {
+						remove_state_core = 10
+						remove_state_core = 11
+						remove_state_core = 12
+						remove_state_core = 13
+						remove_state_core = 87
+						remove_state_core = 90
+						remove_state_core = 92
+						remove_state_core = 93
+						remove_state_core = 94
+						remove_state_core = 95
+						remove_state_core = 96
+						remove_state_core = 97
+						remove_state_core = 98
+						remove_state_core = 189
+						remove_state_core = 190
+						remove_state_core = 191
+						remove_state_core = 192
+						remove_state_core = 193
+						remove_state_core = 194
+						remove_state_core = 197
+						remove_state_core = 198
+						remove_state_core = 199
+						remove_state_core = 201
+						remove_state_core = 202
+						remove_state_core = 203
+						remove_state_core = 204
+						remove_state_core = 206
+						remove_state_core = 207
+						remove_state_core = 221
+						remove_state_core = 225
+						remove_state_core = 226
+						remove_state_core = 228
+						remove_state_core = 241
+						remove_state_core = 259
+						remove_state_core = 784
+						remove_state_core = 823
+					}
+				}
+				if = {
+					limit = {
+						RUS = {
+							has_war_with = BYZ
+						}
+					}
+					BCH = {
+						transfer_state = 137
+						add_state_core = 137
+						transfer_state = 196
+						add_state_core = 196
+						transfer_state = 200
+						add_state_core = 200
+						transfer_state = 218
+						add_state_core = 218
+						transfer_state = 227
+						add_state_core = 227
+						transfer_state = 234
+						add_state_core = 234
+					}
+					hidden_effect = {
+						BYZ = {
+							set_autonomy = {
+								target = BCH
+								autonomy_state = autonomy_aotsm_province
+								end_wars = yes
+								end_civil_wars = yes
+							}
+						}
+						BCH = {
+							set_politics = { ruling_party = reactionist elections_allowed = no }
+							set_popularities = {
+								democratic = 3
+								socialism = 1
+								reactionist = 77
+								authoritarian = 19
+							}
+						}
+						BCH = {
+							load_oob = BCH_army
+						}
+						BCH = {
+							inherit_technology = BYZ
+						}
+					}
+					KUK = {
+						transfer_state = 217
+						add_state_core = 217
+						transfer_state = 235
+						add_state_core = 235
+						transfer_state = 236
+						add_state_core = 236
+						transfer_state = 237
+						add_state_core = 237
+						transfer_state = 238
+						add_state_core = 238
+						transfer_state = 245
+						add_state_core = 245
+						transfer_state = 858
+						add_state_core = 858
+					}
+					hidden_effect = {
+						BYZ = {
+							set_autonomy = {
+								target = KUK
+								autonomy_state = autonomy_aotsm_protectorat
+								end_wars = yes
+								end_civil_wars = yes
+							}
+						}
+						KUK = {
+							set_politics = { ruling_party = reactionist elections_allowed = no }
+							set_popularities = {
+								democratic = 18
+								socialism = 1
+								reactionist = 62
+								authoritarian = 19
+							}
+						}
+						KUK = {
+							load_oob = KUK_army
+						}
+						KUK = {
+							inherit_technology = BYZ
+						}
+					}
+					RUS = {
+						remove_state_core = 137
+						remove_state_core = 196
+						remove_state_core = 200
+						remove_state_core = 217
+						remove_state_core = 218
+						remove_state_core = 227
+						remove_state_core = 228
+						remove_state_core = 234
+						remove_state_core = 235
+						remove_state_core = 236
+						remove_state_core = 237
+						remove_state_core = 238
+						remove_state_core = 245
+						remove_state_core = 858
+					}
+				}
+				if = {
+					limit = {
+						AND = {
+							SCA = {
+								has_country_flag = SCA_VS_RUS_2
+							}
+							SCA = {
+								is_in_faction_with = PRU
+							}
+							SCA = {
+								has_war_with = RUS
+							}	
+						}
+					}
+					SCA = {
+						transfer_state = 111
+						transfer_state = 145
+						transfer_state = 146
+						transfer_state = 147
+						transfer_state = 149
+						transfer_state = 150
+						transfer_state = 213
+						transfer_state = 215
+						transfer_state = 216
+						transfer_state = 722
+					}
+					RUS = {
+						remove_state_core = 213
+						remove_state_core = 215
+						remove_state_core = 216
+						remove_state_core = 722
+					}
+				}	
+				every_country = {
+					limit = {
+						has_war_with = RUS
+					}
+					white_peace = RUS
+				}
+				RUS = {
+					leave_faction = yes
+				}
+				set_global_flag = russian_capitulation
+				news_event = news.76
 			}
 			#Sar capitulation
 			if = {
@@ -2126,6 +2583,12 @@ on_actions = {
 						has_country_flag = BYZ_vs_BUL
 					}
 				}
+				BYZ = {
+					white_peace = {
+						tag = BUL
+						message = BYZ_win_BUL
+					}
+				}
 				BYZ = { 
 					transfer_state = 48
 					transfer_state = 106
@@ -2152,12 +2615,6 @@ on_actions = {
 					transfer_state = 81
 				}
 				BYZ = { clr_country_flag = BYZ_vs_BUL }
-				BYZ = {
-					white_peace = {
-						tag = BUL
-						message = BYZ_win_BUL
-					}
-				}
 				BYZ = { set_country_flag = BYZ_vs_BUL_win }
 				BUL = { remove_ideas = balkan_wars }
 				if = {
@@ -2190,16 +2647,16 @@ on_actions = {
 						has_country_flag =  BYZ_vs_ALB
 					}
 				}
-				BYZ = { 
-					transfer_state = 44
-				}
-				BYZ = { clr_country_flag = BYZ_vs_ALB }
 				BYZ = {
 					white_peace = {
 						tag = ALB
 						message = BYZ_win_ALB
 					}
 				}
+				BYZ = { 
+					transfer_state = 44
+				}
+				BYZ = { clr_country_flag = BYZ_vs_ALB }
 				BYZ = { set_country_flag = BYZ_vs_ALB_win }
 				ALB = { remove_ideas = balkan_wars }
 				if = {
@@ -2232,6 +2689,12 @@ on_actions = {
 						has_country_flag = BYZ_vs_SER
 					}
 				}
+				BYZ = {
+					white_peace = {
+						tag = SER
+						message = BYZ_win_SER
+					}
+				}
 				BYZ = { 
 					transfer_state = 105
 					transfer_state = 107
@@ -2239,12 +2702,6 @@ on_actions = {
 					transfer_state = 802
 				}
 				BYZ = { clr_country_flag = BYZ_vs_SER }
-				BYZ = {
-					white_peace = {
-						tag = SER
-						message = BYZ_win_SER
-					}
-				}
 				BYZ = { set_country_flag = BYZ_vs_SER_win }
 				SER = { remove_ideas = balkan_wars }
 				if = {
@@ -2277,17 +2734,49 @@ on_actions = {
 						has_country_flag = BYZ_vs_BOS
 					}
 				}
-				BYZ = { 
-					transfer_state = 104
-					transfer_state = 804
-				}
-				BYZ = { clr_country_flag = BYZ_vs_BOS }
 				BYZ = {
 					white_peace = {
 						tag = BOS
 						message = BYZ_win_BOS
 					}
 				}
+				if = {
+					limit = {
+						BYZ = {
+							has_country_flag = byz_imperia_politic
+						}
+					}
+					BYZ = { 
+						transfer_state = 104
+						transfer_state = 804
+					}
+				}
+				if = {
+					limit = {
+						BYZ = {
+							has_country_flag = byz_democratic_politic
+						}
+					}
+					DAL = {
+						transfer_state = 104
+						transfer_state = 804
+					}
+					BYZ = {
+						set_autonomy = {
+							target = DAL
+							autonomy_state = autonomy_aotsm_province
+							end_wars = no
+							end_civil_wars = no
+						}
+					}
+					DAL ={
+						set_cosmetic_tag = BYZ_DAL
+					}
+					DAL = {
+						inherit_technology = BYZ
+					}
+				}
+				BYZ = { clr_country_flag = BYZ_vs_BOS }
 				BYZ = { set_country_flag = BYZ_vs_BOS_win }
 				BOS = { remove_ideas = balkan_wars }
 				if = {
@@ -2396,10 +2885,7 @@ on_actions = {
 					IRA = {
 						remove_ideas = persian_civil_war_idea
 					}
-					news_event = {
-						id = news.47
-						days = 1
-					}
+					news_event = news.47
 				}
 				if = {
 					limit = {
@@ -2444,10 +2930,7 @@ on_actions = {
 					IRA = {
 						remove_ideas = persian_civil_war_idea
 					}
-					news_event = {
-						id = news.46
-						days = 1
-					}
+					news_event = news.46
 				}
 			}
 			#PER capitulation
@@ -2507,10 +2990,7 @@ on_actions = {
 					IRA = {
 						remove_ideas = persian_civil_war_idea
 					}
-					news_event = {
-						id = news.48
-						days = 1
-					}
+					news_event = news.48
 				}
 				if = {
 					limit = {
@@ -2555,10 +3035,7 @@ on_actions = {
 					IRA = {
 						remove_ideas = persian_civil_war_idea
 					}
-					news_event = {
-						id = news.46
-						days = 1
-					}
+					news_event = news.48
 				}
 			}
 			#IRA capitulation 
@@ -2618,10 +3095,7 @@ on_actions = {
 					IRA = {
 						remove_ideas = persian_civil_war_idea
 					}
-					news_event = {
-						id = news.48
-						days = 1
-					}
+					news_event = news.48
 				}
 				if = {
 					limit = {
@@ -2666,11 +3140,33 @@ on_actions = {
 					IRA = {
 						remove_ideas = persian_civil_war_idea
 					}
-					news_event = {
-						id = news.47
-						days = 1
+					news_event = news.47
+				}
+			}
+			#SEL capitulation
+			if = {
+				limit = {
+					tag = SEL
+					RUS = {
+						has_completed_focus = Rus_Conquer_Selishi
+					}
+					NOT = {
+						has_global_flag = SEL_capitulation
 					}
 				}
+				RUS = {
+					white_peace = {
+						tag = SEL
+						message = PUS_win_SEL
+					}
+				}
+				RUS = {
+					annex_country = {
+						target = SEL
+						transfer_troops = no
+					}
+				}
+				set_global_flag = SEL_capitulation
 			}
 		}
 	}			

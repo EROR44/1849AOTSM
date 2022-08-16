@@ -2521,41 +2521,41 @@ fren_expand_resourses_cat = {
 }
 
 fren_colonail_deals_cat = {
-	FRR_create_malagasiysk_protectorat = {
-		icon = usa_congress
-					
-		available = {
-			tag = FRR
-			has_country_flag = FRR_invasion_in_algeria_end
-			NOT = { has_country_flag = FRR_dip_mis_in_process }
-		}
+	#FRR_create_malagasiysk_protectorat = {
+	#	icon = usa_congress
+	#				
+	#	available = {
+	#		tag = FRR
+	#		has_country_flag = FRR_invasion_in_algeria_end
+	#		NOT = { has_country_flag = FRR_dip_mis_in_process }
+	#	}
+#
+	#	visible = {
+	#		has_completed_focus = FRA_friendship_witch_mad
+	#		has_country_flag = FRR_invasion_in_algeria_end
+	#	}
 
-		visible = {
-			has_completed_focus = FRA_friendship_witch_mad
-			has_country_flag = FRR_invasion_in_algeria_end
-		}
+	#	cost = 60
+	#	days_remove = 30
+	#	fire_only_once = yes
 
-		cost = 60
-		days_remove = 30
-		fire_only_once = yes
-
-		modifier = {
+	#	modifier = {
 			
-		}
+	#	}
 
-		ai_will_do = {
-			factor = 5
-		}
+	#	ai_will_do = {
+	#		factor = 5
+	#	}
 		
-		complete_effect = {
-			FRR = { set_country_flag = FRR_dip_mis_in_process }
-		}
+	#	complete_effect = {
+	#		FRR = { set_country_flag = FRR_dip_mis_in_process }
+	#	}
 
-		remove_effect = {
-			MAD = { country_event = { id = fren_colonial.7 } }
-			FRR = { clr_country_flag = FRR_dip_mis_in_process }
-		}
-	}
+	#	remove_effect = {
+	#		MAD = { country_event = { id = fren_colonial.7 } }
+	#		FRR = { clr_country_flag = FRR_dip_mis_in_process }
+	#	}
+	#}
 	#FRR_create_zanzibarsk_protectorat = {  
 	#	icon = usa_congress
 	#				
@@ -2940,7 +2940,7 @@ NWA_prom_expand_cat = {
 		}
 
 		ai_will_do = {
-			factor = 30
+			factor = 90
 		}
 		
 		complete_effect = {
@@ -2979,7 +2979,7 @@ NWA_prom_expand_cat = {
 		}
 
 		ai_will_do = {
-			factor = 30
+			factor = 90
 		}
 		
 		complete_effect = {
@@ -3018,7 +3018,7 @@ NWA_prom_expand_cat = {
 		}
 
 		ai_will_do = {
-			factor = 30
+			factor = 90
 		}
 		
 		complete_effect = {
@@ -3473,6 +3473,8 @@ fren_hired_army = {
 		icon = usa_congress
 					
 		available = {
+			owns_state = 16
+			controls_state = 16
 			has_completed_focus = FRA_mercenary_divisions
 		}
 		
@@ -3520,8 +3522,22 @@ fren_hired_army = {
 				}
 			hidden_effect = {
 				set_division_template_lock = {
-				division_template = "Mercenary division"
-				is_locked = yes
+					division_template = "Mercenary division"
+					is_locked = yes
+				}
+				16 = {
+					create_unit = {
+						division = "division_template = \"Mercenary division\" start_experience_factor = 0.2"
+						owner = FRR
+					}
+					create_unit = {
+						division = "division_template = \"Mercenary division\" start_experience_factor = 0.2"
+						owner = FRR
+					}
+					create_unit = {
+						division = "division_template = \"Mercenary division\" start_experience_factor = 0.2"
+						owner = FRR
+					}
 				}
 			}
 			set_country_flag = FRR_mercenary_div_formed
@@ -3564,12 +3580,10 @@ fren_hired_army = {
 		}
 	}
 	
-	FRR_create_mercenary_div_in_paris = {
+	FRR_create_mercenary_div = {
 		icon = usa_congress
 					
 		available = {
-			owns_state = 16
-			controls_state = 16
 			has_country_flag = FRR_mercenary_div_formed
 			NOT = { has_country_flag = FRR_mercenaring_div }
 		}
@@ -3583,7 +3597,7 @@ fren_hired_army = {
 		}
 	
 		cost = 100
-		days_remove = 120
+		days_remove = 50
 		#fire_only_once = no
 	
 		modifier = {
@@ -3616,11 +3630,52 @@ fren_hired_army = {
 
 FRR_war_time_decisions_cat = {
 
+	FRR_war_time_army_xp_bost = { 
+		
+		icon = generic_form_nation
+
+		allowed = {
+			tag = FRR
+		}
+
+		available = {
+			tag = FRR
+			FRR = { has_war = yes}
+		}
+
+		visible = {
+			tag = FRR
+			is_ai = yes
+			FRR = { has_war = yes }
+		}
+		
+		is_good = yes
+		
+		selectable_mission = no
+		
+		#fire_only_once = yes
+		
+		days_remove = 300
+		
+		days_re_enable = 30
+
+		ai_will_do = {
+			factor = 100
+		}
+		
+		modifier = {
+			experience_gain_army = 0.05
+			experience_gain_navy = 0.05
+			experience_gain_air	= 0.05
+		}
+		
+	}
 	FRR_expand_military_production = {
 		icon = usa_congress
 					
 		available = {
 			FRR = { has_war = yes }
+			surrender_progress > 0.20
 			NOT = { has_idea = FRR_improved_mil_production}
 		}
 		
@@ -3630,6 +3685,7 @@ FRR_war_time_decisions_cat = {
 		
 		visible = {
 			FRR = { has_war = yes }
+			NOT = { has_idea = FRR_improved_mil_production}
 		}
 	
 		#cost = 20
@@ -3652,6 +3708,74 @@ FRR_war_time_decisions_cat = {
 			add_ideas = FRR_improved_mil_production
 		}
 	}
+	FRR_recruirt_peoples = {
+		icon = usa_congress
+					
+		available = {
+			FRR = { has_war = yes }
+			OR = {
+				has_manpower < 50000
+				surrender_progress > 0.20
+			}
+		}
+		
+		allowed = { 
+			
+		}
+		
+		visible = {
+			FRR = { has_war = yes }
+		}
+	
+		#cost = 15
+		days_remove = 30
+		#fire_only_once = no
+	
+		modifier = {
+			
+		}
+
+		ai_will_do = {
+			factor = 20
+		}
+		
+		complete_effect = {
+			
+		}
+
+		remove_effect = {
+			random_state = {
+				limit = {
+					is_core_of = FRR
+					is_fully_controlled_by = FRR
+					state_population > 5000
+				}
+				add_manpower = -5000
+				
+			}
+			random_state = {
+				limit = {
+					is_core_of = FRR
+					is_fully_controlled_by = FRR
+					state_population > 5000
+				}
+				add_manpower = -5000
+				
+			}
+			random_state = {
+				limit = {
+					is_core_of = FRR
+					is_fully_controlled_by = FRR
+					state_population > 5000
+				}
+				add_manpower = -5000
+				
+			}
+			FRR = {
+				add_manpower = 15000
+			}
+		}
+	}
 	FRR_defence_of_homeland_decision = {
 		icon = usa_congress
 					
@@ -3669,7 +3793,7 @@ FRR_war_time_decisions_cat = {
 		}
 	
 		#cost = 20
-		#days_remove = 10
+		days_re_enable = 450
 		#fire_only_once = no
 	
 		modifier = {
@@ -3677,13 +3801,9 @@ FRR_war_time_decisions_cat = {
 		}
 
 		ai_will_do = {
-			factor = 0
+			factor = 40
 			modifier = {
-				factor = 10
-				surrender_progress > 0.50
-			}
-			modifier = {
-				factor = 20
+				factor = 80
 				surrender_progress > 0.70
 			}
 		}
@@ -3691,7 +3811,7 @@ FRR_war_time_decisions_cat = {
 		complete_effect = {
 			add_timed_idea = {
 				idea = FRR_defence_of_homeland
-				days = 90
+				days = 120
 			}
 		}
 
@@ -3699,4 +3819,82 @@ FRR_war_time_decisions_cat = {
 			
 		}
 	}
+}
+
+FRR_country_situation_cat = {
+
+	FFR_population_boom = { 
+		
+		icon = generic_form_nation
+
+		allowed = {
+			tag = FRR	
+		}
+
+		available = {
+			tag = FRR
+		}
+
+		visible = {
+			tag = FRR
+			is_ai = yes
+		}
+		
+		is_good = yes
+		
+		selectable_mission = no
+		
+		fire_only_once = yes
+		
+		days_remove = 1825
+
+		ai_will_do = {
+			factor = 100
+		}
+		
+		modifier = {
+			monthly_population = 0.40
+		}
+		
+	}
+	
+	FRR_army_xp_bost = { 
+		
+		icon = generic_form_nation
+
+		allowed = {
+			tag = FRR
+		}
+
+		available = {
+			tag = FRR
+			has_country_flag = FRR_invasion_in_algeria_end
+		}
+
+		visible = {
+			tag = FRR
+			is_ai = yes
+			has_country_flag = FRR_invasion_in_algeria_end
+		}
+		
+		is_good = yes
+		
+		selectable_mission = no
+		
+		fire_only_once = yes
+		
+		days_remove = 600
+
+		ai_will_do = {
+			factor = 100
+		}
+		
+		modifier = {
+			experience_gain_army = 0.25
+			experience_gain_navy = 0.3
+			experience_gain_air	= 0.1
+		}
+		
+	}
+
 }

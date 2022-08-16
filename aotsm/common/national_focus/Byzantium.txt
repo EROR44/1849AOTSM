@@ -11,6 +11,7 @@
 #	FOCUS_FILTER_INDUSTRY = 509
 #
 #}
+
 focus_tree = {
 	id = byzantium_focus
 	
@@ -27,19 +28,20 @@ focus_tree = {
 	
 	reset_on_civilwar = no
 	
-	continuous_focus_position = { x = 320 y = 1045 }
+	continuous_focus_position = { x = 50 y = 785 }
 	
 	initial_show_position = {
-		focus = BYZ_bulgaria_war
+		focus = BYZ_first_senat_meeting
 	}
 	
+	#senat meeting
+	
 	focus = {
-		id = BYZ_power_to_senat
-		icon = GFX_focus_rom_handle_king
-		x = 15
-		y = 0
-		cost = 5
-		mutually_exclusive = { focus = BYZ_counteraction_of_senat }
+		id = BYZ_first_senat_meeting
+		icon = GFX_focus_hol_the_foundations_of_defense
+		x = 20
+		y = -1
+		cost = 4.3
 		ai_will_do = {
 			factor = 10
 		}
@@ -52,6 +54,183 @@ focus_tree = {
 		
 		#search_filters = {  }
 		
+		select_effect = {
+			BYZ = {
+				country_event = {
+					id = byz.9
+					days = 19
+				}
+			}
+		}
+		
+		completion_reward = {
+			if = {
+				limit = {
+					has_country_flag = byz_democratic_politic
+				}
+				custom_effect_tooltip = byz_politic_way
+				hidden_effect = {
+					complete_national_focus = BYZ_power_to_senat
+				}
+			}
+			if = {
+				limit = {
+					has_country_flag = byz_imperia_politic
+				}
+				custom_effect_tooltip = byz_politic_way
+				hidden_effect = {
+					complete_national_focus = BYZ_counteraction_of_senat
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						has_country_flag = byz_democratic_politic
+						has_country_flag = byz_imperia_politic
+					}
+				}
+				custom_effect_tooltip = byz_politic_way
+			}
+		}
+	}
+	
+	focus = {
+		id = BYZ_second_senat_meeting
+		icon = GFX_goal_generic_propaganda
+		relative_position_id = BYZ_first_senat_meeting
+		x = 0
+		y = 3
+		cost = 4.3
+		#mutually_exclusive = { }
+		prerequisite = { focus = BYZ_bulgaria_war }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		available = { 
+			has_country_flag = byz_senat_meeting
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			custom_effect_tooltip = byz_senat_meeting_event
+		}
+	}
+	
+	focus = {
+		id = BYZ_third_senat_meeting
+		icon = GFX_goal_generic_military_deal
+		relative_position_id = BYZ_second_senat_meeting
+		x = 0
+		y = 5
+		cost = 4.3
+		#mutually_exclusive = { }
+		prerequisite = { focus = BYZ_democratic_task focus = BYZ_imperial_task }
+		prerequisite = { focus = BYZ_intervent_in_persia_civil_war }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		available = { 
+			has_country_flag = byz_senat_meeting
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			custom_effect_tooltip = byz_senat_meeting_event
+		}
+	}
+	
+	focus = {
+		id = BYZ_fourth_senat_meeting
+		icon = GFX_goal_generic_intelligence_exchange
+		relative_position_id = BYZ_third_senat_meeting
+		x = 0
+		y = 6
+		cost = 4.3
+		#mutually_exclusive = { }
+		prerequisite = { focus = BYZ_dem_goverment_idea_final focus = BYZ_demmer_goverment_idea_final focus = BYZ_mer_goverment_idea_final focus = BYZ_impgov_goverment_idea_final focus = BYZ_imp_goverment_idea_final }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		available = { 
+			has_country_flag = byz_senat_meeting
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			custom_effect_tooltip = byz_senat_meeting_event
+		}
+	}
+	
+	focus = {
+		id = BYZ_eighth_senat_meeting
+		icon = GFX_goal_generic_demand_territory
+		x = 40
+		y = -1
+		cost = 4.3
+		#mutually_exclusive = { }
+		#prerequisite = { focus = }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		available = { 
+			has_country_flag = byz_senat_meeting
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			custom_effect_tooltip = byz_senat_meeting_event
+		}
+	}
+	
+	#power to senat
+	
+	focus = {
+		id = BYZ_power_to_senat
+		icon = GFX_focus_rom_handle_king
+		relative_position_id = BYZ_first_senat_meeting
+		x = -5
+		y = 2
+		cost = 4.3
+		mutually_exclusive = { focus = BYZ_counteraction_of_senat }
+		prerequisite = { focus = BYZ_first_senat_meeting }
+		ai_will_do = {
+			factor = 10
+		}
+		
+		#cancel = { }
+		
+		available = { 
+			has_country_flag = byz_democratic_politic
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
 		completion_reward = {
 		}
 	}
@@ -59,9 +238,10 @@ focus_tree = {
 	focus = {
 		id = BYZ_support_of_merchants
 		icon = GFX_goal_generic_intelligence_exchange
-		x = 13
+		relative_position_id = BYZ_power_to_senat
+		x = -2
 		y = 1
-		cost = 5
+		cost = 4.3
 		prerequisite = { focus = BYZ_power_to_senat }
 		ai_will_do = {
 			factor = 10000
@@ -96,9 +276,10 @@ focus_tree = {
 	focus = {
 		id = BYZ_suppression_generals
 		icon = GFX_goal_tfv_saf_anti_colonialist_crusade
-		x = 15
+		relative_position_id = BYZ_power_to_senat
+		x = 0
 		y = 1
-		cost = 5
+		cost = 4.3
 		prerequisite = { focus = BYZ_power_to_senat }
 		ai_will_do = {
 			factor = 10000
@@ -139,9 +320,10 @@ focus_tree = {
 	focus = {
 		id = BYZ_support_of_democrats
 		icon = GFX_goal_generic_improve_relations
-		x = 17
+		relative_position_id = BYZ_power_to_senat
+		x = 2
 		y = 1
-		cost = 5
+		cost = 4.3
 		prerequisite = { focus = BYZ_power_to_senat }
 		ai_will_do = {
 			factor = 10000
@@ -173,14 +355,13 @@ focus_tree = {
 		}
 	}
 	
-	#Decentralisation
-	
 	focus = {
 		id = BYZ_decentralisation
 		icon = GFX_focus_generic_support_the_left_right
-		x = 15
+		relative_position_id = BYZ_power_to_senat
+		x = 0
 		y = 2
-		cost = 5
+		cost = 4.3
 		prerequisite = { focus = BYZ_support_of_merchants }
 		prerequisite = { focus = BYZ_suppression_generals }
 		prerequisite = { focus = BYZ_support_of_democrats }
@@ -202,20 +383,26 @@ focus_tree = {
 		}
 	}
 	
+	#counteraction senat
+	
 	focus = {
 		id = BYZ_counteraction_of_senat
 		icon = GFX_focus_usa_voter_registration_act
-		x = 25
-		y = 0
-		cost = 5
+		relative_position_id = BYZ_first_senat_meeting
+		x = 5
+		y = 2
+		cost = 4.3
 		mutually_exclusive = { focus = BYZ_power_to_senat }
+		prerequisite = { focus = BYZ_first_senat_meeting }
 		ai_will_do = {
 			factor = 10000
 		}
 		
 		#cancel = { }
 		
-		#available = {  }
+		available = {
+			has_country_flag = byz_imperia_politic
+		}
 		
 		#bypass = { }
 		
@@ -228,9 +415,10 @@ focus_tree = {
 	focus = {
 		id = BYZ_support_from_democrats
 		icon = GFX_focus_generic_treaty
-		x = 23
+		relative_position_id = BYZ_counteraction_of_senat
+		x = -2
 		y = 1
-		cost = 5
+		cost = 4.3
 		#mutually_exclusive = { }
 		prerequisite = { focus = BYZ_counteraction_of_senat }
 		ai_will_do = {
@@ -266,9 +454,10 @@ focus_tree = {
 	focus = {
 		id = BYZ_support_from_generals
 		icon = GFX_focus_generic_little_entente
-		x = 25
+		relative_position_id = BYZ_counteraction_of_senat
+		x = 0
 		y = 1
-		cost = 5
+		cost = 4.3
 		#mutually_exclusive = { }
 		prerequisite = { focus = BYZ_counteraction_of_senat }
 		ai_will_do = {
@@ -304,9 +493,10 @@ focus_tree = {
 	focus = {
 		id = BYZ_support_from_merchants
 		icon = GFX_focus_mex_privatisation
-		x = 27
+		relative_position_id = BYZ_counteraction_of_senat
+		x = 2
 		y = 1
-		cost = 5
+		cost = 4.3
 		#mutually_exclusive = { }
 		prerequisite = { focus = BYZ_counteraction_of_senat }
 		ai_will_do = {
@@ -339,14 +529,13 @@ focus_tree = {
 		}
 	}
 	
-	#Centralization
-	
 	focus = {
 		id = BYZ_centralization
 		icon = GFX_focus_generic_self_management
-		x = 25
+		relative_position_id = BYZ_counteraction_of_senat
+		x = 0
 		y = 2
-		cost = 5
+		cost = 4.3
 		#mutually_exclusive = { }
 		prerequisite = { focus = BYZ_support_from_democrats }
 		prerequisite = { focus = BYZ_support_from_generals }
@@ -424,16 +613,15 @@ focus_tree = {
 	
 	#Balkan War
 	
-	#Bulgaria
-	
 	focus = {
 		id = BYZ_bulgaria_war
 		icon = GFX_BYZ_bulgaria_war
-		x = 20
+		relative_position_id = BYZ_first_senat_meeting
+		x = 0
 		y = 1
 		cost = 4.3
 		#mutually_exclusive = { }
-		#prerequisite = { }
+		prerequisite = { focus = BYZ_first_senat_meeting }
 		ai_will_do = {
 			factor = 10000
 		}
@@ -470,423 +658,14 @@ focus_tree = {
 	}
 	
 	focus = {
-		id = BYZ_hellenization_of_bulgaria
-		icon = GFX_focus_GRE_resurrecting_the_megali_idea
-		x = 20
-		y = 2
-		cost = 4.3
-		#mutually_exclusive = { }
-		prerequisite = { focus = BYZ_bulgaria_war }
-		ai_will_do = {
-			factor = 10000
-		}
-		
-		#cancel = { }
-		
-		available = { has_country_flag = BYZ_vs_BUL_win }
-		
-		#bypass = { }
-		
-		#search_filters = {  }
-		
-		completion_reward = {
-			add_stability = -0.05
-			custom_effect_tooltip = byz_hellen_bul_20
-			add_to_variable = { byz_hellenization_of_bulgaria_var = 20 }
-			clamp_variable = {
-				var = byz_hellenization_of_bulgaria_var
-				min = 0
-				max = 100
-			}
-		}
-	}
-	
-	focus = {
-		id = BYZ_annex_of_dobruja
-		icon = GFX_goal_generic_position_armies
-		x = 20
-		y = 3
-		cost = 4.3
-		#mutually_exclusive = { }
-		prerequisite = { focus = BYZ_hellenization_of_bulgaria }
-		ai_will_do = {
-			factor = 10000
-		}
-		
-		#cancel = { }
-		
-		available = {
-			has_army_manpower = { size > 124999 }
-		}
-		
-		#bypass = { }
-		
-		#search_filters = {  }
-		
-		completion_reward = {
-			country_event = BYZ.1	
-		}
-	}
-	
-	focus = {
-		id = BYZ_execute_dissenters
-		icon = GFX_goal_generic_attack_allies
-		x = 18
-		y = 2
-		cost = 4.3
-		#mutually_exclusive = { }
-		prerequisite = { focus = BYZ_bulgaria_war }
-		ai_will_do = {
-			factor = 10000
-		}
-		
-		#cancel = { }
-		
-		available = { has_country_flag = BYZ_vs_BUL_win }
-		
-		#bypass = { }
-		
-		#search_filters = {  }
-		
-		completion_reward = {
-			48 = {
-				add_manpower = -91223
-			}
-			106 = {
-				add_manpower = -82111
-			}
-			211 = {
-				add_manpower = -64332
-			}
-			212 = {
-				add_manpower = -77839
-			}
-			801 = {
-				add_manpower = -54911
-			}
-			803 = {
-				add_manpower = -12571
-			}	
-			custom_effect_tooltip = byz_hellen_bul_20
-			add_to_variable = { byz_hellenization_of_bulgaria_var = 20 }
-			clamp_variable = {
-				var = byz_hellenization_of_bulgaria_var
-				min = 0
-				max = 100
-			}
-		}
-	}
-	
-	focus = {
-		id = BYZ_departation_of_bulgar
-		icon = GFX_goal_generic_forceful_treaty
-		x = 18
-		y = 3
-		cost = 4.3
-		#mutually_exclusive = { }
-		prerequisite = { focus = BYZ_execute_dissenters }
-		ai_will_do = {
-			factor = 10000
-		}
-		
-		#cancel = { }
-		
-		#available = { }
-		
-		#bypass = { }
-		
-		#search_filters = {  }
-		
-		completion_reward = {
-			random_state = {
-				limit = { 
-					is_core_of = BYZ 
-				}
-				add_manpower = -25000
-			}
-			random_state = {
-				limit = { 
-					is_core_of = BYZ 
-				}
-				add_manpower = -25000
-			}
-			random_state = {
-				limit = { 
-					is_core_of = BYZ 
-				}
-				add_manpower = -25000
-			}
-			random_state = {
-				limit = { 
-					is_core_of = BYZ 
-				}
-				add_manpower = -25000
-			}
-			random_state = {
-				limit = { 
-					is_core_of = BYZ 
-				}
-				add_manpower = -25000
-			}
-			random_state = {
-				limit = { 
-					is_core_of = BYZ 
-				}
-				add_manpower = -25000
-			}
-			48 = {
-				add_manpower = -75000
-				add_manpower = 25000
-			}
-			106 = {
-				add_manpower = -75000
-				add_manpower = 25000
-			}
-			211 = {
-				add_manpower = -75000
-				add_manpower = 25000
-			}
-			212 = {
-				add_manpower = -75000
-				add_manpower = 25000
-			}
-			801 = {
-				add_manpower = -75000
-				add_manpower = 25000
-			}
-			803 = {
-				add_manpower = -75000
-				add_manpower = 25000
-			}
-			random_state = {
-				limit = {
-					is_core_of = RUS
-					is_controlled_by = RUS
-				}
-				add_manpower = 75000
-			}
-			random_state = {
-				limit = {
-					is_core_of = RUS
-					is_controlled_by = RUS
-				}
-				add_manpower = 75000
-			}
-			random_state = {
-				limit = {
-					is_core_of = RUS
-					is_controlled_by = RUS
-				}
-				add_manpower = 75000
-			}
-			random_state = {
-				limit = {
-					is_core_of = RUS
-					is_controlled_by = RUS
-				}
-				add_manpower = 75000
-			}
-			random_state = {
-				limit = {
-					is_core_of = RUS
-					is_controlled_by = RUS
-				}
-				add_manpower = 75000
-			}
-			random_state = {
-				limit = {
-					is_core_of = RUS
-					is_controlled_by = RUS
-				}
-				add_manpower = 75000
-			}
-			custom_effect_tooltip = byz_hellen_bul_20
-			add_to_variable = { byz_hellenization_of_bulgaria_var = 20 }
-			clamp_variable = {
-				var = byz_hellenization_of_bulgaria_var
-				min = 0
-				max = 100
-			}
-		}
-	}
-	
-	focus = {
-		id = BYZ_greck_investments
-		icon = GFX_goal_generic_construct_infrastructure
-		x = 22
-		y = 2
-		cost = 4.3
-		#mutually_exclusive = { }
-		prerequisite = { focus = BYZ_bulgaria_war }
-		ai_will_do = {
-			factor = 10000
-		}
-		
-		#cancel = { }
-		
-		available = { has_country_flag = BYZ_vs_BUL_win }
-		
-		#bypass = { }
-		
-		#search_filters = {  }
-		
-		completion_reward = {
-			48 = {
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-					instant_build = yes
-				}
-			}
-			106 = {
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-					instant_build = yes
-				}
-			}
-			211 = {
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-					instant_build = yes
-				}
-			}
-			212 = {
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-					instant_build = yes
-				}
-			}
-			801 = {
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-					instant_build = yes
-				}
-			}
-			803 = {
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-					instant_build = yes
-				}
-			}	
-			custom_effect_tooltip = byz_hellen_bul_20
-			add_to_variable = { byz_hellenization_of_bulgaria_var = 20 }
-			clamp_variable = {
-				var = byz_hellenization_of_bulgaria_var
-				min = 0
-				max = 100
-			}
-		}
-	}
-	
-	focus = {
-		id = BYZ_greck_industry
-		icon = GFX_goal_generic_construct_civ_factory
-		x = 22
-		y = 3
-		cost = 4.3
-		#mutually_exclusive = { }
-		prerequisite = { focus = BYZ_greck_investments }
-		ai_will_do = {
-			factor = 10000
-		}
-		
-		#cancel = { }
-		
-		#available = { }
-		
-		#bypass = { }
-		
-		#search_filters = {  }
-		
-		completion_reward = {
-			48 = {
-				add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-					type = industrial_complex
-					level = 1
-					instant_build = yes
-				}
-			}
-			106 = {
-				add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-					type = industrial_complex
-					level = 1
-					instant_build = yes
-				}
-			}
-			212 = {
-				add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-					type = industrial_complex
-					level = 1
-					instant_build = yes
-				}
-			}
-			custom_effect_tooltip = byz_hellen_bul_20
-			add_to_variable = { byz_hellenization_of_bulgaria_var = 20 }
-			clamp_variable = {
-				var = byz_hellenization_of_bulgaria_var
-				min = 0
-				max = 100
-			}
-		}
-	}
-	
-	focus = {
-		id = BYZ_hellenization_of_bulgaria_complete
-		icon = GFX_focus_generic_self_management
-		x = 20
-		y = 4
-		cost = 4.3
-		#mutually_exclusive = { }
-		prerequisite = { focus = BYZ_departation_of_bulgar }
-		prerequisite = { focus = BYZ_annex_of_dobruja }
-		prerequisite = { focus = BYZ_greck_industry }
-		ai_will_do = {
-			factor = 10000
-		}
-		
-		#cancel = { }
-		
-		available = {
-			has_country_flag = hellenization_of_bulgaria_complete
-		}
-		
-		#bypass = { }
-		
-		#search_filters = {  }
-		
-		completion_reward = {
-			BYZ = { 
-				add_state_core = 48
-				add_state_core = 77
-				add_state_core = 106
-				add_state_core = 211
-				add_state_core = 212
-				add_state_core = 801
-				add_state_core = 803
-			}
-		}
-	}
-	
-	#Albania
-	
-	focus = {
 		id = BYZ_albania_war
 		icon = GFX_BYZ_albania_war
-		x = 18
-		y = 5
+		relative_position_id = BYZ_second_senat_meeting
+		x = -2
+		y = 1
 		cost = 4.3
 		#mutually_exclusive = { }
-		prerequisite = { focus = BYZ_departation_of_bulgar }
-		prerequisite = { focus = BYZ_annex_of_dobruja }
-		prerequisite = { focus = BYZ_greck_industry }
+		prerequisite = { focus = BYZ_second_senat_meeting }
 		ai_will_do = {
 			factor = 10000
 		}
@@ -918,132 +697,14 @@ focus_tree = {
 	}
 	
 	focus = {
-		id = BYZ_albania_deportation
-		icon = GFX_focus_generic_support_the_left_right
-		x = 18
-		y = 6
-		cost = 4.3
-		#mutually_exclusive = { }
-		prerequisite = { focus = BYZ_albania_war }
-		ai_will_do = {
-			factor = 10000
-		}
-		
-		#cancel = { }
-		
-		available = { has_country_flag = BYZ_vs_ALB_win }
-		
-		#bypass = { }
-		
-		#search_filters = {  }
-		
-		completion_reward = {
-			random_state = {
-				limit = { 
-					is_core_of = BYZ 
-				}
-				add_manpower = -25000
-			}
-			random_state = {
-				limit = { 
-					is_core_of = BYZ 
-				}
-				add_manpower = -25000
-			}
-			random_state = {
-				limit = { 
-					is_core_of = BYZ 
-				}
-				add_manpower = -25000
-			}
-			random_state = {
-				limit = { 
-					is_core_of = BYZ 
-				}
-				add_manpower = -25000
-			}
-			random_state = {
-				limit = { 
-					is_core_of = BYZ 
-				}
-				add_manpower = -25000
-			}
-			44 = {
-				add_manpower = -341710
-				add_manpower = 125000
-			}
-			235 = {
-				add_manpower = 170855
-			}
-			234 = {
-				add_manpower = 170855
-			}
-			custom_effect_tooltip = byz_hellen_alb_50
-			add_to_variable = { byz_hellenization_of_albania_var = 50 }
-			clamp_variable = {
-				var = byz_hellenization_of_albania_var
-				min = 0
-				max = 100
-			}
-		}
-	}
-	
-	focus = {
-		id = BYZ_albania_investments
-		icon = GFX_focus_generic_industry_2
-		x = 18
-		y = 7
-		cost = 4.3
-		#mutually_exclusive = { }
-		prerequisite = { focus = BYZ_albania_deportation }
-		ai_will_do = {
-			factor = 10000
-		}
-		
-		#cancel = { }
-		
-		#available = { }
-		
-		#bypass = { }
-		
-		#search_filters = {  }
-		
-		completion_reward = {
-			44 = {
-				add_extra_state_shared_building_slots = 2
-				add_building_construction = {
-					type = industrial_complex
-					level = 2
-					instant_build = yes
-				}
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-					instant_build = yes
-				}
-			}
-			custom_effect_tooltip = byz_hellen_alb_50
-			add_to_variable = { byz_hellenization_of_albania_var = 50 }
-			clamp_variable = {
-				var = byz_hellenization_of_albania_var
-				min = 0
-				max = 100
-			}
-		}
-	}
-	
-	#Serbia
-	
-	focus = {
 		id = BYZ_serbia_war
 		icon = GFX_BYZ_serbia_war
-		x = 22
-		y = 5
+		relative_position_id = BYZ_second_senat_meeting
+		x = 2
+		y = 1
 		cost = 4.3
 		#mutually_exclusive = { }
-		prerequisite = { focus = BYZ_departation_of_bulgar }
-		prerequisite = { focus = BYZ_annex_of_dobruja }
-		prerequisite = { focus = BYZ_greck_industry }
+		prerequisite = { focus = BYZ_second_senat_meeting }
 		ai_will_do = {
 			factor = 10000
 		}
@@ -1075,297 +736,14 @@ focus_tree = {
 	}
 	
 	focus = {
-		id = BYZ_serbia_deportation
-		icon = GFX_goal_generic_political_pressure
-		x = 22
-		y = 6
-		cost = 4.3
-		#mutually_exclusive = { }
-		prerequisite = { focus = BYZ_serbia_war }
-		ai_will_do = {
-			factor = 10000
-		}
-		
-		#cancel = { }
-		
-		available = { has_country_flag = BYZ_vs_SER_win }
-
-		#bypass = { }
-		
-		#search_filters = {  }
-		
-		completion_reward = {
-			random_state = {
-				limit = { 
-					is_core_of = BYZ 
-				}
-				add_manpower = -25000
-			}
-			random_state = {
-				limit = { 
-					is_core_of = BYZ 
-				}
-				add_manpower = -25000
-			}
-			random_state = {
-				limit = { 
-					is_core_of = BYZ 
-				}
-				add_manpower = -25000
-			}
-			random_state = {
-				limit = { 
-					is_core_of = BYZ 
-				}
-				add_manpower = -25000
-			}
-			105 = {
-				add_manpower = -196600
-				add_manpower = 25000
-			}
-			107 = {
-				add_manpower = -288000
-				add_manpower = 25000
-			}
-			108 = {
-				add_manpower = -107900
-				add_manpower = 25000
-			}
-			802 = {
-				add_manpower = -66800
-				add_manpower = 25000
-			}
-			random_state = {
-				limit = {
-					is_core_of = RUS
-					is_controlled_by = RUS
-				}
-				add_manpower = 196600
-			}
-			random_state = {
-				limit = {
-					is_core_of = RUS
-					is_controlled_by = RUS
-				}
-				add_manpower = 288000
-			}
-			random_state = {
-				limit = {
-					is_core_of = RUS
-					is_controlled_by = RUS
-				}
-				add_manpower = 107900
-			}
-			random_state = {
-				limit = {
-					is_core_of = RUS
-					is_controlled_by = RUS
-				}
-				add_manpower = 66800
-			}
-			custom_effect_tooltip = byz_hellen_ser_25
-			add_to_variable = { byz_hellenization_of_serbia_var = 25 }
-			clamp_variable = {
-				var = byz_hellenization_of_serbia_var
-				min = 0
-				max = 100
-			}
-		}
-	}
-	
-	focus = {
-		id = BYZ_serbia_investment
-		icon = GFX_focus_generic_industry_1
-		x = 22
-		y = 7
-		cost = 4.3
-		#mutually_exclusive = { }
-		prerequisite = { focus = BYZ_serbia_deportation }
-		ai_will_do = {
-			factor = 10000
-		}
-		
-		#cancel = { }
-		
-		#available = { }
-
-		#bypass = { }
-		
-		#search_filters = {  }
-		
-		completion_reward = {
-			105 = {
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-					instant_build = yes
-				}
-			}
-			107 = {
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-					instant_build = yes
-				}
-			}
-			108 = {
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-					instant_build = yes
-				}
-			}
-			802 = {
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-					instant_build = yes
-				}
-			}
-			custom_effect_tooltip = byz_hellen_ser_25
-			add_to_variable = { byz_hellenization_of_serbia_var = 25 }
-			clamp_variable = {
-				var = byz_hellenization_of_serbia_var
-				min = 0
-				max = 100
-			}
-		}
-	}
-	
-	focus = {
-		id = BYZ_hellenization_of_north_balkan
-		icon = GFX_focus_GRE_reviving_the_spartan_warrior_spirit
-		x = 20
-		y = 6
-		cost = 4.3
-		#mutually_exclusive = { }
-		prerequisite = { focus = BYZ_serbia_war }
-		ai_will_do = {
-			factor = 10000
-		}
-		
-		#cancel = { }
-		
-		available = { has_country_flag = BYZ_vs_SER_win }
-
-		#bypass = { }
-		
-		#search_filters = {  }
-		
-		completion_reward = {
-			add_stability = -0.05
-			custom_effect_tooltip = byz_hellen_ser_25
-			add_to_variable = { byz_hellenization_of_serbia_var = 25 }
-			clamp_variable = {
-				var = byz_hellenization_of_serbia_var
-				min = 0
-				max = 100
-			}
-		}
-	}
-	
-	focus = {
-		id = BYZ_forced_rebaptize_north_balkna
-		icon = GFX_focus_GRE_an_orthodox_state
-		x = 20
-		y = 7
-		cost = 4.3
-		#mutually_exclusive = { }
-		prerequisite = { focus = BYZ_hellenization_of_north_balkan }
-		ai_will_do = {
-			factor = 10000
-		}
-		
-		#cancel = { }
-		
-		#available = { }
-
-		#bypass = { }
-		
-		#search_filters = {  }
-		
-		completion_reward = {
-			country_event = byz.2
-			custom_effect_tooltip = byz_hellen_ser_25
-			add_to_variable = { byz_hellenization_of_serbia_var = 25 }
-			clamp_variable = {
-				var = byz_hellenization_of_serbia_var
-				min = 0
-				max = 100
-			}
-		}
-	}
-	
-	focus = {
-		id = BYZ_hellenization_of_albania_complete
-		icon = GFX_goal_generic_intelligence_exchange
-		x = 19
-		y = 8
-		cost = 4.3
-		#mutually_exclusive = { }
-		prerequisite = { focus = BYZ_albania_investments }
-		ai_will_do = {
-			factor = 10000
-		}
-		
-		#cancel = { }
-		
-		available = { has_country_flag = hellenization_of_albania_complete }
-
-		#bypass = { }
-		
-		#search_filters = {  }
-		
-		completion_reward = {
-			BYZ = { 
-				add_state_core = 44
-			}
-		}
-	}
-	
-	focus = {
-		id = BYZ_hellenization_of_serbia_complete
-		icon = GFX_goal_generic_major_alliance
-		x = 21
-		y = 8
-		cost = 4.3
-		#mutually_exclusive = { }
-		prerequisite = { focus = BYZ_forced_rebaptize_north_balkna }
-		prerequisite = { focus = BYZ_serbia_investment }
-		ai_will_do = {
-			factor = 10000
-		}
-		
-		#cancel = { }
-		
-		available = { has_country_flag = hellenization_of_serbia_complete }
-
-		#bypass = { }
-		
-		#search_filters = {  }
-		
-		completion_reward = {
-			BYZ = { 
-				add_state_core = 105
-				add_state_core = 107
-				add_state_core = 108
-				add_state_core = 802
-			}
-		}
-	}
-	
-	#Bosnia
-	
-	focus = {
 		id = BYZ_bosnia_war
 		icon = GFX_BYZ_bosnia_war
-		x = 20
-		y = 9
+		relative_position_id = BYZ_third_senat_meeting
+		x = 0
+		y = 1
 		cost = 4.3
 		#mutually_exclusive = { }
-		prerequisite = { focus = BYZ_albania_investments }
-		prerequisite = { focus = BYZ_forced_rebaptize_north_balkna }
-		prerequisite = { focus = BYZ_serbia_investment }
+		prerequisite = { focus = BYZ_third_senat_meeting }
 		ai_will_do = {
 			factor = 10000
 		}
@@ -1392,714 +770,14 @@ focus_tree = {
 		}
 	}
 	
-	focus = {
-		id = BYZ_bosnia_dissenters
-		icon = GFX_focus_eng_move_to_secure_the_dominions
-		x = 18
-		y = 10
-		cost = 4.3
-		#mutually_exclusive = { }
-		prerequisite = { focus = BYZ_bosnia_war }
-		ai_will_do = {
-			factor = 10000
-		}
-		
-		#cancel = { }
-		
-		available = { has_country_flag = BYZ_vs_BOS_win }
-		
-		#bypass = { }
-		
-		#search_filters = {  }
-		
-		completion_reward = {
-			104 = {
-				add_manpower = -11912
-			}
-			804 = {
-				add_manpower = -7999
-			}
-			custom_effect_tooltip = byz_hellen_bos_20
-			add_to_variable = { byz_hellenization_of_bosnia_var = 20 }
-			clamp_variable = {
-				var = byz_hellenization_of_bosnia_var
-				min = 0
-				max = 100
-			}
-		}
-	}
-	
-	focus = {
-		id = BYZ_bosnia_deportation
-		icon = GFX_goal_generic_position_armies
-		x = 18
-		y = 11
-		cost = 4.3
-		#mutually_exclusive = { }
-		prerequisite = { focus = BYZ_bosnia_dissenters }
-		ai_will_do = {
-			factor = 10000
-		}
-		
-		#cancel = { }
-		
-		#available = { }
-		
-		#bypass = { }
-		
-		#search_filters = {  }
-		
-		completion_reward = {
-			random_state = {
-				limit = { 
-					is_core_of = BYZ 
-				}
-				add_manpower = -25000
-			}
-			104 = {
-				add_manpower = -109321
-			}
-			104 = {
-				add_manpower = 25000
-			}
-			random_state = {
-				limit = { 
-					is_core_of = RUS 
-				}
-				add_manpower = 109321
-			}
-			random_state = {
-				limit = { 
-					is_core_of = BYZ 
-				}
-				add_manpower = -25000
-			}
-			804 = {
-				add_manpower = -41013
-			}
-			804 = {
-				add_manpower = 25000
-			}
-			random_state = {
-				limit = { 
-					is_core_of = RUS
-				}
-				add_manpower = 41013
-			}
-			custom_effect_tooltip = byz_hellen_bos_20
-			add_to_variable = { byz_hellenization_of_bosnia_var = 20 }
-			clamp_variable = {
-				var = byz_hellenization_of_bosnia_var
-				min = 0
-				max = 100
-			}
-		}
-	}
-	
-	focus = {
-		id = BYZ_hellenization_of_bosnia
-		icon = GFX_focus_GRE_following_in_the_footsteps_of_giants
-		x = 20
-		y = 10
-		cost = 4.3
-		#mutually_exclusive = { }
-		prerequisite = { focus = BYZ_bosnia_war }
-		ai_will_do = {
-			factor = 10000
-		}
-		
-		#cancel = { }
-		
-		available = { has_country_flag = BYZ_vs_BOS_win }
-		
-		#bypass = { }
-		
-		#search_filters = {  }
-		
-		completion_reward = {
-			add_stability = -0.05
-			custom_effect_tooltip = byz_hellen_bos_20
-			add_to_variable = { byz_hellenization_of_bosnia_var = 20 }
-			clamp_variable = {
-				var = byz_hellenization_of_bosnia_var
-				min = 0
-				max = 100
-			}
-		}
-	}
-	
-	focus = {
-		id = BYZ_bosnia_not_bosnia
-		icon = GFX_focus_YUG_safeguard_bosnia
-		x = 20
-		y = 11
-		cost = 4.3
-		#mutually_exclusive = { }
-		prerequisite = { focus = BYZ_hellenization_of_bosnia }
-		ai_will_do = {
-			factor = 10000
-		}
-		
-		#cancel = { }
-		
-		#available = { }
-		
-		#bypass = { }
-		
-		#search_filters = {  }
-		
-		completion_reward = {
-			country_event = { id = byz.3 hours = 14 }
-		}
-	}
-	
-	focus = {
-		id = BYZ_bosnia_investments
-		icon = GFX_goal_generic_construction2
-		x = 22
-		y = 10
-		cost = 4.3
-		#mutually_exclusive = { }
-		prerequisite = { focus = BYZ_bosnia_war }
-		ai_will_do = {
-			factor = 10000
-		}
-		
-		#cancel = { }
-		
-		available = { has_country_flag = BYZ_vs_BOS_win }
-		
-		#bypass = { }
-		
-		#search_filters = {  }
-		
-		completion_reward = {
-			104 = {
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-					instant_build = yes
-				}
-			}
-			804 = {
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-					instant_build = yes
-				}
-			}
-			custom_effect_tooltip = byz_hellen_bos_20
-			add_to_variable = { byz_hellenization_of_bosnia_var = 20 }
-			clamp_variable = {
-				var = byz_hellenization_of_bosnia_var
-				min = 0
-				max = 100
-			}
-		}
-	}
-	
-	focus = {
-		id = BYZ_bosnia_industry
-		icon = GFX_focus_generic_industry_3
-		x = 22
-		y = 11
-		cost = 4.3
-		#mutually_exclusive = { }
-		prerequisite = { focus = BYZ_bosnia_investments }
-		ai_will_do = {
-			factor = 10000
-		}
-		
-		#cancel = { }
-		
-		#available = { }
-		
-		#bypass = { }
-		
-		#search_filters = {  }
-		
-		completion_reward = {
-			104 = {
-				add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-					type = industrial_complex
-					level = 1
-					instant_build = yes
-				}
-			}
-			804 = {
-				add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-					type = industrial_complex
-					level = 1
-					instant_build = yes
-				}
-			}
-			custom_effect_tooltip = byz_hellen_bos_20
-			add_to_variable = { byz_hellenization_of_bosnia_var = 20 }
-			clamp_variable = {
-				var = byz_hellenization_of_bosnia_var
-				min = 0
-				max = 100
-			}
-		}
-	}
-	
-	focus = {
-		id = BYZ_hellenization_of_bosnia_complete
-		icon = GFX_focus_generic_home_defense
-		x = 20
-		y = 12
-		cost = 4.3
-		#mutually_exclusive = { }
-		prerequisite = { focus = BYZ_bosnia_deportation }
-		prerequisite = { focus = BYZ_bosnia_not_bosnia }
-		prerequisite = { focus = BYZ_bosnia_industry }
-		ai_will_do = {
-			factor = 10000
-		}
-		
-		#cancel = { }
-		
-		available = { has_country_flag = hellenization_of_bosnia_complete }
-		
-		#bypass = { }
-		
-		#search_filters = {  }
-		
-		completion_reward = {
-			BYZ = { 
-				add_state_core = 104
-				add_state_core = 804
-				swap_ideas = {
-					remove_idea = potential_world_power
-					add_idea = world_power
-				}
-			}
-		}
-	}
-	
-	#Croatia
-	
-	focus = {
-		id = BYZ_croatia
-		icon = GFX_focus_yug_banovina_of_croatia
-		x = 0
-		y = 11
-		cost = 4.3
-		#mutually_exclusive = { }
-		#prerequisite = { }
-		ai_will_do = {
-			factor = 10000
-		}
-		
-		#cancel = { }
-		
-		available = { 
-			owns_state = 102
-			owns_state = 103
-			owns_state = 109
-			owns_state = 163
-			owns_state = 736
-		}
-		
-		#bypass = { }
-		
-		#search_filters = {  }
-		
-		completion_reward = {
-			country_event = { id = byz.4 hours = 7 } 
-		}
-	}
-	
-	focus = {
-		id = BYZ_croatia_dissenters
-		icon = GFX_goal_generic_political_pressure
-		x = -2
-		y = 12
-		cost = 4.3
-		#mutually_exclusive = { }
-		prerequisite = { focus = BYZ_croatia }
-		ai_will_do = {
-			factor = 10000
-		}
-		
-		#cancel = { }
-		
-		#available = { }
-		
-		#bypass = { }
-		
-		#search_filters = {  }
-		
-		completion_reward = {
-			102 = {
-				add_manpower = -40932
-			}
-			103 = {
-				add_manpower = -30912
-			}
-			109 = {
-				add_manpower = -10921
-			}
-			163 = {
-				add_manpower = -2500
-			}
-			736 = {
-				add_manpower = -5999
-			}
-			custom_effect_tooltip = byz_hellen_cro_20
-			add_to_variable = { byz_hellenization_of_croatia_var = 20 }
-			clamp_variable = {
-				var = byz_hellenization_of_croatia_var
-				min = 0
-				max = 100
-			}
-		}
-	}
-	
-	focus = {
-		id = BYZ_croatia_departation
-		icon = GFX_focus_generic_support_the_left_right
-		x = -2
-		y = 13
-		cost = 4.3
-		#mutually_exclusive = { }
-		prerequisite = { focus = BYZ_croatia_dissenters }
-		ai_will_do = {
-			factor = 10000
-		}
-		
-		#cancel = { }
-		
-		#available = { }
-		
-		#bypass = { }
-		
-		#search_filters = {  }
-		
-		completion_reward = {
-			random_state = {
-				limit = { 
-					is_core_of = BYZ 
-				}
-				add_manpower = -25000
-			}
-			random_state = {
-				limit = { 
-					is_core_of = BYZ 
-				}
-				add_manpower = -25000
-			}
-			random_state = {
-				limit = { 
-					is_core_of = BYZ 
-				}
-				add_manpower = -25000
-			}
-			random_state = {
-				limit = { 
-					is_core_of = BYZ 
-				}
-				add_manpower = -25000
-			}
-			random_state = {
-				limit = { 
-					is_core_of = BYZ 
-				}
-				add_manpower = -25000
-			}
-			102 = {
-				add_manpower = -100000
-				add_manpower = 25000
-			}
-			103 = {
-				add_manpower = -75000
-				add_manpower = 25000
-			}
-			109 = {
-				add_manpower = -100000
-				add_manpower = 25000
-			}
-			163 = {
-				add_manpower = -10000	
-				add_manpower = 25000
-			}
-			736 = {
-				add_manpower = -73000
-				add_manpower = 25000
-			}
-			random_state = {
-				limit = {
-					is_core_of = RUS
-					is_controlled_by = RUS
-				}
-				add_manpower = 100000
-			}
-			random_state = {
-				limit = {
-					is_core_of = RUS
-					is_controlled_by = RUS
-				}
-				add_manpower = 75000
-			}
-			random_state = {
-				limit = {
-					is_core_of = RUS
-					is_controlled_by = RUS
-				}
-				add_manpower = 100000
-			}
-			random_state = {
-				limit = {
-					is_core_of = RUS
-					is_controlled_by = RUS
-				}
-				add_manpower = 10000
-			}
-			random_state = {
-				limit = {
-					is_core_of = RUS
-					is_controlled_by = RUS
-				}
-				add_manpower = 73000
-			}
-			custom_effect_tooltip = byz_hellen_cro_20
-			add_to_variable = { byz_hellenization_of_croatia_var = 20 }
-			clamp_variable = {
-				var = byz_hellenization_of_croatia_var
-				min = 0
-				max = 100
-			}
-		}
-	}
-	
-	focus = {
-		id = BYZ_hellenization_of_croatia
-		icon = GFX_focus_GRE_byzantine_themata
-		x = 0
-		y = 12
-		cost = 4.3
-		#mutually_exclusive = { }
-		prerequisite = { focus = BYZ_croatia }
-		ai_will_do = {
-			factor = 10000
-		}
-		
-		#cancel = { }
-		
-		#available = { }
-		
-		#bypass = { }
-		
-		#search_filters = {  }
-		
-		completion_reward = {
-			add_stability = -0.05
-			custom_effect_tooltip = byz_hellen_cro_20
-			add_to_variable = { byz_hellenization_of_croatia_var = 20 }
-			clamp_variable = {
-				var = byz_hellenization_of_croatia_var
-				min = 0
-				max = 100
-			}
-		}
-	}
-	
-	focus = {
-		id = BYZ_open_border_with_allies
-		icon = GFX_goal_generic_major_alliance
-		x = 0
-		y = 13
-		cost = 4.3
-		#mutually_exclusive = { }
-		prerequisite = { focus = BYZ_hellenization_of_croatia }
-		ai_will_do = {
-			factor = 10000
-		}
-		
-		#cancel = { }
-		
-		#available = { }
-		
-		#bypass = { }
-		
-		#search_filters = {  }
-		
-		completion_reward = {
-			if = {
-				limit = {
-					is_in_faction_with = BYZ
-					is_puppet = no
-				}
-			add_manpower = 25000
-			add_stability = -0.01
-			BYZ = { add_manpower = -25000 }
-			BYZ = { add_stability = 0.01 }
-			}
-		}
-	}
-	
-	focus = {
-		id = BYZ_hellenization_of_croatia_complete
-		icon = GFX_focus_generic_home_defense
-		x = 0
-		y = 14
-		cost = 4.3
-		#mutually_exclusive = { }
-		prerequisite = { focus = BYZ_croatia_departation }
-		prerequisite = { focus = BYZ_open_border_with_allies }
-		prerequisite = { focus = BYZ_croatia_industry }
-		ai_will_do = {
-			factor = 10000
-		}
-		
-		#cancel = { }
-		
-		available = { has_country_flag = hellenization_of_croatia_complete }
-		
-		#bypass = { }
-		
-		#search_filters = {  }
-		
-		completion_reward = {
-			add_state_core = 102
-			add_state_core = 103
-			add_state_core = 109
-			add_state_core = 163
-			add_state_core = 736
-		}
-	}
-	
-	focus = {
-		id = BYZ_croatia_investment
-		icon = GFX_goal_generic_construct_civilian
-		x = 2
-		y = 12
-		cost = 4.3
-		#mutually_exclusive = { }
-		prerequisite = { focus = BYZ_croatia }
-		ai_will_do = {
-			factor = 10000
-		}
-		
-		#cancel = { }
-		
-		#available = { }
-		
-		#bypass = { }
-		
-		#search_filters = {  }
-		
-		completion_reward = {
-			102 = {
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-					instant_build = yes
-				}
-			}
-			103 = {
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-					instant_build = yes
-				}
-			}
-			109 = {
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-					instant_build = yes
-				}
-			}
-			163 = {
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-					instant_build = yes
-				}
-			}
-			736 = {
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-					instant_build = yes
-				}
-			}
-			custom_effect_tooltip = byz_hellen_cro_20
-			add_to_variable = { byz_hellenization_of_croatia_var = 20 }
-			clamp_variable = {
-				var = byz_hellenization_of_croatia_var
-				min = 0
-				max = 100
-			}
-		}
-	}
-	
-	focus = {
-		id = BYZ_croatia_industry
-		icon = GFX_goal_generic_construct_civ_factory	
-		x = 2
-		y = 13
-		cost = 4.3
-		#mutually_exclusive = { }
-		prerequisite = { focus = BYZ_croatia_investment }
-		ai_will_do = {
-			factor = 10000
-		}
-		
-		#cancel = { }
-		
-		#available = { }
-		
-		#bypass = { }
-		
-		#search_filters = {  }
-		
-		completion_reward = {
-			102 = {
-				add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-					type = industrial_complex
-					level = 1
-					instant_build = yes
-				}
-			}
-			103 = {
-				add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-					type = industrial_complex
-					level = 1
-					instant_build = yes
-				}
-			}
-			109 = {
-				add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-					type = industrial_complex
-					level = 1
-					instant_build = yes
-				}
-			}
-			custom_effect_tooltip = byz_hellen_cro_20
-			add_to_variable = { byz_hellenization_of_croatia_var = 20 }
-			clamp_variable = {
-				var = byz_hellenization_of_croatia_var
-				min = 0
-				max = 100
-			}
-		}
-	}
-	
 	#italia
 	
 	focus = {
 		id = BYZ_italia
 		icon = GFX_focus_befriend_italy
-		x = 8
-		y = 12
-		cost = 5
+		x = -6
+		y = 8
+		cost = 4.3
 		#mutually_exclusive = { }
 		#prerequisite = { }
 		ai_will_do = {
@@ -2126,9 +804,10 @@ focus_tree = {
 	focus = {
 		id = BYZ_italia_religian_way
 		icon = GFX_focus_befriend_italy
-		x = 4
-		y = 13
-		cost = 5
+		relative_position_id = BYZ_italia
+		x = -4
+		y = 1
+		cost = 4.3
 		mutually_exclusive = { focus = BYZ_italia_marry_way focus = BYZ_italia_war_way }
 		prerequisite = { focus = BYZ_italia }
 		ai_will_do = {
@@ -2155,9 +834,10 @@ focus_tree = {
 	focus = {
 		id = BYZ_italia_religian_union
 		icon = GFX_goal_generic_intelligence_exchange
-		x = 4
-		y = 14
-		cost = 5
+		relative_position_id = BYZ_italia
+		x = -4
+		y = 2
+		cost = 4.3
 		#mutually_exclusive = { }
 		prerequisite = { focus = BYZ_italia_religian_way }
 		ai_will_do = {
@@ -2180,9 +860,10 @@ focus_tree = {
 	focus = {
 		id = BYZ_italia_religian_conference
 		icon = GFX_goal_generic_national_unity
-		x = 4
-		y = 15
-		cost = 5
+		relative_position_id = BYZ_italia
+		x = -4
+		y = 3
+		cost = 4.3
 		#mutually_exclusive = { }
 		prerequisite = { focus = BYZ_italia_religian_union }
 		ai_will_do = {
@@ -2207,9 +888,10 @@ focus_tree = {
 	focus = {
 		id = BYZ_italia_marry_way
 		icon = GFX_focus_befriend_italy
-		x = 8
-		y = 13
-		cost = 5
+		relative_position_id = BYZ_italia
+		x = 0
+		y = 1
+		cost = 4.3
 		mutually_exclusive = { focus = BYZ_italia_religian_way focus = BYZ_italia_war_way }
 		prerequisite = { focus = BYZ_italia }
 		ai_will_do = {
@@ -2236,9 +918,10 @@ focus_tree = {
 	focus = {
 		id = BYZ_italia_marry_union
 		icon = GFX_goal_generic_improve_relations
-		x = 8
-		y = 14
-		cost = 5
+		relative_position_id = BYZ_italia
+		x = 0
+		y = 2
+		cost = 4.3
 		#mutually_exclusive = { }
 		prerequisite = { focus = BYZ_italia_marry_way }
 		ai_will_do = {
@@ -2261,9 +944,10 @@ focus_tree = {
 	focus = {
 		id = BYZ_italia_marry_event
 		icon = GFX_focus_rom_royal_dictatorship
-		x = 8
-		y = 15
-		cost = 5
+		relative_position_id = BYZ_italia
+		x = 0
+		y = 3
+		cost = 4.3
 		#mutually_exclusive = { }
 		prerequisite = { focus = BYZ_italia_marry_union }
 		ai_will_do = {
@@ -2288,9 +972,10 @@ focus_tree = {
 	focus = {
 		id = BYZ_italia_war_way
 		icon = GFX_focus_befriend_italy
-		x = 12
-		y = 13
-		cost = 5
+		relative_position_id = BYZ_italia
+		x = 4
+		y = 1
+		cost = 4.3
 		mutually_exclusive = { focus = BYZ_italia_religian_way focus = BYZ_italia_marry_way }
 		prerequisite = { focus = BYZ_italia }
 		ai_will_do = {
@@ -2317,9 +1002,10 @@ focus_tree = {
 	focus = {
 		id = BYZ_italia_war_declare
 		icon = GFX_goal_generic_major_war
-		x = 12
-		y = 14
-		cost = 5
+		relative_position_id = BYZ_italia
+		x = 4
+		y = 2
+		cost = 4.3
 		#mutually_exclusive = { }
 		prerequisite = { focus = BYZ_italia_war_way }
 		ai_will_do = {
@@ -2386,9 +1072,10 @@ focus_tree = {
 	focus = {
 		id = BYZ_italia_war_developmet
 		icon = GFX_goal_generic_propaganda
-		x = 12
-		y = 15
-		cost = 5
+		relative_position_id = BYZ_italia
+		x = 4
+		y = 3
+		cost = 4.3
 		#mutually_exclusive = { }
 		prerequisite = { focus = BYZ_italia_war_declare }
 		ai_will_do = {
@@ -2441,9 +1128,10 @@ focus_tree = {
 	focus = {
 		id = BYZ_italia_invest
 		icon = GFX_focus_generic_industry_3
-		x = 6
-		y = 14
-		cost = 5
+		relative_position_id = BYZ_italia
+		x = -2
+		y = 2
+		cost = 4.3
 		#mutually_exclusive = { }
 		prerequisite = { focus = BYZ_italia_religian_way focus = BYZ_italia_marry_way focus = BYZ_italia_war_way }
 		ai_will_do = {
@@ -2496,9 +1184,10 @@ focus_tree = {
 	focus = {
 		id = BYZ_italia_invest_in_south
 		icon = GFX_focus_generic_industry_3
-		x = 6
-		y = 15
-		cost = 5
+		relative_position_id = BYZ_italia
+		x = -2
+		y = 3
+		cost = 4.3
 		#mutually_exclusive = { }
 		prerequisite = { focus = BYZ_italia_invest }
 		ai_will_do = {
@@ -2559,9 +1248,10 @@ focus_tree = {
 	focus = {
 		id = BYZ_italia_reform
 		icon = GFX_focus_hol_the_foundations_of_defense
-		x = 10
-		y = 14
-		cost = 5
+		relative_position_id = BYZ_italia
+		x = 2
+		y = 2
+		cost = 4.3
 		#mutually_exclusive = { }
 		prerequisite = { focus = BYZ_italia_religian_way focus = BYZ_italia_marry_way focus = BYZ_italia_war_way }
 		ai_will_do = {
@@ -2658,9 +1348,10 @@ focus_tree = {
 	focus = {
 		id = BYZ_italia_open_trade
 		icon = GFX_goal_generic_positive_trade_relations
-		x = 10
-		y = 15
-		cost = 5
+		relative_position_id = BYZ_italia
+		x = 2
+		y = 3
+		cost = 4.3
 		#mutually_exclusive = { }
 		prerequisite = { focus = BYZ_italia_reform }
 		ai_will_do = {
@@ -2685,9 +1376,10 @@ focus_tree = {
 	focus = {
 		id = BYZ_roman_empire_reborn
 		icon = GFX_goal_generic_positive_trade_relations
-		x = 8
-		y = 16
-		cost = 5
+		relative_position_id = BYZ_italia
+		x = 0
+		y = 4
+		cost = 4.3
 		#mutually_exclusive = { }
 		prerequisite = { focus = BYZ_italia_religian_conference focus = BYZ_italia_marry_event focus = BYZ_italia_war_developmet }
 		prerequisite = { focus = BYZ_italia_invest_in_south }
@@ -2712,17 +1404,2354 @@ focus_tree = {
 		
 	}
 	
-	#Army_reform
-	
-	#on your own
+	#1850 senat moving
 	
 	focus = {
-		id = BYZ_on_you_own_army_reform
-		icon = GFX_focus_GRE_following_in_the_footsteps_of_giants
+		id = BYZ_intervent_in_persia_civil_war
+		icon = GFX_goal_generic_territory_or_war
+		relative_position_id = BYZ_second_senat_meeting
 		x = 0
-		y = 0
-		cost = 5
-		mutually_exclusive = { focus = BYZ_pru_will_help_army_reform }
+		y = 2
+		cost = 4.3
+		#mutually_exclusive = { }
+		prerequisite = { focus = BYZ_decentralisation focus = BYZ_centralization }
+		prerequisite = { focus = BYZ_second_senat_meeting }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		available = { 
+			if = {
+				limit = {
+					has_country_flag = byz_rulling_imp
+				}
+				custom_trigger_tooltip = {
+					tooltip = byz_imperia_control_100
+					check_variable = { byz_imperial_faction_support > 99 }
+				}
+			}
+			if = {
+				limit = {
+					has_country_flag = byz_rulling_gov
+				}
+				custom_trigger_tooltip = {
+					tooltip = byz_general_control_100
+					check_variable = { byz_generals_faction_support > 99 }
+				}
+			}
+			if = {
+				limit = {
+					has_country_flag = byz_rulling_mer
+				}
+				custom_trigger_tooltip = {
+					tooltip = byz_merchants_control_100
+					check_variable = { byz_merchants_faction_support > 99 }
+				}
+			}
+			if = {
+				limit = {
+					has_country_flag = byz_rulling_dem
+				}
+				custom_trigger_tooltip = {
+					tooltip = byz_democrat_control_100
+					check_variable = { byz_democrats_faction_support > 99 }
+				}
+			}
+			if = {
+				limit = {
+					has_country_flag = byz_rulling_demmer
+				}
+				custom_trigger_tooltip = {
+					tooltip = byz_denmer_control_100
+					check_variable = { byz_demmer_faction_support > 99 }
+				}
+			}
+			if = {
+				limit = {
+					has_country_flag = byz_rulling_impgov
+				}
+				custom_trigger_tooltip = {
+					tooltip = byz_impgov_control_100
+					check_variable = { byz_impgov_faction_support > 99 }
+				}
+			}
+			has_global_flag = persia_civil_war_flag
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			custom_effect_tooltip = byz_intervent_in_civil_war
+			custom_effect_tooltip = byz_im5_me5_dem5_gov15
+			hidden_effect = {
+				BYZ = {
+					add_opinion_modifier = {
+						target = PAR
+						modifier = history_friend
+					}
+				}
+				TRK = {
+					add_opinion_modifier = {
+						target = PAR
+						modifier = history_friend
+					}
+				}
+				ARM = {
+					add_opinion_modifier = {
+						target = PAR
+						modifier = history_friend
+					}
+				}
+				SYR = {
+					add_opinion_modifier = {
+						target = PAR
+						modifier = history_friend
+					}
+				}
+				KUR = {
+					add_opinion_modifier = {
+						target = PAR
+						modifier = history_friend
+					}
+				}
+				CPT = {
+					add_opinion_modifier = {
+						target = PAR
+						modifier = history_friend
+					}
+				}
+				RIT = {
+					add_opinion_modifier = {
+						target = PAR
+						modifier = history_friend
+					}
+				}
+				ZUL = {
+					add_opinion_modifier = {
+						target = PAR
+						modifier = history_friend
+					}
+				}
+				PAR = {
+					add_opinion_modifier = {
+						target = BYZ
+						modifier = history_friend
+					}
+					add_opinion_modifier = {
+						target = TRK
+						modifier = history_friend
+					}
+					add_opinion_modifier = {
+						target = ARM
+						modifier = history_friend
+					}
+					add_opinion_modifier = {
+						target = SYR
+						modifier = history_friend
+					}
+					add_opinion_modifier = {
+						target = KUR
+						modifier = history_friend
+					}
+					add_opinion_modifier = {
+						target = CPT
+						modifier = history_friend
+					}
+					add_opinion_modifier = {
+						target = RIT
+						modifier = history_friend
+					}
+					add_opinion_modifier = {
+						target = CPT
+						modifier = history_friend
+					}
+				}
+			}
+		}
+	}
+	
+	#Democratic
+	
+	focus = {
+		id = BYZ_democratic_mandat
+		icon = GFX_focus_generic_self_management
+		relative_position_id = BYZ_decentralisation
+		x = 0
+		y = 1
+		cost = 4.3
+		#mutually_exclusive = { }
+		prerequisite = { focus = BYZ_decentralisation }
+		prerequisite = { focus = BYZ_second_senat_meeting }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = { }
+		
+		completion_reward = {
+			add_stability = 0.05
+		}	
+	}
+	
+	focus = {
+		id = BYZ_democratic_trade_police
+		icon = GFX_goal_generic_positive_trade_relations
+		relative_position_id = BYZ_decentralisation
+		x = -1
+		y = 2
+		cost = 4.3
+		#mutually_exclusive = { }
+		prerequisite = { focus = BYZ_democratic_mandat }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = { }
+		
+		completion_reward = {
+			if = {
+				limit = {
+					has_idea = closed_economy
+				}
+				swap_ideas = {
+					remove_idea = closed_economy
+					add_idea = free_trade
+				}
+			}
+			if = {
+				limit = {
+					has_idea = limited_exports
+				}
+				swap_ideas = {
+					remove_idea = limited_exports
+					add_idea = free_trade
+				}
+			}
+			if = {
+				limit = {
+					has_idea = export_focus
+				}
+				swap_ideas = {
+					remove_idea = export_focus
+					add_idea = free_trade
+				}
+			}
+			if = {
+				limit = {
+					has_idea = free_trade
+				}
+				add_stability = 0.05
+				add_political_power = 150
+			}
+		}	
+	}
+	
+	focus = {
+		id = BYZ_democratic_taxing_free
+		icon = GFX_goal_generic_improve_relations
+		relative_position_id = BYZ_decentralisation
+		x = 1
+		y = 2
+		cost = 4.3
+		#mutually_exclusive = { }
+		prerequisite = { focus = BYZ_democratic_mandat }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = { }
+		
+		completion_reward = {
+			if = {
+				limit = {
+					has_idea = low_taxation
+				}
+				add_stability = 0.05
+				add_political_power = 150
+			}
+			if = {
+				limit = {
+					has_idea = medium_taxation
+				}
+				swap_ideas = {
+					remove_idea = medium_taxation
+					add_idea = low_taxation
+				}
+			}
+			if = {
+				limit = {
+					has_idea = hight_taxation
+				}
+				swap_ideas = {
+					remove_idea = hight_taxation
+					add_idea = low_taxation
+				}
+			}
+		}	
+	}
+	
+	focus = {
+		id = BYZ_democratic_task
+		icon = GFX_goal_generic_military_sphere
+		relative_position_id = BYZ_decentralisation
+		x = 0
+		y = 3
+		cost = 4.3
+		#mutually_exclusive = { }
+		prerequisite = { focus = BYZ_democratic_trade_police }
+		prerequisite = { focus = BYZ_democratic_taxing_free }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = { }
+		
+		completion_reward = {
+			KUR = {
+				add_ideas = byz_task_to_democraty
+			}
+			SYR = {
+				add_ideas = byz_task_to_democraty
+			}
+			CPT = {
+				add_ideas = byz_task_to_democraty
+			}
+			BYZ = {
+				add_ideas = byz_task_to_democraty
+			}
+		}	
+	}
+	
+	focus = {
+		id = BYZ_democratic_decision
+		icon = GFX_focus_generic_treaty
+		relative_position_id = BYZ_decentralisation
+		x = 3
+		y = 2
+		cost = 4.3
+		#mutually_exclusive = { }
+		prerequisite = { focus = BYZ_decentralisation }
+		prerequisite = { focus = BYZ_second_senat_meeting }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = { }
+		
+		completion_reward = {
+			custom_effect_tooltip = byz_demmer_decision
+		}	
+	}
+	
+	#Imperia
+	
+	focus = {
+		id = BYZ_imperial_march
+		icon = GFX_goal_generic_cavalry
+		relative_position_id = BYZ_centralization
+		x = 0
+		y = 1
+		cost = 4.3
+		#mutually_exclusive = { }
+		prerequisite = { focus = BYZ_centralization }
+		prerequisite = { focus = BYZ_second_senat_meeting }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = { }
+		
+		completion_reward = {
+			add_war_support = 0.05
+			army_experience = 25
+			navy_experience = 25
+			air_experience = 25
+		}	
+	}
+
+	focus = {
+		id = BYZ_imperial_reform_army
+		icon = GFX_goal_generic_axis_build_infantry
+		relative_position_id = BYZ_centralization
+		x = -1
+		y = 2
+		cost = 4.3
+		#mutually_exclusive = { }
+		prerequisite = { focus = BYZ_imperial_march }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = { }
+		
+		completion_reward = {
+			if = {
+				limit = {
+					has_idea = disarmed_nation
+				}			
+				swap_ideas = {
+					remove_idea = disarmed_nation
+					add_idea = extensive_conscription
+				}
+			}
+			if = {
+				limit = {
+					has_idea = volunteer_only
+				}			
+				swap_ideas = {
+					remove_idea = volunteer_only
+					add_idea = extensive_conscription
+				}
+			}
+			if = {
+				limit = {
+					has_idea = limited_conscription	
+				}
+				swap_ideas = {
+					remove_idea = limited_conscription
+					add_idea = extensive_conscription
+				}
+			}
+			if = {
+				limit = {
+					has_idea = extensive_conscription
+				}
+				add_war_support = 0.05
+				add_political_power = 150
+			}
+		}	
+	}
+	
+	focus = {
+		id = BYZ_imperial_laws
+		icon = GFX_goal_generic_construct_mil_factory
+		relative_position_id = BYZ_centralization
+		x = 1
+		y = 2
+		cost = 4.3
+		#mutually_exclusive = { }
+		prerequisite = { focus = BYZ_imperial_march }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = { }
+		
+		completion_reward = {
+			if = {
+				limit = {
+					has_idea = civilian_economy
+				}			
+				swap_ideas = {
+					remove_idea = civilian_economy
+					add_idea = war_economy
+				}
+			}
+			if = {
+				limit = {
+					has_idea = low_economic_mobilisation
+				}			
+				swap_ideas = {
+					remove_idea = low_economic_mobilisation
+					add_idea = war_economy
+				}
+			}
+			if = {
+				limit = {
+					has_idea = partial_economic_mobilisation
+				}			
+				swap_ideas = {
+					remove_idea = partial_economic_mobilisation
+					add_idea = war_economy
+				}
+			}
+			if = {
+				limit = {
+					has_idea = war_economy
+				}
+				add_war_support = 0.05
+				add_political_power = 150
+			}
+		}	
+	}
+	
+	focus = {
+		id = BYZ_imperial_task
+		icon = GFX_focus_rom_royal_dictatorship
+		relative_position_id = BYZ_centralization
+		x = 0
+		y = 3
+		cost = 4.3
+		#mutually_exclusive = { }
+		prerequisite = { focus = BYZ_imperial_reform_army }
+		prerequisite = { focus = BYZ_imperial_laws }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = { }
+		
+		completion_reward = {
+			KUR = {
+				add_ideas = byz_task_to_puppet
+			}
+			SYR = {
+				add_ideas = byz_task_to_puppet
+			}
+			CPT = {
+				add_ideas = byz_task_to_puppet
+			}
+		}	
+	}
+	
+	focus = {
+		id = BYZ_imperial_decision
+		icon = GFX_goal_tfv_strengthen_commonwealth_ties
+		relative_position_id = BYZ_centralization
+		x = -3
+		y = 2
+		cost = 4.3
+		#mutually_exclusive = { }
+		prerequisite = { focus = BYZ_second_senat_meeting }
+		prerequisite = { focus = BYZ_centralization }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = { }
+		
+		completion_reward = {
+			custom_effect_tooltip = byz_impgov_decision
+		}	
+	}
+	
+	#1851 senat moving
+	
+	#Imperial
+	
+	focus = {
+		id = BYZ_impgov_goverment
+		icon = GFX_goal_generic_build_tank
+		relative_position_id = BYZ_third_senat_meeting
+		x = 4
+		y = 1
+		cost = 4.3
+		mutually_exclusive = { focus = BYZ_imp_goverment }
+		prerequisite = { focus = BYZ_third_senat_meeting }
+		prerequisite = { focus = BYZ_imperial_task }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = { }
+		
+		completion_reward = {
+			custom_effect_tooltip = byz_impgov_strong_empire
+		}	
+	}
+	
+	focus = {
+		id = BYZ_imp_goverment
+		icon = GFX_goal_generic_alliance
+		relative_position_id = BYZ_third_senat_meeting
+		x = 8
+		y = 1
+		cost = 4.3
+		mutually_exclusive = { focus = BYZ_impgov_goverment }
+		prerequisite = { focus = BYZ_third_senat_meeting }
+		prerequisite = { focus = BYZ_imperial_task }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = { }
+		
+		completion_reward = {
+			custom_effect_tooltip = byz_imp_papper_empire
+		}	
+	}
+	
+	#Democratic
+	
+	focus = {
+		id = BYZ_dem_goverment
+		icon = GFX_goal_generic_improve_relations
+		relative_position_id = BYZ_third_senat_meeting
+		x = -12
+		y = 1
+		cost = 4.3
+		mutually_exclusive = { focus = BYZ_demmer_goverment }
+		mutually_exclusive = { focus = BYZ_mer_goverment }
+		prerequisite = { focus = BYZ_third_senat_meeting }
+		prerequisite = { focus = BYZ_democratic_task }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = { }
+		
+		completion_reward = {
+			custom_effect_tooltip = byz_dem_humanheaven
+		}	
+	}
+	
+	focus = {
+		id = BYZ_demmer_goverment
+		icon = GFX_goal_generic_national_unity
+		relative_position_id = BYZ_third_senat_meeting
+		x = -8
+		y = 1
+		cost = 4.3
+		mutually_exclusive = { focus = BYZ_dem_goverment }
+		mutually_exclusive = { focus = BYZ_mer_goverment }
+		prerequisite = { focus = BYZ_third_senat_meeting }
+		prerequisite = { focus = BYZ_democratic_task }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = { }
+		
+		completion_reward = {
+			custom_effect_tooltip = byz_demmer_capitalismwithhumanface
+		}	
+	}
+	
+	focus = {
+		id = BYZ_mer_goverment
+		icon = GFX_goal_generic_intelligence_exchange
+		relative_position_id = BYZ_third_senat_meeting
+		x = -4
+		y = 1
+		cost = 4.3
+		mutually_exclusive = { focus = BYZ_dem_goverment }
+		mutually_exclusive = { focus = BYZ_demmer_goverment }
+		prerequisite = { focus = BYZ_third_senat_meeting }
+		prerequisite = { focus = BYZ_democratic_task }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = { }
+		
+		completion_reward = {
+			custom_effect_tooltip = byz_mer_megacapitalism
+		}	
+	}
+	
+	#1852 senat meeting
+	
+	#imperial
+	
+	focus = {
+		id = BYZ_imp_goverment_idea
+		icon = GFX_focus_generic_treaty
+		relative_position_id = BYZ_imp_goverment
+		x = 0
+		y = 1
+		cost = 4.3
+		prerequisite = { focus = BYZ_imp_goverment }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = { }
+		
+		completion_reward = {
+			add_ideas = byz_help_peole_imp
+		}	
+	}
+	
+	focus = {
+		id = BYZ_imp_goverment_centalise_1
+		icon = GFX_goal_generic_construct_infrastructure
+		relative_position_id = BYZ_imp_goverment
+		x = -1
+		y = 2
+		cost = 4.3
+		prerequisite = { focus = BYZ_imp_goverment_idea }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = { }
+		
+		completion_reward = {
+			47 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+				}
+			}
+			184 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+				}
+			}
+			185 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+				}
+			}
+			186 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+				}
+			}
+			339 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+				}
+			}
+			340 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+				}
+			}
+			341 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+				}
+			}
+			342 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+				}
+			}
+			347 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+				}
+			}
+			731 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+				}
+			}
+		}	
+	}
+	
+	focus = {
+		id = BYZ_imp_goverment_centalise_2
+		icon = GFX_goal_generic_propaganda
+		relative_position_id = BYZ_imp_goverment
+		x = -1
+		y = 3
+		cost = 4.3
+		prerequisite = { focus = BYZ_imp_goverment_centalise_1 }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = { }
+		
+		completion_reward = {
+			add_stability = 0.10
+		}	
+	}
+	
+	focus = {
+		id = BYZ_imp_goverment_event_1
+		icon = GFX_goal_generic_dangerous_deal
+		relative_position_id = BYZ_imp_goverment
+		x = 1
+		y = 2
+		cost = 4.3
+		prerequisite = { focus = BYZ_imp_goverment_idea }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = { }
+		
+		completion_reward = {
+			country_event = byz_goverment_idea.9
+		}	
+	}
+	
+	focus = {
+		id = BYZ_imp_goverment_event_2
+		icon = GFX_focus_rom_royal_dictatorship
+		relative_position_id = BYZ_imp_goverment
+		x = 1
+		y = 3
+		cost = 4.3
+		prerequisite = { focus = BYZ_imp_goverment_event_1 }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = { }
+		
+		completion_reward = {
+			country_event = byz_goverment_idea.10
+		}	
+	}
+	
+	focus = {
+		id = BYZ_imp_goverment_idea_final
+		icon = GFX_goal_generic_intelligence_exchange
+		relative_position_id = BYZ_imp_goverment
+		x = 0
+		y = 4
+		cost = 4.3
+		prerequisite = { focus = BYZ_imp_goverment_centalise_2 }
+		prerequisite = { focus = BYZ_imp_goverment_event_2 }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = { }
+		
+		completion_reward = {
+			if = {
+				limit = {
+					AND = {
+						NOT = {
+							has_country_flag = byz_help_people_stab_and_politic
+						}
+						NOT = {
+							has_country_flag = byz_help_people_stab_alot
+						}
+						NOT = {
+							has_country_flag = byz_help_people_attack_core
+						}
+						NOT = {
+							has_country_flag = byz_help_people_defense_core
+						}
+					}
+				}
+				swap_ideas = {
+					remove_idea = byz_help_peole_imp
+					add_idea = byz_help_peole_imp
+				}
+			}
+			if = {
+				limit = {
+					has_country_flag = byz_help_people_stab_and_politic
+					AND = {
+						NOT = {
+							has_country_flag = byz_help_people_attack_core
+						}
+						NOT = {
+							has_country_flag = byz_help_people_defense_core
+						}
+					}
+				}
+				swap_ideas = {
+					remove_idea = byz_help_peole_imp
+					add_idea = byz_help_peole_imp_sp
+				}
+			}
+			if = {
+				limit = {
+					has_country_flag = byz_help_people_stab_alot
+					AND = {
+						NOT = {
+							has_country_flag = byz_help_people_attack_core
+						}
+						NOT = {
+							has_country_flag = byz_help_people_defense_core
+						}
+					}
+				}
+				swap_ideas = {
+					remove_idea = byz_help_peole_imp
+					add_idea = byz_help_peole_imp_as
+				}
+			}
+			if = {
+				limit = {
+					AND = {
+						has_country_flag = byz_help_people_stab_and_politic
+						has_country_flag = byz_help_people_attack_core
+					}
+				}
+				swap_ideas = {
+					remove_idea = byz_help_peole_imp
+					add_idea = byz_help_peole_imp_sp_ac
+				}
+			}	
+			if = {
+				limit = {
+					AND = {
+						has_country_flag = byz_help_people_stab_and_politic
+						has_country_flag = byz_help_people_defense_core
+					}
+				}
+				swap_ideas = {
+					remove_idea = byz_help_peole_imp
+					add_idea = byz_help_peole_imp_sp_dc
+				}
+			}	
+			if = {
+				limit = {
+					AND = {
+						has_country_flag = byz_help_people_stab_alot
+						has_country_flag = byz_help_people_attack_core
+					}
+				}
+				swap_ideas = {
+					remove_idea = byz_help_peole_imp
+					add_idea = byz_help_peole_imp_as_ac
+				}
+			}	
+			if = {
+				limit = {
+					AND = {
+						has_country_flag = byz_help_people_stab_alot
+						has_country_flag = byz_help_people_defense_core
+					}
+				}
+				swap_ideas = {
+					remove_idea = byz_help_peole_imp
+					add_idea = byz_help_peole_imp_as_dc
+				}
+			}
+		}	
+	}
+	
+	#Impgov
+	
+	focus = {
+		id = BYZ_impgov_goverment_idea
+		icon = GFX_focus_generic_self_management
+		relative_position_id = BYZ_impgov_goverment
+		x = 0
+		y = 1
+		cost = 4.3
+		prerequisite = { focus = BYZ_impgov_goverment }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = { }
+		
+		completion_reward = {
+			add_ideas = byz_help_peole_impgov
+		}	
+	}
+	
+	focus = {
+		id = BYZ_impgov_goverment_rebuild_1
+		icon = GFX_goal_generic_construct_mil_factory
+		relative_position_id = BYZ_impgov_goverment
+		x = -1
+		y = 2
+		cost = 4.3
+		prerequisite = { focus = BYZ_impgov_goverment_idea }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = { }
+		
+		completion_reward = {
+			231 = {
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+			797 = {
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+			799 = {
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+		}	
+	}
+	
+	focus = {
+		id = BYZ_impgov_goverment_rebuild_2
+		icon = GFX_focus_GRE_reviving_the_double_headed_eagle
+		relative_position_id = BYZ_impgov_goverment
+		x = -1
+		y = 3
+		cost = 4.3
+		prerequisite = { focus = BYZ_impgov_goverment_rebuild_1 }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = { }
+		
+		completion_reward = {
+			add_stability = 0.05
+			add_war_support = 0.05
+		}	
+	}
+	
+	focus = {
+		id = BYZ_impgov_goverment_event_1
+		icon = GFX_goal_generic_axis_build_infantry
+		relative_position_id = BYZ_impgov_goverment
+		x = 1
+		y = 2
+		cost = 4.3
+		prerequisite = { focus = BYZ_impgov_goverment_idea }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = { }
+		
+		completion_reward = {
+			country_event = byz_goverment_idea.7
+		}	
+	}
+	
+	focus = {
+		id = BYZ_impgov_goverment_event_2
+		icon = GFX_focus_generic_monarchy_2
+		relative_position_id = BYZ_impgov_goverment
+		x = 1
+		y = 3
+		cost = 4.3
+		prerequisite = { focus = BYZ_impgov_goverment_event_1 }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = { }
+		
+		completion_reward = {
+			country_event = byz_goverment_idea.8
+		}	
+	}
+	
+	focus = {
+		id = BYZ_impgov_goverment_idea_final
+		icon = GFX_focus_generic_home_defense
+		relative_position_id = BYZ_impgov_goverment
+		x = 0
+		y = 4
+		cost = 4.3
+		prerequisite = { focus = BYZ_impgov_goverment_rebuild_2 }
+		prerequisite = { focus = BYZ_impgov_goverment_event_2 }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = { }
+		
+		completion_reward = {
+			if = {
+				limit = {
+					AND = {
+						NOT = {
+							has_country_flag = byz_help_people_recrute
+						}
+						NOT = {
+							has_country_flag = byz_help_people_army_bonus
+						}
+						NOT = {
+							has_country_flag = byz_help_people_stab_and_war
+						}
+						NOT = {
+							has_country_flag = byz_help_people_warstab
+						}
+					}
+				}
+				swap_ideas = {
+					remove_idea = byz_help_peole_impgov
+					add_idea = byz_help_peole_impgov
+				}
+			}
+			if = {
+				limit = {
+					has_country_flag = byz_help_people_recrute
+					AND = {
+						NOT = {
+							has_country_flag = byz_help_people_stab_and_war
+						}
+						NOT = {
+							has_country_flag = byz_help_people_warstab
+						}
+					}
+				}
+				swap_ideas = {
+					remove_idea = byz_help_peole_impgov
+					add_idea = byz_help_peole_impgov_r
+				}
+			}
+			if = {
+				limit = {
+					has_country_flag = byz_help_people_army_bonus
+					AND = {
+						NOT = {
+							has_country_flag = byz_help_people_stab_and_war
+						}
+						NOT = {
+							has_country_flag = byz_help_people_warstab
+						}
+					}
+				}
+				swap_ideas = {
+					remove_idea = byz_help_peole_impgov
+					add_idea = byz_help_peole_impgov_b
+				}
+			}
+			if = {
+				limit = {
+					AND = {
+						has_country_flag = byz_help_people_recrute
+						has_country_flag = byz_help_people_stab_and_war
+					}
+				}
+				swap_ideas = {
+					remove_idea = byz_help_peole_impgov
+					add_idea = byz_help_peole_impgov_rsw
+				}
+			}	
+			if = {
+				limit = {
+					AND = {
+						has_country_flag = byz_help_people_recrute
+						has_country_flag = byz_help_people_warstab
+					}
+				}
+				swap_ideas = {
+					remove_idea = byz_help_peole_impgov
+					add_idea = byz_help_peole_impgov_rws
+				}
+			}	
+			if = {
+				limit = {
+					AND = {
+						has_country_flag = byz_help_people_army_bonus
+						has_country_flag = byz_help_people_stab_and_war
+					}
+				}
+				swap_ideas = {
+					remove_idea = byz_help_peole_impgov
+					add_idea = byz_help_peole_impgov_bsw
+				}
+			}	
+			if = {
+				limit = {
+					AND = {
+						has_country_flag = byz_help_people_army_bonus
+						has_country_flag = byz_help_people_warstab
+					}
+				}
+				swap_ideas = {
+					remove_idea = byz_help_peole_impgov
+					add_idea = byz_help_peole_impgov_bws
+				}
+			}
+		}	
+	}
+	
+	#Merchant
+	
+	focus = {
+		id = BYZ_mer_goverment_idea
+		icon = GFX_goal_generic_trade
+		relative_position_id = BYZ_mer_goverment
+		x = 0
+		y = 1
+		cost = 4.3
+		prerequisite = { focus = BYZ_mer_goverment }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = { }
+		
+		completion_reward = {
+			add_ideas = byz_help_peole_mer
+		}	
+	}
+	
+	focus = {
+		id = BYZ_mer_goverment_trader_1
+		icon = GFX_goal_generic_radar
+		relative_position_id = BYZ_mer_goverment
+		x = 1
+		y = 2
+		cost = 4.3
+		prerequisite = { focus = BYZ_mer_goverment_idea }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = { }
+		
+		completion_reward = {
+			816 = {
+				add_building_construction = {
+					type = radar_station
+					level = 2
+					instant_build = yes
+				}
+			}
+			872 = {
+				add_building_construction = {
+					type = radar_station
+					level = 2
+					instant_build = yes
+				}
+			}
+			873 = {
+				add_building_construction = {
+					type = radar_station
+					level = 2
+					instant_build = yes
+				}
+			}
+			874 = {
+				add_building_construction = {
+					type = radar_station
+					level = 2
+					instant_build = yes
+				}
+			}
+			875 = {
+				add_building_construction = {
+					type = radar_station
+					level = 2
+					instant_build = yes
+				}
+			}
+			876 = {
+				add_building_construction = {
+					type = radar_station
+					level = 2
+					instant_build = yes
+				}
+			}
+		}	
+	}
+	
+	focus = {
+		id = BYZ_mer_goverment_trader_2
+		icon = GFX_goal_generic_forceful_treaty
+		relative_position_id = BYZ_mer_goverment
+		x = 1
+		y = 3
+		cost = 4.3
+		prerequisite = { focus = BYZ_mer_goverment_trader_1 }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = { }
+		
+		completion_reward = {
+			add_state_core = 816
+			add_state_core = 872
+			add_state_core = 873
+			add_state_core = 874
+			add_state_core = 875
+			add_state_core = 876
+		}	
+	}
+	
+	focus = {
+		id = BYZ_mer_goverment_event_1
+		icon = GFX_goal_generic_neutrality_focus
+		relative_position_id = BYZ_mer_goverment
+		x = -1
+		y = 2
+		cost = 4.3
+		prerequisite = { focus = BYZ_mer_goverment_idea }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = { }
+		
+		completion_reward = {
+			country_event = byz_goverment_idea.5
+		}	
+	}
+	
+	focus = {
+		id = BYZ_mer_goverment_event_2
+		icon = GFX_focus_mex_privatisation
+		relative_position_id = BYZ_mer_goverment
+		x = -1
+		y = 3
+		cost = 4.3
+		prerequisite = { focus = BYZ_mer_goverment_event_1 }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = { }
+		
+		completion_reward = {
+			country_event = byz_goverment_idea.6
+		}	
+	}
+	
+	focus = {
+		id = BYZ_mer_goverment_idea_final
+		icon = GFX_goal_generic_positive_trade_relations
+		relative_position_id = BYZ_mer_goverment
+		x = 0
+		y = 4
+		cost = 4.3
+		prerequisite = { focus = BYZ_mer_goverment_trader_2 }
+		prerequisite = { focus = BYZ_mer_goverment_event_2 }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = { }
+		
+		completion_reward = {
+			if = {
+				limit = {
+					AND = {
+						NOT = {
+							has_country_flag = byz_help_people_economy
+						}
+						NOT = {
+							has_country_flag = byz_help_people_prom_bonus
+						}
+						NOT = {
+							has_country_flag = byz_help_people_megatrade
+						}
+						NOT = {
+							has_country_flag = byz_help_people_trade_bonus
+						}
+					}
+				}
+				swap_ideas = {
+					remove_idea = byz_help_peole_mer
+					add_idea = byz_help_peole_mer
+				}
+			}
+			if = {
+				limit = {
+					has_country_flag = byz_help_people_economy
+					AND = {
+						NOT = {
+							has_country_flag = byz_help_people_megatrade
+						}
+						NOT = {
+							has_country_flag = byz_help_people_trade_bonus
+						}
+					}
+				}
+				swap_ideas = {
+					remove_idea = byz_help_peole_mer
+					add_idea = byz_help_peole_mer_e
+				}
+			}
+			if = {
+				limit = {
+					has_country_flag = byz_help_people_prom_bonus
+					AND = {
+						NOT = {
+							has_country_flag = byz_help_people_megatrade
+						}
+						NOT = {
+							has_country_flag = byz_help_people_trade_bonus
+						}
+					}
+				}
+				swap_ideas = {
+					remove_idea = byz_help_peole_mer
+					add_idea = byz_help_peole_mer_p
+				}
+			}
+			if = {
+				limit = {
+					AND = {
+						has_country_flag = byz_help_people_economy
+						has_country_flag = byz_help_people_megatrade
+					}
+				}
+				swap_ideas = {
+					remove_idea = byz_help_peole_mer
+					add_idea = byz_help_peole_mer_emt
+				}
+			}	
+			if = {
+				limit = {
+					AND = {
+						has_country_flag = byz_help_people_economy
+						has_country_flag = byz_help_people_trade_bonus
+					}
+				}
+				swap_ideas = {
+					remove_idea = byz_help_peole_mer
+					add_idea = byz_help_peole_mer_et
+				}
+			}	
+			if = {
+				limit = {
+					AND = {
+						has_country_flag = byz_help_people_prom_bonus
+						has_country_flag = byz_help_people_megatrade
+					}
+				}
+				swap_ideas = {
+					remove_idea = byz_help_peole_mer
+					add_idea = byz_help_peole_mer_pmt
+				}
+			}	
+			if = {
+				limit = {
+					AND = {
+						has_country_flag = byz_help_people_prom_bonus
+						has_country_flag = byz_help_people_trade_bonus
+					}
+				}
+				swap_ideas = {
+					remove_idea = byz_help_peole_mer
+					add_idea = byz_help_peole_mer_pt
+				}
+			}
+		}	
+	}
+	
+	#Demmer
+	
+	focus = {
+		id = BYZ_demmer_goverment_idea
+		icon = GFX_focus_generic_strike_at_democracy3
+		relative_position_id = BYZ_demmer_goverment
+		x = 0
+		y = 1
+		cost = 4.3
+		prerequisite = { focus = BYZ_demmer_goverment }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = { }
+		
+		completion_reward = {
+			add_ideas = byz_help_peole_demmer
+		}	
+	}
+	
+	focus = {
+		id = BYZ_demmer_goverment_resourse_1
+		icon = GFX_focus_generic_steel
+		relative_position_id = BYZ_demmer_goverment
+		x = 1
+		y = 2
+		cost = 4.3
+		prerequisite = { focus = BYZ_demmer_goverment_idea }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = { }
+		
+		completion_reward = {
+			339 = {
+				add_extra_state_shared_building_slots = 1
+			}
+			add_resource  = {
+				type = oil
+				amount = 18
+				state = 339
+			}
+			add_resource  = {
+				type = steel
+				amount = 36
+				state = 339
+			}
+			340 = {
+				add_extra_state_shared_building_slots = 1
+			}
+			add_resource  = {
+				type = oil
+				amount = 18
+				state = 340
+			}
+			add_resource  = {
+				type = steel
+				amount = 36
+				state = 340
+			}
+			342 = {
+				add_extra_state_shared_building_slots = 1
+			}
+			add_resource  = {
+				type = oil
+				amount = 18
+				state = 342
+			}
+			add_resource  = {
+				type = steel
+				amount = 36
+				state = 342
+			}
+		}	
+	}
+	
+	focus = {
+		id = BYZ_demmer_goverment_resourse_2
+		icon = GFX_focus_generic_aluminum
+		relative_position_id = BYZ_demmer_goverment
+		x = 1
+		y = 3
+		cost = 4.3
+		prerequisite = { focus = BYZ_demmer_goverment_resourse_1 }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = { }
+		
+		completion_reward = {
+			339 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+			add_resource  = {
+				type = aluminium
+				amount = 9
+				state = 339
+			}
+			add_resource  = {
+				type = tungsten
+				amount = 9
+				state = 339
+			}
+			340 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+			add_resource  = {
+				type = aluminium
+				amount = 9
+				state = 340
+			}
+			add_resource  = {
+				type = tungsten
+				amount = 9
+				state = 340
+			}
+			342 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+			add_resource  = {
+				type = aluminium
+				amount = 9
+				state = 342
+			}
+			add_resource  = {
+				type = tungsten
+				amount = 9
+				state = 342
+			}
+		}	
+	}
+	
+	focus = {
+		id = BYZ_demmer_goverment_event_1
+		icon = GFX_goal_generic_construction2
+		relative_position_id = BYZ_demmer_goverment
+		x = -1
+		y = 2
+		cost = 4.3
+		prerequisite = { focus = BYZ_demmer_goverment_idea }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = { }
+		
+		completion_reward = {
+			country_event = byz_goverment_idea.3
+		}	
+	}
+	
+	focus = {
+		id = BYZ_demmer_goverment_event_2
+		icon = GFX_goal_generic_major_alliance
+		relative_position_id = BYZ_demmer_goverment
+		x = -1
+		y = 3
+		cost = 4.3
+		prerequisite = { focus = BYZ_demmer_goverment_event_1 }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = { }
+		
+		completion_reward = {
+			country_event = byz_goverment_idea.4
+		}	
+	}
+	
+	focus = {
+		id = BYZ_demmer_goverment_idea_final
+		icon = GFX_focus_hol_the_foundations_of_defense
+		relative_position_id = BYZ_demmer_goverment
+		x = 0
+		y = 4
+		cost = 4.3
+		prerequisite = { focus = BYZ_demmer_goverment_resourse_2 }
+		prerequisite = { focus = BYZ_demmer_goverment_event_2 }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = { }
+		
+		completion_reward = {
+			if = {
+				limit = {
+					AND = {
+						NOT = {
+							has_country_flag = byz_help_people_prom
+						}
+						NOT = {
+							has_country_flag = byz_help_people_trade
+						}
+						NOT = {
+							has_country_flag = byz_help_people_tnp
+						}
+						NOT = {
+							has_country_flag = byz_help_people_construction_speed
+						}
+					}
+				}
+				swap_ideas = {
+					remove_idea = byz_help_peole_demmer
+					add_idea = byz_help_peole_demmer
+				}
+			}
+			if = {
+				limit = {
+					has_country_flag = byz_help_people_prom
+					AND = {
+						NOT = {
+							has_country_flag = byz_help_people_tnp
+						}
+						NOT = {
+							has_country_flag = byz_help_people_construction_speed
+						}
+					}
+				}
+				swap_ideas = {
+					remove_idea = byz_help_peole_demmer
+					add_idea = byz_help_peole_demmer_p
+				}
+			}
+			if = {
+				limit = {
+					has_country_flag = byz_help_people_trade
+					AND = {
+						NOT = {
+							has_country_flag = byz_help_people_tnp
+						}
+						NOT = {
+							has_country_flag = byz_help_people_construction_speed
+						}
+					}
+				}
+				swap_ideas = {
+					remove_idea = byz_help_peole_demmer
+					add_idea = byz_help_peole_demmer_t
+				}
+			}
+			if = {
+				limit = {
+					AND = {
+						has_country_flag = byz_help_people_prom
+						has_country_flag = byz_help_people_tnp
+					}
+				}
+				swap_ideas = {
+					remove_idea = byz_help_peole_demmer
+					add_idea = byz_help_peole_demmer_pt
+				}
+			}	
+			if = {
+				limit = {
+					AND = {
+						has_country_flag = byz_help_people_prom
+						has_country_flag = byz_help_people_construction_speed
+					}
+				}
+				swap_ideas = {
+					remove_idea = byz_help_peole_demmer
+					add_idea = byz_help_peole_demmer_pc
+				}
+			}	
+			if = {
+				limit = {
+					AND = {
+						has_country_flag = byz_help_people_trade
+						has_country_flag = byz_help_people_tnp
+					}
+				}
+				swap_ideas = {
+					remove_idea = byz_help_peole_demmer
+					add_idea = byz_help_peole_demmer_tt
+				}
+			}	
+			if = {
+				limit = {
+					AND = {
+						has_country_flag = byz_help_people_trade
+						has_country_flag = byz_help_people_construction_speed
+					}
+				}
+				swap_ideas = {
+					remove_idea = byz_help_peole_demmer
+					add_idea = byz_help_peole_demmer_tc
+				}
+			}
+		}	
+	}
+	
+	#Democtic
+	
+	focus = {
+		id = BYZ_dem_goverment_idea
+		icon = GFX_focus_GRE_an_orthodox_state
+		relative_position_id = BYZ_dem_goverment
+		x = 0
+		y = 1
+		cost = 4.3
+		prerequisite = { focus = BYZ_dem_goverment }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = { }
+		
+		completion_reward = {
+			add_ideas = byz_help_peole_dem
+		}	
+	}
+	
+	focus = {
+		id = BYZ_dem_goverment_reform_1
+		icon = GFX_goal_generic_construction
+		relative_position_id = BYZ_dem_goverment
+		x = 1
+		y = 2
+		cost = 4.3
+		prerequisite = { focus = BYZ_dem_goverment_idea }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = { }
+		
+		completion_reward = {
+			47 = {
+				add_extra_state_shared_building_slots = 1
+			}
+			184 = {
+				add_extra_state_shared_building_slots = 1
+			}
+			185 = {
+				add_extra_state_shared_building_slots = 1
+			}
+			186 = {
+				add_extra_state_shared_building_slots = 1
+			}
+			341 = {
+				add_extra_state_shared_building_slots = 1
+			}
+			731 = {
+				add_extra_state_shared_building_slots = 1
+			}
+			797 = {
+				add_extra_state_shared_building_slots = 1
+			}
+			805 = {
+				add_extra_state_shared_building_slots = 1
+			}
+		}	
+	}
+	
+	focus = {
+		id = BYZ_dem_goverment_reform_2
+		icon = GFX_goal_generic_construct_civ_factory
+		relative_position_id = BYZ_dem_goverment
+		x = 1
+		y = 3
+		cost = 4.3
+		prerequisite = { focus = BYZ_dem_goverment_reform_1 }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = { }
+		
+		completion_reward = {
+			47 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			184 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			185 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			186 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			341 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			731 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			797 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			805 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}	
+	}
+	
+	focus = {
+		id = BYZ_dem_goverment_event_1
+		icon = GFX_goal_generic_national_unity
+		relative_position_id = BYZ_dem_goverment
+		x = -1
+		y = 2
+		cost = 4.3
+		prerequisite = { focus = BYZ_dem_goverment_idea }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = { }
+		
+		completion_reward = {
+			country_event = byz_goverment_idea.1
+		}	
+	}
+	
+	focus = {
+		id = BYZ_dem_goverment_event_2
+		icon = GFX_goal_generic_consumer_goods
+		relative_position_id = BYZ_dem_goverment
+		x = -1
+		y = 3
+		cost = 4.3
+		prerequisite = { focus = BYZ_dem_goverment_event_1 }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = { }
+		
+		completion_reward = {
+			country_event = byz_goverment_idea.2
+		}	
+	}
+	
+	focus = {
+		id = BYZ_dem_goverment_idea_final
+		icon = GFX_focus_BUL_restore_the_bulgarian_patriarchate
+		relative_position_id = BYZ_dem_goverment
+		x = 0
+		y = 4
+		cost = 4.3
+		prerequisite = { focus = BYZ_dem_goverment_reform_2 }
+		prerequisite = { focus = BYZ_dem_goverment_event_2 }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = { }
+		
+		completion_reward = {
+			if = {
+				limit = {
+					AND = {
+						NOT = {
+							has_country_flag = byz_help_people_stab
+						}
+						NOT = {
+							has_country_flag = byz_help_people_politica
+						}
+						NOT = {
+							has_country_flag = byz_help_people_population
+						}
+						NOT = {
+							has_country_flag = byz_help_people_politica_2
+						}
+					}
+				}
+				swap_ideas = {
+					remove_idea = byz_help_peole_dem
+					add_idea = byz_help_peole_dem
+				}
+			}
+			if = {
+				limit = {
+					has_country_flag = byz_help_people_stab
+					AND = {
+						NOT = {
+							has_country_flag = byz_help_people_population
+						}
+						NOT = {
+							has_country_flag = byz_help_people_politica_2
+						}
+					}
+				}
+				swap_ideas = {
+					remove_idea = byz_help_peole_dem
+					add_idea = byz_help_peole_dem_s
+				}
+			}
+			if = {
+				limit = {
+					has_country_flag = byz_help_people_politica
+					AND = {
+						NOT = {
+							has_country_flag = byz_help_people_population
+						}
+						NOT = {
+							has_country_flag = byz_help_people_politica_2
+						}
+					}
+				}
+				swap_ideas = {
+					remove_idea = byz_help_peole_dem
+					add_idea = byz_help_peole_dem_p
+				}
+			}
+			if = {
+				limit = {
+					AND = {
+						has_country_flag = byz_help_people_stab
+						has_country_flag = byz_help_people_population
+					}
+				}
+				swap_ideas = {
+					remove_idea = byz_help_peole_dem
+					add_idea = byz_help_peole_dem_sp
+				}
+			}	
+			if = {
+				limit = {
+					AND = {
+						has_country_flag = byz_help_people_stab
+						has_country_flag = byz_help_people_politica_2
+					}
+				}
+				swap_ideas = {
+					remove_idea = byz_help_peole_dem
+					add_idea = byz_help_peole_dem_sp2
+				}
+			}	
+			if = {
+				limit = {
+					AND = {
+						has_country_flag = byz_help_people_politica
+						has_country_flag = byz_help_people_population
+					}
+				}
+				swap_ideas = {
+					remove_idea = byz_help_peole_dem
+					add_idea = byz_help_peole_dem_pp
+				}
+			}	
+			if = {
+				limit = {
+					AND = {
+						has_country_flag = byz_help_people_politica
+						has_country_flag = byz_help_people_politica_2
+					}
+				}
+				swap_ideas = {
+					remove_idea = byz_help_peole_dem
+					add_idea = byz_help_peole_dem_pp2
+				}
+			}
+		}	
+	}
+	
+	#Army_reform
+	
+	focus = {
+		id = BYZ_start_army_training
+		icon = GFX_focus_generic_military_academy
+		x = -6
+		y = -1
+		cost = 4.3
+		#mutually_exclusive = { }
 		#prerequisite = { }
 		ai_will_do = {
 			factor = 1000
@@ -2742,6 +3771,37 @@ focus_tree = {
 		#search_filters = {  }
 		
 		completion_reward = {
+			add_timed_idea = {
+				idea = byz_army_training_idea
+				days = 365
+			}
+		}
+	}
+	
+	#on your own
+	
+	focus = {
+		id = BYZ_on_you_own_army_reform
+		icon = GFX_focus_GRE_following_in_the_footsteps_of_giants
+		relative_position_id = BYZ_start_army_training
+		x = -3
+		y = 1
+		cost = 4.3
+		mutually_exclusive = { focus = BYZ_pru_will_help_army_reform }
+		prerequisite = { focus = BYZ_start_army_training }
+		ai_will_do = {
+			factor = 1000
+		}
+		
+		#cancel = { }
+		
+		available = { }
+	
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
 			army_experience = 15
 		}
 	}
@@ -2749,9 +3809,10 @@ focus_tree = {
 	focus = {
 		id = BYZ_on_you_own_army_base
 		icon = GFX_goal_generic_production2
+		relative_position_id = BYZ_on_you_own_army_reform
 		x = 0
 		y = 2
-		cost = 5
+		cost = 4.3
 		#mutually_exclusive = { }
 		prerequisite = { focus = BYZ_on_you_own_army_reform }
 		ai_will_do = {
@@ -2783,9 +3844,10 @@ focus_tree = {
 	focus = {
 		id = BYZ_on_you_own_army_advance
 		icon = GFX_goal_generic_construct_mil_factory
+		relative_position_id = BYZ_on_you_own_army_reform
 		x = 0
 		y = 4
-		cost = 5
+		cost = 4.3
 		#mutually_exclusive = { }
 		prerequisite = { focus = BYZ_on_you_own_army_base }
 		ai_will_do = {
@@ -2826,9 +3888,10 @@ focus_tree = {
 	focus = {
 		id = BYZ_on_you_own_army_complete
 		icon = GFX_goal_generic_build_tank
+		relative_position_id = BYZ_on_you_own_army_reform
 		x = 0
 		y = 6
-		cost = 5
+		cost = 4.3
 		#mutually_exclusive = { }
 		prerequisite = { focus = BYZ_old_doctrin_national_spirit focus = BYZ_new_doctrin_national_spirit }
 		prerequisite = { focus = BYZ_on_you_own_army_advance }
@@ -2838,10 +3901,7 @@ focus_tree = {
 		
 		#cancel = { }
 		
-		available = { 
-			owns_state = 47 
-			owns_state = 185
-		}
+		#available = { }
 	
 		#bypass = { }
 		
@@ -2858,9 +3918,10 @@ focus_tree = {
 	focus = {
 		id = BYZ_old_doctrin
 		icon = GFX_focus_generic_little_entente
+		relative_position_id = BYZ_on_you_own_army_reform
 		x = -2
 		y = 1
-		cost = 5
+		cost = 4.3
 		mutually_exclusive = { focus = BYZ_new_doctrin }
 		prerequisite = { focus = BYZ_on_you_own_army_reform }
 		ai_will_do = {
@@ -2886,9 +3947,10 @@ focus_tree = {
 	focus = {
 		id = BYZ_old_doctrin_doctrin
 		icon = GFX_goal_generic_army_doctrines
+		relative_position_id = BYZ_on_you_own_army_reform
 		x = -1
 		y = 3
-		cost = 5
+		cost = 4.3
 		#mutually_exclusive = { }
 		prerequisite = { focus = BYZ_old_doctrin }
 		ai_will_do = {
@@ -2917,9 +3979,10 @@ focus_tree = {
 	focus = {
 		id = BYZ_old_doctrin_tech
 		icon = GFX_goal_generic_axis_build_infantry
+		relative_position_id = BYZ_on_you_own_army_reform
 		x = -3
 		y = 3
-		cost = 5
+		cost = 4.3
 		#mutually_exclusive = { }
 		prerequisite = { focus = BYZ_old_doctrin }
 		ai_will_do = {
@@ -2948,9 +4011,10 @@ focus_tree = {
 	focus = {
 		id = BYZ_old_doctrin_national_spirit
 		icon = GFX_goal_generic_small_arms
+		relative_position_id = BYZ_on_you_own_army_reform
 		x = -2
 		y = 5
-		cost = 5
+		cost = 4.3
 		#mutually_exclusive = { }
 		prerequisite = { focus = BYZ_old_doctrin_tech }
 		prerequisite = { focus = BYZ_old_doctrin_doctrin }
@@ -2979,9 +4043,10 @@ focus_tree = {
 	focus = {
 		id = BYZ_new_doctrin
 		icon = GFX_focus_generic_license_production
+		relative_position_id = BYZ_on_you_own_army_reform
 		x = 2
 		y = 1
-		cost = 5
+		cost = 4.3
 		mutually_exclusive = { focus = BYZ_old_doctrin }
 		prerequisite = { focus = BYZ_on_you_own_army_reform }
 		ai_will_do = {
@@ -3007,9 +4072,10 @@ focus_tree = {
 	focus = {
 		id = BYZ_new_doctrin_doctrin
 		icon = GFX_goal_generic_army_doctrines
+		relative_position_id = BYZ_on_you_own_army_reform
 		x = 1
 		y = 3
-		cost = 5
+		cost = 4.3
 		#mutually_exclusive = { }
 		prerequisite = { focus = BYZ_new_doctrin }
 		ai_will_do = {
@@ -3038,9 +4104,10 @@ focus_tree = {
 	focus = {
 		id = BYZ_new_doctrin_tech
 		icon = GFX_focus_generic_tank_production
+		relative_position_id = BYZ_on_you_own_army_reform
 		x = 3
 		y = 3
-		cost = 5
+		cost = 4.3
 		#mutually_exclusive = { }
 		prerequisite = { focus = BYZ_new_doctrin }
 		ai_will_do = {
@@ -3069,9 +4136,10 @@ focus_tree = {
 	focus = {
 		id = BYZ_new_doctrin_national_spirit
 		icon = GFX_goal_generic_army_tanks
+		relative_position_id = BYZ_on_you_own_army_reform
 		x = 2
 		y = 5
-		cost = 5
+		cost = 4.3
 		#mutually_exclusive = { }
 		prerequisite = { focus = BYZ_new_doctrin_doctrin }
 		prerequisite = { focus = BYZ_new_doctrin_tech }
@@ -3100,23 +4168,19 @@ focus_tree = {
 	focus = {
 		id = BYZ_pru_will_help_army_reform
 		icon = GFX_focus_ger_oppose_hitler
-		x = 6
-		y = 0
-		cost = 5
+		relative_position_id = BYZ_start_army_training
+		x = 3
+		y = 1
+		cost = 4.3
 		mutually_exclusive = { focus = BYZ_on_you_own_army_reform }
-		#prerequisite = { }
+		prerequisite = { focus = BYZ_start_army_training }
 		ai_will_do = {
 			factor = 1
 		}
 		
 		#cancel = { }
 		
-		available = { 
-			OR = {
-				has_completed_focus = BYZ_decentralisation
-				has_completed_focus = BYZ_centralization 
-			}
-		}
+		#available = { }
 	
 		#bypass = { }
 		
@@ -3134,9 +4198,10 @@ focus_tree = {
 	focus = {
 		id = BYZ_pru_will_help_investmant_1
 		icon = GFX_focus_mex_privatisation
-		x = 5
+		relative_position_id = BYZ_pru_will_help_army_reform
+		x = -1
 		y = 1
-		cost = 5
+		cost = 4.3
 		#mutually_exclusive = { }
 		prerequisite = { focus = BYZ_pru_will_help_army_reform }
 		ai_will_do = {
@@ -3169,9 +4234,10 @@ focus_tree = {
 	focus = {
 		id = BYZ_pru_will_help_tech
 		icon = GFX_goal_generic_allies_build_infantry
-		x = 7
+		relative_position_id = BYZ_pru_will_help_army_reform
+		x = 1
 		y = 1
-		cost = 5
+		cost = 4.3
 		#mutually_exclusive = { }
 		prerequisite = { focus = BYZ_pru_will_help_army_reform }
 		ai_will_do = {
@@ -3206,9 +4272,10 @@ focus_tree = {
 	focus = {
 		id = BYZ_pru_will_help_national_spirit
 		icon = GFX_goal_generic_demand_territory
-		x = 6
+		relative_position_id = BYZ_pru_will_help_army_reform
+		x = 0
 		y = 2
-		cost = 5
+		cost = 4.3
 		#mutually_exclusive = { }
 		prerequisite = { focus = BYZ_pru_will_help_investmant_1 }
 		prerequisite = { focus = BYZ_pru_will_help_tech }
@@ -3236,9 +4303,10 @@ focus_tree = {
 	focus = {
 		id = BYZ_pru_will_help_investmant_2
 		icon = GFX_focus_usa_reestablish_the_gold_standard
-		x = 5
+		relative_position_id = BYZ_pru_will_help_army_reform
+		x = -1
 		y = 3
-		cost = 5
+		cost = 4.3
 		#mutually_exclusive = { }
 		prerequisite = { focus = BYZ_pru_will_help_national_spirit }
 		ai_will_do = {
@@ -3280,9 +4348,10 @@ focus_tree = {
 	focus = {
 		id = BYZ_pru_will_help_doctrin
 		icon = GFX_goal_generic_army_doctrines
-		x = 7
+		relative_position_id = BYZ_pru_will_help_army_reform
+		x = 1
 		y = 3
-		cost = 5
+		cost = 4.3
 		#mutually_exclusive = { }
 		prerequisite = { focus = BYZ_pru_will_help_national_spirit }
 		ai_will_do = {
@@ -3311,9 +4380,10 @@ focus_tree = {
 	focus = {
 		id = BYZ_pru_will_help_complete
 		icon = GFX_focus_ger_return_of_the_kaiser
-		x = 6
+		relative_position_id = BYZ_pru_will_help_army_reform
+		x = 0
 		y = 6
-		cost = 5
+		cost = 4.3
 		#mutually_exclusive = { }
 		prerequisite = { focus = BYZ_pru_will_help_investmant_2 }
 		prerequisite = { focus = BYZ_pru_will_help_doctrin }
@@ -3342,9 +4412,10 @@ focus_tree = {
 	focus = {
 		id = BYZ_army_reform_complete
 		icon = GFX_focus_GRE_byzantine_themata
-		x = 3
-		y = 7
-		cost = 5
+		relative_position_id = BYZ_start_army_training
+		x = 0
+		y = 8
+		cost = 4.3
 		#mutually_exclusive = { }
 		prerequisite = { focus = BYZ_on_you_own_army_complete focus = BYZ_pru_will_help_complete }
 		ai_will_do = {
@@ -3353,9 +4424,7 @@ focus_tree = {
 		
 		#cancel = { }
 		
-		available = { 
-			owns_state = 731
-		}
+		#available = { }
 	
 		#bypass = { }
 		
@@ -3389,6 +4458,31 @@ focus_tree = {
 					add_idea = byz_pru_army_3
 				}
 			}
+			if = {
+				limit = {
+					OR = {
+						NOT = {
+							has_idea = byz_old_army_1
+						}
+						NOT = {
+							has_idea = byz_old_army_2
+						}
+						NOT = {
+							has_idea = byz_new_army_1
+						}
+						NOT = {
+							has_idea = byz_new_army_2
+						}
+						NOT = {
+							has_idea = byz_pru_army_1
+						}
+						NOT = {
+							has_idea = byz_pru_army_2
+						}
+					}
+				}
+				custom_effect_tooltip = byz_bonus_via_take_focus
+			}
 		}
 	}
 	
@@ -3397,11 +4491,12 @@ focus_tree = {
 	focus = {
 		id = BYZ_navy_modernization
 		icon = GFX_goal_generic_amphibious_assault
-		x = 38
-		y = 0
-		cost = 5
+		relative_position_id = BYZ_start_army_training
+		x = -14
+		y = 1
+		cost = 4.3
 		#mutually_exclusive = { }
-		#prerequisite = { }
+		prerequisite = { focus = BYZ_start_army_training }
 		ai_will_do = {
 			factor = 1000
 		}
@@ -3409,10 +4504,6 @@ focus_tree = {
 		#cancel = { }
 		
 		available = { 
-			OR = {
-				has_completed_focus = BYZ_decentralisation
-				has_completed_focus = BYZ_centralization
-			}
 			owns_state = 164
 			owns_state = 182
 			owns_state = 183
@@ -3471,9 +4562,10 @@ focus_tree = {
 	focus = {
 		id = BYZ_malta_operation
 		icon = GFX_goal_generic_position_armies
-		x = 38
+		relative_position_id = BYZ_navy_modernization
+		x = 0
 		y = 1
-		cost = 5
+		cost = 4.3
 		#mutually_exclusive = { }
 		prerequisite = { focus = BYZ_navy_modernization }
 		ai_will_do = {
@@ -3498,9 +4590,10 @@ focus_tree = {
 	focus = {
 		id = BYZ_gate_to_mediterranean
 		icon = GFX_goal_generic_intelligence_exchange
-		x = 38
+		relative_position_id = BYZ_navy_modernization
+		x = 0
 		y = 2
-		cost = 5
+		cost = 4.3
 		#mutually_exclusive = { }
 		prerequisite = { focus = BYZ_malta_operation }
 		ai_will_do = {
@@ -3526,9 +4619,10 @@ focus_tree = {
 	focus = {
 		id = BYZ_mediterranean_sea_maneurvers
 		icon = GFX_goal_generic_navy_battleship
-		x = 34
+		relative_position_id = BYZ_navy_modernization
+		x = -4
 		y = 1
-		cost = 5
+		cost = 4.3
 		#mutually_exclusive = { }
 		prerequisite = { focus = BYZ_navy_modernization }
 		ai_will_do = {
@@ -3557,9 +4651,10 @@ focus_tree = {
 	focus = {
 		id = BYZ_tech_mediterranean_sea
 		icon = GFX_goal_generic_navy_cruiser
-		x = 33
+		relative_position_id = BYZ_navy_modernization
+		x = -5
 		y = 2
-		cost = 5
+		cost = 4.3
 		#mutually_exclusive = { }
 		prerequisite = { focus = BYZ_mediterranean_sea_maneurvers }
 		ai_will_do = {
@@ -3594,9 +4689,10 @@ focus_tree = {
 	focus = {
 		id = BYZ_dockyard_mediterranean_sea
 		icon = GFX_goal_generic_construct_naval_dockyard
-		x = 35
+		relative_position_id = BYZ_navy_modernization
+		x = -3
 		y = 2
-		cost = 5
+		cost = 4.3
 		#mutually_exclusive = { }
 		prerequisite = { focus = BYZ_mediterranean_sea_maneurvers }
 		ai_will_do = {
@@ -3640,9 +4736,10 @@ focus_tree = {
 	focus = {
 		id = BYZ_embargo_ENG
 		icon = GFX_goal_generic_trade
-		x = 36
+		relative_position_id = BYZ_navy_modernization
+		x = -2
 		y = 3
-		cost = 5
+		cost = 4.3
 		#mutually_exclusive = { }
 		prerequisite = { focus = BYZ_tech_mediterranean_sea }
 		prerequisite = { focus = BYZ_dockyard_mediterranean_sea }
@@ -3673,9 +4770,10 @@ focus_tree = {
 	focus = {
 		id = BYZ_black_sea_maneurvers
 		icon = GFX_goal_generic_navy_anti_submarine
-		x = 42
+		relative_position_id = BYZ_navy_modernization
+		x = 4
 		y = 1
-		cost = 5
+		cost = 4.3
 		#mutually_exclusive = { }
 		prerequisite = { focus = BYZ_navy_modernization }
 		ai_will_do = {
@@ -3704,9 +4802,10 @@ focus_tree = {
 	focus = {
 		id = BYZ_dockyard_black_sea
 		icon = GFX_goal_generic_navy_doctrines_tactics
-		x = 41
+		relative_position_id = BYZ_navy_modernization
+		x = 3
 		y = 2
-		cost = 5
+		cost = 4.3
 		#mutually_exclusive = { }
 		prerequisite = { focus = BYZ_black_sea_maneurvers }
 		ai_will_do = {
@@ -3750,9 +4849,10 @@ focus_tree = {
 	focus = {
 		id = BYZ_tech_black_sea
 		icon = GFX_goal_generic_navy_submarine
-		x = 43
+		relative_position_id = BYZ_navy_modernization
+		x = 5
 		y = 2
-		cost = 5
+		cost = 4.3
 		#mutually_exclusive = { }
 		prerequisite = { focus = BYZ_black_sea_maneurvers }
 		ai_will_do = {
@@ -3786,9 +4886,10 @@ focus_tree = {
 	focus = {
 		id = BYZ_embargo_RUS
 		icon = GFX_goal_generic_trade
-		x = 40
+		relative_position_id = BYZ_navy_modernization
+		x = 2
 		y = 3
-		cost = 5
+		cost = 4.3
 		#mutually_exclusive = { }
 		prerequisite = { focus = BYZ_gate_to_mediterranean }
 		prerequisite = { focus = BYZ_dockyard_black_sea }
@@ -3819,9 +4920,10 @@ focus_tree = {
 	focus = {
 		id = BYZ_true_king_of_mediterranean
 		icon = GFX_goal_generic_positive_trade_relations
-		x = 38
+		relative_position_id = BYZ_navy_modernization
+		x = 0
 		y = 4
-		cost = 5
+		cost = 4.3
 		#mutually_exclusive = { }
 		prerequisite = { focus = BYZ_embargo_ENG }
 		prerequisite = { focus = BYZ_embargo_RUS }
@@ -3845,14 +4947,740 @@ focus_tree = {
 		}
 	}
 	
+	#Air test
+	
+	focus = {
+		id = BYZ_test_new_type_of_army
+		icon = GFX_goal_generic_build_airforce
+		relative_position_id = BYZ_start_army_training
+		x = 11
+		y = 1
+		cost = 4.3
+		#mutually_exclusive = { }
+		prerequisite = { focus = BYZ_start_army_training }
+		ai_will_do = {
+			factor = 1000
+		}
+		
+		#cancel = { }
+		
+		available = { has_air_experience > 50.00 }
+	
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			set_technology = {
+				early_fighter = 1
+				naval_bomber1 = 1
+				fighter1 = 1
+				CAS1 = 1
+				early_bomber = 1
+				strategic_bomber1 = 1
+			}
+		}
+	}
+	
+	focus = {
+		id = BYZ_main_air_base
+		icon = GFX_goal_generic_air_production
+		relative_position_id = BYZ_test_new_type_of_army
+		x = 0
+		y = 2
+		cost = 4.3
+		#mutually_exclusive = { }
+		prerequisite = { focus = BYZ_test_new_type_of_army }
+		ai_will_do = {
+			factor = 1000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+	
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			797 = {
+				add_building_construction = {
+					type = air_base
+					level = 5
+					instant_build = yes
+				}
+			}
+			799 = {
+				add_building_construction = {
+					type = air_base
+					level = 3
+					instant_build = yes
+				}
+			}
+			231 = {
+				add_building_construction = {
+					type = air_base
+					level = 3
+					instant_build = yes
+				}
+			}
+			291 = {
+				add_building_construction = {
+					type = air_base
+					level = 3
+					instant_build = yes
+				}
+			}
+			882 = {
+				add_building_construction = {
+					type = air_base
+					level = 3
+					instant_build = yes
+				}
+			}
+			447 = {
+				add_building_construction = {
+					type = air_base
+					level = 3
+					instant_build = yes
+				}
+			}
+		}
+	}
+	
+	focus = {
+		id = BYZ_first_world_radar
+		icon = GFX_goal_generic_radar
+		relative_position_id = BYZ_test_new_type_of_army
+		x = 0
+		y = 4
+		cost = 4.3
+		#mutually_exclusive = { }
+		prerequisite = { focus = BYZ_main_air_base }
+		ai_will_do = {
+			factor = 1000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+	
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			797 = {
+				add_building_construction = {
+					type = radar_station
+					level = 2
+					instant_build = yes
+				}
+			}
+			799 = {
+				add_building_construction = {
+					type = radar_station
+					level = 1
+					instant_build = yes
+				}
+			}
+			231 = {
+				add_building_construction = {
+					type = radar_station
+					level = 1
+					instant_build = yes
+				}
+			}
+			291 = {
+				add_building_construction = {
+					type = radar_station
+					level = 1
+					instant_build = yes
+				}
+			}
+			882 = {
+				add_building_construction = {
+					type = radar_station
+					level = 1
+					instant_build = yes
+				}
+			}
+			447 = {
+				add_building_construction = {
+					type = radar_station
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+	
+	focus = {
+		id = BYZ_air_final
+		icon = GFX_goal_generic_air_doctrine
+		relative_position_id = BYZ_test_new_type_of_army
+		x = 0
+		y = 6
+		cost = 4.3
+		#mutually_exclusive = { }
+		prerequisite = { focus = BYZ_fast_air_battle_idea focus = BYZ_bombing_to_stone_age_idea }
+		prerequisite = { focus = BYZ_first_world_radar }
+		ai_will_do = {
+			factor = 1000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+	
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			if = {
+				limit = {
+					has_idea = byz_fab_2
+				}
+				swap_ideas = {
+					remove_idea = byz_fab_2
+					add_idea = byz_fab_3
+				}
+			}
+			if = {
+				limit = {
+					has_idea = byz_bsa_2
+				}
+				swap_ideas = {
+					remove_idea = byz_bsa_2
+					add_idea = byz_bsa_3
+				}
+			}
+			if = {
+				limit = {
+					OR = {
+						NOT = {
+							has_idea = byz_fab_1
+						}
+						NOT = {
+							has_idea = byz_fab_2
+						}
+						NOT = {
+							has_idea = byz_bsa_1
+						}
+						NOT = {
+							has_idea = byz_bsa_2
+						}
+					}
+				}
+				custom_effect_tooltip = byz_bonus_via_take_focus
+			}
+		}
+	}
+	
+	#Fast air battle
+	
+	focus = {
+		id = BYZ_fast_air_battle
+		icon = GFX_goal_generic_air_fighter
+		relative_position_id = BYZ_test_new_type_of_army
+		x = -3
+		y = 1
+		cost = 4.3
+		mutually_exclusive = { focus = BYZ_bombing_to_stone_age }
+		prerequisite = { focus = BYZ_test_new_type_of_army }
+		ai_will_do = {
+			factor = 1000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+	
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_ideas = byz_fab_1
+			add_doctrine_cost_reduction = {
+				cost_reduction = 0.5
+				uses = 1
+				category = cat_battlefield_support
+			}
+		}
+	}
+	
+	focus = {
+		id = BYZ_fast_air_battle_tech
+		icon = GFX_goal_generic_air_fighter2
+		relative_position_id = BYZ_test_new_type_of_army
+		x = -4
+		y = 2
+		cost = 4.3
+		#mutually_exclusive = { }
+		prerequisite = { focus = BYZ_fast_air_battle }
+		ai_will_do = {
+			factor = 1000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+	
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 0.5
+				uses = 2
+				category = light_fighter
+				category = cas_bomber
+			}
+		}
+	}
+	
+	focus = {
+		id = BYZ_fast_air_battle_building
+		icon = GFX_goal_generic_construction
+		relative_position_id = BYZ_test_new_type_of_army
+		x = -2
+		y = 2
+		cost = 4.3
+		#mutually_exclusive = { }
+		prerequisite = { focus = BYZ_fast_air_battle }
+		ai_will_do = {
+			factor = 1000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+	
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			232 = {
+				add_building_construction = {
+					type = air_base
+					level = 3
+					instant_build = yes
+				}
+			}
+			233 = {
+				add_building_construction = {
+					type = air_base
+					level = 3
+					instant_build = yes
+				}
+			}
+		}
+	}
+	
+	focus = {
+		id = BYZ_fast_air_battle_test
+		icon = GFX_focus_generic_air_defense
+		relative_position_id = BYZ_test_new_type_of_army
+		x = -3
+		y = 3
+		cost = 4.3
+		#mutually_exclusive = { }
+		prerequisite = { focus = BYZ_fast_air_battle_tech }
+		prerequisite = { focus = BYZ_fast_air_battle_building }
+		ai_will_do = {
+			factor = 1000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+	
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			air_experience = 50
+		}
+	}
+	
+	focus = {
+		id = BYZ_fast_air_battle_tech_1
+		icon = GFX_focus_usa_escort_fighters
+		relative_position_id = BYZ_test_new_type_of_army
+		x = -4
+		y = 4
+		cost = 4.3
+		#mutually_exclusive = { }
+		prerequisite = { focus = BYZ_fast_air_battle_test }
+		ai_will_do = {
+			factor = 1000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+	
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 1.0
+				uses = 2
+				category = light_fighter
+				category = cas_bomber
+			}
+		}
+	}
+	
+	focus = {
+		id = BYZ_fast_air_battle_building_1
+		icon = GFX_goal_generic_construct_civilian
+		relative_position_id = BYZ_test_new_type_of_army
+		x = -2
+		y = 4
+		cost = 4.3
+		#mutually_exclusive = { }
+		prerequisite = { focus = BYZ_fast_air_battle_test }
+		ai_will_do = {
+			factor = 1000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+	
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			229 = {
+				add_building_construction = {
+					type = air_base
+					level = 2
+					instant_build = yes
+				}
+			}
+			231 = {
+				add_building_construction = {
+					type = air_base
+					level = 2
+					instant_build = yes
+				}
+			}
+			232 = {
+				add_building_construction = {
+					type = air_base
+					level = 2
+					instant_build = yes
+				}
+			}
+			233 = {
+				add_building_construction = {
+					type = air_base
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+	
+	focus = {
+		id = BYZ_fast_air_battle_idea
+		icon = GFX_goal_generic_CAS
+		relative_position_id = BYZ_test_new_type_of_army
+		x = -3
+		y = 5
+		cost = 4.3
+		#mutually_exclusive = { }
+		prerequisite = { focus = BYZ_fast_air_battle_tech_1 }
+		prerequisite = { focus = BYZ_fast_air_battle_building_1 }
+		ai_will_do = {
+			factor = 1000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+	
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = byz_fab_1
+				add_idea = byz_fab_2
+			}
+		}
+	}
+	
+	#Bombing to stone Age
+	
+	focus = {
+		id = BYZ_bombing_to_stone_age
+		icon = GFX_goal_generic_air_bomber
+		relative_position_id = BYZ_test_new_type_of_army
+		x = 3
+		y = 1
+		cost = 4.3
+		mutually_exclusive = { focus = BYZ_fast_air_battle }
+		prerequisite = { focus = BYZ_test_new_type_of_army }
+		ai_will_do = {
+			factor = 1000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+	
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_ideas = byz_bsa_1
+			add_doctrine_cost_reduction = {
+				cost_reduction = 0.5
+				uses = 1
+				category = cat_strategic_destruction
+			}
+		}
+	}
+	
+	focus = {
+		id = BYZ_bombing_to_stone_age_tech
+		icon = GFX_goal_generic_air_naval_bomber
+		relative_position_id = BYZ_test_new_type_of_army
+		x = 4
+		y = 2
+		cost = 4.3
+		#mutually_exclusive = { }
+		prerequisite = { focus = BYZ_bombing_to_stone_age }
+		ai_will_do = {
+			factor = 1000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+	
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 0.5
+				uses = 2
+				category = tactical_bomber
+				category = cat_strategic_bomber
+			}
+		}
+	}
+	
+	focus = {
+		id = BYZ_bombing_to_stone_age_building
+		icon = GFX_goal_generic_construction
+		relative_position_id = BYZ_test_new_type_of_army
+		x = 2
+		y = 2
+		cost = 4.3
+		#mutually_exclusive = { }
+		prerequisite = { focus = BYZ_bombing_to_stone_age }
+		ai_will_do = {
+			factor = 1000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+	
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			230 = {
+				add_building_construction = {
+					type = air_base
+					level = 5
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = anti_air_building
+					level = 3
+					instant_build = yes
+				}
+			}
+		}
+	}
+	
+	focus = {
+		id = BYZ_bombing_to_stone_age_test
+		icon = GFX_focus_eng_special_air_service
+		relative_position_id = BYZ_test_new_type_of_army
+		x = 3
+		y = 3
+		cost = 4.3
+		#mutually_exclusive = { }
+		prerequisite = { focus = BYZ_bombing_to_stone_age_tech }
+		prerequisite = { focus = BYZ_bombing_to_stone_age_building }
+		ai_will_do = {
+			factor = 1000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+	
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			air_experience = 50
+		}
+	}
+	
+	focus = {
+		id = BYZ_bombing_to_stone_age_tech_1
+		icon = GFX_focus_generic_cryptologic_bomb
+		relative_position_id = BYZ_test_new_type_of_army
+		x = 4
+		y = 4
+		cost = 4.3
+		#mutually_exclusive = { }
+		prerequisite = { focus = BYZ_bombing_to_stone_age_test }
+		ai_will_do = {
+			factor = 1000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+	
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 1.0
+				uses = 2
+				category = tactical_bomber
+				category = cat_strategic_bomber
+			}
+		}
+	}
+	
+	focus = {
+		id = BYZ_bombing_to_stone_age_building_1
+		icon = GFX_goal_generic_construct_civilian
+		relative_position_id = BYZ_test_new_type_of_army
+		x = 2
+		y = 4
+		cost = 4.3
+		#mutually_exclusive = { }
+		prerequisite = { focus = BYZ_bombing_to_stone_age_test }
+		ai_will_do = {
+			factor = 1000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+	
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			230 = {
+				add_building_construction = {
+					type = air_base
+					level = 4
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = anti_air_building
+					level = 2
+					instant_build = yes
+				}
+			}
+			230 = {
+				add_building_construction = {
+					type = air_base
+					level = 5
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = anti_air_building
+					level = 2
+					instant_build = yes
+				}
+			}
+			231 = {
+				add_building_construction = {
+					type = air_base
+					level = 4
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = anti_air_building
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+	
+	focus = {
+		id = BYZ_bombing_to_stone_age_idea
+		icon = GFX_goal_generic_CAS
+		relative_position_id = BYZ_test_new_type_of_army
+		x = 3
+		y = 5
+		cost = 4.3
+		#mutually_exclusive = { }
+		prerequisite = { focus = BYZ_bombing_to_stone_age_tech_1 }
+		prerequisite = { focus = BYZ_bombing_to_stone_age_building_1 }
+		ai_will_do = {
+			factor = 1000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+	
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = byz_bsa_1
+				add_idea = byz_bsa_2
+			}
+		}
+	}
+	
 	#Colonia_quest
 	
 	focus = {
 		id = BYZ_colonial_quest
 		icon = GFX_goal_anschluss
-		x = 38
-		y = 7
-		cost = 5
+		x = -20
+		y = 8
+		cost = 4.3
 		#mutually_exclusive = { }
 		#prerequisite = { }
 		ai_will_do = {
@@ -3880,9 +5708,10 @@ focus_tree = {
 	focus = {
 		id = BYZ_colonial_diplomacy_MRH
 		icon = GFX_goal_continuous_def_against_influence
-		x = 38
-		y = 8
-		cost = 5
+		relative_position_id = BYZ_colonial_quest
+		x = 0
+		y = 1
+		cost = 4.3
 		#mutually_exclusive = { }
 		prerequisite = { focus = BYZ_colonial_quest }
 		ai_will_do = {
@@ -3905,9 +5734,10 @@ focus_tree = {
 	focus = {
 		id = BYZ_colonial_diplomacy_ZIM
 		icon = GFX_goal_generic_defence
-		x = 38
-		y = 9
-		cost = 5
+		relative_position_id = BYZ_colonial_quest
+		x = 0
+		y = 2
+		cost = 4.3
 		#mutually_exclusive = { }
 		prerequisite = { focus = BYZ_colonial_diplomacy_MRH }
 		ai_will_do = {
@@ -3930,9 +5760,10 @@ focus_tree = {
 	focus = {
 		id = BYZ_colonial_conference
 		icon = GFX_goal_generic_intelligence_exchange
-		x = 38
-		y = 10
-		cost = 5
+		relative_position_id = BYZ_colonial_quest
+		x = 0
+		y = 3
+		cost = 4.3
 		#mutually_exclusive = { }
 		prerequisite = { focus = BYZ_colonial_diplomacy_ZIM }
 		ai_will_do = {
@@ -3955,9 +5786,10 @@ focus_tree = {
 	focus = {
 		id = BYZ_colonial_trade
 		icon = GFX_goal_generic_positive_trade_relations
-		x = 37
-		y = 11
-		cost = 5
+		relative_position_id = BYZ_colonial_quest
+		x = -1
+		y = 4
+		cost = 4.3
 		#mutually_exclusive = { }
 		prerequisite = { focus = BYZ_afrika_investment_3 }
 		prerequisite = { focus = BYZ_afrika_help_2 }
@@ -4062,9 +5894,10 @@ focus_tree = {
 	focus = {
 		id = BYZ_colonial_gold
 		icon = GFX_goal_generic_position_armies
-		x = 39
-		y = 11
-		cost = 5
+		relative_position_id = BYZ_colonial_quest
+		x = 1
+		y = 4
+		cost = 4.3
 		#mutually_exclusive = { }
 		prerequisite = { focus = BYZ_afrika_investment_3 }
 		prerequisite = { focus = BYZ_afrika_help_2 }
@@ -4105,9 +5938,10 @@ focus_tree = {
 	focus = {
 		id = BYZ_afrika_investment_1
 		icon = GFX_focus_generic_africa_infrastructure
-		x = 34
-		y = 8
-		cost = 5
+		relative_position_id = BYZ_colonial_quest
+		x = -4
+		y = 1
+		cost = 4.3
 		#mutually_exclusive = { }
 		prerequisite = { focus = BYZ_colonial_quest }
 		ai_will_do = {
@@ -4150,9 +5984,10 @@ focus_tree = {
 	focus = {
 		id = BYZ_afrika_investment_2
 		icon = GFX_focus_generic_africa_factory
-		x = 32
-		y = 9
-		cost = 5
+		relative_position_id = BYZ_colonial_quest
+		x = -6
+		y = 2
+		cost = 4.3
 		#mutually_exclusive = { }
 		prerequisite = { focus = BYZ_afrika_investment_1 }
 		ai_will_do = {
@@ -4198,9 +6033,10 @@ focus_tree = {
 	focus = {
 		id = BYZ_afrika_investment_3
 		icon = GFX_focus_generic_africa_production
-		x = 32
-		y = 10
-		cost = 5
+		relative_position_id = BYZ_colonial_quest
+		x = -6
+		y = 3
+		cost = 4.3
 		#mutually_exclusive = { }
 		prerequisite = { focus = BYZ_afrika_investment_2 }
 		ai_will_do = {
@@ -4246,9 +6082,10 @@ focus_tree = {
 	focus = {
 		id = BYZ_afrika_help_1
 		icon = GFX_goal_generic_neutrality_focus
-		x = 36
-		y = 9
-		cost = 5
+		relative_position_id = BYZ_colonial_quest
+		x = -2
+		y = 2
+		cost = 4.3
 		#mutually_exclusive = { }
 		prerequisite = { focus = BYZ_afrika_investment_1 }
 		ai_will_do = {
@@ -4274,9 +6111,10 @@ focus_tree = {
 	focus = {
 		id = BYZ_afrika_help_2
 		icon = GFX_focus_generic_manpower
-		x = 36
-		y = 10
-		cost = 5
+		relative_position_id = BYZ_colonial_quest
+		x = -2
+		y = 3
+		cost = 4.3
 		#mutually_exclusive = { }
 		prerequisite = { focus = BYZ_afrika_help_1 }
 		ai_will_do = {
@@ -4307,9 +6145,10 @@ focus_tree = {
 	focus = {
 		id = BYZ_india_investment_1
 		icon = GFX_goal_generic_construct_infrastructure
-		x = 42
-		y = 8
-		cost = 5
+		relative_position_id = BYZ_colonial_quest
+		x = 4
+		y = 1
+		cost = 4.3
 		#mutually_exclusive = { }
 		prerequisite = { focus = BYZ_colonial_quest }
 		ai_will_do = {
@@ -4359,9 +6198,10 @@ focus_tree = {
 	focus = {
 		id = BYZ_india_investment_2
 		icon = GFX_goal_generic_construct_civ_factory
-		x = 44
-		y = 9
-		cost = 5
+		relative_position_id = BYZ_colonial_quest
+		x = 6
+		y = 2
+		cost = 4.3
 		#mutually_exclusive = { }
 		prerequisite = { focus = BYZ_india_investment_1 }
 		ai_will_do = {
@@ -4415,9 +6255,10 @@ focus_tree = {
 	focus = {
 		id = BYZ_india_investment_3
 		icon = GFX_goal_generic_construct_mil_factory
-		x = 44
-		y = 10
-		cost = 5
+		relative_position_id = BYZ_colonial_quest
+		x = 6
+		y = 3
+		cost = 4.3
 		#mutually_exclusive = { }
 		prerequisite = { focus = BYZ_india_investment_2 }
 		ai_will_do = {
@@ -4471,9 +6312,10 @@ focus_tree = {
 	focus = {
 		id = BYZ_india_help_1
 		icon = GFX_focus_generic_concessions
-		x = 40
-		y = 9
-		cost = 5
+		relative_position_id = BYZ_colonial_quest
+		x = 2
+		y = 2
+		cost = 4.3
 		#mutually_exclusive = { }
 		prerequisite = { focus = BYZ_india_investment_1 }
 		ai_will_do = {
@@ -4499,9 +6341,10 @@ focus_tree = {
 	focus = {
 		id = BYZ_india_help_2
 		icon = GFX_focus_generic_military_mission
-		x = 40
-		y = 10
-		cost = 5
+		relative_position_id = BYZ_colonial_quest
+		x = 2
+		y = 3
+		cost = 4.3
 		#mutually_exclusive = { }
 		prerequisite = { focus = BYZ_india_help_1 }
 		ai_will_do = {
@@ -4531,25 +6374,20 @@ focus_tree = {
 	focus = {
 		id = BYZ_imperial_reform
 		icon = GFX_goal_generic_propaganda
-		x = 20
-		y = 14
-		cost = 5
+		relative_position_id = BYZ_fourth_senat_meeting
+		x = 0
+		y = 1
+		cost = 4.3
 		#mutually_exclusive = { }
-		#prerequisite = { }
+		prerequisite = { focus = BYZ_fourth_senat_meeting }
 		ai_will_do = {
 			factor = 2500
 		}
 		
 		#cancel = { }
 		
-		available = { 
-			OR = {
-				has_completed_focus = BYZ_decentralisation
-				has_completed_focus = BYZ_centralization
-			}
-			is_in_faction_with = PRU
-		}
-		
+		#available = { }
+	
 		#bypass = { }
 		
 		#search_filters = {  }
@@ -4563,9 +6401,10 @@ focus_tree = {
 	focus = {
 		id = BYZ_imperial_reform_senat
 		icon = GFX_focus_usa_voter_registration_act
-		x = 20
-		y = 15
-		cost = 5
+		relative_position_id = BYZ_fourth_senat_meeting
+		x = 0
+		y = 1
+		cost = 4.3
 		#mutually_exclusive = { }
 		prerequisite = { focus = BYZ_imperial_reform }
 		ai_will_do = {
@@ -4588,9 +6427,10 @@ focus_tree = {
 	focus = {
 		id = BYZ_imperial_reform_people
 		icon = GFX_goal_generic_neutrality_focus
-		x = 17
-		y = 16
-		cost = 5
+		relative_position_id = BYZ_fourth_senat_meeting
+		x = -2
+		y = 2
+		cost = 4.3
 		#mutually_exclusive = { }
 		prerequisite = { focus = BYZ_imperial_reform_senat }
 		ai_will_do = {
@@ -4613,9 +6453,10 @@ focus_tree = {
 	focus = {
 		id = BYZ_imperial_reform_slave
 		icon = GFX_goal_generic_national_unity
-		x = 20
-		y = 16
-		cost = 5
+		relative_position_id = BYZ_fourth_senat_meeting
+		x = 0
+		y = 2
+		cost = 4.3
 		#mutually_exclusive = { }
 		prerequisite = { focus = BYZ_imperial_reform_senat }
 		ai_will_do = {
@@ -4638,9 +6479,10 @@ focus_tree = {
 	focus = {
 		id = BYZ_imperial_reform_religion
 		icon = GFX_focus_GRE_an_orthodox_state
-		x = 23
-		y = 16
-		cost = 5
+		relative_position_id = BYZ_fourth_senat_meeting
+		x = 2
+		y = 2
+		cost = 4.3
 		#mutually_exclusive = { }
 		prerequisite = { focus = BYZ_imperial_reform_senat }
 		ai_will_do = {
@@ -4663,9 +6505,10 @@ focus_tree = {
 	focus = {
 		id = BYZ_imperial_reform_economic
 		icon = GFX_goal_generic_positive_trade_relations
-		x = 18
-		y = 17
-		cost = 5
+		relative_position_id = BYZ_fourth_senat_meeting
+		x = -1
+		y = 3
+		cost = 4.3
 		#mutually_exclusive = { }
 		prerequisite = { focus = BYZ_imperial_reform_senat }
 		ai_will_do = {
@@ -4688,9 +6531,10 @@ focus_tree = {
 	focus = {
 		id = BYZ_imperial_reform_law
 		icon = GFX_focus_hol_abandon_the_gold_standard
-		x = 22
-		y = 17
-		cost = 5
+		relative_position_id = BYZ_fourth_senat_meeting
+		x = 1
+		y = 3
+		cost = 4.3
 		#mutually_exclusive = { }
 		prerequisite = { focus = BYZ_imperial_reform_senat }
 		ai_will_do = {
@@ -4713,9 +6557,10 @@ focus_tree = {
 	focus = {
 		id = BYZ_imperial_new_system
 		icon = GFX_focus_hol_the_foundations_of_defense
-		x = 20
-		y = 18
-		cost = 5
+		relative_position_id = BYZ_fourth_senat_meeting
+		x = 0
+		y = 4
+		cost = 4.3
 		#mutually_exclusive = { }
 		prerequisite = { focus = BYZ_imperial_reform_people }
 		prerequisite = { focus = BYZ_imperial_reform_economic }
@@ -4782,7 +6627,7 @@ focus_tree = {
 					desc = "POLITICS_MIHAEL_IV_ZAHAREAS_SOC_DESC"
 					picture = "gfx/leaders/BYZ/Portrait_Mikhail_IV_Zahareas.dds"
 					expire = "1900.1.1"
-					ideology = natianal_socialsm
+					ideology = social_monarchism
 					traits = {
 						red_empire
 					}
@@ -4894,9 +6739,11 @@ focus_tree = {
 	focus = {
 		id = BYZ_purple_dawn
 		icon = GFX_focus_GRE_reviving_the_double_headed_eagle
-		x = 20
-		y = 20
+		relative_position_id = BYZ_eighth_senat_meeting
+		x = 0
+		y = 1
 		cost = 4.3
+		prerequisite = { focus = BYZ_eighth_senat_meeting }
 		#mutually_exclusive = { }
 		ai_will_do = {
 			factor = 2500
