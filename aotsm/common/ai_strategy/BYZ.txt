@@ -1,10 +1,13 @@
 BYZ_unit_production = {
+
 	allowed = {
 		original_tag = BYZ
 	}
+	
 	enable = {
 		always = yes
 	}
+	
 	abort = {
 		always = no
 	}
@@ -42,25 +45,25 @@ BYZ_unit_production = {
 	ai_strategy = {
 		type = role_ratio
 		id = motorized
-		value = 5 
+		value = 25
 	}
 
 	ai_strategy = {
 		type = role_ratio
 		id = mechanized
-		value = 15
+		value = 25
 	}
 
 	ai_strategy = {
 		type = role_ratio
 		id = armor
-		value = 40
+		value = 25
 	}
 
 	ai_strategy = {
 		type = role_ratio
 		id = infantry
-		value = 60
+		value = 50
 	}
 
 	#Air unit factors
@@ -175,64 +178,54 @@ BYZ_unit_production = {
 	ai_strategy = {
 		type = equipment_production_factor
 		id = armor
-		value = 20
+		value = 30
 	}
+	
 	ai_strategy = {
 		type = equipment_production_factor
 		id = motorized
 		value = 20
 	}
+	
 	ai_strategy = {
 		type = equipment_production_min_factories
 		id = anti_air
 		value = 2
 	}
+	
 	ai_strategy = {
 		type = equipment_production_min_factories
 		id = artillery
 		value = 4
 	}
+	
 	ai_strategy = {
 		type = equipment_production_min_factories
 		id = fighter
 		value = 4
 	}
+	
 	ai_strategy = {
 		type = equipment_variant_production_factor
 		id = strat_bomber_equipment
 		value = 20
 	}
+	
 	ai_strategy = {
 		type = equipment_variant_production_factor
 		id = support_equipment
 		value = 30
 	}
-
+	
+	ai_strategy = {
+		type = equipment_production_min_factories
+		id = armor
+		value = 10
+	}
+	
 	ai_strategy = { 
 		type = railway_gun_divisions_ratio
 		value = 1
-	}
-}
-
-byz_not_only_infantry = {
-
-	allowed = {
-		original_tag = BYZ
-	}
-	
-	enable = {
-		has_army_size = {
-			size > 80
-			type = infantry
-		}
-	}
-	
-	abort_when_not_enabled = yes
-	
-	ai_strategy = {
-		type = role_ratio
-		id = infantry
-		value = -100
 	}
 }
 
@@ -242,7 +235,7 @@ byz_halt_light_armor_production_in_transitioning = {
 	}
 	enable = {
 		has_template_majority_unit = medium_armor
-		has_equipment = { light_tank_chassis > 500 }
+		has_equipment = { light_tank_chassis > 2500 }
 	}
 	
 	abort_when_not_enabled = yes
@@ -259,16 +252,16 @@ byz_highered_armored_production = {
 		original_tag = BYZ
 	}
 	enable = {
-		num_of_military_factories > 74
+		num_of_military_factories > 109
 	}
 	abort = {
-		num_of_military_factories < 75
+		num_of_military_factories < 110
 	}
 
 	ai_strategy = {
 		type = role_ratio
 		id = armor
-		value = 30
+		value = 20
 	}
 }
 
@@ -372,7 +365,7 @@ byz_super_boost_light_for_modern_armor = {
 	}
 }
 
-ignor_parfia = {
+ignor_persia = {
 	allowed = {
 		original_tag = BYZ
 	}
@@ -389,6 +382,27 @@ ignor_parfia = {
 	ai_strategy = {
 		type = ignore
 		id = "PER"
+		value = 100
+	}
+}
+
+ignor_parfia = {
+	allowed = {
+		original_tag = BYZ
+	}
+	enable = {
+		date < 1855.6.15
+		country_exists = RUS
+		country_exists = PAR
+	}
+	abort = {
+		NOT = { country_exists = RUS }
+		date > 1855.6.15
+	}
+
+	ai_strategy = {
+		type = ignore
+		id = "PAR"
 		value = 100
 	}
 }
@@ -494,7 +508,7 @@ byz_xp_upgrade_spending_land = {
 	}
 }
 
-USA_home_land_is_safe = {
+byz_home_land_is_safe = {
 	allowed = { 
 		original_tag = BYZ 
 	}
@@ -788,28 +802,24 @@ byz_invasion_in_italy = {
 	}
 
 	ai_strategy = {
-		type = front_control
-		ordertype = invasion
-        execute_order = yes
-		tag = "SAR"
-		priority = 10
+		type = invade
+		id = "SAR"
+		value = 200
 	}
 	
 	ai_strategy = {
-		type = front_control
-		ordertype = invasion
-        execute_order = yes
-		tag = "PAP"
-		priority = 10
+		type = invade
+		id = "PAP"
+		value = 200
 	}
+
 	
 	ai_strategy = {
-		type = front_control
-		ordertype = invasion
-        execute_order = yes
-		tag = "SYC"
-		priority = 10
+		type = invade
+		id = "SYC"
+		value = 200
 	}
+
 }
 
 dont_late_inavasions_in_britain = {
@@ -819,12 +829,12 @@ dont_late_inavasions_in_britain = {
 	}
 	
 	enable = {
-		date < 1854.4.1
+		date < 1855.6.15
 		has_war_with = CBI
 	}
 	
 	abort = {
-		date > 1855.4.1
+		date > 1855.6.15
 	}
 	
 	ai_strategy = { 
@@ -842,12 +852,12 @@ dont_late_inavasions_in_portugal = {
 	}
 	
 	enable = {
-		date < 1855.4.1
+		date < 1855.6.15
 		has_war_with = PRT
 	}
 	
 	abort = {
-		date > 1856.1.1
+		date > 1855.6.15
 	}
 	
 	ai_strategy = { 

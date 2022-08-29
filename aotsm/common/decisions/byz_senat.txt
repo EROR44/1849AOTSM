@@ -1020,6 +1020,99 @@ byz_senat_decision_category = {
 		}
 	}
 	
+	byz_tech_suppremosi_1 = {
+	
+		icon = generic_research
+		
+		allowed = {
+		}
+		
+		available = {
+		}
+		
+		visible = {
+			date > 1850.1.1
+		}
+		
+		ai_will_do = {
+			factor = 50
+			modifier = {
+				factor = 100
+				is_historical_focus_on = yes
+			}
+		}
+		
+		cost = 100
+		
+		fire_only_once = yes
+		
+		complete_effect = {
+			add_research_slot = 1
+		}
+	}
+	
+	byz_tech_suppremosi_2 = {
+	
+		icon = generic_research
+		
+		allowed = {
+		}
+		
+		available = {
+		}
+		
+		visible = {
+			date > 1851.1.1
+		}
+		
+		ai_will_do = {
+			factor = 50
+			modifier = {
+				factor = 100
+				is_historical_focus_on = yes
+			}
+		}
+		
+		cost = 100
+		
+		fire_only_once = yes
+		
+		complete_effect = {
+			add_research_slot = 1
+		}
+	}
+	
+	byz_tech_suppremosi_3 = {
+	
+		icon = generic_research
+		
+		allowed = {
+		}
+		
+		available = {
+		}
+		
+		visible = {
+			date > 1852.1.1
+		}
+		
+		ai_will_do = {
+			factor = 50
+			modifier = {
+				factor = 100
+				is_historical_focus_on = yes
+			}
+		}
+		
+		cost = 100
+		
+		fire_only_once = yes
+		
+		complete_effect = {
+			add_research_slot = 1
+		}
+	}
+	
 	byz_persia_civil_war = {
 	
 		icon = generic_ignite_civil_war
@@ -1051,6 +1144,120 @@ byz_senat_decision_category = {
 				country_event = byz.8
 			}
 		}
+	}
+	
+	byz_attack_afganistan = {
+	
+		icon = generic_ignite_civil_war
+		
+		allowed = {
+		}
+		
+		available = {
+		}
+		
+		visible = {
+			date > 1851.4.30
+			NOT = {
+				country_exists = PER
+				country_exists = IRA
+			}
+			PAR = {
+				has_war = no
+			}
+		}
+		
+		ai_will_do = {
+			factor = 50
+			modifier = {
+				factor = 100
+				is_historical_focus_on = yes
+			}
+		}
+		
+		days_remove = 30
+		
+		fire_only_once = yes
+		
+		remove_effect = {
+			PAR = {
+				declare_war_on = {
+					target = AFG
+					type = annex_everything
+				}
+			}
+			RIT = {
+				declare_war_on = {
+					target = AFG
+					type = annex_everything
+				}
+			}
+			if = {
+				limit = {
+					country_exists = PNJ
+				}
+				PNJ = {
+					declare_war_on = {
+						target = AFG
+						type = annex_everything
+					}
+				}
+			}
+			hidden_effect = {
+				PAR = {
+					add_ideas = afganistan_company
+				}
+				RIT = {
+					add_ideas = afganistan_company
+				}
+				if = {
+					limit = {
+						country_exists = PNJ
+					}
+					PNJ = {
+						add_ideas = afganistan_company
+					}
+				}
+				RIT = {
+					diplomatic_relation = {
+						country = PAR
+						relation = military_access
+						active = yes
+					}
+					diplomatic_relation = {
+						country = PNJ
+						relation = military_access
+						active = yes
+					}
+				}
+				PAR = {
+					diplomatic_relation = {
+						country = RIT
+						relation = military_access
+						active = yes
+					}
+					diplomatic_relation = {
+						country = PNJ
+						relation = military_access
+						active = yes
+					}
+				}
+				PNJ = {
+					diplomatic_relation = {
+						country = PAR
+						relation = military_access
+						active = yes
+					}
+					diplomatic_relation = {
+						country = RIT
+						relation = military_access
+						active = yes
+					}
+				}
+				set_global_flag = afganistan_company_global_flag
+			}
+		}
+		
 	}
 	
 	byz_imp_dem = {

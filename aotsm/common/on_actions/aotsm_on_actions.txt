@@ -1459,14 +1459,14 @@ on_actions = {
 						set_demilitarized_zone = yes
 					}
 				}
+				FRR = {
+					leave_faction = yes
+				}
 				every_country = {
 					limit = {
 						has_war_with = FRR
 					}
 					white_peace = FRR
-				}
-				FRR = {
-					leave_faction = yes
 				}
 				set_global_flag = france_capitulation
 				news_event = news.79
@@ -1531,6 +1531,47 @@ on_actions = {
 				}
 				if = {
 					limit = {
+						MAT = {
+							is_puppet_of = PRU
+						}
+						CBI = {
+							has_war_with = PRU
+						}
+					}
+					MAT = {
+						transfer_state = 826
+						add_state_core = 826
+						transfer_state = 841
+						add_state_core = 841
+						transfer_state = 842
+						add_state_core = 842
+						transfer_state = 843
+						add_state_core = 843
+						transfer_state = 844
+						add_state_core = 844
+					}
+				}
+				if = {
+					limit = {
+						NOT = {
+							MAT = {
+								is_puppet_of = PRU
+							}
+						}
+						CBI = {
+							has_war_with = PRU
+						}
+					}
+					PRU = {
+						transfer_state = 826
+						transfer_state = 841
+						transfer_state = 842
+						transfer_state = 843
+						transfer_state = 844
+					}
+				}
+				if = {
+					limit = {
 						CBI = {
 							has_war_with = PRU
 						}
@@ -1555,11 +1596,6 @@ on_actions = {
 						transfer_state = 696
 						transfer_state = 703
 						transfer_state = 704
-						transfer_state = 826
-						transfer_state = 841
-						transfer_state = 842
-						transfer_state = 843
-						transfer_state = 844
 					}
 				}
 				if = {
@@ -1787,19 +1823,55 @@ on_actions = {
 				}
 				if = {
 					limit = {
+						MAT = {
+							is_puppet_of = PRU
+						}
+						PRT = {
+							has_war_with = PRU
+						}
+					}
+					MAT = {
+						transfer_state = 540
+						add_state_core = 540
+						transfer_state = 796
+						add_state_core = 796
+						transfer_state = 825
+						add_state_core = 825
+						transfer_state = 839
+						add_state_core = 839
+						transfer_state = 847
+						add_state_core = 847
+					}
+				}
+				if = {
+					limit = {
+						NOT = {
+							MAT = {
+								is_puppet_of = PRU
+							}
+						}
 						PRT = {
 							has_war_with = PRU
 						}
 					}
 					PRU = {
 						transfer_state = 540
-						transfer_state = 691
-						transfer_state = 694
-						transfer_state = 702
 						transfer_state = 796
 						transfer_state = 825
 						transfer_state = 839
 						transfer_state = 847
+					}
+				}
+				if = {
+					limit = {
+						PRT = {
+							has_war_with = PRU
+						}
+					}
+					PRU = {
+						transfer_state = 691
+						transfer_state = 694
+						transfer_state = 702
 					}
 				}
 				if = {
@@ -2153,6 +2225,10 @@ on_actions = {
 							add_state_core = 259
 							transfer_state = 859
 							add_state_core = 859
+							transfer_state = 858
+							add_state_core = 858
+							transfer_state = 859
+							add_state_core = 859
 						}
 					hidden_effect = {
 						PRU = {
@@ -2349,14 +2425,14 @@ on_actions = {
 						remove_state_core = 722
 					}
 				}	
+				RUS = {
+					leave_faction = yes
+				}
 				every_country = {
 					limit = {
 						has_war_with = RUS
 					}
 					white_peace = RUS
-				}
-				RUS = {
-					leave_faction = yes
 				}
 				set_global_flag = russian_capitulation
 				news_event = news.76
@@ -3201,6 +3277,449 @@ on_actions = {
 					}
 				}
 				set_global_flag = SEL_capitulation
+			}
+		#Afganistan company
+			#AFG capitulation
+			if = {
+				limit = {
+					tag = AFG
+					has_global_flag = afganistan_company_global_flag
+					NOT = {
+						has_global_flag = AFG_capitulation_ac
+					}
+				}
+				RIT = {
+					transfer_state = 410
+					add_state_core = 410
+					transfer_state = 444
+					add_state_core = 444
+				}
+				if = {
+					limit = {
+						AFG = {
+							owns_state = 443
+						}
+					}
+					RIT = {
+						transfer_state = 443
+						add_state_core = 443
+					}
+				}
+				if = {
+					limit = {
+						AFG = {
+							owns_state = 837
+						}
+					}
+					RIT = {
+						transfer_state = 837
+						add_state_core = 837
+					}
+				}
+				if = {
+					limit = {
+						country_exists = PNJ
+					}
+					PNJ = {
+						transfer_state = 442
+						add_state_core = 442
+						transfer_state = 445
+						add_state_core = 445
+					}
+					RIT = {
+						puppet = PNJ
+					}
+				}
+				if = {
+					limit = {
+						NOT = {
+							country_exists = PNJ
+						}
+						has_global_flag = PNJ_capitulation_ac
+					}
+					RIT = {
+						transfer_state = 440
+						add_state_core = 440
+						transfer_state = 441
+						add_state_core = 441
+						transfer_state = 442
+						add_state_core = 442
+						transfer_state = 445
+						add_state_core = 445
+						transfer_state = 787
+						add_state_core = 787
+					}
+				}
+				if = {
+					limit = {
+						NOT = {
+							country_exists = PNJ
+						}
+						NOT = {
+							has_global_flag = PNJ_capitulation_ac
+						}
+					}
+					RIT = {
+						transfer_state = 442
+						add_state_core = 442
+						transfer_state = 445
+						add_state_core = 445
+						if = {
+							limit = {
+								AFG = {
+									owns_state = 440
+								}
+							}
+							transfer_state = 440
+							add_state_core = 440
+						}
+						if = {
+							limit = {
+								AFG = {
+									owns_state = 441
+								}
+							}
+							transfer_state = 441
+							add_state_core = 441
+						}
+						if = {
+							limit = {
+								AFG = {
+									owns_state = 787
+								}
+							}
+							transfer_state = 787
+							add_state_core = 787
+						}
+					}
+				}
+				every_country = {
+					limit = {
+						has_war_with = AFG
+					}
+					white_peace = {
+						tag = AFG
+						message = AFG_lose_company
+					}
+				}
+				PAR = {
+					annex_country = {
+						target = AFG
+						transfer_troops = no
+					}
+				}
+				RIT = {
+					remove_ideas = afganistan_company
+				}
+				PNJ = {
+					remove_ideas = afganistan_company
+				}
+				PAR = {
+					remove_ideas = afganistan_company
+				}
+				clr_global_flag = afganistan_company_global_flag
+				set_global_flag = AFG_capitulation_ac
+				news_event = news.91
+			}
+			#RIT capitulation
+			if = {
+				limit = {
+					tag = RIT
+					has_global_flag = afganistan_company_global_flag
+					NOT = {
+						has_global_flag = RIT_capitulation_ac
+					}
+				}
+				AFG = {
+					white_peace = {
+						tag = RIT
+						message = RIT_lose_company
+					}
+				}
+				RIT = {
+					remove_ideas = afganistan_company
+				}
+				AFG = {
+					transfer_state = 443
+					transfer_state = 837
+				}
+				set_global_flag = RIT_capitulation_ac
+				if = {
+					limit = {
+						has_global_flag = RIT_capitulation_ac
+						has_global_flag = PNJ_capitulation_ac
+						has_global_flag = PAR_capitulation_ac
+					}
+					clr_global_flag = afganistan_company_global_flag
+					news_event = news.92
+				}
+			}
+			#PNJ capitulation
+			if = {
+				limit = {
+					tag = PNJ
+					has_global_flag = afganistan_company_global_flag
+					NOT = {
+						has_global_flag = PNJ_capitulation_ac
+					}
+				}
+				AFG = {
+					white_peace = {
+						tag = PNJ
+						message = PNJ_lose_company
+					}
+				}
+				PNJ = {
+					remove_ideas = afganistan_company
+				}
+				AFG = {
+					annex_country = {
+						target = PNJ
+						transfer_troops = no
+					}
+					add_state_core = 440
+					add_state_core = 441
+					add_state_core = 787
+				}
+				set_global_flag = PNJ_capitulation_ac
+				if = {
+					limit = {
+						has_global_flag = RIT_capitulation_ac
+						has_global_flag = PNJ_capitulation_ac
+						has_global_flag = PAR_capitulation_ac
+					}
+					clr_global_flag = afganistan_company_global_flag
+					news_event = news.92
+				}
+			}
+			#PAR capitulation
+			if = {
+				limit = {
+					tag = PAR
+					has_global_flag = afganistan_company_global_flag
+					NOT = {
+						has_global_flag = PAR_capitulation_ac
+					}
+				}
+				AFG = {
+					white_peace = {
+						tag = PAR
+						message = PAR_lose_company
+					}
+				}
+				PAR = {
+					remove_ideas = afganistan_company
+				}
+				AFG = {
+					transfer_state = 412
+					add_state_core = 412
+					transfer_state = 414
+					add_state_core = 414
+					transfer_state = 852
+					add_state_core = 852
+				}
+				BYZ = {
+					set_autonomy = {
+						target = PAR
+						autonomy_state = autonomy_aotsm_protectorat
+						end_wars = yes
+						end_civil_wars = yes
+					}
+				}
+				PAR = {
+					set_politics = {
+						ruling_party = authoritarian
+						elections_allowed = no
+						last_election = "1848.1.1"
+						election_frequency = 48
+					}
+					set_popularities = {
+						democratic = 1
+						authoritarian = 93
+						reactionist = 5
+						socialism = 1
+					}
+				}
+				set_global_flag = PAR_capitulation_ac
+				if = {
+					limit = {
+						has_global_flag = RIT_capitulation_ac
+						has_global_flag = PNJ_capitulation_ac
+						has_global_flag = PAR_capitulation_ac
+					}
+					clr_global_flag = afganistan_company_global_flag
+					news_event = news.92
+				}
+			}
+		#Mittleafrika company
+			#CON capitulation
+			if = {
+				limit = {
+					tag = CON
+					CON = {
+						has_country_flag = CON_vs_MAT
+					}
+					CON = {
+						has_war_with = MAT
+					}
+				}
+				MAT = {
+					annex_country = {
+						target = CON
+						transfer_troops = no
+					}
+				}
+				CON = {
+					clr_country_flag = CON_vs_MAT
+				}
+				MAT = {
+					add_state_core = 772
+				}
+			}
+			#LUB capitulation
+			if = {
+				limit = {
+					tag = LUB
+					LUB = {
+						has_country_flag = LUB_vs_MAT
+					}
+					LUB = {
+						has_war_with = MAT
+					}
+				}
+				MAT = {
+					annex_country = {
+						target = LUB
+						transfer_troops = no
+					}
+				}
+				LUB = {
+					clr_country_flag = LUB_vs_MAT
+				}
+				MAT = {
+					add_state_core = 295
+				}
+			}
+			#FKU capitulation
+			if = {
+				limit = {
+					tag = FKU
+					FKU = {
+						has_country_flag = FKU_vs_MAT
+					}
+					FKU = {
+						has_war_with = MAT
+					}
+				}
+				MAT = {
+					annex_country = {
+						target = FKU
+						transfer_troops = no
+					}
+				}
+				FKU = {
+					clr_country_flag = FKU_vs_MAT
+				}
+				MAT = {
+					add_state_core = 538
+					add_state_core = 718
+				}
+			}
+			#BAN capitulation
+			if = {
+				limit = {
+					tag = BAN
+					BAN = {
+						has_country_flag = BAN_vs_MAT
+					}
+					BAN = {
+						has_war_with = MAT
+					}
+				}
+				MAT = {
+					annex_country = {
+						target = BAN
+						transfer_troops = no
+					}
+				}
+				BAN = {
+					clr_country_flag = BAN_vs_MAT
+				}
+				MAT = {
+					add_state_core = 773
+				}
+			}
+			#KIT capitulation
+			if = {
+				limit = {
+					tag = KIT
+					KIT = {
+						has_country_flag = KIT_vs_MAT
+					}
+					KIT = {
+						has_war_with = MAT
+					}
+				}
+				MAT = {
+					annex_country = {
+						target = KIT
+						transfer_troops = no
+					}
+				}
+				KIT = {
+					clr_country_flag = KIT_vs_MAT
+				}
+				MAT = {
+					add_state_core = 548
+				}
+			}
+			#BUG capitulation
+			if = {
+				limit = {
+					tag = BUG
+					BUG = {
+						has_country_flag = BUG_vs_MAT
+					}
+					BUG = {
+						has_war_with = MAT
+					}
+				}
+				MAT = {
+					annex_country = {
+						target = BUG
+						transfer_troops = no
+					}
+				}
+				BUG = {
+					clr_country_flag = BUG_vs_MAT
+				}
+				MAT = {
+					add_state_core = 772
+				}
+			}
+			#BUR capitulation
+			if = {
+				limit = {
+					tag = BUR
+					BUR = {
+						has_country_flag = BUR_vs_MAT
+					}
+					BUR = {
+						has_war_with = MAT
+					}
+				}
+				MAT = {
+					annex_country = {
+						target = BUR
+						transfer_troops = no
+					}
+				}
+				BUR = {
+					clr_country_flag = BUR_vs_MAT
+				}
+				MAT = {
+					add_state_core = 772
+				}
 			}
 		}
 	}			
