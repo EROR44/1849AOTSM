@@ -31,7 +31,6 @@ if = {
 		transport = 1
 	}
 }
-
 if = {
 	limit = { has_dlc = "Man the Guns" }
 	set_technology = {
@@ -40,38 +39,134 @@ if = {
 		early_ship_hull_light = 1
 		basic_ship_hull_light = 1
 		early_ship_hull_submarine = 1
-		basic_ship_hull_submarine = 1
 		early_ship_hull_cruiser = 1
+		basic_ship_hull_cruiser = 1
 		early_ship_hull_heavy = 1
+		early_ship_hull_carrier = 1
+		basic_ship_hull_carrier = 1
 		basic_battery = 1
+		basic_light_battery = 1
+		basic_medium_battery = 1
+		basic_heavy_battery = 1
+		basic_torpedo = 1
+		sonar = 1
+		smoke_generator = 1
+		basic_depth_charges = 1
 		basic_secondary_battery = 1
 		basic_cruiser_armor_scheme = 1
-		basic_torpedo = 1
-		coastal_defense_ships = 1
-		pre_dreadnoughts = 1
+		basic_heavy_armor_scheme = 1
 		mtg_transport = 1
+		improved_secondary_battery = 1
+		basic_fire_control_system = 1
 	}
 }
+
 if = {
 	limit = { not = { has_dlc = "Man the Guns" } }
-	### Ship Variants ###
+	### Variants ###
+	# Submarines #
 	create_equipment_variant = {
-		name = "Birmingham Class"
-		type = destroyer_1
+		name = "Dolphin Class"
+		type = submarine_1
+		parent_version = 0
 		upgrades = {
-			ship_torpedo_upgrade = 2
-			destroyer_engine_upgrade = 2
+			ship_reliability_upgrade = 3
+			sub_engine_upgrade = 2
+			sub_stealth_upgrade = 2
+			sub_torpedo_upgrade = 3
+		}
+	}
+	# Destroyers #
+	create_equipment_variant = {
+		name = "Dublin Class"
+		type = destroyer_1
+		parent_version = 0
+		upgrades = {
+			ship_torpedo_upgrade = 1
+			destroyer_engine_upgrade = 3
 			ship_ASW_upgrade = 2
-			ship_anti_air_upgrade = 2
+			ship_anti_air_upgrade = 1
+		}
+		obsolete = yes
+	}
+	# Light Cruisers #
+	create_equipment_variant = {
+		name = "Edinburgh Class"
+		type = light_cruiser_1
+		parent_version = 0
+		upgrades = {
+			ship_reliability_upgrade = 3
+			ship_engine_upgrade = 3
+			ship_gun_upgrade = 2
+			ship_anti_air_upgrade = 3
+		}
+		obsolete = yes
+	}
+	create_equipment_variant = {
+		name = "Cardiff Class"
+		type = light_cruiser_1
+		parent_version = 1
+		upgrades = {
+			ship_reliability_upgrade = 3
+			ship_engine_upgrade = 3
+			ship_gun_upgrade = 3
+			ship_anti_air_upgrade = 3
+		}
+	}
+	# Heavy Cruisers #
+	create_equipment_variant = {
+		name = "London Class"
+		type = heavy_cruiser_1
+		parent_version = 0
+		upgrades = {
+			ship_reliability_upgrade = 2
+			ship_engine_upgrade = 3
+			ship_armor_upgrade = 3
+			ship_gun_upgrade = 3
+		}
+	}
+	# Battlecruisers #
+	create_equipment_variant = {
+		name = "Irland Class"
+		type = battle_cruiser_1
+		parent_version = 0
+		upgrades = {
+			ship_reliability_upgrade = 3
+			ship_engine_upgrade = 2
+			ship_armor_upgrade = 3
+			ship_gun_upgrade = 2
+		}
+	}
+	# Battleships #
+	create_equipment_variant = {
+		name = "Cromwell Class"
+		type = battleship_1
+		parent_version = 0
+		upgrades = {
+			ship_reliability_upgrade = 3
+			ship_engine_upgrade = 2
+			ship_armor_upgrade = 3
+			ship_gun_upgrade = 3
+		}
+	}
+	create_equipment_variant = {
+		name = "Confederate Class"
+		type = battleship_1
+		parent_version = 0
+		upgrades = {
+			ship_reliability_upgrade = 1
+			ship_engine_upgrade = 2
+			ship_armor_upgrade = 1
 		}
 	}
 }
 
 if = {
 	limit = { has_dlc = "Man the Guns" }
+	### Variants ###
 	# Submarines #
 	create_equipment_variant = {
-		name = "Belfast Class" 
+		name = "Dolphin Class"
 		type = ship_hull_submarine_1
 		name_group = CBI_SS_HISTORICAL
 		parent_version = 0
@@ -80,75 +175,44 @@ if = {
 			fixed_ship_engine_slot = sub_ship_engine_1
 			rear_1_custom_slot = empty
 		}
-		obsolete = yes
-	}
-	create_equipment_variant = {
-		name = "Sherbur Class" 
-		type = ship_hull_submarine_2
-		name_group = CBI_SS_HISTORICAL
-		parent_version = 0
-		modules = {
-			fixed_ship_torpedo_slot = ship_torpedo_sub_1
-			fixed_ship_engine_slot = sub_ship_engine_1
-			rear_1_custom_slot = ship_torpedo_sub_1
-		}
 	}
 	# Destroyers #
 	create_equipment_variant = {
-		name = "Duglas Class" 
+		name = "Dublin Class"
 		type = ship_hull_light_1
 		name_group = CBI_DD_HISTORICAL
 		parent_version = 0
 		modules = {
-			fixed_ship_battery_slot = ship_light_battery_1
+			fixed_ship_battery_slot = ship_light_battery_2
 			fixed_ship_anti_air_slot = empty
 			fixed_ship_fire_control_system_slot = ship_fire_control_system_0
-			fixed_ship_radar_slot = empty
-			fixed_ship_engine_slot = light_ship_engine_1
+			fixed_ship_radar_slot = ship_sonar_1
+			fixed_ship_engine_slot = light_ship_engine_2
 			fixed_ship_torpedo_slot = ship_torpedo_1
-			mid_1_custom_slot = empty
-			rear_1_custom_slot = empty
+			mid_1_custom_slot = ship_torpedo_1
+			rear_1_custom_slot = ship_depth_charge_1
 		}
-	obsolete = yes
+		obsolete = yes
 	}
 	create_equipment_variant = {
-		name = "Birmingham Class" 
-		type = ship_hull_light_1
+		name = "MEN Class"
+		type = ship_hull_light_2
 		name_group = CBI_DD_HISTORICAL
 		parent_version = 0
 		modules = {
-			fixed_ship_battery_slot = ship_light_battery_1
+			fixed_ship_battery_slot = ship_light_battery_2
 			fixed_ship_anti_air_slot = ship_anti_air_1
 			fixed_ship_fire_control_system_slot = ship_fire_control_system_0
-			fixed_ship_radar_slot = empty
+			fixed_ship_radar_slot = ship_sonar_1
 			fixed_ship_engine_slot = light_ship_engine_2
 			fixed_ship_torpedo_slot = ship_torpedo_1
-			mid_1_custom_slot = empty
-			rear_1_custom_slot = ship_mine_layer_1
+			mid_1_custom_slot = ship_torpedo_1
+			rear_1_custom_slot = ship_depth_charge_1
 		}
 	}
-	# Cruisers #
+	# Light Cruisers #
 	create_equipment_variant = {
-		name = "Cardiff Class" 
-		type = ship_hull_cruiser_coastal_defense_ship
-		name_group = CBI_CA_HISTORICAL
-		parent_version = 0
-		modules = {
-			fixed_ship_battery_slot = ship_medium_battery_1
-			fixed_ship_anti_air_slot = ship_anti_air_1
-			fixed_ship_fire_control_system_slot = ship_fire_control_system_0
-			fixed_ship_radar_slot = empty
-			fixed_ship_engine_slot = cruiser_ship_engine_1
-			fixed_ship_armor_slot = ship_armor_cruiser_2
-			fixed_ship_secondaries_slot = ship_secondaries_1
-			mid_1_custom_slot = empty
-			mid_2_custom_slot = empty
-			rear_1_custom_slot = ship_medium_battery_1
-		}
-		obsolete = yes
-	 }
-	create_equipment_variant = {
-		name = "London Class" 
+		name = "Edinburgh Class"
 		type = ship_hull_cruiser_1
 		name_group = CBI_CL_HISTORICAL
 		parent_version = 0
@@ -157,46 +221,180 @@ if = {
 			fixed_ship_anti_air_slot = ship_anti_air_1
 			fixed_ship_fire_control_system_slot = ship_fire_control_system_0
 			fixed_ship_radar_slot = empty
-			fixed_ship_engine_slot = cruiser_ship_engine_1
-			fixed_ship_armor_slot = empty
-			fixed_ship_secondaries_slot = empty
+			fixed_ship_engine_slot = cruiser_ship_engine_2
+			fixed_ship_armor_slot = ship_armor_cruiser_1
 			mid_1_custom_slot = ship_torpedo_1
-			mid_2_custom_slot = empty
-			rear_1_custom_slot = ship_mine_layer_1
+			mid_2_custom_slot = ship_torpedo_1
+			rear_1_custom_slot = ship_light_medium_battery_1
+		}
+		obsolete = yes
+	}
+	create_equipment_variant = {
+			name = "Cardiff Class"
+			type = ship_hull_cruiser_2
+			name_group = CBI_CL_HISTORICAL
+			parent_version = 0
+			modules = {
+				fixed_ship_battery_slot = ship_light_medium_battery_2
+				fixed_ship_anti_air_slot = ship_anti_air_2
+				fixed_ship_fire_control_system_slot = ship_fire_control_system_0
+				fixed_ship_radar_slot = empty
+				fixed_ship_engine_slot = cruiser_ship_engine_2
+				fixed_ship_armor_slot = ship_armor_cruiser_2
+				front_1_custom_slot = ship_anti_air_2
+				mid_1_custom_slot = ship_torpedo_1
+				mid_2_custom_slot = ship_secondaries_2
+				rear_1_custom_slot = ship_light_medium_battery_2
+			}
+		}
+	# Heavy Cruisers #
+	create_equipment_variant = {
+		name = "Birmingham Class"
+		type = ship_hull_cruiser_1
+		name_group = CBI_CA_HISTORICAL
+		parent_version = 0
+		modules = {
+			fixed_ship_battery_slot = ship_medium_battery_2
+			fixed_ship_anti_air_slot = ship_anti_air_1
+			fixed_ship_fire_control_system_slot = ship_fire_control_system_0
+			fixed_ship_radar_slot = empty
+			fixed_ship_engine_slot = cruiser_ship_engine_1
+			fixed_ship_armor_slot = ship_armor_cruiser_1
+			fixed_ship_secondaries_slot = ship_secondaries_1
+			mid_1_custom_slot = ship_airplane_launcher_1
+			mid_2_custom_slot = ship_torpedo_1
+			rear_1_custom_slot = ship_medium_battery_2
 		}
 	}
-	# Battleships #
 	create_equipment_variant = {
-		name = "Oliver Cromwell Class" 
-		type = ship_hull_pre_dreadnought
-		name_group = CBI_BB_HISTORICAL
+		name = "London Class"
+		type = ship_hull_cruiser_1
+		name_group = CBI_CA_HISTORICAL
+		parent_version = 0
+		modules = {
+			fixed_ship_battery_slot = ship_medium_battery_2
+			fixed_ship_anti_air_slot = ship_anti_air_1
+			fixed_ship_fire_control_system_slot = ship_fire_control_system_0
+			fixed_ship_radar_slot = empty
+			fixed_ship_engine_slot = cruiser_ship_engine_1
+			fixed_ship_armor_slot = ship_armor_cruiser_1
+			mid_1_custom_slot = empty
+			mid_2_custom_slot = ship_torpedo_1
+			rear_1_custom_slot = ship_airplane_launcher_1
+		}
+	}
+	# Battlecruisers #
+	create_equipment_variant = {
+		name = "Irland Class"
+		type = ship_hull_heavy_1
+		name_group = CBI_BC_HISTORICAL
 		parent_version = 0
 		modules = {
 			fixed_ship_battery_slot = ship_heavy_battery_1
 			fixed_ship_anti_air_slot = ship_anti_air_1
-			fixed_ship_fire_control_system_slot = ship_fire_control_system_0
+			fixed_ship_fire_control_system_slot = ship_fire_control_system_1
 			fixed_ship_radar_slot = empty
-			fixed_ship_engine_slot = heavy_ship_engine_1
+			fixed_ship_engine_slot = heavy_ship_engine_2
 			fixed_ship_secondaries_slot = ship_secondaries_1
-			fixed_ship_armor_slot = ship_armor_bb_1
-			front_1_custom_slot = empty
-			mid_1_custom_slot = empty
+			fixed_ship_armor_slot = ship_armor_bc_1
+			front_1_custom_slot = ship_anti_air_1
+			mid_1_custom_slot = ship_airplane_launcher_1
+			mid_2_custom_slot = ship_secondaries_1
 			rear_1_custom_slot = empty
 		}
 		obsolete = yes
 	}
+	# Battlecruisers #
+	create_equipment_variant = {
+		name = "Scotland Class"
+		type = ship_hull_heavy_1
+		name_group = CBI_BC_HISTORICAL
+		parent_version = 0
+		modules = {
+			fixed_ship_battery_slot = ship_heavy_battery_1
+			fixed_ship_anti_air_slot = ship_anti_air_1
+			fixed_ship_fire_control_system_slot = ship_fire_control_system_1
+			fixed_ship_radar_slot = empty
+			fixed_ship_engine_slot = heavy_ship_engine_2
+			fixed_ship_secondaries_slot = ship_secondaries_1
+			fixed_ship_armor_slot = ship_armor_bc_2
+			front_1_custom_slot = ship_anti_air_1
+			mid_1_custom_slot = empty
+			mid_2_custom_slot = ship_secondaries_1
+			rear_1_custom_slot = ship_heavy_battery_1
+		}
+	}
+
+	create_equipment_variant = {
+		name = "England Class"
+		type = ship_hull_heavy_1
+		name_group = CBI_BC_HISTORICAL
+		parent_version = 0
+		modules = {
+			fixed_ship_battery_slot = ship_heavy_battery_2
+			fixed_ship_anti_air_slot = ship_anti_air_1
+			fixed_ship_fire_control_system_slot = ship_fire_control_system_1
+			fixed_ship_radar_slot = empty
+			fixed_ship_engine_slot = heavy_ship_engine_2
+			fixed_ship_secondaries_slot = ship_secondaries_2
+			fixed_ship_armor_slot = ship_armor_bc_2
+			front_1_custom_slot = ship_heavy_battery_2
+			mid_1_custom_slot = empty
+			mid_2_custom_slot = ship_anti_air_1
+			rear_1_custom_slot = empty
+		}
+	}
+	# Battleships #
+	create_equipment_variant = {
+		name = "Lord-protector Class"
+		type = ship_hull_heavy_1
+		name_group = CBI_BB_HISTORICAL
+		parent_version = 0
+		modules = {
+			fixed_ship_battery_slot = ship_heavy_battery_2
+			fixed_ship_anti_air_slot = ship_anti_air_1
+			fixed_ship_fire_control_system_slot = ship_fire_control_system_1
+			fixed_ship_radar_slot = empty
+			fixed_ship_engine_slot = heavy_ship_engine_2
+			fixed_ship_secondaries_slot = ship_secondaries_2
+			fixed_ship_armor_slot = ship_armor_bb_2
+			front_1_custom_slot = ship_heavy_battery_2
+			mid_1_custom_slot = empty
+			mid_2_custom_slot = empty
+			rear_1_custom_slot = empty
+		}
+	}
+	create_equipment_variant = {
+		name = "Cromwell Class"
+		type = ship_hull_heavy_1
+		name_group = CBI_BB_HISTORICAL
+		parent_version = 1
+		modules = {
+			fixed_ship_battery_slot = ship_heavy_battery_2
+			fixed_ship_anti_air_slot = ship_anti_air_2
+			fixed_ship_fire_control_system_slot = ship_fire_control_system_1
+			fixed_ship_radar_slot = empty
+			fixed_ship_engine_slot = heavy_ship_engine_2
+			fixed_ship_secondaries_slot = ship_secondaries_2
+			fixed_ship_armor_slot = ship_armor_bb_2
+			front_1_custom_slot = ship_heavy_battery_2
+			mid_1_custom_slot = ship_anti_air_2
+			mid_2_custom_slot = ship_anti_air_2
+			rear_1_custom_slot = ship_heavy_battery_2
+		}
+	}
 }
+
 set_convoys = 150
-add_political_power = 0
 set_research_slots = 3
-set_stability = 0.6
-set_war_support = 0.5
-set_naval_oob = "CBI_1849_naval_legacy"
+set_stability = 0.75
+set_war_support = 0.25
+
 set_politics = {
 	ruling_party = democratic
-	last_election = "1849.1.1"
-	election_frequency = 48
-	elections_allowed = no
+	last_election = "1834.4.18"
+	election_frequency = 480
+	elections_allowed = yes
 }
 set_popularities = {
 	democratic = 68
@@ -212,11 +410,14 @@ add_ideas = {
 	state_corruption
 	backward_industry
 	low_investment_level
+	
+	CBI_confederat_army_1
+	CBI_trade_with_colonies
 	CBI_financial_collapse_1
 	CBI_scientific_stagnation
-	CBI_trade_with_colonies
 	CBI_old_guard
 	CBI_outdated_army
+	
 	britain_science_manufacturer
 }
 
@@ -254,18 +455,101 @@ recruit_character = CBI_Edmund_Layons
 set_autonomy = {
 	target = BAS
 	autonomous_state = autonomy_colony 
-	freedom_level = 0.3
+	freedom_level = 0.25
 }
+
+BAS = {
+	set_cosmetic_tag = BASCBI
+}
+
+BAS = {
+	set_country_flag = COLONY_OF_CONFEDERACY
+}
+
 set_autonomy = {
 	target = OIC
-	autonomous_state = autonomy_colony 
-	freedom_level = 0.3
+	autonomous_state = autonomy_aotsm_trade_company 
+	freedom_level = 0.25
 }
+
+OIC = {
+	set_cosmetic_tag = OICCBI
+}
+
+OIC = {
+	set_country_flag = COLONY_OF_CONFEDERACY
+}
+
 set_autonomy = {
 	target = NEN
 	autonomous_state = autonomy_colony 
-	freedom_level = 0.3
+	freedom_level = 0.50
 }
+
+NEN = {
+	set_cosmetic_tag = NENCBI
+}
+
+NEN = {
+	set_country_flag = COLONY_OF_CONFEDERACY
+}
+
+set_autonomy = {
+	target = BRI
+	autonomous_state = autonomy_aotsm_integrat_unit 
+	freedom_level = 0.25
+}
+
+BRI = {
+	set_cosmetic_tag = BRICBI
+}
+
+BRI = {
+	set_country_flag = PART_OF_CONFEDERACY
+}
+
+set_autonomy = {
+	target = WAL
+	autonomous_state = autonomy_aotsm_integrat_unit 
+	freedom_level = 0.25
+}
+
+WAL = {
+	set_cosmetic_tag = WALCBI
+}
+
+WAL = {
+	set_country_flag = PART_OF_CONFEDERACY
+}
+
+set_autonomy = {
+	target = SCO
+	autonomous_state = autonomy_aotsm_integrat_unit 
+	freedom_level = 0.25
+}
+
+SCO = {
+	set_cosmetic_tag = SCOCBI
+}
+
+SCO = {
+	set_country_flag = PART_OF_CONFEDERACY
+}
+
+set_autonomy = {
+	target = IRE
+	autonomous_state = autonomy_aotsm_free_unit 
+	freedom_level = 0.75
+}
+
+IRE = {
+	set_cosmetic_tag = IRECBI
+}
+
+IRE = {
+	set_country_flag = PART_OF_CONFEDERACY
+}
+
 create_faction = CBI_London_pakt
 add_to_faction = CBI
 add_to_faction = PRT
@@ -273,6 +557,10 @@ add_to_faction = NEN
 add_to_faction = OIC
 add_to_faction = PAS
 add_to_faction = BAS
+add_to_faction = BRI
+add_to_faction = WAL
+add_to_faction = SCO
+add_to_faction = IRE
 
 add_opinion_modifier = {
     target = PRT
@@ -285,6 +573,17 @@ add_opinion_modifier = {
 }
 
 add_opinion_modifier = {
-    target = BYZ
+    target = CBI
     modifier = history_enemy
 }
+
+set_variable = { cbi_bri_integration_procces = 95 }
+set_variable = { cbi_wal_integration_procces = 90 }
+set_variable = { cbi_sco_integration_procces = 70 }
+set_variable = { cbi_ire_integration_procces = 25 }
+set_variable = { cbi_bri_opinion = 100 }
+set_variable = { cbi_wal_opinion = 90 }
+set_variable = { cbi_sco_opinion = 70 }
+set_variable = { cbi_ire_opinion = 50 }
+set_variable = { cbi_ire_plan = 2 }
+set_variable = { cbi_ire_position = 2 }
