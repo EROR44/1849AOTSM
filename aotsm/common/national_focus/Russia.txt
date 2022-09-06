@@ -122,6 +122,7 @@ focus_tree = {
 		search_filters = {FOCUS_FILTER_POLITICAL}
 
 		completion_reward = {
+			custom_effect_tooltip = RUS_diplomatic_interaction_witch_cbi 
 			hidden_effect = {
 				CBI = { country_event = rusPol.3 }
 			}
@@ -143,6 +144,7 @@ focus_tree = {
 		search_filters = {FOCUS_FILTER_POLITICAL}
 
 		completion_reward = {
+			custom_effect_tooltip = RUS_diplomatic_interaction_witch_aus
 			hidden_effect = {
 				AUS = { country_event = rusPol.3 }
 			}
@@ -164,6 +166,7 @@ focus_tree = {
 		search_filters = {FOCUS_FILTER_POLITICAL}
 
 		completion_reward = {
+			custom_effect_tooltip = RUS_diplomatic_interaction_witch_pru
 			hidden_effect = {
 				PRU = { country_event = rusPol.3 }
 			}
@@ -185,6 +188,7 @@ focus_tree = {
 		search_filters = {FOCUS_FILTER_POLITICAL}
 
 		completion_reward = {
+			custom_effect_tooltip = RUS_diplomatic_interaction_witch_frr
 			hidden_effect = {
 				FRR = { country_event = rusPol.3 }
 			}
@@ -206,6 +210,7 @@ focus_tree = {
 		search_filters = {FOCUS_FILTER_POLITICAL}
 
 		completion_reward = {
+			custom_effect_tooltip = RUS_diplomatic_interaction_witch_byz 
 			hidden_effect = {
 				BYZ = { country_event = rusPol.3 }
 			}
@@ -341,7 +346,7 @@ focus_tree = {
 	}
 	##############MILUTIN_DA_SECTION###################
 	focus = {
-		id = RUS_milytin_da 
+		id = RUS_milytin_da  
 		icon = GFX_focus_rus_milutin_da
 		
 		x = -13
@@ -375,7 +380,10 @@ focus_tree = {
 		search_filters = {FOCUS_FILTER_POLITICAL}
 
 		completion_reward = {
-			
+			add_timed_idea = {
+				idea = RUS_invest_in_prom
+				days = 400
+			}
 		}
 	}
 	focus = {
@@ -394,6 +402,24 @@ focus_tree = {
 		search_filters = {FOCUS_FILTER_POLITICAL}
 
 		completion_reward = {
+			if = {
+				limit = {
+					RUS = { has_idea = hight_taxation }
+				}
+				swap_ideas = {
+					remove_idea = hight_taxation 
+					add_idea = medium_taxation
+				}
+			}
+			if = {
+				limit = {
+					RUS = { has_idea = medium_taxation }
+				}
+				swap_ideas = {
+					remove_idea = medium_taxation 
+					add_idea = low_taxation
+				}
+			}
 			RUS_add_5_liberal_influence = yes
 			RUS_remove_5_conservator_influence = yes
 		}
@@ -414,6 +440,7 @@ focus_tree = {
 		search_filters = {FOCUS_FILTER_POLITICAL}
 
 		completion_reward = {
+			add_ideas = RUS_petrograd_birja
 			RUS_add_5_liberal_opinion = yes
 		}
 	}
@@ -434,6 +461,33 @@ focus_tree = {
 		search_filters = {FOCUS_FILTER_POLITICAL}
 
 		completion_reward = {
+			if = {
+				limit = {
+					RUS = { has_idea = state_corruption }
+				}
+				swap_ideas = {
+					remove_idea = state_corruption 
+					add_idea = regional_corruption
+				}
+			}
+			if = {
+				limit = {
+					RUS = { has_idea = regional_corruption }
+				}
+				swap_ideas = {
+					remove_idea = regional_corruption 
+					add_idea = local_corruption
+				}
+			}
+			if = {
+				limit = {
+					RUS = { has_idea = local_corruption }
+				}
+				swap_ideas = {
+					remove_idea = local_corruption 
+					add_idea = no_corruption
+				}
+			}
 			RUS_add_5_liberal_opinion = yes
 			RUS_remove_10_conservator_opinion = yes
 			RUS_remove_5_churchman_opinion = yes
@@ -456,7 +510,25 @@ focus_tree = {
 		search_filters = {FOCUS_FILTER_POLITICAL}
 
 		completion_reward = {
-			
+			add_ideas = RUS_russian_national_prodiction
+			hidden_effect = {
+				651 = {
+					add_extra_state_shared_building_slots = 2
+					add_building_construction = {
+						type = industrial_complex
+						level = 2
+						instant_build = yes
+					}
+				}
+				652 = {
+					add_extra_state_shared_building_slots = 2
+					add_building_construction = {
+						type = industrial_complex
+						level = 2
+						instant_build = yes
+					}
+				}
+			}
 		}
 	}
 	focus = {
@@ -476,6 +548,8 @@ focus_tree = {
 		search_filters = {FOCUS_FILTER_POLITICAL}
 
 		completion_reward = {
+			country_event = rusMil.7 
+			remove_ideas = RUS_dependence_from_import
 			RUS_add_5_reactioner_opinion = yes
 			RUS_add_5_army_opinion = yes
 		}
@@ -496,7 +570,8 @@ focus_tree = {
 		search_filters = {FOCUS_FILTER_POLITICAL}
 
 		completion_reward = {
-			
+			add_offsite_building = { type = industrial_complex level = 2 }
+			RUS_add_3_conservator_influence = yes
 		}
 	}
 	focus = {
@@ -515,13 +590,7 @@ focus_tree = {
 		search_filters = {FOCUS_FILTER_POLITICAL}
 
 		completion_reward = {
-			add_tech_bonus = {
-				bonus = 0.5
-				uses = 2
-				category = ship_modules_tech
-				category = radar_tech
-				category = cat_light_armor
-			}	
+			country_event = rusMil.1
 		}
 	}
 	focus = {
@@ -540,7 +609,7 @@ focus_tree = {
 		search_filters = {FOCUS_FILTER_POLITICAL}
 
 		completion_reward = {
-			
+			CBI = { country_event = rusMil.4 }
 		}
 	}
 	focus = {
@@ -562,7 +631,7 @@ focus_tree = {
 		search_filters = {FOCUS_FILTER_POLITICAL}
 
 		completion_reward = {
-			
+			CBI = { country_event = rusMil.3 }
 		}
 	}
 	focus = {
@@ -582,6 +651,7 @@ focus_tree = {
 		search_filters = {FOCUS_FILTER_POLITICAL}
 
 		completion_reward = {
+			remove_ideas = RUS_an_echo_of_serfdom
 			RUS_add_5_army_influence = yes
 		}
 	}
@@ -601,6 +671,7 @@ focus_tree = {
 		search_filters = {FOCUS_FILTER_POLITICAL}
 
 		completion_reward = {
+			add_ideas = RUS_defence_under_german_agression
 			RUS_add_5_army_influence = yes
 		}
 	}
@@ -624,7 +695,7 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = RUS_start_the_hunt_on_heretics
+		id = RUS_start_the_hunt_on_heretics 
 		icon = GFX_focus_rus_start_hunt_on_the_heretiks
 		
 		x = -1
@@ -764,7 +835,11 @@ focus_tree = {
 		search_filters = {FOCUS_FILTER_POLITICAL}
 
 		completion_reward = {
-			
+			remove_ideas = RUS_unfinished_reforms
+			add_timed_idea = {
+				idea = RUS_reforms
+				days = 500
+			}
 		}
 	}
 	focus = {
@@ -4479,7 +4554,6 @@ focus_tree = {
 		x = 0
 		y = 2
 		cost = 7
-		mutually_exclusive = { focus = RUS_manevr_flot } 
 		
 		available = {
 
