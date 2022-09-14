@@ -16,6 +16,7 @@ on_actions = {
 			FRR = { country_event = { id = fren.12 days = 924 } }
 			SOS = { country_event = { id = sos.1 days = 951 } }
 			BYZ = { country_event = { id = script_event.3 days = 2 } }
+			BYZ = { country_event = { id = script_event.7 days = 2 } }
 			QIN = { country_event = { id = qin.1 days = 381 } }
 			CBI = { country_event = { id = CBI.100 days = 254 } }
 			
@@ -483,6 +484,16 @@ on_actions = {
 						clr_country_flag = revenge_for_hungary_gla
 					}
 				}
+				if = {
+					limit = {
+						GLA = {
+							has_idea = russian_help
+						}
+					}
+					GLA = {
+						remove_ideas = russian_help
+					}
+				}
 				PRU = {
 					transfer_state = 80
 					transfer_state = 89
@@ -527,6 +538,16 @@ on_actions = {
 					}
 					VLH = {
 						clr_country_flag = revenge_for_hungary_vlh
+					}
+				}
+				if = {
+					limit = {
+						VLH = {
+							has_idea = russian_help
+						}
+					}
+					VLH = {
+						remove_ideas = russian_help
 					}
 				}
 				PRU = {
@@ -2473,6 +2494,38 @@ on_actions = {
 					}
 					white_peace = RUS
 				}
+				hidden_effect = {
+					if = {
+						limit = {
+							BYZ = {
+								has_idea = russian_history_enemy_1
+							}
+						}
+						BYZ = {
+							remove_ideas = russian_history_enemy_1
+						}
+					}
+					if = {
+						limit = {
+							BYZ = {
+								has_idea = russian_history_enemy_2
+							}
+						}
+						BYZ = {
+							remove_ideas = russian_history_enemy_2
+						}
+					}
+					if = {
+						limit = {
+							BYZ = {
+								has_idea = russian_history_enemy_3
+							}
+						}
+						BYZ = {
+							remove_ideas = russian_history_enemy_3
+						}
+					}
+				}
 				set_global_flag = russian_capitulation
 				news_event = news.76
 			}
@@ -3758,6 +3811,33 @@ on_actions = {
 				}
 				MAT = {
 					add_state_core = 772
+				}
+			}
+			#SKZ capitulation
+			if = {
+				limit = {
+					tag = SKZ
+					PAR = {
+						has_country_flag = PAR_vs_SKZ
+					}
+					SKZ = {
+						has_war_with = PAR
+					}
+				}
+				PAR = {
+					white_peace = {
+						tag = SKZ
+						message = PAR_succes_SKZ
+					}
+				}
+				PAR = {
+					annex_country = {
+						target = SKZ
+						transfer_troops = no
+					}
+				}
+				PAR = {
+					clr_country_flag = PAR_vs_SKZ
 				}
 			}
 		}
