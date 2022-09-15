@@ -130,9 +130,25 @@ war_decision_categories = {
 							target = CBI
 							transfer_troops = yes
 						}
-						set_capital = {
-							state = 126 
-							remember_old_capital = no
+						if = {
+							limit = {
+								NOT = {
+									has_global_flag = leypoldit_bombing
+								}
+							}
+							set_capital = {
+								state = 126 
+								remember_old_capital = no
+							}
+						}
+						if = {
+							limit = {
+								has_global_flag = leypoldit_bombing
+							}
+							set_capital = {
+								state = 127 
+								remember_old_capital = no
+							}
 						}
 						add_state_core = 122
 						add_state_core = 125
@@ -166,10 +182,32 @@ war_decision_categories = {
 						remove_state_core = 865
 						remove_state_core = 866
 					}
-					126 = {
-						set_province_name = {
-							id = 6103
-							name = LONDINIUM
+					if = {
+						limit = {
+							NOT = {
+								has_global_flag = leypoldit_bombing
+							}
+						}
+						126 = {
+							set_province_name = {
+								id = 6103
+								name = LONDINIUM
+							}
+						}
+					}
+					if = {
+						limit = {
+							has_global_flag = leypoldit_bombing
+						}
+						set_capital = {
+							state = 127 
+							remember_old_capital = no
+						}
+						127 = {
+							set_province_name = {
+								id = 3501
+								name = NEW_LONDINIUM
+							}
 						}
 					}
 					BYZ = {
