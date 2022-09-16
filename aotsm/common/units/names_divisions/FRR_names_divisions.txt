@@ -1,54 +1,15 @@
-﻿# Division template historical names system. Is a new method of naming the divisions based on the names-group assigned to it's template.
-# If we run out of all historical names, the names will be assigned in the old way.
-#
-# Each group has a made up tag. Use it if you want to append more, or replace existing names with the extra txt files (modding).
-#
-# for_countries - lists all countries that can use it. If empty, or entire tag is missing, all countries in the world can use it.
-#
-# can_use - is a trigger that locks/unlocks the group under specific circumstances. The trigger is in a country scope.
-#
-# division_types - is a list of tokens to corresponding unit types. A player can in fact use any group of names for a div.template
-#                  however this tag is a helper for an automated choice (for AI, or if the group must switch on it's own, because
-#                  for example the current one is no longer available due to the can_use trigger saying so).
-#                  In automated choice, the division template must have at least 1 of the following types for it to be chosen.
-#
-# fallback_name - Is going to be used if we run out of the scripted historical names. If you want to use the old division naming
-#                 mechanics to be used for fallbacks, then just skip this option.
-#
-# unordered - It's a list of historical division names that did not have a number. Regardless if such names happened in history or not
-#             this option is available here mainly for a mods.
-#
-# ordered - Is a list of all historical names. 
-#           Numbers must start from 1 and up. 
-#           Numbers can't repeat in one scope.
-#           If you script the name for this group, at the same number (for example in a mod in another file), the name will be override.
-#           All arguments between the brackets must be separated by spaces. Each argument is wrapped in "quotas".
-#           1st argument = The name. It must contain either: 
-#                          %d (for decimal number placement)
-#                          %s (for string number placement - ROMAN numbers like XIV).
-#           2nd argument is optional = A localizable text describing this historical division. The text will be visible in the tooltip
-#                                      where you choose the historical division name.
-#           3rd argument is optional = An URL preferably pointing to the WIKI. It's a future feature that is not currently working in
-#                                      the current game version.
-FRR_INF_01 = 
-{
+﻿FRR_INF_01 = {
 	name = "Infantry Division"
 
-	for_countries = { FRR }
+	for_countries = { FRR FRA BRE }
 
 	can_use = { always = yes }
 
 	division_types = { "infantry" }
 
-	# Number reservation system will tie to another group.
-	#link_numbering_with = { FRR_INF_01 }
-
 	fallback_name = "%dème Division d'Infanterie"
 
-	# Names with numbers (only one number per entry). 
-	# It's okay to have gaps in numbering.
-	ordered =
-	{
+	ordered = {
 		2 = { "%dème Division d'Infanterie" }
 		4 = { "%dème Division d'Infanterie" }
 		6 = { "%dème Division d'Infanterie" }
@@ -110,7 +71,7 @@ FRR_INF_01 =
 		303 = { "3ème Div. Légère d`Infanterie" }
 		301 = { "1ère Division Légère de Chasseurs" }
 		302 = { "2ème Division Légère de Chasseurs" }
-		59 = { "%dème Div. Légère d`Infanterie" }		# post-invasion divisions, raised quickly and haphazardly
+		59 = { "%dème Div. Légère d`Infanterie" }	
 		40 = { "%dème Division d'Infanterie" }
 		17 = { "%dème Div. Légère d`Infanterie" }
 		353 = { "53ème Div. Légère d`Infanterie" }
@@ -121,7 +82,7 @@ FRR_INF_01 =
 		239 = { "%dème Div. Légère d`Infanterie" }
 		240 = { "%dème Div. Légère d`Infanterie" }
 		241 = { "%dème Div. Légère d`Infanterie" }
-		33 = { "%dème Division d'Infanterie" }			# fictional divisions start here
+		33 = { "%dème Division d'Infanterie" }
 		34 = { "%dème Division d'Infanterie" }
 		37 = { "%dème Division d'Infanterie" }
 		38 = { "%dème Division d'Infanterie" }
@@ -199,25 +160,18 @@ FRR_INF_01 =
 	}
 }
 
-FRR_CAV_01 = 
-{
+FRR_CAV_01 = {
 	name = "Cavalry Division"
 
-	for_countries = { FRR }
+	for_countries = { FRR FRA BRE }
 
 	can_use = { always = yes }
 
 	division_types = { "cavalry" }
-
-	# Number reservation system will tie to another group.
-	#link_numbering_with = { FRR_INF_01 }
-
+	
 	fallback_name = "%dème Division de Cavalerie"
 
-	# Names with numbers (only one number per entry). 
-	# It's okay to have gaps in numbering.
-	ordered =
-	{
+	ordered = {
 		1 = { "%dère Division de Cavalerie" }
 		2 = { "%dème Division de Cavalerie" }
 		3 = { "%dème Division de Cavalerie" }
@@ -241,25 +195,20 @@ FRR_CAV_01 =
 	}
 }
 
-FRR_MOT_01 = 
-{
+FRR_MOT_01 = {
 	name = "Motorized Division"
 
-	for_countries = { FRR }
+	for_countries = { FRR FRA BRE }
 
 	can_use = { always = yes }
 
 	division_types = { "motorized" }
 
-	# Number reservation system will tie to another group.
 	link_numbering_with = { FRR_INF_01 }
 
 	fallback_name = "%dème Div. d'Infanterie Motorisée"
 
-	# Names with numbers (only one number per entry). 
-	# It's okay to have gaps in numbering.
-	ordered =
-	{
+	ordered = {
 		1 = { "%dère Div. d'Infanterie Motorisée" }
 		3 = { "%dème Div. d'Infanterie Motorisée" }
 		5 = { "%dème Div. d'Infanterie Motorisée" }
@@ -267,7 +216,7 @@ FRR_MOT_01 =
 		12 = { "%dème Div. d'Infanterie Motorisée" }
 		15 = { "%dème Div. d'Infanterie Motorisée" }
 		25 = { "%dème Div. d'Infanterie Motorisée" }
-		91 = { "%dème Div. d'Infanterie Motorisée" }		# fictional divisions start here
+		91 = { "%dème Div. d'Infanterie Motorisée" }	
 		92 = { "%dème Div. d'Infanterie Motorisée" }
 		93 = { "%dème Div. d'Infanterie Motorisée" }
 		94 = { "%dème Div. d'Infanterie Motorisée" }
@@ -300,31 +249,24 @@ FRR_MOT_01 =
 	}
 }
 
-FRR_MEC_01 = 
-{
+FRR_MEC_01 = {
 	name = "Light Mechanized Division"
 
-	for_countries = { FRR }
+	for_countries = { FRR FRA BRE }
 
 	can_use = { always = yes }
 
 	division_types = { "light_armor" "medium_armor" "mechanized" }
 
-	# Number reservation system will tie to another group.
-	#link_numbering_with = { FRR_INF_01 }
-
 	fallback_name = "%dème Division Légère Mécanique"
 
-	# Names with numbers (only one number per entry). 
-	# It's okay to have gaps in numbering.
-	ordered =
-	{
+	ordered = {
 		1 = { "%dère Division Légère Mécanique" }
 		2 = { "%dème Division Légère Mécanique" }
 		3 = { "%dème Division Légère Mécanique" }
 		4 = { "%dème Division Légère Mécanique" }
 		7 = { "%dème Division Légère Mécanique" }
-		5 = { "%dème Division Légère Mécanique" }		# fictional divisions start here
+		5 = { "%dème Division Légère Mécanique" }
 		6 = { "%dème Division Légère Mécanique" }
 		8 = { "%dème Division Légère Mécanique" }
 		9 = { "%dème Division Légère Mécanique" }
@@ -352,31 +294,24 @@ FRR_MEC_01 =
 	}
 }
 
-FRR_DLC_01 = 
-{
+FRR_DLC_01 = {
 	name = "Light Cavalry Division"
 
-	for_countries = { FRR }
+	for_countries = { FRR FRA BRE }
 
 	can_use = { always = yes }
 
 	division_types = { "motorized" "cavalry" "mechanized" }
-
-	# Number reservation system will tie to another group.
-	#link_numbering_with = { FRR_INF_01 }
-
+	
 	fallback_name = "%dème Div. Légère de Cavalerie"
-
-	# Names with numbers (only one number per entry). 
-	# It's okay to have gaps in numbering.
-	ordered =
-	{
+	
+	ordered = {
 		1 = { "%dère Div. Légère de Cavalerie" }
 		2 = { "%dème Div. Légère de Cavalerie" }
 		3 = { "%dème Div. Légère de Cavalerie" }
 		4 = { "%dème Div. Légère de Cavalerie" }
 		5 = { "%dème Div. Légère de Cavalerie" }
-		6 = { "%dème Div. Légère de Cavalerie" }	# fictional divisions start here
+		6 = { "%dème Div. Légère de Cavalerie" }	
 		7 = { "%dème Div. Légère de Cavalerie" }
 		8 = { "%dème Div. Légère de Cavalerie" }
 		9 = { "%dème Div. Légère de Cavalerie" }
@@ -404,25 +339,18 @@ FRR_DLC_01 =
 	}
 }
 
-FRR_ARM_01 = 
-{
+FRR_ARM_01 = {
 	name = "Armored Division"
 
-	for_countries = { FRR }
+	for_countries = { FRR FRA BRE }
 
 	can_use = { always = yes }
 
 	division_types = { "light_armor" "medium_armor" "heavy_armor" "modern_armor" }
 
-	# Number reservation system will tie to another group.
-	#link_numbering_with = { FRR_INF_01 }
-
 	fallback_name = "%dème Division Cuirassée"
 
-	# Names with numbers (only one number per entry). 
-	# It's okay to have gaps in numbering.
-	ordered =
-	{
+	ordered = {
 		1 = { "%dère Division Cuirassée" }
 		2 = { "%dème Division Cuirassée" }
 		3 = { "%dème Division Cuirassée" }
@@ -469,25 +397,18 @@ FRR_ARM_01 =
 	}
 }
 
-FRR_ARM_02 = 
-{
+FRR_ARM_02 = {
 	name = "Tank Brigade"
 
-	for_countries = { FRR }
+	for_countries = { FRR FRA BRE }
 
 	can_use = { always = yes }
 
 	division_types = { "light_armor" "medium_armor" "heavy_armor" "modern_armor" }
 
-	# Number reservation system will tie to another group.
-	#link_numbering_with = { FRR_INF_01 }
-
 	fallback_name = "%dème Brigade Cuirassée"
 
-	# Names with numbers (only one number per entry). 
-	# It's okay to have gaps in numbering.
-	ordered =
-	{
+	ordered = {
 		1 = { "%dère Brigade Cuirassée" }
 		2 = { "%dème Brigade Cuirassée" }
 		3 = { "%dème Brigade Cuirassée" }
@@ -534,25 +455,20 @@ FRR_ARM_02 =
 	}
 }
 
-FRR_ARM_03 = 
-{
+FRR_ARM_03 = {
 	name = "Armored Division (late)"
 
-	for_countries = { FRR }
+	for_countries = { FRR FRA BRE }
 
 	can_use = { always = yes }
 
 	division_types = { "medium_armor" "modern_armor" }
 
-	# Number reservation system will tie to another group.
 	link_numbering_with = { FRR_ARM_01 }
 
 	fallback_name = "%dème Division Blindée"
 
-	# Names with numbers (only one number per entry). 
-	# It's okay to have gaps in numbering.
-	ordered =
-	{
+	ordered = {
 		1 = { "%dère Division Blindée" }
 		2 = { "%dème Division Blindée" }
 		3 = { "%dème Division Blindée" }
@@ -599,25 +515,18 @@ FRR_ARM_03 =
 	}
 }
 
-FRR_PAR_01 = 
-{
+FRR_PAR_01 = {
 	name = "Paratrooper Division"
 
-	for_countries = { FRR }
+	for_countries = { FRR FRA BRE }
 
 	can_use = { always = yes }
 
 	division_types = { "paratrooper" }
 
-	# Number reservation system will tie to another group.
-	#link_numbering_with = { FRR_INF_01 }
-
 	fallback_name = "%dème Division Parachutiste"
 
-	# Names with numbers (only one number per entry). 
-	# It's okay to have gaps in numbering.
-	ordered =
-	{
+	ordered = {
 		10 = { "%dème Division Parachutiste" }
 		25 = { "%dème Division Parachutiste" }
 		24 = { "%dème Division Aéroportée" }
@@ -635,25 +544,18 @@ FRR_PAR_01 =
 	}
 }
 
-FRR_MAR_01 = 
-{
+FRR_MAR_01 = {
 	name = "Marine Division"
 
-	for_countries = { FRR }
+	for_countries = { FRR FRA BRE }
 
 	can_use = { always = yes }
 
 	division_types = { "marine" }
 
-	# Number reservation system will tie to another group.
-	#link_numbering_with = { FRR_INF_01 }
-
 	fallback_name = "%dème Div. d'Infanterie de Marine"
 
-	# Names with numbers (only one number per entry). 
-	# It's okay to have gaps in numbering.
-	ordered =
-	{
+	ordered = {
 		1 = { "%dère Div. d'Infanterie de Marine" }
 		2 = { "%dème Div. d'Infanterie de Marine" }
 		3 = { "%dème Div. d'Infanterie de Marine" }
@@ -677,25 +579,20 @@ FRR_MAR_01 =
 	}
 }
 
-FRR_MNT_01 = 
-{
+FRR_MNT_01 = {
 	name = "Mountain Division"
 
-	for_countries = { FRR }
+	for_countries = { FRR FRA BRE }
 
 	can_use = { always = yes }
 
 	division_types = { "mountaineers" }
 
-	# Number reservation system will tie to another group.
 	link_numbering_with = { FRR_INF_01 }
 
 	fallback_name = "%dème Division d'Infanterie Alpine"
 
-	# Names with numbers (only one number per entry). 
-	# It's okay to have gaps in numbering.
-	ordered =
-	{
+	ordered = {
 		27 = { "%dème Division d'Infanterie Alpine" }
 		29 = { "%dème Division d'Infanterie Alpine" }
 		30 = { "%dème Division d'Infanterie Alpine" }
@@ -703,7 +600,7 @@ FRR_MNT_01 =
 		28 = { "%dème Division d'Infanterie Alpine" }
 		64 = { "%dème Division d'Infanterie Alpine" }
 		65 = { "%dème Division d'Infanterie Alpine" }
-		91 = { "%dème Division d'Infanterie Alpine" }		# fictional divisions start here
+		91 = { "%dème Division d'Infanterie Alpine" }	
 		92 = { "%dème Division d'Infanterie Alpine" }
 		93 = { "%dème Division d'Infanterie Alpine" }
 		94 = { "%dème Division d'Infanterie Alpine" }
@@ -736,25 +633,20 @@ FRR_MNT_01 =
 	}
 }
 
-FRR_GAR_01 = 
-{
+FRR_GAR_01 = {
 	name = "Garrison Division"
 
-	for_countries = { FRR }
+	for_countries = { FRR FRA BRE }
 
 	can_use = { always = yes }
 
 	division_types = { "infantry" }
-
-	# Number reservation system will tie to another group.
+	
 	link_numbering_with = { FRR_INF_01 }
 
 	fallback_name = "%dème Division de Forteresse"
 
-	# Names with numbers (only one number per entry). 
-	# It's okay to have gaps in numbering.
-	ordered =
-	{
+	ordered = {
 		101 = { "%dère Div. d'Inf. de Forteresse" }
 		102 = { "%dème Div. d'Inf. de Forteresse" }
 		103 = { "%dème Div. d'Inf. de Forteresse" }
@@ -822,25 +714,18 @@ FRR_GAR_01 =
 	}
 }
 
-FRR_COL_01 = 
-{
+FRR_COL_01 = {
 	name = "Colonial Division"
 
-	for_countries = { FRR }
+	for_countries = { FRR FRA BRE }
 
 	can_use = { always = yes }
 
 	division_types = { "infantry" }
 
-	# Number reservation system will tie to another group.
-	#link_numbering_with = { FRR_INF_01 }
-
 	fallback_name = "%dème d'Infanterie Coloniale"
 
-	# Names with numbers (only one number per entry). 
-	# It's okay to have gaps in numbering.
-	ordered =
-	{
+	ordered = {
 		41 = { "1ère Div. d'Inf. Nord-Africaine" }
 		42 = { "2ème Div. d'Inf. Nord-Africaine" }
 		43 = { "3ème Div. d'Inf. Nord-Africaine" }
@@ -867,11 +752,11 @@ FRR_COL_01 =
 		46 = { "6ème Div. d'Inf. Nord-Africaine" }
 		47 = { "7ème Div. d'Inf. Nord-Africaine" }
 		8 = { "%dème Div. d'Infanterie Coloniale" }
-		9 = { "%dème Div. d'Infanterie Coloniale" }			# post-invasion divisions start here, raised haphazardly
+		9 = { "%dème Div. d'Infanterie Coloniale" }	
 		101 = { "1ère Div. Légère d'Inf. Nord-Africaine" }
 		102 = { "2ème Div. Légère d'Inf. Coloniale" }
 		108 = { "8ème Div. Légère d'Inf. Coloniale" }
-		10 = { "%dème Div. d'Infanterie Coloniale" }		# fictional divisions start here
+		10 = { "%dème Div. d'Infanterie Coloniale" }
 		64 = { "4ème Division Marocaine" }
 		65 = { "5ème Division Marocaine" }
 		11 = { "%dème Div. d'Infanterie Coloniale" }

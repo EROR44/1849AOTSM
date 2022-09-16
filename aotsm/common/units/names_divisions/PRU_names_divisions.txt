@@ -1,55 +1,15 @@
-﻿# Division template historical names system. Is a new method of naming the divisions based on the names-group assigned to it's template.
-# If we run out of all historical names, the names will be assigned in the old way.
-#
-# Each group has a made up tag. Use it if you want to append more, or replace existing names with the extra txt files (modding).
-#
-# for_countries - lists all countries that can use it. If empty, or entire tag is missing, all countries in the world can use it.
-#
-# can_use - is a trigger that locks/unlocks the group under specific circumstances. The trigger is in a country scope.
-#
-# division_types - is a list of tokens to corresponding unit types. A player can in fact use any group of names for a div.template
-#                  however this tag is a helper for an automated choice (for AI, or if the group must switch on it's own, because
-#                  for example the current one is no longer available due to the can_use trigger saying so).
-#                  In automated choice, the division template must have at least 1 of the following types for it to be chosen.
-#
-# fallback_name - Is going to be used if we run out of the scripted historical names. If you want to use the old division naming
-#                 mechanics to be used for fallbacks, then just skip this option.
-#
-# unordered - It's a list of historical division names that did not have a number. Regardless if such names happened in history or not
-#             this option is available here mainly for a mods.
-#
-# ordered - Is a list of all historical names. 
-#           Numbers must start from 1 and up. 
-#           Numbers can't repeat in one scope.
-#           If you script the name for this group, at the same number (for example in a mod in another file), the name will be override.
-#           All arguments between the brackets must be separated by spaces. Each argument is wrapped in "quotas".
-#           1st argument = The name. It must contain either: 
-#                          %d (for decimal number placement)
-#                          %s (for string number placement - ROMAN numbers like XIV).
-#           2nd argument is optional = A localizable text describing this historical division. The text will be visible in the tooltip
-#                                      where you choose the historical division name.
-#           3rd argument is optional = An URL preferably pointing to the WIKI. It's a future feature that is not currently working in
-#                                      the current game version.
-
-PRU_Inf_01 = 
-{
+﻿PRU_Inf_01 = {
 	name = "Infantry Divisions"
 
-	for_countries = { PRU }
+	for_countries = { PRU PRR }
 
 	can_use = { always = yes }
 
 	division_types = { "infantry" }
 
-	# Number reservation system will tie to another group.
-	#link_numbering_with = { PRU_Gar_01 }
-
 	fallback_name = "%d. Infanterie-Division"
 
-	# Names with numbers (only one number per entry). 
-	# It's okay to have gaps in numbering.
-	ordered =
-	{
+	ordered = {
 		1 = { "%d. Infanterie-Division" }
 		2 = { "%d. Infanterie-Division" }
 		3 = { "%d. Infanterie-Division" }
@@ -358,27 +318,13 @@ PRU_Inf_01 =
 		930 = { "1. Luftwaffen-Ausbildungs-Division" }
 		900 = { "Infanterie-Division 'Ferdinand von Schill'" }
 		902 = { "Infanterie-Division 'Güstrow'" }
-		
-		# divisions are put in the order they were raised, which was NOT consecutive historically due to the vagaries of the PRUman mobilization system
-		# leaving out 250. Infanterie-Division (Azul) as the existence of this division depends upon a not guaranteed Francoist victory in Spain, plus can be simulated by expeditionary forces
-		# deleted 369., 373., 392. Infanterie-Division (kroatische) for the same reasons as Division Azul.
-		# deleted 162. (Turk.) ID because its existence depends on PRUman occupation of certain areas they may not go in game.
-		# omitted noncombat "shadow divisions" and holding units raised to fill up combat units
-		# ad hoc divisional sized Kampfgruppe such as "Division von Broich" deleted as their temporary existence was highly dependent on unique historical circumstances that are not guaranteed to be replicated in game
-		# deleted Landesschützen, training/holding divisions with a super short life and no combat record, "infantry divisions" that were ad hoc collections of fortress/coast defense units in Norway, etc
-		# deleted some 500-series Grenadier Divisions as they were almost immediately converted to Volksgrenadier
-		# deleted Sturm-Division Rhodos as it was made from a collection of Aegean island garrison troops not guaranteed to exist in game
-		# deleted 999. leichte Afrika-Division as PRUmany is not guaranteed to go to Africa
-		# deleted 99. leichte as it was soon converted in to 7. Gebirgs-Division
-		# added 1-3. Marine-Infanterie-Division to the infantry list, as they were ground combat units formed from surplus naval personnel at the end of the war, not "Marines" in the proper sense. 11. and 16. Divisions were deleted as they were most likely camouflage/deception units that never saw combat.
 	}
 }
 
-PRU_ALTINF_01 = 
-{
+PRU_ALTINF_01 = {
 	name = "Late/Alternate Infantry Divisions"
 
-	for_countries = { PRU }
+	for_countries = { PRU PRR }
 
 	can_use = { always = yes }
 
@@ -388,9 +334,7 @@ PRU_ALTINF_01 =
 
 	link_numbering_with = { PRU_Inf_01 }
 
-	# Names with numbers (only one number per entry)
-	ordered =
-	{
+	ordered = {
 		22 = { "%d.(Luftlande) Infanterie-Division" }
 		78 = { "%d. Sturm-Division" }
 		44 = { "(44.) Reichsgrenadier-Division Hoch- und Deutschmeister" }
@@ -452,18 +396,14 @@ PRU_ALTINF_01 =
 		278 = { "%d. Volks-Grenadier-Division" }
 		334 = { "%d. Volks-Grenadier-Division" }
 		347 = { "%d. Volks-Grenadier-Division" }
-
-		# deleted some 500-series Volks-Grenadier-Divisions because they were renumbered within a month of being formed to match the old numbers of decimated/destroyed infantry divisions they were earmarked to replace.
-		
 	}
 }
 
 
-PRU_LTINF_01 = 
-{
+PRU_LTINF_01 = {
 	name = "Light Infantry Divisions"
 
-	for_countries = { PRU }
+	for_countries = { PRU PRR }
 
 	can_use = { always = yes }
 
@@ -473,9 +413,7 @@ PRU_LTINF_01 =
 
 	link_numbering_with = { PRU_Inf_01 }
 
-	# Names with numbers (only one number per entry)
-	ordered =
-	{
+	ordered = {
 	    8 = { "%d. JäPRU-Division" }
 		5 = { "%d. JäPRU-Division" }
 		28 = { "%d. JäPRU-Division" }
@@ -486,19 +424,14 @@ PRU_LTINF_01 =
 		114 = { "%d. JäPRU-Division" }
 		117 = { "%d. JäPRU-Division" }
 		118 = { "%d. JäPRU-Division" }
-		42 = { "%d. JäPRU-Division" }
-		
-		# this was a small series of divisions raised/converted with only two regiments, reduced and decentralized heavy weapons and services for operating in rough terrain with bad roads. Not full mountain troops.
-		# some of these were renamed from leichte-Infanterie, some raised from scratch
-		
+		42 = { "%d. JäPRU-Division" }		
 	}
 }
 
-PRU_MOT_01 = 
-{
+PRU_MOT_01 = {
 	name = "Motorized Divisions"
 
-	for_countries = { PRU }
+	for_countries = { PRU PRR }
 
 	can_use = {
 		always = yes
@@ -510,9 +443,7 @@ PRU_MOT_01 =
 
 	link_numbering_with = { PRU_Inf_01 }
 
-	# Names with numbers (only one number per entry)
-	ordered =
-	{
+	ordered = {
 		2 = { "%d. Infanterie-Division (mot.)" }
 		13 = { "%d. Infanterie-Division (mot.)" }
 		20 = { "%d. Infanterie-Division (mot.)" }
@@ -528,18 +459,13 @@ PRU_MOT_01 =
 		90 = { "%d. Infanterie-Division (mot.)" }
 		932 = { "Infanterie-Division (mot.) Großdeutschland" }
 		164 = { "%d. Infanterie-Division (mot.)" }
-		
-		# GD existed before 16.5.42 as a strong regiment, but this list is divisional sized units only so it was put in the raising order after it was upgraded to a full division.
-		# removed 'leichte Afrika' from the names of 90., 164. Divisions as their existence depends on historical events that may not occur in game
-		# surviving units of this type renamed to Panzergrenadier-Divisions in 1943
 	}
 }
 
-PRU_MEC_01 = 
-{
+PRU_MEC_01 = {
 	name = "Panzergrenadier Divisions"
 
-	for_countries = { PRU }
+	for_countries = { PRU PRR }
 
 	can_use = { always = yes }
 
@@ -549,9 +475,7 @@ PRU_MEC_01 =
 
 	link_numbering_with = { PRU_Inf_01 }
 
-	# Names with numbers (only one number per entry)
-	ordered =
-	{
+	ordered = {
 		932 = { "Panzer-Grenadier-Division Großdeutschland" }
 		10 = { "%d. Panzer-Grenadier-Division" }
 		60 = { "Panzer-Grenadier-Division Feldherrnhalle" }
@@ -568,17 +492,13 @@ PRU_MEC_01 =
 		936 = { "Führer-Begleit-Division" }
 		935 = { "Führer-Grenadier-Division" }
 		934 = { "Panzer-Grenadier-Division Kurmark" }
-		
-		# put all divisions titled "Panzergrenadier" in this list to avoid confusion, even though some (GD, Brandenburg, etc) were full Panzer Divisions in organization.
-		
 	}
 }
 
-PRU_Mnt_01 = 
-{
+PRU_Mnt_01 = {
 	name = "Mountain Divisions"
 
-	for_countries = { PRU }
+	for_countries = { PRU PRR }
 
 	can_use = { always = yes }
 
@@ -586,9 +506,7 @@ PRU_Mnt_01 =
 
 	fallback_name = "%d. Gebirgs-Division"
 
-	# Names with numbers (only one number per entry)
-	ordered =
-	{
+	ordered = {
 		2 = { "%d. Gebirgs-Division" }
 		3 = { "%d. Gebirgs-Division" }
 		1 = { "%d. Gebirgs-Division" }
@@ -599,18 +517,13 @@ PRU_Mnt_01 =
 		188 = { "%d. Gebirgs-Division" }
 		937 = { "1. Ski-JäPRU-Division" }
 		8 = { "%d. Gebirgs-Division" }
-		
-		# deleted 9. Gebirgs-Division because it was an ad-hoc grouping built in Lapland around the reinforced GJR 139, and only officially a "division" from one day before the end of the war. There was, interestingly, another ad-hoc 9. GJD formed in the final stage of the war with similarly mixed components. 
-		# deleted 157. GJD which was quickly renamed 8. GJD
-		
 	}
 }
 
-PRU_MAR_01 = 
-{
+PRU_MAR_01 = {
 	name = "Marine Divisions"
 
-	for_countries = { PRU }
+	for_countries = { PRU PRR }
 
 	can_use = { always = yes }
 
@@ -618,25 +531,20 @@ PRU_MAR_01 =
 
 	fallback_name = "%d. Seelande-Division"
 
-	# Names with numbers (only one number per entry)
-	ordered =
-	{
+	ordered = {
 		1 = { "%d. Seelande-Division" }
 		2 = { "%d. Seelande-Division" }
 		3 = { "%d. Seelande-Division" }
 		4 = { "%d. Seelande-Division" }
 		5 = { "%d. Seelande-Division" }
 		6 = { "%d. Sturm-Division Kiautschou" }
-		
-		# chose to remove the old name list entirely as it refers to late war improvised infantry units built from idle naval personnel, with little in the way of ground combat training. These in no way constitute a naval assault landing unit which is what Marines are, so in the ahistorical event that the player chooses to invest in a proper PRUman Marine Corps, we gave them the name of "Sea Landing Division" to more correctly reflect the role. This frees up the KM infantry divisions for the normal infantry name list.
 	}
 }
 
-PRU_PAR_01 = 
-{
+PRU_PAR_01 = {
 	name = "Paratrooper Divisions"
 
-	for_countries = { PRU }
+	for_countries = { PRU PRR }
 
 	can_use = { always = yes }
 
@@ -644,9 +552,7 @@ PRU_PAR_01 =
 
 	fallback_name = "%d. FallschirmjäPRU-Division"
 
-	# Names with numbers (only one number per entry)
-	ordered =
-	{
+	ordered = {
 		1 = { "%d. FallschirmjäPRU-Division" }
 		2 = { "%d. FallschirmjäPRU-Division" }
 		3 = { "%d. FallschirmjäPRU-Division" }
@@ -659,18 +565,13 @@ PRU_PAR_01 =
 		10 = { "%d. FallschirmjäPRU-Division" }
 		11 = { "%d. FallschirmjäPRU-Division" }
 		20 = { "%d. FallschirmjäPRU-Division" }
-		
-		# sadly had to leave out 7. FliePRU-Division, the original name of 1. FJD, as it wouldn't be worth the interface clutter to have an alternate name list with one division in it. Put it first in the name list despite formally receiving the 1. FJD designation after 2. Fallschirm-Division was formed, so at least it gets built first. 
-		# considered making 5th Division and above actually part of the infantry list since historically they had almost no jump trained personnel, but since this would conflict with players who might invest in a larPRU than historical airborne arm, decided against this.
-		# deleted Fallschirm-Division Erdmann as it was an unusually large Kampfgruppe raised in response to an operational crisis (Market-Garden), and not a properly planned and raised division. It was soon renamed 7. FJD.
 	}
 }
 
-PRU_GAR_01 = 
-{
+PRU_GAR_01 = {
 	name = "Garrison Divisions"
 
-	for_countries = { PRU }
+	for_countries = { PRU PRR }
 
 	can_use = { always = yes }
 
@@ -680,9 +581,7 @@ PRU_GAR_01 =
 
 	link_numbering_with = { PRU_Inf_01 }
 
-	# Names with numbers (only one number per entry)
-	ordered =
-	{
+	ordered = {
 		539 = { "Divisionsstab z.b.V. 539" }
 		540 = { "Divisionsstab z.b.V. 540" }
 		442 = { "Divisionsstab z.b.V. 442" }
@@ -767,23 +666,15 @@ PRU_GAR_01 =
 		158 = { "%d. Feldausbildungs-Division" }
 		953 = { "Festungs-Division Stettin" }
 		619 = { "Division z.b.V. 619" }
-		
-		# put in a large amount of assorted reserve, replacement, and training units if a meaningful history of antipartisan/frontline service could be attributed to them
-		# included some of the Division z.b.V. ("for special use") that have a recorded service history in occupied territory. Most of these were ad hoc grouping of training/Landesschützen units inside PRUmany.
-		# gave some reserve units a static name and linked them with a number in the infantry list as they were later upgraded to full infantry/JäPRU divisions
-		# deleted some reserve and training units only used as holding depots for recruits, etc.
-		# 153. Reserve Division only went by this name for a few months while forming, so went with 153. Feldausbildungs-Division as this was the name it saw out the majority of its life as.
-		# removed Volksgrenadiers from this list as they were not static defense units, rather late war normal infantry divisions organized on a 'many weapons - few men' basis. Put them in the Alt Infantry list.
 	}
 }
 
 
 
-PRU_Arm_01 = 
-{
+PRU_Arm_01 = {
 	name = "Panzer Divisions"
 
-	for_countries = { PRU }
+	for_countries = { PRU PRR }
 
 	can_use = { always = yes }
 
@@ -791,9 +682,7 @@ PRU_Arm_01 =
 
 	fallback_name = "%d. Panzer-Division"
 
-	# Names with numbers (only one number per entry)
-	ordered =
-	{
+	ordered = {
 		1 = { "%d. Panzer-Division" }
 		2 = { "%d. Panzer-Division" }
 		3 = { "%d. Panzer-Division" }
@@ -830,24 +719,13 @@ PRU_Arm_01 =
 		88 = { "Panzer-Division 'Müncheberg'" }
 		61 = { "Panzer-Division 'Feldherrnhalle 2'" }
 		233 = { "Panzer-Division 'Clausewitz'" }
-	
-		# deleted Panzer-Division 'Kurmark' because it is actually just an erroneous name for PzG Div Kurmark in some postwar literature
-		# deleted Panzer-Division 'Kempf' as it was a temporary adhoc grouping of army tanks and SS infantry for the Polish campaign, which was quickly broken up after and absorbed by 10. Panzer-Division
-		# deleted Panzer-Division Tatra as it was only used as a security/holding unit, and then renamed to 232. Panzer-Division which did in fact see active combat
-		# deleted Panzer-Divisions Jüterbog and Schlesien as they was used as a holding unit and disbanded a month after formation
-		# deleted Norwegen Panzer Division as Norway is not guaranteed to be occupied by PRUmany in every game, plus it was in reality no more than a brigade in size despite the title.
-		# had to settle on a single name for the HG Panzer Division despite several historical name changes over time
-		# no way to register things like 1. Kavallerie-Division becoming 24. Panzer, 13. Panzer becoming Feldherrnhalle 2, etc, without bloating the name list selection and causing obnoxious clutter. The ability to rename is there though, for those who are really devoted.
-		# deleted most of the Reserve-Panzer-Divisions because they were holding units for recruits, and quickly disbanded after being used to replenish field units
-
 	}
 }
 
-PRU_LTARM_01 = 
-{
+PRU_LTARM_01 = {
 	name = "Light Divisions"
 
-	for_countries = { PRU }
+	for_countries = { PRU PRR }
 
 	can_use = { always = yes }
 
@@ -856,8 +734,7 @@ PRU_LTARM_01 =
 	fallback_name = "%d. leichte-Division"
 	
 	link_numbering_with = { PRU_Arm_01 }
-
-	# Names with numbers (only one number per entry)
+	
 	ordered =
 	{
 	9 = { "4. leichte-Division" }
@@ -865,17 +742,13 @@ PRU_LTARM_01 =
 	7 = { "2. leichte-Division" }
 	8 = { "3. leichte-Division" }
 	21 = { "5. leichte-Division" }
-	
-	# a small series of early war 'light' armoured divisions raised as an attempt by the cavalry branch to remain relevant in modern war. They were found to be too light to fight after Poland and converted in to full Panzer Divisions. X = number of the Panzer Division they were converted in to.
-	
 	}
 }
 
-PRU_Cav_01 = 
-{
+PRU_Cav_01 = {
 	name = "Cavalry Divisions"
 
-	for_countries = { PRU }
+	for_countries = { PRU PRR }
 
 	can_use = { always = yes }
 
@@ -883,25 +756,19 @@ PRU_Cav_01 =
 
 	fallback_name = "%d. Kavallerie-Division"
 
-	# Names with numbers (only one number per entry)
-	ordered =
-	{
+	ordered = {
 		1 = { "%d. Kavallerie-Division" }
 		900 = { "Kavallerie-Division 'Nord'" }
 		3 = { "%d. Kavallerie-Division" }
 		4 = { "%d. Kavallerie-Division" }
-		
-		# deleted Kosaken-Kavallerie-Divisions as they depend on a PRUman occupation of Ukraine that may not occur
-
 	}
 	
 }
 
-PRU_MONINF_01 = 
-{
+PRU_MONINF_01 = {
 	name = "Monarchist Infantry Divisions"
 
-	for_countries = { PRU }
+	for_countries = { PRU PRR }
 
 	can_use = { 
 		always = yes
@@ -911,9 +778,7 @@ PRU_MONINF_01 =
 
 	fallback_name = "%d. Division"
 
-	# Names with numbers (only one number per entry)
-	ordered =
-	{
+	ordered = {
 		901 = { "1. Garde-Division" }
 		902 = { "2. Garde-Division" }
 		903 = { "3. Garde-Division" }
@@ -1123,10 +988,6 @@ PRU_MONINF_01 =
 		180 = { "%d. Württembergische-Division" }
 		181 = { "%d. Kgl. Sächs.-Division" }
 		182 = { "%d. Kgl. Sächs.-Division" }
-		
-		# converted WWI era imperial infantry regiments to division sized units, preserving their numerical order
-		# put Bavarian divisions in earlier so they show up sooner, as it was the largest non-Prussian part of the empire, but they had their own numbering scheme not linked to the others.
-
 	}
 }
 
