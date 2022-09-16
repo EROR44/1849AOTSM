@@ -1,0 +1,263 @@
+add_namespace = postwar
+
+country_event = { #German civil war
+	id = postwar.1
+	title = postwar.1.t
+	desc = postwar.1.d
+	
+	picture = GFX_report_event_german_reichstag_gathering
+
+	is_triggered_only = yes
+
+	immediate = {
+		hidden_effect = {
+			SGE = {
+				add_state_core = 5
+				add_state_core = 8
+				add_state_core = 28
+				add_state_core = 42
+				add_state_core = 50
+				add_state_core = 51
+				add_state_core = 52
+				add_state_core = 53
+				add_state_core = 54
+				add_state_core = 55
+				add_state_core = 56
+				add_state_core = 57
+				add_state_core = 58
+				add_state_core = 59
+				add_state_core = 60
+				add_state_core = 61
+				add_state_core = 62
+				add_state_core = 63
+				add_state_core = 64
+				add_state_core = 65
+				add_state_core = 66
+				add_state_core = 67
+				add_state_core = 68
+				add_state_core = 85
+				add_state_core = 86
+				add_state_core = 188
+				add_state_core = 762
+				add_state_core = 763
+				add_state_core = 808
+				add_state_core = 828
+				add_state_core = 829
+				add_state_core = 888
+			}
+			SGE = {
+				transfer_state = 50
+				transfer_state = 52
+				transfer_state = 53
+				transfer_state = 54
+				transfer_state = 55
+				transfer_state = 56
+				transfer_state = 57
+				transfer_state = 808
+				transfer_state = 888
+			}
+			PRU = {
+				transfer_units_fraction= {
+					target = SGE
+					size = 0.00
+					stockpile_ratio = 0.70
+					army_ratio = 0.60
+					navy_ratio = 0.70
+					air_ratio = 0.70
+				}
+			}
+			set_global_flag = GERMAN_CIVIL_WAR
+		}
+	}
+
+	option = { #Goverment
+		name = postwar.1.a
+		trigger = {
+			NOT = {
+				is_ai = yes
+			}
+		}
+		hidden_effect = {
+			SGE = {
+				declare_war_on = {
+					target = PRU
+					type = annex_everything
+				}
+			}
+		}
+	}
+	
+	option = { #Revolution
+		name = postwar.1.b
+		trigger = {
+			NOT = {
+				is_ai = yes
+			}
+		}
+		SGE = { change_tag_from = PRU }
+		hidden_effect = {
+			SGE = {
+				declare_war_on = {
+					target = PRU
+					type = annex_everything
+				}
+			}
+		}
+	}
+	
+	option = { #Prussian
+		name = postwar.1.c
+		trigger = {
+			NOT = {
+				is_ai = yes
+			}
+		}
+		PRR = { change_tag_from = PRU }
+		hidden_effect = {
+			SGE = {
+				declare_war_on = {
+					target = PRU
+					type = annex_everything
+				}
+			}
+		}
+	}
+	
+	option = { #ai
+		name = postwar.1.ai
+		trigger = {
+			is_ai = yes
+		}
+	}
+}
+
+country_event = { #Yugoslavia Qustian
+	id = postwar.2
+	title = postwar.2.t
+	desc = postwar.2.d
+	
+	picture = GFX_report_event_generic_read_write
+
+	is_triggered_only = yes
+	
+	option = { #No
+		name = postwar.2.a
+		RUS = {
+			set_country_flag = YUG_NO
+		}
+	}
+	
+	option = { #Yes
+		name = postwar.2.b
+		RUS = {
+			set_country_flag = YUG_YES
+		}
+		hidden_effect = {
+			SER = {
+				set_cosmetic_tag = SERYUG
+			}
+			SER = {
+				annex_country = {
+					target = BOS
+					transfer_troops = yes
+				}
+				annex_country = {
+					target = CRO
+					transfer_troops = yes
+				}
+				annex_country = {
+					target = SLO
+					transfer_troops = yes
+				}
+				add_state_core = 45
+				add_state_core = 102
+				add_state_core = 103
+				add_state_core = 104
+				add_state_core = 109
+				add_state_core = 163
+				add_state_core = 736
+				add_state_core = 804
+			}
+		}
+	}
+	
+}
+
+country_event = { #Bolgarian Qustian
+	id = postwar.3
+	title = postwar.3.t
+	desc = postwar.3.d
+	
+	picture = GFX_report_event_generic_read_write
+
+	is_triggered_only = yes
+	
+	option = { #Bulgaria
+		name = postwar.3.a
+		BUL = {
+			transfer_state = 48
+			transfer_state = 77
+			transfer_state = 106
+			transfer_state = 211
+			transfer_state = 212
+			transfer_state = 801
+			transfer_state = 803
+		}
+		hidden_effect = {
+			RUS = {
+				set_autonomy = {
+					target = BUL
+					autonomy_state = autonomy_puppet
+					end_wars = yes
+					end_civil_wars = yes
+				}
+			}
+		}
+	}
+	
+	option = { #Mol-Wal-Bul
+		name = postwar.3.b
+		VLH = {
+			transfer_state = 48
+			add_state_core = 48
+			transfer_state = 77
+			add_state_core = 77
+			transfer_state = 106
+			add_state_core = 106
+			transfer_state = 211
+			add_state_core = 211
+			transfer_state = 212
+			add_state_core = 212
+			transfer_state = 801
+			add_state_core = 801
+			transfer_state = 803
+			add_state_core = 803
+		}
+	}
+	
+	option = { #Megaslavia
+		name = postwar.3.c
+		trigger = {
+			RUS = {
+				has_country_flag = YUG_YES
+			}
+		}
+		SER = {
+			transfer_state = 48
+			add_state_core = 48
+			transfer_state = 77
+			add_state_core = 77
+			transfer_state = 106
+			add_state_core = 106
+			transfer_state = 211
+			add_state_core = 211
+			transfer_state = 212
+			add_state_core = 212
+			transfer_state = 801
+			add_state_core = 801
+			transfer_state = 803
+			add_state_core = 803
+		}
+	}
+	
+}
