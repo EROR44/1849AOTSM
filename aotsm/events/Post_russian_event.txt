@@ -1,0 +1,145 @@
+add_namespace = postrus
+
+country_event = { #Pan-Turkism
+	id = postrus.1
+	title = postrus.1.t
+	desc = postrus.1.d
+	picture = GFX_report_event_generic_battle
+	
+	is_triggered_only = yes
+	
+	fire_only_once = no	
+	
+	option = {
+		name = postrus.1.a
+		ai_chance = {
+			factor = 75
+		}
+		if = {
+			limit = {
+				tag = KOK
+			}
+			SKZ = {
+				annex_country = {
+					target = KOK
+					transfer_troops = yes
+				}
+			}
+			SKZ = {
+				add_state_core = 732
+				add_state_core = 742
+			}
+			if = {
+				limit = {
+					KOK = {
+						is_ai = no
+					}
+				}
+				SKZ = { change_tag_from = KOK }
+			}
+		}
+		if = {
+			limit = {
+				tag = BUK
+			}
+			SKZ = {
+				annex_country = {
+					target = BUK
+					transfer_troops = yes
+				}
+			}
+			SKZ = {
+				add_state_core = 585
+			}
+			if = {
+				limit = {
+					BUK = {
+						is_ai = no
+					}
+				}
+				SKZ = { change_tag_from = BUK }
+			}
+		}
+		if = {
+			limit = {
+				tag = HIV
+			}
+			SKZ = {
+				annex_country = {
+					target = HIV
+					transfer_troops = yes
+				}
+			}
+			SKZ = {
+				add_state_core = 584
+			}
+			if = {
+				limit = {
+					HIV = {
+						is_ai = no
+					}
+				}
+				SKZ = { change_tag_from = HIV }
+			}
+		}
+	}
+	
+	option = {
+		name = postrus.1.b
+		ai_chance = {
+			factor = 25
+		}
+		if = {
+			limit = {
+				tag = KOK
+			}
+			SKZ = {
+				declare_war_on = {
+					target = KOK
+					type = annex_everything
+				}
+			}
+			KOK = {
+				set_country_flag = KOK_vs_SKZ
+			}
+			SKZ = {
+				add_state_core = 732
+				add_state_core = 742
+			}
+		}
+		if = {
+			limit = {
+				tag = BUK
+			}
+			SKZ = {
+				declare_war_on = {
+					target = BUK
+					type = annex_everything
+				}
+			}
+			BUK = {
+				set_country_flag = BUK_vs_SKZ
+			}
+			SKZ = {
+				add_state_core = 585
+			}
+		}
+		if = {
+			limit = {
+				tag = HIV
+			}
+			SKZ = {
+				declare_war_on = {
+					target = HIV
+					type = annex_everything
+				}
+			}
+			HIV = {
+				set_country_flag = HIV_vs_SKZ
+			}
+			SKZ = {
+				add_state_core = 584
+			}
+		}
+	}
+}
