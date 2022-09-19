@@ -4923,71 +4923,59 @@ on_actions = {
 							end_civil_wars = yes
 						}
 					}
+					if = {
+						limit = {
+							RUS = {
+								has_war_with = HUN
+							}
+						}
+						RUS = {
+							set_autonomy = {
+								target = SLA
+								autonomy_state = autonomy_puppet
+								end_wars = yes
+								end_civil_wars = yes
+							}
+						}
+						RUS = {
+							set_autonomy = {
+								target = GLA
+								autonomy_state = autonomy_puppet
+								end_wars = yes
+								end_civil_wars = yes
+							}
+						}
+						SLA = {
+							transfer_state = 70
+							transfer_state = 71
+							transfer_state = 73
+							transfer_state = 664
+						}
+						GLA = {
+							transfer_state = 80
+							transfer_state = 88
+							transfer_state = 89
+							transfer_state = 91
+						}
+						PRU = {
+							transfer_units_fraction= {
+								target = SLA
+								size = 0.00
+								stockpile_ratio = 0.10
+								army_ratio = 0.05
+								navy_ratio = 0.00
+								air_ratio = 0.00
+							}
+						}
+						SLA = {
+							inherit_technology = RUS
+						}
+						GLA = {
+							inherit_technology = RUS
+						}
+					}
 					BOH = {
-						set_politics = { ruling_party = authoritarian elections_allowed = no }
-						set_popularities = {
-							democratic = 6
-							socialism = 14
-							reactionist = 31
-							authoritarian = 49
-						}
-						drop_cosmetic_tag = yes
-					}
-					SLA = {
-						transfer_state = 70
-						transfer_state = 71
-						transfer_state = 73
-						transfer_state = 664
-					}
-					RUS = {
-						set_autonomy = {
-							target = SLA
-							autonomy_state = autonomy_puppet
-							end_wars = yes
-							end_civil_wars = yes
-						}
-					}
-					SLA = {
-						set_politics = { ruling_party = authoritarian elections_allowed = no }
-						set_popularities = {
-							democratic = 5
-							socialism = 20
-							reactionist = 31
-							authoritarian = 44
-						}
-					}
-					GLA = {
-						transfer_state = 80
-						transfer_state = 88
-						transfer_state = 89
-						transfer_state = 91
-					}
-					RUS = {
-						set_autonomy = {
-							target = GLA
-							autonomy_state = autonomy_puppet
-							end_wars = yes
-							end_civil_wars = yes
-						}
-					}
-					BOH = {
 						inherit_technology = RUS
-					}
-					SLA = {
-						inherit_technology = RUS
-					}
-					GLA = {
-						inherit_technology = RUS
-					}
-					PRU = {
-						transfer_units_fraction= {
-							target = SLA
-							size = 0.00
-							stockpile_ratio = 0.10
-							army_ratio = 0.05
-							navy_ratio = 0.00
-							air_ratio = 0.00
-						}
 					}
 					PRU = {
 						transfer_units_fraction= {
@@ -5007,19 +4995,34 @@ on_actions = {
 						}
 					}
 					FRR = {
-						transfer_state = 8
 						transfer_state = 28
 						add_state_core = 28
-						transfer_state = 42
-						transfer_state = 51
 						transfer_state = 828
 						add_state_core = 828
-						transfer_state = 863
+					}
+					REU = {
+						transfer_state = 8
+						add_state_core = 8
+						transfer_state = 42
+						add_state_core = 42
+						transfer_state = 51
+						add_state_core = 51
+					}
+					FRR = {
+						set_autonomy = {
+							target = REU
+							autonomy_state = autonomy_puppet
+							end_wars = yes
+							end_civil_wars = yes
+						}
 					}
 					BEL = {
 						transfer_state = 6
 						add_state_core = 6
 						transfer_state = 34
+						add_state_core = 863
+						transfer_state = 863
+						add_state_core = 863
 					}
 					FRR = {
 						set_autonomy = {
@@ -5030,15 +5033,17 @@ on_actions = {
 						}
 					}
 					BEL = {
-						set_politics = { ruling_party = socialism elections_allowed = no }
-						set_popularities = {
-							democratic = 34
-							socialism = 46
-							reactionist = 12
-							authoritarian = 8
-						}
 						drop_cosmetic_tag = yes
-						kill_country_leader = yes
+						if = {
+							limit = {
+								BEL = {
+									has_government = socialism
+								}
+							}
+							BEL = {
+								kill_country_leader = yes
+							}
+						}
 					}
 				}
 				if = {
@@ -5454,6 +5459,84 @@ on_actions = {
 				PRR = {
 					load_focus_tree = prussian_lose_focus
 				}
+				PRU = {
+					if = {
+						limit = {
+							has_idea = monarchy
+						}
+						PRU = {
+							swap_ideas = {
+								remove_idea = monarchy
+								add_idea = republic
+							}
+						}
+					}
+				}
+				PRU = {
+					if = {
+						limit = {
+							has_idea = constitutional_monarchy
+						}
+						PRU = {
+							swap_ideas = {
+								remove_idea = constitutional_monarchy
+								add_idea = republic
+							}
+						}
+					}
+				}
+				PRU = {
+					if = {
+						limit = {
+							has_idea = parliament_monarchy
+						}
+						PRU = {
+							swap_ideas = {
+								remove_idea = parliament_monarchy
+								add_idea = republic
+							}
+						}
+					}
+				}
+				PRU = {
+					if = {
+						limit = {
+							has_idea = dictature_fg
+						}
+						PRU = {
+							swap_ideas = {
+								remove_idea = dictature_fg
+								add_idea = republic
+							}
+						}
+					}
+				}
+				if = {
+					limit = {
+						PRU = {
+							has_idea = world_power
+						}
+					}
+					PRU = {
+						swap_ideas = {
+							remove_idea = world_power
+							add_idea = large_country
+						}
+					}
+				}
+				if = {
+					limit = {
+						PRU = {
+							has_idea = potential_world_power
+						}
+					}
+					PRU = {
+						swap_ideas = {
+							remove_idea = potential_world_power
+							add_idea = large_country
+						}
+					}
+				}
 			}
 			#BYZ capitulation
 			if = {
@@ -5485,6 +5568,10 @@ on_actions = {
 						annex_country = {
 							target = SAR
 							transfer_troops = no
+						}
+						set_capital = {
+							state = 2
+							remember_old_capital = yes
 						}
 					}
 				}
@@ -5772,31 +5859,41 @@ on_actions = {
 							end_civil_wars = yes
 						}
 					}
-					RUS = {
-						set_autonomy = {
-							target = HUN
-							autonomy_state = autonomy_puppet
-							end_wars = yes
-							end_civil_wars = yes
+					if = {
+						limit = {
+							RUS = {
+								has_war_with = HUN
+							}
+						}
+						RUS = {
+							set_autonomy = {
+								target = HUN
+								autonomy_state = autonomy_puppet
+								end_wars = yes
+								end_civil_wars = yes
+							}
+						}
+						RUS = {
+							set_autonomy = {
+								target = VLH
+								autonomy_state = autonomy_puppet
+								end_wars = yes
+								end_civil_wars = yes
+							}
+						}
+						VLH = {
+							transfer_state = 46
+							transfer_state = 76
+							transfer_state = 79
+							transfer_state = 81
+							transfer_state = 82
+							transfer_state = 83
+							transfer_state = 84
 						}
 					}
 					RUS = {
 						transfer_state = 78
 						transfer_state = 766
-					}
-					VLH = {
-						transfer_state = 76
-						transfer_state = 82
-						transfer_state = 83
-						transfer_state = 84
-					}
-					RUS = {
-						set_autonomy = {
-							target = VLH
-							autonomy_state = autonomy_puppet
-							end_wars = yes
-							end_civil_wars = yes
-						}
 					}
 					RUS = {
 						transfer_state = 797
@@ -6219,6 +6316,153 @@ on_actions = {
 				}
 				BYZ = {
 					leave_faction = yes
+				}
+				set_global_flag = byz_capitulation
+				news_event = news.81
+				if = {
+					limit = {
+						country_exists = BYZ
+					}
+					BYZ = {
+						country_event = {
+							id = postwar.4
+							days = 60
+						}
+					}
+				}
+				BYZ = {
+					load_focus_tree = romea_lose_focus
+				}
+				if = {
+					limit = {
+						BYZ = {
+							has_idea = world_power
+						}
+					}
+					BYZ = {
+						swap_ideas = {
+							remove_idea = world_power
+							add_idea = large_country
+						}
+					}
+				}
+				if = {
+					limit = {
+						BYZ = {
+							has_idea = potential_world_power
+						}
+					}
+					BYZ = {
+						swap_ideas = {
+							remove_idea = potential_world_power
+							add_idea = large_country
+						}
+					}
+				}
+			}
+			#HIV capitulation
+			if = {
+				limit = {
+					tag = HIV
+					HIV = {
+						has_country_flag = HIV_vs_SKZ
+					}
+				}
+				if = {
+					limit = {
+						SKZ = {
+							controls_state = 742
+						}
+					}
+					SKZ = {
+						annex_country = {
+							target = HIV
+							transfer_troops = no
+						}
+					}
+				}
+				if = {
+					limit = {
+						PAR = {
+							controls_state = 742
+						}
+					}
+					PAR = {
+						annex_country = {
+							target = HIV
+							transfer_troops = no
+						}
+					}
+				}
+			}
+			#BUK capitulation
+			if = {
+				limit = {
+					tag = BUK
+					BUK = {
+						has_country_flag = BUK_vs_SKZ
+					}
+				}
+				if = {
+					limit = {
+						SKZ = {
+							controls_state = 742
+						}
+					}
+					SKZ = {
+						annex_country = {
+							target = BUK
+							transfer_troops = no
+						}
+					}
+				}
+				if = {
+					limit = {
+						PAR = {
+							controls_state = 742
+						}
+					}
+					PAR = {
+						annex_country = {
+							target = BUK
+							transfer_troops = no
+						}
+					}
+				}
+			}
+			#KOK capitulation
+			if = {
+				limit = {
+					tag = KOK
+					KOK = {
+						has_country_flag = KOK_vs_SKZ
+					}
+				}
+				if = {
+					limit = {
+						SKZ = {
+							controls_state = 742
+						}
+					}
+					SKZ = {
+						annex_country = {
+							target = KOK
+							transfer_troops = no
+						}
+					}
+				}
+				if = {
+					limit = {
+						PAR = {
+							controls_state = 742
+						}
+					}
+					PAR = {
+						annex_country = {
+							target = KOK
+							transfer_troops = no
+						}
+					}
 				}
 			}
 		}

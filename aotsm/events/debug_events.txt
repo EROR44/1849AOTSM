@@ -288,19 +288,32 @@ country_event = { #Prussian cap
 			}
 		}
 		FRR = {
-			transfer_state = 8
 			transfer_state = 28
 			add_state_core = 28
-			transfer_state = 42
-			transfer_state = 51
 			transfer_state = 828
 			add_state_core = 828
-			transfer_state = 863
+		}
+		REU = {
+			transfer_state = 8
+			add_state_core = 8
+			transfer_state = 42
+			add_state_core = 42
+			transfer_state = 51
+			add_state_core = 51
+		}
+		FRR = {
+			set_autonomy = {
+				target = REU
+				autonomy_state = autonomy_puppet
+				end_wars = yes
+				end_civil_wars = yes
+			}
 		}
 		BEL = {
 			transfer_state = 6
 			add_state_core = 6
 			transfer_state = 34
+			transfer_state = 863
 		}
 		FRR = {
 			set_autonomy = {
@@ -311,15 +324,17 @@ country_event = { #Prussian cap
 			}
 		}
 		BEL = {
-			set_politics = { ruling_party = socialism elections_allowed = no }
-			set_popularities = {
-				democratic = 34
-				socialism = 46
-				reactionist = 12
-				authoritarian = 8
-			}
 			drop_cosmetic_tag = yes
-			kill_country_leader = yes
+			if = {
+				limit = {
+					BEL = {
+						has_government = socialism
+					}
+				}
+				BEL = {
+					kill_country_leader = yes
+				}
+			}
 		}
 		PRT = {
 			transfer_state = 308
@@ -406,6 +421,15 @@ country_event = { #Prussian cap
 				authoritarian = 29
 			}
 			set_cosmetic_tag = PRU_LOSE
+		}
+		PRU = {
+			load_focus_tree = lose_germany_focus
+		}
+		SGE = {
+			load_focus_tree = rev_germany_focus
+		}
+		PRR = {
+			load_focus_tree = prussian_lose_focus
 		}
 	}
 }
@@ -768,6 +792,18 @@ country_event = { #Byzantium Cap
 			transfer_state = 160
 			transfer_state = 161
 			transfer_state = 162
+			set_capital = {
+				state = 2
+				remember_old_capital = yes
+			}
+			country_event = {
+				id = postwar.4
+				days = 60
+			}
+		}
+		news_event = news.81
+		BYZ = {
+			load_focus_tree = romea_lose_focus
 		}
 	}
 }
