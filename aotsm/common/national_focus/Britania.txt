@@ -4071,6 +4071,642 @@ focus_tree = {
 		
 	}
 
+#Air
+
+	focus = {
+		id = CBI_new_place_of_warfere
+		icon = GFX_goal_generic_build_airforce
+		#relative_position_id = CBI_byzantium_example
+		x = -16
+		y = 13
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		#mutually_exclusive = { }
+		#prerequisite = { }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_doctrine_cost_reduction = {
+				cost_reduction = 0.5
+				uses = 2
+				category = air_doctrine
+			}
+			air_experience = 25
+		}
+		
+	}
+	
+	focus = {
+		id = CBI_light_tech
+		icon = GFX_goal_generic_air_fighter2
+		relative_position_id = CBI_new_place_of_warfere
+		x = -3
+		y = 1
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		mutually_exclusive = { focus = CBI_heavy_tech }
+		prerequisite = { focus = CBI_new_place_of_warfere }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 1.0
+				uses = 2
+				category = light_air
+			}
+		}
+		
+	}
+	
+	focus = {
+		id = CBI_fight_tech
+		icon = GFX_goal_generic_air_fighter
+		relative_position_id = CBI_new_place_of_warfere
+		x = -2
+		y = 2
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		#mutually_exclusive = {  }
+		prerequisite = { focus = CBI_light_tech }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 1.0
+				uses = 2
+				category = light_fighter
+			}
+		}
+		
+	}
+	
+	focus = {
+		id = CBI_cas_tech
+		icon = GFX_goal_generic_CAS
+		relative_position_id = CBI_new_place_of_warfere
+		x = -4
+		y = 2
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		#mutually_exclusive = {  }
+		prerequisite = { focus = CBI_light_tech }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 1.0
+				uses = 2
+				category = cas_bomber
+			}
+		}
+		
+	}
+	
+	focus = {
+		id = CBI_naval_bomber_tech
+		icon = GFX_goal_generic_air_naval_bomber
+		relative_position_id = CBI_new_place_of_warfere
+		x = -3
+		y = 3
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		#mutually_exclusive = {  }
+		prerequisite = { focus = CBI_fight_tech }
+		prerequisite = { focus = CBI_cas_tech }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 1.0
+				uses = 2
+				category = naval_bomber
+			}
+		}
+		
+	}
+	
+	focus = {
+		id = CBI_air_base
+		icon = GFX_goal_generic_air_production
+		relative_position_id = CBI_new_place_of_warfere
+		x = 0
+		y = 2
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = CBI_new_place_of_warfere }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			if = {
+				limit = {
+					OR = {
+						owns_state = 121
+						SCO = {
+							is_puppet_of = ROOT
+						}
+					}
+				}
+				121 = {
+					add_building_construction = {
+						type = air_base
+						level = 3
+						instant_build = yes
+					}
+					add_building_construction = {
+						type = anti_air_building	
+						level = 1
+						instant_build = yes
+					}
+				}
+			}
+			if = {
+				limit = {
+					OR = {
+						owns_state = 122
+						WAL = {
+							is_puppet_of = ROOT
+						}
+					}
+				}
+				122 = {
+					add_building_construction = {
+						type = air_base
+						level = 3
+						instant_build = yes
+					}
+					add_building_construction = {
+						type = anti_air_building	
+						level = 1
+						instant_build = yes
+					}
+				}
+			}
+			126 = {
+				add_building_construction = {
+					type = air_base
+					level = 5
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = anti_air_building	
+					level = 2
+					instant_build = yes
+				}
+			}
+			if = {
+				limit = {
+					OR = {
+						owns_state = 128
+						BRI = {
+							is_puppet_of = ROOT
+						}
+					}
+				}
+				128 = {
+					add_building_construction = {
+						type = air_base
+						level = 3
+						instant_build = yes
+					}
+					add_building_construction = {
+						type = anti_air_building	
+						level = 1
+						instant_build = yes
+					}
+				}
+			}
+		}
+		
+	}
+	
+	focus = {
+		id = CBI_radar
+		icon = GFX_goal_generic_radar
+		relative_position_id = CBI_new_place_of_warfere
+		x = 0
+		y = 3
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = CBI_air_base }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		available = { 
+			has_tech = radio_detection
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			if = {
+				limit = {
+					OR = {
+						owns_state = 123
+						BRI = {
+							is_puppet_of = ROOT
+						}
+					}
+				}
+				123 = {
+					add_building_construction = {
+						type = air_base
+						level = 2
+						instant_build = yes
+					}
+					add_building_construction = {
+						type = anti_air_building	
+						level = 1
+						instant_build = yes
+					}
+					add_building_construction = {
+						type = radar_station	
+						level = 1
+						instant_build = yes
+					}
+				}
+			}
+			if = {
+				limit = {
+					OR = {
+						owns_state = 125
+						BRI = {
+							is_puppet_of = ROOT
+						}
+					}
+				}
+				125 = {
+					add_building_construction = {
+						type = air_base
+						level = 2
+						instant_build = yes
+					}
+					add_building_construction = {
+						type = anti_air_building	
+						level = 1
+						instant_build = yes
+					}
+					add_building_construction = {
+						type = radar_station	
+						level = 1
+						instant_build = yes
+					}
+				}
+			}
+			126 = {
+				add_building_construction = {
+					type = air_base
+					level = 3
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = anti_air_building	
+					level = 2
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = radar_station	
+					level = 1
+					instant_build = yes
+				}
+			}
+			if = {
+				limit = {
+					OR = {
+						owns_state = 127
+						BRI = {
+							is_puppet_of = ROOT
+						}
+					}
+				}
+				127 = {
+					add_building_construction = {
+						type = air_base
+						level = 2
+						instant_build = yes
+					}
+					add_building_construction = {
+						type = anti_air_building	
+						level = 1
+						instant_build = yes
+					}
+					add_building_construction = {
+						type = radar_station	
+						level = 1
+						instant_build = yes
+					}
+				}
+			}
+			if = {
+				limit = {
+					OR = {
+						owns_state = 338
+						BRI = {
+							is_puppet_of = ROOT
+						}
+					}
+				}
+				338 = {
+					add_building_construction = {
+						type = air_base
+						level = 2
+						instant_build = yes
+					}
+					add_building_construction = {
+						type = anti_air_building	
+						level = 1
+						instant_build = yes
+					}
+					add_building_construction = {
+						type = radar_station	
+						level = 1
+						instant_build = yes
+					}
+				}
+			}
+		}
+		
+	}
+	
+	focus = {
+		id = CBI_heavy_tech
+		icon = GFX_focus_usa_escort_fighters
+		relative_position_id = CBI_new_place_of_warfere
+		x = 3
+		y = 1
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		mutually_exclusive = { focus = CBI_light_tech }
+		prerequisite = { focus = CBI_new_place_of_warfere }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 1.0
+				uses = 2
+				category = medium_air
+				category = heavy_air
+			}
+		}
+		
+	}
+	
+	focus = {
+		id = CBI_heavy_fighter_tech
+		icon = GFX_focus_generic_air_defense
+		relative_position_id = CBI_new_place_of_warfere
+		x = 2
+		y = 2
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		#mutually_exclusive = {  }
+		prerequisite = { focus = CBI_heavy_tech }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 1.0
+				uses = 2
+				category = cat_heavy_fighter
+			}
+		}
+		
+	}
+	
+	focus = {
+		id = CBI_tactical_bomber_tech
+		icon = GFX_focus_eng_special_air_service
+		relative_position_id = CBI_new_place_of_warfere
+		x = 4
+		y = 2
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		#mutually_exclusive = {  }
+		prerequisite = { focus = CBI_heavy_tech }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 1.0
+				uses = 2
+				category = tactical_bomber
+			}
+		}
+		
+	}
+	
+	focus = {
+		id = CBI_strateg_bomber_tech
+		icon = GFX_goal_generic_air_bomber
+		relative_position_id = CBI_new_place_of_warfere
+		x = 3
+		y = 3
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		#mutually_exclusive = {  }
+		prerequisite = { focus = CBI_heavy_fighter_tech }
+		prerequisite = { focus = CBI_tactical_bomber_tech }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 1.0
+				uses = 2
+				category = cat_strategic_bomber
+			}
+		}
+		
+	}
+	
+	focus = {
+		id = CBI_rule_the_sky
+		icon = GFX_focus_generic_aircraft_production
+		relative_position_id = CBI_new_place_of_warfere
+		x = 0
+		y = 4
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		#mutually_exclusive = {  }
+		prerequisite = { focus = CBI_naval_bomber_tech focus = CBI_strateg_bomber_tech }
+		prerequisite = { focus = CBI_radar }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			air_experience = 75
+			add_doctrine_cost_reduction = {
+				cost_reduction = 0.75
+				uses = 3
+				category = air_doctrine
+			}
+		}
+		
+	}
+
+
 }
 
 focus_tree = {
