@@ -213,6 +213,65 @@ PRU_unit_production = {
 	}
 }
 
+prussian_war_prepere = {
+
+	allowed = {
+		original_tag = PRU
+	}
+	
+	enable = {
+		OR = {
+			PRU = {
+				focus_progress = {
+					focus = PRU_aus_war
+					progress > 0.01
+				}
+			}
+			PRU = {
+				focus_progress = {
+					focus = PRU_aus_ultimatum
+					progress > 0.01
+				}
+			}
+		}
+		OR = {
+			NOT = {
+				has_completed_focus = PRU_aus_war
+			}
+			NOT = {
+				has_completed_focus = PRU_aus_ultimatum
+			}
+		}
+		country_exists = AUS
+	}
+
+	abort = {
+		OR = {
+			NOT = { country_exists = AUS }
+			AND = {
+				has_completed_focus = PRU_aus_war
+				PRU = { has_war_with = AUS }
+			}
+			AND = {
+				has_completed_focus = PRU_aus_ultimatum
+				PRU = { has_war_with = AUS }
+			}
+		}
+	}
+
+	ai_strategy = {
+		type = conquer
+		id = "AUS"
+		value = 100
+	}
+	
+	ai_strategy = {
+		type = conquer
+		id = "SAK"
+		value = 100
+	}
+}
+
 PRU_anti_armor = {
 	allowed = {
 		original_tag = PRU
