@@ -2633,6 +2633,9 @@ focus_tree = {
 
 		completion_reward = {			
 			RUS = { country_event = { id = fren.22 } }
+			hidden_effect = { 
+				set_country_flag = FRR_be_witch_rus
+			}
 		}
 	}
 	focus = {
@@ -2966,8 +2969,27 @@ focus_tree = {
 			if = {
 				limit = {
 					has_country_flag = FRR_cbi_choosen
+					CBI = { has_war_with = PRU }
 				}
 				CBI = { add_to_faction = FRR }
+			}
+			if = {
+				limit = {
+					has_country_flag = FRR_be_witch_rus
+					RUS = { 
+						has_war_with = PRU 
+						is_faction_leader = yes
+					}
+				}
+				RUS = { add_to_faction = FRR }
+			}
+			if = {
+				limit = {
+					has_country_flag = FRR_be_witch_rus
+					RUS = { has_war_with = PRU }
+					FRR = { is_faction_leader = yes }
+				}
+				FRR = { add_to_faction = RUS }
 			}
 			FRR = {
 				declare_war_on = {
