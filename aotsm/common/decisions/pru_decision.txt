@@ -229,6 +229,190 @@ pru_prospect_for_resources = {
 	}
 }
 
+pru_army_hiring_category = {
+
+	release_prototype_of_tank = { 
+		
+		icon = generic_merge_plant_tank
+
+		allowed = {
+			
+		}
+
+		available = {
+			num_of_civilian_factories_available_for_projects > 4
+		}
+
+		visible = {
+			tag = PRU
+			PRU = {
+				has_completed_focus = PRU_Austria_must_fall
+			}
+		}
+
+		fire_only_once = yes
+
+		cost = 0
+		days_remove = 365
+
+		modifier = {
+			civilian_factory_use = 5
+		}
+
+		ai_will_do = {
+			factor = 1250
+		}
+		
+		complete_effect = {
+			PRU = {
+				set_technology = { 
+					basic_medium_tank_chassis = 1
+					improved_medium_tank_chassis = 1
+					advanced_medium_tank_chassis = 1
+					armor_tech_2 = 1
+					armor_tech_3 = 1
+					engine_tech_2 = 1
+					engine_tech_3 = 1
+				}
+				create_equipment_variant = {
+					name = "Kingkaizer"
+					type = medium_tank_chassis_3
+					parent_version = 0
+					modules = {
+						main_armament_slot = tank_medium_cannon_2
+						turret_type_slot = tank_medium_three_man_tank_turret
+						suspension_type_slot = tank_christie_suspension
+						armor_type_slot = tank_welded_armor
+						engine_type_slot = tank_petrol_electric_engine
+						special_type_slot_1 = tank_radio_2
+					}
+					upgrades = {
+						tank_nsb_engine_upgrade = 4
+						tank_nsb_armor_upgrade = 4
+					}
+					icon = "GFX_GER_improved_medium_tank_medium"
+				}
+			}
+			hidden_effect = {
+				PRU = {
+					set_country_flag = pru_has_acces_to_panzer
+				}
+			}
+		}
+		
+		remove_effect = { 
+			64 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+			763 = {
+				add_extra_state_shared_building_slots = 3
+				add_building_construction = {
+					type = arms_factory
+					level = 3
+					instant_build = yes
+				}
+			}
+			PRU = {
+				country_event = ger.14
+			}	
+		}
+	}
+	
+	release_tank_on_battlefield = { 
+		
+		icon = generic_tank
+
+		allowed = {
+			
+		}
+
+		available = {
+			has_manpower > 26669
+		}
+
+		visible = {
+			tag = PRU
+			PRU = {
+				has_completed_focus = PRU_Austria_must_fall
+			}
+			PRU = {
+				has_country_flag = pru_has_acces_to_panzer
+			}
+		}
+
+		fire_only_once = yes
+
+		cost = 0
+
+		ai_will_do = {
+			factor = 1250
+		}
+		
+		complete_effect = {
+			PRU = {
+				add_manpower = -27000
+				hidden_effect = {
+					load_oob = PRU_TANK
+				}
+				custom_effect_tooltip = pru_spawn_tank
+			}
+		}
+	}
+	
+	release_division_on_battlefield = { 
+		
+		icon = generic_military
+		
+		allowed = {
+			
+		}
+
+		available = {
+			has_manpower > 12899
+		}
+
+		visible = {
+			tag = PRU
+			PRU = {
+				has_completed_focus = PRU_Austria_must_fall
+			}
+			check_variable = {
+				pru_division_spawn < 10
+			}
+		}
+
+		fire_only_once = no
+
+		cost = 0
+		
+		days_re_enable = 1
+
+		ai_will_do = {
+			factor = 1250
+		}
+		
+		complete_effect = {
+			PRU = {
+				add_manpower = -12900
+				hidden_effect = {
+					load_oob = PRU_DIVISIA
+				}
+				custom_effect_tooltip = pru_spawn_divisia
+			}
+			add_to_variable = {
+				var = pru_division_spawn
+				value = 1
+			}
+		}
+	}
+
+}
+
 pru_leypoldit_bomb = {
 	
 	tech_bomb = { 
