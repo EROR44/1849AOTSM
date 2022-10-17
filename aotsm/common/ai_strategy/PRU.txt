@@ -198,7 +198,7 @@ PRU_unit_production = {
 	}
 	ai_strategy = {
 		type = equipment_variant_production_factor
-		id = strat_bomber_equipment
+		id = iw_medium_airframe
 		value = -100
 	}
 	ai_strategy = {
@@ -210,6 +210,65 @@ PRU_unit_production = {
 	ai_strategy = {
 		type = railway_gun_divisions_ratio
 		value = 1
+	}
+}
+
+prussian_war_prepere = {
+
+	allowed = {
+		original_tag = PRU
+	}
+	
+	enable = {
+		OR = {
+			PRU = {
+				focus_progress = {
+					focus = PRU_aus_war
+					progress > 0.01
+				}
+			}
+			PRU = {
+				focus_progress = {
+					focus = PRU_aus_ultimatum
+					progress > 0.01
+				}
+			}
+		}
+		OR = {
+			NOT = {
+				has_completed_focus = PRU_aus_war
+			}
+			NOT = {
+				has_completed_focus = PRU_aus_ultimatum
+			}
+		}
+		country_exists = AUS
+	}
+
+	abort = {
+		OR = {
+			NOT = { country_exists = AUS }
+			AND = {
+				has_completed_focus = PRU_aus_war
+				PRU = { has_war_with = AUS }
+			}
+			AND = {
+				has_completed_focus = PRU_aus_ultimatum
+				PRU = { has_war_with = AUS }
+			}
+		}
+	}
+
+	ai_strategy = {
+		type = conquer
+		id = "AUS"
+		value = 100
+	}
+	
+	ai_strategy = {
+		type = conquer
+		id = "SAK"
+		value = 100
 	}
 }
 
@@ -630,4 +689,32 @@ pru_xp_upgrade_spending_land = {
 		id = upgrade_xp_cutoff
 		value = 100
 	}
+}
+
+pru_never_help_bri = {
+
+	allowed = {
+		tag = PRU
+	}
+	
+	enable = {
+		date > 1849.1.1
+	}
+	
+	abort_when_not_enabled = yes
+	
+	ai_strategy = {
+		type = diplo_action_desire
+		id = CBI
+		target = send_lend_lease_desire
+		value = -1000
+	}	
+	
+	ai_strategy = {
+		type = diplo_action_desire
+		id = CBI
+		target = send_volunteers_desire
+		value = -1000
+	}	
+
 }

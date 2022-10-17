@@ -13,6 +13,4709 @@ focus_tree = {
 		factor = 0
 		
 		modifier = {
+			add = 25
+			tag = CBI
+		}
+	}
+	
+	default = no
+	
+	reset_on_civilwar = no
+	
+	continuous_focus_position = { x = 2700 y = 50 }
+	
+	initial_show_position = {
+		focus = CBI_continue_line
+	}
+	
+	### Politic branch ###
+	
+	focus = {
+		id = CBI_continue_line
+		icon = GFX_focus_cbi_resume_lems_politic
+		#relative_position_id = 
+		x = 0
+		y = 0
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		#mutually_exclusive = { }
+		#prerequisite = { }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_political_power = 150
+		}
+	}
+	
+	focus = {
+		id = CBI_visit_to_france
+		icon = GFX_focus_cbi_lem_go_to_frr
+		relative_position_id = CBI_continue_line
+		x = 2
+		y = 1
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = CBI_continue_line }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			country_event = cbi_frr.1
+		}
+	}
+	
+	focus = {
+		id = CBI_visit_to_prussia
+		icon = GFX_focus_cbi_lem_go_to_berlin
+		relative_position_id = CBI_continue_line
+		x = 0
+		y = 1
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = CBI_continue_line }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			country_event = cbi_pru.1
+		}
+	}
+	
+	focus = {
+		id = CBI_visit_to_russian
+		icon = GFX_focus_cbi_lem_go_to_rus
+		relative_position_id = CBI_continue_line
+		x = -2
+		y = 1
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = CBI_continue_line }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			country_event = cbi_rus.1
+		}
+	}
+	
+	focus = {
+		id = CBI_economi_reform
+		icon = GFX_focus_cbi_the_last_chance_for_economic
+		relative_position_id = CBI_continue_line
+		x = 1
+		y = 2
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = CBI_visit_to_france }
+		prerequisite = { focus = CBI_visit_to_prussia }
+		prerequisite = { focus = CBI_visit_to_russian }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = CBI_financial_collapse_1
+				add_idea = CBI_financial_collapse_2
+			}
+		}
+	}
+	
+	focus = {
+		id = CBI_help_people
+		icon = GFX_focus_cbi_help_for_peoples
+		relative_position_id = CBI_continue_line
+		x = -1
+		y = 2
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = CBI_visit_to_france }
+		prerequisite = { focus = CBI_visit_to_prussia }
+		prerequisite = { focus = CBI_visit_to_russian }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_stability = 0.05
+			add_popularity = {
+				ideology = socialism
+				popularity = -0.05
+			}
+		}
+	}
+	
+	focus = {
+		id = CBI_will_of_lem
+		icon = GFX_focus_cbi_lem_write_the_will
+		relative_position_id = CBI_continue_line
+		x = 0
+		y = 3
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = CBI_help_people }
+		prerequisite = { focus = CBI_economi_reform }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		select_effect = {
+			hidden_effect = {
+				CBI = {
+					country_event = {
+						days = 13
+						id = cbi_rip.1
+					}
+				}
+			}
+		}
+		
+		completion_reward = {
+			if = {
+				limit = {
+					has_global_flag = LEM_IS_DEAD
+				}
+				add_stability = -0.15
+			}
+			if = {
+				limit = {
+					NOT = {
+						has_global_flag = LEM_IS_DEAD
+					}
+				}
+				country_event = cbi.1
+			}
+		}
+	}
+	
+	focus = {
+		id = CBI_next_lord_protector
+		icon = GFX_focus_cbi_who_is_next_lord_protector
+		relative_position_id = CBI_continue_line
+		x = 0
+		y = 4
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = CBI_will_of_lem }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			if = {
+				limit = {
+					has_global_flag = LEM_IS_DEAD
+				}
+				country_event = cbi.9
+			}
+			if = {
+				limit = {
+					NOT = {
+						has_global_flag = LEM_IS_DEAD
+					}
+				}
+				country_event = cbi.2
+			}
+		}
+	}
+	
+	focus = {
+		id = CBI_eduard_smit_stenli
+		icon = GFX_focus_cbi_smith_stenli
+		relative_position_id = CBI_next_lord_protector
+		x = -4
+		y = 1
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		mutually_exclusive = { focus = CBI_genri_templ focus = CBI_jordj_rassel }
+		prerequisite = { focus = CBI_next_lord_protector }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		available = { 
+			OR = {
+				has_country_flag = eduard_smit_stenli_chose
+				has_country_leader = {
+					character = CBI_Eduard_Smit_Stenli
+					ruling_only = yes
+				}
+			}
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			custom_effect_tooltip = eduard_smit_stenli_politic
+		}
+	}
+	
+	focus = {
+		id = CBI_help_colony
+		icon = GFX_focus_cbi_help_for_colonies
+		relative_position_id = CBI_eduard_smit_stenli
+		x = -2
+		y = 1
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = CBI_eduard_smit_stenli }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			NEN = {
+				add_offsite_building = { type = industrial_complex level = 2  }
+			}
+			OIC = {
+				add_offsite_building = { type = industrial_complex level = 2  }
+			}
+			BAS = {
+				add_offsite_building = { type = industrial_complex level = 2  }
+			}
+			NEN = {
+				add_opinion_modifier = {
+					target = CBI
+					modifier = help_from_confederacy
+				}
+			}
+			CBI = {
+				add_opinion_modifier = {
+					target = NEN
+					modifier = help_from_confederacy
+				}
+			}
+			OIC = {
+				add_opinion_modifier = {
+					target = CBI
+					modifier = help_from_confederacy
+				}
+			}
+			CBI = {
+				add_opinion_modifier = {
+					target = OIC
+					modifier = help_from_confederacy
+				}
+			}
+			BAS = {
+				add_opinion_modifier = {
+					target = CBI
+					modifier = help_from_confederacy
+				}
+			}
+			CBI = {
+				add_opinion_modifier = {
+					target = BAS
+					modifier = help_from_confederacy
+				}
+			}
+		}
+	}
+	
+	focus = {
+		id = CBI_help_packt
+		icon = GFX_focus_cbi_help_for_pakt
+		relative_position_id = CBI_eduard_smit_stenli
+		x = -2
+		y = 2
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = CBI_help_colony }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			PRT = {
+				add_offsite_building = { type = industrial_complex level = 2  }
+			}
+			PRT = {
+				add_opinion_modifier = {
+					target = CBI
+					modifier = help_from_confederacy
+				}
+			}
+			CBI = {
+				add_opinion_modifier = {
+					target = PRT
+					modifier = help_from_confederacy
+				}
+			}
+		}
+	}
+	
+	focus = {
+		id = CBI_help_block
+		icon = GFX_focus_cbi_help_for_blocks
+		relative_position_id = CBI_eduard_smit_stenli
+		x = -2
+		y = 3
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = CBI_help_packt }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			WAL = {
+				add_offsite_building = { type = industrial_complex level = 2  }
+			}
+			BRI = {
+				add_offsite_building = { type = industrial_complex level = 2  }
+			}
+			SCO = {
+				add_offsite_building = { type = industrial_complex level = 2  }
+			}
+			IRE = {
+				add_offsite_building = { type = industrial_complex level = 2  }
+			}
+			WAL = {
+				add_opinion_modifier = {
+					target = CBI
+					modifier = help_from_confederacy
+				}
+			}
+			CBI = {
+				add_opinion_modifier = {
+					target = WAL
+					modifier = help_from_confederacy
+				}
+			}
+			BRI = {
+				add_opinion_modifier = {
+					target = CBI
+					modifier = help_from_confederacy
+				}
+			}
+			CBI = {
+				add_opinion_modifier = {
+					target = BRI
+					modifier = help_from_confederacy
+				}
+			}
+			SCO = {
+				add_opinion_modifier = {
+					target = CBI
+					modifier = help_from_confederacy
+				}
+			}
+			CBI = {
+				add_opinion_modifier = {
+					target = SCO
+					modifier = help_from_confederacy
+				}
+			}
+			IRE = {
+				add_opinion_modifier = {
+					target = CBI
+					modifier = help_from_confederacy
+				}
+			}
+			IRE = {
+				add_opinion_modifier = {
+					target = CBI
+					modifier = help_from_confederacy
+				}
+			}
+			custom_effect_tooltip = incress_opinion_small
+			hidden_effect = {
+				add_to_variable = { cbi_bri_opinion = 10 }
+				clamp_variable = {
+					var = cbi_bri_opinion
+					min = 0
+					max = 100
+				}
+				add_to_variable = { cbi_wal_opinion = 10 }
+				clamp_variable = {
+					var = cbi_wal_opinion
+					min = 0
+					max = 100
+				}
+				add_to_variable = { cbi_sco_opinion = 10 }
+				clamp_variable = {
+					var = cbi_sco_opinion
+					min = 0
+					max = 100
+				}
+				add_to_variable = { cbi_ire_opinion = 10 }
+				clamp_variable = {
+					var = cbi_ire_opinion
+					min = 0
+					max = 100
+				}
+			}
+		}
+	}
+	
+	focus = {
+		id = CBI_lem_legacy
+		icon = GFX_focus_cbi_the_lem_legacy
+		relative_position_id = CBI_eduard_smit_stenli
+		x = 0
+		y = 1
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = CBI_eduard_smit_stenli }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_political_power = 150
+			add_stability = 0.05
+		}
+	}
+	
+	focus = {
+		id = CBI_new_trade_politic
+		icon = GFX_focus_cbi_new_trade_politic
+		relative_position_id = CBI_eduard_smit_stenli
+		x = 0
+		y = 2
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = CBI_lem_legacy }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			if = {
+				limit = {
+					CBI = {
+						has_idea = free_trade
+					}
+				}
+				add_stability = 0.05
+			}
+			if = {
+				limit = {
+					CBI = {
+						has_idea = export_focus
+					}
+				}
+				swap_ideas = {
+					remove_idea = export_focus
+					add_idea = free_trade
+				}
+			}
+			if = {
+				limit = {
+					CBI = {
+						has_idea = limited_exports
+					}
+				}
+				swap_ideas = {
+					remove_idea = limited_exports
+					add_idea = free_trade
+				}
+			}
+			if = {
+				limit = {
+					CBI = {
+						has_idea = closed_economy
+					}
+				}
+				swap_ideas = {
+					remove_idea = closed_economy
+					add_idea = free_trade
+				}
+			}
+		}
+	}
+	
+	focus = {
+		id = CBI_first_comprimis
+		icon = GFX_focus_cbi_first_compromiss
+		relative_position_id = CBI_eduard_smit_stenli
+		x = 0
+		y = 3
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = CBI_new_trade_politic }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = hight_taxation
+				add_idea = medium_taxation
+			}
+		}
+	}
+	
+	focus = {
+		id = CBI_lem_statue
+		icon = GFX_focus_cbi_erect_lems_statues
+		relative_position_id = CBI_eduard_smit_stenli
+		x = 2
+		y = 1
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = CBI_eduard_smit_stenli focus = CBI_genri_templ }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			113 = {
+				add_extra_state_shared_building_slots = 2
+			}
+			121 = {
+				add_extra_state_shared_building_slots = 2
+			}
+			122 = {
+				add_extra_state_shared_building_slots = 2
+			}
+			126 = {
+				add_extra_state_shared_building_slots = 2
+			}
+			128 = {
+				add_extra_state_shared_building_slots = 2
+			}
+		}
+	}
+	
+	focus = {
+		id = CBI_freedom_for_love
+		icon = GFX_focus_cbi_fredom_behind_love
+		relative_position_id = CBI_eduard_smit_stenli
+		x = 2
+		y = 2
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = CBI_lem_statue }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			custom_effect_tooltip = incress_opinion_but_decress_integration
+			hidden_effect = {
+				add_to_variable = { cbi_bri_opinion = 15 }
+				clamp_variable = {
+					var = cbi_bri_opinion
+					min = 0
+					max = 100
+				}
+				add_to_variable = { cbi_bri_integration_procces = -5 }
+				clamp_variable = {
+					var = cbi_bri_integration_procces
+					min = 0
+					max = 100
+				}
+				add_to_variable = { cbi_wal_opinion = 15 }
+				clamp_variable = {
+					var = cbi_wal_opinion
+					min = 0
+					max = 100
+				}
+				add_to_variable = { cbi_wal_integration_procces = -5 }
+				clamp_variable = {
+					var = cbi_wal_integration_procces
+					min = 0
+					max = 100
+				}
+				add_to_variable = { cbi_sco_opinion = 15 }
+				clamp_variable = {
+					var = cbi_sco_opinion
+					min = 0
+					max = 100
+				}
+				add_to_variable = { cbi_sco_integration_procces = -5 }
+				clamp_variable = {
+					var = cbi_sco_integration_procces
+					min = 0
+					max = 100
+				}
+				add_to_variable = { cbi_ire_opinion = 15 }
+				clamp_variable = {
+					var = cbi_ire_opinion
+					min = 0
+					max = 100
+				}
+				add_to_variable = { cbi_ire_integration_procces = -5 }
+				clamp_variable = {
+					var = cbi_ire_integration_procces
+					min = 0
+					max = 100
+				}
+			}
+		}
+	}
+	
+	focus = {
+		id = CBI_visit_block
+		icon = GFX_focus_cbi_unscheduled_visit
+		relative_position_id = CBI_eduard_smit_stenli
+		x = 2
+		y = 3
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = CBI_freedom_for_love }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			country_event = cbi.10
+		}
+	}
+	
+	focus = {
+		id = CBI_lem_reform_profit
+		icon = GFX_focus_cbi_benefit_of_lem_reforms
+		relative_position_id = CBI_eduard_smit_stenli
+		x = 0
+		y = 4
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = CBI_help_block }
+		prerequisite = { focus = CBI_first_comprimis }
+		prerequisite = { focus = CBI_visit_block }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = CBI_financial_collapse_2
+				add_idea = CBI_financial_collapse_3
+			}
+		}
+	}
+	
+	focus = {
+		id = CBI_genri_templ
+		icon = GFX_focus_cbi_templ
+		relative_position_id = CBI_next_lord_protector
+		x = 0
+		y = 1
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		mutually_exclusive = { focus = CBI_eduard_smit_stenli focus = CBI_jordj_rassel }
+		prerequisite = { focus = CBI_next_lord_protector }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		available = { 
+			OR = {
+				has_country_flag = genri_templ_chose
+				has_country_leader = {
+					character = CBI_Henry_Templ
+					ruling_only = yes
+				}
+			}
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			custom_effect_tooltip = genri_templ_politic
+		}
+	}
+	
+	focus = {
+		id = CBI_new_administration
+		icon = GFX_focus_cbi_update_list_of_servants
+		relative_position_id = CBI_genri_templ
+		x = 0
+		y = 1
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = CBI_genri_templ }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_stability = -0.05
+			add_political_power = -100
+			swap_ideas = {
+				remove_idea = state_corruption
+				add_idea = regional_corruption
+			}
+		}
+	}
+	
+	focus = {
+		id = CBI_not_peacfull_time
+		icon = GFX_focus_cbi_not_peace_time
+		relative_position_id = CBI_genri_templ
+		x = 0
+		y = 2
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = CBI_new_administration }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			if = {
+				limit = {
+					CBI = {
+						has_idea = civilian_economy
+					}
+				}
+				swap_ideas = {
+					remove_idea = civilian_economy
+					add_idea = low_economic_mobilisation
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						CBI = {
+							has_idea = civilian_economy
+						}
+					}
+				}
+				add_war_support = 0.05
+			}
+		}
+	}
+	
+	focus = {
+		id = CBI_russian_will_resist
+		icon = GFX_focus_rus_forsed_union
+		relative_position_id = CBI_genri_templ
+		x = 0
+		y = 3
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = CBI_not_peacfull_time }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			CBI = {
+				give_guarantee = RUS
+			}
+			RUS = {
+				give_guarantee = CBI
+			}
+		}
+	}
+	
+	focus = {
+		id = CBI_reform_taxating
+		icon = GFX_focus_cbi_tax_reform
+		relative_position_id = CBI_genri_templ
+		x = 2
+		y = 1
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = CBI_genri_templ focus = CBI_jordj_rassel }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = hight_taxation
+				add_idea = medium_taxation
+			}
+		}
+	}
+	
+	focus = {
+		id = CBI_fund_for_politic
+		icon = GFX_focus_cbi_funts_behind_power
+		relative_position_id = CBI_genri_templ
+		x = 2
+		y = 2
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = CBI_reform_taxating }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_political_power = 150
+		}
+	}
+	
+	focus = {
+		id = CBI_parad_in_london
+		icon = GFX_focus_cbi_the_great_london_parade
+		relative_position_id = CBI_genri_templ
+		x = 2
+		y = 3
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = CBI_fund_for_politic }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			country_event = cbi.11
+		}
+	}
+	
+	focus = {
+		id = CBI_new_economy_system
+		icon = GFX_focus_cbi_nep
+		relative_position_id = CBI_genri_templ
+		x = 0
+		y = 4
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = CBI_visit_block }
+		prerequisite = { focus = CBI_russian_will_resist }
+		prerequisite = { focus = CBI_parad_in_london }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = CBI_financial_collapse_2
+				add_idea = CBI_financial_collapse_3
+			}
+		}
+	}
+	
+	focus = {
+		id = CBI_jordj_rassel
+		icon = GFX_focus_cbi_rassel
+		relative_position_id = CBI_next_lord_protector
+		x = 4
+		y = 1
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		mutually_exclusive = { focus = CBI_eduard_smit_stenli focus = CBI_genri_templ }
+		prerequisite = { focus = CBI_next_lord_protector }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		available = { 
+			OR = {
+				has_country_flag = jordj_rassel_chose
+				has_country_leader = {
+					character = CBI_Jordj_Rassel
+					ruling_only = yes
+				}
+			}
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			custom_effect_tooltip = jordj_rassel_politic
+		}
+	}
+	
+	focus = {
+		id = CBI_new_boss
+		icon = GFX_focus_cbi_the_new_boss_of_london
+		relative_position_id = CBI_jordj_rassel
+		x = 0
+		y = 1
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = CBI_jordj_rassel }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_stability = 0.05
+			add_war_support = 0.05
+		}
+	}
+	
+	focus = {
+		id = CBI_new_military_command
+		icon = GFX_focus_cbi_purge_the_army_command
+		relative_position_id = CBI_jordj_rassel
+		x = 0
+		y = 2
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = CBI_new_boss }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_manpower = -75000
+			army_experience = 25
+		}
+	}
+	
+	focus = {
+		id = CBI_not_republic_just_protectorat
+		icon = GFX_focus_cbi_dissolve_parliament
+		relative_position_id = CBI_jordj_rassel
+		x = 0
+		y = 3
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = CBI_new_military_command }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = republic
+				add_idea = dictature_fg
+			}
+		}
+	}
+	
+	focus = {
+		id = CBI_catch_and_outrun
+		icon = GFX_focus_cbi_catch_up_and_overtake
+		relative_position_id = CBI_jordj_rassel
+		x = 2
+		y = 1
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = CBI_jordj_rassel }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = backward_industry
+				add_idea = modern_industry
+			}
+			add_stability = -0.05
+			add_war_support = 0.10
+		}
+	}
+	
+	focus = {
+		id = CBI_cut_the_hand
+		icon = GFX_focus_cbi_and_hands_flew
+		relative_position_id = CBI_jordj_rassel
+		x = 2
+		y = 2
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = CBI_catch_and_outrun }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_political_power = 250
+			swap_ideas = {
+				remove_idea = state_corruption
+				add_idea = regional_corruption
+			}
+		}
+	}
+	
+	focus = {
+		id = CBI_military_observer
+		icon = GFX_focus_cbi_millitary_supervision
+		relative_position_id = CBI_jordj_rassel
+		x = 2
+		y = 3
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = CBI_cut_the_hand }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			custom_effect_tooltip = cbi_military_observer_on_block
+			hidden_effect = {
+				add_to_variable = { cbi_bri_integration_procces = 5 }
+				clamp_variable = {
+					var = cbi_bri_integration_procces
+					min = 0
+					max = 100
+				}
+				add_to_variable = { cbi_wal_integration_procces = 5 }
+				clamp_variable = {
+					var = cbi_wal_integration_procces
+					min = 0
+					max = 100
+				}
+				add_to_variable = { cbi_sco_integration_procces = 5 }
+				clamp_variable = {
+					var = cbi_sco_integration_procces
+					min = 0
+					max = 100
+				}
+				add_to_variable = { cbi_ire_integration_procces = 5 }
+				clamp_variable = {
+					var = cbi_ire_integration_procces
+					min = 0
+					max = 100
+				}
+			}
+		}
+	}
+	
+	focus = {
+		id = CBI_militarasy_economy
+		icon = GFX_focus_cbi_militarise_economic
+		relative_position_id = CBI_jordj_rassel
+		x = 0
+		y = 4
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = CBI_parad_in_london }
+		prerequisite = { focus = CBI_not_republic_just_protectorat }
+		prerequisite = { focus = CBI_military_observer }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = CBI_financial_collapse_2
+				add_idea = CBI_financial_collapse_3
+			}
+		}
+	}
+	
+	focus = {
+		id = CBI_new_britania
+		icon = GFX_focus_cbi_CBI_the_new_brittany
+		relative_position_id = CBI_new_economy_system
+		x = 0
+		y = 1
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = CBI_lem_reform_profit focus = CBI_new_economy_system focus = CBI_militarasy_economy }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = large_country
+				add_idea = potential_world_power
+			}
+		}
+	}
+	
+### Army branch ###
+
+	focus = {
+		id = CBI_army_of_confederacy
+		icon = GFX_focus_cbi_the_republick_army
+		#relative_position_id = 
+		x = -1
+		y = 12
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		mutually_exclusive = { focus = CBI_army_of_lord }
+		#prerequisite = {  }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		available = { 
+			OR = {
+				has_country_leader = {
+					character = CBI_Eduard_Smit_Stenli
+					ruling_only = yes
+				}
+				has_country_leader = {
+					character = CBI_Henry_Templ
+					ruling_only = yes
+				}
+			}
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = CBI_outdated_army_1
+				add_idea = CBI_outdated_army_2
+			}
+			add_ideas = CBI_confederasy_army_1
+		}
+	}
+	
+	focus = {
+		id = CBI_army_of_confederacy_docrtine
+		icon = GFX_focus_cbi_old_school
+		relative_position_id = CBI_army_of_confederacy
+		x = -4
+		y = 1
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		#mutually_exclusive = {  }
+		prerequisite = { focus = CBI_army_of_confederacy }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_doctrine_cost_reduction = {
+				cost_reduction = 0.5
+				uses = 2
+				category = cat_mass_assault
+			}
+		}
+	}
+	
+	focus = {
+		id = CBI_army_of_confederacy_support
+		icon = GFX_focus_cbi_update_support_equipment
+		relative_position_id = CBI_army_of_confederacy
+		x = -6
+		y = 2
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		#mutually_exclusive = {  }
+		prerequisite = { focus = CBI_army_of_confederacy_docrtine }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 0.5
+				uses = 2
+				category = support_tech
+			}
+		}
+	}
+	
+	focus = {
+		id = CBI_army_of_confederacy_idea_1
+		icon = GFX_focus_cbi_military_reform
+		relative_position_id = CBI_army_of_confederacy
+		x = -4
+		y = 2
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		#mutually_exclusive = {  }
+		prerequisite = { focus = CBI_army_of_confederacy_docrtine }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = CBI_outdated_army_2
+				add_idea = CBI_outdated_army_3
+			}
+			swap_ideas = {
+				remove_idea = CBI_confederasy_army_1
+				add_idea = CBI_confederasy_army_2
+			}
+		}
+	}
+	
+	focus = {
+		id = CBI_army_of_confederacy_infantry
+		icon = GFX_focus_cbi_new_weapon
+		relative_position_id = CBI_army_of_confederacy
+		x = -2
+		y = 2
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		#mutually_exclusive = {  }
+		prerequisite = { focus = CBI_army_of_confederacy_docrtine }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 0.5
+				uses = 2
+				category = infantry_weapons
+			}
+		}
+	}
+	
+	focus = {
+		id = CBI_army_of_confederacy_experience
+		icon = GFX_focus_cbi_army_experiance
+		relative_position_id = CBI_army_of_confederacy
+		x = -5
+		y = 3
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		#mutually_exclusive = {  }
+		prerequisite = { focus = CBI_army_of_confederacy_support }
+		prerequisite = { focus = CBI_army_of_confederacy_idea_1 }
+		prerequisite = { focus = CBI_army_of_confederacy_infantry }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			army_experience = 50
+		}
+	}
+	
+	focus = {
+		id = CBI_army_of_confederacy_artileria
+		icon = GFX_focus_cbi_russian_artillery
+		relative_position_id = CBI_army_of_confederacy
+		x = -3
+		y = 3
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		#mutually_exclusive = {  }
+		prerequisite = { focus = CBI_army_of_confederacy_support }
+		prerequisite = { focus = CBI_army_of_confederacy_idea_1 }
+		prerequisite = { focus = CBI_army_of_confederacy_infantry }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 0.5
+				uses = 2
+				category = artillery
+			}
+		}
+	}
+	
+	focus = {
+		id = CBI_army_of_confederacy_idea_2
+		icon = GFX_focus_cbi_estimate_army_reform
+		relative_position_id = CBI_army_of_confederacy
+		x = -4
+		y = 4
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		#mutually_exclusive = {  }
+		prerequisite = { focus = CBI_army_of_confederacy_experience }
+		prerequisite = { focus = CBI_army_of_confederacy_artileria }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = CBI_confederasy_army_2
+				add_idea = CBI_confederasy_army_3
+			}
+		}
+	}
+	
+	focus = {
+		id = CBI_yuong_commander
+		icon = GFX_focus_cbi_update_army_command
+		#relative_position_id = 
+		x = 0
+		y = 13
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		#mutually_exclusive = {  }
+		prerequisite = { focus = CBI_army_of_confederacy focus = CBI_army_of_lord }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		available = { 
+			has_army_experience > 24.99
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = CBI_old_guard_1
+				add_idea = CBI_old_guard_2
+			}
+			army_experience = -25
+		}
+	}
+	
+	focus = {
+		id = CBI_raid_old_base
+		icon = GFX_focus_cbi_raid_on_generals_fortresses
+		relative_position_id = CBI_yuong_commander
+		x = -1
+		y = 1
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		#mutually_exclusive = {  }
+		prerequisite = { focus = CBI_yuong_commander }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		available = { 
+			has_manpower > 24999
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_manpower = -25000
+		}
+	}
+	
+	focus = {
+		id = CBI_help_yung_commander
+		icon = GFX_focus_cbi_provide_young_generals
+		relative_position_id = CBI_yuong_commander
+		x = 1
+		y = 1
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		#mutually_exclusive = {  }
+		prerequisite = { focus = CBI_yuong_commander }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		available = { 
+			command_power > 24.99
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_command_power = -25
+		}
+	}
+	
+	focus = {
+		id = CBI_young_guard
+		icon = GFX_focus_cbi_the_young_guards
+		relative_position_id = CBI_yuong_commander
+		x = 0
+		y = 2
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		#mutually_exclusive = {  }
+		prerequisite = { focus = CBI_raid_old_base }
+		prerequisite = { focus = CBI_help_yung_commander }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = CBI_old_guard_2
+				add_idea = CBI_old_guard_3
+			}
+			CBI = {
+				every_unit_leader = {
+					add_max_trait = 1
+					add_attack = 1
+					add_defense = 1
+				}
+			}
+		}
+	}
+	
+	focus = {
+		id = CBI_new_army_of_nation
+		icon = GFX_focus_cbi_the_great_army_of_confederation
+		relative_position_id = CBI_yuong_commander
+		x = 0
+		y = 4
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		#mutually_exclusive = {  }
+		prerequisite = { focus = CBI_young_guard }
+		prerequisite = { focus = CBI_army_of_confederacy_idea_2 focus = CBI_army_of_lord_idea_2 }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			army_experience = 100
+			remove_ideas = CBI_outdated_army_3
+			add_tech_bonus = {
+				bonus = 0.75
+				uses = 3
+				category = armor
+			}
+		}
+	}
+	
+	focus = {
+		id = CBI_army_of_lord
+		icon = GFX_focus_cbi_army_of_the_lord_protector
+		#relative_position_id = 
+		x = 1
+		y = 12
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		mutually_exclusive = { focus = CBI_army_of_confederacy }
+		#prerequisite = {  }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		available = {
+			OR = {
+				has_country_leader = {
+					character = CBI_Henry_Templ
+					ruling_only = yes
+				}
+				has_country_leader = {
+					character = CBI_Jordj_Rassel
+					ruling_only = yes
+				}
+			}
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = CBI_outdated_army_1
+				add_idea = CBI_outdated_army_2
+			}
+			add_ideas = CBI_lord_army_1
+		}
+	}
+	
+	focus = {
+		id = CBI_army_of_lord_doctrine
+		icon = GFX_focus_cbi_new_school
+		relative_position_id = CBI_army_of_lord
+		x = 4
+		y = 1
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = CBI_army_of_lord }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_doctrine_cost_reduction = {
+				cost_reduction = 0.5
+				uses = 2
+				category = cat_grand_battle_plan
+			}
+		}
+	}
+	
+	focus = {
+		id = CBI_army_of_lord_infantry
+		icon = GFX_focus_cbi_lord_rifles
+		relative_position_id = CBI_army_of_lord
+		x = 2
+		y = 2
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = CBI_army_of_lord_doctrine }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_doctrine_cost_reduction = {
+				cost_reduction = 0.5
+				uses = 3
+				category = infantry_weapons
+			}
+		}
+	}
+	
+	focus = {
+		id = CBI_army_of_lord_idea_1
+		icon = GFX_focus_cbi_the_lord_vision
+		relative_position_id = CBI_army_of_lord
+		x = 4
+		y = 2
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = CBI_army_of_lord_doctrine }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = CBI_outdated_army_2
+				add_idea = CBI_outdated_army_3
+			}
+			swap_ideas = {
+				remove_idea = CBI_lord_army_1
+				add_idea = CBI_lord_army_2
+			}
+		}
+	}
+	
+	focus = {
+		id = CBI_army_of_lord_armor
+		icon = GFX_focus_cbi_pru_experiance
+		relative_position_id = CBI_army_of_lord
+		x = 6
+		y = 2
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = CBI_army_of_lord_doctrine }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 0.5
+				uses = 2
+				category = armor
+			}
+		}
+	}
+	
+	focus = {
+		id = CBI_army_of_lord_mech
+		icon = GFX_focus_cbi_transport_to_army
+		relative_position_id = CBI_army_of_lord
+		x = 3
+		y = 3
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = CBI_army_of_lord_infantry }
+		prerequisite = { focus = CBI_army_of_lord_idea_1 }
+		prerequisite = { focus = CBI_army_of_lord_armor }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 0.5
+				uses = 2
+				category = motorized_equipment
+			}
+		}
+	}
+	
+	focus = {
+		id = CBI_army_of_lord_experience
+		icon = GFX_focus_cbi_lord_ideas
+		relative_position_id = CBI_army_of_lord
+		x = 5
+		y = 3
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = CBI_army_of_lord_infantry }
+		prerequisite = { focus = CBI_army_of_lord_idea_1 }
+		prerequisite = { focus = CBI_army_of_lord_armor }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			army_experience = 50
+			add_command_power = 50
+		}
+	}
+	
+	focus = {
+		id = CBI_army_of_lord_idea_2
+		icon = GFX_focus_cbi_glory_for_the_lord_protector
+		relative_position_id = CBI_army_of_lord
+		x = 4
+		y = 4
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = CBI_army_of_lord_mech }
+		prerequisite = { focus = CBI_army_of_lord_experience }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = CBI_lord_army_2
+				add_idea = CBI_lord_army_3
+			}
+		}
+	}
+	
+	### Industria branch ###
+	
+	focus = {
+		id = CBI_new_face_of_fund
+		icon = GFX_focus_cbi_the_new_face_of_funt
+		#relative_position_id = 
+		x = -16
+		y = 0
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		#mutually_exclusive = {  }
+		#prerequisite = {  }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		available = { 
+			OR = {
+				has_completed_focus = CBI_lem_reform_profit
+				has_completed_focus = CBI_new_economy_system
+				has_completed_focus = CBI_militarasy_economy
+			}
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_ideas = CBI_fund_of_cromwell_1
+		}
+	}
+	
+	focus = {
+		id = CBI_development_of_conderety
+		icon = GFX_focus_cbi_economic_of_confederation
+		relative_position_id = CBI_new_face_of_fund
+		x = -5
+		y = 1
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		#mutually_exclusive = {  }
+		prerequisite = { focus = CBI_new_face_of_fund  }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			126 = {
+				add_extra_state_shared_building_slots = 4
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+	
+	focus = {
+		id = CBI_development_of_ireland
+		icon = GFX_focus_cbi_ireland_infrastructure
+		relative_position_id = CBI_development_of_conderety
+		x = -2
+		y = 1
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		#mutually_exclusive = {  }
+		prerequisite = { focus = CBI_development_of_conderety  }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		bypass = { 
+			NOT = {
+				IRE = {
+					is_puppet_of = CBI
+				}
+			}
+			NOT = {
+				owns_state = 113
+				owns_state = 119
+				owns_state = 134
+				owns_state = 135
+			}
+		}
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			113 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+			119 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			134 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			135 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+	
+	focus = {
+		id = CBI_development_of_england
+		icon = GFX_focus_cbi_english_industry
+		relative_position_id = CBI_development_of_conderety
+		x = 0
+		y = 1
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		#mutually_exclusive = {  }
+		prerequisite = { focus = CBI_development_of_conderety  }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		bypass = { 
+			NOT = {
+				BRI = {
+					is_puppet_of = CBI
+				}
+			}
+			NOT = {
+				owns_state = 123
+				owns_state = 125
+				owns_state = 127
+				owns_state = 128
+				owns_state = 129
+				owns_state = 130
+				owns_state = 131
+				owns_state = 132
+				owns_state = 338
+				owns_state = 866
+			}
+		}
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			123 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			125 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			127 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			128 = {
+				add_extra_state_shared_building_slots = 3
+				add_building_construction = {
+					type = industrial_complex
+					level = 3
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			129 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			130 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			131 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			132 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			338 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			866 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+	
+	focus = {
+		id = CBI_development_of_scotland
+		icon = GFX_focus_cbi_heavy_industry_of_scotland
+		relative_position_id = CBI_development_of_conderety
+		x = 2
+		y = 1
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		#mutually_exclusive = {  }
+		prerequisite = { focus = CBI_development_of_conderety  }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		bypass = { 
+			NOT = {
+				SCO = {
+					is_puppet_of = CBI
+				}
+			}
+			NOT = {
+				owns_state = 120
+				owns_state = 121
+				owns_state = 133
+				owns_state = 136
+				owns_state = 864
+				owns_state = 865
+			}
+		}
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			120 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			121 = {
+				add_extra_state_shared_building_slots = 4
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = dockyard
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			133 = {
+				add_extra_state_shared_building_slots = 3
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = dockyard
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			136 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			864 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			865 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+	
+	focus = {
+		id = CBI_development_of_english_metal
+		icon = GFX_focus_cbi_develop_english_metals
+		relative_position_id = CBI_development_of_conderety
+		x = 1
+		y = 2
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		#mutually_exclusive = {  }
+		prerequisite = { focus = CBI_development_of_england  }
+		prerequisite = { focus = CBI_development_of_scotland }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		available = {
+			OR = {
+				AND = {
+					owns_state = 128
+					owns_state = 129
+					owns_state = 130
+					owns_state = 132
+				}
+				BRI = {
+					is_puppet_of = CBI
+				}
+			}
+			owns_state = 126
+		}
+		
+		bypass = { 
+			NOT = {
+				BRI = {
+					is_puppet_of = CBI
+				}
+			}
+			NOT = {
+				owns_state = 126
+				owns_state = 128
+				owns_state = 129
+				owns_state = 130
+				owns_state = 132
+			}
+		}
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_resource = {
+				type = leypoldit
+				amount = 6
+				state = 126
+			}
+			add_resource = {
+				type = steel
+				amount = 12
+				state = 126
+			}
+			add_resource = {
+				type = aluminium
+				amount = 8
+				state = 126
+			}
+			add_resource = {
+				type = steel
+				amount = 12
+				state = 129
+			}
+			add_resource = {
+				type = aluminium
+				amount = 8
+				state = 129
+			}
+			add_resource = {
+				type = steel
+				amount = 12
+				state = 130
+			}
+			add_resource = {
+				type = aluminium
+				amount = 8
+				state = 130
+			}
+			add_resource = {
+				type = steel
+				amount = 12
+				state = 132
+			}
+			add_resource = {
+				type = aluminium
+				amount = 8
+				state = 132
+			}
+		}
+		
+	}
+	
+	focus = {
+		id = CBI_development_of_scotland_resourse
+		icon = GFX_focus_cbi_scotland_mines
+		relative_position_id = CBI_development_of_conderety
+		x = -1
+		y = 2
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		#mutually_exclusive = {  }
+		prerequisite = { focus = CBI_development_of_ireland }
+		prerequisite = { focus = CBI_development_of_england }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		available = {
+			OR = {
+				AND = {
+					owns_state = 121
+					owns_state = 133
+				}
+				SCO = {
+					is_puppet_of = CBI
+				}
+			}
+		}
+		
+		bypass = { 
+			NOT = {
+				BRI = {
+					is_puppet_of = CBI
+				}
+			}
+			NOT = {
+				owns_state = 121
+				owns_state = 133
+			}
+		}
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_resource = {
+				type = oil
+				amount = 14
+				state = 121
+			}
+			add_resource = {
+				type = oil
+				amount = 14
+				state = 133
+			}
+		}
+		
+	}
+	
+	focus = {
+		id = CBI_stop_corruption
+		icon = GFX_focus_cbi_stop_corruption_in_industry_sector
+		relative_position_id = CBI_development_of_conderety
+		x = 0
+		y = 3
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		#mutually_exclusive = {  }
+		prerequisite = { focus = CBI_development_of_scotland_resourse }
+		prerequisite = { focus = CBI_development_of_english_metal }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			if = {
+				limit = {
+					CBI = {
+						has_idea = local_corruption
+					}
+				}
+				swap_ideas = {
+					remove_idea = local_corruption
+					add_idea = no_corruption
+				}
+			}
+			if = {
+				limit = {
+					CBI = {
+						has_idea = regional_corruption
+					}
+				}
+				swap_ideas = {
+					remove_idea = regional_corruption
+					add_idea = local_corruption
+				}
+			}
+			if = {
+				limit = {
+					CBI = {
+						has_idea = state_corruption
+					}
+				}
+				swap_ideas = {
+					remove_idea = state_corruption
+					add_idea = regional_corruption
+				}
+			}
+		}
+		
+	}
+		
+	focus = {
+		id = CBI_economy_reform_next_stage
+		icon = GFX_focus_cbi_the_next_step_of_economic_reforms
+		relative_position_id = CBI_new_face_of_fund
+		x = 0
+		y = 1
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = CBI_new_face_of_fund }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = CBI_financial_collapse_3
+				add_idea = CBI_financial_collapse_4
+			}
+		}
+	}
+	
+	focus = {
+		id = CBI_economy_reform_work_days
+		icon = GFX_focus_cbi_update_standarts
+		relative_position_id = CBI_new_face_of_fund
+		x = -1
+		y = 2
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = CBI_economy_reform_next_stage }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			country_event = cbi.12
+		}
+	}
+	
+	focus = {
+		id = CBI_economy_reform_child_labour
+		icon = GFX_focus_cbi_children_labour
+		relative_position_id = CBI_new_face_of_fund
+		x = 1
+		y = 2
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = CBI_economy_reform_next_stage }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			country_event = cbi.13
+		}
+	}
+	
+	focus = {
+		id = CBI_futer_of_fund
+		icon = GFX_focus_cbi_the_future_of_cromwell_funt
+		relative_position_id = CBI_new_face_of_fund
+		x = 0
+		y = 3
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = CBI_economy_reform_work_days }
+		prerequisite = { focus = CBI_economy_reform_child_labour }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			country_event = cbi.14
+		}
+	}
+	
+	focus = {
+		id = CBI_new_british_economy
+		icon = GFX_focus_cbi_rebrith_of_britain_economic
+		relative_position_id = CBI_new_face_of_fund
+		x = 0
+		y = 5
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = CBI_stop_corruption }
+		prerequisite = { focus = CBI_futer_of_fund }
+		prerequisite = { focus = CBI_find_not_tech }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			remove_ideas = CBI_financial_collapse_4
+		}
+	}
+	
+	focus = {
+		id = CBI_into_the_future
+		icon = GFX_focus_cbi_british_science
+		relative_position_id = CBI_new_face_of_fund
+		x = 5
+		y = 1
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = CBI_new_face_of_fund }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_research_slot = 1
+		}
+	}
+	
+	focus = {
+		id = CBI_new_economy_tech
+		icon = GFX_focus_cbi_inovations_in_industry
+		relative_position_id = CBI_into_the_future
+		x = -2
+		y = 1
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = CBI_into_the_future }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 0.5
+				uses = 3
+				category = industry
+			}
+		}
+	}
+	
+	focus = {
+		id = CBI_stop_tech_stagnat
+		icon = GFX_focus_cbi_stop_scientific_stagnation
+		relative_position_id = CBI_into_the_future
+		x = 0
+		y = 1
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = CBI_into_the_future }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = CBI_scientific_stagnation_1
+				add_idea = CBI_scientific_stagnation_2
+			}
+		}
+	}
+	
+	focus = {
+		id = CBI_new_electric_tech
+		icon = GFX_focus_cbi_innovations_in_electronic
+		relative_position_id = CBI_into_the_future
+		x = 2
+		y = 1
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = CBI_into_the_future }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 0.5
+				uses = 3
+				category = electronics
+			}
+		}
+	}
+	
+	focus = {
+		id = CBI_reopen_oxford
+		icon = GFX_focus_cbi_open_new_wing_of_oxford
+		relative_position_id = CBI_into_the_future
+		x = -1
+		y = 2
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = CBI_new_economy_tech }
+		prerequisite = { focus = CBI_stop_tech_stagnat }
+		prerequisite = { focus = CBI_new_electric_tech }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_research_slot = 1
+		}
+	}
+	
+	focus = {
+		id = CBI_a_bit_new_tech
+		icon = GFX_focus_cbi_new_tehs
+		relative_position_id = CBI_into_the_future
+		x = 1
+		y = 2
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = CBI_new_economy_tech }
+		prerequisite = { focus = CBI_stop_tech_stagnat }
+		prerequisite = { focus = CBI_new_electric_tech }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 0.5
+				uses = 2
+				category = synth_resources
+			}
+			add_tech_bonus = {
+				bonus = 0.5
+				uses = 2
+				category = excavation_tech
+			}
+		}
+	}
+	
+	focus = {
+		id = CBI_find_not_tech
+		icon = GFX_focus_cbi_purge_scientisits
+		relative_position_id = CBI_into_the_future
+		x = 0
+		y = 3
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = CBI_reopen_oxford }
+		prerequisite = { focus = CBI_a_bit_new_tech }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = CBI_scientific_stagnation_2
+				add_idea = CBI_scientific_stagnation_3
+			}if = {
+				limit = {
+					CBI = {
+						has_idea = local_corruption
+					}
+				}
+				swap_ideas = {
+					remove_idea = local_corruption
+					add_idea = no_corruption
+				}
+			}
+			if = {
+				limit = {
+					CBI = {
+						has_idea = regional_corruption
+					}
+				}
+				swap_ideas = {
+					remove_idea = regional_corruption
+					add_idea = local_corruption
+				}
+			}
+			if = {
+				limit = {
+					CBI = {
+						has_idea = state_corruption
+					}
+				}
+				swap_ideas = {
+					remove_idea = state_corruption
+					add_idea = regional_corruption
+				}
+			}
+		}
+	}
+	
+	#Navy
+	
+	focus = {
+		id = CBI_byzantium_example
+		icon = GFX_focus_GRE_a_long_and_proud_tradition
+		#relative_position_id = CBI_into_the_future
+		x = -20
+		y = 7
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		mutually_exclusive = { focus = CBI_tech_fleet }
+		#prerequisite = {  }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		available = { 
+			OR = {
+				has_country_leader = {
+					character = CBI_Eduard_Smit_Stenli
+					ruling_only = yes
+				}
+				has_country_leader = {
+					character = CBI_Henry_Templ
+					ruling_only = yes
+				}
+				has_country_leader = {
+					character = CBI_Jordj_Rassel
+					ruling_only = yes
+				}
+			}
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_doctrine_cost_reduction = {
+				cost_reduction = 0.5
+				uses = 2
+				category = cat_fleet_in_being
+			}
+		}
+		
+	}
+	
+	focus = {
+		id = CBI_big_fleet_tech
+		icon = GFX_goal_generic_navy_battleship
+		relative_position_id = CBI_byzantium_example
+		x = -1
+		y = 1
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		#mutually_exclusive = { focus = CBI_tech_fleet }
+		prerequisite = { focus = CBI_byzantium_example  }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 1.0
+				uses = 2
+				category = bc_tech
+			}
+		}
+		
+	}
+	
+	focus = {
+		id = CBI_tech_for_big_fleet
+		icon = GFX_focus_generic_navy_battleship2
+		relative_position_id = CBI_byzantium_example
+		x = -1
+		y = 2
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		#mutually_exclusive = { focus = CBI_tech_fleet }
+		prerequisite = { focus = CBI_big_fleet_tech  }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 1.0
+				uses = 3
+				category = ship_modules_tech
+			}
+		}
+		
+	}
+	
+	focus = {
+		id = CBI_medium_fleet_tech
+		icon = GFX_focus_generic_destroyer
+		relative_position_id = CBI_byzantium_example
+		x = 1
+		y = 1
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		#mutually_exclusive = { focus = CBI_tech_fleet }
+		prerequisite = { focus = CBI_byzantium_example  }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 1.0
+				uses = 2
+				category = ca_tech
+			}
+		}
+		
+	}
+	
+	focus = {
+		id = CBI_tech_for_medium_fleet
+		icon = GFX_focus_generic_cruiser2
+		relative_position_id = CBI_byzantium_example
+		x = 1
+		y = 2
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		#mutually_exclusive = { focus = CBI_tech_fleet }
+		prerequisite = { focus = CBI_medium_fleet_tech  }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 1.0
+				uses = 3
+				category = ship_modules_tech
+			}
+		}
+		
+	}
+	
+	focus = {
+		id = CBI_transport_tech
+		icon = GFX_goal_generic_amphibious_assault
+		relative_position_id = CBI_byzantium_example
+		x = 0
+		y = 3
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		#mutually_exclusive = { focus = CBI_tech_fleet }
+		prerequisite = { focus = CBI_tech_for_big_fleet }
+		prerequisite = { focus = CBI_tech_for_medium_fleet  }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 2.5
+				uses = 2
+				category = tp_tech
+			}
+			add_doctrine_cost_reduction = {
+				cost_reduction = 0.5
+				uses = 2
+				category = cat_fleet_in_being
+			}
+		}
+		
+	}
+	
+	focus = {
+		id = CBI_grand_lond_dock
+		icon = GFX_focus_POL_develop_polish_shipbuilding
+		relative_position_id = CBI_byzantium_example
+		x = 4
+		y = 1
+		cost = 8.6
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		#mutually_exclusive = { focus = CBI_tech_fleet }
+		prerequisite = { focus = CBI_byzantium_example focus = CBI_tech_fleet }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			126 = {
+				add_extra_state_shared_building_slots = 5
+				add_building_construction = {
+					type = dockyard
+					level = 5
+					instant_build = yes
+				}
+				set_building_level = {
+					type = naval_base
+					level = 10
+					instant_build = yes
+					province = 11374
+				}
+				set_building_level = {
+					type = coastal_bunker
+					level = 5
+					instant_build = yes
+					province = 11374
+				}
+			}
+		}
+		
+	}
+	
+	focus = {
+		id = CBI_scotland_dock
+		icon = GFX_goal_generic_construct_naval_dockyard
+		relative_position_id = CBI_byzantium_example
+		x = 3
+		y = 2
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		#mutually_exclusive = { focus = CBI_tech_fleet }
+		prerequisite = { focus = CBI_grand_lond_dock }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			121 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = dockyard
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+		
+	}
+	
+	focus = {
+		id = CBI_english_dock
+		icon = GFX_focus_generic_coastal_fort
+		relative_position_id = CBI_byzantium_example
+		x = 5
+		y = 2
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		#mutually_exclusive = { focus = CBI_tech_fleet }
+		prerequisite = { focus = CBI_grand_lond_dock }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			127 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = dockyard
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+		
+	}
+	
+	focus = {
+		id = CBI_tech_fleet
+		icon = GFX_goal_generic_navy_doctrines_tactics
+		relative_position_id = CBI_byzantium_example
+		x = 8
+		y = 0
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		mutually_exclusive = { focus = CBI_byzantium_example }
+		#prerequisite = {  }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		available = { 
+			OR = {
+				has_country_leader = {
+					character = CBI_Eduard_Smit_Stenli
+					ruling_only = yes
+				}
+				has_country_leader = {
+					character = CBI_Henry_Templ
+					ruling_only = yes
+				}
+				has_country_leader = {
+					character = CBI_Jordj_Rassel
+					ruling_only = yes
+				}
+			}
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_doctrine_cost_reduction = {
+				cost_reduction = 0.5
+				uses = 2
+				category = cat_trade_interdiction
+			}
+		}
+		
+	}
+	
+	focus = {
+		id = CBI_small_fleet_tech
+		icon = GFX_focus_generic_destroyer
+		relative_position_id = CBI_byzantium_example
+		x = 7
+		y = 1
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		#mutually_exclusive = { focus = CBI_byzantium_example }
+		prerequisite = { focus = CBI_tech_fleet  }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 1.0
+				uses = 2
+				category = dd_tech
+			}
+		}
+		
+	}
+	
+	focus = {
+		id = CBI_tech_for_small_fleet
+		icon = GFX_goal_generic_navy_cruiser
+		relative_position_id = CBI_byzantium_example
+		x = 7
+		y = 2
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		#mutually_exclusive = { focus = CBI_small_fleet_tech }
+		prerequisite = { focus = CBI_small_fleet_tech  }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 1.0
+				uses = 3
+				category = ship_modules_tech
+			}
+		}
+		
+	}
+	
+	focus = {
+		id = CBI_underwater_fleet_tech
+		icon = GFX_goal_generic_navy_submarine
+		relative_position_id = CBI_byzantium_example
+		x = 9
+		y = 1
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		#mutually_exclusive = { focus = CBI_byzantium_example }
+		prerequisite = { focus = CBI_tech_fleet  }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 1.0
+				uses = 2
+				category = ss_tech
+			}
+		}
+		
+	}
+	
+	focus = {
+		id = CBI_tech_for_underwater_fleet
+		icon = GFX_goal_generic_navy_anti_submarine
+		relative_position_id = CBI_byzantium_example
+		x = 9
+		y = 2
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		#mutually_exclusive = { focus = CBI_byzantium_example }
+		prerequisite = { focus = CBI_underwater_fleet_tech  }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 1.0
+				uses = 3
+				category = ship_modules_tech
+			}
+		}
+		
+	}
+	
+	focus = {
+		id = CBI_tech_tranport
+		icon = GFX_goal_generic_amphibious_assault
+		relative_position_id = CBI_byzantium_example
+		x = 8
+		y = 3
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		#mutually_exclusive = { focus = CBI_byzantium_example }
+		prerequisite = { focus = CBI_tech_for_small_fleet }
+		prerequisite = { focus = CBI_tech_for_underwater_fleet  }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 2.5
+				uses = 2
+				category = tp_tech
+			}
+			add_doctrine_cost_reduction = {
+				cost_reduction = 0.5
+				uses = 2
+				category = cat_trade_interdiction
+			}
+		}
+		
+	}
+	
+	focus = {
+		id = CBI_british_rule_the_sea
+		icon = GFX_focus_eng_global_defense
+		relative_position_id = CBI_byzantium_example
+		x = 4
+		y = 4
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		#mutually_exclusive = { focus = CBI_byzantium_example }
+		prerequisite = { focus = CBI_transport_tech focus = CBI_tech_tranport }
+		prerequisite = { focus = CBI_scotland_dock }
+		prerequisite = { focus = CBI_english_dock }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			CBI = {
+				add_ideas = CBI_rule_the_sea
+			}
+		}
+		
+	}
+
+#Air
+
+	focus = {
+		id = CBI_new_place_of_warfere
+		icon = GFX_goal_generic_build_airforce
+		#relative_position_id = CBI_byzantium_example
+		x = -16
+		y = 13
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		#mutually_exclusive = { }
+		#prerequisite = { }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_doctrine_cost_reduction = {
+				cost_reduction = 0.5
+				uses = 2
+				category = air_doctrine
+			}
+			air_experience = 25
+		}
+		
+	}
+	
+	focus = {
+		id = CBI_light_tech
+		icon = GFX_goal_generic_air_fighter2
+		relative_position_id = CBI_new_place_of_warfere
+		x = -3
+		y = 1
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		mutually_exclusive = { focus = CBI_heavy_tech }
+		prerequisite = { focus = CBI_new_place_of_warfere }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 1.0
+				uses = 2
+				category = light_air
+			}
+		}
+		
+	}
+	
+	focus = {
+		id = CBI_fight_tech
+		icon = GFX_goal_generic_air_fighter
+		relative_position_id = CBI_new_place_of_warfere
+		x = -2
+		y = 2
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		#mutually_exclusive = {  }
+		prerequisite = { focus = CBI_light_tech }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 1.0
+				uses = 2
+				category = light_fighter
+			}
+		}
+		
+	}
+	
+	focus = {
+		id = CBI_cas_tech
+		icon = GFX_goal_generic_CAS
+		relative_position_id = CBI_new_place_of_warfere
+		x = -4
+		y = 2
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		#mutually_exclusive = {  }
+		prerequisite = { focus = CBI_light_tech }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 1.0
+				uses = 2
+				category = cas_bomber
+			}
+		}
+		
+	}
+	
+	focus = {
+		id = CBI_naval_bomber_tech
+		icon = GFX_goal_generic_air_naval_bomber
+		relative_position_id = CBI_new_place_of_warfere
+		x = -3
+		y = 3
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		#mutually_exclusive = {  }
+		prerequisite = { focus = CBI_fight_tech }
+		prerequisite = { focus = CBI_cas_tech }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 1.0
+				uses = 2
+				category = naval_bomber
+			}
+		}
+		
+	}
+	
+	focus = {
+		id = CBI_air_base
+		icon = GFX_goal_generic_air_production
+		relative_position_id = CBI_new_place_of_warfere
+		x = 0
+		y = 2
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = CBI_new_place_of_warfere }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			if = {
+				limit = {
+					OR = {
+						owns_state = 121
+						SCO = {
+							is_puppet_of = ROOT
+						}
+					}
+				}
+				121 = {
+					add_building_construction = {
+						type = air_base
+						level = 3
+						instant_build = yes
+					}
+					add_building_construction = {
+						type = anti_air_building	
+						level = 1
+						instant_build = yes
+					}
+				}
+			}
+			if = {
+				limit = {
+					OR = {
+						owns_state = 122
+						WAL = {
+							is_puppet_of = ROOT
+						}
+					}
+				}
+				122 = {
+					add_building_construction = {
+						type = air_base
+						level = 3
+						instant_build = yes
+					}
+					add_building_construction = {
+						type = anti_air_building	
+						level = 1
+						instant_build = yes
+					}
+				}
+			}
+			126 = {
+				add_building_construction = {
+					type = air_base
+					level = 5
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = anti_air_building	
+					level = 2
+					instant_build = yes
+				}
+			}
+			if = {
+				limit = {
+					OR = {
+						owns_state = 128
+						BRI = {
+							is_puppet_of = ROOT
+						}
+					}
+				}
+				128 = {
+					add_building_construction = {
+						type = air_base
+						level = 3
+						instant_build = yes
+					}
+					add_building_construction = {
+						type = anti_air_building	
+						level = 1
+						instant_build = yes
+					}
+				}
+			}
+		}
+		
+	}
+	
+	focus = {
+		id = CBI_radar
+		icon = GFX_goal_generic_radar
+		relative_position_id = CBI_new_place_of_warfere
+		x = 0
+		y = 3
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = CBI_air_base }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		available = { 
+			has_tech = radio_detection
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			if = {
+				limit = {
+					OR = {
+						owns_state = 123
+						BRI = {
+							is_puppet_of = ROOT
+						}
+					}
+				}
+				123 = {
+					add_building_construction = {
+						type = air_base
+						level = 2
+						instant_build = yes
+					}
+					add_building_construction = {
+						type = anti_air_building	
+						level = 1
+						instant_build = yes
+					}
+					add_building_construction = {
+						type = radar_station	
+						level = 1
+						instant_build = yes
+					}
+				}
+			}
+			if = {
+				limit = {
+					OR = {
+						owns_state = 125
+						BRI = {
+							is_puppet_of = ROOT
+						}
+					}
+				}
+				125 = {
+					add_building_construction = {
+						type = air_base
+						level = 2
+						instant_build = yes
+					}
+					add_building_construction = {
+						type = anti_air_building	
+						level = 1
+						instant_build = yes
+					}
+					add_building_construction = {
+						type = radar_station	
+						level = 1
+						instant_build = yes
+					}
+				}
+			}
+			126 = {
+				add_building_construction = {
+					type = air_base
+					level = 3
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = anti_air_building	
+					level = 2
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = radar_station	
+					level = 1
+					instant_build = yes
+				}
+			}
+			if = {
+				limit = {
+					OR = {
+						owns_state = 127
+						BRI = {
+							is_puppet_of = ROOT
+						}
+					}
+				}
+				127 = {
+					add_building_construction = {
+						type = air_base
+						level = 2
+						instant_build = yes
+					}
+					add_building_construction = {
+						type = anti_air_building	
+						level = 1
+						instant_build = yes
+					}
+					add_building_construction = {
+						type = radar_station	
+						level = 1
+						instant_build = yes
+					}
+				}
+			}
+			if = {
+				limit = {
+					OR = {
+						owns_state = 338
+						BRI = {
+							is_puppet_of = ROOT
+						}
+					}
+				}
+				338 = {
+					add_building_construction = {
+						type = air_base
+						level = 2
+						instant_build = yes
+					}
+					add_building_construction = {
+						type = anti_air_building	
+						level = 1
+						instant_build = yes
+					}
+					add_building_construction = {
+						type = radar_station	
+						level = 1
+						instant_build = yes
+					}
+				}
+			}
+		}
+		
+	}
+	
+	focus = {
+		id = CBI_heavy_tech
+		icon = GFX_focus_usa_escort_fighters
+		relative_position_id = CBI_new_place_of_warfere
+		x = 3
+		y = 1
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		mutually_exclusive = { focus = CBI_light_tech }
+		prerequisite = { focus = CBI_new_place_of_warfere }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 1.0
+				uses = 2
+				category = medium_air
+				category = heavy_air
+			}
+		}
+		
+	}
+	
+	focus = {
+		id = CBI_heavy_fighter_tech
+		icon = GFX_focus_generic_air_defense
+		relative_position_id = CBI_new_place_of_warfere
+		x = 2
+		y = 2
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		#mutually_exclusive = {  }
+		prerequisite = { focus = CBI_heavy_tech }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 1.0
+				uses = 2
+				category = cat_heavy_fighter
+			}
+		}
+		
+	}
+	
+	focus = {
+		id = CBI_tactical_bomber_tech
+		icon = GFX_focus_eng_special_air_service
+		relative_position_id = CBI_new_place_of_warfere
+		x = 4
+		y = 2
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		#mutually_exclusive = {  }
+		prerequisite = { focus = CBI_heavy_tech }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 1.0
+				uses = 2
+				category = tactical_bomber
+			}
+		}
+		
+	}
+	
+	focus = {
+		id = CBI_strateg_bomber_tech
+		icon = GFX_goal_generic_air_bomber
+		relative_position_id = CBI_new_place_of_warfere
+		x = 3
+		y = 3
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		#mutually_exclusive = {  }
+		prerequisite = { focus = CBI_heavy_fighter_tech }
+		prerequisite = { focus = CBI_tactical_bomber_tech }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 1.0
+				uses = 2
+				category = cat_strategic_bomber
+			}
+		}
+		
+	}
+	
+	focus = {
+		id = CBI_rule_the_sky
+		icon = GFX_focus_generic_aircraft_production
+		relative_position_id = CBI_new_place_of_warfere
+		x = 0
+		y = 4
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				has_country_flag = SYNDICALIST_REVOLUTION_COUNTRY
+			}
+		}
+		#mutually_exclusive = {  }
+		prerequisite = { focus = CBI_naval_bomber_tech focus = CBI_strateg_bomber_tech }
+		prerequisite = { focus = CBI_radar }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			air_experience = 75
+			add_doctrine_cost_reduction = {
+				cost_reduction = 0.75
+				uses = 3
+				category = air_doctrine
+			}
+		}
+		
+	}
+
+
+}
+
+focus_tree = {
+	id = british_focus_old
+	
+	country = {
+		factor = 0
+		
+		modifier = {
 			add = 10
 			tag = CBI
 		}
@@ -4106,12 +8809,12 @@ focus_tree = {
 		search_filters = {FOCUS_FILTER_INDUSTRY}
 		
 		completion_reward = {
-			swap_ideas = {
-			remove_idea = CBI_outdated_army
-			add_idea = CBI_outdated_army_cromwells_testaments_1
-				}
-			}
+			#swap_ideas = {
+			#	remove_idea = CBI_outdated_army
+			#	add_idea = CBI_outdated_army_cromwells_testaments_1
+			#}
 		}
+	}
 		
 	focus = {
 		id = focus_CBI_establishing_strict_discipline
@@ -4134,12 +8837,12 @@ focus_tree = {
 		search_filters = {FOCUS_FILTER_INDUSTRY}
 		
 		completion_reward = {
-			swap_ideas = {
-			remove_idea = CBI_outdated_army_cromwells_testaments_1
-			add_idea = CBI_outdated_army_cromwells_testaments_2
-				}
-			}
+			#swap_ideas = {
+			#	remove_idea = CBI_outdated_army_cromwells_testaments_1
+			#	add_idea = CBI_outdated_army_cromwells_testaments_2
+			#}
 		}
+	}
 
 	focus = {
 		id = focus_CBI_constant_training
@@ -4163,12 +8866,12 @@ focus_tree = {
 		search_filters = {FOCUS_FILTER_INDUSTRY}
 		
 		completion_reward = {
-			swap_ideas = {
-			remove_idea = CBI_outdated_army_cromwells_testaments_2
-			add_idea = CBI_outdated_army_cromwells_testaments_3
-				}
-			}
+			#swap_ideas = {
+			#	remove_idea = CBI_outdated_army_cromwells_testaments_2
+			#	add_idea = CBI_outdated_army_cromwells_testaments_3
+			#}
 		}
+	}
 
 	focus = {
 		id = focus_CBI_piety

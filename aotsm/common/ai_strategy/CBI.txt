@@ -10,6 +10,222 @@
 # protect
 # influence
 
+CBI_unit_production = {
+	allowed = {
+		original_tag = CBI
+	}
+	enable = {
+		always = yes
+	}
+	abort = {
+		always = no
+	}
+
+	ai_strategy = {
+		type = role_ratio
+		id = garrison
+		value = -100
+	}
+
+	ai_strategy = {
+		type = role_ratio
+		id = paratroopers
+		value = -100
+	}
+
+	ai_strategy = {
+		type = role_ratio
+		id = mountaineers
+		value = -100
+	}
+
+	ai_strategy = {
+		type = role_ratio
+		id = marines
+		value = 5
+	}
+
+	ai_strategy = {
+		type = role_ratio
+		id = cavalry
+		value = -100
+	}
+
+	ai_strategy = {
+		type = role_ratio
+		id = motorized
+		value = 25
+	}
+
+	ai_strategy = {
+		type = role_ratio
+		id = mechanized
+		value = 5
+	}
+
+	ai_strategy = {
+		type = role_ratio
+		id = armor
+		value = 45 
+	}
+
+	ai_strategy = {
+		type = role_ratio
+		id = infantry
+		value = 50
+	}
+
+	ai_strategy = {
+		type = unit_ratio
+		id = fighter
+		value = 150
+	}
+
+	ai_strategy = {
+		type = unit_ratio
+		id = cas
+		value = -35 
+	}
+
+	ai_strategy = {
+		type = unit_ratio
+		id = tactical_bomber
+		value = -40
+	}
+
+	ai_strategy = {
+		type = unit_ratio
+		id = strategic_bomber
+		value = 100
+	}
+
+	ai_strategy = {
+		type = unit_ratio
+		id = naval_bomber
+		value = 125
+	}
+
+	ai_strategy = {
+		type = unit_ratio
+		id = capital_ship
+		value = 15
+	}
+
+	ai_strategy = {
+		type = unit_ratio
+		id = submarine
+		value = -50 
+	}
+
+	ai_strategy = {
+		type = unit_ratio
+		id = screen_ship
+		value = 20
+	}
+
+	ai_strategy = {
+		type = unit_ratio
+		id = convoy
+		value = 20
+	}
+
+	ai_strategy = {
+		type = equipment_production_factor
+		id = fighter
+		value = 150
+	}
+
+	ai_strategy = {
+		type = equipment_production_factor
+		id = cas
+		value = -65
+	}
+
+	ai_strategy = {
+		type = equipment_production_factor
+		id = tactical_bomber
+		value = -80
+	}
+
+	ai_strategy = {
+		type = equipment_production_factor
+		id = naval_bomber
+		value = 125
+	}
+
+	ai_strategy = {
+		type = equipment_production_factor
+		id = strategic_bomber
+		value = 100
+	}
+
+	ai_strategy = {
+		type = equipment_production_factor
+		id = infantry
+		value = 11
+	}
+
+	ai_strategy = {
+		type = equipment_production_factor
+		id = anti_tank
+		value = 20
+	}
+
+	ai_strategy = {
+		type = equipment_production_factor
+		id = anti_air
+		value = 25
+	}
+
+	ai_strategy = {
+		type = equipment_production_factor
+		id = artillery
+		value = 100
+	}
+
+	ai_strategy = {
+		type = equipment_production_factor
+		id = armor
+		value = 10
+	}
+	ai_strategy = {
+		type = equipment_production_factor
+		id = motorized
+		value = 5
+	}
+	ai_strategy = {
+		type = equipment_production_min_factories 
+		id = anti_air
+		value = 2
+	}
+	ai_strategy = {
+		type = equipment_production_min_factories
+		id = artillery
+		value = 4
+	}
+	ai_strategy = {
+		type = equipment_production_min_factories
+		id = fighter
+		value = 4
+	}
+	ai_strategy = {
+		type = equipment_variant_production_factor
+		id = iw_medium_airframe
+		value = -100
+	}
+	ai_strategy = {
+		type = equipment_variant_production_factor
+		id = support_equipment
+		value = 30
+	}
+
+	ai_strategy = {
+		type = railway_gun_divisions_ratio
+		value = 1
+	}
+}
+
+
 CBI_area_priority = {
 	enable = {
 		original_tag = CBI
@@ -54,13 +270,13 @@ CBI_area_priority = {
 	ai_strategy = {
 		type = area_priority
 		id = pacific
-		value = 15 #less focus here
+		value = -5 #less focus here
 	}
 	
 	ai_strategy = {
 		type = area_priority
 		id = oceania
-		value = 15
+		value = -5
 	}
   
 	ai_strategy = {
@@ -90,36 +306,55 @@ CBI_area_priority = {
 }
 
 britain_wants_civ = {
+
 	allowed = {
 		original_tag = CBI
 	}
+	
 	enable = {
-		date < 1851.3.1
+		date < 1853.1.1
 		has_war = no
 	}
-	abort_when_not_enabled = yes
+	
+	abort = {
+		CBI = {
+			num_of_civilian_factories > 99
+		}
+	}
 	
 	ai_strategy = {
 		type = building_target
 		id = industrial_complex
-		value = 49
+		value = 100
 	}
+	
 }
 
 britain_wants_arms_factory = {
+
 	allowed = {
 		original_tag = CBI
 	}
+	
 	enable = {
-		date < 1851.1.1
+		OR = {	
+			has_war = yes
+			date > 1853.1.1
+		}
 	}
-	abort_when_not_enabled = yes
+	
+	abort = {
+		CBI = {
+			num_of_military_factories > 99
+		}
+	}
 	
 	ai_strategy = {
 		type = building_target
 		id = arms_factory
-		value = 45
+		value = 100
 	}
+	
 }
 
 prepare_for_great_war = {
@@ -127,13 +362,14 @@ prepare_for_great_war = {
 		original_tag = CBI
 	}
 	enable = {
-		date > 1853.1.1
+		OR = {
+			has_war = yes
+			date > 1854.1.1
+		}
 	}
-	abort = {
-		date < 1853.1.1
-	}
+	abort_when_not_enabled = yes
 	
-	ai_strategy = {   #заставляет ии нанимать больше дивизий
+	ai_strategy = {   
 		type = force_build_armies 
 		value = 200 
 	}
@@ -171,7 +407,7 @@ prepare_for_great_war = {
 	ai_strategy = {
 		type = equipment_production_factor
 		id = artillery
-		value = 100 #20 to 40
+		value = 20
 	}
 	
 	ai_strategy = {
@@ -183,15 +419,16 @@ prepare_for_great_war = {
 }
 
 britain_has_war_witch_germany = {
+
 	allowed = {
 		original_tag = CBI
 	}
+	
 	enable = {
 		has_war_with = PRU
 	}
-	abort = {
-		NOT = { has_war_with = PRU }
-	}
+	
+	abort_when_not_enabled = yes
 	
 	ai_strategy = { 
 		type = invade 
@@ -201,47 +438,23 @@ britain_has_war_witch_germany = {
 	
 	ai_strategy = { 
 		type = strike_force_home_base 
-		id = 56
+		id = 18
 	}
-	
-	ai_strategy = { 
-		type = strike_force_home_base 
-		id = 59
-	}
-	
-	ai_strategy = {
-        type = front_control
-        tag = "PRU"
-        priority = 25
-        ordertype = front 
-        execution_type = balanced 
-        execute_order = yes 
-        manual_attack = yes 
-    }
-	
-	ai_strategy = {
-        type = front_control
-        tag = "PRU"
-        priority = 10 
-        ordertype = invasion 
-        execution_type = rush  
-        execute_order = yes 
-        manual_attack = yes 
-    }
 	
 }
 
 
 britain_has_war_witch_scandinavy = {
+
 	allowed = {
 		original_tag = CBI
 	}
+	
 	enable = {
 		has_war_with = SCA
 	}
-	abort = {
-		NOT = { has_war_with = SCA }
-	}
+	
+	abort_when_not_enabled = yes
 	
 	ai_strategy = { 
 		type = invade 
@@ -251,124 +464,155 @@ britain_has_war_witch_scandinavy = {
 	
 	ai_strategy = { 
 		type = strike_force_home_base 
-		id = 142
+		id = 16
 	}
-	
-	ai_strategy = { 
-		type = strike_force_home_base 
-		id = 99
-	}
-	
-	ai_strategy = {
-        type = front_control
-        tag = "PRU"
-        priority = 5
-        ordertype = front 
-        execution_type = balanced 
-        execute_order = yes 
-        manual_attack = yes 
-    }
-	
-	ai_strategy = {
-        type = front_control
-        tag = "PRU"
-        priority = 25 
-        ordertype = invasion 
-        execution_type = rush  
-        execute_order = yes 
-        manual_attack = yes 
-    }
 	
 }
 
 britain_help_continental_france = {
+
 	allowed = {
 		original_tag = CBI
 	}
+	
 	enable = {
-		#is_in_faction_with
 		is_in_faction_with = FRR
 	}
+	
 	abort = {
-		#NOT = { has_war_with = PRU }
 		OR = {
 			NOT = { is_in_faction_with = FRR }
 			any_owned_state = { is_core_of = CBI NOT = { is_controlled_by = CBI } }
 		}
 	}
+	
 	ai_strategy = {
 		type = force_defend_ally_borders
-		id = "FRR"
-		value = 400
+		id = FRR
+		value = 100
 	}
 	
 }
 
 britain_help_russian_front = {
+
 	allowed = {
 		original_tag = CBI
 	}
+	
 	enable = {
-		#is_in_faction_with
 		is_in_faction_with = RUS
 	}
+	
 	abort = {
-		#NOT = { has_war_with = PRU }
 		OR = {
 			NOT = { is_in_faction_with = RUS }
 			any_owned_state = { is_core_of = CBI NOT = { is_controlled_by = CBI } }
 		}
 	}
+	
 	ai_strategy = {
 		type = force_defend_ally_borders
-		id = "RUS"
-		value = 800
+		id = RUS
+		value = 125
 	}
 }
 
 britain_defaulte_core_defence = {
+
 	allowed = {
 		original_tag = CBI
 	}
+	
 	enable = {
-		date > 1851.1.1
-	}
-	abort = {
 		any_owned_state = { is_core_of = CBI NOT = { is_controlled_by = CBI } }
 	}
 	
+	abort_when_not_enabled = yes
+	
 	ai_strategy = { 
 		type = garrison
-		value = 10
+		value = 50
 	}
 	
 	ai_strategy = {
 		type = force_defend_ally_borders
-		id = "NEN"
-		value = -60
+		id = NEN
+		value = -100
+	}
+	
+	ai_strategy = {
+		type = force_defend_ally_borders
+		id = BRI
+		value = 100
+	}
+	
+	ai_strategy = {
+		type = force_defend_ally_borders
+		id = WAL
+		value = 100
+	}
+	
+	ai_strategy = {
+		type = force_defend_ally_borders
+		id = SCO
+		value = 100
 	}
 	
 }
 
-FRR_prepare_for_war_with_pru = {
+ignor_colony_front_line = {
+
 	allowed = {
-		tag = FRR
+		original_tag = CBI
 	}
-
+	
 	enable = {
-		PRU = {
-			exists = yes
-		}
-		NOT = { is_ally_with = PRU }
-		date > 1853.1.1
+		date < 1856.6.15
 	}
-
+	
 	abort_when_not_enabled = yes
 
 	ai_strategy = {
-		type = prepare_for_war
-		id = PRU
-		value = 900
+		type = ignore
+		id = "GRI"
+		value = 100
 	}
+	
+	ai_strategy = {
+		type = ignore
+		id = "GOT"
+		value = 100
+	}
+	
+	ai_strategy = {
+		type = ignore
+		id = "SOK"
+		value = 100
+	}
+	
+	ai_strategy = {
+		type = ignore
+		id = "BNI"
+		value = 100
+	}
+	
+	ai_strategy = {
+		type = ignore
+		id = "AKA"
+		value = 100
+	}
+	
+	ai_strategy = {
+		type = ignore
+		id = "KRU"
+		value = 100
+	}
+	
+	ai_strategy = {
+		type = ignore
+		id = "SEN"
+		value = 100
+	}
+	
 }
- 

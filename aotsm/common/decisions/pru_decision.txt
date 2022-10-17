@@ -229,6 +229,190 @@ pru_prospect_for_resources = {
 	}
 }
 
+pru_army_hiring_category = {
+
+	release_prototype_of_tank = { 
+		
+		icon = generic_merge_plant_tank
+
+		allowed = {
+			
+		}
+
+		available = {
+			num_of_civilian_factories_available_for_projects > 4
+		}
+
+		visible = {
+			tag = PRU
+			PRU = {
+				has_completed_focus = PRU_Austria_must_fall
+			}
+		}
+
+		fire_only_once = yes
+
+		cost = 0
+		days_remove = 365
+
+		modifier = {
+			civilian_factory_use = 5
+		}
+
+		ai_will_do = {
+			factor = 1250
+		}
+		
+		complete_effect = {
+			PRU = {
+				set_technology = { 
+					basic_medium_tank_chassis = 1
+					improved_medium_tank_chassis = 1
+					advanced_medium_tank_chassis = 1
+					armor_tech_2 = 1
+					armor_tech_3 = 1
+					engine_tech_2 = 1
+					engine_tech_3 = 1
+				}
+				create_equipment_variant = {
+					name = "Kingkaizer"
+					type = medium_tank_chassis_3
+					parent_version = 0
+					modules = {
+						main_armament_slot = tank_medium_cannon_2
+						turret_type_slot = tank_medium_three_man_tank_turret
+						suspension_type_slot = tank_christie_suspension
+						armor_type_slot = tank_welded_armor
+						engine_type_slot = tank_petrol_electric_engine
+						special_type_slot_1 = tank_radio_2
+					}
+					upgrades = {
+						tank_nsb_engine_upgrade = 4
+						tank_nsb_armor_upgrade = 4
+					}
+					icon = "GFX_GER_improved_medium_tank_medium"
+				}
+			}
+			hidden_effect = {
+				PRU = {
+					set_country_flag = pru_has_acces_to_panzer
+				}
+			}
+		}
+		
+		remove_effect = { 
+			64 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+			763 = {
+				add_extra_state_shared_building_slots = 3
+				add_building_construction = {
+					type = arms_factory
+					level = 3
+					instant_build = yes
+				}
+			}
+			PRU = {
+				country_event = ger.14
+			}	
+		}
+	}
+	
+	release_tank_on_battlefield = { 
+		
+		icon = generic_tank
+
+		allowed = {
+			
+		}
+
+		available = {
+			has_manpower > 26669
+		}
+
+		visible = {
+			tag = PRU
+			PRU = {
+				has_completed_focus = PRU_Austria_must_fall
+			}
+			PRU = {
+				has_country_flag = pru_has_acces_to_panzer
+			}
+		}
+
+		fire_only_once = yes
+
+		cost = 0
+
+		ai_will_do = {
+			factor = 1250
+		}
+		
+		complete_effect = {
+			PRU = {
+				add_manpower = -27000
+				hidden_effect = {
+					load_oob = PRU_TANK
+				}
+				custom_effect_tooltip = pru_spawn_tank
+			}
+		}
+	}
+	
+	release_division_on_battlefield = { 
+		
+		icon = generic_military
+		
+		allowed = {
+			
+		}
+
+		available = {
+			has_manpower > 12899
+		}
+
+		visible = {
+			tag = PRU
+			PRU = {
+				has_completed_focus = PRU_Austria_must_fall
+			}
+			check_variable = {
+				pru_division_spawn < 10
+			}
+		}
+
+		fire_only_once = no
+
+		cost = 0
+		
+		days_re_enable = 1
+
+		ai_will_do = {
+			factor = 1250
+		}
+		
+		complete_effect = {
+			PRU = {
+				add_manpower = -12900
+				hidden_effect = {
+					load_oob = PRU_DIVISIA
+				}
+				custom_effect_tooltip = pru_spawn_divisia
+			}
+			add_to_variable = {
+				var = pru_division_spawn
+				value = 1
+			}
+		}
+	}
+
+}
+
 pru_leypoldit_bomb = {
 	
 	tech_bomb = { 
@@ -607,12 +791,175 @@ pru_diplomat_missia = {
 						}
 					}
 					transfer_state = 766
-					add_state_core = 766
 				}
+				add_state_core = 766
 			}
 		}
 		
 	}
+	
+	creating_of_mittleafrika = {
+		icon = eng_trade_unions_support
+		
+		allowed = {
+			
+		}
+		
+		available = {
+			
+		}
+		
+		visible = {
+			PRU = {
+				owns_state = 539
+				owns_state = 660
+			}
+		}		
+			
+		cost = 0	
+		
+		ai_will_do = {
+			factor = 100
+		}
+		
+		fire_only_once = yes
+		
+		complete_effect = {
+			hidden_effect = {
+				add_victory_points = {
+					province = 8207
+					value = 20
+				}
+			}
+			MAT = {	
+				inherit_technology = PRU
+			}
+			MAT = {
+				add_state_core = 539
+				add_state_core = 660
+				transfer_state = 539
+				transfer_state = 660
+			}
+			PRU = {
+				PRU_Karl_Friedrich_Wilhelm_Leopold_August_Graf_von_Werder = {
+					set_nationality = MAT
+				}
+			}
+			PRU = {
+				set_autonomy = {
+					target = MAT
+					autonomy_state = autonomy_puppet
+					end_wars = yes
+					end_civil_wars = yes
+				}
+			}
+			hidden_effect = {
+				MAT = {
+					set_politics = { ruling_party = authoritarian elections_allowed = no }
+					set_popularities = {
+						democratic = 9
+						socialism = 1
+						reactionist = 3
+						authoritarian = 87
+					}
+				}
+				MAT = {
+					load_oob = MAT_army
+				}
+				MAT = {
+					create_country_leader = {
+						name = "PRU_Karl_Friedrich_Wilhelm_Leopold_August_Graf_von_Werder"
+						desc = "POLITICS_KARL_FRIEDRICH_WILHELM_LEOPOLD_AUGUST_GRAF_VON_WARDER_DESC"
+						picture = "gfx/leaders/PRU/Portrait_Avgust_fon-Verder.dds"
+						expire = "1888.1.1"
+						ideology = dictature
+						traits = {
+						}
+					}
+				}
+				MAT = {
+					add_ideas = mittleafrika_idea
+				}
+				539 = {
+					set_state_category = town
+					add_extra_state_shared_building_slots = 3
+					add_building_construction = {
+						type = infrastructure
+						level = 3
+						instant_build = yes
+					}
+					add_building_construction = {
+						type = arms_factory
+						level = 1
+						instant_build = yes
+					}
+					add_building_construction = {
+						type = industrial_complex
+						level = 2
+						instant_build = yes
+					}
+				}
+			}
+			news_event = news.93
+		}
+	}
+	
+	attack_switzeland = { 
+		
+		icon = generic_nationalism
+
+		allowed = {
+			
+		}
+
+		available = {
+ 
+		}
+
+		visible = {
+			original_tag = PRU
+			has_global_flag = france_capitulation
+			is_in_faction_with = BYZ
+			country_exists = GAL
+		}
+
+		fire_only_once = yes
+
+		cost = 0
+		
+		ai_will_do = {
+			factor = 100
+		}
+		
+		complete_effect = {
+			PRU = {
+				declare_war_on = {
+					target = SWI
+					type = annex_everything
+				}
+			}
+			BYZ = {
+				declare_war_on = {
+					target = SWI
+					type = annex_everything
+				}
+			}
+			FRA = {
+				declare_war_on = {
+					target = SWI
+					type = annex_everything
+				}
+			}
+			SWI = {
+				set_country_flag = SWI_end_of_neutrality
+			}
+		}
+		
+	}
+	
+}
+
+pru_war_decision = {
 	
 	use_gas_attack_decision = { 
 		
@@ -726,6 +1073,126 @@ pru_diplomat_missia = {
 		}
 		
 	}
+	
+	pru_not_again_war_in_our_land = { 
+		
+		icon = generic_form_nation
+
+		allowed = {
+			original_tag = PRU
+		}
+
+		available = {
+			surrender_progress > 0.2
+		}
+
+		visible = {
+			has_global_flag = firts_world_war
+			OR = {
+				has_war_with = RUS
+				has_war_with = FRR
+			}
+		}
+
+		fire_only_once = yes
+
+		cost = 0
+		
+		days_re_enable = 365
+
+		ai_will_do = {
+			factor = 100
+		}
+		
+		complete_effect = {
+			add_ideas = pru_never_surrender
+		}
+		
+	}
+	
+	pru_mass_war_production = { 
+		
+		icon = generic_form_nation
+
+		allowed = {
+			original_tag = PRU
+		}
+
+		available = {
+			has_stability > 0.5
+		}
+
+		visible = {
+			OR = {
+				has_war_with = RUS
+				has_war_with = FRR
+			}
+		}
+
+		fire_only_once = yes
+
+		cost = 0
+		
+		days_re_enable = 365
+
+		ai_will_do = {
+			factor = 100
+		}
+		
+		complete_effect = {
+			add_ideas = pru_mass_war_production_idea
+		}
+		
+	}
+	
+	pru_not_france_land = { 
+		
+		icon = generic_form_nation
+
+		allowed = {
+			original_tag = PRU
+		}
+
+		available = {
+			has_full_control_of_state = 28
+			has_full_control_of_state = 828
+		}
+
+		visible = {
+			OR = {
+				has_war_with = RUS
+				has_war_with = FRR
+			}
+			FRR = {
+				owns_state = 28
+				owns_state = 828
+			}
+		}
+
+		fire_only_once = yes
+
+		cost = 0
+		
+		days_re_enable = 365
+
+		ai_will_do = {
+			factor = 100
+		}
+		
+		complete_effect = {
+			PRU = {
+				transfer_state = 28
+				add_state_core = 28
+				transfer_state = 828
+				add_state_core = 828
+			}
+			FRR = {
+				add_stability = -0.10
+				add_war_support = -0.10
+			}
+		}
+		
+	}
 
 }
 
@@ -801,6 +1268,427 @@ pru_country_progress = {
 			experience_gain_air	= 0.25
 		}
 		
+	}
+
+}
+
+mat_decision = {
+
+	mat_build_industrial_complex = {
+
+		icon = generic_factory
+
+		allowed = {
+
+		}
+
+		available = {
+			any_owned_state = {
+				is_core_of = MAT
+				industrial_complex < 3
+			}
+		}
+
+		visible = {
+			tag = MAT
+			any_owned_state = {
+				is_core_of = MAT
+				industrial_complex < 3
+			}
+		}
+
+		fire_only_once = no
+
+		cost = 20
+		days_remove = 70
+
+		ai_will_do = {
+			factor = 100
+		}
+		
+		remove_effect = {
+			random_state = {
+				limit = {
+					is_core_of = MAT
+					industrial_complex < 3
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	
+	}
+	
+	mat_build_arms_factory = {
+
+		icon = generic_merge_plant_materiel
+
+		allowed = {
+
+		}
+
+		available = {
+			any_owned_state = {
+				is_core_of = MAT
+				arms_factory < 3
+			}
+		}
+
+		visible = {
+			tag = MAT
+			any_owned_state = {
+				is_core_of = MAT
+				arms_factory < 3
+			}
+		}
+
+		fire_only_once = no
+
+		cost = 20
+		days_remove = 70
+
+		ai_will_do = {
+			factor = 100
+		}
+		
+		remove_effect = {
+			random_state = {
+				limit = {
+					is_core_of = MAT
+					arms_factory < 3
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	
+	}
+	
+	mat_build_new_city = {
+
+		icon = generic_construction
+
+		allowed = {
+
+		}
+
+		available = {
+		}
+
+		visible = {
+			tag = MAT
+			any_owned_state = {
+				is_core_of = MAT
+				NOT = {
+					has_state_flag = mit_new_city
+				}
+			}
+		}
+
+		fire_only_once = no
+
+		cost = 20
+		days_remove = 70
+
+		ai_will_do = {
+			factor = 100
+		}
+		
+		remove_effect = {
+			random_state = {
+				limit = {
+					is_core_of = MAT
+					NOT = {
+						has_state_flag = mit_new_city
+					}
+				}
+				add_extra_state_shared_building_slots = 5
+				set_state_flag = mit_new_city
+			}
+		}
+	
+	}
+	
+	mat_annex_cas_colony = {
+
+		icon = generic_civil_support
+
+		allowed = {
+
+		}
+
+		available = {
+			has_army_manpower = {
+				size > 49999
+			}
+		}
+
+		visible = {
+			NOT = {
+				MAT = {
+					owns_state = 297
+					owns_state = 705
+					owns_state = 824
+				}
+			}
+		}
+
+		fire_only_once = yes
+
+		cost = 0
+
+		ai_will_do = {
+			factor = 100
+		}
+		
+		complete_effect = {
+			MAT = {
+				transfer_state = 297
+				add_state_core = 297
+				transfer_state = 705
+				add_state_core = 705
+				transfer_state = 824
+				add_state_core = 824
+			}
+			CAS = {
+				remove_state_core = 297
+				remove_state_core = 705
+				remove_state_core = 824
+				add_state_claim = 297
+				add_state_claim = 705
+				add_state_claim = 824
+			}
+		}
+	
+	}
+	
+	mat_attack_kongo = {
+
+		icon = generic_nationalism
+
+		allowed = {
+
+		}
+
+		available = {
+		}
+
+		visible = {
+			date > 1851.4.30
+		}
+
+		fire_only_once = yes
+
+		cost = 0
+
+		ai_will_do = {
+			factor = 100
+		}
+		
+		days_remove = 30
+		
+		remove_effect = {
+			MAT = {
+				declare_war_on = {
+					target = CON
+					type = annex_everything
+				}
+			}
+			CON = {
+				set_country_flag = CON_vs_MAT
+			}
+		}
+	
+	}
+	
+	mat_attack_luba = {
+
+		icon = generic_nationalism
+
+		allowed = {
+
+		}
+
+		available = {
+		}
+
+		visible = {
+			NOT = {
+				country_exists = CON
+			}
+		}
+
+		fire_only_once = yes
+
+		cost = 0
+
+		ai_will_do = {
+			factor = 100
+		}
+		
+		days_remove = 30
+		
+		remove_effect = {
+			MAT = {
+				declare_war_on = {
+					target = LUB
+					type = annex_everything
+				}
+			}
+			LUB = {
+				set_country_flag = LUB_vs_MAT
+			}
+		}
+	
+	}
+	
+	mat_attack_kuba = {
+
+		icon = generic_nationalism
+
+		allowed = {
+
+		}
+
+		available = {
+		}
+
+		visible = {
+			NOT = {
+				country_exists = LUB
+			}
+		}
+
+		fire_only_once = yes
+
+		cost = 0
+
+		ai_will_do = {
+			factor = 100
+		}
+		
+		days_remove = 30
+		
+		remove_effect = {
+			MAT = {
+				declare_war_on = {
+					target = FKU
+					type = annex_everything
+				}
+			}
+			FKU = {
+				set_country_flag = FKU_vs_MAT
+			}
+		}
+	
+	}
+	
+	mat_attack_bang = {
+
+		icon = generic_nationalism
+
+		allowed = {
+
+		}
+
+		available = {
+		}
+
+		visible = {
+			NOT = {
+				country_exists = FKU
+			}
+		}
+
+		fire_only_once = yes
+
+		cost = 0
+
+		ai_will_do = {
+			factor = 100
+		}
+		
+		days_remove = 30
+		
+		remove_effect = {
+			MAT = {
+				declare_war_on = {
+					target = BAN
+					type = annex_everything
+				}
+			}
+			BAN = {
+				set_country_flag = BAN_vs_MAT
+			}
+		}
+	
+	}
+	
+	mat_attack_kbb = {
+
+		icon = generic_nationalism
+
+		allowed = {
+
+		}
+
+		available = {
+		}
+
+		visible = {
+			NOT = {
+				country_exists = BAN
+			}
+		}
+
+		fire_only_once = yes
+
+		cost = 0
+
+		ai_will_do = {
+			factor = 100
+		}
+		
+		days_remove = 30
+		
+		remove_effect = {
+			MAT = {
+				declare_war_on = {
+					target = KIT
+					type = annex_everything
+				}
+			}
+			KIT = {
+				set_country_flag = KIT_vs_MAT
+			}
+			MAT = {
+				declare_war_on = {
+					target = BUG
+					type = annex_everything
+				}
+			}
+			BUG = {
+				set_country_flag = BUG_vs_MAT
+			}
+			MAT = {
+				declare_war_on = {
+					target = BUR
+					type = annex_everything
+				}
+			}
+			BUR = {
+				set_country_flag = BUR_vs_MAT
+			}
+		}
+	
 	}
 
 }

@@ -71,8 +71,6 @@ country_event = {
 		}
 		hidden_effect = {
 			PRU = { create_faction = "Prussian_sphere" }
-			PRU = { add_to_faction = SAK }
-			PRU = { add_to_faction = TUR }
 			PRU = { add_to_faction = HAN }
 			PRU = { add_to_faction = MCL }
 			PRU = { add_to_faction = SLG }
@@ -81,6 +79,8 @@ country_event = {
 			AUS = {
 				create_faction = "Austrian_sphere"
 			}
+			AUS = { add_to_faction = SAK }
+			AUS = { add_to_faction = TUR }
 			AUS = { add_to_faction = BAD }
 			AUS = { add_to_faction = VUR }
 			AUS = { add_to_faction = BAV }
@@ -1112,11 +1112,23 @@ country_event = {
 					has_war_with = PRU
 				}
 			}
+			CBI = {
+				set_autonomy = {
+					target = IRE
+					autonomy_state = autonomy_free
+					end_wars = no
+					end_civil_wars = no
+				}
+			}
 			IRE = {
-				transfer_state = 113
-				transfer_state = 119
-				transfer_state = 134
-				transfer_state = 135
+				leave_faction = yes
+				remove_ideas = CBI_free_irland
+			}
+			every_country = {
+				limit = {
+					has_war_with = IRE
+					}
+				white_peace = IRE
 			}
 			PRU = {
 				add_to_faction = IRE
@@ -1127,16 +1139,46 @@ country_event = {
 				remove_state_core = 134
 				remove_state_core = 135
 			}
+			if = {
+				limit = {
+					MAT = {
+						is_puppet_of = PRU
+					}
+				}
+				MAT = {
+					transfer_state = 826
+					add_state_core = 826
+					transfer_state = 841
+					add_state_core = 841
+					transfer_state = 842
+					add_state_core = 842
+					transfer_state = 843
+					add_state_core = 843
+					transfer_state = 844
+					add_state_core = 844
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						MAT = {
+							is_puppet_of = PRU
+						}
+					}
+				}
+				PRU = {
+					transfer_state = 826
+					transfer_state = 841
+					transfer_state = 842
+					transfer_state = 843
+					transfer_state = 844
+				}
+			}
 			PRU = {
 				transfer_state = 299
 				transfer_state = 696
 				transfer_state = 703
 				transfer_state = 704
-				transfer_state = 826
-				transfer_state = 841
-				transfer_state = 842
-				transfer_state = 843
-				transfer_state = 844
 			}
 		}
 		if = {
@@ -1309,6 +1351,33 @@ country_event = {
 				}
 			}
 		}
+		CBI = {
+			transfer_units_fraction= {
+				target = PRU
+				size = 0.0
+				stockpile_ratio = 0.0
+				army_ratio = 0.0
+				navy_ratio = 0.85
+				air_ratio = 0.0
+			}
+		}
+		MEN = {
+			transfer_state = 866
+		}
+		CBI = {
+			transfer_units_fraction= {
+				target = MEN
+				size = 0.0
+				stockpile_ratio = 0.0
+				army_ratio = 0.90
+				navy_ratio = 0.0
+				air_ratio = 0.0
+			}
+			annex_country = {
+				target = MEN
+				transfer_troops = no
+			}
+		}
 		if = {
 			limit = {
 				NOT = {
@@ -1318,6 +1387,96 @@ country_event = {
 			PRT = {
 				set_faction_leader = yes
 			}
+		}
+		CBI = {
+			annex_country = {
+				target = BRI
+				transfer_troops = no
+			}
+		}
+		CBI = {
+			annex_country = {
+				target = WAL
+				transfer_troops = no
+			}
+		}
+		CBI = {
+			annex_country = {
+				target = SCO
+				transfer_troops = no
+			}
+		}
+		CBI = {
+			add_manpower = -1000000
+		}
+		if = {
+			limit = {
+				CBI = {
+					has_idea = scraping_the_barrel
+				}
+			}
+			swap_ideas = {
+				remove_idea = scraping_the_barrel
+				add_idea = disarmed_nation
+			}
+		}
+		if = {
+			limit = {
+				CBI = {
+					has_idea = all_adults_serve
+				}
+			}
+			swap_ideas = {
+				remove_idea = all_adults_serve
+				add_idea = disarmed_nation
+			}
+		}
+		if = {
+			limit = {
+				CBI = {
+					has_idea = service_by_requirement
+				}
+			}
+			swap_ideas = {
+				remove_idea = service_by_requirement
+				add_idea = disarmed_nation
+			}
+		}
+		if = {
+			limit = {
+				CBI = {
+					has_idea = extensive_conscription
+				}
+			}
+			swap_ideas = {
+				remove_idea = extensive_conscription
+				add_idea = disarmed_nation
+			}
+		}
+		if = {
+			limit = {
+				CBI = {
+					has_idea = limited_conscription
+				}
+			}
+			swap_ideas = {
+				remove_idea = limited_conscription
+				add_idea = disarmed_nation
+			}
+		}
+		if = {
+			limit = {
+				CBI = {
+					has_idea = volunteer_only
+				}
+			}
+			swap_ideas = {
+				remove_idea = volunteer_only
+				add_idea = disarmed_nation
+			}
+		}
+		CBI = {
+			add_war_support = -2.00
 		}
 		CBI = {
 			leave_faction = yes
@@ -1343,15 +1502,45 @@ country_event = {
 						has_war_with = PRU
 					}
 				}
+				if = {
+					limit = {
+						MAT = {
+							is_puppet_of = PRU
+						}
+					}
+					MAT = {
+						transfer_state = 540
+						add_state_core = 540
+						transfer_state = 796
+						add_state_core = 796
+						transfer_state = 825
+						add_state_core = 825
+						transfer_state = 839
+						add_state_core = 839
+						transfer_state = 847
+						add_state_core = 847
+					}
+				}
+				if = {
+					limit = {
+						NOT = {
+							MAT = {
+								is_puppet_of = PRU
+							}
+						}
+					}
+					PRU = {
+						transfer_state = 540
+						transfer_state = 796
+						transfer_state = 825
+						transfer_state = 839
+						transfer_state = 847
+					}
+				}
 				PRU = {
-					transfer_state = 540
 					transfer_state = 691
 					transfer_state = 694
 					transfer_state = 702
-					transfer_state = 796
-					transfer_state = 825
-					transfer_state = 839
-					transfer_state = 847
 				}
 			}
 			if = {
@@ -1565,6 +1754,60 @@ country_event = {
 		name = ger.13.a 
 		add_stability = -0.05
 	}
+}
+
+country_event = {
+	id = ger.14 
+	title = ger.14.t
+	desc = ger.14.d
+	picture = GFX_report_event_bul_ff_troops_panzer
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = { #Prefer Berlin
+		name = ger.14.a 
+		trigger = {
+			owns_state = 64
+		}
+		ai_chance = {
+			factor = 65
+		}
+		PRU = {
+			add_timed_idea = {
+				idea = berlin_armor_production
+				days = 365
+			}
+		}
+	}
+	
+	option = { #Prefer Koninsberg
+		name = ger.14.b
+		trigger = {
+			owns_state = 763
+		}
+		ai_chance = {
+			factor = 35
+		}
+		PRU = {
+			add_timed_idea = {
+				idea = koninsberg_armor_production
+				days = 365
+			}
+		}
+	}
+	
+	option = { #Not own Berlin and Koninsberg... How?
+		name = ger.14.c
+		trigger = {
+			NOT = {
+				owns_state = 64
+				owns_state = 763
+			}
+		}
+	}
+	
 }
 
 country_event = {

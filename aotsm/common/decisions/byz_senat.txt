@@ -12,10 +12,7 @@ byz_senat_decision_category = {
 		}
 		visible = {
 			tag = BYZ
-			OR = {
-				has_country_flag = byz_rulling_imp
-				has_country_flag = byz_rulling_impgov
-			}
+			has_country_flag = byz_rulling_imp
 			NOT = {
 				check_variable = { byz_imperial_faction_support > 199 }
 			}
@@ -165,6 +162,117 @@ byz_senat_decision_category = {
 								custom_effect_tooltip = byz_imperium_donat_3
 							}
 						}
+					}
+				}
+			}
+		}
+	}
+	
+	byz_parad_of_imperia = {
+		icon = generic_speech
+		allowed = {
+			tag = BYZ
+		}
+		available = {
+			NOT = {
+				check_variable = { byz_merchants_faction_support < 4 }
+				check_variable = { byz_democrats_faction_support < 4 }
+			}
+		}
+		visible = {
+			tag = BYZ
+			has_country_flag = byz_rulling_impgov
+			NOT = {
+				check_variable = { byz_merchants_faction_support < 4 }
+				check_variable = { byz_democrats_faction_support < 4 }
+			}
+		}		
+			
+		cost = 0	
+		
+		ai_will_do = {
+			factor = 100
+		}
+		
+		days_remove = 30
+		days_re_enable = 120
+		fire_only_once = no
+		
+		complete_effect = {		
+		}
+		
+		remove_effect = {
+			if = {
+				limit = {
+					check_variable = { byz_merchants_faction_support > 4 }
+				}
+				random_list = {
+					50 = {
+						add_to_variable = { byz_imperial_faction_support = 5 }
+						clamp_variable = {
+							var = byz_imperial_faction_support
+							min = 0
+							max = 200
+						}
+						add_to_variable = { byz_merchants_faction_support = -5 }
+						clamp_variable = {
+							var = byz_merchants_faction_support
+							min = 0
+							max = 200
+						}
+						custom_effect_tooltip = byz_i_5_m_5
+					}
+					50 = {
+						add_to_variable = { byz_generals_faction_support = 5 }
+						clamp_variable = {
+							var = byz_generals_faction_support
+							min = 0
+							max = 200
+						}
+						add_to_variable = { byz_merchants_faction_support = -5 }
+						clamp_variable = {
+							var = byz_merchants_faction_support
+							min = 0
+							max = 200
+						}
+						custom_effect_tooltip = byz_g_5_m_5
+					}
+				}
+			}
+			if = {
+				limit = {
+					check_variable = { byz_democrats_faction_support > 4 }
+				}
+				random_list = {
+					50 = {
+						add_to_variable = { byz_imperial_faction_support = 5 }
+						clamp_variable = {
+							var = byz_imperial_faction_support
+							min = 0
+							max = 200
+						}
+						add_to_variable = { byz_democrats_faction_support = -5 }
+						clamp_variable = {
+							var = byz_democrats_faction_support
+							min = 0
+							max = 200
+						}
+						custom_effect_tooltip = byz_i_5_d_5
+					}
+					50 = {
+						add_to_variable = { byz_generals_faction_support = 5 }
+						clamp_variable = {
+							var = byz_generals_faction_support
+							min = 0
+							max = 200
+						}
+						add_to_variable = { byz_democrats_faction_support = -5 }
+						clamp_variable = {
+							var = byz_democrats_faction_support
+							min = 0
+							max = 200
+						}
+						custom_effect_tooltip = byz_g_5_d_5
 					}
 				}
 			}
@@ -1020,6 +1128,99 @@ byz_senat_decision_category = {
 		}
 	}
 	
+	byz_tech_suppremosi_1 = {
+	
+		icon = generic_research
+		
+		allowed = {
+		}
+		
+		available = {
+		}
+		
+		visible = {
+			date > 1850.1.1
+		}
+		
+		ai_will_do = {
+			factor = 50
+			modifier = {
+				factor = 100
+				is_historical_focus_on = yes
+			}
+		}
+		
+		cost = 100
+		
+		fire_only_once = yes
+		
+		complete_effect = {
+			add_research_slot = 1
+		}
+	}
+	
+	byz_tech_suppremosi_2 = {
+	
+		icon = generic_research
+		
+		allowed = {
+		}
+		
+		available = {
+		}
+		
+		visible = {
+			date > 1851.1.1
+		}
+		
+		ai_will_do = {
+			factor = 50
+			modifier = {
+				factor = 100
+				is_historical_focus_on = yes
+			}
+		}
+		
+		cost = 100
+		
+		fire_only_once = yes
+		
+		complete_effect = {
+			add_research_slot = 1
+		}
+	}
+	
+	byz_tech_suppremosi_3 = {
+	
+		icon = generic_research
+		
+		allowed = {
+		}
+		
+		available = {
+		}
+		
+		visible = {
+			date > 1852.1.1
+		}
+		
+		ai_will_do = {
+			factor = 50
+			modifier = {
+				factor = 100
+				is_historical_focus_on = yes
+			}
+		}
+		
+		cost = 100
+		
+		fire_only_once = yes
+		
+		complete_effect = {
+			add_research_slot = 1
+		}
+	}
+	
 	byz_persia_civil_war = {
 	
 		icon = generic_ignite_civil_war
@@ -1051,6 +1252,120 @@ byz_senat_decision_category = {
 				country_event = byz.8
 			}
 		}
+	}
+	
+	byz_attack_afganistan = {
+	
+		icon = generic_ignite_civil_war
+		
+		allowed = {
+		}
+		
+		available = {
+		}
+		
+		visible = {
+			date > 1851.4.30
+			NOT = {
+				country_exists = PER
+				country_exists = IRA
+			}
+			PAR = {
+				has_war = no
+			}
+		}
+		
+		ai_will_do = {
+			factor = 50
+			modifier = {
+				factor = 100
+				is_historical_focus_on = yes
+			}
+		}
+		
+		days_remove = 30
+		
+		fire_only_once = yes
+		
+		remove_effect = {
+			PAR = {
+				declare_war_on = {
+					target = AFG
+					type = annex_everything
+				}
+			}
+			RIT = {
+				declare_war_on = {
+					target = AFG
+					type = annex_everything
+				}
+			}
+			if = {
+				limit = {
+					country_exists = PNJ
+				}
+				PNJ = {
+					declare_war_on = {
+						target = AFG
+						type = annex_everything
+					}
+				}
+			}
+			hidden_effect = {
+				PAR = {
+					add_ideas = afganistan_company
+				}
+				RIT = {
+					add_ideas = afganistan_company
+				}
+				if = {
+					limit = {
+						country_exists = PNJ
+					}
+					PNJ = {
+						add_ideas = afganistan_company
+					}
+				}
+				RIT = {
+					diplomatic_relation = {
+						country = PAR
+						relation = military_access
+						active = yes
+					}
+					diplomatic_relation = {
+						country = PNJ
+						relation = military_access
+						active = yes
+					}
+				}
+				PAR = {
+					diplomatic_relation = {
+						country = RIT
+						relation = military_access
+						active = yes
+					}
+					diplomatic_relation = {
+						country = PNJ
+						relation = military_access
+						active = yes
+					}
+				}
+				PNJ = {
+					diplomatic_relation = {
+						country = PAR
+						relation = military_access
+						active = yes
+					}
+					diplomatic_relation = {
+						country = RIT
+						relation = military_access
+						active = yes
+					}
+				}
+				set_global_flag = afganistan_company_global_flag
+			}
+		}
+		
 	}
 	
 	byz_imp_dem = {

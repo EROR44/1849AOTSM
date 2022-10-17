@@ -1,0 +1,193 @@
+railways_union_decision_category = {
+	
+	join_railways_union = {
+		icon = generic_decision
+					
+		available = {
+			if = {
+				limit = {
+					NOT = {
+						tag = BYZ
+						tag = RUS
+						tag = SCA
+						tag = SAR
+					}
+				}
+				OR = {
+					any_neighbor_country = {
+						has_country_flag = railways_member_flag
+						has_opinion = {
+							target = ROOT
+							value > 99
+						}
+					}
+					if = {
+						limit = {
+							OR = {
+								is_puppet = yes
+								is_subject = yes
+							}
+						}
+						overlord = {
+							has_country_flag = railways_member_flag
+							ROOT = {
+								is_puppet_of = PREV
+							}
+						}
+					}
+					any_country = {
+						has_country_flag = railways_member_flag
+						is_in_faction_with = ROOT
+					}
+				}
+			}
+			if = {
+				limit = {
+					tag = RUS
+				}
+				date > 1853.12.15
+			}
+			if = {
+				limit = {
+					tag = BYZ
+				}
+				date > 1849.1.1
+			}		
+			if = {
+				limit = {
+					tag = SCA
+				}
+				date > 1850.9.12
+			}
+			if = {
+				limit = {
+					tag = SAR
+				}
+				date > 1850.10.12
+			}
+		}
+		
+		allowed = { 
+			
+		}
+		
+		visible = {
+			OR = {
+				OR = {
+					AND = {
+						any_neighbor_country = {
+							has_country_flag = railways_member_flag
+						}
+						NOT = {
+							has_country_flag = railways_member_flag
+						}
+						capital_scope = {
+							is_on_continent = europe
+						}
+					}
+					AND = {
+						tag = TRK
+						NOT = {
+							has_country_flag = railways_member_flag
+						}
+					}
+					AND = {
+						tag = ARM
+						NOT = {
+							has_country_flag = railways_member_flag
+						}
+					}
+					AND = {
+						tag = KUR
+						NOT = {
+							has_country_flag = railways_member_flag
+						}
+					}
+					AND = {
+						tag = SYR
+						NOT = {
+							has_country_flag = railways_member_flag
+						}
+					}
+					AND = {
+						tag = CPT
+						NOT = {
+							has_country_flag = railways_member_flag
+						}
+					}
+				}
+				AND = {
+					tag = BYZ
+					BYZ = {
+						NOT = {
+							has_country_flag = railways_member_flag
+						}
+					}
+				}
+			}
+		}
+		
+		fire_only_once = no
+
+		ai_will_do = {
+			factor = -100
+			modifier = {
+				add = 200
+				tag = HOL
+			}
+			modifier = {
+				add = 200
+				tag = BEL
+			}
+			modifier = {
+				add = 200
+				tag = BOH
+			}
+			modifier = {
+				add = 200
+				tag = SCA
+			}
+			modifier = {
+				add = 200
+				tag = HUN
+			}
+			modifier = {
+				add = 200
+				tag = BYZ
+			}
+			modifier = {
+				add = 200
+				tag = SAR
+			}
+			modifier = {
+				add = 200
+				tag = TRK
+			}
+			modifier = {
+				add = 200
+				tag = ARM
+			}
+			modifier = {
+				add = 200
+				tag = KUR
+			}
+			modifier = {
+				add = 200
+				tag = SYR
+			}
+			modifier = {
+				add = 200
+				tag = CPT
+			}
+		}
+		
+		complete_effect = {
+			set_country_flag = railways_member_flag
+		}
+
+		remove_effect = {
+		}
+	}
+	
+	
+}
