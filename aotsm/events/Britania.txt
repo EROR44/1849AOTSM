@@ -8,6 +8,7 @@ add_namespace = cbi_frr
 add_namespace = cbi_pru
 add_namespace = cbi_rus
 add_namespace = cbi_rip
+add_namespace = cbi_soc_rev
 
 #### FRANCE ####
 
@@ -853,6 +854,14 @@ country_event = { #results
 			min = 0
 			max = 100
 		}
+		hidden_effect = {
+			CBI = {
+				country_event = {
+					id = cbi_soc_rev.1
+					days = 90
+				}
+			}
+		}
 		news_event = news.95
 	}
 	
@@ -941,6 +950,14 @@ country_event = { #results
 			var = cbi_ire_plan
 			min = 0
 			max = 5
+		}
+		hidden_effect = {
+			CBI = {
+				country_event = {
+					id = cbi_soc_rev.1
+					days = 90
+				}
+			}
 		}
 		news_event = news.95
 	}
@@ -1037,6 +1054,14 @@ country_event = { #results
 			min = 0
 			max = 5
 		}
+		hidden_effect = {
+			CBI = {
+				country_event = {
+					id = cbi_soc_rev.1
+					days = 90
+				}
+			}
+		}
 		news_event = news.95
 	}
 	
@@ -1088,6 +1113,7 @@ country_event = { #results
 			}
 			add_stability = -0.25
 			set_country_flag = CBI_SOCIALISM_CRISIS
+			set_country_flag = cbi_soc_revolution_begin
 		}
 		custom_effect_tooltip = cbi_confederaty_neutraliti
 		add_to_variable = { cbi_bri_opinion = -50 }
@@ -1363,12 +1389,6 @@ country_event = { #Lem found dead
 		custom_effect_tooltip = cbi_lem_dead_tt
 		add_stability = -0.15
 		add_political_power = -500
-		set_popularities = {
-			democratic = 25
-			authoritarian = 25
-			reactionist = 25
-			socialism = 25
-		}
 		news_event = news.94
 		hidden_effect = {
 			CBI = {
@@ -1380,12 +1400,140 @@ country_event = { #Lem found dead
 				retire_character = CBI_Uillem_Lem
 				promote_character = CBI_Robert_Pil
 			}
+			CBI = {
+				set_popularities = {
+					democratic = 25
+					authoritarian = 25
+					reactionist = 25
+					socialism = 25
+				}
+			}
 			set_global_flag = LEM_IS_DEAD
 			CBI = {
 				country_event = {
 					days = 2
 					id = cbi.3
 				}
+			}
+		}
+	}
+}
+
+#### Socialism revolution ####
+
+country_event = { #Socialism revolution begin
+	id = cbi_soc_rev.1
+	title = cbi_soc_rev.1.t
+	desc = cbi_soc_rev.1.d
+	picture = GFX_report_event_worker_protests
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		CBI = {
+			set_country_flag = cbi_soc_revolution_begin
+			set_country_flag = cbi_soc_revolution_active_phase
+		}
+	}
+	
+	option = { #Ops....
+		name = cbi_soc_rev.1.a
+		CBI = {
+			add_stability = -0.25
+			add_timed_idea = {
+				idea = CBI_chartist_revolution
+				days = 180
+			}
+			add_timed_idea = {
+				idea = CBI_global_strikes
+				days = 30
+			}
+		}
+		news_event = news.102
+	}
+}
+
+country_event = { #Solve the problem
+	id = cbi_soc_rev.2
+	title = cbi_soc_rev.2.t
+	desc = cbi_soc_rev.2.d
+	picture = GFX_report_event_eng_mosley_march_on_downing_street
+	
+	is_triggered_only = yes
+	
+	option = { #truth Pile
+		name = cbi_soc_rev.2.a
+		trigger = {
+			NOT = {
+				has_country_flag = CBI_SOCIALISM_CRISIS
+			}
+		}
+		ai_chance = {
+			factor = 33
+			modifier = {
+				factor = 1
+				is_historical_focus_on = yes
+			}	
+		}
+		custom_effect_tooltip = cbi_truth_pile
+		set_country_flag = cbi_truth_pile_flag
+		clr_country_flag = cbi_soc_revolution_active_phase
+		set_country_flag = cbi_soc_revolution_passive_phase
+		add_manpower = -73
+		hidden_effect = {
+			BRI = {
+				transfer_navy = {
+					target = CBI
+				}
+			}
+			CBI = {
+				annex_country = {
+					target = BRI
+					transfer_troops = yes
+				}
+				add_ideas = CBI_industrial_heart_mini
+				set_country_flag = bri_been_integration
+			}
+		}
+	}
+	
+	option = { #Try compromis
+		name = cbi_soc_rev.2.b
+		trigger = {
+			NOT = {
+				has_country_flag = CBI_SOCIALISM_CRISIS
+			}
+		}
+		ai_chance = {
+			factor = 33
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+			}	
+		}
+		custom_effect_tooltip = cbi_try_compromis
+		set_country_flag = cbi_try_compromis_flag
+		clr_country_flag = cbi_soc_revolution_active_phase
+		set_country_flag = cbi_soc_revolution_passive_phase
+	}
+	
+	option = { #Chartits are right 
+		name = cbi_soc_rev.2.c
+		ai_chance = {
+			factor = 33
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+			}	
+		}
+		custom_effect_tooltip = cbi_chartists_are_right
+		set_country_flag = cbi_chartists_are_right_flag
+		clr_country_flag = cbi_soc_revolution_active_phase
+		set_country_flag = cbi_soc_revolution_passive_phase
+		CBI = {
+			add_popularity = {
+				ideology = socialism
+				popularity = 0.25
 			}
 		}
 	}
