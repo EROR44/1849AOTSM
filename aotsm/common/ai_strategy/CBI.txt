@@ -11,12 +11,15 @@
 # influence
 
 CBI_unit_production = {
+
 	allowed = {
 		original_tag = CBI
 	}
+	
 	enable = {
 		always = yes
 	}
+	
 	abort = {
 		always = no
 	}
@@ -270,13 +273,13 @@ CBI_area_priority = {
 	ai_strategy = {
 		type = area_priority
 		id = pacific
-		value = -5 #less focus here
+		value = -15 #less focus here
 	}
 	
 	ai_strategy = {
 		type = area_priority
 		id = oceania
-		value = -5
+		value = -15
 	}
   
 	ai_strategy = {
@@ -367,6 +370,7 @@ prepare_for_great_war = {
 			date > 1854.1.1
 		}
 	}
+	
 	abort_when_not_enabled = yes
 	
 	ai_strategy = {   
@@ -518,28 +522,26 @@ britain_help_russian_front = {
 	}
 }
 
-britain_help_russian_front = {
+britain_home_is_safe = {
 
 	allowed = {
 		original_tag = CBI
 	}
 	
 	enable = {
-		is_in_faction_with = FRR
-	}
-	
-	abort = {
-		OR = {
-			NOT = { is_in_faction_with = FRR }
-			any_owned_state = { is_core_of = CBI NOT = { is_controlled_by = CBI } }
+		all_owned_state = { 
+			is_core_of = CBI 
+			is_controlled_by = CBI
 		}
 	}
 	
-	ai_strategy = {
-		type = force_defend_ally_borders
-		id = "FRR"
-		value = 200
+	abort_when_not_enabled = yes
+	
+	ai_strategy = { 
+		type = garrison
+		value = 5
 	}
+	
 }
 
 britain_defaulte_core_defence = {
