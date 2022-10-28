@@ -1553,6 +1553,177 @@ country_event = { #Fund question
 	
 }
 
+country_event = { #Nen Situation
+	id = cbi.15
+	title = cbi.15.t
+	desc = cbi.15.d
+	picture = GFX_report_event_generic_usa_treaty
+	
+	is_triggered_only = yes
+	
+	option = { #more freedom
+		name = cbi.15.a
+		ai_chance = {
+			factor = 50
+		}
+		CBI = {
+			set_autonomy = {
+				target = NEN
+				autonomy_state = autonomy_dominion
+				end_wars = no
+				end_civil_wars = no
+			}
+		}
+	}
+	
+	option = { #no changes
+		name = cbi.15.b
+		ai_chance = {
+			factor = 0
+		}
+	}
+	
+	option = { #no freedom
+		name = cbi.15.c
+		ai_chance = {
+			factor = 50	
+		}
+		CBI = {
+			set_autonomy = {
+				target = NEN
+				autonomy_state = autonomy_puppet
+				end_wars = no
+				end_civil_wars = no
+			}
+		}
+	}
+	
+}
+
+country_event = { #Celtic Solidarity
+	id = cbi.16
+	title = cbi.16.t
+	desc = cbi.16.d
+	picture = GFX_report_event_gre_allied_diplomacy
+	
+	is_triggered_only = yes
+	
+	option = { #One forever
+		name = cbi.16.a
+		custom_effect_tooltip = integretion_incress_small_sco
+		custom_effect_tooltip = integretion_incress_small_wal
+		hidden_effect = {
+			add_to_variable = { cbi_sco_integration_procces = 5 }
+			clamp_variable = {
+				var = cbi_sco_integration_procces
+				min = 0
+				max = 100
+			}
+			add_to_variable = { cbi_wal_integration_procces = 5 }
+			clamp_variable = {
+				var = cbi_wal_integration_procces
+				min = 0
+				max = 100
+			}
+		}
+	}
+	
+}
+
+country_event = { #old history
+	id = cbi.17
+	title = cbi.17.t
+	desc = cbi.17.d
+	picture = GFX_report_event_gre_allied_diplomacy_military
+	
+	is_triggered_only = yes
+	
+	option = { #Not enemy, but frieds
+		name = cbi.17.a
+		custom_effect_tooltip = integretion_incress_small_wal
+		custom_effect_tooltip = integretion_incress_small_bri
+		hidden_effect = {
+			add_to_variable = { cbi_wal_integration_procces = 5 }
+			clamp_variable = {
+				var = cbi_wal_integration_procces
+				min = 0
+				max = 100
+			}
+			add_to_variable = { cbi_bri_integration_procces = 5 }
+			clamp_variable = {
+				var = cbi_bri_integration_procces
+				min = 0
+				max = 100
+			}
+		}
+	}
+	
+}
+
+country_event = { #north_irish_qustian
+	id = cbi.18
+	title = cbi.18.t
+	desc = cbi.18.d
+	picture = GFX_report_event_finnish_letter
+	
+	is_triggered_only = yes
+	
+	option = { #Irish is irish
+		name = cbi.18.a
+		ai_chance = {
+			factor = 33
+		}
+		custom_effect_tooltip = incress_opinion_small
+		hidden_effect = {
+			add_to_variable = { cbi_ire_opinion = 15 }
+			clamp_variable = {
+				var = cbi_ire_opinion
+				min = 0
+				max = 100
+			}
+		}
+
+	}
+	
+	option = { #no probleb of confederaty
+		name = cbi.18.b
+		ai_chance = {
+			factor = 34
+		}
+
+	}
+	
+	option = { #North irish is english
+		name = cbi.18.c
+		ai_chance = {
+			factor = 33
+		}
+		if = {
+			limit = {
+				country_exists = BRI
+				BRI = {
+					is_subject_of = CBI
+				}
+			}
+			BRI = {
+				transfer_state = 119
+				add_state_core = 119
+			}
+		}
+		if = {
+			limit = {
+				NOT = {
+					country_exists = BRI
+				}
+			}
+			CBI = {
+				transfer_state = 119
+			}
+		}
+	}
+	
+}
+
 ### RIP ###
 
 country_event = { #Lem found dead
