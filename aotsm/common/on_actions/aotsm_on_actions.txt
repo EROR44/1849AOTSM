@@ -607,8 +607,8 @@ on_actions = {
 					set_autonomy = {
 						target = VLH
 						autonomy_state = autonomy_aotsm_province
-						end_wars = no
-						end_civil_wars = no
+						end_wars = yes
+						end_civil_wars = yes
 					}
 				}
 				VLH = {
@@ -6556,6 +6556,167 @@ on_actions = {
 				CPT = { set_country_flag = CPT_vs_TIR_win }
 				CPT = { remove_ideas = eqyptian_wars }
 				TRI = { remove_ideas = war_for_freedom }
+			}
+			#HUN capitulation
+			if = {
+				limit = {
+					tag = HUN
+					VLH = { has_country_flag = VLH_war_with_HUN }
+				}
+				VLH = {
+					white_peace = {
+						tag = HUN
+						message = Hungaria_lose
+					}
+				}
+				GLA = {
+					white_peace = {
+						tag = HUN
+					}
+				}
+				VLH = {
+					transfer_state = 76
+					transfer_state = 82
+					transfer_state = 83
+					transfer_state = 84
+				}
+				if = {
+					limit = {
+						GLA = {
+							has_country_flag = GLA_with_VLH
+						}
+					}
+					GLA = {
+						transfer_state = 71
+						transfer_state = 73
+					}
+				}
+				VLH = { clr_country_flag = VLH_war_with_HUN }
+				GLA = { leave_faction = yes }
+				VLH = { leave_faction = yes }
+				VLH = { give_guarantee = GLA }
+				GLA = { give_guarantee = VLH }
+				PRU = { add_to_faction = HUN }
+				news_event = news.75
+			}
+			#VLH capitulation
+			if = {
+				limit = {
+					tag = VLH
+					VLH = { has_country_flag = VLH_war_with_HUN }
+				}
+				HUN = {
+					white_peace = {
+						tag = VLH
+						message = Hungaria_win
+					}
+				}
+				HUN = {
+					white_peace = {
+						tag = GLA
+					}
+				}
+				VLH = { clr_country_flag = VLH_war_with_HUN }
+				GLA = { leave_faction = yes }
+				VLH = { leave_faction = yes }
+				46 = { set_demilitarized_zone = yes }
+				79 = { set_demilitarized_zone = yes }
+				80 = { set_demilitarized_zone = yes }
+				81 = { set_demilitarized_zone = yes }
+				88 = { set_demilitarized_zone = yes }
+				89 = { set_demilitarized_zone = yes }
+				news_event = news.74
+			}
+			if = {
+				limit = {
+					tag = VLH
+					VLH = {
+						has_country_flag = PRU_destroed_russian_allience_VLH
+					}
+				}
+				if = {
+					limit = {
+						VLH = {
+							has_idea = russian_help
+						}
+					}
+					VLH = {
+						remove_ideas = russian_help
+					}
+				}
+				PRU = {
+					transfer_state = 78
+					if = {
+						limit = {
+							NOT = {
+								BYZ = {
+									is_in_faction_with = PRU
+								}
+							}
+						}
+						transfer_state = 766
+					}
+				}
+				BYZ = {
+					set_autonomy = {
+						target = VLH
+						autonomy_state = autonomy_aotsm_province
+						end_wars = yes
+						end_civil_wars = yes
+					}
+				}
+				VLH = {
+					set_cosmetic_tag = BYZ_ROM
+				}
+				VLH = {
+					set_country_flag = VLHBYZ
+				}
+				if = {
+					limit = {
+						BYZ = {
+							is_in_faction_with = PRU
+						}
+					}
+					BCH = {
+						transfer_state = 766
+						add_state_core = 766
+					}
+				}
+				VLH = { clr_country_flag = PRU_destroed_russian_allience_VLH }
+				VLH = { set_country_flag = vlh_capitulation }
+			}
+			#GLA capitulation
+			if = {
+				limit = {
+					tag = GLA
+					GLA = {
+						has_country_flag = PRU_destroed_russian_allience_GLA
+					}
+				}
+				if = {
+					limit = {
+						GLA = {
+							has_idea = russian_help
+						}
+					}
+					GLA = {
+						remove_ideas = russian_help
+					}
+				}
+				PRU = {
+					transfer_state = 80
+					transfer_state = 89
+					transfer_state = 91
+				}
+				HUN = {
+					transfer_state = 71
+					transfer_state = 73
+				}
+				PLH = {
+					transfer_state = 88
+					add_state_core = 88
+				}
+				GLA = { clr_country_flag = PRU_destroed_russian_allience_GLA }
 			}
 		}
 	}			
