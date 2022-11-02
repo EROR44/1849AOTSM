@@ -1,4 +1,4 @@
-version="1.11.8"
+version="1.12.*"
 tags={
 	"Alternative History"
 	"Map"
@@ -80,6 +80,6 @@ replace_path="music/hoi3"
 replace_path="gfx/interface/equipmentdesigner"
 picture="aotsm_picture.png"
 name="Hearts of Iron: Age of the Steam Mashines"
-supported_version="1.11.*"
+supported_version="1.12.*"
 path="G:/GitHub/1849AOTSM/aotsm"
 remote_file_id="2830590005"
