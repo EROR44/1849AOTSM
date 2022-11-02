@@ -11,12 +11,15 @@
 # influence
 
 CBI_unit_production = {
+
 	allowed = {
 		original_tag = CBI
 	}
+	
 	enable = {
 		always = yes
 	}
+	
 	abort = {
 		always = no
 	}
@@ -270,13 +273,13 @@ CBI_area_priority = {
 	ai_strategy = {
 		type = area_priority
 		id = pacific
-		value = -5 #less focus here
+		value = -15 #less focus here
 	}
 	
 	ai_strategy = {
 		type = area_priority
 		id = oceania
-		value = -5
+		value = -15
 	}
   
 	ai_strategy = {
@@ -367,6 +370,7 @@ prepare_for_great_war = {
 			date > 1854.1.1
 		}
 	}
+	
 	abort_when_not_enabled = yes
 	
 	ai_strategy = {   
@@ -488,7 +492,7 @@ britain_help_continental_france = {
 	
 	ai_strategy = {
 		type = force_defend_ally_borders
-		id = FRR
+		id = "FRR"
 		value = 100
 	}
 	
@@ -513,9 +517,31 @@ britain_help_russian_front = {
 	
 	ai_strategy = {
 		type = force_defend_ally_borders
-		id = RUS
+		id = "RUS"
 		value = 125
 	}
+}
+
+britain_home_is_safe = {
+
+	allowed = {
+		original_tag = CBI
+	}
+	
+	enable = {
+		all_owned_state = { 
+			is_core_of = CBI 
+			is_controlled_by = CBI
+		}
+	}
+	
+	abort_when_not_enabled = yes
+	
+	ai_strategy = { 
+		type = garrison
+		value = 5
+	}
+	
 }
 
 britain_defaulte_core_defence = {
@@ -525,7 +551,12 @@ britain_defaulte_core_defence = {
 	}
 	
 	enable = {
-		any_owned_state = { is_core_of = CBI NOT = { is_controlled_by = CBI } }
+		any_owned_state = { 
+			is_core_of = CBI 
+			NOT = { 
+				is_controlled_by = CBI
+			}
+		}
 	}
 	
 	abort_when_not_enabled = yes
@@ -612,6 +643,41 @@ ignor_colony_front_line = {
 	ai_strategy = {
 		type = ignore
 		id = "SEN"
+		value = 100
+	}
+	
+}
+
+ready_to_war = {
+	
+	allowed = {
+		original_tag = CBI
+	}
+	
+	enable = {
+		date > 1854.1.1
+	}
+	
+	abort = {
+		OR = {
+			CBI = {
+				has_war_with = PRU
+			}
+			has_global_flag = firts_world_war
+			has_global_flag = cbi_capitulation
+			has_global_flag = pru_capitulation
+		}
+	}
+
+	ai_strategy = {
+		type = prepare_for_war
+		id = PRU
+		value = 100
+	}
+	
+	ai_strategy = {
+		type = prepare_for_war
+		id = BYZ
 		value = 100
 	}
 	

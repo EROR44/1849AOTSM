@@ -684,6 +684,16 @@ pru_diplomat_missia = {
 		visible = {
 			original_tag = PRU
 			has_global_flag = russian_capitulation
+			NOT = {
+				VLH = { 
+					has_country_flag = VLH_war_with_HUN 
+				}
+			}
+			NOT = {
+				VLH = {
+					has_country_flag = vlh_capitulation
+				}
+			}
 			OR = {
 				country_exists = GLA
 				NOT = {
@@ -737,6 +747,93 @@ pru_diplomat_missia = {
 				hidden_effect = {
 					VLH = {
 						set_country_flag = revenge_for_hungary_vlh
+					}
+				}
+			}
+		}
+		
+	}
+	
+	pru_help_hungary_win = { 
+		
+		icon = generic_nationalism
+
+		allowed = {
+			
+		}
+
+		available = {
+ 
+		}
+
+		visible = {
+			original_tag = PRU
+			has_global_flag = russian_capitulation
+			VLH = { 
+				has_country_flag = VLH_war_with_HUN 
+			}
+			NOT = {
+				VLH = {
+					has_country_flag = vlh_capitulation
+				}
+			}
+			OR = {
+				country_exists = GLA
+				NOT = {
+					VLH = {
+						is_puppet = yes
+					}
+				}
+			}
+		}
+
+		fire_only_once = yes
+
+		cost = 0
+		days_remove = 12
+
+		ai_will_do = {
+			factor = 100
+		}
+		
+		remove_effect = {
+			PRU = {
+				add_to_faction = HUN
+			}
+			if = {
+				limit = {
+					country_exists = GLA
+				}
+				PRU = {
+					declare_war_on = {
+						target = GLA
+						type = annex_everything
+					}
+				}
+				hidden_effect = {
+					GLA = {
+						set_country_flag = PRU_destroed_russian_allience_GLA
+					}
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						VLH = {
+							is_puppet = yes
+						}
+					}
+				}
+				PRU = {
+					declare_war_on = {
+						target = VLH
+						type = annex_everything
+					}
+				}
+				hidden_effect = {
+					VLH = {
+						set_country_flag = PRU_destroed_russian_allience_VLH
+						clr_country_flag = VLH_war_with_HUN
 					}
 				}
 			}
