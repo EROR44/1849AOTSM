@@ -24,7 +24,7 @@ focus_tree = {
 	reset_on_civilwar = no
 	
 	initial_show_position = {
-		#focus = RUS_moscow_allrussian_conference
+		focus = RUS_end_of_political_isolation
 	}
 
 #	focus = {
@@ -121,6 +121,9 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_INDUSTRY }
 
 		completion_reward = {
+			RUS_remove_5_churchman_opinion = yes
+			RUS_add_5_liberal_opinion = yes
+			RUS_add_5_army_opinion = yes
 			398 = {
 				#add_extra_state_shared_building_slots = 2
 				add_building_construction = {
@@ -150,7 +153,7 @@ focus_tree = {
 	
 	focus = {
 		id = RUS_modernise_railway_network
-		icon = GFX_goal_generic_improve_relations
+		icon = GFX_focus_generic_railroad
 		
 		x = -2
 		y = 1
@@ -192,6 +195,8 @@ focus_tree = {
 				idea = RUS_invest_in_mil_production
 				days = 200
 			}
+			RUS_add_5_army_influence = yes
+			RUS_add_1_army_opinion = yes
 		}
 	}
 	
@@ -279,6 +284,7 @@ focus_tree = {
 
 		completion_reward = {
 			add_ideas = RUS_mass_weapons_production
+			RUS_add_1_army_opinion = yes
 		}
 	}
 	
@@ -354,6 +360,7 @@ focus_tree = {
 
 		completion_reward = {
 			add_ideas = RUS_army_mechanisation
+			RUS_add_1_army_opinion = yes
 		}
 	}
 	
@@ -375,12 +382,13 @@ focus_tree = {
 
 		completion_reward = {
 			add_ideas = RUS_face_of_modern_army
+			RUS_add_1_army_opinion = yes
 		}
 	}
 	
 	focus = {
 		id = RUS_use_own_specialists
-		icon = GFX_goal_generic_improve_relations
+		icon = GFX_goal_generic_intelligence_exchange
 		
 		x = 3
 		y = 1
@@ -400,6 +408,8 @@ focus_tree = {
 				remove_idea = RUS_russian_intelligentsia
 				add_idea = RUS_intelligentsia_1	
 			}
+			RUS_add_5_autocrat_opinion = yes
+			RUS_add_5_monarhist_opinion = yes
 		}
 	}
 	
@@ -421,13 +431,18 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_INDUSTRY }
 
 		completion_reward = {
-
+		swap_ideas = {
+				remove_idea = RUS_russian_intelligentsia
+				add_idea = RUS_foreign_advisors	
+			}
+			RUS_add_5_conservator_opinion = yes
+			RUS_remove_5_autocrat_opinion = yes
 		}
 	}
 	
 	focus = {
 		id = RUS_develop_west_russia
-		icon = GFX_goal_generic_improve_relations
+		icon = GFX_goal_generic_major_alliance
 		
 		x = -1
 		y = 1
@@ -450,7 +465,7 @@ focus_tree = {
 	
 	focus = {
 		id = RUS_develop_central_russia
-		icon = GFX_goal_generic_improve_relations
+		icon = GFX_goal_generic_major_alliance
 		
 		x = 1
 		y = 1
@@ -473,7 +488,7 @@ focus_tree = {
 	
 	focus = {
 		id = RUS_develop_east_russia
-		icon = GFX_goal_generic_improve_relations
+		icon = GFX_goal_generic_major_alliance
 		
 		x = 3
 		y = 1
@@ -496,7 +511,7 @@ focus_tree = {
 	
 	focus = {
 		id = RUS_invest_in_intellect_of_nation 
-		icon = GFX_goal_generic_improve_relations
+		icon = GFX_goal_generic_scientific_exchange
 		
 		x = 0
 		y = 1
@@ -518,12 +533,14 @@ focus_tree = {
 				remove_idea = low_investment_level
 				add_idea = average_investment_level	
 			}
+			RUS_add_5_liberal_influence = yes
+			RUS_add_1_liberal_opinion = yes
 		}
 	}
 	
 	focus = {
 		id = RUS_expand_petrograd_goverment_university
-		icon = GFX_goal_generic_improve_relations
+		icon = GFX_focus_research
 		
 		x = 0
 		y = 2
@@ -608,22 +625,107 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
 		completion_reward = {
-			
+			RUS_add_10_monarhist_influence
+			RUS_add_10_socialist_influence
+			RUS_add_10_army_influence
 		}
 	}
 
 #########################MAIN_POLITICAL_WAY##############################
 	
 	focus = {
-		id = RUS_
+		id = RUS_the_new_anbitions_of_old_empire
+		icon = GFX_goal_generic_political_pressure
+		
+		x = -1
+		y = 1
+		cost = 5
+
+		relative_position_id = RUS_end_of_political_isolation
+		prerequisite = { focus = RUS_end_of_political_isolation }
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			
+		}
+	}
+	
+	focus = {
+		id = RUS_stabilisate_economic
+		icon = GFX_goal_generic_neutrality_focus
+		
+		x = 1
+		y = 1
+		cost = 5
+
+		relative_position_id = RUS_end_of_political_isolation
+		prerequisite = { focus = RUS_end_of_political_isolation }
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			
+		}
+	}
+	
+	focus = {
+		id = RUS_resume_reforms
+		icon = GFX_goal_generic_improve_relations
+		
+		x = 0
+		y = 2
+		cost = 5
+
+		relative_position_id = RUS_end_of_political_isolation
+		prerequisite = { focus = RUS_the_new_anbitions_of_old_empire }
+		prerequisite = { focus = RUS_stabilisate_economic }
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			
+		}
+	}
+	
+	focus = {
+		id = RUS_retirement_of_pushin #отставка пущина
+		icon = GFX_goal_generic_improve_relations
+		
+		x = 0
+		y = 2
+		cost = 5
+
+		relative_position_id = RUS_end_of_political_isolation
+		prerequisite = { focus = RUS_the_new_anbitions_of_old_empire }
+		prerequisite = { focus = RUS_stabilisate_economic }
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			
+		}
+	}
+	
+	focus = {
+		id = RUS_who_will_take_power
 		icon = GFX_goal_generic_improve_relations
 		
 		x = 0
 		y = 1
 		cost = 5
 
-		relative_position_id = RUS_end_of_political_isolation
-		prerequisite = { focus = RUS_end_of_political_isolation }
+		relative_position_id = RUS_retirement_of_pushin
+		prerequisite = { focus = RUS_retirement_of_pushin }
+
 		
 		available_if_capitulated = yes
 		
@@ -656,6 +758,31 @@ focus_tree = {
 		}
 	}
 
+##############################MILUTIN_BLOCK#################################
+
+	focus = {
+		id = RUS_milutin_da
+		icon = GFX_focus_rus_milutin_da
+		
+		x = 0
+		y = 1
+		cost = 5
+
+		relative_position_id = RUS_who_will_take_power
+		prerequisite = { focus = RUS_who_will_take_power }
+
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			
+		}
+	}
+	
+	
+	
 #########################RETURN_OF_MONARHY_BLOCK##############################
 	
 	focus = {
