@@ -10,6 +10,9 @@ on_actions = {
 				}
 				country_event = history.1
 			}
+			
+			set_variable = { var = leaver_number value = 0 }
+			
 			RUS = { country_event = { id = pol.1 days = 2100 } }
 			JAP = { country_event = { id = jap.1 days = 120 } }
 			FRR = { country_event = { id = fren.11 days = 920 } }
@@ -6776,5 +6779,74 @@ on_actions = {
 				GLA = { clr_country_flag = PRU_destroed_russian_allience_GLA }
 			}
 		}
-	}			
+	}		
+	on_state_control_changed = {
+		effect = {
+			if = {
+				limit = {
+					has_global_flag = PRU_VS_AUS_1
+					PRU = {
+						has_war_with = AUS
+					}
+					OR = {
+						9 = {
+							controller = {
+								OR = {
+									tag = PRU
+									is_subject_of = PRU
+									is_in_faction_with = PRU
+								}
+							}
+						}
+						4 = {
+							controller = {
+								OR = {
+									tag = PRU
+									is_subject_of = PRU
+									is_in_faction_with = PRU
+								}
+							}
+						}
+					}
+				}
+				PRU = { white_peace = AUS }
+				AUS = { dismantle_faction = yes }
+				PRU = { dismantle_faction = yes }
+				every_other_country = {
+					limit = {
+						OR = {
+							has_country_flag = german_union_for_prussian
+							has_country_flag = german_union_for_austrian
+						}
+						OR = {
+							tag = MCS
+							tag = MCL
+							tag = LBE
+							tag = HLS
+							tag = SLG
+							tag = HAM
+							tag = HAN
+							tag = BRM
+							tag = OLD
+							tag = SAK
+							tag = TYR
+							tag = WEI
+							tag = MEI
+							tag = HES
+							tag = WLD
+							tag = FRN
+							tag = KOL
+						}
+					}
+					PRU = {
+						annex_country = { target = PREV transfer_troops = no }
+					}
+				}
+				PRU = { set_country_flag = victory_R_V_A_1 }
+				PRU = { set_cosmetic_tag = PRUNGU }
+				news_event = { hours = 24 id = news.2 }
+				clr_global_flag = PRU_VS_AUS_1
+			}
+		}
+	}
 }
