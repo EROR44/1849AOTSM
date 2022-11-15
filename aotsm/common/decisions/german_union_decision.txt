@@ -1,0 +1,803 @@
+german_union_block = {
+
+	neutrality_site_german_union = {
+
+		icon = generic_nationalism
+
+		allowed = {
+		}
+
+		available = {
+			NOT = {
+				has_country_flag = german_union_chose_recently
+			}
+		}
+		
+		visible = {
+			is_subject = no
+			OR = {
+				has_country_flag = german_union_for_prussian
+				has_country_flag = german_union_for_austrian
+			}
+		}
+		
+		ai_will_do = {
+		}
+		
+		fire_only_once = no
+		
+		days_re_enable = 1
+
+		complete_effect = {
+			custom_effect_tooltip = neutrality_site_german_union_tt
+			custom_effect_tooltip = neutrality_choice_warning_tt
+			set_country_flag = {
+				flag = german_union_chose_recently
+				days = 30
+				value = 1
+			}
+			if = {
+				limit = {
+					tag = SAK
+				}
+				if = {
+					limit = {
+						has_country_flag = german_union_for_prussian
+					}
+					clr_country_flag = german_union_for_prussian
+					remove_from_array = { global.german_union_for_pru = SAK }
+					set_country_flag = german_union_neutrality
+					add_to_array = { global.german_union_neutrality = SAK }
+					TYR = {
+						clr_country_flag = german_union_for_prussian
+						remove_from_array = { global.german_union_for_pru = TYR }
+						set_country_flag = german_union_neutrality
+						add_to_array = { global.german_union_neutrality = TYR }
+					}
+				}
+				if = {
+					limit = {
+						has_country_flag = german_union_for_austrian
+					}
+					clr_country_flag = german_union_for_austrian
+					remove_from_array = { global.german_union_for_aus = SAK }
+					set_country_flag = german_union_neutrality
+					add_to_array = { global.german_union_neutrality = SAK }
+					TYR = {
+						clr_country_flag = german_union_for_austrian
+						remove_from_array = { global.german_union_for_aus = TYR }
+						set_country_flag = german_union_neutrality
+						add_to_array = { global.german_union_neutrality = TYR }
+					}
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						tag = SAK
+					}
+				}
+				if = {
+					limit = {
+						has_country_flag = german_union_for_prussian
+					}
+					clr_country_flag = german_union_for_prussian
+					remove_from_array = { global.german_union_for_pru = ROOT }
+					set_country_flag = german_union_neutrality
+					add_to_array = { global.german_union_neutrality = ROOT }
+				}
+				if = {
+					limit = {
+						has_country_flag = german_union_for_austrian
+					}
+					clr_country_flag = german_union_for_austrian
+					remove_from_array = { global.german_union_for_aus = ROOT }
+					set_country_flag = german_union_neutrality
+					add_to_array = { global.german_union_neutrality = ROOT }
+				}
+			}
+		}
+
+	}
+	
+	prussian_site_german_union = {
+
+		icon = generic_nationalism
+
+		allowed = {
+		}
+
+		available = {
+			NOT = {
+				has_country_flag = german_union_chose_recently
+			}
+		}
+		
+		visible = {
+			is_subject = no
+			OR = {
+				has_country_flag = german_union_neutrality
+				has_country_flag = german_union_for_austrian
+			}
+		}
+		
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = 5
+				tag = KOL
+				date > 1849.1.31
+			}
+			modifier = {
+				add = 5
+				tag = MCS
+				PRU = {
+					has_country_flag = victory_R_V_A_1
+				}
+			}
+			modifier = {
+				add = 5
+				tag = LBE
+				PRU = {
+					has_country_flag = victory_R_V_A_1
+				}
+			}
+			modifier = {
+				add = 5
+				tag = HAM
+				PRU = {
+					has_country_flag = victory_R_V_A_1
+				}
+			}
+			modifier = {
+				add = 5
+				tag = BRM
+				PRU = {
+					has_country_flag = victory_R_V_A_1
+				}
+			}
+			modifier = {
+				add = 5
+				tag = WLD
+				PRU = {
+					has_country_flag = victory_R_V_A_1
+				}
+			}
+		}
+		
+		fire_only_once = no
+		
+		days_re_enable = 1
+
+		complete_effect = {
+			custom_effect_tooltip = prussian_site_german_union_tt
+			custom_effect_tooltip = side_choice_warning_tt
+			set_country_flag = {
+				flag = german_union_chose_recently
+				days = 30
+				value = 1
+			}
+			if = {
+				limit = {
+					tag = SAK
+				}
+				if = {
+					limit = {
+						has_country_flag = german_union_neutrality
+					}
+					clr_country_flag = german_union_neutrality
+					remove_from_array = { global.german_union_neutrality = SAK }
+					set_country_flag = german_union_for_prussian
+					add_to_array = { global.german_union_for_pru = SAK }
+					TYR = {
+						clr_country_flag = german_union_neutrality
+						remove_from_array = { global.german_union_neutrality = TYR }
+						set_country_flag = german_union_for_prussian
+						add_to_array = { global.german_union_for_pru = TYR }
+					}
+				}
+				if = {
+					limit = {
+						has_country_flag = german_union_for_austrian
+					}
+					clr_country_flag = german_union_for_austrian
+					remove_from_array = { global.german_union_for_aus = SAK }
+					set_country_flag = german_union_for_prussian
+					add_to_array = { global.german_union_for_pru = SAK }
+					TYR = {
+						clr_country_flag = german_union_for_austrian
+						remove_from_array = { global.german_union_for_aus = TYR }
+						set_country_flag = german_union_for_prussian
+						add_to_array = { global.german_union_for_pru = TYR }
+					}
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						tag = SAK
+					}
+				}
+				if = {
+					limit = {
+						has_country_flag = german_union_neutrality
+					}
+					clr_country_flag = german_union_neutrality
+					remove_from_array = { global.german_union_neutrality = ROOT }
+					set_country_flag = german_union_for_prussian
+					add_to_array = { global.german_union_for_pru = ROOT }
+				}
+				if = {
+					limit = {
+						has_country_flag = german_union_for_austrian
+					}
+					clr_country_flag = german_union_for_austrian
+					remove_from_array = { global.german_union_for_aus = ROOT }
+					set_country_flag = german_union_for_prussian
+					add_to_array = { global.german_union_for_pru = ROOT }
+				}
+			}
+		}
+
+	}
+	
+	austrian_site_german_union = {
+
+		icon = generic_nationalism
+
+		allowed = {
+		}
+
+		available = {
+			NOT = {
+				has_country_flag = german_union_chose_recently
+			}
+		}
+		
+		visible = {
+			is_subject = no
+			OR = {
+				has_country_flag = german_union_neutrality
+				has_country_flag = german_union_for_prussian
+			}
+		}
+		
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = 5
+				tag = VUR
+				date > 1850.2.26
+			}
+			modifier = {
+				add = 5
+				tag = BAD
+				date > 1850.6.18
+			}
+		}
+		
+		fire_only_once = no
+		
+		days_re_enable = 1
+
+		complete_effect = {
+			custom_effect_tooltip = austrian_site_german_union_tt
+			custom_effect_tooltip = side_choice_warning_tt
+			set_country_flag = {
+				flag = german_union_chose_recently
+				days = 30
+				value = 1
+			}
+			if = {
+				limit = {
+					tag = SAK
+				}
+				if = {
+					limit = {
+						has_country_flag = german_union_neutrality
+					}
+					clr_country_flag = german_union_neutrality
+					remove_from_array = { global.german_union_neutrality = SAK }
+					set_country_flag = german_union_for_austrian
+					add_to_array = { global.german_union_for_aus = SAK }
+					TYR = {
+						clr_country_flag = german_union_neutrality
+						remove_from_array = { global.german_union_neutrality = TYR }
+						set_country_flag = german_union_for_austrian
+						add_to_array = { global.german_union_for_aus = TYR }
+					}
+				}
+				if = {
+					limit = {
+						has_country_flag = german_union_for_prussian
+					}
+					clr_country_flag = german_union_for_prussian
+					remove_from_array = { global.german_union_for_pru = SAK }
+					set_country_flag = german_union_for_austrian
+					add_to_array = { global.german_union_for_aus = SAK }
+					TYR = {
+						clr_country_flag = german_union_for_prussian
+						remove_from_array = { global.german_union_for_pru = TYR }
+						set_country_flag = german_union_for_austrian
+						add_to_array = { global.german_union_for_aus = TYR }
+					}
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						tag = SAK
+					}
+				}
+				if = {
+					limit = {
+						has_country_flag = german_union_neutrality
+					}
+					clr_country_flag = german_union_neutrality
+					remove_from_array = { global.german_union_neutrality = ROOT }
+					set_country_flag = german_union_for_austrian
+					add_to_array = { global.german_union_for_aus = ROOT }
+				}
+				if = {
+					limit = {
+						has_country_flag = german_union_for_prussian
+					}
+					clr_country_flag = german_union_for_prussian
+					remove_from_array = { global.german_union_for_pru = ROOT }
+					set_country_flag = german_union_for_austrian
+					add_to_array = { global.german_union_for_aus = ROOT }
+				}
+			}
+		}
+
+	}
+	
+	leave_german_union = {
+
+		icon = generic_break_treaty
+
+		allowed = {
+		}
+
+		available = {
+			NOT = {
+				has_global_flag = war_in_german_region
+			}
+			NOT = {
+				has_global_flag = leave_german_union_global	
+			}
+		}
+		
+		visible = {
+			is_subject = no
+			NOT = {
+				tag = AUS
+			}
+			NOT = {
+				tag = PRU
+			}
+			NOT = {
+				tag = FRN
+			}
+			OR = {
+				tag = MCS
+				tag = MCL
+				tag = LBE
+				tag = HLS
+				tag = SLG
+				tag = HAM
+				tag = HAN
+				tag = BRM
+				tag = OLD
+				tag = WLD
+				tag = SAK
+				tag = WEI
+				tag = MEI
+				tag = HES
+				tag = KOL
+				tag = LUX
+				tag = ELS
+				tag = BAD
+				tag = VUR
+				tag = BAV
+				tag = BOH
+				tag = BRD
+				tag = POM
+				tag = SIL
+				tag = GPO
+			}
+		}
+		
+		ai_will_do = {
+		}
+		
+		fire_only_once = no
+		
+		days_re_enable = 1
+
+		complete_effect = {
+			if = {
+				limit = {
+					tag = PRU
+				}
+				set_variable = {
+					var = leaver_number
+					value = 1
+				}
+			}
+			if = {
+				limit = {
+					tag = AUS
+				}
+				set_variable = {
+					var = leaver_number
+					value = 2
+				}
+			}
+			if = {
+				limit = {
+					tag = SWI
+				}
+				set_variable = {
+					var = leaver_number
+					value = 3
+				}
+			}
+			if = {
+				limit = {
+					tag = SAK
+				}
+				set_variable = {
+					var = leaver_number
+					value = 4
+				}
+			}
+			if = {
+				limit = {
+					tag = BAV
+				}
+				set_variable = {
+					var = leaver_number
+					value = 5
+				}
+			}
+			if = {
+				limit = {
+					tag = BAD
+				}
+				set_variable = {
+					var = leaver_number
+					value = 6
+				}
+			}
+			if = {
+				limit = {
+					tag = VUR
+				}
+				set_variable = {
+					var = leaver_number
+					value = 7
+				}
+			}
+			if = {
+				limit = {
+					tag = HAN
+				}
+				set_variable = {
+					var = leaver_number
+					value = 8
+				}
+			}
+			if = {
+				limit = {
+					tag = FRN
+				}
+				set_variable = {
+					var = leaver_number
+					value = 9
+				}
+			}
+			if = {
+				limit = {
+					tag = MCL
+				}
+				set_variable = {
+					var = leaver_number
+					value = 10
+				}
+			}
+			if = {
+				limit = {
+					tag = SLG
+				}
+				set_variable = {
+					var = leaver_number
+					value = 11
+				}
+			}
+			if = {
+				limit = {
+					tag = TYR
+				}
+				set_variable = {
+					var = leaver_number
+					value = 12
+				}
+			}
+			if = {
+				limit = {
+					tag = VES
+				}
+				set_variable = {
+					var = leaver_number
+					value = 13
+				}
+			}
+			if = {
+				limit = {
+					tag = BOH
+				}
+				set_variable = {
+					var = leaver_number
+					value = 14
+				}
+			}
+			if = {
+				limit = {
+					tag = LUX
+				}
+				set_variable = {
+					var = leaver_number
+					value = 15
+				}
+			}
+			if = {
+				limit = {
+					tag = ELS
+				}
+				set_variable = {
+					var = leaver_number
+					value = 16
+				}
+			}
+			if = {
+				limit = {
+					tag = LIE
+				}
+				set_variable = {
+					var = leaver_number
+					value = 17
+				}
+			}
+			if = {
+				limit = {
+					tag = HOH
+				}
+				set_variable = {
+					var = leaver_number
+					value = 18
+				}
+			}
+			if = {
+				limit = {
+					tag = HAM
+				}
+				set_variable = {
+					var = leaver_number
+					value = 19
+				}
+			}
+			if = {
+				limit = {
+					tag = LBE
+				}
+				set_variable = {
+					var = leaver_number
+					value = 20
+				}
+			}
+			if = {
+				limit = {
+					tag = OLD
+				}
+				set_variable = {
+					var = leaver_number
+					value = 21
+				}
+			}
+			if = {
+				limit = {
+					tag = BRM
+				}
+				set_variable = {
+					var = leaver_number
+					value = 22
+				}
+			}
+			if = {
+				limit = {
+					tag = HLS
+				}
+				set_variable = {
+					var = leaver_number
+					value = 23
+				}
+			}
+			if = {
+				limit = {
+					tag = HES
+				}
+				set_variable = {
+					var = leaver_number
+					value = 24
+				}
+			}
+			if = {
+				limit = {
+					tag = WLD
+				}
+				set_variable = {
+					var = leaver_number
+					value = 25
+				}
+			}
+			if = {
+				limit = {
+					tag = MEI
+				}
+				set_variable = {
+					var = leaver_number
+					value = 26
+				}
+			}
+			if = {
+				limit = {
+					tag = WEI
+				}
+				set_variable = {
+					var = leaver_number
+					value = 27
+				}
+			}
+			if = {
+				limit = {
+					tag = MCS
+				}
+				set_variable = {
+					var = leaver_number
+					value = 28
+				}
+			}
+			if = {
+				limit = {
+					tag = KOL
+				}
+				set_variable = {
+					var = leaver_number
+					value = 29
+				}
+			}
+			if = {
+				limit = {
+					tag = GPO
+				}
+				set_variable = {
+					var = leaver_number
+					value = 30
+				}
+			}
+			if = {
+				limit = {
+					tag = SIL
+				}
+				set_variable = {
+					var = leaver_number
+					value = 31
+				}
+			}
+			if = {
+				limit = {
+					tag = BRD
+				}
+				set_variable = {
+					var = leaver_number
+					value = 32
+				}
+			}
+			if = {
+				limit = {
+					tag = POM
+				}
+				set_variable = {
+					var = leaver_number
+					value = 33
+				}
+			}
+			custom_effect_tooltip = news_107_tt
+			hidden_effect = {
+				news_event = news.107
+			}
+			custom_effect_tooltip = time_to_leave_tt
+			custom_effect_tooltip = leave_warning_tt
+			if = {
+				limit = {
+					tag = SAK
+				}
+				if = {
+					limit = {
+						has_country_flag = german_union_neutrality
+					}
+					clr_country_flag = german_union_neutrality
+					remove_from_array = { global.german_union_neutrality = SAK }
+					TYR = {
+						clr_country_flag = german_union_neutrality
+						remove_from_array = { global.german_union_neutrality = TYR }
+					}
+				}
+				if = {
+					limit = {
+						has_country_flag = german_union_for_prussian
+					}
+					clr_country_flag = german_union_for_prussian
+					remove_from_array = { global.german_union_for_pru = SAK }
+					TYR = {
+						clr_country_flag = german_union_for_prussian
+						remove_from_array = { global.german_union_for_pru = TYR }
+					}
+				}
+				if = {
+					limit = {
+						has_country_flag = german_union_for_austrian
+					}
+					clr_country_flag = german_union_for_austrian
+					remove_from_array = { global.german_union_for_aus = SAK }
+					TYR = {
+						clr_country_flag = german_union_for_austrian
+						remove_from_array = { global.german_union_for_aus = TYR }
+					}
+				}
+				remove_from_array = { global.german_union_members = SAK }
+				remove_from_array = { global.german_union_members = TYR }
+			}
+			if = {
+				limit = {
+					NOT = {
+						tag = SAK
+					}
+				}
+				if = {
+					limit = {
+						has_country_flag = german_union_neutrality
+					}
+					clr_country_flag = german_union_neutrality
+					remove_from_array = { global.german_union_neutrality = ROOT }
+				}
+				if = {
+					limit = {
+						has_country_flag = german_union_for_prussian
+					}
+					clr_country_flag = german_union_for_prussian
+					remove_from_array = { global.german_union_for_pru = ROOT }
+				}
+				if = {
+					limit = {
+						has_country_flag = german_union_for_austrian
+					}
+					clr_country_flag = german_union_for_austrian
+					remove_from_array = { global.german_union_for_aus = ROOT }
+				}
+				remove_from_array = { global.german_union_members = ROOT }
+			}
+			set_global_flag = {
+				flag = leave_german_union_global
+				days = 15
+				value = 1
+			}
+			ROOT = {
+				set_country_flag = leave_german_union
+			}
+		}
+
+	}
+
+}
