@@ -67,6 +67,7 @@ on_actions = {
 			add_to_array = { global.german_union_members = OLD }
 			add_to_array = { global.german_union_members = SLG }
 			add_to_array = { global.german_union_members = HLS }
+			add_to_array = { global.german_union_members = HAN }
 			add_to_array = { global.german_union_members = LUX }
 			add_to_array = { global.german_union_members = SWI }
 			
@@ -98,6 +99,7 @@ on_actions = {
 			add_to_array = { global.german_union_neutrality = OLD }
 			add_to_array = { global.german_union_neutrality = SLG }
 			add_to_array = { global.german_union_neutrality = HLS }
+			add_to_array = { global.german_union_neutrality = HAN }
 			add_to_array = { global.german_union_neutrality = LUX }
 			add_to_array = { global.german_union_neutrality = SWI }
 			
@@ -6777,6 +6779,194 @@ on_actions = {
 					add_state_core = 88
 				}
 				GLA = { clr_country_flag = PRU_destroed_russian_allience_GLA }
+			}
+			#Punishment
+			if = {
+				limit = {
+					has_country_flag = punished_begining
+					OR = {
+						has_war_with = PRU
+						has_war_with = AUS
+						has_war_with = FRN
+					}
+				}
+				if = {
+					limit = {
+						PRU = {
+							is_faction_leader = yes
+						}
+						NOT = {
+							PRU = {
+								has_country_flag = leave_german_union
+							}
+						}
+					}
+					ROOT = {
+						white_peace = PRU
+						add_to_array = { global.german_union_members = ROOT }
+						add_to_array = { global.german_union_for_pru = ROOT }
+						set_country_flag = german_union_for_prussian
+						add_ideas = saint_allience_idea
+					}
+				}
+				if = {
+					limit = {
+						AUS = {
+							is_faction_leader = yes
+						}
+						NOT = {
+							AUS = {
+								has_country_flag = leave_german_union
+							}
+						}
+					}
+					ROOT = {
+						white_peace = AUS
+						add_to_array = { global.german_union_members = ROOT }
+						add_to_array = { global.german_union_for_aus = ROOT }
+						set_country_flag = german_union_for_austrian
+						add_ideas = saint_allience_idea
+					}
+				}
+				if = {
+					limit = {
+						FRN = {
+							is_faction_leader = yes
+						}
+						NOT = {
+							FRN = {
+								has_country_flag = leave_german_union
+							}
+						}
+					}
+					ROOT = {
+						white_peace = FRN
+						add_to_array = { global.german_union_members = ROOT }
+						add_to_array = { global.german_union_neutrality = ROOT }
+						set_country_flag = german_union_neutrality
+						add_ideas = saint_allience_idea
+					}
+				}
+				ROOT = {
+					set_country_flag = punished_succed
+					clr_country_flag = punished_begining
+					clr_country_flag = leave_german_union
+				}
+				if = {
+					limit = {
+						PRU = {
+							is_faction_leader = yes
+						}
+					}
+					PRU = {
+						dismantle_faction = yes
+					}
+				}
+				if = {
+					limit = {
+						AUS = {
+							is_faction_leader = yes
+						}
+					}
+					AUS = {
+						dismantle_faction = yes
+					}
+				}
+				if = {
+					limit = {
+						FRN = {
+							is_faction_leader = yes
+						}
+					}
+					FRN = {
+						dismantle_faction = yes
+					}
+				}
+				if = {
+					limit = {
+						PRU = {
+							has_country_flag = was_leader_of_faction
+						}
+					}
+					PRU = {
+						clr_country_flag = was_leader_of_faction
+						create_faction = PRU_Kontinentaleuropa_pakt
+					}
+					every_country = {
+						limit = {
+							has_country_flag = was_in_prussian_allience
+						}
+						PRU = { add_to_faction = PREV }
+						clr_country_flag = was_in_prussian_allience
+					}
+				}
+				if = {
+					limit = {
+						AUS = {
+							has_country_flag = was_leader_of_faction
+						}
+					}
+					AUS = {
+						clr_country_flag = was_leader_of_faction
+					}
+					every_country = {
+						limit = {
+							has_country_flag = was_in_austrian_allience
+						}
+						AUS = { add_to_faction = PREV }
+						clr_country_flag = was_in_austrian_allience
+					}
+				}
+			}
+			if = {
+				limit = {
+					has_country_flag = leader_of_punished_coalition
+				}
+				if = {
+					limit = {
+						PRU = {
+							has_country_flag = leader_of_punished_coalition
+						}
+					}
+					every_country = {
+						limit = {
+							has_country_flag = punished_begining
+						}
+						white_peace = PRU
+						set_country_flag = punished_fail
+						clr_country_flag = punished_begining
+					}
+				}
+				if = {
+					limit = {
+						AUS = {
+							has_country_flag = leader_of_punished_coalition
+						}
+					}
+					every_country = {
+						limit = {
+							has_country_flag = punished_begining
+						}
+						white_peace = AUS
+						set_country_flag = punished_fail
+						clr_country_flag = punished_begining
+					}
+				}
+				if = {
+					limit = {
+						FRN = {
+							has_country_flag = leader_of_punished_coalition
+						}
+					}
+					every_country = {
+						limit = {
+							has_country_flag = punished_begining
+						}
+						white_peace = FRN
+						set_country_flag = punished_fail
+						clr_country_flag = punished_begining
+					}
+				}		
 			}
 		}
 	}		
