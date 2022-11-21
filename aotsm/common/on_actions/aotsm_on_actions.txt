@@ -6917,64 +6917,85 @@ on_actions = {
 						clr_country_flag = was_in_austrian_allience
 					}
 				}
+				if = {
+					limit = {
+						has_country_flag = leader_of_punished_coalition
+					}
+					if = {
+						limit = {
+							PRU = {
+								has_country_flag = leader_of_punished_coalition
+							}
+						}
+						every_country = {
+							limit = {
+								has_country_flag = punished_begining
+							}
+							white_peace = PRU
+							set_country_flag = punished_fail
+							clr_country_flag = punished_begining
+						}
+					}
+					if = {
+						limit = {
+							AUS = {
+								has_country_flag = leader_of_punished_coalition
+							}
+						}
+						every_country = {
+							limit = {
+								has_country_flag = punished_begining
+							}
+							white_peace = AUS
+							set_country_flag = punished_fail
+							clr_country_flag = punished_begining
+						}
+					}
+					if = {
+						limit = {
+							FRN = {
+								has_country_flag = leader_of_punished_coalition
+							}
+						}
+						every_country = {
+							limit = {
+								has_country_flag = punished_begining
+							}
+							white_peace = FRN
+							set_country_flag = punished_fail
+							clr_country_flag = punished_begining
+						}
+					}		
+				}
 			}
+			#PRU annex bad boy
 			if = {
 				limit = {
-					has_country_flag = leader_of_punished_coalition
-				}
-				if = {
-					limit = {
-						PRU = {
-							has_country_flag = leader_of_punished_coalition
-						}
-					}
-					every_country = {
-						limit = {
-							has_country_flag = punished_begining
-						}
-						white_peace = PRU
-						set_country_flag = punished_fail
-						clr_country_flag = punished_begining
+					has_country_flag = PRU_war_with_you
+					ROOT = {
+						has_war_with = PRU
 					}
 				}
-				if = {
-					limit = {
-						AUS = {
-							has_country_flag = leader_of_punished_coalition
-						}
-					}
-					every_country = {
-						limit = {
-							has_country_flag = punished_begining
-						}
-						white_peace = AUS
-						set_country_flag = punished_fail
-						clr_country_flag = punished_begining
+				PRU = {
+					white_peace = ROOT
+				}
+				PRU = {
+					annex_country = {
+						target = ROOT
+						transfer_troops = no
 					}
 				}
-				if = {
-					limit = {
-						FRN = {
-							has_country_flag = leader_of_punished_coalition
-						}
-					}
-					every_country = {
-						limit = {
-							has_country_flag = punished_begining
-						}
-						white_peace = FRN
-						set_country_flag = punished_fail
-						clr_country_flag = punished_begining
-					}
-				}		
 			}
 		}
-	}		
+	}
 	on_state_control_changed = {
 		effect = {
+			#First Prussian-Austrian war
 			if = {
 				limit = {
-					has_global_flag = PRU_VS_AUS_1
+					PRU = {
+						has_country_flag = PRU_VS_AUS_1
+					}
 					PRU = {
 						has_war_with = AUS
 					}
@@ -7036,6 +7057,79 @@ on_actions = {
 				PRU = { set_cosmetic_tag = PRUNGU }
 				news_event = { hours = 24 id = news.2 }
 				clr_global_flag = PRU_VS_AUS_1
+			}
+			#Second Prussian-Austrian war
+			if = {
+				limit = {
+					PRU = {
+						has_country_flag = PRU_VS_AUS_2
+					}
+					PRU = {
+						has_war_with = AUS
+					}
+					OR = {
+						9 = {
+							controller = {
+								OR = {
+									tag = PRU
+									is_subject_of = PRU
+									is_in_faction_with = PRU
+								}
+							}
+						}
+						4 = {
+							controller = {
+								OR = {
+									tag = PRU
+									is_subject_of = PRU
+									is_in_faction_with = PRU
+								}
+							}
+						}
+					}
+				}
+				PRU = { white_peace = AUS }
+				PRU = { set_country_flag = victory_R_V_A_2 }
+				PRU = { clr_country_flag = PRU_vs_AUS_2 }
+				AUS = { dismantle_faction = yes }
+				if = {
+					limit = {
+						has_country_flag = time_member_of_allience
+					}
+					leave_faction = yes
+					clr_country_flag = time_member_of_allience
+				}
+				every_other_country = {
+					limit = {
+						OR = {
+							has_country_flag = german_union_for_prussian
+							has_country_flag = german_union_for_austrian
+						}
+						OR = {
+							tag = BAV
+							tag = VUR
+							tag = HOH
+							tag = BAD
+							tag = ELS
+						}
+					}
+					PRU = {
+						annex_country = { target = PREV transfer_troops = no }
+					}
+				}
+				every_other_country = {
+					limit = {
+						has_country_flag = german_union_for_austrian
+					}
+					clr_country_flag = german_union_for_austrian
+					remove_from_array = { global.german_union_for_aus = ROOT }
+					set_country_flag = german_union_for_prussian
+					add_to_array = { global.german_union_for_pru = ROOT }
+				}
+				AUS = {
+					remove_from_array = { global.german_union_leader = AUS }
+				}
+				news_event = { hours = 24 id = news.13 }
 			}
 		}
 	}
