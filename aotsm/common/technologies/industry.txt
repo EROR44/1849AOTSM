@@ -757,19 +757,22 @@ technologies = {
 		}
 				
 		path = {
-			leads_to_tech = synth_oil_experiments 
-			research_cost_coeff = 1
-		}
-		path = {
 			leads_to_tech = fuel_refining 
 			research_cost_coeff = 1
 		}
+		
+				
+		path = {
+			leads_to_tech = oil_processing 
+			research_cost_coeff = 1
+		}
+		
 		
 		research_cost = 1
 		start_year = 1849
 		folder = {
 			name = industry_folder
-			position = { x = 1 y = 0 }
+			position = { x = 0 y = 0 }
 		}
 		
 		categories = {
@@ -854,12 +857,12 @@ technologies = {
 			leads_to_tech = fuel_refining2 
 			research_cost_coeff = 1
 		}
-		
+
 		research_cost = 3
 		start_year = 1849
 		folder = {
 			name = industry_folder
-			position = { x = 3 y = 2 }
+			position = { x = 1 y = 2 }
 		}
 		
 		categories = {
@@ -924,7 +927,7 @@ technologies = {
 		start_year = 1850
 		folder = {
 			name = industry_folder
-			position = { x = 3 y = 4 }
+			position = { x = 1 y = 4 }
 		}
 		
 		categories = {
@@ -980,7 +983,7 @@ technologies = {
 		start_year = 1852
 		folder = {
 			name = industry_folder
-			position = { x = 3 y = 6 }
+			position = { x = 1 y = 6 }
 		}
 		
 		categories = {
@@ -1027,7 +1030,7 @@ technologies = {
 		start_year = 1853
 		folder = {
 			name = industry_folder
-			position = { x = 3 y = 8 }
+			position = { x = 1 y = 8 }
 		}
 		
 		categories = {
@@ -1070,7 +1073,7 @@ technologies = {
 		start_year = 1855
 		folder = {
 			name = industry_folder
-			position = { x = 3 y = 10 }
+			position = { x = 1 y = 10 }
 		}
 		
 		categories = {
@@ -1102,65 +1105,6 @@ technologies = {
 				num_of_naval_factories > 40
 			}				
 		}		
-	}
-	
-	synth_oil_experiments = {
-
-		enable_building = {
-			building = synthetic_refinery
-			level = 3
-		}
-				
-		path = {
-			leads_to_tech = oil_processing 
-			research_cost_coeff = 1
-		}
-		path = {
-			leads_to_tech = rubber_processing 
-			research_cost_coeff = 1
-		}
-		
-		research_cost = 3
-		start_year = 1849
-		folder = {
-			name = industry_folder
-			position = { x = 0 y = 2 }
-		}
-		
-		categories = {
-			industry
-			synth_resources
-			cat_synth_oil
-		}
-		
-		ai_will_do = {
-			factor = 5
-			modifier = {
-				OR = {
-					tag = PRU
-					tag = ITA
-					tag = JAP
-				}
-				has_war = yes
-				factor = 5
-			}
-			modifier = {
-				factor = 0.5
-				oil > 10
-			}
-			modifier = {
-				factor = 0.5
-				oil > 20
-			}	
-			modifier = {
-				factor = 0.5
-				oil > 30
-			}			
-		}
-		
-		ai_research_weights = {
-			oil = -2.0
-		}
 	}
 	
 	oil_processing = {
@@ -1376,6 +1320,64 @@ technologies = {
 	}
 
 	#####################################
+	
+	rubber_processing_experiments = {
+
+		enable_building = {
+			building = synthetic_refinery
+			level = 3
+		}
+		
+				
+		path = {
+			leads_to_tech = rubber_processing 
+			research_cost_coeff = 1
+		}
+		
+		
+		research_cost = 3
+		start_year = 1849
+		folder = {
+			name = industry_folder
+			position = { x = 1 y = 0 }
+		}
+		
+		categories = {
+			industry
+			synth_resources
+			cat_synth_oil
+		}
+		
+		ai_will_do = {
+			factor = 5
+			modifier = {
+				OR = {
+					tag = PRU
+					tag = ITA
+					tag = JAP
+				}
+				has_war = yes
+				factor = 5
+			}
+			modifier = {
+				factor = 0.5
+				oil > 10
+			}
+			modifier = {
+				factor = 0.5
+				oil > 20
+			}	
+			modifier = {
+				factor = 0.5
+				oil > 30
+			}			
+		}
+		
+		ai_research_weights = {
+			oil = -2.0
+		}
+	}
+	
 	rubber_processing = {
 
 		on_research_complete = {
@@ -1396,7 +1398,7 @@ technologies = {
 		
 		folder = {
 			name = industry_folder
-			position = { x = 1 y = 4 }
+			position = { x = 1 y = 2 }
 		}
 		
 		categories = {
@@ -1456,7 +1458,7 @@ technologies = {
 		
 		folder = {
 			name = industry_folder
-			position = { x = 1 y = 6 }
+			position = { x = 1 y = 4 }
 		}
 		
 		categories = {
@@ -1516,7 +1518,7 @@ technologies = {
 		
 		folder = {
 			name = industry_folder
-			position = { x = 1 y = 8 }
+			position = { x = 1 y = 6  }
 		}
 		
 		categories = {
@@ -1557,6 +1559,58 @@ technologies = {
 	}
 
 	modern_rubber_processing = {
+
+		on_research_complete = {
+			modify_building_resources = {
+				building = synthetic_refinery
+				resource = rubber
+				amount = 1
+			}
+		}
+		
+		path = {
+			leads_to_tech = modern_rubber_processing_1
+			research_cost_coeff = 1
+		}
+		
+		research_cost = 1.5
+		start_year = 1855
+		
+		folder = {
+			name = industry_folder
+			position = { x = 1 y = 8 }
+		}
+		
+		categories = {
+			industry
+			synth_resources
+			cat_synth_rubber
+		}
+		
+		ai_will_do = {
+			factor = 0.5
+			modifier = {
+				factor = 0.5
+				rubber > 10
+			}
+			modifier = {
+				factor = 0.5
+				rubber > 20
+			}	
+			modifier = {
+				factor = 0.5
+				rubber > 30
+			}			
+		}
+		
+		ai_research_weights = {
+			rubber = -2.0
+		}
+		
+		show_effect_as_desc = yes
+	}
+	
+	modern_rubber_processing_1 = {
 
 		on_research_complete = {
 			modify_building_resources = {
@@ -1972,6 +2026,11 @@ technologies = {
 		industry_repair_factor = 0.10
 		
 		path = {
+			leads_to_tech = construction6 
+			research_cost_coeff = 1
+		}
+		
+		path = {
 			leads_to_tech = excavation5
 			research_cost_coeff = 1
 		}
@@ -2021,6 +2080,92 @@ technologies = {
 		folder = {
 			name = industry_folder
 			position = { x = 2 y = 8 }
+		}
+		
+		ai_will_do = {
+			factor = 2
+			
+			modifier = {
+				factor = 5.0
+				OR = {
+					oil > 0
+					aluminium > 0
+					rubber > 0
+					tungsten > 0
+					steel > 0
+					chromium > 0
+				}
+			}
+			
+			modifier = {
+				factor = 1.5
+				OR = {
+					oil > 8
+					aluminium > 8
+					rubber > 8
+					tungsten > 8
+					steel > 8
+					chromium > 8
+				}
+			}
+		}
+	}
+	
+	construction6 = {
+
+		production_speed_buildings_factor = 0.10
+		industry_repair_factor = 0.10
+		
+		path = {
+			leads_to_tech = excavation6
+			research_cost_coeff = 1
+		}
+
+		
+		research_cost = 2
+		start_year = 1857
+		
+		categories = {
+			industry
+			construction_tech
+		}
+		
+		folder = {
+			name = industry_folder
+			position = { x = 0 y = 10 }
+		}
+		
+		ai_will_do = {
+			factor = 4
+			
+			modifier = {
+				factor = 10
+				date > "1855.1.1"
+			}
+		}
+	}
+
+
+	excavation6 = {
+		
+		local_resources_factor = 0.10
+		
+		path = {
+			research_cost_coeff = 1
+		}
+		
+		research_cost = 2
+		start_year = 1857
+		
+		categories = {
+			industry
+			construction_tech
+			excavation_tech
+		}
+		
+		folder = {
+			name = industry_folder
+			position = { x = 2 y = 10 }
 		}
 		
 		ai_will_do = {
