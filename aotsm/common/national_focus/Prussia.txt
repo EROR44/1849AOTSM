@@ -171,17 +171,21 @@ focus_tree = {
 		completion_reward = {
 			hidden_effect = {
 				PRU = { create_faction = "Prussian_sphere" }
-				PRU = { add_to_faction = HAN }
-				PRU = { add_to_faction = MCL }
-				PRU = { add_to_faction = SLG }
-				PRU = { add_to_faction = VES }
-				PRU = { add_to_faction = FRN }
-				AUS = { create_faction = "Austrian_sphere" }
-				AUS = { add_to_faction = SAK }
-				AUS = { add_to_faction = TUR }
-				AUS = { add_to_faction = BAD }
-				AUS = { add_to_faction = VUR }
-				AUS = { add_to_faction = BAV }
+				every_other_country = {
+					limit = {
+						has_country_flag = german_union_for_prussian
+					}
+					PRU = { add_to_faction = PREV }
+				}
+				AUS = {
+					create_faction = "Austrian_sphere"
+				}
+				every_other_country = {
+					limit = {
+						has_country_flag = german_union_for_austrian
+					}
+					AUS = { add_to_faction = PREV }
+				}
 			}
 			PRU = {
 				declare_war_on = {
@@ -189,6 +193,8 @@ focus_tree = {
 					type = annex_everything
 				}
 			}
+			set_global_flag = war_in_german_region
+			set_global_flag = PRU_VS_AUS_1
 		}
 	}
 	
@@ -1406,9 +1412,6 @@ focus_tree = {
 			swap_ideas = {
 				remove_idea = constitutional_monarchy
 				add_idea = monarchy
-			}
-			hidden_effect = {
-				PRU = { country_event = { id = ger.10 days = 98 } }
 			}
 		}
 	}

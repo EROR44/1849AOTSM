@@ -21,43 +21,41 @@ country_event = {
 		name = gerultimate.1.a	
 		ai_chance = {
 			factor = 10
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+			}
 		}
 		hidden_effect = { 
-			PRU = {
-				annex_country = { target = MCL transfer_troops = yes }
-				annex_country = { target = SLG transfer_troops = yes }
-				annex_country = { target = HAN transfer_troops = yes }
-				annex_country = { target = VES transfer_troops = yes }
-				annex_country = { target = FRN transfer_troops = yes }
-				annex_country = { target = TYR transfer_troops = yes }
-				annex_country = { target = SAK transfer_troops = yes }
-			}
-			MCL = {
-				remove_state_core = 62
-				remove_state_core = 61
-			}
-			SLG = {
-				remove_state_core = 58
-				remove_state_core = 829
-			}
-			HAN = {
-				remove_state_core = 59
-			}
-			VES = {
-				remove_state_core = 56
-			}
-			TYR = {
-				remove_state_core = 60
-			}
-			SAK = { 
-				remove_state_core = 65
-			}
-			FRN = {
-				remove_state_core = 57
-				remove_state_core = 51
-				remove_state_core = 55
-				remove_state_core = 42
-				remove_state_core = 28
+			every_other_country = {
+				limit = {
+					OR = {
+						has_country_flag = german_union_for_prussian
+						has_country_flag = german_union_for_austrian
+					}
+					OR = {
+						tag = MCS
+						tag = MCL
+						tag = LBE
+						tag = HLS
+						tag = SLG
+						tag = HAM
+						tag = HAN
+						tag = BRM
+						tag = OLD
+						tag = SAK
+						tag = TYR
+						tag = WEI
+						tag = MEI
+						tag = HES
+						tag = WLD
+						tag = FRN
+						tag = KOL
+					}
+				}
+				PRU = {
+					annex_country = { target = PREV transfer_troops = no }
+				}
 			}
 			PRU = { set_country_flag = victory_R_V_A_1 }
 			PRU = { set_cosmetic_tag = PRUNGU }
@@ -71,19 +69,21 @@ country_event = {
 		}
 		hidden_effect = {
 			PRU = { create_faction = "Prussian_sphere" }
-			PRU = { add_to_faction = HAN }
-			PRU = { add_to_faction = MCL }
-			PRU = { add_to_faction = SLG }
-			PRU = { add_to_faction = VES }
-			PRU = { add_to_faction = FRN }
+			every_other_country = {
+				limit = {
+					has_country_flag = german_union_for_prussian
+				}
+				PRU = { add_to_faction = PREV }
+			}
 			AUS = {
 				create_faction = "Austrian_sphere"
 			}
-			AUS = { add_to_faction = SAK }
-			AUS = { add_to_faction = TUR }
-			AUS = { add_to_faction = BAD }
-			AUS = { add_to_faction = VUR }
-			AUS = { add_to_faction = BAV }
+			every_other_country = {
+				limit = {
+					has_country_flag = german_union_for_austrian
+				}
+				AUS = { add_to_faction = PREV }
+			}
 		}
 		PRU = {
 			declare_war_on = {
@@ -91,8 +91,8 @@ country_event = {
 				type = annex_everything
 			}
 		}
-		PRU = { add_ideas = pru_blitzkrieg }
-		AUS = { add_ideas = fear_of_revolution }
+		set_global_flag = war_in_german_region
+		set_global_flag = PRU_VS_AUS_1
 	}
 }
 
@@ -568,15 +568,9 @@ country_event = {
 				remove_idea = monarchy
 				add_idea = constitutional_monarchy
 			}
-			create_country_leader = {
-				name = "PRU_Fridrich_III"
-				desc = "POLITICS_FRIDRICH_III_DESC"
-				picture = "gfx/leaders/PRU/Portrait_Fridrich_III.dds"
-				expire = "1888.1.1"
-				ideology = social_monarchism
-				traits = {
-					red_kaiser
-				}
+			hidden_effect = {
+				retire_character = PRU_Hans_fon_Bulov
+				promote_character = PRU_Fridrich_III_soc
 			}
 			set_party_name = { 
 				ideology = socialism 
@@ -983,15 +977,10 @@ country_event = {
 		name = ger.10.a 
 		PRU = {
 			set_country_flag = pru_kaiser_death
-			kill_country_leader = yes
-			create_country_leader = {
-				name = "PRU_Fridrich_III"
-				desc = "POLITICS_FRIDRICH_III_DESC"
-				picture = "gfx/leaders/PRU/Portrait_Fridrich_III.dds"
-				expire = "1888.1.1"
-				ideology = monarchist
-				traits = {
-				}
+			custom_effect_tooltip = Fridrich_Wilhelm_IV_dead_tt
+			hidden_effect = {
+				retire_character = PRU_Fridrih_Wilgelm_IV
+				promote_character = PRU_Fridrich_III
 			}
 		}
 		news_event = { hours = 24 id = news.20 }
