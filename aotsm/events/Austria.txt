@@ -4,9 +4,67 @@
 #################
 
 add_namespace = aus
+add_namespace = aus_kaiser
 add_namespace = aus_dem
 add_namespace = aus_ref
 add_namespace = end_of_austrian
+
+country_event = {
+	id = aus.1
+	title = aus.1.t
+	desc = aus.1.d
+	picture = GFX_report_event_gre_greece_and_turkey_relations
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = {
+		name = aus.1.a
+		add_timed_idea = {
+			idea = AUS_additional_education_of_kaiser
+			days = 365
+		} 
+		hidden_effect = {
+			country_event = {
+				id = aus_kaiser.1
+				days = 180
+			}
+		}
+		custom_effect_tooltip = austrian_story_yes_tt
+	}
+	
+	option = {
+		name = aus.1.b	
+		set_country_flag = AUS_no_story_of_empire
+		custom_effect_tooltip = austrian_story_no_tt
+	}
+}
+
+country_event = {
+	id = aus_kaiser.1
+	title = aus_kaiser.1.t
+	desc = aus_kaiser.1.d
+	picture = GFX_report_event_eng_royal_family
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = {
+		name = aus_kaiser.1.a
+		remove_trait = {
+			character = AUS_Franz_Joseph_I
+			ideology = monarchist
+			trait = mediocre_1
+		}
+		add_trait = {
+			 character = AUS_Franz_Joseph_I
+			 ideology = monarchist
+			 trait = mediocre_2
+		}
+	}
+}
 
 country_event = {
 	id = aus_dem.1
