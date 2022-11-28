@@ -4,8 +4,67 @@
 #################
 
 add_namespace = aus
+add_namespace = aus_kaiser
 add_namespace = aus_dem
 add_namespace = aus_ref
+add_namespace = end_of_austrian
+
+country_event = {
+	id = aus.1
+	title = aus.1.t
+	desc = aus.1.d
+	picture = GFX_report_event_gre_greece_and_turkey_relations
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = {
+		name = aus.1.a
+		add_timed_idea = {
+			idea = AUS_additional_education_of_kaiser
+			days = 365
+		} 
+		hidden_effect = {
+			country_event = {
+				id = aus_kaiser.1
+				days = 180
+			}
+		}
+		custom_effect_tooltip = austrian_story_yes_tt
+	}
+	
+	option = {
+		name = aus.1.b	
+		set_country_flag = AUS_no_story_of_empire
+		custom_effect_tooltip = austrian_story_no_tt
+	}
+}
+
+country_event = {
+	id = aus_kaiser.1
+	title = aus_kaiser.1.t
+	desc = aus_kaiser.1.d
+	picture = GFX_report_event_eng_royal_family
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = {
+		name = aus_kaiser.1.a
+		remove_trait = {
+			character = AUS_Franz_Joseph_I
+			ideology = monarchist
+			trait = mediocre_1
+		}
+		add_trait = {
+			 character = AUS_Franz_Joseph_I
+			 ideology = monarchist
+			 trait = mediocre_2
+		}
+	}
+}
 
 country_event = {
 	id = aus_dem.1
@@ -84,10 +143,12 @@ country_event = {
 			transfer_state = 88
 			transfer_state = 89
 			transfer_state = 91
+			transfer_state = 902
 			add_state_core = 80
 			add_state_core = 88
 			add_state_core = 89
 			add_state_core = 91
+			add_state_core = 902
 		}
 		VEN = {
 			transfer_state = 159
@@ -125,6 +186,363 @@ country_event = {
 			remove_state_core = 736
 			remove_state_core = 764
 			remove_state_core = 810
+			remove_state_core = 902
+		}
+	}
+}
+
+country_event = {
+	id = end_of_austrian.1 #Hungary out
+	title = end_of_austrian.1.t
+	desc = end_of_austrian.1.d
+	picture = GFX_report_event_german_troops_paris
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = { 
+		name = end_of_austrian.1.a	
+		if = {
+			limit = {
+				NOT = {
+					PRU = {
+						has_country_flag = victory_R_V_A_3
+					}
+				}
 			}
+			HUN = {
+				inherit_technology = AUS
+				transfer_state = 43
+				transfer_state = 154
+				transfer_state = 155
+				add_ideas = revolution_power
+				load_oob = revolution_force_HUN
+				set_party_rule = {
+					ideology = reactionist
+				}
+				set_country_flag = hun_has_revolution_aus
+			}
+			HUN = {
+				declare_war_on = {
+					target = AUS
+					type = annex_everything
+				}
+			}
+			AUS = {
+				remove_state_core = 43
+				remove_state_core = 154
+				remove_state_core = 155
+				hidden_effect = {
+					43 = {
+						teleport_armies = {
+							limit = {
+								has_war_with = HUN
+							}
+							to_state = 4
+						}
+					}
+					154 = {
+						teleport_armies = {
+							limit = {
+								has_war_with = HUN
+							}
+							to_state = 4
+						}
+					}
+					155 = {
+						teleport_armies = {
+							limit = {
+								has_war_with = HUN
+							}
+							to_state = 4
+						}
+					}
+				}
+			}
+			AUS = {
+				swap_ideas = {
+					remove_idea = fight_for_empire_1
+					add_idea = fight_for_empire_2
+				}
+			}
+			hidden_effect = {
+				AUS = {
+					country_event = {
+						id = end_of_austrian.2 
+						days = 2
+					}
+				}
+			}
+		}
+	}
+}
+
+country_event = {
+	id = end_of_austrian.2 #Moldavia annex south bykovina
+	title = end_of_austrian.2.t
+	desc = end_of_austrian.2.d
+	picture = GFX_report_event_gre_city_siege
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = { 
+		name = end_of_austrian.2.a	
+		if = {
+			limit = {
+				NOT = {
+					PRU = {
+						has_country_flag = victory_R_V_A_3
+					}
+				}
+			}
+			if = {
+				limit = {
+					AUS = {
+						owns_state = 902
+					}
+				}
+				if = {
+					limit = {
+						country_exists = MOL
+					}
+					MOL = {
+						transfer_state = 902
+						add_state_core = 902
+					}
+				}
+				if = {
+					limit = {
+						NOT = {
+							country_exists = MOL
+						}
+					}
+					VLH = {
+						transfer_state = 902
+						add_state_core = 902
+					}
+				}
+			}
+			AUS = {
+				hidden_effect = {
+					902 = {
+						teleport_armies = {
+							limit = {
+								has_war_with = PRU
+							}
+							to_state = 4
+						}
+					}
+				}
+			}
+			hidden_effect = {
+				AUS = {
+					country_event = {
+						id = end_of_austrian.3
+						days = 4
+					}
+				}
+			}
+		}
+	}
+}
+
+country_event = {
+	id = end_of_austrian.3 #Galisian Revolution
+	title = end_of_austrian.3.t
+	desc = end_of_austrian.3.d
+	picture = GFX_report_event_bul_military_parade_vidin
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = { 
+		name = end_of_austrian.3.a	
+		if = {
+			limit = {
+				NOT = {
+					PRU = {
+						has_country_flag = victory_R_V_A_3
+					}
+				}
+			}
+			GLA = {
+				inherit_technology = AUS
+				transfer_state = 80
+				transfer_state = 89
+				transfer_state = 91
+				add_ideas = revolution_power
+				load_oob = revolution_force_GLA
+				set_country_flag = gla_has_revolution_aus
+			}
+			GLA = {
+				declare_war_on = {
+					target = AUS
+					type = annex_everything
+				}
+			}
+			if = {
+				limit = {
+					country_exists = HUN
+				}
+				HUN = {
+					transfer_state = 73
+					transfer_state = 76
+					transfer_state = 83
+					transfer_state = 84
+				}
+			}
+			AUS = {
+				remove_state_core = 73
+				remove_state_core = 76
+				remove_state_core = 80
+				remove_state_core = 83
+				remove_state_core = 84
+				remove_state_core = 89
+				remove_state_core = 91
+				hidden_effect = {
+					73 = {
+						teleport_armies = {
+							limit = {
+								has_war_with = HUN
+							}
+							to_state = 4
+						}
+					}
+					76 = {
+						teleport_armies = {
+							limit = {
+								has_war_with = HUN
+							}
+							to_state = 4
+						}
+					}
+					83 = {
+						teleport_armies = {
+							limit = {
+								has_war_with = HUN
+							}
+							to_state = 4
+						}
+					}
+					84 = {
+						teleport_armies = {
+							limit = {
+								has_war_with = HUN
+							}
+							to_state = 4
+						}
+					}
+					80 = {
+						teleport_armies = {
+							limit = {
+								has_war_with = GLA
+							}
+							to_state = 4
+						}
+					}
+					89 = {
+						teleport_armies = {
+							limit = {
+								has_war_with = GLA
+							}
+							to_state = 4
+						}
+					}
+					91 = {
+						teleport_armies = {
+							limit = {
+								has_war_with = GLA
+							}
+							to_state = 4
+						}
+					}
+				}
+			}
+			AUS = {
+				swap_ideas = {
+					remove_idea = fight_for_empire_2
+					add_idea = fight_for_empire_3
+				}
+			}
+			hidden_effect = {
+				AUS = {
+					country_event = {
+						id = end_of_austrian.4
+						days = 3
+					}
+				}
+			}
+		}
+	}
+}
+
+country_event = {
+	id = end_of_austrian.4 #Venetian Revolution
+	title = end_of_austrian.4.t
+	desc = end_of_austrian.4.d
+	picture = GFX_report_event_dutch_soldiers_indonesia
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = { 
+		name = end_of_austrian.4.a	
+		if = {
+			limit = {
+				NOT = {
+					PRU = {
+						has_country_flag = victory_R_V_A_3
+					}
+				}
+			}
+			VEN = {
+				inherit_technology = AUS
+				transfer_state = 159
+				transfer_state = 160
+				add_ideas = revolution_power
+				load_oob = revolution_force_VEN
+				set_country_flag = ven_has_revolution_aus
+			}
+			VEN = {
+				declare_war_on = {
+					target = AUS
+					type = annex_everything
+				}
+			}
+			AUS = {
+				remove_state_core = 159
+				remove_state_core = 160
+				hidden_effect = {
+					159 = {
+						teleport_armies = {
+							limit = {
+								has_war_with = VEN
+							}
+							to_state = 4
+						}
+					}
+					160 = {
+						teleport_armies = {
+							limit = {
+								has_war_with = VEN
+							}
+							to_state = 4
+						}
+					}
+				}
+			}
+			AUS = {
+				swap_ideas = {
+					remove_idea = fight_for_empire_3
+					add_idea = fight_for_empire_4
+				}
+			}
+			news_event = news.109
+		}
 	}
 }
