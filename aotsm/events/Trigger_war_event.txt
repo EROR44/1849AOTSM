@@ -106,9 +106,12 @@ country_event = {
 	trigger = {
 		tag = PRU
 		AUS = {
-			surrender_progress > 0.40
+			surrender_progress > 0.75
 		}
 		PRU = { has_country_flag = PRU_vs_AUS_1 }
+		PRU = {
+			has_war_with = AUS
+		}
 	}
 	option = {
 		name = twe.3.a
@@ -167,7 +170,7 @@ country_event = {
 	trigger = {
 		tag = AUS
 		PRU = {
-			surrender_progress > 0.40
+			surrender_progress > 0.95
 		}
 		PRU = { has_country_flag = PRU_vs_AUS_1 }
 	}
@@ -355,43 +358,56 @@ country_event = {
 	trigger = {
 		tag = PRU
 		AUS = {
-			surrender_progress > 0.40
+			surrender_progress > 0.75
+		}
+		PRU = {
+			has_war_with = AUS
 		}
 		PRU = { has_country_flag = PRU_vs_AUS_2 }
 	}
 	option = {
 		name = twe.6.a
 		hidden_effect = {
+			PRU = { white_peace = AUS }
 			PRU = { set_country_flag = victory_R_V_A_2 }
 			PRU = { clr_country_flag = PRU_vs_AUS_2 }
-			PRU = {
-				annex_country = { target = BAD transfer_troops = no }
-				annex_country = { target = BAV transfer_troops = no }
-				annex_country = { target = VUR transfer_troops = no }
-			}
-			BAD = {
-				remove_state_core = 828
-				remove_state_core = 50
-			}
-			VUR = {
-				remove_state_core = 808
-			}
-			BAV = {
-				remove_state_core = 54
-				remove_state_core = 53
-				remove_state_core = 52
-			}
-			remove_from_faction = AUS
-			remove_from_faction = BAD
-			remove_from_faction = VUR
-			remove_from_faction = BAV
 			AUS = { dismantle_faction = yes }
-			PRU = { white_peace = AUS }
-			every_country = {
+			if = {
 				limit = {
-					has_war_with = AUS
+					has_country_flag = time_member_of_allience
 				}
-				white_peace = AUS
+				leave_faction = yes
+				clr_country_flag = time_member_of_allience
+			}
+			every_other_country = {
+				limit = {
+					OR = {
+						has_country_flag = german_union_for_prussian
+						has_country_flag = german_union_for_austrian
+					}
+					OR = {
+						tag = BAV
+						tag = VUR
+						tag = HOH
+						tag = BAD
+						tag = ELS
+					}
+				}
+				PRU = {
+					annex_country = { target = PREV transfer_troops = no }
+				}
+			}
+			every_other_country = {
+				limit = {
+					has_country_flag = german_union_for_austrian
+				}
+				clr_country_flag = german_union_for_austrian
+				remove_from_array = { global.german_union_for_aus = ROOT }
+				set_country_flag = german_union_for_prussian
+				add_to_array = { global.german_union_for_pru = ROOT }
+			}
+			AUS = {
+				remove_from_array = { global.german_union_leader = ROOT }
 			}
 		}
 		news_event = { hours = 24 id = news.13 }
@@ -411,7 +427,7 @@ country_event = {
 	trigger = {
 		tag = AUS
 		PRU = {
-			surrender_progress > 0.40
+			surrender_progress > 0.95
 		}
 		PRU = { has_country_flag = PRU_vs_AUS_2 }
 	}
@@ -436,266 +452,266 @@ country_event = {
 	}
 }
 
-country_event = {
-	id = twe.7 #Third AUS vs PRU BYZ(Pru win)
-	title = twe.7.t
-	desc = twe.7.d
-	picture = GFX_report_event_molotov_signing_pact
-	
-	fire_only_once = yes
+#country_event = {
+#	id = twe.7 #Third AUS vs PRU BYZ(Pru win)
+#	title = twe.7.t
+#	desc = twe.7.d
+#	picture = GFX_report_event_molotov_signing_pact
+#	
+#	fire_only_once = yes
+#
+#	hidden =  yes
+#	
+#	trigger = {
+#		tag = PRU
+#		AUS = {
+#			surrender_progress > 0.05
+#		}
+#		PRU = { has_country_flag = PRU_vs_AUS_3 }
+#	}
+#	option = {
+#		name = twe.7.a
+#		hidden_effect = {
+#			PRU = { set_country_flag = victory_R_V_A_3 }
+#			PRU = { clr_country_flag = PRU_vs_AUS_3 }
+#			PRU = { white_peace = AUS }
+#			BYZ = { white_peace = AUS }
+#			HUN = {
+#				transfer_state = 43
+#				transfer_state = 45
+#				transfer_state = 70
+#				transfer_state = 71
+#				transfer_state = 73
+#				transfer_state = 76
+#				transfer_state = 82
+#				transfer_state = 83
+#				transfer_state = 84
+#				transfer_state = 154
+#				transfer_state = 155
+#				transfer_state = 664
+#				transfer_state = 764
+#				add_state_core = 43
+#				add_state_core = 45
+#				add_state_core = 70
+#				add_state_core = 71
+#				add_state_core = 73
+#				add_state_core = 76
+#				add_state_core = 82
+#				add_state_core = 83
+#				add_state_core = 84
+#				add_state_core = 103
+#				add_state_core = 109
+#				add_state_core = 154
+#				add_state_core = 155
+#				add_state_core = 664
+#				add_state_core = 764
+#			}
+#			BOH = {
+#				transfer_state = 9
+#				transfer_state = 69
+#				transfer_state = 72
+#				transfer_state = 74
+#				transfer_state = 75
+#				add_state_core = 9
+#				add_state_core = 69
+#				add_state_core = 72
+#				add_state_core = 74
+#				add_state_core = 75
+#				add_state_core = 810
+#			}
+#			GLA = {
+#				transfer_state = 80
+#				transfer_state = 88
+#				transfer_state = 89
+#				transfer_state = 91
+#				add_state_core = 80
+#				add_state_core = 88
+#				add_state_core = 89
+#				add_state_core = 91
+#			}
+#			VEN = {
+#				transfer_state = 39
+#				transfer_state = 159
+#				transfer_state = 160
+#				add_state_core = 159
+#				add_state_core = 160
+#			}
+#			AUS = {
+#				remove_state_core = 4
+#				remove_state_core = 9
+#				remove_state_core = 39
+#				remove_state_core = 43
+#				remove_state_core = 45
+#				remove_state_core = 69
+#				remove_state_core = 70
+#				remove_state_core = 71
+#				remove_state_core = 72
+#				remove_state_core = 73
+#				remove_state_core = 74
+#				remove_state_core = 75
+#				remove_state_core = 76
+#				remove_state_core = 80
+#				remove_state_core = 83
+#				remove_state_core = 84
+#				remove_state_core = 88
+#				remove_state_core = 89
+#				remove_state_core = 91
+#				remove_state_core = 102
+#				remove_state_core = 103
+#				remove_state_core = 109
+#				remove_state_core = 152
+#				remove_state_core = 153
+#				remove_state_core = 154
+#				remove_state_core = 155
+#				remove_state_core = 159
+#				remove_state_core = 160
+#				remove_state_core = 163
+#				remove_state_core = 664
+#				remove_state_core = 736
+#				remove_state_core = 764
+#				remove_state_core = 810
+#				remove_state_core = 887
+#			}
+#			PRU = {
+#				transfer_state = 4
+#				transfer_state = 152
+#				transfer_state = 153
+#				transfer_state = 887
+#				add_state_core = 887
+#			}
+#			if = {
+#				limit = {
+#					BYZ = {
+#						has_country_flag = byz_imperia_politic
+#					}
+#				}
+#				BYZ = { 
+#					transfer_state = 102
+#					transfer_state = 103
+#					transfer_state = 109
+#					transfer_state = 163
+#					transfer_state = 736
+#				}
+#			}
+#			if = {
+#				limit = {
+#					BYZ = {
+#						has_country_flag = byz_democratic_politic
+#					}
+#				}
+#				DAL = {
+#					transfer_state = 102
+#					transfer_state = 103
+#					transfer_state = 109
+#					transfer_state = 163
+#					transfer_state = 736
+#				}
+#			}
+#			BYZ = { set_country_flag = BYZ_vs_AUS_win }
+#			PRU = { puppet = VEN }
+#			PRU = { puppet = BOH }
+#			PRU = {
+#				transfer_state = 69
+#				add_state_core = 69
+#				transfer_state = 810
+#				add_state_core = 810
+#			}
+#			BOH = {
+#				set_politics = { ruling_party = authoritarian elections_allowed = no }
+#				set_popularities = {
+#					democratic = 24
+#					socialism = 6
+#					reactionist = 26
+#					authoritarian = 44
+#				}
+#				add_country_leader_role = {
+#					character = BOH_Moris_fon_Bissing
+#					promote_leader = yes
+#					country_leader = {
+#						ideology = centrism
+#						expire = "1900.1.1.1"
+#						traits = { }
+#					}
+#				}
+#			}
+#			VEN = {
+#				inherit_technology = AUS
+#			}
+#			BOH = {
+#				inherit_technology = AUS
+#			}
+#			HUN = {
+#				inherit_technology = AUS
+#			}
+#			GLA = {
+#				inherit_technology = AUS
+#			}
+#			BOH = {
+#				load_oob = BOH_oob
+#			}
+#			BOH = {
+#				set_cosmetic_tag = BOHPRU
+#			}
+#			HUN = {
+#				load_oob = HUN_oob
+#			}
+#			GLA = {
+#				load_oob = GLA_oob
+#			}
+#			VEN = { 
+#				load_oob = VEN_oob
+#			}
+#			if = {
+#				limit = {
+#					VLH = {
+#						has_country_flag = VLH_CR
+#					}
+#				}
+#				VLH = {
+#					create_faction = ANTI-HUNGARY-ALLIENCE
+#				}
+#				GLA = {
+#					country_event = { id = te.13 hours = 12 }
+#				}
+#				VLH = {
+#					country_event = { id = te.14 days = 28 }
+#				}
+#			}
+#		}
+#		news_event = news.15 
+#	}
+#}
 
-	hidden =  yes
-	
-	trigger = {
-		tag = PRU
-		AUS = {
-			surrender_progress > 0.05
-		}
-		PRU = { has_country_flag = PRU_vs_AUS_3 }
-	}
-	option = {
-		name = twe.7.a
-		hidden_effect = {
-			PRU = { set_country_flag = victory_R_V_A_3 }
-			PRU = { clr_country_flag = PRU_vs_AUS_3 }
-			PRU = { white_peace = AUS }
-			BYZ = { white_peace = AUS }
-			HUN = {
-				transfer_state = 43
-				transfer_state = 45
-				transfer_state = 70
-				transfer_state = 71
-				transfer_state = 73
-				transfer_state = 76
-				transfer_state = 82
-				transfer_state = 83
-				transfer_state = 84
-				transfer_state = 154
-				transfer_state = 155
-				transfer_state = 664
-				transfer_state = 764
-				add_state_core = 43
-				add_state_core = 45
-				add_state_core = 70
-				add_state_core = 71
-				add_state_core = 73
-				add_state_core = 76
-				add_state_core = 82
-				add_state_core = 83
-				add_state_core = 84
-				add_state_core = 103
-				add_state_core = 109
-				add_state_core = 154
-				add_state_core = 155
-				add_state_core = 664
-				add_state_core = 764
-			}
-			BOH = {
-				transfer_state = 9
-				transfer_state = 69
-				transfer_state = 72
-				transfer_state = 74
-				transfer_state = 75
-				add_state_core = 9
-				add_state_core = 69
-				add_state_core = 72
-				add_state_core = 74
-				add_state_core = 75
-				add_state_core = 810
-			}
-			GLA = {
-				transfer_state = 80
-				transfer_state = 88
-				transfer_state = 89
-				transfer_state = 91
-				add_state_core = 80
-				add_state_core = 88
-				add_state_core = 89
-				add_state_core = 91
-			}
-			VEN = {
-				transfer_state = 39
-				transfer_state = 159
-				transfer_state = 160
-				add_state_core = 159
-				add_state_core = 160
-			}
-			AUS = {
-				remove_state_core = 4
-				remove_state_core = 9
-				remove_state_core = 39
-				remove_state_core = 43
-				remove_state_core = 45
-				remove_state_core = 69
-				remove_state_core = 70
-				remove_state_core = 71
-				remove_state_core = 72
-				remove_state_core = 73
-				remove_state_core = 74
-				remove_state_core = 75
-				remove_state_core = 76
-				remove_state_core = 80
-				remove_state_core = 83
-				remove_state_core = 84
-				remove_state_core = 88
-				remove_state_core = 89
-				remove_state_core = 91
-				remove_state_core = 102
-				remove_state_core = 103
-				remove_state_core = 109
-				remove_state_core = 152
-				remove_state_core = 153
-				remove_state_core = 154
-				remove_state_core = 155
-				remove_state_core = 159
-				remove_state_core = 160
-				remove_state_core = 163
-				remove_state_core = 664
-				remove_state_core = 736
-				remove_state_core = 764
-				remove_state_core = 810
-				remove_state_core = 887
-			}
-			PRU = {
-				transfer_state = 4
-				transfer_state = 152
-				transfer_state = 153
-				transfer_state = 887
-				add_state_core = 887
-			}
-			if = {
-				limit = {
-					BYZ = {
-						has_country_flag = byz_imperia_politic
-					}
-				}
-				BYZ = { 
-					transfer_state = 102
-					transfer_state = 103
-					transfer_state = 109
-					transfer_state = 163
-					transfer_state = 736
-				}
-			}
-			if = {
-				limit = {
-					BYZ = {
-						has_country_flag = byz_democratic_politic
-					}
-				}
-				DAL = {
-					transfer_state = 102
-					transfer_state = 103
-					transfer_state = 109
-					transfer_state = 163
-					transfer_state = 736
-				}
-			}
-			BYZ = { set_country_flag = BYZ_vs_AUS_win }
-			PRU = { puppet = VEN }
-			PRU = { puppet = BOH }
-			PRU = {
-				transfer_state = 69
-				add_state_core = 69
-				transfer_state = 810
-				add_state_core = 810
-			}
-			BOH = {
-				set_politics = { ruling_party = authoritarian elections_allowed = no }
-				set_popularities = {
-					democratic = 24
-					socialism = 6
-					reactionist = 26
-					authoritarian = 44
-				}
-				add_country_leader_role = {
-					character = BOH_Moris_fon_Bissing
-					promote_leader = yes
-					country_leader = {
-						ideology = centrism
-						expire = "1900.1.1.1"
-						traits = { }
-					}
-				}
-			}
-			VEN = {
-				inherit_technology = AUS
-			}
-			BOH = {
-				inherit_technology = AUS
-			}
-			HUN = {
-				inherit_technology = AUS
-			}
-			GLA = {
-				inherit_technology = AUS
-			}
-			BOH = {
-				load_oob = BOH_oob
-			}
-			BOH = {
-				set_cosmetic_tag = BOHPRU
-			}
-			HUN = {
-				load_oob = HUN_oob
-			}
-			GLA = {
-				load_oob = GLA_oob
-			}
-			VEN = { 
-				load_oob = VEN_oob
-			}
-			if = {
-				limit = {
-					VLH = {
-						has_country_flag = VLH_CR
-					}
-				}
-				VLH = {
-					create_faction = ANTI-HUNGARY-ALLIENCE
-				}
-				GLA = {
-					country_event = { id = te.13 hours = 12 }
-				}
-				VLH = {
-					country_event = { id = te.14 days = 28 }
-				}
-			}
-		}
-		news_event = news.15 
-	}
-}
-
-country_event = {
-	id = twe.70 #Third AUS vs PRU BYZ(Aus win)
-	title = twe.70.t
-	desc = twe.70.d
-	picture = GFX_report_event_molotov_signing_pact
-	
-	fire_only_once = yes
-
-	hidden =  yes
-	
-	trigger = {
-		tag = AUS
-		PRU = {
-			surrender_progress > 0.35
-		}
-		PRU = { has_country_flag = PRU_vs_AUS_3 }
-	}
-	option = {
-		name = twe.70.a
-		hidden_effect = {
-			AUS = { set_country_flag = victory_R_V_A_3 }
-			PRU = { clr_country_flag = PRU_vs_AUS_3 }
-			PRU = { white_peace = AUS }
-			BYZ = { white_peace = AUS }
-		}
-		news_event = news.16 
-		PRU = { country_event = { hours = 24 id = ger.6 } }
-		PRU = { set_country_flag = PRU_revolution }
-	}
-}
+#country_event = {
+#	id = twe.70 #Third AUS vs PRU BYZ(Aus win)
+#	title = twe.70.t
+#	desc = twe.70.d
+#	picture = GFX_report_event_molotov_signing_pact
+#	
+#	fire_only_once = yes
+#
+#	hidden =  yes
+#	
+#	trigger = {
+#		tag = AUS
+#		PRU = {
+#			surrender_progress > 0.35
+#		}
+#		PRU = { has_country_flag = PRU_vs_AUS_3 }
+#	}
+#	option = {
+#		name = twe.70.a
+#		hidden_effect = {
+#			AUS = { set_country_flag = victory_R_V_A_3 }
+#			PRU = { clr_country_flag = PRU_vs_AUS_3 }
+#			PRU = { white_peace = AUS }
+#			BYZ = { white_peace = AUS }
+#		}
+#		news_event = news.16 
+#		PRU = { country_event = { hours = 24 id = ger.6 } }
+#		PRU = { set_country_flag = PRU_revolution }
+#	}
+#}
 
 country_event = {
 	id = twe.8

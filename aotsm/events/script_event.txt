@@ -1813,6 +1813,20 @@ country_event = {
 				remove_from_array = { global.german_union_members = POM }
 			}
 		}
+		if = {
+			limit = {
+				NOT = {
+					country_exists = HOH
+				}
+				is_in_array = {
+					array = global.german_union_members
+					value = HOH
+				}
+			}
+			HOH = {
+				remove_from_array = { global.german_union_members = HOH }
+			}
+		}
 	}
 }
 
@@ -2321,6 +2335,21 @@ country_event = {
 				clr_country_flag = german_union_for_prussian
 			}
 		}
+		if = {
+			limit = {
+				NOT = {
+					country_exists = HOH
+				}
+				is_in_array = {
+					array = global.german_union_for_pru
+					value = HOH
+				}
+			}
+			HOH = {
+				remove_from_array = { global.german_union_for_pru = HOH }
+				clr_country_flag = german_union_for_prussian
+			}
+		}
 	}
 }
 
@@ -2761,6 +2790,21 @@ country_event = {
 			}
 			POM = {
 				remove_from_array = { global.german_union_for_aus = POM }
+				clr_country_flag = german_union_for_austrian
+			}
+		}
+		if = {
+			limit = {
+				NOT = {
+					country_exists = HOH
+				}
+				is_in_array = {
+					array = global.german_union_for_aus
+					value = HOH
+				}
+			}
+			HOH = {
+				remove_from_array = { global.german_union_for_aus = HOH }
 				clr_country_flag = german_union_for_austrian
 			}
 		}
@@ -3207,5 +3251,130 @@ country_event = {
 				set_country_flag = german_union_neutrality
 			}
 		}
+		if = {
+			limit = {
+				NOT = {
+					country_exists = HOH
+				}
+				is_in_array = {
+					array = global.german_union_neutrality
+					value = HOH
+				}
+			}
+			HOH = {
+				remove_from_array = { global.german_union_neutrality = HOH }
+				set_country_flag = german_union_neutrality
+			}
+		}
 	}
+}
+
+country_event = {
+	id = script_event.9999
+	title = script_event.9999.t
+	desc = script_event.9999.d
+	picture = GFX_report_event_communist_leader
+	
+	mean_time_to_happen = {
+		days = 2
+	}
+	
+	hidden = yes
+	
+	option = {
+		name = script_event.9999.a
+		if = {
+			limit = {
+				OR = {
+					AUS = {
+						controls_state = 91
+					}
+					PRU = {
+						controls_state = 91
+					}
+					GLA = {
+						controls_state = 91
+					}
+				}
+			}
+			91 = {
+				set_state_name  = "91_province_deutsch"
+			}
+		}
+		if = {
+			limit = {
+				NOT = {
+					AUS = {
+						controls_state = 91
+					}
+					PRU = {
+						controls_state = 91
+					}
+					GLA = {
+						controls_state = 91
+					}
+				}	
+			}
+			91 = {
+				set_state_name  = "91_province_other"
+			}
+		}	
+	}
+	
+}
+
+country_event = {
+	id = script_event.10000
+	title = script_event.10000.t
+	desc = script_event.10000.d
+	picture = GFX_report_event_communist_leader
+	
+	mean_time_to_happen = {
+		days = 2
+	}
+	
+	hidden = yes
+	
+	option = {
+		name = script_event.10000.a
+		if = {
+			limit = {
+				OR = {
+					AUS = {
+						controls_province = 91
+					}
+					PRU = {
+						controls_province = 91
+					}
+					GLA = {
+						controls_province = 91
+					}
+				}
+			}
+			set_province_name = {
+				id = 11479
+				name = 11479_province_deutsch
+			}
+		}
+		if = {
+			limit = {
+				NOT = {
+					AUS = {
+						controls_province = 91
+					}
+					PRU = {
+						controls_province = 91
+					}
+					GLA = {
+						controls_province = 91
+					}
+				}	
+			}
+			set_province_name = {
+				id = 11479
+				name = 11479_province_other
+			}
+		}	
+	}
+	
 }

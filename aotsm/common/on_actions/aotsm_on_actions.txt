@@ -1220,8 +1220,13 @@ on_actions = {
 					}
 					if = {
 						limit = {
-							SAR = {
-								is_subject_of = BYZ
+							OR = {
+								SAR = {
+									is_subject_of = BYZ
+								}
+								SAR = {
+									is_in_faction_with = PRU
+								}
 							}
 						}
 						SAR = {
@@ -1235,8 +1240,13 @@ on_actions = {
 					}
 					if = {
 						limit = {
-							PAP = {
-								is_subject_of = BYZ
+							OR = {
+								PAP = {
+									is_subject_of = BYZ
+								}
+								PAP = {
+									is_in_faction_with = PRU
+								}
 							}
 						}
 						PAP = {
@@ -1250,8 +1260,13 @@ on_actions = {
 					}
 					if = {
 						limit = {
-							SYC = {
-								is_subject_of = BYZ
+							OR = {
+								SYC = {
+									is_subject_of = BYZ
+								}
+								SYC = {
+									is_in_faction_with = PRU
+								}
 							}
 						}
 						SYC = {
@@ -1310,6 +1325,21 @@ on_actions = {
 								FRR = {
 									owns_state = 1
 								}
+								NOT = {
+									SAR = {
+										is_in_faction_with = PRU
+									}
+								}
+							}
+							SAR = {
+								transfer_state = 1
+							}
+						}
+						if = {
+							limit = {
+								FRR = {
+									owns_state = 1
+								}
 							}
 							transfer_state = 1
 						}
@@ -1319,7 +1349,9 @@ on_actions = {
 									owns_state = 21
 								}
 							}
-							transfer_state = 21
+							GAL = {
+								transfer_state = 21
+							}
 						}
 						if = {
 							limit = {
@@ -1327,7 +1359,9 @@ on_actions = {
 									owns_state = 32
 								}
 							}
-							transfer_state = 32
+							GAL = {
+								transfer_state = 32
+							}
 						}
 					}
 					FRR = {
@@ -5113,6 +5147,8 @@ on_actions = {
 						add_state_core = 42
 						transfer_state = 51
 						add_state_core = 51
+						transfer_state = 894
+						add_state_core = 894
 					}
 					FRR = {
 						set_autonomy = {
@@ -6917,64 +6953,659 @@ on_actions = {
 						clr_country_flag = was_in_austrian_allience
 					}
 				}
+				if = {
+					limit = {
+						has_country_flag = leader_of_punished_coalition
+					}
+					if = {
+						limit = {
+							PRU = {
+								has_country_flag = leader_of_punished_coalition
+							}
+						}
+						every_country = {
+							limit = {
+								has_country_flag = punished_begining
+							}
+							white_peace = PRU
+							set_country_flag = punished_fail
+							clr_country_flag = punished_begining
+						}
+					}
+					if = {
+						limit = {
+							AUS = {
+								has_country_flag = leader_of_punished_coalition
+							}
+						}
+						every_country = {
+							limit = {
+								has_country_flag = punished_begining
+							}
+							white_peace = AUS
+							set_country_flag = punished_fail
+							clr_country_flag = punished_begining
+						}
+					}
+					if = {
+						limit = {
+							FRN = {
+								has_country_flag = leader_of_punished_coalition
+							}
+						}
+						every_country = {
+							limit = {
+								has_country_flag = punished_begining
+							}
+							white_peace = FRN
+							set_country_flag = punished_fail
+							clr_country_flag = punished_begining
+						}
+					}		
+				}
 			}
+			#PRU annex bad boy
 			if = {
 				limit = {
-					has_country_flag = leader_of_punished_coalition
+					has_country_flag = PRU_war_with_you
+					ROOT = {
+						has_war_with = PRU
+					}
+				}
+				PRU = {
+					white_peace = ROOT
+				}
+				PRU = {
+					annex_country = {
+						target = ROOT
+						transfer_troops = no
+					}
+				}
+			}
+			#Last Prussian-Austrian war
+			if = {
+				limit = {
+					tag = AUS
+					AUS = {
+						has_war_with = PRU
+					}
+					PRU = {
+						has_country_flag = PRU_VS_AUS_3
+					}
+				}
+				PRU = {
+					white_peace = {
+						tag = AUS
+						message = wienna_peace
+					}
 				}
 				if = {
 					limit = {
-						PRU = {
-							has_country_flag = leader_of_punished_coalition
+						NOT = {
+							country_exists = HUN
 						}
 					}
-					every_country = {
-						limit = {
-							has_country_flag = punished_begining
+					HUN = {
+						transfer_state = 43
+						transfer_state = 45
+						transfer_state = 70
+						transfer_state = 71
+						transfer_state = 73
+						transfer_state = 76
+						transfer_state = 82
+						transfer_state = 83
+						transfer_state = 84
+						transfer_state = 154
+						transfer_state = 155
+						transfer_state = 664
+						transfer_state = 764
+						add_state_core = 43
+						add_state_core = 45
+						add_state_core = 70
+						add_state_core = 71
+						add_state_core = 73
+						add_state_core = 76
+						add_state_core = 82
+						add_state_core = 83
+						add_state_core = 84
+						add_state_core = 103
+						add_state_core = 109
+						add_state_core = 154
+						add_state_core = 155
+						add_state_core = 664
+						add_state_core = 764
+						#load_focus_tree = hungarian_focus_tree
+						inherit_technology = AUS
+						load_oob = HUN_oob
+					}
+					AUS = {
+						remove_state_core = 43
+						remove_state_core = 45
+						remove_state_core = 70
+						remove_state_core = 71
+						remove_state_core = 73
+						remove_state_core = 76
+						remove_state_core = 82
+						remove_state_core = 83
+						remove_state_core = 84
+						remove_state_core = 154
+						remove_state_core = 155
+						remove_state_core = 664
+						remove_state_core = 764
+					}
+				}
+				if = {
+					limit = {
+						country_exists = HUN
+					}
+					HUN = {
+						set_party_rule = {
+							ideology = authoritarian
 						}
-						white_peace = PRU
-						set_country_flag = punished_fail
-						clr_country_flag = punished_begining
+						#load_focus_tree = hungarian_focus_tree
+						if = {
+							limit = {
+								AUS = {
+									owns_state = 45
+								}
+							}
+							HUN = {
+								transfer_state = 45
+								add_state_core = 45
+							}
+							AUS = {
+								remove_state_core = 45
+							}
+						}
+						if = {
+							limit = {
+								AUS = {
+									owns_state = 70
+								}
+							}
+							HUN = {
+								transfer_state = 70
+								add_state_core = 70
+							}
+							AUS = {
+								remove_state_core = 70
+							}
+						}
+						if = {
+							limit = {
+								AUS = {
+									owns_state = 71
+								}
+							}
+							HUN = {
+								transfer_state = 71
+								add_state_core = 71
+							}
+							AUS = {
+								remove_state_core = 71
+							}
+						}
+						if = {
+							limit = {
+								AUS = {
+									owns_state = 73
+								}
+							}
+							HUN = {
+								transfer_state = 73
+								add_state_core = 73
+							}
+							AUS = {
+								remove_state_core = 73
+							}
+						}
+						if = {
+							limit = {
+								AUS = {
+									owns_state = 76
+								}
+							}
+							HUN = {
+								transfer_state = 76
+								add_state_core = 76
+							}
+							AUS = {
+								remove_state_core = 76
+							}
+						}
+						if = {
+							limit = {
+								AUS = {
+									owns_state = 82
+								}
+							}
+							HUN = {
+								transfer_state = 82
+								add_state_core = 82
+							}
+							AUS = {
+								remove_state_core = 82
+							}
+						}
+						if = {
+							limit = {
+								AUS = {
+									owns_state = 83
+								}
+							}
+							HUN = {
+								transfer_state = 83
+								add_state_core = 83
+							}
+							AUS = {
+								remove_state_core = 83
+							}
+						}
+						if = {
+							limit = {
+								AUS = {
+									owns_state = 84
+								}
+							}
+							HUN = {
+								transfer_state = 84
+								add_state_core = 84
+							}
+							AUS = {
+								remove_state_core = 84
+							}
+						}
+						if = {
+							limit = {
+								AUS = {
+									owns_state = 664
+								}
+							}
+							HUN = {
+								transfer_state = 664
+								add_state_core = 664
+							}
+							AUS = {
+								remove_state_core = 664
+							}
+						}
+						if = {
+							limit = {
+								AUS = {
+									owns_state = 764
+								}
+							}
+							HUN = {
+								transfer_state = 764
+								add_state_core = 764
+							}
+							AUS = {
+								remove_state_core = 764
+							}
+						}
+					}
+				}
+				if = {
+					limit = {
+						NOT = {
+							country_exists = GLA
+						}
+					}
+					GLA = {
+						transfer_state = 80
+						transfer_state = 88
+						transfer_state = 89
+						transfer_state = 91
+						add_state_core = 80
+						add_state_core = 88
+						add_state_core = 89
+						add_state_core = 91
+						inherit_technology = AUS
+						load_oob = GLA_oob
+					}
+					AUS = {
+						remove_state_core = 80
+						remove_state_core = 88
+						remove_state_core = 89
+						remove_state_core = 91
+					}
+				}
+				if = {
+					limit = {
+						country_exists = GLA
+					}
+					if = {
+						limit = {
+							AUS = {
+								owns_state = 88
+							}
+						}
+						GLA = {
+							transfer_state = 88
+							add_state_core = 88
+						}
+						AUS = {
+							remove_state_core = 88
+						}
+					}
+				}
+				if = {
+					limit = {
+						NOT = {
+							country_exists = VEN
+						}
+					}
+					VEN = {
+						transfer_state = 159
+						transfer_state = 160
+						add_state_core = 159
+						add_state_core = 160
+						inherit_technology = AUS
+						load_oob = VEN_oob
+					}
+				}
+				BOH = {
+					transfer_state = 9
+					transfer_state = 69
+					transfer_state = 72
+					transfer_state = 74
+					transfer_state = 75
+					add_state_core = 9
+					add_state_core = 69
+					add_state_core = 72
+					add_state_core = 74
+					add_state_core = 75
+					add_state_core = 810
+					inherit_technology = AUS
+					load_oob = BOH_oob
+					set_cosmetic_tag = BOHPRU
+				}
+				AUS = {
+					remove_state_core = 9
+					remove_state_core = 69
+					remove_state_core = 72
+					remove_state_core = 74
+					remove_state_core = 75
+				}
+				PRU = {
+					transfer_state = 4
+					transfer_state = 39
+					transfer_state = 152
+					transfer_state = 153
+					transfer_state = 887
+					add_state_core = 887
+				}
+				AUS = {
+					remove_state_core = 4
+					remove_state_core = 39
+					remove_state_core = 152
+					remove_state_core = 153
+					remove_state_core = 159
+					remove_state_core = 160
+					remove_state_core = 887
+				}
+				if = {
+					limit = {
+						BYZ = {
+							is_in_faction_with = PRU
+						}
+					}
+					if = {
+						limit = {
+							BYZ = {
+								has_country_flag = byz_imperia_politic
+							}
+						}
+						BYZ = { 
+							transfer_state = 102
+							transfer_state = 103
+							transfer_state = 109
+							transfer_state = 163
+							transfer_state = 736
+						}
+					}
+					if = {
+						limit = {
+							BYZ = {
+								has_country_flag = byz_democratic_politic
+							}
+						}
+						DAL = {
+							transfer_state = 102
+							transfer_state = 103
+							transfer_state = 109
+							transfer_state = 163
+							transfer_state = 736
+						}
+					}
+					BYZ = { set_country_flag = BYZ_vs_AUS_win }
+					AUS = {
+						remove_state_core = 102
+						remove_state_core = 103
+						remove_state_core = 109
+						remove_state_core = 163
+						remove_state_core = 736
+					}
+				}
+				if = {
+					limit = {
+						NOT = {
+							BYZ = {
+								is_in_faction_with = PRU
+							}
+						}
+					}
+					CRO = {	
+						transfer_state = 103
+						transfer_state = 109
+						transfer_state = 163
+						add_state_core = 103
+						add_state_core = 109
+						add_state_core = 163
+					}
+					SLO = {
+						transfer_state = 102
+						transfer_state = 736
+						add_state_core = 102
+						add_state_core = 736
+					}
+					AUS = {
+						remove_state_core = 102
+						remove_state_core = 103
+						remove_state_core = 109
+						remove_state_core = 163
+						remove_state_core = 736
+					}
+				}
+				PRU = { puppet = BOH }
+				PRU = {
+					transfer_state = 69
+					add_state_core = 69
+					transfer_state = 810
+					add_state_core = 810
+				}
+				AUS = {
+					remove_state_core = 69
+					remove_state_core = 810
+				}
+				BOH = {
+					set_politics = { ruling_party = authoritarian elections_allowed = no }
+					set_popularities = {
+						democratic = 24
+						socialism = 6
+						reactionist = 26
+						authoritarian = 44
+					}
+					add_country_leader_role = {
+						character = BOH_Moris_fon_Bissing
+						promote_leader = yes
+						country_leader = {
+							ideology = centrism
+							expire = "1900.1.1.1"
+							traits = { }
+						}
+					}
+				}
+				if = {
+					limit = {
+						VLH = {
+							has_country_flag = VLH_CR
+						}
+					}
+					VLH = {
+						create_faction = ANTI-HUNGARY-ALLIENCE
+					}
+					GLA = {
+						country_event = { id = te.13 hours = 12 }
+					}
+					VLH = {
+						country_event = { id = te.14 days = 28 }
 					}
 				}
 				if = {
 					limit = {
 						AUS = {
-							has_country_flag = leader_of_punished_coalition
+							owns_state = 902
 						}
 					}
-					every_country = {
+					if = {
 						limit = {
-							has_country_flag = punished_begining
+							country_exists = MOL
 						}
-						white_peace = AUS
-						set_country_flag = punished_fail
-						clr_country_flag = punished_begining
+						MOL = {
+							transfer_state = 902
+							add_state_core = 902
+						}
+					}
+					if = {
+						limit = {
+							NOT = {
+								country_exists = MOL
+							}
+						}
+						VLH = {
+							transfer_state = 902
+							add_state_core = 902
+						}
+					}
+					AUS = {
+						remove_state_core = 902
+					}
+				}
+				PRU = { set_country_flag = victory_R_V_A_3 }
+				news_event = { hours = 24 id = news.15 }
+				PRU = { clr_country_flag = PRU_vs_AUS_3 }
+				set_global_flag = german_empire_now_exist
+				if = {
+					limit = {
+						HUN = {
+							has_country_flag = hun_has_revolution_aus
+						}
+					}
+					HUN = {
+						clr_country_flag = hun_has_revolution_aus
+						remove_ideas = revolution_power
 					}
 				}
 				if = {
 					limit = {
-						FRN = {
-							has_country_flag = leader_of_punished_coalition
+						GLA = {
+							has_country_flag = gla_has_revolution_aus
 						}
 					}
-					every_country = {
-						limit = {
-							has_country_flag = punished_begining
-						}
-						white_peace = FRN
-						set_country_flag = punished_fail
-						clr_country_flag = punished_begining
+					GLA = {
+						clr_country_flag = gla_has_revolution_aus
+						remove_ideas = revolution_power
 					}
-				}		
+				}
+				if = {
+					limit = {
+						VEN = {
+							has_country_flag = ven_has_revolution_aus
+						}
+					}
+					VEN = {
+						clr_country_flag = ven_has_revolution_aus
+						remove_ideas = revolution_power
+					}
+				}
 			}
-		}
-	}		
-	on_state_control_changed = {
-		effect = {
+			#AUS win Hungary
 			if = {
 				limit = {
-					has_global_flag = PRU_VS_AUS_1
+					tag = HUN
+					HUN = {
+						has_country_flag = hun_has_revolution_aus
+					}
+					HUN = {
+						has_war_with = AUS
+					}
+				}
+				AUS = {
+					annex_country = {
+						target = HUN
+						transfer_troops = no
+					}
+				}
+				HUN = {
+					clr_country_flag = hun_has_revolution_aus
+					remove_ideas = revolution_power
+				}
+			}
+			#AUS win Galisian
+			if = {
+				limit = {
+					tag = GLA
+					GLA = {
+						has_country_flag = gla_has_revolution_aus
+					}
+					GLA = {
+						has_war_with = AUS
+					}
+				}
+				AUS = {
+					annex_country = {
+						target = GLA
+						transfer_troops = no
+					}
+				}
+				GLA = {
+					clr_country_flag = gla_has_revolution_aus
+					remove_ideas = revolution_power
+				}
+			}
+			#AUS win Venetian
+			if = {
+				limit = {
+					tag = VEN
+					VEN = {
+						has_country_flag = ven_has_revolution_aus
+					}
+					VEN = {
+						has_war_with = AUS
+					}
+				}
+				AUS = {
+					annex_country = {
+						target = VEN
+						transfer_troops = no
+					}
+				}
+				VEN = {
+					clr_country_flag = ven_has_revolution_aus
+					remove_ideas = revolution_power
+				}
+			}
+		}
+	}
+	on_state_control_changed = {
+		effect = {
+			#First Prussian-Austrian war
+			if = {
+				limit = {
+					PRU = {
+						has_country_flag = PRU_VS_AUS_1
+					}
 					PRU = {
 						has_war_with = AUS
 					}
@@ -7035,7 +7666,84 @@ on_actions = {
 				PRU = { set_country_flag = victory_R_V_A_1 }
 				PRU = { set_cosmetic_tag = PRUNGU }
 				news_event = { hours = 24 id = news.2 }
-				clr_global_flag = PRU_VS_AUS_1
+				PRU = { clr_country_flag = PRU_vs_AUS_1 }
+			}
+			#Second Prussian-Austrian war
+			if = {
+				limit = {
+					PRU = {
+						has_country_flag = PRU_VS_AUS_2
+					}
+					PRU = {
+						has_war_with = AUS
+					}
+					OR = {
+						9 = {
+							controller = {
+								OR = {
+									tag = PRU
+									is_subject_of = PRU
+									is_in_faction_with = PRU
+								}
+							}
+						}
+						4 = {
+							controller = {
+								OR = {
+									tag = PRU
+									is_subject_of = PRU
+									is_in_faction_with = PRU
+								}
+							}
+						}
+					}
+				}
+				PRU = { white_peace = AUS }
+				PRU = { set_country_flag = victory_R_V_A_2 }
+				PRU = { clr_country_flag = PRU_vs_AUS_2 }
+				AUS = { dismantle_faction = yes }
+				if = {
+					limit = {
+						has_country_flag = time_member_of_allience
+						NOT = {
+							tag = PRU
+						}
+					}
+					leave_faction = yes
+					clr_country_flag = time_member_of_allience
+				}
+				every_other_country = {
+					limit = {
+						OR = {
+							has_country_flag = german_union_for_prussian
+							has_country_flag = german_union_for_austrian
+						}
+						OR = {
+							tag = BAV
+							tag = VUR
+							tag = HOH
+							tag = BAD
+							tag = ELS
+						}
+					}
+					PRU = {
+						annex_country = { target = PREV transfer_troops = no }
+					}
+				}
+				every_other_country = {
+					limit = {
+						has_country_flag = german_union_for_austrian
+					}
+					clr_country_flag = german_union_for_austrian
+					remove_from_array = { global.german_union_for_aus = ROOT }
+					set_country_flag = german_union_for_prussian
+					add_to_array = { global.german_union_for_pru = ROOT }
+				}
+				AUS = {
+					remove_from_array = { global.german_union_leader = AUS }
+					remove_ideas = creater_of_saint_allience_idea
+				}
+				news_event = { hours = 24 id = news.13 }
 			}
 		}
 	}

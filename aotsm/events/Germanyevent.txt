@@ -222,22 +222,35 @@ country_event = {
 			factor = 10
 		}
 		hidden_effect = { 
-			PRU = {
-				annex_country = { target = BAD transfer_troops = yes }
-				annex_country = { target = BAV transfer_troops = yes }
-				annex_country = { target = VUR transfer_troops = yes }
+			every_other_country = {
+				limit = {
+					OR = {
+						has_country_flag = german_union_for_prussian
+						has_country_flag = german_union_for_austrian
+					}
+					OR = {
+						tag = BAV
+						tag = VUR
+						tag = HOH
+						tag = BAD
+						tag = ELS
+					}
+				}
+				PRU = {
+					annex_country = { target = PREV transfer_troops = no }
+				}
 			}
-			BAD = {
-				remove_state_core = 828
-				remove_state_core = 50
+			every_other_country = {
+				limit = {
+					has_country_flag = german_union_for_austrian
+				}
+				clr_country_flag = german_union_for_austrian
+				remove_from_array = { global.german_union_for_aus = ROOT }
+				set_country_flag = german_union_for_prussian
+				add_to_array = { global.german_union_for_pru = ROOT }
 			}
-			VUR = {
-				remove_state_core = 808
-			}
-			BAV = {
-				remove_state_core = 54
-				remove_state_core = 53
-				remove_state_core = 52
+			AUS = {
+				remove_from_array = { global.german_union_leader = AUS }
 			}
 			PRU = { set_country_flag = victory_R_V_A_2 }
 		}
@@ -249,13 +262,28 @@ country_event = {
 			factor = 90
 		}
 		hidden_effect = {
-				AUS = {
-					create_faction = "Austrian_sphere"
+			every_other_country = {
+				limit = {
+					has_country_flag = german_union_for_prussian
+					NOT = {
+						tag = PRU
+					}
 				}
-				AUS = { add_to_faction = BAD }
-				AUS = { add_to_faction = VUR }
-				AUS = { add_to_faction = BAV }
+				PRU = { add_to_faction = PREV }
+				PREV = {
+					set_country_flag = time_member_of_allience
+				}
 			}
+			AUS = {
+				create_faction = "Austrian_sphere"
+			}
+			every_other_country = {
+				limit = {
+					has_country_flag = german_union_for_austrian
+				}
+				AUS = { add_to_faction = PREV }
+			}
+		}
 		PRU = {
 			declare_war_on = {
 				target = AUS
@@ -290,6 +318,11 @@ country_event = {
 				type = annex_everything
 			}
 		}
+		hidden_effect = {
+			AUS = {
+				add_ideas = fight_for_empire_1
+			}
+		}
 	}
 	
 	option = {
@@ -304,6 +337,11 @@ country_event = {
 			}
 		}
 		BYZ = { country_event = byz.7 }
+		hidden_effect = {
+			AUS = {
+				add_ideas = fight_for_empire_1
+			}
+		}
 	}
 }
 
@@ -500,6 +538,53 @@ country_event = {
 }
 
 country_event = {
+	id = gerultimate.7
+	title = gerultimate.7.t
+	desc = gerultimate.7.d
+	picture = GFX_report_event_generic_read_write
+	
+	is_triggered_only = yes
+	
+	fire_only_once = no
+	
+	option = {
+		name = gerultimate.7.a	
+		ai_chance = {
+			factor = 25
+			modifier = {
+				factor = 0
+				has_country_flag = german_union_for_prussian
+			}
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+			}
+		}
+		set_country_flag = PRU_war_with_you
+		PRU = {
+			declare_war_on = {
+				target = ROOT
+				type = annex_everything 
+			}
+		}
+	}
+	
+	option = {
+		name = gerultimate.7.b
+		ai_chance = {
+			factor = 75
+		}
+		PRU = {
+			annex_country = {
+				target = ROOT
+				transfer_troops = no
+			}
+		}
+	}
+	
+}
+
+country_event = {
 	id = ger.1
 	title = ger.1.t
 	desc = ger.1.d
@@ -514,18 +599,13 @@ country_event = {
 		PRU = { set_country_flag = pru_shot }
 		add_manpower = -1
 		kill_country_leader = yes
-		create_country_leader = {
-			name = "PRU_Otton_Bismark"
-			desc = "POLITICS_OTTON_FON_BISMARK_DESC"
-			picture = "gfx/leaders/PRU/Portrait_Bismark.dds"
-			expire = "1900.1.1"
-			ideology = conservatism
-			traits = {
-			}
-		}
+		promote_character = PRU_Otton_Bismark
 		set_politics = { ruling_party = authoritarian elections_allowed = no }
 		add_stability = -0.25
-		news_event = { hours = 24 id = news.17 }
+		news_event = {
+			id = news.17
+			days = 1
+		}
 		RUS = { country_event = { id = ger.9 days = 2 } }
 	}
 }	
@@ -865,7 +945,7 @@ country_event = {
 	option = {
 		name = ger.7.a 
 		ai_chance = {
-			factor = 50
+			factor = 25
 			modifier = {
 				factor = 0
 				is_historical_focus_on = yes
@@ -877,7 +957,7 @@ country_event = {
 	option = {
 		name = ger.7.b 
 		ai_chance = {
-			factor = 50
+			factor = 75
 		}
 		set_country_flag = pru_autharitarian
 		country_event = { id = ger.8 days = 14 } 
@@ -897,7 +977,7 @@ country_event = {
 	option = {
 		name = ger.8.a 
 		ai_chance = {
-			factor = 50
+			factor = 10
 			modifier = {
 				factor = 0
 				is_historical_focus_on = yes
@@ -909,7 +989,7 @@ country_event = {
 	option = {
 		name = ger.8.b 
 		ai_chance = {
-			factor = 50
+			factor = 90
 		}
 		set_country_flag = pru_kaiser
 	}
@@ -1747,6 +1827,35 @@ country_event = {
 		}
 	}
 	
+}
+
+country_event = {
+	id = ger.15 #annex of Elsas
+	title = ger.15.t
+	desc = ger.15.d
+	picture = GFX_report_event_generic_read_write
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = {
+		name = ger.15.a 
+		custom_effect_tooltip = annex_of_elsase_tt
+		news_event = news.110
+		hidden_effect = {
+			PRU = {
+				annex_country = {
+					target = ELS
+					transfer_troops = no
+				}
+			}
+			PRU = {
+				add_state_core = 28
+				add_state_core = 828
+			}
+		}
+	}
 }
 
 country_event = {
