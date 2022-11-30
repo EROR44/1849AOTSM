@@ -152,6 +152,130 @@ country_event = {
 }
 
 country_event = {
+	id = scadip.2 #Scandinavia prospary
+	title = scadip.2.t
+	desc = scadip.2.d
+	picture = GFX_report_event_canada_treaty
+
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	option = { #yes
+		name = scadip.2.a
+		ai_chance = {
+			factor = 50
+		}
+		SCA = {
+			country_event = {
+				id = sca.3
+				days = 2
+			}
+		}
+		SCA = {
+			transfer_state = 58
+			add_state_core = 58
+			transfer_state = 829
+			add_state_core = 829
+		}
+	}
+	
+	option = { #no
+		name = scadip.2.b
+		ai_chance = {
+			factor = 50
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+			}
+		}
+		SCA = {
+			country_event = {
+				id = sca.4
+				days = 2
+			}
+		}
+	}
+	
+}
+
+country_event = {
+	id = scadip.3 #They say yes
+	title = scadip.3.t
+	desc = scadip.3.d
+	picture = GFX_report_event_canada_treaty
+
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	option = { #yes
+		name = scadip.3.a
+		PRU = {
+			add_to_faction = SCA
+		}
+		if = {
+			limit = {
+				PRU = {
+					has_war_with = RUS
+				}
+			}
+			SCA = {
+				declare_war_on = {
+					target = RUS
+					type = annex_everything
+				}
+			}
+		}
+		if = {
+			limit = {
+				PRU = {
+					has_war_with = CBI
+				}
+			}
+			SCA = {
+				declare_war_on = {
+					target = CBI
+					type = annex_everything
+				}
+			}
+		}
+		if = {
+			limit = {
+				PRU = {
+					has_war_with = FRR
+				}
+			}
+			SCA = {
+				declare_war_on = {
+					target = FRR
+					type = annex_everything
+				}
+			}
+		}
+		news_event = news.116
+	}
+	
+}
+
+country_event = {
+	id = scadip.4 #They say no
+	title = scadip.4.t
+	desc = scadip.4.d
+	picture = GFX_report_event_canada_treaty
+
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	option = { #yes
+		name = scadip.4.a
+		
+	}
+	
+}
+
+country_event = {
 	id = scawar.1 #invasion on Nyfayndland
 	title = scawar.1.t
 	desc = scawar.1.d
