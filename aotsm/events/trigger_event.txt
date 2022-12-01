@@ -652,7 +652,7 @@ country_event = {
 	option = {
 		name = te.13.a
 		ai_chance = {
-			factor = 50
+			factor = 90
 		}
 		VLH = { add_to_faction =  GLA }
 		GLA = { set_country_flag = GLA_with_VLH }
@@ -661,10 +661,16 @@ country_event = {
 	option = {
 		name = te.13.b
 		ai_chance = {
-			factor = 50
+			factor = 10
 			modifier = {
 				factor = 0
 				is_historical_focus_on = yes
+			}
+			modifier = {
+				factor = 0
+				HUN = {
+					is_ai = yes
+				}
 			}
 		}
 	}
@@ -691,9 +697,6 @@ country_event = {
 				type = annex_everything
 			}
 		}
-		VLH = {
-			add_ideas = russian_help
-		}
 		if = {
 			limit = {
 				GLA = { has_country_flag = GLA_with_VLH }
@@ -704,8 +707,11 @@ country_event = {
 					type = annex_everything
 				}
 			}
-			GLA = {
-				add_ideas = russian_help
+		}
+		RUS = {
+			country_event = {
+				id = war_event.1
+				days = 2
 			}
 		}
 		news_event = news.73
