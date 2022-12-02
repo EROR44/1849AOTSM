@@ -1,0 +1,275 @@
+
+add_namespace = war_event
+
+country_event = { #Anti-Hungarian coalition want help
+	id = war_event.1
+	title = war_event.1.t
+	desc = war_event.1.d
+	picture = GFX_report_event_ast_transfer_singapore
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = { #Yes
+		name = war_event.1.a
+		ai_chance = {
+			factor = 75
+			modifier = {
+				factor = 10
+				HUN = {
+					is_ai = yes
+				}
+			}
+		}
+		custom_effect_tooltip = acces_to_help_ahc_tt
+		RUS = {
+			set_country_flag = acces_to_help_ahc
+		}
+		VLH = {
+			country_event = {
+				id = war_event.2
+				days = 2
+			}
+		}
+		if = {
+			limit = {
+				GLA = { has_country_flag = GLA_with_VLH }
+			}
+			GLA = {
+				country_event = {
+					id = war_event.2
+					days = 2
+				}
+			}
+		}
+		news_event = news.117
+	}
+	
+	option = { #No
+		name = war_event.1.b
+		ai_chance = {
+			factor = 25
+			modifier = {
+				factor = 0
+				HUN = {
+					is_ai = yes
+				}
+			}
+		}
+		custom_effect_tooltip = no_acces_to_help_ahc_tt
+		RUS = {
+			set_country_flag = leave_coalition_alone
+		}
+		VLH = {
+			country_event = {
+				id = war_event.3
+				days = 2
+			}
+		}
+		if = {
+			limit = {
+				GLA = { has_country_flag = GLA_with_VLH }
+			}
+			GLA = {
+				country_event = {
+					id = war_event.3
+					days = 2
+				}
+			}
+		}
+	}
+	
+}
+
+country_event = { #Russian say yes
+	id = war_event.2
+	title = war_event.2.t
+	desc = war_event.2.d
+	picture = GFX_report_event_generic_usa_treaty
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = { #Together to victory 
+		name = war_event.2.a
+	}
+	
+}
+
+country_event = { #Russian say no
+	id = war_event.3
+	title = war_event.3.t
+	desc = war_event.3.d
+	picture = GFX_report_event_spr_solidify_the_frontlines
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = { #Sad news
+		name = war_event.3.a
+	}
+	
+}
+
+country_event = { #Volunteers back
+	id = war_event.4
+	title = war_event.4.t
+	desc = war_event.4.d
+	picture = GFX_report_event_canadian_soldiers
+	
+	is_triggered_only = yes
+	
+	fire_only_once = no
+	
+	option = { #God news
+		name = war_event.4.a
+		army_experience = 75
+		add_manpower = manpower_back_vlh
+		add_equipment_to_stockpile = {
+			type = infantry_equipment
+			amount = weapon_back_vlh
+			producer = RUS
+		}
+		
+	}
+	
+}
+
+country_event = { #Volunteers back
+	id = war_event.5
+	title = war_event.4.t
+	desc = war_event.4.d
+	picture = GFX_report_event_canadian_soldiers
+	
+	is_triggered_only = yes
+	
+	fire_only_once = no
+	
+	option = { #God news
+		name = war_event.4.a
+		army_experience = 75
+		add_manpower = manpower_back_gla
+		add_equipment_to_stockpile = {
+			type = infantry_equipment
+			amount = weapon_back_gla
+			producer = RUS
+		}
+	}
+	
+}
+
+country_event = { #What do with Russian
+	id = war_event.6
+	title = war_event.6.t
+	desc = war_event.6.d
+	picture = GFX_report_event_spr_captured_republican
+	
+	is_triggered_only = yes
+	
+	fire_only_once = no
+	
+	option = { #send them back
+		name = war_event.6.a
+		ai_chance = {
+			factor = 25
+		}
+		if = {
+			limit = {
+				RUS = {
+					has_country_flag = rus_send_volonter_to_vlh
+				}
+			}
+			set_variable_to_random = {
+				var = manpower_back_vlh
+				min = 21933
+				max = 38144
+			}
+		}
+		if = {
+			limit = {
+				RUS = {
+					has_country_flag = rus_send_volonter_to_gla
+				}
+			}
+			set_variable_to_random = {
+				var = manpower_back_gla
+				min = 11931
+				max = 39142
+			}
+		}
+		RUS = {
+			country_event = {
+				id = war_event.7
+				days = 2
+			}
+		}
+		
+	}
+	
+	option = { #jail them
+		name = war_event.6.b
+		ai_chance = {
+			factor = 75
+		}
+		RUS = {
+			country_event = {
+				id = war_event.8
+				days = 2
+			}
+		}
+	}
+	
+}
+
+country_event = { #Hungary send our people back
+	id = war_event.7
+	title = war_event.7.t
+	desc = war_event.7.d
+	picture = GFX_report_event_soviet_soldiers
+	
+	is_triggered_only = yes
+	
+	fire_only_once = no
+	
+	option = { #good
+		name = war_event.7.a
+		army_experience = 50
+		if = {
+			limit = {
+				RUS = {
+					has_country_flag = rus_send_volonter_to_vlh
+				}
+			}
+			add_manpower = manpower_back_vlh
+		}
+		if = {
+			limit = {
+				RUS = {
+					has_country_flag = rus_send_volonter_to_gla
+				}
+			}
+			add_manpower = manpower_back_gla
+		}
+	}
+	
+}
+
+country_event = { #Hungary jail our people back
+	id = war_event.8
+	title = war_event.8.t
+	desc = war_event.8.d
+	picture = GFX_report_event_dead_soldiers
+	
+	is_triggered_only = yes
+	
+	fire_only_once = no
+	
+	option = { #What they say?!
+		name = war_event.8.a
+		add_war_support = 0.10
+	}
+	
+}

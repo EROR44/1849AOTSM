@@ -1682,6 +1682,64 @@ country_event = {
 		VLH = { give_guarantee = GLA }
 		GLA = { give_guarantee = VLH }
 		PRU = { add_to_faction = HUN }
+		if = {
+			limit = {
+				RUS = {
+					has_country_flag = rus_send_volonter_to_vlh
+				}
+			}
+			set_variable_to_random = {
+				var = manpower_back_vlh
+				min = 42912
+				max = 59613
+			}
+			set_variable_to_random = {
+				var = weapon_back_vlh
+				min = 711
+				max = 981
+			}
+			VLH = {
+				delete_unit_template_and_units = {
+					division_template = "Russian Volunteers"
+					disband = no
+				}
+			}
+			RUS = {
+				country_event = {
+					id = war_event.4
+					days = 1
+				}
+			}
+		}
+		if = {
+			limit = {
+				RUS = {
+					has_country_flag = rus_send_volonter_to_gla
+				}
+			}
+			set_variable_to_random = {
+				var = manpower_back_gla
+				min = 42912
+				max = 59613
+			}
+			set_variable_to_random = {
+				var = weapon_back_gla
+				min = 711
+				max = 981
+			}
+			GLA = {
+				delete_unit_template_and_units = {
+					division_template = "Russian Volunteers"
+					disband = no
+				}
+			}
+			RUS = {
+				country_event = {
+					id = war_event.5
+					days = 1
+				}
+			}
+		}
 		news_event = news.75
 	}
 }
@@ -1725,6 +1783,24 @@ country_event = {
 		81 = { set_demilitarized_zone = yes }
 		88 = { set_demilitarized_zone = yes }
 		89 = { set_demilitarized_zone = yes }
+		if = {
+			limit = {
+				OR = {
+					RUS = {
+						has_country_flag = rus_send_volonter_to_vlh
+					}
+					RUS = {
+						has_country_flag = rus_send_volonter_to_gla
+					}
+				}
+			}
+			HUN = {
+				country_event = {
+					id = war_event.6
+					days = 1
+				}
+			}
+		}
 		news_event = news.74
 	}
 }
