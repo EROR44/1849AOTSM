@@ -561,6 +561,11 @@ country_event = {
 			surrender_progress > 0.25
 		}
 		has_global_flag = firts_world_war
+		NOT = {
+			SCA = {
+				has_war_with = RUS
+			}
+		}
 	}
 	
 	option = {
@@ -647,7 +652,7 @@ country_event = {
 	option = {
 		name = te.13.a
 		ai_chance = {
-			factor = 50
+			factor = 90
 		}
 		VLH = { add_to_faction =  GLA }
 		GLA = { set_country_flag = GLA_with_VLH }
@@ -656,10 +661,16 @@ country_event = {
 	option = {
 		name = te.13.b
 		ai_chance = {
-			factor = 50
+			factor = 10
 			modifier = {
 				factor = 0
 				is_historical_focus_on = yes
+			}
+			modifier = {
+				factor = 0
+				HUN = {
+					is_ai = yes
+				}
 			}
 		}
 	}
@@ -686,9 +697,6 @@ country_event = {
 				type = annex_everything
 			}
 		}
-		VLH = {
-			add_ideas = russian_help
-		}
 		if = {
 			limit = {
 				GLA = { has_country_flag = GLA_with_VLH }
@@ -699,8 +707,11 @@ country_event = {
 					type = annex_everything
 				}
 			}
-			GLA = {
-				add_ideas = russian_help
+		}
+		RUS = {
+			country_event = {
+				id = war_event.1
+				days = 2
 			}
 		}
 		news_event = news.73
@@ -2376,7 +2387,7 @@ country_event = {
 		MSK = { change_tag_from = ROOT }
 		hidden_effect = {
 			RUS = {
-				 = {
+				RUS_PAVEL_NIKOLAEVICH_IGNATIEVS = {
 					set_nationality = CSG
 				}
 			}
@@ -3331,7 +3342,7 @@ country_event = {
 		CSG = { change_tag_from = ROOT }
 		hidden_effect = {
 			RUS = {
-				RUS_Pavel_Nikolaevich_Ignatiev = {
+				RUS_PAVEL_NIKOLAEVICH_IGNATIEVS = {
 					set_nationality = CSG
 				}
 			}
@@ -4286,7 +4297,7 @@ country_event = {
 		FER = { change_tag_from = ROOT }
 		hidden_effect = {
 			RUS = {
-				RUS_Pavel_Nikolaevich_Ignatiev = {
+				RUS_PAVEL_NIKOLAEVICH_IGNATIEVS = {
 					set_nationality = CSG
 				}
 			}
@@ -5241,7 +5252,7 @@ country_event = {
 		ALS = { change_tag_from = ROOT }
 		hidden_effect = {
 			RUS = {
-				RUS_Pavel_Nikolaevich_Ignatiev = {
+				RUS_PAVEL_NIKOLAEVICH_IGNATIEVS = {
 					set_nationality = CSG
 				}
 			}
@@ -6209,7 +6220,7 @@ country_event = {
 		NKZ = { change_tag_from = ROOT }
 		hidden_effect = {
 			RUS = {
-				RUS_Pavel_Nikolaevich_Ignatiev = {
+				RUS_PAVEL_NIKOLAEVICH_IGNATIEVS = {
 					set_nationality = CSG
 				}
 			}
@@ -7171,7 +7182,7 @@ country_event = {
 		SKZ = { change_tag_from = ROOT }
 		hidden_effect = {
 			RUS = {
-				RUS_Pavel_Nikolaevich_Ignatiev = {
+				RUS_PAVEL_NIKOLAEVICH_IGNATIEVS = {
 					set_nationality = CSG
 				}
 			}
@@ -8125,7 +8136,7 @@ country_event = {
 		}
 		hidden_effect = {
 			RUS = {
-				RUS_Pavel_Nikolaevich_Ignatiev = {
+				RUS_PAVEL_NIKOLAEVICH_IGNATIEVS = {
 					set_nationality = CSG
 				}
 			}
@@ -9282,9 +9293,27 @@ country_event = {
 			id = te.92
 			days = 60
 		}
-		country_event = {
-			id = te.93
-			days = 90
+		if = {
+			limit = {
+				NOT = {
+					SCA = {
+						owns_state = 829
+						owns_state = 58
+					}
+				}
+			}
+			country_event = {
+				id = te.93
+				days = 90
+			}
+		}
+		else = {
+			SCA = {
+				country_event = {
+					id = te.106
+					days = 30
+				}
+			}
 		}
 	}
 	

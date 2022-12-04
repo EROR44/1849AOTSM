@@ -337,6 +337,7 @@ byz_super_boost_light_for_modern_armor = {
 	enable = {
 		OR = {
 			has_tech = main_battle_tank
+			has_tech = main_battle_tank_chassis
 		}
 		NOT = { has_template_ai_majority_unit = modern_armor }
 	}
@@ -819,6 +820,50 @@ byz_invasion_in_italy = {
 		value = 200
 	}
 
+}
+
+byz_invasion_in_black_sea = {
+	
+	allowed = {
+		original_tag = BYZ
+	}
+	
+	enable = {
+		date > 1854.10.15
+		BYZ = {
+			has_war_with = RUS
+		}
+	}
+
+	abort = {
+		OR = {
+			NOT = {
+				BYZ = {
+					has_war_with = RUS
+				}
+			}
+			NOT = {
+				RUS = {
+					controls_state = 137
+					controls_state = 192
+					controls_state = 196
+					controls_state = 197
+					controls_state = 200
+					controls_state = 218
+					controls_state = 227
+					controls_state = 234
+					controls_state = 858
+				}
+			}
+		}
+	}
+
+	ai_strategy = {
+		type = invasion_unit_request
+		strategic_region = 131
+		value = 200
+	}
+	
 }
 
 dont_late_inavasions_in_britain = {

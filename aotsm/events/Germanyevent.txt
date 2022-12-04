@@ -6,6 +6,7 @@
 add_namespace = ger
 add_namespace = gerultimate
 add_namespace = ger_byz
+add_namespace = ger_frr
 
 country_event = {
 	id = gerultimate.1
@@ -23,7 +24,10 @@ country_event = {
 			factor = 10
 			modifier = {
 				factor = 0
-				is_historical_focus_on = yes
+				OR = {
+					is_historical_focus_on = yes
+					PRU = { has_country_flag = PRU_AI_RANDOM_HISTORICAL }
+				}
 			}
 		}
 		hidden_effect = { 
@@ -84,6 +88,12 @@ country_event = {
 				}
 				AUS = { add_to_faction = PREV }
 			}
+			PRU = {
+				country_event = {
+					id = ger.16
+					days = 1
+				}
+			}
 		}
 		PRU = {
 			declare_war_on = {
@@ -112,7 +122,10 @@ country_event = {
 			factor = 1
 			modifier = {
 				factor = 0
-				is_historical_focus_on = yes
+				OR = {
+					is_historical_focus_on = yes
+					PRU = { has_country_flag = PRU_AI_RANDOM_HISTORICAL }
+				}
 			}
 		}
 		PRU = {
@@ -197,7 +210,10 @@ country_event = {
 			factor = 20
 			modifier = {
 				factor = 0
-				is_historical_focus_on = yes
+				OR = {
+					is_historical_focus_on = yes
+					PRU = { has_country_flag = PRU_AI_RANDOM_HISTORICAL }
+				}
 			}
 		}
 		PRU = { add_to_faction = HOL }
@@ -309,7 +325,10 @@ country_event = {
 			factor = 10
 			modifier = {
 				factor = 0
-				is_historical_focus_on = yes
+				OR = {
+					is_historical_focus_on = yes
+					PRU = { has_country_flag = PRU_AI_RANDOM_HISTORICAL }
+				}
 			}
 		}
 		PRU = {
@@ -557,7 +576,10 @@ country_event = {
 			}
 			modifier = {
 				factor = 0
-				is_historical_focus_on = yes
+				OR = {
+					is_historical_focus_on = yes
+					PRU = { has_country_flag = PRU_AI_RANDOM_HISTORICAL }
+				}
 			}
 		}
 		set_country_flag = PRU_war_with_you
@@ -948,7 +970,10 @@ country_event = {
 			factor = 25
 			modifier = {
 				factor = 0
-				is_historical_focus_on = yes
+				OR = {
+					is_historical_focus_on = yes
+					PRU = { has_country_flag = PRU_AI_RANDOM_HISTORICAL }
+				}
 			}
 		}
 		set_country_flag = pru_bismark
@@ -980,7 +1005,10 @@ country_event = {
 			factor = 10
 			modifier = {
 				factor = 0
-				is_historical_focus_on = yes
+				OR = {
+					is_historical_focus_on = yes
+					PRU = { has_country_flag = PRU_AI_RANDOM_HISTORICAL }
+				}
 			}
 		}
 		set_country_flag = pru_junker
@@ -1142,6 +1170,109 @@ country_event = {
 			IRE = {
 				leave_faction = yes
 				remove_ideas = CBI_free_irland
+			}
+			if = {
+				limit = {
+					NOT = {
+						IRE = {
+							controls_state = 119
+						}
+					}
+				}
+				IRE = {
+					transfer_state = 119
+					add_state_core = 119
+				}
+				CBI = {
+					remove_state_core = 119
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						country_exists = IRE
+					}
+				}
+				if = {
+					limit = {
+						113 = {
+							owner = {
+								OR = {
+									tag = CBI
+									is_subject_of = CBI
+									is_in_faction_with = CBI
+								}
+							}
+						}
+					}
+					IRE = {
+						transfer_state = 113
+						add_state_core = 113
+					}
+					CBI = {
+						remove_state_core = 113
+					}
+				}
+				if = {
+					limit = {
+						119 = {
+							owner = {
+								OR = {
+									tag = CBI
+									is_subject_of = CBI
+									is_in_faction_with = CBI
+								}
+							}
+						}
+					}
+					IRE = {
+						transfer_state = 119
+						add_state_core = 119
+					}
+					CBI = {
+						remove_state_core = 119
+					}
+				}
+				if = {
+					limit = {
+						119 = {
+							owner = {
+								OR = {
+									tag = CBI
+									is_subject_of = CBI
+									is_in_faction_with = CBI
+								}
+							}
+						}
+					}
+					IRE = {
+						transfer_state = 134
+						add_state_core = 134
+					}
+					CBI = {
+						remove_state_core = 134
+					}
+				}
+				if = {
+					limit = {
+						119 = {
+							owner = {
+								OR = {
+									tag = CBI
+									is_subject_of = CBI
+									is_in_faction_with = CBI
+								}
+							}
+						}
+					}
+					IRE = {
+						transfer_state = 135
+						add_state_core = 135
+					}
+					CBI = {
+						remove_state_core = 135
+					}
+				}
 			}
 			every_country = {
 				limit = {
@@ -1854,6 +1985,114 @@ country_event = {
 				add_state_core = 28
 				add_state_core = 828
 			}
+			FRR = {
+				country_event = {
+					id = ger_frr.1
+					hours = 4
+				}
+			}
+			MEC = {
+				country_event = {
+					id = mec.1
+					days = 79
+				}
+			}
+		}
+	}
+}
+
+country_event = {
+	id = ger.16 #Fraternization on front
+	title = ger.16.t
+	desc = ger.16.d
+	picture = GFX_report_event_german_volunteers
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = {
+		name = ger.6.a 
+		news_event = news.118
+		PRU = {
+			add_timed_idea = {
+				idea = pru_fraternization_on_front
+				days = 40
+			}
+		}
+	}
+}
+
+country_event = {
+	id = ger_frr.1 #Reaction on annex of Elsas
+	title = ger_frr.1.t
+	desc = ger_frr.1.d
+	picture = GFX_report_event_soldiers_in_france
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = { #Protest
+		name = ger_frr.1.a 
+		ai_chance = {
+			factor = 50
+			modifier = {
+				FRR = {
+					has_government = socialism
+				}
+				factor = 2
+			}
+			modifier = {
+				FRR = {
+					has_government = democratic
+				}
+				factor = 1.5
+			}
+		}
+		add_war_support = 0.05
+	}
+	
+	option = { #attack!
+		name = ger_frr.1.b
+		ai_chance = {
+			factor = 50
+			modifier = {
+				FRR = {
+					has_government = reactionist
+				}
+				factor = 2
+			}
+			modifier = {
+				FRR = {
+					has_government = authoritarian
+				}
+				factor = 1.5
+			}
+		}
+		add_war_support = 0.075
+		start_border_war = {
+			change_state_after_war = no
+			attacker = {
+				state = 862
+				num_provinces = 2
+				on_win = abw.10
+				on_lose = abw.9
+			}	
+			defender = {
+				state = 28
+				num_provinces = 3
+				on_win = abw.9
+				on_lose = abw.10
+			}
+		}
+		hidden_effect = {
+			set_border_war_data = {
+				attacker = 862
+				defender = 28
+				defender_modifier = 0.30
+				combat_width = 120
+			}
 		}
 	}
 }
@@ -1874,7 +2113,10 @@ country_event = {
 			factor = 10
 			modifier = {
 				factor = 0
-				is_historical_focus_on = yes
+				OR = {
+					is_historical_focus_on = yes
+					PRU = { has_country_flag = PRU_AI_RANDOM_HISTORICAL }
+				}
 			}
 		}
 	}
@@ -1885,6 +2127,9 @@ country_event = {
 			factor = 90
 		}
 		PRU = { add_to_faction = BYZ }
+		hidden_effect = {
+			news_event = news.113
+		}
 	}
 }
 
@@ -1904,7 +2149,10 @@ country_event = {
 			factor = 10
 			modifier = {
 				factor = 0
-				is_historical_focus_on = yes
+				OR = {
+					is_historical_focus_on = yes
+					PRU = { has_country_flag = PRU_AI_RANDOM_HISTORICAL }
+				}
 			}
 		}
 	}
@@ -1935,7 +2183,10 @@ country_event = {
 			factor = 10
 			modifier = {
 				factor = 0
-				is_historical_focus_on = yes
+				OR = {
+					is_historical_focus_on = yes
+					PRU = { has_country_flag = PRU_AI_RANDOM_HISTORICAL }
+				}
 			}
 		}
 	}
@@ -1972,7 +2223,10 @@ country_event = {
 			factor = 10
 			modifier = {
 				factor = 0
-				is_historical_focus_on = yes
+				OR = {
+					is_historical_focus_on = yes
+					PRU = { has_country_flag = PRU_AI_RANDOM_HISTORICAL }
+				}
 			}
 		}
 	}
