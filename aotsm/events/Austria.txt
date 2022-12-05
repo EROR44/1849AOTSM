@@ -4,6 +4,7 @@
 #################
 
 add_namespace = aus
+add_namespace = aus_diplomacy
 add_namespace = aus_kaiser
 add_namespace = aus_dem
 add_namespace = aus_ref
@@ -21,6 +22,9 @@ country_event = {
 	
 	option = {
 		name = aus.1.a
+		ai_chance = {
+			factor = 0
+		}
 		add_timed_idea = {
 			idea = AUS_additional_education_of_kaiser
 			days = 365
@@ -36,8 +40,176 @@ country_event = {
 	
 	option = {
 		name = aus.1.b	
+		ai_chance = {
+			factor = 100
+		}
 		set_country_flag = AUS_no_story_of_empire
 		custom_effect_tooltip = austrian_story_no_tt
+	}
+}
+
+country_event = { #Will country help Aus
+	id = aus_diplomacy.1
+	title = aus_diplomacy.1.t
+	desc = aus_diplomacy.1.d
+	picture = GFX_report_event_gre_city_siege
+	
+	is_triggered_only = yes
+	
+	fire_only_once = no
+	
+	option = { #Yes
+		name = aus_diplomacy.1.a
+		ai_chance = {
+			factor = 75
+		}
+		add_to_array = { global.austrian_help = ROOT }
+		AUS = {
+			country_event = {
+				id = aus_diplomacy.2
+				days = 1
+			}
+		}
+		if = {
+			limit = {
+				tag = RUS
+			}
+			AUS = {
+				add_timed_idea = {
+					idea = rus_help_to_aus
+					days = 120
+				}
+			}
+		}
+		if = {
+			limit = {
+				tag = FRR
+			}
+			AUS = {
+				add_timed_idea = {
+					idea = frr_help_to_aus
+					days = 120
+				}
+			}
+		}
+		if = {
+			limit = {
+				tag = CBI
+			}
+			AUS = {
+				add_timed_idea = {
+					idea = cbi_help_to_aus
+					days = 120
+				}
+			}
+		}
+		if = {
+			limit = {
+				NOT = {
+					any_country = {
+						has_country_flag = first_place_in_help_to_aus
+					}
+				}
+			}
+			set_country_flag = first_place_in_help_to_aus
+		}
+		if = {
+			limit = {
+				NOT = {
+					has_country_flag = first_place_in_help_to_aus
+				}
+				NOT = {
+					any_country = {
+						has_country_flag = second_place_in_help_to_aus
+					}
+				}
+			}
+			set_country_flag = second_place_in_help_to_aus
+		}
+		if = {
+			limit = {
+				NOT = {
+					has_country_flag = first_place_in_help_to_aus
+				}
+				NOT = {
+					has_country_flag = second_place_in_help_to_aus
+				}
+				NOT = {
+					any_country = {
+						has_country_flag = third_place_in_help_to_aus
+					}
+				}
+			}
+			set_country_flag = third_place_in_help_to_aus
+		}
+		ROOT = {
+			set_country_flag = chose_help_to_aus_flag
+		}
+	}
+	
+	option = { #No
+		name = aus_diplomacy.1.b	
+		ai_chance = {
+			factor = 25
+			modifier = {
+				factor = 0
+				has_game_rule = {
+					rule = AUS_fall_or_not
+					option = AUS_TRY_TO_NO_FALL
+				}
+			}
+		}
+		AUS = {
+			country_event = {
+				id = aus_diplomacy.3
+				days = 1
+			}
+		}
+	}
+}
+
+country_event = { #They say yes
+	id = aus_diplomacy.2
+	title = aus_diplomacy.2.t
+	desc = aus_diplomacy.2.d
+	picture = GFX_report_event_spain_civil_war_volunteers_02
+	
+	is_triggered_only = yes
+	
+	fire_only_once = no
+	
+	option = { 
+		name = aus_diplomacy.2.a
+	}
+}
+
+country_event = { #They say no
+	id = aus_diplomacy.3
+	title = aus_diplomacy.3.t
+	desc = aus_diplomacy.3.d
+	picture = GFX_report_event_gre_city_siege
+	
+	is_triggered_only = yes
+	
+	fire_only_once = no
+	
+	option = { 
+		name = aus_diplomacy.3.a
+	}
+}
+
+country_event = { #AUS ask for peace(Fun Event)
+	id = aus_diplomacy.4
+	title = aus_diplomacy.4.t
+	desc = aus_diplomacy.4.d
+	picture = GFX_report_event_gre_allied_diplomacy_military
+	
+	is_triggered_only = yes
+	
+	fire_only_once = no
+	
+	option = { #They say only no :3
+		name = aus_diplomacy.4.a
 	}
 }
 
