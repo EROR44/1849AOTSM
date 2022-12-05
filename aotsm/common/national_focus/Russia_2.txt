@@ -112,6 +112,10 @@ focus_tree = {
 		y = 1
 		cost = 5
 		
+		available = {
+			has_completed_focus = RUS_stabilisate_economic
+		}
+		
 		relative_position_id = RUS_infrastructure_development
 		prerequisite = { focus = RUS_infrastructure_development }
 		prerequisite = { focus = RUS_investment_in_civil_industry }
@@ -529,10 +533,34 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_INDUSTRY }
 
 		completion_reward = {
-			swap_ideas = {
-				remove_idea = low_investment_level
-				add_idea = average_investment_level	
+			if = { 
+				limit = {
+					ROOT = { has_idea = average_investment_level }
+				}
+				swap_ideas = {
+					remove_idea = average_investment_level 
+					add_idea = hight_investment_level	
+				}
 			}
+			if = { 
+				limit = {
+					ROOT = { has_idea = low_investment_level }
+				}
+				swap_ideas = {
+					remove_idea = low_investment_level  
+					add_idea = average_investment_level
+				}
+			}
+			if = { 
+				limit = {
+					ROOT = { has_idea = average_investment_level }
+				}
+				swap_ideas = {
+					remove_idea = average_investment_level 
+					add_idea = hight_investment_level	
+				}
+			}
+
 			RUS_add_5_liberal_influence = yes
 			RUS_add_1_liberal_opinion = yes
 		}
@@ -594,7 +622,7 @@ focus_tree = {
 		
 		x = 8
 		y = 0
-		cost = 5
+		cost = 2
 		
 		mutually_exclusive = { focus = RUS_the_opposition_miting }
 
@@ -605,16 +633,21 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
 		completion_reward = {
-			
+			country_event = { id = rusPol.1 }
 		}
 	}
+	
 	focus = {
 		id = RUS_the_opposition_miting
 		icon = GFX_goal_generic_improve_relations
 		
 		x = 8
 		y = 0
-		cost = 5
+		cost = 2
+		
+		available = {
+			always = no
+		}
 		
 		mutually_exclusive = { focus = RUS_end_of_political_isolation }
 
@@ -625,9 +658,9 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
 		completion_reward = {
-			RUS_add_10_monarhist_influence
-			RUS_add_10_socialist_influence
-			RUS_add_10_army_influence
+			RUS_add_10_monarhist_influence = yes
+			RUS_add_10_socialist_influence = yes
+			RUS_add_10_army_influence = yes
 		}
 	}
 
@@ -639,7 +672,7 @@ focus_tree = {
 		
 		x = -1
 		y = 1
-		cost = 5
+		cost = 1
 
 		relative_position_id = RUS_end_of_political_isolation
 		prerequisite = { focus = RUS_end_of_political_isolation }
@@ -649,7 +682,7 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
 		completion_reward = {
-			
+			country_event = { id = rusPol.2 }
 		}
 	}
 	
@@ -659,7 +692,7 @@ focus_tree = {
 		
 		x = 1
 		y = 1
-		cost = 5
+		cost = 1
 
 		relative_position_id = RUS_end_of_political_isolation
 		prerequisite = { focus = RUS_end_of_political_isolation }
@@ -669,28 +702,7 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
 		completion_reward = {
-			
-		}
-	}
-	
-	focus = {
-		id = RUS_resume_reforms
-		icon = GFX_goal_generic_improve_relations
-		
-		x = 0
-		y = 2
-		cost = 5
-
-		relative_position_id = RUS_end_of_political_isolation
-		prerequisite = { focus = RUS_the_new_anbitions_of_old_empire }
-		prerequisite = { focus = RUS_stabilisate_economic }
-		
-		available_if_capitulated = yes
-		
-		search_filters = { FOCUS_FILTER_POLITICAL }
-
-		completion_reward = {
-			
+			country_event = { id = rusPol.3 }
 		}
 	}
 	
@@ -700,7 +712,7 @@ focus_tree = {
 		
 		x = 0
 		y = 2
-		cost = 5
+		cost = 1
 
 		relative_position_id = RUS_end_of_political_isolation
 		prerequisite = { focus = RUS_the_new_anbitions_of_old_empire }
@@ -711,7 +723,7 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
 		completion_reward = {
-			
+			country_event = { id = rusPol.4 }
 		}
 	}
 	
@@ -732,7 +744,7 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
 		completion_reward = {
-			
+			country_event = { id = rusPol.5 }
 		}
 	}
 	
@@ -761,7 +773,7 @@ focus_tree = {
 ##############################MILUTIN_BLOCK#################################
 
 	focus = {
-		id = RUS_milutin_da
+		id = RUS_milutin_da 
 		icon = GFX_focus_rus_milutin_da
 		
 		x = 0
@@ -778,6 +790,241 @@ focus_tree = {
 
 		completion_reward = {
 			
+		}
+	}
+	
+	focus = {
+		id = RUS_promotion_of_market_reforms
+		icon = GFX_focus_rus_market_reforms
+		
+		x = -2
+		y = 1
+		cost = 5
+		
+		available = {
+			NOT = { has_idea = RUS_invest_in_industry }
+		}
+
+		relative_position_id = RUS_milutin_da
+		prerequisite = { focus = RUS_milutin_da }
+
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			
+			add_timed_idea = {
+				days = 365
+				idea = RUS_market_reforms
+			}
+		}
+	}
+	
+	focus = {
+		id = RUS_expand_petrograd_birja
+		icon = GFX_focus_rus_expand_petrograd_birja
+		
+		x = 0
+		y = 1
+		cost = 5
+
+		relative_position_id = RUS_milutin_da
+		prerequisite = { focus = RUS_milutin_da }
+
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			
+		}
+	}
+	
+	focus = {
+		id = RUS_subsidies_for_smal_companies
+		icon = GFX_focus_rus_industrial_subsidies
+		
+		x = -1
+		y = 1
+		cost = 5
+
+		relative_position_id = RUS_promotion_of_market_reforms
+		prerequisite = { focus = RUS_promotion_of_market_reforms }
+
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = RUS_dependence_from_import
+				add_idea = RUS_dependence_from_import_1
+			}
+		}
+	}
+	
+	focus = {
+		id = RUS_fight_witch_nepotism
+		icon = GFX_focus_rus_fight_with_the_nepotism
+		
+		x = 1
+		y = 1
+		cost = 5
+
+		relative_position_id = RUS_promotion_of_market_reforms
+		prerequisite = { focus = RUS_promotion_of_market_reforms }
+
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = regional_corruption
+				add_idea = local_corruption
+			}
+		}	
+	}
+	
+	focus = {
+		id = RUS_russian_national_production
+		icon = GFX_focus_rus_russian_national_production
+		
+		x = 1
+		y = 1
+		cost = 5
+		
+		available = {
+			NOT = { has_idea = RUS_market_reforms }
+		}
+
+		relative_position_id = RUS_subsidies_for_smal_companies
+		prerequisite = { focus = RUS_subsidies_for_smal_companies }
+		prerequisite = { focus = RUS_fight_witch_nepotism }
+
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			add_ideas = RUS_russian_national_production
+		}
+	}
+	
+	focus = {
+		id = RUS_the_question_of_privilege
+		icon = GFX_focus_generic_strike_at_democracy1
+		
+		x = 1
+		y = 2
+		cost = 5
+
+		relative_position_id = RUS_milutin_da
+		prerequisite = { focus = RUS_milutin_da }
+
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			
+		}
+	}
+	
+	focus = {
+		id = RUS_antigerman_rithorick
+		icon = GFX_focus_rus_anti_german_society
+		x = -1
+		y = 1
+		cost = 5
+
+		relative_position_id = RUS_the_question_of_privilege
+		prerequisite = { focus = RUS_the_question_of_privilege }
+		prerequisite = { focus = RUS_fight_witch_nepotism }
+
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			
+		}
+	}
+	
+	focus = {
+		id = RUS_trade_war_witch_germany
+		icon = GFX_focus_trade_war_witch_germany
+		
+		x = -1
+		y = 1
+		cost = 5
+
+		relative_position_id = RUS_antigerman_rithorick
+		prerequisite = { focus = RUS_antigerman_rithorick }
+		prerequisite = { focus = RUS_russian_national_production }
+
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			
+		}
+	}
+	
+	focus = {
+		id = RUS_education_reform 
+		icon = GFX_focus_rus_education_reform
+		
+		x = 2
+		y = 1
+		cost = 5
+
+		relative_position_id = RUS_milutin_da
+		prerequisite = { focus = RUS_milutin_da }
+
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			if = { 
+				limit = {
+					ROOT = { has_idea = average_investment_level }
+				}
+				swap_ideas = {
+					remove_idea = average_investment_level 
+					add_idea = hight_investment_level	
+				}
+			}
+			if = { 
+				limit = {
+					ROOT = { has_idea = low_investment_level }
+				}
+				swap_ideas = {
+					remove_idea = low_investment_level  
+					add_idea = average_investment_level
+				}
+			}
+			if = { 
+				limit = {
+					ROOT = { has_idea = average_investment_level }
+				}
+				swap_ideas = {
+					remove_idea = average_investment_level 
+					add_idea = hight_investment_level	
+				}
+			}
 		}
 	}
 	
@@ -830,3 +1077,26 @@ focus_tree = {
 			
 		}
 	}
+
+#########################FOREIGN_POLICY##############################
+	
+	focus = {
+		id = RUS_foreign_policy
+		icon = GFX_goal_generic_improve_relations
+		
+		x = 7
+		y = 10
+		cost = 5
+
+		relative_position_id = RUS_investment_in_civil_industry
+		#prerequisite = { focus = RUS_the_opposition_miting }
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			
+		}
+	}
+	
