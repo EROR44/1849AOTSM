@@ -103,9 +103,9 @@ on_actions = {
 			add_to_array = { global.german_union_neutrality = LUX }
 			add_to_array = { global.german_union_neutrality = SWI }
 			
-			set_variable = { help_aus_1_var = 0 }
-			set_variable = { help_aus_2_var = 0 }
-			set_variable = { help_aus_3_var = 0 }
+			set_variable = { global.help_aus_1_var = 0 }
+			set_variable = { global.help_aus_2_var = 0 }
+			set_variable = { global.help_aus_3_var = 0 }
 			
 			FRR = {
 				if = {
@@ -7883,6 +7883,90 @@ on_actions = {
 				PRU = { set_cosmetic_tag = PRUNGU }
 				news_event = { hours = 24 id = news.2 }
 				PRU = { clr_country_flag = PRU_vs_AUS_1 }
+				if = {
+					limit = {
+						AUS = {
+							has_idea = rus_help_to_aus
+						}
+					}
+					AUS = {
+						remove_ideas = rus_help_to_aus
+					}
+				}
+				if = {
+					limit = {
+						AUS = {
+							has_idea = frr_help_to_aus
+						}
+					}
+					AUS = {
+						remove_ideas = frr_help_to_aus
+					}
+				}
+				if = {
+					limit = {
+						AUS = {
+							has_idea = cbi_help_to_aus
+						}
+					}
+					AUS = {
+						remove_ideas = cbi_help_to_aus
+					}
+				}
+				if = {
+					limit = {
+						any_country = {
+							has_country_flag = first_place_in_help_to_aus
+						}
+					}
+					PREV = {
+						add_timed_idea = {
+							idea = aus_reparation_for_help_first
+							days = 180
+						}
+						clr_country_flag = chose_help_to_aus_flag
+						clr_country_flag = first_place_in_help_to_aus
+					}
+					remove_to_array = { global.austrian_help = PREV }
+					AUS = {
+						add_timed_idea = {
+							idea = aus_reparation_for_help_for_aus
+							days = 180
+						}
+					}
+				}
+				if = {
+					limit = {
+						any_country = {
+							has_country_flag = second_place_in_help_to_aus
+						}
+					}
+					PREV = {
+						add_timed_idea = {
+							idea = aus_reparation_for_help_second
+							days = 180
+						}
+						clr_country_flag = chose_help_to_aus_flag
+						clr_country_flag = second_place_in_help_to_aus
+					}
+					remove_to_array = { global.austrian_help = PREV }
+				}
+				if = {
+					limit = {
+						any_country = {
+							has_country_flag = third_place_in_help_to_aus
+						}
+					}
+					PREV = {
+						add_timed_idea = {
+							idea = aus_reparation_for_help_third
+							days = 180
+						}
+						clr_country_flag = chose_help_to_aus_flag
+						clr_country_flag = third_place_in_help_to_aus
+					}
+					remove_to_array = { global.austrian_help = PREV }
+				}
 			}
 			#Second Prussian-Austrian war
 			if = {
