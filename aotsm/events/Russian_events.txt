@@ -71,7 +71,7 @@ country_event = {
 	id = rusPol.4
 	title = rusPol.4.t
 	desc = rusPol.4.d
-	picture = GFX_report_event_molotov_signing_pact
+	picture = GFX_report_event_gre_venizelos_speech
 	
 	is_triggered_only = yes
 	
@@ -82,7 +82,18 @@ country_event = {
 		ai_chance = {
 			factor = 100
 		}
-
+		retire_country_leader = yes
+		set_politics = { ruling_party = authoritarian }
+		add_country_leader_role = {
+			character = RUS_national_council
+			promote_leader = yes
+			
+			country_leader = {
+				expire = "1900.1.1"
+				ideology = elitarism
+				traits = {  }
+			}
+		}
 	}
 }
 
@@ -99,9 +110,92 @@ country_event = {
 	option = {
 		name = rusPol.5.a	
 		ai_chance = {
-			factor = 100
+			factor = 10
+			modifier = {
+				factor = 100
+				is_historical_focus_on = yes
+			}
 		}
-
+		hidden_effect = {
+			retire_country_leader = yes
+			add_popularity = {
+				ideology = democratic
+				popularity = 0.30
+			}
+			set_politics = { ruling_party = democratic }
+			add_country_leader_role = {
+				character = RUS_Dmitry_Alekseevich_Milyutin
+				promote_leader = yes
+				
+				country_leader = {
+					expire = "1900.1.1"
+					ideology = liberalism
+					traits = {  }
+				}
+			}
+			complete_national_focus = RUS_milutin_da
+			news_event = { id = news.50 days = 1 }
+		}
+	}
+	option = {
+		name = rusPol.5.b
+		ai_chance = {
+			factor = 50
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+			}
+		}
+		hidden_effect = {
+			retire_country_leader = yes
+			add_popularity = {
+				ideology = authoritarian
+				popularity = 0.30
+			}
+			set_politics = { ruling_party = authoritarian }
+			add_country_leader_role = {
+				character = RUS_Konstantin_Nikolaevich
+				promote_leader = yes
+				
+				country_leader = {
+					expire = "1900.1.1"
+					ideology = centrism
+					traits = {  }
+				}
+			}
+			complete_national_focus = RUS_romanov_kn
+			news_event = { id = news.51 days = 1 }
+		}
+	}
+	option = {
+		name = rusPol.5.c	
+		ai_chance = {
+			factor = 35
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+			}
+		}
+		hidden_effect = {
+			retire_country_leader = yes
+			add_popularity = {
+				ideology = reactionist
+				popularity = 0.30
+			}
+			set_politics = { ruling_party = reactionist }
+			add_country_leader_role = {
+				character = RUS_Mihail_Fedorovich_Orlov
+				promote_leader = yes
+				
+				country_leader = {
+					expire = "1900.1.1"
+					ideology = paternalism
+					traits = {  }
+				}
+			}
+			complete_national_focus = RUS_orlov_mf
+			news_event = { id = news.52 days = 1 }
+		}
 	}
 }
 
@@ -120,8 +214,76 @@ country_event = {
 	option = {
 		name = rusMil.1.a	
 		ai_chance = {
+			factor = 20
+		}
+		RUS_add_3_conservator_opinion = yes
+		RUS_remove_3_liberal_opinion = yes
+	}
+	option = {
+		name = rusMil.1.b	
+		ai_chance = {
+			factor = 10
+		}
+		RUS_remove_3_conservator_opinion = yes
+		RUS_add_3_liberal_opinion = yes
+	}
+}
+
+country_event = {
+	id = rusMil.2
+	title = rusMil.2.t
+	desc = rusMil.2.d
+	picture = GFX_report_event_molotov_signing_pact
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = {
+		name = rusMil.2.a	
+		ai_chance = {
 			factor = 100
 		}
+		RUS_add_5_army_opinion = yes
+		RUS_add_5_army_influence = yes
+	}
+}
 
+country_event = {
+	id = rusMil.3
+	title = rusMil.3.t
+	desc = rusMil.3.d
+	picture = GFX_report_event_molotov_signing_pact
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = {
+		name = rusMil.3.a	
+		ai_chance = {
+			factor = 100
+		}
+		custom_effect_tooltip = RUS_start_trade_war_witch_ger
+		hidden_effect = {
+			RUS = {
+				add_timed_idea = {
+				idea = RUS_trade_war_witch_ger
+				days = 365				
+				}
+			}
+			if = {
+				limit = {
+					country_exists = PRU
+				}
+				PRU = {
+					add_timed_idea = {
+					idea = RUS_ger_trade_war_witch_rus
+					days = 365
+					}
+				}
+			}
+			news_event = { id = news.53 days = 3 }
+		}
 	}
 }
