@@ -18,7 +18,7 @@ focus_tree = {
 		}
 	}
 	
-	continuous_focus_position = { x = 2600 y = 100 }
+	continuous_focus_position = { x = 4400 y = 100 }
 	
 	default = no
 	reset_on_civilwar = no
@@ -396,7 +396,7 @@ focus_tree = {
 		
 		x = 3
 		y = 1
-		cost = 5
+		cost = 2
 		
 		mutually_exclusive = { focus = RUS_use_foreign_specialists }
 		
@@ -423,7 +423,7 @@ focus_tree = {
 		
 		x = 5
 		y = 1
-		cost = 5
+		cost = 2
 		
 		mutually_exclusive = { focus = RUS_use_own_specialists }
 		
@@ -450,7 +450,7 @@ focus_tree = {
 		
 		x = -1
 		y = 1
-		cost = 5
+		cost = 1
 
 		relative_position_id = RUS_use_own_specialists
 		prerequisite = { 
@@ -473,7 +473,7 @@ focus_tree = {
 		
 		x = 1
 		y = 1
-		cost = 5
+		cost = 1
 
 		relative_position_id = RUS_use_own_specialists
 		prerequisite = { 
@@ -496,7 +496,7 @@ focus_tree = {
 		
 		x = 3
 		y = 1
-		cost = 5
+		cost = 1
 
 		relative_position_id = RUS_use_own_specialists
 		prerequisite = { 
@@ -641,7 +641,7 @@ focus_tree = {
 		id = RUS_the_opposition_miting
 		icon = GFX_goal_generic_improve_relations
 		
-		x = 8
+		x = 24
 		y = 0
 		cost = 2
 		
@@ -757,12 +757,95 @@ focus_tree = {
 		id = RUS_moscow_allrussian_conference
 		icon = GFX_goal_generic_improve_relations
 		
-		x = 4
-		y = 1
-		cost = 5
+		x = 12
+		y = 2
+		cost = 0
+		
+		available = {
+			aotsm_changing_only_by_event_or_solution = yes
+		}
 
 		relative_position_id = RUS_end_of_political_isolation
 
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			
+		}
+	}
+	
+	focus = {
+		id = RUS_villagers_quiestion
+		icon = GFX_goal_generic_improve_relations
+		
+		x = -2
+		y = 1
+		cost = 1
+
+		relative_position_id = RUS_moscow_allrussian_conference
+		prerequisite = { focus = RUS_moscow_allrussian_conference }
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			
+		}
+	}
+	focus = {
+		id = RUS_industry_situation
+		icon = GFX_goal_generic_improve_relations
+		
+		x = 0
+		y = 1
+		cost = 1
+
+		relative_position_id = RUS_moscow_allrussian_conference
+		prerequisite = { focus = RUS_moscow_allrussian_conference }
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			
+		}
+	}
+	focus = {
+		id = RUS_the_problem_of_nationalities
+		icon = GFX_goal_generic_improve_relations
+		
+		x = 2
+		y = 1
+		cost = 1
+
+		relative_position_id = RUS_moscow_allrussian_conference
+		prerequisite = { focus = RUS_moscow_allrussian_conference }
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			
+		}
+	}
+	focus = {
+		id = RUS_results_of_conferention
+		icon = GFX_goal_generic_improve_relations
+		
+		x = 0
+		y = 2
+		cost = 2
+
+		relative_position_id = RUS_industry_situation
+		prerequisite = { focus = RUS_villagers_quiestion }
+		prerequisite = { focus = RUS_industry_situation }
+		prerequisite = { focus = RUS_the_problem_of_nationalities }
 		
 		available_if_capitulated = yes
 		
@@ -931,6 +1014,7 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
 		completion_reward = {
+			remove_ideas = RUS_dependence_from_import_1
 			add_ideas = RUS_russian_national_production
 		}
 	}
@@ -1095,7 +1179,7 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
 		completion_reward = {
-			
+			country_event = { id = rusRomKN.1 }
 		}
 	}
 	
@@ -1116,7 +1200,13 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
 		completion_reward = {
-			
+			army_experience = 25
+			add_doctrine_cost_reduction = {
+				name = land_doc_bonus
+				cost_reduction = 1.0
+				uses = 1
+				category = land_doctrine
+			}
 		}
 	}
 	
@@ -1137,7 +1227,7 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
 		completion_reward = {
-			
+			country_event = { id = rusRomKN.2 }
 		}
 	}
 	
@@ -1161,7 +1251,9 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
 		completion_reward = {
-			
+			add_stability = 0.1
+			RUS_add_5_churchman_influence = yes
+			RUS_add_5_conservator_opinion = yes
 		}
 	}
 	
@@ -1183,7 +1275,8 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
 		completion_reward = {
-			
+			add_ideas = RUS_expand_police_batalions
+			RUS_add_10_army_influence = yes
 		}
 	}
 	
@@ -1204,7 +1297,7 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
 		completion_reward = {
-			
+			country_event = { id = rusRomKN.3 }
 		}
 	}
 	
@@ -1231,7 +1324,9 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
 		completion_reward = {
-			
+			add_ideas = RUS_people_support 
+			RUS_add_5_liberal_influence = yes
+			RUS_remove_5_conservator_opinion = yes
 		}
 	}
 	focus = {
@@ -1253,7 +1348,9 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
 		completion_reward = {
-			
+			add_ideas = RUS_nobility_support
+			RUS_add_5_conservator_influence = yes
+			RUS_remove_5_liberal_opinion = yes
 		}
 	}
 	
@@ -1268,7 +1365,7 @@ focus_tree = {
 		relative_position_id = RUS_support_people 
 		prerequisite = { 
 			focus = RUS_support_people  
-			focus = RUS_support_nobility  
+			focus = RUS_support_nobility 
 		}
 		prerequisite = { focus = RUS_for_god_people_and_fatherland }
 
@@ -1278,7 +1375,12 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
 		completion_reward = {
-			
+			add_timed_idea = {
+				idea = RUS_idea_grants_for_church
+				days = 365
+			} 
+			RUS_add_5_churchman_influence = yes
+			RUS_add_5_conservator_opinion = yes
 		}
 	}
 	focus = {
@@ -1288,9 +1390,13 @@ focus_tree = {
 		x = -2
 		y = 1
 		cost = 5
+		
+		available = {
+			NOT = { has_idea = RUS_idea_grants_for_church }
+		}
 
 		relative_position_id = RUS_grants_for_church 
-		prerequisite = { focus = RUS_grants_for_church  }
+		prerequisite = { focus = RUS_grants_for_church  } 
 		prerequisite = { focus = RUS_expand_police_battalions }
 
 		
@@ -1299,7 +1405,7 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
 		completion_reward = {
-			
+			add_ideas = RUS_we_are_russians_witch_us_god
 		}
 	}
 	
@@ -1349,7 +1455,13 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
 		completion_reward = {
-			
+			swap_ideas = {
+				remove_idea = RUS_russian_intelligentsia
+				add_idea = RUS_idea_russian_identity
+			}
+			RUS_remove_5_liberal_opinion = yes
+			RUS_remove_5_monarhist_opinion = yes
+			RUS_add_3_churchman_influence = yes
 		}
 	}
 	focus = {
@@ -1371,7 +1483,10 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
 		completion_reward = {
-			
+			add_ideas = RUS_idea_support_army
+			RUS_remove_3_liberal_opinion = yes
+			RUS_remove_3_conservator_opinion = yes
+			RUS_add_5_army_opinion = yes
 		}
 	}
 	focus = {
@@ -1394,7 +1509,11 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
 		completion_reward = {
-			
+			swap_ideas = {
+				remove_idea = RUS_idea_russian_identity
+				add_idea = RUS_idea_russian_identity_1
+			}
+			RUS_add_5_army_opinion = yes
 		}
 	}
 	focus = {
@@ -1417,7 +1536,9 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
 		completion_reward = {
-			
+			add_stability = 0.1
+			RUS_add_5_liberal_opinion = yes
+			RUS_remove_5_conservator_opinion = yes
 		}
 	}
 	focus = {
@@ -1437,7 +1558,7 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
 		completion_reward = {
-			
+			country_event = { id = rusOrl.1}
 		}
 	}
 	focus = {
@@ -1457,7 +1578,41 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
 		completion_reward = {
-			
+			if = { 
+				limit = {
+					ROOT = { 
+						has_idea = state_corruption
+					}
+				}
+				swap_ideas = {
+					remove_idea = state_corruption
+					add_idea = regional_corruption
+				}
+			}
+			if = { 
+				limit = {
+					ROOT = { 
+						has_idea = regional_corruption
+					}
+				}
+				swap_ideas = {
+					remove_idea = regional_corruption
+					add_idea = local_corruption
+				}
+			}
+			if = { 
+				limit = {
+					ROOT = { 
+						has_idea = local_corruption
+					}
+				}
+				swap_ideas = {
+					remove_idea = local_corruption
+					add_idea = no_corruption
+				}
+			}
+			RUS_add_5_liberal_influence = yes
+			RUS_remove_3_conservator_opinion = yes
 		}
 	}
 	focus = {
@@ -1477,7 +1632,7 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
 		completion_reward = {
-			
+			country_event = { id = rusOrl.2 }
 		}
 	}
 	focus = {
@@ -1498,11 +1653,15 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
 		completion_reward = {
-			
+			add_timed_idea = {
+				idea = RUS_idea_secure_the_rear
+				days = 200
+			}
+			RUS_add_5_army_influence = yes
 		}
 	}
 	focus = {
-		id = RUS_personal_dictature
+		id = RUS_personal_dictature 
 		icon = GFX_focus_rus_personal_dictature
 		
 		x = 0
@@ -1520,7 +1679,7 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
 		completion_reward = {
-			
+			country_event = { id = rusOrl.3 }
 		}
 	}
 
@@ -1575,15 +1734,119 @@ focus_tree = {
 #########################FOREIGN_POLICY##############################
 	
 	focus = {
-		id = RUS_foreign_policy
+		id = RUS_the_giant_has_awakened #гигант пробудился
 		icon = GFX_goal_generic_improve_relations
 		
 		x = 7
 		y = 10
 		cost = 5
+		
+		available = {
+			aotsm_changing_only_by_event_or_solution = yes
+		}
 
 		relative_position_id = RUS_investment_in_civil_industry
 		#prerequisite = { focus = RUS_the_opposition_miting }
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			
+		}
+	}
+	
+	focus = {
+		id = RUS_conquest_of_steppe
+		icon = GFX_goal_generic_improve_relations
+		
+		x = -4
+		y = 1
+		cost = 5 
+		
+		mutually_exclusive = { focus = RUS_friendship_witch_kaz }
+
+		relative_position_id = RUS_the_giant_has_awakened
+		prerequisite = { focus = RUS_the_giant_has_awakened }
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			
+		}
+	}
+	focus = {
+		id = RUS_demand_kaz
+		icon = GFX_goal_generic_improve_relations
+		
+		x = 0
+		y = 1
+		cost = 5 
+
+		relative_position_id = RUS_conquest_of_steppe
+		prerequisite = { focus = RUS_conquest_of_steppe }
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			
+		}
+	}
+	focus = {
+		id = RUS_demand_per
+		icon = GFX_goal_generic_improve_relations
+		
+		x = 0
+		y = 1
+		cost = 5 
+
+		relative_position_id = RUS_conquest_of_steppe
+		prerequisite = { focus = RUS_conquest_of_steppe }
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			
+		}
+	}
+	focus = {
+		id = RUS_friendship_witch_kaz
+		icon = GFX_goal_generic_improve_relations
+		
+		x = -2
+		y = 1
+		cost = 5 
+		
+		mutually_exclusive = { focus = RUS_conquest_of_steppe }
+
+		relative_position_id = RUS_the_giant_has_awakened
+		prerequisite = { focus = RUS_the_giant_has_awakened }
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			
+		}
+	}
+	focus = {
+		id = RUS_chinesse_threat
+		icon = GFX_goal_generic_improve_relations
+		
+		x = 3
+		y = 1
+		cost = 5
+
+		relative_position_id = RUS_the_giant_has_awakened
+		prerequisite = { focus = RUS_the_giant_has_awakened }
 		
 		available_if_capitulated = yes
 		
