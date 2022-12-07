@@ -7745,6 +7745,9 @@ on_actions = {
 						remove_ideas = revolution_power
 					}
 				}
+				AUS = {
+					mark_focus_tree_layout_dirty = yes
+				}
 			}
 			#AUS win Hungary
 			if = {
@@ -7886,6 +7889,26 @@ on_actions = {
 				if = {
 					limit = {
 						AUS = {
+							has_idea = AUS_never_surrender_idea
+						}
+					}
+					AUS = {
+						remove_ideas = AUS_never_surrender_idea
+					}
+				}
+				if = {
+					limit = {
+						PRU = {
+							has_idea = AUS_sabotage_pru
+						}
+					}
+					PRU = {
+						remove_ideas = AUS_sabotage_pru
+					}
+				}
+				if = {
+					limit = {
+						AUS = {
 							has_idea = rus_help_to_aus
 						}
 					}
@@ -7915,19 +7938,84 @@ on_actions = {
 				}
 				if = {
 					limit = {
-						any_country = {
-							has_country_flag = first_place_in_help_to_aus
+						AUS = {
+							has_country_flag = ask_russian
 						}
 					}
-					PREV = {
-						add_timed_idea = {
-							idea = aus_reparation_for_help_first
-							days = 180
+					AUS = {
+						clr_country_flag = ask_russian
+					}
+				}
+				if = {
+					limit = {
+						AUS = {
+							has_country_flag = ask_france
+						}
+					}
+					AUS = {
+						clr_country_flag = ask_france
+					}
+				}
+				if = {
+					limit = {
+						AUS = {
+							has_country_flag = ask_cbi
+						}
+					}
+					AUS = {
+						clr_country_flag = ask_cbi
+					}
+				}
+				if = {
+					limit = {
+						any_country = {
+								has_country_flag = first_place_in_help_to_aus
+						}
+					}
+					every_country = {
+						limit = {
+							has_country_flag = first_place_in_help_to_aus
+						}
+						if = {
+							limit = {
+								check_variable = {
+									global.help_aus_1_var < 0.26
+								}
+							}
+							add_timed_idea = {
+								idea = aus_reparation_for_help_little
+								days = 180
+							}
+						}
+						if = {
+							limit = {
+								check_variable = {
+									global.help_aus_1_var > 0.25
+								}
+								check_variable = {
+									global.help_aus_1_var < 0.51
+								}
+							}
+							add_timed_idea = {
+								idea = aus_reparation_for_help_medium
+								days = 180
+							}
+						}
+						if = {
+							limit = {
+								check_variable = {
+									global.help_aus_1_var > 0.50
+								}
+							}
+							add_timed_idea = {
+								idea = aus_reparation_for_help_more
+								days = 180
+							}
 						}
 						clr_country_flag = chose_help_to_aus_flag
 						clr_country_flag = first_place_in_help_to_aus
+						remove_from_array = { global.austrian_help = PREV }
 					}
-					remove_to_array = { global.austrian_help = PREV }
 					AUS = {
 						add_timed_idea = {
 							idea = aus_reparation_for_help_for_aus
@@ -7941,15 +8029,50 @@ on_actions = {
 							has_country_flag = second_place_in_help_to_aus
 						}
 					}
-					PREV = {
-						add_timed_idea = {
-							idea = aus_reparation_for_help_second
-							days = 180
+					every_country = {
+						limit = {
+							has_country_flag = second_place_in_help_to_aus
+						}
+						if = {
+							limit = {
+								check_variable = {
+									global.help_aus_2_var < 0.26
+								}
+							}
+							add_timed_idea = {
+								idea = aus_reparation_for_help_little
+								days = 180
+							}
+						}
+						if = {
+							limit = {
+								check_variable = {
+									global.help_aus_2_var > 0.25
+								}
+								check_variable = {
+									global.help_aus_2_var < 0.51
+								}
+							}
+							add_timed_idea = {
+								idea = aus_reparation_for_help_medium
+								days = 180
+							}
+						}
+						if = {
+							limit = {
+								check_variable = {
+									global.help_aus_2_var > 0.50
+								}
+							}
+							add_timed_idea = {
+								idea = aus_reparation_for_help_more
+								days = 180
+							}
 						}
 						clr_country_flag = chose_help_to_aus_flag
 						clr_country_flag = second_place_in_help_to_aus
+						remove_from_array = { global.austrian_help = PREV }
 					}
-					remove_to_array = { global.austrian_help = PREV }
 				}
 				if = {
 					limit = {
@@ -7957,15 +8080,56 @@ on_actions = {
 							has_country_flag = third_place_in_help_to_aus
 						}
 					}
-					PREV = {
-						add_timed_idea = {
-							idea = aus_reparation_for_help_third
-							days = 180
+					every_country = {
+						limit = {
+							has_country_flag = first_place_in_help_to_aus
+						}
+						if = {
+							limit = {
+								check_variable = {
+									global.help_aus_3_var < 0.26
+								}
+							}
+							add_timed_idea = {
+								idea = aus_reparation_for_help_little
+								days = 180
+							}
+						}
+						if = {
+							limit = {
+								check_variable = {
+									global.help_aus_3_var > 0.25
+								}
+								check_variable = {
+									global.help_aus_3_var < 0.51
+								}
+							}
+							add_timed_idea = {
+								idea = aus_reparation_for_help_medium
+								days = 180
+							}
+						}
+						if = {
+							limit = {
+								check_variable = {
+									global.help_aus_3_var > 0.50
+								}
+							}
+							add_timed_idea = {
+								idea = aus_reparation_for_help_more
+								days = 180
+							}
 						}
 						clr_country_flag = chose_help_to_aus_flag
 						clr_country_flag = third_place_in_help_to_aus
+						remove_from_array = { global.austrian_help = PREV }
 					}
-					remove_to_array = { global.austrian_help = PREV }
+				}
+				set_variable = { global.help_aus_1_var = 0 }
+				set_variable = { global.help_aus_2_var = 0 }
+				set_variable = { global.help_aus_3_var = 0 }
+				AUS = {
+					mark_focus_tree_layout_dirty = yes
 				}
 			}
 			#Second Prussian-Austrian war
@@ -8044,6 +8208,9 @@ on_actions = {
 					remove_ideas = creater_of_saint_allience_idea
 				}
 				news_event = { hours = 24 id = news.13 }
+				AUS = {
+					mark_focus_tree_layout_dirty = yes
+				}
 			}
 		}
 	}
