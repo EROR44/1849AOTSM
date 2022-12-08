@@ -604,8 +604,8 @@ on_actions = {
 							}
 							has_global_flag = russian_capitulation
 						}
-						RUS = {
-							has_completed_focus = Rus_Ally_in_Lviv
+						GLA = {
+							is_in_faction_with = RUS
 						}
 					}
 				}
@@ -660,8 +660,8 @@ on_actions = {
 							}
 							has_global_flag = russian_capitulation
 						}
-						RUS = {
-							has_completed_focus = Rus_Ally_in_Bucharest
+						VLH = {
+							is_in_faction_with = RUS
 						}
 					}
 				}
@@ -3524,16 +3524,21 @@ on_actions = {
 					transfer_state = 801
 					transfer_state = 803
 				}
+				BUL = {
+					set_nationality = {
+						target_country = VLH
+						character = BUL_Alexandr_Battenberg
+					}
+				}
 				VLH = {
-					create_country_leader = {
-						name = "BUL_Alexandr_Battenberg"
-						desc = "POLITICS_ALEXANDR_BATTENBERG_DESC"
-						picture = "gfx/leaders/BUL/Portrait_Alexandr_Battenberg.dds"
-						expire = "1900.1.1"
-						ideology = monarchist
-						traits = {
-							hate_byzantium
-						}
+					promote_character = {
+						character = BUL_Alexandr_Battenberg
+						ideology = authoritarian
+					}
+					add_trait = {
+						 character = BUL_Alexandr_Battenberg
+						 ideology = monarchist
+						 trait = hate_byzantium
 					}
 				}
 				VLH = {
@@ -4075,7 +4080,7 @@ on_actions = {
 				limit = {
 					tag = SEL
 					RUS = {
-						has_completed_focus = Rus_Conquer_Selishi
+						has_war_with = SEL
 					}
 					NOT = {
 						has_global_flag = SEL_capitulation
@@ -4084,7 +4089,7 @@ on_actions = {
 				RUS = {
 					white_peace = {
 						tag = SEL
-						message = PUS_win_SEL
+						message = RUS_win_SEL
 					}
 				}
 				RUS = {
@@ -7760,6 +7765,46 @@ on_actions = {
 						remove_ideas = revolution_power
 					}
 				}
+				ZEN = {
+					transfer_state = 840
+					add_state_core = 840
+				}
+				if = {
+					limit = {
+						BYZ = {
+							is_in_faction_with = PRU
+						}
+					}
+					ZUL = {
+						transfer_state = 848
+						add_state_core = 848
+					}
+				}
+				if = {
+					limit = {
+						AUS = {
+							owns_state = 848
+						}
+						country_exists = MAT
+					}
+					MAT = {
+						transfer_state = 848
+						add_state_core = 848
+					}
+				}
+				if = {
+					limit = {
+						AUS = {
+							owns_state = 848
+						}
+						NOT = {
+							country_exists = MAT
+						}
+					}
+					PRU = {
+						transfer_state = 848
+					}
+				}
 				AUS = {
 					mark_focus_tree_layout_dirty = yes
 				}
@@ -8145,6 +8190,12 @@ on_actions = {
 				set_variable = { global.help_aus_3_var = 0 }
 				AUS = {
 					mark_focus_tree_layout_dirty = yes
+				}
+				AUS = {
+					delete_unit_template_and_units = {
+						division_template = "Baeuerliche Division"
+						disband = yes 
+					}
 				}
 			}
 			#Second Prussian-Austrian war
