@@ -18,7 +18,7 @@ focus_tree = {
 		}
 	}
 	
-	continuous_focus_position = { x = 4400 y = 100 }
+	continuous_focus_position = { x = 100 y = 1600 }
 	
 	default = no
 	reset_on_civilwar = no
@@ -113,7 +113,7 @@ focus_tree = {
 		cost = 5
 		
 		available = {
-			has_completed_focus = RUS_stabilisate_economic
+			has_completed_focus = RUS_industry_situation
 		}
 		
 		relative_position_id = RUS_infrastructure_development
@@ -128,30 +128,7 @@ focus_tree = {
 			RUS_remove_5_churchman_opinion = yes
 			RUS_add_5_liberal_opinion = yes
 			RUS_add_5_army_opinion = yes
-			398 = {
-				#add_extra_state_shared_building_slots = 2
-				add_building_construction = {
-					type = industrial_complex
-					level = 1
-					instant_build = yes
-				}
-			}
-			651 = {
-				#add_extra_state_shared_building_slots = 2
-				add_building_construction = {
-					type = industrial_complex
-					level = 2
-					instant_build = yes
-				}
-			}
-			652 = {
-				#add_extra_state_shared_building_slots = 2
-				add_building_construction = {
-					type = industrial_complex
-					level = 1
-					instant_build = yes
-				}
-			}
+			add_ideas = RUS_forced_industrialisation
 		}
 	}
 	
@@ -232,6 +209,14 @@ focus_tree = {
 		y = 1
 		cost = 5
 		
+		available = {
+			ROOT = {
+				has_full_control_of_state = 248
+				has_full_control_of_state = 223
+				has_full_control_of_state = 252
+			}
+		}
+		
 		mutually_exclusive = { focus = RUS_mass_production_of_weapon }
 		
 		relative_position_id = RUS_exploration_new_resources
@@ -243,18 +228,18 @@ focus_tree = {
 
 		completion_reward = {
 			248 = {
-				add_extra_state_shared_building_slots = 2
+				add_extra_state_shared_building_slots = 1
 				add_building_construction = {
 					type = arms_factory
-					level = 2
+					level = 1
 					instant_build = yes
 				}
 			}
 			223 = {
-				add_extra_state_shared_building_slots = 2
+				add_extra_state_shared_building_slots = 1
 				add_building_construction = {
 					type = arms_factory
-					level = 2
+					level = 1
 					instant_build = yes
 				}
 			}
@@ -299,6 +284,15 @@ focus_tree = {
 		x = 0
 		y = 2
 		cost = 5
+		
+		available = {
+			ROOT = {
+				has_full_control_of_state = 217
+				has_full_control_of_state = 249
+				has_full_control_of_state = 221
+				has_full_control_of_state = 398
+			}
+		}
 
 		relative_position_id = RUS_exploration_new_resources
 		prerequisite = { 
@@ -312,15 +306,15 @@ focus_tree = {
 
 		completion_reward = {
 			217 = {
-				add_extra_state_shared_building_slots = 2
+				add_extra_state_shared_building_slots = 1
 				add_building_construction = {
 					type = arms_factory
 					level = 1
 					instant_build = yes
 				}
 			}
-			217 = {
-				add_extra_state_shared_building_slots = 2
+			249 = {
+				add_extra_state_shared_building_slots = 1
 				add_building_construction = {
 					type = industrial_complex
 					level = 1
@@ -335,7 +329,7 @@ focus_tree = {
 					instant_build = yes
 				}
 			}
-			221 = {
+			398 = {
 				add_extra_state_shared_building_slots = 1
 				add_building_construction = {
 					type = industrial_complex
@@ -587,12 +581,20 @@ focus_tree = {
 	}
 	
 	focus = {
-		id = RUS_
+		id = RUS_liquidate_backwardness
 		icon = GFX_goal_generic_improve_relations
 		
 		x = -2
 		y = 1
 		cost = 5
+		
+		available = {
+			ROOT = { 
+				industrial_complex > 55
+				arms_factory > 30
+				NOT = { has_idea = RUS_dependence_from_import }
+			}
+		}
 
 		relative_position_id = RUS_expand_petrograd_goverment_university
 		prerequisite = { 
@@ -606,7 +608,44 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_INDUSTRY }
 
 		completion_reward = {
-			
+			if = {
+				limit = {
+					ROOT = { has_idea = medium_developed_industry }
+				}
+				swap_ideas = {
+					remove_idea = medium_developed_industry
+					add_idea = modern_industry
+				}
+			}
+			if = {
+				limit = {
+					ROOT = { has_idea = backward_industry }
+				}
+				swap_ideas = {
+					remove_idea = backward_industry
+					add_idea = medium_developed_industry
+				}
+			}
+			if = {
+				limit = {
+					ROOT = { has_idea = manufactory_production }
+				}
+				swap_ideas = {
+					remove_idea = manufactory_production
+					add_idea = backward_industry
+				}
+			}
+			if = {
+				limit = {
+					ROOT = { has_idea = agrarian_country }
+				}
+				swap_ideas = {
+					remove_idea = agrarian_country
+					add_idea = manufactory_production
+				}
+			}
+			remove_ideas = RUS_forced_industrialisation
+			add_stability = 0.1
 		}
 	}
 	
@@ -641,7 +680,7 @@ focus_tree = {
 		id = RUS_the_opposition_miting
 		icon = GFX_goal_generic_improve_relations
 		
-		x = 24
+		x = 26
 		y = 0
 		cost = 2
 		
@@ -1455,9 +1494,36 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
 		completion_reward = {
-			swap_ideas = {
-				remove_idea = RUS_russian_intelligentsia
-				add_idea = RUS_idea_russian_identity
+			if = {
+				limit = {
+					ROOT = { has_idea = RUS_russian_intelligentsia }
+				}
+				swap_ideas = {
+					remove_idea = RUS_russian_intelligentsia
+					add_idea = RUS_idea_russian_identity
+				}
+			}
+			if = {
+				limit = {
+					ROOT = { has_idea = RUS_intelligentsia_1 }
+				}
+				swap_ideas = {
+					remove_idea = RUS_intelligentsia_1
+					add_idea = RUS_idea_russian_identity
+				}
+			}
+			if = {
+				limit = {
+					ROOT = { 
+						NOT = {
+							OR = {
+								has_idea = RUS_russian_intelligentsia 
+								has_idea = RUS_intelligentsia_1
+							}
+						}
+					}
+				}
+				add_ideas = RUS_idea_russian_identity
 			}
 			RUS_remove_5_liberal_opinion = yes
 			RUS_remove_5_monarhist_opinion = yes
@@ -1686,10 +1752,10 @@ focus_tree = {
 #########################RETURN_OF_MONARHY_BLOCK##############################
 	
 	focus = {
-		id = RUS_return_of_monarhy
+		id = RUS_return_of_old_orders
 		icon = GFX_goal_generic_improve_relations
 		
-		x = -1
+		x = -4
 		y = 1
 		cost = 5
 		
@@ -1706,6 +1772,75 @@ focus_tree = {
 			
 		}
 	}
+	
+	focus = {
+		id = RUS_ignatiev
+		icon = GFX_goal_generic_improve_relations
+		
+		x = -3
+		y = 1
+		cost = 5
+		
+		mutually_exclusive = { focus = RUS_romanov_an }
+		mutually_exclusive = { focus = RUS_churh_take_the_power }
+
+		relative_position_id = RUS_return_of_old_orders
+		prerequisite = { focus = RUS_return_of_old_orders }
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			
+		}
+	}
+	
+	focus = {
+		id = RUS_churh_take_the_power
+		icon = GFX_goal_generic_improve_relations
+		
+		x = 0
+		y = 1
+		cost = 5
+		
+		mutually_exclusive = { focus = RUS_ignatiev }
+		mutually_exclusive = { focus = RUS_romanov_an }
+
+		relative_position_id = RUS_return_of_old_orders
+		prerequisite = { focus = RUS_return_of_old_orders }
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			
+		}
+	}
+	
+	focus = {
+		id = RUS_romanov_an
+		icon = GFX_goal_generic_improve_relations
+		
+		x = 3
+		y = 1
+		cost = 5
+		
+		mutually_exclusive = { focus = RUS_ignatiev }
+		mutually_exclusive = { focus = RUS_churh_take_the_power }
+
+		relative_position_id = RUS_return_of_old_orders
+		prerequisite = { focus = RUS_return_of_old_orders }
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			
+		}
+	}
 
 #########################RETURN_OF_MONARHY_BLOCK##############################
 	
@@ -1713,14 +1848,58 @@ focus_tree = {
 		id = RUS_the_red_threat #красная угроза
 		icon = GFX_goal_generic_improve_relations
 		
-		x = 1
+		x = 5
 		y = 1
 		cost = 5
 		
-		mutually_exclusive = { focus = RUS_return_of_monarhy }
+		mutually_exclusive = { focus = RUS_return_of_old_orders }
 
 		relative_position_id = RUS_the_opposition_miting
 		prerequisite = { focus = RUS_the_opposition_miting }
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			
+		}
+	}
+	
+	focus = {
+		id = RUS_chernyshevsky_ng
+		icon = GFX_goal_generic_improve_relations
+		
+		x = -2
+		y = 1
+		cost = 5
+		
+		mutually_exclusive = { focus = RUS_pushkin_as }
+
+		relative_position_id = RUS_the_red_threat
+		prerequisite = { focus = RUS_the_red_threat }
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			
+		}
+	}
+	
+	focus = {
+		id = RUS_pushkin_as
+		icon = GFX_goal_generic_improve_relations
+		
+		x = 2
+		y = 1
+		cost = 5
+		
+		mutually_exclusive = { focus = RUS_chernyshevsky_ng }
+
+		relative_position_id = RUS_the_red_threat
+		prerequisite = { focus = RUS_the_red_threat }
 		
 		available_if_capitulated = yes
 		
