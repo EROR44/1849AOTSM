@@ -6783,6 +6783,454 @@ focus_tree = {
 	}
 	
 	focus = {
+		id = BYZ_balkan_stategia
+		icon = GFX_focus_generic_balkans_focus
+		#relative_position_id = 
+		x = 3
+		y = 8
+		cost = 4.3
+		#prerequisite = { focus =  }
+		#mutually_exclusive = { }
+		ai_will_do = {
+			factor = 25000
+		}
+		
+		#cancel = { }
+		
+		available = {
+			OR = {
+				AUS = {
+					has_country_flag = victory_R_V_A_1
+				}
+				AUS = {
+					has_country_flag = victory_R_V_A_2
+				}
+			}
+			date > 1853.1.1
+		}
+		
+		bypass = {
+			owns_state = 102
+			owns_state = 103
+			owns_state = 109
+			owns_state = 163
+			owns_state = 736
+		}
+		
+		select_effect = {
+			AUS = {
+				country_event = {
+					id = byz_ultimatum.1
+					days = 25
+				}
+			}
+		}
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			if = {
+				limit = {
+					NOT = {
+						BYZ = {
+							has_country_flag = aus_byz_deal_complete
+						}
+						BYZ = {
+							has_country_flag = aus_byz_deal_fail
+						}
+					}
+				}
+				custom_effect_tooltip = fake_austrian_event_byz_1
+			}
+			if = {
+				limit = {
+					BYZ = {
+						has_country_flag = aus_byz_deal_complete
+					}
+				}
+				custom_effect_tooltip = austrian_deal_say_yes_tt
+			}
+			if = {
+				limit = {
+					BYZ = {
+						has_country_flag = aus_byz_deal_fail
+					}
+				}
+				custom_effect_tooltip = austrian_deal_say_no_tt
+			}
+		}	
+	}
+	
+	focus = {
+		id = BYZ_prepering_to_war_with_aus
+		icon = GFX_goal_generic_position_armies
+		relative_position_id = BYZ_balkan_stategia
+		x = -2
+		y = 1
+		cost = 4.3
+		prerequisite = { focus = BYZ_balkan_stategia }
+		#mutually_exclusive = { }
+		ai_will_do = {
+			factor = 25000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		bypass = {
+			OR = {
+				AND = {
+					owns_state = 102
+					owns_state = 103
+					owns_state = 109
+					owns_state = 163
+					owns_state = 736
+				}
+				has_country_flag = aus_byz_deal_complete
+			}
+		}
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			if = {
+				limit = {
+					NOT = {
+						has_completed_focus = BYZ_only_one_can_be_roman
+					}
+				}
+				add_timed_idea = {
+					idea = byz_prepering_war_idea
+					days = 180
+				}
+			}
+			if = {
+				limit = {
+					has_completed_focus = BYZ_only_one_can_be_roman
+				}
+				add_timed_idea = {
+					idea = byz_prepering_war_idea
+					days = 150
+				}
+			}
+			add_doctrine_cost_reduction = {
+				name = land_doc_bonus
+				cost_reduction = 0.5
+				uses = 2
+				category = land_doctrine
+			}
+		}	
+	}
+	
+	focus = {
+		id = BYZ_ultimatum_to_aus
+		icon = GFX_goal_generic_occupy_states_ongoing_war
+		relative_position_id = BYZ_balkan_stategia
+		x = 0
+		y = 1
+		cost = 4.3
+		prerequisite = { focus = BYZ_balkan_stategia }
+		#mutually_exclusive = { }
+		ai_will_do = {
+			factor = 25000
+		}
+		
+		#cancel = { }
+		
+		available = { 
+			has_completed_focus = BYZ_prepering_to_war_with_aus
+			has_completed_focus = BYZ_only_one_can_be_roman
+		}
+		
+		bypass = {
+			OR = {
+				AND = {
+					owns_state = 102
+					owns_state = 103
+					owns_state = 109
+					owns_state = 163
+					owns_state = 736
+				}
+				has_country_flag = aus_byz_deal_complete
+			}
+		}
+		
+		select_effect = {
+			AUS = {
+				country_event = {
+					id = byz_ultimatum.2
+					days = 25
+				}
+			}
+		}
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			if = {
+				limit = {
+					NOT = {
+						BYZ = {
+							has_country_flag = aus_say_yes_for_ultimatum
+						}
+						BYZ = {
+							has_country_flag = aus_say_no_for_ultimatum
+						}
+					}
+				}
+				custom_effect_tooltip = fake_austrian_event_byz_2
+			}
+			if = {
+				limit = {
+					BYZ = {
+						has_country_flag = aus_say_yes_for_ultimatum
+					}
+				}
+				custom_effect_tooltip = austrian_ultimatum_say_yes_tt
+			}
+			if = {
+				limit = {
+					BYZ = {
+						has_country_flag = aus_say_no_for_ultimatum
+					}
+				}
+				custom_effect_tooltip = austrian_ultimatum_say_no_tt
+			}
+		}	
+	}
+	
+	focus = {
+		id = BYZ_only_one_can_be_roman
+		icon = GFX_focus_ITA_banda_carita
+		relative_position_id = BYZ_balkan_stategia
+		x = 2
+		y = 1
+		cost = 4.3
+		prerequisite = { focus = BYZ_balkan_stategia }
+		#mutually_exclusive = { }
+		ai_will_do = {
+			factor = 25000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		bypass = {
+			OR = {
+				AND = {
+					owns_state = 102
+					owns_state = 103
+					owns_state = 109
+					owns_state = 163
+					owns_state = 736
+				}
+				has_country_flag = aus_byz_deal_complete
+			}
+		}
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_ideas = byz_true_roman_1
+			hidden_effect = {
+				if = {
+					limit = {
+						VLH = {
+							has_country_flag = VLH_CR
+						}
+					}
+					swap_ideas = {
+						remove_idea = byz_true_roman_1
+						add_idea = byz_true_roman_2
+					}
+				}
+			}
+		}	
+	}
+	
+	focus = {
+		id = BYZ_mass_mobilisation
+		icon = GFX_focus_generic_manpower
+		relative_position_id = BYZ_balkan_stategia
+		x = -1
+		y = 2
+		cost = 4.3
+		prerequisite = { focus = BYZ_prepering_to_war_with_aus }
+		prerequisite = { focus = BYZ_ultimatum_to_aus }
+		prerequisite = { focus = BYZ_only_one_can_be_roman }
+		#mutually_exclusive = { }
+		ai_will_do = {
+			factor = 25000
+		}
+		
+		#cancel = { }
+		
+		available = {
+			has_country_flag = aus_say_no_for_ultimatum
+		}
+		
+		bypass = {
+			OR = {
+				AND = {
+					owns_state = 102
+					owns_state = 103
+					owns_state = 109
+					owns_state = 163
+					owns_state = 736
+				}
+				has_country_flag = aus_byz_deal_complete
+				has_country_flag = aus_say_yes_for_ultimatum
+			}
+		}
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			every_state = {
+				limit = {
+					state_population > 499999
+					is_core_of = BYZ
+				}
+				add_manpower = -75000
+				BYZ = {
+					add_manpower = 75000
+				}
+			}
+		}	
+	}
+	
+	focus = {
+		id = BYZ_cross_the_rubicon
+		icon = GFX_focus_eng_move_to_secure_the_dominions
+		relative_position_id = BYZ_balkan_stategia
+		x = 1
+		y = 2
+		cost = 4.3
+		prerequisite = { focus = BYZ_prepering_to_war_with_aus }
+		prerequisite = { focus = BYZ_ultimatum_to_aus }
+		prerequisite = { focus = BYZ_only_one_can_be_roman }
+		#mutually_exclusive = { }
+		ai_will_do = {
+			factor = 25000
+		}
+		
+		#cancel = { }
+		
+		available = { 
+			has_country_flag = aus_say_no_for_ultimatum
+		}
+		
+		bypass = {
+			OR = {
+				AND = {
+					owns_state = 102
+					owns_state = 103
+					owns_state = 109
+					owns_state = 163
+					owns_state = 736
+				}
+				has_country_flag = aus_byz_deal_complete
+				has_country_flag = aus_say_yes_for_ultimatum
+			}
+		}
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			AUS = {
+				add_opinion_modifier = {
+					target = BYZ
+					modifier = attack_border
+				}
+			}
+			every_state = {
+				limit = {
+					is_owned_by = AUS
+					any_neighbor_state  = {
+						is_owned_by = BYZ
+					}
+				}
+				damage_building = {
+					type = infrastructure
+					damage = 3
+				}
+				if = {
+					limit = {
+						arms_factory > 0
+					}
+					damage_building = {
+						type = arms_factory 
+						damage = 1
+					}
+				}
+				if = {
+					limit = {
+						industrial_complex > 0
+						industrial_complex < 2
+					}
+					damage_building = {
+						type = industrial_complex
+						damage = 1
+					}
+				}
+				if = {
+					limit = {
+						industrial_complex > 1
+					}
+					damage_building = {
+						type = industrial_complex
+						damage = 2
+					}
+				}
+			}
+		}	
+	}
+	
+	focus = {
+		id = BYZ_return_your_land
+		icon = GFX_focus_ITA_mare_nostrum
+		relative_position_id = BYZ_balkan_stategia
+		x = 0
+		y = 3
+		cost = 4.3
+		prerequisite = { focus = BYZ_mass_mobilisation }
+		prerequisite = { focus = BYZ_cross_the_rubicon }
+		#mutually_exclusive = { }
+		ai_will_do = {
+			factor = 25000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		bypass = {
+			OR = {
+				AND = {
+					owns_state = 102
+					owns_state = 103
+					owns_state = 109
+					owns_state = 163
+					owns_state = 736
+				}
+				has_country_flag = aus_byz_deal_complete
+				has_country_flag = aus_say_yes_for_ultimatum
+			}
+		}
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			declare_war_on = {
+				target = AUS
+				type = annex_everything
+			}
+		}	
+	}
+	
+	focus = {
 		id = BYZ_purple_dawn
 		icon = GFX_focus_byz_purple_dawn
 		relative_position_id = BYZ_eighth_senat_meeting
@@ -6808,3 +7256,30 @@ focus_tree = {
 		completion_reward = {
 		}	
 	}
+	
+	focus = {
+		id = BYZ_gigant_fall_a_sleep
+		icon = GFX_
+		relative_position_id = BYZ_eighth_senat_meeting
+		x = 0
+		y = 2
+		cost = 4.3
+		prerequisite = { focus = BYZ_purple_dawn }
+		#mutually_exclusive = { }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+		}	
+	}
+	
+}
