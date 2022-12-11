@@ -1,0 +1,42 @@
+add_namespace = kaz_t_pakt
+
+########################################
+#########TASHKENT_PACT_EVENTS###########
+########################################
+
+country_event = { #Кризис
+	id = kaz_t_pakt.1 
+	title = kaz_t_pakt.1.t
+	desc = kaz_t_pakt.1.d 
+	picture = GFX_report_event_gre_venizelos_speech
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = { #pact is alive?
+		name = kaz_t_pakt.1.a	
+		ai_chance = {
+			factor = 0
+		}
+		hidden_effect = {
+			news_event = { id = news.135 days = 4 }
+		}
+	}
+	
+	option = { #end of tashkent pact
+		name = kaz_t_pakt.1.b
+		ai_chance = {
+			factor = 100
+		}
+		hidden_effect = {
+			KAZ = { remove_ideas = KAZ_tashkent_agreement_idea }
+			BUK = { remove_ideas = KAZ_tashkent_agreement_idea }
+			HIV = { remove_ideas = KAZ_tashkent_agreement_idea }
+			KAZ = {
+				dismantle_faction = yes
+			}
+			news_event = { id = news.134 days = 4 }
+		}
+	}
+}
