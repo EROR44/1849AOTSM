@@ -685,7 +685,7 @@ focus_tree = {
 		id = RUS_the_opposition_miting
 		icon = GFX_goal_generic_improve_relations
 		
-		x = 26
+		x = 28
 		y = 0
 		cost = 2
 		
@@ -804,7 +804,7 @@ focus_tree = {
 		id = RUS_moscow_allrussian_conference
 		icon = GFX_goal_generic_improve_relations
 		
-		x = 12
+		x = 11
 		y = 2
 		cost = 0
 		
@@ -943,6 +943,7 @@ focus_tree = {
 		
 		available = {
 			NOT = { has_idea = RUS_invest_in_industry }
+			RUS_has_less_than_50_influence_of_conservator = yes 
 		}
 
 		relative_position_id = RUS_milutin_da
@@ -971,6 +972,10 @@ focus_tree = {
 		x = 0
 		y = 1
 		cost = 5
+		
+		available = {
+			RUS_has_less_than_50_influence_of_conservator = yes 
+		}
 
 		relative_position_id = RUS_milutin_da
 		prerequisite = { focus = RUS_milutin_da }
@@ -994,6 +999,10 @@ focus_tree = {
 		x = -1
 		y = 1
 		cost = 5
+		
+		available = {
+			RUS_has_less_than_50_influence_of_conservator = yes 
+		}
 
 		relative_position_id = RUS_promotion_of_market_reforms
 		prerequisite = { focus = RUS_promotion_of_market_reforms }
@@ -1020,6 +1029,11 @@ focus_tree = {
 		x = 1
 		y = 1
 		cost = 5
+		
+		available = {
+			RUS_has_less_than_50_influence_of_churchman = yes 
+			RUS_has_less_than_50_influence_of_autocrat = yes 
+		}
 
 		relative_position_id = RUS_promotion_of_market_reforms
 		prerequisite = { focus = RUS_promotion_of_market_reforms }
@@ -1073,6 +1087,11 @@ focus_tree = {
 		x = 1
 		y = 2
 		cost = 5
+		
+		available = {
+			RUS_has_less_than_50_influence_of_monarhist = yes 
+			RUS_has_less_than_50_influence_of_autocrat = yes 
+		}
 
 		relative_position_id = RUS_milutin_da
 		prerequisite = { focus = RUS_milutin_da }
@@ -1311,6 +1330,10 @@ focus_tree = {
 		x = -1
 		y = 1
 		cost = 5
+		
+		available = {
+			RUS_has_less_than_50_influence_of_army = yes
+		}
 
 		relative_position_id = RUS_for_god_people_and_fatherland
 		prerequisite = { focus = RUS_for_god_people_and_fatherland }
@@ -1383,6 +1406,7 @@ focus_tree = {
 		x = -1
 		y = 1
 		cost = 5
+	
 		
 		mutually_exclusive = { focus = RUS_support_people }
 
@@ -1408,6 +1432,10 @@ focus_tree = {
 		x = -1
 		y = 1
 		cost = 5
+		
+		available = {
+			RUS_has_neutral_or_better_relations_witch_churchman = yes
+		}
 
 		relative_position_id = RUS_support_people 
 		prerequisite = { 
@@ -1492,6 +1520,10 @@ focus_tree = {
 		x = -2
 		y = 1
 		cost = 5
+		
+		available = {
+			RUS_has_more_than_30_influence_of_army = yes
+		}
 
 		relative_position_id = RUS_orlov_mf
 		prerequisite = { focus = RUS_orlov_mf }
@@ -1570,6 +1602,10 @@ focus_tree = {
 		x = -1
 		y = 1
 		cost = 5
+		
+		available = {
+			RUS_has_more_than_30_influence_of_army = yes
+		}
 
 		relative_position_id = RUS_support_army
 		prerequisite = { 
@@ -1716,6 +1752,10 @@ focus_tree = {
 		x = 1
 		y = 1
 		cost = 5
+		
+		available = {
+			RUS_has_more_than_30_influence_of_army = yes
+		}
 
 		relative_position_id = RUS_fight_with_corruption
 		prerequisite = { focus = RUS_fight_with_corruption }
@@ -1741,6 +1781,10 @@ focus_tree = {
 		x = 0
 		y = 1
 		cost = 5
+		
+		available = {
+			RUS_has_more_than_50_influence_of_army = yes
+		}
 
 		relative_position_id = RUS_promote_respublikan_moods
 		prerequisite = { focus = RUS_secure_the_rear }
@@ -1763,7 +1807,7 @@ focus_tree = {
 		id = RUS_return_of_old_orders
 		icon = GFX_goal_generic_improve_relations
 		
-		x = -4
+		x = -5
 		y = 1
 		cost = 5
 		
@@ -1780,14 +1824,20 @@ focus_tree = {
 			
 		}
 	}
-	
+
+#########################IGNATIEV_SECTION##############################
+
 	focus = {
 		id = RUS_ignatiev
-		icon = GFX_goal_generic_improve_relations
+		icon = GFX_focus_rus_ignatiev_pn
 		
-		x = -3
+		x = -6
 		y = 1
 		cost = 5
+		
+		available = {
+			aotsm_performed_by_event_or_solution = yes
+		}
 		
 		mutually_exclusive = { focus = RUS_romanov_an }
 		mutually_exclusive = { focus = RUS_churh_take_the_power }
@@ -1805,12 +1855,342 @@ focus_tree = {
 	}
 	
 	focus = {
+		id = RUS_ally_witch_army
+		icon = GFX_focus_rus_loyal_army
+		
+		x = -1
+		y = 1
+		cost = 5
+		
+		available = {
+			RUS_has_more_than_30_influence_of_army = yes 
+			RUS_has_neutral_or_worse_relations_witch_army = yes
+		}
+		
+		mutually_exclusive = { focus = RUS_ally_witch_church }
+
+		relative_position_id = RUS_ignatiev
+		prerequisite = { focus = RUS_ignatiev }
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			RUS_add_10_army_influence = yes
+		}
+	}
+	
+	focus = {
+		id = RUS_control_the_church
+		icon = GFX_goal_generic_political_pressure
+		
+		x = -1
+		y = 1
+		cost = 5
+		
+		available = {
+			RUS_has_less_than_30_influence_of_churchman = yes 
+		}
+
+		relative_position_id = RUS_ally_witch_army
+		prerequisite = { focus = RUS_ally_witch_army }
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			RUS_remove_5_churchman_opinion = yes
+		}
+	}
+	
+	focus = {
+		id = RUS_the_power_of_one_idea
+		icon = GFX_focus_rus_the_power_of_one_idea
+		x = 0
+		y = 2
+		cost = 5
+		
+		available = {
+			RUS_has_more_than_50_influence_of_army = yes 
+		}
+
+		relative_position_id = RUS_control_the_church
+		prerequisite = { focus = RUS_control_the_church }
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			
+		}
+	}
+	
+	focus = {
+		id = RUS_ally_witch_church
+		icon = GFX_focus_rus_union_witch_church
+		
+		x = 1
+		y = 1
+		cost = 5
+		
+		available = {
+			RUS_has_more_than_30_influence_of_churchman = yes 
+			RUS_has_neutral_or_worse_relations_witch_churchman = yes
+		}
+		
+		mutually_exclusive = { focus = RUS_ally_witch_army }
+
+		relative_position_id = RUS_ignatiev
+		prerequisite = { focus = RUS_ignatiev }
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			RUS_add_10_churchman_influence = yes
+		}
+	}
+	
+	focus = {
+		id = RUS_control_the_army
+		icon = GFX_focus_ITA_corpo_volontari_della_liberta
+		
+		x = 1
+		y = 1
+		cost = 5
+		
+		available = {
+			RUS_has_less_than_30_influence_of_army = yes 
+		}
+
+		relative_position_id = RUS_ally_witch_church
+		prerequisite = { focus = RUS_ally_witch_church }
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			RUS_remove_5_army_opinion = yes
+		}
+	}
+	
+	focus = {
+		id = RUS_russian_national_orthodox_way
+		icon = GFX_focus_rus_russian_national_orthodox_way
+		
+		x = 0
+		y = 2
+		cost = 5
+		
+		available = {
+			RUS_has_more_than_50_influence_of_churchman = yes 
+		}
+
+		relative_position_id = RUS_control_the_army
+		prerequisite = { focus = RUS_control_the_army }
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			
+		}
+	}
+	
+	focus = {
+		id = RUS_owerwite_political_system
+		icon = GFX_focus_rus_overwrite_political_system
+		
+		x = 0
+		y = 2
+		cost = 5
+		
+
+		relative_position_id = RUS_ignatiev
+		prerequisite = { 
+			focus = RUS_ally_witch_army				
+			focus = RUS_ally_witch_church				
+		}
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			
+		}
+	}
+	
+	focus = {
+		id = RUS_new_workers
+		icon = GFX_focus_rus_new_workers
+		
+		x = -1
+		y = 1
+		cost = 5
+		
+
+		relative_position_id = RUS_owerwite_political_system
+		prerequisite = { focus = RUS_owerwite_political_system }
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			
+		}
+	}
+	
+	focus = {
+		id = RUS_new_peasants
+		icon = GFX_focus_rus_new_villagers
+		
+		x = 1
+		y = 1
+		cost = 5
+		
+
+		relative_position_id = RUS_owerwite_political_system
+		prerequisite = { focus = RUS_owerwite_political_system }
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			
+		}
+	}
+	
+	focus = {
+		id = RUS_clear_country_from_traitors
+		icon = GFX_focus_rus_clear_country_from_the_traitors
+		
+		x = 0
+		y = 2
+		cost = 5
+		
+		available = {
+			
+		}
+		
+
+		relative_position_id = RUS_owerwite_political_system
+		prerequisite = { focus = RUS_new_workers }			
+		prerequisite = { focus = RUS_new_peasants }
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			custom_effect_tooltip = RUS_start_traitors_purdge
+			add_timed_idea = {
+				idea = RUS_the_great_purge
+				days = 365
+			}
+		}
+	}
+	
+	focus = {
+		id = RUS_prepare_country
+		icon = GFX_focus_rus_armed_neutrality
+		
+		x = -1
+		y = 1
+		cost = 5
+		
+		available = {
+			NOT = { has_idea = RUS_the_great_purge }
+		}
+		
+
+		relative_position_id = RUS_clear_country_from_traitors
+		prerequisite = { focus = RUS_clear_country_from_traitors }
+		prerequisite = { 
+			focus = RUS_the_power_of_one_idea
+			focus = RUS_russian_national_orthodox_way
+		}
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			
+		}
+	}
+	
+	focus = {
+		id = RUS_fight_with_byz_posion
+		icon = GFX_focus_rus_the_greek_posion
+		
+		x = 1
+		y = 1
+		cost = 5
+		
+		available = {
+			NOT = { has_idea = RUS_the_great_purge }
+		}
+
+		relative_position_id = RUS_clear_country_from_traitors
+		prerequisite = { focus = RUS_clear_country_from_traitors }
+		prerequisite = { 
+			focus = RUS_the_power_of_one_idea
+			focus = RUS_russian_national_orthodox_way
+		}
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			
+		}
+	}
+	
+	focus = {
+		id = RUS_new_russia 
+		icon = GFX_focus_rus_new_russia
+		
+		x = 0
+		y = 2
+		cost = 5
+		
+
+		relative_position_id = RUS_clear_country_from_traitors
+		prerequisite = { focus = RUS_prepare_country }
+		prerequisite = { focus = RUS_fight_with_byz_posion }
+
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			
+		}
+	}
+	
+#########################CHURCH_SECTION##############################	
+
+	focus = {
 		id = RUS_churh_take_the_power
 		icon = GFX_goal_generic_improve_relations
 		
 		x = 0
 		y = 1
 		cost = 5
+		
+		available = {
+			aotsm_performed_by_event_or_solution = yes
+		}
 		
 		mutually_exclusive = { focus = RUS_ignatiev }
 		mutually_exclusive = { focus = RUS_romanov_an }
@@ -1828,12 +2208,98 @@ focus_tree = {
 	}
 	
 	focus = {
+		id = RUS_choose_patriarch
+		icon = GFX_goal_generic_improve_relations
+		
+		x = 0
+		y = 1
+		cost = 5
+
+		relative_position_id = RUS_churh_take_the_power
+		prerequisite = { focus = RUS_churh_take_the_power }
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			
+		}
+	}
+	
+	focus = {
+		id = RUS_alliance_church_witch_army
+		icon = GFX_goal_generic_improve_relations
+		
+		x = -2
+		y = 1
+		cost = 5
+
+		relative_position_id = RUS_choose_patriarch
+		prerequisite = { focus = RUS_choose_patriarch }
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			
+		}
+	}
+	
+	focus = {
+		id = RUS_take_the_human_mind
+		icon = GFX_goal_generic_improve_relations
+		
+		x = 0
+		y = 1
+		cost = 5
+
+		relative_position_id = RUS_choose_patriarch
+		prerequisite = { focus = RUS_choose_patriarch }
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			
+		}
+	}
+	
+	focus = {
+		id = RUS_
+		icon = GFX_goal_generic_improve_relations
+		
+		x = 2
+		y = 1
+		cost = 5
+
+		relative_position_id = RUS_choose_patriarch
+		prerequisite = { focus = RUS_choose_patriarch }
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			
+		}
+	}
+	
+#########################ROMANOV_AN_SECTION##############################	
+
+	focus = {
 		id = RUS_romanov_an
 		icon = GFX_goal_generic_improve_relations
 		
-		x = 3
+		x = 6
 		y = 1
 		cost = 5
+		
+		available = {
+			aotsm_performed_by_event_or_solution = yes
+		}
 		
 		mutually_exclusive = { focus = RUS_ignatiev }
 		mutually_exclusive = { focus = RUS_churh_take_the_power }
@@ -1856,7 +2322,7 @@ focus_tree = {
 		id = RUS_the_red_threat #красная угроза
 		icon = GFX_goal_generic_improve_relations
 		
-		x = 5
+		x = 6
 		y = 1
 		cost = 5
 		
@@ -1882,6 +2348,10 @@ focus_tree = {
 		y = 1
 		cost = 5
 		
+		available = {
+			aotsm_performed_by_event_or_solution = yes
+		}
+		
 		mutually_exclusive = { focus = RUS_pushkin_as }
 
 		relative_position_id = RUS_the_red_threat
@@ -1903,6 +2373,10 @@ focus_tree = {
 		x = 2
 		y = 1
 		cost = 5
+		
+		available = {
+			aotsm_performed_by_event_or_solution = yes
+		}
 		
 		mutually_exclusive = { focus = RUS_chernyshevsky_ng }
 
@@ -2151,9 +2625,9 @@ focus_tree = {
 			}
 		}
 		
-		mutually_excclusive = { focus = RUS_ally_witch_britain }
-		mutually_excclusive = { focus = RUS_moscow_pact }
-		mutually_excclusive = { focus = RUS_ally_witch_france }
+		mutually_exclusive = { focus = RUS_ally_witch_britain }
+		mutually_exclusive = { focus = RUS_moscow_pact }
+		mutually_exclusive = { focus = RUS_ally_witch_france }
 
 		relative_position_id = RUS_the_giant_has_awakened
 		prerequisite = { focus = RUS_the_giant_has_awakened }
