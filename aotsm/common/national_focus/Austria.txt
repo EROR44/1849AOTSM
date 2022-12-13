@@ -952,7 +952,7 @@ focus_tree = {
 		id = AUS_old_way_again
 		icon = GFX_focus_generic_monarchy_2
 		relative_position_id = AUS_great_defendce_begin
-		x = -1
+		x = -5
 		y = 1
 		cost = 4.3
 		allow_branch = {
@@ -995,21 +995,21 @@ focus_tree = {
 		id = AUS_try_new_way
 		icon = GFX_goal_support_democracy
 		relative_position_id = AUS_great_defendce_begin
-		x = 1
+		x = 5
 		y = 1
 		cost = 4.3
 		allow_branch = {
-			PRU = {
-				has_country_flag = victory_R_V_A_1
-			}
-			NOT = {
-				PRU = {
-					has_country_flag = victory_R_V_A_2
-				}
-				PRU = {
-					has_country_flag = victory_R_V_A_3
-				}
-			}
+			#PRU = {
+			#	has_country_flag = victory_R_V_A_1
+			#}
+			#NOT = {
+			#	PRU = {
+			#		has_country_flag = victory_R_V_A_2
+			#	}
+			#	PRU = {
+			#		has_country_flag = victory_R_V_A_3
+			#	}
+			#}
 		}
 		mutually_exclusive = { focus = AUS_old_way_again }
 		prerequisite = { focus = AUS_great_defendce_begin }
@@ -1030,6 +1030,751 @@ focus_tree = {
 			add_timed_idea = {
 				idea = AUS_wind_of_change
 				days = 180
+			}
+		}
+	}
+	
+	focus = {
+		id = AUS_military_reform
+		icon = GFX_goal_generic_forceful_treaty
+		relative_position_id = AUS_try_new_way
+		x = -3
+		y = 1
+		cost = 4.3
+		allow_branch = {
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = AUS_try_new_way }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_war_support = 0.05
+			add_political_power = 150
+		}
+	}
+	
+	focus = {
+		id = AUS_first_military_reform
+		icon = GFX_goal_generic_air_doctrine
+		relative_position_id = AUS_try_new_way
+		x = -4
+		y = 2
+		cost = 4.3
+		allow_branch = {
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = AUS_military_reform }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_war_support = 0.05
+			swap_ideas = {
+				remove_idea = AUS_napoleonic_tactic
+				add_idea = AUS_austrian_tactic
+			}
+		}
+	}
+	
+	focus = {
+		id = AUS_reform_military_command
+		icon = GFX_goal_generic_axis_build_infantry
+		relative_position_id = AUS_try_new_way
+		x = -2
+		y = 2
+		cost = 4.3
+		allow_branch = {
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = AUS_military_reform }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_war_support = 0.05
+			army_experience = 50
+			add_command_power = 100
+		}
+	}
+	
+	focus = {
+		id = AUS_in_glory_future
+		icon = GFX_focus_generic_improve_the_administration
+		relative_position_id = AUS_try_new_way
+		x = 0
+		y = 1
+		cost = 4.3
+		allow_branch = {
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = AUS_try_new_way }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		available = { 
+			NOT = {
+				has_idea = AUS_wind_of_change
+			}
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_stability = 0.10
+			set_politics = {
+				ruling_party = democratic
+			}
+			swap_ideas = {
+				remove_idea = monarchy
+				add_idea = constitutional_monarchy
+			}
+		}
+	}
+	
+	focus = {
+		id = AUS_grand_election
+		icon = GFX_focus_hol_the_foundations_of_defense
+		relative_position_id = AUS_try_new_way
+		x = 0
+		y = 2
+		cost = 4.3
+		allow_branch = {
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = AUS_in_glory_future }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			AUS = {
+			}
+		}
+	}
+	
+	focus = {
+		id = AUS_iogan_win
+		icon = GFX_focus_generic_the_giant_wakes
+		relative_position_id = AUS_try_new_way
+		x = -4
+		y = 3
+		cost = 4.3
+		allow_branch = {
+		}
+		mutually_exclusive = { focus = AUS_ferdinand_win focus = AUS_napoleon_win }
+		prerequisite = { focus = AUS_grand_election }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			custom_effect_tooltip = iogan_politic_open_tt
+			set_party_name = {
+				ideology = democratic
+				long_name = AUS_iogan_democratic_party
+				name = AUS_iogan_democratic_party
+			}
+			hidden_effect = {
+				set_party_name = {
+					ideology = democratic
+					long_name = AUS_iogan_democratic_party_long
+					name = AUS_iogan_democratic_party
+				}
+			}
+		}
+	}
+	
+	focus = {
+		id = AUS_maintain_army
+		icon = GFX_focus_mex_privatisation
+		relative_position_id = AUS_iogan_win
+		x = 0
+		y = 1
+		cost = 4.3
+		allow_branch = {
+		}
+		#mutually_exclusive = {  }
+		prerequisite = { focus = AUS_iogan_win }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_ideas = AUS_aggresive_democraty
+		}
+	}
+	
+	focus = {
+		id = AUS_main_enemy
+		icon = GFX_focus_RAJ_clamp_down_on_corruption
+		relative_position_id = AUS_iogan_win
+		x = -1
+		y = 2
+		cost = 4.3
+		allow_branch = {
+		}
+		#mutually_exclusive = {  }
+		prerequisite = { focus = AUS_maintain_army }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+		}
+	}
+	
+	focus = {
+		id = AUS_find_compromiss
+		icon = GFX_focus_generic_concessions
+		relative_position_id = AUS_iogan_win
+		x = 1
+		y = 2
+		cost = 4.3
+		allow_branch = {
+		}
+		#mutually_exclusive = {  }
+		prerequisite = { focus = AUS_maintain_army }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+		}
+	}
+	
+	focus = {
+		id = AUS_create_OEA
+		icon = GFX_focus_generic_little_entente
+		relative_position_id = AUS_iogan_win
+		x = 0
+		y = 3
+		cost = 4.3
+		allow_branch = {
+		}
+		#mutually_exclusive = {  }
+		prerequisite = { focus = AUS_main_enemy }
+		prerequisite = { focus = AUS_find_compromiss }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			AUS = {
+				create_faction = OEA_faction
+			}
+		}
+	}
+	
+	focus = {
+		id = AUS_ferdinand_win
+		icon = GFX_focus_POL_habsburg
+		relative_position_id = AUS_try_new_way
+		x = 0
+		y = 3
+		cost = 4.3
+		allow_branch = {
+		}
+		mutually_exclusive = { focus = AUS_iogan_win focus = AUS_napoleon_win }
+		prerequisite = { focus = AUS_grand_election }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			custom_effect_tooltip = ferdinand_politic_open_tt
+			set_party_name = {
+				ideology = democratic
+				long_name = AUS_ferdinand_democratic_party
+				name = AUS_ferdinand_democratic_party
+			}
+			hidden_effect = {
+				set_party_name = {
+					ideology = democratic
+					long_name = AUS_ferdinand_democratic_party_long
+					name = AUS_ferdinand_democratic_party
+				}
+			}
+		}
+	}
+	
+	focus = {
+		id = AUS_path_to_federation
+		icon = GFX_focus_generic_diplomatic_treaty
+		relative_position_id = AUS_ferdinand_win
+		x = 0
+		y = 1
+		cost = 4.3
+		allow_branch = {
+		}
+		#mutually_exclusive = {  }
+		prerequisite = { focus = AUS_ferdinand_win }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_stability = 0.05
+			add_political_power = 150
+		}
+	}
+	
+	focus = {
+		id = AUS_dialog_with_hungarian
+		icon = GFX_focus_proclaim_the_restauration_of_Austria_Hungary
+		relative_position_id = AUS_ferdinand_win
+		x = -1
+		y = 2
+		cost = 4.3
+		allow_branch = {
+		}
+		#mutually_exclusive = {  }
+		prerequisite = { focus = AUS_path_to_federation }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+		}
+	}
+	
+	focus = {
+		id = AUS_dialog_with_slavane
+		icon = GFX_focus_YUG_dissolve_serbia
+		relative_position_id = AUS_ferdinand_win
+		x = 1
+		y = 2
+		cost = 4.3
+		allow_branch = {
+		}
+		#mutually_exclusive = {  }
+		prerequisite = { focus = AUS_path_to_federation }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+		}
+	}
+	
+	focus = {
+		id = AUS_eternal_union
+		icon = GFX_focus_generic_home_defense
+		relative_position_id = AUS_ferdinand_win
+		x = 0
+		y = 3
+		cost = 4.3
+		allow_branch = {
+		}
+		#mutually_exclusive = {  }
+		prerequisite = { focus = AUS_dialog_with_hungarian }
+		prerequisite = { focus = AUS_dialog_with_slavane }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_ideas = AUS_eternal_union_idea
+		}
+	}
+	
+	focus = {
+		id = AUS_napoleon_win
+		icon = GFX_focus_fra_le_deluge
+		relative_position_id = AUS_try_new_way
+		x = 4
+		y = 3
+		cost = 4.3
+		allow_branch = {
+		}
+		mutually_exclusive = { focus = AUS_iogan_win focus = AUS_napoleon_win }
+		prerequisite = { focus = AUS_grand_election }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			custom_effect_tooltip = napoleon_politic_open_tt
+			set_party_name = {
+				ideology = democratic
+				long_name = AUS_napoleon_democratic_party
+				name = AUS_napoleon_democratic_party
+			}
+			hidden_effect = {
+				set_party_name = {
+					ideology = democratic
+					long_name = AUS_napoleon_democratic_party_long
+					name = AUS_napoleon_democratic_party
+				}
+			}
+		}
+	}
+	
+	focus = {
+		id = AUS_visit_corsica
+		icon = GFX_goal_generic_major_alliance
+		relative_position_id = AUS_napoleon_win
+		x = 0
+		y = 1
+		cost = 4.3
+		allow_branch = {
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = AUS_napoleon_win }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+		}
+	}
+	
+	focus = {
+		id = AUS_not_repeat_mistakes
+		icon = GFX_focus_rom_abdicate
+		relative_position_id = AUS_napoleon_win
+		x = -1
+		y = 2
+		cost = 4.3
+		allow_branch = {
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = AUS_visit_corsica }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = constitutional_monarchy
+				add_idea = parliament_monarchy
+			}
+		}
+	}
+	
+	focus = {
+		id = AUS_find_weak_links
+		icon = GFX_focus_rom_parties_end
+		relative_position_id = AUS_napoleon_win
+		x = 1
+		y = 2
+		cost = 4.3
+		allow_branch = {
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = AUS_visit_corsica }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = regional_corruption
+				add_idea = no_corruption
+			}
+		}
+	}
+	
+	focus = {
+		id = AUS_new_liberal_austrian
+		icon = GFX_focus_generic_improve_the_administration
+		relative_position_id = AUS_napoleon_win
+		x = 0
+		y = 3
+		cost = 4.3
+		allow_branch = {
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = AUS_not_repeat_mistakes }
+		prerequisite = { focus = AUS_find_weak_links }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_ideas = AUS_liberal_austrian
+		}
+	}
+	
+	focus = {
+		id = AUS_austrin_reborn
+		icon = GFX_focus_generic_population_growth
+		relative_position_id = AUS_grand_election
+		x = 0
+		y = 5
+		cost = 4.3
+		allow_branch = {
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = AUS_create_OEA focus = AUS_eternal_union focus = AUS_new_liberal_austrian }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_stability = 0.10
+			set_country_flag = aus_no_post_war_problem
+		}
+	}
+	
+	focus = {
+		id = AUS_civilian_reform
+		icon = GFX_goal_generic_intelligence_exchange
+		relative_position_id = AUS_try_new_way
+		x = 3
+		y = 1
+		cost = 4.3
+		allow_branch = {
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = AUS_try_new_way }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_stability = 0.05
+			add_political_power = 150
+		}
+	}
+	
+	focus = {
+		id = AUS_economi_reborn
+		icon = GFX_goal_generic_production
+		relative_position_id = AUS_try_new_way
+		x = 2
+		y = 2
+		cost = 4.3
+		allow_branch = {
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = AUS_civilian_reform }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_stability = 0.05
+			swap_ideas = {
+				remove_idea = medium_developed_industry
+				add_idea = modern_industry
+			}
+		}
+	}
+	
+	focus = {
+		id = AUS_tax_free
+		icon = GFX_focus_hol_abandon_the_gold_standard
+		relative_position_id = AUS_try_new_way
+		x = 4
+		y = 2
+		cost = 4.3
+		allow_branch = {
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = AUS_civilian_reform }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_political_power = 300
+			add_stability = 0.05
+			swap_ideas = {
+				remove_idea = hight_taxation
+				add_idea = medium_taxation
 			}
 		}
 	}
