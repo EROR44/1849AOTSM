@@ -4,11 +4,16 @@
 #################
 
 add_namespace = aus
+add_namespace = aus_iogan
+add_namespace = aus_ferdinand
+add_namespace = aus_napoleon
 add_namespace = aus_diplomacy
 add_namespace = aus_kaiser
 add_namespace = aus_dem
 add_namespace = aus_ref
 add_namespace = end_of_austrian
+
+#Base aus
 
 country_event = {
 	id = aus.1
@@ -61,6 +66,183 @@ country_event = {
 		custom_effect_tooltip = austrian_story_no_tt
 	}
 }
+
+country_event = {
+	id = aus.2 #Elections
+	title = aus.2.t
+	desc = aus.2.d
+	picture = GFX_report_event_election_vote
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = { #Iogan win
+		name = aus.2.a
+		ai_chance = {
+			factor = 20
+		}
+		set_country_flag = iogan_win_aus
+		complete_national_focus = AUS_iogan_win
+		promote_character = {
+			character = AUS_Iogann_von_Rechbergund_Rotenleven
+		}
+		mark_focus_tree_layout_dirty = yes
+	}
+	
+	option = { #Ferdinand win
+		name = aus.2.b	
+		ai_chance = {
+			factor = 75
+		}
+		set_country_flag = ferdinand_win_aus
+		complete_national_focus = AUS_ferdinand_win
+		promote_character = {
+			character = AUS_Karl_von_Buol_Shauenstein
+		}
+		mark_focus_tree_layout_dirty = yes
+	}
+	
+	option = { #Napoleon win
+		name = aus.2.c	
+		ai_chance = {
+			factor = 5
+		}
+		set_country_flag = napoleon_win_aus
+		complete_national_focus = AUS_napoleon_win
+		promote_character = {
+			character = AUS_Napoleon_II
+		}
+		mark_focus_tree_layout_dirty = yes
+	}
+}
+
+#aus iogan
+
+country_event = {
+	id = aus_iogan.1 #main enemy
+	title = aus_iogan.1.t
+	desc = aus_iogan.1.d
+	picture = GFX_report_event_german_troops
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = { #CBI wil pay!
+		name = aus_iogan.1.a
+		add_opinion_modifier = {
+			target = CBI
+			modifier = history_enemy
+		}
+		CBI = {
+			add_opinion_modifier = {
+				target = AUS
+				modifier = history_enemy
+			}
+		}
+	}
+	
+}
+
+country_event = {
+	id = aus_iogan.2 #compromiss
+	title = aus_iogan.2.t
+	desc = aus_iogan.2.d
+	picture = GFX_report_event_gre_cabinet_meeting
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = { #with byzantium
+		name = aus_iogan.2.a
+		ai_chance = {
+			factor = 0
+		}
+	}
+	
+	option = { #with russian
+		name = aus_iogan.2.b
+		ai_chance = {
+			factor = 5
+		}
+		add_opinion_modifier = {
+			target = RUS
+			modifier = history_friend
+		}
+		RUS = {
+			add_opinion_modifier = {
+				target = AUS
+				modifier = history_friend
+			}
+		}
+	}
+	
+	option = { #Compromis what it is?
+		name = aus_iogan.2.c
+		ai_chance = {
+			factor = 95
+		}
+		add_stability = 0.05
+	}
+	
+}
+
+#aus ferdinand
+
+country_event = {
+	id = aus_ferdinand.1 #what hungary want
+	title = aus_ferdinand.1.t
+	desc = aus_ferdinand.1.d
+	picture = GFX_report_event_generic_usa_treaty
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = {
+		name = aus_ferdinand.1.a
+	}
+	
+}
+
+country_event = {
+	id = aus_ferdinand.2 #what slavane want
+	title = aus_ferdinand.2.t
+	desc = aus_ferdinand.2.d
+	picture = GFX_report_event_finnish_letter
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = {
+		name = aus_ferdinand.2.a
+	}
+	
+}
+
+#aus napoleon
+
+country_event = {
+	id = aus_napoleon.1 #visit on corsica
+	title = aus_napoleon.1.t
+	desc = aus_napoleon.1.d
+	picture = GFX_report_event_french_british_officers
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = {
+		name = aus_napoleon.1.a
+		news_event = news.138
+	}
+	
+}
+
+#aus diplomacy
 
 country_event = { #Will country help Aus
 	id = aus_diplomacy.1
@@ -227,6 +409,8 @@ country_event = { #AUS ask for peace(Fun Event)
 	}
 }
 
+#aus kaiser
+
 country_event = {
 	id = aus_kaiser.1
 	title = aus_kaiser.1.t
@@ -252,6 +436,8 @@ country_event = {
 	}
 }
 
+#aus dem
+
 country_event = {
 	id = aus_dem.1
 	title = aus_dem.1.t
@@ -266,6 +452,8 @@ country_event = {
 		name = aus_dem.1.a	
 	}
 }
+
+#aus ref
 
 country_event = {
 	id = aus_ref.1
@@ -376,6 +564,8 @@ country_event = {
 		}
 	}
 }
+
+#end of austrian
 
 country_event = {
 	id = end_of_austrian.1 #Hungary out
