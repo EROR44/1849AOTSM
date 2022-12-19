@@ -232,6 +232,9 @@ focus_tree = {
 		#search_filters = {  }
 		
 		completion_reward = {
+			hidden_effect = {
+				promote_character = BYZ_Mihael_IV_Zachareas_decentalisation
+			}
 		}
 	}
 	
@@ -792,6 +795,10 @@ focus_tree = {
 				date > 1854.1.1
 			}
 			has_completed_focus = BYZ_malta_operation
+			has_country_flag = BYZ_vs_AUS_win
+			NOT = {
+				has_country_flag = lose_balkan_war
+			}
 		}
 		
 		#bypass = { }
@@ -1417,6 +1424,45 @@ focus_tree = {
 			news_event = { id = news.18 days = 1 }
 			set_cosmetic_tag = BYZROM
 			custom_effect_tooltip = byz_roman_decision_tt
+			hidden_effect = {
+				if = {
+					limit = {
+						has_government = democratic
+					}
+					promote_character = {
+						character = BYZ_Mihael_IV_Zachareas_roman
+						ideology = liberalism
+					}
+				}
+				if = {
+					limit = {
+						has_government = socialism
+					}
+					promote_character = {
+						character = BYZ_Mihael_IV_Zachareas_roman
+						ideology = social_monarchism
+					}
+					remove_trait = {
+						character = BYZ_Mihael_IV_Zachareas_roman
+						ideology = social_monarchism
+						trait = byz_empire
+					}
+					add_trait = {
+						 character = BYZ_Mihael_IV_Zachareas_roman
+						 ideology = social_monarchism
+						 trait = red_empire
+					}
+				}
+				if = {
+					limit = {
+						has_government = authoritarian
+					}
+					promote_character = {
+						character = BYZ_Mihael_IV_Zachareas_roman
+						ideology = monarchist
+					}
+				}
+			}
 		}
 		
 	}
@@ -6660,13 +6706,11 @@ focus_tree = {
 						byz_authoritarian_power_var > 2
 					}
 					NOT = {
-						OR = {
-							check_variable = {
-								byz_socialism_power_var > 2
-							}
-							check_variable = {
-								byz_democratic_power_var > 2
-							}
+						check_variable = {
+							byz_socialism_power_var > 2
+						}
+						check_variable = {
+							byz_democratic_power_var > 2
 						}
 					}
 				}
@@ -6679,13 +6723,79 @@ focus_tree = {
 						byz_socialism_power_var > 2
 					}
 					NOT = {
-						OR = {
-							check_variable = {
-								byz_authoritarian_power_var > 2
+						check_variable = {
+							byz_authoritarian_power_var > 2
+						}
+						check_variable = {
+							byz_democratic_power_var > 2
+						}
+					}
+				}
+				hidden_effect = {
+					if = {
+						limit = {
+							has_country_leader = {
+								character = BYZ_Mihael_IV_Zachareas
+								ruling_only = yes
 							}
-							check_variable = {
-								byz_democratic_power_var > 2
+						}
+						promote_character = {
+							character = BYZ_Mihael_IV_Zachareas
+							ideology = social_monarchism
+						}
+						remove_trait = {
+							character = BYZ_Mihael_IV_Zachareas
+							ideology = social_monarchism
+							trait = byz_empire
+						}
+						add_trait = {
+							 character = BYZ_Mihael_IV_Zachareas
+							 ideology = social_monarchism
+							 trait = red_empire
+						}
+					}
+					if = {
+						limit = {
+							has_country_leader = {
+								character = BYZ_Mihael_IV_Zachareas_decentalisation
+								ruling_only = yes
 							}
+						}
+						promote_character = {
+							character = BYZ_Mihael_IV_Zachareas_decentalisation
+							ideology = social_monarchism
+						}
+						remove_trait = {
+							character = BYZ_Mihael_IV_Zachareas_decentalisation
+							ideology = social_monarchism
+							trait = byz_empire
+						}
+						add_trait = {
+							 character = BYZ_Mihael_IV_Zachareas_decentalisation
+							 ideology = social_monarchism
+							 trait = red_empire
+						}
+					}
+					if = {
+						limit = {
+							has_country_leader = {
+								character = BYZ_Mihael_IV_Zachareas_roman
+								ruling_only = yes
+							}
+						}
+						promote_character = {
+							character = BYZ_Mihael_IV_Zachareas_roman
+							ideology = social_monarchism
+						}
+						remove_trait = {
+							character = BYZ_Mihael_IV_Zachareas_roman
+							ideology = social_monarchism
+							trait = byz_empire
+						}
+						add_trait = {
+							 character = BYZ_Mihael_IV_Zachareas_roman
+							 ideology = social_monarchism
+							 trait = red_empire
 						}
 					}
 				}
@@ -6696,16 +6806,6 @@ focus_tree = {
 					last_election = "1852.1.1"
 					election_frequency = 48
 				}
-				create_country_leader = {
-					name = "BYZ_Mihael_IV_Zachareas"
-					desc = "POLITICS_MIHAEL_IV_ZAHAREAS_SOC_DESC"
-					picture = "gfx/leaders/BYZ/Portrait_Mikhail_IV_Zahareas.dds"
-					expire = "1900.1.1"
-					ideology = social_monarchism
-					traits = {
-						red_empire
-					}
-				}
 			}
 			
 			if = {
@@ -6714,13 +6814,49 @@ focus_tree = {
 						byz_democratic_power_var > 2
 					}
 					NOT = {
-						OR = {
-							check_variable = {
-								byz_authoritarian_power_var > 2
+						check_variable = {
+							byz_authoritarian_power_var > 2
+						}
+						check_variable = {
+							byz_socialism_power_var > 2
+						}
+					}
+				}
+				hidden_effect = {
+					if = {
+						limit = {
+							has_country_leader = {
+								character = BYZ_Mihael_IV_Zachareas
+								ruling_only = yes
 							}
-							check_variable = {
-								byz_socialism_power_var > 2
+						}
+						promote_character = {
+							character = BYZ_Mihael_IV_Zachareas
+							ideology = liberalism
+						}
+					}
+					if = {
+						limit = {
+							has_country_leader = {
+								character = BYZ_Mihael_IV_Zachareas_decentalisation
+								ruling_only = yes
 							}
+						}
+						promote_character = {
+							character = BYZ_Mihael_IV_Zachareas_decentalisation
+							ideology = liberalism
+						}
+					}
+					if = {
+						limit = {
+							has_country_leader = {
+								character = BYZ_Mihael_IV_Zachareas_roman
+								ruling_only = yes
+							}
+						}
+						promote_character = {
+							character = BYZ_Mihael_IV_Zachareas_roman
+							ideology = liberalism
 						}
 					}
 				}
@@ -6730,16 +6866,6 @@ focus_tree = {
 					elections_allowed = no
 					last_election = "1852.1.1"
 					election_frequency = 48
-				}
-				create_country_leader = {
-					name = "BYZ_Mihael_IV_Zachareas"
-					desc = "POLITICS_MIHAEL_IV_ZAHAREAS_DEM_DESC"
-					picture = "gfx/leaders/BYZ/Portrait_Mikhail_IV_Zahareas.dds"
-					expire = "1900.1.1"
-					ideology = liberalism
-					traits = {
-						byz_empire
-					}
 				}
 			}
 			
@@ -7097,7 +7223,9 @@ focus_tree = {
 				BYZ = {
 					add_manpower = 75000
 				}
+				set_state_flag = mobilisation_target
 			}
+			custom_effect_tooltip = demobilisation_decision_tt
 		}	
 	}
 	
@@ -7227,6 +7355,8 @@ focus_tree = {
 				target = AUS
 				type = annex_everything
 			}
+			news_event = news.128
+			set_global_flag = balkan_war_aus_vs_byz
 		}	
 	}
 	

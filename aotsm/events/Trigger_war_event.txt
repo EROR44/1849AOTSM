@@ -1843,3 +1843,113 @@ country_event = {
 		}
 	}
 }
+
+country_event = {
+	id = twe.32 #Balkan war Byzantium Win
+	desc = twe.32.d
+	picture = GFX_report_event_molotov_signing_pact
+	
+	fire_only_once = yes
+	
+	hidden =  yes
+	
+	trigger = {
+		tag = BYZ
+		AUS = {
+			surrender_progress > 0.50
+		}
+		BYZ = {
+			has_war_with = AUS
+		}
+		has_global_flag = balkan_war_aus_vs_byz
+	}
+	
+	option = {
+		name = twe.32.a
+		BYZ = {
+			white_peace = {
+				tag = AUS
+				message = viena_peace_tt
+			}
+		}
+		clr_global_flag = balkan_war_aus_vs_byz
+		BYZ = {
+			set_country_flag = BYZ_vs_AUS_win
+		}
+		BYZ = {
+			transfer_state = 102
+			transfer_state = 103
+			transfer_state = 109
+			transfer_state = 163
+			transfer_state = 736
+		}
+		if = {
+			limit = {
+				NOT = {
+					country_exists = VEN
+				}
+			}
+			VEN = {
+				transfer_state = 159
+				transfer_state = 160
+				add_state_core = 159
+				add_state_core = 160
+				inherit_technology = AUS
+				load_oob = VEN_oob
+			}
+		}
+		AUS = {
+			remove_state_core = 102
+			remove_state_core = 103
+			remove_state_core = 159
+			remove_state_core = 160
+			remove_state_core = 163
+			remove_state_core = 736
+		}
+		news_event = news.129
+	}
+}
+
+country_event = {
+	id = twe.31 #Austrian win
+	desc = twe.31.d
+	picture = GFX_report_event_molotov_signing_pact
+	
+	fire_only_once = yes
+	
+	hidden =  yes
+	
+	trigger = {
+		tag = AUS
+		BYZ = {
+			surrender_progress > 0.50
+		}
+		AUS = {
+			has_war_with = BYZ
+		}
+		has_global_flag = balkan_war_aus_vs_byz
+	}
+	
+	option = {
+		name = twe.31.a
+		AUS = {
+			white_peace = {
+				tag = BYZ
+				message = athens_peace_tt
+			}
+		}
+		clr_global_flag = balkan_war_aus_vs_byz
+		BYZ = {
+			set_country_flag = lose_balkan_war
+		}	
+		AUS = {
+			transfer_state = 104
+			transfer_state = 105
+			transfer_state = 107
+			transfer_state = 108
+			transfer_state = 802
+			transfer_state = 804
+		}
+		news_event = news.130
+	}
+}

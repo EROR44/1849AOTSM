@@ -13,6 +13,9 @@ focus_tree = {
 	default = no
 	reset_on_civilwar = no
 	
+	continuous_focus_position = { x = 2000 y = 150 }
+	
+	
 	initial_show_position = {
 		focus = AUS_sick_man_of_europa
 	}
@@ -952,21 +955,21 @@ focus_tree = {
 		id = AUS_old_way_again
 		icon = GFX_focus_generic_monarchy_2
 		relative_position_id = AUS_great_defendce_begin
-		x = -5
+		x = -6
 		y = 1
 		cost = 4.3
 		allow_branch = {
-			PRU = {
-				has_country_flag = victory_R_V_A_1
-			}
-			NOT = {
-				PRU = {
-					has_country_flag = victory_R_V_A_2
-				}
-				PRU = {
-					has_country_flag = victory_R_V_A_3
-				}
-			}
+			#PRU = {
+			#	has_country_flag = victory_R_V_A_1
+			#}
+			#NOT = {
+			#	PRU = {
+			#		has_country_flag = victory_R_V_A_2
+			#	}
+			#	PRU = {
+			#		has_country_flag = victory_R_V_A_3
+			#	}
+			#}
 		}
 		mutually_exclusive = { focus = AUS_try_new_way }
 		prerequisite = { focus = AUS_great_defendce_begin }
@@ -992,10 +995,520 @@ focus_tree = {
 	}
 	
 	focus = {
+		id = AUS_imperial_donation
+		icon = GFX_goal_generic_production2
+		relative_position_id = AUS_old_way_again
+		x = -3
+		y = 1
+		cost = 4.3
+		allow_branch = {
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = AUS_old_way_again }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			4 = {
+				add_extra_state_shared_building_slots = 2
+			}
+			39 = {
+				add_extra_state_shared_building_slots = 1
+			}
+			102 = {
+				add_extra_state_shared_building_slots = 1
+			}
+			152 = {
+				add_extra_state_shared_building_slots = 1
+			}
+			153 = {
+				add_extra_state_shared_building_slots = 1
+			}
+			736 = {
+				add_extra_state_shared_building_slots = 1
+			}
+			887 = {
+				add_extra_state_shared_building_slots = 1
+			}
+		}
+	}
+	
+	focus = {
+		id = AUS_rebuild_nation
+		icon = GFX_goal_generic_construct_civilian
+		relative_position_id = AUS_old_way_again
+		x = -4
+		y = 2
+		cost = 4.3
+		allow_branch = {
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = AUS_imperial_donation }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_stability = 0.05
+			swap_ideas = {
+				remove_idea = medium_developed_industry
+				add_idea = modern_industry
+			}
+		}
+	}
+	
+	focus = {
+		id = AUS_empire_will_help
+		icon = GFX_goal_generic_construct_civ_factory
+		relative_position_id = AUS_old_way_again
+		x = -2
+		y = 2
+		cost = 4.3
+		allow_branch = {
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = AUS_imperial_donation }
+		prerequisite = { focus = AUS_what_emper_say }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			random_state = {
+				limit = { 
+					is_core_of = AUS 
+					NOT = {
+						is_core_of = BOH
+						is_core_of = HUN
+						is_core_of = GLA
+						is_core_of = VEN
+						is_core_of = SLO
+						is_core_of = SLA
+						is_core_of = CRO
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_state = {
+				limit = { 
+					is_core_of = AUS 
+					NOT = {
+						is_core_of = BOH
+						is_core_of = HUN
+						is_core_of = GLA
+						is_core_of = VEN
+						is_core_of = SLO
+						is_core_of = SLA
+						is_core_of = CRO
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_state = {
+				limit = { 
+					is_core_of = AUS 
+					NOT = {
+						is_core_of = BOH
+						is_core_of = HUN
+						is_core_of = GLA
+						is_core_of = VEN
+						is_core_of = SLO
+						is_core_of = SLA
+						is_core_of = CRO
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+	
+	focus = {
+		id = AUS_what_emper_say
+		icon = GFX_goal_generic_improve_relations
+		relative_position_id = AUS_old_way_again
+		x = 0
+		y = 1
+		cost = 4.3
+		allow_branch = {
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = AUS_old_way_again }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			country_event = aus.10
+		}
+	}
+	
+	focus = {
+		id = AUS_destroy_infliation
+		icon = GFX_focus_mex_privatisation
+		relative_position_id = AUS_old_way_again
+		x = -1
+		y = 3
+		cost = 4.3
+		allow_branch = {
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = AUS_rebuild_nation }
+		prerequisite = { focus = AUS_empire_will_help }
+		prerequisite = { focus = AUS_what_emper_say }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_stability = 0.05
+			swap_ideas = {
+				remove_idea = regional_corruption
+				add_idea = local_corruption
+			}
+			swap_ideas = {
+				remove_idea = hight_taxation
+				add_idea = medium_taxation
+			}
+		}
+	}
+	
+	focus = {
+		id = AUS_old_army_reform
+		icon = GFX_focus_chi_army_reform
+		relative_position_id = AUS_old_way_again
+		x = 1
+		y = 3
+		cost = 4.3
+		allow_branch = {
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = AUS_what_emper_say }
+		prerequisite = { focus = AUS_new_army_standart }
+		prerequisite = { focus = AUS_war_game }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_war_support = 0.05
+			add_political_power = 150
+		}
+	}
+	
+	focus = {
+		id = AUS_new_wing_of_empire
+		icon = GFX_goal_generic_CAS
+		relative_position_id = AUS_old_way_again
+		x = 0
+		y = 4
+		cost = 4.3
+		allow_branch = {
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = AUS_destroy_infliation }
+		prerequisite = { focus = AUS_old_army_reform }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			country_event = aus.12-
+		}
+	}
+	
+	focus = {
+		id = AUS_habsburg_legacy
+		icon = GFX_focus_hun_elect_a_king
+		relative_position_id = AUS_old_way_again
+		x = -1
+		y = 5
+		cost = 4.3
+		allow_branch = {
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = AUS_new_wing_of_empire }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_timed_idea = {
+				idea = AUS_habsburg_legacy_idea
+				days = 365
+			}
+		}
+	}
+	
+	focus = {
+		id = AUS_hre_legacy
+		icon = GFX_focus_ger_return_of_the_kaiser
+		relative_position_id = AUS_old_way_again
+		x = 1
+		y = 5
+		cost = 4.3
+		allow_branch = {
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = AUS_new_wing_of_empire }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_timed_idea = {
+				idea = AUS_hre_legacy_idea
+				days = 365
+			}
+		}
+	}
+	
+	focus = {
+		id = AUS_enlightened_monarchy
+		icon = GFX_focus_generic_monarchy_1
+		relative_position_id = AUS_old_way_again
+		x = 0
+		y = 6
+		cost = 4.3
+		allow_branch = {
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = AUS_habsburg_legacy }
+		prerequisite = { focus = AUS_hre_legacy }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			country_event = aus.11
+			add_ideas = AUS_enlightened_monarchy_idea
+		}
+	}
+	
+	focus = {
+		id = AUS_new_gold_age
+		icon = GFX_focus_ger_revive_kaiserreich
+		relative_position_id = AUS_old_way_again
+		x = 0
+		y = 7
+		cost = 4.3
+		allow_branch = {
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = AUS_enlightened_monarchy }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_stability = 0.10
+			set_country_flag = aus_no_post_war_problem
+		}
+	}
+	
+	focus = {
+		id = AUS_military_reborn
+		icon = GFX_goal_rhineland
+		relative_position_id = AUS_old_way_again
+		x = 3
+		y = 1
+		cost = 4.3
+		allow_branch = {
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = AUS_old_way_again }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			army_experience = 25
+			add_doctrine_cost_reduction = {
+				cost_reduction = 0.5
+				uses = 2
+				category = land_doctrine
+			}
+		}
+	}
+	
+	focus = {
+		id = AUS_new_army_standart
+		icon = GFX_goal_generic_special_forces
+		relative_position_id = AUS_old_way_again
+		x = 2
+		y = 2
+		cost = 4.3
+		allow_branch = {
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = AUS_military_reborn }
+		prerequisite = { focus = AUS_what_emper_say }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_war_support = 0.10
+			swap_ideas = {
+				remove_idea = AUS_napoleonic_tactic
+				add_idea = AUS_austrian_tactic
+			}
+		}
+	}
+	
+	focus = {
+		id = AUS_war_game
+		icon = GFX_goal_generic_territory_or_war
+		relative_position_id = AUS_old_way_again
+		x = 4
+		y = 2
+		cost = 4.3
+		allow_branch = {
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = AUS_military_reborn }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_war_support = 0.05
+			army_experience = 50
+		}
+	}
+	
+	focus = {
 		id = AUS_try_new_way
 		icon = GFX_goal_support_democracy
 		relative_position_id = AUS_great_defendce_begin
-		x = 5
+		x = 6
 		y = 1
 		cost = 4.3
 		allow_branch = {
@@ -1157,6 +1670,7 @@ focus_tree = {
 			set_politics = {
 				ruling_party = democratic
 			}
+			add_ideas = AUS_franz_iosif_I
 			swap_ideas = {
 				remove_idea = monarchy
 				add_idea = constitutional_monarchy
