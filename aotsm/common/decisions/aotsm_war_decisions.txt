@@ -596,6 +596,42 @@ first_brother_war = {
 		
 		timeout_effect = {
 			custom_effect_tooltip = aus_win_first_war_tt
+			hidden_effect = {
+				SIL = {
+					transfer_state = 66
+					transfer_state = 67
+					transfer_state = 762
+				}
+				AUS = {
+					set_autonomy = {
+						target = SIL
+						autonomy_state = autonomy_integrated_puppet
+						end_wars = yes
+						end_civil_wars = yes
+					}
+				}
+				SIL = {
+					set_politics = { ruling_party = democratic elections_allowed = no }
+					set_popularities = {
+						democratic = 55
+						socialism = 5
+						reactionist = 17
+						authoritarian = 13
+					}
+				}
+				add_to_array = { global.german_union_members = SIL }
+				add_to_array = { global.german_union_for_aus = SIL }
+				PRU = {
+					load_focus_tree = prussian_lose_focus
+				}
+				remove_from_array = { global.german_union_leader = PRU }
+				AUS = {
+					remove_mission = first_brother_war_decision
+				}
+				PRU = {
+					remove_mission = first_brother_war_decision
+				}
+			}
 		}
 		
 		cancel_trigger = {
@@ -626,6 +662,14 @@ first_brother_war = {
 		
 		cancel_effect = {
 			custom_effect_tooltip = aus_lose_first_war_tt
+			hidden_effect = {
+				AUS = {
+					remove_mission = first_brother_war_decision
+				}
+				PRU = {
+					remove_mission = first_brother_war_decision
+				}
+			}
 		}
 	
 	}
