@@ -699,7 +699,10 @@ focus_tree = {
 		#search_filters = {  }
 		
 		completion_reward = {
-			load_oob = "AUS_peasants_rise"
+			custom_effect_tooltip = AUS_peasants_rise_tt
+			hidden_effect = {
+				load_oob = "AUS_peasants_rise"
+			}
 		}
 	}
 	
@@ -2325,7 +2328,554 @@ focus_tree = {
 	
 	#War focus 2
 	
+	focus = {
+		id = AUS_second_war
+		icon = GFX_goal_generic_allies_build_infantry
+		relative_position_id = AUS_sick_man_of_europa
+		x = 0
+		y = 13
+		cost = 4.3
+		allow_branch = {
+			PRU = {
+				has_country_flag = PRU_VS_AUS_2
+			}
+			NOT = { 
+				PRU = {
+					has_country_flag = victory_R_V_A_2
+				}
+			}
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = AUS_new_gold_age focus = AUS_austrin_reborn }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		cancel = {
+			OR = {
+				PRU = {
+					has_country_flag = victory_R_V_A_2
+				}
+				AUS = {
+					has_country_flag = victory_R_V_A_2
+				}
+			}
+		}
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			if = {
+				limit = {
+					has_idea = extensive_conscription
+				}
+				add_war_support = 0.25
+			}
+			if = {
+				limit = {
+					has_idea = limited_conscription
+				}
+				swap_ideas = {
+					remove_idea = limited_conscription
+					add_idea = extensive_conscription
+				}
+			}
+			if = {
+				limit = {
+					has_idea = volunteer_only
+				}
+				swap_ideas = {
+					remove_idea = volunteer_only
+					add_idea = extensive_conscription
+				}
+			}
+			if = {
+				limit = {
+					has_idea = disarmed_nation
+				}
+				swap_ideas = {
+					remove_idea = disarmed_nation
+					add_idea = extensive_conscription
+				}
+			}
+			if = {
+				limit = {
+					has_idea = war_economy
+				}
+				add_war_support = 0.25
+			}
+			if = {
+				limit = {
+					has_idea = partial_economic_mobilisation
+				}
+				swap_ideas = {
+					remove_idea = partial_economic_mobilisation
+					add_idea = war_economy
+				}
+			}
+			if = {
+				limit = {
+					has_idea = low_economic_mobilisation
+				}
+				swap_ideas = {
+					remove_idea = low_economic_mobilisation
+					add_idea = war_economy
+				}
+			}
+			if = {
+				limit = {
+					has_idea = civilian_economy
+				}
+				swap_ideas = {
+					remove_idea = civilian_economy
+					add_idea = war_economy
+				}
+			}
+		}
+	}
+	
+	focus = {
+		id = AUS_mobilisation_economy
+		icon = GFX_goal_generic_consumer_goods
+		relative_position_id = AUS_sick_man_of_europa
+		x = -2
+		y = 14
+		cost = 4.3
+		allow_branch = {
+			PRU = {
+				has_country_flag = PRU_VS_AUS_2
+			}
+			NOT = { 
+				PRU = {
+					has_country_flag = victory_R_V_A_2
+				}
+			}
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = AUS_second_war }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		cancel = {
+			OR = {
+				PRU = {
+					has_country_flag = victory_R_V_A_2
+				}
+				AUS = {
+					has_country_flag = victory_R_V_A_2
+				}
+			}
+		}
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			random_state = {
+				limit = {
+					is_core_of = AUS
+					industrial_complex > 1
+				}
+				remove_building = {
+					type = industrial_complex
+					level = 1
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+			random_state = {
+				limit = {
+					is_core_of = AUS
+					industrial_complex > 1
+				}
+				remove_building = {
+					type = industrial_complex
+					level = 1
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+	
+	focus = {
+		id = AUS_old_equipment_again
+		icon = GFX_goal_generic_build_tank
+		relative_position_id = AUS_sick_man_of_europa
+		x = 0
+		y = 14
+		cost = 4.3
+		allow_branch = {
+			PRU = {
+				has_country_flag = PRU_VS_AUS_2
+			}
+			NOT = { 
+				PRU = {
+					has_country_flag = victory_R_V_A_2
+				}
+			}
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = AUS_second_war }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		cancel = {
+			OR = {
+				PRU = {
+					has_country_flag = victory_R_V_A_2
+				}
+				AUS = {
+					has_country_flag = victory_R_V_A_2
+				}
+			}
+		}
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = 750
+				producer = ROOT
+			}
+			add_equipment_to_stockpile = {
+				type = artillery_equipment
+				amount = 250
+				producer = ROOT
+			}
+			add_equipment_to_stockpile = {
+				type = support_equipment
+				amount = 125
+				producer = ROOT
+			}
+			add_equipment_to_stockpile = {
+				type = motorized_equipment
+				amount = 100
+				producer = ROOT
+			}
+		}
+	}
+	
+	focus = {
+		id = AUS_mobilisation_people
+		icon = GFX_focus_generic_little_entente
+		relative_position_id = AUS_sick_man_of_europa
+		x = 2
+		y = 14
+		cost = 4.3
+		allow_branch = {
+			PRU = {
+				has_country_flag = PRU_VS_AUS_2
+			}
+			NOT = { 
+				PRU = {
+					has_country_flag = victory_R_V_A_2
+				}
+			}
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = AUS_second_war }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		cancel = {
+			OR = {
+				PRU = {
+					has_country_flag = victory_R_V_A_2
+				}
+				AUS = {
+					has_country_flag = victory_R_V_A_2
+				}
+			}
+		}
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			4 = {
+				add_manpower = -12730
+			}
+			152 = {
+				add_manpower = -7300
+			}
+			153 = {
+				add_manpower = -6700
+			}
+			887 = {
+				add_manpower = -5200
+			}
+			add_manpower = 31930
+		}
+	}
+	
+	focus = {
+		id = AUS_last_stand_defends
+		icon = GFX_goal_generic_small_arms
+		relative_position_id = AUS_sick_man_of_europa
+		x = -1
+		y = 15
+		cost = 4.3
+		allow_branch = {
+			PRU = {
+				has_country_flag = PRU_VS_AUS_2
+			}
+			NOT = { 
+				PRU = {
+					has_country_flag = victory_R_V_A_2
+				}
+			}
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = AUS_mobilisation_economy }
+		prerequisite = { focus = AUS_old_equipment_again }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		cancel = {
+			OR = {
+				PRU = {
+					has_country_flag = victory_R_V_A_2
+				}
+				AUS = {
+					has_country_flag = victory_R_V_A_2
+				}
+			}
+		}
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_war_support = 0.50
+			add_stability = 0.50
+		}
+	}
+	
+	focus = {
+		id = AUS_second_plan_industrial
+		icon = GFX_goal_generic_construct_mil_factory
+		relative_position_id = AUS_sick_man_of_europa
+		x = 1
+		y = 15
+		cost = 4.3
+		allow_branch = {
+			PRU = {
+				has_country_flag = PRU_VS_AUS_2
+			}
+			NOT = { 
+				PRU = {
+					has_country_flag = victory_R_V_A_2
+				}
+			}
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = AUS_old_equipment_again }
+		prerequisite = { focus = AUS_mobilisation_people }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		cancel = {
+			OR = {
+				PRU = {
+					has_country_flag = victory_R_V_A_2
+				}
+				AUS = {
+					has_country_flag = victory_R_V_A_2
+				}
+			}
+		}
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			random_state = {
+				limit = {
+					is_core_of = AUS
+					industrial_complex > 1
+				}
+				remove_building = {
+					type = industrial_complex
+					level = 1
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+			random_state = {
+				limit = {
+					is_core_of = AUS
+					industrial_complex > 1
+				}
+				remove_building = {
+					type = industrial_complex
+					level = 1
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+			random_state = {
+				limit = {
+					is_core_of = AUS
+					industrial_complex > 1
+				}
+				remove_building = {
+					type = industrial_complex
+					level = 1
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+			random_state = {
+				limit = {
+					is_core_of = AUS
+					industrial_complex > 1
+				}
+				remove_building = {
+					type = industrial_complex
+					level = 1
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+	
 	#Aus win 2
+	
+	focus = {
+		id = AUS_imperial_way
+		icon = GFX_goal_generic_alliance
+		#relative_position_id = 
+		x = -6
+		y = 13
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				PRU = {
+					has_country_flag = PRU_VS_AUS_2
+				}	
+			}
+			NOT = {
+				PRU = {
+					has_country_flag = victory_R_V_A_2
+				}
+			}
+		}
+		mutually_exclusive = { focus = AUS_democratic_way }
+		prerequisite = { focus = AUS_new_gold_age focus = AUS_austrin_reborn }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = aus_win_aus_pru_war_2_tt		
+				AUS = {
+					has_country_flag = victory_R_V_A_2
+				}
+			}
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_stability = 0.25
+		}
+	}
+	
+	focus = {
+		id = AUS_democratic_way
+		icon = GFX_focus_hol_the_foundations_of_defense
+		#relative_position_id = 
+		x = 6
+		y = 13
+		cost = 4.3
+		allow_branch = {
+			NOT = {
+				PRU = {
+					has_country_flag = PRU_VS_AUS_2
+				}	
+			}
+			NOT = {
+				PRU = {
+					has_country_flag = victory_R_V_A_2
+				}
+			}
+		}
+		mutually_exclusive = { focus = AUS_imperial_way }
+		prerequisite = { focus = AUS_new_gold_age focus = AUS_austrin_reborn }
+		ai_will_do = {
+			factor = 10000
+		}
+		
+		#cancel = { }
+		
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = aus_win_aus_pru_war_2_tt		
+				AUS = {
+					has_country_flag = victory_R_V_A_2
+				}
+			}
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_stability = 0.25
+		}
+	}
 	
 	#Aus lose 2
 	

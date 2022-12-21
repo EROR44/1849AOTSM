@@ -541,31 +541,31 @@ first_brother_war = {
 			}
 		}
 		
-		available = {
-			custom_trigger_tooltip = {
-				tooltip = aus_lose_war_trigger_decision_tt	
-				OR = {
-					9 = {
-						controller = {
-							OR = {
-								tag = PRU
-								is_subject_of = PRU
-								is_in_faction_with = PRU
-							}
-						}
-					}
-					4 = {
-						controller = {
-							OR = {
-								tag = PRU
-								is_subject_of = PRU
-								is_in_faction_with = PRU
-							}
-						}
-					}
-				}
-			}
-		}
+		#available = {
+		#	custom_trigger_tooltip = {
+		#		tooltip = aus_lose_war_trigger_decision_tt	
+		#		OR = {
+		#			9 = {
+		#				controller = {
+		#					OR = {
+		#						tag = PRU
+		#						is_subject_of = PRU
+		#						is_in_faction_with = PRU
+		#					}
+		#				}
+		#			}
+		#			4 = {
+		#				controller = {
+		#					OR = {
+		#						tag = PRU
+		#						is_subject_of = PRU
+		#						is_in_faction_with = PRU
+		#					}
+		#				}
+		#			}
+		#		}
+		#	}
+		#}
 		
 		visible = {
 			OR = {
@@ -596,6 +596,72 @@ first_brother_war = {
 		
 		timeout_effect = {
 			custom_effect_tooltip = aus_win_first_war_tt
+			hidden_effect = {
+				AUS = {
+					white_peace = PRU
+				}
+				SIL = {
+					transfer_state = 66
+					transfer_state = 67
+					transfer_state = 762
+				}
+				AUS = {
+					set_autonomy = {
+						target = SIL
+						autonomy_state = autonomy_integrated_puppet
+						end_wars = yes
+						end_civil_wars = yes
+					}
+				}
+				SIL = {
+					set_politics = { ruling_party = democratic elections_allowed = no }
+					set_popularities = {
+						democratic = 55
+						socialism = 5
+						reactionist = 17
+						authoritarian = 13
+					}
+				}
+				add_to_array = { global.german_union_members = SIL }
+				add_to_array = { global.german_union_for_aus = SIL }
+				remove_from_array = { global.german_union_leader = PRU }
+				PRU = {
+					load_focus_tree = prussian_lose_focus
+				}
+				PRU = {
+					clr_country_flag = PRU_VS_AUS_1
+				}
+				every_other_country = {
+					limit = {
+						has_country_flag = german_union_for_prussian
+					}
+					clr_country_flag = german_union_for_prussian
+					remove_from_array = { global.german_union_for_pru = PREV }
+					set_country_flag = german_union_neutrality
+					add_to_array = { global.german_union_neutrality = PREV }
+				}
+				AUS = {
+					set_country_flag = victory_R_V_A_1
+				}
+				SIL = {
+					load_oob = SIL_army
+				}
+				PRU = {
+					remove_mission = first_brother_war_decision
+				}
+				AUS = {
+					remove_mission = first_brother_war_decision
+				}
+				PRU = {
+					set_country_flag = first_civilwar_scenario
+				}
+				PRU = {
+					country_event = {
+						id = ger.6
+						days = 17
+					}
+				}
+			}
 		}
 		
 		cancel_trigger = {
@@ -626,6 +692,14 @@ first_brother_war = {
 		
 		cancel_effect = {
 			custom_effect_tooltip = aus_lose_first_war_tt
+			hidden_effect = {
+				AUS = {
+					remove_mission = first_brother_war_decision
+				}
+				PRU = {
+					remove_mission = first_brother_war_decision
+				}
+			}
 		}
 	
 	}

@@ -7882,6 +7882,134 @@ on_actions = {
 					remove_ideas = revolution_power
 				}
 			}
+			#German civilwar PRU win
+			if = {
+				limit = {
+					tag = SGE
+					OR = {
+						PRU = {
+							has_country_flag = first_civilwar_scenario
+						}
+						PRU = {
+							has_country_flag = second_civilwar_scenario
+						}
+						PRU = {
+							has_country_flag = third_civilwar_scenarion
+						}
+					}
+					SGE = {
+						has_war_with = PRU
+					}
+					has_global_flag = prussian_civilwar
+				}
+				clr_global_flag = prussian_civilwar
+				if = {
+					limit = {
+						PRU = {
+							has_country_flag = first_civilwar_scenario
+						}
+					}
+					PRU = {
+						clr_country_flag = first_civilwar_scenario
+					}
+				}
+				if = {
+					limit = {
+						PRU = {
+							has_country_flag = second_civilwar_scenario
+						}
+					}
+					PRU = {
+						clr_country_flag = second_civilwar_scenario
+					}
+				}
+				if = {
+					limit = {
+						PRU = {
+							has_country_flag = third_civilwar_scenarion
+						}
+					}
+					PRU = {
+						clr_country_flag = third_civilwar_scenarion
+					}
+				}
+				PRU = {
+					white_peace = {
+						tag = SGE
+						message = PRU_win_SGE
+					}
+				}
+				PRU = {
+					annex_country = {
+						target = SGE
+						transfer_troops = no
+					}
+				}
+			}
+			#German civilwar SGE win
+			if = {
+				limit = {
+					tag = PRU
+					OR = {
+						PRU = {
+							has_country_flag = first_civilwar_scenario
+						}
+						PRU = {
+							has_country_flag = second_civilwar_scenario
+						}
+						PRU = {
+							has_country_flag = third_civilwar_scenarion
+						}
+					}
+					SGE = {
+						has_war_with = PRU
+					}
+					has_global_flag = prussian_civilwar
+				}
+				clr_global_flag = prussian_civilwar
+				if = {
+					limit = {
+						PRU = {
+							has_country_flag = first_civilwar_scenario
+						}
+					}
+					PRU = {
+						clr_country_flag = first_civilwar_scenario
+					}
+				}
+				if = {
+					limit = {
+						PRU = {
+							has_country_flag = second_civilwar_scenario
+						}
+					}
+					PRU = {
+						clr_country_flag = second_civilwar_scenario
+					}
+				}
+				if = {
+					limit = {
+						PRU = {
+							has_country_flag = third_civilwar_scenarion
+						}
+					}
+					PRU = {
+						clr_country_flag = third_civilwar_scenarion
+					}
+				}
+				SGE = {
+					white_peace = {
+						tag = PRU
+						message = SGE_win_PRU
+					}
+				}
+				SGE = {
+					annex_country = {
+						target = PRU
+						transfer_troops = no
+					}
+				}
+			}
 		}
 	}
 	on_state_control_changed = {
@@ -8204,6 +8332,12 @@ on_actions = {
 						disband = yes 
 					}
 				}
+				AUS = {
+					remove_mission = first_brother_war_decision
+				}
+				PRU = {
+					remove_mission = first_brother_war_decision
+				}
 			}
 			#Second Prussian-Austrian war
 			if = {
@@ -8322,12 +8456,35 @@ on_actions = {
 				BYZ = {
 					set_country_flag = BYZ_vs_AUS_win
 				}
-				BYZ = {
-					transfer_state = 102
-					transfer_state = 103
-					transfer_state = 109
-					transfer_state = 163
-					transfer_state = 736
+				if = {
+					limit = {
+						BYZ = {
+							has_country_flag = byz_democratic_politic
+						}
+					}
+					DAL = {
+						transfer_state = 102
+						transfer_state = 103
+						transfer_state = 109
+						transfer_state = 163
+						transfer_state = 736
+					}
+				}
+				if = {
+					limit = {
+						BYZ = {
+							NOT = {
+								has_country_flag = byz_democratic_politic
+							}
+						}
+					}
+					BYZ = {
+						transfer_state = 102
+						transfer_state = 103
+						transfer_state = 109
+						transfer_state = 163
+						transfer_state = 736
+					}
 				}
 				if = {
 					limit = {
@@ -8351,6 +8508,12 @@ on_actions = {
 					remove_state_core = 160
 					remove_state_core = 163
 					remove_state_core = 736
+				}
+				AUS = {
+					remove_ideas = war_for_the_balkan_idea
+				}
+				BYZ = {
+					remove_ideas = war_for_the_balkan_idea
 				}
 				news_event = news.129
 			}
@@ -8388,6 +8551,12 @@ on_actions = {
 					transfer_state = 108
 					transfer_state = 802
 					transfer_state = 804
+				}
+				AUS = {
+					remove_ideas = war_for_the_balkan_idea
+				}
+				BYZ = {
+					remove_ideas = war_for_the_balkan_idea
 				}
 				news_event = news.130
 			}
