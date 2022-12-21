@@ -794,7 +794,7 @@ country_event = {
 	id = ger.6 #revolution
 	title = ger.6.t
 	desc = ger.6.d
-	picture = GFX_report_event_molotov_signing_pact
+	picture = GFX_report_event_ger_civil_war
 	
 	is_triggered_only = yes
 	
@@ -805,24 +805,42 @@ country_event = {
 		ai_chance = {
 			factor = 100
 		}
-		SGE = { inherit_technology = PRU }
-		PRU = { delete_unit_template_and_units = { division_template = "Arme Divisia" } }
+		hidden_effect = {
+			SGE = { inherit_technology = PRU }
+		}
 		if = {
 			limit = {
-				AUS = { has_country_flag = victory_R_V_A_1 }
+				PRU = { has_country_flag = first_civilwar_scenario }
 			}
-			PRU = {
+			hidden_effect = {
 				every_core_state = {
+					limit = {
+						is_core_of = PRU
+					}
 					add_core_of = SGE
 				}
 			}
 			SGE = {
 				transfer_state = 64
-				transfer_state = 68
-				transfer_state = 63
-				transfer_state = 763
+				transfer_state = 62
 			}
-			SGE = { load_oob = SGE_RVA_1 }
+			hidden_effect = {
+				PRU = {
+					transfer_units_fraction= {
+						target = SGE
+						size = 0.0
+						stockpile_ratio = 0.75
+						army_ratio = 0.65
+						navy_ratio = 0.50
+						air_ratio = 0.00
+						keep_unit_leaders_trigger = {
+							NOT = {
+								has_unit_leader_flag = is_sympathy_to_socialism
+							}
+						}
+					}
+				}
+			}
 			SGE = {
 				declare_war_on = {
 					target = PRU
@@ -830,61 +848,7 @@ country_event = {
 				}
 			}
 		}
-		if = {
-			limit = {
-				AUS = { has_country_flag = victory_R_V_A_2 }
-			}
-			PRU = {
-				every_core_state = {
-					add_core_of = SGE
-				}
-			}
-			SGE = {
-				transfer_state = 55
-				transfer_state = 58
-				transfer_state = 64
-				transfer_state = 68
-				transfer_state = 63
-				transfer_state = 763
-				transfer_state = 829
-			}
-			SGE = { load_oob = SGE_RVA_2 }
-			SGE = {
-				declare_war_on = {
-					target = PRU
-					type = annex_everything
-				}
-			}
-		}
-		if = {
-			limit = {
-				AUS = { has_country_flag = victory_R_V_A_3 }
-			}
-			PRU = {
-				every_core_state = {
-					add_core_of = SGE
-				}
-			}
-			SGE = {
-				transfer_state = 50
-				transfer_state = 52
-				transfer_state = 54
-				transfer_state = 55
-				transfer_state = 58
-				transfer_state = 64
-				transfer_state = 68
-				transfer_state = 63
-				transfer_state = 763
-				transfer_state = 829
-			}
-			SGE = { load_oob = SGE_RVA_3 }
-			SGE = {
-				declare_war_on = {
-					target = PRU
-					type = annex_everything
-				}
-			}
-		}
+		set_global_flag = prussian_civilwar
 	}
 	
 	option = {
@@ -892,26 +856,43 @@ country_event = {
 		ai_chance = {
 			factor = 0
 		}
-		delete_unit_template_and_units = { division_template = "Arme Divisia" }
 		SGE = { change_tag_from = PRU }
-		SGE = { inherit_technology = PRU }
-		PRU = { delete_unit_template_and_units = { division_template = "Arme Divisia" } }
+		hidden_effect = {
+			SGE = { inherit_technology = PRU }
+		}
 		if = {
 			limit = {
-				AUS = { has_country_flag = victory_R_V_A_1 }
+				PRU = { has_country_flag = first_civilwar_scenario }
 			}
-			PRU = {
+			hidden_effect = {
 				every_core_state = {
+					limit = {
+						is_core_of = PRU
+					}
 					add_core_of = SGE
 				}
 			}
 			SGE = {
 				transfer_state = 64
-				transfer_state = 68
-				transfer_state = 63
-				transfer_state = 763
+				transfer_state = 62
 			}
-			SGE = { load_oob = SGE_RVA_1 }
+			hidden_effect = {
+				PRU = {
+					transfer_units_fraction= {
+						target = SGE
+						size = 0.0
+						stockpile_ratio = 0.75
+						army_ratio = 0.65
+						navy_ratio = 0.50
+						air_ratio = 0.00
+						keep_unit_leaders_trigger = {
+							NOT = {
+								has_unit_leader_flag = is_sympathy_to_socialism
+							}
+						}
+					}
+				}
+			}
 			SGE = {
 				declare_war_on = {
 					target = PRU
@@ -919,61 +900,7 @@ country_event = {
 				}
 			}
 		}
-		if = {
-			limit = {
-				AUS = { has_country_flag = victory_R_V_A_2 }
-			}
-			PRU = {
-				every_core_state = {
-					add_core_of = SGE
-				}
-			}
-			SGE = {
-				transfer_state = 55
-				transfer_state = 58
-				transfer_state = 64
-				transfer_state = 68
-				transfer_state = 63
-				transfer_state = 763
-				transfer_state = 829
-			}
-			SGE = { load_oob = SGE_RVA_2 }
-			SGE = {
-				declare_war_on = {
-					target = PRU
-					type = annex_everything
-				}
-			}
-		}
-		if = {
-			limit = {
-				AUS = { has_country_flag = victory_R_V_A_3 }
-			}
-			PRU = {
-				every_core_state = {
-					add_core_of = SGE
-				}
-			}
-			SGE = {
-				transfer_state = 50
-				transfer_state = 52
-				transfer_state = 54
-				transfer_state = 55
-				transfer_state = 58
-				transfer_state = 64
-				transfer_state = 68
-				transfer_state = 63
-				transfer_state = 763
-				transfer_state = 829
-			}
-			SGE = { load_oob = SGE_RVA_3 }
-			SGE = {
-				declare_war_on = {
-					target = PRU
-					type = annex_everything
-				}
-			}
-		}
+		set_global_flag = prussian_civilwar
 	}
 }
 
