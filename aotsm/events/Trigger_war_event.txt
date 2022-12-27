@@ -170,66 +170,76 @@ country_event = {
 	trigger = {
 		tag = AUS
 		PRU = {
-			surrender_progress > 0.95
+			surrender_progress > 0.90
 		}
 		PRU = { has_country_flag = PRU_vs_AUS_1 }
 	}
 	option = {
 		name = twe.30.a
-		hidden_effect = {
-			AUS = { set_country_flag = victory_R_V_A_1 }
-			PRU = { clr_country_flag = PRU_vs_AUS_1 }
-			PRU = { remove_ideas = pru_blitzkrieg }
-			remove_from_faction = PRU
-			remove_from_faction = AUS
-			remove_from_faction = BAD
-			remove_from_faction = VUR
-			remove_from_faction = BAV
-			remove_from_faction = MCL
-			remove_from_faction = SLG
-			remove_from_faction = HAN
-			remove_from_faction = VES
-			remove_from_faction = FRN
-			remove_from_faction = TYR
-			remove_from_faction = SAK
-			PRU = { white_peace = AUS }
-			PRU = { white_peace = BAD }
-			PRU = { white_peace = BAV }
-			PRU = { white_peace = VUR }
-			MCL = { white_peace = AUS }
-			MCL = { white_peace = BAD }
-			MCL = { white_peace = BAV }
-			MCL = { white_peace = VUR }
-			SLG = { white_peace = AUS }
-			SLG = { white_peace = BAD }
-			SLG = { white_peace = BAV }
-			SLG = { white_peace = VUR }
-			HAN = { white_peace = AUS }
-			HAN = { white_peace = BAD }
-			HAN = { white_peace = BAV }
-			HAN = { white_peace = VUR }
-			VES = { white_peace = AUS }
-			VES = { white_peace = BAD }
-			VES = { white_peace = BAV }
-			VES = { white_peace = VUR }
-			SAK = { white_peace = AUS }
-			SAK = { white_peace = BAD }
-			SAK = { white_peace = BAV }
-			SAK = { white_peace = VUR }
-			TYR = { white_peace = AUS }
-			TYR = { white_peace = BAD }
-			TYR = { white_peace = BAV }
-			TYR = { white_peace = VUR }
-			FRN = { white_peace = AUS }
-			FRN = { white_peace = BAD }
-			FRN = { white_peace = BAV }
-			FRN = { white_peace = VUR }
-			AUS = { dismantle_faction = yes }
-			PRU = { dismantle_faction = yes }
+		AUS = {
+			white_peace = PRU
 		}
-		news_event = { hours = 24 id = news.3 }
-		PRU = { country_event = { hours = 24 id = ger.6 } }
-		PRU = { set_country_flag = PRU_revolution }
+		SIL = {
+			transfer_state = 66
+			transfer_state = 67
+			transfer_state = 762
+		}
+		AUS = {
+			set_autonomy = {
+				target = SIL
+				autonomy_state = autonomy_integrated_puppet
+				end_wars = yes
+				end_civil_wars = yes
+			}
+		}
+		SIL = {
+			set_politics = { ruling_party = democratic elections_allowed = no }
+			set_popularities = {
+				democratic = 55
+				socialism = 5
+				reactionist = 17
+				authoritarian = 13
+			}
+		}
+		add_to_array = { global.german_union_members = SIL }
+		add_to_array = { global.german_union_for_aus = SIL }
+		remove_from_array = { global.german_union_leader = PRU }
+		PRU = {
+			load_focus_tree = prussian_lose_focus
+		}
+		PRU = {
+			clr_country_flag = PRU_VS_AUS_1
+		}
+		every_other_country = {
+			limit = {
+				has_country_flag = german_union_for_prussian
+			}
+			clr_country_flag = german_union_for_prussian
+			remove_from_array = { global.german_union_for_pru = PREV }
+			set_country_flag = german_union_neutrality
+			add_to_array = { global.german_union_neutrality = PREV }
+		}
+		AUS = {
+			set_country_flag = victory_R_V_A_1
+		}
+		SIL = {
+			load_oob = SIL_army
+		}
+		PRU = {
+			remove_mission = first_brother_war_decision
+		}
+		AUS = {
+			remove_mission = first_brother_war_decision
+		}
+		PRU = {
+			set_country_flag = first_civilwar_scenario
+		}
+		PRU = {
+			country_event = {
+				id = ger.6
+				days = 17
+			}
+		}
 	}
 }
 
@@ -371,7 +381,30 @@ country_event = {
 			PRU = { white_peace = AUS }
 			PRU = { set_country_flag = victory_R_V_A_2 }
 			PRU = { clr_country_flag = PRU_vs_AUS_2 }
-			AUS = { dismantle_faction = yes }
+			if = {
+				limit = {
+					NOT = {
+						AUS = {
+							has_completed_focus = AUS_create_OEA
+						}
+					}
+				}
+				AUS = { dismantle_faction = yes }
+			}
+			if = {
+				limit = {
+					AUS = {
+						has_completed_focus = AUS_create_OEA
+					}
+				}
+				if = {
+					limit = {
+						has_country_flag = time_member_of_allience_aus
+					}
+					leave_faction = yes
+					clr_country_flag = time_member_of_allience_aus
+				}
+			}
 			if = {
 				limit = {
 					has_country_flag = time_member_of_allience
