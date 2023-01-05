@@ -2487,15 +2487,17 @@ focus_tree = {
 		}
 	}
 	
+################CHOOSE_FOREIGN_POLITIC_SECTION################
 	focus = {
-		id = RUS_conquest_of_steppe
-		icon = GFX_goal_generic_improve_relations
+		id = RUS_the_way_of_diplomaty
+		icon = GFX_focus_generic_the_giant_wakes
 		
 		x = -4
 		y = 1
 		cost = 5 
-		
-		mutually_exclusive = { focus = RUS_friendship_witch_kaz }
+
+		mutually_exclusive = { focus = RUS_mixed_way }
+		mutually_exclusive = { focus = RUS_the_way_of_power }
 
 		relative_position_id = RUS_the_giant_has_awakened
 		prerequisite = { focus = RUS_the_giant_has_awakened }
@@ -2505,19 +2507,75 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
 		completion_reward = {
-			
+			set_country_flag = RUS_diplomaty_way
 		}
 	}
 	focus = {
-		id = RUS_demand_kaz
-		icon = GFX_goal_generic_improve_relations
+		id = RUS_mixed_way
+		icon = GFX_focus_spr_torchbearers_of_tomorrow
 		
 		x = 0
 		y = 1
 		cost = 5 
 
-		relative_position_id = RUS_conquest_of_steppe
-		prerequisite = { focus = RUS_conquest_of_steppe }
+		mutually_exclusive = { focus = RUS_the_way_of_diplomaty }
+		mutually_exclusive = { focus = RUS_the_way_of_power }
+
+		relative_position_id = RUS_the_giant_has_awakened
+		prerequisite = { focus = RUS_the_giant_has_awakened }
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			set_country_flag = RUS_mixed_way
+		}
+	}
+	focus = {
+		id = RUS_the_way_of_power
+		icon = GFX_focus_generic_support_the_left_right
+		
+		x = 4
+		y = 1
+		cost = 5 
+
+		mutually_exclusive = { focus = RUS_the_way_of_diplomaty }
+		mutually_exclusive = { focus = RUS_mixed_way }
+
+		relative_position_id = RUS_the_giant_has_awakened
+		prerequisite = { focus = RUS_the_giant_has_awakened }
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			set_country_flag = RUS_power_way
+		}
+	}
+	focus = {
+		id = RUS_kazah_quiestion
+		icon = GFX_goal_generic_improve_relations
+		
+		x = -2
+		y = 1
+		cost = 5 
+		
+		available = {
+			OR = { 
+				has_country_flag = RUS_diplomaty_way
+				has_country_flag = RUS_mixed_way
+			}
+		}
+		
+		mutually_exclusive = { focus = RUS_invasion_in_central_asia }
+
+		relative_position_id = RUS_mixed_way
+		prerequisite = { 
+			focus = RUS_mixed_way 
+			focus = RUS_the_way_of_diplomaty 
+		}
 		
 		available_if_capitulated = yes
 		
@@ -2528,15 +2586,153 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = RUS_demand_per
-		icon = GFX_goal_generic_improve_relations
+		id = RUS_invasion_in_central_asia
+		icon = GFX_focus_generic_annex_country
+		
+		x = 2
+		y = 1
+		cost = 5 
+		
+		mutually_exclusive = { focus = RUS_kazah_quiestion }
+
+		relative_position_id = RUS_mixed_way
+		prerequisite = { 
+			focus = RUS_mixed_way 
+			focus = RUS_the_way_of_power 
+		}
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			
+		}
+	}
+	focus = {
+		id = RUS_claims_on_nortch_manchguria
+		icon = GFX_focus_generic_annex_country
+		
+		x = 0
+		y = 2
+		cost = 5 
+		
+		mutually_exclusive = { focus = RUS_kazah_quiestion }
+
+		relative_position_id = RUS_mixed_way
+		prerequisite = { 
+			focus = RUS_kazah_quiestion 
+			focus = RUS_invasion_in_central_asia 
+		}
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			
+		}
+	}
+	focus = {
+		id = RUS_russo_chinesse_relations
+		icon = GFX_focus_generic_annex_country
+		
+		x = -2
+		y = 1
+		cost = 5 
+		
+		mutually_exclusive = { focus = RUS_reorg_lands_of_far_east }
+
+		relative_position_id = RUS_claims_on_nortch_manchguria
+		prerequisite = { focus = RUS_claims_on_nortch_manchguria }
+		prerequisite = { focus = RUS_friendship_witch_kaz }
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			
+		}
+	}
+	focus = {
+		id = RUS_reorg_lands_of_far_east
+		icon = GFX_goal_generic_dangerous_deal
+		
+		x = 2
+		y = 1
+		cost = 5 
+		
+		mutually_exclusive = { focus = RUS_russo_chinesse_relations }
+
+		relative_position_id = RUS_claims_on_nortch_manchguria
+		prerequisite = { focus = RUS_claims_on_nortch_manchguria }
+		prerequisite = { focus = RUS_control_cental_asia }
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			
+		}
+	}
+	focus = {
+		id = RUS_demand_ecognition_of_new_borders
+		icon = GFX_goal_generic_forceful_treaty
+		
+		x = 0
+		y = 2
+		cost = 5 
+
+		relative_position_id = RUS_claims_on_nortch_manchguria
+		prerequisite = { 
+			focus = RUS_reorg_lands_of_far_east 
+			focus = RUS_russo_chinesse_relations 
+		}
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			
+		}
+	}
+#####################DIPLOMATIC_WAY_SECTION###############################	
+	focus = {
+		id = RUS_expand_diplomatic_korpus
+		icon = GFX_goal_generic_intelligence_exchange
 		
 		x = 0
 		y = 1
 		cost = 5 
+		
 
-		relative_position_id = RUS_conquest_of_steppe
-		prerequisite = { focus = RUS_conquest_of_steppe }
+		relative_position_id = RUS_the_way_of_diplomaty
+		prerequisite = { 
+			focus = RUS_mixed_way 
+			focus = RUS_the_way_of_diplomaty 
+		}
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			
+		}
+	}
+	focus = {
+		id = RUS_in_search_of_ally
+		icon = GFX_goal_generic_national_unity
+		
+		x = -1
+		y = 1
+		cost = 5 
+
+		relative_position_id = RUS_expand_diplomatic_korpus
+		prerequisite = { focus = RUS_expand_diplomatic_korpus }
 		
 		available_if_capitulated = yes
 		
@@ -2548,16 +2744,15 @@ focus_tree = {
 	}
 	focus = {
 		id = RUS_friendship_witch_kaz
-		icon = GFX_goal_generic_improve_relations
+		icon = GFX_focus_generic_treaty
 		
-		x = -2
+		x = 1
 		y = 1
 		cost = 5 
-		
-		mutually_exclusive = { focus = RUS_conquest_of_steppe }
 
-		relative_position_id = RUS_the_giant_has_awakened
-		prerequisite = { focus = RUS_the_giant_has_awakened }
+		relative_position_id = RUS_expand_diplomatic_korpus
+		prerequisite = { focus = RUS_expand_diplomatic_korpus }
+		prerequisite = { focus = RUS_kazah_quiestion }
 		
 		available_if_capitulated = yes
 		
@@ -2568,15 +2763,18 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = RUS_chinesse_threat
-		icon = GFX_goal_generic_improve_relations
+		id = RUS_alliamce_quiestion
+		icon = GFX_goal_generic_alliance
 		
-		x = 3
-		y = 1
-		cost = 5
+		x = -1
+		y = 2
+		cost = 5 
 
-		relative_position_id = RUS_the_giant_has_awakened
-		prerequisite = { focus = RUS_the_giant_has_awakened }
+		relative_position_id = RUS_friendship_witch_kaz
+		prerequisite = { 
+			focus = RUS_friendship_witch_kaz 
+			focus = RUS_in_search_of_ally
+		}
 		
 		available_if_capitulated = yes
 		
@@ -2586,6 +2784,88 @@ focus_tree = {
 			
 		}
 	}
+#####################POWER_WAY_SECTION###############################		
+	focus = {
+		id = RUS_declare_patrial_mobilisation
+		icon = GFX_focus_SWI_issue_war_bonds
+		
+		x = 0
+		y = 1
+		cost = 5 
+
+		relative_position_id = RUS_the_way_of_power
+		prerequisite = { focus = RUS_the_way_of_power }
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			
+		}
+	}
+	focus = {
+		id = RUS_control_cental_asia
+		icon = GFX_goal_generic_political_pressure
+		
+		x = -1
+		y = 1
+		cost = 5 
+
+		relative_position_id = RUS_declare_patrial_mobilisation
+		prerequisite = { focus = RUS_declare_patrial_mobilisation }
+		prerequisite = { focus = RUS_invasion_in_central_asia }
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			
+		}
+	}
+	focus = {
+		id = RUS_revive_the_ohranka
+		icon = GFX_focus_generic_secret_service_agency
+		
+		x = 1
+		y = 1
+		cost = 5 
+
+		relative_position_id = RUS_declare_patrial_mobilisation
+		prerequisite = { focus = RUS_declare_patrial_mobilisation }
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			
+		}
+	}
+	focus = {
+		id = RUS_declare_about_own_ambitions
+		icon = GFX_goal_generic_propaganda
+		
+		x = -1
+		y = 2
+		cost = 5 
+
+		relative_position_id = RUS_revive_the_ohranka
+		prerequisite = { 
+			focus = RUS_revive_the_ohranka 
+			focus = RUS_control_cental_asia 
+		}
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			
+		}
+	}
+
 #########################ALLY_CHOOSE_SECTION###########################	
 	focus = {
 		id = RUS_ally_witch_france
