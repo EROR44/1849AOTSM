@@ -271,6 +271,19 @@ on_actions = {
 				}
 				RUS = { remove_ideas = RUS_dependence_from_import }
 			}
+			if = { #временная мера
+				limit = {
+					QIN = {
+						has_war_witch = TPN
+					}			
+				}
+				QIN ={	
+					swap_ideas = { 
+						remove_idea = large_country
+						add_idea = potential_world_power
+					}
+				}
+			}
 		}
 	}
 	
@@ -311,6 +324,69 @@ on_actions = {
 	
 	on_capitulation = {
 		effect = {
+			#TPN capitulation
+			if = {
+				limit = {
+					tag = QIN
+					has_global_flag = taypin_uprising_started 
+				}				
+				QIN = { 
+					white_peace = {
+						tag = TPN
+						message = TPN_lose
+					}					
+					transfer_state = 591
+					transfer_state = 592
+					transfer_state = 606
+					transfer_state = 748
+					transfer_state = 749
+					if = {
+						limit = {
+							TPN = {
+								owns_state = 596
+							}	
+						}
+						QIN = {
+							transfer_state = 596
+						}
+					}
+					remove_ideas = QIN_stagnation_of_empire_1 #временная мера, потом вырезать
+					remove_ideas = QIN_peoples_riots #временная мера, потом вырезать
+				}
+				TPN = {
+					remove_state_core = 325
+					remove_state_core = 524
+					remove_state_core = 591
+					remove_state_core = 592
+					remove_state_core = 593
+					remove_state_core = 594
+					remove_state_core = 595
+					remove_state_core = 596
+					remove_state_core = 597
+					remove_state_core = 598
+					remove_state_core = 599
+					remove_state_core = 600
+					remove_state_core = 602
+					remove_state_core = 603
+					remove_state_core = 606
+					remove_state_core = 607
+					remove_state_core = 613
+					remove_state_core = 620
+					remove_state_core = 728
+					remove_state_core = 743
+					remove_state_core = 744
+					remove_state_core = 747
+					remove_state_core = 748
+					remove_state_core = 749
+					remove_state_core = 750
+					remove_state_core = 751
+					remove_state_core = 826
+				}
+				add_threat = 5
+				clr_global_flag = taypin_uprising_started
+				set_global_flag = taypin_uprising_failed
+				news_event = { id = news.147 hours = 24 }
+			}
 			#ALG capitulation
 			if = {
 				limit = {
