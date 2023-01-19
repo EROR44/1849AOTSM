@@ -468,6 +468,9 @@ country_event = {
 				country_event = { id = te.10 days = 30 }
 			}
 			YPS = {
+				set_cosmetic_tag = BYZ_YPS
+			}
+			YPS = {
 				add_ideas = { crusader_state }
 			}
 			SYR = {
@@ -561,6 +564,11 @@ country_event = {
 			surrender_progress > 0.25
 		}
 		has_global_flag = firts_world_war
+		NOT = {
+			SCA = {
+				has_war_with = RUS
+			}
+		}
 	}
 	
 	option = {
@@ -647,7 +655,7 @@ country_event = {
 	option = {
 		name = te.13.a
 		ai_chance = {
-			factor = 50
+			factor = 90
 		}
 		VLH = { add_to_faction =  GLA }
 		GLA = { set_country_flag = GLA_with_VLH }
@@ -656,10 +664,16 @@ country_event = {
 	option = {
 		name = te.13.b
 		ai_chance = {
-			factor = 50
+			factor = 10
 			modifier = {
 				factor = 0
 				is_historical_focus_on = yes
+			}
+			modifier = {
+				factor = 0
+				HUN = {
+					is_ai = yes
+				}
 			}
 		}
 	}
@@ -968,6 +982,7 @@ country_event = {
 	
 	option = {
 		name = te.17.a
+		news_event = news.111
 	}
 	
 }
@@ -9280,9 +9295,27 @@ country_event = {
 			id = te.92
 			days = 60
 		}
-		country_event = {
-			id = te.93
-			days = 90
+		if = {
+			limit = {
+				NOT = {
+					SCA = {
+						owns_state = 829
+						owns_state = 58
+					}
+				}
+			}
+			country_event = {
+				id = te.93
+				days = 90
+			}
+		}
+		else = {
+			SCA = {
+				country_event = {
+					id = te.106
+					days = 30
+				}
+			}
 		}
 	}
 	

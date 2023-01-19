@@ -4,6 +4,8 @@
 ###################
 
 add_namespace = byz
+add_namespace = byz_ultimatum
+add_namespace = byz_chain
 add_namespace = byz_ita
 add_namespace = byz_pru
 add_namespace = byz_senat
@@ -336,10 +338,7 @@ country_event = { #Senat meeting 1849
 				factor = 0
 				OR = {
 					is_historical_focus_on = yes
-					has_game_rule = {
-						rule = BYZ_ai_behavior 
-						option = TRUE_ROMAN_WAY
-					}
+					BYZ = { has_country_flag = BYZ_AI_RANDOM_HISTORICAL }
 				}
 			}
 		}
@@ -1160,7 +1159,504 @@ country_event = { #Help bot with merchant
 	}
 	
 }
+
+country_event = { #Balkan ultimatum
+	id = byz_ultimatum.1
+	title = byz_ultimatum.1.t
+	desc = byz_ultimatum.1.d
+	picture = GFX_report_event_gre_balkan_pact
 	
+	hidden =  yes
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = { #Peace is best
+		name = byz_ultimatum.1.a
+		ai_chance = {
+			factor = 10
+		}
+		BYZ = {
+			set_country_flag = aus_byz_deal_complete
+			country_event = {
+				id = byz_chain.1
+				hours = 4
+			}
+		}
+	}
+	
+	option = { #Lets Trade
+		name = byz_ultimatum.1.b
+		ai_chance = {
+			factor = 90
+		}
+		BYZ = {
+			country_event = {
+				id = byz_chain.5
+				hours = 4
+			}
+		}
+	}
+	
+	option = { #Say no
+		name = byz_ultimatum.1.c
+		ai_chance = {
+			factor = 0
+		}
+		BYZ = {
+			set_country_flag = aus_byz_deal_fail
+			country_event = {
+				id = byz_chain.3
+				hours = 4
+			}
+		}
+	}
+	
+}
+
+country_event = { #last letter
+	id = byz_ultimatum.2
+	title = byz_ultimatum.2.t
+	desc = byz_ultimatum.2.d
+	picture = GFX_report_event_gre_parade
+	
+	hidden =  yes
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = { #Peace is best
+		name = byz_ultimatum.2.a
+		ai_chance = {
+			factor = 30
+		}
+		BYZ = {
+			set_country_flag = aus_say_yes_for_ultimatum
+			country_event = {
+				id = byz_chain.2
+				hours = 4
+			}
+		}
+	}
+	
+	option = { #They don't declare war
+		name = byz_ultimatum.2.b
+		ai_chance = {
+			factor = 70
+		}
+		BYZ = {
+			set_country_flag = aus_say_no_for_ultimatum
+			country_event = {
+				id = byz_chain.4
+				hours = 4
+			}
+		}
+	}
+	
+}
+
+country_event = { #They say deal Yes
+	id = byz_chain.1
+	title = byz_chain.1.t
+	desc = byz_chain.1.d
+	picture = GFX_report_event_gre_allied_diplomacy
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		hidden_effect = {
+			BYZ = {
+				set_country_flag = BYZ_vs_AUS_win
+				transfer_state = 102
+				transfer_state = 103
+				transfer_state = 109
+				transfer_state = 163
+				transfer_state = 736
+			}
+			VEN = {
+				transfer_state = 159
+				transfer_state = 160
+			}
+		}
+	}
+	
+	option = { #Good
+		name = byz_chain.1.a
+		news_event = news.124
+	}
+}	
+
+country_event = { #They say ultimatum Yes
+	id = byz_chain.2
+	title = byz_chain.2.t
+	desc = byz_chain.2.d
+	picture = GFX_report_event_gre_diplomacy
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		hidden_effect = {
+			BYZ = {
+				set_country_flag = BYZ_vs_AUS_win
+				transfer_state = 102
+				transfer_state = 103
+				transfer_state = 109
+				transfer_state = 163
+				transfer_state = 736
+			}
+			VEN = {
+				transfer_state = 159
+				transfer_state = 160
+			}
+		}
+	}
+	
+	option = { #Good
+		name = byz_chain.2.a
+		news_event = news.125
+		if = {
+			limit = {
+				BYZ = {
+					has_idea = byz_prepering_war_idea
+				}
+			}
+			BYZ = {
+				remove_ideas = byz_prepering_war_idea
+			}
+		}
+		if = {
+			limit = {
+				BYZ = {
+					has_idea = byz_true_roman_1
+				}
+			}
+			BYZ = {
+				remove_ideas = byz_true_roman_1
+			}
+		}
+		if = {
+			limit = {
+				BYZ = {
+					has_idea = byz_true_roman_2
+				}
+			}
+			BYZ = {
+				remove_ideas = byz_true_roman_2
+			}
+		}
+	}
+}	
+
+country_event = { #They say to deal no
+	id = byz_chain.3
+	title = byz_chain.3.t
+	desc = byz_chain.3.d
+	picture = GFX_report_event_gre_greek_cavalry
+	
+	is_triggered_only = yes
+	
+	option = { #War is hel
+		name = byz_chain.3.a
+		news_event = news.126
+	}
+}
+
+country_event = { #They say to ultimatum no
+	id = byz_chain.4
+	title = byz_chain.4.t
+	desc = byz_chain.4.d
+	picture = GFX_report_event_gre_venizelos_speech
+	
+	is_triggered_only = yes
+	
+	option = { #War is hel
+		name = byz_chain.4.a
+		news_event = news.127
+	}
+}
+
+country_event = { #They want to trade
+	id = byz_chain.5
+	title = byz_chain.5.t
+	desc = byz_chain.5.d
+	picture = GFX_report_event_tur_inonu_diplomacy
+	
+	is_triggered_only = yes
+	
+	option = { #Okey let's trade
+		name = byz_chain.5.a
+		ai_chance = {
+			factor = 60
+		}
+		AUS = {
+			country_event = {
+				id = byz_chain.6
+				hours = 4
+			}
+		}
+	}
+	
+	option = { #It isn't deal it's ultimatum
+		name = byz_chain.5.b
+		ai_chance = {
+			factor = 40
+		}
+		BYZ = {
+			set_country_flag = aus_byz_deal_fail
+		}
+		news_event = news.126
+	}
+}
+
+country_event = { #What we want
+	id = byz_chain.6
+	title = byz_chain.6.t
+	desc = byz_chain.6.d
+	picture = GFX_report_event_finnish_letter
+	
+	is_triggered_only = yes
+	
+	option = { #Non-agresiv-pact
+		name = byz_chain.6.a
+		ai_chance = {
+			factor = 40
+		}
+		BYZ = {
+			country_event = {
+				id = byz_chain.7
+				hours = 4
+			}
+		}
+	}
+	
+	option = { #Non-agresiv-pact and gurant
+		name = byz_chain.6.b
+		ai_chance = {
+			factor = 40
+		}
+		BYZ = {
+			country_event = {
+				id = byz_chain.8
+				hours = 4
+			}
+		}
+	}
+	
+	option = { #We need crown of West Roman Empire
+		name = byz_chain.6.с
+		ai_chance = {
+			factor = 10
+		}
+		BYZ = {
+			country_event = {
+				id = byz_chain.9
+				hours = 4
+			}
+		}
+	}
+}
+
+country_event = { #Not a big prize
+	id = byz_chain.7
+	title = byz_chain.7.t
+	desc = byz_chain.7.d
+	picture = GFX_report_event_generic_read_write
+	
+	is_triggered_only = yes
+	
+	option = { #Yes
+		name = byz_chain.7.a
+		ai_chance = {
+			factor = 90
+		}
+		AUS = {
+			set_country_flag = deal_1
+			country_event = {
+				id = byz_chain.10
+				hours = 4
+			}
+		}
+	}
+	
+	option = { #No
+		name = byz_chain.7.b
+		ai_chance = {
+			factor = 10
+		}
+		BYZ = {
+			set_country_flag = aus_byz_deal_fail
+		}
+		news_event = news.126
+	}
+}
+
+country_event = { #Normal prize
+	id = byz_chain.8
+	title = byz_chain.8.t
+	desc = byz_chain.8.d
+	picture = GFX_report_event_generic_read_write
+	
+	is_triggered_only = yes
+	
+	option = { #Yes
+		name = byz_chain.8.a
+		ai_chance = {
+			factor = 60
+		}
+		AUS = {
+			set_country_flag = deal_2
+			country_event = {
+				id = byz_chain.10
+				hours = 4
+			}
+		}
+	}
+	
+	option = { #No
+		name = byz_chain.8.b
+		ai_chance = {
+			factor = 40
+		}
+		BYZ = {
+			set_country_flag = aus_byz_deal_fail
+		}
+		news_event = news.126
+	}
+}
+
+country_event = { #Ultimate prize
+	id = byz_chain.9
+	title = byz_chain.9.t
+	desc = byz_chain.9.d
+	picture = GFX_report_event_generic_read_write
+	
+	is_triggered_only = yes
+	
+	option = { #Yes
+		name = byz_chain.9.a
+		ai_chance = {
+			factor = 20
+		}
+		AUS = {
+			set_country_flag = deal_3
+			country_event = {
+				id = byz_chain.10
+				hours = 4
+			}
+		}
+	}
+	
+	option = { #No
+		name = byz_chain.9.b
+		ai_chance = {
+			factor = 80
+		}
+		BYZ = {
+			set_country_flag = aus_byz_deal_fail
+		}
+		news_event = news.126
+	}
+}
+
+country_event = { #They say yes
+	id = byz_chain.10
+	title = byz_chain.10.t
+	desc = byz_chain.10.d
+	picture = GFX_report_event_generic_sign_treaty1
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		hidden_effect = {
+			if = {
+				limit = {
+					AUS = {
+						has_country_flag = deal_1
+					}
+				}
+				AUS = {
+					diplomatic_relation = {
+						country = BYZ
+						relation = non_aggression_pact
+						active = yes
+					}
+				}
+				BYZ = {
+					diplomatic_relation = {
+						country = AUS
+						relation = non_aggression_pact
+						active = yes
+					}
+				}
+			}
+			if = {
+				limit = {
+					AUS = {
+						has_country_flag = deal_2
+					}
+				}
+				AUS = {
+					diplomatic_relation = {
+						country = BYZ
+						relation = non_aggression_pact
+						active = yes
+					}
+				}
+				BYZ = {
+					diplomatic_relation = {
+						country = AUS
+						relation = non_aggression_pact
+						active = yes
+					}
+				}
+				BYZ = {
+					diplomatic_relation = {
+						country = AUS
+						relation = guarantee
+						active = yes
+					}
+				}
+			}
+			if = {
+				limit = {
+					AUS = {
+						has_country_flag = deal_3
+					}
+				}
+				AUS = {
+					add_trait = {
+						 character = AUS_Franz_Joseph_I
+						 ideology = monarchist
+						 trait = kaiser_of_west
+					}
+				}
+				news_event = {
+					id = news.131
+					days = 27
+				}
+			}
+			BYZ = {
+				set_country_flag = BYZ_vs_AUS_win
+				transfer_state = 102
+				transfer_state = 103
+				transfer_state = 109
+				transfer_state = 163
+				transfer_state = 736
+			}
+			VEN = {
+				transfer_state = 159
+				transfer_state = 160
+			}
+		}
+	}
+	
+	option = { #Good
+		name = byz_chain.10.a
+		news_event = news.124
+	}
+}
 
 country_event = {
 	id = byz_ita.1
