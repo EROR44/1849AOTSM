@@ -1063,6 +1063,160 @@ pru_diplomat_missia = {
 		
 	}
 	
+	pru_recreating_faction = {
+	
+		icon = generic_nationalism
+
+		allowed = {
+			
+		}
+
+		available = {
+ 
+		}
+
+		visible = {
+			original_tag = PRU
+			PRU = {
+				has_completed_focus = PRU_aus_win
+			}
+			OR = {
+				PRU = {
+					is_faction_leader = no
+				}
+				PRU = {
+					is_in_faction = no
+				}
+			}
+			NOT = {
+				has_global_flag = pru_capitulation
+			}
+		}
+
+		fire_only_once = yes
+
+		cost = 0
+		
+		ai_will_do = {
+			factor = 100
+		}
+		
+		complete_effect = {
+			PRU = { create_faction = "PRU_Kontinentaleuropa_pakt" }
+			if = {
+				limit = {
+					has_global_flag = hol_was_in_faction_with_pru
+				}
+				PRU = {
+					add_to_faction = HOL
+				}
+			}
+			if = {
+				limit = {
+					has_global_flag = byz_was_in_faction_with_pru
+				}
+				PRU = { add_to_faction = BYZ }
+			}
+		}
+	
+	}
+	
+	pru_rejoin_faction = {
+	
+		icon = generic_nationalism
+
+		allowed = {
+			
+		}
+
+		available = {
+ 
+		}
+
+		visible = {
+			original_tag = PRU
+			PRU = {
+				is_faction_leader = yes
+			}
+			PRU = {
+				is_in_faction = yes
+			}
+			OR = {
+				AND = {
+					NOT = {
+						HOL = {
+							is_in_faction_with = PRU
+						}
+					}
+					has_global_flag = hol_was_in_faction_with_pru
+					NOT = {
+						HOL = {
+							has_country_flag = leave_pru_allience
+						}
+					}
+				}
+				AND = {
+					NOT = {
+						BYZ = {
+							is_in_faction_with = PRU
+						}
+					}
+					has_global_flag = byz_was_in_faction_with_pru
+					NOT = {
+						has_global_flag = byz_antoginize_pru
+					}
+				}
+			}
+			NOT = {
+				has_global_flag = pru_capitulation
+			}
+		}
+
+		fire_only_once = yes
+
+		cost = 0
+		
+		ai_will_do = {
+			factor = 100
+		}
+		
+		complete_effect = {
+			if = {
+				limit = {
+					has_global_flag = hol_was_in_faction_with_pru
+					NOT = {
+						HOL = {
+							is_in_faction_with = PRU
+						}
+					}
+					NOT = {
+						HOL = {
+							has_country_flag = leave_pru_allience
+						}
+					}
+				}
+				PRU = {
+					add_to_faction = HOL
+				}
+			}
+			if = {
+				limit = {
+					has_global_flag = byz_was_in_faction_with_pru
+					NOT = {
+						BYZ = {
+							is_in_faction_with = PRU
+						}
+					}
+					NOT = {
+						has_global_flag = byz_antoginize_pru
+					}
+				}
+				PRU = { add_to_faction = BYZ }
+			}
+		}
+	
+	}
+	
 }
 
 pru_war_decision = {
@@ -1110,9 +1264,11 @@ pru_war_decision = {
 						days = 35
 					}
 				}
-				news_event = {
-					id = news.66
-					days = 14
+				hidden_effect = {
+					country_event = {
+						id = script_event.15
+						days = 14
+					}
 				}
 			}
 			if = {

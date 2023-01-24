@@ -10,6 +10,7 @@ add_namespace = byz_ita
 add_namespace = byz_pru
 add_namespace = byz_senat
 add_namespace = byz_goverment_idea
+add_namespace = byz_student_chain
 
 country_event = {
 	id = byz.1
@@ -2927,6 +2928,1568 @@ country_event = { #Power
 			set_country_flag = byz_help_people_defense_core
 		}
 		custom_effect_tooltip = byz_help_people_defense_effect
+	}
+	
+}
+
+country_event = { #Student Revolt start
+	id = byz_student_chain.1
+	title = byz_student_chain.1.t
+	desc = byz_student_chain.1.d
+	picture = GFX_report_event_worker_protests
+	
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		hidden_effect = {
+			913 = {
+				set_demilitarized_zone = yes
+			}
+		}
+	}
+
+	option = { 
+		name = byz_student_chain.1.a
+		hidden_effect = {
+			BYZ = {
+				set_variable = {
+					var = student_revolt_pointer
+					value = 0
+				}
+			}
+			news_event = {
+				id = news.155
+				days = 3
+			}
+			BYZ = {
+				country_event = {
+					id = byz_student_chain.2
+					days = 44
+				}
+			}
+		}
+		custom_effect_tooltip = BYZ_913_is_demilitaz
+		set_global_flag = BYZ_student_revolt_proccess
+		custom_effect_tooltip = BYZ_start_of_student_revolt
+	}
+	
+}
+
+country_event = { #Army ready! What do we do?
+	id = byz_student_chain.2
+	title = byz_student_chain.2.t
+	desc = byz_student_chain.2.d
+	picture = GFX_report_event_polish_army
+	
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {
+	}
+
+	option = { 
+		name = byz_student_chain.2.a
+		ai_chance = {
+            base = 20
+        }
+		hidden_effect = {
+			if = {
+				limit = {
+					BYZ = {
+						check_variable = {
+							student_revolt_pointer > 5
+						}
+					}
+				}
+				BYZ = {
+					country_event = {
+						id = byz_student_chain.8
+						days = 6
+					}
+				}
+			}
+			if = {
+				limit = {
+					BYZ = {
+						check_variable = {
+							student_revolt_pointer < 6
+						}
+					}
+				}
+				BYZ = {
+					country_event = {
+						id = byz_student_chain.3
+						days = 12
+					}
+				}
+				random_list = {
+					75 = {
+						BYZ = {
+							add_to_variable = {
+								var = student_revolt_pointer
+								value = 1
+							}
+						}
+					}
+					25 = {
+						BYZ = {
+							add_to_variable = {
+								var = student_revolt_pointer
+								value = 2
+							}
+						}
+					}
+				}
+			}
+		}
+		add_political_power = -50
+		add_manpower = -731
+		913 = {
+			add_manpower = -6792
+		}
+	}
+	
+	option = { 
+		name = byz_student_chain.2.b
+		ai_chance = {
+            base = 20
+        }
+		hidden_effect = {
+			if = {
+				limit = {
+					BYZ = {
+						check_variable = {
+							student_revolt_pointer > 5
+						}
+					}
+				}
+				BYZ = {
+					country_event = {
+						id = byz_student_chain.8
+						days = 6
+					}
+				}
+			}
+			if = {
+				limit = {
+					BYZ = {
+						check_variable = {
+							student_revolt_pointer < 6
+						}
+					}
+				}
+				BYZ = {
+					country_event = {
+						id = byz_student_chain.3
+						days = 12
+					}
+				}
+				random_list = {
+					50 = {
+						BYZ = {
+							add_to_variable = {
+								var = student_revolt_pointer
+								value = 0
+							}
+						}
+					}
+					50 = {
+						BYZ = {
+							add_to_variable = {
+								var = student_revolt_pointer
+								value = 1
+							}
+						}
+					}
+				}
+			}
+		}
+		add_political_power = -100
+		913 = {
+			add_manpower = -44
+		}
+	}
+	
+	option = { 
+		name = byz_student_chain.2.c
+		ai_chance = {
+            base = 60
+        }
+		hidden_effect = {
+			if = {
+				limit = {
+					BYZ = {
+						check_variable = {
+							student_revolt_pointer > 5
+						}
+					}
+				}
+				BYZ = {
+					country_event = {
+						id = byz_student_chain.8
+						days = 6
+					}
+				}
+			}
+			if = {
+				limit = {
+					BYZ = {
+						check_variable = {
+							student_revolt_pointer < 6
+						}
+					}
+				}
+				BYZ = {
+					country_event = {
+						id = byz_student_chain.3
+						days = 12
+					}
+				}
+				random_list = {
+					75 = {
+						BYZ = {
+							add_to_variable = {
+								var = student_revolt_pointer
+								value = 0
+							}
+						}
+					}
+					25 = {
+						BYZ = {
+							add_to_variable = {
+								var = student_revolt_pointer
+								value = 1
+							}
+						}
+					}
+				}
+			}
+		}
+		add_political_power = -200
+	}
+	
+}
+
+country_event = { #Unrest growing
+	id = byz_student_chain.3
+	title = byz_student_chain.3.t
+	desc = byz_student_chain.3.d
+	picture = GFX_report_event_generic_strike
+	
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {
+	}
+
+	option = { 
+		name = byz_student_chain.3.a
+		ai_chance = {
+            base = 20
+        }
+		hidden_effect = {
+			if = {
+				limit = {
+					BYZ = {
+						check_variable = {
+							student_revolt_pointer > 5
+						}
+					}
+				}
+				BYZ = {
+					country_event = {
+						id = byz_student_chain.8
+						days = 6
+					}
+				}
+			}
+			if = {
+				limit = {
+					BYZ = {
+						check_variable = {
+							student_revolt_pointer < 6
+						}
+					}
+				}
+				BYZ = {
+					country_event = {
+						id = byz_student_chain.4
+						days = 7
+					}
+				}
+				random_list = {
+					40 = {
+						BYZ = {
+							add_to_variable = {
+								var = student_revolt_pointer
+								value = 1
+							}
+						}
+					}
+					60 = {
+						BYZ = {
+							add_to_variable = {
+								var = student_revolt_pointer
+								value = 2
+							}
+						}
+					}
+				}
+			}
+		}
+		add_stability = -0.05
+		add_war_support = -0.05
+		49 = {
+			add_manpower = -173
+		}
+		343 = {
+			add_manpower = -244
+		}
+		345 = {
+			add_manpower = -78
+		}
+		346 = {
+			add_manpower = -44
+		}
+		348 = {
+			add_manpower = -471
+		}
+		356 = {
+			add_manpower = -92
+		}
+		798 = {
+			add_manpower = -211
+		}
+		913 = {
+			add_manpower = -1021
+		}
+	}
+	
+	option = { 
+		name = byz_student_chain.3.b
+		ai_chance = {
+            base = 20
+        }
+		hidden_effect = {
+			if = {
+				limit = {
+					BYZ = {
+						check_variable = {
+							student_revolt_pointer > 5
+						}
+					}
+				}
+				BYZ = {
+					country_event = {
+						id = byz_student_chain.8
+						days = 6
+					}
+				}
+			}
+			if = {
+				limit = {
+					BYZ = {
+						check_variable = {
+							student_revolt_pointer < 6
+						}
+					}
+				}
+				BYZ = {
+					country_event = {
+						id = byz_student_chain.4
+						days = 7
+					}
+				}
+				random_list = {
+					30 = {
+						BYZ = {
+							add_to_variable = {
+								var = student_revolt_pointer
+								value = 0
+							}
+						}
+					}
+					70 = {
+						BYZ = {
+							add_to_variable = {
+								var = student_revolt_pointer
+								value = 1
+							}
+						}
+					}
+				}
+			}
+		}
+		add_political_power = -100
+	}
+	
+	option = { 
+		name = byz_student_chain.3.c
+		ai_chance = {
+            base = 60
+        }
+		hidden_effect = {
+			if = {
+				limit = {
+					BYZ = {
+						check_variable = {
+							student_revolt_pointer > 5
+						}
+					}
+				}
+				BYZ = {
+					country_event = {
+						id = byz_student_chain.8
+						days = 6
+					}
+				}
+			}
+			if = {
+				limit = {
+					BYZ = {
+						check_variable = {
+							student_revolt_pointer < 6
+						}
+					}
+				}
+				BYZ = {
+					country_event = {
+						id = byz_student_chain.4
+						days = 7
+					}
+				}
+				random_list = {
+					90 = {
+						BYZ = {
+							add_to_variable = {
+								var = student_revolt_pointer
+								value = 0
+							}
+						}
+					}
+					10 = {
+						BYZ = {
+							add_to_variable = {
+								var = student_revolt_pointer
+								value = 1
+							}
+						}
+					}
+				}
+			}
+		}
+		add_political_power = -200
+		add_stability = -0.05
+	}
+	
+}
+
+country_event = { #Imperor speach
+	id = byz_student_chain.4
+	title = byz_student_chain.4.t
+	desc = byz_student_chain.4.d
+	picture = GFX_report_event_king_speech
+	
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {
+	}
+
+	option = { 
+		name = byz_student_chain.4.a
+		ai_chance = {
+            base = 70
+        }
+		hidden_effect = {
+			if = {
+				limit = {
+					BYZ = {
+						check_variable = {
+							student_revolt_pointer > 5
+						}
+					}
+				}
+				BYZ = {
+					country_event = {
+						id = byz_student_chain.8
+						days = 6
+					}
+				}
+			}
+			if = {
+				limit = {
+					BYZ = {
+						check_variable = {
+							student_revolt_pointer < 6
+						}
+					}
+				}
+				BYZ = {
+					country_event = {
+						id = byz_student_chain.5
+						days = 9
+					}
+				}
+				random_list = {
+					40 = {
+						BYZ = {
+							add_to_variable = {
+								var = student_revolt_pointer
+								value = -1
+							}
+						}
+					}
+					60 = {
+						BYZ = {
+							add_to_variable = {
+								var = student_revolt_pointer
+								value = 0
+							}
+						}
+					}
+				}
+			}
+		}
+		add_stability = 0.10
+		add_political_power = 250
+		hidden_effect = {
+			random_list = {
+				53 = {
+					BYZ = {
+						country_event = {
+							id = byz_student_chain.9
+							days = 7
+						}
+					}
+				}
+				47 = {
+					BYZ = {
+						add_political_power = 1
+					}
+				}
+			}
+		}
+	}
+	
+	option = { 
+		name = byz_student_chain.4.b
+		ai_chance = {
+            base = 20
+        }
+		hidden_effect = {
+			if = {
+				limit = {
+					BYZ = {
+						check_variable = {
+							student_revolt_pointer > 5
+						}
+					}
+				}
+				BYZ = {
+					country_event = {
+						id = byz_student_chain.8
+						days = 6
+					}
+				}
+			}
+			if = {
+				limit = {
+					BYZ = {
+						check_variable = {
+							student_revolt_pointer < 6
+						}
+					}
+				}
+				BYZ = {
+					country_event = {
+						id = byz_student_chain.5
+						days = 9
+					}
+				}
+				random_list = {
+					25 = {
+						BYZ = {
+							add_to_variable = {
+								var = student_revolt_pointer
+								value = 0
+							}
+						}
+					}
+					75 = {
+						BYZ = {
+							add_to_variable = {
+								var = student_revolt_pointer
+								value = 1
+							}
+						}
+					}
+				}
+			}
+		}
+		add_stability = 0.05
+		add_political_power = 75
+	}
+	
+	option = { 
+		name = byz_student_chain.4.c
+		ai_chance = {
+            base = 10
+        }
+		hidden_effect = {
+			if = {
+				limit = {
+					BYZ = {
+						check_variable = {
+							student_revolt_pointer > 5
+						}
+					}
+				}
+				BYZ = {
+					country_event = {
+						id = byz_student_chain.8
+						days = 6
+					}
+				}
+			}
+			if = {
+				limit = {
+					BYZ = {
+						check_variable = {
+							student_revolt_pointer < 6
+						}
+					}
+				}
+				BYZ = {
+					country_event = {
+						id = byz_student_chain.5
+						days = 9
+					}
+				}
+				random_list = {
+					50 = {
+						BYZ = {
+							add_to_variable = {
+								var = student_revolt_pointer
+								value = 2
+							}
+						}
+					}
+					50 = {
+						BYZ = {
+							add_to_variable = {
+								var = student_revolt_pointer
+								value = 3
+							}
+						}
+					}
+				}
+			}
+		}
+		add_stability = -0.05
+		add_political_power = -150
+	}
+	
+}
+
+country_event = { #Speak with Student
+	id = byz_student_chain.5
+	title = byz_student_chain.5.t
+	desc = byz_student_chain.5.d
+	picture = GFX_report_event_soviet_finnish_pact
+	
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {
+	}
+
+	option = { 
+		name = byz_student_chain.5.a
+		ai_chance = {
+            base = 20
+        }
+		hidden_effect = {
+			if = {
+				limit = {
+					BYZ = {
+						check_variable = {
+							student_revolt_pointer > 5
+						}
+					}
+				}
+				BYZ = {
+					country_event = {
+						id = byz_student_chain.8
+						days = 6
+					}
+				}
+			}
+			if = {
+				limit = {
+					BYZ = {
+						check_variable = {
+							student_revolt_pointer < 6
+						}
+					}
+				}
+				BYZ = {
+					country_event = {
+						id = byz_student_chain.6
+						days = 11
+					}
+				}
+				random_list = {
+					50 = {
+						BYZ = {
+							add_to_variable = {
+								var = student_revolt_pointer
+								value = 0
+							}
+						}
+					}
+					50 = {
+						BYZ = {
+							add_to_variable = {
+								var = student_revolt_pointer
+								value = 1
+							}
+						}
+					}
+				}
+			}
+		}
+		add_political_power = -100
+	}
+	
+	option = { 
+		name = byz_student_chain.5.b
+		ai_chance = {
+            base = 20
+        }
+		hidden_effect = {
+			if = {
+				limit = {
+					BYZ = {
+						check_variable = {
+							student_revolt_pointer > 5
+						}
+					}
+				}
+				BYZ = {
+					country_event = {
+						id = byz_student_chain.8
+						days = 6
+					}
+				}
+			}
+			if = {
+				limit = {
+					BYZ = {
+						check_variable = {
+							student_revolt_pointer < 6
+						}
+					}
+				}
+				BYZ = {
+					country_event = {
+						id = byz_student_chain.6
+						days = 11
+					}
+				}
+				random_list = {
+					80 = {
+						BYZ = {
+							add_to_variable = {
+								var = student_revolt_pointer
+								value = 1
+							}
+						}
+					}
+					20 = {
+						BYZ = {
+							add_to_variable = {
+								var = student_revolt_pointer
+								value = 2
+							}
+						}
+					}
+				}
+			}
+		}
+		add_political_power = 100
+	}
+	
+	option = { 
+		name = byz_student_chain.5.c
+		ai_chance = {
+            base = 60
+        }
+		hidden_effect = {
+			if = {
+				limit = {
+					BYZ = {
+						check_variable = {
+							student_revolt_pointer > 5
+						}
+					}
+				}
+				BYZ = {
+					country_event = {
+						id = byz_student_chain.8
+						days = 6
+					}
+				}
+			}
+			if = {
+				limit = {
+					BYZ = {
+						check_variable = {
+							student_revolt_pointer < 6
+						}
+					}
+				}
+				BYZ = {
+					country_event = {
+						id = byz_student_chain.6
+						days = 11
+					}
+				}
+				random_list = {
+					50 = {
+						BYZ = {
+							add_to_variable = {
+								var = student_revolt_pointer
+								value = -1
+							}
+						}
+					}
+					50 = {
+						BYZ = {
+							add_to_variable = {
+								var = student_revolt_pointer
+								value = 1
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	
+}
+
+country_event = { #Student start prepering to war
+	id = byz_student_chain.6
+	title = byz_student_chain.6.t
+	desc = byz_student_chain.6.d
+	picture = GFX_report_event_spain_civil_war_volunteers_02
+	
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {
+	}
+
+	option = { 
+		name = byz_student_chain.6.a
+		ai_chance = {
+            base = 20
+        }
+		hidden_effect = {
+			random_list = {
+				50 = {
+					BYZ = {
+						add_to_variable = {
+							var = student_revolt_pointer
+							value = -2
+						}
+					}
+				}
+				50 = {
+					BYZ = {
+						add_to_variable = {
+							var = student_revolt_pointer
+							value = -1
+						}
+					}
+				}
+			}
+			if = {
+				limit = {
+					BYZ = {
+						check_variable = {
+							student_revolt_pointer > 5
+						}
+					}
+				}
+				BYZ = {
+					country_event = {
+						id = byz_student_chain.8
+						days = 6
+					}
+				}
+			}
+			if = {
+				limit = {
+					BYZ = {
+						check_variable = {
+							student_revolt_pointer < 6
+						}
+					}
+				}
+				BYZ = {
+					country_event = {
+						id = byz_student_chain.7
+						days = 2
+					}
+				}
+			}
+		}
+		custom_effect_tooltip = BYZ_student_be_strong_if_war
+		set_global_flag = army_of_mladoturk_normal
+	}
+	
+	option = { 
+		name = byz_student_chain.6.b
+		ai_chance = {
+            base = 60
+        }
+		hidden_effect = {
+			random_list = {
+				10 = {
+					BYZ = {
+						add_to_variable = {
+							var = student_revolt_pointer
+							value = 1
+						}
+					}
+				}
+				90 = {
+					BYZ = {
+						add_to_variable = {
+							var = student_revolt_pointer
+							value = 2
+						}
+					}
+				}
+			}
+			if = {
+				limit = {
+					BYZ = {
+						check_variable = {
+							student_revolt_pointer > 5
+						}
+					}
+				}
+				BYZ = {
+					country_event = {
+						id = byz_student_chain.8
+						days = 6
+					}
+				}
+			}
+			if = {
+				limit = {
+					BYZ = {
+						check_variable = {
+							student_revolt_pointer < 6
+						}
+					}
+				}
+				BYZ = {
+					country_event = {
+						id = byz_student_chain.7
+						days = 2
+					}
+				}
+			}
+		}
+		custom_effect_tooltip = BYZ_student_be_weak_if_war
+		set_global_flag = army_of_mladoturk_weak
+	}
+	
+	option = { 
+		name = byz_student_chain.6.c
+		ai_chance = {
+            base = 20
+        }
+		hidden_effect = {
+			random_list = {
+				40 = {
+					BYZ = {
+						add_to_variable = {
+							var = student_revolt_pointer
+							value = 2
+						}
+					}
+				}
+				60 = {
+					BYZ = {
+						add_to_variable = {
+							var = student_revolt_pointer
+							value = 3
+						}
+					}
+				}
+			}
+			if = {
+				limit = {
+					BYZ = {
+						check_variable = {
+							student_revolt_pointer > 5
+						}
+					}
+				}
+				BYZ = {
+					country_event = {
+						id = byz_student_chain.8
+						days = 6
+					}
+				}
+			}
+			if = {
+				limit = {
+					BYZ = {
+						check_variable = {
+							student_revolt_pointer < 6
+						}
+					}
+				}
+				BYZ = {
+					country_event = {
+						id = byz_student_chain.7
+						days = 2
+					}
+				}
+			}
+		}
+		add_stability = -0.10
+		add_war_support = -0.05
+		add_manpower = -1732
+		913 = {
+			add_manpower = -12713
+		}
+		custom_effect_tooltip = BYZ_you_realy_want_bloodbath
+		set_global_flag = army_of_mladoturk_very_weak
+	}
+	
+}
+
+country_event = { #Good end of student Revolt
+	id = byz_student_chain.7
+	title = byz_student_chain.7.t
+	desc = byz_student_chain.7.d
+	picture = GFX_report_event_generic_sign_treaty1
+	
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {
+	}
+
+	option = { 
+		name = byz_student_chain.7.a
+		clr_global_flag = BYZ_student_revolt_proccess
+		913 = {
+			set_demilitarized_zone = no
+		}
+		custom_effect_tooltip = BYZ_student_revolt_peacefull_end
+		hidden_effect = {
+			news_event = {
+				id = news.156
+				days = 7
+			}
+		}
+	}
+	
+}
+
+country_event = { #Bad end of student Revolt
+	id = byz_student_chain.8
+	title = byz_student_chain.8.t
+	desc = byz_student_chain.8.d
+	picture = GFX_report_event_generic_riot
+	
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		hidden_effect = {
+			set_global_flag = BYZ_student_revolt_inproggres
+			913 = {
+				set_demilitarized_zone = no
+			}
+			RTU = {
+				transfer_state = 913
+				add_state_core = 913
+			}
+			RTU = {
+				set_cosmetic_tag = RTU_REVOLT
+			}
+			RTU = {
+				add_state_core = 49
+				add_state_core = 339
+				add_state_core = 340
+				add_state_core = 342
+				add_state_core = 343
+				add_state_core = 344
+				add_state_core = 345
+				add_state_core = 346
+				add_state_core = 347
+				add_state_core = 348
+				add_state_core = 349
+				add_state_core = 355
+				add_state_core = 356
+				add_state_core = 798
+			}
+			RTU = {
+				inherit_technology = BYZ
+			}
+			BYZ = {
+				declare_war_on = {
+					target = RTU
+					type = annex_everything
+				}
+			}
+			if = {
+				limit = {
+					OR = { 
+						has_global_flag = army_of_mladoturk_normal
+						NOT = {
+							has_global_flag = army_of_mladoturk_weak
+							has_global_flag = army_of_mladoturk_very_weak
+						}
+					}
+				}
+				RTU = {
+					set_province_controller = 3862
+					set_province_controller = 6995
+					set_province_controller = 9861
+					set_province_controller = 11746
+					load_oob = RTU_NORMAL_ARMY
+					add_equipment_to_stockpile = {
+						type = infantry_equipment
+						amount = 9100
+						producer = RTU
+					}
+					add_equipment_to_stockpile = {
+						type = artillery_equipment
+						amount = 1200
+						producer = RTU
+					}
+					add_equipment_to_stockpile = {
+						type = support_equipment
+						amount = 3000
+						producer = RTU
+					}
+				}
+			}
+			if = {
+				limit = {
+					has_global_flag = army_of_mladoturk_weak
+				}
+				RTU = {
+					set_province_controller = 3862
+					set_province_controller = 6995
+					set_province_controller = 9861
+					set_province_controller = 11746
+					load_oob = RTU_WEAK_ARMY
+					add_equipment_to_stockpile = {
+						type = infantry_equipment
+						amount = 9100
+						producer = RTU
+					}
+					add_equipment_to_stockpile = {
+						type = artillery_equipment
+						amount = 1200
+						producer = RTU
+					}
+					add_equipment_to_stockpile = {
+						type = support_equipment
+						amount = 3000
+						producer = RTU
+					}
+				}
+			}
+			if = {
+				limit = {
+					has_global_flag = army_of_mladoturk_very_weak
+				}
+				RTU = {
+					set_province_controller = 3862
+					set_province_controller = 6995
+					set_province_controller = 9861
+					set_province_controller = 11746
+					load_oob = RTU_VERY_WEAK_ARMY
+					add_equipment_to_stockpile = {
+						type = infantry_equipment
+						amount = 9100
+						producer = RTU
+					}
+					add_equipment_to_stockpile = {
+						type = support_equipment
+						amount = 3000
+						producer = RTU
+					}
+				}
+			}
+			344 = {
+				add_manpower = -21700
+			}
+			346 = {
+				add_manpower = -11700
+			}
+			356 = {
+				add_manpower = -51900
+			}
+			798 = {
+				add_manpower = -42190
+			}
+			RTU = {
+				add_manpower = 127490
+			}
+			RTU = {
+				add_ideas = BYZ_war_RTU_ai_idea
+			}
+			BYZ = {
+				add_ideas = BYZ_war_RTU_ai_idea
+			}
+			BYZ = {
+				activate_mission = war_with_mladoturk_decision
+			}
+		}
+	}
+
+	option = { 
+		name = byz_student_chain.8.a
+		custom_effect_tooltip = BYZ_student_revolt_war_begin
+		hidden_effect = {
+			news_event = {
+				id = news.157
+				days = 2
+			}
+		}
+	}
+	
+}
+
+country_event = { #Assasination on Empirer
+	id = byz_student_chain.9
+	title = byz_student_chain.9.t
+	desc = byz_student_chain.9.d
+	picture = GFX_report_event_generic_military_parade
+	
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		hidden_effect = {
+			BYZ = {
+				add_to_variable = {
+					var = student_revolt_pointer
+					value = 10
+				}
+				set_country_flag = BYZ_student_try_to_kill_empire
+			}
+		}
+	}
+
+	option = { 
+		name = byz_student_chain.9.a
+		add_manpower = -1
+		custom_effect_tooltip = BYZ_general_save_empiror
+		hidden_effect = {
+			BYZ = {
+				BYZ_Konstantin_Tyutchev = {
+					retire = yes
+				}
+			}
+			news_event = {
+				id = news.161
+				days = 2
+			}
+		}
+	}
+	
+}
+
+country_event = { #What we do with Ankara?
+	id = byz_student_chain.10
+	title = byz_student_chain.10.t
+	desc = byz_student_chain.10.d
+	picture = GFX_report_event_gre_city_devastated
+	
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {
+	}
+
+	option = { 
+		name = byz_student_chain.10.a
+		ai_chance = {
+            base = 45
+        }
+		hidden_effect = {
+			913 = {
+				remove_building = {
+					type = arms_factory
+					level = 10
+				}
+				remove_building = {
+					type = industrial_complex
+					level = 10
+				}
+			}
+		}
+	}
+	
+	option = { 
+		name = byz_student_chain.10.b
+		ai_chance = {
+            base = 50
+        }
+		913 = {
+			set_state_category = rural
+		}
+		hidden_effect = {
+			913 = {
+				remove_building = {
+					type = arms_factory
+					level = 10
+				}
+				remove_building = {
+					type = industrial_complex
+					level = 10
+				}
+			}
+		}
+	}
+	
+	option = { 
+		name = byz_student_chain.10.c
+		ai_chance = {
+            base = 5
+			modifier = {
+				factor = 1000
+				BYZ = {
+					has_country_flag = BYZ_student_try_to_kill_empire
+				}
+			}
+        }
+		913 = {
+			set_state_category = wasteland
+			add_manpower = -173500
+			set_state_name = "913_destroed"
+			set_province_name = {
+				id = 11747
+				name = 11747_destroed
+			}
+		}
+		49 = {
+			add_manpower = 32500
+		}
+		346 = {
+			add_manpower = 37500
+		}
+		348 = {
+			add_manpower = 20000
+		}
+		356 = {
+			add_manpower = 23650
+		}
+		798 = {
+			add_manpower = 42500
+		}
+		hidden_effect = {
+			913 = {
+				remove_building = {
+					type = arms_factory
+					level = 10
+				}
+				remove_building = {
+					type = industrial_complex
+					level = 10
+				}
+				set_victory_points = {
+					province = 11747
+					value = 1
+				}
+			}
+			news_event = {
+				id = news.162
+				days = 5
+			}
+		}
+	}
+	
+}
+
+country_event = { #Mladoturk win
+	id = byz_student_chain.11
+	title = byz_student_chain.11.t
+	desc = byz_student_chain.11.d
+	picture = GFX_report_event_generic_soldiers_surrendering
+	
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		hidden_effect = {
+			BYZ = {
+				remove_ideas = BYZ_war_RTU_ai_idea
+			}
+			RTU = {
+				remove_ideas = BYZ_war_RTU_ai_idea
+			}
+			RTU = {
+				white_peace = {
+					tag = BYZ
+					message = RTU_win_student_war_BYZ
+				}
+			}
+			RTU = {
+				remove_state_core = 49
+				remove_state_core = 339
+				remove_state_core = 340
+				remove_state_core = 342
+				remove_state_core = 343
+				remove_state_core = 344
+				remove_state_core = 345
+				remove_state_core = 346
+				remove_state_core = 347
+				remove_state_core = 348
+				remove_state_core = 349
+				remove_state_core = 355
+				remove_state_core = 356
+				remove_state_core = 913
+			}
+			BYZ = {
+				transfer_state = 913
+			}
+			clr_global_flag = BYZ_student_revolt_proccess
+			clr_global_flag = BYZ_student_revolt_inproggres
+			BYZ = {
+				set_variable = {
+					var = student_revolt_pointer
+					value = 0
+				}
+			}
+			BYZ = {
+				remove_mission = war_with_mladoturk_decision
+			}
+		}
+	}
+
+	option = { 
+		name = byz_student_chain.11.a
+		add_stability = -0.10
+		add_war_support = -0.10
+		add_political_power = -250
+		if = {
+			limit = {
+				BYZ = {
+					has_country_flag = rulling_faction_of_byz_impgov
+				}
+			}
+			custom_effect_tooltip = BYZ_coalition_with_general_end
+			hidden_effect = {
+				BYZ = {
+					clr_country_flag = rulling_faction_of_byz_impgov
+					set_country_flag = rulling_faction_of_byz_imp
+				}
+			}
+		}
+		hidden_effect = {
+			news_event = {
+				id = news.159
+				days = 2
+			}
+		}
+	}
+	
+}
+
+country_event = { #Mladoturk lose
+	id = byz_student_chain.12
+	title = byz_student_chain.12.t
+	desc = byz_student_chain.12.d
+	picture = GFX_report_event_gre_political_march
+	
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		hidden_effect = {
+			BYZ = {
+				remove_ideas = BYZ_war_RTU_ai_idea
+			}
+			RTU = {
+				remove_ideas = BYZ_war_RTU_ai_idea
+			}
+			RTU = {
+				remove_state_core = 49
+				remove_state_core = 339
+				remove_state_core = 340
+				remove_state_core = 342
+				remove_state_core = 343
+				remove_state_core = 344
+				remove_state_core = 345
+				remove_state_core = 346
+				remove_state_core = 347
+				remove_state_core = 348
+				remove_state_core = 349
+				remove_state_core = 355
+				remove_state_core = 356
+				remove_state_core = 913
+			}
+			BYZ = {
+				transfer_state = 913
+			}
+			clr_global_flag = BYZ_student_revolt_proccess
+			clr_global_flag = BYZ_student_revolt_inproggres
+			BYZ = {
+				set_variable = {
+					var = student_revolt_pointer
+					value = 0
+				}
+			}
+			BYZ = {
+				remove_mission = war_with_mladoturk_decision
+			}
+		}
+	}
+
+	option = { 
+		name = byz_student_chain.12.a
+		add_stability = 0.05
+		add_political_power = 105
+		hidden_effect = {
+			BYZ = {
+				country_event = {
+					id = byz_student_chain.10
+					days = 12
+				}
+			}
+			news_event = {
+				id = news.158
+				days = 2
+			}
+		}
 	}
 	
 }
