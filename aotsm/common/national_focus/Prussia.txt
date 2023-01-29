@@ -948,13 +948,17 @@ focus_tree = {
 		#search_filters = {  }
 		
 		completion_reward = {
-			add_offsite_building = { type = industrial_complex level = 3 }
-			if = {
+			add_offsite_building = { type = industrial_complex level = 2 }
+			every_country = {
 				limit = {
+					NOT = {
+						tag = PRU
+					}
 					is_in_faction_with = PRU
 				}
-				add_offsite_building = { type = industrial_complex level = 2 }
+				add_offsite_building = { type = industrial_complex level = 1 }
 			}
+			add_ideas = pru_faction_trading_idea
 			custom_effect_tooltip = PRU_open_new_economic_effect
 		}
 	}
@@ -1660,6 +1664,17 @@ focus_tree = {
 		#search_filters = {  }
 		
 		completion_reward = {
+			add_offsite_building = { type = arms_factory level = 2 }
+			every_country = {
+				limit = {
+					NOT = {
+						tag = PRU
+					}
+					is_in_faction_with = PRU
+				}
+				add_offsite_building = { type = arms_factory level = 1 }
+			}
+			add_ideas = pru_faction_trading_idea
 			custom_effect_tooltip = PRU_open_new_economic_effect
 		}
 	}
@@ -1848,6 +1863,7 @@ focus_tree = {
 		#search_filters = {  }
 		
 		completion_reward = {
+			custom_effect_tooltip = pru_junker_ban_other_party_tt
 			hidden_effect = {
 				set_temp_variable = {
 					var = ban_ideology_var
@@ -1866,33 +1882,31 @@ focus_tree = {
 					value = 0.66
 				}
 				set_country_flag = banned_democratic_flag
-			}
-			custom_effect_tooltip = ban_democratic_party_tt
-			add_stability = ban_ideology_var
-			
-			hidden_effect = {
+				set_variable = {
+					var = pru_stability_debaff
+					value = ban_ideology_var
+				}
 				set_temp_variable = {
 					var = ban_ideology_var
-					value = party_popularity@reactionist
+					value = party_popularity@authoritarian
 				}
 				multiply_temp_variable = {
 					var = ban_ideology_var
 					value = -1
 				}
 				add_popularity = {
-					ideology = reactionist
+					ideology = authoritarian
 					popularity = ban_ideology_var
 				}
 				multiply_temp_variable = {
 					var = ban_ideology_var
 					value = 0.66
 				}
-				set_country_flag = banned_reactionist_flag
-			}
-			custom_effect_tooltip = ban_reactionist_party_tt
-			add_stability = ban_ideology_var
-			
-			hidden_effect = {
+				set_country_flag = banned_authoritarian_flag
+				add_to_variable = {
+					var = pru_stability_debaff
+					value = ban_ideology_var
+				}
 				set_temp_variable = {
 					var = ban_ideology_var
 					value = party_popularity@socialism
@@ -1910,9 +1924,12 @@ focus_tree = {
 					value = 0.66
 				}
 				set_country_flag = banned_socialism_flag
+				add_to_variable = {
+					var = pru_stability_debaff
+					value = ban_ideology_var
+				}
+				add_stability = pru_stability_debaff
 			}
-			custom_effect_tooltip = ban_socialism_party_tt
-			add_stability = ban_ideology_var
 		}
 	}
 	
