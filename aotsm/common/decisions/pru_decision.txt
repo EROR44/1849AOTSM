@@ -1312,6 +1312,7 @@ pru_war_decision = {
 		}
 
 		visible = {
+			has_country_flag = pru_nicolays_war_plan
 			OR = {
 				has_war_with = RUS
 				has_war_with = FRR
@@ -1382,28 +1383,89 @@ pru_war_decision = {
 		}
 
 		available = {
-			has_stability > 0.5
+			has_stability > 0.54
 		}
 
 		visible = {
+			NOT = {
+				has_idea = pru_mass_war_production_idea
+			}
 			OR = {
 				has_war_with = RUS
 				has_war_with = FRR
 			}
 		}
 
-		fire_only_once = yes
+		fire_only_once = no
 
 		cost = 0
 		
 		days_re_enable = 365
 
 		ai_will_do = {
-			factor = 100
+			factor = 0
+			modifier = {
+				factor = 25
+				has_stability > 0.55
+			}
+			modifier = {
+				factor = 50
+				has_stability > 0.59
+			}
 		}
 		
 		complete_effect = {
 			add_ideas = pru_mass_war_production_idea
+		}
+		
+	}
+	
+	pru_additional_food_for_worker = { 
+		
+		icon = generic_form_nation
+
+		allowed = {
+			original_tag = PRU
+		}
+
+		available = {
+			has_stability > 0.49
+		}
+
+		visible = {
+			NOT = {
+				has_idea = pru_mass_war_production_idea_with_sawdust_soup
+			}
+			has_idea = pru_mass_war_production_idea
+			OR = {
+				has_war_with = RUS
+				has_war_with = FRR
+			}
+		}
+
+		fire_only_once = no
+
+		cost = 0
+		
+		days_re_enable = 1
+
+		ai_will_do = {
+			factor = 5
+			modifier = {
+				factor = 0
+				has_stability > 0.59
+			}
+			modifier = {
+				factor = 25
+				has_stability > 0.49
+			}
+		}
+		
+		complete_effect = {
+			swap_ideas = {
+				remove_idea = pru_mass_war_production_idea
+				add_idea = pru_mass_war_production_idea_with_sawdust_soup
+			}
 		}
 		
 	}
