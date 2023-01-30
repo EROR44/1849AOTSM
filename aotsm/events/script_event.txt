@@ -39,7 +39,10 @@ country_event = {
 	picture = GFX_report_event_communist_leader
 	
 	trigger = {
-		is_puppet = yes
+		OR = {
+			is_puppet = yes
+			is_subject = yes
+		}
 		is_major = yes
 	}
 	
@@ -3375,10 +3378,57 @@ country_event = {
 	hidden = yes
 	
 	option = {
-		name = script_event.15.a
+		name = script_event.16.a
 		913 = {
 			set_demilitarized_zone = yes
 		}
+	}
+	
+}
+
+country_event = {
+	id = script_event.17
+	title = script_event.17.t
+	desc = script_event.17.d
+	picture = GFX_report_event_communist_leader
+	
+	trigger = {
+		has_global_flag = {
+			flag = firts_world_war
+			days > 59
+		}
+		PRU = {
+			has_idea = mass_attack_by_wrangel
+		}
+		OR = {
+			AND = {
+				PRU = {
+					has_war_with = FRR
+				}
+				FRR = {
+					surrender_progress > 0.19
+				}
+			}
+			AND = {
+				PRU = {
+					has_war_with = RUS
+				}
+				RUS = {
+					surrender_progress > 0.19
+				}
+			}
+		}
+	}
+	
+	mean_time_to_happen = {
+		days = 2
+	}
+	
+	hidden = yes
+	
+	option = {
+		name = script_event.17.a
+		news_event = news.169
 	}
 	
 }
