@@ -331,7 +331,7 @@ news_event = { # New Roman Empire
 	id = news.18
 	title = news.18.t
 	desc = news.18.d
-	picture = GFX_news_event_ottoman_sultan_returns
+	picture = GFX_news_event_rome_rose_from_the_ashes
 	
 	major = yes
 	
@@ -381,7 +381,7 @@ news_event = { # Death of Kaiser
 	id = news.20
 	title = news.20.t
 	desc = news.20.d
-	picture = GFX_news_event_king_speech
+	picture = GFX_news_event_death_of_kaiser
 	
 	major = yes
 	
@@ -1320,7 +1320,7 @@ news_event = {
 	id = news.64 #Gas attack from Germany
 	title = news.64.t
 	desc = news.64.d
-	picture = GFX_news_event_047
+	picture = GFX_news_event_gas_attack
 	
 	major = yes
 	
@@ -1443,7 +1443,7 @@ news_event = {
 	id = news.68 #Germany Gurant Polish
 	title = news.68.t
 	desc = news.68.d
-	picture = GFX_news_event_hitler_handshake
+	picture = GFX_news_event_german_will_fight_for_poland
 	
 	major = yes
 	
@@ -2659,7 +2659,7 @@ news_event = {
 	id = news.111 #winter of 1854-1855
 	title = news.111.t
 	desc = news.111.d
-	picture = GFX_news_event_military_planning
+	picture = GFX_news_event_winter_1854_1855
 	
 	major = yes
 	
@@ -2668,14 +2668,27 @@ news_event = {
 	option = {
 		name = news.111.a
 		trigger = {
-			tag = PRU
+			OR = {
+				tag = PRU
+				is_subject_of = PRU
+				tag = BYZ
+				is_subject_of = BYZ
+			}
+			has_war_with = RUS
 		}
 	}
 	
 	option = {
 		name = news.111.b
 		trigger = {
-			tag = RUS
+			OR = {
+				tag = RUS
+				is_in_faction_with = RUS
+			}
+			OR = {
+				has_war_with = PRU
+				has_war_with = BYZ
+			}
 		}
 	}
 	
@@ -2683,8 +2696,9 @@ news_event = {
 		name = news.111.c
 		trigger = {
 			NOT = {
-				tag = PRU
-				tag = RUS
+				has_war_with = RUS
+				has_war_with = PRU
+				has_war_with = BYZ
 			}
 		}
 	}
@@ -2695,7 +2709,7 @@ news_event = {
 	id = news.112 #winter of 1855-1856
 	title = news.112.t
 	desc = news.112.d
-	picture = GFX_news_event_soldiers_marching
+	picture = GFX_news_event_winter_1855_1856
 	
 	major = yes
 	
@@ -2704,14 +2718,27 @@ news_event = {
 	option = {
 		name = news.112.a
 		trigger = {
-			tag = PRU
+			OR = {
+				tag = PRU
+				is_subject_of = PRU
+				tag = BYZ
+				is_subject_of = BYZ
+			}
+			has_war_with = RUS
 		}
 	}
 	
 	option = {
 		name = news.112.b
 		trigger = {
-			tag = RUS
+			OR = {
+				tag = RUS
+				is_in_faction_with = RUS
+			}
+			OR = {
+				has_war_with = PRU
+				has_war_with = BYZ
+			}
 		}
 	}
 	
@@ -2719,8 +2746,9 @@ news_event = {
 		name = news.112.c
 		trigger = {
 			NOT = {
-				tag = PRU
-				tag = RUS
+				has_war_with = RUS
+				has_war_with = PRU
+				has_war_with = BYZ
 			}
 		}
 	}
@@ -3714,11 +3742,11 @@ news_event = {
 	}
 }	
 
-news_event = {
+news_event = { #Christmac Truse
 	id = news.139
 	title = news.139.t
 	desc = news.139.d
-	picture = GFX_news_event_generic_sign_treaty1
+	picture = GFX_news_event_christmac_thruse
 	
 	major = yes
 	
@@ -3727,7 +3755,24 @@ news_event = {
 	option = {
 		name = news.139.a
 		trigger = {
+			tag = FRR
+		}
+	}
 	
+	option = {
+		name = news.139.b
+		trigger = {
+			tag = PRU
+		}
+	}
+	
+	option = {
+		name = news.139.c
+		trigger = {
+			NOT = {
+				tag = FRR
+				tag = PRU
+			}
 		}
 	}
 }
@@ -4039,7 +4084,7 @@ news_event = {
 	id = news.151 #Creating of Imperial Guard
 	title = news.151.t
 	desc = news.151.d
-	picture = GFX_news_event_saf_soldiers
+	picture = GFX_news_event_new_roman_imperial_guard
 	
 	major = yes
 	
@@ -4067,7 +4112,7 @@ news_event = {
 	id = news.152 #Creating of StormTrupper
 	title = news.152.t
 	desc = news.152.d
-	picture = GFX_news_event_german_volunteers
+	picture = GFX_news_event_creating_of_stormtrupper
 	
 	major = yes
 	
@@ -4461,6 +4506,390 @@ news_event = {
 	
 	option = {
 		name = news.167.a
+	}
+	
+}
+
+news_event = {
+	id = news.168 #German Mass attack
+	title = news.168.t
+	desc = news.168.d
+	picture = GFX_
+	
+	major = yes
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = news.168.a
+		trigger = {
+			tag = PRU
+		}
+	}
+	
+	option = {
+		name = news.168.b
+		trigger = {
+			tag = BYZ
+		}
+	}
+	
+	option = {
+		name = news.168.c
+		trigger = {
+			NOT = {
+				tag = PRU
+				tag = BYZ
+			}
+			has_war_with = PRU
+		}
+	}
+	
+	option = {
+		name = news.168.f
+		trigger = {
+			NOT = {
+				tag = PRU
+				tag = BYZ
+			}
+			NOT = {
+				has_war_with = PRU
+			}
+		}
+	}
+	
+}
+
+news_event = {
+	id = news.169 #Fail
+	title = news.169.t
+	desc = news.169.d
+	picture = GFX_
+	
+	major = yes
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = news.169.a
+		trigger = {
+			tag = PRU
+		}
+	}
+	
+	option = {
+		name = news.169.b
+		trigger = {
+			tag = BYZ
+		}
+	}
+	
+	option = {
+		name = news.169.c
+		trigger = {
+			NOT = {
+				tag = PRU
+				tag = BYZ
+			}
+			has_war_with = PRU
+		}
+	}
+	
+	option = {
+		name = news.169.f
+		trigger = {
+			NOT = {
+				tag = PRU
+				tag = BYZ
+			}
+			NOT = {
+				has_war_with = PRU
+			}
+		}
+	}
+	
+}
+
+news_event = {
+	id = news.170 #winter of 1854-1855 #Bismark plan
+	title = news.170.t
+	desc = news.170.d
+	picture = GFX_news_event_winter_1854_1855
+	
+	major = yes
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = news.170.a
+		trigger = {
+			OR = {
+				tag = BYZ
+				is_subject_of = BYZ
+			}
+			has_war_with = RUS
+		}
+	}
+	
+	option = {
+		name = news.170.b
+		trigger = {
+			OR = {
+				tag = RUS
+				is_in_faction_with = RUS
+			}
+			OR = {
+				has_war_with = PRU
+				has_war_with = BYZ
+			}
+		}
+	}
+	
+	option = {
+		name = news.170.c
+		trigger = {
+			NOT = {
+				has_war_with = RUS
+				has_war_with = PRU
+				has_war_with = BYZ
+			}
+		}
+	}
+	
+	option = {
+		name = news.170.f
+		trigger = {
+			OR = {
+				tag = PRU
+				is_subject_of = PRU
+			}
+			has_war_with = RUS
+		}
+	}
+	
+}
+
+news_event = {
+	id = news.171 #German prepeared to winter
+	title = news.171.t
+	desc = news.171.d
+	picture = GFX_news_event_military_planning
+	
+	major = yes
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = news.171.a
+		trigger = {
+			OR = {
+				tag = PRU
+				is_subject_of = PRU
+			}
+		}
+	}
+	
+	option = {
+		name = news.171.b
+		trigger = {
+			OR = {
+				tag = BYZ
+				is_subject_of = BYZ
+			}
+		}
+	}
+	
+	option = {
+		name = news.171.c
+		trigger = {
+			OR = {
+				tag = CBI
+				tag = FRR
+				tag = RUS
+			}
+			has_war_with = PRU
+		}
+	}
+	
+	option = {
+		name = news.171.f
+		trigger = {
+			NOT = {
+				tag = BYZ
+				is_subject_of = BYZ
+				tag = PRU
+				is_subject_of = PRU
+				has_war_with = PRU
+			}
+		}
+	}
+	
+}
+
+news_event = {
+	id = news.172 #winter of 1855-1856 #Bismark plan
+	title = news.172.t
+	desc = news.172.d
+	picture = GFX_news_event_winter_1855_1856
+	
+	major = yes
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = news.172.a
+		trigger = {
+			OR = {
+				tag = BYZ
+				is_subject_of = BYZ
+			}
+			has_war_with = RUS
+		}
+	}
+	
+	option = {
+		name = news.172.b
+		trigger = {
+			OR = {
+				tag = RUS
+				is_in_faction_with = RUS
+			}
+			OR = {
+				has_war_with = PRU
+				has_war_with = BYZ
+			}
+		}
+	}
+	
+	option = {
+		name = news.172.c
+		trigger = {
+			NOT = {
+				has_war_with = RUS
+				has_war_with = PRU
+				has_war_with = BYZ
+			}
+		}
+	}
+	
+	option = {
+		name = news.172.f
+		trigger = {
+			OR = {
+				tag = PRU
+				is_subject_of = PRU
+			}
+			has_war_with = RUS
+		}
+	}
+	
+}
+
+news_event = {
+	id = news.173 #winter of 1856-1857
+	title = news.173.t
+	desc = news.173.d
+	picture = GFX_news_event_winter_1856_1857
+	
+	major = yes
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = news.173.a
+		trigger = {
+			OR = {
+				tag = PRU
+				is_subject_of = PRU
+				tag = BYZ
+				is_subject_of = BYZ
+			}
+			has_war_with = RUS
+		}
+	}
+	
+	option = {
+		name = news.173.b
+		trigger = {
+			OR = {
+				tag = RUS
+				is_in_faction_with = RUS
+			}
+			OR = {
+				has_war_with = PRU
+				has_war_with = BYZ
+			}
+		}
+	}
+	
+	option = {
+		name = news.173.c
+		trigger = {
+			NOT = {
+				has_war_with = RUS
+				has_war_with = PRU
+				has_war_with = BYZ
+			}
+		}
+	}
+	
+}
+
+news_event = {
+	id = news.174 #winter of 1856-1857 #Bismark plan
+	title = news.174.t
+	desc = news.174.d
+	picture = GFX_news_event_winter_1856_1857
+	
+	major = yes
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = news.174.a
+		trigger = {
+			OR = {
+				tag = BYZ
+				is_subject_of = BYZ
+			}
+			has_war_with = RUS
+		}
+	}
+	
+	option = {
+		name = news.174.b
+		trigger = {
+			OR = {
+				tag = RUS
+				is_in_faction_with = RUS
+			}
+			OR = {
+				has_war_with = PRU
+				has_war_with = BYZ
+			}
+		}
+	}
+	
+	option = {
+		name = news.174.c
+		trigger = {
+			NOT = {
+				has_war_with = RUS
+				has_war_with = PRU
+				has_war_with = BYZ
+			}
+		}
+	}
+	
+	option = {
+		name = news.174.f
+		trigger = {
+			OR = {
+				tag = PRU
+				is_subject_of = PRU
+			}
+			has_war_with = RUS
+		}
 	}
 	
 }
