@@ -48,7 +48,7 @@ pru_prospect_for_resources = {
 			51 = {
 				add_resource = {
 					type = oil
-					amount = 12
+					amount = 6
 				}
 			}
 			51 = {
@@ -108,7 +108,7 @@ pru_prospect_for_resources = {
 			42 = {
 				add_resource = {
 					type = oil
-					amount = 18
+					amount = 12
 				}
 			}
 			42 = {
@@ -135,7 +135,7 @@ pru_prospect_for_resources = {
 		}
 
 		available = {
-			num_of_civilian_factories_available_for_projects > 2
+			num_of_civilian_factories_available_for_projects > 4
 			owns_state = 66
 			controls_state = 66
 		}
@@ -144,32 +144,32 @@ pru_prospect_for_resources = {
 			has_completed_focus = PRU_resourse
 			owns_state = 66
 			controls_state = 66
-			66 = {
-				NOT = {
-					has_state_flag = sln_aluminium_flag
-				}
-			}
+			check_variable = { PRU.aluminium_in_66 < 3 }
 		}
 
-		fire_only_once = yes
+		fire_only_once = no
 
 		cost = 25
 		days_remove = 60
+		days_re_enable = 1
 
 		modifier = {
-			civilian_factory_use = 3
+			civilian_factory_use = 5
 		}
 
 		ai_will_do = {
 			factor = 1
 		}
 		remove_effect = { 
-			66 = { set_state_flag = sln_aluminium_flag } 
 			66 = {
 				add_resource = {
 					type = aluminium
-					amount = 54
+					amount = 12
 				}
+			}
+			add_to_variable = {
+				var = PRU.aluminium_in_66
+				value = 1
 			}
 		}
 	}
@@ -189,7 +189,7 @@ pru_prospect_for_resources = {
 		}
 
 		available = {
-			num_of_civilian_factories_available_for_projects > 2
+			num_of_civilian_factories_available_for_projects > 4
 			owns_state = 67
 			controls_state = 67
 		}
@@ -198,32 +198,32 @@ pru_prospect_for_resources = {
 			has_completed_focus = PRU_resourse
 			owns_state = 67
 			controls_state = 67
-			67 = {
-				NOT = {
-					has_state_flag = sls_aluminium_flag
-				}
-			}
+			check_variable = { PRU.aluminium_in_67 < 3 }
 		}
 
-		fire_only_once = yes
+		fire_only_once = no
 
 		cost = 25
 		days_remove = 60
+		days_re_enable = 1
 
 		modifier = {
-			civilian_factory_use = 3
+			civilian_factory_use = 5
 		}
 
 		ai_will_do = {
 			factor = 1
 		}
 		remove_effect = { 
-			67 = { set_state_flag = sls_aluminium_steel } 
 			67 = {
 				add_resource = {
 					type = aluminium
-					amount = 72
+					amount = 18
 				}
+			}
+			add_to_variable = {
+				var = PRU.aluminium_in_67
+				value = 1
 			}
 		}
 	}
@@ -2009,6 +2009,885 @@ mat_decision = {
 			BUR = {
 				set_country_flag = BUR_vs_MAT
 			}
+		}
+	
+	}
+
+}
+
+pru_integration_decision = {
+
+	integrat_mcs = {
+
+		icon = generic_nationalism
+
+		allowed = {
+
+		}
+
+		available = {
+			NOT = {
+				country_exists = MCS
+			}
+			owns_state = 897
+		}
+
+		visible = {
+			PRU = {
+				has_completed_focus = PRU_integration
+			}
+		}
+
+		fire_only_once = yes
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 100
+		}
+		
+		modifier = {
+			political_power_factor = -0.05
+		}
+		
+		days_remove = 25
+		
+		remove_effect = {
+			add_state_core = 897
+		}
+	
+	}
+	
+	integrat_mcl = {
+
+		icon = generic_nationalism
+
+		allowed = {
+
+		}
+
+		available = {
+			NOT = {
+				country_exists = MCL
+			}
+			owns_state = 61
+		}
+
+		visible = {
+			PRU = {
+				has_completed_focus = PRU_integration
+			}
+		}
+
+		fire_only_once = yes
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 100
+		}
+		
+		modifier = {
+			political_power_factor = -0.05
+		}
+		
+		days_remove = 25
+		
+		remove_effect = {
+			add_state_core = 61
+		}
+	
+	}
+	
+	integrat_lbe = {
+
+		icon = generic_nationalism
+
+		allowed = {
+
+		}
+
+		available = {
+			NOT = {
+				country_exists = MCL
+			}
+			owns_state = 892
+		}
+
+		visible = {
+			PRU = {
+				has_completed_focus = PRU_integration
+			}
+		}
+
+		fire_only_once = yes
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 100
+		}
+		
+		modifier = {
+			political_power_factor = -0.05
+		}
+		
+		days_remove = 25
+		
+		remove_effect = {
+			add_state_core = 892
+		}
+	
+	}
+	
+	integrat_hls = {
+
+		icon = generic_nationalism
+
+		allowed = {
+
+		}
+
+		available = {
+			NOT = {
+				country_exists = HLS
+			}
+			owns_state = 58
+		}
+
+		visible = {
+			PRU = {
+				has_completed_focus = PRU_integration
+			}
+		}
+
+		fire_only_once = yes
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 100
+		}
+		
+		modifier = {
+			political_power_factor = -0.05
+		}
+		
+		days_remove = 25
+		
+		remove_effect = {
+			add_state_core = 58
+		}
+	
+	}
+	
+	integrat_slg = {
+
+		icon = generic_nationalism
+
+		allowed = {
+
+		}
+
+		available = {
+			NOT = {
+				country_exists = SLG
+			}
+			owns_state = 829
+		}
+
+		visible = {
+			PRU = {
+				has_completed_focus = PRU_integration
+			}
+		}
+
+		fire_only_once = yes
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 100
+		}
+		
+		modifier = {
+			political_power_factor = -0.05
+		}
+		
+		days_remove = 25
+		
+		remove_effect = {
+			add_state_core = 829
+		}
+	
+	}
+	
+	integrat_ham = {
+
+		icon = generic_nationalism
+
+		allowed = {
+
+		}
+
+		available = {
+			NOT = {
+				country_exists = HAM
+			}
+			owns_state = 893
+		}
+
+		visible = {
+			PRU = {
+				has_completed_focus = PRU_integration
+			}
+		}
+
+		fire_only_once = yes
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 100
+		}
+		
+		modifier = {
+			political_power_factor = -0.05
+		}
+		
+		days_remove = 25
+		
+		remove_effect = {
+			add_state_core = 893
+		}
+	
+	}
+	
+	integrat_han = {
+
+		icon = generic_nationalism
+
+		allowed = {
+
+		}
+
+		available = {
+			NOT = {
+				country_exists = HAN
+			}
+			owns_state = 56
+			owns_state = 57
+			owns_state = 59
+		}
+
+		visible = {
+			PRU = {
+				has_completed_focus = PRU_integration
+			}
+		}
+
+		fire_only_once = yes
+
+		cost = 30
+
+		ai_will_do = {
+			factor = 100
+		}
+		
+		modifier = {
+			political_power_factor = -0.05
+		}
+		
+		days_remove = 75
+		
+		remove_effect = {
+			add_state_core = 56
+			add_state_core = 57
+			add_state_core = 59
+		}
+	
+	}
+	
+	integrat_brm = {
+
+		icon = generic_nationalism
+
+		allowed = {
+
+		}
+
+		available = {
+			NOT = {
+				country_exists = BRM
+			}
+			owns_state = 896
+		}
+
+		visible = {
+			PRU = {
+				has_completed_focus = PRU_integration
+			}
+		}
+
+		fire_only_once = yes
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 100
+		}
+		
+		modifier = {
+			political_power_factor = -0.05
+		}
+		
+		days_remove = 25
+		
+		remove_effect = {
+			add_state_core = 896
+		}
+	
+	}
+	
+	integrat_old = {
+
+		icon = generic_nationalism
+
+		allowed = {
+
+		}
+
+		available = {
+			NOT = {
+				country_exists = OLD
+			}
+			owns_state = 895
+		}
+
+		visible = {
+			PRU = {
+				has_completed_focus = PRU_integration
+			}
+		}
+
+		fire_only_once = yes
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 100
+		}
+		
+		modifier = {
+			political_power_factor = -0.05
+		}
+		
+		days_remove = 25
+		
+		remove_effect = {
+			add_state_core = 895
+		}
+	
+	}
+	
+	integrat_sak = {
+
+		icon = generic_nationalism
+
+		allowed = {
+
+		}
+
+		available = {
+			NOT = {
+				country_exists = SAK
+			}
+			owns_state = 65
+		}
+
+		visible = {
+			PRU = {
+				has_completed_focus = PRU_integration
+			}
+		}
+
+		fire_only_once = yes
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 100
+		}
+		
+		modifier = {
+			political_power_factor = -0.05
+		}
+		
+		days_remove = 25
+		
+		remove_effect = {
+			add_state_core = 65
+		}
+	
+	}
+	
+	integrat_tyr = {
+
+		icon = generic_nationalism
+
+		allowed = {
+
+		}
+
+		available = {
+			NOT = {
+				country_exists = TYR
+			}
+			owns_state = 60
+		}
+
+		visible = {
+			PRU = {
+				has_completed_focus = PRU_integration
+			}
+		}
+
+		fire_only_once = yes
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 100
+		}
+		
+		modifier = {
+			political_power_factor = -0.05
+		}
+		
+		days_remove = 25
+		
+		remove_effect = {
+			add_state_core = 60
+		}
+	
+	}
+	
+	integrat_wei = {
+
+		icon = generic_nationalism
+
+		allowed = {
+
+		}
+
+		available = {
+			NOT = {
+				country_exists = WEI
+			}
+			owns_state = 901
+		}
+
+		visible = {
+			PRU = {
+				has_completed_focus = PRU_integration
+			}
+		}
+
+		fire_only_once = yes
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 100
+		}
+		
+		modifier = {
+			political_power_factor = -0.05
+		}
+		
+		days_remove = 25
+		
+		remove_effect = {
+			add_state_core = 901
+		}
+	
+	}
+	
+	integrat_mei = {
+
+		icon = generic_nationalism
+
+		allowed = {
+
+		}
+
+		available = {
+			NOT = {
+				country_exists = MEI
+			}
+			owns_state = 900
+		}
+
+		visible = {
+			PRU = {
+				has_completed_focus = PRU_integration
+			}
+		}
+
+		fire_only_once = yes
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 100
+		}
+		
+		modifier = {
+			political_power_factor = -0.05
+		}
+		
+		days_remove = 25
+		
+		remove_effect = {
+			add_state_core = 900
+		}
+	
+	}
+	
+	integrat_hes = {
+
+		icon = generic_nationalism
+
+		allowed = {
+
+		}
+
+		available = {
+			NOT = {
+				country_exists = HES
+			}
+			owns_state = 898
+		}
+
+		visible = {
+			PRU = {
+				has_completed_focus = PRU_integration
+			}
+		}
+
+		fire_only_once = yes
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 100
+		}
+		
+		modifier = {
+			political_power_factor = -0.05
+		}
+		
+		days_remove = 25
+		
+		remove_effect = {
+			add_state_core = 898
+		}
+	
+	}
+	
+	integrat_wld = {
+
+		icon = generic_nationalism
+
+		allowed = {
+
+		}
+
+		available = {
+			NOT = {
+				country_exists = WLD
+			}
+			owns_state = 899
+		}
+
+		visible = {
+			PRU = {
+				has_completed_focus = PRU_integration
+			}
+		}
+
+		fire_only_once = yes
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 100
+		}
+		
+		modifier = {
+			political_power_factor = -0.05
+		}
+		
+		days_remove = 25
+		
+		remove_effect = {
+			add_state_core = 899
+		}
+	
+	}
+	
+	integrat_frn = {
+
+		icon = generic_nationalism
+
+		allowed = {
+
+		}
+
+		available = {
+			NOT = {
+				country_exists = FRN
+			}
+			owns_state = 55
+		}
+
+		visible = {
+			PRU = {
+				has_completed_focus = PRU_integration
+			}
+		}
+
+		fire_only_once = yes
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 100
+		}
+		
+		modifier = {
+			political_power_factor = -0.05
+		}
+		
+		days_remove = 25
+		
+		remove_effect = {
+			add_state_core = 55
+		}
+	
+	}
+	
+	integrat_kol = {
+
+		icon = generic_nationalism
+
+		allowed = {
+
+		}
+
+		available = {
+			NOT = {
+				country_exists = KOL
+			}
+			owns_state = 42
+			owns_state = 51
+			owns_state = 888
+		}
+
+		visible = {
+			PRU = {
+				has_completed_focus = PRU_integration
+			}
+		}
+
+		fire_only_once = yes
+
+		cost = 30
+
+		ai_will_do = {
+			factor = 100
+		}
+		
+		modifier = {
+			political_power_factor = -0.05
+		}
+		
+		days_remove = 75
+		
+		remove_effect = {
+			add_state_core = 42
+			add_state_core = 51
+			add_state_core = 888
+		}
+	
+	}
+	
+	integrat_bav = {
+
+		icon = generic_nationalism
+
+		allowed = {
+
+		}
+
+		available = {
+			NOT = {
+				country_exists = BAV
+			}
+			owns_state = 52
+			owns_state = 53
+			owns_state = 54
+			owns_state = 894
+		}
+
+		visible = {
+			PRU = {
+				has_completed_focus = PRU_integration_2
+			}
+		}
+
+		fire_only_once = yes
+
+		cost = 40
+
+		ai_will_do = {
+			factor = 100
+		}
+		
+		modifier = {
+			political_power_factor = -0.05
+		}
+		
+		days_remove = 100
+		
+		remove_effect = {
+			add_state_core = 52
+			add_state_core = 53
+			add_state_core = 54
+			add_state_core = 894
+		}
+	
+	}
+	
+	integrat_vur = {
+
+		icon = generic_nationalism
+
+		allowed = {
+
+		}
+
+		available = {
+			NOT = {
+				country_exists = VUR
+			}
+			owns_state = 808
+		}
+
+		visible = {
+			PRU = {
+				has_completed_focus = PRU_integration_2
+			}
+		}
+
+		fire_only_once = yes
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 100
+		}
+		
+		modifier = {
+			political_power_factor = -0.05
+		}
+		
+		days_remove = 25
+		
+		remove_effect = {
+			add_state_core = 808
+		}
+	
+	}
+	
+	integrat_hoh = {
+
+		icon = generic_nationalism
+
+		allowed = {
+
+		}
+
+		available = {
+			NOT = {
+				country_exists = HOH
+			}
+			owns_state = 890
+		}
+
+		visible = {
+			PRU = {
+				has_completed_focus = PRU_integration_2
+			}
+		}
+
+		fire_only_once = yes
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 100
+		}
+		
+		modifier = {
+			political_power_factor = -0.05
+		}
+		
+		days_remove = 25
+		
+		remove_effect = {
+			add_state_core = 890
+		}
+	
+	}
+	
+	integrat_bad = {
+
+		icon = generic_nationalism
+
+		allowed = {
+
+		}
+
+		available = {
+			NOT = {
+				country_exists = BAD
+			}
+			owns_state = 50
+		}
+
+		visible = {
+			PRU = {
+				has_completed_focus = PRU_integration_2
+			}
+		}
+
+		fire_only_once = yes
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 100
+		}
+		
+		modifier = {
+			political_power_factor = -0.05
+		}
+		
+		days_remove = 25
+		
+		remove_effect = {
+			add_state_core = 50
 		}
 	
 	}

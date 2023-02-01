@@ -2518,3 +2518,119 @@ country_event = {
 	}
 	
 }
+
+country_event = {
+	id = ger_warplane.6
+	title = ger_warplane.6.t
+	desc = ger_warplane.6.d
+	picture = GFX_report_event_german_troops
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		hidden_effect = {
+			PRU = {
+				add_timed_idea = {
+					idea = mass_attack_by_wrangel
+					days = 120
+				}
+			}
+		}
+	}
+	
+	option = {
+		name = ger_warplane.6.a
+		custom_effect_tooltip = pru_add_idea_mass_attack
+	}
+	
+}
+
+country_event = {
+	id = ger_warplane.7
+	title = ger_warplane.7.t
+	desc = ger_warplane.7.d
+	picture = GFX_report_event_german_troops
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		hidden_effect = {
+			PRU = {
+				add_ideas = bismark_logistic_idea
+			}
+		}
+	}
+	
+	option = {
+		name = ger_warplane.7.a
+		custom_effect_tooltip = pru_add_idea_bismark_logistic
+	}
+	
+}
+
+country_event = { #Black Order Hail Kaiser
+	id = ger_blackorder.1
+	title = ger_blackorder.1.t
+	desc = ger_blackorder.1.d
+	picture = GFX_report_event_german_volunteers
+	
+	trigger = {
+		NOT = {
+			country_exists = KOL
+		}
+		PRU = {
+			owns_state = 42
+			owns_state = 51
+			owns_state = 888
+		}
+	}
+	
+	mean_time_to_happen = {
+		days = 45
+	}
+	
+	fire_only_once = yes
+	
+	immediate = {
+		hidden_effect = {
+			set_variable = {
+				var = PRU.blacksun_influence
+				value = 0
+			}
+		}
+	}
+	
+	option = {
+		name = ger_blackorder.1.a
+		custom_effect_tooltip = pru_blacksun_influince_rise
+		hidden_effect = {
+			add_to_variable = {
+				var = PRU.blacksun_influence
+				value = 1
+			}
+		}
+	}
+	
+	option = {
+		name = ger_blackorder.1.b
+	}
+	
+	option = {
+		name = ger_blackorder.1.c
+		custom_effect_tooltip = pru_blacksun_influince_fall
+		hidden_effect = {
+			add_to_variable = {
+				var = PRU.blacksun_influence
+				value = -1
+			}
+			PRU = {
+				set_country_flag = pru_say_no_to_blacksun
+			}
+		}
+	}
+	
+}
