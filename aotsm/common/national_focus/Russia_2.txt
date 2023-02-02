@@ -3071,7 +3071,7 @@ focus_tree = {
 	
 	focus = {
 		id = RUS_department_of_armed_forces
-		icon = GFX_goal_generic_improve_relations
+		icon = GFX_focus_generic_military_academy
 		
 		x = 16
 		y = 0
@@ -3095,7 +3095,7 @@ focus_tree = {
 	
 	focus = {
 		id = RUS_land_section
-		icon = GFX_goal_generic_improve_relations
+		icon = GFX_goal_generic_allies_build_infantry
 		
 		x = -6
 		y = 1
@@ -3114,13 +3114,13 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
 		completion_reward = {
-			
+			army_experience = 25
 		}
 	}
 	
 	focus = {
 		id = RUS_will_theory
-		icon = GFX_goal_generic_improve_relations
+		icon = GFX_focus_ETH_freedom_at_gunpoint
 		
 		x = -2
 		y = 1
@@ -3142,6 +3142,7 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
 		completion_reward = {
+			army_experience = 15
 			add_doctrine_cost_reduction = {
 				name = land_doc_bonus
 				cost_reduction = 1.0
@@ -3174,7 +3175,8 @@ focus_tree = {
 		
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
-		completion_reward = {
+		completion_reward = {	
+			army_experience = 15
 			add_doctrine_cost_reduction = {
 				name = land_doc_bonus
 				cost_reduction = 1.0
@@ -3186,7 +3188,7 @@ focus_tree = {
 	
 	focus = {
 		id = RUS_focus_on_mechanisation
-		icon = GFX_goal_generic_improve_relations
+		icon = GFX_focus_generic_truck
 		
 		x = 2
 		y = 1
@@ -3208,6 +3210,7 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
 		completion_reward = {
+			army_experience = 15
 			add_doctrine_cost_reduction = {
 				name = land_doc_bonus
 				cost_reduction = 1.0
@@ -3219,7 +3222,7 @@ focus_tree = {
 	
 	focus = {
 		id = RUS_start_hidden_mobilization
-		icon = GFX_goal_generic_improve_relations
+		icon = GFX_focus_SOV_mobilization_plan
 		
 		x = 0
 		y = 1
@@ -3302,15 +3305,50 @@ focus_tree = {
 	}
 	
 	focus = {
-		id = RUS_1
-		icon = GFX_goal_generic_improve_relations
+		id = RUS_new_army_equipment
+		icon = GFX_focus_secret_rearmament
+		
+		x = -2
+		y = 1
+		cost = 5 
+		
+		available = {
+			has_completed_focus = RUS_will_theory
+		}
+		
+
+		relative_position_id = RUS_start_hidden_mobilization
+		prerequisite = { focus = RUS_start_hidden_mobilization }
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			army_experience = 15
+			add_tech_bonus = {
+				bonus = 1.0
+				uses = 2
+				category = infantry_weapons
+			}
+			add_tech_bonus = {
+				bonus = 1.0
+				uses = 1
+				category = support_tech
+			}
+		}
+	}
+	
+	focus = {
+		id = RUS_new_guns_for_army
+		icon = GFX_goal_generic_army_artillery
 		
 		x = 0
 		y = 1
 		cost = 5 
 		
 		available = {
-
+			has_completed_focus = RUS_artillery_priority
 		}
 
 		relative_position_id = RUS_start_hidden_mobilization
@@ -3321,7 +3359,118 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
 		completion_reward = {
+			army_experience = 15
+			add_tech_bonus = {
+				bonus = 1.0
+				uses = 2
+				category = infantry_weapons
+			}
+			add_tech_bonus = {
+				name = infantry_artillery_bonus
+				bonus = 1.0
+				uses = 1
+				category = artillery
+			}
+		}
+	}
+	
+	focus = {
+		id = RUS_development_of_prototypes
+		icon = GFX_focus_generic_tankette
+		
+		x = 2
+		y = 1
+		cost = 5 
+		
+		available = {
+			has_completed_focus = RUS_focus_on_mechanisation
+		}
 
+		relative_position_id = RUS_start_hidden_mobilization
+		prerequisite = { focus = RUS_start_hidden_mobilization }
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			army_experience = 15
+			add_tech_bonus = {
+				bonus = 1.0
+				uses = 1
+				name = mech_army_bonus
+				category = armor
+			}
+			add_tech_bonus = {
+				name = infantry_artillery_bonus
+				bonus = 1.0
+				uses = 2
+				category = motorized_equipment
+				category = cat_mechanized_equipment
+			}
+		}
+	}
+	
+	focus = {
+		id = RUS_end_army_modernisation
+		icon = GFX_focus_chi_army_reform
+		
+		x = 0
+		y = 1
+		cost = 5 
+		
+		available = {
+
+		}
+	
+
+		relative_position_id = RUS_new_guns_for_army
+		prerequisite = { 
+			focus = RUS_new_army_equipment 
+			focus = RUS_new_guns_for_army 
+			focus = RUS_development_of_prototypes 
+		}
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			army_experience = 25
+			add_ideas = RUS_russian_army
+			if = {
+				limit = {
+					has_completed_focus = RUS_will_theory
+				}
+				add_doctrine_cost_reduction = {
+					name = land_doc_bonus
+					cost_reduction = 1.0
+					uses = 1
+					category = cat_mass_assault
+				}	
+			}
+			if = {
+				limit = {
+					has_completed_focus = RUS_artillery_priority
+				}
+				add_doctrine_cost_reduction = {
+					name = land_doc_bonus
+					cost_reduction = 1.0
+					uses = 1
+					category = cat_superior_firepower
+				}	
+			}
+			if = {
+				limit = {
+					has_completed_focus = RUS_focus_on_mechanisation
+				}
+				add_doctrine_cost_reduction = {
+					name = land_doc_bonus
+					cost_reduction = 1.0
+					uses = 1
+					category = cat_mobile_warfare
+				}	
+			}
 		}
 	}
 	
