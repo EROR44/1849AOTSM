@@ -4902,3 +4902,153 @@ news_event = {
 	}
 	
 }
+
+news_event = {
+	id = news.175 #Rise of Evil
+	title = news.175.t
+	desc = news.175.d
+	picture = GFX_news_event_german_speech
+	
+	major = yes
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = news.175.a
+		trigger = {
+			tag = PRU
+		}
+	}
+	
+	option = {
+		name = news.175.b
+		trigger = {
+			tag = BYZ
+		}
+	}
+	
+	option = {
+		name = news.175.c
+		trigger = {
+			NOT = {
+				tag = PRU
+				tag = BYZ
+			}
+		}
+	}
+	
+	
+}
+
+news_event = {
+	id = news.176 #Battle of Senadai
+	title = news.176.t
+	desc = news.176.d
+	picture = GFX_news_event_last_samurai_battle
+	
+	major = yes
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = news.176.a
+		trigger = {
+			tag = JAP
+		}
+	}
+	
+	option = {
+		name = news.176.b
+		trigger = {
+			tag = JAS
+		}
+	}
+	
+	option = {
+		name = news.176.c
+		trigger = {
+			tag = TUK
+		}
+	}
+	
+	option = {
+		name = news.176.f
+		trigger = {
+			NOT = {
+				tag = JAP
+				tag = JAS
+				tag = TUK
+			}
+		}
+	}
+	
+	
+}
+
+news_event = {
+	id = news.177 #Not Edo just Tokio
+	title = news.177.t
+	desc = news.177.d
+	picture = GFX_news_event_japanese_army_parade
+	
+	major = yes
+	
+	trigger = {
+		533 = { 
+			OR = {
+				is_controlled_by = JAP 
+				is_controlled_by = TUK
+			}
+		}
+		533 = { 
+			is_owned_by = JAS 
+		}
+		OR = {
+			JAP = {
+				has_war_with = JAS 
+			}
+			TUK = {
+				has_war_with = TUK
+			}
+		}
+		NOT = { 
+			has_global_flag = last_samurai_battle_in_history
+		}
+		JAS = {	
+			has_capitulated = no
+		}
+	}
+	
+	immediate = {
+		set_global_flag = last_samurai_battle_in_history
+	}
+	
+	mean_time_to_happen = {
+		days = 2
+	}
+	
+	option = {
+		name = news.177.a
+		trigger = {
+			tag = JAP
+		}
+	}
+	
+	option = {
+		name = news.177.b
+		trigger = {
+			tag = JAS
+		}
+	}
+	
+	option = {
+		name = news.177.c
+		trigger = {
+			NOT = {
+				tag = JAP
+				tag = JAS
+			}
+		}
+	}
+	
+}
