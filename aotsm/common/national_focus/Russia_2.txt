@@ -7,7 +7,7 @@
 ### search_filters = {FOCUS_FILTER_ANNEXATION}
 
 focus_tree = {
-	id = russian__state_focus
+	id = russian_state_focus
 	
 	country = {
 		factor = 0
@@ -2585,7 +2585,7 @@ focus_tree = {
 		
 		x = 1
 		y = 1
-		cost = 5 
+		cost = 2 
 
 		relative_position_id = RUS_the_giant_has_awakened
 		prerequisite = { focus = RUS_the_giant_has_awakened }
@@ -2609,7 +2609,7 @@ focus_tree = {
 		y = 1
 		cost = 5 
 
-		mutually_exclusive = { focus = RUS_conquer_cenrtal_asia }
+		mutually_exclusive = { focus = RUS_conquer_central_asia }
 
 		relative_position_id = RUS_central_asian_politick
 		prerequisite = { focus = RUS_central_asian_politick }
@@ -2716,7 +2716,7 @@ focus_tree = {
 ################CENTRAL_ASIA_INVASION_SECTION################
 	
 	focus = {
-		id = RUS_conquer_cenrtal_asia
+		id = RUS_conquer_central_asia
 		icon = GFX_focus_generic_strike_at_democracy1
 		
 		x = 1
@@ -2745,8 +2745,8 @@ focus_tree = {
 		y = 1
 		cost = 5 
 
-		relative_position_id = RUS_conquer_cenrtal_asia
-		prerequisite = { focus = RUS_conquer_cenrtal_asia }
+		relative_position_id = RUS_conquer_central_asia
+		prerequisite = { focus = RUS_conquer_central_asia }
 		
 		available_if_capitulated = yes
 		
@@ -2785,7 +2785,7 @@ focus_tree = {
 		
 		x = 6
 		y = 1
-		cost = 5 
+		cost = 2
 
 		relative_position_id = RUS_the_giant_has_awakened
 		prerequisite = { focus = RUS_the_giant_has_awakened }
@@ -3019,7 +3019,7 @@ focus_tree = {
 		
 		x = -11
 		y = 1
-		cost = 5 
+		cost = 2 
 
 		relative_position_id = RUS_the_giant_has_awakened
 		prerequisite = { focus = RUS_the_giant_has_awakened }
@@ -3054,7 +3054,27 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
 		completion_reward = {
-		
+			set_country_flag = RUS_on_britain_side
+			add_opinion_modifier = {
+				target = CBI
+				modifier = huge_increase
+			}
+			if = {
+				limit = {
+					RUS = {
+						NOT = { is_guaranteed_by = CBI }
+					}			
+				}
+				CBI = { give_guarantee = RUS }
+			}
+			if = {
+				limit = {
+					CBI = {
+						NOT = { is_guaranteed_by = RUS }
+					}
+				}
+				RUS = { give_guarantee = CBI }
+			}
 		}
 	}
 	
@@ -3074,7 +3094,7 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
 		completion_reward = {
-		
+			CBI = { country_event = russian_european_politic.1 }
 		}
 	}
 	
@@ -3086,6 +3106,15 @@ focus_tree = {
 		y = 1
 		cost = 5 
 		
+		available = {
+			NOT = { 
+				OR = {
+					is_in_faction = yes 
+					is_faction_leader = yes
+				}
+			}
+		}
+		
 		mutually_exclusive = { focus = RUS_moscow_pact }
 
 		relative_position_id = RUS_coop_researches_witch_britain
@@ -3096,7 +3125,7 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
 		completion_reward = {
-		
+			country_event = russian_european_politic.12
 		}
 	}
 
@@ -3121,7 +3150,27 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
 		completion_reward = {
-		
+			set_country_flag = RUS_on_french_side
+			add_opinion_modifier = {
+				target = FRR
+				modifier = huge_increase
+			}
+			if = {
+				limit = {
+					RUS = {
+						NOT = { is_guaranteed_by = FRR }
+					}					
+				}
+				FRR = { give_guarantee = RUS }
+			}
+			if = {
+				limit = {
+					FRR = {
+						NOT = { is_guaranteed_by = RUS }
+					}					
+				}
+				RUS = { give_guarantee = FRR }
+			}
 		}
 	}
 	
@@ -3132,8 +3181,6 @@ focus_tree = {
 		x = 0
 		y = 1
 		cost = 5 
-
-		mutually_exclusive = { focus = RUS_entente }
 		
 		relative_position_id = RUS_russo_french_relations
 		prerequisite = { focus = RUS_russo_french_relations }
@@ -3143,7 +3190,7 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
 		completion_reward = {
-		
+			FRR = { country_event = { id = russian_european_politic.15 days = 2 } }
 		}
 	}
 	
@@ -3154,6 +3201,15 @@ focus_tree = {
 		x = -1
 		y = 1
 		cost = 5 
+		
+		available = {
+			NOT = { 
+				OR = {
+					is_in_faction = yes 
+					is_faction_leader = yes
+				}
+			}
+		}
 
 		mutually_exclusive = { focus = RUS_entente }
 		mutually_exclusive = { focus = RUS_ally_witch_britain }
@@ -3169,7 +3225,7 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
 		completion_reward = {
-		
+			create_faction = RUS_moscow_agreement
 		}
 	}
 	
@@ -3180,6 +3236,15 @@ focus_tree = {
 		x = 1
 		y = 1
 		cost = 5 
+		
+		available = {
+			NOT = { 
+				OR = {
+					is_in_faction = yes 
+					is_faction_leader = yes
+				}
+			}
+		}
 
 		mutually_exclusive = { focus = RUS_moscow_pact }
 		
@@ -3191,7 +3256,7 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
 		completion_reward = {
-		
+			FRR = { country_event = russian_european_politic.26 }
 		}
 	}
 	
@@ -3254,7 +3319,27 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
 		completion_reward = {
-		
+			set_country_flag = RUS_on_austrian_side
+			add_opinion_modifier = {
+				target = AUS
+				modifier = huge_increase
+			}
+			if = {
+				limit = {
+					RUS = {
+						NOT = { is_guaranteed_by = AUS }
+					}
+				}
+				AUS = { give_guarantee = RUS }
+			}
+			if = {
+				limit = {
+					AUS = {
+						NOT = { is_guaranteed_by = RUS }
+					}
+				}
+				RUS = { give_guarantee = AUS }
+			}
 		}
 	}
 	
@@ -3285,6 +3370,15 @@ focus_tree = {
 		x = 0
 		y = 2
 		cost = 5 
+		
+		available = {
+			NOT = { 
+				OR = {
+					is_in_faction = yes 
+					is_faction_leader = yes
+				}
+			}
+		}
 
 		relative_position_id = RUS_russo_austrian_relations
 		prerequisite = { focus = RUS_russo_austrian_relations }
