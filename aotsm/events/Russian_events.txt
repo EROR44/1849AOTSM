@@ -9,6 +9,7 @@ add_namespace = rusIgn #Игнатьев
 add_namespace = rusRomAN #Александр Павлович
 add_namespace = rusPus #Пушкин
 add_namespace = rusRandFractions #Фракцционные ивенты
+add_namespace = russian_european_politic #
 
 country_event = {
 	id = rusPol.1
@@ -905,6 +906,909 @@ country_event = {
 		hidden_effect = {
 			remove_ideas = oligarhy
 			add_ideas = dictature_fg
+		}
+	}
+}
+
+########################EURIPEAN_POLITICK_EVENTS##############################
+
+country_event = {
+	id = russian_european_politic.1 #предложение совместных исследований для британии
+	title = russian_european_politic.1.t
+	desc = russian_european_politic.1.d
+	picture = GFX_report_event_molotov_signing_pact
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = {
+		name = russian_european_politic.1.a	
+		ai_chance = {
+			factor = 20
+			modifier = { 
+				factor = 100
+				is_historical_focus_on = yes
+			}
+		}
+
+		hidden_effect = {
+			RUS = {
+				country_event = russian_european_politic.2 
+			}
+		}
+	}
+	
+	option = {
+		name = russian_european_politic.1.b
+		ai_chance = {
+			factor = 5
+		}
+
+		hidden_effect = {
+			RUS = {
+				country_event = russian_european_politic.2 
+			}
+		}
+	}
+}
+
+country_event = {
+	id = russian_european_politic.2 #согласие на сотрудничество британии
+	title = russian_european_politic.2.t
+	desc = russian_european_politic.2.d
+	picture = GFX_report_event_molotov_signing_pact
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = {
+		name = russian_european_politic.2.a	
+		ai_chance = {
+			factor = 20
+		}
+
+		hidden_effect = {
+			RUS = {
+				add_ideas = RUS_coop_russo_british_researches
+			}
+			CBI = {
+				add_ideas = RUS_coop_russo_british_researches
+			}
+			RUS = {
+				country_event = { id = russian_european_politic.4 days = 62 }
+			}
+		}
+	}
+}
+
+country_event = {
+	id = russian_european_politic.3 #отказ сотрудничать
+	title = russian_european_politic.3.t
+	desc = russian_european_politic.3.d
+	picture = GFX_report_event_molotov_signing_pact
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = {
+		name = russian_european_politic.3.a	
+		ai_chance = {
+			factor = 20
+		}
+
+		hidden_effect = {
+	
+		}
+	}
+}
+
+country_event = {
+	id = russian_european_politic.4 #Продолжение технического сотрудничества
+	title = russian_european_politic.4.t
+	desc = russian_european_politic.4.d
+	picture = GFX_report_event_molotov_signing_pact
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = { #промышленность
+		name = russian_european_politic.4.a	
+		ai_chance = {
+			factor = 20
+			modifier = {
+				factor = 40
+				is_historical_focus_on = yes
+			}
+		}
+
+		hidden_effect = {
+			CBI = { country_event = { id = russian_european_politic.5 days = 2 } }
+		}
+	}
+	option = { #пехотное оснащение
+		name = russian_european_politic.4.b
+		ai_chance = {
+			factor = 20
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+			}
+		}
+		
+		hidden_effect = {
+			CBI = { country_event = { id = russian_european_politic.7 days = 2 } }
+		}
+	}
+	option = { #техника
+		name = russian_european_politic.4.c
+		ai_chance = {
+			factor = 20
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+			}
+		}
+
+		hidden_effect = {
+			CBI = { country_event = { id = russian_european_politic.9 days = 2 } }
+		}
+	}
+	option = { #не нужно
+		name = russian_european_politic.4.d	
+		ai_chance = {
+			factor = 0
+		}
+
+		hidden_effect = {
+	
+		}
+	}
+}
+
+country_event = {
+	id = russian_european_politic.5 #пром сотрудничество - ивент для британии
+	title = russian_european_politic.5.t
+	desc = russian_european_politic.5.d
+	picture = GFX_report_event_molotov_signing_pact
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = {
+		name = russian_european_politic.5.a	
+		ai_chance = {
+			factor = 20
+		}
+		add_tech_bonus = {
+			bonus = 1.0
+			uses = 1 
+			category = industry
+		}
+		hidden_effect = {
+			RUS = { country_event = { id = russian_european_politic.6 days = 2 } }
+		}
+	}
+	
+	option = {
+		name = russian_european_politic.5.a	
+		ai_chance = {
+			factor = 0
+		}
+		
+		hidden_effect = {
+			RUS = { country_event = { id = russian_european_politic.11 days = 2 } }
+		}
+	}
+}
+
+country_event = {
+	id = russian_european_politic.6 #пром сотрудничество - ответ для россии
+	title = russian_european_politic.6.t
+	desc = russian_european_politic.6.d
+	picture = GFX_report_event_molotov_signing_pact
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = {
+		name = russian_european_politic.6.a	
+		ai_chance = {
+			factor = 20
+		}
+		add_tech_bonus = {
+			bonus = 1.0
+			uses = 1 
+			category = industry
+		}
+		hidden_effect = {
+	
+		}
+	}
+}
+
+country_event = {
+	id = russian_european_politic.7 #пехотное оснащение - ивент для британии
+	title = russian_european_politic.7.t
+	desc = russian_european_politic.7.d
+	picture = GFX_report_event_molotov_signing_pact
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = {
+		name = russian_european_politic.7.a	
+		ai_chance = {
+			factor = 20
+		}
+		add_tech_bonus = {
+			bonus = 0.5
+			uses = 1
+			category = infantry_weapons
+		}
+		add_tech_bonus = {
+			bonus = 0.5
+			uses = 1
+			category = support_tech
+		}	
+		hidden_effect = {
+			RUS = { country_event = { id = russian_european_politic.8 days = 2 } }
+		}
+	}
+	option = {
+		name = russian_european_politic.7.b	
+		ai_chance = {
+			factor = 0
+		}
+	
+		hidden_effect = {
+			RUS = { country_event = { id = russian_european_politic.11 days = 2 } }
+		}
+	}
+}
+
+country_event = {
+	id = russian_european_politic.8 #пехотное оснащение - ответ для россии
+	title = russian_european_politic.8.t
+	desc = russian_european_politic.8.d
+	picture = GFX_report_event_molotov_signing_pact
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = {
+		name = russian_european_politic.8.a	
+		add_tech_bonus = {
+			bonus = 0.5
+			uses = 1
+			category = infantry_weapons
+		}
+		add_tech_bonus = {
+			bonus = 0.5
+			uses = 1
+			category = support_tech
+		}
+		hidden_effect = {
+	
+		}
+	}
+}
+country_event = {
+	id = russian_european_politic.9 #техника - ивент для британии
+	title = russian_european_politic.9.t
+	desc = russian_european_politic.9.d
+	picture = GFX_report_event_molotov_signing_pact
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = {
+		name = russian_european_politic.9.a	
+		ai_chance = {
+			factor = 20
+		}
+		add_tech_bonus = {
+			name = infantry_artillery_bonus
+			bonus = 0.5
+			uses = 1
+			category = artillery
+		}
+		add_tech_bonus = {
+			bonus = 0.5
+			uses = 1
+			category = motorized_equipment
+			category = cat_mechanized_equipment
+		}
+		hidden_effect = {
+			RUS = { country_event = { id = russian_european_politic.10 days = 2 } }
+		}
+	}
+	
+	option = {
+		name = russian_european_politic.9.b	
+		ai_chance = {
+			factor = 0
+		}
+
+		hidden_effect = {
+			RUS = { country_event = { id = russian_european_politic.11 days = 2 } }
+		}
+	}
+}
+
+country_event = {
+	id = russian_european_politic.10 #техника - ответ для россии
+	title = russian_european_politic.10.t
+	desc = russian_european_politic.10.d
+	picture = GFX_report_event_molotov_signing_pact
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = {
+		name = russian_european_politic.10.a	
+		add_tech_bonus = {
+			name = infantry_artillery_bonus
+			bonus = 0.5
+			uses = 1
+			category = artillery
+		}
+		add_tech_bonus = {
+			bonus = 0.5
+			uses = 1
+			category = motorized_equipment
+			category = cat_mechanized_equipment
+		}
+		hidden_effect = {
+	
+		}
+	}
+}
+
+country_event = {
+	id = russian_european_politic.11 #отказ - ивент для россии
+	title = russian_european_politic.11.t
+	desc = russian_european_politic.11.d
+	picture = GFX_report_event_molotov_signing_pact
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = {
+		name = russian_european_politic.11.a	
+
+		hidden_effect = {
+	
+		}
+	}
+}
+
+country_event = {
+	id = russian_european_politic.12 #Вступление в лондонский пакт
+	title = russian_european_politic.12.t
+	desc = russian_european_politic.12.d
+	picture = GFX_report_event_molotov_signing_pact
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = {
+		name = russian_european_politic.12.a	
+		ai_chance = {
+			factor = 20
+			modifier = {
+				factor = 100
+				is_historical_focus_on = yes
+			}
+		}
+
+		hidden_effect = {
+			RUS = {
+				add_to_faction = yes
+				country_event = russian_european_politic.13
+			}
+			news_event = { id = news.178 days = 2}
+		}
+	}
+	option = {
+		name = russian_european_politic.12.a	
+		ai_chance = {
+			factor = 0
+		}
+
+		hidden_effect = {
+			RUS = { country_event = russian_european_politic.14 }			
+		}
+	}
+}
+
+country_event = {
+	id = russian_european_politic.13 # Британия согласна
+	title = russian_european_politic.13.t
+	desc = russian_european_politic.13.d
+	picture = GFX_report_event_molotov_signing_pact
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = {
+		name = russian_european_politic.13.a	
+		ai_chance = {
+			factor = 20
+		}
+
+		hidden_effect = {
+	
+		}
+	}
+}
+
+country_event = {
+	id = russian_european_politic.14 #Отказ
+	title = russian_european_politic.14.t
+	desc = russian_european_politic.14.d
+	picture = GFX_report_event_molotov_signing_pact
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = {
+		name = russian_european_politic.14.a	
+		ai_chance = {
+			factor = 20
+		}
+
+		hidden_effect = {
+	
+		}
+	}
+}
+
+country_event = {
+	id = russian_european_politic.15 #Совместные исследования с францией
+	title = russian_european_politic.15.t
+	desc = russian_european_politic.15.d
+	picture = GFX_report_event_molotov_signing_pact
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = { #согласие
+		name = russian_european_politic.15.a	
+		ai_chance = {
+			factor = 20
+		}
+
+		hidden_effect = {
+			RUS = {
+				country_event = { id = russian_european_politic.16 days = 2 }
+			}
+		}
+	}
+	
+	option = { #отказ
+		name = russian_european_politic.15.b	
+		ai_chance = {
+			factor = 0
+		}
+
+		hidden_effect = {
+			RUS = {
+				country_event = { id = russian_european_politic.17 days = 2 }
+			}
+		}
+	}
+}
+
+country_event = {
+	id = russian_european_politic.16 #Согласие
+	title = russian_european_politic.16.t
+	desc = russian_european_politic.16.d
+	picture = GFX_report_event_molotov_signing_pact
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = {
+		name = russian_european_politic.16.a	
+		ai_chance = {
+			factor = 20
+		}
+
+		hidden_effect = {
+			RUS = {
+				add_ideas = RUS_coop_russo_french_researches
+			}
+			CBI = {
+				add_ideas = RUS_coop_russo_french_researches
+			}
+			RUS = {
+				country_event = { id = russian_european_politic.18 days = 62 }
+			}
+		}
+	}
+}
+
+country_event = {
+	id = russian_european_politic.17 #Отказ
+	title = russian_european_politic.17.t
+	desc = russian_european_politic.17.d
+	picture = GFX_report_event_molotov_signing_pact
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = {
+		name = russian_european_politic.17.a	
+		ai_chance = {
+			factor = 20
+		}
+
+		hidden_effect = {
+	
+		}
+	}
+}
+
+country_event = {
+	id = russian_european_politic.18 #Расширение сотрудничества
+	title = russian_european_politic.18.t
+	desc = russian_european_politic.18.d
+	picture = GFX_report_event_molotov_signing_pact
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = { #промышленность
+		name = russian_european_politic.18.a	
+		ai_chance = {
+			factor = 20
+		}
+		
+		hidden_effect = {
+			RUS = { country_event = { id = russian_european_politic.19 days = 2 } }
+		}
+	}
+	option = { #техника
+		name = russian_european_politic.18.b	
+		ai_chance = {
+			factor = 20
+		}
+
+		hidden_effect = {
+			RUS = { country_event = { id = russian_european_politic.21 days = 2 } }
+		}
+	}
+	option = { #тактика
+		name = russian_european_politic.18.c	
+		ai_chance = {
+			factor = 20
+		}
+
+		hidden_effect = {
+			RUS = { country_event = { id = russian_european_politic.23 days = 2 } }
+		}
+	}
+	option = { #не требуется
+		name = russian_european_politic.18.d	
+		ai_chance = {
+			factor = 20
+		}
+
+		hidden_effect = {
+			
+		}
+	}
+}
+
+country_event = {
+	id = russian_european_politic.19 #пром сотрудничество - ивент для франции
+	title = russian_european_politic.19.t
+	desc = russian_european_politic.19.d
+	picture = GFX_report_event_molotov_signing_pact
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = {
+		name = russian_european_politic.19.a	
+		ai_chance = {
+			factor = 20
+		}
+		add_tech_bonus = {
+			bonus = 1.0
+			uses = 1 
+			category = industry
+		}
+		hidden_effect = {
+			RUS = { country_event = { id = russian_european_politic.20 days = 2 } }
+		}
+	}
+	option = {
+		name = russian_european_politic.19.a	
+		ai_chance = {
+			factor = 20
+		}
+
+		hidden_effect = {
+			RUS = { country_event = { id = russian_european_politic.25 days = 2 } }
+		}
+	}
+}
+
+country_event = {
+	id = russian_european_politic.20 #пром сотрудничество - ивент для россии
+	title = russian_european_politic.20.t
+	desc = russian_european_politic.20.d
+	picture = GFX_report_event_molotov_signing_pact
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = {
+		name = russian_european_politic.20.a	
+		add_tech_bonus = {
+			bonus = 1.0
+			uses = 2 
+			category = industry
+		}
+		hidden_effect = {
+	
+		}
+	}
+}
+
+country_event = {
+	id = russian_european_politic.21 #тех сотрудничество - ивент для франции
+	title = russian_european_politic.21.t
+	desc = russian_european_politic.21.d
+	picture = GFX_report_event_molotov_signing_pact
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = {
+		name = russian_european_politic.21.a	
+		ai_chance = {
+			factor = 20
+		}
+		add_tech_bonus = {
+			name = infantry_artillery_bonus
+			bonus = 0.5
+			uses = 1
+			category = artillery
+		}
+		add_tech_bonus = {
+			bonus = 0.5
+			uses = 1
+			category = motorized_equipment
+			category = cat_mechanized_equipment
+		}
+		hidden_effect = {
+			RUS = { country_event = { id = russian_european_politic.22 days = 2 } }
+		}
+	}
+	option = {
+		name = russian_european_politic.21.a	
+		ai_chance = {
+			factor = 20
+		}
+
+		hidden_effect = {
+			RUS = { country_event = { id = russian_european_politic.25 days = 2 } }
+		}
+	}
+}
+
+country_event = {
+	id = russian_european_politic.22 #тех сотрудничество - ивент для россии
+	title = russian_european_politic.22.t
+	desc = russian_european_politic.22.d
+	picture = GFX_report_event_molotov_signing_pact
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = {
+		name = russian_european_politic.22.a	
+		ai_chance = {
+			factor = 20
+		}
+		add_tech_bonus = {
+			name = infantry_artillery_bonus
+			bonus = 0.5
+			uses = 1
+			category = artillery
+		}
+		add_tech_bonus = {
+			bonus = 0.5
+			uses = 1
+			category = motorized_equipment
+			category = cat_mechanized_equipment
+		}
+		hidden_effect = {
+	
+		}
+	}
+}
+
+country_event = {
+	id = russian_european_politic.23 #тактическое сотрудничество - ивент для франции
+	title = russian_european_politic.23.t
+	desc = russian_european_politic.23.d
+	picture = GFX_report_event_molotov_signing_pact
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = {
+		name = russian_european_politic.23.a	
+		ai_chance = {
+			factor = 20
+		}
+		add_doctrine_cost_reduction = {
+			name = land_doc_bonus
+			cost_reduction = 1.0
+			uses = 1
+			category = land_doctrine
+		}
+		hidden_effect = {
+			RUS = { country_event = { id = russian_european_politic.24 days = 2 } }
+		}
+	}
+	option = {
+		name = russian_european_politic.23.a	
+		ai_chance = {
+			factor = 20
+		}
+		hidden_effect = {
+			RUS = { country_event = { id = russian_european_politic.25 days = 2 } }
+		}
+	}
+}
+
+country_event = {
+	id = russian_european_politic.24 #тактическое сотрудничество - ивент для россии
+	title = russian_european_politic.24.t
+	desc = russian_european_politic.24.d
+	picture = GFX_report_event_molotov_signing_pact
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = {
+		name = russian_european_politic.24.a	
+		ai_chance = {
+			factor = 20
+		}
+		add_doctrine_cost_reduction = {
+			name = land_doc_bonus
+			cost_reduction = 1.0
+			uses = 1
+			category = land_doctrine
+		}
+		hidden_effect = {
+	
+		}
+	}
+}
+
+country_event = {
+	id = russian_european_politic.25 #отказ франции
+	title = russian_european_politic.25.t
+	desc = russian_european_politic.25.d
+	picture = GFX_report_event_molotov_signing_pact
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = {
+		name = russian_european_politic.25.a	
+		ai_chance = {
+			factor = 20
+		}
+
+		hidden_effect = {
+	
+		}
+	}
+}
+
+country_event = {
+	id = russian_european_politic.26 #Создание антанты - ивент для франции
+	title = russian_european_politic.26.t
+	desc = russian_european_politic.26.d
+	picture = GFX_report_event_molotov_signing_pact
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = {
+		name = russian_european_politic.26.a	
+		ai_chance = {
+			factor = 20
+		}
+
+		hidden_effect = {
+			RUS = { country_event = { id = russian_european_politic.27 days = 2} }
+		}
+	}
+	
+	option = {
+		name = russian_european_politic.26.a	
+		ai_chance = {
+			factor = 0
+		}
+
+		hidden_effect = {
+	
+		}
+	}
+}
+
+country_event = {
+	id = russian_european_politic.27 #Согласие
+	title = russian_european_politic.27.t
+	desc = russian_european_politic.27.d
+	picture = GFX_report_event_molotov_signing_pact
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = {
+		name = russian_european_politic.27.a	
+
+		hidden_effect = {
+			RUS = {
+				create_faction = RUS_entente
+				add_to_faction = FRR
+			}
+			news_event = { id = news.179 days = 2 }
+		}
+	}
+}
+
+country_event = {
+	id = russian_european_politic.28 #Отказ
+	title = russian_european_politic.28.t
+	desc = russian_european_politic.28.d
+	picture = GFX_report_event_molotov_signing_pact
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = {
+		name = russian_european_politic.28.a	
+
+		hidden_effect = {
+	
 		}
 	}
 }
