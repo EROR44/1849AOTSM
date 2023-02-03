@@ -10,6 +10,7 @@ add_namespace = ger_frr
 add_namespace = ger_answer
 add_namespace = ger_warplane
 add_namespace = ger_blackorder
+add_namespace = ger_warpolitic
 
 country_event = {
 	id = gerultimate.1
@@ -2357,6 +2358,298 @@ country_event = {
 }
 
 country_event = {
+	id = ger_answer.9
+	title = ger_answer.9.t
+	desc = ger_answer.9.d
+	picture = GFX_report_event_election_vote
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = {
+		name = ger_answer.9.a	
+		#PLH = {
+		#	promote_character  = 
+		#}
+	}
+	
+}
+
+country_event = {
+	id = ger_answer.10
+	title = ger_answer.10.t
+	desc = ger_answer.10.d
+	picture = GFX_report_event_generic_sign_treaty1
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = {
+		name = ger_answer.10.a	
+	}
+	
+}
+
+country_event = {
+	id = ger_answer.11
+	title = ger_answer.11.t
+	desc = ger_answer.11.d
+	picture = GFX_report_event_nazis_in_danzig
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = {
+		name = ger_answer.11.a	
+		hidden_effect = {
+			POL = {
+				transfer_state = 853
+				add_state_core = 10
+				add_state_core = 87
+				add_state_core = 90
+				add_state_core = 92
+				add_state_core = 97
+				add_state_core = 98
+				add_state_core = 853
+				add_state_core = 903
+			}
+			POL = {
+				change_tag_from = PLH
+			}
+			POL = {
+				inherit_technology = PLH
+			}
+			PLH = {
+				transfer_units_fraction= {
+					target = POL
+					size = 1.0
+					stockpile_ratio = 1.0
+					army_ratio = 1.0
+					navy_ratio = 1.0
+					air_ratio = 1.0
+				}
+			}
+			POL = {
+				annex_country = {
+					target = PLH
+					transfer_troops = yes
+				}
+			}
+			PLH = {
+				remove_state_core = 10
+				remove_state_core = 87
+				remove_state_core = 90
+				remove_state_core = 92
+				remove_state_core = 97
+				remove_state_core = 98
+				remove_state_core = 853
+				remove_state_core = 903
+			}
+			POL = {
+				load_focus_tree = { tree = Poland_focus_101 keep_completed = yes }
+			}
+			PRU = {
+				set_autonomy = {
+					target = POL
+					autonomy_state = autonomy_aotsm_personal_union
+					end_wars = no
+					end_civil_wars = no
+				}
+			}
+			POL = {
+				set_politics = { ruling_party = authoritarian elections_allowed = no }
+				set_popularities = {
+					democratic = 9
+					socialism = 1
+					reactionist = 26
+					authoritarian = 64
+				}
+			}
+			#POL = {
+			#	promote_character = {
+			#		character = 
+			#		ideology = monarchist
+			#	}
+			#}
+		}
+	}
+	
+}
+
+country_event = {
+	id = ger_answer.12
+	title = ger_answer.12.t
+	desc = ger_answer.12.d
+	picture = GFX_report_event_german_troops
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = { #They know alternative
+		name = ger_answer.12.a	
+		ai_chance = {
+			factor = 60
+			modifier = {
+				factor = 100
+				PRU = {
+					surrender_progress < 0.001
+				}
+			}
+			modifier = {
+				factor = 50
+				PRU = {
+					surrender_progress > 0.00
+					surrender_progress < 0.101
+				}
+			}
+			modifier = {
+				factor = 0
+				PRU = {
+					surrender_progress > 0.100
+				}
+			}
+		}
+		PRU = {
+			declare_war_on = {
+				target = PLH
+				type = annex_everything
+			}
+		}
+		PRU = {
+			set_country_flag = plh_fight_for_freedom
+		}
+	}
+	
+	option = { #We can't resist
+		name = ger_answer.12.b
+		ai_chance = {
+			factor = 40
+			modifier = {
+				factor = 0
+				PRU = {
+					surrender_progress < 0.001
+				}
+			}
+			modifier = {
+				factor = 50
+				PRU = {
+					surrender_progress > 0.00
+					surrender_progress < 0.101
+				}
+			}
+			modifier = {
+				factor = 100
+				PRU = {
+					surrender_progress > 0.100
+				}
+			}
+		}
+		add_political_power = -150
+	}
+	
+}
+
+country_event = {
+	id = ger_answer.13
+	title = ger_answer.13.t
+	desc = ger_answer.13.d
+	picture = GFX_report_event_german_volunteers
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = {
+		name = ger_answer.13.a
+		hidden_effect = {
+			PRU = {
+				annex_country = {
+					target = PLH
+					transfer_troops = no
+				} 
+			}
+		}
+	}
+	
+}
+
+country_event = {
+	id = ger_answer.14
+	title = ger_answer.14.t
+	desc = ger_answer.14.d
+	picture = GFX_report_event_german_volunteers
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = {
+		name = ger_answer.14.a	
+		hidden_effect = {
+			POL = {
+				transfer_state = 87
+				transfer_state = 98
+				add_state_core = 10
+				add_state_core = 87
+				add_state_core = 90
+				add_state_core = 92
+				add_state_core = 97
+				add_state_core = 98
+				add_state_core = 853
+				add_state_core = 903
+			}
+			POL = {
+				inherit_technology = PLH
+			}
+			PLH = {
+				transfer_units_fraction= {
+					target = POL
+					size = 0.25
+					stockpile_ratio = 0.25
+					army_ratio = 0.25
+					navy_ratio = 0.25
+					air_ratio = 0.25
+				}
+			}
+			POL = {
+				load_focus_tree = { tree = Poland_focus_101 keep_completed = yes }
+			}
+			PRU = {
+				set_autonomy = {
+					target = POL
+					autonomy_state = autonomy_integrated_puppet
+					end_wars = no
+					end_civil_wars = no
+				}
+			}
+			POL = {
+				set_politics = { ruling_party = reactionist elections_allowed = no }
+				set_popularities = {
+					democratic = 5
+					socialism = 1
+					reactionist = 87
+					authoritarian = 7
+				}
+			}
+			POL = {
+				declare_war_on = {
+					target = PLH
+					type = annex_everything
+				}
+			}
+			POL = {
+				set_country_flag = pol_civilwar_plh
+			}
+		}
+	}
+	
+}
+
+country_event = {
 	id = ger_warplane.1
 	title = ger_warplane.1.t
 	desc = ger_warplane.1.d
@@ -2742,7 +3035,7 @@ country_event = { #Hunting is going well
 	id = ger_blackorder.11
 	title = ger_blackorder.11.t
 	desc = ger_blackorder.11.d
-	picture = GFX_report_event_german_reichstag_gathering
+	picture = GFX_report_event_dead_soldiers
 	
 	is_triggered_only = yes
 	
@@ -2769,6 +3062,526 @@ country_event = { #Hunting is going well
 			factor = 70
 		}
 		custom_effect_tooltip = pru_acces_to_all_partisan_must_die_tt
+	}
+	
+}
+
+country_event = { #Qustian about Poland
+	id = ger_warpolitic.1
+	title = ger_warpolitic.1.t
+	desc = ger_warpolitic.1.d
+	picture = GFX_report_event_generic_read_write
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = { #democraty in poland
+		name = ger_warpolitic.1.a
+		ai_chance = {
+			factor = 60
+			modifier = {
+				factor = 80
+				PRU = {
+					has_government = democratic
+				}
+			}
+			modifier = {
+				factor = 40
+				PRU = {
+					has_government = authoritarian
+				}
+			}
+			modifier = {
+				factor = 10
+				PRU = {
+					has_government = reactionist
+				}
+			}
+			modifier = {
+				factor = 90
+				PRU = {
+					has_government = socialism
+				}
+			}
+		}
+		PRU = {
+			country_event = {
+				id = ger_warpolitic.2
+				days = 1
+			}
+		}	
+		custom_effect_tooltip = PRU_choose_diplomacy_way
+	}
+	
+	option = { #king or integration
+		name = ger_warpolitic.1.b
+		ai_chance = {
+			factor = 40
+			modifier = {
+				factor = 20
+				PRU = {
+					has_government = democratic
+				}
+			}
+			modifier = {
+				factor = 60
+				PRU = {
+					has_government = authoritarian
+				}
+			}
+			modifier = {
+				factor = 90
+				PRU = {
+					has_government = reactionist
+				}
+			}
+			modifier = {
+				factor = 10
+				PRU = {
+					has_government = socialism
+				}
+			}
+		}
+		PRU = {
+			country_event = {
+				id = ger_warpolitic.3
+				days = 1
+			}
+		}	
+		custom_effect_tooltip = PRU_choose_agressive_way
+	}
+	
+}
+
+country_event = { #Democraty in Poland
+	id = ger_warpolitic.2
+	title = ger_warpolitic.2.t
+	desc = ger_warpolitic.2.d
+	picture = GFX_report_event_generic_sign_treaty2
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = { #They chose own politic
+		name = ger_warpolitic.2.a
+		ai_chance = {
+			factor = 60
+			modifier = {
+				factor = 60
+				PRU = {
+					has_government = democratic
+				}
+			}
+			modifier = {
+				factor = 20
+				PRU = {
+					has_government = authoritarian
+				}
+			}
+			modifier = {
+				factor = 5
+				PRU = {
+					has_government = reactionist
+				}
+			}
+			modifier = {
+				factor = 90
+				PRU = {
+					has_government = socialism
+				}
+			}
+		}
+		custom_effect_tooltip = PRU_choose_poland_friend_way_tt
+		PRU = {
+			set_country_flag = PRU_choose_poland_friend
+		}
+	}
+	
+	option = { #They choose our politic
+		name = ger_warpolitic.2.b
+		ai_chance = {
+			factor = 40
+			modifier = {
+				factor = 40
+				PRU = {
+					has_government = democratic
+				}
+			}
+			modifier = {
+				factor = 80
+				PRU = {
+					has_government = authoritarian
+				}
+			}
+			modifier = {
+				factor = 95
+				PRU = {
+					has_government = reactionist
+				}
+			}
+			modifier = {
+				factor = 10
+				PRU = {
+					has_government = socialism
+				}
+			}
+		}
+		custom_effect_tooltip = PRU_chose_to_help_in_decision_way_tt
+		PRU = {
+			set_country_flag = PRU_chose_to_help_in_decision
+		}		
+	}
+	
+}
+
+country_event = { #King or integration
+	id = ger_warpolitic.3
+	title = ger_warpolitic.3.t
+	desc = ger_warpolitic.3.d
+	picture = GFX_report_event_german_troops
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = { #Kaisser of Poland
+		name = ger_warpolitic.3.a
+		ai_chance = {
+			factor = 60
+			modifier = {
+				factor = 90
+				PRU = {
+					has_government = democratic
+				}
+			}
+			modifier = {
+				factor = 75
+				PRU = {
+					has_government = authoritarian
+				}
+			}
+			modifier = {
+				factor = 25
+				PRU = {
+					has_government = reactionist
+				}
+			}
+			modifier = {
+				factor = 90
+				PRU = {
+					has_government = socialism
+				}
+			}
+		}
+		custom_effect_tooltip = PRU_chose_king_in_poland_way_tt
+		PRU = {
+			set_country_flag = PRU_chose_king_in_poland
+		}	
+	}
+	
+	option = { #Poland is part of Reich
+		name = ger_warpolitic.3.b
+		ai_chance = {
+			factor = 40
+			modifier = {
+				factor = 10
+				PRU = {
+					has_government = democratic
+				}
+			}
+			modifier = {
+				factor = 25
+				PRU = {
+					has_government = authoritarian
+				}
+			}
+			modifier = {
+				factor = 75
+				PRU = {
+					has_government = reactionist
+				}
+			}
+			modifier = {
+				factor = 10
+				PRU = {
+					has_government = socialism
+				}
+			}
+		}
+		custom_effect_tooltip = PRU_chose_to_integrat_poland_way_tt
+		PRU = {
+			set_country_flag = PRU_chose_to_integrat_poland
+		}	
+	}
+	
+}
+
+country_event = { #German say that they want in our politic
+	id = ger_warpolitic.4
+	title = ger_warpolitic.4.t
+	desc = ger_warpolitic.4.d
+	picture = GFX_report_event_generic_sign_treaty3
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = { #say yes
+		name = ger_warpolitic.4.a
+		ai_chance = {
+			factor = 50
+			modifier = {
+				factor = 80
+				PRU = {
+					has_government = democratic
+				}
+			}
+			modifier = {
+				factor = 25
+				PRU = {
+					has_government = authoritarian
+				}
+			}
+			modifier = {
+				factor = 0
+				PRU = {
+					has_government = reactionist
+				}
+			}
+			modifier = {
+				factor = 80
+				PRU = {
+					has_government = socialism
+				}
+			}
+		}
+		PRU = {
+			country_event = {
+				id = ger_answer.9
+				days = 1
+			}
+		}		
+	}
+	
+	option = { #say no
+		name = ger_warpolitic.4.b
+		ai_chance = {
+			factor = 50
+			modifier = {
+				factor = 20
+				PRU = {
+					has_government = democratic
+				}
+			}
+			modifier = {
+				factor = 75
+				PRU = {
+					has_government = authoritarian
+				}
+			}
+			modifier = {
+				factor = 100
+				PRU = {
+					has_government = reactionist
+				}
+			}
+			modifier = {
+				factor = 20
+				PRU = {
+					has_government = socialism
+				}
+			}
+		}
+		PRU = {
+			country_event = {
+				id = ger_answer.10
+				days = 1
+			}
+		}
+	}
+	
+}
+
+country_event = { #German say that they want kingdom with their candidat
+	id = ger_warpolitic.5
+	title = ger_warpolitic.5.t
+	desc = ger_warpolitic.5.d
+	picture = GFX_report_event_soviet_german_soldier_handshake
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = { #say yes
+		name = ger_warpolitic.5.a
+		ai_chance = {
+			factor = 50
+			modifier = {
+				factor = 70
+				PRU = {
+					has_government = democratic
+				}
+			}
+			modifier = {
+				factor = 60
+				PRU = {
+					has_government = authoritarian
+				}
+			}
+			modifier = {
+				factor = 0
+				PRU = {
+					has_government = reactionist
+				}
+			}
+			modifier = {
+				factor = 80
+				PRU = {
+					has_government = socialism
+				}
+			}
+		}
+		PRU = {
+			country_event = {
+				id = ger_answer.11
+				days = 1
+			}
+		}
+	}
+	
+	option = { #say no
+		name = ger_warpolitic.5.b
+		trigger = {
+			PRU = {
+				has_war_with = RUS
+			}
+		}
+		ai_chance = {
+			factor = 50
+			modifier = {
+				factor = 30
+				PRU = {
+					has_government = democratic
+				}
+			}
+			modifier = {
+				factor = 40
+				PRU = {
+					has_government = authoritarian
+				}
+			}
+			modifier = {
+				factor = 0
+				PRU = {
+					has_government = reactionist
+				}
+			}
+			modifier = {
+				factor = 20
+				PRU = {
+					has_government = socialism
+				}
+			}
+		}
+		RUS = {
+			country_event = {
+				id = pol_rus.2
+				days = 1
+			}
+		}
+	}
+	
+}
+
+country_event = { #German say that poland is mistake
+	id = ger_warpolitic.6
+	title = ger_warpolitic.6.t
+	desc = ger_warpolitic.6.d
+	picture = GFX_report_event_german_troops
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = { #say yes
+		name = ger_warpolitic.6.a
+		ai_chance = {
+			factor = 50
+			modifier = {
+				factor = 10
+				PRU = {
+					has_government = democratic
+				}
+			}
+			modifier = {
+				factor = 10
+				PRU = {
+					has_government = authoritarian
+				}
+			}
+			modifier = {
+				factor = 10
+				PRU = {
+					has_government = reactionist
+				}
+			}
+			modifier = {
+				factor = 10
+				PRU = {
+					has_government = socialism
+				}
+			}
+		}
+		PRU = {
+			country_event = {
+				id = ger_answer.13
+				days = 1
+			}
+		}
+	}
+	
+	option = { #say no
+		name = ger_warpolitic.6.b
+		trigger = {
+			PRU = {
+				has_war_with = RUS
+			}
+		}
+		ai_chance = {
+			factor = 50
+			modifier = {
+				factor = 90
+				PRU = {
+					has_government = democratic
+				}
+			}
+			modifier = {
+				factor = 90
+				PRU = {
+					has_government = authoritarian
+				}
+			}
+			modifier = {
+				factor = 90
+				PRU = {
+					has_government = reactionist
+				}
+			}
+			modifier = {
+				factor = 90
+				PRU = {
+					has_government = socialism
+				}
+			}
+		}
+		RUS = {
+			country_event = {
+				id = pol_rus.3
+				days = 1
+			}
+		}
 	}
 	
 }
