@@ -3899,19 +3899,28 @@ on_actions = {
 						}
 					}
 					BLT = {
+						add_state_core = 915
 						transfer_state = 11
-						add_state_core = 11
 						transfer_state = 12
-						add_state_core = 12
 						transfer_state = 13
-						add_state_core = 13
 						transfer_state = 189
-						add_state_core = 189
 						transfer_state = 190
-						add_state_core = 190
 						transfer_state = 191
-						add_state_core = 191
 						transfer_state = 784
+						transfer_state = 915
+					}
+					EST = {
+						add_state_core = 13
+						add_state_core = 191
+					}
+					LAT = {
+						add_state_core = 12
+						add_state_core = 190
+						add_state_core = 915
+					}
+					LIT = {
+						add_state_core = 11
+						add_state_core = 189
 						add_state_core = 784
 					}
 					hidden_effect = {
@@ -3924,12 +3933,12 @@ on_actions = {
 							}
 						}
 						BLT = {
-							set_politics = { ruling_party = authoritarian elections_allowed = no }
+							set_politics = { ruling_party = democratic elections_allowed = no }
 							set_popularities = {
-								democratic = 11
-								socialism = 14
-								reactionist = 19
-								authoritarian = 56
+								democratic = 34
+								socialism = 0
+								reactionist = 33
+								authoritarian = 33
 							}
 						}
 						BLT = {
@@ -3937,6 +3946,15 @@ on_actions = {
 						}
 						BLT = {
 							inherit_technology = PRU
+						}
+						EST = {
+							inherit_technology = RUS
+						}
+						LIT = {
+							inherit_technology = RUS
+						}
+						LAT = {
+							inherit_technology = RUS
 						}
 					}
 				}
@@ -4005,16 +4023,19 @@ on_actions = {
 					UKR = {
 						transfer_state = 93
 						add_state_core = 93
+						add_state_core = 137
 						transfer_state = 192
 						add_state_core = 192
 						transfer_state = 193
 						add_state_core = 193
+						add_state_core = 196
 						transfer_state = 197
 						add_state_core = 197
 						transfer_state = 198
 						add_state_core = 198
 						transfer_state = 199
 						add_state_core = 199
+						add_state_core = 200
 						transfer_state = 201
 						add_state_core = 201
 						transfer_state = 202
@@ -4029,6 +4050,7 @@ on_actions = {
 						add_state_core = 225
 						transfer_state = 226
 						add_state_core = 226
+						add_state_core = 227
 						transfer_state = 228
 						add_state_core = 228
 						transfer_state = 240
@@ -4207,6 +4229,7 @@ on_actions = {
 					remove_state_core = 858
 					remove_state_core = 885
 					remove_state_core = 886
+					remove_state_core = 915
 				}
 				if = {
 					limit = {
@@ -4802,6 +4825,56 @@ on_actions = {
 					add_to_faction = IND
 				}
 				set_global_flag = hol_was_in_faction_with_pru
+			}
+			#BEL capitulation
+			if = {
+				limit = {
+					tag = BEL
+					BEL = {
+						has_war_with = PRU
+					}
+					PRU = {
+						has_country_flag = P_V_B
+					}
+				}
+				HOL = {
+					transfer_state = 6
+				}
+				BEL = { set_cosmetic_tag = BELVAL }
+				PRU = { puppet = BEL }
+				BEL = { 
+					remove_state_core = 8
+					remove_state_core = 863
+				}
+				PRU = { 
+					add_state_core = 8
+					transfer_state = 8
+					add_state_core = 863
+					transfer_state = 863
+				}
+				BEL = {
+					set_politics = { ruling_party = authoritarian elections_allowed = no }
+					set_popularities = {
+						democratic = 20
+						socialism = 4
+						reactionist = 23
+						authoritarian = 53
+					}
+					retire_character = BEL_Leopold_I
+					add_country_leader_role = {
+						character = BEL_Edwin_von_Manteuffel
+						promote_leader = yes
+						country_leader = {
+							ideology = monarchist
+							expire = "1900.1.1.1"
+							traits = { walduke }
+						}
+					}
+					swap_ideas = {
+						remove_idea = medium_country
+						add_idea = little_country
+					}
+				}
 			}
 			#PAR capitulation 
 			if = {
