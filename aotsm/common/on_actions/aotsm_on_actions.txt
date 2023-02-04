@@ -8410,6 +8410,12 @@ on_actions = {
 				763 = {
 					remove_dynamic_modifier = { modifier = AUS_state_slavic_probleb_dynamic_modifier }
 				}
+				PRU = {
+					white_peace = {
+						tag = AUS
+						message = wienna_peace
+					}
+				}
 				AUS = {
 					set_autonomy = {
 						target = ZEN
@@ -8421,10 +8427,12 @@ on_actions = {
 				ZEN = {
 					leave_faction = yes
 				}
-				PRU = {
+				every_country = {
+					limit = {
+						has_war_with = ZEN 
+					}
 					white_peace = {
-						tag = AUS
-						message = wienna_peace
+						tag = ZEN
 					}
 				}
 				HUN = {
@@ -8996,6 +9004,165 @@ on_actions = {
 					}
 					remove_ideas = creater_of_saint_allience_idea
 				}
+				if = {
+					limit = {
+						AUS = {
+							has_idea = rus_help_to_aus
+						}
+					}
+					AUS = {
+						remove_ideas = rus_help_to_aus
+					}
+				}
+				if = {
+					limit = {
+						AUS = {
+							has_idea = frr_help_to_aus
+						}
+					}
+					AUS = {
+						remove_ideas = frr_help_to_aus
+					}
+				}
+				if = {
+					limit = {
+						AUS = {
+							has_idea = cbi_help_to_aus
+						}
+					}
+					AUS = {
+						remove_ideas = cbi_help_to_aus
+					}
+				}
+				if = {
+					limit = {
+						AUS = {
+							has_country_flag = ask_russian
+						}
+					}
+					AUS = {
+						clr_country_flag = ask_russian
+					}
+				}
+				if = {
+					limit = {
+						AUS = {
+							has_country_flag = ask_france
+						}
+					}
+					AUS = {
+						clr_country_flag = ask_france
+					}
+				}
+				if = {
+					limit = {
+						AUS = {
+							has_country_flag = ask_cbi
+						}
+					}
+					AUS = {
+						clr_country_flag = ask_cbi
+					}
+				}
+				if = {
+					limit = {
+						any_country = {
+								has_country_flag = first_place_in_help_to_aus
+						}
+					}
+					every_country = {
+						limit = {
+							has_country_flag = first_place_in_help_to_aus
+						}
+						clr_country_flag = chose_help_to_aus_flag
+						clr_country_flag = first_place_in_help_to_aus
+						if = {
+							limit = {
+								tag = RUS
+							}
+							remove_from_array = { global.austrian_help = RUS }
+						}
+						if = {
+							limit = {
+								tag = FRR
+							}
+							remove_from_array = { global.austrian_help = FRR }
+						}
+						if = {
+							limit = {
+								tag = CBI
+							}
+							remove_from_array = { global.austrian_help = CBI }
+						}
+					}
+				}
+				if = {
+					limit = {
+						any_country = {
+							has_country_flag = second_place_in_help_to_aus
+						}
+					}
+					every_country = {
+						limit = {
+							has_country_flag = second_place_in_help_to_aus
+						}
+						clr_country_flag = chose_help_to_aus_flag
+						clr_country_flag = second_place_in_help_to_aus
+						if = {
+							limit = {
+								tag = RUS
+							}
+							remove_from_array = { global.austrian_help = RUS }
+						}
+						if = {
+							limit = {
+								tag = FRR
+							}
+							remove_from_array = { global.austrian_help = FRR }
+						}
+						if = {
+							limit = {
+								tag = CBI
+							}
+							remove_from_array = { global.austrian_help = CBI }
+						}
+					}
+				}
+				if = {
+					limit = {
+						any_country = {
+							has_country_flag = third_place_in_help_to_aus
+						}
+					}
+					every_country = {
+						limit = {
+							has_country_flag = first_place_in_help_to_aus
+						}
+						clr_country_flag = chose_help_to_aus_flag
+						clr_country_flag = third_place_in_help_to_aus
+						if = {
+							limit = {
+								tag = RUS
+							}
+							remove_from_array = { global.austrian_help = RUS }
+						}
+						if = {
+							limit = {
+								tag = FRR
+							}
+							remove_from_array = { global.austrian_help = FRR }
+						}
+						if = {
+							limit = {
+								tag = CBI
+							}
+							remove_from_array = { global.austrian_help = CBI }
+						}
+					}
+				}
+				set_variable = { global.help_aus_1_var = 0 }
+				set_variable = { global.help_aus_2_var = 0 }
+				set_variable = { global.help_aus_3_var = 0 }
 			}
 			#AUS win Hungary
 			if = {
@@ -9600,6 +9767,9 @@ on_actions = {
 					}
 					PRU = {
 						has_war_with = AUS
+					}
+					AUS = {
+						surrender_progress > 0.40
 					}
 					OR = {
 						9 = {
