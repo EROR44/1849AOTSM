@@ -1,16 +1,13 @@
 add_namespace = rusPol #Политические ивенты
-add_namespace = rusInd #Промышленные ивенты
-add_namespace = rusWar #Военные Ивенты
-add_namespace = rusHis #Иветнты справки
 add_namespace = rusRomKN #Константин Николаевич
 add_namespace = rusMil #Милютин
 add_namespace = rusOrl #Орлов
 add_namespace = rusIgn #Игнатьев
 add_namespace = rusRomAN #Александр Павлович
 add_namespace = rusPus #Пушкин
-add_namespace = rusRandFractions #Фракцционные ивенты
 add_namespace = russian_european_politic #
 add_namespace = political_confrontation #
+
 
 country_event = {
 	id = rusPol.1
@@ -1879,9 +1876,9 @@ country_event = {
 }
 
 country_event = {
-	id = russian_european_politic. 31 #Австрия отказывается
-	title = russian_european_politic. 31.t
-	desc = russian_european_politic. 31.d
+	id = russian_european_politic.31 #Австрия отказывается
+	title = russian_european_politic.31.t
+	desc = russian_european_politic.31.d
 	picture = GFX_report_event_aotsm_generic_signing_the_contract
 	
 	is_triggered_only = yes
@@ -1889,7 +1886,7 @@ country_event = {
 	fire_only_once = yes
 	
 	option = {
-		name = russian_european_politic. 31.a	
+		name = russian_european_politic.31.a	
 
 		hidden_effect = {
 			RUS = { set_country_flag = RUS_russian_help_for_aus_denied }
@@ -1990,8 +1987,8 @@ country_event = {
 
 country_event = {
 	id = political_confrontation.1 #
-	title = russian_european_politic.1.t
-	desc = russian_european_politic.1.d
+	title = political_confrontation.1.t
+	desc = political_confrontation.1.d
 	picture = GFX_report_event_aotsm_generic_signing_the_contract
 	
 	is_triggered_only = yes
@@ -1999,21 +1996,204 @@ country_event = {
 	fire_only_once = yes
 	
 	option = { #Киреевский Иван Васильевич - славянофил, церковник - ставка на церковь, пропаганду и национализм - пропаганда, закручивание гаек
-		name = russian_european_politic.1.a	
-
+		name = political_confrontation.1.a	
+		ai_chance = {
+			factor = 20
+		}
+		RUS_add_5_churchman_opinion = yes
+		RUS_add_5_autocrat_opinion = yes
 		hidden_effect = {
-	
+			country_event = { id = political_confrontation.2 days = 2}
 		}
 	}
 	option = { #Лавров Петр Лаврович - народник - ставка на интеллигенцию и просвещение народа - умеренный путь - гос дотации на постройку фабрик и заводов
-		name = russian_european_politic.1.b	
+		name = political_confrontation.1.b	
+		RUS_add_5_churchman_opinion = yes
+		hidden_effect = {
+			country_event = { id = political_confrontation.3 days = 2}
+		}
+	}
+	option = { #Петрашевский Михаил Васильевич - социалист утопист, сторонник демократических преобразований - постепенное просвещение, субсидии промышленности
+		name = political_confrontation.1.c	
 
+		hidden_effect = {
+			country_event = { id = political_confrontation.4 days = 2}
+		}
+	}
+}
+
+country_event = {
+	id = political_confrontation.2 # План Киреевскогл
+	title = political_confrontation.2.t
+	desc = political_confrontation.2.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = {
+		name = political_confrontation.2.a	
+
+		hidden_effect = {
+			add_timed_idea = {
+				days = 1095
+				idea = RUS_plan_of_kireevsky
+			}
+		}
+	}
+}
+
+country_event = {
+	id = political_confrontation.3 #План Лаврова
+	title = political_confrontation.3.t
+	desc = political_confrontation.3.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = {
+		name = political_confrontation.3.a	
+
+		hidden_effect = {
+			add_timed_idea = {
+				days = 1095
+				idea = RUS_plan_of_lavrov
+			}
+		}
+	}
+}
+
+country_event = {
+	id = political_confrontation.4 #План Петрашевского
+	title = political_confrontation.4.t
+	desc = political_confrontation.4.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = {
+		name = political_confrontation.4.a	
+
+		hidden_effect = {
+			add_timed_idea = {
+				days = 1095
+				idea = RUS_plan_of_petrashevsky
+			}
+		}
+	}
+}
+
+country_event = {
+	id = political_confrontation.5 #Устранение германского влияния
+	title = political_confrontation.5.t
+	desc = political_confrontation.5.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = {
+		name = political_confrontation.5.a	
+
+		hidden_effect = {
+			add_timed_idea = {
+				days = 365
+				idea = RUS_degermanisation
+			}
+		}
+	}
+}
+
+country_event = {
+	id = political_confrontation.6 # Уничтожить империю зла
+	title = political_confrontation.6.t
+	desc = political_confrontation.6.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = {
+		name = political_confrontation.6.a	
+		ai_chance = {
+			factor = 20
+		}
+		
 		hidden_effect = {
 	
 		}
 	}
-	option = { #Петрашевский Михаил Васильевич - социалист утопист, сторонник демократических преобразований - постепенное просвещение, субсидии промышленности
-		name = russian_european_politic.1.c	
+	
+	option = {
+		name = political_confrontation.6.a	
+		ai_chance = {
+			factor = 20
+		}
+		
+		hidden_effect = {
+			PRU = {
+				country_event = { id = political_confrontation.7 days = 2}
+			}
+		}
+	}
+}
+
+country_event = {
+	id = political_confrontation.7 #Русский ультиматум
+	title = political_confrontation.7.t
+	desc = political_confrontation.7.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = {
+		name = political_confrontation.7.a	
+		ai_chance = {
+			factor = 0
+		}
+		
+		hidden_effect = {
+			RUS = {
+				country_event = { id = political_confrontation.8 days = 2}
+			}
+		}
+	}
+	
+	option = {
+		name = political_confrontation.7.a	
+		ai_chance = {
+			factor = 20
+		}
+
+		hidden_effect = {
+			RUS = {
+				country_event = { id = political_confrontation.9 days = 2}
+			}
+		}
+	}
+}
+
+country_event = {
+	id = political_confrontation.8 #Согласие
+	title = political_confrontation.8.t
+	desc = political_confrontation.8.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = {
+		name = political_confrontation.8.a	
 
 		hidden_effect = {
 	
@@ -2022,9 +2202,9 @@ country_event = {
 }
 
 country_event = {
-	id = political_confrontation.1 #
-	title = russian_european_politic.1.t
-	desc = russian_european_politic.1.d
+	id = political_confrontation.9 #Отказ
+	title = political_confrontation.9.t
+	desc = political_confrontation.9.d
 	picture = GFX_report_event_aotsm_generic_signing_the_contract
 	
 	is_triggered_only = yes
@@ -2032,112 +2212,30 @@ country_event = {
 	fire_only_once = yes
 	
 	option = {
-		name = russian_european_politic.1.a	
-
+		name = political_confrontation.9.a	
+		ai_chance = {
+			factor = 20
+		}
+		declare_war_on = {
+			target = PRU
+			type = annex_everything
+		}
 		hidden_effect = {
-	
+			
 		}
 	}
-}country_event = {
-	id = political_confrontation.1 #
-	title = russian_european_politic.1.t
-	desc = russian_european_politic.1.d
-	picture = GFX_report_event_aotsm_generic_signing_the_contract
-	
-	is_triggered_only = yes
-	
-	fire_only_once = yes
 	
 	option = {
-		name = russian_european_politic.1.a	
-
-		hidden_effect = {
-	
+		name = political_confrontation.9.b	
+		ai_chance = {
+			factor = 1
 		}
-	}
-}country_event = {
-	id = political_confrontation.1 #
-	title = russian_european_politic.1.t
-	desc = russian_european_politic.1.d
-	picture = GFX_report_event_aotsm_generic_signing_the_contract
-	
-	is_triggered_only = yes
-	
-	fire_only_once = yes
-	
-	option = {
-		name = russian_european_politic.1.a	
-
+		add_war_support = -0.05
 		hidden_effect = {
-	
-		}
-	}
-}country_event = {
-	id = political_confrontation.1 #
-	title = russian_european_politic.1.t
-	desc = russian_european_politic.1.d
-	picture = GFX_report_event_aotsm_generic_signing_the_contract
-	
-	is_triggered_only = yes
-	
-	fire_only_once = yes
-	
-	option = {
-		name = russian_european_politic.1.a	
-
-		hidden_effect = {
-	
-		}
-	}
-}country_event = {
-	id = political_confrontation.1 #
-	title = russian_european_politic.1.t
-	desc = russian_european_politic.1.d
-	picture = GFX_report_event_aotsm_generic_signing_the_contract
-	
-	is_triggered_only = yes
-	
-	fire_only_once = yes
-	
-	option = {
-		name = russian_european_politic.1.a	
-
-		hidden_effect = {
-	
-		}
-	}
-}country_event = {
-	id = political_confrontation.1 #
-	title = russian_european_politic.1.t
-	desc = russian_european_politic.1.d
-	picture = GFX_report_event_aotsm_generic_signing_the_contract
-	
-	is_triggered_only = yes
-	
-	fire_only_once = yes
-	
-	option = {
-		name = russian_european_politic.1.a	
-
-		hidden_effect = {
-	
-		}
-	}
-}country_event = {
-	id = political_confrontation.1 #
-	title = russian_european_politic.1.t
-	desc = russian_european_politic.1.d
-	picture = GFX_report_event_aotsm_generic_signing_the_contract
-	
-	is_triggered_only = yes
-	
-	fire_only_once = yes
-	
-	option = {
-		name = russian_european_politic.1.a	
-
-		hidden_effect = {
-	
+			create_wargoal = { 
+				type = annex_everything 
+				target = PRU 
+			}
 		}
 	}
 }
