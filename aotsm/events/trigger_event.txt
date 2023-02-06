@@ -1232,25 +1232,27 @@ country_event = {
 	is_triggered_only = yes
 	
 	immediate = {
-		PRU = {
-			add_timed_idea = {
-				idea = pru_peace_rus
-				days = 30
+		hidden_effect = {
+			PRU = {
+				add_timed_idea = {
+					idea = pru_peace_rus
+					days = 30
+				}
 			}
-		}
-		BYZ = {
-			add_timed_idea = {
-				idea = pru_peace_rus
-				days = 30
+			BYZ = {
+				add_timed_idea = {
+					idea = pru_peace_rus
+					days = 30
+				}
 			}
-		}
-		RUS = {
-			add_timed_idea = {
-				idea = rus_peace_pru
-				days = 30
+			RUS = {
+				add_timed_idea = {
+					idea = rus_peace_pru
+					days = 30
+				}
 			}
+			news_event = news.88
 		}
-		news_event = news.88
 	}
 	
 	option = {
@@ -1552,43 +1554,123 @@ country_event = {
 					}
 				}
 			}
-			BCH = {
-				transfer_state = 137
-				add_state_core = 137
-				transfer_state = 196
-				add_state_core = 196
-				transfer_state = 200
-				add_state_core = 200
-				transfer_state = 218
-				add_state_core = 218
-				transfer_state = 227
-				add_state_core = 227
-				transfer_state = 234
-				add_state_core = 234
+			if = {
+				limit = {
+					NOT = {
+						country_exists = BCH
+					}
+				}
+				BCH = {
+					transfer_state = 137
+					add_state_core = 137
+					transfer_state = 196
+					add_state_core = 196
+					transfer_state = 200
+					add_state_core = 200
+					transfer_state = 218
+					add_state_core = 218
+					transfer_state = 227
+					add_state_core = 227
+					transfer_state = 234
+					add_state_core = 234
+				}
+				hidden_effect = {
+					BYZ = {
+						set_autonomy = {
+							target = BCH
+							autonomy_state = autonomy_aotsm_province
+							end_wars = yes
+							end_civil_wars = yes
+						}
+					}
+					BCH = {
+						set_politics = { ruling_party = reactionist elections_allowed = no }
+						set_popularities = {
+							democratic = 3
+							socialism = 1
+							reactionist = 77
+							authoritarian = 19
+						}
+					}
+					BCH = {
+						load_oob = BCH_army
+					}
+					BCH = {
+						inherit_technology = BYZ
+					}
+				}
 			}
-			hidden_effect = {
-				BYZ = {
-					set_autonomy = {
-						target = BCH
-						autonomy_state = autonomy_aotsm_province
-						end_wars = yes
-						end_civil_wars = yes
+			if = {
+				limit = {
+					country_exists = BCH 
+				}
+				BCH = {
+					if = {
+						limit = {
+							RUS = {
+								owns_state = 137
+							}
+						}
+						transfer_state = 137
+						RUS = {
+							remove_state_core = 137
+						}
 					}
-				}
-				BCH = {
-					set_politics = { ruling_party = reactionist elections_allowed = no }
-					set_popularities = {
-						democratic = 3
-						socialism = 1
-						reactionist = 77
-						authoritarian = 19
+					if = {
+						limit = {
+							RUS = {
+								owns_state = 196
+							}
+						}
+						transfer_state = 196
+						RUS = {
+							remove_state_core = 196
+						}
 					}
-				}
-				BCH = {
-					load_oob = BCH_army
-				}
-				BCH = {
-					inherit_technology = BYZ
+					if = {
+						limit = {
+							RUS = {
+								owns_state = 200
+							}
+						}
+						transfer_state = 200
+						RUS = {
+							remove_state_core = 200
+						}
+					}
+					if = {
+						limit = {
+							RUS = {
+								owns_state = 218
+							}
+						}
+						transfer_state = 218
+						RUS = {
+							remove_state_core = 218
+						}
+					}
+					if = {
+						limit = {
+							RUS = {
+								owns_state = 227
+							}
+						}
+						transfer_state = 227
+						RUS = {
+							remove_state_core = 227
+						}
+					}
+					if = {
+						limit = {
+							RUS = {
+								owns_state = 234
+							}
+						}
+						transfer_state = 234
+						RUS = {
+							remove_state_core = 234
+						}
+					}
 				}
 			}
 			KUK = {
@@ -1799,25 +1881,27 @@ country_event = {
 	is_triggered_only = yes
 	
 	immediate = {
-		PRU = {
-			add_timed_idea = {
-				idea = pru_peace_rus
-				days = 28
+		hidden_effect = {
+			PRU = {
+				add_timed_idea = {
+					idea = pru_peace_rus
+					days = 30
+				}
 			}
-		}
-		BYZ = {
-			add_timed_idea = {
-				idea = pru_peace_rus
-				days = 28
+			BYZ = {
+				add_timed_idea = {
+					idea = pru_peace_rus
+					days = 30
+				}
 			}
-		}
-		RUS = {
-			add_timed_idea = {
-				idea = rus_peace_pru
-				days = 28
+			RUS = {
+				add_timed_idea = {
+					idea = rus_peace_pru
+					days = 30
+				}
 			}
+			news_event = news.89
 		}
-		news_event = news.89
 	}
 	
 	option = {
@@ -2919,6 +3003,20 @@ country_event = {
 				id = ger_answer.20
 				days = 20
 			}
+		}
+		custom_effect_tooltip = peace_idea_for_20_days_tt
+		if = {
+			limit = {
+				NOT = {
+					RUS = {
+						has_country_leader = {
+							character = RUS_Romanov_Alexandr_Nikolaevich
+							ruling_only = yes
+						}
+					}
+				}
+			}
+			custom_effect_tooltip = nobel_revolt_risk_hight_tt
 		}
 	}
 	

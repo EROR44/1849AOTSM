@@ -1449,6 +1449,8 @@ byz_senat_decision_category = {
 		
 		fire_only_once = yes
 		
+		war_with_on_remove = AFG
+		
 		remove_effect = {
 			add_to_war = {
 				targeted_alliance = RIT
@@ -1456,6 +1458,260 @@ byz_senat_decision_category = {
 				hostility_reason = asked_to_join
 			}
 			news_event = news.150
+		}
+		
+	}
+	
+	byz_cremia_operation = {
+	
+		icon = generic_ignite_civil_war
+		
+		allowed = {
+		}
+		
+		available = {
+		}
+		
+		visible = {
+			tag = BYZ
+			OR = {
+				AND = {
+					has_war_with = RUS
+					has_global_flag = firts_world_war
+					date > 1855.4.15
+				}
+				AND = {
+					date > 1855.2.10
+					NOT = {
+						has_war_with = RUS
+					}
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 50
+			modifier = {
+				factor = 100
+				is_historical_focus_on = yes
+			}
+		}
+		
+		days_remove = 30
+		
+		fire_only_once = yes
+		
+		war_with_on_remove = RUS
+		
+		remove_effect = {
+			if = {
+				limit = {
+					NOT = {
+						has_global_flag = firts_world_war
+					}
+				}
+				set_global_flag = firts_world_war
+				hidden_effect = {
+					if = {
+						limit = {
+							BYZ = {
+								has_idea = russian_history_enemy_2
+							}
+						}
+						BYZ = {
+							swap_ideas = {
+								remove_idea = russian_history_enemy_2
+								add_idea = russian_history_enemy_3
+							}
+						}
+					}
+					if = {
+						limit = {
+							BYZ = {
+								has_idea = russian_history_enemy_1
+							}
+						}
+						BYZ = {
+							swap_ideas = {
+								remove_idea = russian_history_enemy_1
+								add_idea = russian_history_enemy_2
+							}
+						}
+					}
+					PRU = {
+						complete_national_focus = PRU_first_world_war
+					}
+					if = {
+						limit = {
+							PRU = {
+								has_country_flag = pru_wrangel_war_plan
+							}
+						}
+						PRU = {
+							country_event = ger_warplane.6
+						}
+						news_event = {
+							id = news.168
+							days = 2
+						}
+					}
+					if = {
+						limit = {
+							PRU = {
+								has_country_flag = pru_bismark_war_plan
+							}
+						}
+						PRU = {
+							country_event = ger_warplane.7
+						}
+						news_event = {
+							id = news.171
+							days = 3
+						}
+					}
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						BYZ = {
+							has_war_with = RUS
+						}
+					}
+				}
+				declare_war_on = {
+					target = RUS
+					type = annex_everything
+				}
+				if = {
+					limit = {
+						PRU = {
+							is_in_faction_with = BYZ
+						}
+						NOT = {
+							PRU = {
+								has_war_with = RUS
+							}
+						}
+					}
+					PRU = {
+						add_to_war = {
+							targeted_alliance = BYZ
+							enemy = RUS
+						}
+					}
+				}
+			}
+			BCH = {
+				add_state_core = 137
+				add_state_core = 196
+				add_state_core = 200
+				add_state_core = 218
+				add_state_core = 227
+				add_state_core = 234
+			}
+			137 = {
+				set_state_owner_to = BCH
+			}
+			hidden_effect = {
+				BYZ = {
+					set_autonomy = {
+						target = BCH
+						autonomy_state = autonomy_aotsm_province
+						end_wars = no
+						end_civil_wars = no
+					}
+				}
+				BCH = {
+					set_politics = { ruling_party = reactionist elections_allowed = no }
+					set_popularities = {
+						democratic = 3
+						socialism = 1
+						reactionist = 77
+						authoritarian = 19
+					}
+				}
+				BCH = {
+					add_to_war = {
+						targeted_alliance = BYZ
+						enemy = RUS
+					}
+				}
+				BCH = {
+					set_province_controller = 705
+					set_province_controller = 6704
+					set_province_controller = 9680
+				}
+				BCH = {
+					inherit_technology = BYZ
+				}
+				BCH = {
+					load_oob = BCH_attack_crimea
+				}
+				if = {
+					limit = {
+						BYZ = {
+							has_country_flag = Tyutchev_is_dead
+						}
+					}
+					BYZ = {
+						set_nationality = {
+							target_country = BCH
+							character = BYZ_Apollon_Paliadis
+						}
+					}
+					BCH = {
+						add_country_leader_role = {
+							character = BYZ_Apollon_Paliadis
+							promote_leader = yes
+							country_leader = {
+								ideology = paternalism
+								expire = "1880.1.1"
+								traits = { }
+							}
+						}
+					}
+				}
+				if = {
+					limit = {
+						NOT = {
+							BYZ = {
+								has_country_flag = Tyutchev_is_dead
+							}
+						}
+					}
+					BYZ = {
+						set_nationality = {
+							target_country = BCH
+							character = BYZ_Konstantin_Tyutchev
+						}
+					}
+					BCH = {
+						add_country_leader_role = {
+							character = BYZ_Konstantin_Tyutchev
+							promote_leader = yes
+							country_leader = {
+								ideology = paternalism
+								expire = "1880.1.1"
+								traits = { }
+							}
+						}
+					}
+				}
+			}
+			set_global_flag = start_of_crimea_operation
+			news_event = news.181
+			hidden_effect = {
+				BYZ = {
+					activate_mission = battle_for_crimea_decision
+				}
+				RUS = {
+					activate_mission = battle_for_crimea_decision_none
+				}
+				BCH = {
+					activate_mission = battle_for_crimea_decision_none
+				}
+			}
 		}
 		
 	}

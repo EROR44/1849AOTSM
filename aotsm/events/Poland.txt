@@ -540,118 +540,196 @@ country_event = {
 		ai_chance = {
 			factor = 100
 		}
-		PLH = {
-			declare_war_on = {
-				target = RUS
-				type = annex_everything
-			}
-		}
-		PRU = { add_to_faction = PLH }
-		PLH = { 
-			add_to_war = {
-				targeted_alliance = PRU
-				enemy = RUS
-			}
-		}
-		PRU = {
-			add_to_war = {
-				targeted_alliance = PLH
-				enemy = RUS
-			}
-		}
-		BYZ = {
-			add_to_war = {
-				targeted_alliance = PLH
-				enemy = RUS
-			}
-		}
-		news_event = news.69
-		hidden_effect = {
-			if = {
-				limit = {
-					BYZ = {
-						has_idea = russian_history_enemy_2
-					}
-				}
-				BYZ = {
-					swap_ideas = {
-						remove_idea = russian_history_enemy_2
-						add_idea = russian_history_enemy_3
-					}
+		if = {
+			limit = {
+				NOT = {
+					has_global_flag = firts_world_war
 				}
 			}
-			if = {
-				limit = {
-					BYZ = {
-						has_idea = russian_history_enemy_1
-					}
-				}
-				BYZ = {
-					swap_ideas = {
-						remove_idea = russian_history_enemy_1
-						add_idea = russian_history_enemy_2
-					}
+			set_global_flag = firts_world_war
+			PLH = {
+				declare_war_on = {
+					target = RUS
+					type = annex_everything
 				}
 			}
-			if = {
-				limit = {
-					country_exists = KRA
-				}
-				PLH = {
-					change_tag_from = KRA
-				}
-				KRA = {
-					transfer_units_fraction= {
-						target = PLH
-						size = 1.0
-						stockpile_ratio = 1.0
-						army_ratio = 1.0
-						navy_ratio = 1.0
-						air_ratio = 1.0
-					}
-				}
-				PLH = {
-					annex_country = {
-						target = KRA
-						transfer_troops = yes
-					}
-				}	
-				KRA = {
-					remove_state_core = 903
+			PRU = { add_to_faction = PLH }
+			PLH = { 
+				add_to_war = {
+					targeted_alliance = PRU
+					enemy = RUS
 				}
 			}
-		}
-		set_global_flag = firts_world_war
-		hidden_effect = {
 			PRU = {
-				complete_national_focus = PRU_first_world_war
+				add_to_war = {
+					targeted_alliance = PLH
+					enemy = RUS
+				}
 			}
-			if = {
-				limit = {
-					PRU = {
-						has_country_flag = pru_wrangel_war_plan
+			BYZ = {
+				add_to_war = {
+					targeted_alliance = PLH
+					enemy = RUS
+				}
+			}
+			news_event = news.69
+			hidden_effect = {
+				if = {
+					limit = {
+						BYZ = {
+							has_idea = russian_history_enemy_2
+						}
+					}
+					BYZ = {
+						swap_ideas = {
+							remove_idea = russian_history_enemy_2
+							add_idea = russian_history_enemy_3
+						}
+					}
+				}
+				if = {
+					limit = {
+						BYZ = {
+							has_idea = russian_history_enemy_1
+						}
+					}
+					BYZ = {
+						swap_ideas = {
+							remove_idea = russian_history_enemy_1
+							add_idea = russian_history_enemy_2
+						}
+					}
+				}
+				if = {
+					limit = {
+						country_exists = KRA
+					}
+					PLH = {
+						change_tag_from = KRA
+					}
+					KRA = {
+						transfer_units_fraction= {
+							target = PLH
+							size = 1.0
+							stockpile_ratio = 1.0
+							army_ratio = 1.0
+							navy_ratio = 1.0
+							air_ratio = 1.0
+						}
+					}
+					PLH = {
+						annex_country = {
+							target = KRA
+							transfer_troops = yes
+						}
+					}	
+					KRA = {
+						remove_state_core = 903
+					}
+					PLH = {
+						add_state_core = 903
 					}
 				}
 				PRU = {
-					country_event = ger_warplane.6
+					complete_national_focus = PRU_first_world_war
 				}
-				news_event = {
-					id = news.168
-					days = 2
-				}
-			}
-			if = {
-				limit = {
+				if = {
+					limit = {
+						PRU = {
+							has_country_flag = pru_wrangel_war_plan
+						}
+					}
 					PRU = {
-						has_country_flag = pru_bismark_war_plan
+						country_event = ger_warplane.6
+					}
+					news_event = {
+						id = news.168
+						days = 2
 					}
 				}
-				PRU = {
-					country_event = ger_warplane.7
+				if = {
+					limit = {
+						PRU = {
+							has_country_flag = pru_bismark_war_plan
+						}
+					}
+					PRU = {
+						country_event = ger_warplane.7
+					}
+					news_event = {
+						id = news.171
+						days = 3
+					}
 				}
-				news_event = {
-					id = news.171
-					days = 3
+			}
+		}
+		if = {
+			limit = {
+				has_global_flag = firts_world_war
+			}
+			PLH = {
+				declare_war_on = {
+					target = RUS
+					type = annex_everything
+				}
+			}
+			PRU = { add_to_faction = PLH }
+			hidden_effect = {
+				if = {
+					limit = {
+						BYZ = {
+							has_idea = russian_history_enemy_2
+						}
+					}
+					BYZ = {
+						swap_ideas = {
+							remove_idea = russian_history_enemy_2
+							add_idea = russian_history_enemy_3
+						}
+					}
+				}
+				if = {
+					limit = {
+						BYZ = {
+							has_idea = russian_history_enemy_1
+						}
+					}
+					BYZ = {
+						swap_ideas = {
+							remove_idea = russian_history_enemy_1
+							add_idea = russian_history_enemy_2
+						}
+					}
+				}
+				if = {
+					limit = {
+						country_exists = KRA
+					}
+					PLH = {
+						change_tag_from = KRA
+					}
+					KRA = {
+						transfer_units_fraction= {
+							target = PLH
+							size = 1.0
+							stockpile_ratio = 1.0
+							army_ratio = 1.0
+							navy_ratio = 1.0
+							air_ratio = 1.0
+						}
+					}
+					PLH = {
+						annex_country = {
+							target = KRA
+							transfer_troops = yes
+						}
+					}	
+					KRA = {
+						remove_state_core = 903
+					}
+					PLH = {
+						add_state_core = 903
+					}
 				}
 			}
 		}
