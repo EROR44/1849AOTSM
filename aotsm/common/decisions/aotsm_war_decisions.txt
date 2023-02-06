@@ -798,3 +798,158 @@ war_with_mladoturk_categories = {
 	}
 
 }
+
+battle_for_crimea_categories = {
+
+	battle_for_crimea_decision = {
+	
+		activation = {
+			has_global_flag = start_of_crimea_operation
+		}
+		
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = BYZ_what_to_do_for_win_crimea_tt	
+				always = no
+			}
+		}
+		
+		visible = {
+			tag = BYZ
+			BYZ = {
+				has_war_with = RUS
+			}
+			has_global_flag = start_of_crimea_operation
+		}
+		
+		icon = generic_ignite_civil_war
+		
+		ai_will_do = {
+			factor = 100
+		}
+		
+		days_mission_timeout = 45
+		
+		timeout_effect = {
+			custom_effect_tooltip = BYZ_what_to_do_for_lose_crimea_time_tt
+			hidden_effect = {
+				RUS = {
+					annex_country = {
+						target = BCH
+						transfer_troops = no
+					}
+				}
+				BYZ = {
+					remove_mission = battle_for_crimea_decision
+				}
+				RUS = {
+					remove_mission = battle_for_crimea_decision_none
+				}
+				BCH = {
+					remove_mission = battle_for_crimea_decision_none
+				}
+				clr_global_flag = start_of_crimea_operation
+				news_event = news.182
+			}
+		}
+		
+		cancel_trigger = {
+			custom_trigger_tooltip = {
+				tooltip = BYZ_trigger_what_to_do_for_win_crimea_tt
+				BCH = {
+					has_full_control_of_state = 137
+				}
+			}
+		}
+		
+		cancel_effect = {
+			custom_effect_tooltip = BYZ_what_to_do_for_win_crimea_effect_tt
+			hidden_effect = {
+				196 = {
+					set_state_owner_to = BCH
+				}
+				200 = {
+					set_state_owner_to = BCH
+				}
+				218 = {
+					set_state_owner_to = BCH
+				}
+				227 = {
+					set_state_owner_to = BCH
+				}
+				234 = {
+					set_state_owner_to = BCH
+				}
+				RUS = {
+					remove_state_core = 137
+					remove_state_core = 200
+					remove_state_core = 218
+					remove_state_core = 227
+					remove_state_core = 234
+				}
+				BYZ = {
+					remove_mission = battle_for_crimea_decision
+				}
+				RUS = {
+					remove_mission = battle_for_crimea_decision_none
+				}
+				BCH = {
+					remove_mission = battle_for_crimea_decision_none
+				}
+				clr_global_flag = start_of_crimea_operation
+				news_event = news.183
+			}
+		}
+	
+	}
+	
+	battle_for_crimea_decision_none = {
+	
+		activation = {
+			has_global_flag = start_of_crimea_operation
+		}
+		
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = BYZ_what_to_do_for_win_crimea_tt	
+				always = no
+			}
+		}
+		
+		visible = {
+			OR = {
+				tag = RUS
+				tag = BCH
+			}
+			BYZ = {
+				has_war_with = RUS
+			}
+			has_global_flag = start_of_crimea_operation
+		}
+		
+		icon = generic_ignite_civil_war
+		
+		ai_will_do = {
+			factor = 100
+		}
+		
+		days_mission_timeout = 45
+		
+		timeout_effect = {
+			custom_effect_tooltip = BYZ_what_to_do_for_lose_crimea_time_tt
+		}
+		
+		cancel_trigger = {
+			custom_trigger_tooltip = {
+				tooltip = BYZ_trigger_what_to_do_for_win_crimea_tt
+				always = no
+			}
+		}
+		
+		cancel_effect = {
+			custom_effect_tooltip = BYZ_what_to_do_for_win_crimea_effect_tt
+		}
+	
+	}
+
+}
