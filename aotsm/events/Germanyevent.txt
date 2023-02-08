@@ -672,10 +672,7 @@ country_event = {
 		promote_character = PRU_Otton_Bismark
 		set_politics = { ruling_party = authoritarian elections_allowed = no }
 		add_stability = -0.25
-		news_event = {
-			id = news.17
-			days = 1
-		}
+		news_event = news.17
 		RUS = { country_event = { id = ger.9 days = 2 } }
 	}
 }	
@@ -3230,7 +3227,7 @@ country_event = { #Black Order Hail Kaiser
 		name = ger_blackorder.1.a
 		custom_effect_tooltip = pru_blacksun_influince_rise
 		ai_chance = {
-			factor = 75
+			factor = 25
 		}
 		hidden_effect = {
 			add_to_variable = {
@@ -3243,7 +3240,7 @@ country_event = { #Black Order Hail Kaiser
 	option = {
 		name = ger_blackorder.1.b
 		ai_chance = {
-			factor = 25
+			factor = 75
 		}
 	}
 	
@@ -3279,7 +3276,32 @@ country_event = { #Black Sun helping Hand
 	option = {
 		name = ger_blackorder.2.a
 		ai_chance = {
-			factor = 33
+			factor = 20
+		}
+		add_equipment_to_stockpile = {
+			type = infantry_equipment
+			amount = 10000
+			producer = PRU
+		}
+		add_equipment_to_stockpile = {
+			type = support_equipment
+			amount = 7500
+			producer = ROOT
+		}
+		add_equipment_to_stockpile = {
+			type = artillery_equipment
+			amount = 5000
+			producer = ROOT
+		}
+		add_equipment_to_stockpile = {
+			type = motorized_equipment
+			amount = 2000
+			producer = ROOT
+		}
+		add_equipment_to_stockpile = {
+			type = medium_tank_chassis_3
+			amount = 1000
+			variant_name = "Kingkaizer"
 		}
 		custom_effect_tooltip = pru_blacksun_influince_rise_hight
 		hidden_effect = {
@@ -3293,7 +3315,27 @@ country_event = { #Black Sun helping Hand
 	option = {
 		name = ger_blackorder.2.b
 		ai_chance = {
-			factor = 33
+			factor = 30
+		}
+		add_equipment_to_stockpile = {
+			type = infantry_equipment
+			amount = 5000
+			producer = PRU
+		}
+		add_equipment_to_stockpile = {
+			type = support_equipment
+			amount = 3750
+			producer = ROOT
+		}
+		add_equipment_to_stockpile = {
+			type = artillery_equipment
+			amount = 2500
+			producer = ROOT
+		}
+		add_equipment_to_stockpile = {
+			type = motorized_equipment
+			amount = 1250
+			producer = ROOT
 		}
 		custom_effect_tooltip = pru_blacksun_influince_rise
 		hidden_effect = {
@@ -3307,7 +3349,7 @@ country_event = { #Black Sun helping Hand
 	option = {
 		name = ger_blackorder.2.c
 		ai_chance = {
-			factor = 34
+			factor = 50
 		}
 		custom_effect_tooltip = pru_blacksun_influince_fall
 		hidden_effect = {
@@ -3333,7 +3375,7 @@ country_event = { #Black Sun in goverment
 	option = {
 		name = ger_blackorder.3.a
 		ai_chance = {
-			factor = 45
+			factor = 30
 		}
 		custom_effect_tooltip = pru_blacksun_influince_rise
 		hidden_effect = {
@@ -3347,13 +3389,225 @@ country_event = { #Black Sun in goverment
 	option = {
 		name = ger_blackorder.3.b
 		ai_chance = {
-			factor = 55
+			factor = 70
 		}
 		custom_effect_tooltip = pru_blacksun_influince_fall
 		hidden_effect = {
 			add_to_variable = {
 				var = PRU.blacksun_influence
 				value = -1
+			}
+		}
+	}
+	
+}
+
+country_event = { #Black Sun try coup the goverment
+	id = ger_blackorder.4
+	title = ger_blackorder.4.t
+	desc = ger_blackorder.4.d
+	picture = GFX_report_event_ger_civil_war
+	
+	trigger = {
+		tag = PRU
+		check_variable = {
+			PRU.blacksun_influence > 5
+		}
+	}
+	
+	mean_time_to_happen = {
+		days = 180
+	}
+	
+	fire_only_once = yes
+	
+	option = {
+		name = ger_blackorder.4.a
+		ai_chance = {
+			factor = 100
+		}
+		if = {
+			limit = {
+				is_ai = yes
+			}
+			random_list = {
+				74 = {
+					PRU = {
+						country_event = {
+							id = ger_blackorder.5
+							days = 6
+						}
+					}
+				}
+				25 = {
+					PRU = {
+						country_event = {
+							id = ger_blackorder.6
+							days = 3
+						}
+					}
+				}
+			}
+		}
+		if = {
+			limit = {
+				is_ai = no
+			}
+			PRU = {
+				country_event = {
+					id = ger_blackorder.5
+					days = 6
+				}
+			}
+		}
+	}
+	
+	option = {
+		name = ger_blackorder.4.b
+		trigger = {
+			is_ai = no
+		}
+		ai_chance = {
+			factor = 0
+		}
+		PRU = {
+			country_event = {
+				id = ger_blackorder.6
+				days = 3
+			}
+		}
+	}
+	
+}
+
+country_event = { #Black Sun succesd coup
+	id = ger_blackorder.5
+	title = ger_blackorder.5.t
+	desc = ger_blackorder.5.d
+	picture = GFX_report_event_german_reichstag_bombed
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = {
+		name = ger_blackorder.5.a
+		custom_effect_tooltip = blackordersuccedcoup_tt
+		hidden_effect = {
+			PRU = {
+				set_country_flag = blacksun_end_germany
+			}
+			KOL = {
+				set_nationality = {
+					target_country = PRU
+					character = KOL_Wilgelm_Austrian
+				}
+			}
+			PRU = {
+				promote_character = {
+					character = KOL_Wilgelm_Austrian
+					ideology = national_populism
+				}
+			}
+			news_event = news.184
+		}
+	}
+	
+}
+
+country_event = { #Black Sun fail coup
+	id = ger_blackorder.6
+	title = ger_blackorder.6.t
+	desc = ger_blackorder.6.d
+	picture = GFX_report_event_german_reichstag_gathering
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = {
+		name = ger_blackorder.6.a
+		custom_effect_tooltip = blackorderfailcoup_tt
+		hidden_effect = {
+			if = {
+				limit = {
+					NOT = {
+						PRU = {
+							has_completed_focus = PRU_ask_black_sun_help
+						}
+					}
+				}
+				PRU = {
+					unlock_national_focus = PRU_ask_black_sun_help
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						PRU = {
+							has_completed_focus = PRU_hunt_partisan
+						}
+					}
+				}
+				PRU = {
+					unlock_national_focus = PRU_hunt_partisan
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						PRU = {
+							has_completed_focus = PRU_all_partisan_must_die
+						}
+					}
+				}
+				PRU = {
+					unlock_national_focus = PRU_all_partisan_must_die
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						PRU = {
+							has_completed_focus = PRU_influence_on_govermant
+						}
+					}
+				}
+				PRU = {
+					unlock_national_focus = PRU_influence_on_govermant
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						PRU = {
+							has_completed_focus = PRU_new_present_by_blacksun
+						}
+					}
+				}
+				PRU = {
+					unlock_national_focus = PRU_new_present_by_blacksun
+				}
+			}
+			if = {
+				limit = {
+					PRU = {
+						has_idea = pru_blacksun_hunt_partisan_1
+					}
+				}
+				remove_ideas = pru_blacksun_hunt_partisan_1
+			}
+			if = {
+				limit = {
+					PRU = {
+						has_idea = pru_blacksun_hunt_partisan_2
+					}
+				}
+				remove_ideas = pru_blacksun_hunt_partisan_2
+			}
+			set_variable = {
+				var = PRU.blacksun_influence
+				value = 0
 			}
 		}
 	}
