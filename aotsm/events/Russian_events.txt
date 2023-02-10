@@ -2000,7 +2000,11 @@ country_event = {
 	option = { 
 		name = russian_european_politic.1.a	# Граница по Амуру - минимальный вариант - покупка земель - вероятнее всего дружба
 		ai_chance = {
-			factor = 20
+			factor = 5
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+			}
 		}
 		
 		hidden_effect = {
@@ -2012,6 +2016,10 @@ country_event = {
 		name = russian_european_politic.1.b	# Ханьшенвей наш - приморский край + Ханьшеньвей - дружеские отношения 50x50
 		ai_chance = {
 			factor = 20
+			modifier = {
+				factor = 100
+				is_historical_focus_on = yes
+			}
 		}
 		
 		hidden_effect = {
@@ -2022,7 +2030,11 @@ country_event = {
 	option = {
 		name = russian_european_politic.1.c	# Интервенция в маньчжурию - максимальный вариант  - контроль над Ханьшеньвенем и северной маньчжурией - дружба с Китаем невозможна
 		ai_chance = {
-			factor = 20
+			factor = 0
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+			}
 		}
 		
 		hidden_effect = {
@@ -2043,10 +2055,31 @@ country_event = {
 	fire_only_once = yes
 	
 	option = {
-		name = russian_european_politic.2.a	
-
+		name = russian_european_politic.2.a	#Согласие
+		ai_chance = {
+			factor = 15
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+			}
+		}
 		hidden_effect = {
+			RUS = { country_event = { id = russian_far_east_politic.12 days = 2 } }
+		}
+	}
 	
+	option = {
+		name = russian_european_politic.2.b	#Отказ
+		ai_chance = {
+			factor = 12
+			modifier = {
+				factor = 100
+				is_historical_focus_on = yes
+			}
+		}
+		
+		hidden_effect = {
+			RUS = { country_event = { id = russian_far_east_politic.13 days = 2 } }
 		}
 	}
 }
@@ -2077,7 +2110,7 @@ country_event = {
 			factor = 20
 		}
 		hidden_effect = {
-			QIN = { country_event = { id = russian_far_east_politic.7 days = 2} }
+			QIN = { country_event = { id = russian_far_east_politic.9 days = 2} }
 		}
 	}
 }
@@ -2093,24 +2126,28 @@ country_event = {
 	fire_only_once = yes
 	
 	option = {
-		name = russian_european_politic.4.a	
+		name = russian_european_politic.4.a	#согласие
 		ai_chance = {
 			factor = 20
+			modifier = {
+				factor = 50
+				is_historical_focus_on = yes
+			}
 		}
 		
 		hidden_effect = {
-			QIN = { country_event = { id = russian_far_east_politic.5 days = 2} }
+			RUS = { country_event = { id = russian_far_east_politic.5 days = 2} }
 		}
 	}
 	
 	option = {
-		name = russian_european_politic.4.b
+		name = russian_european_politic.4.b #отказ
 		ai_chance = {
 			factor = 20
 		}
 		
 		hidden_effect = {
-			#QIN = { country_event = { id = russian_far_east_politic.6 days = 2} } #поменять id ивента
+			RUS = { country_event = { id = russian_far_east_politic.6 days = 2} } 
 		}
 	}
 }
@@ -2146,7 +2183,10 @@ country_event = {
 	
 	option = {
 		name = russian_european_politic.6.a	#Что поделать
-
+		ai_chance = {
+			factor = 20
+		}
+		add_war_support = -0.05
 		hidden_effect = {
 	
 		}
@@ -2154,9 +2194,15 @@ country_event = {
 	
 	option = {
 		name = russian_european_politic.6.b #Взять силой
-
+		ai_chance = {
+			factor = 20
+		}
+		declare_war_on = {
+			target = QIN
+			type = annex_everything
+		}
 		hidden_effect = {
-	
+			
 		}
 	}
 }
@@ -2173,6 +2219,9 @@ country_event = {
 	
 	option = {
 		name = russian_european_politic.7.a	
+		ai_chance = {
+			factor = 20
+		}
 
 		hidden_effect = {
 	
@@ -2181,6 +2230,9 @@ country_event = {
 	
 	option = {
 		name = russian_european_politic.7.a	
+		ai_chance = {
+			factor = 20
+		}
 
 		hidden_effect = {
 	
@@ -2200,15 +2252,24 @@ country_event = {
 	
 	option = {
 		name = russian_european_politic.8.a	#Ультиматум
-
+		ai_chance = {
+			factor = 20
+		}
 		hidden_effect = {
-			QIN = { country_event = { id = russian_far_east_politic.8 days = 2 } }
+			QIN = { country_event = { id = russian_far_east_politic.9 days = 2 } }
 		}
 	}
 	
 	option = {
 		name = russian_european_politic.8.a	#Вторжение в Китай
-
+		ai_chance = {
+			factor = 20
+		}
+		
+		declare_war_on = {
+			target = QIN
+			type = annex_everything
+		}
 		hidden_effect = {
 	
 		}
@@ -2273,7 +2334,10 @@ country_event = {
 	
 	option = {
 		name = russian_european_politic.11.a	
-
+		ai_chance = {
+			factor = 20
+		}
+		add_war_support = -0.1
 		hidden_effect = {
 	
 		}
@@ -2281,11 +2345,342 @@ country_event = {
 	
 	option = {
 		name = russian_european_politic.11.b	
-
+		ai_chance = {
+			factor = 20
+		}
+		declare_war_on = {
+			target = QIN
+			type = annex_everything
+		}
 		hidden_effect = {
 	
 		}
 	}
+}
+
+country_event = {
+	id = russian_far_east_politic.12 #Поккупка состоялась - ответ для россии - ивент 2 в цепочке 
+	title = russian_european_politic.12.t
+	desc = russian_european_politic.12.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = {
+		name = russian_european_politic.12.a	
+		ai_chance = {
+			factor = 20
+		}
+		
+		hidden_effect = {
+	
+		}
+	}
+
+}
+
+country_event = {
+	id = russian_far_east_politic.13 #Китай отказал - ответ для россии - ивент 2 в цепочке 
+	title = russian_european_politic.13.t
+	desc = russian_european_politic.13.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = {
+		name = russian_european_politic.13.a	
+		ai_chance = {
+			factor = 20
+		}
+		add_stability = -0.5
+		hidden_effect = {
+	
+		}
+	}
+	
+	option = {
+		name = russian_european_politic.13.b #Мы возьмем их силой
+		ai_chance = {
+			factor = 20
+		}
+		declare_war_on = {
+			target = QIN
+			type = annex_everything
+		}
+		hidden_effect = {
+	
+		}
+	}
+
+}
+
+country_event = {
+	id = russian_far_east_politic.14 #Интеграция новых земель на дальнем востоке
+	title = russian_european_politic.14.t
+	desc = russian_european_politic.14.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = {
+		name = russian_european_politic.14.a #Постепенная интеграция
+		ai_chance = {
+			factor = 20
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+			}
+		}
+		hidden_effect = {
+			#сделать блок решений на интеграцию
+		}
+	}
+	
+	option = {
+		name = russian_european_politic.14.b#Принудительная интеграция
+		ai_chance = {
+			factor = 20
+			modifier = {
+				factor = 100
+				is_historical_focus_on = yes
+			}
+		}
+		add_political_power = -50
+		hidden_effect = {
+			country_event = { id = russian_far_east_politic.15 days = 2 }
+		}
+	}
+
+}
+
+country_event = {
+	id = russian_far_east_politic.15 #Интеграция новых земель на дальнем востоке - принудительная - 1 этап
+	title = russian_european_politic.15.t
+	desc = russian_european_politic.15.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = {
+		name = russian_european_politic.15.a #
+		add_political_power = -50
+		560 = {
+			add_manpower = -936
+		}
+		328 = {
+			add_manpower = 936
+		}
+		657 = {
+			add_manpower = -1031
+		}
+		328 = {
+			add_manpower = 1031
+		}
+		408 = {
+			add_manpower = -712
+		}
+		328 = {
+			add_manpower = 712
+		}
+		409 = {
+			add_manpower = -1511
+		}
+		328 = {
+			add_manpower = 1511
+		}
+		hidden_effect = {
+			country_event = { id = russian_far_east_politic.16 days = 25 }
+			
+		}
+	}
+
+}
+
+country_event = {
+	id = russian_far_east_politic.16 #Интеграция новых земель на дальнем востоке - принудительная - 2 этап
+	title = russian_european_politic.16.t
+	desc = russian_european_politic.16.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = {
+		name = russian_european_politic.16.a #
+		add_political_power = -50
+		560 = {
+			add_manpower = -2196
+		}
+		657 = {
+			add_manpower = -1997
+		}
+		hidden_effect = {
+			country_event = { id = russian_far_east_politic.17 days = 25 }
+			RUS = {
+				add_state_core = 560
+				add_state_core = 657
+			}
+			QIN = {
+				remove_state_core = 560
+				remove_state_core = 657
+			}
+			MAN = {
+				remove_state_core = 560
+				remove_state_core = 657
+			}
+			
+		}
+	}
+
+}
+
+country_event = {
+	id = russian_far_east_politic.17 #Интеграция новых земель на дальнем востоке - принудительная - 3 этап
+	title = russian_european_politic.17.t
+	desc = russian_european_politic.17.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = {
+		name = russian_european_politic.17.a #
+		add_political_power = -50
+		408 = {
+			add_manpower = -1109
+		}
+		409 = {
+			add_manpower = -2011
+		}
+		hidden_effect = {
+			RUS = {
+				add_state_core = 408
+				add_state_core = 409
+			}
+			QIN = {
+				remove_state_core = 408
+				remove_state_core = 409
+			}
+			MAN = {
+				remove_state_core = 408
+				remove_state_core = 409
+			}
+		}
+	}
+
+}
+
+country_event = {
+	id = russian_far_east_politic.18 #Претензии на туву
+	title = russian_european_politic.18.t
+	desc = russian_european_politic.18.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = {
+		name = russian_european_politic.18.a #Потребовать
+
+		hidden_effect = {
+			QIN = { country_event = { id = russian_far_east_politic.19  days = 2} }
+		}
+	}
+	
+	option = {
+		name = russian_european_politic.18.a #Интервенция
+		declare_war_on = {
+			target = QIN
+			type = annex_everything
+		}
+		hidden_effect = {
+			
+		}
+	}
+
+}
+
+country_event = {
+	id = russian_far_east_politic.19 #Претензии на туву - ивент для Китая
+	title = russian_european_politic.19.t
+	desc = russian_european_politic.19.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = {
+		name = russian_european_politic.19.a #Согласиться
+
+		hidden_effect = {
+			RUS = { country_event = { id = russian_far_east_politic.20 days = 2 } }
+		}
+	}
+	option = {
+		name = russian_european_politic.19.b #Отказать
+
+		hidden_effect = {
+			RUS = { country_event = { id = russian_far_east_politic.21 days = 2 } }
+		}
+	}
+
+}
+
+country_event = {
+	id = russian_far_east_politic.20 #Претензии на туву - согласие - ответ для России
+	title = russian_european_politic.20.t
+	desc = russian_european_politic.20.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = {
+		name = russian_european_politic.20.a #
+
+		hidden_effect = {
+			RUS = {
+				transfer_state = 329
+			}
+		}
+	}
+
+}
+
+country_event = {
+	id = russian_far_east_politic.21 #Претензии на туву - отказ - ответ для России
+	title = russian_european_politic.21.t
+	desc = russian_european_politic.21.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = {
+		name = russian_european_politic.21.a #
+		declare_war_on = {
+			target = QIN
+			type = annex_everything
+		}
+		hidden_effect = {
+			
+		}
+	}
+
 }
 
 #############################POLITICAL_CONFRONTATION_EVENTS#################################
