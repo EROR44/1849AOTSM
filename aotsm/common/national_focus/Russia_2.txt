@@ -18,7 +18,7 @@ focus_tree = {
 		}
 	}
 	
-	continuous_focus_position = { x = 100 y = 1600 }
+	continuous_focus_position = { x = 50 y = 1600 }
 	
 	default = no
 	reset_on_civilwar = no
@@ -3333,6 +3333,7 @@ focus_tree = {
 					has_country_flag = victory_R_V_A_3
 				}
 			}
+			NOT = { has_completed_focus = RUS_antiaustrian_politick }
 		}
 		
 		mutually_exclusive = { focus = RUS_russo_british_relations }
@@ -3425,16 +3426,17 @@ focus_tree = {
 		id = RUS_antigerman_politick
 		icon = GFX_goal_generic_forceful_treaty
 		
-		x = -3
+		x = -5
 		y = 1
 		cost = 5 
 		
 		available = {
-			NOT = { has_war = yes }
+			has_war = no 
 			aotsm_performed_by_event_or_solution = yes
 		}
 		
 		mutually_exclusive = { focus = RUS_antibuzantium_politick } 
+		mutually_exclusive = { focus = RUS_antiaustrian_politick } 
 
 		relative_position_id = RUS_european_politick
 		prerequisite = { focus = RUS_european_politick }
@@ -3457,7 +3459,7 @@ focus_tree = {
 		cost = 5 
 		
 		available = {
-			NOT = { has_war = yes }
+			has_war = no 
 		}
 
 		relative_position_id = RUS_antigerman_politick
@@ -3481,7 +3483,7 @@ focus_tree = {
 		cost = 5 
 		
 		available = {
-			NOT = { has_war = yes }
+			has_war = no 
 		}
 
 		relative_position_id = RUS_fight_witch_german_influence
@@ -3500,16 +3502,17 @@ focus_tree = {
 		id = RUS_antibuzantium_politick
 		icon = GFX_focus_rus_strike_the_first
 		
-		x = -1
+		x = -3
 		y = 1
 		cost = 5 
 		
 		available = {
-			NOT = { has_war = yes }
+			has_war = no 
 			aotsm_performed_by_event_or_solution = yes
 		}
 
 		mutually_exclusive = { focus = RUS_antigerman_politick } 
+		mutually_exclusive = { focus = RUS_antiaustrian_politick } 
 
 		relative_position_id = RUS_european_politick
 		prerequisite = { focus = RUS_european_politick }
@@ -3525,14 +3528,14 @@ focus_tree = {
 	
 	focus = {
 		id = RUS_fight_witch_trade_gegemony
-		icon = GFX_goal_generic_improve_relations
+		icon = GFX_goal_generic_consumer_goods
 		
 		x = 0
 		y = 1
 		cost = 5 
 		
 		available = {
-			NOT = { has_war = yes }
+			has_war = no 
 		}
 
 		relative_position_id = RUS_antibuzantium_politick
@@ -3556,7 +3559,7 @@ focus_tree = {
 		cost = 5 
 		
 		available = {
-			NOT = { has_war = yes }
+			has_war = no 
 		}
 
 		relative_position_id = RUS_fight_witch_trade_gegemony
@@ -3574,6 +3577,97 @@ focus_tree = {
 		}
 	}
 	
+	focus = {
+		id = RUS_antiaustrian_politick
+		icon = GFX_goal_generic_political_pressure
+		
+		x = -1
+		y = 1
+		cost = 5 
+		
+		available = {
+			has_war = no 
+			AUS = { 
+				exists = yes
+				NOT = { 
+					is_puppet = yes
+				}
+				OR = {
+					has_country_flag = victory_R_V_A_1
+					has_country_flag = victory_R_V_A_2
+					has_country_flag = victory_R_V_A_3
+				}
+			}
+			NOT = { has_completed_focus = RUS_russo_austrian_relations }
+			aotsm_performed_by_event_or_solution = yes
+		}
+
+		mutually_exclusive = { focus = RUS_antigerman_politick } 
+		mutually_exclusive = { focus = RUS_antibuzantium_politick } 
+
+		relative_position_id = RUS_european_politick
+		prerequisite = { focus = RUS_european_politick }
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+		
+		}
+	}
+	
+	focus = {
+		id = RUS_anti_austrian_propaganda
+		icon = GFX_goal_generic_dangerous_deal
+		
+		x = 0
+		y = 1
+		cost = 5 
+		
+		available = {
+			has_war = no 
+		}
+
+		relative_position_id = RUS_antiaustrian_politick
+		prerequisite = { focus = RUS_antiaustrian_politick }
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+		
+		}
+	}
+	
+	focus = {
+		id = RUS_marsh_on_vienna
+		icon = GFX_goal_generic_major_war
+		
+		x = 0
+		y = 1
+		cost = 5 
+		
+		available = {
+			has_war = no 
+		}
+
+		relative_position_id = RUS_anti_austrian_propaganda
+		prerequisite = { focus = RUS_anti_austrian_propaganda }
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			declare_war_on = {
+				target = AUS
+				type = annex_everything
+			}
+		}
+	}
+	
 	
 ################FINLAND_QIUESTION_SECTION################
 	
@@ -3581,7 +3675,7 @@ focus_tree = {
 		id = RUS_finalnd_quiestion
 		icon = GFX_goal_generic_improve_relations
 		
-		x = -6
+		x = -8
 		y = 1
 		cost = 5 
 		
@@ -4188,6 +4282,160 @@ focus_tree = {
 
 		relative_position_id = RUS_department_of_armed_forces
 		prerequisite = { focus = RUS_department_of_armed_forces }
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			
+		}
+	}
+	
+	focus = {
+		id = RUS_andrey_murom_developments #Разработки Андрея Мурома
+		icon = GFX_goal_generic_improve_relations
+		
+		x = -2
+		y = 1
+		cost = 5 
+		
+		available = {
+			has_completed_focus = RUS_use_own_specialists
+		}
+	
+
+		relative_position_id = RUS_air_section
+		prerequisite = { focus = RUS_air_section }
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			
+		}
+	}
+	
+	focus = {
+		id = RUS_develop_heavy_aviation
+		icon = GFX_goal_generic_improve_relations
+		
+		x = 0
+		y = 2
+		cost = 5 
+		
+		available = {
+
+		}
+	
+
+		relative_position_id = RUS_andrey_murom_developments
+		prerequisite = { focus = RUS_andrey_murom_developments }
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			
+		}
+	}
+	
+	focus = {
+		id = RUS_how_use_aviation
+		icon = GFX_goal_generic_improve_relations
+		
+		x = 1
+		y = 1
+		cost = 5 
+		
+		available = {
+			has_completed_focus = RUS_use_own_specialists
+		}
+	
+
+		relative_position_id = RUS_air_section
+		prerequisite = { focus = RUS_air_section }
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			
+		}
+	}
+	
+	focus = {
+		id = RUS_bet_on_front_aviation
+		icon = GFX_goal_generic_improve_relations
+		
+		x = -1
+		y = 1
+		cost = 5 
+		
+		available = {
+
+		}
+	
+		mutually_exclusive = { focus = RUS_bet_on_distant_attacks }
+
+		relative_position_id = RUS_how_use_aviation
+		prerequisite = { focus = RUS_how_use_aviation }
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			
+		}
+	}
+	
+	focus = {
+		id = RUS_bet_on_distant_attacks
+		icon = GFX_goal_generic_improve_relations
+		
+		x = 1
+		y = 1
+		cost = 5 
+		
+		available = {
+
+		}
+	
+		mutually_exclusive = { focus = RUS_bet_on_front_aviation }
+		
+		relative_position_id = RUS_how_use_aviation
+		prerequisite = { focus = RUS_how_use_aviation }
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			
+		}
+	}
+	
+	focus = {
+		id = RUS_create_russian_aviation
+		icon = GFX_goal_generic_improve_relations
+		
+		x = -1
+		y = 1
+		cost = 5 
+		
+		available = {
+
+		}
+		
+		relative_position_id = RUS_bet_on_distant_attacks
+		prerequisite = { 
+			focus = RUS_bet_on_front_aviation 
+			focus = RUS_bet_on_distant_attacks 
+		}
 		
 		available_if_capitulated = yes
 		
