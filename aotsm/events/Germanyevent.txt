@@ -11,6 +11,7 @@ add_namespace = ger_answer
 add_namespace = ger_warplane
 add_namespace = ger_blackorder
 add_namespace = ger_warpolitic
+add_namespace = ger_bismark
 
 country_event = {
 	id = gerultimate.1
@@ -674,6 +675,13 @@ country_event = {
 		add_stability = -0.25
 		news_event = news.17
 		RUS = { country_event = { id = ger.9 days = 2 } }
+		hidden_effect = {
+			set_party_name = {
+				ideology = democratic
+				long_name = pru_bismark_party_long
+				name = pru_bismark_party
+			}
+		}
 	}
 }	
 
@@ -3509,6 +3517,17 @@ country_event = { #Black Sun succesd coup
 					ideology = national_populism
 				}
 			}
+			PRU = {
+				set_politics = {
+					ruling_party = reactionist
+					elections_allowed = no
+				}
+				set_party_name = {
+					ideology = reactionist
+					long_name = pru_darksun_party_long
+					name = pru_darksun_party
+				}
+			}
 			news_event = news.184
 		}
 	}
@@ -4247,4 +4266,585 @@ country_event = { #Christmas Thruce?
 		}
 	}
 	
+}
+
+#################
+# Bismark Event #
+#################
+# 1 - 99 PRU    #
+# 100 - 199 FRR #
+# 200 - 299 RUS #
+#################
+
+country_event = { #Bismark missian in Russian
+	id = ger_bismark.1
+	title = ger_bismark.1.t
+	desc = ger_bismark.1.d
+	picture = GFX_report_event_generic_read_write
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = { #good news
+		name = ger_bismark.1.a
+		ai_chance = {
+			factor = 50
+		}
+		RUS = {
+			country_event = {
+				id = ger_bismark.200
+				days = 7
+			}
+		}
+	}
+
+}
+
+country_event = { #Bismark complete his work in Russian
+	id = ger_bismark.2
+	title = ger_bismark.2.t
+	desc = ger_bismark.2.d
+	picture = GFX_report_event_generic_read_write
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = { #good news
+		name = ger_bismark.2.a
+		ai_chance = {
+			factor = 50
+		}
+		PRU = {
+			country_event = {
+				id = ger_bismark.4
+				days = 8
+			}
+		}
+	}
+
+}
+
+country_event = { #Russian say no
+	id = ger_bismark.3
+	title = ger_bismark.3.t
+	desc = ger_bismark.3.d
+	picture = GFX_report_event_generic_read_write
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = { #end diplomacy with barbarian
+		name = ger_bismark.3.a
+		ai_chance = {
+			factor = 50
+		}
+		PRU = {
+			country_event = {
+				id = ger_bismark.4
+				days = 8
+			}
+		}
+		hidden_effect = {
+			RUS = {
+				country_event = {
+					id = ger_bismark.204
+					days = 14
+				}
+			}
+		}
+	}
+
+}
+
+country_event = { #missia in paris
+	id = ger_bismark.4
+	title = ger_bismark.4.t
+	desc = ger_bismark.4.d
+	picture = GFX_report_event_generic_read_write
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = { #say the French we don't want war
+		name = ger_bismark.4.a
+		ai_chance = {
+			factor = 50
+		}
+		FRR = {
+			country_event = {
+				id = ger_bismark.100
+				days = 9
+			}
+		}
+	}
+
+}
+
+country_event = { #Bismark return with good news
+	id = ger_bismark.5
+	title = ger_bismark.5.t
+	desc = ger_bismark.5.d
+	picture = GFX_report_event_generic_read_write
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		hidden_effect = {
+			PRU = {
+				diplomatic_relation = {
+					country = FRR
+					relation = non_aggression_pact
+					active = yes
+				}
+			}
+			FRR = {
+				diplomatic_relation = {
+					country = PRU
+					relation = non_aggression_pact
+					active = yes
+				}
+			}
+		}
+	}
+	
+	option = { #Very good news
+		name = ger_bismark.5.a
+		ai_chance = {
+			factor = 50
+		}
+	}
+
+}
+
+country_event = { #Bismark say no for nonagresive pact, but yes to war plan
+	id = ger_bismark.6
+	title = ger_bismark.6.t
+	desc = ger_bismark.6.d
+	picture = GFX_report_event_generic_read_write
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = { #Very good news
+		name = ger_bismark.6.a
+		ai_chance = {
+			factor = 50
+		}
+		custom_effect_tooltip = if_war_with_france_opendecison_to_destrod_they_tt
+	}
+
+}
+
+country_event = { #France say no
+	id = ger_bismark.7
+	title = ger_bismark.7.t
+	desc = ger_bismark.7.d
+	picture = GFX_report_event_generic_read_write
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = { #Okey, end diplomacy
+		name = ger_bismark.7.a
+		ai_chance = {
+			factor = 50
+		}
+		hidden_effect = {
+			FRR = {
+				country_event = {
+					id = ger_bismark.103
+					days = 19
+				}
+			}
+		}
+	}
+
+}
+
+country_event = { #French answer
+	id = ger_bismark.100
+	title = ger_bismark.100.t
+	desc = ger_bismark.100.d
+	picture = GFX_report_event_generic_read_write
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = { #He is Diplomat. He only do his work
+		name = ger_bismark.100.a
+		ai_chance = {
+			factor = 60
+		}
+		FRR = {
+			country_event = {
+				id = ger_bismark.101
+				days = 5
+			}
+		}
+	}
+	
+	option = { #If he want to speak with leader we need inspect him
+		name = ger_bismark.100.b
+		ai_chance = {
+			factor = 35
+		}
+		FRR = {
+			country_event = {
+				id = ger_bismark.102
+				hours = 3
+			}
+		}
+	}
+	
+	option = { #Say no
+		name = ger_bismark.100.c
+		ai_chance = {
+			factor = 5
+		}
+		hidden_effect = {
+			PRU = {
+				country_event = {
+					id = ger_bismark.7
+					days = 8
+				}
+			}
+		}
+	}
+	
+}
+
+country_event = { #What Bismark ask
+	id = ger_bismark.101
+	title = ger_bismark.101.t
+	desc = ger_bismark.101.d
+	picture = GFX_report_event_generic_read_write
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = { #Nonaggresive pact is good decision
+		name = ger_bismark.101.a
+		ai_chance = {
+			factor = 10
+		}
+		FRR = {
+			set_country_flag = fra_say_bismark_yes
+		}
+		hidden_effect = {
+			PRU = {
+				country_event = {
+					id = ger_bismark.5
+					days = 14
+				}
+			}
+		}
+	}
+	
+	option = { #If they don't give elsas back, we can't speak about peace
+		name = ger_bismark.101.b
+		ai_chance = {
+			factor = 90
+		}
+		hidden_effect = {
+			PRU = {
+				country_event = {
+					id = ger_bismark.6
+					days = 14
+				}
+			}
+		}
+	}
+	
+}
+
+country_event = { #Bismark has weapon with him
+	id = ger_bismark.102
+	title = ger_bismark.102.t
+	desc = ger_bismark.102.d
+	picture = GFX_report_event_generic_read_write
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = { #He travel in other country logic he need weapon
+		name = ger_bismark.102.a
+		ai_chance = {
+			factor = 30
+		}
+		FRR = {
+			country_event = {
+				id = ger_bismark.101
+				days = 5
+			}
+		}
+	}
+	
+	option = { #Send him back
+		name = ger_bismark.102.b
+		ai_chance = {
+			factor = 70
+		}
+		hidden_effect = {
+			PRU = {
+				country_event = {
+					id = ger_bismark.7
+					days = 14
+				}
+			}
+		}
+	}
+	
+}
+
+country_event = { #Kontinental Europa end dimplomacy with France
+	id = ger_bismark.103
+	title = ger_bismark.103.t
+	desc = ger_bismark.103.d
+	picture = GFX_report_event_generic_read_write
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		hidden_effect = {
+			every_country = {
+				limit = {
+					is_in_faction_with = PRU
+				}
+				add_opinion_modifier = {
+					target = FRR
+					modifier = end_dimpomacy
+				}
+				add_opinion_modifier = {
+					target = FRR
+					modifier = end_trade
+				}
+				FRR = {
+					add_opinion_modifier = {
+						target = PREV
+						modifier = end_dimpomacy
+					}
+					add_opinion_modifier = {
+						target = PREV
+						modifier = end_trade
+					}
+				}
+			}
+		}
+	}
+	
+	option = { #Not what we expect
+		name = ger_bismark.103.a
+		ai_chance = {
+			factor = 70
+		}
+		news_event = news.186
+	}
+	
+}
+
+country_event = { #Russian answer
+	id = ger_bismark.200
+	title = ger_bismark.200.t
+	desc = ger_bismark.200.d
+	picture = GFX_report_event_generic_read_write
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = { #He is Diplomat. He only do his work
+		name = ger_bismark.200.a
+		ai_chance = {
+			factor = 70
+		}
+		hidden_effect = {		
+			PRU = {
+				country_event = {
+					id = ger_bismark.2
+					days = 21
+				}
+			}
+			RUS = {
+				country_event = {
+					id = ger_bismark.201
+					days = 30
+				}
+			}
+		}
+	}
+	
+	option = { ##It's suspisance we need know what he do
+		name = ger_bismark.200.b
+		ai_chance = {
+			factor = 20
+		}
+		hidden_effect = {
+			PRU = {
+				country_event = {
+					id = ger_bismark.2
+					days = 21
+				}
+			}
+			RUS = {
+				country_event = {
+					id = ger_bismark.203
+					days = 13
+				}
+			}
+		}
+	}
+	
+	option = { #It is't time to dimplomacy
+		name = ger_bismark.200.c
+		ai_chance = {
+			factor = 10
+		}
+		hidden_effect = {
+			PRU = {
+				country_event = {
+					id = ger_bismark.3
+					days = 8
+				}
+			}
+		}
+	}
+
+}
+
+country_event = { #Wolgadeutsche discontent
+	id = ger_bismark.201
+	title = ger_bismark.201.t
+	desc = ger_bismark.201.d
+	picture = GFX_report_event_generic_read_write
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = { #Very bad news
+		name = ger_bismark.201.a
+		ai_chance = {
+			factor = 70
+		}
+		RUS = {
+			remove_state_core = 401
+		}
+	}
+
+}
+
+country_event = { #Wolgadeutsche discontent fail
+	id = ger_bismark.202
+	title = ger_bismark.202.t
+	desc = ger_bismark.202.d
+	picture = GFX_report_event_generic_read_write
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = { #All german are bad
+		name = ger_bismark.202.a
+		ai_chance = {
+			factor = 70
+		}
+	}
+
+}
+
+country_event = { #Bismar dialog with Wolgadeutsche
+	id = ger_bismark.203
+	title = ger_bismark.203.t
+	desc = ger_bismark.203.d
+	picture = GFX_report_event_generic_read_write
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = { #Army must know what is happend here
+		name = ger_bismark.203.a
+		ai_chance = {
+			factor = 70
+		}
+		custom_effect_tooltip = wolgadeutschediscontdecision_tt
+		set_global_flag = wolgadeutsche_discont_begin
+	}
+	
+	option = { #We not intresting
+		name = ger_bismark.203.b
+		ai_chance = {
+			factor = 30
+		}
+		hidden_effect = {
+			RUS = {
+				country_event = {
+					id = ger_bismark.201
+					days = 11
+				}
+			}
+		}
+	}
+
+}
+
+country_event = { #Kontinental Europa end diplomacy with us
+	id = ger_bismark.204
+	title = ger_bismark.204.t
+	desc = ger_bismark.204.d
+	picture = GFX_report_event_generic_read_write
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		hidden_effect = {
+			every_country = {
+				limit = {
+					is_in_faction_with = PRU
+				}
+				add_opinion_modifier = {
+					target = RUS
+					modifier = end_dimpomacy
+				}
+				add_opinion_modifier = {
+					target = RUS
+					modifier = end_trade
+				}
+				RUS = {
+					add_opinion_modifier = {
+						target = PREV
+						modifier = end_dimpomacy
+					}
+					add_opinion_modifier = {
+						target = PREV
+						modifier = end_trade
+					}
+				}
+			}
+		}
+	}
+	
+	option = { #Not what we expect
+		name = ger_bismark.204.a
+		ai_chance = {
+			factor = 70
+		}
+		news_event = news.185
+	}
+
 }
