@@ -74,6 +74,7 @@ country_event = {
 		name = script_event.3.a
 		news_event = { id = news.108 days = 83 }
 		news_event = { id = news.104 days = 128 }
+		news_event = { id = news.187 days = 153 hours = 5 } 
 		KOL = { country_event = { id = blacksun.1 days = 176 } }
 		news_event = { id = news.37 days = 417 } 
 		news_event = { id = news.163 days = 926 }
@@ -2360,6 +2361,21 @@ country_event = {
 				clr_country_flag = german_union_for_prussian
 			}
 		}
+		if = {
+			limit = {
+				NOT = {
+					country_exists = FRN
+				}
+				is_in_array = {
+					array = global.german_union_for_pru
+					value = FRN
+				}
+			}
+			FRN = {
+				remove_from_array = { global.german_union_for_pru = FRN }
+				clr_country_flag = german_union_for_prussian
+			}
+		}
 	}
 }
 
@@ -3463,6 +3479,50 @@ country_event = {
 			}
 			RTU = {
 				add_offsite_building = { type = arms_factory level = 15 }
+			}
+		}
+	}
+	
+}
+
+country_event = {
+	id = script_event.19
+	title = script_event.19.t
+	desc = script_event.19.d
+	picture = GFX_report_event_communist_leader
+	
+	is_triggered_only = yes
+	
+	hidden = yes
+	
+	option = {
+		name = script_event.19.a
+		if = {
+			limit = {
+				PRU = {
+					has_tech = kingkaiser_2
+				}
+			}
+			PRU = {
+				country_event = {
+					id = ger.18
+					days = 2
+				}
+			}
+		}
+		if = {
+			limit = {
+				NOT = {
+					PRU = {
+						has_tech = kingkaiser_2
+					}
+				}
+			}
+			PRU = {
+				country_event = {
+					id = script_event.19
+					days = 30
+				}
 			}
 		}
 	}
