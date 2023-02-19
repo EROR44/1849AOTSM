@@ -10,6 +10,8 @@ add_namespace = cbi_rus
 add_namespace = cbi_byz
 add_namespace = cbi_rip
 add_namespace = cbi_soc_rev
+add_namespace = cbi_prt_situation
+add_namespace = cbi_prt_situation_answer
 
 #### FRANCE ####
 
@@ -2212,6 +2214,682 @@ country_event = { #Solve the problem
 			}
 		}
 	}
+}
+
+country_event = { #Enemy of my enemy?
+	id = cbi_prt_situation.1
+	title = cbi_prt_situation.1.t
+	desc = cbi_prt_situation.1.d
+	picture = GFX_report_event_eng_mosley_march_on_downing_street
+	
+	is_triggered_only = yes
+	
+	option = { #why not?
+		name = cbi_prt_situation.1.a
+		ai_chance = {
+			factor = 75
+		}
+		BYZ = {
+			add_opinion_modifier = {
+				target = PRT
+				modifier = history_enemy
+			}
+		}
+		PRT = {
+			add_opinion_modifier = {
+				target = BYZ
+				modifier = history_enemy
+			}
+		}
+		CBI = {
+			country_event = {
+				id = cbi_prt_situation_answer.1
+				days = 2
+			}
+		}
+		PRT = {
+			country_event = {
+				id = cbi_prt_situation_answer.3
+				days = 2
+			}
+		}
+	}
+		
+	option = { #why yes?
+		name = cbi_prt_situation.1.b
+		ai_chance = {
+			factor = 25
+		}
+		CBI = {
+			country_event = {
+				id = cbi_prt_situation_answer.2
+				days = 2
+			}
+		}
+	}
+	
+}
+
+country_event = { #Military plan
+	id = cbi_prt_situation.2
+	title = cbi_prt_situation.2.t
+	desc = cbi_prt_situation.2.d
+	picture = GFX_report_event_eng_mosley_march_on_downing_street
+	
+	is_triggered_only = yes
+	
+	option = { #Jordj Rassel
+		name = cbi_prt_situation.2.a
+		ai_chance = {
+			factor = 90
+		}
+	}
+		
+	option = { #Military
+		name = cbi_prt_situation.2.b
+		ai_chance = {
+			factor = 10
+		}
+	}
+	
+}
+
+country_event = { #Australia lost
+	id = cbi_prt_situation.3
+	title = cbi_prt_situation.3.t
+	desc = cbi_prt_situation.3.d
+	picture = GFX_report_event_eng_mosley_march_on_downing_street
+	
+	is_triggered_only = yes
+	
+	option = { #It's mean war
+		name = cbi_prt_situation.3.a
+		trigger = {
+			NOT = {
+				PRT = {
+					has_country_flag = cant_react_australia
+				}
+			}
+		}
+		ai_chance = {
+			factor = 30
+		}
+		CBI = {
+			country_event = {
+				id = cbi_prt_situation_answer.4
+				days = 3
+			}
+		}
+		PRT = {
+			declare_war_on = {
+				target = CBI
+				type = annex_everything
+			}
+		}
+	}
+		
+	option = { #We can get it later
+		name = cbi_prt_situation.3.b
+		trigger = {
+			NOT = {
+				PRT = {
+					has_country_flag = cant_react_australia
+				}
+			}
+		}
+		ai_chance = {
+			factor = 70
+		}
+		CBI = {
+			country_event = {
+				id = cbi_prt_situation_answer.5
+				days = 3
+			}
+		}
+	}
+	
+	option = { #cant react
+		name = cbi_prt_situation.3.b
+		trigger = {
+			PRT = {
+				has_country_flag = cant_react_australia
+			}
+		}
+		ai_chance = {
+			factor = 100
+		}
+		CBI = {
+			country_event = {
+				id = cbi_prt_situation_answer.6
+				days = 3
+			}
+		}
+	}
+	
+}
+
+country_event = { #British Ultimatum
+	id = cbi_prt_situation.4
+	title = cbi_prt_situation.4.t
+	desc = cbi_prt_situation.4.d
+	picture = GFX_report_event_eng_mosley_march_on_downing_street
+	
+	is_triggered_only = yes
+	
+	option = { #We have only one answer - war
+		name = cbi_prt_situation.4.a
+		ai_chance = {
+			factor = 75
+		}
+		CBI = {
+			country_event = {
+				id = cbi_prt_situation_answer.7
+				days = 1
+			}
+		}
+	}
+		
+	option = { #Okey, 
+		name = cbi_prt_situation.4.b
+		ai_chance = {
+			factor = 25
+		}
+		PRT = {
+			leave_faction = yes
+		}
+		hidden_effect = {
+			if = {
+				limit = {
+					PRT = {
+						has_government = democratic
+					}
+				}
+				set_variable = {
+					var = PRT.rulling_party
+					value = 1
+				}
+			}
+			if = {
+				limit = {
+					PRT = {
+						has_government = socialism
+					}
+				}
+				set_variable = {
+					var = PRT.rulling_party
+					value = 2
+				}
+			}
+			if = {
+				limit = {
+					PRT = {
+						has_government = reactionist
+					}
+				}
+				set_variable = {
+					var = PRT.rulling_party
+					value = 3
+				}
+			}
+			if = {
+				limit = {
+					PRT = {
+						has_government = authoritarian
+					}
+				}
+				set_variable = {
+					var = PRT.rulling_party
+					value = 4
+				}
+			}
+			PRT = {
+				set_variable = {
+					var = PRT.democraty_number
+					value = party_popularity@democratic
+				}
+				set_variable = {
+					var = PRT.socialism_number
+					value = party_popularity@socialism
+				}
+				set_variable = {
+					var = PRT.reactionist_number
+					value = party_popularity@reactionist
+				}
+				set_variable = {
+					var = PRT.authoritarian_number
+					value = party_popularity@authoritarian
+				}
+			}
+		}
+		set_autonomy = {
+			target = PRT
+			autonomy_state = autonomy_puppet
+			end_wars = no
+			end_civil_wars = no
+		}
+		hidden_effect = {
+			PRT = {
+				multiply_variable = {
+					var = PRT.democraty_number
+					value = 100
+				}
+				multiply_variable = {
+					var = PRT.socialism_number
+					value = 100
+				}
+				multiply_variable = {
+					var = PRT.reactionist_number
+					value = 100
+				}
+				multiply_variable = {
+					var = PRT.authoritarian_number
+					value = 100
+				}
+			}
+			if = {
+				limit = {
+					check_variable = {
+						var = PRT.rulling_party
+						value = 1
+					}
+				}
+				PRT = {
+					set_politics = {
+						ruling_party = democratic
+					}
+				}
+			}
+			if = {
+				limit = {
+					check_variable = {
+						var = PRT.rulling_party
+						value = 2
+					}
+				}
+				PRT = {
+					set_politics = {
+						ruling_party = socialism
+					}
+				}
+			}
+			if = {
+				limit = {
+					check_variable = {
+						var = PRT.rulling_party
+						value = 3
+					}
+				}
+				PRT = {
+					set_politics = {
+						ruling_party = reactionist
+					}
+				}
+			}
+			if = {
+				limit = {
+					check_variable = {
+						var = PRT.rulling_party
+						value = 4
+					}
+				}
+				PRT = {
+					set_politics = {
+						ruling_party = authoritarian
+					}
+				}
+			}
+			PRT = {
+				set_popularities = {
+					democratic = PRT.democraty_number
+					socialism = PRT.socialism_number
+					reactionist = PRT.reactionist_number
+					authoritarian = PRT.authoritarian_number
+				}
+			}
+		}
+		CBI = {
+			add_to_faction = PRT
+		}
+		CBI = {
+			country_event = {
+				id = cbi_prt_situation_answer.8
+				days = 1
+			}
+		}
+	}
+}
+
+country_event = { #Prussian reaction
+	id = cbi_prt_situation.5
+	title = cbi_prt_situation.5.t
+	desc = cbi_prt_situation.5.d
+	picture = GFX_report_event_eng_mosley_march_on_downing_street
+	
+	is_triggered_only = yes
+	
+	option = { #We must help
+		name = cbi_prt_situation.5.a
+		ai_chance = {
+			factor = 0
+			modifier = {
+				add = 25
+				PRU = {
+					has_completed_focus = PRU_aus_win_3
+				}
+			}
+			modifier = {
+				add = 75
+				PRU = {
+					has_government = reactionist
+				}
+			}
+		}
+		PRT = {
+			country_event = {
+				id = cbi_prt_situation_answer.9
+				days = 3
+			}
+		}
+	}
+		
+	option = { #It their war
+		name = cbi_prt_situation.5.b
+		ai_chance = {
+			factor = 100
+			modifier = {
+				add = -25
+				PRU = {
+					has_completed_focus = PRU_aus_win_3
+				}
+			}
+			modifier = {
+				add = -75
+				PRU = {
+					has_government = reactionist
+				}
+			}
+		}
+	}
+}
+
+country_event = { #Enemy of my enemy? Answer
+	id = cbi_prt_situation_answer.1
+	title = cbi_prt_situation_answer.1.t
+	desc = cbi_prt_situation_answer.1.d
+	picture = GFX_report_event_eng_mosley_march_on_downing_street
+	
+	is_triggered_only = yes
+	
+	option = { #Good news
+		name = cbi_prt_situation_answer.1.a
+	}
+	
+}
+
+country_event = { #Enemy of my enemy? Answer
+	id = cbi_prt_situation_answer.2
+	title = cbi_prt_situation_answer.2.t
+	desc = cbi_prt_situation_answer.2.d
+	picture = GFX_report_event_eng_mosley_march_on_downing_street
+	
+	is_triggered_only = yes
+	
+	option = { #Bad news
+		name = cbi_prt_situation_answer.2.a
+	}
+	
+}
+
+country_event = { #Enemy of my enemy? Answer
+	id = cbi_prt_situation_answer.3
+	title = cbi_prt_situation_answer.3.t
+	desc = cbi_prt_situation_answer.3.d
+	picture = GFX_report_event_eng_mosley_march_on_downing_street
+	
+	is_triggered_only = yes
+	
+	option = { #British is hell
+		name = cbi_prt_situation_answer.3.a
+	}
+	
+}
+
+country_event = { #Australian situation? Answer
+	id = cbi_prt_situation_answer.4
+	title = cbi_prt_situation_answer.4.t
+	desc = cbi_prt_situation_answer.4.d
+	picture = GFX_report_event_eng_mosley_march_on_downing_street
+	
+	is_triggered_only = yes
+	
+	option = { #they say war
+		name = cbi_prt_situation_answer.4.a
+	}
+	
+}
+
+country_event = { #Australian situation? Answer
+	id = cbi_prt_situation_answer.5
+	title = cbi_prt_situation_answer.5.t
+	desc = cbi_prt_situation_answer.5.d
+	picture = GFX_report_event_eng_mosley_march_on_downing_street
+	
+	is_triggered_only = yes
+	
+	option = { #Peace time
+		name = cbi_prt_situation_answer.5.a
+	}
+	
+}
+
+country_event = { #Australian situation? Answer
+	id = cbi_prt_situation_answer.6
+	title = cbi_prt_situation_answer.6.t
+	desc = cbi_prt_situation_answer.6.d
+	picture = GFX_report_event_eng_mosley_march_on_downing_street
+	
+	is_triggered_only = yes
+	
+	option = { #What we expect
+		name = cbi_prt_situation_answer.6.a
+	}
+	
+}
+
+country_event = { #Ultimatum to Portugalia? Answer
+	id = cbi_prt_situation_answer.7
+	title = cbi_prt_situation_answer.7.t
+	desc = cbi_prt_situation_answer.7.d
+	picture = GFX_report_event_eng_mosley_march_on_downing_street
+	
+	is_triggered_only = yes
+	
+	option = { #War mean war
+		name = cbi_prt_situation_answer.7.a
+		ai_chance = {
+			factor = 100
+			modifier = {
+				add = -50
+				CBI = {
+					has_war = yes
+				}
+			}
+			modifier = {
+				add = -25
+				CBI = {
+					surrender_progress > 0.25
+				}
+			}
+			modifier = {
+				add = -25
+				CBI = {
+					surrender_progress > 0.50
+				}
+			}
+		}
+		CBI = {
+			declare_war_on = {
+				target = PRT
+				type = annex_everything
+			}
+		}
+	}
+	
+	option = { #We can do it
+		name = cbi_prt_situation_answer.7.b
+		ai_chance = {
+			factor = 0
+			modifier = {
+				add = 50
+				CBI = {
+					has_war = yes
+				}
+			}
+			modifier = {
+				add = 25
+				CBI = {
+					surrender_progress > 0.25
+				}
+			}
+			modifier = {
+				add = 25
+				CBI = {
+					surrender_progress > 0.50
+				}
+			}
+		}
+		add_stability = -0.10
+		add_war_support = -0.25
+	}
+	
+}
+
+country_event = { #Australian situation? Answer
+	id = cbi_prt_situation_answer.8
+	title = cbi_prt_situation_answer.8.t
+	desc = cbi_prt_situation_answer.8.d
+	picture = GFX_report_event_eng_mosley_march_on_downing_street
+	
+	is_triggered_only = yes
+	
+	option = { #Good ending
+		name = cbi_prt_situation_answer.8.a
+	}
+	
+}
+
+country_event = { #Prussian Prospery? Answer
+	id = cbi_prt_situation_answer.9
+	title = cbi_prt_situation_answer.9.t
+	desc = cbi_prt_situation_answer.9.d
+	picture = GFX_report_event_eng_mosley_march_on_downing_street
+	
+	is_triggered_only = yes
+	
+	option = { #We say yes!
+		name = cbi_prt_situation_answer.9.a
+		ai_chance = {
+			factor = 75
+		}
+		PRU = {
+			country_event = {
+				id = cbi_prt_situation_answer.10
+				days = 3
+			}
+		}
+		CBI = {
+			country_event = {
+				id = cbi_prt_situation_answer.12
+				days = 4
+			}
+		}
+		PRT = {
+			set_country_flag = prt_aspect_to_friend_with_pru
+		}
+	}
+	
+	option = { #We say no!
+		name = cbi_prt_situation_answer.9.b
+		ai_chance = {
+			factor = 25
+		}
+		PRU = {
+			country_event = {
+				id = cbi_prt_situation_answer.11
+				days = 3
+			}
+		}
+	}
+	
+}
+
+country_event = { #Prt answer about prospary? Answer
+	id = cbi_prt_situation_answer.10
+	title = cbi_prt_situation_answer.10.t
+	desc = cbi_prt_situation_answer.10.d
+	picture = GFX_report_event_eng_mosley_march_on_downing_street
+	
+	is_triggered_only = yes
+	
+	option = { #Good, very good
+		name = cbi_prt_situation_answer.10.a
+		PRU = {
+			diplomatic_relation = {
+				country = PRT
+				relation = guarantee
+				active = yes
+			}
+		}
+		PRT = {
+			diplomatic_relation = {
+				country = PRU
+				relation = guarantee
+				active = yes
+			}
+		}
+	}
+	
+}
+
+country_event = { #Prt answer about prospary? Answer
+	id = cbi_prt_situation_answer.11
+	title = cbi_prt_situation_answer.11.t
+	desc = cbi_prt_situation_answer.11.d
+	picture = GFX_report_event_eng_mosley_march_on_downing_street
+	
+	is_triggered_only = yes
+	
+	option = { #They say what they want
+		name = cbi_prt_situation_answer.11.a
+	}
+	
+}
+
+country_event = { #British is flame, becouse pru guaranteed prt
+	id = cbi_prt_situation_answer.12
+	title = cbi_prt_situation_answer.12.t
+	desc = cbi_prt_situation_answer.12.d
+	picture = GFX_report_event_eng_mosley_march_on_downing_street
+	
+	is_triggered_only = yes
+	
+	option = { #Okey we go
+		ai_chance = {
+			factor = 40
+		}
+		name = cbi_prt_situation_answer.12.a
+	}
+	
+	option = { #We cant do that
+		ai_chance = {
+			factor = 60
+		}
+		name = cbi_prt_situation_answer.12.b
+		CBI = {
+			set_country_flag = cbi_leave_prt_free
+		}
+	}
+	
 }
 
 #### OLD ####
