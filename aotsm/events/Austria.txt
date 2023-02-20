@@ -12,6 +12,7 @@ add_namespace = aus_kaiser
 add_namespace = aus_dem
 add_namespace = aus_ref
 add_namespace = end_of_austrian
+add_namespace = aus_industrian_reform
 
 #Base aus
 
@@ -1080,4 +1081,357 @@ country_event = {
 			news_event = news.109
 		}
 	}
+}
+
+country_event = {
+	id = aus_industrian_reform.1 #Austria or Hungary
+	title = aus_industrian_reform.1.t
+	desc = aus_industrian_reform.1.d
+	picture = GFX_report_event_generic_factory
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = { #Austria
+		name = aus_industrian_reform.1.a	
+		ai_chance = {
+			factor = 100
+		}
+		AUS = {
+			set_country_flag = aus_choose_austrian_land
+		}
+		4 = {
+			add_extra_state_shared_building_slots = 3
+			add_building_construction = {
+				type = industrial_complex
+				level = 3
+				instant_build = yes
+			}
+		}
+	}
+	
+	option = { #Hungary
+		name = aus_industrian_reform.1.b
+		ai_chance = {
+			factor = 0
+		}
+		AUS = {
+			set_country_flag = aus_choose_hungary_land
+		}
+		43 = {
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}
+		154 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}
+		155 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}
+	}
+	
+}
+
+country_event = {
+	id = aus_industrian_reform.2 #Austria or Bohemia or Galitia or Hungary
+	title = aus_industrian_reform.2.t
+	desc = aus_industrian_reform.2.d
+	picture = GFX_report_event_austrian_land
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = { #Austria
+		name = aus_industrian_reform.2.a	
+		trigger = {
+			NOT = {
+				AUS = {
+					has_country_flag = aus_choose_austrian_land
+				}
+			}
+		}
+		ai_chance = {
+			factor = 25
+		}
+		4 = {
+			add_extra_state_shared_building_slots = 3
+			add_building_construction = {
+				type = industrial_complex
+				level = 3
+				instant_build = yes
+			}
+		}
+		AUS = {
+			set_country_flag = aus_choose_austrian_land
+		}
+	}
+	
+	option = { #Bohemia
+		name = aus_industrian_reform.2.b
+		trigger = {
+			NOT = {
+				AUS = {
+					has_country_flag = aus_choose_bohemia_land
+				}
+			}
+		}
+		ai_chance = {
+			factor = 25
+		}
+		9 = {
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+			add_building_construction = {
+				type = arms_factory
+				level = 1
+				instant_build = yes
+			}
+		}
+		75 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}
+		AUS = {
+			set_country_flag = aus_choose_bohemia_land
+		}
+	}
+	
+	option = { #Galitia
+		name = aus_industrian_reform.2.g
+		trigger = {
+			NOT = {
+				AUS = {
+					has_country_flag = aus_choose_galitian_land
+				}
+			}
+		}
+		ai_chance = {
+			factor = 25
+		}
+		80 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = infrastructure
+				level = 1
+				instant_build = yes
+			}
+		}
+		88 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = infrastructure
+				level = 1
+				instant_build = yes
+			}
+		}
+		89 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = infrastructure
+				level = 1
+				instant_build = yes
+			}
+		}
+		91 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = infrastructure
+				level = 1
+				instant_build = yes
+			}
+		}
+		902 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = infrastructure
+				level = 1
+				instant_build = yes
+			}
+		}
+		AUS = {
+			set_country_flag = aus_choose_galitian_land
+		}
+	}
+	
+	option = { #Hungary
+		name = aus_industrian_reform.2.h
+		trigger = {
+			NOT = {
+				AUS = {
+					has_country_flag = aus_choose_hungary_land
+				}
+			}
+		}
+		ai_chance = {
+			factor = 25
+		}
+		43 = {
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}
+		154 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}
+		155 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}
+		AUS = {
+			set_country_flag = aus_choose_hungary_land
+		}
+	}
+	
+	option = { #end
+		name = aus_industrian_reform.2.e
+		trigger = {
+			AUS = {
+				has_country_flag = aus_choose_austrian_land
+				has_country_flag = aus_choose_bohemia_land
+				has_country_flag = aus_choose_galitian_land
+				has_country_flag = aus_choose_hungary_land
+			}
+		}
+		ai_chance = {
+			factor = 100
+		}
+		random_state = {
+			prioritize = {
+				4 9 43 91
+			}
+			limit = {
+				is_core_of = AUS
+				is_owned_and_controlled_by = AUS
+			}
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+				type = industrial_complex
+				level = 2
+				instant_build = yes
+			}
+		}
+		random_state = {
+			prioritize = {
+				4 9 43 91
+			}
+			limit = {
+				is_core_of = AUS
+				is_owned_and_controlled_by = AUS
+			}
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+				type = industrial_complex
+				level = 2
+				instant_build = yes
+			}
+		}
+		random_state = {
+			prioritize = {
+				4 9 43 91
+			}
+			limit = {
+				is_core_of = AUS
+				is_owned_and_controlled_by = AUS
+			}
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+				type = industrial_complex
+				level = 2
+				instant_build = yes
+			}
+		}
+		random_state = {
+			prioritize = {
+				4 9 43 91
+			}
+			limit = {
+				is_core_of = AUS
+				is_owned_and_controlled_by = AUS
+			}
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+				type = industrial_complex
+				level = 2
+				instant_build = yes
+			}
+		}
+	}
+}
+	
+country_event = {
+	id = aus_industrian_reform.3 #Land of Hungary
+	title = aus_industrian_reform.3.t
+	desc = aus_industrian_reform.3.d
+	picture = GFX_report_event_hungary_industrialisation
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = { #Agrarian Hungary
+		name = aus_industrian_reform.3.a	
+		ai_chance = {
+			factor = 75
+		}
+		AUS = {
+			add_ideas = AUS_hungary_agrarian
+		}
+		hidden_effect = {
+			HUN = {
+				add_ideas = AUS_hungary_agrarian
+			}
+		}
+	}
+	
+	option = { #Industrilist Hungary
+		name = aus_industrian_reform.3.b	
+		ai_chance = {
+			factor = 25
+		}
+		AUS = {
+			add_ideas = AUS_hungary_industrialism
+		}
+		hidden_effect = {
+			HUN = {
+				add_ideas = AUS_hungary_industrialism
+			}
+		}
+	}
+	
 }

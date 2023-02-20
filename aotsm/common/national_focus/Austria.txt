@@ -13,7 +13,7 @@ focus_tree = {
 	default = no
 	reset_on_civilwar = no
 	
-	continuous_focus_position = { x = 2000 y = 150 }
+	continuous_focus_position = { x = 4000 y = 1 }
 	
 	
 	initial_show_position = {
@@ -1416,6 +1416,7 @@ focus_tree = {
 		completion_reward = {
 			add_stability = 0.10
 			set_country_flag = aus_no_post_war_problem
+			custom_effect_tooltip = aus_postwar_problem_solved_tt
 		}
 	}
 	
@@ -2243,6 +2244,7 @@ focus_tree = {
 		completion_reward = {
 			add_stability = 0.10
 			set_country_flag = aus_no_post_war_problem
+			custom_effect_tooltip = aus_postwar_problem_solved_tt
 		}
 	}
 	
@@ -3002,14 +3004,1476 @@ focus_tree = {
 		#search_filters = {  }
 		
 		completion_reward = {
+			add_tech_bonus = {
+				bonus = 0.5
+				uses = 2
+				category = industry
+			}
+		}
+		
+	}
+	
+	focus = {
+		id = AUS_reform_plan
+		icon = GFX_goal_generic_intelligence_exchange
+		relative_position_id = AUS_new_industrial_refrom
+		x = 0
+		y = 1
+		cost = 4.3
+		allow_branch = {
+			#NOT = {
+			#	PRU = {
+			#		has_country_flag = victory_R_V_A_1
+			#	}
+			#}
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = AUS_new_industrial_refrom }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		available = { 
+			custom_trigger_tooltip = {
+				tooltip = aus_not_post_war_problem_tt		
+				AUS = {
+					has_country_flag = aus_no_post_war_problem
+				}	
+			}
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			AUS = {
+				country_event = aus_industrian_reform.1
+			}
+			AUS = {
+				set_variable = {
+					var = AUS.industrial_point
+					value = 0
+				}
+			}
+		}
+		
+	}
+	
+	focus = {
+		id = AUS_main_land_industrialisation
+		icon = GFX_goal_generic_positive_trade_relations
+		relative_position_id = AUS_new_industrial_refrom
+		x = -6
+		y = 2
+		cost = 4.3
+		allow_branch = {
+			#NOT = {
+			#	PRU = {
+			#		has_country_flag = victory_R_V_A_1
+			#	}
+			#}
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = AUS_reform_plan }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		available = { 
+			has_country_flag = aus_choose_austrian_land
+			custom_trigger_tooltip = {
+				tooltip = aus_not_post_war_problem_tt		
+				AUS = {
+					has_country_flag = aus_no_post_war_problem
+				}	
+			}
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			if = {
+				limit = {
+					AUS = {
+						has_idea = AUS_industrian_development_1
+					}
+				}
+				AUS = {
+					swap_ideas = {
+						remove_idea = AUS_industrian_development_1
+						add_idea = AUS_industrian_development_2
+					}
+				}
+			}
+			if = {
+				limit = {
+					AUS = {
+						has_idea = AUS_idustrian_degradation_3
+					}
+				}
+				AUS = {
+					swap_ideas = {
+						remove_idea = AUS_idustrian_degradation_3
+						add_idea = AUS_industrian_development_1
+					}
+				}
+			}
+			if = {
+				limit = {
+					AUS = {
+						has_idea = AUS_idustrian_degradation_2
+					}
+				}
+				AUS = {
+					swap_ideas = {
+						remove_idea = AUS_idustrian_degradation_2
+						add_idea = AUS_idustrian_degradation_3
+					}
+				}
+			}
+			if = {
+				limit = {
+					AUS = {
+						has_idea = AUS_idustrian_degradation_1
+					}
+				}
+				AUS = {
+					swap_ideas = {
+						remove_idea = AUS_idustrian_degradation_1
+						add_idea = AUS_idustrian_degradation_2
+					}
+				}
+			}
+			if = {
+				limit = {
+					AUS = {
+						check_variable = { AUS.industrial_point = 1 }
+					}
+				}
+				if = {
+					limit = {
+						AUS = {
+							has_idea = modern_industry
+						}
+					}
+					AUS = {
+						swap_ideas = {
+							remove_idea = modern_industry
+							add_idea = ahead_of_time_industry
+						}
+					}
+				}
+				if = {
+					limit = {
+						AUS = {
+							has_idea = medium_developed_industry
+						}
+					}
+					AUS = {
+						swap_ideas = {
+							remove_idea = medium_developed_industry
+							add_idea = modern_industry
+						}
+					}
+				}
+				if = {
+					limit = {
+						AUS = {
+							has_idea = backward_industry
+						}
+					}
+					AUS = {
+						swap_ideas = {
+							remove_idea = backward_industry
+							add_idea = medium_developed_industry
+						}
+					}
+				}
+			}
+			AUS = {
+				add_to_variable = {
+					var = AUS.industrial_point
+					value = 1
+				}
+			}
+		}
+		
+	}
+	
+	focus = {
+		id = AUS_venezia_new_dockyard
+		icon = GFX_focus_generic_refit_civilian_ships
+		relative_position_id = AUS_main_land_industrialisation
+		x = -1
+		y = 1
+		cost = 4.3
+		allow_branch = {
+			#NOT = {
+			#	PRU = {
+			#		has_country_flag = victory_R_V_A_1
+			#	}
+			#}
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = AUS_main_land_industrialisation }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		available = { 
+			custom_trigger_tooltip = {
+				tooltip = aus_not_post_war_problem_tt		
+				AUS = {
+					has_country_flag = aus_no_post_war_problem
+				}	
+			}
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			160 = {
+				add_extra_state_shared_building_slots = 3
+				add_building_construction = {
+					type = dockyard
+					level = 3
+					instant_build = yes
+				}
+			}
+			736 = {
+				add_extra_state_shared_building_slots = 3
+				add_building_construction = {
+					type = dockyard
+					level = 3
+					instant_build = yes
+				}
+			}
+		}
+		
+	}
+	
+	focus = {
+		id = AUS_austrian_new_fabric
+		icon = GFX_goal_generic_neutrality_focus
+		relative_position_id = AUS_main_land_industrialisation
+		x = 1
+		y = 1
+		cost = 4.3
+		allow_branch = {
+			#NOT = {
+			#	PRU = {
+			#		has_country_flag = victory_R_V_A_1
+			#	}
+			#}
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = AUS_main_land_industrialisation }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		available = { 
+			custom_trigger_tooltip = {
+				tooltip = aus_not_post_war_problem_tt		
+				AUS = {
+					has_country_flag = aus_no_post_war_problem
+				}	
+			}
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			102 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			152 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+			153 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		
+	}
+	
+	focus = {
+		id = AUS_new_wien_universtitet
+		icon = GFX_goal_generic_scientific_exchange
+		relative_position_id = AUS_main_land_industrialisation
+		x = 0
+		y = 2
+		cost = 4.3
+		allow_branch = {
+			#NOT = {
+			#	PRU = {
+			#		has_country_flag = victory_R_V_A_1
+			#	}
+			#}
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = AUS_venezia_new_dockyard }
+		prerequisite = { focus = AUS_austrian_new_fabric }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		available = { 
+			custom_trigger_tooltip = {
+				tooltip = aus_not_post_war_problem_tt		
+				AUS = {
+					has_country_flag = aus_no_post_war_problem
+				}	
+			}
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_research_slot = 1
+			add_tech_bonus = {
+				bonus = 0.75
+				uses = 2
+				category = industry
+			}
+			AUS = {
+				country_event = aus_industrian_reform.2
+			}
+		}
+		
+	}
+	
+	focus = {
+		id = AUS_bohemia_industrialisation
+		icon = GFX_goal_generic_consumer_goods
+		relative_position_id = AUS_new_industrial_refrom
+		x = -2
+		y = 2
+		cost = 4.3
+		allow_branch = {
+			#NOT = {
+			#	PRU = {
+			#		has_country_flag = victory_R_V_A_1
+			#	}
+			#}
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = AUS_reform_plan }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		available = { 
+			has_country_flag = aus_choose_bohemia_land
+			custom_trigger_tooltip = {
+				tooltip = aus_not_post_war_problem_tt		
+				AUS = {
+					has_country_flag = aus_no_post_war_problem
+				}	
+			}
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			if = {
+				limit = {
+					AUS = {
+						has_idea = AUS_industrian_development_1
+					}
+				}
+				AUS = {
+					swap_ideas = {
+						remove_idea = AUS_industrian_development_1
+						add_idea = AUS_industrian_development_2
+					}
+				}
+			}
+			if = {
+				limit = {
+					AUS = {
+						has_idea = AUS_idustrian_degradation_3
+					}
+				}
+				AUS = {
+					swap_ideas = {
+						remove_idea = AUS_idustrian_degradation_3
+						add_idea = AUS_industrian_development_1
+					}
+				}
+			}
+			if = {
+				limit = {
+					AUS = {
+						has_idea = AUS_idustrian_degradation_2
+					}
+				}
+				AUS = {
+					swap_ideas = {
+						remove_idea = AUS_idustrian_degradation_2
+						add_idea = AUS_idustrian_degradation_3
+					}
+				}
+			}
+			if = {
+				limit = {
+					AUS = {
+						has_idea = AUS_idustrian_degradation_1
+					}
+				}
+				AUS = {
+					swap_ideas = {
+						remove_idea = AUS_idustrian_degradation_1
+						add_idea = AUS_idustrian_degradation_2
+					}
+				}
+			}
+			if = {
+				limit = {
+					AUS = {
+						check_variable = { AUS.industrial_point = 1 }
+					}
+				}
+				if = {
+					limit = {
+						AUS = {
+							has_idea = modern_industry
+						}
+					}
+					AUS = {
+						swap_ideas = {
+							remove_idea = modern_industry
+							add_idea = ahead_of_time_industry
+						}
+					}
+				}
+				if = {
+					limit = {
+						AUS = {
+							has_idea = medium_developed_industry
+						}
+					}
+					AUS = {
+						swap_ideas = {
+							remove_idea = medium_developed_industry
+							add_idea = modern_industry
+						}
+					}
+				}
+				if = {
+					limit = {
+						AUS = {
+							has_idea = backward_industry
+						}
+					}
+					AUS = {
+						swap_ideas = {
+							remove_idea = backward_industry
+							add_idea = medium_developed_industry
+						}
+					}
+				}
+			}
+			AUS = {
+				add_to_variable = {
+					var = AUS.industrial_point
+					value = 1
+				}
+			}
+		}
+		
+	}
+	
+	focus = {
+		id = AUS_bohemia_hard_idustrial
+		icon = GFX_goal_generic_construct_mil_factory
+		relative_position_id = AUS_bohemia_industrialisation
+		x = -1
+		y = 1
+		cost = 4.3
+		allow_branch = {
+			#NOT = {
+			#	PRU = {
+			#		has_country_flag = victory_R_V_A_1
+			#	}
+			#}
+		}
+		mutually_exclusive = { focus = AUS_bohemia_easy_idustrial }
+		prerequisite = { focus = AUS_bohemia_industrialisation }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		available = { 
+			custom_trigger_tooltip = {
+				tooltip = aus_not_post_war_problem_tt		
+				AUS = {
+					has_country_flag = aus_no_post_war_problem
+				}	
+			}
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			9 = {
+				add_extra_state_shared_building_slots = 4
+				add_building_construction = {
+					type = arms_factory
+					level = 4
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+				}
+			}
+			75 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+		
+	}
+	
+	focus = {
+		id = AUS_bohemia_easy_idustrial
+		icon = GFX_goal_generic_construct_civ_factory
+		relative_position_id = AUS_bohemia_industrialisation
+		x = 1
+		y = 1
+		cost = 4.3
+		allow_branch = {
+			#NOT = {
+			#	PRU = {
+			#		has_country_flag = victory_R_V_A_1
+			#	}
+			#}
+		}
+		mutually_exclusive = { focus = AUS_bohemia_hard_idustrial }
+		prerequisite = { focus = AUS_bohemia_industrialisation }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		available = { 
+			custom_trigger_tooltip = {
+				tooltip = aus_not_post_war_problem_tt		
+				AUS = {
+					has_country_flag = aus_no_post_war_problem
+				}	
+			}
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			9 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			69 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			72 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			74 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			75 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			810 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
 			
+		}
+		
+	}
+	
+	focus = {
+		id = AUS_bohemia_new_steel_production
+		icon = GFX_focus_generic_steel
+		relative_position_id = AUS_bohemia_industrialisation
+		x = 0
+		y = 2
+		cost = 4.3
+		allow_branch = {
+			#NOT = {
+			#	PRU = {
+			#		has_country_flag = victory_R_V_A_1
+			#	}
+			#}
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = AUS_bohemia_hard_idustrial focus = AUS_bohemia_easy_idustrial }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		available = { 
+			custom_trigger_tooltip = {
+				tooltip = aus_not_post_war_problem_tt		
+				AUS = {
+					has_country_flag = aus_no_post_war_problem
+				}	
+			}
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_resource = {
+				type = oil
+				amount = 12
+				state = 9
+			}
+			add_resource = {
+				type = steel
+				amount = 24
+				state = 9
+			}
+			add_resource = {
+				type = oil
+				amount = 6
+				state = 75
+			}
+			add_resource = {
+				type = steel
+				amount = 12
+				state = 9
+			}
+			add_tech_bonus = {
+				bonus = 0.75
+				uses = 2
+				category = excavation_tech
+			}
+			AUS = {
+				country_event = aus_industrian_reform.2
+			}
+		}
+		
+	}
+	
+	focus = {
+		id = AUS_galitian_industrialisation
+		icon = GFX_focus_generic_polish_deal
+		relative_position_id = AUS_new_industrial_refrom
+		x = 2
+		y = 2
+		cost = 4.3
+		allow_branch = {
+			#NOT = {
+			#	PRU = {
+			#		has_country_flag = victory_R_V_A_1
+			#	}
+			#}
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = AUS_reform_plan }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		available = { 
+			has_country_flag = aus_choose_galitian_land
+			custom_trigger_tooltip = {
+				tooltip = aus_not_post_war_problem_tt		
+				AUS = {
+					has_country_flag = aus_no_post_war_problem
+				}	
+			}
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			if = {
+				limit = {
+					AUS = {
+						has_idea = AUS_industrian_development_1
+					}
+				}
+				AUS = {
+					swap_ideas = {
+						remove_idea = AUS_industrian_development_1
+						add_idea = AUS_industrian_development_2
+					}
+				}
+			}
+			if = {
+				limit = {
+					AUS = {
+						has_idea = AUS_idustrian_degradation_3
+					}
+				}
+				AUS = {
+					swap_ideas = {
+						remove_idea = AUS_idustrian_degradation_3
+						add_idea = AUS_industrian_development_1
+					}
+				}
+			}
+			if = {
+				limit = {
+					AUS = {
+						has_idea = AUS_idustrian_degradation_2
+					}
+				}
+				AUS = {
+					swap_ideas = {
+						remove_idea = AUS_idustrian_degradation_2
+						add_idea = AUS_idustrian_degradation_3
+					}
+				}
+			}
+			if = {
+				limit = {
+					AUS = {
+						has_idea = AUS_idustrian_degradation_1
+					}
+				}
+				AUS = {
+					swap_ideas = {
+						remove_idea = AUS_idustrian_degradation_1
+						add_idea = AUS_idustrian_degradation_2
+					}
+				}
+			}
+			if = {
+				limit = {
+					AUS = {
+						check_variable = { AUS.industrial_point = 1 }
+					}
+				}
+				if = {
+					limit = {
+						AUS = {
+							has_idea = modern_industry
+						}
+					}
+					AUS = {
+						swap_ideas = {
+							remove_idea = modern_industry
+							add_idea = ahead_of_time_industry
+						}
+					}
+				}
+				if = {
+					limit = {
+						AUS = {
+							has_idea = medium_developed_industry
+						}
+					}
+					AUS = {
+						swap_ideas = {
+							remove_idea = medium_developed_industry
+							add_idea = modern_industry
+						}
+					}
+				}
+				if = {
+					limit = {
+						AUS = {
+							has_idea = backward_industry
+						}
+					}
+					AUS = {
+						swap_ideas = {
+							remove_idea = backward_industry
+							add_idea = medium_developed_industry
+						}
+					}
+				}
+			}
+			AUS = {
+				add_to_variable = {
+					var = AUS.industrial_point
+					value = 1
+				}
+			}
+		}
+		
+	}
+	
+	focus = {
+		id = AUS_galitian_poland_favour
+		icon = GFX_focus_generic_industry_3
+		relative_position_id = AUS_galitian_industrialisation
+		x = -1
+		y = 1
+		cost = 4.3
+		allow_branch = {
+			#NOT = {
+			#	PRU = {
+			#		has_country_flag = victory_R_V_A_1
+			#	}
+			#}
+		}
+		mutually_exclusive = { focus = AUS_galitian_ukrain_favour }
+		prerequisite = { focus = AUS_galitian_industrialisation }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		available = { 
+			custom_trigger_tooltip = {
+				tooltip = aus_not_post_war_problem_tt		
+				AUS = {
+					has_country_flag = aus_no_post_war_problem
+				}	
+			}
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			88 = {
+				add_extra_state_shared_building_slots = 5
+				add_building_construction = {
+					type = industrial_complex
+					level = 3
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+		
+	}
+	
+	focus = {
+		id = AUS_galitian_ukrain_favour
+		icon = GFX_focus_generic_industry_2
+		relative_position_id = AUS_galitian_industrialisation
+		x = 1
+		y = 1
+		cost = 4.3
+		allow_branch = {
+			#NOT = {
+			#	PRU = {
+			#		has_country_flag = victory_R_V_A_1
+			#	}
+			#}
+		}
+		mutually_exclusive = { focus = AUS_galitian_poland_favour  }
+		prerequisite = { focus = AUS_galitian_industrialisation }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		available = { 
+			custom_trigger_tooltip = {
+				tooltip = aus_not_post_war_problem_tt		
+				AUS = {
+					has_country_flag = aus_no_post_war_problem
+				}	
+			}
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			80 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+			89 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+			91 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+		
+	}
+	
+	focus = {
+		id = AUS_galitian_new_land_for_industrian
+		icon = GFX_focus_generic_improve_roads
+		relative_position_id = AUS_galitian_industrialisation
+		x = 0
+		y = 2
+		cost = 4.3
+		allow_branch = {
+			#NOT = {
+			#	PRU = {
+			#		has_country_flag = victory_R_V_A_1
+			#	}
+			#}
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = AUS_galitian_poland_favour focus = AUS_galitian_ukrain_favour }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		available = { 
+			custom_trigger_tooltip = {
+				tooltip = aus_not_post_war_problem_tt		
+				AUS = {
+					has_country_flag = aus_no_post_war_problem
+				}	
+			}
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			80 = {
+				add_extra_state_shared_building_slots = 2
+			}
+			88 = {
+				add_extra_state_shared_building_slots = 2
+			}
+			89 = {
+				add_extra_state_shared_building_slots = 2
+			}
+			91 = {
+				add_extra_state_shared_building_slots = 2
+			}
+			902 = {
+				add_extra_state_shared_building_slots = 2
+			}
+			add_tech_bonus = {
+				bonus = 0.75
+				uses = 2
+				category = construction_tech
+			}
+			AUS = {
+				country_event = aus_industrian_reform.2
+			}
+		}
+		
+	}
+	
+	focus = {
+		id = AUS_hungary_industrialisation
+		icon = GFX_focus_proclaim_the_restauration_of_Austria_Hungary
+		relative_position_id = AUS_new_industrial_refrom
+		x = 6
+		y = 2
+		cost = 4.3
+		allow_branch = {
+			#NOT = {
+			#	PRU = {
+			#		has_country_flag = victory_R_V_A_1
+			#	}
+			#}
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = AUS_reform_plan }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		available = { 
+			has_country_flag = aus_choose_hungary_land
+			custom_trigger_tooltip = {
+				tooltip = aus_not_post_war_problem_tt		
+				AUS = {
+					has_country_flag = aus_no_post_war_problem
+				}	
+			}
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			if = {
+				limit = {
+					AUS = {
+						has_idea = AUS_industrian_development_1
+					}
+				}
+				AUS = {
+					swap_ideas = {
+						remove_idea = AUS_industrian_development_1
+						add_idea = AUS_industrian_development_2
+					}
+				}
+			}
+			if = {
+				limit = {
+					AUS = {
+						has_idea = AUS_idustrian_degradation_3
+					}
+				}
+				AUS = {
+					swap_ideas = {
+						remove_idea = AUS_idustrian_degradation_3
+						add_idea = AUS_industrian_development_1
+					}
+				}
+			}
+			if = {
+				limit = {
+					AUS = {
+						has_idea = AUS_idustrian_degradation_2
+					}
+				}
+				AUS = {
+					swap_ideas = {
+						remove_idea = AUS_idustrian_degradation_2
+						add_idea = AUS_idustrian_degradation_3
+					}
+				}
+			}
+			if = {
+				limit = {
+					AUS = {
+						has_idea = AUS_idustrian_degradation_1
+					}
+				}
+				AUS = {
+					swap_ideas = {
+						remove_idea = AUS_idustrian_degradation_1
+						add_idea = AUS_idustrian_degradation_2
+					}
+				}
+			}
+			if = {
+				limit = {
+					AUS = {
+						check_variable = { AUS.industrial_point = 1 }
+					}
+				}
+				if = {
+					limit = {
+						AUS = {
+							has_idea = modern_industry
+						}
+					}
+					AUS = {
+						swap_ideas = {
+							remove_idea = modern_industry
+							add_idea = ahead_of_time_industry
+						}
+					}
+				}
+				if = {
+					limit = {
+						AUS = {
+							has_idea = medium_developed_industry
+						}
+					}
+					AUS = {
+						swap_ideas = {
+							remove_idea = medium_developed_industry
+							add_idea = modern_industry
+						}
+					}
+				}
+				if = {
+					limit = {
+						AUS = {
+							has_idea = backward_industry
+						}
+					}
+					AUS = {
+						swap_ideas = {
+							remove_idea = backward_industry
+							add_idea = medium_developed_industry
+						}
+					}
+				}
+			}
+			AUS = {
+				add_to_variable = {
+					var = AUS.industrial_point
+					value = 1
+				}
+			}
+		}
+		
+	}
+	
+	focus = {
+		id = AUS_hungary_city_focus
+		icon = GFX_focus_generic_industry_1
+		relative_position_id = AUS_hungary_industrialisation
+		x = -1
+		y = 1
+		cost = 4.3
+		allow_branch = {
+			#NOT = {
+			#	PRU = {
+			#		has_country_flag = victory_R_V_A_1
+			#	}
+			#}
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = AUS_hungary_industrialisation }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		available = { 
+			custom_trigger_tooltip = {
+				tooltip = aus_not_post_war_problem_tt		
+				AUS = {
+					has_country_flag = aus_no_post_war_problem
+				}	
+			}
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			43 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			154 = {
+				add_extra_state_shared_building_slots = 3
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			155 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			664 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		
+	}
+	
+	focus = {
+		id = AUS_hungary_costline_focus
+		icon = GFX_goal_generic_construct_naval_dockyard
+		relative_position_id = AUS_hungary_industrialisation
+		x = 1
+		y = 1
+		cost = 4.3
+		allow_branch = {
+			#NOT = {
+			#	PRU = {
+			#		has_country_flag = victory_R_V_A_1
+			#	}
+			#}
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = AUS_hungary_industrialisation }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		available = { 
+			custom_trigger_tooltip = {
+				tooltip = aus_not_post_war_problem_tt		
+				AUS = {
+					has_country_flag = aus_no_post_war_problem
+				}	
+			}
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			103 = {
+				add_extra_state_shared_building_slots = 3
+				add_building_construction = {
+					type = dockyard
+					level = 3
+					instant_build = yes
+				}
+			}
+			163 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = dockyard
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+		
+	}
+	
+	focus = {
+		id = AUS_hungary_land_qustian
+		icon = GFX_focus_generic_land_reclamation
+		relative_position_id = AUS_hungary_industrialisation
+		x = 0
+		y = 2
+		cost = 4.3
+		allow_branch = {
+			#NOT = {
+			#	PRU = {
+			#		has_country_flag = victory_R_V_A_1
+			#	}
+			#}
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = AUS_hungary_city_focus }
+		prerequisite = { focus = AUS_hungary_costline_focus }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		available = { 
+			custom_trigger_tooltip = {
+				tooltip = aus_not_post_war_problem_tt		
+				AUS = {
+					has_country_flag = aus_no_post_war_problem
+				}	
+			}
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 0.75
+				uses = 2
+				category = industry
+			}
+			AUS = {
+				country_event = {
+					id = aus_industrian_reform.3
+					days = 2
+				}
+			}
+			AUS = {
+				country_event = aus_industrian_reform.2
+			}
 		}
 		
 	}
 	
 	#Austrian Diplomacy
 	
+	#Victory 1 war
 	
+	#Iosif lose 1 war
+	
+	#Iogan lose 1 war
+	
+	#Ferdinand lose 1 war
+	
+	#Napoleon lose 1 war
 	
 }
 
