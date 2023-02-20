@@ -3576,10 +3576,71 @@ country_event = { #Black Sun helping Hand
 			amount = 2000
 			producer = ROOT
 		}
-		add_equipment_to_stockpile = {
-			type = medium_tank_chassis_3
-			amount = 1000
-			variant_name = "Kingkaizer"
+		if = {
+			limit = {
+				AND = {
+					PRU = {
+						has_tech = kingkaiser_1
+					}
+					NOT = {
+						PRU = {
+							has_tech = kingkaiser_2
+						}
+					}
+					NOT = {
+						PRU = {
+							has_tech = kingkaiser_3
+						}
+					}
+				}
+			}
+			add_equipment_to_stockpile = {
+				type = medium_tank_equipment_kingkaiser_1
+				amount = 1000
+				variant_name = "Kingkaizer"
+			}
+		}
+		if = {
+			limit = {
+				AND = {
+					PRU = {
+						has_tech = kingkaiser_1
+					}
+					PRU = {
+						has_tech = kingkaiser_2
+					}
+					NOT = {
+						PRU = {
+							has_tech = kingkaiser_3
+						}
+					}
+				}
+			}
+			add_equipment_to_stockpile = {
+				type = medium_tank_equipment_kingkaiser_2
+				amount = 1000
+				variant_name = "Kingkaizer 2B"
+			}
+		}
+		if = {
+			limit = {
+				AND = {
+					PRU = {
+						has_tech = kingkaiser_1
+					}
+					PRU = {
+						has_tech = kingkaiser_2
+					}
+					PRU = {
+						has_tech = kingkaiser_3
+					}
+				}
+			}
+			add_equipment_to_stockpile = {
+				type = medium_tank_equipment_kingkaiser_3
+				amount = 1000
+				variant_name = "Kingkaizer 3A"
+			}
 		}
 		custom_effect_tooltip = pru_blacksun_influince_rise_hight
 		hidden_effect = {
@@ -3691,7 +3752,7 @@ country_event = { #Black Sun try coup the goverment
 	trigger = {
 		tag = PRU
 		check_variable = {
-			PRU.blacksun_influence > 5
+			PRU.blacksun_influence > 4
 		}
 	}
 	
