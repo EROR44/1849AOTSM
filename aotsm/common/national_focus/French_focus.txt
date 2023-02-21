@@ -1,4 +1,5 @@
 ### search_filters = {FOCUS_FILTER_POLITICAL}
+### search_filters = {FOCUS_FILTER_POLITICAL}
 ### search_filters = {FOCUS_FILTER_RESEARCH}
 ### search_filters = {FOCUS_FILTER_INDUSTRY}
 ### search_filters = {FOCUS_FILTER_STABILITY}
@@ -3721,7 +3722,7 @@ focus_tree = {
 		id = FRA_the_regime_of_auth_democracy
 		icon = GFX_focus_frr_regime_of_auth_democraty
 		
-		x = 0
+		x = -1
 		y = 1
 		relative_position_id = FRA_anri_de_artua_goverment
 		prerequisite = { focus =  FRA_anri_de_artua_goverment }
@@ -3820,14 +3821,12 @@ focus_tree = {
 		id = FRA_auth_politic
 		icon = GFX_focus_frr_authoritarian_politic
 		
-		x = 2
+		x = 1
 		y = 1
 		relative_position_id = FRA_anri_de_artua_goverment
 		prerequisite = { 
-			focus =  FRA_louis_napoleons_goverment 
 			focus =  FRA_anri_de_artua_goverment 
 		}
-		mutually_exclusive = { focus = FRA_militarists_politic }
 		cost = 3
 		
 		available = {
@@ -3874,7 +3873,7 @@ focus_tree = {
 		id = FRA_creat_national_guards #национальная гвардия
 		icon = GFX_focus_frr_create_national_guards
 		
-		x = 1
+		x = 2
 		y = 3
 		relative_position_id = FRA_auth_politic
 		prerequisite = { 
@@ -3900,7 +3899,7 @@ focus_tree = {
 		id = FRA_censorship_of_press
 		icon = GFX_focus_frr_censured_press
 		
-		x = -1
+		x = 0
 		y = 1
 		relative_position_id = FRA_weaken_positions_of_opposition
 		prerequisite = { 
@@ -3927,7 +3926,7 @@ focus_tree = {
 		id = FRA_update_french_goverment
 		icon = GFX_focus_frr_update_fremch_goverment
 		
-		x = 1
+		x = 2
 		y = 1
 		relative_position_id = FRA_weaken_positions_of_opposition
 		prerequisite = { focus =  FRA_weaken_positions_of_opposition }
@@ -4055,14 +4054,12 @@ focus_tree = {
 		id = FRA_militarists_politic
 		icon = GFX_focus_frr_militarist_politic
 		
-		x = -2
+		x = -1
 		y = 1
 		relative_position_id = FRA_louis_napoleons_goverment
 		prerequisite = { 
 			focus =  FRA_louis_napoleons_goverment 
-			focus =  FRA_anri_de_artua_goverment 
 		}
-		mutually_exclusive = { focus = FRA_auth_politic }
 		cost = 3
 		
 		available = {
@@ -4081,7 +4078,7 @@ focus_tree = {
 		id = FRA_new_constitution
 		icon = GFX_focus_frr_new_constitution
 		
-		x = -1
+		x = -2
 		y = 1
 		relative_position_id = FRA_militarists_politic
 		prerequisite = { 
@@ -4135,7 +4132,7 @@ focus_tree = {
 		id = FRA_propaganda_french_uniqueness
 		icon = GFX_focus_frr_popagande_of_french_uniquess
 		
-		x = 0
+		x = 1
 		y = 1
 		relative_position_id = FRA_louis_napoleons_goverment
 		prerequisite = { focus =  FRA_louis_napoleons_goverment}
@@ -4233,6 +4230,8 @@ focus_tree = {
 		search_filters = {FOCUS_FILTER_POLITICAL}
 
 		completion_reward = {
+			custom_effect_tooltip = FRR_lui_napoleon_ban_other_parties
+			
 			hidden_effect = {
 				set_temp_variable = {
 					var = ban_ideology_var
@@ -4251,11 +4250,8 @@ focus_tree = {
 					value = 0.66
 				}
 				set_country_flag = banned_democratic_flag
-			}
-			custom_effect_tooltip = ban_democratic_party_tt
-			add_stability = ban_ideology_var
-			
-			hidden_effect = {
+				add_stability = ban_ideology_var
+				
 				set_temp_variable = {
 					var = ban_ideology_var
 					value = party_popularity@authoritarian
@@ -4273,11 +4269,8 @@ focus_tree = {
 					value = 0.66
 				}
 				set_country_flag = banned_authoritarian_flag
-			}
-			custom_effect_tooltip = ban_authoritarian_party_tt
-			add_stability = ban_ideology_var
-			
-			hidden_effect = {
+				add_stability = ban_ideology_var	
+				
 				set_temp_variable = {
 					var = ban_ideology_var
 					value = party_popularity@socialism
@@ -4295,9 +4288,12 @@ focus_tree = {
 					value = 0.66
 				}
 				set_country_flag = banned_socialism_flag
+				add_stability = ban_ideology_var
 			}
-			custom_effect_tooltip = ban_socialism_party_tt
-			add_stability = ban_ideology_var
+			custom_effect_tooltip = ban_democratical_party_tt	
+			custom_effect_tooltip = ban_authoritarian_party_tt
+			custom_effect_tooltip = ban_socialism_party_tt			
+			custom_effect_tooltip = aotsm_ban_ideology_degrease_stability_tt	
 		}
 	}
 	focus = {
