@@ -13,7 +13,7 @@ focus_tree = {
 	default = no
 	reset_on_civilwar = no
 	
-	continuous_focus_position = { x = 4000 y = 1 }
+	continuous_focus_position = { x = 6300 y = 1 }
 	
 	
 	initial_show_position = {
@@ -2905,7 +2905,7 @@ focus_tree = {
 		id = AUS_new_doctrine
 		icon = GFX_goal_generic_special_forces
 		#relative_position_id = 
-		x = -15
+		x = -26
 		y = 0
 		cost = 4.3
 		allow_branch = {
@@ -2917,7 +2917,7 @@ focus_tree = {
 		}
 		#mutually_exclusive = { }
 		ai_will_do = {
-			factor = 2500
+			factor = 3000
 		}
 		
 		#cancel = { }
@@ -2949,7 +2949,2209 @@ focus_tree = {
 		#search_filters = {  }
 		
 		completion_reward = {
-			
+			army_experience = 15
+			navy_experience = 15
+			air_experience = 15
+		}
+		
+	}
+	
+	focus = {
+		id = AUS_navy_reorganism
+		icon = GFX_goal_generic_navy_cruiser
+		relative_position_id = AUS_new_doctrine
+		x = -13
+		y = 1
+		cost = 4.3
+		allow_branch = {
+			#NOT = {
+			#	PRU = {
+			#		has_country_flag = victory_R_V_A_1
+			#	}
+			#}
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = AUS_new_doctrine }
+		ai_will_do = {
+			factor = 2750
+		}
+		
+		#cancel = { }
+		
+		available = { 
+			custom_trigger_tooltip = {
+				tooltip = aus_not_post_war_problem_tt		
+				AUS = {
+					has_country_flag = aus_no_post_war_problem
+				}	
+			}
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			navy_experience = 25
+			add_doctrine_cost_reduction = {
+				cost_reduction = 0.5
+				uses = 2
+				category = naval_doctrine
+			}
+		}
+		
+	}
+	
+	focus = {
+		id = AUS_navy_quantity_over_quality
+		icon = GFX_goal_generic_navy_anti_submarine
+		relative_position_id = AUS_navy_reorganism
+		x = -2
+		y = 1
+		cost = 4.3
+		allow_branch = {
+			#NOT = {
+			#	PRU = {
+			#		has_country_flag = victory_R_V_A_1
+			#	}
+			#}
+		}
+		mutually_exclusive = { focus = AUS_navy_quality_over_quantity }
+		prerequisite = { focus = AUS_navy_reorganism }
+		ai_will_do = {
+			factor = 2750
+		}
+		
+		#cancel = { }
+		
+		available = { 
+			custom_trigger_tooltip = {
+				tooltip = aus_not_post_war_problem_tt		
+				AUS = {
+					has_country_flag = aus_no_post_war_problem
+				}	
+			}
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			AUS = {
+				add_ideas = AUS_austrian_naval_idea_1
+			}
+		}
+		
+	}
+	
+	focus = {
+		id = AUS_navy_quantity_fleet_tech
+		icon = GFX_goal_generic_navy_submarine
+		relative_position_id = AUS_navy_quantity_over_quality
+		x = 1
+		y = 1
+		cost = 4.3
+		allow_branch = {
+			#NOT = {
+			#	PRU = {
+			#		has_country_flag = victory_R_V_A_1
+			#	}
+			#}
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = AUS_navy_quantity_over_quality }
+		ai_will_do = {
+			factor = 2750
+		}
+		
+		#cancel = { }
+		
+		available = { 
+			custom_trigger_tooltip = {
+				tooltip = aus_not_post_war_problem_tt		
+				AUS = {
+					has_country_flag = aus_no_post_war_problem
+				}	
+			}
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 0.5
+				uses = 2
+				category = dd_tech
+			}
+			add_tech_bonus = {
+				bonus = 0.5
+				uses = 2
+				category = ss_tech
+			}
+		}
+		
+	}
+	
+	focus = {
+		id = AUS_navy_quantity_eqvipment_tech
+		icon = GFX_goal_generic_special_forces
+		relative_position_id = AUS_navy_quantity_over_quality
+		x = -1
+		y = 1
+		cost = 4.3
+		allow_branch = {
+			#NOT = {
+			#	PRU = {
+			#		has_country_flag = victory_R_V_A_1
+			#	}
+			#}
+		}
+		#mutually_exclusive = {  }
+		prerequisite = { focus = AUS_navy_quantity_over_quality }
+		ai_will_do = {
+			factor = 2750
+		}
+		
+		#cancel = { }
+		
+		available = { 
+			custom_trigger_tooltip = {
+				tooltip = aus_not_post_war_problem_tt		
+				AUS = {
+					has_country_flag = aus_no_post_war_problem
+				}	
+			}
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 0.5
+				uses = 4
+				category = ship_modules_tech
+			}
+		}
+		
+	}
+	
+	focus = {
+		id = AUS_navy_quantity_spirit
+		icon = GFX_goal_generic_navy_doctrines_tactics
+		relative_position_id = AUS_navy_quantity_over_quality
+		x = 0
+		y = 2
+		cost = 4.3
+		allow_branch = {
+			#NOT = {
+			#	PRU = {
+			#		has_country_flag = victory_R_V_A_1
+			#	}
+			#}
+		}
+		#mutually_exclusive = {  }
+		prerequisite = { focus = AUS_navy_quantity_fleet_tech }
+		prerequisite = { focus = AUS_navy_quantity_eqvipment_tech }
+		ai_will_do = {
+			factor = 2750
+		}
+		
+		#cancel = { }
+		
+		available = { 
+			custom_trigger_tooltip = {
+				tooltip = aus_not_post_war_problem_tt		
+				AUS = {
+					has_country_flag = aus_no_post_war_problem
+				}	
+			}
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_doctrine_cost_reduction = {
+				cost_reduction = 0.5
+				uses = 2
+				category = cat_trade_interdiction
+			}
+		}
+		
+	}
+	
+	focus = {
+		id = AUS_navy_new_dockyard
+		icon = GFX_goal_generic_construct_naval_dockyard
+		relative_position_id = AUS_navy_reorganism
+		x = 0
+		y = 3
+		cost = 4.3
+		allow_branch = {
+			#NOT = {
+			#	PRU = {
+			#		has_country_flag = victory_R_V_A_1
+			#	}
+			#}
+		}
+		#mutually_exclusive = {  }
+		prerequisite = { focus = AUS_navy_reorganism }
+		ai_will_do = {
+			factor = 2750
+		}
+		
+		#cancel = { }
+		
+		available = { 
+			custom_trigger_tooltip = {
+				tooltip = aus_not_post_war_problem_tt		
+				AUS = {
+					has_country_flag = aus_no_post_war_problem
+				}	
+			}
+		}
+		
+		bypass = { 
+			NOT = {
+				AUS = {
+					owns_state = 160
+					owns_state = 736
+				}
+			}
+		}
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			160 = {
+				add_extra_state_shared_building_slots = 3
+				add_building_construction = {
+					type = dockyard
+					level = 3
+					instant_build = yes
+				}
+			}
+			736 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = dockyard
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+		
+	}
+	
+	focus = {
+		id = AUS_navy_quality_over_quantity
+		icon = GFX_goal_generic_navy_battleship
+		relative_position_id = AUS_navy_reorganism
+		x = 2
+		y = 1
+		cost = 4.3
+		allow_branch = {
+			#NOT = {
+			#	PRU = {
+			#		has_country_flag = victory_R_V_A_1
+			#	}
+			#}
+		}
+		mutually_exclusive = { focus = AUS_navy_quantity_over_quality }
+		prerequisite = { focus = AUS_navy_reorganism }
+		ai_will_do = {
+			factor = 2750
+		}
+		
+		#cancel = { }
+		
+		available = { 
+			custom_trigger_tooltip = {
+				tooltip = aus_not_post_war_problem_tt		
+				AUS = {
+					has_country_flag = aus_no_post_war_problem
+				}	
+			}
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			AUS = {
+				add_ideas = AUS_austrian_naval_idea_1
+			}
+		}
+		
+	}
+	
+	focus = {
+		id = AUS_navy_quality_eqvipment_tech
+		icon = GFX_goal_generic_navy_cruiser
+		relative_position_id = AUS_navy_quality_over_quantity
+		x = -1
+		y = 1
+		cost = 4.3
+		allow_branch = {
+			#NOT = {
+			#	PRU = {
+			#		has_country_flag = victory_R_V_A_1
+			#	}
+			#}
+		}
+		#mutually_exclusive = {  }
+		prerequisite = { focus = AUS_navy_quality_over_quantity }
+		ai_will_do = {
+			factor = 2750
+		}
+		
+		#cancel = { }
+		
+		available = { 
+			custom_trigger_tooltip = {
+				tooltip = aus_not_post_war_problem_tt		
+				AUS = {
+					has_country_flag = aus_no_post_war_problem
+				}	
+			}
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 0.5
+				uses = 4
+				category = ship_modules_tech
+			}
+		}
+		
+	}
+	
+	focus = {
+		id = AUS_navy_quality_fleet_tech
+		icon = GFX_focus_generic_navy_battleship2
+		relative_position_id = AUS_navy_quality_over_quantity
+		x = 1
+		y = 1
+		cost = 4.3
+		allow_branch = {
+			#NOT = {
+			#	PRU = {
+			#		has_country_flag = victory_R_V_A_1
+			#	}
+			#}
+		}
+		#mutually_exclusive = {  }
+		prerequisite = { focus = AUS_navy_quality_over_quantity }
+		ai_will_do = {
+			factor = 2750
+		}
+		
+		#cancel = { }
+		
+		available = { 
+			custom_trigger_tooltip = {
+				tooltip = aus_not_post_war_problem_tt		
+				AUS = {
+					has_country_flag = aus_no_post_war_problem
+				}	
+			}
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 0.5
+				uses = 2
+				category = cl_tech
+			}
+			add_tech_bonus = {
+				bonus = 0.5
+				uses = 2
+				category = bb_tech
+			}
+		}
+		
+	}
+	
+	focus = {
+		id = AUS_navy_quality_spirit
+		icon = GFX_goal_generic_navy_doctrines_tactics
+		relative_position_id = AUS_navy_quality_over_quantity
+		x = 0
+		y = 2
+		cost = 4.3
+		allow_branch = {
+			#NOT = {
+			#	PRU = {
+			#		has_country_flag = victory_R_V_A_1
+			#	}
+			#}
+		}
+		#mutually_exclusive = {  }
+		prerequisite = { focus = AUS_navy_quality_eqvipment_tech }
+		prerequisite = { focus = AUS_navy_quality_fleet_tech }
+		ai_will_do = {
+			factor = 2750
+		}
+		
+		#cancel = { }
+		
+		available = { 
+			custom_trigger_tooltip = {
+				tooltip = aus_not_post_war_problem_tt		
+				AUS = {
+					has_country_flag = aus_no_post_war_problem
+				}	
+			}
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_doctrine_cost_reduction = {
+				cost_reduction = 0.5
+				uses = 2
+				category = cat_fleet_in_being
+			}
+		}
+		
+	}
+	
+	focus = {
+		id = AUS_navy_final_focus
+		icon = GFX_goal_generic_navy_doctrines_tactics
+		relative_position_id = AUS_navy_reorganism
+		x = 0
+		y = 4
+		cost = 4.3
+		allow_branch = {
+			#NOT = {
+			#	PRU = {
+			#		has_country_flag = victory_R_V_A_1
+			#	}
+			#}
+		}
+		#mutually_exclusive = {  }
+		prerequisite = { focus = AUS_navy_quantity_spirit }
+		prerequisite = { focus = AUS_navy_new_dockyard }
+		prerequisite = { focus = AUS_navy_quality_spirit }
+		ai_will_do = {
+			factor = 2750
+		}
+		
+		#cancel = { }
+		
+		available = { 
+			custom_trigger_tooltip = {
+				tooltip = aus_not_post_war_problem_tt		
+				AUS = {
+					has_country_flag = aus_no_post_war_problem
+				}	
+			}
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			AUS = {
+				swap_ideas = {
+					remove_idea = AUS_austrian_naval_idea_1
+					add_idea = AUS_austrian_naval_idea_2
+				}
+			}
+		}
+		
+	}
+	
+	focus = {
+		id = AUS_army_reorganism
+		icon = GFX_focus_generic_combined_arms
+		relative_position_id = AUS_new_doctrine
+		x = 0
+		y = 1
+		cost = 4.3
+		allow_branch = {
+			#NOT = {
+			#	PRU = {
+			#		has_country_flag = victory_R_V_A_1
+			#	}
+			#}
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = AUS_new_doctrine }
+		ai_will_do = {
+			factor = 3000
+		}
+		
+		#cancel = { }
+		
+		available = { 
+			custom_trigger_tooltip = {
+				tooltip = aus_not_post_war_problem_tt		
+				AUS = {
+					has_country_flag = aus_no_post_war_problem
+				}	
+			}
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			army_experience = 25
+			add_doctrine_cost_reduction = {
+				cost_reduction = 0.5
+				uses = 2
+				category = land_doctrine
+			}
+		}
+		
+	}
+	
+	focus = {
+		id = AUS_army_prussian_tactic
+		icon = GFX_focus_generic_army_tanks2
+		relative_position_id = AUS_army_reorganism
+		x = -6
+		y = 1
+		cost = 4.3
+		allow_branch = {
+			#NOT = {
+			#	PRU = {
+			#		has_country_flag = victory_R_V_A_1
+			#	}
+			#}
+		}
+		mutually_exclusive = { focus = AUS_army_fire_from_all_gun focus = AUS_army_planing_army focus = AUS_army_mass_army }
+		prerequisite = { focus = AUS_army_reorganism }
+		ai_will_do = {
+			factor = 3000
+		}
+		
+		#cancel = { }
+		
+		available = { 
+			custom_trigger_tooltip = {
+				tooltip = aus_not_post_war_problem_tt		
+				AUS = {
+					has_country_flag = aus_no_post_war_problem
+				}	
+			}
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			AUS = {
+				swap_ideas = {
+					remove_idea = AUS_austrian_tactic
+					add_idea = AUS_austrian_tactic_panzer_1
+				}
+			}
+		}
+		
+	}
+	
+	focus = {
+		id = AUS_army_prussian_doctrine
+		icon = GFX_goal_generic_army_doctrines
+		relative_position_id = AUS_army_prussian_tactic
+		x = -1
+		y = 1
+		cost = 4.3
+		allow_branch = {
+			#NOT = {
+			#	PRU = {
+			#		has_country_flag = victory_R_V_A_1
+			#	}
+			#}
+		}
+		#mutually_exclusive = {  }
+		prerequisite = { focus = AUS_army_prussian_tactic }
+		ai_will_do = {
+			factor = 3000
+		}
+		
+		#cancel = { }
+		
+		available = { 
+			custom_trigger_tooltip = {
+				tooltip = aus_not_post_war_problem_tt		
+				AUS = {
+					has_country_flag = aus_no_post_war_problem
+				}	
+			}
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_doctrine_cost_reduction = {
+				cost_reduction = 0.5
+				uses = 2
+				category = cat_mobile_warfare
+			}
+		}
+		
+	}
+	
+	focus = {
+		id = AUS_army_prussian_tech
+		icon = GFX_goal_generic_army_tanks
+		relative_position_id = AUS_army_prussian_tactic
+		x = 1
+		y = 1
+		cost = 4.3
+		allow_branch = {
+			#NOT = {
+			#	PRU = {
+			#		has_country_flag = victory_R_V_A_1
+			#	}
+			#}
+		}
+		#mutually_exclusive = {  }
+		prerequisite = { focus = AUS_army_prussian_tactic }
+		ai_will_do = {
+			factor = 3000
+		}
+		
+		#cancel = { }
+		
+		available = { 
+			custom_trigger_tooltip = {
+				tooltip = aus_not_post_war_problem_tt		
+				AUS = {
+					has_country_flag = aus_no_post_war_problem
+				}	
+			}
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 0.5
+				uses = 2
+				category = armor
+			}
+			add_tech_bonus = {
+				bonus = 0.5
+				uses = 1
+				category = motorized_equipment
+			}
+		}
+		
+	}
+	
+	focus = {
+		id = AUS_army_prussian_pattern
+		icon = GFX_focus_generic_tank_production
+		relative_position_id = AUS_army_prussian_tactic
+		x = 0
+		y = 2
+		cost = 4.3
+		allow_branch = {
+			#NOT = {
+			#	PRU = {
+			#		has_country_flag = victory_R_V_A_1
+			#	}
+			#}
+		}
+		#mutually_exclusive = {  }
+		prerequisite = { focus = AUS_army_prussian_doctrine }
+		prerequisite = { focus = AUS_army_prussian_tech }
+		ai_will_do = {
+			factor = 3000
+		}
+		
+		#cancel = { }
+		
+		available = { 
+			custom_trigger_tooltip = {
+				tooltip = aus_not_post_war_problem_tt		
+				AUS = {
+					has_country_flag = aus_no_post_war_problem
+				}	
+			}
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			custom_effect_tooltip = aus_divisian_pattern_panzer_tt
+			hidden_effect = {
+				AUS = {
+					load_oob = AUS_panzer_oob
+				}
+			}
+		}
+		
+	}
+	
+	focus = {
+		id = AUS_army_prussian_spirit
+		icon = GFX_focus_generic_tankette
+		relative_position_id = AUS_army_prussian_tactic
+		x = 0
+		y = 3
+		cost = 4.3
+		allow_branch = {
+			#NOT = {
+			#	PRU = {
+			#		has_country_flag = victory_R_V_A_1
+			#	}
+			#}
+		}
+		#mutually_exclusive = {  }
+		prerequisite = { focus = AUS_army_prussian_pattern }
+		ai_will_do = {
+			factor = 3000
+		}
+		
+		#cancel = { }
+		
+		available = { 
+			custom_trigger_tooltip = {
+				tooltip = aus_not_post_war_problem_tt		
+				AUS = {
+					has_country_flag = aus_no_post_war_problem
+				}	
+			}
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			AUS = {
+				swap_ideas = {
+					remove_idea = AUS_austrian_tactic_panzer_1
+					add_idea = AUS_austrian_tactic_panzer_2
+				}
+			}
+		}
+		
+	}
+	
+	focus = {
+		id = AUS_army_fire_from_all_gun
+		icon = GFX_focus_ETH_freedom_at_gunpoint
+		relative_position_id = AUS_army_reorganism
+		x = -2
+		y = 1
+		cost = 4.3
+		allow_branch = {
+			#NOT = {
+			#	PRU = {
+			#		has_country_flag = victory_R_V_A_1
+			#	}
+			#}
+		}
+		mutually_exclusive = { focus = AUS_army_prussian_tactic focus = AUS_army_planing_army focus = AUS_army_mass_army }
+		prerequisite = { focus = AUS_army_reorganism }
+		ai_will_do = {
+			factor = 3000
+		}
+		
+		#cancel = { }
+		
+		available = { 
+			custom_trigger_tooltip = {
+				tooltip = aus_not_post_war_problem_tt		
+				AUS = {
+					has_country_flag = aus_no_post_war_problem
+				}	
+			}
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			AUS = {
+				swap_ideas = {
+					remove_idea = AUS_austrian_tactic
+					add_idea = AUS_austrian_tactic_artileria_1
+				}
+			}
+		}
+		
+	}
+	
+	focus = {
+		id = AUS_army_fire_from_all_gun_doctrine
+		icon = GFX_goal_generic_army_doctrines
+		relative_position_id = AUS_army_fire_from_all_gun
+		x = -1
+		y = 1
+		cost = 4.3
+		allow_branch = {
+			#NOT = {
+			#	PRU = {
+			#		has_country_flag = victory_R_V_A_1
+			#	}
+			#}
+		}
+		#mutually_exclusive = {  }
+		prerequisite = { focus = AUS_army_fire_from_all_gun }
+		ai_will_do = {
+			factor = 3000
+		}
+		
+		#cancel = { }
+		
+		available = { 
+			custom_trigger_tooltip = {
+				tooltip = aus_not_post_war_problem_tt		
+				AUS = {
+					has_country_flag = aus_no_post_war_problem
+				}	
+			}
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_doctrine_cost_reduction = {
+				cost_reduction = 0.5
+				uses = 2
+				category = cat_superior_firepower
+			}
+		}
+		
+	}
+	
+	focus = {
+		id = AUS_army_fire_from_all_gun_tech
+		icon = GFX_goal_generic_build_tank
+		relative_position_id = AUS_army_fire_from_all_gun
+		x = 1
+		y = 1
+		cost = 4.3
+		allow_branch = {
+			#NOT = {
+			#	PRU = {
+			#		has_country_flag = victory_R_V_A_1
+			#	}
+			#}
+		}
+		#mutually_exclusive = {  }
+		prerequisite = { focus = AUS_army_fire_from_all_gun }
+		ai_will_do = {
+			factor = 3000
+		}
+		
+		#cancel = { }
+		
+		available = { 
+			custom_trigger_tooltip = {
+				tooltip = aus_not_post_war_problem_tt		
+				AUS = {
+					has_country_flag = aus_no_post_war_problem
+				}	
+			}
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 0.5
+				uses = 2
+				category = artillery
+			}
+			add_tech_bonus = {
+				bonus = 0.5
+				uses = 1
+				category = support_tech
+			}
+		}
+		
+	}
+	
+	focus = {
+		id = AUS_army_fire_from_all_gun_pattern
+		icon = GFX_goal_generic_army_artillery
+		relative_position_id = AUS_army_fire_from_all_gun
+		x = 0
+		y = 2
+		cost = 4.3
+		allow_branch = {
+			#NOT = {
+			#	PRU = {
+			#		has_country_flag = victory_R_V_A_1
+			#	}
+			#}
+		}
+		#mutually_exclusive = {  }
+		prerequisite = { focus = AUS_army_fire_from_all_gun_tech }
+		prerequisite = { focus = AUS_army_fire_from_all_gun_doctrine }
+		ai_will_do = {
+			factor = 3000
+		}
+		
+		#cancel = { }
+		
+		available = { 
+			custom_trigger_tooltip = {
+				tooltip = aus_not_post_war_problem_tt		
+				AUS = {
+					has_country_flag = aus_no_post_war_problem
+				}	
+			}
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			custom_effect_tooltip = aus_divisian_artileria_mass_tt
+			hidden_effect = {
+				AUS = {
+					load_oob = AUS_artileria_oob
+				}
+			}
+		}
+		
+	}
+	
+	focus = {
+		id = AUS_army_fire_from_all_gun_spirit
+		icon = GFX_goal_generic_army_artillery2
+		relative_position_id = AUS_army_fire_from_all_gun
+		x = 0
+		y = 3
+		cost = 4.3
+		allow_branch = {
+			#NOT = {
+			#	PRU = {
+			#		has_country_flag = victory_R_V_A_1
+			#	}
+			#}
+		}
+		#mutually_exclusive = {  }
+		prerequisite = { focus = AUS_army_fire_from_all_gun_pattern }
+		ai_will_do = {
+			factor = 3000
+		}
+		
+		#cancel = { }
+		
+		available = { 
+			custom_trigger_tooltip = {
+				tooltip = aus_not_post_war_problem_tt		
+				AUS = {
+					has_country_flag = aus_no_post_war_problem
+				}	
+			}
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			AUS = {
+				swap_ideas = {
+					remove_idea = AUS_austrian_tactic_artileria_1
+					add_idea = AUS_austrian_tactic_artileria_2
+				}
+			}
+		}
+		
+	}
+	
+	focus = {
+		id = AUS_army_planing_army
+		icon = GFX_goal_generic_occupy_states_ongoing_war
+		relative_position_id = AUS_army_reorganism
+		x = 2
+		y = 1
+		cost = 4.3
+		allow_branch = {
+			#NOT = {
+			#	PRU = {
+			#		has_country_flag = victory_R_V_A_1
+			#	}
+			#}
+		}
+		mutually_exclusive = { focus = AUS_army_prussian_tactic focus = AUS_army_fire_from_all_gun focus = AUS_army_mass_army }
+		prerequisite = { focus = AUS_army_reorganism }
+		ai_will_do = {
+			factor = 3000
+		}
+		
+		#cancel = { }
+		
+		available = { 
+			custom_trigger_tooltip = {
+				tooltip = aus_not_post_war_problem_tt		
+				AUS = {
+					has_country_flag = aus_no_post_war_problem
+				}	
+			}
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			AUS = {
+				swap_ideas = {
+					remove_idea = AUS_austrian_tactic
+					add_idea = AUS_austrian_tactic_plan_1
+				}
+			}
+		}
+		
+	}
+	
+	focus = {
+		id = AUS_army_planing_army_tech
+		icon = GFX_goal_generic_small_arms
+		relative_position_id = AUS_army_planing_army
+		x = -1
+		y = 1
+		cost = 4.3
+		allow_branch = {
+			#NOT = {
+			#	PRU = {
+			#		has_country_flag = victory_R_V_A_1
+			#	}
+			#}
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = AUS_army_planing_army }
+		ai_will_do = {
+			factor = 3000
+		}
+		
+		#cancel = { }
+		
+		available = { 
+			custom_trigger_tooltip = {
+				tooltip = aus_not_post_war_problem_tt		
+				AUS = {
+					has_country_flag = aus_no_post_war_problem
+				}	
+			}
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 0.5
+				uses = 3
+				category = support_tech
+			}
+		}
+		
+	}
+	
+	focus = {
+		id = AUS_army_planing_army_doctine
+		icon = GFX_goal_generic_army_doctrines
+		relative_position_id = AUS_army_planing_army
+		x = 1
+		y = 1
+		cost = 4.3
+		allow_branch = {
+			#NOT = {
+			#	PRU = {
+			#		has_country_flag = victory_R_V_A_1
+			#	}
+			#}
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = AUS_army_planing_army }
+		ai_will_do = {
+			factor = 3000
+		}
+		
+		#cancel = { }
+		
+		available = { 
+			custom_trigger_tooltip = {
+				tooltip = aus_not_post_war_problem_tt		
+				AUS = {
+					has_country_flag = aus_no_post_war_problem
+				}	
+			}
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_doctrine_cost_reduction = {
+				cost_reduction = 0.5
+				uses = 2
+				category = cat_grand_battle_plan
+			}
+		}
+		
+	}
+	
+	focus = {
+		id = AUS_army_planing_army_pattern
+		icon = GFX_goal_generic_allies_build_infantry
+		relative_position_id = AUS_army_planing_army
+		x = 0
+		y = 2
+		cost = 4.3
+		allow_branch = {
+			#NOT = {
+			#	PRU = {
+			#		has_country_flag = victory_R_V_A_1
+			#	}
+			#}
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = AUS_army_planing_army_tech }
+		prerequisite = { focus = AUS_army_planing_army_doctine }
+		ai_will_do = {
+			factor = 3000
+		}
+		
+		#cancel = { }
+		
+		available = { 
+			custom_trigger_tooltip = {
+				tooltip = aus_not_post_war_problem_tt		
+				AUS = {
+					has_country_flag = aus_no_post_war_problem
+				}	
+			}
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			custom_effect_tooltip = aus_divisian_pattern_tactic_tt
+			hidden_effect = {
+				AUS = {
+					load_oob = AUS_tactic_oob
+				}
+			}
+		}
+		
+	}
+	
+	focus = {
+		id = AUS_army_planing_army_spirit
+		icon = GFX_goal_generic_position_armies
+		relative_position_id = AUS_army_planing_army
+		x = 0
+		y = 3
+		cost = 4.3
+		allow_branch = {
+			#NOT = {
+			#	PRU = {
+			#		has_country_flag = victory_R_V_A_1
+			#	}
+			#}
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = AUS_army_planing_army_pattern }
+		ai_will_do = {
+			factor = 3000
+		}
+		
+		#cancel = { }
+		
+		available = { 
+			custom_trigger_tooltip = {
+				tooltip = aus_not_post_war_problem_tt		
+				AUS = {
+					has_country_flag = aus_no_post_war_problem
+				}	
+			}
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			AUS = {
+				swap_ideas = {
+					remove_idea = AUS_austrian_tactic_plan_1
+					add_idea = AUS_austrian_tactic_plan_2
+				}
+			}
+		}
+		
+	}
+	
+	focus = {
+		id = AUS_army_mass_army
+		icon = GFX_goal_generic_axis_build_infantry
+		relative_position_id = AUS_army_reorganism
+		x = 6
+		y = 1
+		cost = 4.3
+		allow_branch = {
+			#NOT = {
+			#	PRU = {
+			#		has_country_flag = victory_R_V_A_1
+			#	}
+			#}
+		}
+		mutually_exclusive = { focus = AUS_army_prussian_tactic focus = AUS_army_fire_from_all_gun focus = AUS_army_planing_army }
+		prerequisite = { focus = AUS_army_reorganism }
+		ai_will_do = {
+			factor = 3000
+		}
+		
+		#cancel = { }
+		
+		available = { 
+			custom_trigger_tooltip = {
+				tooltip = aus_not_post_war_problem_tt		
+				AUS = {
+					has_country_flag = aus_no_post_war_problem
+				}	
+			}
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			AUS = {
+				swap_ideas = {
+					remove_idea = AUS_austrian_tactic
+					add_idea = AUS_austrian_tactic_mass_1
+				}
+			}
+		}
+		
+	}
+	
+	focus = {
+		id = AUS_army_mass_army_tech
+		icon = GFX_goal_generic_allies_build_infantry
+		relative_position_id = AUS_army_mass_army
+		x = -1
+		y = 1
+		cost = 4.3
+		allow_branch = {
+			#NOT = {
+			#	PRU = {
+			#		has_country_flag = victory_R_V_A_1
+			#	}
+			#}
+		}
+		#mutually_exclusive = {  }
+		prerequisite = { focus = AUS_army_mass_army }
+		ai_will_do = {
+			factor = 3000
+		}
+		
+		#cancel = { }
+		
+		available = { 
+			custom_trigger_tooltip = {
+				tooltip = aus_not_post_war_problem_tt		
+				AUS = {
+					has_country_flag = aus_no_post_war_problem
+				}	
+			}
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 0.5
+				uses = 3
+				category = infantry_weapons
+			}
+		}
+		
+	}
+	
+	focus = {
+		id = AUS_army_mass_army_doctrine
+		icon = GFX_goal_generic_army_doctrines
+		relative_position_id = AUS_army_mass_army
+		x = 1
+		y = 1
+		cost = 4.3
+		allow_branch = {
+			#NOT = {
+			#	PRU = {
+			#		has_country_flag = victory_R_V_A_1
+			#	}
+			#}
+		}
+		#mutually_exclusive = {  }
+		prerequisite = { focus = AUS_army_mass_army }
+		ai_will_do = {
+			factor = 3000
+		}
+		
+		#cancel = { }
+		
+		available = { 
+			custom_trigger_tooltip = {
+				tooltip = aus_not_post_war_problem_tt		
+				AUS = {
+					has_country_flag = aus_no_post_war_problem
+				}	
+			}
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_doctrine_cost_reduction = {
+				cost_reduction = 0.5
+				uses = 2
+				category = cat_mass_assault
+			}
+		}
+		
+	}
+	
+	focus = {
+		id = AUS_army_mass_army_pattern
+		icon = GFX_focus_generic_little_entente
+		relative_position_id = AUS_army_mass_army
+		x = 0
+		y = 2
+		cost = 4.3
+		allow_branch = {
+			#NOT = {
+			#	PRU = {
+			#		has_country_flag = victory_R_V_A_1
+			#	}
+			#}
+		}
+		#mutually_exclusive = {  }
+		prerequisite = { focus = AUS_army_mass_army_tech }
+		prerequisite = { focus = AUS_army_mass_army_doctrine }
+		ai_will_do = {
+			factor = 3000
+		}
+		
+		#cancel = { }
+		
+		available = { 
+			custom_trigger_tooltip = {
+				tooltip = aus_not_post_war_problem_tt		
+				AUS = {
+					has_country_flag = aus_no_post_war_problem
+				}	
+			}
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			custom_effect_tooltip = aus_divisian_pattern_mass_tt
+			hidden_effect = {
+				AUS = {
+					load_oob = AUS_mass_oob
+				}
+			}
+		}
+		
+	}
+	
+	focus = {
+		id = AUS_army_mass_army_spirit
+		icon = GFX_focus_generic_manpower
+		relative_position_id = AUS_army_mass_army
+		x = 0
+		y = 3
+		cost = 4.3
+		allow_branch = {
+			#NOT = {
+			#	PRU = {
+			#		has_country_flag = victory_R_V_A_1
+			#	}
+			#}
+		}
+		#mutually_exclusive = {  }
+		prerequisite = { focus = AUS_army_mass_army_pattern }
+		ai_will_do = {
+			factor = 3000
+		}
+		
+		#cancel = { }
+		
+		available = { 
+			custom_trigger_tooltip = {
+				tooltip = aus_not_post_war_problem_tt		
+				AUS = {
+					has_country_flag = aus_no_post_war_problem
+				}	
+			}
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			AUS = {
+				swap_ideas = {
+					remove_idea = AUS_austrian_tactic_mass_1
+					add_idea = AUS_austrian_tactic_mass_2
+				}
+			}
+		}
+		
+	}
+	
+	focus = {
+		id = AUS_new_warfarer
+		icon = GFX_focus_generic_air_defense
+		relative_position_id = AUS_new_doctrine
+		x = 13
+		y = 1
+		cost = 4.3
+		allow_branch = {
+			#NOT = {
+			#	PRU = {
+			#		has_country_flag = victory_R_V_A_1
+			#	}
+			#}
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = AUS_new_doctrine }
+		ai_will_do = {
+			factor = 2000
+		}
+		
+		#cancel = { }
+		
+		available = { 
+			custom_trigger_tooltip = {
+				tooltip = aus_not_post_war_problem_tt		
+				AUS = {
+					has_country_flag = aus_no_post_war_problem
+				}	
+			}
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			air_experience = 25
+			add_doctrine_cost_reduction = {
+				cost_reduction = 0.5
+				uses = 2
+				category = air_doctrine
+			}
+		}
+		
+	}
+	
+	focus = {
+		id = AUS_big_bird
+		icon = GFX_goal_generic_air_bomber
+		relative_position_id = AUS_new_warfarer
+		x = -3
+		y = 1
+		cost = 4.3
+		allow_branch = {
+			#NOT = {
+			#	PRU = {
+			#		has_country_flag = victory_R_V_A_1
+			#	}
+			#}
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = AUS_new_warfarer }
+		ai_will_do = {
+			factor = 2000
+		}
+		
+		#cancel = { }
+		
+		available = { 
+			custom_trigger_tooltip = {
+				tooltip = aus_not_post_war_problem_tt		
+				AUS = {
+					has_country_flag = aus_no_post_war_problem
+				}	
+			}
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			air_experience = 50
+			add_doctrine_cost_reduction = {
+				cost_reduction = 0.5
+				uses = 2
+				category = air_doctrine
+			}
+		}
+		
+	}
+	
+	focus = {
+		id = AUS_big_bird_tech
+		icon = GFX_focus_generic_multi_role_aircraft
+		relative_position_id = AUS_new_warfarer
+		x = -4
+		y = 2
+		cost = 4.3
+		allow_branch = {
+			#NOT = {
+			#	PRU = {
+			#		has_country_flag = victory_R_V_A_1
+			#	}
+			#}
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = AUS_big_bird }
+		ai_will_do = {
+			factor = 2000
+		}
+		
+		#cancel = { }
+		
+		available = { 
+			custom_trigger_tooltip = {
+				tooltip = aus_not_post_war_problem_tt		
+				AUS = {
+					has_country_flag = aus_no_post_war_problem
+				}	
+			}
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 0.50
+				uses = 2
+				category = heavy_air
+			}
+		}	
+		
+	}
+	
+	focus = {
+		id = AUS_big_bird_tech_eqwipment
+		icon = GFX_goal_generic_air_naval_bomber
+		relative_position_id = AUS_new_warfarer
+		x = -2
+		y = 2
+		cost = 4.3
+		allow_branch = {
+			#NOT = {
+			#	PRU = {
+			#		has_country_flag = victory_R_V_A_1
+			#	}
+			#}
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = AUS_big_bird }
+		ai_will_do = {
+			factor = 2000
+		}
+		
+		#cancel = { }
+		
+		available = { 
+			custom_trigger_tooltip = {
+				tooltip = aus_not_post_war_problem_tt		
+				AUS = {
+					has_country_flag = aus_no_post_war_problem
+				}	
+			}
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 0.50
+				uses = 3
+				category = plane_modules_tech
+			}
+		}
+		
+	}
+	
+	focus = {
+		id = AUS_big_bird_tech_allot
+		icon = GFX_focus_generic_armored_air_support
+		relative_position_id = AUS_new_warfarer
+		x = -3
+		y = 3
+		cost = 4.3
+		allow_branch = {
+			#NOT = {
+			#	PRU = {
+			#		has_country_flag = victory_R_V_A_1
+			#	}
+			#}
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = AUS_big_bird_tech }
+		prerequisite = { focus = AUS_big_bird_tech_eqwipment }
+		ai_will_do = {
+			factor = 2000
+		}
+		
+		#cancel = { }
+		
+		available = { 
+			custom_trigger_tooltip = {
+				tooltip = aus_not_post_war_problem_tt		
+				AUS = {
+					has_country_flag = aus_no_post_war_problem
+				}	
+			}
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 0.25
+				uses = 2
+				category = medium_air
+			}
+			add_tech_bonus = {
+				bonus = 0.50
+				uses = 3
+				category = plane_modules_tech
+			}
+		}
+		
+	}
+	
+	focus = {
+		id = AUS_air_base
+		icon = GFX_focus_generic_aircraft_production
+		relative_position_id = AUS_new_warfarer
+		x = 0
+		y = 1
+		cost = 4.3
+		allow_branch = {
+			#NOT = {
+			#	PRU = {
+			#		has_country_flag = victory_R_V_A_1
+			#	}
+			#}
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = AUS_new_warfarer }
+		ai_will_do = {
+			factor = 2000
+		}
+		
+		#cancel = { }
+		
+		available = { 
+			AUS = {
+				has_tech = iw_basic_airframe
+			}
+			custom_trigger_tooltip = {
+				tooltip = aus_not_post_war_problem_tt		
+				AUS = {
+					has_country_flag = aus_no_post_war_problem
+				}	
+			}
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			4 = {
+				add_building_construction = {
+					type = air_base
+					level = 5
+					instant_build = yes
+				}
+			}
+			9 = {
+				add_building_construction = {
+					type = air_base
+					level = 4
+					instant_build = yes
+				}
+			}
+			43 = {
+				add_building_construction = {
+					type = air_base
+					level = 4
+					instant_build = yes
+				}
+			}
+			91 = {
+				add_building_construction = {
+					type = air_base
+					level = 3
+					instant_build = yes
+				}
+			}
+		}
+		
+	}
+	
+	focus = {
+		id = AUS_radar_build
+		icon = GFX_goal_generic_radar
+		relative_position_id = AUS_new_warfarer
+		x = 0
+		y = 2
+		cost = 4.3
+		allow_branch = {
+			#NOT = {
+			#	PRU = {
+			#		has_country_flag = victory_R_V_A_1
+			#	}
+			#}
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = AUS_air_base }
+		ai_will_do = {
+			factor = 2000
+		}
+		
+		#cancel = { }
+		
+		available = { 
+			AUS = {
+				has_tech = radio_detection
+			}
+			custom_trigger_tooltip = {
+				tooltip = aus_not_post_war_problem_tt		
+				AUS = {
+					has_country_flag = aus_no_post_war_problem
+				}	
+			}
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			4 = {
+				add_building_construction = {
+					type = radar_station
+					level = 1
+					instant_build = yes
+				}
+			}
+			9 = {
+				add_building_construction = {
+					type = radar_station
+					level = 1
+					instant_build = yes
+				}
+			}
+			43 = {
+				add_building_construction = {
+					type = radar_station
+					level = 1
+					instant_build = yes
+				}
+			}
+			91 = {
+				add_building_construction = {
+					type = radar_station
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		
+	}
+	
+	focus = {
+		id = AUS_sky_doctrine
+		icon = GFX_goal_generic_air_doctrine
+		relative_position_id = AUS_new_warfarer
+		x = 0
+		y = 3
+		cost = 4.3
+		allow_branch = {
+			#NOT = {
+			#	PRU = {
+			#		has_country_flag = victory_R_V_A_1
+			#	}
+			#}
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = AUS_radar_build }
+		ai_will_do = {
+			factor = 2000
+		}
+		
+		#cancel = { }
+		
+		available = { 
+			custom_trigger_tooltip = {
+				tooltip = aus_not_post_war_problem_tt		
+				AUS = {
+					has_country_flag = aus_no_post_war_problem
+				}	
+			}
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_doctrine_cost_reduction = {
+				cost_reduction = 0.5
+				uses = 2
+				category = air_doctrine
+			}
+		}
+		
+	}
+	
+	focus = {
+		id = AUS_sky_spirit
+		icon = GFX_focus_eng_special_air_service
+		relative_position_id = AUS_new_warfarer
+		x = 0
+		y = 4
+		cost = 4.3
+		allow_branch = {
+			#NOT = {
+			#	PRU = {
+			#		has_country_flag = victory_R_V_A_1
+			#	}
+			#}
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = AUS_big_bird_tech_allot }
+		prerequisite = { focus = AUS_sky_doctrine }
+		prerequisite = { focus = AUS_little_bird_tech_allot }
+		ai_will_do = {
+			factor = 2000
+		}
+		
+		#cancel = { }
+		
+		available = { 
+			custom_trigger_tooltip = {
+				tooltip = aus_not_post_war_problem_tt		
+				AUS = {
+					has_country_flag = aus_no_post_war_problem
+				}	
+			}
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			AUS = {
+				add_ideas = AUS_austrian_sky_spirit
+			}
+		}
+		
+	}
+	
+	focus = {
+		id = AUS_little_bird
+		icon = GFX_goal_generic_air_fighter2
+		relative_position_id = AUS_new_warfarer
+		x = 3
+		y = 1
+		cost = 4.3
+		allow_branch = {
+			#NOT = {
+			#	PRU = {
+			#		has_country_flag = victory_R_V_A_1
+			#	}
+			#}
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = AUS_new_warfarer }
+		ai_will_do = {
+			factor = 2000
+		}
+		
+		#cancel = { }
+		
+		available = { 
+			custom_trigger_tooltip = {
+				tooltip = aus_not_post_war_problem_tt		
+				AUS = {
+					has_country_flag = aus_no_post_war_problem
+				}	
+			}
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			air_experience = 50
+			add_doctrine_cost_reduction = {
+				cost_reduction = 0.5
+				uses = 2
+				category = air_doctrine
+			}
+		}
+		
+	}
+	
+	focus = {
+		id = AUS_little_bird_eqwipment
+		icon = GFX_goal_generic_air_production
+		relative_position_id = AUS_new_warfarer
+		x = 2
+		y = 2
+		cost = 4.3
+		allow_branch = {
+			#NOT = {
+			#	PRU = {
+			#		has_country_flag = victory_R_V_A_1
+			#	}
+			#}
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = AUS_little_bird }
+		ai_will_do = {
+			factor = 2000
+		}
+		
+		#cancel = { }
+		
+		available = { 
+			custom_trigger_tooltip = {
+				tooltip = aus_not_post_war_problem_tt		
+				AUS = {
+					has_country_flag = aus_no_post_war_problem
+				}	
+			}
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 0.50
+				uses = 3
+				category = plane_modules_tech
+			}
+		}
+		
+	}
+	
+	focus = {
+		id = AUS_little_bird_tech
+		icon = GFX_goal_generic_air_fighter
+		relative_position_id = AUS_new_warfarer
+		x = 4
+		y = 2
+		cost = 4.3
+		allow_branch = {
+			#NOT = {
+			#	PRU = {
+			#		has_country_flag = victory_R_V_A_1
+			#	}
+			#}
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = AUS_little_bird }
+		ai_will_do = {
+			factor = 2000
+		}
+		
+		#cancel = { }
+		
+		available = { 
+			custom_trigger_tooltip = {
+				tooltip = aus_not_post_war_problem_tt		
+				AUS = {
+					has_country_flag = aus_no_post_war_problem
+				}	
+			}
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 0.50
+				uses = 2
+				category = light_air
+			}
+		}
+		
+	}
+	
+	focus = {
+		id = AUS_little_bird_tech_allot
+		icon = GFX_focus_generic_long_range_aircraft
+		relative_position_id = AUS_new_warfarer
+		x = 3
+		y = 3
+		cost = 4.3
+		allow_branch = {
+			#NOT = {
+			#	PRU = {
+			#		has_country_flag = victory_R_V_A_1
+			#	}
+			#}
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = AUS_little_bird_eqwipment }
+		prerequisite = { focus = AUS_little_bird_tech }
+		ai_will_do = {
+			factor = 2000
+		}
+		
+		#cancel = { }
+		
+		available = { 
+			custom_trigger_tooltip = {
+				tooltip = aus_not_post_war_problem_tt		
+				AUS = {
+					has_country_flag = aus_no_post_war_problem
+				}	
+			}
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 0.25
+				uses = 2
+				category = medium_air
+			}
+			add_tech_bonus = {
+				bonus = 0.50
+				uses = 3
+				category = plane_modules_tech
+			}
+		}
+		
+	}
+	
+	focus = {
+		id = AUS_army_reform_final
+		icon = GFX_focus_chi_army_reform
+		relative_position_id = AUS_army_reorganism
+		x = 0
+		y = 5
+		cost = 4.3
+		allow_branch = {
+			#NOT = {
+			#	PRU = {
+			#		has_country_flag = victory_R_V_A_1
+			#	}
+			#}
+		}
+		#mutually_exclusive = { }
+		prerequisite = { focus = AUS_navy_final_focus }
+		prerequisite = { focus = AUS_army_prussian_spirit focus = AUS_army_fire_from_all_gun_spirit focus = AUS_army_planing_army_spirit focus = AUS_army_mass_army_spirit }
+		prerequisite = { focus = AUS_sky_spirit }
+		ai_will_do = {
+			factor = 2000
+		}
+		
+		#cancel = { }
+		
+		available = { 
+			custom_trigger_tooltip = {
+				tooltip = aus_not_post_war_problem_tt		
+				AUS = {
+					has_country_flag = aus_no_post_war_problem
+				}	
+			}
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			AUS = {
+				remove_ideas = {	
+					AUS_austrian_sky_spirit
+					AUS_austrian_naval_idea_2
+				}
+				add_ideas = {
+					AUS_grand_army_idea
+				}
+			}
 		}
 		
 	}
