@@ -2726,6 +2726,10 @@ focus_tree = {
 		y = 1
 		cost = 5 
 		
+		available = {
+			has_war = no
+		}
+		
 		mutually_exclusive = { focus = RUS_friendship_witch_tashkent }
 
 		relative_position_id = RUS_central_asian_politick
@@ -2767,6 +2771,10 @@ focus_tree = {
 		x = 0
 		y = 1
 		cost = 5 
+		
+		available = {
+			has_war = no
+		}
 
 		relative_position_id = RUS_reоrganise_central_asia
 		prerequisite = { focus = RUS_reоrganise_central_asia }
@@ -2835,6 +2843,10 @@ focus_tree = {
 		x = -1
 		y = 1
 		cost = 5 
+		
+		available = {
+			has_war = no
+		}
 
 		relative_position_id = RUS_far_east_politick
 		prerequisite = { focus = RUS_far_east_politick }
@@ -2870,7 +2882,7 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
 		completion_reward = {
-			country_event = russian_far_east_politic.14
+			custom_effect_tooltip = RUS_unlock_integration_far_east_decisions
 		}
 	}
 	
@@ -2881,6 +2893,10 @@ focus_tree = {
 		x = 0
 		y = 1
 		cost = 5 
+		
+		available = {
+			has_war = no
+		}
 
 		relative_position_id = RUS_control_amur
 		prerequisite = { focus = RUS_control_amur }
@@ -2890,7 +2906,7 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
 		completion_reward = {
-			country_event = russian_far_east_politic.18
+			QIN = { country_event = russian_far_east_politic.11 }
 		}
 	}
 	
@@ -2916,8 +2932,8 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
 		completion_reward = {
-		
-		}
+			country_event = russian_far_east_politic.14
+		} 
 	}
 	
 	focus = {
@@ -2927,6 +2943,10 @@ focus_tree = {
 		x = 0
 		y = 1
 		cost = 5 
+		
+		available = {
+			
+		}
 		
 		mutually_exclusive = { focus = RUS_intervention_in_china }
 
@@ -2938,7 +2958,39 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
 		completion_reward = {
-		
+			if = {
+				limit = {
+					country_exists = JAP 
+				}
+				JAP = {
+					add_opinion_modifier = {
+						target = RUS
+						modifier = rus_anti_jap_mil_politick
+					}
+				}
+			}
+			if = {
+				limit = {
+					country_exists = JAS
+				}
+				JAS = {
+					add_opinion_modifier = {
+						target = RUS
+						modifier = rus_anti_jap_mil_politick
+					}
+				}
+			}
+			if = {
+				limit = {
+					country_exists = TUK
+				}
+				TUK = {
+					add_opinion_modifier = {
+						target = RUS
+						modifier = rus_anti_jap_mil_politick
+					}
+				}
+			}
 		}
 	}
 
@@ -2951,6 +3003,10 @@ focus_tree = {
 		x = 3
 		y = 1
 		cost = 5 
+		
+		available = {
+			japan_civil_war_end = yes
+		}
 
 		relative_position_id = RUS_far_east_politick
 		prerequisite = { focus = RUS_far_east_politick }
@@ -2960,7 +3016,7 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
 		completion_reward = {
-		
+			country_event = russian_far_east_politic.18
 		}
 	}
 	
@@ -2971,6 +3027,10 @@ focus_tree = {
 		x = 1
 		y = 1
 		cost = 5 
+		
+		available = {
+			has_country_flag = RUS_not_up_rus_jap_relations
+		}
 
 		relative_position_id = RUS_russo_japanesse_relations
 		prerequisite = { focus = RUS_russo_japanesse_relations }
@@ -2980,7 +3040,33 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
 		completion_reward = {
-		
+			if = {
+				limit = {
+					country_exists = JAP 
+					has_country_flag = JAPFULLJAP 
+				}
+				JAP = {
+					country_event = russian_far_east_politic.22
+				}
+			}
+			if = {
+				limit = {
+					country_exists = JAS
+					has_country_flag = JASFULLJAP  
+				}
+				JAS = {
+					country_event = russian_far_east_politic.22
+				}
+			}
+			if = {
+				limit = {
+					country_exists = TUK
+					has_country_flag = TUKFULLJAP  
+				}
+				TUK = {
+					country_event = russian_far_east_politic.22
+				}
+			}
 		}
 	}
 	
@@ -2991,6 +3077,10 @@ focus_tree = {
 		x = 0
 		y = 1
 		cost = 5 
+		
+		available = {
+			has_country_flag = RUS_not_up_rus_jap_relations
+		}
 
 		relative_position_id = RUS_claims_on_sahalin
 		prerequisite = { focus = RUS_claims_on_sahalin }
@@ -3011,6 +3101,10 @@ focus_tree = {
 		x = -1
 		y = 2
 		cost = 5 
+		
+		available = {
+			has_country_flag = RUS_up_rus_jap_relations
+		}
 		
 		mutually_exclusive = { focus = RUS_fight_witch_japan_militarism }
 
@@ -3163,7 +3257,7 @@ focus_tree = {
 	
 	focus = {
 		id = RUS_russo_french_relations
-		icon = GFX_focus_chi_reach_out_to_france
+		icon = GFX_focus_rus_rus_frr_agreements
 		
 		x = 4
 		y = 1
@@ -3206,7 +3300,7 @@ focus_tree = {
 	
 	focus = {
 		id = RUS_coop_researches_witch_france
-		icon = GFX_goal_generic_scientific_exchange
+		icon = GFX_focus_rus_coop_researches_witch_france
 		
 		x = 0
 		y = 1
@@ -3304,7 +3398,7 @@ focus_tree = {
 	
 	focus = {
 		id = RUS_in_search_of_allies
-		icon = GFX_goal_generic_national_unity
+		icon = GFX_focus_rus_in_search_of_allies
 		
 		x = 0
 		y = 1
@@ -3330,7 +3424,7 @@ focus_tree = {
 	
 	focus = {
 		id = RUS_russo_austrian_relations
-		icon = GFX_goal_generic_improve_relations
+		icon = GFX_focus_rus_rus_aus_agreements
 		
 		x = 7
 		y = 1
@@ -3378,7 +3472,7 @@ focus_tree = {
 	
 	focus = {
 		id = RUS_help_aus_economic
-		icon = GFX_focus_generic_industry_1
+		icon = GFX_focus_rus_help_aus_economic
 		
 		x = -1
 		y = 1
@@ -3398,7 +3492,7 @@ focus_tree = {
 	
 	focus = {
 		id = RUS_ally_aus
-		icon = GFX_goal_generic_major_alliance
+		icon = GFX_focus_rus_ally_with_aus
 		
 		x = 0
 		y = 2
