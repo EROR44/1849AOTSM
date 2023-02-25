@@ -1,13 +1,9 @@
-add_namespace = prt
-add_namespace = prt_sal_vs_september
-add_namespace = prt_sal
-add_namespace = prt_sep
-add_namespace = prt_right_economy
+add_namespace = prt_event
 
 country_event = {
-	id = prt.1
-	title = prt.1.t
-	desc = prt.1.d
+	id = prt_event.1
+	title = prt_event.1.t
+	desc = prt_event.1.d
 	picture = GFX_report_event_generic_rally_3
 
 	fire_only_once = yes
@@ -15,477 +11,486 @@ country_event = {
 	is_triggered_only = yes
 	
 	option = {
-	    name = prt.1.a
-	    hidden_effect = {
-		    PRT = {
-		        set_country_flag = PRT_september_way
-			}
-		}
+	    name = prt_event.1.a
 		ai_chance = { factor = 50 }
-    }
-
-	option = {
-	    name = prt.1.b
-	    hidden_effect = {
-		    PRT = {
-		        set_country_flag = PRT_saldania_way
-				country_event = { days = 50 id = prt_sal_vs_september.1 }
-			}
+		
+		add_popularity = {
+			ideology = democratic 
+            popularity = 0.05
 		}
-	    ai_chance = { factor = 50 }
+		add_popularity = {
+			ideology = socialism
+            popularity = 0.10
+		}
     }
 }
 
 country_event = {
-	id = prt_sal_vs_september.1
-	title = prt_sal_vs_september.1.t
-	desc = prt_sal_vs_september.1.d
-	picture = GFX_report_event_generic_conference
+	id = prt_event.2
+	title = prt_event.2.t
+	desc = prt_event.2.d
+	picture = GFX_report_event_generic_rally_3
 
 	fire_only_once = yes
 	
 	is_triggered_only = yes
-		    
+	
 	option = {
-	    name = prt_sal_vs_september.1.a
-	    hidden_effect = {
-		    PRT = {
-				country_event = { days = 50 id = prt_sal_vs_september.2 }
+	    name = prt_event.1.a
+		ai_chance = { factor = 50 }
+		
+		add_stability = -0.1
+		set_politics = {
+			ruling_party = reactionist
+			elections_allowed = no
+            last_election = "1935.12.17"
+            election_frequency = 48
+		}
+    }
+}
+
+country_event = {
+	id = prt_event.3
+	title = prt_event.3.t
+	desc = prt_event.3.d
+	picture = GFX_report_event_generic_rally_3
+
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	option = {
+	    name = prt_event.1.a
+		ai_chance = { factor = 50 }
+		
+		add_popularity = {
+			ideology = authoritarian
+            popularity = -0.15
+		}
+    }
+}
+
+country_event = {
+	id = prt_event.4
+	title = prt_event.4.t
+	desc = prt_event.4.d
+	picture = GFX_report_event_generic_rally_3
+
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	option = {
+	    name = prt_event.4.a
+		ai_chance = { factor = 50 }
+		
+		set_politics = {
+			ruling_party = democratic
+			elections_allowed = no
+            last_election = "1935.12.17"
+            election_frequency = 48
+		}
+    }
+}
+
+country_event = {
+	id = prt_event.5
+	title = prt_event.5.t
+	desc = prt_event.5.d
+	picture = GFX_report_event_generic_rally_3
+
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	option = {
+	    name = prt_event.5.a
+		ai_chance = { factor = 50 }
+		
+		set_politics = {
+			ruling_party = socialism
+			elections_allowed = no
+            last_election = "1935.12.17"
+            election_frequency = 48
+		}
+		swap_ideas = {
+			remove_idea = constitutional_monarchy_fg
+			add_idea = republic
+		}
+		hidden_effect = {
+			CBI = {
+			country_event = prt_event.6
+		}
+		}
+    }
+}
+
+country_event = {
+	id = prt_event.6
+	title = prt_event.6.t
+	desc = prt_event.6.d
+	picture = GFX_report_event_generic_rally_3
+
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	option = {
+	    name = prt_event.6.a
+		ai_chance = { factor = 50 }
+		
+		add_popularity = {
+			ideology = democratic 
+            popularity = 0.01
+		}
+		add_popularity = {
+			ideology = socialism
+            popularity = 0.02
+		}
+		 add_stability = -0.02
+    }
+}
+
+country_event = {
+	id = prt_event.7
+	title = prt_event.7.t
+	desc = prt_event.7.d
+	picture = GFX_report_event_generic_rally_3
+
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	option = {
+	    name = prt_event.7.a
+		ai_chance = { factor = 50 }
+		
+		leave_faction = yes
+		remove_opinion_modifier = {
+				target = CBI
+                modifier = history_friend
 			}
-	    }
+		CBI = {
+		remove_opinion_modifier = {
+				target = PRT
+                modifier = history_friend
+		}
+		}
+		diplomatic_relation = {
+			country = SON
+            relation = puppet
+            active = no
+		}
+		diplomatic_relation = {
+			country = PAS
+            relation = puppet
+            active = no
+		}
+		PAS = {
+			country_event = prt_event.8
+		}
+		CBI = {
+			country_event = prt_event.8
+		}
+    }
+}
+
+country_event = {
+	id = prt_event.8
+	title = prt_event.8.t
+	desc = prt_event.8.d
+	picture = GFX_report_event_generic_rally_3
+
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	option = {
+	    name = prt_event.8.a
+		ai_chance = { factor = 50 }
+		
+		set_politics = {
+			ruling_party = reactionist
+			elections_allowed = no
+            last_election = "1935.12.17"
+            election_frequency = 48
+		}
+		CBI = { add_to_faction = PAS }
+    }
+}
+
+country_event = {
+	id = prt_event.9
+	title = prt_event.9.t
+	desc = prt_event.9.d
+	picture = GFX_report_event_generic_rally_3
+
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	option = {
+	    name = prt_event.9.a
+		ai_chance = { factor = 50 }
+		
+		add_popularity = {
+			ideology = socialism
+            popularity = 0.05
+		}
+    }
+}
+
+country_event = {
+	id = prt_event.10
+	title = prt_event.10.t
+	desc = prt_event.9.d
+	picture = GFX_report_event_generic_rally_3
+
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	option = {
+	    name = prt_event.10.a
+		ai_chance = { factor = 50 }
+		
+		add_ideas = PRT_The_First_Step_in_Economic_Greatness
+    }
+}
+
+country_event = {
+	id = prt_event.11
+	title = prt_event.11.t
+	desc = prt_event.11.d
+	picture = GFX_report_event_generic_rally_3
+
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	option = {
+	    name = prt_event.11.a
+		ai_chance = { factor = 50 }
+		
+		swap_ideas = {
+				remove_idea = PRT_The_First_Step_in_Economic_Greatness
+				add_idea = PRT_The_Second_Step_in_Economic_Greatness
+			}
+    }
+}
+
+country_event = {
+	id = prt_event.12
+	title = prt_event.12.t
+	desc = prt_event.12.d
+	picture = GFX_report_event_generic_rally_3
+
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	option = {
+	    name = prt_event.12.a
+		ai_chance = { factor = 50 }
+		
+		
+    }
+}
+
+country_event = {
+	id = prt_event.13
+	title = prt_event.13.t
+	desc = prt_event.13.d
+	picture = GFX_report_event_generic_rally_3
+
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	option = {
+	    name = prt_event.13.a
+		ai_chance = { factor = 50 }
+		
+		swap_ideas = {
+				remove_idea = PRT_The_Second_Step_in_Economic_Greatness
+				add_idea = PRT_The_Third_Step_in_Economic_Greatness
+			}
+    }
+}
+
+country_event = {
+	id = prt_event.14
+	title = prt_event.14.t
+	desc = prt_event.14.d
+	picture = GFX_report_event_generic_rally_3
+
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	option = {
+	    name = prt_event.14.a
+		ai_chance = { factor = 50 }
+		
+		add_political_power = -50
+		PRT = {
+			leave_faction = yes
+		}
+    }
+}
+
+country_event = {
+	id = prt_event.15
+	title = prt_event.15.t
+	desc = prt_event.15.d
+	picture = GFX_report_event_generic_rally_3
+
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	option = {
+	    name = prt_event.15.a
+		ai_chance = { factor = 50 }
+		
+		PRU = { add_to_faction = PRT }
+    }
+	option = {
+	    name = prt_event.15.b
+		ai_chance = { factor = 50 }
+		
+		add_political_power = -50
+    }
+}
+
+country_event = {
+	id = prt_event.16
+	title = prt_event.16.t
+	desc = prt_event.16.d
+	picture = GFX_report_event_generic_rally_3
+
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	 
+	option = {
+	    name = prt_event.16.a
+		ai_chance = { factor = 50 }
 		
 		PRT = {
-		    swap_ideas = {
-                 remove_idea = PRT_september_1
-                 add_idea = PRT_september_2
-			}
+			transfer_state = 171
+			transfer_state = 698	
+			add_state_core = 171
+		    add_state_core = 698				
 		}
+		add_state_core = 171
+		add_state_core = 698
     }
-}
-
-country_event = {
-	id = prt_sal_vs_september.2
-	title = prt_sal_vs_september.2.t
-	desc = prt_sal_vs_september.2.d
-	picture = GFX_report_event_generic_conference
-
-	fire_only_once = yes
-	
-	is_triggered_only = yes
-		    
 	option = {
-	    name = prt_sal_vs_september.2.a
-		PRT = {
-		    swap_ideas = {
-                 remove_idea = PRT_september_2
-                 add_idea = PRT_september_3
-			}
-		}
-    }
-}
-
-country_event = {
-	id = prt.2
-	title = prt.2.t
-	desc = prt.2.t
-	picture = GFX_report_event_generic_funeral
-
-	fire_only_once = yes
-	
-	is_triggered_only = yes
-	
-	option = {
-	    name = prt.2.a
-		trigger = {
-		    democratic > 0.25
-            has_country_flag = PRT_september_way
-		}
-	    hidden_effect = {
-		    PRT = {
-		        set_country_flag = PRT_september_win
-				clr_country_flag = PRT_september_way
-			}
-		}
+	    name = prt_event.16.b
 		ai_chance = { factor = 50 }
-    }
-
-	option = {
-	    name = prt.2.b
-		trigger = {
-		    authoritarian > 0.5
-            has_country_flag = PRT_saldania_way_way
-		}
-	    hidden_effect = {
-		    PRT = {
-		        set_country_flag = PRT_saldania_win
-				clr_country_flag = PRT_saldania_way
-			}
-		}
-	    ai_chance = { factor = 50 }
-    }
-}
-
-country_event = {
-	id = prt_sal.1
-	title = prt_sal.1.t
-	desc = prt_sal.1.d
-	picture = GFX_report_event_generic_conference
-
-	fire_only_once = yes
-	
-	is_triggered_only = yes
-		    
-	option = {
-	    name = prt_sal.1.a
-		PRT = {
-		    remove_ideas = PRT_september_3
-			add_ideas = PRT_september5
-			add_ideas = PRT_colonial1
-			add_ideas = PRT_money1
-		}
-    }
-}
-
-country_event = {
-	id = prt_sal.2
-	title = prt_sal.2.t
-	desc = prt_sal.2.d
-	picture = GFX_report_event_generic_conference
-
-	fire_only_once = yes
-	
-	is_triggered_only = yes
-		    
-	option = {
-	    name = prt_sal.2.a
-		hidden_effect = {
-		    PRT = {
-		        set_country_flag = PRT_fight_sep_1
-			}
-		}
-    }
-} 
-
-country_event = {
-	id = prt_sal.4
-	title = prt_sal.4.t
-	desc = prt_sal.4.d
-	picture = GFX_report_event_generic_conference
-
-	fire_only_once = yes
-	
-	is_triggered_only = yes
-		    
-	option = {
-	    name = prt_sal.4.a
-		hidden_effect = {
-		    PRT = {
-		        set_country_flag = PRT_good_economic_1
-			}
-		}
-		ai_chance = { factor = 50 }
-    }
-	
-	option = {
-	    name = prt_sal.4.b
-		hidden_effect = {
-		    PRT = {
-		        set_country_flag = PRT_bad_economic_1
-			}
-		}
-	    ai_chance = { factor = 50 }
-    }
-}
-
-country_event = {
-	id = prt_sal.5
-	title = prt_sal.5.t
-	desc = prt_sal.5.d
-	picture = GFX_report_event_generic_conference
-
-	fire_only_once = yes
-	
-	is_triggered_only = yes
-		    
-	option = {
-	    name = prt_sal.5.a
-		hidden_effect = {
-		    PRT = {
-		        set_country_flag = PRT_good_economic_2
-			}
-		}
-		ai_chance = { factor = 50 }
-    }
-	
-	option = {
-	    name = prt_sal.5.b
-		hidden_effect = {
-		    PRT = {
-		        set_country_flag = PRT_bad_economic_2
-			}
-		}
-	    ai_chance = { factor = 50 }
-    }
-}
-
-country_event = {
-	id = prt_sal.6
-	title = prt_sal.6.t
-	desc = prt_sal.6.d
-	picture = GFX_report_event_generic_conference
-
-	fire_only_once = yes
-	
-	is_triggered_only = yes
-		    
-	option = {
-	    name = prt_sal.6.a
-		hidden_effect = {
-		    PRT = {
-		        set_country_flag = PRT_good_economic_3
-			}
-		}
-		ai_chance = { factor = 50 }
-    }
-	
-	option = {
-	    name = prt_sal.6.b
-		hidden_effect = {
-		    PRT = {
-		        set_country_flag = PRT_bad_economic_3
-			}
-		}
-		ai_chance = { factor = 50 }
-    }
-}
-
-country_event = {
-	id = prt_sal.7
-	title = prt_sal.7.t
-	desc = prt_sal.7.d
-	picture = GFX_report_event_generic_conference
-
-	fire_only_once = yes
-	
-	is_triggered_only = yes
-		    
-	option = {
-	    name = prt_sal.7.a
-		trigger = {
-		    OR = {
-                AND = {
-				    has_country_flag = PRT_good_economic_1
-					has_country_flag = PRT_good_economic_2
-				}
-				AND = { 
-				    has_country_flag = PRT_good_economic_1
-					has_country_flag = PRT_good_economic_3
-				}
-				AND = { 
-				    has_country_flag = PRT_good_economic_2
-					has_country_flag = PRT_good_economic_3
-			    }
-			}
-		}
-		hidden_effect = {
-		    PRT = {
-		        clr_country_flag = PRT_bad_economic_1
-				clr_country_flag = PRT_bad_economic_2
-				clr_country_flag = PRT_bad_economic_3
-				clr_country_flag = PRT_good_economic_1
-				clr_country_flag = PRT_good_economic_1
-				clr_country_flag = PRT_good_economic_1
-			}
-		}
 		
 		PRT = {
-			remove_ideas = PRT_money1
+		 	add_state_core = 171
+		    add_state_core = 698
+			create_wargoal = {
+				type = puppet_wargoal_focus
+                target = CAS
+			}		
 		}
-    }
-	
-	option = {
-	    name = prt_sal.7.b
-		trigger = {
-		    OR = {
-                AND = {
-				    has_country_flag = PRT_bad_economic_1
-					has_country_flag = PRT_bad_economic_2
-				}
-				AND = { 
-				    has_country_flag = PRT_bad_economic_1
-					has_country_flag = PRT_bad_economic_3
-				}
-				AND = { 
-				    has_country_flag = PRT_bad_economic_2
-					has_country_flag = PRT_bad_economic_3
-			    }
-			}
-		}
-		hidden_effect = {
-		    PRT = {
-		        clr_country_flag = PRT_bad_economic_1
-				clr_country_flag = PRT_bad_economic_2
-				clr_country_flag = PRT_bad_economic_3
-				clr_country_flag = PRT_good_economic_1
-				clr_country_flag = PRT_good_economic_1
-				clr_country_flag = PRT_good_economic_1
-			}
-		}
-		PRT = {
-		    swap_ideas = {
-				remove_idea = PRT_money1
-			    add_idea = PRT_money2
-			}
-	    }
     }
 }
 
 country_event = {
-	id = prt_sal.8
-	title = prt_sal.8.t
-	desc = prt_sal.8.d
-	picture = GFX_report_event_generic_conference
+	id = prt_event.17
+	title = prt_event.17.t
+	desc = prt_event.17.d
+	picture = GFX_report_event_generic_rally_3
 
 	fire_only_once = yes
 	
 	is_triggered_only = yes
-		    
+	
 	option = {
-	    name = prt_sal.8.a
-		PRT = {
-		    remove_ideas = PRT_colonial1
-		}
+	    name = prt_event.17.a
 		ai_chance = { factor = 50 }
-    }
-	
-	option = {
-	    name = prt_sal.8.b
+		
 		PRT = {
-		     give_resource_rights = {
-			    receiver = SON
-				state = 484
+			diplomatic_relation = {
+               country = GRA
+               relation = puppet
+               active = yes
+			   }		
+		}
+    }
+	option = {
+	    name = prt_event.17.b
+		ai_chance = { factor = 50 }
+		
+		PRT = {
+			create_wargoal = {
+				type = puppet_wargoal_focus
+                target = GRA
 			}
 		}
-		PRT = {
-		    swap_ideas = {
-			    remove_idea = PRT_colonial1
-				add_idea = PRT_colonial2
-			}
-		}
+    }
+}
+
+country_event = {
+	id = prt_event.18
+	title = prt_event.18.t
+	desc = prt_event.18.d
+	picture = GFX_report_event_generic_rally_3
+
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	option = {
+	    name = prt_event.18.a
 		ai_chance = { factor = 50 }
+		
+		PRT = { add_to_faction = ARA }
     }
-}
-
-country_event = {
-	id = prt_sal.10
-	title = prt_sal.10.t
-	desc = prt_sal.10.d
-	picture = GFX_report_event_generic_conference
-
-	fire_only_once = yes
-	
-	is_triggered_only = yes
-		    
 	option = {
-	    name = prt_sal.10.a
-		hidden_effect = {
-		    PRT = {
-		        clr_country_flag = PRT_saldania_win
-				set_country_flag = PRT_saldania_big_win
-			}
-		}
-		ai_chance = { factor = 100 }
-    }
-}
-
-country_event = {
-	id = prt_sal.100
-	title = prt_sal.100.t
-	desc = prt_sal.100.d
-	picture = GFX_report_event_generic_conference
-
-	fire_only_once = yes
-	
-	is_triggered_only = yes
-		    
-	option = {
-	    name = prt_sal.100.a
-		ai_chance = { factor = 25 }
-    }
-	
-	option = {
-	    name = prt_sal.100.b
-		ai_chance = { factor = 25 }
-    }
-}
-
-country_event = {
-	id = prt_sal.101
-	title = prt_sal.101.t
-	desc = prt_sal.101.d
-	picture = GFX_report_event_generic_conference
-
-	fire_only_once = yes
-	
-	is_triggered_only = yes
-		    
-	option = {
-	    name = prt_sal.101.a
-		PRT = {
-		    set_state_controller = 290
-			set_state_controller = 461
-			set_state_controller = 462
-			set_state_controller = 783
-		}
+	    name = prt_event.18.b
 		ai_chance = { factor = 50 }
+		
+		add_political_power = -50
     }
+}
+
+country_event = {
+	id = prt_event.19
+	title = prt_event.19.t
+	desc = prt_event.19.d
+	picture = GFX_report_event_generic_rally_3
+
+	fire_only_once = yes
+	
+	is_triggered_only = yes
 	
 	option = {
-	    name = prt_sal.101.b
-		PRT = {
-            set_autonomy = {
-                target = MOR
-                autonomy_state = autonomy_aotsm_protectorat
-            }
-		}
+	    name = prt_event.19.a
 		ai_chance = { factor = 50 }
-	}
-}
-
-country_event = {
-	id = prt_right_economy.1
-	title = prt_right_economy.1.t
-	desc = prt_right_economy.1.d
-	picture = GFX_report_event_generic_conference
-
-	fire_only_once = yes
-	
-	is_triggered_only = yes
-		    
-	option = {
-	    name = prt_right_economy.1.a
-		hidden_effect = {
-		    set_country_flag = PRT_right_economic_fix
-	    }
-		ai_chance = { factor = 100 }
+		
+		PRT = {
+			annex_country = {
+				target = ARA
+                transfer_troops = yes
+			}									
+		}
     }
-	
-}
-
-
-
-
-country_event = {
-	id = prt_sep.1
-	title = prt_sep.1.t
-	desc = prt_sep.1.d
-	picture = GFX_report_event_generic_conference
-
-	fire_only_once = yes
-	
-	is_triggered_only = yes
-		    
 	option = {
-	    name = prt_sep.1.a
+	    name = prt_event.19.b
+		ai_chance = { factor = 50 }
+		
+		leave_faction = yes
+		PRT = {
+			declare_war_on = {
+				target = ARA
+                type = annex_everything
+				}								
+		}
     }
 }

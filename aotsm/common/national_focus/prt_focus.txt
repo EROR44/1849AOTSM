@@ -14,1118 +14,3922 @@ focus_tree = {
 	}
 	default = no
 	reset_on_civilwar = no
-	
-	focus = {
-		id = PRT_start
-		icon = GFX_goal_generic_forceful_treaty
-		x = 19
-		y = 0
-		cost = 20
-		ai_will_do = {
-			factor = 100
-		}
-		
-		#cancel = { }
-		
-		#available = {  }
-		
-		bypass = { }
-		
-		#search_filters = {  }
-		
-		select_effect = {
-		    country_event = { days = 1 id = prt.1 }
-		}
-		
-		completion_reward = {
-			country_event = {
-			    id = prt.2
-			}
-		}
-	}
-	
-	focus = {
-		id = PRT_sal1
-		icon = GFX_goal_generic_political_pressure
-		prerequisite = {
-		    focus = PRT_start
-		}
-		x = 16
-		y = 1
-		cost = 1
-		ai_will_do = {
-			factor = 100
-		}
-		
-		#cancel = { }
-		
-		available = { 
-		    has_country_flag = prt_saldania_win
-		}
-		
-		bypass = { }
-		
-		#search_filters = {  }
-		
-		completion_reward = {
-			country_event = {
-			    id = prt_sal.1
-			}
-		}
-	}
-	
-	focus = {
-		id = PRT_sal1_septemb_end1
-		icon = GFX_focus_spr_crush_the_revolution
-		prerequisite = {
-		    focus = PRT_sal1
-		}
-		x = 14
-		y = 2
-		cost = 7
-		ai_will_do = {
-			factor = 100
-		}
-		
-		#cancel = { }
-		
-		available = { 
-		}
-		
-		bypass = { }
-		
-		#search_filters = {  }
-		
-		completion_reward = {
-			PRT = { 
-			    country_event = {
-			        id = prt_sal.2
-				}
-			}
-		}
-	}
-	
-	focus = {
-		id = PRT_sal1_economic1
-		icon = GFX_focus_generic_treaty
-		prerequisite = {
-		    focus = PRT_sal1
-		}
-		x = 16
-		y = 2
-		cost = 5
-		ai_will_do = {
-			factor = 100
-		}
-		
-		#cancel = { }
-		
-		available = { 
-		}
-		
-		bypass = { }
-		
-		#search_filters = {  }
-		
-		completion_reward = {
-		     country_event = {
-			        id = prt_sal.4
-		    }
-		}
-	}
-	
-	focus = {
-		id = PRT_sal1_economic2
-		icon = GFX_focus_generic_industry_3
-		prerequisite = {
-		    focus = PRT_sal1_economic1
-		}
-		x = 15
-		y = 3
-		cost = 5
-		ai_will_do = {
-			factor = 100
-		}
-		
-		#cancel = { }
-		
-		available = { 
-		}
-		
-		bypass = { }
-		
-		#search_filters = {  }
-		
-		completion_reward = {
-		
-		
-		}
-	}
-	
-	focus = {
-		id = PRT_sal1_economic3
-		icon = GFX_goal_generic_positive_trade_relations
-		prerequisite = {
-		    focus = PRT_sal1_economic1
-		}
-		x = 17
-		y = 3
-		cost = 5
-		ai_will_do = {
-			factor = 100
-		}
-		
-		#cancel = { }
-		
-		available = { 
-		}
-		
-		bypass = { }
-		
-		#search_filters = {  }
-		
-		completion_reward = {
-		     country_event = {
-			        id = prt_sal.6
-		    }
-		}
-	}
-	
-	focus = {
-		id = PRT_sal1_economic4
-		icon = GFX_focus_hol_abandon_the_gold_standard
-		prerequisite = { focus = PRT_sal1_economic2 }
-		prerequisite = { focus = PRT_sal1_economic3 }
 
-		x = 16
-		y = 4
+	continuous_focus_position = { x = 50 y = 1600 } 
+
+	focus = {
+		id = PRT_Stay_put
+		icon = GFX_goal_generic_defence
 		cost = 5
+		x = 2
+		y = 0
 		ai_will_do = {
-			factor = 100
+			factor = 5
 		}
+		mutually_exclusive = {
+        focus = PRT_Give_up_positions
+        }
+		available = {
 		
-		#cancel = { }
-		
-		available = { 
 		}
-		
-		bypass = { }
-		
-		#search_filters = {  }
-		
 		completion_reward = {
-		     country_event = {
-			        id = prt_sal.7
-		    }
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_Stay_put"			
+
+			country_event = prt_event.1
 		}
 	}
-	
+
 	focus = {
-		id = PRT_sal1_colonial1
-		icon = GFX_focus_generic_africa_production
-		prerequisite = {
-	        focus = PRT_sal1
+		id = PRT_Strengthen_the_army
+		icon = GFX_focus_generic_military_mission
+		cost = 5
+		x = 0
+		y = 1
+		ai_will_do = {
+			factor = 5
 		}
-		x = 18
+		prerequisite = {
+		focus = PRT_Stay_put
+		}
+		available = {
+		
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_Strengthen_the_army"			
+
+			swap_ideas = {
+				remove_idea = PRT_A_politicized_army
+				add_idea = PRT_An_obedient_army
+			}
+		}
+	}
+
+	focus = {
+		id = PRT_Military_coup
+		icon = GFX_focus_generic_military_dictatorship
+		cost = 5
+		x = -2
 		y = 2
-		cost = 7
 		ai_will_do = {
-			factor = 100
+			factor = 5
 		}
-		
-		#cancel = { }
-		
-		available = { 
+		prerequisite = {
+		focus =  PRT_Strengthen_the_army
 		}
+		mutually_exclusive = {
+        focus = PRT_The_Great_Agreement
+        }
+		available = {
 		
-		bypass = { }
-		
-		#search_filters = {  }
-		
+		}
 		completion_reward = {
-		     country_event = {
-			        id = prt_sal.8
-		    }
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_Military_coup"			
+
+			country_event = prt_event.2
 		}
 	}
-	
+
 	focus = {
-		id = PRT_sal1_colonial2
-		icon = GFX_goal_generic_construct_civ_factory
-		prerequisite = {
-	        focus = PRT_sal1_colonial1
-		}
-		x = 18
+		id = PRT_The_Queen_on_strings
+		icon = GFX_focus_rom_handle_king
+		cost = 5
+		x = -3
 		y = 4
-		cost = 7
 		ai_will_do = {
-			factor = 100
+			factor = 5
 		}
-		
-		#cancel = { }
-		
-		available = { 
+		prerequisite = {
+		focus =  PRT_Military_coup
 		}
+		available = {
 		
-		bypass = { }
-		
-		#search_filters = {  }
-		
+		}
 		completion_reward = {
-		    SON = {
-			    add_ideas = SON_colonial_good
-			}
-			PAS = {
-			    add_ideas = PAS_colonial_good
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_The_Queen_on_strings"			
+
+            remove_ideas = PRT_Political_crisis
+			swap_ideas = {
+				remove_idea = PRT_Maria_2
+				add_idea = PRT_Maria_20
 			}
 		}
 	}
-	
+
 	focus = {
-		id = PRT_sal1_2
-		icon = GFX_goal_generic_construct_civ_factory
-		prerequisite = { focus = PRT_sal1_economic4 }
-		#prerequisite = { focus = PRT_sal1_septemb_end2 }
-		prerequisite = { focus = PRT_sal1_colonial2 }
-		x = 16
+		id = PRT_The_power_of_reaction
+		icon = GFX_focus_generic_self_management
+		cost = 7
+		x = -4
 		y = 5
-		cost = 1
 		ai_will_do = {
-			factor = 100
+			factor = 5
 		}
-		
-		#cancel = { }
-		
-		available = { 
+		prerequisite = {
+		focus =  PRT_The_Queen_on_strings
 		}
+		available = {
 		
-		bypass = { }
-		
-		#search_filters = {  }
-		
+		}
 		completion_reward = {
-			country_event = {
-			    id = prt_sal.10
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_The_power_of_reaction"			
+
+			add_popularity = {
+				ideology = reactionist 
+                popularity = 0.10
 			}
 		}
 	}
-	
-    focus = {
-		id = PRT_sal2_economy
-		icon = GFX_goal_generic_construct_civ_factory
-		prerequisite = {
-		   focus = PRT_sal1_2
-		}
-		x = 15
+
+	focus = {
+		id = PRT_The_Power_of_tradition
+		icon = GFX_goal_generic_CAS
+		cost = 5
+		x = -5
 		y = 6
-		cost = 7
 		ai_will_do = {
-			factor = 100
+			factor = 5
 		}
-		
-		#cancel = { }
-		
-		available = { 
+		prerequisite = {
+		focus =  PRT_The_power_of_reaction
 		}
+		available = {
 		
-		bypass = { }
-		
-		#search_filters = {  }
-		
+		}
 		completion_reward = {
-		    PRT = {
-			    complete_national_focus = PRT_right_economy1
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_The_Power_of_tradition"			
+
+            add_ideas = PRT_Strength_in_traditions   
+		}
+	}
+
+	focus = {
+		id = PRT_Ray_of_the_Past
+		icon = GFX_focus_generic_spread_fascism
+		cost =7
+		x = -3
+		y = 6
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		focus =  PRT_The_power_of_reaction
+		}
+		available = {
+		
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_Ray_of_the_Past"			
+
+			add_offsite_building = { type = arms_factory level = 1 }
+			add_popularity = {
+				ideology = reactionist 
+                popularity = 0.05
 			}
 		}
 	}
-	
+
 	focus = {
-		id = PRT_sal2_army
-		icon = GFX_goal_generic_construct_civ_factory
-		prerequisite = {
-		   focus = PRT_sal1_2
-		}
-		x = 17
-		y = 6
+		id = PRT_Monopolize_power
+		icon = GFX_goal_demand_sudetenland
 		cost = 7
+		x = -2
+		y = 5
 		ai_will_do = {
-			factor = 100
+			factor = 5
 		}
-		
-		#cancel = { }
-		
-		available = { 
+		prerequisite = {
+		focus =  PRT_The_Queen_on_strings
 		}
-		
-		bypass = { }
-		
-		#search_filters = {  }
-		
+		mutually_exclusive = {
+        focus = PRT_The_power_of_the_center
+        }
+		available = {
+			has_completed_focus = PRT_Stay_on_your_own	
+		}
 		completion_reward = {
-		    PRT = {
-			    complete_national_focus = PRT_right_economy1
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_Monopolize_power"			
+
+			add_political_power = 100
+		}
+	}
+
+	focus = {
+		id = PRT_Night_of_the_Long_Knives
+		icon = GFX_focus_generic_conspiracy
+		cost = 7
+		x = -1
+		y = 6
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		focus = PRT_Monopolize_power
+		focus =  PRT_The_power_of_the_center
+		}
+		prerequisite = {
+        focus = PRT_The_power_of_reaction
+        }
+		available = {
+		
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_Night_of_the_Long_Knives"			
+
+            add_popularity = {
+				ideology = reactionist 
+                popularity = 0.05
+			}
+            add_popularity = {
+				ideology = democratic 
+                popularity = -0.05
+			}
+			add_popularity = {
+				ideology = socialism
+                popularity = -0.10
+			}
+			swap_ideas = {
+				remove_idea = regional_corruption
+				add_idea = local_corruption
 			}
 		}
 	}
-	
+
 	focus = {
-		id = PRT_sal2_colony
-		icon = GFX_goal_generic_construct_civ_factory
-		prerequisite = {
-		   focus = PRT_sal1_2
-		}
-		x = 12
-		y = 6
-		cost = 7
-		ai_will_do = {
-			factor = 100
-		}
-		
-		#cancel = { }
-		
-		available = { 
-		}
-		
-		bypass = { }
-		
-		#search_filters = {  }
-		
-		completion_reward = {
-		    #PRT = {
-			#    complete_national_focus = PRT_right_colony1
-			#}
-		}
-	}
-	
-	focus = {
-		id = PRT_sal2_law1
-		icon = GFX_goal_generic_construct_civ_factory
-		prerequisite = { focus = PRT_sal2_army }
-		prerequisite = { focus = PRT_sal2_economy }
-		x = 16
+		id = PRT_State_racial_theory
+		icon = GFX_goal_generic_forceful_treaty
+		cost = 5
+		x = -3
 		y = 7
-		cost = 7
 		ai_will_do = {
-			factor = 100
+			factor = 5
 		}
-		
-		#cancel = { }
-		
-		available = { 
+		prerequisite = {
+		focus =  PRT_Night_of_the_Long_Knives
 		}
+		available = {
 		
-		bypass = { }
-		
-		#search_filters = {  }
-		
+		}
 		completion_reward = {
-		    
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_State_racial_theory"			
+
+			add_ideas = PRT_State_division_into_colors
 		}
 	}
-	
+
 	focus = {
-		id = PRT_right_economy1
+		id = PRT_Power_for_Whites
+		icon = GFX_goal_generic_political_pressure
+		cost = 5
+		x = -4
+		y = 8
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		focus =  PRT_State_racial_theory
+		}
+		available = {
+		
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_Power_for_Whites"			
+
+			add_political_power = 100
+			add_popularity = {
+				ideology = reactionist 
+                popularity = 0.10
+			}
+		}
+	}
+
+	focus = {
+		id = PRT_A_power_that_no_king_has_ever_dreamed_of
+		icon = GFX_focus_rom_royal_dictatorship
+		cost = 7
+		x = -1
+		y = 7
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		focus =  PRT_Night_of_the_Long_Knives
+		}
+		available = {
+		
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_A_power_that_no_king_has_ever_dreamed_of"			
+
+			add_ideas = PRT_Absolute_power
+		}
+	}
+
+	focus = {
+		id = PRT_Underground_factories
+		icon = GFX_goal_generic_construct_mil_factory
+		cost = 7
+		x = -2
+		y = 8
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		focus =  PRT_A_power_that_no_king_has_ever_dreamed_of
+		}
+		available = {
+		
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_Underground_factories"			
+
+			add_offsite_building = { type = arms_factory level = 2 }
+		}
+	}
+
+	focus = {
+		id = PRT_A_new_path_for_Portugal
+		icon = GFX_focus_por_the_kingdom_reunited
+		cost = 7
+		x = -1
+		y = 9
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		focus =  PRT_Underground_factories
+		}
+		prerequisite = {
+        focus = PRT_Fanatical_militarism
+        }
+		available = {
+		
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_A_new_path_for_Portugal"			
+
+			add_popularity = {
+				ideology = reactionist 
+                popularity = 0.10
+			}
+		}
+	}
+
+	focus = {
+		id = PRT_Fanatical_militarism
+		icon = GFX_goal_generic_attack_allies
+		cost = 7
+		x = 0
+		y = 8
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		focus =  PRT_A_power_that_no_king_has_ever_dreamed_of
+		}
+		available = {
+		
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_Fanatical_militarism"			
+
+			add_war_support = 0.1
+		}
+	}
+
+	focus = {
+		id = PRT_Stay_on_your_own
+		icon = GFX_goal_generic_neutrality_focus
+		cost = 5
+		x = -1
+		y = 3
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		focus = PRT_Military_coup
+		focus = PRT_The_Great_Agreement
+		}
+		mutually_exclusive = {
+        focus = PRT_New_Constitution
+        }
+		available = {
+		
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_Stay_on_your_own"			
+
+			add_popularity = {
+				ideology = democratic 
+                popularity = -0.10
+			}
+			add_popularity = {
+				ideology = socialism
+                popularity = -0.10
+			}
+		}
+	}
+
+	focus = {
+		id = PRT_The_Great_Agreement
+		icon = GFX_focus_hol_the_foundations_of_defense
+		cost = 5
+		x = 0
+		y = 2
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		focus =  PRT_Strengthen_the_army
+		}
+		mutually_exclusive = {
+        focus = PRT_Military_coup
+        }
+		available = {
+		
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_The_Great_Agreement"			
+
+            custom_effect_tooltip = PRT_unlock_Joaquim_Antonio_de_Aguiar
+			add_stability = 0.05
+			add_popularity = {
+				ideology = democratic 
+                popularity = 0.05
+			}
+		}
+	}
+
+	focus = {
+		id = PRT_The_Queen_is_on_the_throne
+		icon = GFX_focus_generic_home_defense
+		cost = 5
+		x = 1
+		y = 4
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		focus = PRT_The_Great_Agreement
+		}
+		prerequisite = {
+		focus =  PRT_The_War_on_Socialism
+		}
+		available = {
+		
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_The_Queen_is_on_the_throne"			
+
+			remove_ideas = PRT_Political_crisis
+			add_popularity = {
+				ideology = authoritarian
+                popularity = 0.05
+			}
+		}
+	}
+
+	focus = {
+		id = PRT_The_power_of_the_center
+		icon = GFX_goal_generic_dangerous_deal
+		cost = 7
+		x = 0
+		y = 5
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		focus =  PRT_The_Queen_on_strings
+		focus =  PRT_The_Queen_is_on_the_throne
+		}
+		mutually_exclusive = {
+        focus = PRT_Monopolize_power
+        }
+		available = {
+			OR = {
+				has_completed_focus = PRT_New_Constitution
+				has_government = authoritarian			
+			}	
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_The_power_of_the_center"			
+
+			add_stability = 0.10		
+		}
+	}
+
+	focus = {
+		id = PRT_Stabilize_society
+		icon = GFX_goal_generic_dangerous_deal
+		cost = 7
+		x = 1
+		y = 6
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		focus =  PRT_The_power_of_the_center
+		}
+		prerequisite = {
+		focus =  PRT_Controlled_democracy
+		}
+		available = {
+		
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_Stabilize_society"			
+
+			add_stability = 0.1
+		}
+	}
+
+	focus = {
+		id = PRT_New_features_in_the_old_body
+		icon = GFX_goal_generic_cavalry
+		cost = 7
+		x = 1
+		y = 7
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		focus =  PRT_Stabilize_society
+		}
+		available = {
+		
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_New_features_in_the_old_body"			
+
+            add_ideas = PRT_New_features
+			add_popularity = {
+				ideology = authoritarian
+                popularity = 0.05
+			}
+		}
+	}
+
+	focus = {
+		id = PRT_Portugal_for_everyone
+		icon = GFX_goal_generic_forceful_treaty
+		cost = 7
+		x = 2
+		y = 8
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		focus =  PRT_New_features_in_the_old_body
+		}
+		available = {
+		
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_Portugal_for_everyone"			
+
+            add_political_power = 100
+			add_popularity = {
+				ideology = authoritarian 
+                popularity = 0.10
+			}
+		}
+	}
+
+	focus = {
+		id = PRT_Invest_in_the_population
+		icon = GFX_focus_generic_concessions
+		cost = 7
+		x = 2
+		y = 9
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		focus =  PRT_Portugal_for_everyone
+		}
+		available = {
+		
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_Invest_in_the_population"			
+
+			add_stability = 0.05
+			add_offsite_building = { type = industrial_complex level = 1 }
+		}
+	}
+
+	focus = {
+		id = PRT_Tighten_your_belts
+		icon = GFX_focus_generic_annex_country_2
+		cost = 7
+		x = 3
+		y = 7
+		ai_will_do = {
+			factor = 5
+		} 
+		prerequisite = {
+		focus =  PRT_Stabilize_society
+		}
+		available = {
+		
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_Tighten_your_belts"			
+
+			swap_ideas = {
+				remove_idea = medium_taxation
+				add_idea = hight_taxation
+			}
+		}
+	}
+
+	focus = {
+		id = PRT_Controlled_democracy
+		icon = GFX_focus_usa_voter_registration_act
+		cost = 7 
+		x = 2
+		y = 5
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		focus =  PRT_The_Queen_is_on_the_throne
+		}
+		available = {
+		
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_Controlled_democracy"			
+
+            add_popularity = {
+				ideology = democratic 
+                popularity = 0.10
+			}
+			add_popularity = {
+				ideology = authoritarian 
+                popularity = 0.10
+			}
+		}
+	}
+
+	focus = {
+		id = PRT_Expand_liberal_reforms
 		icon = GFX_goal_generic_consumer_goods
+		cost = 7
+		x = 3
+		y = 6
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		focus =  PRT_Controlled_democracy
+		focus = PRT_Opportunities_for_everyone
+		}
+		available = {
+		
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_Expand_liberal_reforms"			
+
+			add_ideas = PRT_Market_reforms
+		}
+	}
+
+	focus = {
+		id = PRT_The_War_on_Socialism
+		icon = GFX_goal_generic_demand_territory
+		cost = 5
+		x = 2
+		y = 2
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		focus =  PRT_Strengthen_the_army
+		}
+		available = {
+		
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_The_War_on_Socialism"			
+
+            add_stability = -0.05
+			add_popularity = {
+				ideology = socialism
+                popularity = -0.10
+			}
+		}
+	}
+
+	focus = {
+		id = PRT_New_Constitution
+		icon = GFX_focus_generic_treaty
+		cost = 5
+		x = 3
+		y = 3
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		focus =  PRT_The_War_on_Socialism
+		focus =  PRT_Suppress_radicalism
+		}
+		mutually_exclusive = {
+        focus = PRT_Stay_on_your_own
+        }
+		available = {
+			NOT = {
+				has_completed_focus = PRT_Military_coup				
+			}
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_New_Constitution"			
+
+			add_political_power = 125
+		}
+	}
+
+	focus = {
+		id = PRT_To_suppress_discontent_in_the_colonies
+		icon = GFX_goal_generic_political_pressure
+		cost = 5
+		x = 3
+		y = 1
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		focus =  PRT_Stay_put
+		focus =  PRT_Give_up_positions
+		}
+		available = {
+		
+		}
+		completion_reward = { 
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_To_suppress_discontent_in_the_colonies"			
+
+            army_experience = 10
+            add_stability = 0.05
+			add_command_power = -25
+		} 
+	}
+
+	focus = {
+		id = PRT_Give_up_positions 
+		icon = GFX_goal_generic_improve_relations
+		cost = 5
 		x = 4
 		y = 0
-		cost = 8
 		ai_will_do = {
-			factor = 100
+			factor = 5
 		}
-		
-		#cancel = { }
-		
-		available = { 
-		    has_completed_focus = PRT_sal2_economy
-		}
-		
-		bypass = { }
-		
-		#search_filters = {  }
-		
-		completion_reward = {    
-		}
-	}
-	
-	focus = {
-		id = PRT_right_economy2
-		icon = GFX_goal_generic_construction2
-		prerequisite = {
-		   focus = PRT_right_economy1
-		}
-		x = 4
-		y = 1
-		cost = 8
-		ai_will_do = {
-			factor = 100
-		}
-		#cancel = { 
-		#	has_idea = PRT_right_economic_problem 
-		#}
-		
+		mutually_exclusive = {
+        focus = PRT_Stay_put
+        }
 		available = {
+		
 		}
-		
-		bypass = { }
-		
-		#search_filters = {  }
-		
 		completion_reward = {
-		    #set_building_level = {
-            #   type = infrastructure
-            #    level = 3
-            #    instant_build = yes
-			#	province = {
-			#	    all_provinces = yes
-            #       limit_to_border = yes
-            #        level < 3
-            #    }  
-            #}
-            hidden_effect = {
-				#PRT = { 
-				# 	  set_country_flag = PRT_society_works
-				#} 
-            }			
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_Give_up_positions"			
+
+			country_event = prt_event.3
 		}
 	}
-	
+
 	focus = {
-		id = PRT_right_economy3
-		icon = GFX_focus_usa_reestablish_the_gold_standard
-		prerequisite = {
-		   focus = PRT_right_economy1
-		}
+		id = PRT_Portuguese_Democracy
+		icon = GFX_focus_generic_improve_the_administration
+		cost = 5
 		x = 6
 		y = 1
-		cost = 8
 		ai_will_do = {
-			factor = 100
+			factor = 5
 		}
-		cancel = { 
-		    #has_idea = PRT_right_economic_problem
+		prerequisite = {
+		focus =  PRT_Give_up_positions
 		}
-		
 		available = {
+		
 		}
-		
-		bypass = { }
-		
-		#search_filters = {  }
-		
 		completion_reward = {
-        #    add_political_power = 150
-        #    hidden_effect = {
-        #       country_event = {
-        #            id = prt_right_economy.1
-        #            days = 20
-        #        }
-        #    }				
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_Portuguese_Democracy"			
+
+            add_ideas = PRT_The_Fire_of_Portuguese_Democracy
+			country_event = prt_event.4
 		}
 	}
-	
+
 	focus = {
-		id = PRT_right_economy4
-		icon = GFX_focus_rom_parties_end
-		prerequisite = {
-		   focus = PRT_right_economy3
-		}
-		x = 5
+		id = PRT_Suppress_radicalism
+		icon = GFX_goal_anti_comintern_pact
+		cost = 5
+		x = 4
 		y = 2
-		cost = 8
 		ai_will_do = {
-			factor = 100
+			factor = 5
 		}
-		#cancel = { }
-		
+		prerequisite = {
+		focus =  PRT_Portuguese_Democracy
+		}
+		mutually_exclusive = {
+        focus = PRT_Backhand
+        }
 		available = {
-		    #has_idea = PRT_right_economic_problem
+		
 		}
-		
-		bypass = { }
-		
-		#search_filters = {  }
-		
-		completion_reward = { 
-        #	add_ideas = PRT_right_economic_fix		
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_Suppress_radicalism"			
+
+            add_political_power = 25
+			add_popularity = {
+				ideology = democratic 
+                popularity = 0.05
+			}
+			add_popularity = {
+				ideology = socialism
+                popularity = -0.05
+			}
 		}
 	}
-	
+
 	focus = {
-		id = PRT_right_economy5
-		icon = GFX_focus_SOV_merge_plants 
-		prerequisite = {
-		   focus = PRT_right_economy4
-		}
+		id = PRT_The_victory_of_liberalism
+		icon = GFX_focus_generic_the_giant_wakes
+		cost = 5
 		x = 5
-		y = 3
-		cost = 8
-		ai_will_do = {
-			factor = 100
-		}
-		cancel = { has_idea = PRT_right_economic_problem }
-		
-		available = {
-		  #  has_idea = PRT_right_economic_fix
-		}
-		
-		bypass = { }
-		
-		#search_filters = {  }
-		
-		completion_reward = {
-            hidden_effect = {
-                set_country_flag = PRT_economy_fix2
-				clr_country_flag = PRT_economy_fix1
-            }		
-		}
-	}
-	
-	focus = {
-		id = PRT_right_economy6
-		icon = GFX_focus_mex_privatisation
-		prerequisite = {
-		   focus = PRT_right_economy5
-		}
-		x = 6
 		y = 4
-		cost = 8
 		ai_will_do = {
-			factor = 100
+			factor = 5
 		}
-		cancel = { has_idea = PRT_right_economic_problem }
-		
+		prerequisite = {
+		focus =  PRT_Suppress_radicalism
+		}
 		available = {
+		
 		}
-		
-		bypass = { }
-		
-		#search_filters = {  }
-		
 		completion_reward = {
-            #swap_ideas = {
-            #    remove_idea = PRT_right_economic_fix
-            #    add_idea = PRT_right_economy_great
-            #}				
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_The_victory_of_liberalism"			
+
+			remove_ideas = PRT_Political_crisis
+			add_popularity = {
+				ideology = democratic
+                popularity = 0.05
+			}
 		}
 	}
-	
+
 	focus = {
-		id = PRT_right_economy7
-		icon = GFX_goal_generic_scientific_exchange
-		prerequisite = {
-		   focus = PRT_right_economy2
-		}
-		x = 4
-		y = 4
-		cost = 10
-		ai_will_do = {
-			factor = 100
-		}
-		cancel = { has_idea = PRT_right_economic_problem }
-		
-		available = {
-		}
-		
-		bypass = { }
-		
-		#search_filters = {  }
-		
-		completion_reward = {
-            add_research_slot = 1		
-		}
-	}
-	
-	focus = {
-		id = PRT_right_economy8
-		icon = GFX_focus_renounce_the_treaty_of_trianon
-		prerequisite = {
-		   focus = PRT_right_economy1
-		}
-		x = 2
-		y = 1
+		id = PRT_Opportunities_for_everyone
+		icon = GFX_focus_generic_military_academy
 		cost = 7
+		x = 4
+		y = 5
 		ai_will_do = {
-			factor = 100
+			factor = 5
 		}
-		cancel = { has_idea = PRT_right_economic_problem }
-		
-		available = {
-		    #has_completed_focus = PRT_right_army2
-		}
-		
-		bypass = { }
-		
-		#search_filters = {  }
-		
-		completion_reward = {
-            hidden_effect = {
-                set_country_flag = PRT_economy_vs_army1
-            }			
-		}
-	}
-	
-	focus = {
-		id = PRT_right_economy9
-		icon = GFX_goal_generic_construct_infrastructure
 		prerequisite = {
-		   focus = PRT_right_economy8
+		focus =  PRT_The_victory_of_liberalism
 		}
-		x = 1
-		y = 3
-		cost = 8
-		ai_will_do = {
-			factor = 100
-		}
-		cancel = { has_idea = PRT_right_economic_problem }
-		
 		available = {
+		
 		}
-		
-		bypass = { }
-		
-		#search_filters = {  }
-		
 		completion_reward = {
-            hidden_effect = {
-                set_country_flag = PRT_economy_vs_army2
-            }		
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_Opportunities_for_everyone"			
+
+			swap_ideas = {
+				remove_idea = medium_taxation
+				add_idea = low_taxation
+			}
 		}
 	}
-	
+
 	focus = {
-		id = PRT_right_economy10
-		icon = GFX_goal_generic_production2
-		prerequisite = { focus = PRT_right_economy8 }
-		prerequisite = { focus = PRT_right_economy2 }
-		x = 3
+		id = PRT_The_Power_of_free_people
+		icon = GFX_focus_generic_self_management
+		cost = 7
+		x = 5
+		y = 6
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		focus =  PRT_Opportunities_for_everyone
+		}
+		available = {
+		
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_The_Power_of_free_people"			
+
+			add_popularity = {
+				ideology = democratic
+                popularity = 0.10
+			}
+		}
+	}
+
+	focus = {
+		id = PRT_Defeat_the_influence_of_religion
+		icon = GFX_focus_mex_triumph_over_the_cristeros
+		cost = 7
+		x = 5
+		y = 7
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		focus =  PRT_The_Power_of_free_people
+		}
+		available = {
+		
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_Defeat_the_influence_of_religion"			
+
+			swap_ideas = {
+				remove_idea = regional_corruption
+				add_idea = local_corruption
+			}
+		}
+	}
+
+	focus = {
+		id = PRT_Church_money
+		icon = GFX_goal_generic_forceful_treaty
+		cost = 7
+		x = 5
+		y = 8
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		focus =  PRT_Defeat_the_influence_of_religion
+		}
+		available = {
+		
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_Church_money"			
+
+			add_political_power = 100
+		}
+	}
+
+	focus = {
+		id = PRT_Collect_investments
+		icon = GFX_goal_generic_intelligence_exchange
+		cost = 7
+		x = 7
+		y = 7
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		focus =  PRT_The_Power_of_free_people
+		}
+		available = {
+		
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_Collect_investments"			
+
+			add_offsite_building = { type = industrial_complex level = 2 }
+		}
+	}
+
+	focus = {
+		id = PRT_Expand_colonial_opportunities
+		icon = GFX_goal_generic_position_armies
+		cost = 7
+		x = 7
+		y = 8
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		focus =  PRT_Collect_investments
+		}
+		available = {
+		
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_Expand_colonial_opportunities"			
+
+			if = {
+				limit = {
+					has_full_control_of_state = 540
+				}
+				add_political_power = 10
+				540 = {
+					add_manpower = 10000				
+				}
+			}
+			if = {
+				limit = {
+					has_full_control_of_state = 847
+				}
+				add_political_power = 10
+				847 = {
+					add_manpower = 10000				
+				}
+			}
+			if = {
+				limit = {
+					has_full_control_of_state = 839
+				}
+				add_political_power = 10
+				839 = {
+					add_manpower = 10000				
+				}
+			}
+			if = {
+				limit = {
+					has_full_control_of_state = 825
+				}
+				add_political_power = 10
+				825 = {
+					add_manpower = 10000				
+				}
+			}
+			if = {
+				limit = {
+					has_full_control_of_state = 796
+				}
+				add_political_power = 10
+				796 = {
+					add_manpower = 10000				
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = PRT_Democracy_is_at_the_head_of_everything
+		icon = GFX_focus_rom_parties_end
+		cost = 7
+		x = 6
+		y = 5
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		focus =  PRT_The_victory_of_liberalism
+		focus =  PRT_Victory_of_the_proletariat
+		}
+		available = {
+		
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_Democracy_is_at_the_head_of_everything"			
+
+			swap_ideas = {
+				remove_idea = PRT_The_Fire_of_Portuguese_Democracy
+				add_idea = PRT_Democracy_as_a_fact
+			}
+		}
+	}
+
+	focus = {
+		id = PRT_Utopia_for_everyone
+		icon = GFX_focus_ger_great_red_menace
+		cost = 5
+		x = 7
+		y = 6
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		focus =  PRT_Democracy_is_at_the_head_of_everything
+		}
+		prerequisite = {
+        focus = PRT_Cancel_the_private_property
+        }
+		available = {
+		
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_Utopia_for_everyone"			
+
+			swap_ideas = {
+				remove_idea = PRT_Democracy_as_a_fact
+				add_idea = PRT_Utopian_democracy
+			}
+		}
+	}
+
+	focus = {
+		id = PRT_Backhand
+		icon = GFX_focus_spr_unify_the_london_bureau
+		cost = 5
+		x = 6
 		y = 2
-		cost = 8
 		ai_will_do = {
-			factor = 100
+			factor = 5
 		}
-		cancel = { has_idea = PRT_right_economic_problem }
-		
+		prerequisite = {
+		focus = PRT_Portuguese_Democracy
+		}
+		mutually_exclusive = {
+        focus = PRT_Suppress_radicalism
+        }
 		available = {
+		
 		}
-		
-		bypass = { }
-		
-		#search_filters = {  }
-		
 		completion_reward = {
-            hidden_effect = {
-                set_country_flag = PRT_economy_vs_army3
-            }		
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_Backhand"			
+
+			country_event = prt_event.5
 		}
 	}
-	
+
 	focus = {
-		id = PRT_right_economy11
-		icon = GFX_goal_generic_positive_trade_relations
-		prerequisite = {
-		   focus = PRT_right_economy10
+		id = PRT_Reorganize_the_army
+		icon = GFX_focus_eng_move_to_secure_the_dominions
+		cost = 5
+		x = 8
+		y = 2
+		ai_will_do = {
+			factor = 5
 		}
-		x = 3
+		prerequisite = {
+		focus =  PRT_Portuguese_Democracy
+		}
+		available = {
+		
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_Reorganize_the_army"			
+
+			remove_ideas = PRT_A_politicized_army
+		}
+	}
+
+	focus = {
+		id = PRT_Defeat_the_reaction
+		icon = GFX_focus_rom_abdicate
+		cost = 5
+		x = 7
 		y = 3
-		cost = 8
 		ai_will_do = {
-			factor = 100
+			factor = 5
 		}
-		cancel = { has_idea = PRT_right_economic_problem }
-		
+		prerequisite = {
+		focus = PRT_Backhand
+		}
+		prerequisite = {
+        focus = PRT_Reorganize_the_army
+        }
 		available = {
+		
 		}
-		
-		bypass = { }
-		
-		#search_filters = {  }
-		
 		completion_reward = {
-            hidden_effect = {
-                set_country_flag = PRT_economy_vs_army4
-            }		
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_Defeat_the_reaction"			
+
+			remove_ideas = PRT_Maria_2
+			add_popularity = {
+				ideology = socialism
+                popularity = 0.10
+			}
+			hidden_effect = {
+			    country_event = prt_event.7
+		    }
 		}
 	}
-	
+
 	focus = {
-		id = PRT_right_economy12
-		icon = GFX_focus_generic_treaty
-		prerequisite = { focus = PRT_right_economy9 }
-		prerequisite = { focus = PRT_right_economy11 }
-		x = 2
+		id = PRT_Victory_of_the_proletariat
+		icon = GFX_focus_ITA_corpo_volontari_della_liberta
+		cost = 5
+		x = 9
 		y = 4
-		cost = 8
 		ai_will_do = {
-			factor = 100
+			factor = 5
+		} 
+		prerequisite = {
+		focus =  PRT_Defeat_the_reaction
 		}
-		cancel = { has_idea = PRT_right_economic_problem }
-		
 		available = {
+		
 		}
-		
-		bypass = { }
-		
-		#search_filters = {  }
-		
 		completion_reward = {
-            hidden_effect = {
-                clr_country_flag = PRT_economy_vs_army1
-				clr_country_flag = PRT_economy_vs_army2
-				clr_country_flag = PRT_economy_vs_army3
-				clr_country_flag = PRT_economy_vs_army4
-			}
-            #swap_ideas = {
-            #   remove_idea = PRT_economy_vs_army_problem
-			#	add_idea = PRT_economy_2
-            #}			
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_Victory_of_the_proletariat"			
+
+            add_war_support = 0.05
+			remove_ideas = PRT_Political_crisis
 		}
 	}
-	
+
 	focus = {
-		id = PRT_sal2_marocco_war
-		icon = GFX_focus_generic_treaty
-		prerequisite = {
-		   focus = PRT_sal2_colony
-		}
-		mutually_exclusive = {
-		    focus = PRT_sal2_spain_ultimate
-		}
-		x = 11
-		y = 7
+		id = PRT_Cancel_the_private_property
+		icon = GFX_focus_generic_support_the_left_right
 		cost = 5
+		x = 8
+		y = 5
 		ai_will_do = {
-			factor = 100
+			factor = 5
 		}
-		
-		cancel = { 
-		    OR = {
-			    GRA = {
-			        AND = {
-			            owns_state = 290
-					    owns_state = 461
-					    owns_state = 462
-					    owns_state = 783
-				    }
-			    }
-				CAS = {
-			        AND = {
-			            owns_state = 290
-					    owns_state = 461
-					    owns_state = 462
-					    owns_state = 783
-				    }
-			    }
-			}
+		prerequisite = {
+		focus =  PRT_Victory_of_the_proletariat
 		}
-				
-		available = { 
-		    MOR = {
-			    AND = {
-			        owns_state = 290
-					owns_state = 461
-					owns_state = 462
-					owns_state = 783
-				}
-			}
+		available = {
+		
 		}
-		
-		bypass = { }
-		
-		#search_filters = {  }
-		
 		completion_reward = {
-		    PRT = { 
-			    declare_war_on = {
-                    target = MOR
-                    type = annex_everything
-                }
-			}
-		    hidden_effect = {
-			    PRT = {
-				    set_country_flag = PRT_marocco_warr
-				}
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_Cancel_the_private_property"			
+
+			swap_ideas = {
+				remove_idea = slavery_allowed
+				add_idea = slavery_forbidden
 			}
 		}
 	}
-	
+
 	focus = {
-		id = PRT_sal2_spain_ultimate
-		icon = GFX_focus_generic_treaty
-		prerequisite = {
-		   focus = PRT_sal2_colony
-		}
-		mutually_exclusive = {
-		    focus = PRT_sal2_marocco_war
-		}
-		x = 13
-		y = 7
-		cost = 5
+		id = PRT_Revolution_perestroika_glasnost
+		icon = GFX_focus_spr_class_war
+		cost = 7
+		x = 9
+		y = 6
 		ai_will_do = {
-			factor = 100
+			factor = 5
 		}
-		
-		cancel = { 
-		     MOR = {
-			    AND = {
-			        owns_state = 290
-					owns_state = 461
-					owns_state = 462
-					owns_state = 783
-				}
-			}
+		prerequisite = {
+		focus =  PRT_Cancel_the_private_property
 		}
-				
-		available = {
-            OR = {
-			    GRA = {
-			        AND = {
-			            owns_state = 290
-					    owns_state = 461
-					    owns_state = 462
-					    owns_state = 783
-				    }
-			    }
-				CAS = {
-			        AND = {
-			            owns_state = 290
-					    owns_state = 461
-					    owns_state = 462
-					    owns_state = 783
-				    }
-			    }
-			}   
-		}
-		
-		bypass = { }
-		
-		#search_filters = {  }
-		
-		completion_reward = {
-		    CAS = {
-			    if = {
-                    limit = {
-                        AND = {
-			                owns_state = 290
-					        owns_state = 461
-					        owns_state = 462
-					        owns_state = 783
-				        } 
-                    }
-                    CAS = {
-				        country_event = {
-					        id = cas_prt_ult.1
-					    }
-				    }
-			    }
-             else = {
-                    CAS = {
-				        country_event = {
-					        id = cas_prt_agr.1
-					    }
-				    }
-                }
-            }
-			
-	        GRA = {
-			    if = {
-                    limit = {
-                        AND = {
-			                owns_state = 290
-					        owns_state = 461
-					        owns_state = 462
-					        owns_state = 783
-				        } 
-                    }
-                    GRA = {
-				        country_event = {
-					        id = gra_prt_ult.1
-					    }
-				    }
-			    }
-                else = {
-                    GRA = {
-				        country_event = {
-					        id = gra_prt_agr.1
-					    }
-				    }
-                }
-	        }
+		prerequisite = {
+        focus = PRT_Socialism_for_everyone
         }
-	}
-	
-	focus = {
-		id = PRT_sal2_marocco_war2
-		icon = GFX_focus_generic_treaty
-		prerequisite = {
-		   focus = PRT_sal2_marocco_war
-		}
-		x = 11
-		y = 8
-		cost = 5
-		ai_will_do = {
-			factor = 100
-		}
-		
-		cancel = { 
-		    OR = {
-			    GRA = {
-			        AND = {
-			            owns_state = 290
-					    owns_state = 461
-					    owns_state = 462
-					    owns_state = 783
-				    }
-			    }
-				CAS = {
-			        AND = {
-			            owns_state = 290
-					    owns_state = 461
-					    owns_state = 462
-					    owns_state = 783
-				    }
-			    }
-				
-				MOR = {
-			        AND = {
-			            owns_state = 290
-					    owns_state = 461
-					    owns_state = 462
-					    owns_state = 783
-				    }
-			    }
-			}
-		}
-				
-		available = { 
-		   
-		}
-		
-		bypass = { 
-		    PRT = {
-			    AND = {
-			        owns_state = 290
-					owns_state = 461
-					owns_state = 462
-					owns_state = 783
-				}
-			}
-		}
-		
-		#search_filters = {  }
-		
-		completion_reward = {
-		    PRT = {
-			    add_timed_idea = {
-				    idea = PRT_marocco_battle
-					days = 75
-	            }
-			}
-		}
-	}
-	
-	focus = {
-		id = PRT_sal2_spain_diplomacy
-		icon = GFX_focus_generic_treaty
-		prerequisite = {
-		   focus = PRT_sal2_spain_ultimate
-		}
-		x = 13
-		y = 8
-		cost = 5
-		ai_will_do = {
-			factor = 100
-		}
-		
-		cancel = { 
-		
-		}
-				
 		available = {
-        
+		
 		}
-		
-		bypass = { }
-		
-		#search_filters = {  }
-		
 		completion_reward = {
-		    PRT = {
-			    country_event = {
-				    id = prt_sal.100
-				}
-            }				
-        }
-	}
-	
-	focus = {
-		id = PRT_sal2_marocco_man
-		icon = GFX_goal_support_democracy
-		prerequisite = {
-		   focus = PRT_sal2_spain_diplomacy
-		   focus = PRT_sal2_marocco_war2
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_Revolution_perestroika_glasnost"			
+
+			add_popularity = {
+				ideology = socialism
+                popularity = 0.15
+			}
 		}
-		x = 12
+	}
+
+	focus = {
+		id = PRT_Unite_around_the_people
+		icon = GFX_focus_generic_join_comintern
+		cost = 7
+		x = 9
+		y = 7
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		focus =  PRT_Revolution_perestroika_glasnost
+		}
+		available = {
+		
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_Unite_around_the_people"			
+
+			add_political_power = 100
+			add_popularity = {
+				ideology = socialism
+                popularity = 0.05
+			}
+		}
+	}
+
+	focus = {
+		id = PRT_Bastion_of_progress
+		icon = GFX_goal_generic_demand_territory
+		cost = 7
+		x = 9
+		y = 8
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		focus =  PRT_Unite_around_the_people
+		}
+		available = {
+		
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_Bastion_of_progress"			
+
+			add_ideas = PRT_The_State_of_Progress
+		}
+	}
+
+	focus = {
+		id = PRT_Advanced_education
+		icon = GFX_focus_generic_socialist_science
+		cost = 7
+		x = 9
 		y = 9
-		cost = 5
 		ai_will_do = {
-			factor = 100
+			factor = 5
 		}
-		
-		cancel = { 
-		
+		prerequisite = {
+		focus = PRT_Bastion_of_progress 
 		}
-				
 		available = {
-		    PRT = {
-			    AND = {
-			        owns_state = 290
-					owns_state = 461
-					owns_state = 462
-					owns_state = 783
+			has_completed_focus = PRT_Expand_scientific_programs					
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_Advanced_education"			
+
+			add_research_slot = 1
+			add_popularity = {
+				ideology = socialism
+                popularity = 0.05
+			}
+		}
+	}
+
+	focus = {
+		id = PRT_Soft_collectivization
+		icon = GFX_goal_generic_national_unity
+		cost = 7
+		x = 11
+		y = 9
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		focus =  PRT_Bastion_of_progress
+		}
+		available = {
+		
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_Soft_collectivization"			
+
+            add_offsite_building = { type = industrial_complex level = 1 }
+			swap_ideas = {
+				remove_idea = regional_corruption
+				add_idea = local_corruption
+			}
+			add_popularity = {
+				ideology = socialism
+                popularity = 0.05
+			}
+		}
+	}
+
+	focus = {
+		id = PRT_New_Realism
+		icon = GFX_focus_SOV_organize_wreckers
+		cost = 7
+		x = 11
+		y = 7
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		focus =  PRT_Revolution_perestroika_glasnost
+		}
+		available = {
+		
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_New_Realism"			
+
+			add_offsite_building = { type = industrial_complex level = 1 }
+			add_popularity = {
+				ideology = socialism
+                popularity = 0.10
+			}
+		}
+	}
+
+	focus = {
+		id = PRT_Socialism_for_everyone
+		icon = GFX_goal_generic_improve_relations
+		cost = 7
+		x = 10
+		y = 5
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		focus =  PRT_Victory_of_the_proletariat
+		}
+		available = {
+		
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_Socialism_for_everyone"			
+
+			swap_ideas = {
+				remove_idea = medium_taxation
+				add_idea = low_taxation
+			}
+		}
+	}
+
+	focus = {
+		id = PRT_Socialist_Brigades
+		icon = GFX_focus_ETH_freedom_at_gunpoint
+		cost = 7
+		x = 11
+		y = 6
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		focus =  PRT_Socialism_for_everyone
+		}
+		available = {
+		
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_Socialist_Brigades"			
+
+			add_ideas = PRT_Internationalist_volunteers
+		}
+	}
+
+	focus = {
+		id = PRT_Independent_Portugal
+		icon = GFX_goal_generic_demand_territory
+		cost = 7
+		x = 14
+		y = 0
+		ai_will_do = {
+			factor = 5
+		}
+		mutually_exclusive = {
+        focus = PRT_Remain_loyal_to_LondonPRT_The_Iberian_Revolution
+        }
+		mutually_exclusive = {
+        focus = PRT_Remain_loyal_to_London
+        }
+		available = {
+			is_subject = no
+			OR = {
+				date > 1852.01.01	
+				has_government = reactionist
+			}
+			NOT = {
+				has_government = democratic
+				has_government = socialism
+			}
+			NOT = {
+				has_idea = PRT_Political_crisis			
+			}	
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_Independent_Portugal"			
+
+			CBI = {
+				country_event = prt_event.14			
+			}
+		}
+	}
+
+	focus = {
+		id = PRT_The_ancestral_lands_of_Portugal
+		icon = GFX_goal_generic_position_armies
+		cost = 5
+		x = 11
+		y = 1
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		focus =  PRT_Independent_Portugal
+		}
+		available = {
+			is_subject = no	
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_The_ancestral_lands_of_Portugal"			
+
+			CAS = {
+				country_event = prt_event.16			
+			}
+		}
+	}
+
+	focus = {
+		id = PRT_Subjugate_Granada
+		icon = GFX_focus_generic_annex_country
+		cost = 5
+		x = 11
+		y = 2
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		focus =  PRT_The_ancestral_lands_of_Portugal
+		}
+		available = {
+			is_subject = no	
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_Subjugate_Granada"			
+
+			GRA = {
+				country_event = prt_event.17			
+			}
+		}
+	}
+
+	focus = {
+		id = PRT_Expand_African_Colonies
+		icon = GFX_goal_generic_more_territorial_claims
+		cost = 5
+		x = 10
+		y = 3
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		focus =  PRT_Subjugate_Granada
+		}
+		available = {
+			is_subject = no	
+			has_war = no
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_Expand_African_Colonies"			
+
+			add_state_claim = 272
+			add_state_claim = 296
+			add_state_claim = 701
+			create_wargoal = {
+				type = annex_everything
+                target = NGW
+			}
+			create_wargoal = {
+				type = annex_everything
+                target = SEN
+			}
+			create_wargoal = {
+				type = annex_everything
+                target = GWI
+			}
+		}
+	}
+
+	focus = {
+		id = PRT_Portuguese_Science
+		icon = GFX_focus_generic_self_management
+		cost = 5
+		x = 11
+		y = 4
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		focus =  PRT_Expand_African_Colonies
+		}
+		available = {
+			is_subject = no	
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_Portuguese_Science"			
+
+			add_research_slot = 1
+		}
+	}
+
+	focus = {
+		id = PRT_Anti_British_relations
+		icon = GFX_focus_eng_move_to_secure_the_dominions
+		cost = 5
+		x = 13
+		y = 1
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		focus =  PRT_Independent_Portugal
+		}
+		available = {
+			is_subject = no					
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_Anti_British_relations"			
+
+			remove_opinion_modifier = {
+				target = CBI
+                modifier = history_friend
+			}
+			CBI = {
+				remove_opinion_modifier = {
+				    target = PRT
+                    modifier = history_friend
+			}
+			}
+		}
+	}
+
+	focus = {
+		id = PRT_Lisbon_Steel_Rod
+		icon = GFX_focus_generic_fascist_troops
+		cost = 5
+		x = 13
+		y = 2
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		focus =  PRT_Anti_British_relations
+		}
+		available = {
+			is_subject = no	
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_Lisbon_Steel_Rod"			
+
+			add_ideas = PRT_Steel_rod
+		}
+	}
+
+	focus = {
+		id = PRT_The_New_Empire
+		icon = GFX_focus_por_the_fifth_empire
+		cost = 5
+		x = 12
+		y = 3
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		focus = PRT_Subjugate_Granada
+		}
+		prerequisite = {
+		focus =  PRT_Lisbon_Steel_Rod
+		}
+		mutually_exclusive = {
+        focus = PRT_German_defender
+        }
+		available = {
+			is_subject = no
+			is_in_faction = no	
+			has_war = no
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_The_New_Empire"			
+
+            add_war_support = 0.10
+			create_faction = Portuguese_Great_Empire
+			swap_ideas = {
+				remove_idea = large_country
+				add_idea = potential_world_power
+			}
+		}
+	}
+
+	focus = {
+		id = PRT_German_defender
+		icon = GFX_goal_generic_improve_relations
+		cost = 5
+		x = 14
+		y = 3
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		focus =  PRT_Lisbon_Steel_Rod
+		}
+		mutually_exclusive = {
+        focus = PRT_The_New_Empire
+        }
+		available = {
+			is_subject = no
+			is_in_faction = no	
+			has_government = reactionist
+			PRU = {
+				is_faction_leader = yes
+				has_completed_focus = PRU_juncker_take_power				
+			}				
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_German_defender"			
+
+			PRU = {
+				country_event = prt_event.15			
+			}
+		}
+	}
+
+	focus = {
+		id = PRT_Invincible_people
+		icon = GFX_focus_generic_coastal_fort
+		cost = 7
+		x = 13
+		y = 4
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		focus =  PRT_The_New_Empire
+		focus =  PRT_German_defender
+		}
+		available = {
+			is_subject = no
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_Invincible_people"			
+
+			add_ideas = PRT_The_Invincible_people_of_Portugal
+		}
+	}
+
+	focus = {
+		id = PRT_Remain_loyal_to_London
+		icon = GFX_goal_generic_forceful_treaty
+		cost = 7
+		x = 16
+		y = 0
+		ai_will_do = {
+			factor = 5
+		}
+		mutually_exclusive = {
+        focus =PRT_Independent_Portugal
+        }
+		mutually_exclusive = {
+        focus =PRT_The_Iberian_Revolution
+        }
+		available = {
+			is_in_faction_with = CBI
+			date > 1852.01.01		
+			NOT = {
+				has_government = socialism
+			}
+			NOT = {
+				has_idea = PRT_Political_crisis			
+			}	
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_Remain_loyal_to_London"			
+
+			add_command_power = 50
+		}
+	}
+
+	focus = {
+		id = PRT_Help_from_the_British_Isles
+		icon = GFX_goal_generic_intelligence_exchange
+		cost = 5
+		x = 15
+		y = 1
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		focus =  PRT_Remain_loyal_to_London
+		}
+		available = {
+			is_in_faction_with = CBI		
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_Help_from_the_British_Isles"			
+
+			add_research_slot = 1
+		}
+	}
+
+	focus = {
+		id = PRT_An_Indestructible_union
+		icon = GFX_goal_generic_major_alliance
+		cost = 5
+		x = 15
+		y = 2
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		focus = PRT_Help_from_the_British_Isles
+		}
+		available = {
+			is_in_faction_with = CBI		
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_An_Indestructible_union"			
+
+			add_political_power = 100
+		}
+	}
+
+	focus = {
+		id = PRT_The_German_aggressor
+		icon = GFX_goal_generic_CAS
+		cost = 7
+		x = 16
+		y = 3
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		focus =  PRT_Remain_loyal_to_London
+		}
+		available = {
+			is_in_faction_with = CBI		
+			OR = {
+				PRU = {
+					has_war_with = RUS
+					has_war_with = CBI
+					has_war_with = FRR
 				}
 			}
-        }
-		
-		bypass = { }
-		
-		#search_filters = {  }
-		
-		completion_reward = {
-		    PRT = {
-			    country_event = {
-				    id = prt_sal.101
-				}	
-            }				
-        }
-	}
-	
-	focus = {
-		id = PRT_sep1
-		icon = GFX_goal_support_democracy
-		prerequisite = {
-		    focus = PRT_start
 		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_The_German_aggressor"			
+
+			add_ideas = PRT_Anti_German_Society
+		}
+	}
+
+	focus = {
+		id = PRT_Mass_appeal
+		icon = GFX_focus_generic_manpower
+		cost = 10
+		x = 15
+		y = 4
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		focus =  PRT_The_German_aggressor
+		}
+		available = {
+			is_in_faction_with = CBI		
+			OR = {
+				PRU = {
+					has_war_with = RUS
+				}
+				PRU = {
+					has_war_with = CBI
+				}
+				PRU = {
+					has_war_with = FRR
+				}
+			}
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_Mass_appeal"			
+
+			add_manpower = 100000
+		}
+	}
+
+	focus = {
+		id = PRT_Strengthen_Angola
+		icon = GFX_goal_generic_defence
+		cost = 10
+		x = 17
+		y = 4
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		focus =  PRT_The_German_aggressor
+		}
+		available = {
+			controls_state = 540
+			controls_state = 796
+			is_in_faction_with = CBI	
+			OR = {
+				PRU = {
+					has_war_with = RUS
+					has_war_with = CBI
+					has_war_with = FRR
+				}
+			}		
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_Mass_appeal"			
+
+            540 = {
+				add_building_construction = {
+					type = naval_base
+					level = 1
+					province = 12958
+					instant_build = yes
+				}
+			}
+			540 = {
+				add_building_construction = {
+					type = bunker
+					level = 1
+					province = 12958
+					instant_build = yes
+				}
+			}
+			540 = {
+				limit = {
+					free_building_slots = {
+						building = infrastructure
+						size > 1
+						include_locked = yes
+					}
+				}
+
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			796 = {
+				add_building_construction = {
+					type = air_base
+					level = 2
+					instant_build = yes
+				}
+			}
+			796 = {
+				add_building_construction = {
+					type = bunker
+					level = 1
+					province = 2115
+					instant_build = yes
+				}
+			}
+			796 = {
+				limit = {
+					free_building_slots = {
+						building = infrastructure
+						size > 1
+						include_locked = yes
+					}
+				}
+
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = PRT_British_Maritime_experience
+		icon = GFX_goal_generic_navy_cruiser
+		cost = 5
+		x = 17
+		y = 1
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		focus =  PRT_Remain_loyal_to_London
+		}
+		available = {
+			is_in_faction_with = CBI		
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_British_Maritime_experience"			
+
+            navy_experience = 10
+			add_tech_bonus = {
+				name = cv_bonus
+				bonus = 0.50
+				uses = 1
+				category = dd_tech
+				category = bc_tech
+			}	
+		}
+	}
+
+	focus = {
+		id = PRT_Strengthen_the_Atlantic
+		icon = GFX_goal_generic_construct_naval_dockyard
+		cost = 5
+		x = 17
+		y = 2
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		focus =  PRT_British_Maritime_experience
+		}
+		available = {
+			is_in_faction_with = CBI
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_Strengthen_the_Atlantic"			
+
+            navy_experience = 10
+			random_owned_controlled_state = {
+				prioritize = { 697 }
+				limit = {
+					is_coastal = yes
+					free_building_slots = {
+						building = dockyard
+						size > 1
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = dockyard
+					level = 1
+					instant_build = yes
+				}
+				set_state_flag = CAN_halifax_shipyards_DY
+			}
+		}
+	}
+
+	focus = {
+		id = PRT_The_Iberian_Revolution
+		icon = GFX_focus_por_workers_of_iberia
+		cost = 7
+		x = 18
+		y = 0
+		ai_will_do = {
+			factor = 5
+		}
+		mutually_exclusive = {
+        focus = PRT_Remain_loyal_to_London
+        }
+		mutually_exclusive = {
+        focus = PRT_Independent_Portugal
+        }
+		available = {
+			is_subject = no	
+			has_government = socialism
+			NOT = {
+				has_idea = PRT_Political_crisis			
+			}	
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_The_Iberian_Revolution"			
+
+            add_war_support = 0.10
+			add_manpower = 25000
+		}
+	}
+
+	focus = {
+		id = PRT_Revolutionary_fortitude
+		icon = GFX_focus_focus_fra_revolution_utmost
+		cost = 5
+		x = 19
+		y = 1
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		focus =  PRT_The_Iberian_Revolution
+		}
+		available = {
+			is_subject = no			
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_Revolutionary_fortitude"			
+
+			add_ideas = PRT_The_Iberian_Revolution
+			add_popularity = {
+				ideology = socialism
+                popularity = 0.05
+			}
+		}
+	}
+
+	focus = {
+		id = PRT_The_Socialist_Pact
+		icon = GFX_focus_generic_join_comintern
+		cost = 5
+		x = 19
+		y = 2
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		focus =  PRT_Revolutionary_fortitude
+		}
+		available = {
+			is_subject = no	
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_The_Socialist_Pact"			
+
+			create_faction = The_Socialist_Pact
+			ARA = {
+				country_event = prt_event.18			
+			}
+		}
+	}
+
+	focus = {
+		id = PRT_The_War_with_Castile
+		icon = GFX_goal_generic_major_war
+		cost = 5
+		x = 18
+		y = 3
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		focus =  PRT_The_Socialist_Pact
+		}
+		available = {
+			is_subject = no						
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_The_War_with_Castile"			
+
+			add_state_claim = 171
+			add_state_claim = 790
+			add_state_claim = 174
+		    add_state_claim = 791		
+			add_state_claim = 176	
+			add_state_claim = 792	
+			add_state_claim = 172	
+			add_state_claim = 788	
+			add_state_claim = 41	
+			add_state_claim = 793	
+			add_state_claim = 170	
+			add_state_claim = 175	
+			add_state_claim = 168	
+			add_state_claim = 698	
+			create_wargoal = {
+				type = annex_everything
+                target = CAS
+			}
+		}
+	}
+
+	focus = {
+		id = PRT_Unity_with_Madrid
+		icon = GFX_goal_generic_national_unity
+		cost = 5
+		x = 19
+		y = 4
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		focus =  PRT_The_War_with_Castile
+		focus =  PRT_The_Socialist_Pact
+		}
+		available = {
+			is_subject = no	
+			OR = {
+				CAS = {
+				exists = no												
+			    }
+				owns_state = 171
+			    owns_state = 790
+			    owns_state = 174
+		     	owns_state = 791		
+				owns_state = 176	
+				owns_state = 792	
+				owns_state = 172	
+				owns_state = 788	
+				owns_state = 41	
+				owns_state = 793	
+				owns_state = 170	
+				owns_state = 175	
+				owns_state = 168	
+				owns_state = 698		
+			}		
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_Unity_with_Madrid"			
+
+			add_state_core = 171
+		    add_state_core = 790
+			add_state_core = 174
+		    add_state_core = 791		
+			add_state_core = 176	
+			add_state_core = 792	
+			add_state_core = 172	
+			add_state_core = 788	
+			add_state_core = 41	
+			add_state_core = 793	
+			add_state_core = 170	
+			add_state_core = 175	
+			add_state_core = 168	
+			add_state_core = 698	
+		}
+	}
+
+	focus = {
+		id = PRT_Unite_with_Aragon
+		icon = GFX_goal_generic_dangerous_deal
+		cost = 5
+		x = 20
+		y = 3
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		focus =  PRT_The_Socialist_Pact
+		}
+		mutually_exclusive = {
+        focus = PRT_To_fight_for_Aragon
+        }
+		available = {
+			is_subject = no		
+			ARA = {
+				exists = yes
+				is_ally_with = PRT												
+			}
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_Unite_with_Aragon"			
+
+			add_state_claim = 166
+			add_state_claim = 794
+			add_state_claim = 165
+			add_state_claim = 167
+			add_state_claim = 177
+			ARA = {
+				country_event = prt_event.19
+			}
+		}
+	}
+
+	focus = {
+		id = PRT_New_Iberia
+		icon = GFX_focus_generic_free_iberia
+		cost = 7
+		x = 21
+		y = 4
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		focus = PRT_Unite_with_Aragon
+		focus = PRT_To_fight_for_Aragon
+		focus =  PRT_The_Socialist_Pact 
+		}
+		available = {
+			is_subject = no			
+			CAS = {
+				exists = no												
+			}
+			ARA = {
+				exists = no												
+			}
+			GRA = {
+				exists = no												
+			}
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_New_Iberia"			
+
+            set_cosmetic_tag = PRT_IBR
+			add_state_core = 166
+			add_state_core = 794
+			add_state_core = 165
+			add_state_core = 167
+			add_state_core = 177
+			swap_ideas = {
+				remove_idea = large_country
+				add_idea = potential_world_power
+			}
+		}
+	}
+
+	focus = {
+		id = PRT_To_fight_for_Aragon
+		icon = GFX_focus_SOV_the_glory_of_the_red_army_communism
+		cost = 5
+		x = 22
+		y = 3
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		focus =  PRT_The_Socialist_Pact
+		}
+		mutually_exclusive = {
+        focus = PRT_Unite_with_Aragon
+        }
+		available = {
+			is_subject = no	
+			ARA = {
+				exists = yes
+				NOT = {
+					is_ally_with = PRT					
+				}							
+			}
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_To_fight_for_Aragon"			
+
+			add_state_claim = 166
+			add_state_claim = 794
+			add_state_claim = 165
+			add_state_claim = 167
+			add_state_claim = 177
+			create_wargoal = {
+				type = annex_everything
+                target = ARA
+			}
+		}
+	}
+
+	focus = {
+		id = PRT_The_war_with_Granada
+		icon = GFX_goal_generic_major_war
+		cost = 5
+		x = 24
+		y = 3
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		focus =  PRT_The_Socialist_Pact
+		}
+		available = {
+			is_subject = no			
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_The_war_with_Granada"			
+
+			add_state_claim = 169
+			add_state_claim = 789
+			add_state_claim = 173
+			add_state_claim = 118
+			create_wargoal = {
+				type = annex_everything
+                target = GRA
+			}
+		}
+	}
+
+	focus = {
+		id = PRT_Unity_with_Granada
+		icon = GFX_goal_generic_national_unity
+		cost = 5
+		x = 23
+		y = 4
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		focus =  PRT_The_war_with_Granada
+		focus =  PRT_The_Socialist_Pact
+		}
+		available = {
+			is_subject = no	
+			OR = {
+				owns_state = 169
+			    owns_state = 789
+			    owns_state = 173
+		     	owns_state = 118	
+			GRA = {
+				exists = no												
+			}		
+			}		
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_Unity_with_Granada"			
+
+			add_state_core = 169
+			add_state_core = 789
+			add_state_core = 173
+			add_state_core = 118
+		}
+	}
+
+	focus = {
+		id = PRT_Unite_before_London
+		icon = GFX_focus_eng_global_defense
+		cost = 7
+		x = 16
+		y = 6
+		ai_will_do = {
+			factor = 50
+		}
+		available = {
+			has_war_with = CBI	
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_Unite_before_London"			
+
+			add_ideas = PRT_The_Anti_English_Society
+		}
+	}
+
+	focus = {
+		id = PRT_Bristle_the_coast
+		icon = GFX_goal_generic_fortify_city
+		cost = 10
+		x = 15
+		y = 7
+		ai_will_do = {
+			factor = 50
+		}
+		prerequisite = {
+		focus =  PRT_Unite_before_London
+		}
+		available = {
+			has_war_with = CBI	
+			controls_state = 180
+			controls_state = 112
+			controls_state = 179
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_Bristle_the_coast"			
+
+			180 = {
+				add_building_construction = {
+					type = bunker
+					level = 1
+					province = 11673
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = bunker
+					level = 2
+					province = 9817
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = coastal_bunker
+					level = 1
+					province = 11673
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = coastal_bunker
+					level = 2
+					province = 9817
+					instant_build = yes
+				}
+			}
+			112 = {
+				add_building_construction = {
+					type = bunker
+					level = 3
+					province = 11805
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = coastal_bunker
+					level = 3
+					province = 11805
+					instant_build = yes
+				}
+			}
+			179 = {
+				add_building_construction = {
+					type = bunker
+					level = 2
+					province = 3790
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = bunker
+					level = 1
+					province = 6880
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = bunker
+					level = 1
+					province = 970
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = coastal_bunker
+					level = 2
+					province = 3790
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = coastal_bunker
+					level = 1
+					province = 6880
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = coastal_bunker
+					level = 1
+					province = 970
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = PRT_Cry_for_help
+		icon = GFX_goal_generic_attack_allies
+		cost = 10
+		x = 17
+		y = 7
+		ai_will_do = {
+			factor = 50
+		}
+		prerequisite = {
+		focus =  PRT_Unite_before_London
+		}
+		available = {
+			has_war_with = CBI		
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_Cry_for_help"			
+
+            add_manpower = 10000
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+                amount = 500
+                producer = BYZ
+			}
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+                amount = 500
+                producer = PRU
+			}
+		}
+	}
+
+	focus = {
+		id = PRT_Economic_recovery
+		icon = GFX_goal_generic_consumer_goods
+		cost = 5
+		x = 26
+		y = 0
+		ai_will_do = {
+			factor = 5
+		}
+		available = {
+			NOT = {
+				has_idea = PRT_Political_crisis			
+			}		
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_Economic_recovery"			
+
+			add_tech_bonus = {
+				name = GER_four_year_plan
+				bonus = 1.0
+				uses = 1
+				category = industry
+			}
+		}
+	}
+
+	focus = {
+		id = PRT_Abolition_of_lifelong_slavery
+		icon = GFX_focus_generic_court
+		cost = 5
 		x = 22
 		y = 1
-		cost = 1
 		ai_will_do = {
-			factor = 100
+			factor = 5
 		}
-		
-		#cancel = { }
-		
-		available = { 
-		    has_country_flag = prt_september_win
+		prerequisite = {
+		focus =  PRT_Economic_recovery
 		}
-		
-		bypass = { }
-		
-		#search_filters = {  }
-		
+		available = {
+			has_idea = slavery_allowed
+			date > 1850.01.01
+			NOT = {
+				has_government = socialism
+				has_government = reactionist				
+			}
+		}
 		completion_reward = {
-			country_event = {
-			    id = prt_sep.1
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_Abolition_of_lifelong_slavery"			
+
+            add_political_power = -100
+			swap_ideas = {
+				remove_idea = slavery_allowed
+				add_idea = limited_slavery
 			}
 		}
 	}
-	
+
+	focus = {
+		id = PRT_Complete_abolition_of_slavery
+		icon = GFX_goal_generic_demand_territory
+		cost = 7
+		x = 22
+		y = 2
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		focus =  PRT_Abolition_of_lifelong_slavery
+		}
+		available = {
+			has_idea = limited_slavery
+			date > 1852.01.01
+			NOT = {
+				has_government = socialism		
+				has_government = reactionist		
+			}
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_Complete_abolition_of_slavery"			
+
+            add_political_power = -100
+			swap_ideas = {
+				remove_idea = limited_slavery
+				add_idea = slavery_forbidden
+			}
+		}
+	}
+
+	focus = {
+		id = PRT_Start_cutting_corners
+		icon = GFX_focus_generic_industry_1
+		cost = 5
+		x = 26
+		y = 1
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		focus =  PRT_Economic_recovery
+		}
+		available = {
+		
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_Start_cutting_corners"			
+
+			country_event = prt_event.10
+		}
+	}
+
+	focus = {
+		id = PRT_Compose_production
+		icon = GFX_goal_generic_construct_civ_factory 
+		cost = 5
+		x = 25
+		y = 2
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		focus =  PRT_Start_cutting_corners
+		}
+		available = {
+		
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_Compose_production"			
+
+			random_state = {
+				limit = { is_core_of = PRT }
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = PRT_African_resources
+		icon = GFX_goal_generic_construction2
+		cost = 5
+		x = 27
+		y = 2
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		focus =  PRT_Start_cutting_corners
+		}
+		available = {
+		
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_African_resources"			
+
+			add_tech_bonus = {
+				name = GER_coal_liquidization
+				bonus = 1.0
+				uses = 1
+				category = synth_resources
+			}
+			if = {
+				limit = {
+					has_full_control_of_state = 540
+				}
+				540 = {
+					add_extra_state_shared_building_slots = 1
+					add_building_construction = {
+						type = synthetic_refinery
+						level = 1
+						instant_build = yes
+					}
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = PRT_Expand_scientific_programs
+		icon = GFX_focus_research
+		cost = 5
+		x = 26
+		y = 3
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		focus = PRT_Compose_production
+		}
+		prerequisite = {
+        focus = PRT_African_resources
+        }
+		available = {
+		
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_Expand_scientific_programs"			
+
+			swap_ideas = {
+				remove_idea = low_investment_level
+				add_idea = average_investment_level
+			}
+		}
+	}
+
+	focus = {
+		id = PRT_Portuguese_diligence
+		icon = GFX_focus_generic_industry_2
+		cost = 5
+		x = 26
+		y = 4
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		focus =  PRT_Expand_scientific_programs
+		}
+		available = {
+		
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_Portuguese_diligence"			
+
+            country_event = prt_event.11
+		}
+	}
+
+	focus = {
+		id = PRT_Conveyor_production
+		icon = GFX_goal_generic_production2
+		cost = 5
+		x = 24
+		y = 5
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		focus =  PRT_Portuguese_diligence
+		}
+		available = {
+			has_completed_focus = PRT_Modern_industry	
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_Conveyor_production"			
+
+			add_tech_bonus = {
+				name = GER_coal_liquidization
+				bonus = 1.0
+				uses = 1
+				category = electronics
+			}
+		}
+	}
+
+	focus = {
+		id = PRT_Portuguese_Metro
+		icon = GFX_goal_generic_construction2
+		cost = 7
+		x = 24
+		y = 8
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		focus =  PRT_Conveyor_production
+		}
+		available = {
+		
+		}
+		completion_reward = { 
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_Portuguese_Metro"			
+
+			country_event = prt_event.12
+		}
+	}
+
+	focus = {
+		id = PRT_A_strong_man
+		icon = GFX_focus_generic_industry_3
+		cost = 5
+		x = 25
+		y = 7
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		focus =  PRT_Conveyor_production
+		}
+		prerequisite = {
+        focus = PRT_The_industrial_world_has_won
+        }
+		available = {
+		
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_A_strong_man"			
+
+			country_event = prt_event.13
+		}
+	}
+
+	focus = {
+		id = PRT_The_new_is_always_the_well_forgotten_old
+		icon = GFX_focus_research2
+		cost = 5
+		x = 26
+		y = 5
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		focus = PRT_Portuguese_diligence 
+		}
+		available = {
+		
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_The_new_is_always_the_well_forgotten_old"			
+
+			add_tech_bonus = {
+				name = GER_coal_liquidization
+				bonus = 1.0
+				uses = 1
+				category = construction_tech
+			}
+		}
+	}
+
+	focus = {
+		id = PRT_The_industrial_world_has_won
+		icon = GFX_goal_generic_construct_mil_factory
+		cost = 5
+		x = 26
+		y = 6
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		focus =  PRT_The_new_is_always_the_well_forgotten_old
+		}
+		available = {
+		
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_The_industrial_world_has_won"			
+
+			random_owned_controlled_state = {
+				prioritize = { 112 }
+						limit = {
+							free_building_slots = {
+								building = arms_factory
+								size > 1
+								include_locked = yes
+							}
+						}
+						add_extra_state_shared_building_slots = 2
+						add_building_construction = {
+							type = arms_factory
+							level = 2
+							instant_build = yes
+						}
+						set_state_flag = GER_integrate_war_economies
+					}
+
+			random_owned_controlled_state = {
+				prioritize = { 179 }
+						limit = {
+							free_building_slots = {
+								building = industrial_complex
+								size > 1
+								include_locked = yes
+							}
+						}
+						add_extra_state_shared_building_slots = 2
+						add_building_construction = {
+							type = industrial_complex
+							level = 2
+							instant_build = yes
+						}
+						set_state_flag = GER_integrate_war_economies
+					}
+		}
+	}
+
+	focus = {
+		id = PRT_Atlantic_Trade
+		icon = GFX_goal_generic_neutrality_focus
+		cost = 5
+		x = 28
+		y = 5
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		focus = PRT_Portuguese_diligence 
+		}
+		available = {
+		
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_Atlantic_Trade"			
+
+			add_ideas = PRT_The_Portuguese_Silk_Road
+		}
+	}
+
+	focus = {
+		id = PRT_Silver_Merchant_Fleet
+		icon = GFX_focus_generic_refit_civilian_ships
+		cost = 5
+		x = 27
+		y = 7
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		focus =  PRT_Atlantic_Trade
+		}
+		available = {
+		
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_Silver_Merchant_Fleet"			
+
+			random_owned_controlled_state = {
+				prioritize = { 112 }
+				limit = {
+					is_coastal = yes
+					free_building_slots = {
+						building = dockyard
+						size > 2
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = dockyard
+					level = 2
+					instant_build = yes
+				}
+				set_state_flag = CAN_halifax_shipyards_DY
+			}	
+		}
+	}
+
+	focus = {
+		id = PRT_Nineteenth_Century_Portugal
+		icon = GFX_focus_generic_support_the_left_right
+		cost = 10
+		x = 26
+		y = 8
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		focus =  PRT_A_strong_man
+		}
+		prerequisite = {
+        focus = PRT_Silver_Merchant_Fleet
+        }
+		available = {
+		
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_Nineteenth_Century_Portugal"			
+
+			swap_ideas = {
+				remove_idea = PRT_The_Third_Step_in_Economic_Greatness
+				add_idea = PRT_Portugals_Golden_Years
+			}
+		}
+	}
+
+	focus = {
+		id = PRT_Resources_from_the_sea
+		icon = GFX_focus_generic_annex_country
+		cost = 5
+		x = 28
+		y = 8
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		focus =  PRT_Atlantic_Trade
+		}
+		available = {
+		
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_Resources_from_the_sea"			
+
+			add_tech_bonus = {
+				name = GER_coal_liquidization
+				bonus = 0.75
+				uses = 2
+				category = excavation_tech
+			}
+		}
+	}
+
+	focus = {
+		id = PRT_Develop_machine_tool_construction
+		icon = GFX_goal_generic_production2
+		cost = 5
+		x = 30
+		y = 1
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		focus =  PRT_Economic_recovery
+		}
+		available = {
+		
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_Develop_machine_tool_construction"			
+
+			add_tech_bonus = {
+				name = GER_four_year_plan
+				bonus = 1.0
+				uses = 1
+				category = industry
+			}
+		}
+	}
+
+	focus = {
+		id = PRT_Modern_industry
+		icon = GFX_goal_generic_construction 
+		cost = 7
+		x = 30
+		y = 2
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		focus =  PRT_Develop_machine_tool_construction 
+		}
+		available = {
+			has_idea = medium_developed_industry
+			date > 1852.01.01		
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_Modern_industry"			
+
+			swap_ideas = {
+				remove_idea = medium_developed_industry
+				add_idea = modern_industry
+			}
+		}
+	} 
+
+	focus = {
+		id = PRT_Reactivate_the_army
+		icon = GFX_goal_generic_axis_build_infantry
+		cost = 2
+		x = 34
+		y = 0
+		ai_will_do = {
+			factor = 5
+		}
+		available = {
+			NOT = {
+				has_idea = PRT_Political_crisis			
+			}	
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_Reactivate_the_army"			
+
+			add_timed_idea = {
+				idea = PRT_Decentralized_Army
+				days = 365
+			}
+		}
+	}
+
+	focus = {
+		id = PRT_Portuguese_Colonial_Legion
+		icon = GFX_focus_generic_manpower
+		cost = 5
+		x = 32
+		y = 1
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		focus =  PRT_Reactivate_the_army
+		}
+		available = {
+			NOT = {
+				has_government = socialism		
+				has_government = reactionist			
+			}
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_Portuguese_Colonial_Legion"			
+
+            add_manpower = 5000
+			add_ideas = PRT_The_Colonial_Legion
+		}
+	}
+
+	focus = {
+		id = PRT_New_generation_of_officers
+		icon = GFX_focus_generic_military_mission
+		cost = 5
+		x = 34
+		y = 1
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		focus =  PRT_Reactivate_the_army
+		}
+		available = {
+		
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_New_generation_of_officers"			
+
+			army_experience = 25
+		}
+	}
+
+	focus = {
+		id = PRT_The_doctrine_of_firepower_superiority
+		icon = GFX_goal_generic_army_artillery2
+		cost = 5
+		x = 33
+		y = 2
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		focus =  PRT_New_generation_of_officers
+		}
+		mutually_exclusive = {
+        focus = PRT_The_doctrine_of_large_scale_planning
+        }
+		available = {
+		
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_The_doctrine_of_firepower_superiority"			
+
+			add_doctrine_cost_reduction = {
+				name = land_doc_bonus
+				cost_reduction = 0.75
+				uses = 1
+				category = cat_superior_firepower
+			}
+		}
+	}
+
+	focus = {
+		id = PRT_The_doctrine_of_large_scale_planning
+		icon = GFX_goal_generic_build_tank
+		cost = 5
+		x = 35
+		y = 2
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		focus =  PRT_New_generation_of_officers
+		}
+		mutually_exclusive = {
+        focus = PRT_The_doctrine_of_firepower_superiority
+        }
+		available = {
+		
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_The_doctrine_of_large_scale_planning"			
+
+			add_doctrine_cost_reduction = {
+				name = land_doc_bonus
+				cost_reduction = 0.75
+				uses = 1
+				category = 	cat_grand_battle_plan
+			}
+		}
+	}
+
+	focus = {
+		id = PRT_Improve_unit_support
+		icon = GFX_focus_secret_rearmament
+		cost = 5
+		x = 34
+		y = 3
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		focus =  PRT_The_doctrine_of_firepower_superiority
+		focus =  PRT_The_doctrine_of_large_scale_planning
+		}
+		available = {
+		
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_Improve_unit_support"			
+
+			add_doctrine_cost_reduction = {
+				name = land_doc_bonus
+				cost_reduction = 0.50
+				uses = 1
+				category = support_tech
+			}
+		}
+	}
+
+	focus = {
+		id = PRT_Lean_on_light_tanks
+		icon = GFX_focus_generic_tankette
+		cost = 7
+		x = 32
+		y = 4
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		focus =  PRT_Improve_unit_support
+		}
+		available = {
+		
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_Lean_on_light_tanks"			
+
+			add_tech_bonus = {
+					bonus = 1.0
+					uses = 1
+					name = mech_army_bonus
+					technology = basic_light_tank_chassis
+					technology = improved_light_tank_chassis
+					technology = mechanised_infantry
+				}
+		}
+	}
+
+	focus = {
+		id = PRT_Strong_army_spirit
+		icon = GFX_focus_chi_army_reform
+		cost = 7
+		x = 34
+		y = 4
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		focus =  PRT_Improve_unit_support
+		}
+		available = {
+			NOT = {
+				has_idea = PRT_Decentralized_Army			
+			}	
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_Strong_army_spirit"			
+
+			add_ideas = PRT_Strong_spirit_in_the_army
+		}
+	}
+
+	focus = {
+		id = PRT_Indestructible_artillery
+		icon = GFX_focus_generic_air_defense
+		cost = 7
+		x = 33
+		y = 5
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		focus =  PRT_Strong_army_spirit
+		}
+		available = {
+		
+		} 
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_Indestructible_artillery"			
+
+			add_tech_bonus = {
+				name = land_doc_bonus
+				bonus = 0.75
+				uses = 1
+				category = artillery
+			}
+		}
+	}
+
+	focus = {
+		id = PRT_Victory_or_death
+		icon = GFX_focus_generic_strike_at_democracy1
+		cost = 7
+		x = 35
+		y = 5
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		focus =  PRT_Strong_army_spirit
+		}
+		available = {
+			has_war = yes
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_Victory_or_death"			
+
+			swap_ideas = {
+				remove_idea = PRT_Strong_spirit_in_the_army
+				add_idea = PRT_An_army_that_doesnt_lose
+			}
+		}
+	}
+
+	focus = {
+		id = PRT_Naval_Army
+		icon = GFX_goal_generic_amphibious_assault
+		cost = 7
+		x = 36
+		y = 4
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		focus =  PRT_Improve_unit_support
+		}
+		available = {
+		
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_Naval_Army"			
+
+			add_tech_bonus = {
+				name = special_forces_bonus
+				bonus = 1.0
+				uses = 1
+				technology = marines
+				technology = marines2
+			}
+		}
+	}
+
+	focus = {
+		id = PRT_Reduce_the_cost_of_bayonets
+		icon = GFX_goal_generic_military_sphere
+		cost = 5
+		x = 36
+		y = 1
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		focus =  PRT_Reactivate_the_army
+		}
+		available = {
+			has_completed_focus = PRT_Develop_machine_tool_construction					
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_Reduce_the_cost_of_bayonets"			
+
+			add_ideas = PRT_Cheap_production
+		}
+	}
+
+	focus = {
+		id = PRT_Awaken_the_Fleet
+		icon = GFX_goal_generic_build_nay
+		cost = 5
+		x = 40
+		y = 0
+		ai_will_do = {
+			factor = 5
+		}
+		available = {
+			NOT = {
+				has_idea = PRT_Political_crisis			
+			}	
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_Awaken_the_Fleet"			
+
+			navy_experience = 25
+		}
+	}
+
+	focus = {
+		id = PRT_Fleet_Impact_Doctrine
+		icon = GFX_goal_generic_navy_battleship 
+		cost = 5
+		x = 39
+		y = 1
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		focus =  PRT_Awaken_the_Fleet
+		}
+		mutually_exclusive = {
+        focus = PRT_The_doctrine_of_the_obstruction_of_sea_routes
+        }
+		available = {
+		
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_Fleet_Impact_Doctrine"			
+
+			add_doctrine_cost_reduction = {
+				name = land_doc_bonus
+				cost_reduction = 0.75
+				uses = 1
+				category = 	cat_fleet_in_being
+			}
+		}
+	}
+
+	focus = {
+		id = PRT_Bet_on_battleships
+		icon = GFX_focus_generic_navy_battleship2
+		cost = 5
+		x = 38
+		y = 2
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		focus =  PRT_Fleet_Impact_Doctrine
+		}
+		available = {
+		
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_Bet_on_battleships"			
+
+			add_tech_bonus = {
+				name = cv_bonus
+				bonus = 0.75
+				uses = 1
+				category = bb_tech
+			}
+		}
+	}
+
+	focus = {
+		id = PRT_The_doctrine_of_the_obstruction_of_sea_routes
+		icon = GFX_goal_generic_navy_cruiser
+		cost = 5
+		x = 41
+		y = 1
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		focus =  PRT_Awaken_the_Fleet
+		}
+		mutually_exclusive = {
+        focus = PRT_Fleet_Impact_Doctrine
+        }
+		available = {
+		
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_The_doctrine_of_the_obstruction_of_sea_routes"			
+
+			add_doctrine_cost_reduction = {
+				name = land_doc_bonus
+				cost_reduction = 0.75
+				uses = 1
+				category = 	cat_trade_interdiction
+			}
+		}
+	}
+
+	focus = {
+		id = PRT_Betting_on_submarines
+		icon = GFX_focus_generic_midget_submarines
+		cost = 5
+		x = 42
+		y = 2
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		focus =  PRT_The_doctrine_of_the_obstruction_of_sea_routes
+		}
+		available = {
+		
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_Betting_on_submarines"			
+
+			add_tech_bonus = {
+				name = cv_bonus
+				bonus = 0.75
+				uses = 1
+				category = ss_tech
+			}
+		}
+	}
+
+	focus = {
+		id = PRT_Portuguese_New_shipyards
+		icon = GFX_goal_generic_construct_naval_dockyard
+		cost = 5
+		x = 40
+		y = 2
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		focus =  PRT_Fleet_Impact_Doctrine
+		focus = PRT_The_doctrine_of_the_obstruction_of_sea_routes
+		}
+		available = {
+		
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_Portuguese_New_shipyards"			
+
+			random_owned_controlled_state = {
+				prioritize = { 697 }
+				limit = {
+					is_coastal = yes
+					free_building_slots = {
+						building = dockyard
+						size > 1
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = dockyard
+					level = 1
+					instant_build = yes
+				}
+				set_state_flag = CAN_halifax_shipyards_DY
+			}
+			random_owned_controlled_state = {
+				prioritize = { 178 }
+				limit = {
+					is_coastal = yes
+					free_building_slots = {
+						building = dockyard
+						size > 1
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = dockyard
+					level = 1
+					instant_build = yes
+				}
+				set_state_flag = CAN_halifax_shipyards_DY
+			}
+		}
+	}
+
+	focus = {
+		id = PRT_Reliance_on_destroyers
+		icon = GFX_focus_generic_destroyer
+		cost = 7
+		x = 39
+		y = 3
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		focus =  PRT_Portuguese_New_shipyards
+		}
+		available = {
+		
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_Reliance_on_destroyers"			
+
+			add_tech_bonus = {
+				name = cv_bonus
+				bonus = 0.75
+				uses = 1
+				category = dd_tech
+			}
+		}
+	}  
+
+	focus = { 
+		id = PRT_The_power_of_light_cruisers
+		icon = GFX_focus_generic_cruiser2
+		cost = 7
+		x = 38
+		y = 4
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		focus =  PRT_Reliance_on_destroyers
+		}
+		available = {
+		
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_The_power_of_light_cruisers"			
+
+			add_tech_bonus = {
+				name = bc_bonus
+				bonus = 0.75
+				uses = 1
+				category = bc_tech
+			}
+		}
+	}
+
+	focus = {
+		id = PRT_Invincible_Fleet
+		icon = GFX_goal_generic_CAS
+		cost = 7
+		x = 40
+		y = 4
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		focus = PRT_Reliance_on_destroyers 
+		focus = PRT_Improved_guns 
+		}
+		available = {
+		
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_Invincible_Fleet"			
+
+			add_ideas = PRT_The_fleet_that_could
+		}
+	}
+
+	focus = {
+		id = PRT_Improved_guns
+		icon = GFX_goal_generic_production
+		cost = 7
+		x = 41
+		y = 3 
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		focus =  PRT_Portuguese_New_shipyards
+		}
+		available = {
+		
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_Improved_guns"			
+
+			add_tech_bonus = {
+				name = bc_bonus
+				bonus = 0.75
+				uses = 1
+				category = cat_ship_light_battery
+				category = cat_ship_medium_battery
+			}
+		}
+	}
+
+	focus = {
+		id = PRT_Invincible_vitality
+		icon = GFX_goal_generic_demand_territory
+		cost = 7
+		x = 42
+		y = 4
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		focus =  PRT_Improved_guns
+		}
+		available = {
+		
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_Invincible_vitality"			
+
+			add_tech_bonus = {
+				name = bc_bonus
+				bonus = 0.75
+				uses = 1
+				category = plane_modules_tech
+			}
+		}
+	}
+ 
+	focus = {
+		id = PRT_Revive_the_aircraft_industry
+		icon = GFX_goal_generic_build_airforce
+		cost = 5
+		x = 45
+		y = 0
+		ai_will_do = {
+			factor = 5
+		}
+		available = {
+			NOT = {
+				has_idea = PRT_Political_crisis			
+			}
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_Revive_the_aircraft_industry"			
+
+			air_experience = 25
+		}
+	}
+
+	focus = {
+		id = PRT_Light_aircraft
+		icon = GFX_goal_generic_air_fighter
+		cost = 5
+		x = 43
+		y = 1
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		focus =  PRT_Revive_the_aircraft_industry
+		}
+		available = {
+		
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_Light_aircraft"			
+
+			add_tech_bonus = {
+				name = GER_long_range_escorts
+				bonus = 0.75
+				uses = 1
+				category = light_air
+			}
+		}
+	}
+
+	focus = {
+		id = PRT_Air_combat_support_doctrine
+		icon = GFX_goal_generic_air_production
+		cost = 5
+		x = 44
+		y = 2
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		focus =  PRT_Light_aircraft
+		}
+		prerequisite = {
+		focus =  PRT_Improve_air_defense
+		}
+		mutually_exclusive = {
+        focus = PRT_The_Doctrine_of_Strategic_Destruction
+        }
+		available = {
+		
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_Air_combat_support_doctrine"			
+
+			add_doctrine_cost_reduction = {
+				name = land_doc_bonus
+				cost_reduction = 0.75
+				uses = 1
+				category = 	cat_battlefield_support
+			}
+		}
+	} 
+
+	focus = {
+		id = PRT_Improve_air_defense
+		icon = GFX_focus_generic_air_defense
+		cost = 5
+		x = 45
+		y = 1
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		focus =  PRT_Revive_the_aircraft_industry
+		}
+		available = {
+		
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus Improve_air_defense"			
+
+			add_tech_bonus = {
+				name = ITA_specialization
+				bonus = 0.75
+				uses = 1
+				category = cat_anti_air
+			}
+		}
+	}
+
+	focus = {
+		id = PRT_The_Doctrine_of_Strategic_Destruction
+		icon = GFX_focus_generic_long_range_aircraft
+		cost = 5
+		x = 46
+		y = 2
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		focus =  PRT_Improve_air_defense
+		}
+		prerequisite = {
+		focus =  PRT_Heavy_aircraft
+		}
+		mutually_exclusive = {
+        focus = PRT_Air_combat_support_doctrine
+        }
+		available = {
+		
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_The_Doctrine_of_Strategic_Destruction"			
+
+			add_doctrine_cost_reduction = {
+				name = land_doc_bonus
+				cost_reduction = 0.75
+				uses = 1
+				category = 	cat_strategic_destruction
+			}
+		}
+	}
+
+	focus = {
+		id = PRT_Heavy_aircraft
+		icon = GFX_goal_generic_air_bomber
+		cost = 5
+		x = 47
+		y = 1
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		focus =  PRT_Revive_the_aircraft_industry
+		}
+		available = {
+		
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_Heavy_aircraft"			
+
+			add_tech_bonus = {
+				name = GER_long_range_escorts
+				bonus = 0.75
+				uses = 1
+				category = heavy_air
+			}
+		}
+	}
+
+	focus = {
+		id = PRT_
+		icon = GFX_goal_generic_government_deals
+		cost = 5
+		x = 1000
+		y = 1000
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		focus =  
+		}
+		mutually_exclusive = {
+        focus =
+        }
+		available = {
+		
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus "			
+
+			
+		}
+	}
+}
