@@ -1686,6 +1686,73 @@ rus_political_decisions_cat = {
 		}
 	}
 	
+	RUS_integrate_north_manchguria = {
+		icon = usa_congress
+					
+		available = {
+			560 = { is_owned_by = RUS }
+			657 = { is_owned_by = RUS }
+		}
+		
+		allowed = { 
+			
+		}
+		
+		visible = {
+			560 = { is_owned_by = RUS }
+			657 = { is_owned_by = RUS }
+			has_country_flag = RUS_china_friendhip_way
+		}
+	
+		cost = 5
+		days_remove = 30
+		fire_only_once = yes
+	
+		modifier = {
+			
+		}
+
+		ai_will_do = {
+			factor = 20
+		}
+		
+		complete_effect = {
+			
+		}
+
+		remove_effect = {
+			custom_effect_tooltip = RUS_integrate_north_manchguria_tt
+			hidden_effect = {
+				560 = {
+					set_state_name = RUS_560
+				}
+				657 = {
+					set_state_name = RUS_657
+				}
+				if = {
+					limit = {
+						408 = { is_owned_by = RUS }
+						409 = { is_owned_by = RUS }
+						}
+					408 = {
+						set_state_name = RUS_408
+					}
+					409 = {
+						set_state_name = RUS_409
+					}
+					set_province_name = {
+						id = 957
+						name = RUS_vp_957
+					}
+					set_province_name = {
+						id = 12189
+						name = RUS_vp_12189
+					}
+				}
+			}
+		}
+	}
+	
 	RUS_nationalise_tuva = {
 		icon = usa_congress
 					
@@ -1820,7 +1887,64 @@ rus_war_time_decisions_cat = {
 					
 		available = {
 			RUS = { has_war = yes }
-			has_manpower < 100000
+			surrender_progress > 0.15
+		}
+		
+		allowed = { 
+			
+		}
+		
+		visible = {
+			RUS = { has_war = yes }
+		}
+	
+		cost = 10
+		days_remove = 14
+		#fire_only_once = no
+	
+		modifier = {
+			
+		}
+
+		ai_will_do = {
+			factor = 5
+			modifier = {
+				has_manpower < 1000000
+				factor = 10
+			}
+			modifier = {
+				has_manpower < 600000
+				factor = 20
+			}
+			modifier = {
+				has_manpower < 400000
+				factor = 40
+			}
+		}
+		
+		complete_effect = {
+			set_country_flag = RUS_recritong_in_progress
+			RUS = {
+				random_owned_controlled_state = {
+					add_manpower = -1000
+				}
+				random_owned_controlled_state = {
+					add_manpower = -1000
+				}
+			}
+		}
+
+		remove_effect = {
+			clr_country_flag = RUS_recritong_in_progress
+			add_manpower = 2000
+		}
+	}
+	RUS_recruirt_more_peoples = {
+		icon = usa_congress
+					
+		available = {
+			RUS = { has_war = yes }
+			surrender_progress > 0.15
 		}
 		
 		allowed = { 
@@ -1832,7 +1956,7 @@ rus_war_time_decisions_cat = {
 		}
 	
 		cost = 20
-		days_remove = 20
+		days_remove = 14
 		#fire_only_once = no
 	
 		modifier = {
@@ -1840,15 +1964,39 @@ rus_war_time_decisions_cat = {
 		}
 
 		ai_will_do = {
-			factor = 20
+			factor = 5
+			modifier = {
+				has_manpower < 1000000
+				factor = 10
+			}
+			modifier = {
+				has_manpower < 600000
+				factor = 30
+			}
+			modifier = {
+				has_manpower < 400000
+				factor = 50
+			}
 		}
 		
 		complete_effect = {
-			
+			set_country_flag = RUS_recritong_in_progress
+			RUS = {
+				random_owned_controlled_state = {
+					add_manpower = -3000
+				}
+				random_owned_controlled_state = {
+					add_manpower = -3000
+				}
+				random_owned_controlled_state = {
+					add_manpower = -3000
+				}
+			}
 		}
 
 		remove_effect = {
-			add_manpower = 10000
+			clr_country_flag = RUS_recritong_in_progress
+			add_manpower = 9000
 		}
 	}
 	RUS_defence_of_homeland_decision = {
@@ -1856,7 +2004,7 @@ rus_war_time_decisions_cat = {
 					
 		available = {
 			RUS = { has_war = yes }
-			surrender_progress > 0.40
+			surrender_progress > 0.3
 		}
 		
 		allowed = { 
@@ -1879,18 +2027,18 @@ rus_war_time_decisions_cat = {
 			factor = 20
 			modifier = {
 				factor = 30
-				surrender_progress > 0.40
+				surrender_progress > 0.35
 			}
 			modifier = {
 				factor = 50
-				surrender_progress > 0.50
+				surrender_progress > 0.40
 			}
 		}
 		
 		complete_effect = {
 			add_timed_idea = {
 				idea = RUS_defence_of_homeland
-				days = 100
+				days = 200
 			}
 		}
 
@@ -1917,8 +2065,6 @@ rus_modernise_railway_network_cat = {
 			ROOT = { has_country_flag = RUS_start_railway_modernisation }
 		}
 	
-		cost = 50
-		#days_re_enable = 450
 		days_remove = 60
 		fire_only_once = yes
 	
@@ -1963,8 +2109,6 @@ rus_modernise_railway_network_cat = {
 			ROOT = { has_country_flag = RUS_start_railway_modernisation }
 		}
 	
-		cost = 50
-		#days_re_enable = 450
 		days_remove = 60
 		fire_only_once = yes
 	
@@ -1994,4 +2138,45 @@ rus_modernise_railway_network_cat = {
 		}
 	}
 	
+}
+
+RUS_ai_boost_cat = {
+	
+	RUS_army_xp_bost = { 
+		
+		icon = generic_form_nation
+
+		allowed = {
+			tag = RUS
+		}
+
+		available = {
+			tag = RUS
+		}
+
+		visible = {
+			tag = RUS
+			is_ai = yes
+		}
+		
+		is_good = yes
+		
+		selectable_mission = no
+		
+		fire_only_once = yes
+		
+		days_remove = 720
+
+		ai_will_do = {
+			factor = 100
+		}
+		
+		modifier = {
+			experience_gain_army = 0.05
+			experience_gain_navy = 0.05
+			experience_gain_air	= 0.05
+		}
+		
+	}
+
 }
