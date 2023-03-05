@@ -1,4 +1,5 @@
 ### search_filters = {FOCUS_FILTER_POLITICAL}
+### search_filters = {FOCUS_FILTER_POLITICAL}
 ### search_filters = {FOCUS_FILTER_RESEARCH}
 ### search_filters = {FOCUS_FILTER_INDUSTRY}
 ### search_filters = {FOCUS_FILTER_STABILITY}
@@ -66,29 +67,12 @@ focus_tree = {
 ################################################################
 #######################INDUSTRY_SECTION#########################
 ################################################################
-
-	focus = {
-		id = RUS_infrastructure_development
-		icon = GFX_goal_generic_construct_infrastructure
-		 
-		x = 1
-		y = 0
-		cost = 5
-		
-		available_if_capitulated = yes
-		
-		search_filters = { FOCUS_FILTER_INDUSTRY }
-
-		completion_reward = {
-			custom_effect_tooltip = RUS_open_infrastructure_dev_decisions_cat
-		}
-	}
 	
 	focus = {
 		id = RUS_investment_in_civil_industry
 		icon = GFX_goal_generic_construct_civ_factory
 		
-		x = 3
+		x = 2
 		y = 0
 		cost = 5
 		
@@ -127,7 +111,7 @@ focus_tree = {
 		id = RUS_start_forced_industrialisation
 		icon = GFX_goal_generic_construct_civilian
 		
-		x = 1
+		x = 0
 		y = 1
 		cost = 5
 		
@@ -135,8 +119,7 @@ focus_tree = {
 			has_completed_focus = RUS_industry_situation
 		}
 		
-		relative_position_id = RUS_infrastructure_development
-		prerequisite = { focus = RUS_infrastructure_development }
+		relative_position_id = RUS_investment_in_civil_industry
 		prerequisite = { focus = RUS_investment_in_civil_industry }
 		
 		available_if_capitulated = yes
@@ -378,36 +361,40 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_INDUSTRY }
 
 		completion_reward = {
-			217 = {
-				add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-					type = arms_factory
-					level = 1
-					instant_build = yes
+			custom_effect_tooltip = RUS_add_2_arms_factory_in_volgograd_kharkov
+			custom_effect_tooltip = RUS_add_2_industrial_complex_in_perm_kazan
+			hidden_effect = {
+				217 = {
+					add_extra_state_shared_building_slots = 1
+					add_building_construction = {
+						type = arms_factory
+						level = 1
+						instant_build = yes
+					}
 				}
-			}
-			249 = {
-				add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-					type = industrial_complex
-					level = 1
-					instant_build = yes
+				249 = {
+					add_extra_state_shared_building_slots = 1
+					add_building_construction = {
+						type = industrial_complex
+						level = 1
+						instant_build = yes
+					}
 				}
-			}
-			221 = {
-				add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-					type = arms_factory
-					level = 1
-					instant_build = yes
+				221 = {
+					add_extra_state_shared_building_slots = 1
+					add_building_construction = {
+						type = arms_factory
+						level = 1
+						instant_build = yes
+					}
 				}
-			}
-			398 = {
-				add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-					type = industrial_complex
-					level = 1
-					instant_build = yes
+				398 = {
+					add_extra_state_shared_building_slots = 1
+					add_building_construction = {
+						type = industrial_complex
+						level = 1
+						instant_build = yes
+					}
 				}
 			}
 		}
@@ -697,8 +684,173 @@ focus_tree = {
 					add_idea = manufactory_production
 				}
 			}
+			if = {
+				limit = {
+					ROOT = { has_idea = RUS_an_echo_of_serfdom }
+				}
+				swap_ideas = {
+					remove_idea = RUS_an_echo_of_serfdom
+					add_idea = RUS_an_echo_of_serfdom_1
+				}
+			}
+			if = {
+				limit = {
+					ROOT = { has_idea = RUS_an_echo_of_serfdom_1 }
+				}
+				remove_ideas = RUS_an_echo_of_serfdom_1	
+			}
 			remove_ideas = RUS_forced_industrialisation
 			#add_stability = 0.1
+		}
+	}
+
+############################SECOND_BRANCH_OF_INDUSTRIALISATION##############################
+	
+	focus = {
+		id = RUS_second_branch_of_industrialisation #послевоенный блок фокусов
+		icon = GFX_goal_generic_construct_civilian
+		
+		x = 0
+		y = 1
+		cost = 5
+		
+		available = {
+			aotsm_performed_by_event_or_solution = yes
+		}
+
+		relative_position_id = RUS_liquidate_backwardness
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			
+		}
+	}
+	
+	focus = {
+		id = RUS_bultic_industry
+		icon = GFX_goal_generic_construct_civilian
+		
+		x = -3
+		y = 1
+		cost = 5
+		
+		available = {
+			
+		}
+
+		relative_position_id = RUS_second_branch_of_industrialisation
+		prerequisite = { focus = RUS_second_branch_of_industrialisation }
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			
+		}
+	}
+	
+	focus = {
+		id = RUS_poland_industry
+		icon = GFX_goal_generic_construct_civilian
+		
+		x = -1
+		y = 1
+		cost = 5
+		
+		available = {
+			
+		}
+
+		relative_position_id = RUS_second_branch_of_industrialisation
+		prerequisite = { focus = RUS_second_branch_of_industrialisation }
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			
+		}
+	}
+	
+	focus = {
+		id = RUS_malorisian_industry
+		icon = GFX_goal_generic_construct_civilian
+		
+		x = 1
+		y = 1
+		cost = 5
+		
+		available = {
+			
+		}
+
+		relative_position_id = RUS_second_branch_of_industrialisation
+		prerequisite = { focus = RUS_second_branch_of_industrialisation }
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			
+		}
+	}
+	
+	focus = {
+		id = RUS_kuban_industry
+		icon = GFX_goal_generic_construct_civilian
+		
+		x = 3
+		y = 1
+		cost = 5
+		
+		available = {
+			
+		}
+
+		relative_position_id = RUS_second_branch_of_industrialisation
+		prerequisite = { focus = RUS_second_branch_of_industrialisation }
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			
+		}
+	}
+	
+	focus = {
+		id = RUS_industrialisation_of_siberia
+		icon = GFX_goal_generic_construct_civilian
+		
+		x = 0
+		y = 2
+		cost = 5
+		
+		available = {
+			
+		}
+
+		relative_position_id = RUS_second_branch_of_industrialisation
+		prerequisite = { 
+			focus = RUS_bultic_industry 
+			focus = RUS_poland_industry 
+			focus = RUS_malorisian_industry 
+			focus = RUS_kuban_industry 
+		}
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			
 		}
 	}
 	
@@ -764,7 +916,7 @@ focus_tree = {
 		id = RUS_red_uprising
 		icon = GFX_goal_generic_improve_relations
 		
-		x = 34
+		x = 38
 		y = 0
 		cost = 2
 		
@@ -2460,7 +2612,9 @@ focus_tree = {
 		}
 	}
 
-#########################RETURN_OF_MONARHY_BLOCK##############################
+##########################################################################
+#########################RED_FOCUCES_SECTION##############################
+##########################################################################
 	
 	focus = {
 		id = RUS_the_power_in_hands_of_red #красная угроза
@@ -2481,12 +2635,14 @@ focus_tree = {
 			
 		}
 	}
+
+#########################CHERNYSHEVSKIY_FOCUSES_SECTION##############################
 	
 	focus = {
 		id = RUS_chernyshevsky_ng
 		icon = GFX_goal_generic_improve_relations
 		
-		x = -2
+		x = -4
 		y = 1
 		cost = 5
 		
@@ -2495,6 +2651,7 @@ focus_tree = {
 		}
 		
 		mutually_exclusive = { focus = RUS_pushkin_as }
+		mutually_exclusive = { focus = RUS_gertsen_ai }
 
 		relative_position_id = RUS_the_power_in_hands_of_red
 		prerequisite = { focus = RUS_the_power_in_hands_of_red }
@@ -2509,7 +2666,103 @@ focus_tree = {
 	}
 	
 	focus = {
-		id = RUS_pushkin_as
+		id = RUS_rely_on_market
+		icon = GFX_goal_generic_improve_relations
+		
+		x = -2
+		y = 1
+		cost = 5
+		
+		available = {
+			
+		}
+
+		relative_position_id = RUS_chernyshevsky_ng
+		prerequisite = { focus = RUS_chernyshevsky_ng }
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			
+		}
+	}
+	
+	focus = {
+		id = RUS_reorganise_petrograd_birja
+		icon = GFX_goal_generic_improve_relations
+		
+		x = 0
+		y = 1
+		cost = 5
+		
+		available = {
+			
+		}
+
+		relative_position_id = RUS_rely_on_market
+		prerequisite = { focus = RUS_rely_on_market }
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			
+		}
+	}
+	
+	focus = {
+		id = RUS_invocation_to_vilagers
+		icon = GFX_goal_generic_improve_relations
+		
+		x = 0
+		y = 1
+		cost = 5
+		
+		available = {
+			
+		}
+
+		relative_position_id = RUS_chernyshevsky_ng
+		prerequisite = { focus = RUS_chernyshevsky_ng }
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			
+		}
+	}
+	
+	focus = {
+		id = RUS_revoke_privileges
+		icon = GFX_goal_generic_improve_relations
+		
+		x = 0
+		y = 1
+		cost = 5
+		
+		available = {
+			
+		}
+
+		relative_position_id = RUS_invocation_to_vilagers
+		prerequisite = { focus = RUS_invocation_to_vilagers }
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			
+		}
+	}
+	
+	focus = {
+		id = RUS_labor_union_integration
 		icon = GFX_goal_generic_improve_relations
 		
 		x = 2
@@ -2517,9 +2770,247 @@ focus_tree = {
 		cost = 5
 		
 		available = {
+			
+		}
+
+		relative_position_id = RUS_chernyshevsky_ng
+		prerequisite = { 
+			focus = RUS_chernyshevsky_ng 
+			focus = RUS_gertsen_ai 
+		}
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			
+		}
+	}
+	
+	
+	focus = {
+		id = RUS_guaranties_for_workers
+		icon = GFX_goal_generic_improve_relations
+		
+		x = 0
+		y = 1
+		cost = 5
+		
+		available = {
+			
+		}
+
+		relative_position_id = RUS_labor_union_integration
+		prerequisite = { focus = RUS_labor_union_integration }
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			
+		}
+	}
+	
+	focus = {
+		id = RUS_organise_goverment_control_market
+		icon = GFX_goal_generic_improve_relations
+		
+		x = 0
+		y = 1
+		cost = 5
+		
+		available = {
+			
+		}
+
+		relative_position_id = RUS_revoke_privileges
+		prerequisite = { focus = RUS_reorganise_petrograd_birja }
+		prerequisite = { focus = RUS_revoke_privileges }
+		prerequisite = { focus = RUS_guaranties_for_workers }
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			
+		}
+	}
+
+#########################GERTSEN_FOCUSES_SECTION##############################
+	
+	focus = {
+		id = RUS_gertsen_ai #Появляется не сразу и только если Герцен вернется из ссылки до выбора социалистического правителя
+		icon = GFX_goal_generic_improve_relations
+		
+		x = 0
+		y = 1
+		cost = 5
+		
+		available = {
 			aotsm_performed_by_event_or_solution = yes
 		}
 		
+		mutually_exclusive = { focus = RUS_pushkin_as }
+		mutually_exclusive = { focus = RUS_chernyshevsky_ng }
+
+		relative_position_id = RUS_the_power_in_hands_of_red
+		prerequisite = { focus = RUS_the_power_in_hands_of_red }
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			
+		}
+	}
+	
+	focus = {
+		id = RUS_shorten_the_list_of_officials #сократить лист чиновников
+		icon = GFX_goal_generic_improve_relations
+		
+		x = 0
+		y = 1
+		cost = 5
+		
+		available = {
+			
+		}
+
+		relative_position_id = RUS_gertsen_ai
+		prerequisite = { focus = RUS_gertsen_ai }
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			
+		}
+	}
+	
+	focus = {
+		id = RUS_reorg_the_goverment
+		icon = GFX_goal_generic_improve_relations
+		
+		x = 0
+		y = 1
+		cost = 5
+		
+		available = {
+			
+		}
+
+		relative_position_id = RUS_shorten_the_list_of_officials
+		prerequisite = { focus = RUS_shorten_the_list_of_officials }
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			
+		}
+	}
+	
+	focus = {
+		id = RUS_ban_the_church
+		icon = GFX_goal_generic_improve_relations
+		
+		x = 2
+		y = 1
+		cost = 5
+		
+		available = {
+			
+		}
+
+		relative_position_id = RUS_gertsen_ai
+		prerequisite = { 
+			focus = RUS_gertsen_ai 
+			focus = RUS_pushkin_as
+		}
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			
+		}
+	}
+	
+	
+	focus = {
+		id = RUS_abolition_of_the_nobility
+		icon = GFX_goal_generic_improve_relations
+		
+		x = 0
+		y = 1
+		cost = 5
+		
+		available = {
+			
+		}
+
+		relative_position_id = RUS_ban_the_church
+		prerequisite = { focus = RUS_ban_the_church }
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			
+		}
+	}
+	
+	focus = {
+		id = RUS_go_to_plan_economic
+		icon = GFX_goal_generic_improve_relations
+		
+		x = 0
+		y = 1
+		cost = 5
+		
+		available = {
+			
+		}
+
+		relative_position_id = RUS_reorg_the_goverment
+		prerequisite = { 
+			focus = RUS_guaranties_for_workers
+			focus = RUS_reorg_the_goverment 
+			focus = RUS_abolition_of_the_nobility
+		}
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			
+		}
+	}
+
+#########################PUSHKIN_FOCUSES_SECTION##############################
+	
+	focus = {
+		id = RUS_pushkin_as
+		icon = GFX_goal_generic_improve_relations
+		
+		x = 4
+		y = 1
+		cost = 5
+		
+		available = {
+			aotsm_performed_by_event_or_solution = yes
+		}
+		
+		mutually_exclusive = { focus = RUS_gertsen_ai }
 		mutually_exclusive = { focus = RUS_chernyshevsky_ng }
 
 		relative_position_id = RUS_the_power_in_hands_of_red
