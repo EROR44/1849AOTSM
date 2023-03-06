@@ -67,6 +67,15 @@ characters = {
 		}
 	}
 	
+	RUS_temporary_goverment = {
+		name = RUS_temporary_goverment
+		portraits = {
+			civilian = {
+				large = "gfx/leaders/RUS/Portrait_russian_temporary_goverment.dds"
+			}
+		}
+	}
+	
 	RUS_Konstantin_Nikolaevich = {
 		name = RUS_Konstantin_Nikolaevich
 		portraits = {
@@ -116,13 +125,13 @@ characters = {
 				small = GFX_idea_Chernyshevskiy_Nikolay_Gavrilovich
 			}
 		}
-		country_leader = {
-			desc = "POLITICS_CHERNYSHEVSIY_NICOLAY_GAVRILOVICH_DESC"
-			ideology = market_socialism
-			traits = { market_socialist_trait }#проверить как будет работать
-			expire = "1900.1.1.1"
-			id = -1
-		}
+		#country_leader = {
+		#	desc = "POLITICS_CHERNYSHEVSIY_NICOLAY_GAVRILOVICH_DESC"
+		#	ideology = market_socialism
+		#	traits = { market_socialist_trait }#проверить как будет работать
+		#	expire = "1900.1.1.1"
+		#	id = -1
+		#}
 		advisor = {
 			cost = 150
 			slot = political_advisor
@@ -131,7 +140,12 @@ characters = {
 				original_tag = RUS
 			}
 			available = {
-				
+				NOT = {
+					has_country_leader = {
+						character = RUS_Chernyshevskiy_Nikolay_Gavrilovich
+						ruling_only = yes
+					}
+				}
 			}
 			traits = { 
 				market_socialist_trait #проверить как будет работать
@@ -150,12 +164,56 @@ characters = {
 				large = "gfx/leaders/RUS/Portrait_Alexander_Sergeevich_Pushkin.dds"
 			}
 		}
-		country_leader = {
-			desc = "POLITICS_ALEXANDER_SERGEYEVICH_PUSHKIN_DESC"
-			ideology = reformism
-			traits = {  }
-			expire = "1900.1.1.1"
-			id = -1
+#		country_leader = {
+#			desc = "POLITICS_ALEXANDER_SERGEYEVICH_PUSHKIN_DESC"
+#			ideology = reformism
+#			traits = {  }
+#			expire = "1900.1.1.1"
+#			id = -1
+#		}
+	}
+	
+	RUS_Aleksander_Ivanovich_Gertsen = {
+		name = RUS_Aleksander_Ivanovich_Gertsen
+		portraits = {
+			civilian = {
+				large = "gfx/leaders/RUS/Portrait_Alexander_Ivanovich_Gertsen.dds"
+				small = GFX_idea_Alexander_Ivanovich_Gertsen				
+			}
+		}
+#		country_leader = {
+#			desc = "POLITICS_ALEXANDER_IVANOVICH_GERTSEN_DESC"
+#			ideology = engelsism
+#			traits = {  }
+#			expire = "1900.1.1.1"
+#			id = -1
+#		}
+		advisor = {
+			slot = political_advisor
+			idea_token = RUS_Aleksander_Ivanovich_Gertsen
+			allowed = {
+				original_tag = RUS
+			}
+			visible = {
+				has_country_flag = RUS_gertsen_returns_from_link
+			}
+			available = {
+				NOT = {
+					has_country_leader = {
+						character = RUS_Aleksander_Ivanovich_Gertsen
+						ruling_only = yes
+					}
+				}
+				has_government = socialism
+				has_country_flag = RUS_gertsen_returns_from_link
+			}
+			traits = {
+				father_of_russian_socialism_advisor 
+			}
+			cost =  150
+			ai_will_do = {
+				factor = 100
+			}
 		}
 	}
 	
