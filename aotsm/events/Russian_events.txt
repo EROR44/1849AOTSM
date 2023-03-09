@@ -10,6 +10,7 @@ add_namespace = political_confrontation #
 add_namespace = finland_quiestion #
 add_namespace = russian_far_east_politic #
 add_namespace = russian_central_asia_politic #
+add_namespace = russian_old_way_political_event #
 add_namespace = russian_socialist_political_event #
 
 
@@ -3664,6 +3665,111 @@ country_event = {
 		
 		hidden_effect = {
 			
+		}
+	}
+}
+
+##############################OLD_WAY_EVENT_SECTION###################################
+
+country_event = {
+	id = russian_old_way_political_event.1 # 
+	title = russian_old_way_political_event.1.t
+	desc = russian_old_way_political_event.1.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = {
+		name = russian_old_way_political_event.1.a	
+		ai_chance = {
+			factor = 5
+		}
+		custom_effect_tooltip = RUS_choose_ignatiev_pn
+		hidden_effect = {
+			retire_country_leader = yes
+			add_popularity = {
+				ideology = authoritarian
+				popularity = 0.15
+			}
+			set_politics = { ruling_party = authoritarian }
+			add_country_leader_role = {
+				character = RUS_Pavel_Nikolaevich_Ignatiev
+				promote_leader = yes
+				
+				country_leader = {
+					expire = "1900.1.1"
+					ideology = dictature
+					traits = { leader_of_the_black_union }
+				}
+			}
+			complete_national_focus = RUS_ignatiev
+			#news_event = { id = news.199 days = 2 }
+		}
+	}
+	
+	option = {
+		name = russian_old_way_political_event.1.b	
+		
+		trigger = {
+			RUS = { has_country_flag = RUS_church_take_power }
+		}
+		ai_chance = {
+			factor = 0
+			modifier = {
+				has_country_flag = RUS_church_take_power
+				factor = 15
+			}
+		}
+		custom_effect_tooltip = RUS_choose_church
+		hidden_effect = {
+			retire_country_leader = yes
+			add_popularity = {
+				ideology = authoritarian
+				popularity = 0.15
+			}
+			set_politics = { ruling_party = authoritarian }
+			add_country_leader_role = {
+				character = RUS_national_council
+				promote_leader = yes
+				
+				country_leader = {
+					expire = "1900.1.1"
+					ideology = theocracy_sub
+					traits = {  }
+				}
+			}
+			complete_national_focus = RUS_churh_take_the_power
+			#news_event = { id = news.200 days = 2 }
+		}
+	}
+	
+	option = {
+		name = russian_old_way_political_event.1.c	
+		ai_chance = {
+			factor = 15
+		}
+		custom_effect_tooltip = RUS_choose_romanov_an
+		hidden_effect = {
+			retire_country_leader = yes
+			add_popularity = {
+				ideology = authoritarian
+				popularity = 0.15
+			}
+			set_politics = { ruling_party = authoritarian }
+			add_country_leader_role = {
+				character = RUS_Romanov_Alexandr_Nikolaevich
+				promote_leader = yes
+				
+				country_leader = {
+					expire = "1900.1.1"
+					ideology = monarchist
+					traits = {  }
+				}
+			}
+			complete_national_focus = RUS_romanov_an
+			#news_event = { id = news.201 days = 2 }
 		}
 	}
 }
