@@ -1,0 +1,856 @@
+
+RUS_unit_production = {
+
+	allowed = {
+		original_tag = RUS
+	}
+	
+	enable = {
+		always = yes
+	}
+	
+	abort = {
+		always = no
+	}
+
+	ai_strategy = {
+		type = role_ratio
+		id = garrison
+		value = 4
+	}
+
+	ai_strategy = {
+		type = role_ratio
+		id = mountaineers
+		value = 2
+	}
+
+	ai_strategy = {
+		type = role_ratio
+		id = marines
+		value = 0
+	}
+
+	ai_strategy = {
+		type = role_ratio
+		id = cavalry
+		value = -400
+	}
+
+	ai_strategy = {
+		type = role_ratio
+		id = motorized
+		value = 10
+	}
+
+	ai_strategy = {
+		type = role_ratio
+		id = mechanized
+		value = 5
+	}
+
+	ai_strategy = {
+		type = role_ratio
+		id = armor
+		value = -50
+	}
+
+	ai_strategy = {
+		type = role_ratio
+		id = infantry
+		value = 50
+	}
+
+	ai_strategy = {
+		type = unit_ratio
+		id = fighter
+		value = 20
+	}
+
+	ai_strategy = {
+		type = unit_ratio
+		id = cas
+		value = -35 
+	}
+
+	ai_strategy = {
+		type = unit_ratio
+		id = tactical_bomber
+		value = -40
+	}
+
+	ai_strategy = {
+		type = unit_ratio
+		id = strategic_bomber
+		value = 15
+	}
+
+	ai_strategy = {
+		type = unit_ratio
+		id = naval_bomber
+		value = 5
+	}
+
+	ai_strategy = {
+		type = unit_ratio
+		id = capital_ship
+		value = 15
+	}
+
+	ai_strategy = {
+		type = unit_ratio
+		id = submarine
+		value = 5
+	}
+
+	ai_strategy = {
+		type = unit_ratio
+		id = screen_ship
+		value = 20
+	}
+
+	ai_strategy = {
+		type = unit_ratio
+		id = convoy
+		value = 25
+	}
+
+	ai_strategy = {
+		type = equipment_production_factor
+		id = fighter
+		value = 1
+	}
+
+	ai_strategy = {
+		type = equipment_production_factor
+		id = cas
+		value = -65
+	}
+
+	ai_strategy = {
+		type = equipment_production_factor
+		id = tactical_bomber
+		value = -80
+	}
+
+	ai_strategy = {
+		type = equipment_production_factor
+		id = naval_bomber
+		value = -120
+	}
+
+	ai_strategy = {
+		type = equipment_production_factor
+		id = strategic_bomber
+		value = 8
+	}
+
+	ai_strategy = {
+		type = equipment_production_factor
+		id = infantry
+		value = 60
+	}
+
+	ai_strategy = {
+		type = equipment_production_factor
+		id = anti_tank
+		value = 15
+	}
+
+	ai_strategy = {
+		type = equipment_production_factor
+		id = anti_air
+		value = 12
+	}
+
+	ai_strategy = {
+		type = equipment_production_factor
+		id = artillery
+		value = 50
+	}
+
+	ai_strategy = {
+		type = equipment_production_factor
+		id = armor
+		value = -20
+	}
+	ai_strategy = {
+		type = equipment_production_factor
+		id = motorized
+		value = 5
+	}
+	ai_strategy = {
+		type = equipment_production_min_factories 
+		id = anti_air
+		value = 1
+	}
+	ai_strategy = {
+		type = equipment_production_min_factories
+		id = artillery
+		value = 2
+	}
+#	ai_strategy = {
+#		type = equipment_production_min_factories
+#		id = fighter
+#		value = 1
+#	}
+	ai_strategy = {
+		type = equipment_variant_production_factor
+		id = medium_plane_airframe
+		value = -100
+	}
+	ai_strategy = {
+		type = equipment_variant_production_factor
+		id = support_equipment
+		value = 25
+	}
+
+#	ai_strategy = {
+#		type = railway_gun_divisions_ratio
+#		value = 1
+#	}
+}
+
+RUS_crush_central_asia = {
+	allowed = {
+		original_tag = RUS
+	}
+	enable = {
+		OR = {
+			has_war_with = KAZ
+			has_war_with = BUK
+			has_war_with = HIV
+		}
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = front_control
+		tag = KAZ
+		ratio = 0.25
+		priority = 100
+		ordertype = front
+		execution_type = rush_weak
+		execute_order = yes
+	}
+	ai_strategy = {
+		type = front_control
+		tag = BUK
+		ratio = 0.25
+		priority = 100
+		ordertype = front
+		execution_type = rush_weak
+		execute_order = yes
+	}
+	ai_strategy = {
+		type = front_control
+		tag = HIV
+		ratio = 0.25
+		priority = 100
+		ordertype = front
+		execution_type = rush_weak
+		execute_order = yes
+	}
+}
+
+RUS_civilian_buildup = {
+	allowed = {
+		original_tag = RUS
+	}
+	enable = {
+		has_idea = RUS_invest_in_industry
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = building_target
+		id = industrial_complex
+		value = 200
+	}
+}
+
+RUS_millitary_buildup = {
+	allowed = {
+		original_tag = RUS
+	}
+	enable = {
+		has_idea = RUS_invest_in_mil_production
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = building_target
+		id = arms_factory
+		value = 200
+	}
+}
+
+RUS_shift_production = {
+	allowed = {
+		original_tag = RUS
+	}
+	enable = {
+		has_equipment = { infantry_equipment > 6000 }
+	}
+	abort = {
+		has_equipment = { infantry_equipment < 6000 }	
+	}
+
+	ai_strategy = {
+		type = equipment_production_factor
+		id = infantry
+		value = -25
+	}
+}
+
+RUS_ally_tashkent = {
+	allowed = {
+		original_tag = RUS
+	}
+	enable = {
+		has_completed_focus = RUS_friendship_witch_tashkent
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = befriend
+		id = "KAZ"
+		value = 100
+	}
+	
+	ai_strategy = {
+		type = befriend
+		id = "HIV"
+		value = 100
+	}
+	
+	ai_strategy = {
+		type = befriend
+		id = "BUK"
+		value = 100
+	}
+}
+
+RUS_less_naval_focus = {
+	allowed = {
+		original_tag = RUS
+	}
+	enable = {
+		PRU = { is_faction_leader = yes }
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = unit_ratio
+		id = capital_ship
+		value = -3
+	}
+	ai_strategy = {
+		type = unit_ratio
+		id = submarine
+		value = -3
+	}
+	ai_strategy = {
+		type = unit_ratio
+		id = screen_ship
+		value = -3
+	}
+	ai_strategy = {
+		type = unit_ratio
+		id = convoy
+		value = -3
+	}
+}
+
+RUS_war_witch_germany = {
+	allowed = {
+		original_tag = RUS
+	}
+	enable = {
+		has_war_with = PRU
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = antagonize
+		id = PRU
+		value = 1000
+	}
+	
+	ai_strategy = { 
+		type = front_unit_request
+		country_trigger = {
+			tag = PRU
+		}
+		value = 1000
+	}
+	
+	ai_strategy = {
+        type = front_control
+        tag = "PRU"
+        priority = 10 
+        ordertype = front # front or invasion
+        execution_type = balanced # one of careful balanced rush rush_weak (осторожно, сбалансированно, агрессивно, прорыв)
+        execute_order = yes # испольнять приказ или нет, если нет то просто будут стоять в обороне
+        manual_attack = yes # точечные атаки, если нет, то ИИ не будет совершать никаких отдельных атак, кроме батлплана (да да ИИ тоже умеет ручками)
+    }
+	
+}
+
+RUS_war_witch_byzantium = {
+	allowed = {
+		original_tag = RUS
+	}
+	enable = {
+		has_war_with = BYZ
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = antagonize
+		id = BYZ
+		value = 1000
+	}
+	
+	ai_strategy = { 
+		type = front_unit_request
+		country_trigger = {
+			tag = BYZ
+		}
+		value = 1000
+	}
+	
+	ai_strategy = {
+        type = front_control
+        tag = "BYZ"
+        priority = 10
+        ordertype = front # front or invasion
+        execution_type = balanced # one of careful balanced rush rush_weak (осторожно, сбалансированно, агрессивно, прорыв)
+        execute_order = yes # испольнять приказ или нет, если нет то просто будут стоять в обороне
+        manual_attack = yes # точечные атаки, если нет, то ИИ не будет совершать никаких отдельных атак, кроме батлплана (да да ИИ тоже умеет ручками)
+    }
+	
+}
+
+RUS_war_witch_scamdinavia = {
+	allowed = {
+		original_tag = RUS
+	}
+	enable = {
+		has_war_with = SCA
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = antagonize
+		id = SCA
+		value = 1000
+	}
+	
+	ai_strategy = { 
+		type = front_unit_request
+		country_trigger = {
+			tag = SCA
+		}
+		value = 1000
+	}
+	
+	ai_strategy = {
+        type = front_control
+        tag = "SCA"
+        priority = 10
+        ordertype = front # front or invasion
+        execution_type = balanced # one of careful balanced rush rush_weak (осторожно, сбалансированно, агрессивно, прорыв)
+        execute_order = yes # испольнять приказ или нет, если нет то просто будут стоять в обороне
+        manual_attack = yes # точечные атаки, если нет, то ИИ не будет совершать никаких отдельных атак, кроме батлплана (да да ИИ тоже умеет ручками)
+    }
+	
+}
+
+RUS_other_great_war_ai_startegy = {
+
+	allowed = {
+		original_tag = RUS
+	}
+	enable = {
+		has_war_with = PRU
+		has_war_with = BYZ
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = antagonize
+		id = JAP
+		value = 1000
+	}
+	
+	ai_strategy = { 
+		type = front_unit_request
+		country_trigger = {
+			tag = JAP
+		}
+		value = 50
+	}
+	
+	ai_strategy = {
+		type = antagonize
+		id = PLH
+		value = 1000
+	}
+	
+	ai_strategy = {
+		type = conquer
+		id = "PLH"
+		value = 100
+	}
+	
+	ai_strategy = { 
+		type = front_unit_request
+		country_trigger = {
+			tag = PLH
+		}
+		value = 1000
+	}
+	
+	ai_strategy = {
+        type = front_control
+        tag = "PLH"
+        priority = 10
+        ordertype = front # front or invasion
+        execution_type = balanced # one of careful balanced rush rush_weak (осторожно, сбалансированно, агрессивно, прорыв)
+        execute_order = yes # испольнять приказ или нет, если нет то просто будут стоять в обороне
+        manual_attack = yes # точечные атаки, если нет, то ИИ не будет совершать никаких отдельных атак, кроме батлплана (да да ИИ тоже умеет ручками)
+    }
+	
+	ai_strategy = {
+		type = conquer
+		id = "BLT"
+		value = 100
+	}
+	
+	ai_strategy = { 
+		type = front_unit_request
+		country_trigger = {
+			tag = BLT
+		}
+		value = 1000
+	}
+	
+	ai_strategy = {
+        type = front_control
+        tag = "BLT"
+        priority = 10
+        ordertype = front # front or invasion
+        execution_type = balanced # one of careful balanced rush rush_weak (осторожно, сбалансированно, агрессивно, прорыв)
+        execute_order = yes # испольнять приказ или нет, если нет то просто будут стоять в обороне
+        manual_attack = yes # точечные атаки, если нет, то ИИ не будет совершать никаких отдельных атак, кроме батлплана (да да ИИ тоже умеет ручками)
+    }
+	
+	ai_strategy = {
+		type = conquer
+		id = "WRT"
+		value = 100
+	}
+	
+	ai_strategy = { 
+		type = front_unit_request
+		country_trigger = {
+			tag = WRT
+		}
+		value = 1000
+	}
+	
+	ai_strategy = {
+        type = front_control
+        tag = "WRT"
+        priority = 10
+        ordertype = front # front or invasion
+        execution_type = balanced # one of careful balanced rush rush_weak (осторожно, сбалансированно, агрессивно, прорыв)
+        execute_order = yes # испольнять приказ или нет, если нет то просто будут стоять в обороне
+        manual_attack = yes # точечные атаки, если нет, то ИИ не будет совершать никаких отдельных атак, кроме батлплана (да да ИИ тоже умеет ручками)
+    }
+	
+	ai_strategy = {
+		type = conquer
+		id = "UKR"
+		value = 100
+	}
+	
+	ai_strategy = { 
+		type = front_unit_request
+		country_trigger = {
+			tag = UKR
+		}
+		value = 1000
+	}
+	
+	ai_strategy = {
+        type = front_control
+        tag = "UKR"
+        priority = 10
+        ordertype = front # front or invasion
+        execution_type = balanced # one of careful balanced rush rush_weak (осторожно, сбалансированно, агрессивно, прорыв)
+        execute_order = yes # испольнять приказ или нет, если нет то просто будут стоять в обороне
+        manual_attack = yes # точечные атаки, если нет, то ИИ не будет совершать никаких отдельных атак, кроме батлплана (да да ИИ тоже умеет ручками)
+    }
+	
+}
+
+RUS_ai_safe_equipment_for-war = {
+
+	allowed = {
+		original_tag = RUS
+	}
+	enable = {
+		date > 1854.1.1
+	}
+	
+	abort_when_not_enabled = yes
+	
+	ai_strategy = {
+		type = equipment_production_factor
+		id = infantry
+		value = 500
+	}
+	
+	ai_strategy = {   #заставляет ии нанимать больше дивизий
+		type = force_build_armies 
+		value = -200 
+	}
+
+	ai_strategy = {
+		type = build_army
+		id = infantry
+		value = -1000
+	}
+
+	ai_strategy = {
+		type = build_army
+		id = mountaineers
+		value = -1000
+	}
+
+	ai_strategy = {
+		type = build_army
+		id = marines
+		value = -1000
+	}
+
+	ai_strategy = {
+		type = build_army
+		id = cavalry
+		value = -1000
+	}
+
+	ai_strategy = {
+		type = build_army
+		id = motorized
+		value = -1000
+	}
+
+	ai_strategy = {
+		type = build_army
+		id = mechanized
+		value = -1000
+	}
+
+	ai_strategy = {
+		type = build_army
+		id = armor
+		value = -1000
+	}
+	
+}
+
+RUS_more_division_on_front = {
+
+	allowed = {
+		tag = RUS
+	}
+	
+	enable = {
+		OR =  {
+			RUS = {
+				has_war_with = PRU
+			}
+			RUS = {
+				has_war_with = BYZ
+			}
+			RUS = {
+				has_war_with = SCA
+			}
+		}
+	}
+	
+	abort_when_not_enabled = yes
+	
+	ai_strategy = { 
+		type = garrison 
+		value = 10 
+	}
+	
+}
+
+RUS_more_divisions_on_front = {
+
+	allowed = {
+		tag = RUS
+	}
+	
+	enable = {
+		date > 1854.1.1
+	}
+	
+	abort_when_not_enabled = yes
+	
+	ai_strategy = {
+		type = front_unit_request
+		tag = PRU
+		value = 200
+	}
+	
+	ai_strategy = {
+		type = front_unit_request
+		tag = BYZ
+		value = 120
+	}
+	
+	ai_strategy = {
+		type = front_unit_request
+		tag = SCA
+		value = 30
+	}
+	
+	ai_strategy = {
+		type = front_unit_request
+		tag = AUS
+		value = -200
+	}
+	
+	ai_strategy = {
+		type = front_unit_request
+		tag = MOL
+		value = -200
+	}
+	
+	ai_strategy = {
+		type = front_unit_request
+		tag = VLH
+		value = -200
+	}
+	
+	ai_strategy = {
+		type = front_unit_request
+		tag = GLA
+		value = -200
+	}
+	
+	ai_strategy = {
+		type = front_unit_request
+		tag = KAZ
+		value = -200
+	}
+	
+	ai_strategy = {
+		type = front_unit_request
+		tag = SDZ
+		value = -200
+	}
+	
+	ai_strategy = {
+		type = front_unit_request
+		tag = MON
+		value = -200
+	}
+	
+	ai_strategy = {
+		type = front_unit_request
+		tag = MAN
+		value = -200
+	}
+	
+	ai_strategy = {
+		type = front_unit_request
+		tag = QIN
+		value = -200
+	}
+	
+#	ai_strategy = {
+#		type = front_unit_request
+#		tag = AFG
+#		value = -200
+#	}
+	
+}
+
+#историческая стратегия 1 мировой
+
+RUS_historical_ai_attack_pru = {
+
+	allowed = {
+		original_tag = RUS
+		is_historical_focus_on = yes
+	}
+	enable = {
+		RUS = {
+			has_war_with = PRU
+		}
+	}
+	abort_when_not_enabled = yes
+
+#	ai_strategy = {
+#		type = consider_weak
+#		id = "PRU"
+#		value = 100
+#	}
+	
+	ai_strategy = {
+		type = antagonize
+		id = "PRU"
+		value = 100
+	}
+	
+	ai_strategy = { 
+		type = front_unit_request
+		country_trigger = {
+			tag = PRU
+		}
+		value = 100
+	}
+	
+}
+
+RUS_historical_ai_attack_byz = {
+
+	allowed = {
+		original_tag = RUS
+		is_historical_focus_on = yes
+	}
+	enable = {
+		RUS = {
+			has_war_with = BYZ
+		}
+	}
+	abort_when_not_enabled = yes
+
+#	ai_strategy = {
+#		type = consider_weak
+#		id = "BYZ"
+#		value = 100
+#	}
+	
+	ai_strategy = {
+		type = antagonize
+		id = "BYZ"
+		value = 100
+	}
+	
+	ai_strategy = { 
+		type = front_unit_request
+		country_trigger = {
+			tag = BYZ
+		}
+		value = 100
+	}
+	
+}

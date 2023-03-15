@@ -74,20 +74,33 @@ country_event = { #Creating Romania
 		VLH = { set_country_flag = VLH_CR }
 		news_event = news.8
 		hidden_effect = {
-			random_list = {
-				10 = {
-					news_event = {
-						id = news.121
-						days = 30
+			if = {
+				limit = {
+					NOT = {
+						is_historical_focus_on = yes
 					}
 				}
-				90 = {
-					VLH = {
-						country_event = {
-							id = chain.10
-							days = 29
+				random_list = {
+					10 = {
+						news_event = {
+							id = news.121
+							days = 30
 						}
 					}
+					90 = {
+						VLH = {
+							country_event = {
+								id = chain.10
+								days = 29
+							}
+						}
+					}
+				}
+			}
+			else = {
+				news_event = {
+					id = news.121
+					days = 30
 				}
 			}
 		}
@@ -105,7 +118,7 @@ country_event = { #Do something with malta
 	id = chain.3
 	title = chain.3.t
 	desc = chain.3.d
-	picture = GFX_news_event_ast_navy
+	picture = GFX_report_event_ast_navy
 	
 	is_triggered_only = yes
 	

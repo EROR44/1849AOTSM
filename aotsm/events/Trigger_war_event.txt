@@ -9,8 +9,7 @@ country_event = {
 	id = twe.1 #war BYZ vs BUL
 	title = twe.1.t
 	desc = twe.1.d
-	picture = GFX_report_event_molotov_signing_pact
-	
+	picture = GFX_report_event_aotsm_generic_signing_the_contract	
 	fire_only_once = yes
 	
 	hidden =  yes
@@ -52,16 +51,21 @@ country_event = {
 			transfer_state = 801
 			transfer_state = 803
 		}
+		BUL = {
+			set_nationality = {
+				target_country = VLH
+				character = BUL_Alexandr_Battenberg
+			}
+		}
 		VLH = {
-			create_country_leader = {
-				name = "BUL_Alexandr_Battenberg"
-				desc = "POLITICS_ALEXANDR_BATTENBERG_DESC"
-				picture = "gfx/leaders/BUL/Portrait_Alexandr_Battenberg.dds"
-				expire = "1900.1.1"
+			promote_character = {
+				character = BUL_Alexandr_Battenberg
 				ideology = monarchist
-				traits = {
-					hate_byzantium
-				}
+			}
+			add_trait = {
+				 character = BUL_Alexandr_Battenberg
+				 ideology = monarchist
+				 trait = hate_byzantium
 			}
 		}
 		VLH = {
@@ -97,8 +101,7 @@ country_event = {
 	id = twe.3 #First AUS vs PRU(Pru win)
 	title = twe.3.t
 	desc = twe.3.d
-	picture = GFX_report_event_molotov_signing_pact
-	
+	picture = GFX_report_event_aotsm_generic_signing_the_contract	
 	fire_only_once = yes
 	
 	hidden =  yes
@@ -106,71 +109,360 @@ country_event = {
 	trigger = {
 		tag = PRU
 		AUS = {
-			surrender_progress > 0.40
+			surrender_progress > 0.75
 		}
 		PRU = { has_country_flag = PRU_vs_AUS_1 }
+		PRU = {
+			has_war_with = AUS
+		}
 	}
 	option = {
 		name = twe.3.a
 		hidden_effect = {
-			PRU = { set_country_flag = victory_R_V_A_1 }
-			PRU = { clr_country_flag = PRU_vs_AUS_1 }
-			PRU = { remove_ideas = pru_blitzkrieg }
-			PRU = {
-				annex_country = { target = MCL transfer_troops = no }
-				annex_country = { target = SLG transfer_troops = no }
-				annex_country = { target = HAN transfer_troops = no }
-				annex_country = { target = VES transfer_troops = no }
-				annex_country = { target = FRN transfer_troops = no }
-				annex_country = { target = TYR transfer_troops = no }
-				annex_country = { target = SAK transfer_troops = no }
-			}
-			MCL = {
-				remove_state_core = 62
-				remove_state_core = 61
-			}
-			SLG = {
-				remove_state_core = 58
-				remove_state_core = 829
-			}
-			HAN = {
-				remove_state_core = 59
-			}
-			VES = {
-				remove_state_core = 56
-			}
-			TYR = {
-				remove_state_core = 60
-			}
-			SAK = { 
-				remove_state_core = 65
-			}
-			FRN = {
-				remove_state_core = 57
-				remove_state_core = 51
-				remove_state_core = 55
-				remove_state_core = 42
-				remove_state_core = 28
-			}
-			PRU = { set_cosmetic_tag = PRUNGU }
 			PRU = { white_peace = AUS }
-			PRU = { white_peace = BAD }
-			PRU = { white_peace = BAV }
-			PRU = { white_peace = VUR }
-			remove_from_faction = PRU
-			remove_from_faction = AUS
-			remove_from_faction = BAD
-			remove_from_faction = VUR
-			remove_from_faction = BAV
-			remove_from_faction = MCL
-			remove_from_faction = SLG
-			remove_from_faction = HAN
-			remove_from_faction = VES
-			remove_from_faction = FRN
-			remove_from_faction = TYR
-			remove_from_faction = SAK
 			AUS = { dismantle_faction = yes }
 			PRU = { dismantle_faction = yes }
+			every_other_country = {
+				limit = {
+					OR = {
+						has_country_flag = german_union_for_prussian
+						has_country_flag = german_union_for_austrian
+					}
+					OR = {
+						tag = MCS
+						tag = MCL
+						tag = LBE
+						tag = HLS
+						tag = SLG
+						tag = HAM
+						tag = HAN
+						tag = BRM
+						tag = OLD
+						tag = SAK
+						tag = TYR
+						tag = WEI
+						tag = MEI
+						tag = HES
+						tag = WLD
+						tag = FRN
+						tag = KOL
+					}
+				}
+				PRU = {
+					annex_country = { target = PREV transfer_troops = no }
+				}
+			}
+			PRU = { set_country_flag = victory_R_V_A_1 }
+			PRU = { set_cosmetic_tag = PRUNGU }
+			clr_global_flag = PRU_VS_AUS_1
+			if = {
+				limit = {
+					AUS = {
+						has_idea = AUS_never_surrender_idea
+					}
+				}
+				AUS = {
+					remove_ideas = AUS_never_surrender_idea
+				}
+			}
+			if = {
+				limit = {
+					PRU = {
+						has_idea = AUS_sabotage_pru
+					}
+				}
+				PRU = {
+					remove_ideas = AUS_sabotage_pru
+				}
+			}
+			if = {
+				limit = {
+					AUS = {
+						has_idea = rus_help_to_aus
+					}
+				}
+				AUS = {
+					remove_ideas = rus_help_to_aus
+				}
+			}
+			if = {
+				limit = {
+					AUS = {
+						has_idea = frr_help_to_aus
+					}
+				}
+				AUS = {
+					remove_ideas = frr_help_to_aus
+				}
+			}
+			if = {
+				limit = {
+					AUS = {
+						has_idea = cbi_help_to_aus
+					}
+				}
+				AUS = {
+					remove_ideas = cbi_help_to_aus
+				}
+			}
+			if = {
+				limit = {
+					AUS = {
+						has_country_flag = ask_russian
+					}
+				}
+				AUS = {
+					clr_country_flag = ask_russian
+				}
+			}
+			if = {
+				limit = {
+					AUS = {
+						has_country_flag = ask_france
+					}
+				}
+				AUS = {
+					clr_country_flag = ask_france
+				}
+			}
+			if = {
+				limit = {
+					AUS = {
+						has_country_flag = ask_cbi
+					}
+				}
+				AUS = {
+					clr_country_flag = ask_cbi
+				}
+			}
+			if = {
+				limit = {
+					any_country = {
+							has_country_flag = first_place_in_help_to_aus
+					}
+				}
+				every_country = {
+					limit = {
+						has_country_flag = first_place_in_help_to_aus
+					}
+					if = {
+						limit = {
+							check_variable = {
+								global.help_aus_1_var < 0.26
+							}
+						}
+						add_timed_idea = {
+							idea = aus_reparation_for_help_little
+							days = 180
+						}
+					}
+					if = {
+						limit = {
+							check_variable = {
+								global.help_aus_1_var > 0.25
+							}
+							check_variable = {
+								global.help_aus_1_var < 0.51
+							}
+						}
+						add_timed_idea = {
+							idea = aus_reparation_for_help_medium
+							days = 180
+						}
+					}
+					if = {
+						limit = {
+							check_variable = {
+								global.help_aus_1_var > 0.50
+							}
+						}
+						add_timed_idea = {
+							idea = aus_reparation_for_help_more
+							days = 180
+						}
+					}
+					clr_country_flag = chose_help_to_aus_flag
+					clr_country_flag = first_place_in_help_to_aus
+					if = {
+						limit = {
+							tag = RUS
+						}
+						remove_from_array = { global.austrian_help = RUS }
+					}
+					if = {
+						limit = {
+							tag = FRR
+						}
+						remove_from_array = { global.austrian_help = FRR }
+					}
+					if = {
+						limit = {
+							tag = CBI
+						}
+						remove_from_array = { global.austrian_help = CBI }
+					}
+				}
+				AUS = {
+					add_timed_idea = {
+						idea = aus_reparation_for_help_for_aus
+						days = 180
+					}
+				}
+			}
+			if = {
+				limit = {
+					any_country = {
+						has_country_flag = second_place_in_help_to_aus
+					}
+				}
+				every_country = {
+					limit = {
+						has_country_flag = second_place_in_help_to_aus
+					}
+					if = {
+						limit = {
+							check_variable = {
+								global.help_aus_2_var < 0.26
+							}
+						}
+						add_timed_idea = {
+							idea = aus_reparation_for_help_little
+							days = 180
+						}
+					}
+					if = {
+						limit = {
+							check_variable = {
+								global.help_aus_2_var > 0.25
+							}
+							check_variable = {
+								global.help_aus_2_var < 0.51
+							}
+						}
+						add_timed_idea = {
+							idea = aus_reparation_for_help_medium
+							days = 180
+						}
+					}
+					if = {
+						limit = {
+							check_variable = {
+								global.help_aus_2_var > 0.50
+							}
+						}
+						add_timed_idea = {
+							idea = aus_reparation_for_help_more
+							days = 180
+						}
+					}
+					clr_country_flag = chose_help_to_aus_flag
+					clr_country_flag = second_place_in_help_to_aus
+					if = {
+						limit = {
+							tag = RUS
+						}
+						remove_from_array = { global.austrian_help = RUS }
+					}
+					if = {
+						limit = {
+							tag = FRR
+						}
+						remove_from_array = { global.austrian_help = FRR }
+					}
+					if = {
+						limit = {
+							tag = CBI
+						}
+						remove_from_array = { global.austrian_help = CBI }
+					}
+				}
+			}
+			if = {
+				limit = {
+					any_country = {
+						has_country_flag = third_place_in_help_to_aus
+					}
+				}
+				every_country = {
+					limit = {
+						has_country_flag = first_place_in_help_to_aus
+					}
+					if = {
+						limit = {
+							check_variable = {
+								global.help_aus_3_var < 0.26
+							}
+						}
+						add_timed_idea = {
+							idea = aus_reparation_for_help_little
+							days = 180
+						}
+					}
+					if = {
+						limit = {
+							check_variable = {
+								global.help_aus_3_var > 0.25
+							}
+							check_variable = {
+								global.help_aus_3_var < 0.51
+							}
+						}
+						add_timed_idea = {
+							idea = aus_reparation_for_help_medium
+							days = 180
+						}
+					}
+					if = {
+						limit = {
+							check_variable = {
+								global.help_aus_3_var > 0.50
+							}
+						}
+						add_timed_idea = {
+							idea = aus_reparation_for_help_more
+							days = 180
+						}
+					}
+					clr_country_flag = chose_help_to_aus_flag
+					clr_country_flag = third_place_in_help_to_aus
+					if = {
+						limit = {
+							tag = RUS
+						}
+						remove_from_array = { global.austrian_help = RUS }
+					}
+					if = {
+						limit = {
+							tag = FRR
+						}
+						remove_from_array = { global.austrian_help = FRR }
+					}
+					if = {
+						limit = {
+							tag = CBI
+						}
+						remove_from_array = { global.austrian_help = CBI }
+					}
+				}
+			}
+			set_variable = { global.help_aus_1_var = 0 }
+			set_variable = { global.help_aus_2_var = 0 }
+			set_variable = { global.help_aus_3_var = 0 }
+			AUS = {
+				mark_focus_tree_layout_dirty = yes
+			}
+			AUS = {
+				delete_unit_template_and_units = {
+					division_template = "Baeuerliche Division"
+					disband = yes 
+				}
+			}
+			AUS = {
+				remove_mission = first_brother_war_decision
+			}
+			PRU = {
+				remove_mission = first_brother_war_decision
+			}
 		}
 		news_event = { hours = 24 id = news.2 }
 	}
@@ -180,8 +472,7 @@ country_event = {
 	id = twe.30 #First AUS vs PRU(Aus win)
 	title = twe.30.t
 	desc = twe.30.d
-	picture = GFX_report_event_molotov_signing_pact
-	
+	picture = GFX_report_event_aotsm_generic_signing_the_contract	
 	fire_only_once = yes
 	
 	hidden =  yes
@@ -189,66 +480,76 @@ country_event = {
 	trigger = {
 		tag = AUS
 		PRU = {
-			surrender_progress > 0.40
+			surrender_progress > 0.90
 		}
 		PRU = { has_country_flag = PRU_vs_AUS_1 }
 	}
 	option = {
 		name = twe.30.a
-		hidden_effect = {
-			AUS = { set_country_flag = victory_R_V_A_1 }
-			PRU = { clr_country_flag = PRU_vs_AUS_1 }
-			PRU = { remove_ideas = pru_blitzkrieg }
-			remove_from_faction = PRU
-			remove_from_faction = AUS
-			remove_from_faction = BAD
-			remove_from_faction = VUR
-			remove_from_faction = BAV
-			remove_from_faction = MCL
-			remove_from_faction = SLG
-			remove_from_faction = HAN
-			remove_from_faction = VES
-			remove_from_faction = FRN
-			remove_from_faction = TYR
-			remove_from_faction = SAK
-			PRU = { white_peace = AUS }
-			PRU = { white_peace = BAD }
-			PRU = { white_peace = BAV }
-			PRU = { white_peace = VUR }
-			MCL = { white_peace = AUS }
-			MCL = { white_peace = BAD }
-			MCL = { white_peace = BAV }
-			MCL = { white_peace = VUR }
-			SLG = { white_peace = AUS }
-			SLG = { white_peace = BAD }
-			SLG = { white_peace = BAV }
-			SLG = { white_peace = VUR }
-			HAN = { white_peace = AUS }
-			HAN = { white_peace = BAD }
-			HAN = { white_peace = BAV }
-			HAN = { white_peace = VUR }
-			VES = { white_peace = AUS }
-			VES = { white_peace = BAD }
-			VES = { white_peace = BAV }
-			VES = { white_peace = VUR }
-			SAK = { white_peace = AUS }
-			SAK = { white_peace = BAD }
-			SAK = { white_peace = BAV }
-			SAK = { white_peace = VUR }
-			TYR = { white_peace = AUS }
-			TYR = { white_peace = BAD }
-			TYR = { white_peace = BAV }
-			TYR = { white_peace = VUR }
-			FRN = { white_peace = AUS }
-			FRN = { white_peace = BAD }
-			FRN = { white_peace = BAV }
-			FRN = { white_peace = VUR }
-			AUS = { dismantle_faction = yes }
-			PRU = { dismantle_faction = yes }
+		AUS = {
+			white_peace = PRU
 		}
-		news_event = { hours = 24 id = news.3 }
-		PRU = { country_event = { hours = 24 id = ger.6 } }
-		PRU = { set_country_flag = PRU_revolution }
+		SIL = {
+			transfer_state = 66
+			transfer_state = 67
+			transfer_state = 762
+		}
+		AUS = {
+			set_autonomy = {
+				target = SIL
+				autonomy_state = autonomy_integrated_puppet
+				end_wars = yes
+				end_civil_wars = yes
+			}
+		}
+		SIL = {
+			set_politics = { ruling_party = democratic elections_allowed = no }
+			set_popularities = {
+				democratic = 55
+				socialism = 5
+				reactionist = 17
+				authoritarian = 13
+			}
+		}
+		add_to_array = { global.german_union_members = SIL }
+		add_to_array = { global.german_union_for_aus = SIL }
+		remove_from_array = { global.german_union_leader = PRU }
+		PRU = {
+			load_focus_tree = prussian_lose_focus
+		}
+		PRU = {
+			clr_country_flag = PRU_VS_AUS_1
+		}
+		every_other_country = {
+			limit = {
+				has_country_flag = german_union_for_prussian
+			}
+			clr_country_flag = german_union_for_prussian
+			remove_from_array = { global.german_union_for_pru = PREV }
+			set_country_flag = german_union_neutrality
+			add_to_array = { global.german_union_neutrality = PREV }
+		}
+		AUS = {
+			set_country_flag = victory_R_V_A_1
+		}
+		SIL = {
+			load_oob = SIL_army
+		}
+		PRU = {
+			remove_mission = first_brother_war_decision
+		}
+		AUS = {
+			remove_mission = first_brother_war_decision
+		}
+		PRU = {
+			set_country_flag = first_civilwar_scenario
+		}
+		PRU = {
+			country_event = {
+				id = ger.6
+				days = 17
+			}
+		}
 	}
 }
 
@@ -256,8 +557,7 @@ country_event = {
 	id = twe.4 #PRU vs BEL
 	title = twe.4.t
 	desc = twe.4.d
-	picture = GFX_report_event_molotov_signing_pact
-	
+	picture = GFX_report_event_aotsm_generic_signing_the_contract	
 	fire_only_once = yes
 	
 	hidden =  yes
@@ -271,64 +571,42 @@ country_event = {
 	}
 	option = {
 		name = twe.4.a
-		if = {
-			limit = {
-				HOL = { has_idea = pru_ultimatum }
-			}
-			hidden_effect = {
-				PRU = { white_peace = BEL }
-				HOL = {
-					transfer_state = 6
-				}
-				BEL = { set_cosmetic_tag = BELVAL }
-				BEL = { 
-					remove_state_core = 8
-					remove_state_core = 863
-				}
-				PRU = { 
-					add_state_core = 8
-					transfer_state = 8
-					add_state_core = 863
-					transfer_state = 863
-				}
-				BEL = { remove_ideas = war_for_freedom }
-			}
+		HOL = {
+			transfer_state = 6
 		}
-		if = {
-			limit = {
-				NOT = {
-					HOL = {
-						has_idea = pru_ultimatum
-					}
+		BEL = { set_cosmetic_tag = BELVAL }
+		PRU = { puppet = BEL }
+		BEL = { 
+			remove_state_core = 8
+			remove_state_core = 863
+		}
+		PRU = { 
+			add_state_core = 8
+			transfer_state = 8
+			add_state_core = 863
+			transfer_state = 863
+		}
+		BEL = {
+			set_politics = { ruling_party = authoritarian elections_allowed = no }
+			set_popularities = {
+				democratic = 20
+				socialism = 4
+				reactionist = 23
+				authoritarian = 53
+			}
+			retire_character = BEL_Leopold_I
+			add_country_leader_role = {
+				character = BEL_Edwin_von_Manteuffel
+				promote_leader = yes
+				country_leader = {
+					ideology = monarchist
+					expire = "1900.1.1.1"
+					traits = { walduke }
 				}
 			}
-			hidden_effect = {
-				PRU = { clr_country_flag = P_V_B }
-				PRU = { white_peace = BEL }
-				PRU = { puppet = BEL }
-				BEL = { remove_state_core = 8 }
-				PRU = { add_state_core = 8 }
-				PRU = { transfer_state = 8 }
-				BEL = { remove_ideas = war_for_freedom }
-				BEL = {
-					set_politics = { ruling_party = authoritarian elections_allowed = no }
-					set_popularities = {
-						democratic = 20
-						socialism = 4
-						reactionist = 23
-						authoritarian = 53
-					}
-					retire_character = BEL_Leopold_I
-					add_country_leader_role = {
-						character = BEL_Edwin_von_Manteuffel
-						promote_leader = yes
-						country_leader = {
-							ideology = monarchist
-							expire = "1900.1.1.1"
-							traits = { walduke }
-						}
-					}
-				}
+			swap_ideas = {
+				remove_idea = medium_country
+				add_idea = little_country
 			}
 		}
 	}
@@ -338,8 +616,7 @@ country_event = {
 #	id = twe.5 #PRU vs HOL
 #	title = twe.5.t
 #	desc = twe.5.d
-#	picture = GFX_report_event_molotov_signing_pact
-#	
+#	picture = GFX_report_event_aotsm_generic_signing_the_contract#	
 #	fire_only_once = yes
 #	
 #	hidden =  yes
@@ -368,8 +645,7 @@ country_event = {
 	id = twe.6 #Second AUS vs PRU(Pru win)
 	title = twe.6.t
 	desc = twe.6.d
-	picture = GFX_report_event_molotov_signing_pact
-	
+	picture = GFX_report_event_aotsm_generic_signing_the_contract	
 	fire_only_once = yes
 	
 	hidden =  yes
@@ -377,43 +653,385 @@ country_event = {
 	trigger = {
 		tag = PRU
 		AUS = {
-			surrender_progress > 0.40
+			surrender_progress > 0.75
+		}
+		PRU = {
+			has_war_with = AUS
 		}
 		PRU = { has_country_flag = PRU_vs_AUS_2 }
 	}
 	option = {
 		name = twe.6.a
 		hidden_effect = {
+			PRU = { white_peace = AUS }
 			PRU = { set_country_flag = victory_R_V_A_2 }
 			PRU = { clr_country_flag = PRU_vs_AUS_2 }
-			PRU = {
-				annex_country = { target = BAD transfer_troops = no }
-				annex_country = { target = BAV transfer_troops = no }
-				annex_country = { target = VUR transfer_troops = no }
-			}
-			BAD = {
-				remove_state_core = 828
-				remove_state_core = 50
-			}
-			VUR = {
-				remove_state_core = 808
-			}
-			BAV = {
-				remove_state_core = 54
-				remove_state_core = 53
-				remove_state_core = 52
-			}
-			remove_from_faction = AUS
-			remove_from_faction = BAD
-			remove_from_faction = VUR
-			remove_from_faction = BAV
-			AUS = { dismantle_faction = yes }
-			PRU = { white_peace = AUS }
-			every_country = {
+			if = {
 				limit = {
-					has_war_with = AUS
+					NOT = {
+						AUS = {
+							has_completed_focus = AUS_create_OEA
+						}
+					}
 				}
-				white_peace = AUS
+				AUS = { dismantle_faction = yes }
+			}
+			if = {
+				limit = {
+					AUS = {
+						has_completed_focus = AUS_create_OEA
+					}
+				}
+				if = {
+					limit = {
+						has_country_flag = time_member_of_allience_aus
+					}
+					leave_faction = yes
+					clr_country_flag = time_member_of_allience_aus
+				}
+			}
+			if = {
+				limit = {
+					has_country_flag = time_member_of_allience
+				}
+				leave_faction = yes
+				clr_country_flag = time_member_of_allience
+			}
+			every_other_country = {
+				limit = {
+					OR = {
+						has_country_flag = german_union_for_prussian
+						has_country_flag = german_union_for_austrian
+					}
+					OR = {
+						tag = BAV
+						tag = VUR
+						tag = HOH
+						tag = BAD
+						tag = ELS
+					}
+				}
+				PRU = {
+					annex_country = { target = PREV transfer_troops = no }
+				}
+			}
+			every_other_country = {
+				limit = {
+					has_country_flag = german_union_for_austrian
+				}
+				clr_country_flag = german_union_for_austrian
+				remove_from_array = { global.german_union_for_aus = ROOT }
+				set_country_flag = german_union_for_prussian
+				add_to_array = { global.german_union_for_pru = ROOT }
+			}
+			AUS = {
+				remove_from_array = { global.german_union_leader = ROOT }
+			}
+			if = {
+				limit = {
+					AUS = {
+						has_idea = AUS_never_surrender_idea
+					}
+				}
+				AUS = {
+					remove_ideas = AUS_never_surrender_idea
+				}
+			}
+			if = {
+				limit = {
+					PRU = {
+						has_idea = AUS_sabotage_pru
+					}
+				}
+				PRU = {
+					remove_ideas = AUS_sabotage_pru
+				}
+			}
+			if = {
+				limit = {
+					AUS = {
+						has_idea = rus_help_to_aus
+					}
+				}
+				AUS = {
+					remove_ideas = rus_help_to_aus
+				}
+			}
+			if = {
+				limit = {
+					AUS = {
+						has_idea = frr_help_to_aus
+					}
+				}
+				AUS = {
+					remove_ideas = frr_help_to_aus
+				}
+			}
+			if = {
+				limit = {
+					AUS = {
+						has_idea = cbi_help_to_aus
+					}
+				}
+				AUS = {
+					remove_ideas = cbi_help_to_aus
+				}
+			}
+			if = {
+				limit = {
+					AUS = {
+						has_country_flag = ask_russian
+					}
+				}
+				AUS = {
+					clr_country_flag = ask_russian
+				}
+			}
+			if = {
+				limit = {
+					AUS = {
+						has_country_flag = ask_france
+					}
+				}
+				AUS = {
+					clr_country_flag = ask_france
+				}
+			}
+			if = {
+				limit = {
+					AUS = {
+						has_country_flag = ask_cbi
+					}
+				}
+				AUS = {
+					clr_country_flag = ask_cbi
+				}
+			}
+			if = {
+				limit = {
+					any_country = {
+							has_country_flag = first_place_in_help_to_aus
+					}
+				}
+				every_country = {
+					limit = {
+						has_country_flag = first_place_in_help_to_aus
+					}
+					if = {
+						limit = {
+							check_variable = {
+								global.help_aus_1_var < 0.26
+							}
+						}
+						add_timed_idea = {
+							idea = aus_reparation_for_help_little
+							days = 180
+						}
+					}
+					if = {
+						limit = {
+							check_variable = {
+								global.help_aus_1_var > 0.25
+							}
+							check_variable = {
+								global.help_aus_1_var < 0.51
+							}
+						}
+						add_timed_idea = {
+							idea = aus_reparation_for_help_medium
+							days = 180
+						}
+					}
+					if = {
+						limit = {
+							check_variable = {
+								global.help_aus_1_var > 0.50
+							}
+						}
+						add_timed_idea = {
+							idea = aus_reparation_for_help_more
+							days = 180
+						}
+					}
+					clr_country_flag = chose_help_to_aus_flag
+					clr_country_flag = first_place_in_help_to_aus
+					if = {
+						limit = {
+							tag = RUS
+						}
+						remove_from_array = { global.austrian_help = RUS }
+					}
+					if = {
+						limit = {
+							tag = FRR
+						}
+						remove_from_array = { global.austrian_help = FRR }
+					}
+					if = {
+						limit = {
+							tag = CBI
+						}
+						remove_from_array = { global.austrian_help = CBI }
+					}
+				}
+				AUS = {
+					add_timed_idea = {
+						idea = aus_reparation_for_help_for_aus
+						days = 180
+					}
+				}
+			}
+			if = {
+				limit = {
+					any_country = {
+						has_country_flag = second_place_in_help_to_aus
+					}
+				}
+				every_country = {
+					limit = {
+						has_country_flag = second_place_in_help_to_aus
+					}
+					if = {
+						limit = {
+							check_variable = {
+								global.help_aus_2_var < 0.26
+							}
+						}
+						add_timed_idea = {
+							idea = aus_reparation_for_help_little
+							days = 180
+						}
+					}
+					if = {
+						limit = {
+							check_variable = {
+								global.help_aus_2_var > 0.25
+							}
+							check_variable = {
+								global.help_aus_2_var < 0.51
+							}
+						}
+						add_timed_idea = {
+							idea = aus_reparation_for_help_medium
+							days = 180
+						}
+					}
+					if = {
+						limit = {
+							check_variable = {
+								global.help_aus_2_var > 0.50
+							}
+						}
+						add_timed_idea = {
+							idea = aus_reparation_for_help_more
+							days = 180
+						}
+					}
+					clr_country_flag = chose_help_to_aus_flag
+					clr_country_flag = second_place_in_help_to_aus
+					if = {
+						limit = {
+							tag = RUS
+						}
+						remove_from_array = { global.austrian_help = RUS }
+					}
+					if = {
+						limit = {
+							tag = FRR
+						}
+						remove_from_array = { global.austrian_help = FRR }
+					}
+					if = {
+						limit = {
+							tag = CBI
+						}
+						remove_from_array = { global.austrian_help = CBI }
+					}
+				}
+			}
+			if = {
+				limit = {
+					any_country = {
+						has_country_flag = third_place_in_help_to_aus
+					}
+				}
+				every_country = {
+					limit = {
+						has_country_flag = first_place_in_help_to_aus
+					}
+					if = {
+						limit = {
+							check_variable = {
+								global.help_aus_3_var < 0.26
+							}
+						}
+						add_timed_idea = {
+							idea = aus_reparation_for_help_little
+							days = 180
+						}
+					}
+					if = {
+						limit = {
+							check_variable = {
+								global.help_aus_3_var > 0.25
+							}
+							check_variable = {
+								global.help_aus_3_var < 0.51
+							}
+						}
+						add_timed_idea = {
+							idea = aus_reparation_for_help_medium
+							days = 180
+						}
+					}
+					if = {
+						limit = {
+							check_variable = {
+								global.help_aus_3_var > 0.50
+							}
+						}
+						add_timed_idea = {
+							idea = aus_reparation_for_help_more
+							days = 180
+						}
+					}
+					clr_country_flag = chose_help_to_aus_flag
+					clr_country_flag = third_place_in_help_to_aus
+					if = {
+						limit = {
+							tag = RUS
+						}
+						remove_from_array = { global.austrian_help = RUS }
+					}
+					if = {
+						limit = {
+							tag = FRR
+						}
+						remove_from_array = { global.austrian_help = FRR }
+					}
+					if = {
+						limit = {
+							tag = CBI
+						}
+						remove_from_array = { global.austrian_help = CBI }
+					}
+				}
+			}
+			set_variable = { global.help_aus_1_var = 0 }
+			set_variable = { global.help_aus_2_var = 0 }
+			set_variable = { global.help_aus_3_var = 0 }
+			AUS = {
+				mark_focus_tree_layout_dirty = yes
+			}
+			if = {
+				limit = {
+					AUS = {
+						has_completed_focus = AUS_create_OEA
+					}
+				}
+				AUS = {
+					create_faction = OEA_faction
+				}
 			}
 		}
 		news_event = { hours = 24 id = news.13 }
@@ -424,8 +1042,7 @@ country_event = {
 	id = twe.60 #Second AUS vs PRU(Aus win)
 	title = twe.60.t
 	desc = twe.60.d
-	picture = GFX_report_event_molotov_signing_pact
-	
+	picture = GFX_report_event_aotsm_generic_signing_the_contract	
 	fire_only_once = yes
 	
 	hidden =  yes
@@ -433,7 +1050,7 @@ country_event = {
 	trigger = {
 		tag = AUS
 		PRU = {
-			surrender_progress > 0.40
+			surrender_progress > 0.95
 		}
 		PRU = { has_country_flag = PRU_vs_AUS_2 }
 	}
@@ -458,273 +1075,270 @@ country_event = {
 	}
 }
 
-country_event = {
-	id = twe.7 #Third AUS vs PRU BYZ(Pru win)
-	title = twe.7.t
-	desc = twe.7.d
-	picture = GFX_report_event_molotov_signing_pact
-	
-	fire_only_once = yes
+#country_event = {
+#	id = twe.7 #Third AUS vs PRU BYZ(Pru win)
+#	title = twe.7.t
+#	desc = twe.7.d
+#	picture = GFX_report_event_aotsm_generic_signing_the_contract#	
+#	fire_only_once = yes
+#
+#	hidden =  yes
+#	
+#	trigger = {
+#		tag = PRU
+#		AUS = {
+#			surrender_progress > 0.05
+#		}
+#		PRU = { has_country_flag = PRU_vs_AUS_3 }
+#	}
+#	option = {
+#		name = twe.7.a
+#		hidden_effect = {
+#			PRU = { set_country_flag = victory_R_V_A_3 }
+#			PRU = { clr_country_flag = PRU_vs_AUS_3 }
+#			PRU = { white_peace = AUS }
+#			BYZ = { white_peace = AUS }
+#			HUN = {
+#				transfer_state = 43
+#				transfer_state = 45
+#				transfer_state = 70
+#				transfer_state = 71
+#				transfer_state = 73
+#				transfer_state = 76
+#				transfer_state = 82
+#				transfer_state = 83
+#				transfer_state = 84
+#				transfer_state = 154
+#				transfer_state = 155
+#				transfer_state = 664
+#				transfer_state = 764
+#				add_state_core = 43
+#				add_state_core = 45
+#				add_state_core = 70
+#				add_state_core = 71
+#				add_state_core = 73
+#				add_state_core = 76
+#				add_state_core = 82
+#				add_state_core = 83
+#				add_state_core = 84
+#				add_state_core = 103
+#				add_state_core = 109
+#				add_state_core = 154
+#				add_state_core = 155
+#				add_state_core = 664
+#				add_state_core = 764
+#			}
+#			BOH = {
+#				transfer_state = 9
+#				transfer_state = 69
+#				transfer_state = 72
+#				transfer_state = 74
+#				transfer_state = 75
+#				add_state_core = 9
+#				add_state_core = 69
+#				add_state_core = 72
+#				add_state_core = 74
+#				add_state_core = 75
+#				add_state_core = 810
+#			}
+#			GLA = {
+#				transfer_state = 80
+#				transfer_state = 88
+#				transfer_state = 89
+#				transfer_state = 91
+#				add_state_core = 80
+#				add_state_core = 88
+#				add_state_core = 89
+#				add_state_core = 91
+#			}
+#			VEN = {
+#				transfer_state = 39
+#				transfer_state = 159
+#				transfer_state = 160
+#				add_state_core = 159
+#				add_state_core = 160
+#			}
+#			AUS = {
+#				remove_state_core = 4
+#				remove_state_core = 9
+#				remove_state_core = 39
+#				remove_state_core = 43
+#				remove_state_core = 45
+#				remove_state_core = 69
+#				remove_state_core = 70
+#				remove_state_core = 71
+#				remove_state_core = 72
+#				remove_state_core = 73
+#				remove_state_core = 74
+#				remove_state_core = 75
+#				remove_state_core = 76
+#				remove_state_core = 80
+#				remove_state_core = 83
+#				remove_state_core = 84
+#				remove_state_core = 88
+#				remove_state_core = 89
+#				remove_state_core = 91
+#				remove_state_core = 102
+#				remove_state_core = 103
+#				remove_state_core = 109
+#				remove_state_core = 152
+#				remove_state_core = 153
+#				remove_state_core = 154
+#				remove_state_core = 155
+#				remove_state_core = 159
+#				remove_state_core = 160
+#				remove_state_core = 163
+#				remove_state_core = 664
+#				remove_state_core = 736
+#				remove_state_core = 764
+#				remove_state_core = 810
+#				remove_state_core = 887
+#			}
+#			PRU = {
+#				transfer_state = 4
+#				transfer_state = 152
+#				transfer_state = 153
+#				transfer_state = 887
+#				add_state_core = 887
+#			}
+#			if = {
+#				limit = {
+#					BYZ = {
+#						has_country_flag = byz_imperia_politic
+#					}
+#				}
+#				BYZ = { 
+#					transfer_state = 102
+#					transfer_state = 103
+#					transfer_state = 109
+#					transfer_state = 163
+#					transfer_state = 736
+#				}
+#			}
+#			if = {
+#				limit = {
+#					BYZ = {
+#						has_country_flag = byz_democratic_politic
+#					}
+#				}
+#				DAL = {
+#					transfer_state = 102
+#					transfer_state = 103
+#					transfer_state = 109
+#					transfer_state = 163
+#					transfer_state = 736
+#				}
+#			}
+#			BYZ = { set_country_flag = BYZ_vs_AUS_win }
+#			PRU = { puppet = VEN }
+#			PRU = { puppet = BOH }
+#			PRU = {
+#				transfer_state = 69
+#				add_state_core = 69
+#				transfer_state = 810
+#				add_state_core = 810
+#			}
+#			BOH = {
+#				set_politics = { ruling_party = authoritarian elections_allowed = no }
+#				set_popularities = {
+#					democratic = 24
+#					socialism = 6
+#					reactionist = 26
+#					authoritarian = 44
+#				}
+#				add_country_leader_role = {
+#					character = BOH_Moris_fon_Bissing
+#					promote_leader = yes
+#					country_leader = {
+#						ideology = centrism
+#						expire = "1900.1.1.1"
+#						traits = { }
+#					}
+#				}
+#			}
+#			VEN = {
+#				inherit_technology = AUS
+#			}
+#			BOH = {
+#				inherit_technology = AUS
+#			}
+#			HUN = {
+#				inherit_technology = AUS
+#			}
+#			GLA = {
+#				inherit_technology = AUS
+#			}
+#			BOH = {
+#				load_oob = BOH_oob
+#			}
+#			BOH = {
+#				set_cosmetic_tag = BOHPRU
+#			}
+#			HUN = {
+#				load_oob = HUN_oob
+#			}
+#			GLA = {
+#				load_oob = GLA_oob
+#			}
+#			VEN = { 
+#				load_oob = VEN_oob
+#			}
+#			if = {
+#				limit = {
+#					VLH = {
+#						has_country_flag = VLH_CR
+#					}
+#				}
+#				VLH = {
+#					create_faction = ANTI-HUNGARY-ALLIENCE
+#				}
+#				GLA = {
+#					country_event = { id = te.13 hours = 12 }
+#				}
+#				VLH = {
+#					country_event = { id = te.14 days = 28 }
+#				}
+#			}
+#		}
+#		news_event = news.15 
+#	}
+#}
 
-	hidden =  yes
-	
-	trigger = {
-		tag = PRU
-		AUS = {
-			surrender_progress > 0.05
-		}
-		PRU = { has_country_flag = PRU_vs_AUS_3 }
-	}
-	option = {
-		name = twe.7.a
-		hidden_effect = {
-			PRU = { set_country_flag = victory_R_V_A_3 }
-			PRU = { clr_country_flag = PRU_vs_AUS_3 }
-			PRU = { white_peace = AUS }
-			BYZ = { white_peace = AUS }
-			HUN = {
-				transfer_state = 43
-				transfer_state = 45
-				transfer_state = 70
-				transfer_state = 71
-				transfer_state = 73
-				transfer_state = 76
-				transfer_state = 82
-				transfer_state = 83
-				transfer_state = 84
-				transfer_state = 154
-				transfer_state = 155
-				transfer_state = 664
-				transfer_state = 764
-				add_state_core = 43
-				add_state_core = 45
-				add_state_core = 70
-				add_state_core = 71
-				add_state_core = 73
-				add_state_core = 76
-				add_state_core = 82
-				add_state_core = 83
-				add_state_core = 84
-				add_state_core = 103
-				add_state_core = 109
-				add_state_core = 154
-				add_state_core = 155
-				add_state_core = 664
-				add_state_core = 764
-			}
-			BOH = {
-				transfer_state = 9
-				transfer_state = 69
-				transfer_state = 72
-				transfer_state = 74
-				transfer_state = 75
-				add_state_core = 9
-				add_state_core = 69
-				add_state_core = 72
-				add_state_core = 74
-				add_state_core = 75
-				add_state_core = 810
-			}
-			GLA = {
-				transfer_state = 80
-				transfer_state = 88
-				transfer_state = 89
-				transfer_state = 91
-				add_state_core = 80
-				add_state_core = 88
-				add_state_core = 89
-				add_state_core = 91
-			}
-			VEN = {
-				transfer_state = 39
-				transfer_state = 159
-				transfer_state = 160
-				add_state_core = 159
-				add_state_core = 160
-			}
-			AUS = {
-				remove_state_core = 4
-				remove_state_core = 9
-				remove_state_core = 39
-				remove_state_core = 43
-				remove_state_core = 45
-				remove_state_core = 69
-				remove_state_core = 70
-				remove_state_core = 71
-				remove_state_core = 72
-				remove_state_core = 73
-				remove_state_core = 74
-				remove_state_core = 75
-				remove_state_core = 76
-				remove_state_core = 80
-				remove_state_core = 83
-				remove_state_core = 84
-				remove_state_core = 88
-				remove_state_core = 89
-				remove_state_core = 91
-				remove_state_core = 102
-				remove_state_core = 103
-				remove_state_core = 109
-				remove_state_core = 152
-				remove_state_core = 153
-				remove_state_core = 154
-				remove_state_core = 155
-				remove_state_core = 159
-				remove_state_core = 160
-				remove_state_core = 163
-				remove_state_core = 664
-				remove_state_core = 736
-				remove_state_core = 764
-				remove_state_core = 810
-				remove_state_core = 887
-			}
-			PRU = {
-				transfer_state = 4
-				transfer_state = 152
-				transfer_state = 153
-				transfer_state = 887
-				add_state_core = 887
-			}
-			if = {
-				limit = {
-					BYZ = {
-						has_country_flag = byz_imperia_politic
-					}
-				}
-				BYZ = { 
-					transfer_state = 102
-					transfer_state = 103
-					transfer_state = 109
-					transfer_state = 163
-					transfer_state = 736
-				}
-			}
-			if = {
-				limit = {
-					BYZ = {
-						has_country_flag = byz_democratic_politic
-					}
-				}
-				DAL = {
-					transfer_state = 102
-					transfer_state = 103
-					transfer_state = 109
-					transfer_state = 163
-					transfer_state = 736
-				}
-			}
-			BYZ = { set_country_flag = BYZ_vs_AUS_win }
-			PRU = { puppet = VEN }
-			PRU = { puppet = BOH }
-			PRU = {
-				transfer_state = 69
-				add_state_core = 69
-				transfer_state = 810
-				add_state_core = 810
-			}
-			BOH = {
-				set_politics = { ruling_party = authoritarian elections_allowed = no }
-				set_popularities = {
-					democratic = 24
-					socialism = 6
-					reactionist = 26
-					authoritarian = 44
-				}
-				add_country_leader_role = {
-					character = BOH_Moris_fon_Bissing
-					promote_leader = yes
-					country_leader = {
-						ideology = centrism
-						expire = "1900.1.1.1"
-						traits = { }
-					}
-				}
-			}
-			VEN = {
-				inherit_technology = AUS
-			}
-			BOH = {
-				inherit_technology = AUS
-			}
-			HUN = {
-				inherit_technology = AUS
-			}
-			GLA = {
-				inherit_technology = AUS
-			}
-			BOH = {
-				load_oob = BOH_oob
-			}
-			BOH = {
-				set_cosmetic_tag = BOHPRU
-			}
-			HUN = {
-				load_oob = HUN_oob
-			}
-			GLA = {
-				load_oob = GLA_oob
-			}
-			VEN = { 
-				load_oob = VEN_oob
-			}
-			if = {
-				limit = {
-					VLH = {
-						has_country_flag = VLH_CR
-					}
-				}
-				VLH = {
-					create_faction = ANTI-HUNGARY-ALLIENCE
-				}
-				GLA = {
-					country_event = { id = te.13 hours = 12 }
-				}
-				VLH = {
-					country_event = { id = te.14 days = 28 }
-				}
-			}
-		}
-		news_event = news.15 
-	}
-}
-
-country_event = {
-	id = twe.70 #Third AUS vs PRU BYZ(Aus win)
-	title = twe.70.t
-	desc = twe.70.d
-	picture = GFX_report_event_molotov_signing_pact
-	
-	fire_only_once = yes
-
-	hidden =  yes
-	
-	trigger = {
-		tag = AUS
-		PRU = {
-			surrender_progress > 0.35
-		}
-		PRU = { has_country_flag = PRU_vs_AUS_3 }
-	}
-	option = {
-		name = twe.70.a
-		hidden_effect = {
-			AUS = { set_country_flag = victory_R_V_A_3 }
-			PRU = { clr_country_flag = PRU_vs_AUS_3 }
-			PRU = { white_peace = AUS }
-			BYZ = { white_peace = AUS }
-		}
-		news_event = news.16 
-		PRU = { country_event = { hours = 24 id = ger.6 } }
-		PRU = { set_country_flag = PRU_revolution }
-	}
-}
+#country_event = {
+#	id = twe.70 #Third AUS vs PRU BYZ(Aus win)
+#	title = twe.70.t
+#	desc = twe.70.d
+#	picture = GFX_report_event_aotsm_generic_signing_the_contract#	
+#	fire_only_once = yes
+#
+#	hidden =  yes
+#	
+#	trigger = {
+#		tag = AUS
+#		PRU = {
+#			surrender_progress > 0.35
+#		}
+#		PRU = { has_country_flag = PRU_vs_AUS_3 }
+#	}
+#	option = {
+#		name = twe.70.a
+#		hidden_effect = {
+#			AUS = { set_country_flag = victory_R_V_A_3 }
+#			PRU = { clr_country_flag = PRU_vs_AUS_3 }
+#			PRU = { white_peace = AUS }
+#			BYZ = { white_peace = AUS }
+#		}
+#		news_event = news.16 
+#		PRU = { country_event = { hours = 24 id = ger.6 } }
+#		PRU = { set_country_flag = PRU_revolution }
+#	}
+#}
 
 country_event = {
 	id = twe.8
 	title = twe.8.t
 	desc = twe.8.d
-	picture = GFX_report_event_molotov_signing_pact
-	
+	picture = GFX_report_event_aotsm_generic_signing_the_contract	
 	fire_only_once = yes
 
 	hidden =  yes
@@ -842,8 +1456,7 @@ country_event = {
 	id = twe.9 #War with Albania
 	title = twe.9.t
 	desc = twe.9.d
-	picture = GFX_report_event_molotov_signing_pact
-	
+	picture = GFX_report_event_aotsm_generic_signing_the_contract	
 	fire_only_once = yes
 
 	hidden =  yes
@@ -908,8 +1521,7 @@ country_event = {
 	id = twe.10 #War with Serbia
 	title = twe.10.t
 	desc = twe.10.d
-	picture = GFX_report_event_molotov_signing_pact
-	
+	picture = GFX_report_event_aotsm_generic_signing_the_contract	
 	fire_only_once = yes
 
 	hidden =  yes
@@ -977,8 +1589,7 @@ country_event = {
 	id = twe.11 #war with Bosnia
 	title = twe.11.t
 	desc = twe.11.d
-	picture = GFX_report_event_molotov_signing_pact
-	
+	picture = GFX_report_event_aotsm_generic_signing_the_contract	
 	fire_only_once = yes
 
 	hidden =  yes
@@ -1076,8 +1687,7 @@ country_event = {
 	id = twe.12
 	title = twe.12.t
 	desc = twe.12.d
-	picture = GFX_report_event_molotov_signing_pact
-	
+	picture = GFX_report_event_aotsm_generic_signing_the_contract	
 	fire_only_once = yes
 	
 	hidden =  yes
@@ -1101,8 +1711,7 @@ country_event = {
 	id = twe.13 #Cpt vs Kir win CPT
 	title = twe.13.t
 	desc = twe.13.d
-	picture = GFX_report_event_molotov_signing_pact
-	
+	picture = GFX_report_event_aotsm_generic_signing_the_contract	
 	fire_only_once = yes
 	
 	hidden =  yes
@@ -1141,8 +1750,7 @@ country_event = {
 	id = twe.14 #Cpt vs Kir win KIR
 	title = twe.14.t
 	desc = twe.14.d
-	picture = GFX_report_event_molotov_signing_pact
-	
+	picture = GFX_report_event_aotsm_generic_signing_the_contract	
 	fire_only_once = yes
 	
 	hidden =  yes
@@ -1175,8 +1783,7 @@ country_event = {
 	id = twe.15 #Cpt vs Tri win CPT
 	title = twe.15.t
 	desc = twe.15.d
-	picture = GFX_report_event_molotov_signing_pact
-	
+	picture = GFX_report_event_aotsm_generic_signing_the_contract	
 	fire_only_once = yes
 	
 	hidden =  yes
@@ -1215,8 +1822,7 @@ country_event = {
 	id = twe.16 #Cpt vs Tri win TIR
 	title = twe.16.t
 	desc = twe.16.d
-	picture = GFX_report_event_molotov_signing_pact
-	
+	picture = GFX_report_event_aotsm_generic_signing_the_contract	
 	fire_only_once = yes
 	
 	hidden =  yes
@@ -1251,8 +1857,7 @@ country_event = {
 #	id = twe.17 #JAP vs JAS win JAP
 #	title = twe.17.t
 #	desc = twe.17.d
-#	picture = GFX_report_event_molotov_signing_pact
-#	
+#	picture = GFX_report_event_aotsm_generic_signing_the_contract#	
 #	fire_only_once = yes
 #	
 #	hidden =  yes
@@ -1298,8 +1903,7 @@ country_event = {
 #	id = twe.18 #JAP vs JAS win JAS
 #	title = twe.18.t
 #	desc = twe.18.d
-#	picture = GFX_report_event_molotov_signing_pact
-#	
+#	picture = GFX_report_event_aotsm_generic_signing_the_contract#	
 #	fire_only_once = yes
 #	
 #	hidden =  yes
@@ -1345,8 +1949,7 @@ country_event = {
 #	id = twe.19 #JAP vs JAS win JAP
 #	title = twe.19.t
 #	desc = twe.19.d
-#	picture = GFX_report_event_molotov_signing_pact
-#	
+#	picture = GFX_report_event_aotsm_generic_signing_the_contract#	
 #	fire_only_once = yes
 #	
 #	hidden =  yes
@@ -1377,8 +1980,7 @@ country_event = {
 #	id = twe.20 #JAP vs JAS win JAS
 #	title = twe.20.t
 #	desc = twe.20.d
-#	picture = GFX_report_event_molotov_signing_pact
-#	
+#	picture = GFX_report_event_aotsm_generic_signing_the_contract#	
 #	fire_only_once = yes
 #	
 #	hidden =  yes
@@ -1409,8 +2011,7 @@ country_event = {
 #	id = twe.21 #TUK vs JAP win TUK
 #	title = twe.21.t
 #	desc = twe.21.d
-#	picture = GFX_report_event_molotov_signing_pact
-#	
+#	picture = GFX_report_event_aotsm_generic_signing_the_contract#	
 #	fire_only_once = yes
 #	
 #	hidden =  yes
@@ -1451,8 +2052,7 @@ country_event = {
 #	id = twe.22 #TUK vs JAP win JAP
 #	title = twe.22.t
 #	desc = twe.22.d
-#	picture = GFX_report_event_molotov_signing_pact
-#	
+#	picture = GFX_report_event_aotsm_generic_signing_the_contract#	
 #	fire_only_once = yes
 #	
 #	hidden =  yes
@@ -1493,8 +2093,7 @@ country_event = {
 #	id = twe.23 #TUK vs JAS win TUK
 #	title = twe.23.t
 #	desc = twe.23.d
-#	picture = GFX_report_event_molotov_signing_pact
-#	
+#	picture = GFX_report_event_aotsm_generic_signing_the_contract#	
 #	fire_only_once = yes
 #	
 #	hidden =  yes
@@ -1535,8 +2134,7 @@ country_event = {
 #	id = twe.24 #TUK vs JAS win JAS
 #	title = twe.24.t
 #	desc = twe.24.d
-#	picture = GFX_report_event_molotov_signing_pact
-#	
+#	picture = GFX_report_event_aotsm_generic_signing_the_contract#	
 #	fire_only_once = yes
 #	
 #	hidden =  yes
@@ -1576,8 +2174,7 @@ country_event = {
 #country_event = {
 #	id = twe.25 #France_annex_ALG
 #	desc = twe.25.d
-#	picture = GFX_report_event_molotov_signing_pact
-#	
+#	picture = GFX_report_event_aotsm_generic_signing_the_contract#	
 #	fire_only_once = yes
 #	
 #	hidden =  yes
@@ -1611,8 +2208,7 @@ country_event = {
 #country_event = {
 	#id = twe.26 #France_fail_invasion
 	#desc = twe.26.d
-	#picture = GFX_report_event_molotov_signing_pact
-	
+	#picture = GFX_report_event_aotsm_generic_signing_the_contract	
 	#fire_only_once = yes
 	
 	#hidden =  yes
@@ -1638,8 +2234,7 @@ country_event = {
 country_event = {
 	id = twe.27 #Hungaria Lose
 	desc = twe.27.d
-	picture = GFX_report_event_molotov_signing_pact
-	
+	picture = GFX_report_event_aotsm_generic_signing_the_contract	
 	fire_only_once = yes
 	
 	hidden =  yes
@@ -1688,6 +2283,64 @@ country_event = {
 		VLH = { give_guarantee = GLA }
 		GLA = { give_guarantee = VLH }
 		PRU = { add_to_faction = HUN }
+		if = {
+			limit = {
+				RUS = {
+					has_country_flag = rus_send_volonter_to_vlh
+				}
+			}
+			set_variable_to_random = {
+				var = manpower_back_vlh
+				min = 42912
+				max = 59613
+			}
+			set_variable_to_random = {
+				var = weapon_back_vlh
+				min = 711
+				max = 981
+			}
+			VLH = {
+				delete_unit_template_and_units = {
+					division_template = "Russian Volunteers"
+					disband = no
+				}
+			}
+			RUS = {
+				country_event = {
+					id = war_event.4
+					days = 1
+				}
+			}
+		}
+		if = {
+			limit = {
+				RUS = {
+					has_country_flag = rus_send_volonter_to_gla
+				}
+			}
+			set_variable_to_random = {
+				var = manpower_back_gla
+				min = 42912
+				max = 59613
+			}
+			set_variable_to_random = {
+				var = weapon_back_gla
+				min = 711
+				max = 981
+			}
+			GLA = {
+				delete_unit_template_and_units = {
+					division_template = "Russian Volunteers"
+					disband = no
+				}
+			}
+			RUS = {
+				country_event = {
+					id = war_event.5
+					days = 1
+				}
+			}
+		}
 		news_event = news.75
 	}
 }
@@ -1695,8 +2348,7 @@ country_event = {
 country_event = {
 	id = twe.28 #Hungaria win
 	desc = twe.28.d
-	picture = GFX_report_event_molotov_signing_pact
-	
+	picture = GFX_report_event_aotsm_generic_signing_the_contract	
 	fire_only_once = yes
 	
 	hidden =  yes
@@ -1731,14 +2383,31 @@ country_event = {
 		81 = { set_demilitarized_zone = yes }
 		88 = { set_demilitarized_zone = yes }
 		89 = { set_demilitarized_zone = yes }
+		if = {
+			limit = {
+				OR = {
+					RUS = {
+						has_country_flag = rus_send_volonter_to_vlh
+					}
+					RUS = {
+						has_country_flag = rus_send_volonter_to_gla
+					}
+				}
+			}
+			HUN = {
+				country_event = {
+					id = war_event.6
+					days = 1
+				}
+			}
+		}
 		news_event = news.74
 	}
 }
 country_event = {
 	id = twe.29 #Покорение казахстана
 	desc = twe.29.d
-	picture = GFX_report_event_molotov_signing_pact
-	
+	picture = GFX_report_event_aotsm_generic_signing_the_contract	
 	fire_only_once = yes
 	
 	hidden =  yes
@@ -1771,5 +2440,148 @@ country_event = {
 			RUS = { clr_country_flag = RUS_konquer_kaz_was_started }
 			RUS = { set_country_flag = RUS_kaz_was_konquered }
 		}
+	}
+}
+
+country_event = {
+	id = twe.32 #Balkan war Byzantium Win
+	desc = twe.32.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract	
+	fire_only_once = yes
+	
+	hidden =  yes
+	
+	trigger = {
+		tag = BYZ
+		AUS = {
+			surrender_progress > 0.50
+		}
+		BYZ = {
+			has_war_with = AUS
+		}
+		has_global_flag = balkan_war_aus_vs_byz
+	}
+	
+	option = {
+		name = twe.32.a
+		BYZ = {
+			white_peace = {
+				tag = AUS
+				message = viena_peace_tt
+			}
+		}
+		clr_global_flag = balkan_war_aus_vs_byz
+		BYZ = {
+			set_country_flag = BYZ_vs_AUS_win
+		}
+		if = {
+			limit = {
+				BYZ = {
+					has_country_flag = byz_democratic_politic
+				}
+			}
+			DAL = {
+				transfer_state = 102
+				transfer_state = 103
+				transfer_state = 109
+				transfer_state = 163
+				transfer_state = 736
+			}
+		}
+		if = {
+			limit = {
+				BYZ = {
+					NOT = {
+						has_country_flag = byz_democratic_politic
+					}
+				}
+			}
+			BYZ = {
+				transfer_state = 102
+				transfer_state = 103
+				transfer_state = 109
+				transfer_state = 163
+				transfer_state = 736
+			}
+		}
+		if = {
+			limit = {
+				NOT = {
+					country_exists = VEN
+				}
+			}
+			VEN = {
+				transfer_state = 159
+				transfer_state = 160
+				add_state_core = 159
+				add_state_core = 160
+				inherit_technology = AUS
+				load_oob = VEN_oob
+			}
+		}
+		AUS = {
+			remove_state_core = 102
+			remove_state_core = 103
+			remove_state_core = 159
+			remove_state_core = 160
+			remove_state_core = 163
+			remove_state_core = 736
+		}
+		AUS = {
+			remove_ideas = war_for_the_balkan_idea
+		}
+		BYZ = {
+			remove_ideas = war_for_the_balkan_idea
+		}
+		news_event = news.129
+	}
+}
+
+country_event = {
+	id = twe.31 #Austrian win
+	desc = twe.31.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract	
+	fire_only_once = yes
+	
+	hidden =  yes
+	
+	trigger = {
+		tag = AUS
+		BYZ = {
+			surrender_progress > 0.50
+		}
+		AUS = {
+			has_war_with = BYZ
+		}
+		has_global_flag = balkan_war_aus_vs_byz
+	}
+	
+	option = {
+		name = twe.31.a
+		AUS = {
+			white_peace = {
+				tag = BYZ
+				message = athens_peace_tt
+			}
+		}
+		clr_global_flag = balkan_war_aus_vs_byz
+		BYZ = {
+			set_country_flag = lose_balkan_war
+		}	
+		AUS = {
+			transfer_state = 104
+			transfer_state = 105
+			transfer_state = 107
+			transfer_state = 108
+			transfer_state = 802
+			transfer_state = 804
+		}
+		AUS = {
+			remove_ideas = war_for_the_balkan_idea
+		}
+		BYZ = {
+			remove_ideas = war_for_the_balkan_idea
+		}
+		news_event = news.130
 	}
 }

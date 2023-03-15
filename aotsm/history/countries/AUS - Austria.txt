@@ -1,23 +1,52 @@
 capital = 4
+
 set_technology = {
 	infantry_weapons = 1
-	tech_mountaineers = 1
+	infantry_weapons1 = 1
+	support_weapons = 1
+	uniform_equipment = 1
+	uniform_equipment1 = 1
+	winter_equipment1 = 1
+	heavy_equipment1 = 1
+	tech_recon = 1
 	tech_support = 1		
 	tech_engineers = 1
-	tech_recon = 1
+	tech_special_forces = 1
+	tech_mountaineers = 1
+	motorised_infantry = 1
 	gw_artillery = 1
 	basic_train = 1
+	basic_machine_tools = 1
 }
+
+if = {
+	limit = {
+		NOT = { has_dlc = "No Step Back" }
+	}
+	set_technology = {
+		gwtank = 1
+	}
+}
+
+if = {
+	limit = {
+		has_dlc = "No Step Back"
+	}
+	set_technology = {
+		gwtank_chassis = 1
+		engine_tech_1 = 1
+		armor_tech_1 = 1
+	}
+}
+
 if = {
 	limit = { not = { has_dlc = "Man the Guns" } }
 	set_technology = {
-		early_submarine = 1
 		early_destroyer = 1
 		early_light_cruiser = 1
-		early_heavy_cruiser = 1
-		early_battleship = 1
-		transport = 1
+		early_submarine = 1
 	}
+	set_naval_oob = "AUS_1849_naval_legacy"
 }
 if = {
 	limit = { has_dlc = "Man the Guns" }
@@ -29,54 +58,198 @@ if = {
 		early_ship_hull_submarine = 1
 		basic_ship_hull_submarine = 1
 		early_ship_hull_cruiser = 1
-		early_ship_hull_heavy = 1
 		basic_battery = 1
-		
-		basic_cruiser_armor_scheme = 1
 		basic_torpedo = 1
+		basic_depth_charges = 1
 		coastal_defense_ships = 1
-		pre_dreadnoughts = 1
-		mtg_transport = 1
+	}
+	set_naval_oob = "AUS_1849_naval_mtg"
+
+}
+
+if = {
+	limit = { not = { has_dlc = "Man the Guns" } }
+	# Submarines #
+	create_equipment_variant = {
+		name = "Wölfe Class"
+		type = submarine_1
+		upgrades = {
+			ship_reliability_upgrade = 3
+			sub_engine_upgrade = 2
+			sub_stealth_upgrade = 2
+			sub_torpedo_upgrade = 3
+		}
+	}
+	# Destroyers #
+	create_equipment_variant = {
+		name = "Zerstörer Class"
+		type = destroyer_1
+		upgrades = {
+			ship_torpedo_upgrade = 1
+			destroyer_engine_upgrade = 1
+			ship_ASW_upgrade = 1
+			ship_anti_air_upgrade = 1
+		}
+	}
+	# Cruisers #
+	create_equipment_variant = {
+		name = "Kreuzer Class"
+		type = heavy_cruiser_1
+		upgrades = {
+			ship_reliability_upgrade = 1
+			ship_engine_upgrade = 1
+			ship_armor_upgrade = 1
+			ship_gun_upgrade = 1
+		}
+	}
+
+}
+if = {
+	limit = { has_dlc = "Man the Guns" }
+	# Submarines #
+	create_equipment_variant = {
+		name = "Wölfe Class"				
+		type = ship_hull_submarine_2
+		name_group = PRU_SS_HISTORICAL
+		parent_version = 0
+		modules = {
+			fixed_ship_torpedo_slot = ship_torpedo_sub_1
+			fixed_ship_engine_slot = sub_ship_engine_1
+			rear_1_custom_slot = empty
+		}
+	}
+	# Destroyers #
+	create_equipment_variant = {
+		name = "Zerstörer Class"				
+		type = ship_hull_light_2
+		name_group = PRU_DD_HISTORICAL
+		parent_version = 0
+		modules = {
+			fixed_ship_battery_slot = ship_light_battery_1
+			fixed_ship_anti_air_slot = ship_anti_air_1
+			fixed_ship_fire_control_system_slot = ship_fire_control_system_0
+			fixed_ship_radar_slot = empty
+			fixed_ship_engine_slot = light_ship_engine_1
+			fixed_ship_torpedo_slot = ship_torpedo_1
+			mid_1_custom_slot = ship_mine_layer_1
+			rear_1_custom_slot = ship_depth_charge_1
+		}
+	}
+	# Cruisers #
+	create_equipment_variant = {
+		name = "Kreuzer Class"				
+		type = ship_hull_cruiser_coastal_defense_ship
+		name_group = PRU_CL_HISTORICAL
+		parent_version = 0
+		modules = {
+			fixed_ship_battery_slot = ship_light_medium_battery_1
+			fixed_ship_anti_air_slot = ship_anti_air_1
+			fixed_ship_fire_control_system_slot = ship_fire_control_system_0
+			fixed_ship_radar_slot = empty
+			fixed_ship_engine_slot = cruiser_ship_engine_1
+			fixed_ship_armor_slot = empty
+			fixed_ship_secondaries_slot = empty
+			mid_1_custom_slot = empty
+			mid_2_custom_slot = empty
+			rear_1_custom_slot = empty
+		}
 	}
 }
 
 recruit_character = AUS_Franz_Joseph_I
+recruit_character = AUS_Franz_Joseph_I_land
 recruit_character = AUS_Alex_fon_Mensdorf_Puli
-recruit_character = AUS_Eduard_Taaffe
+recruit_character = AUS_duke_Felix_Fridrich_tsu_Shvartsenberg
+recruit_character = AUS_Karl_von_Buol_Shauenstein
+recruit_character = AUS_Iogann_von_Rechbergund_Rotenleven
 recruit_character = AUS_Karel_Sladovskiy
+recruit_character = AUS_Napoleon_II
 recruit_character = AUS_Wilhelm_von_Braunschweig
 recruit_character = AUS_Austrian_Reichstag
+recruit_character = AUS_Laval_Nugent_von_Vestment
+recruit_character = AUS_Yulius_Yakob_fon_Gayanu
+recruit_character = AUS_Jozef_Mentsel_von_Radets
+recruit_character = AUS_Evgeniy_Wratislav_von_Mitrovits_Nettolitsky
+recruit_character = AUS_Konstantin_de_Aspre
+recruit_character = AUS_Albert_Rudolf_Austrian
+recruit_character = AUS_Ludvig_August_von_Benedek
+recruit_character = AUS_Eduard_Klam_Gallas
+recruit_character = AUS_Karl_Vilgelm_von_Gablent
+recruit_character = AUS_Wilgelm_Ramming_von_Ridrichten
+recruit_character = AUS_Ervin_von_Neuperg
+recruit_character = AUS_Franz_Kuhn_Freiherr_von_Kuhnenfeld
+recruit_character = AUS_Wilhelm_von_Tegetthoff
+recruit_character = AUS_Maximillian_von_Shternek
+recruit_character = AUS_Karl_Rudolf_Brommi
+recruit_character = AUS_Anton_von_Pets
+recruit_character = AUS_Leopold_Ludwig_Austrian
+recruit_character = AUS_Karl_Wilhelm_von_Auersperg
+recruit_character = AUS_Julius_Anton_Glaser
+recruit_character = AUS_Apolinary_Jaworski
+recruit_character = AUS_Ami_Boue
+recruit_character = AUS_Gorove_Istvan
+recruit_character = AUS_Alfred_Ritter_von_Arneth
+recruit_character = AUS_Moritz_Hartmann
+recruit_character = AUS_Eduard_Gregr
+
 
 set_convoys = 150
-add_political_power = 0
-set_research_slots = 3
-set_stability = 0.6
-set_war_support = 0.5
+
+set_research_slots = 4
+
+set_stability = 0.62
+set_war_support = 0.23
+
 set_oob = "AUS_1849"
+
 set_politics = {
 	ruling_party = authoritarian
-	last_election = "1849.1.1"
+	last_election = "1848.11.21"
 	election_frequency = 48
 	elections_allowed = no
 }
+
 set_popularities = {
 	democratic = 21
 	socialism = 7
 	reactionist = 32
 	authoritarian = 40
 }
+
 add_ideas = {
-	constitutional_monarchy
+	monarchy
 	potential_world_power
 	catolicysm	
 	regional_corruption
-	medium_developed_industry
-	low_investment_level
+	backward_industry
+	average_investment_level
+	
+	austrian_science_manufacturer
 	
 	creater_of_saint_allience_idea
 	saint_allience_idea
 	AUS_slovian_revolution
 	AUS_hungarian_revolution
+	AUS_napoleonic_tactic
+	AUS_idustrian_degradation_1
 }
 
 set_country_flag = railways_member_flag
+
+diplomatic_relation = {
+    country = ELS
+    relation = guarantee
+    active = yes
+}
+
+diplomatic_relation = {
+    country = KRA
+    relation = guarantee
+    active = yes
+}
+
+diplomatic_relation = {
+    country = LIE
+    relation = guarantee
+    active = yes
+}

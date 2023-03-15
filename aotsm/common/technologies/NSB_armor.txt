@@ -13,6 +13,457 @@ technologies = {
 	@1858 = 12
 	@1859 = 20
 
+	motorised_infantry = {
+
+		enable_subunits = {
+			motorized
+		}
+
+		enable_equipments = {
+			motorized_equipment_1
+		}
+
+		enable_equipment_modules = {
+			tank_wheeled_suspension
+		}
+
+		on_research_complete_limit = {
+			NOT = {
+				has_template_containing_unit = motorized
+			}
+		}
+		on_research_complete = {
+			hidden_effect = {
+				load_oob = "unlock_motorized"
+			}			
+			custom_effect_tooltip = UNLOCK_DIVISION_TEMPLATE
+		}
+		
+		path = {
+			leads_to_tech = motorised_infantry2
+			research_cost_coeff = 1
+		}
+
+		research_cost = 2
+		start_year = 1849
+		folder = {
+			name = nsb_armour_folder
+			position = { x = -9 y = 0 }
+		}
+		
+		folder = {
+			name = support_folder
+			position = { x = 7 y = 9 }
+		}
+		
+		categories = {
+			motorized_equipment
+			infantry_tech
+		}
+		
+		ai_will_do = {
+			factor = 1
+			
+			modifier = {
+				factor = 2
+				date > "1850.1.1"
+			}
+			
+			modifier = {
+				factor = 2
+				date > "1851.1.1"
+			}
+			
+			modifier = {
+				factor = 2
+				date > "1852.1.1"
+			}
+			modifier = {
+				is_major = no
+				factor = 0.5
+			}
+		}
+	}
+
+	motorised_infantry2 = {
+
+		enable_equipments = {
+			motorized_equipment_2
+		}
+		
+		path = {
+			leads_to_tech = mechanised_infantry
+			research_cost_coeff = 1
+		}
+
+		path = {
+			leads_to_tech = armored_car1
+			research_cost_coeff = 1
+		}		
+
+		research_cost = 2
+		start_year = 1836
+		folder = {
+			name = nsb_armour_folder
+			position = { x = -9 y = 4 }
+		}		
+				
+		sub_technologies = {
+			motorized_rocket_unit
+		}
+		
+		categories = {
+			infantry_weapons
+		}
+		
+		ai_will_do = {
+			factor = 3
+						
+			modifier = {
+				factor = 10
+				date > "1852.1.1"
+			}
+			modifier = {
+				num_of_military_factories < 50
+				factor = 0.5
+			}
+			#modifier = {
+			#	factor = 0
+			#	tag = RUS
+			#	OR = {
+			#		date < "1857.1.1" # stock up on lots of rifles, we got the manpower
+			#		AND = {
+			#			date > "1856.1.1"
+			#			surrender_progress < 0.1 # if we arent losing badly its ok
+			#		}
+			#	}
+			#}
+		}
+	}
+	motorized_rocket_unit = {
+
+		enable_subunits = {
+			motorized_rocket_brigade
+		}
+		enable_equipments = {
+			motorized_rocket_equipment_1
+		}
+	
+		research_cost = 1.5
+		start_year = 1852
+		
+		ai_will_do = {
+			factor = 1
+			
+			modifier = {
+				factor = 2
+				tag = RUS
+			}
+		}
+		
+		categories = {
+			mot_rockets
+		}
+	}
+	
+	armored_car1 = {
+
+		enable_subunits = {
+			armored_car
+		}
+
+		enable_equipments = {
+			gw_armored_car_equipment
+		}
+		#allow_branch = { has_dlc = "La Resistance" }
+		path = {
+			leads_to_tech = armored_car2
+			research_cost_coeff = 1
+		}
+
+		research_cost = 2
+		start_year = 1849
+		folder = {
+			name = nsb_armour_folder
+			position = { x = -10 y = 6 }
+		}
+		
+		categories = {
+			motorized_equipment
+			armor
+			cat_armored_cars
+		}
+		
+		ai_will_do = {
+			factor = 1
+			
+			modifier = {
+				factor = 2
+				date > "1850.1.1"
+			}
+			
+			modifier = {
+				factor = 2
+				date > "1851.1.1"
+			}
+			
+			modifier = {
+				factor = 2
+				date > "1852.1.1"
+			}
+			modifier = {
+				is_major = no
+				factor = 0.5
+			}
+		}
+	}
+
+	armored_car2 = {
+
+		enable_equipments = {
+			armored_car_equipment_1
+		}
+		
+		path = {
+			leads_to_tech = armored_car3
+			research_cost_coeff = 1
+		}
+
+		research_cost = 2
+		start_year = 1853
+		folder = {
+			name = nsb_armour_folder
+			position = { x = -10 y = 9 }
+		}
+		
+		categories = {
+			motorized_equipment
+			armor
+			cat_armored_cars
+		}
+		
+		ai_will_do = {
+			factor = 1
+			
+			modifier = {
+				factor = 2
+				date > "1850.1.1"
+			}
+			
+			modifier = {
+				factor = 2
+				date > "1851.1.1"
+			}
+			
+			modifier = {
+				factor = 2
+				date > "1852.1.1"
+			}
+			modifier = {
+				is_major = no
+				factor = 0.5
+			}
+		}
+	}
+
+	armored_car3 = {
+
+		enable_equipments = {
+			armored_car_equipment_2
+		}
+
+		research_cost = 2
+		start_year = 1855
+		folder = {
+			name = nsb_armour_folder
+			position = { x = -10 y = 11 }
+		}
+		
+		categories = {
+			motorized_equipment
+			armor
+			cat_armored_cars
+		}
+		
+		sub_technologies = {
+			armored_car_at_upgrade
+		}
+
+		ai_will_do = {
+			factor = 1
+			
+			modifier = {
+				factor = 2
+				date > "1850.1.1"
+			}
+			
+			modifier = {
+				factor = 2
+				date > "1851.1.1"
+			}
+			
+			modifier = {
+				factor = 2
+				date > "1852.1.1"
+			}
+			modifier = {
+				is_major = no
+				factor = 0.5
+			}
+		}
+	}
+
+	armored_car_at_upgrade = {
+
+		enable_equipments = {
+			armored_car_at_equipment
+		}
+
+		research_cost = 1
+		start_year = 1856
+		sub_tech_index = 1
+		
+		categories = {
+			motorized_equipment
+			armor
+			cat_armored_cars
+		}
+
+		ai_will_do = {
+			factor = 1
+			
+			modifier = {
+				factor = 2
+				date > "1850.1.1"
+			}
+			
+			modifier = {
+				factor = 2
+				date > "1851.1.1"
+			}
+			
+			modifier = {
+				factor = 2
+				date > "1852.1.1"
+			}
+			modifier = {
+				is_major = no
+				factor = 0.5
+			}
+		}
+	}
+
+	mechanised_infantry = {
+
+		enable_equipments = {
+			mechanized_equipment_1
+		}
+
+		enable_equipment_modules = {
+			tank_half_track_suspension
+		}
+		
+		motorized = {
+			hardness = 1.0
+		}
+		mot_artillery_brigade = {
+			hardness = 1.0
+		}
+		mot_anti_tank_brigade = {
+			hardness = 1.0
+		}
+		mot_anti_air_brigade = {
+			hardness = 1.0
+		}
+		mot_rocket_artillery_brigade = {
+			hardness = 1.0
+		}
+
+		path = {
+			leads_to_tech = mechanised_infantry2
+			research_cost_coeff = 1
+		}
+
+		research_cost = 2
+		start_year = 1852
+		folder = {
+			name = nsb_armour_folder
+			position = { x = -7 y = 8 }
+		}
+		
+		categories = {
+			motorized_equipment
+			infantry_tech
+			cat_mechanized_equipment
+		}
+		
+		ai_will_do = {
+			factor = 2
+			modifier = {
+				tag = FRR
+				factor = 2
+			}
+		}
+	}
+	
+	mechanised_infantry2 = {
+
+		enable_equipments = {
+			mechanized_equipment_2
+		}
+		
+		path = {
+			leads_to_tech = mechanised_infantry3
+			research_cost_coeff = 1
+		}
+
+		research_cost = 2
+		start_year = 1856
+		folder = {
+			name = nsb_armour_folder
+			position = { x = -7 y = 12}
+		}
+		
+		categories = {
+			motorized_equipment
+			infantry_tech
+			cat_mechanized_equipment
+		}
+		
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	
+	mechanised_infantry3 = {
+
+		enable_equipments = {
+			mechanized_equipment_3
+		}
+
+		mechanized = {
+			soft_attack = 0.15
+			hard_attack = 0.15
+		}
+
+		research_cost = 3
+		start_year = 1858
+		folder = {
+			name = nsb_armour_folder
+			position = { x = -7 y = 14 }
+		}
+		
+		categories = {
+			motorized_equipment
+			infantry_tech
+			cat_mechanized_equipment
+		}
+		
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
 	### GERMAN TANK NAMES IN COMMENTS SO YOU CAN FIND STUFF MORE EASILY
 	gwtank_chassis = { #Leichttraktor
 
@@ -110,7 +561,7 @@ technologies = {
 		start_year = 1836
 		folder = {
 			name = nsb_armour_folder
-			position = { x = 2 y = 0 }
+			position = { x = 1 y = 1 }
 		}
 
 		ai_will_do = {
@@ -186,16 +637,11 @@ technologies = {
 			research_cost_coeff = 1
 		}
 
-		path = {
-			leads_to_tech = amphibious_tank_chassis
-			research_cost_coeff = 1
-		}
-
 		research_cost = 2
-		start_year = 1839
+		start_year = 1849
 		folder = {
 			name = nsb_armour_folder
-			position = { x = -4 y = 2 }
+			position = { x = -2 y = 4 }
 		}
 
 		ai_will_do = {
@@ -241,13 +687,18 @@ technologies = {
 			leads_to_tech = advanced_light_tank_chassis
 			research_cost_coeff = 1
 		}
+		
+		path = {
+			leads_to_tech = improved_medium_tank_chassis
+			research_cost_coeff = 1.5
+		}
 
 		research_cost = 2
-		start_year = 1849
+		start_year = 1851
 
 		folder = {
 			name = nsb_armour_folder
-			position = { x = -4 y = 4 }
+			position = { x = -2 y = 6 }
 		}
 
 		ai_will_do = {
@@ -294,122 +745,6 @@ technologies = {
 		}
 	}
 
-
-
-	amphibious_tank_chassis = { #SchwimmPanzer II
-
-		enable_equipments = {
-			amphibious_tank_chassis_1
-		}
-
-		enable_subunits = {
-			amphibious_armor
-		}
-
-		path = {
-			leads_to_tech = amphibious_drive
-			research_cost_coeff = 1
-		}
-
-		allow_branch = {
-			has_dlc = "Man the Guns"
-		}
-
-		research_cost = 2
-		start_year = 1851
-
-		folder = {
-			name = nsb_armour_folder
-			position = { x = -1 y = 5 }
-		}
-
-		ai_will_do = {
-			factor = 0.5
-
-			modifier = {
-				factor = 2
-				is_major = yes
-				NOT = {
-					tag = PRU
-				}
-			}
-			modifier = {
-				original_tag = JAP
-				factor = 2
-			}
-			modifier = {
-				not = {
-					any_controlled_state = {
-						is_coastal = yes
-					}
-				}
-				factor = 0
-			}
-		}
-
-		categories = {
-			armor
-			tp_tech
-		}
-	}
-
-	amphibious_drive = { #SchwimmPanzer II
-
-
-		enable_equipment_modules = {
-			amphibious_drive
-		}
-
-		enable_equipments = {
-			light_tank_amphibious_chassis_0
-			medium_tank_amphibious_chassis_0
-			heavy_tank_amphibious_chassis_0
-			light_tank_amphibious_chassis_1
-			medium_tank_amphibious_chassis_1
-			heavy_tank_amphibious_chassis_1
-			light_tank_amphibious_chassis_2
-			medium_tank_amphibious_chassis_2
-			heavy_tank_amphibious_chassis_2
-			light_tank_amphibious_chassis_3
-			medium_tank_amphibious_chassis_3
-			heavy_tank_amphibious_chassis_3
-		}
-
-		research_cost = 2
-		start_year = 1854
-
-		folder = {
-			name = nsb_armour_folder
-			position = { x = -1 y = 8 }
-		}
-
-		ai_will_do = {
-			factor = 0.5
-
-			modifier = {
-				factor = 2
-				is_major = yes
-			}
-			modifier = {
-				original_tag = JAP
-				factor = 2
-			}
-			modifier = {
-				not = {
-					any_controlled_state = {
-						is_coastal = yes
-					}
-				}
-				factor = 0
-			}
-		}
-
-		categories = {
-			armor
-			tp_tech
-		}
-	}
-
 	advanced_light_tank_chassis = { #Leopard
 
 		enable_equipments = {
@@ -424,7 +759,7 @@ technologies = {
 
 		folder = {
 			name = nsb_armour_folder
-			position = { x = -4 y = 8 }
+			position = { x = -2 y = 10 }
 		}
 
 		ai_will_do = {
@@ -500,17 +835,13 @@ technologies = {
 			research_cost_coeff = 1
 		}
 
-		path = {
-			leads_to_tech = amphibious_tank_chassis
-			research_cost_coeff = 1
-		}
 
 		research_cost = 2
-		start_year = 1849
+		start_year = 1851
 
 		folder = {
 			name = nsb_armour_folder
-			position = { x = 2 y = @1849 }
+			position = { x = 2 y = 6 }
 		}
 
 		ai_will_do = {
@@ -547,7 +878,7 @@ technologies = {
 			modifier = {
 				factor = 15.0
 				tag = PRU
-				has_opinion_modifier = sov_ger_treaty
+				date > "1850.1.1"
 			}
 		}
 
@@ -574,11 +905,11 @@ technologies = {
 		}
 
 		research_cost = 2
-		start_year = 1853
+		start_year = 1856
 
 		folder = {
 			name = nsb_armour_folder
-			position = { x = 2 y = @1853 }
+			position = { x = 2 y = 10 }
 		}
 
 		ai_will_do = {
@@ -637,17 +968,17 @@ technologies = {
 			medium_tank_aa_chassis_3
 		}
 
-		path = {
-			leads_to_tech = main_battle_tank_chassis
-			research_cost_coeff = 1
-		}
+#		path = {
+#			leads_to_tech = main_battle_tank_chassis
+#			research_cost_coeff = 1
+#		}
 
 		research_cost = 2
-		start_year = 1856
+		start_year = 1858
 
 		folder = {
 			name = nsb_armour_folder
-			position = { x = 2 y = @1856 }
+			position = { x = 2 y = 12 }
 		}
 
 		ai_will_do = {
@@ -666,51 +997,6 @@ technologies = {
 			modifier = {
 				factor = 1.2
 				date > "1859.1.1"
-			}
-		}
-
-		categories = {
-			armor
-			cat_medium_armor
-		}
-	}
-
-	main_battle_tank_chassis = { #E-50
-
-		enable_equipments = {
-			modern_tank_chassis_1
-			modern_tank_destroyer_chassis_1
-			modern_tank_artillery_chassis_1
-			modern_tank_aa_chassis_1
-		}
-		enable_subunits = {
-			modern_armor
-		}
-
-		research_cost = 2.5
-		start_year = 1858
-
-		folder = {
-			name = nsb_armour_folder
-			position = { x = 2 y = @1858 }
-		}
-
-		ai_will_do = {
-			factor = 1
-
-			modifier = {
-				factor = 2
-				date > "1859.1.1"
-			}
-
-			modifier = {
-				factor = 2
-				date > "1947.1.1"
-			}
-
-			modifier = {
-				factor = 2
-				date > "1948.1.1"
 			}
 		}
 
@@ -766,11 +1052,11 @@ technologies = {
 		}
 
 		research_cost = 2
-		start_year = 1839
+		start_year = 1849
 
 		folder = {
 			name = nsb_armour_folder
-			position = { x = 5 y = 2 }
+			position = { x = 5 y = 4 }
 		}
 
 		ai_will_do = {
@@ -778,7 +1064,7 @@ technologies = {
 
 			modifier = {
 				factor = 1.2
-				date > "1937.1.1"
+				date > "1849.1.1"
 			}
 
 			modifier = {
@@ -821,17 +1107,17 @@ technologies = {
 			research_cost_coeff = 1
 		}
 
-		path = {
-			leads_to_tech = super_heavy_tank_chassis
-			research_cost_coeff = 1
-		}
+#		path = {
+#			leads_to_tech = super_heavy_tank_chassis
+#			research_cost_coeff = 1
+#		}
 
 		research_cost = 2.5
-		start_year = 1853
+		start_year = 1854
 
 		folder = {
 			name = nsb_armour_folder
-			position = { x = 5 y = @1853 }
+			position = { x = 5 y = 8 }
 		}
 
 		ai_will_do = {
@@ -873,17 +1159,17 @@ technologies = {
 			heavy_tank_aa_chassis_3
 		}
 
-		path = {
-			leads_to_tech = main_battle_tank_chassis
-			research_cost_coeff = 1
-		}
+#		path = {
+#			leads_to_tech = main_battle_tank_chassis
+#			research_cost_coeff = 1
+#		}
 
 		research_cost = 2.5
-		start_year = 1856
+		start_year = 1858
 
 		folder = {
 			name = nsb_armour_folder
-			position = { x = 5 y = @1856 }
+			position = { x = 5 y = 12 }
 		}
 
 		ai_will_do = {
@@ -891,18 +1177,18 @@ technologies = {
 
 			modifier = {
 				factor = 1.2
-				date > "1857.1.1"
-			}
-
-			modifier = {
-				factor = 1.2
-				date > "1858.1.1"
-			}
-
-			modifier = {
-				factor = 1.2
 				date > "1859.1.1"
 			}
+
+			modifier = {
+				factor = 1.2
+				date > "1860.1.1"
+			}
+
+			modifier = {
+				factor = 1.2
+				date > "1861.1.1"
+			}
 		}
 
 		categories = {
@@ -911,39 +1197,39 @@ technologies = {
 		}
 	}
 
-	super_heavy_tank_chassis = { #Maus
-
-		enable_equipments = {
-			super_heavy_tank_chassis_1
-			super_heavy_tank_destroyer_chassis_1
-			super_heavy_tank_artillery_chassis_1
-			super_heavy_tank_aa_chassis_1
-		}
-
-		enable_subunits = {
-			super_heavy_armor
-		}
-
-		enable_equipment_modules = {
-			tank_super_heavy_cannon
-		}
-
-		research_cost = 2.5
-		start_year = 1856
-		folder = {
-			name = nsb_armour_folder
-			position = { x = 8 y = @1856 }
-		}
-
-		ai_will_do = {
-			factor = 0 # Hitler cries on the inside
-		}
-
-		categories = {
-			armor
-			cat_heavy_armor
-		}
-	}
+#	super_heavy_tank_chassis = { #Maus
+#
+#		enable_equipments = {
+#			super_heavy_tank_chassis_1
+#			super_heavy_tank_destroyer_chassis_1
+#			super_heavy_tank_artillery_chassis_1
+#			super_heavy_tank_aa_chassis_1
+#		}
+#
+#		enable_subunits = {
+#			super_heavy_armor
+#		}
+#
+#		enable_equipment_modules = {
+#			tank_super_heavy_cannon
+#		}
+#
+#		research_cost = 2.5
+#		start_year = 1856
+#		folder = {
+#			name = nsb_armour_folder
+#			position = { x = 8 y = @1856 }
+#		}
+#
+#		ai_will_do = {
+#			factor = 0 # Hitler cries on the inside
+#		}
+#
+#		categories = {
+#			armor
+#			cat_heavy_armor
+#		}
+#	}
 
 	armor_tech_1 = {
 		enable_equipment_modules = {
@@ -961,10 +1247,10 @@ technologies = {
 		show_effect_as_desc = yes
 
 		research_cost = 1
-		start_year = 1839
+		start_year = 1851
 		folder = {
 			name = nsb_armour_folder
-			position = { x = 3 y = @1849 }
+			position = { x = 1 y = 5 }
 		}
 
 		ai_will_do = {
@@ -1016,10 +1302,10 @@ technologies = {
 		show_effect_as_desc = yes
 
 		research_cost = 1
-		start_year = 1849
+		start_year = 1854
 		folder = {
 			name = nsb_armour_folder
-			position = { x = 3 y = @1851 }
+			position = { x = 1 y = 8 }
 		}
 
 		ai_will_do = {
@@ -1069,10 +1355,10 @@ technologies = {
 		show_effect_as_desc = yes
 
 		research_cost = 1
-		start_year = 1854
+		start_year = 1856
 		folder = {
 			name = nsb_armour_folder
-			position = { x = 3 y = @1854 }
+			position = { x = 1 y = 10 }
 		}
 
 		ai_will_do = {
@@ -1111,10 +1397,10 @@ technologies = {
 	armor_tech_4 = {
 
 		research_cost = 1
-		start_year = 1857
+		start_year = 1858
 		folder = {
 			name = nsb_armour_folder
-			position = { x = 3 y = @1857 }
+			position = { x = 1 y = 12 }
 		}
 
 		on_research_complete = {
@@ -1132,21 +1418,6 @@ technologies = {
 			modifier = {
 				has_war = yes
 				factor = 2
-			}
-
-			modifier = {
-				factor = 1.1
-				date > "1937.1.1"
-			}
-
-			modifier = {
-				factor = 1.1
-				date > "1851.1.1"
-			}
-
-			modifier = {
-				factor = 1.1
-				date > "1852.1.1"
 			}
 		}
 
@@ -1167,10 +1438,10 @@ technologies = {
 		}
 		show_effect_as_desc = yes
 		research_cost = 1
-		start_year = 1839
+		start_year = 1851
 		folder = {
 			name = nsb_armour_folder
-			position = { x = 2 y = @1849 }
+			position = { x = 4 y = 5 }
 		}
 
 		ai_will_do = {
@@ -1220,10 +1491,10 @@ technologies = {
 		show_effect_as_desc = yes
 
 		research_cost = 1
-		start_year = 1849
+		start_year = 1854
 		folder = {
 			name = nsb_armour_folder
-			position = { x = 2 y = @1851 }
+			position = { x = 4 y = 8 }
 		}
 
 		ai_will_do = {
@@ -1271,10 +1542,10 @@ technologies = {
 		}
 		show_effect_as_desc = yes
 		research_cost = 1
-		start_year = 1854
+		start_year = 1856
 		folder = {
 			name = nsb_armour_folder
-			position = { x = 2 y = @1854 }
+			position = { x = 4 y = 10 }
 		}
 
 		ai_will_do = {
@@ -1313,10 +1584,10 @@ technologies = {
 	engine_tech_4 = {
 
 		research_cost = 1
-		start_year = 1857
+		start_year = 1858
 		folder = {
 			name = nsb_armour_folder
-			position = { x = 2 y = @1857 }
+			position = { x = 4 y = 12 }
 		}
 		on_research_complete = {
 			custom_effect_tooltip = engine_tech_4_tt
@@ -1354,4 +1625,71 @@ technologies = {
 			armor
 		}
 	}
+	
+	kingkaiser_1 = {
+
+		research_cost = 0
+		start_year = 9999
+		show_effect_as_desc = no
+		
+		enable_equipments = {
+			medium_tank_equipment_kingkaiser_1
+			tank_medium_one_man_kaiser_tank_turret
+			tank_medium_kaiser_cannon_1
+			tank_kaiser_radio_1
+		}
+		
+		ai_will_do = {
+			factor = 0
+		}
+
+		categories = {
+			armor
+		}
+	}
+	
+	kingkaiser_2 = {
+
+		research_cost = 0
+		start_year = 9999
+		show_effect_as_desc = no
+		
+		enable_equipments = {
+			medium_tank_equipment_kingkaiser_2
+			tank_medium_two_man_kaiser_tank_turret
+			tank_medium_kaiser_cannon_2
+			tank_kaiser_radio_2
+		}
+		
+		ai_will_do = {
+			factor = 0
+		}
+
+		categories = {
+			armor
+		}
+	}
+	
+	kingkaiser_3 = {
+
+		research_cost = 0
+		start_year = 9999
+		show_effect_as_desc = no
+		
+		enable_equipments = {
+			medium_tank_equipment_kingkaiser_3
+			tank_medium_three_man_kaiser_tank_turret
+			tank_medium_kaiser_cannon_3
+			tank_kaiser_radio_3
+		}
+		
+		ai_will_do = {
+			factor = 0
+		}
+
+		categories = {
+			armor
+		}
+	}
+	
 }

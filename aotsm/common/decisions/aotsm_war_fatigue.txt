@@ -494,4 +494,271 @@ aotsm_war_fatigue = {
 		}
 	}
 	
+	aotsm_COALITION_war_fatigue_1 = {
+		icon = decision_category_border_conflicts
+		
+		allowed = {
+			OR = {
+				tag = VLH
+				tag = GLA
+			}
+		}
+		
+		activation = {                          
+			VLH = { has_country_flag = VLH_war_with_HUN } 
+			OR = {
+				tag = VLH
+				tag = GLA
+			}
+			has_war_with = HUN
+			RUS = { has_country_flag = leave_coalition_alone }
+			NOT = {
+				OR = {
+					has_idea = war_fatigue_1
+					has_idea = war_fatigue_2
+					has_idea = war_fatigue_3
+				}
+			}                   
+        }
+		
+		available = {
+			has_war = no
+		}
+		
+		visible = {
+			VLH = { has_country_flag = VLH_war_with_HUN } 
+			OR = {
+				tag = VLH
+				tag = GLA
+			}
+			has_war_with = HUN
+			RUS = { has_country_flag = leave_coalition_alone }
+			NOT = {
+				OR = {
+					has_idea = war_fatigue_1
+					has_idea = war_fatigue_2
+					has_idea = war_fatigue_3
+				}
+			} 
+		}		
+	
+		ai_will_do = {
+			factor = 40
+			modifier = {
+				factor = 100
+				is_historical_focus_on = yes
+			}
+		}
+		
+		days_mission_timeout = 50
+		
+		complete_effect = {		
+			
+		}
+		
+		timeout_effect = {
+			add_ideas = war_fatigue_1
+		}
+	}
+	
+	aotsm_COALITION_war_fatigue_2 = {
+		icon = decision_category_border_conflicts
+		
+		allowed = {
+			OR = {
+				tag = VLH
+				tag = GLA
+			}
+		}
+		
+		activation = {  
+			VLH = { has_country_flag = VLH_war_with_HUN } 
+			OR = {
+				tag = VLH
+				tag = GLA
+			}
+			has_war_with = HUN
+			RUS = { has_country_flag = leave_coalition_alone }
+			has_idea = war_fatigue_1
+		}
+		
+		available = {
+			has_war = no
+		}
+		
+		visible = {
+			VLH = { has_country_flag = VLH_war_with_HUN } 
+			OR = {
+				tag = VLH
+				tag = GLA
+			}
+			has_war_with = HUN
+			RUS = { has_country_flag = leave_coalition_alone }
+			has_idea = war_fatigue_1
+		}		
+	
+		ai_will_do = {
+			factor = 40
+			modifier = {
+				factor = 100
+				is_historical_focus_on = yes
+			}
+		}
+		
+		days_mission_timeout = 50
+		
+		complete_effect = {		
+			
+		}
+		
+		timeout_effect = {
+			swap_ideas = {
+				remove_idea = war_fatigue_1
+				add_idea = war_fatigue_2
+			} 
+		}
+	}
+	
+	aotsm_COALITION_war_fatigue_3 = {
+		icon = decision_category_border_conflicts
+		
+		allowed = {
+			OR = {
+				tag = VLH
+				tag = GLA
+			}
+		}
+		
+		activation = {
+			VLH = { has_country_flag = VLH_war_with_HUN } 
+			OR = {
+				tag = VLH
+				tag = GLA
+			}
+			has_war_with = HUN
+			RUS = { has_country_flag = leave_coalition_alone }
+			has_idea = war_fatigue_2
+		}
+		
+		available = {
+			has_war = no
+		}
+		
+		visible = {
+			VLH = { has_country_flag = VLH_war_with_HUN } 
+			OR = {
+				tag = VLH
+				tag = GLA
+			}
+			has_war_with = HUN
+			RUS = { has_country_flag = leave_coalition_alone }
+			has_idea = war_fatigue_2
+		}		
+	
+		ai_will_do = {
+			factor = 40
+			modifier = {
+				factor = 100
+				is_historical_focus_on = yes
+			}
+		}
+		
+		days_mission_timeout = 50
+		
+		complete_effect = {		
+			
+		}
+		
+		timeout_effect = {
+			swap_ideas = {
+				remove_idea = war_fatigue_2
+				add_idea = war_fatigue_3
+			} 
+		}
+	}
+	
+	aotsm_COALITION_war_fatigue_4 = {
+		icon = decision_category_border_conflicts
+		
+		allowed = {
+			OR = {
+				tag = VLH
+				tag = GLA
+			}
+		}
+		
+		activation = {   
+			OR = {
+				tag = VLH
+				tag = GLA
+			}
+			has_war = no
+			RUS = { has_country_flag = leave_coalition_alone }
+			OR = {
+				has_idea = war_fatigue_1
+				has_idea = war_fatigue_2
+				has_idea = war_fatigue_3
+			}
+			NOT = {
+				VLH = { has_country_flag = VLH_war_with_HUN } 
+			}
+		}
+		
+		available = {
+			always = no
+		}
+		
+		visible = {
+			OR = {
+				tag = VLH
+				tag = GLA
+			}
+			has_war = no
+			RUS = { has_country_flag = leave_coalition_alone }
+			OR = {
+				has_idea = war_fatigue_1
+				has_idea = war_fatigue_2
+				has_idea = war_fatigue_3
+			}
+			NOT = {
+				VLH = { has_country_flag = VLH_war_with_HUN } 
+			}
+		}		
+	
+		ai_will_do = {
+			factor = 40
+			modifier = {
+				factor = 100
+				is_historical_focus_on = yes
+			}
+		}
+		
+		days_mission_timeout = 365
+		
+		complete_effect = {		
+			
+		}
+		
+		timeout_effect = {
+			if = {
+				limit = {
+					has_idea = war_fatigue_1
+				}
+				remove_ideas = war_fatigue_1
+			}
+			if = {
+				limit = {
+					has_idea = war_fatigue_2
+				}
+				remove_ideas = war_fatigue_2
+			}
+			if = {
+				limit = {
+					has_idea = war_fatigue_3
+				}
+				remove_ideas = war_fatigue_3
+			}
+		}
+	}
+	
 }
