@@ -6,61 +6,75 @@
 add_namespace = ger
 add_namespace = gerultimate
 add_namespace = ger_byz
+add_namespace = ger_frr
+add_namespace = ger_answer
+add_namespace = ger_warplane
+add_namespace = ger_blackorder
+add_namespace = ger_warpolitic
+add_namespace = ger_bismark
 
 country_event = {
 	id = gerultimate.1
 	title = gerultimate.1.t
 	desc = gerultimate.1.d
-	picture = GFX_report_event_molotov_signing_pact
-	
+	picture = GFX_report_event_aotsm_generic_signing_the_contract	
 	is_triggered_only = yes
 	
 	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event gerultimate.1"}
 	
 	option = {
 		name = gerultimate.1.a	
 		ai_chance = {
 			factor = 10
+			modifier = {
+				factor = 0
+				OR = {
+					is_historical_focus_on = yes
+					PRU = { has_country_flag = PRU_AI_RANDOM_HISTORICAL }
+				}
+			}
 		}
 		hidden_effect = { 
-			PRU = {
-				annex_country = { target = MCL transfer_troops = yes }
-				annex_country = { target = SLG transfer_troops = yes }
-				annex_country = { target = HAN transfer_troops = yes }
-				annex_country = { target = VES transfer_troops = yes }
-				annex_country = { target = FRN transfer_troops = yes }
-				annex_country = { target = TYR transfer_troops = yes }
-				annex_country = { target = SAK transfer_troops = yes }
-			}
-			MCL = {
-				remove_state_core = 62
-				remove_state_core = 61
-			}
-			SLG = {
-				remove_state_core = 58
-				remove_state_core = 829
-			}
-			HAN = {
-				remove_state_core = 59
-			}
-			VES = {
-				remove_state_core = 56
-			}
-			TYR = {
-				remove_state_core = 60
-			}
-			SAK = { 
-				remove_state_core = 65
-			}
-			FRN = {
-				remove_state_core = 57
-				remove_state_core = 51
-				remove_state_core = 55
-				remove_state_core = 42
-				remove_state_core = 28
+			every_other_country = {
+				limit = {
+					OR = {
+						has_country_flag = german_union_for_prussian
+						has_country_flag = german_union_for_austrian
+					}
+					OR = {
+						tag = MCS
+						tag = MCL
+						tag = LBE
+						tag = HLS
+						tag = SLG
+						tag = HAM
+						tag = HAN
+						tag = BRM
+						tag = OLD
+						tag = SAK
+						tag = TYR
+						tag = WEI
+						tag = MEI
+						tag = HES
+						tag = WLD
+						tag = FRN
+						tag = KOL
+					}
+				}
+				PRU = {
+					annex_country = { target = PREV transfer_troops = no }
+				}
 			}
 			PRU = { set_country_flag = victory_R_V_A_1 }
 			PRU = { set_cosmetic_tag = PRUNGU }
+			AUS = {
+				mark_focus_tree_layout_dirty = yes
+			}
+		}
+		PRU = {
+			country_event = ger_answer.l
 		}
 	}
 	
@@ -71,19 +85,27 @@ country_event = {
 		}
 		hidden_effect = {
 			PRU = { create_faction = "Prussian_sphere" }
-			PRU = { add_to_faction = HAN }
-			PRU = { add_to_faction = MCL }
-			PRU = { add_to_faction = SLG }
-			PRU = { add_to_faction = VES }
-			PRU = { add_to_faction = FRN }
+			every_other_country = {
+				limit = {
+					has_country_flag = german_union_for_prussian
+				}
+				PRU = { add_to_faction = PREV }
+			}
 			AUS = {
 				create_faction = "Austrian_sphere"
 			}
-			AUS = { add_to_faction = SAK }
-			AUS = { add_to_faction = TUR }
-			AUS = { add_to_faction = BAD }
-			AUS = { add_to_faction = VUR }
-			AUS = { add_to_faction = BAV }
+			every_other_country = {
+				limit = {
+					has_country_flag = german_union_for_austrian
+				}
+				AUS = { add_to_faction = PREV }
+			}
+			PRU = {
+				country_event = {
+					id = ger.16
+					days = 1
+				}
+			}
 		}
 		PRU = {
 			declare_war_on = {
@@ -91,8 +113,24 @@ country_event = {
 				type = annex_everything
 			}
 		}
-		PRU = { add_ideas = pru_blitzkrieg }
-		AUS = { add_ideas = fear_of_revolution }
+		set_global_flag = war_in_german_region
+		PRU = {
+			set_country_flag = PRU_VS_AUS_1
+		}
+		AUS = {
+			mark_focus_tree_layout_dirty = yes
+		}
+		PRU = {
+			country_event = ger_answer.2
+		}
+		hidden_effect = {
+			PRU = {
+				country_event = {
+					id = script_event.20
+					days = 18
+				}
+			}
+		}
 	}
 }
 
@@ -100,11 +138,12 @@ country_event = {
 	id = gerultimate.2
 	title = gerultimate.2.t
 	desc = gerultimate.2.d
-	picture = GFX_report_event_molotov_signing_pact
-	
+	picture = GFX_report_event_aotsm_generic_signing_the_contract	
 	is_triggered_only = yes
 	
 	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event gerultimate.2"}
 	
 	option = {
 		name = gerultimate.2.a	
@@ -112,7 +151,10 @@ country_event = {
 			factor = 1
 			modifier = {
 				factor = 0
-				is_historical_focus_on = yes
+				OR = {
+					is_historical_focus_on = yes
+					PRU = { has_country_flag = PRU_AI_RANDOM_HISTORICAL }
+				}
 			}
 		}
 		PRU = {
@@ -123,6 +165,9 @@ country_event = {
 		}
 		BEL = { add_ideas = war_for_freedom }
 		PRU = { set_country_flag = P_V_B }
+		PRU = {
+			country_event = ger_answer.3
+		}
 	}
 	
 	option = {
@@ -163,6 +208,13 @@ country_event = {
 					traits = { walduke }
 				}
 			}
+			swap_ideas = {
+				remove_idea = medium_country
+				add_idea = little_country
+			}
+		}
+		PRU = {
+			country_event = ger_answer.4
 		}
 	}	
 }
@@ -171,11 +223,12 @@ country_event = {
 	id = gerultimate.3
 	title = gerultimate.3.t
 	desc = gerultimate.3.d
-	picture = GFX_report_event_molotov_signing_pact
-	
+	picture = GFX_report_event_aotsm_generic_signing_the_contract	
 	is_triggered_only = yes
 	
 	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event gerultimate.3"}
 	
 	option = {
 		name = gerultimate.3.a	
@@ -189,6 +242,9 @@ country_event = {
 			}
 		}
 		PRU = { set_country_flag = P_V_H }
+		PRU = {
+			country_event = ger_answer.5
+		}
 	}
 	
 	option = {
@@ -197,12 +253,18 @@ country_event = {
 			factor = 20
 			modifier = {
 				factor = 0
-				is_historical_focus_on = yes
+				OR = {
+					is_historical_focus_on = yes
+					PRU = { has_country_flag = PRU_AI_RANDOM_HISTORICAL }
+				}
 			}
 		}
 		PRU = { add_to_faction = HOL }
 		PRU = { add_to_faction = IND }
 		HOL = { add_ideas = pru_ultimatum }
+		PRU = {
+			country_event = ger_answer.6
+		}
 	}
 }
 
@@ -210,11 +272,12 @@ country_event = {
 	id = gerultimate.4
 	title = gerultimate.4.t
 	desc = gerultimate.4.d
-	picture = GFX_report_event_molotov_signing_pact
-	
+	picture = GFX_report_event_aotsm_generic_signing_the_contract	
 	is_triggered_only = yes
 	
 	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event gerultimate.4"}
 	
 	option = {
 		name = gerultimate.4.a	
@@ -222,24 +285,43 @@ country_event = {
 			factor = 10
 		}
 		hidden_effect = { 
-			PRU = {
-				annex_country = { target = BAD transfer_troops = yes }
-				annex_country = { target = BAV transfer_troops = yes }
-				annex_country = { target = VUR transfer_troops = yes }
+			every_other_country = {
+				limit = {
+					OR = {
+						has_country_flag = german_union_for_prussian
+						has_country_flag = german_union_for_austrian
+					}
+					OR = {
+						tag = BAV
+						tag = VUR
+						tag = HOH
+						tag = BAD
+						tag = ELS
+					}
+				}
+				PRU = {
+					annex_country = { target = PREV transfer_troops = no }
+				}
 			}
-			BAD = {
-				remove_state_core = 828
-				remove_state_core = 50
+			every_other_country = {
+				limit = {
+					has_country_flag = german_union_for_austrian
+				}
+				clr_country_flag = german_union_for_austrian
+				remove_from_array = { global.german_union_for_aus = ROOT }
+				set_country_flag = german_union_for_prussian
+				add_to_array = { global.german_union_for_pru = ROOT }
 			}
-			VUR = {
-				remove_state_core = 808
-			}
-			BAV = {
-				remove_state_core = 54
-				remove_state_core = 53
-				remove_state_core = 52
+			AUS = {
+				remove_from_array = { global.german_union_leader = AUS }
 			}
 			PRU = { set_country_flag = victory_R_V_A_2 }
+			AUS = {
+				mark_focus_tree_layout_dirty = yes
+			}
+		}
+		PRU = {
+			country_event = ger_answer.7
 		}
 	}
 	
@@ -249,18 +331,42 @@ country_event = {
 			factor = 90
 		}
 		hidden_effect = {
-				AUS = {
-					create_faction = "Austrian_sphere"
+			every_other_country = {
+				limit = {
+					has_country_flag = german_union_for_prussian
+					NOT = {
+						tag = PRU
+					}
 				}
-				AUS = { add_to_faction = BAD }
-				AUS = { add_to_faction = VUR }
-				AUS = { add_to_faction = BAV }
+				PRU = { add_to_faction = PREV }
+				PREV = {
+					set_country_flag = time_member_of_allience
+				}
 			}
+			AUS = {
+				create_faction = "Austrian_sphere"
+			}
+			every_other_country = {
+				limit = {
+					has_country_flag = german_union_for_austrian
+				}
+				AUS = { add_to_faction = PREV }
+			}
+		}
 		PRU = {
 			declare_war_on = {
 				target = AUS
 				type = annex_everything
 			}
+		}
+		PRU = {
+			set_country_flag = PRU_VS_AUS_2
+		}
+		AUS = {
+			mark_focus_tree_layout_dirty = yes
+		}
+		PRU = {
+			country_event = ger_answer.8
 		}
 	}
 }
@@ -269,11 +375,12 @@ country_event = {
 	id = gerultimate.5
 	title = gerultimate.5.t
 	desc = gerultimate.5.d
-	picture = GFX_report_event_molotov_signing_pact
-	
+	picture = GFX_report_event_aotsm_generic_signing_the_contract	
 	is_triggered_only = yes
 	
 	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event gerultimate.5"}
 	
 	option = {
 		name = gerultimate.5.a	
@@ -281,13 +388,24 @@ country_event = {
 			factor = 10
 			modifier = {
 				factor = 0
-				is_historical_focus_on = yes
+				OR = {
+					is_historical_focus_on = yes
+					PRU = { has_country_flag = PRU_AI_RANDOM_HISTORICAL }
+				}
 			}
 		}
 		PRU = {
 			declare_war_on = {
 				target = AUS
 				type = annex_everything
+			}
+		}
+		hidden_effect = {
+			AUS = {
+				add_ideas = fight_for_empire_1
+			}
+			AUS = {
+				mark_focus_tree_layout_dirty = yes
 			}
 		}
 	}
@@ -304,6 +422,14 @@ country_event = {
 			}
 		}
 		BYZ = { country_event = byz.7 }
+		hidden_effect = {
+			AUS = {
+				add_ideas = fight_for_empire_1
+			}
+			AUS = {
+				mark_focus_tree_layout_dirty = yes
+			}
+		}
 	}
 }
 
@@ -311,11 +437,12 @@ country_event = {
 	id = gerultimate.6
 	title = gerultimate.6.t
 	desc = gerultimate.6.d
-	picture = GFX_report_event_molotov_signing_pact
-	
+	picture = GFX_report_event_aotsm_generic_signing_the_contract	
 	is_triggered_only = yes
 	
 	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event gerultimate.6"}
 	
 	option = {
 		name = gerultimate.6.a	
@@ -406,7 +533,7 @@ country_event = {
 			remove_state_core = 161
 			remove_state_core = 162
 			remove_state_core = 735
-		}		
+		}
 	}
 	
 	option = {
@@ -500,33 +627,88 @@ country_event = {
 }
 
 country_event = {
-	id = ger.1
-	title = ger.1.t
-	desc = ger.1.d
-	picture = GFX_report_event_molotov_signing_pact
+	id = gerultimate.7
+	title = gerultimate.7.t
+	desc = gerultimate.7.d
+	picture = GFX_report_event_generic_read_write
 	
 	is_triggered_only = yes
 	
+	fire_only_once = no
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event gerultimate.7"}
+	
+	option = {
+		name = gerultimate.7.a	
+		ai_chance = {
+			factor = 25
+			modifier = {
+				factor = 0
+				has_country_flag = german_union_for_prussian
+			}
+			modifier = {
+				factor = 0
+				OR = {
+					is_historical_focus_on = yes
+					PRU = { has_country_flag = PRU_AI_RANDOM_HISTORICAL }
+				}
+			}
+		}
+		set_country_flag = PRU_war_with_you
+		PRU = {
+			declare_war_on = {
+				target = ROOT
+				type = annex_everything 
+			}
+		}
+	}
+	
+	option = {
+		name = gerultimate.7.b
+		ai_chance = {
+			factor = 75
+		}
+		PRU = {
+			annex_country = {
+				target = ROOT
+				transfer_troops = no
+			}
+		}
+	}
+	
+}
+
+country_event = {
+	id = ger.1
+	title = ger.1.t
+	desc = ger.1.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract	
+	is_triggered_only = yes
+	
 	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger.1"}
 	
 	option = {
 		name = ger.1.a
 		PRU = { set_country_flag = pru_shot }
 		add_manpower = -1
 		kill_country_leader = yes
-		create_country_leader = {
-			name = "PRU_Otton_Bismark"
-			desc = "POLITICS_OTTON_FON_BISMARK_DESC"
-			picture = "gfx/leaders/PRU/Portrait_Bismark.dds"
-			expire = "1900.1.1"
-			ideology = conservatism
-			traits = {
-			}
-		}
+		promote_character = PRU_Otton_Bismark
 		set_politics = { ruling_party = authoritarian elections_allowed = no }
 		add_stability = -0.25
-		news_event = { hours = 24 id = news.17 }
+		PRU = {
+			remove_ideas = pru_kaiser_wilgelm_iv
+		}
+		news_event = news.17
 		RUS = { country_event = { id = ger.9 days = 2 } }
+		hidden_effect = {
+			set_party_name = {
+				ideology = democratic
+				long_name = pru_bismark_party_long
+				name = pru_bismark_party
+			}
+		}
 	}
 }	
 
@@ -534,11 +716,12 @@ country_event = {
 	id = ger.2
 	title = ger.2.t
 	desc = ger.2.d
-	picture = GFX_report_event_molotov_signing_pact
-	
+	picture = GFX_report_event_aotsm_generic_signing_the_contract	
 	is_triggered_only = yes
 	
 	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger.2"}
 	
 	option = {
 		name = ger.2.a #divid italia
@@ -554,11 +737,12 @@ country_event = {
 	id = ger.3
 	title = ger.3.t
 	desc = ger.3.d
-	picture = GFX_report_event_molotov_signing_pact
-	
+	picture = GFX_report_event_aotsm_generic_signing_the_contract	
 	is_triggered_only = yes
 	
 	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger.3"}
 	
 	option = {
 		name = ger.3.a #Constitutia
@@ -566,17 +750,11 @@ country_event = {
 			add_stability = 0.05
 			swap_ideas = {
 				remove_idea = monarchy
-				add_idea = constitutional_monarchy
+				add_idea = constitutional_monarchy_fg
 			}
-			create_country_leader = {
-				name = "PRU_Fridrich_III"
-				desc = "POLITICS_FRIDRICH_III_DESC"
-				picture = "gfx/leaders/PRU/Portrait_Fridrich_III.dds"
-				expire = "1888.1.1"
-				ideology = social_monarchism
-				traits = {
-					red_kaiser
-				}
+			hidden_effect = {
+				retire_character = PRU_Hans_fon_Bulov
+				promote_character = PRU_Fridrich_III_soc
 			}
 			set_party_name = { 
 				ideology = socialism 
@@ -596,11 +774,12 @@ country_event = {
 	id = ger.4
 	title = ger.4.t
 	desc = ger.4.d
-	picture = GFX_report_event_molotov_signing_pact
-	
+	picture = GFX_report_event_aotsm_generic_signing_the_contract	
 	is_triggered_only = yes
 	
 	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger.4"}
 	
 	option = {
 		name = ger.4.a
@@ -639,11 +818,12 @@ country_event = {
 	id = ger.5
 	title = ger.5.t
 	desc = ger.5.d
-	picture = GFX_report_event_molotov_signing_pact
-	
+	picture = GFX_report_event_aotsm_generic_signing_the_contract	
 	is_triggered_only = yes
 	
 	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger.5"}
 	
 	option = {
 		name = ger.5.a 
@@ -655,16 +835,12 @@ country_event = {
 	option = {
 		name = ger.5.b 
 		ai_chance = {
-			factor = 90
+			factor = 0
 			modifier = {
-				OR = {
-					FRR = {
-						has_completed_focus = FRA_be_with_britain
-						has_completed_focus = FRA_french_entente
-						has_completed_focus = FRA_own_aliance
-					}
+				FRR = {
+					has_country_flag = FRR_pru_choosen
 				}
-				factor = 0
+				factor = 30
 			}
 		}
 		PRU = { add_to_faction = FRR }
@@ -675,35 +851,55 @@ country_event = {
 	id = ger.6 #revolution
 	title = ger.6.t
 	desc = ger.6.d
-	picture = GFX_report_event_molotov_signing_pact
+	picture = GFX_report_event_ger_civil_war
 	
 	is_triggered_only = yes
 	
 	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger.6"}
 	
 	option = {
 		name = ger.6.a 
 		ai_chance = {
 			factor = 100
 		}
-		SGE = { inherit_technology = PRU }
-		PRU = { delete_unit_template_and_units = { division_template = "Arme Divisia" } }
+		hidden_effect = {
+			SGE = { inherit_technology = PRU }
+		}
 		if = {
 			limit = {
-				AUS = { has_country_flag = victory_R_V_A_1 }
+				PRU = { has_country_flag = first_civilwar_scenario }
 			}
-			PRU = {
+			hidden_effect = {
 				every_core_state = {
+					limit = {
+						is_core_of = PRU
+					}
 					add_core_of = SGE
 				}
 			}
 			SGE = {
 				transfer_state = 64
-				transfer_state = 68
-				transfer_state = 63
-				transfer_state = 763
+				transfer_state = 62
 			}
-			SGE = { load_oob = SGE_RVA_1 }
+			hidden_effect = {
+				PRU = {
+					transfer_units_fraction= {
+						target = SGE
+						size = 0.0
+						stockpile_ratio = 0.75
+						army_ratio = 0.65
+						navy_ratio = 0.50
+						air_ratio = 0.00
+						keep_unit_leaders_trigger = {
+							NOT = {
+								has_unit_leader_flag = is_sympathy_to_socialism
+							}
+						}
+					}
+				}
+			}
 			SGE = {
 				declare_war_on = {
 					target = PRU
@@ -711,61 +907,7 @@ country_event = {
 				}
 			}
 		}
-		if = {
-			limit = {
-				AUS = { has_country_flag = victory_R_V_A_2 }
-			}
-			PRU = {
-				every_core_state = {
-					add_core_of = SGE
-				}
-			}
-			SGE = {
-				transfer_state = 55
-				transfer_state = 58
-				transfer_state = 64
-				transfer_state = 68
-				transfer_state = 63
-				transfer_state = 763
-				transfer_state = 829
-			}
-			SGE = { load_oob = SGE_RVA_2 }
-			SGE = {
-				declare_war_on = {
-					target = PRU
-					type = annex_everything
-				}
-			}
-		}
-		if = {
-			limit = {
-				AUS = { has_country_flag = victory_R_V_A_3 }
-			}
-			PRU = {
-				every_core_state = {
-					add_core_of = SGE
-				}
-			}
-			SGE = {
-				transfer_state = 50
-				transfer_state = 52
-				transfer_state = 54
-				transfer_state = 55
-				transfer_state = 58
-				transfer_state = 64
-				transfer_state = 68
-				transfer_state = 63
-				transfer_state = 763
-				transfer_state = 829
-			}
-			SGE = { load_oob = SGE_RVA_3 }
-			SGE = {
-				declare_war_on = {
-					target = PRU
-					type = annex_everything
-				}
-			}
-		}
+		set_global_flag = prussian_civilwar
 	}
 	
 	option = {
@@ -773,26 +915,43 @@ country_event = {
 		ai_chance = {
 			factor = 0
 		}
-		delete_unit_template_and_units = { division_template = "Arme Divisia" }
 		SGE = { change_tag_from = PRU }
-		SGE = { inherit_technology = PRU }
-		PRU = { delete_unit_template_and_units = { division_template = "Arme Divisia" } }
+		hidden_effect = {
+			SGE = { inherit_technology = PRU }
+		}
 		if = {
 			limit = {
-				AUS = { has_country_flag = victory_R_V_A_1 }
+				PRU = { has_country_flag = first_civilwar_scenario }
 			}
-			PRU = {
+			hidden_effect = {
 				every_core_state = {
+					limit = {
+						is_core_of = PRU
+					}
 					add_core_of = SGE
 				}
 			}
 			SGE = {
 				transfer_state = 64
-				transfer_state = 68
-				transfer_state = 63
-				transfer_state = 763
+				transfer_state = 62
 			}
-			SGE = { load_oob = SGE_RVA_1 }
+			hidden_effect = {
+				PRU = {
+					transfer_units_fraction= {
+						target = SGE
+						size = 0.0
+						stockpile_ratio = 0.75
+						army_ratio = 0.65
+						navy_ratio = 0.50
+						air_ratio = 0.00
+						keep_unit_leaders_trigger = {
+							NOT = {
+								has_unit_leader_flag = is_sympathy_to_socialism
+							}
+						}
+					}
+				}
+			}
 			SGE = {
 				declare_war_on = {
 					target = PRU
@@ -800,61 +959,7 @@ country_event = {
 				}
 			}
 		}
-		if = {
-			limit = {
-				AUS = { has_country_flag = victory_R_V_A_2 }
-			}
-			PRU = {
-				every_core_state = {
-					add_core_of = SGE
-				}
-			}
-			SGE = {
-				transfer_state = 55
-				transfer_state = 58
-				transfer_state = 64
-				transfer_state = 68
-				transfer_state = 63
-				transfer_state = 763
-				transfer_state = 829
-			}
-			SGE = { load_oob = SGE_RVA_2 }
-			SGE = {
-				declare_war_on = {
-					target = PRU
-					type = annex_everything
-				}
-			}
-		}
-		if = {
-			limit = {
-				AUS = { has_country_flag = victory_R_V_A_3 }
-			}
-			PRU = {
-				every_core_state = {
-					add_core_of = SGE
-				}
-			}
-			SGE = {
-				transfer_state = 50
-				transfer_state = 52
-				transfer_state = 54
-				transfer_state = 55
-				transfer_state = 58
-				transfer_state = 64
-				transfer_state = 68
-				transfer_state = 63
-				transfer_state = 763
-				transfer_state = 829
-			}
-			SGE = { load_oob = SGE_RVA_3 }
-			SGE = {
-				declare_war_on = {
-					target = PRU
-					type = annex_everything
-				}
-			}
-		}
+		set_global_flag = prussian_civilwar
 	}
 }
 
@@ -868,13 +973,18 @@ country_event = {
 	
 	fire_only_once = yes
 	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger.7"}
+	
 	option = {
 		name = ger.7.a 
 		ai_chance = {
-			factor = 50
+			factor = 25
 			modifier = {
 				factor = 0
-				is_historical_focus_on = yes
+				OR = {
+					is_historical_focus_on = yes
+					PRU = { has_country_flag = PRU_AI_RANDOM_HISTORICAL }
+				}
 			}
 		}
 		set_country_flag = pru_bismark
@@ -883,7 +993,7 @@ country_event = {
 	option = {
 		name = ger.7.b 
 		ai_chance = {
-			factor = 50
+			factor = 75
 		}
 		set_country_flag = pru_autharitarian
 		country_event = { id = ger.8 days = 14 } 
@@ -900,13 +1010,18 @@ country_event = {
 	
 	fire_only_once = yes
 	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger.8"}
+	
 	option = {
 		name = ger.8.a 
 		ai_chance = {
-			factor = 50
+			factor = 10
 			modifier = {
 				factor = 0
-				is_historical_focus_on = yes
+				OR = {
+					is_historical_focus_on = yes
+					PRU = { has_country_flag = PRU_AI_RANDOM_HISTORICAL }
+				}
 			}
 		}
 		set_country_flag = pru_junker
@@ -915,7 +1030,7 @@ country_event = {
 	option = {
 		name = ger.8.b 
 		ai_chance = {
-			factor = 50
+			factor = 90
 		}
 		set_country_flag = pru_kaiser
 	}
@@ -930,6 +1045,8 @@ country_event = {
 	is_triggered_only = yes
 	
 	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger.9"}
 	
 	option = {
 		name = ger.9.a 
@@ -979,18 +1096,32 @@ country_event = {
 	
 	fire_only_once = yes
 	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger.10"}
+	
 	option = {
 		name = ger.10.a 
 		PRU = {
 			set_country_flag = pru_kaiser_death
-			kill_country_leader = yes
-			create_country_leader = {
-				name = "PRU_Fridrich_III"
-				desc = "POLITICS_FRIDRICH_III_DESC"
-				picture = "gfx/leaders/PRU/Portrait_Fridrich_III.dds"
-				expire = "1888.1.1"
-				ideology = monarchist
-				traits = {
+			if = {
+				limit = {
+					PRU = {
+						has_idea = pru_kaiser_wilgelm_iv
+					}
+				}
+				PRU = {
+					remove_ideas = pru_kaiser_wilgelm_iv
+					add_ideas = pru_kaiser_fridrich_iii
+				}
+			}
+			custom_effect_tooltip = Fridrich_Wilhelm_IV_dead_tt
+			hidden_effect = {
+				retire_character = PRU_Fridrih_Wilgelm_IV
+				promote_character = PRU_Fridrich_III
+				PRU = {
+					set_character_name = {
+						character = PRU_Friedrich_III_fm
+						name = PRU_Friedrich_III_fm_kaiser
+					}
 				}
 			}
 		}
@@ -1007,6 +1138,8 @@ country_event = {
 	is_triggered_only = yes
 	
 	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger.11"}
 	
 	option = {
 		name = ger.11.a 
@@ -1073,6 +1206,109 @@ country_event = {
 			IRE = {
 				leave_faction = yes
 				remove_ideas = CBI_free_irland
+			}
+			if = {
+				limit = {
+					NOT = {
+						country_exists = IRE
+					}
+				}
+				if = {
+					limit = {
+						113 = {
+							owner = {
+								OR = {
+									tag = CBI
+									is_subject_of = CBI
+									is_in_faction_with = CBI
+								}
+							}
+						}
+					}
+					IRE = {
+						transfer_state = 113
+						add_state_core = 113
+					}
+					CBI = {
+						remove_state_core = 113
+					}
+				}
+				if = {
+					limit = {
+						119 = {
+							owner = {
+								OR = {
+									tag = CBI
+									is_subject_of = CBI
+									is_in_faction_with = CBI
+								}
+							}
+						}
+					}
+					IRE = {
+						transfer_state = 119
+						add_state_core = 119
+					}
+					CBI = {
+						remove_state_core = 119
+					}
+				}
+				if = {
+					limit = {
+						134 = {
+							owner = {
+								OR = {
+									tag = CBI
+									is_subject_of = CBI
+									is_in_faction_with = CBI
+								}
+							}
+						}
+					}
+					IRE = {
+						transfer_state = 134
+						add_state_core = 134
+					}
+					CBI = {
+						remove_state_core = 134
+					}
+				}
+				if = {
+					limit = {
+						135 = {
+							owner = {
+								OR = {
+									tag = CBI
+									is_subject_of = CBI
+									is_in_faction_with = CBI
+								}
+							}
+						}
+					}
+					IRE = {
+						transfer_state = 135
+						add_state_core = 135
+					}
+					CBI = {
+						remove_state_core = 135
+					}
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						IRE = {
+							controls_state = 119
+						}
+					}
+				}
+				IRE = {
+					transfer_state = 119
+					add_state_core = 119
+				}
+				CBI = {
+					remove_state_core = 119
+				}
 			}
 			every_country = {
 				limit = {
@@ -1684,6 +1920,8 @@ country_event = {
 	
 	fire_only_once = yes
 	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger.12"}
+	
 	option = {
 		name = ger.12.a 
 		add_war_support = 0.05
@@ -1700,6 +1938,8 @@ country_event = {
 	
 	fire_only_once = yes
 	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger.13"}
+	
 	option = {
 		name = ger.13.a 
 		add_stability = -0.05
@@ -1715,6 +1955,8 @@ country_event = {
 	is_triggered_only = yes
 	
 	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger.14"}
 	
 	option = { #Prefer Berlin
 		name = ger.14.a 
@@ -1761,6 +2003,476 @@ country_event = {
 }
 
 country_event = {
+	id = ger.15 #annex of Elsas
+	title = ger.15.t
+	desc = ger.15.d
+	picture = GFX_report_event_generic_read_write
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger.15"}
+	
+	option = {
+		name = ger.15.a 
+		custom_effect_tooltip = annex_of_elsase_tt
+		news_event = news.110
+		hidden_effect = {
+			PRU = {
+				annex_country = {
+					target = ELS
+					transfer_troops = no
+				}
+			}
+			PRU = {
+				add_state_core = 28
+				add_state_core = 828
+			}
+			FRR = {
+				country_event = {
+					id = ger_frr.1
+					hours = 4
+				}
+			}
+			MEC = {
+				country_event = {
+					id = mec.1
+					days = 79
+				}
+			}
+		}
+	}
+}
+
+country_event = {
+	id = ger.16 #Fraternization on front
+	title = ger.16.t
+	desc = ger.16.d
+	picture = GFX_report_event_german_volunteers
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event ger.16"
+		hidden_effect = {
+			PRU = {
+				add_timed_idea = {
+					idea = pru_fraternization_on_front
+					days = 40
+				}
+			}
+		}
+	}
+	
+	option = {
+		name = ger.16.a 
+		news_event = news.118
+		custom_effect_tooltip = pru_add_idea_fraternization_on_front
+	}
+}
+
+country_event = {
+	id = ger.17 #Kinkaiser Second
+	title = ger.17.t
+	desc = ger.17.d
+	picture = GFX_report_event_kingkaiser_second_type
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger.17"}
+	
+	option = {
+		name = ger.17.a 
+		set_technology = {
+			kingkaiser_2 = 1
+		}
+		create_equipment_variant = {
+			name = "Kingkaizer 2B"
+			type = medium_tank_equipment_kingkaiser_2
+			parent_version = 0
+			modules = {
+				main_armament_slot = tank_medium_kaiser_cannon_2
+				turret_type_slot = tank_medium_two_man_kaiser_tank_turret
+				suspension_type_slot = tank_christie_suspension
+				armor_type_slot = tank_cast_armor
+				engine_type_slot = tank_petrol_electric_engine
+				special_type_slot_1 = tank_kaiser_radio_2
+				special_type_slot_2 = wet_ammo_storage
+				special_type_slot_3 = additional_machine_guns
+			}
+			upgrades = {
+				tank_nsb_engine_upgrade = 7
+				tank_nsb_armor_upgrade = 7
+			}
+			icon = "GFX_GER_improved_medium_tank_medium"
+		}
+	}
+}
+
+country_event = {
+	id = ger.18 #Kinkaiser last
+	title = ger.18.t
+	desc = ger.18.d
+	picture = GFX_report_event_kingkaiser_third_type
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger.18"}
+	
+	option = {
+		name = ger.18.a 
+		set_technology = {
+			kingkaiser_3 = 1
+		}
+		create_equipment_variant = {
+			name = "Kingkaizer 3A"
+			type = medium_tank_equipment_kingkaiser_3
+			parent_version = 0
+			modules = {
+				main_armament_slot = tank_medium_kaiser_cannon_3
+				turret_type_slot = tank_medium_three_man_kaiser_tank_turret
+				suspension_type_slot = tank_christie_suspension
+				armor_type_slot = tank_cast_armor
+				engine_type_slot = tank_petrol_electric_engine
+				special_type_slot_1 = tank_kaiser_radio_3
+				special_type_slot_2 = wet_ammo_storage
+				special_type_slot_3 = additional_machine_guns
+				special_type_slot_4 = auto_loader
+			}
+			upgrades = {
+				tank_nsb_engine_upgrade = 10
+				tank_nsb_armor_upgrade = 10
+			}
+			icon = "GFX_GER_advanced_medium_tank_medium"
+		}
+	}
+}
+
+country_event = {
+	id = ger.19 #Weber know about leypoldit
+	title = ger.19.t
+	desc = ger.19.d
+	picture = GFX_report_event_lelpolid_knowledge_growing
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger.19"}
+	
+	option = {
+		name = ger.19.a 
+		64 = {
+			add_resource = {
+				type = leypoldit
+				amount = 25
+			}
+		}
+		custom_effect_tooltip = unlock_teoretic_wilgelm_eduard_beber_tt
+		PRU = {
+			set_country_flag = unlock_wilhelm_eduard_beber
+		}
+		hidden_effect = {
+			PRU = {
+				country_event = {
+					id = ger.20
+					days = 812
+				}
+			}
+		}
+	}
+}
+
+country_event = {
+	id = ger.20 #Leypoldit Universal
+	title = ger.20.t
+	desc = ger.20.d
+	picture = GFX_report_event_lelpolid_knowledge_growing_last
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger.20"}
+	
+	option = {
+		name = ger.20.a 
+		64 = {
+			add_resource = {
+				type = leypoldit
+				amount = 25
+			}
+		}
+	}
+}
+
+country_event = {
+	id = ger.21 #Death of Wilhelm I in battlefield
+	title = ger.21.t
+	desc = ger.21.d
+	picture = GFX_report_event_death_of_wilhem_in_battlefield
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event ger.21"
+		hidden_effect = {
+			PRU = {
+				PRU_Wilhelm_I = {
+					retire = yes
+				}
+			}
+		}
+	}
+	
+	option = {
+		name = ger.21.a 
+		add_war_support = -0.05
+		add_stability = -0.05
+		custom_effect_tooltip = death_of_wilhelm_i_tt
+		news_event = news.196
+		hidden_effect = {
+			PRU = {
+				set_character_name = {
+					character = PRU_Friedrich_III_fm
+					name = PRU_Friedrich_III_fm_prinz
+				}
+			}
+		}
+	}
+}
+
+country_event = {
+	id = ger.22 #Death of Wilhelm I home
+	title = ger.22.t
+	desc = ger.22.d
+	picture = GFX_report_event_death_of_wilhem_home
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event ger.22"
+		hidden_effect = {
+			PRU = {
+				PRU_Wilhelm_I = {
+					retire = yes
+				}
+			}
+		}
+	}
+	
+	option = {
+		name = ger.22.a 
+		add_stability = -0.05
+		custom_effect_tooltip = death_of_wilhelm_i_tt
+		news_event = news.197
+		hidden_effect = {
+			PRU = {
+				set_character_name = {
+					character = PRU_Friedrich_III_fm
+					name = PRU_Friedrich_III_fm_prinz
+				}
+			}
+		}
+	}
+}
+
+country_event = {
+	id = ger.23 #Krupp Rise
+	title = ger.23.t
+	desc = ger.23.d
+	picture = GFX_report_event_rise_of_krupp_empire
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event ger.23"
+	}
+	
+	option = {
+		name = ger.23.a 
+		add_offsite_building = { type = arms_factory level = 2 }
+		custom_effect_tooltip = pru_get_access_to_krupp
+		PRU = {
+			set_country_flag = krupp_unlock
+		}
+		if = {
+			limit = {
+				PRU = {
+					is_ai = yes
+				}
+			}
+			PRU = {
+				add_ideas = pru_artillery
+			}
+		}
+	}
+}
+
+country_event = {
+	id = ger.24 #Siemins Rise
+	title = ger.24.t
+	desc = ger.24.d
+	picture = GFX_report_event_rise_of_siemens_empire
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event ger.24"
+	}
+	
+	option = {
+		name = ger.24.a 
+		add_offsite_building = { type = industrial_complex level = 3 }
+		custom_effect_tooltip = pru_get_access_to_siemens
+		PRU = {
+			set_country_flag = siemens_unlock
+		}
+		if = {
+			limit = {
+				PRU = {
+					is_ai = yes
+				}
+			}
+			PRU = {
+				add_ideas = pru_steampunk_fabric
+			}
+		}
+	}
+}
+
+country_event = {
+	id = ger.25 #Karl Bosch out
+	title = ger.25.t
+	desc = ger.25.d
+	picture = GFX_report_event_bosch_out
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event ger.25"
+	}
+	
+	option = {
+		name = ger.25.a 
+		custom_effect_tooltip = pru_bosch_out_tt
+		if = {
+			limit = {
+				PRU = {
+					PRU_Carl_Bosch = {
+						is_character_slot = political_advisor
+					}
+				}
+			}
+			add_political_power = 150
+		}
+		hidden_effect = {
+			PRU = {
+				deactivate_advisor = carl_bosch
+			}
+		}
+		PRU = {
+			set_country_flag = pru_bosch_out
+		}
+	}
+}
+
+country_event = {
+	id = ger_frr.1 #Reaction on annex of Elsas
+	title = ger_frr.1.t
+	desc = ger_frr.1.d
+	picture = GFX_report_event_soldiers_in_france
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger_frr.1"}
+	
+	option = { #Protest
+		name = ger_frr.1.a 
+		ai_chance = {
+			factor = 50
+			modifier = {
+				FRR = {
+					has_government = socialism
+				}
+				factor = 2
+			}
+			modifier = {
+				FRR = {
+					has_government = democratic
+				}
+				factor = 1.5
+			}
+		}
+		add_war_support = 0.05
+	}
+	
+	option = { #attack!
+		name = ger_frr.1.b
+		ai_chance = {
+			factor = 50
+			modifier = {
+				FRR = {
+					has_government = reactionist
+				}
+				factor = 2
+			}
+			modifier = {
+				FRR = {
+					has_government = authoritarian
+				}
+				factor = 1.5
+			}
+		}
+		add_war_support = 0.075
+		start_border_war = {
+			change_state_after_war = no
+			attacker = {
+				state = 862
+				num_provinces = 2
+				on_win = abw.10
+				on_cancel = abw.11
+				on_lose = abw.9
+			}	
+			defender = {
+				state = 28
+				num_provinces = 3
+				on_win = abw.9
+				on_cancel = abw.11
+				on_lose = abw.10
+			}
+		}
+		hidden_effect = {
+			set_border_war_data = {
+				attacker = 862
+				defender = 28
+				defender_modifier = 0.30
+				combat_width = 120
+			}
+		}
+	}
+}
+
+country_event = {
 	id = ger_byz.1
 	title = ger_byz.1.t
 	desc = ger_byz.1.d
@@ -1770,13 +2482,18 @@ country_event = {
 	
 	fire_only_once = yes
 	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger_byz.1"}
+	
 	option = {
 		name = ger_byz.1.a 
 		ai_chance = {
-			factor = 10
+			factor = 2
 			modifier = {
 				factor = 0
-				is_historical_focus_on = yes
+				OR = {
+					is_historical_focus_on = yes
+					PRU = { has_country_flag = PRU_AI_RANDOM_HISTORICAL }
+				}
 			}
 		}
 	}
@@ -1784,9 +2501,13 @@ country_event = {
 	option = {
 		name = ger_byz.1.b 
 		ai_chance = {
-			factor = 90
+			factor = 98
 		}
 		PRU = { add_to_faction = BYZ }
+		set_global_flag = byz_was_in_faction_with_pru
+		hidden_effect = {
+			news_event = news.113
+		}
 	}
 }
 
@@ -1794,11 +2515,12 @@ country_event = {
 	id = ger_byz.2
 	title = ger_byz.2.t
 	desc = ger_byz.2.d
-	picture = GFX_report_event_molotov_signing_pact
-	
+	picture = GFX_report_event_aotsm_generic_signing_the_contract	
 	is_triggered_only = yes
 	
 	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger_byz.2"}
 	
 	option = {
 		name = ger_byz.2.a 
@@ -1806,7 +2528,10 @@ country_event = {
 			factor = 10
 			modifier = {
 				factor = 0
-				is_historical_focus_on = yes
+				OR = {
+					is_historical_focus_on = yes
+					PRU = { has_country_flag = PRU_AI_RANDOM_HISTORICAL }
+				}
 			}
 		}
 	}
@@ -1825,11 +2550,12 @@ country_event = {
 	id = ger_byz.3
 	title = ger_byz.3.t
 	desc = ger_byz.3.d
-	picture = GFX_report_event_molotov_signing_pact
-	
+	picture = GFX_report_event_aotsm_generic_signing_the_contract	
 	is_triggered_only = yes
 	
 	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger_byz.3"}
 	
 	option = {
 		name = ger_byz.3.a 
@@ -1837,7 +2563,10 @@ country_event = {
 			factor = 10
 			modifier = {
 				factor = 0
-				is_historical_focus_on = yes
+				OR = {
+					is_historical_focus_on = yes
+					PRU = { has_country_flag = PRU_AI_RANDOM_HISTORICAL }
+				}
 			}
 		}
 	}
@@ -1862,11 +2591,12 @@ country_event = {
 	id = ger_byz.4
 	title = ger_byz.4.t
 	desc = ger_byz.4.d
-	picture = GFX_report_event_molotov_signing_pact
-	
+	picture = GFX_report_event_aotsm_generic_signing_the_contract	
 	is_triggered_only = yes
 	
 	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger_byz.4"}
 	
 	option = {
 		name = ger_byz.4.a #NO
@@ -1874,7 +2604,10 @@ country_event = {
 			factor = 10
 			modifier = {
 				factor = 0
-				is_historical_focus_on = yes
+				OR = {
+					is_historical_focus_on = yes
+					PRU = { has_country_flag = PRU_AI_RANDOM_HISTORICAL }
+				}
 			}
 		}
 	}
@@ -1886,4 +2619,2824 @@ country_event = {
 		}
 		BYZ = { set_country_flag = BYZ_secret_protocol }
 	}
+}
+
+country_event = {
+	id = ger_answer.1
+	title = ger_answer.1.t
+	desc = ger_answer.1.d
+	picture = GFX_report_event_generic_sign_treaty2
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger_answer.1"}
+	
+	option = {
+		name = ger_answer.1.a	
+	}
+	
+}
+
+country_event = {
+	id = ger_answer.2
+	title = ger_answer.2.t
+	desc = ger_answer.2.d
+	picture = GFX_report_event_german_troops_paris
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger_answer.2"}
+	
+	option = {
+		name = ger_answer.2.a	
+	}
+	
+}
+
+country_event = {
+	id = ger_answer.3
+	title = ger_answer.3.t
+	desc = ger_answer.3.d
+	picture = GFX_report_event_hungarian_soldiers
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger_answer.3"}
+	
+	option = {
+		name = ger_answer.3.a	
+	}
+	
+}
+
+country_event = {
+	id = ger_answer.4
+	title = ger_answer.4.t
+	desc = ger_answer.4.d
+	picture = GFX_report_event_generic_peaceful_annexation
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger_answer.4"}
+	
+	option = {
+		name = ger_answer.4.a	
+	}
+	
+}
+
+country_event = {
+	id = ger_answer.5
+	title = ger_answer.5.t
+	desc = ger_answer.5.d
+	picture = GFX_report_event_soldiers_marching
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger_answer.5"}
+	
+	option = {
+		name = ger_answer.5.a	
+	}
+	
+}
+
+country_event = {
+	id = ger_answer.6
+	title = ger_answer.6.t
+	desc = ger_answer.6.d
+	picture = GFX_report_event_generic_sign_treaty1
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger_answer.6"}
+	
+	option = {
+		name = ger_answer.6.a	
+	}
+	
+}
+
+country_event = {
+	id = ger_answer.7
+	title = ger_answer.7.t
+	desc = ger_answer.7.d
+	picture = GFX_report_event_generic_read_write
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger_answer.7"}
+	
+	option = {
+		name = ger_answer.7.a	
+	}
+	
+}
+
+country_event = {
+	id = ger_answer.8
+	title = ger_answer.8.t
+	desc = ger_answer.8.d
+	picture = GFX_report_event_german_troops
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger_answer.8"}
+	
+	option = {
+		name = ger_answer.8.a	
+	}
+	
+}
+
+country_event = {
+	id = ger_answer.9
+	title = ger_answer.9.t
+	desc = ger_answer.9.d
+	picture = GFX_report_event_election_vote
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger_answer.9"}
+	
+	option = {
+		name = ger_answer.9.a	
+		PLH = {
+			promote_character  = PLH_Ernst_von_Pfuel
+			add_country_leader_role = {
+				character = PLH_Ernst_von_Pfuel
+				promote_leader = yes
+				country_leader = {
+					ideology = conservatism
+					expire = "1866.12.3.1"
+					traits = { }
+				}
+			}
+		}
+	}
+	
+}
+
+country_event = {
+	id = ger_answer.10
+	title = ger_answer.10.t
+	desc = ger_answer.10.d
+	picture = GFX_report_event_generic_sign_treaty1
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger_answer.10"}
+	
+	option = {
+		name = ger_answer.10.a	
+	}
+	
+}
+
+country_event = {
+	id = ger_answer.11
+	title = ger_answer.11.t
+	desc = ger_answer.11.d
+	picture = GFX_report_event_nazis_in_danzig
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger_answer.11"}
+	
+	option = {
+		name = ger_answer.11.a	
+		hidden_effect = {
+			POL = {
+				transfer_state = 853
+				add_state_core = 10
+				add_state_core = 87
+				add_state_core = 90
+				add_state_core = 92
+				add_state_core = 97
+				add_state_core = 98
+				add_state_core = 853
+				add_state_core = 903
+			}
+			POL = {
+				change_tag_from = PLH
+			}
+			POL = {
+				inherit_technology = PLH
+			}
+			PLH = {
+				transfer_units_fraction= {
+					target = POL
+					size = 1.0
+					stockpile_ratio = 1.0
+					army_ratio = 1.0
+					navy_ratio = 1.0
+					air_ratio = 1.0
+				}
+			}
+			POL = {
+				annex_country = {
+					target = PLH
+					transfer_troops = yes
+				}
+			}
+			PLH = {
+				remove_state_core = 10
+				remove_state_core = 87
+				remove_state_core = 90
+				remove_state_core = 92
+				remove_state_core = 97
+				remove_state_core = 98
+				remove_state_core = 853
+				remove_state_core = 903
+			}
+			POL = {
+				load_focus_tree = { tree = Poland_focus_101 keep_completed = yes }
+			}
+			PRU = {
+				set_autonomy = {
+					target = POL
+					autonomy_state = autonomy_aotsm_personal_union
+					end_wars = no
+					end_civil_wars = no
+				}
+			}
+			POL = {
+				set_politics = { ruling_party = authoritarian elections_allowed = no }
+				set_popularities = {
+					democratic = 9
+					socialism = 1
+					reactionist = 26
+					authoritarian = 64
+				}
+			}
+			PRU = {
+				set_nationality = {
+					target_country = POL
+					character = PRU_Alberht_Prussian
+				}
+			}
+			POL = {
+				add_country_leader_role = {
+					character = PRU_Alberht_Prussian
+					promote_leader = yes
+					country_leader = {
+						ideology = monarchist
+						expire = "1877.5.17.1"
+						traits = { }
+					}
+				}
+			}
+		}
+	}
+	
+}
+
+country_event = {
+	id = ger_answer.12
+	title = ger_answer.12.t
+	desc = ger_answer.12.d
+	picture = GFX_report_event_german_troops
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger_answer.12"}
+	
+	option = { #They know alternative
+		name = ger_answer.12.a	
+		ai_chance = {
+			factor = 60
+			modifier = {
+				factor = 100
+				PRU = {
+					surrender_progress < 0.001
+				}
+			}
+			modifier = {
+				factor = 50
+				PRU = {
+					surrender_progress > 0.00
+					surrender_progress < 0.101
+				}
+			}
+			modifier = {
+				factor = 0
+				PRU = {
+					surrender_progress > 0.100
+				}
+			}
+		}
+		PRU = {
+			declare_war_on = {
+				target = PLH
+				type = annex_everything
+			}
+		}
+		PRU = {
+			set_country_flag = plh_fight_for_freedom
+		}
+	}
+	
+	option = { #We can't resist
+		name = ger_answer.12.b
+		ai_chance = {
+			factor = 40
+			modifier = {
+				factor = 0
+				PRU = {
+					surrender_progress < 0.001
+				}
+			}
+			modifier = {
+				factor = 50
+				PRU = {
+					surrender_progress > 0.00
+					surrender_progress < 0.101
+				}
+			}
+			modifier = {
+				factor = 100
+				PRU = {
+					surrender_progress > 0.100
+				}
+			}
+		}
+		add_political_power = -150
+	}
+	
+}
+
+country_event = {
+	id = ger_answer.13
+	title = ger_answer.13.t
+	desc = ger_answer.13.d
+	picture = GFX_report_event_german_volunteers
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger_answer.13"}
+	
+	option = {
+		name = ger_answer.13.a
+		hidden_effect = {
+			PRU = {
+				annex_country = {
+					target = PLH
+					transfer_troops = no
+				} 
+			}
+		}
+	}
+	
+}
+
+country_event = {
+	id = ger_answer.14
+	title = ger_answer.14.t
+	desc = ger_answer.14.d
+	picture = GFX_report_event_german_volunteers
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger_answer.14"}
+	
+	option = {
+		name = ger_answer.14.a	
+		hidden_effect = {
+			POL = {
+				transfer_state = 87
+				transfer_state = 98
+				add_state_core = 10
+				add_state_core = 87
+				add_state_core = 90
+				add_state_core = 92
+				add_state_core = 97
+				add_state_core = 98
+				add_state_core = 853
+				add_state_core = 903
+			}
+			POL = {
+				inherit_technology = PLH
+			}
+			POL = {
+				set_cosmetic_tag = POL_INTEGRATION
+			}
+			PLH = {
+				transfer_units_fraction= {
+					target = POL
+					size = 0.25
+					stockpile_ratio = 0.25
+					army_ratio = 0.25
+					navy_ratio = 0.25
+					air_ratio = 0.25
+				}
+			}
+			POL = {
+				load_focus_tree = { tree = Poland_focus_101 keep_completed = yes }
+			}
+			PRU = {
+				set_autonomy = {
+					target = POL
+					autonomy_state = autonomy_integrated_puppet
+					end_wars = no
+					end_civil_wars = no
+				}
+			}
+			POL = {
+				set_politics = { ruling_party = reactionist elections_allowed = no }
+				set_popularities = {
+					democratic = 5
+					socialism = 1
+					reactionist = 87
+					authoritarian = 7
+				}
+			}
+			POL = {
+				declare_war_on = {
+					target = PLH
+					type = annex_everything
+				}
+			}
+			POL = {
+				set_country_flag = pol_civilwar_plh
+			}
+			POL = {
+				load_oob = POL_LIBIRATION_ARMY
+			}
+		}
+	}
+	
+}
+
+country_event = {
+	id = ger_answer.15
+	title = ger_answer.15.t
+	desc = ger_answer.15.d
+	picture = GFX_report_event_generic_read_write
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event ger_answer.15"
+		hidden_effect = {
+			if = {
+				limit = {
+					PRU = {
+						has_idea = pru_peace_rus
+					}
+				}
+				PRU = {
+					remove_ideas = pru_peace_rus
+				}
+			}
+			if = {
+				limit = {
+					BYZ = {
+						has_idea = pru_peace_rus
+					}
+				}
+				BYZ = {
+					remove_ideas = pru_peace_rus
+				}
+			}
+			if = {
+				limit = {
+					RUS = {
+						has_idea = rus_peace_rus
+					}
+				}
+				RUS = {
+					remove_ideas = rus_peace_rus
+				}
+			}
+		}
+	}
+	
+	option = {
+		name = ger_answer.15.a	
+	}
+	
+}
+
+country_event = {
+	id = ger_answer.16
+	title = ger_answer.16.t
+	desc = ger_answer.16.d
+	picture = GFX_report_event_german_volunteers
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event ger_answer.16"
+		hidden_effect = {
+			if = {
+				limit = {
+					PRU = {
+						has_idea = pru_peace_rus
+					}
+				}
+				PRU = {
+					remove_ideas = pru_peace_rus
+				}
+			}
+			if = {
+				limit = {
+					BYZ = {
+						has_idea = pru_peace_rus
+					}
+				}
+				BYZ = {
+					remove_ideas = pru_peace_rus
+				}
+			}
+			if = {
+				limit = {
+					RUS = {
+						has_idea = rus_peace_rus
+					}
+				}
+				RUS = {
+					remove_ideas = rus_peace_rus
+				}
+			}
+		}
+	}
+	
+	option = {
+		name = ger_answer.16.a	
+	}
+	
+}
+
+country_event = {
+	id = ger_answer.17
+	title = ger_answer.17.t
+	desc = ger_answer.17.d
+	picture = GFX_report_event_generic_read_write
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event ger_answer.17"
+		hidden_effect = {
+			if = {
+				limit = {
+					PRU = {
+						has_idea = pru_peace_rus
+					}
+				}
+				PRU = {
+					remove_ideas = pru_peace_rus
+				}
+			}
+			if = {
+				limit = {
+					BYZ = {
+						has_idea = pru_peace_rus
+					}
+				}
+				BYZ = {
+					remove_ideas = pru_peace_rus
+				}
+			}
+			if = {
+				limit = {
+					RUS = {
+						has_idea = rus_peace_rus
+					}
+				}
+				RUS = {
+					remove_ideas = rus_peace_rus
+				}
+			}
+		}
+	}
+	
+	option = {
+		name = ger_answer.17.a	
+	}
+	
+}
+
+country_event = {
+	id = ger_answer.18
+	title = ger_answer.18.t
+	desc = ger_answer.18.d
+	picture = GFX_report_event_german_troops
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event ger_answer.18"
+		hidden_effect = {
+			if = {
+				limit = {
+					PRU = {
+						has_idea = pru_peace_rus
+					}
+				}
+				PRU = {
+					remove_ideas = pru_peace_rus
+				}
+			}
+			if = {
+				limit = {
+					BYZ = {
+						has_idea = pru_peace_rus
+					}
+				}
+				BYZ = {
+					remove_ideas = pru_peace_rus
+				}
+			}
+			if = {
+				limit = {
+					RUS = {
+						has_idea = rus_peace_rus
+					}
+				}
+				RUS = {
+					remove_ideas = rus_peace_rus
+				}
+			}
+		}
+	}
+	
+	option = {
+		name = ger_answer.18.a	
+	}
+	
+}
+
+country_event = {
+	id = ger_answer.19
+	title = ger_answer.19.t
+	desc = ger_answer.19.d
+	picture = GFX_report_event_generic_read_write
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event ger_answer.19"
+		hidden_effect = {
+			if = {
+				limit = {
+					PRU = {
+						has_idea = pru_peace_rus
+					}
+				}
+				PRU = {
+					remove_ideas = pru_peace_rus
+				}
+			}
+			if = {
+				limit = {
+					BYZ = {
+						has_idea = pru_peace_rus
+					}
+				}
+				BYZ = {
+					remove_ideas = pru_peace_rus
+				}
+			}
+			if = {
+				limit = {
+					RUS = {
+						has_idea = rus_peace_rus
+					}
+				}
+				RUS = {
+					remove_ideas = rus_peace_rus
+				}
+			}
+		}
+	}
+	
+	option = {
+		name = ger_answer.19.a	
+	}
+	
+}
+
+country_event = {
+	id = ger_answer.20
+	title = ger_answer.20.t
+	desc = ger_answer.20.d
+	picture = GFX_report_event_german_troops_paris
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event ger_answer.20"
+		hidden_effect = {
+			if = {
+				limit = {
+					PRU = {
+						has_idea = pru_peace_rus
+					}
+				}
+				PRU = {
+					remove_ideas = pru_peace_rus
+				}
+			}
+			if = {
+				limit = {
+					BYZ = {
+						has_idea = pru_peace_rus
+					}
+				}
+				BYZ = {
+					remove_ideas = pru_peace_rus
+				}
+			}
+			if = {
+				limit = {
+					RUS = {
+						has_idea = rus_peace_rus
+					}
+				}
+				RUS = {
+					remove_ideas = rus_peace_rus
+				}
+			}
+		}
+	}
+	
+	option = {
+		name = ger_answer.20.a	
+	}
+	
+}
+
+country_event = {
+	id = ger_answer.21
+	title = ger_answer.21.t
+	desc = ger_answer.21.d
+	picture = GFX_report_event_generic_sign_treaty1
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger_answer.21"}
+	
+	option = {
+		name = ger_answer.21.a	
+	}
+	
+}
+
+country_event = {
+	id = ger_answer.22
+	title = ger_answer.22.t
+	desc = ger_answer.22.d
+	picture = GFX_report_event_generic_sign_treaty2
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger_answer.22"}
+	
+	option = {
+		name = ger_answer.22.a	
+		news_event = news.139
+	}
+	
+}
+
+country_event = {
+	id = ger_warplane.1
+	title = ger_warplane.1.t
+	desc = ger_warplane.1.d
+	picture = GFX_report_event_military_planning
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger_warplane.1"}
+	
+	option = {
+		name = ger_warplane.1.a
+		PRU = {
+			country_event = {
+				id = ger_warplane.2
+				days = 1
+			}
+		}
+	}
+	
+}
+
+country_event = {
+	id = ger_warplane.2
+	title = ger_warplane.2.t
+	desc = ger_warplane.2.d
+	picture = GFX_report_event_nicoloys_war_plan
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger_warplane.2"}
+	
+	option = {
+		name = ger_warplane.2.a
+		PRU = {
+			country_event = {
+				id = ger_warplane.3
+				days = 1
+			}
+		}
+	}
+	
+}
+
+country_event = {
+	id = ger_warplane.3
+	title = ger_warplane.3.t
+	desc = ger_warplane.3.d
+	picture = GFX_report_event_wrangel_war_plan
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger_warplane.3"}
+	
+	option = {
+		name = ger_warplane.3.a
+		PRU = {
+			country_event = {
+				id = ger_warplane.4
+				days = 1
+			}
+		}
+	}
+	
+}
+
+country_event = {
+	id = ger_warplane.4
+	title = ger_warplane.4.t
+	desc = ger_warplane.4.d
+	picture = GFX_report_event_bismark_and_military_command
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger_warplane.4"}
+	
+	option = {
+		name = ger_warplane.4.a
+		PRU = {
+			country_event = {
+				id = ger_warplane.5
+				days = 1
+			}
+		}
+	}
+	
+}
+
+country_event = {
+	id = ger_warplane.5
+	title = ger_warplane.5.t
+	desc = ger_warplane.5.d
+	picture = GFX_report_event_ast_planning
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger_warplane.5"}
+	
+	option = {
+		name = ger_warplane.5.a
+		ai_chance = {
+			factor = 65
+			modifier = {
+				factor = 20
+				OR = {
+					RUS = {
+						is_ai = no
+					}
+					FRR = {
+						is_ai = no
+					}
+				}
+			}
+		}
+		PRU = {
+			set_country_flag = pru_nicolays_war_plan
+		}
+	}
+	
+	option = {
+		name = ger_warplane.5.b
+		ai_chance = {
+			factor = 10
+			modifier = {
+				factor = 20
+				OR = {
+					RUS = {
+						is_ai = no
+					}
+					FRR = {
+						is_ai = no
+					}
+				}
+			}
+		}
+		PRU = {
+			set_country_flag = pru_wrangel_war_plan
+		}
+	}
+	
+	option = {
+		name = ger_warplane.5.c
+		ai_chance = {
+			factor = 25
+			modifier = {
+				factor = 60
+				OR = {
+					RUS = {
+						is_ai = no
+					}
+					FRR = {
+						is_ai = no
+					}
+				}
+			}
+		}
+		PRU = {
+			set_country_flag = pru_bismark_war_plan
+		}
+	}
+	
+}
+
+country_event = {
+	id = ger_warplane.6
+	title = ger_warplane.6.t
+	desc = ger_warplane.6.d
+	picture = GFX_report_event_german_troops
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event ger_warplane.6"
+		hidden_effect = {
+			PRU = {
+				add_timed_idea = {
+					idea = mass_attack_by_wrangel
+					days = 120
+				}
+			}
+		}
+	}
+	
+	option = {
+		name = ger_warplane.6.a
+		custom_effect_tooltip = pru_add_idea_mass_attack
+	}
+	
+}
+
+country_event = {
+	id = ger_warplane.7
+	title = ger_warplane.7.t
+	desc = ger_warplane.7.d
+	picture = GFX_report_event_german_troops
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event ger_warplane.7"
+		hidden_effect = {
+			PRU = {
+				add_ideas = bismark_logistic_idea
+			}
+		}
+	}
+	
+	option = {
+		name = ger_warplane.7.a
+		custom_effect_tooltip = pru_add_idea_bismark_logistic
+	}
+	
+}
+
+country_event = { #Black Order Hail Kaiser
+	id = ger_blackorder.1
+	title = ger_blackorder.1.t
+	desc = ger_blackorder.1.d
+	picture = GFX_report_event_blacksun_document
+	
+	trigger = {
+		NOT = {
+			country_exists = KOL
+		}
+		PRU = {
+			owns_state = 42
+			owns_state = 51
+			owns_state = 888
+		}
+	}
+	
+	mean_time_to_happen = {
+		days = 45
+	}
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event ger_blackorder.1"
+		hidden_effect = {
+			set_variable = {
+				var = PRU.blacksun_influence
+				value = 0
+			}
+		}
+	}
+	
+	option = {
+		name = ger_blackorder.1.a
+		custom_effect_tooltip = pru_blacksun_influince_rise
+		ai_chance = {
+			factor = 25
+		}
+		hidden_effect = {
+			add_to_variable = {
+				var = PRU.blacksun_influence
+				value = 1
+			}
+		}
+	}
+	
+	option = {
+		name = ger_blackorder.1.b
+		ai_chance = {
+			factor = 75
+		}
+	}
+	
+	option = {
+		name = ger_blackorder.1.c
+		custom_effect_tooltip = pru_blacksun_influince_fall
+		ai_chance = {
+			factor = 0
+		}
+		hidden_effect = {
+			add_to_variable = {
+				var = PRU.blacksun_influence
+				value = -1
+			}
+			PRU = {
+				set_country_flag = pru_say_no_to_blacksun
+			}
+		}
+	}
+	
+}
+
+country_event = { #Black Sun helping Hand
+	id = ger_blackorder.2
+	title = ger_blackorder.2.t
+	desc = ger_blackorder.2.d
+	picture = GFX_report_event_generic_lend_lease
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger_blackorder.2"}
+	
+	option = {
+		name = ger_blackorder.2.a
+		ai_chance = {
+			factor = 20
+		}
+		add_equipment_to_stockpile = {
+			type = infantry_equipment
+			amount = 10000
+			producer = PRU
+		}
+		add_equipment_to_stockpile = {
+			type = support_equipment
+			amount = 7500
+			producer = ROOT
+		}
+		add_equipment_to_stockpile = {
+			type = artillery_equipment
+			amount = 5000
+			producer = ROOT
+		}
+		add_equipment_to_stockpile = {
+			type = motorized_equipment
+			amount = 2000
+			producer = ROOT
+		}
+		if = {
+			limit = {
+				AND = {
+					PRU = {
+						has_tech = kingkaiser_1
+					}
+					NOT = {
+						PRU = {
+							has_tech = kingkaiser_2
+						}
+					}
+					NOT = {
+						PRU = {
+							has_tech = kingkaiser_3
+						}
+					}
+				}
+			}
+			add_equipment_to_stockpile = {
+				type = medium_tank_equipment_kingkaiser_1
+				amount = 1000
+				variant_name = "Kingkaizer"
+			}
+		}
+		if = {
+			limit = {
+				AND = {
+					PRU = {
+						has_tech = kingkaiser_1
+					}
+					PRU = {
+						has_tech = kingkaiser_2
+					}
+					NOT = {
+						PRU = {
+							has_tech = kingkaiser_3
+						}
+					}
+				}
+			}
+			add_equipment_to_stockpile = {
+				type = medium_tank_equipment_kingkaiser_2
+				amount = 1000
+				variant_name = "Kingkaizer 2B"
+			}
+		}
+		if = {
+			limit = {
+				AND = {
+					PRU = {
+						has_tech = kingkaiser_1
+					}
+					PRU = {
+						has_tech = kingkaiser_2
+					}
+					PRU = {
+						has_tech = kingkaiser_3
+					}
+				}
+			}
+			add_equipment_to_stockpile = {
+				type = medium_tank_equipment_kingkaiser_3
+				amount = 1000
+				variant_name = "Kingkaizer 3A"
+			}
+		}
+		custom_effect_tooltip = pru_blacksun_influince_rise_hight
+		hidden_effect = {
+			add_to_variable = {
+				var = PRU.blacksun_influence
+				value = 2
+			}
+		}
+	}
+	
+	option = {
+		name = ger_blackorder.2.b
+		ai_chance = {
+			factor = 30
+		}
+		add_equipment_to_stockpile = {
+			type = infantry_equipment
+			amount = 5000
+			producer = PRU
+		}
+		add_equipment_to_stockpile = {
+			type = support_equipment
+			amount = 3750
+			producer = ROOT
+		}
+		add_equipment_to_stockpile = {
+			type = artillery_equipment
+			amount = 2500
+			producer = ROOT
+		}
+		add_equipment_to_stockpile = {
+			type = motorized_equipment
+			amount = 1250
+			producer = ROOT
+		}
+		custom_effect_tooltip = pru_blacksun_influince_rise
+		hidden_effect = {
+			add_to_variable = {
+				var = PRU.blacksun_influence
+				value = 1
+			}
+		}
+	}
+	
+	option = {
+		name = ger_blackorder.2.c
+		ai_chance = {
+			factor = 50
+		}
+		custom_effect_tooltip = pru_blacksun_influince_fall
+		hidden_effect = {
+			add_to_variable = {
+				var = PRU.blacksun_influence
+				value = -1
+			}
+		}
+	}
+	
+}
+
+country_event = { #Black Sun in goverment
+	id = ger_blackorder.3
+	title = ger_blackorder.3.t
+	desc = ger_blackorder.3.d
+	picture = GFX_report_event_german_reichstag_gathering
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger_blackorder.3"}
+	
+	option = {
+		name = ger_blackorder.3.a
+		ai_chance = {
+			factor = 30
+		}
+		custom_effect_tooltip = pru_blacksun_influince_rise
+		hidden_effect = {
+			add_to_variable = {
+				var = PRU.blacksun_influence
+				value = 1
+			}
+		}
+	}
+	
+	option = {
+		name = ger_blackorder.3.b
+		ai_chance = {
+			factor = 70
+		}
+		custom_effect_tooltip = pru_blacksun_influince_fall
+		hidden_effect = {
+			add_to_variable = {
+				var = PRU.blacksun_influence
+				value = -1
+			}
+		}
+	}
+	
+}
+
+country_event = { #Black Sun try coup the goverment
+	id = ger_blackorder.4
+	title = ger_blackorder.4.t
+	desc = ger_blackorder.4.d
+	picture = GFX_report_event_ger_civil_war
+	
+	trigger = {
+		tag = PRU
+		check_variable = {
+			PRU.blacksun_influence > 4
+		}
+	}
+	
+	mean_time_to_happen = {
+		days = 180
+	}
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger_blackorder.4"}
+	
+	option = {
+		name = ger_blackorder.4.a
+		ai_chance = {
+			factor = 100
+		}
+		if = {
+			limit = {
+				is_ai = yes
+			}
+			random_list = {
+				74 = {
+					PRU = {
+						country_event = {
+							id = ger_blackorder.5
+							days = 6
+						}
+					}
+				}
+				25 = {
+					PRU = {
+						country_event = {
+							id = ger_blackorder.6
+							days = 3
+						}
+					}
+				}
+			}
+		}
+		if = {
+			limit = {
+				is_ai = no
+			}
+			PRU = {
+				country_event = {
+					id = ger_blackorder.5
+					days = 6
+				}
+			}
+		}
+	}
+	
+	option = {
+		name = ger_blackorder.4.b
+		trigger = {
+			is_ai = no
+		}
+		ai_chance = {
+			factor = 0
+		}
+		PRU = {
+			country_event = {
+				id = ger_blackorder.6
+				days = 3
+			}
+		}
+	}
+	
+}
+
+country_event = { #Black Sun succesd coup
+	id = ger_blackorder.5
+	title = ger_blackorder.5.t
+	desc = ger_blackorder.5.d
+	picture = GFX_report_event_german_reichstag_bombed
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger_blackorder.5"}
+	
+	option = {
+		name = ger_blackorder.5.a
+		custom_effect_tooltip = blackordersuccedcoup_tt
+		hidden_effect = {
+			PRU = {
+				set_country_flag = blacksun_end_germany
+			}
+			KOL = {
+				set_nationality = {
+					target_country = PRU
+					character = KOL_Wilgelm_Austrian
+				}
+			}
+			PRU = {
+				promote_character = {
+					character = KOL_Wilgelm_Austrian
+					ideology = national_populism
+				}
+			}
+			PRU = {
+				set_politics = {
+					ruling_party = reactionist
+					elections_allowed = no
+				}
+				set_party_name = {
+					ideology = reactionist
+					long_name = pru_darksun_party_long
+					name = pru_darksun_party
+				}
+			}
+			news_event = news.184
+		}
+	}
+	
+}
+
+country_event = { #Black Sun fail coup
+	id = ger_blackorder.6
+	title = ger_blackorder.6.t
+	desc = ger_blackorder.6.d
+	picture = GFX_report_event_german_reichstag_gathering
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger_blackorder.6"}
+	
+	option = {
+		name = ger_blackorder.6.a
+		custom_effect_tooltip = blackorderfailcoup_tt
+		hidden_effect = {
+			if = {
+				limit = {
+					NOT = {
+						PRU = {
+							has_completed_focus = PRU_ask_black_sun_help
+						}
+					}
+				}
+				PRU = {
+					unlock_national_focus = PRU_ask_black_sun_help
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						PRU = {
+							has_completed_focus = PRU_hunt_partisan
+						}
+					}
+				}
+				PRU = {
+					unlock_national_focus = PRU_hunt_partisan
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						PRU = {
+							has_completed_focus = PRU_all_partisan_must_die
+						}
+					}
+				}
+				PRU = {
+					unlock_national_focus = PRU_all_partisan_must_die
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						PRU = {
+							has_completed_focus = PRU_influence_on_govermant
+						}
+					}
+				}
+				PRU = {
+					unlock_national_focus = PRU_influence_on_govermant
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						PRU = {
+							has_completed_focus = PRU_new_present_by_blacksun
+						}
+					}
+				}
+				PRU = {
+					unlock_national_focus = PRU_new_present_by_blacksun
+				}
+			}
+			if = {
+				limit = {
+					PRU = {
+						has_idea = pru_blacksun_hunt_partisan_1
+					}
+				}
+				remove_ideas = pru_blacksun_hunt_partisan_1
+			}
+			if = {
+				limit = {
+					PRU = {
+						has_idea = pru_blacksun_hunt_partisan_2
+					}
+				}
+				remove_ideas = pru_blacksun_hunt_partisan_2
+			}
+			set_variable = {
+				var = PRU.blacksun_influence
+				value = 0
+			}
+		}
+	}
+	
+}
+
+country_event = { #Hunting is going well
+	id = ger_blackorder.11
+	title = ger_blackorder.11.t
+	desc = ger_blackorder.11.d
+	picture = GFX_report_event_dead_soldiers
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger_blackorder.11"}
+	
+	option = {
+		name = ger_blackorder.11.a
+		ai_chance = {
+			factor = 30
+		}
+		custom_effect_tooltip = pru_acces_to_all_partisan_must_die_tt
+		custom_effect_tooltip = pru_blacksun_influince_rise
+		hidden_effect = {
+			add_to_variable = {
+				var = PRU.blacksun_influence
+				value = 1
+			}
+		}
+	}
+	
+	option = {
+		name = ger_blackorder.11.b
+		ai_chance = {
+			factor = 70
+		}
+		custom_effect_tooltip = pru_acces_to_all_partisan_must_die_tt
+	}
+	
+}
+
+country_event = { #Qustian about Poland
+	id = ger_warpolitic.1
+	title = ger_warpolitic.1.t
+	desc = ger_warpolitic.1.d
+	picture = GFX_report_event_generic_read_write
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger_warpolitic.1"}
+	
+	option = { #democraty in poland
+		name = ger_warpolitic.1.a
+		ai_chance = {
+			factor = 60
+			modifier = {
+				factor = 80
+				PRU = {
+					has_government = democratic
+				}
+			}
+			modifier = {
+				factor = 40
+				PRU = {
+					has_government = authoritarian
+				}
+			}
+			modifier = {
+				factor = 10
+				PRU = {
+					has_government = reactionist
+				}
+			}
+			modifier = {
+				factor = 90
+				PRU = {
+					has_government = socialism
+				}
+			}
+		}
+		PRU = {
+			country_event = {
+				id = ger_warpolitic.2
+				days = 1
+			}
+		}	
+		custom_effect_tooltip = PRU_choose_diplomacy_way
+	}
+	
+	option = { #king or integration
+		name = ger_warpolitic.1.b
+		ai_chance = {
+			factor = 40
+			modifier = {
+				factor = 20
+				PRU = {
+					has_government = democratic
+				}
+			}
+			modifier = {
+				factor = 60
+				PRU = {
+					has_government = authoritarian
+				}
+			}
+			modifier = {
+				factor = 90
+				PRU = {
+					has_government = reactionist
+				}
+			}
+			modifier = {
+				factor = 10
+				PRU = {
+					has_government = socialism
+				}
+			}
+		}
+		PRU = {
+			country_event = {
+				id = ger_warpolitic.3
+				days = 1
+			}
+		}	
+		custom_effect_tooltip = PRU_choose_agressive_way
+	}
+	
+}
+
+country_event = { #Democraty in Poland
+	id = ger_warpolitic.2
+	title = ger_warpolitic.2.t
+	desc = ger_warpolitic.2.d
+	picture = GFX_report_event_generic_sign_treaty2
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger_warpolitic.2+"}
+	
+	option = { #They chose own politic
+		name = ger_warpolitic.2.a
+		ai_chance = {
+			factor = 60
+			modifier = {
+				factor = 60
+				PRU = {
+					has_government = democratic
+				}
+			}
+			modifier = {
+				factor = 20
+				PRU = {
+					has_government = authoritarian
+				}
+			}
+			modifier = {
+				factor = 5
+				PRU = {
+					has_government = reactionist
+				}
+			}
+			modifier = {
+				factor = 90
+				PRU = {
+					has_government = socialism
+				}
+			}
+		}
+		custom_effect_tooltip = PRU_choose_poland_friend_way_tt
+		PRU = {
+			set_country_flag = PRU_choose_poland_friend
+		}
+	}
+	
+	option = { #They choose our politic
+		name = ger_warpolitic.2.b
+		ai_chance = {
+			factor = 40
+			modifier = {
+				factor = 40
+				PRU = {
+					has_government = democratic
+				}
+			}
+			modifier = {
+				factor = 80
+				PRU = {
+					has_government = authoritarian
+				}
+			}
+			modifier = {
+				factor = 95
+				PRU = {
+					has_government = reactionist
+				}
+			}
+			modifier = {
+				factor = 10
+				PRU = {
+					has_government = socialism
+				}
+			}
+		}
+		custom_effect_tooltip = PRU_chose_to_help_in_decision_way_tt
+		PRU = {
+			set_country_flag = PRU_chose_to_help_in_decision
+		}		
+	}
+	
+}
+
+country_event = { #King or integration
+	id = ger_warpolitic.3
+	title = ger_warpolitic.3.t
+	desc = ger_warpolitic.3.d
+	picture = GFX_report_event_german_troops
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger_warpolitic.3"}
+	
+	option = { #Kaisser of Poland
+		name = ger_warpolitic.3.a
+		ai_chance = {
+			factor = 60
+			modifier = {
+				factor = 90
+				PRU = {
+					has_government = democratic
+				}
+			}
+			modifier = {
+				factor = 75
+				PRU = {
+					has_government = authoritarian
+				}
+			}
+			modifier = {
+				factor = 25
+				PRU = {
+					has_government = reactionist
+				}
+			}
+			modifier = {
+				factor = 90
+				PRU = {
+					has_government = socialism
+				}
+			}
+		}
+		custom_effect_tooltip = PRU_chose_king_in_poland_way_tt
+		PRU = {
+			set_country_flag = PRU_chose_king_in_poland
+		}	
+	}
+	
+	option = { #Poland is part of Reich
+		name = ger_warpolitic.3.b
+		ai_chance = {
+			factor = 40
+			modifier = {
+				factor = 10
+				PRU = {
+					has_government = democratic
+				}
+			}
+			modifier = {
+				factor = 25
+				PRU = {
+					has_government = authoritarian
+				}
+			}
+			modifier = {
+				factor = 75
+				PRU = {
+					has_government = reactionist
+				}
+			}
+			modifier = {
+				factor = 10
+				PRU = {
+					has_government = socialism
+				}
+			}
+		}
+		custom_effect_tooltip = PRU_chose_to_integrat_poland_way_tt
+		PRU = {
+			set_country_flag = PRU_chose_to_integrat_poland
+		}	
+	}
+	
+}
+
+country_event = { #German say that they want in our politic
+	id = ger_warpolitic.4
+	title = ger_warpolitic.4.t
+	desc = ger_warpolitic.4.d
+	picture = GFX_report_event_generic_sign_treaty3
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger_warpolitic.4"}
+	
+	option = { #say yes
+		name = ger_warpolitic.4.a
+		ai_chance = {
+			factor = 50
+			modifier = {
+				factor = 80
+				PRU = {
+					has_government = democratic
+				}
+			}
+			modifier = {
+				factor = 25
+				PRU = {
+					has_government = authoritarian
+				}
+			}
+			modifier = {
+				factor = 0
+				PRU = {
+					has_government = reactionist
+				}
+			}
+			modifier = {
+				factor = 80
+				PRU = {
+					has_government = socialism
+				}
+			}
+		}
+		PRU = {
+			country_event = {
+				id = ger_answer.9
+				days = 1
+			}
+		}		
+	}
+	
+	option = { #say no
+		name = ger_warpolitic.4.b
+		ai_chance = {
+			factor = 50
+			modifier = {
+				factor = 20
+				PRU = {
+					has_government = democratic
+				}
+			}
+			modifier = {
+				factor = 75
+				PRU = {
+					has_government = authoritarian
+				}
+			}
+			modifier = {
+				factor = 100
+				PRU = {
+					has_government = reactionist
+				}
+			}
+			modifier = {
+				factor = 20
+				PRU = {
+					has_government = socialism
+				}
+			}
+		}
+		PRU = {
+			country_event = {
+				id = ger_answer.10
+				days = 1
+			}
+		}
+	}
+	
+}
+
+country_event = { #German say that they want kingdom with their candidat
+	id = ger_warpolitic.5
+	title = ger_warpolitic.5.t
+	desc = ger_warpolitic.5.d
+	picture = GFX_report_event_soviet_german_soldier_handshake
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger_warpolitic.5"}
+	
+	option = { #say yes
+		name = ger_warpolitic.5.a
+		ai_chance = {
+			factor = 50
+			modifier = {
+				factor = 70
+				PRU = {
+					has_government = democratic
+				}
+			}
+			modifier = {
+				factor = 60
+				PRU = {
+					has_government = authoritarian
+				}
+			}
+			modifier = {
+				factor = 0
+				PRU = {
+					has_government = reactionist
+				}
+			}
+			modifier = {
+				factor = 80
+				PRU = {
+					has_government = socialism
+				}
+			}
+		}
+		PRU = {
+			country_event = {
+				id = ger_answer.11
+				days = 1
+			}
+		}
+	}
+	
+	option = { #say no
+		name = ger_warpolitic.5.b
+		trigger = {
+			PRU = {
+				has_war_with = RUS
+			}
+		}
+		ai_chance = {
+			factor = 50
+			modifier = {
+				factor = 30
+				PRU = {
+					has_government = democratic
+				}
+			}
+			modifier = {
+				factor = 40
+				PRU = {
+					has_government = authoritarian
+				}
+			}
+			modifier = {
+				factor = 0
+				PRU = {
+					has_government = reactionist
+				}
+			}
+			modifier = {
+				factor = 20
+				PRU = {
+					has_government = socialism
+				}
+			}
+		}
+		RUS = {
+			country_event = {
+				id = pol_rus.2
+				days = 1
+			}
+		}
+	}
+	
+}
+
+country_event = { #German say that poland is mistake
+	id = ger_warpolitic.6
+	title = ger_warpolitic.6.t
+	desc = ger_warpolitic.6.d
+	picture = GFX_report_event_german_troops
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger_warpolitic.6"}
+	
+	option = { #say yes
+		name = ger_warpolitic.6.a
+		ai_chance = {
+			factor = 50
+			modifier = {
+				factor = 10
+				PRU = {
+					has_government = democratic
+				}
+			}
+			modifier = {
+				factor = 10
+				PRU = {
+					has_government = authoritarian
+				}
+			}
+			modifier = {
+				factor = 10
+				PRU = {
+					has_government = reactionist
+				}
+			}
+			modifier = {
+				factor = 10
+				PRU = {
+					has_government = socialism
+				}
+			}
+		}
+		PRU = {
+			country_event = {
+				id = ger_answer.13
+				days = 1
+			}
+		}
+	}
+	
+	option = { #say no
+		name = ger_warpolitic.6.b
+		trigger = {
+			PRU = {
+				has_war_with = RUS
+			}
+		}
+		ai_chance = {
+			factor = 50
+			modifier = {
+				factor = 90
+				PRU = {
+					has_government = democratic
+				}
+			}
+			modifier = {
+				factor = 90
+				PRU = {
+					has_government = authoritarian
+				}
+			}
+			modifier = {
+				factor = 90
+				PRU = {
+					has_government = reactionist
+				}
+			}
+			modifier = {
+				factor = 90
+				PRU = {
+					has_government = socialism
+				}
+			}
+		}
+		RUS = {
+			country_event = {
+				id = pol_rus.3
+				days = 1
+			}
+		}
+	}
+	
+}
+
+country_event = { #Christmas Thruce?
+	id = ger_warpolitic.7
+	title = ger_warpolitic.7.t
+	desc = ger_warpolitic.7.d
+	picture = GFX_report_event_generic_read_write
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger_warpolitic.7"}
+	
+	option = { #say yes
+		name = ger_warpolitic.7.a
+		ai_chance = {
+			factor = 50
+			modifier = {
+				factor = 90
+				PRU = {
+					has_government = democratic
+				}
+			}
+			modifier = {
+				factor = 90
+				PRU = {
+					has_government = socialism
+				}
+			}
+			modifier = {
+				factor = 50
+				PRU = {
+					has_government = authoritarian
+				}
+			}
+			modifier = {
+				factor = 50
+				PRU = {
+					has_government = reactionist
+				}
+			}
+		}
+		PRU = {
+			country_event = ger_answer.21
+		}
+	}
+	
+	option = { #say no
+		name = ger_warpolitic.7.b
+		ai_chance = {
+			factor = 50
+			modifier = {
+				factor = 10
+				PRU = {
+					has_government = democratic
+				}
+			}
+			modifier = {
+				factor = 10
+				PRU = {
+					has_government = socialism
+				}
+			}
+			modifier = {
+				factor = 50
+				PRU = {
+					has_government = authoritarian
+				}
+			}
+			modifier = {
+				factor = 50
+				PRU = {
+					has_government = reactionist
+				}
+			}
+		}
+		PRU = {
+			country_event = ger_answer.22
+		}
+	}
+	
+}
+
+#################
+# Bismark Event #
+#################
+# 1 - 99 PRU    #
+# 100 - 199 FRR #
+# 200 - 299 RUS #
+#################
+
+country_event = { #Bismark missian in Russian
+	id = ger_bismark.1
+	title = ger_bismark.1.t
+	desc = ger_bismark.1.d
+	picture = GFX_report_event_generic_read_write
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger_bismark.1"}
+	
+	option = { #good news
+		name = ger_bismark.1.a
+		ai_chance = {
+			factor = 50
+		}
+		RUS = {
+			country_event = {
+				id = ger_bismark.200
+				days = 7
+			}
+		}
+	}
+
+}
+
+country_event = { #Bismark complete his work in Russian
+	id = ger_bismark.2
+	title = ger_bismark.2.t
+	desc = ger_bismark.2.d
+	picture = GFX_report_event_generic_read_write
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger_bismark.2"}
+	
+	option = { #good news
+		name = ger_bismark.2.a
+		ai_chance = {
+			factor = 50
+		}
+		PRU = {
+			country_event = {
+				id = ger_bismark.4
+				days = 8
+			}
+		}
+	}
+
+}
+
+country_event = { #Russian say no
+	id = ger_bismark.3
+	title = ger_bismark.3.t
+	desc = ger_bismark.3.d
+	picture = GFX_report_event_generic_read_write
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger_bismark.3"}
+	
+	option = { #end diplomacy with barbarian
+		name = ger_bismark.3.a
+		ai_chance = {
+			factor = 50
+		}
+		PRU = {
+			country_event = {
+				id = ger_bismark.4
+				days = 8
+			}
+		}
+		hidden_effect = {
+			RUS = {
+				country_event = {
+					id = ger_bismark.204
+					days = 14
+				}
+			}
+		}
+	}
+
+}
+
+country_event = { #missia in paris
+	id = ger_bismark.4
+	title = ger_bismark.4.t
+	desc = ger_bismark.4.d
+	picture = GFX_report_event_generic_read_write
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger_bismark.4"}
+	
+	option = { #say the French we don't want war
+		name = ger_bismark.4.a
+		ai_chance = {
+			factor = 50
+		}
+		FRR = {
+			country_event = {
+				id = ger_bismark.100
+				days = 9
+			}
+		}
+	}
+
+}
+
+country_event = { #Bismark return with good news
+	id = ger_bismark.5
+	title = ger_bismark.5.t
+	desc = ger_bismark.5.d
+	picture = GFX_report_event_generic_read_write
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger_bismark.5"}
+	
+	immediate = {
+		hidden_effect = {
+			PRU = {
+				diplomatic_relation = {
+					country = FRR
+					relation = non_aggression_pact
+					active = yes
+				}
+			}
+			FRR = {
+				diplomatic_relation = {
+					country = PRU
+					relation = non_aggression_pact
+					active = yes
+				}
+			}
+		}
+	}
+	
+	option = { #Very good news
+		name = ger_bismark.5.a
+		ai_chance = {
+			factor = 50
+		}
+	}
+
+}
+
+country_event = { #Bismark say no for nonagresive pact, but yes to war plan
+	id = ger_bismark.6
+	title = ger_bismark.6.t
+	desc = ger_bismark.6.d
+	picture = GFX_report_event_generic_read_write
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger_bismark.6"}
+	
+	option = { #Very good news
+		name = ger_bismark.6.a
+		ai_chance = {
+			factor = 50
+		}
+		custom_effect_tooltip = if_war_with_france_opendecison_to_destrod_they_tt
+	}
+
+}
+
+country_event = { #France say no
+	id = ger_bismark.7
+	title = ger_bismark.7.t
+	desc = ger_bismark.7.d
+	picture = GFX_report_event_generic_read_write
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger_bismark.7"}
+	
+	option = { #Okey, end diplomacy
+		name = ger_bismark.7.a
+		ai_chance = {
+			factor = 50
+		}
+		hidden_effect = {
+			FRR = {
+				country_event = {
+					id = ger_bismark.103
+					days = 19
+				}
+			}
+		}
+	}
+
+}
+
+country_event = { #French answer
+	id = ger_bismark.100
+	title = ger_bismark.100.t
+	desc = ger_bismark.100.d
+	picture = GFX_report_event_generic_read_write
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger_bismark.100"}
+	
+	option = { #He is Diplomat. He only do his work
+		name = ger_bismark.100.a
+		ai_chance = {
+			factor = 60
+		}
+		FRR = {
+			country_event = {
+				id = ger_bismark.101
+				days = 5
+			}
+		}
+	}
+	
+	option = { #If he want to speak with leader we need inspect him
+		name = ger_bismark.100.b
+		ai_chance = {
+			factor = 35
+		}
+		FRR = {
+			country_event = {
+				id = ger_bismark.102
+				hours = 3
+			}
+		}
+	}
+	
+	option = { #Say no
+		name = ger_bismark.100.c
+		ai_chance = {
+			factor = 5
+		}
+		hidden_effect = {
+			PRU = {
+				country_event = {
+					id = ger_bismark.7
+					days = 8
+				}
+			}
+		}
+	}
+	
+}
+
+country_event = { #What Bismark ask
+	id = ger_bismark.101
+	title = ger_bismark.101.t
+	desc = ger_bismark.101.d
+	picture = GFX_report_event_generic_read_write
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger_bismark.101"}
+	
+	option = { #Nonaggresive pact is good decision
+		name = ger_bismark.101.a
+		ai_chance = {
+			factor = 10
+		}
+		FRR = {
+			set_country_flag = fra_say_bismark_yes
+		}
+		hidden_effect = {
+			PRU = {
+				country_event = {
+					id = ger_bismark.5
+					days = 14
+				}
+			}
+		}
+	}
+	
+	option = { #If they don't give elsas back, we can't speak about peace
+		name = ger_bismark.101.b
+		ai_chance = {
+			factor = 90
+		}
+		hidden_effect = {
+			PRU = {
+				country_event = {
+					id = ger_bismark.6
+					days = 14
+				}
+			}
+		}
+	}
+	
+}
+
+country_event = { #Bismark has weapon with him
+	id = ger_bismark.102
+	title = ger_bismark.102.t
+	desc = ger_bismark.102.d
+	picture = GFX_report_event_generic_read_write
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger_bismark.102"}
+	
+	option = { #He travel in other country logic he need weapon
+		name = ger_bismark.102.a
+		ai_chance = {
+			factor = 30
+		}
+		FRR = {
+			country_event = {
+				id = ger_bismark.101
+				days = 5
+			}
+		}
+	}
+	
+	option = { #Send him back
+		name = ger_bismark.102.b
+		ai_chance = {
+			factor = 70
+		}
+		hidden_effect = {
+			PRU = {
+				country_event = {
+					id = ger_bismark.7
+					days = 14
+				}
+			}
+		}
+	}
+	
+}
+
+country_event = { #Kontinental Europa end dimplomacy with France
+	id = ger_bismark.103
+	title = ger_bismark.103.t
+	desc = ger_bismark.103.d
+	picture = GFX_report_event_generic_read_write
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger_bismark.103"}
+	
+	immediate = {
+		hidden_effect = {
+			every_country = {
+				limit = {
+					is_in_faction_with = PRU
+				}
+				add_opinion_modifier = {
+					target = FRR
+					modifier = end_dimpomacy
+				}
+				add_opinion_modifier = {
+					target = FRR
+					modifier = end_trade
+				}
+				FRR = {
+					add_opinion_modifier = {
+						target = PREV
+						modifier = end_dimpomacy
+					}
+					add_opinion_modifier = {
+						target = PREV
+						modifier = end_trade
+					}
+				}
+			}
+		}
+	}
+	
+	option = { #Not what we expect
+		name = ger_bismark.103.a
+		ai_chance = {
+			factor = 70
+		}
+		news_event = news.186
+	}
+	
+}
+
+country_event = { #Russian answer
+	id = ger_bismark.200
+	title = ger_bismark.200.t
+	desc = ger_bismark.200.d
+	picture = GFX_report_event_generic_read_write
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger_bismark.200"}
+	
+	option = { #He is Diplomat. He only do his work
+		name = ger_bismark.200.a
+		ai_chance = {
+			factor = 70
+		}
+		hidden_effect = {		
+			PRU = {
+				country_event = {
+					id = ger_bismark.2
+					days = 21
+				}
+			}
+			RUS = {
+				country_event = {
+					id = ger_bismark.201
+					days = 30
+				}
+			}
+		}
+	}
+	
+	option = { ##It's suspisance we need know what he do
+		name = ger_bismark.200.b
+		ai_chance = {
+			factor = 20
+		}
+		hidden_effect = {
+			PRU = {
+				country_event = {
+					id = ger_bismark.2
+					days = 21
+				}
+			}
+			RUS = {
+				country_event = {
+					id = ger_bismark.203
+					days = 13
+				}
+			}
+		}
+	}
+	
+	option = { #It is't time to dimplomacy
+		name = ger_bismark.200.c
+		ai_chance = {
+			factor = 10
+		}
+		hidden_effect = {
+			PRU = {
+				country_event = {
+					id = ger_bismark.3
+					days = 8
+				}
+			}
+		}
+	}
+
+}
+
+country_event = { #Wolgadeutsche discontent
+	id = ger_bismark.201
+	title = ger_bismark.201.t
+	desc = ger_bismark.201.d
+	picture = GFX_report_event_generic_read_write
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger_bismark.201"}
+	
+	option = { #Very bad news
+		name = ger_bismark.201.a
+		ai_chance = {
+			factor = 70
+		}
+		RUS = {
+			remove_state_core = 401
+		}
+	}
+
+}
+
+country_event = { #Wolgadeutsche discontent fail
+	id = ger_bismark.202
+	title = ger_bismark.202.t
+	desc = ger_bismark.202.d
+	picture = GFX_report_event_generic_read_write
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger_bismark.202"}
+	
+	option = { #All german are bad
+		name = ger_bismark.202.a
+		ai_chance = {
+			factor = 70
+		}
+	}
+
+}
+
+country_event = { #Bismar dialog with Wolgadeutsche
+	id = ger_bismark.203
+	title = ger_bismark.203.t
+	desc = ger_bismark.203.d
+	picture = GFX_report_event_generic_read_write
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger_bismark.203"}
+	
+	option = { #Army must know what is happend here
+		name = ger_bismark.203.a
+		ai_chance = {
+			factor = 70
+		}
+		custom_effect_tooltip = wolgadeutschediscontdecision_tt
+		set_global_flag = wolgadeutsche_discont_begin
+	}
+	
+	option = { #We not intresting
+		name = ger_bismark.203.b
+		ai_chance = {
+			factor = 30
+		}
+		hidden_effect = {
+			RUS = {
+				country_event = {
+					id = ger_bismark.201
+					days = 11
+				}
+			}
+		}
+	}
+
+}
+
+country_event = { #Kontinental Europa end diplomacy with us
+	id = ger_bismark.204
+	title = ger_bismark.204.t
+	desc = ger_bismark.204.d
+	picture = GFX_report_event_generic_read_write
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event ger_bismark.204"
+		hidden_effect = {
+			every_country = {
+				limit = {
+					is_in_faction_with = PRU
+				}
+				add_opinion_modifier = {
+					target = RUS
+					modifier = end_dimpomacy
+				}
+				add_opinion_modifier = {
+					target = RUS
+					modifier = end_trade
+				}
+				RUS = {
+					add_opinion_modifier = {
+						target = PREV
+						modifier = end_dimpomacy
+					}
+					add_opinion_modifier = {
+						target = PREV
+						modifier = end_trade
+					}
+				}
+			}
+		}
+	}
+	
+	option = { #Not what we expect
+		name = ger_bismark.204.a
+		ai_chance = {
+			factor = 70
+		}
+		news_event = news.185
+	}
+
 }

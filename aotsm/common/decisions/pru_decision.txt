@@ -48,7 +48,7 @@ pru_prospect_for_resources = {
 			51 = {
 				add_resource = {
 					type = oil
-					amount = 12
+					amount = 6
 				}
 			}
 			51 = {
@@ -108,7 +108,7 @@ pru_prospect_for_resources = {
 			42 = {
 				add_resource = {
 					type = oil
-					amount = 18
+					amount = 12
 				}
 			}
 			42 = {
@@ -135,7 +135,7 @@ pru_prospect_for_resources = {
 		}
 
 		available = {
-			num_of_civilian_factories_available_for_projects > 2
+			num_of_civilian_factories_available_for_projects > 4
 			owns_state = 66
 			controls_state = 66
 		}
@@ -144,32 +144,32 @@ pru_prospect_for_resources = {
 			has_completed_focus = PRU_resourse
 			owns_state = 66
 			controls_state = 66
-			66 = {
-				NOT = {
-					has_state_flag = sln_aluminium_flag
-				}
-			}
+			check_variable = { PRU.aluminium_in_66 < 3 }
 		}
 
-		fire_only_once = yes
+		fire_only_once = no
 
 		cost = 25
 		days_remove = 60
+		days_re_enable = 1
 
 		modifier = {
-			civilian_factory_use = 3
+			civilian_factory_use = 5
 		}
 
 		ai_will_do = {
 			factor = 1
 		}
 		remove_effect = { 
-			66 = { set_state_flag = sln_aluminium_flag } 
 			66 = {
 				add_resource = {
 					type = aluminium
-					amount = 54
+					amount = 12
 				}
+			}
+			add_to_variable = {
+				var = PRU.aluminium_in_66
+				value = 1
 			}
 		}
 	}
@@ -189,7 +189,7 @@ pru_prospect_for_resources = {
 		}
 
 		available = {
-			num_of_civilian_factories_available_for_projects > 2
+			num_of_civilian_factories_available_for_projects > 4
 			owns_state = 67
 			controls_state = 67
 		}
@@ -198,32 +198,32 @@ pru_prospect_for_resources = {
 			has_completed_focus = PRU_resourse
 			owns_state = 67
 			controls_state = 67
-			67 = {
-				NOT = {
-					has_state_flag = sls_aluminium_flag
-				}
-			}
+			check_variable = { PRU.aluminium_in_67 < 3 }
 		}
 
-		fire_only_once = yes
+		fire_only_once = no
 
 		cost = 25
 		days_remove = 60
+		days_re_enable = 1
 
 		modifier = {
-			civilian_factory_use = 3
+			civilian_factory_use = 5
 		}
 
 		ai_will_do = {
 			factor = 1
 		}
 		remove_effect = { 
-			67 = { set_state_flag = sls_aluminium_steel } 
 			67 = {
 				add_resource = {
 					type = aluminium
-					amount = 72
+					amount = 18
 				}
+			}
+			add_to_variable = {
+				var = PRU.aluminium_in_67
+				value = 1
 			}
 		}
 	}
@@ -265,32 +265,27 @@ pru_army_hiring_category = {
 		
 		complete_effect = {
 			PRU = {
-				set_technology = { 
-					basic_medium_tank_chassis = 1
-					improved_medium_tank_chassis = 1
-					advanced_medium_tank_chassis = 1
-					armor_tech_2 = 1
-					armor_tech_3 = 1
-					engine_tech_2 = 1
-					engine_tech_3 = 1
+				set_technology = {
+					kingkaiser_1 = 1
 				}
 				create_equipment_variant = {
 					name = "Kingkaizer"
-					type = medium_tank_chassis_3
+					type = medium_tank_equipment_kingkaiser_1
 					parent_version = 0
 					modules = {
-						main_armament_slot = tank_medium_cannon_2
-						turret_type_slot = tank_medium_three_man_tank_turret
+						main_armament_slot = tank_medium_kaiser_cannon_1
+						turret_type_slot = tank_medium_one_man_kaiser_tank_turret
 						suspension_type_slot = tank_christie_suspension
 						armor_type_slot = tank_welded_armor
 						engine_type_slot = tank_petrol_electric_engine
-						special_type_slot_1 = tank_radio_2
+						special_type_slot_1 = tank_kaiser_radio_1
+						special_type_slot_2 = wet_ammo_storage
 					}
 					upgrades = {
 						tank_nsb_engine_upgrade = 4
 						tank_nsb_armor_upgrade = 4
 					}
-					icon = "GFX_GER_improved_medium_tank_medium"
+					icon = "GFX_GER_basic_medium_tank_medium"
 				}
 			}
 			hidden_effect = {
@@ -399,6 +394,15 @@ pru_army_hiring_category = {
 		complete_effect = {
 			PRU = {
 				add_manpower = -12900
+				if = {
+					limit = {
+						NOT = {
+							has_country_flag = pru_divisia_load
+						}
+					}
+					load_oob = PRU_ELITE
+					set_country_flag = pru_divisia_load
+				}
 				hidden_effect = {
 					load_oob = PRU_DIVISIA
 				}
@@ -606,6 +610,9 @@ pru_leypoldit_bomb = {
 			}
 			date > 1856.1.17
 			has_country_flag = pru_bomb_complete
+			CBI = {
+				is_ai = yes
+			}
 		}
 
 		fire_only_once = yes
@@ -1054,9 +1061,999 @@ pru_diplomat_missia = {
 		
 	}
 	
+	pru_recreating_faction = {
+	
+		icon = generic_nationalism
+
+		allowed = {
+			
+		}
+
+		available = {
+ 
+		}
+
+		visible = {
+			original_tag = PRU
+			PRU = {
+				has_completed_focus = PRU_aus_win
+			}
+			OR = {
+				PRU = {
+					is_faction_leader = no
+				}
+				PRU = {
+					is_in_faction = no
+				}
+			}
+			NOT = {
+				has_global_flag = pru_capitulation
+			}
+		}
+
+		fire_only_once = yes
+
+		cost = 0
+		
+		ai_will_do = {
+			factor = 100
+		}
+		
+		complete_effect = {
+			PRU = { create_faction = "PRU_Kontinentaleuropa_pakt" }
+			if = {
+				limit = {
+					has_global_flag = hol_was_in_faction_with_pru
+				}
+				PRU = {
+					add_to_faction = HOL
+				}
+			}
+			if = {
+				limit = {
+					has_global_flag = byz_was_in_faction_with_pru
+				}
+				PRU = { add_to_faction = BYZ }
+			}
+		}
+	
+	}
+	
+	pru_rejoin_faction = {
+	
+		icon = generic_nationalism
+
+		allowed = {
+			
+		}
+
+		available = {
+ 
+		}
+
+		visible = {
+			original_tag = PRU
+			PRU = {
+				is_faction_leader = yes
+			}
+			PRU = {
+				is_in_faction = yes
+			}
+			OR = {
+				AND = {
+					NOT = {
+						HOL = {
+							is_in_faction_with = PRU
+						}
+					}
+					has_global_flag = hol_was_in_faction_with_pru
+					NOT = {
+						HOL = {
+							has_country_flag = leave_pru_allience
+						}
+					}
+				}
+				AND = {
+					NOT = {
+						BYZ = {
+							is_in_faction_with = PRU
+						}
+					}
+					has_global_flag = byz_was_in_faction_with_pru
+					NOT = {
+						has_global_flag = byz_antoginize_pru
+					}
+				}
+			}
+			NOT = {
+				has_global_flag = pru_capitulation
+			}
+		}
+
+		fire_only_once = yes
+
+		cost = 0
+		
+		ai_will_do = {
+			factor = 100
+		}
+		
+		complete_effect = {
+			if = {
+				limit = {
+					has_global_flag = hol_was_in_faction_with_pru
+					NOT = {
+						HOL = {
+							is_in_faction_with = PRU
+						}
+					}
+					NOT = {
+						HOL = {
+							has_country_flag = leave_pru_allience
+						}
+					}
+				}
+				PRU = {
+					add_to_faction = HOL
+				}
+			}
+			if = {
+				limit = {
+					has_global_flag = byz_was_in_faction_with_pru
+					NOT = {
+						BYZ = {
+							is_in_faction_with = PRU
+						}
+					}
+					NOT = {
+						has_global_flag = byz_antoginize_pru
+					}
+				}
+				PRU = { add_to_faction = BYZ }
+			}
+		}
+	
+	}
+	
+	pru_givepolandland = {
+	
+		icon = generic_nationalism
+
+		allowed = {
+			
+		}
+
+		available = {
+			10 = {
+				is_controlled_by_ROOT_or_ally = yes
+			}
+			87 = {
+				is_controlled_by_ROOT_or_ally = yes
+			}
+			90 = {
+				is_controlled_by_ROOT_or_ally = yes
+			}
+			92 = {
+				is_controlled_by_ROOT_or_ally = yes
+			}
+			97 = {
+				is_controlled_by_ROOT_or_ally = yes
+			}
+			98 = {
+				is_controlled_by_ROOT_or_ally = yes
+			}
+			853 = {
+				is_controlled_by_ROOT_or_ally = yes
+			}
+		}
+
+		visible = {
+			original_tag = PRU
+			PRU = {
+				has_completed_focus = PRU_dialog_with_poland
+			}
+			PLH = {
+				is_in_faction_with = PRU
+			}
+			PRU = {
+				has_war_with = RUS
+			}
+			NOT = {
+				PRU = {
+					has_completed_focus = PRU_poland_chose_they_own
+				}
+				PRU = {
+					has_completed_focus = PRU_poland_help_to_chose_right
+				}
+				PRU = {
+					has_completed_focus = PRU_poland_need_king_our_king
+				}
+				PRU = {
+					has_completed_focus = PRU_who_will_ask_poland
+				}
+			}
+		}
+
+		fire_only_once = yes
+
+		cost = 0
+		days_remove = 15
+		
+		ai_will_do = {
+			factor = 100
+		}
+		
+		remove_effect = {
+			if = {
+				limit = {
+					PRU = {
+						has_war_with = RUS
+					}
+				}
+				custom_effect_tooltip = pru_givepolandland_tt
+				hidden_effect = {
+					RUS = {
+						remove_state_core = 10
+						remove_state_core = 87
+						remove_state_core = 90
+						remove_state_core = 92
+						remove_state_core = 98
+						remove_state_core = 97
+						remove_state_core = 853
+					}
+					PLH = {
+						add_state_core = 10
+						add_state_core = 87
+						add_state_core = 90
+						add_state_core = 92
+						add_state_core = 98
+						add_state_core = 97
+						add_state_core = 853
+						transfer_state = 10
+						transfer_state = 87
+						transfer_state = 90
+						transfer_state = 92
+						transfer_state = 98
+						transfer_state = 97
+						transfer_state = 853
+					}
+					PRU = {
+						add_to_variable = {
+							var = PRU.release_country_during_war
+							value = 1
+						}
+					}
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						PRU = {
+							has_war_with = RUS
+						}
+					}
+				}
+				PLH = {
+					add_stability = 0.05
+					add_political_power = 150
+				}
+			}
+		}
+	
+	}
+	
+	pru_givepribalticaland = {
+	
+		icon = generic_nationalism
+
+		allowed = {
+			
+		}
+
+		available = {
+			11 = {
+				is_controlled_by_ROOT_or_ally = yes
+			}
+			12 = {
+				is_controlled_by_ROOT_or_ally = yes
+			}
+			13 = {
+				is_controlled_by_ROOT_or_ally = yes
+			}
+			189 = {
+				is_controlled_by_ROOT_or_ally = yes
+			}
+			190 = {
+				is_controlled_by_ROOT_or_ally = yes
+			}
+			191 = {
+				is_controlled_by_ROOT_or_ally = yes
+			}
+			784 = {
+				is_controlled_by_ROOT_or_ally = yes
+			}
+			915 = {
+				is_controlled_by_ROOT_or_ally = yes
+			}
+		}
+
+		visible = {
+			original_tag = PRU
+			PRU = {
+				has_completed_focus = PRU_dialog_with_pribaltika
+			}
+			PRU = {
+				has_war_with = RUS
+			}
+			NOT = {
+				country_exists = BLT
+			}
+		}
+
+		fire_only_once = yes
+
+		cost = 0
+		days_remove = 15
+		
+		ai_will_do = {
+			factor = 100
+		}
+		
+		remove_effect = {
+			if = {
+				limit = {
+					PRU = {
+						has_war_with = RUS
+					}
+				}
+				custom_effect_tooltip = pru_givepribalticaland_tt
+				hidden_effect = {
+					RUS = {
+						remove_state_core = 11
+						remove_state_core = 12
+						remove_state_core = 13
+						remove_state_core = 189
+						remove_state_core = 190
+						remove_state_core = 191
+						remove_state_core = 784
+						remove_state_core = 915
+					}
+					BLT = {
+						add_state_core = 915
+						transfer_state = 11
+						transfer_state = 12
+						transfer_state = 13
+						transfer_state = 189
+						transfer_state = 190
+						transfer_state = 191
+						transfer_state = 784
+						transfer_state = 915
+					}
+					EST = {
+						add_state_core = 13
+						add_state_core = 191
+					}
+					LAT = {
+						add_state_core = 12
+						add_state_core = 190
+						add_state_core = 915
+					}
+					LIT = {
+						add_state_core = 11
+						add_state_core = 189
+						add_state_core = 784
+					}
+					PRU = {
+						set_autonomy = {
+							target = BLT
+							autonomy_state = autonomy_integrated_puppet
+							end_wars = no
+							end_civil_wars = no
+						}
+					}
+					BLT = {
+						set_politics = { ruling_party = democratic elections_allowed = no }
+						set_popularities = {
+							democratic = 34
+							socialism = 0
+							reactionist = 33
+							authoritarian = 33
+						}
+					}
+					BLT = {
+						load_oob = BLT_army
+					}
+					BLT = {
+						inherit_technology = PRU
+					}
+					EST = {
+						inherit_technology = RUS
+					}
+					LIT = {
+						inherit_technology = RUS
+					}
+					LAT = {
+						inherit_technology = RUS
+					}
+					PRU = {
+						add_to_variable = {
+							var = PRU.release_country_during_war
+							value = 1
+						}
+					}
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						PRU = {
+							has_war_with = RUS
+						}
+					}
+				}
+				BLT = {
+					add_stability = 0.05
+					add_political_power = 150
+				}
+			}
+		}
+	
+	}
+	
+	pru_givewhiteruttenialand = {
+	
+		icon = generic_nationalism
+
+		allowed = {
+			
+		}
+
+		available = {
+			94 = {
+				is_controlled_by_ROOT_or_ally = yes
+			}
+			95 = {
+				is_controlled_by_ROOT_or_ally = yes
+			}
+			96 = {
+				is_controlled_by_ROOT_or_ally = yes
+			}
+			194 = {
+				is_controlled_by_ROOT_or_ally = yes
+			}
+			204 = {
+				is_controlled_by_ROOT_or_ally = yes
+			}
+			206 = {
+				is_controlled_by_ROOT_or_ally = yes
+			}
+			207 = {
+				is_controlled_by_ROOT_or_ally = yes
+			}
+			224 = {
+				is_controlled_by_ROOT_or_ally = yes
+			}
+			241 = {
+				is_controlled_by_ROOT_or_ally = yes
+			}
+			243 = {
+				is_controlled_by_ROOT_or_ally = yes
+			}
+			823 = {
+				is_controlled_by_ROOT_or_ally = yes
+			}
+		}
+
+		visible = {
+			original_tag = PRU
+			PRU = {
+				has_completed_focus = PRU_dialog_with_white_ruttenia
+			}
+			PRU = {
+				has_war_with = RUS
+			}
+			NOT = {
+				country_exists = WRT
+			}
+		}
+
+		fire_only_once = yes
+
+		cost = 0
+		days_remove = 15
+		
+		ai_will_do = {
+			factor = 100
+		}
+		
+		remove_effect = {
+			if = {
+				limit = {
+					PRU = {
+						has_war_with = RUS
+					}
+				}
+				custom_effect_tooltip = pru_givewhiteruttenialand_tt
+				hidden_effect = {
+					RUS = {
+						remove_state_core = 94
+						remove_state_core = 95
+						remove_state_core = 96
+						remove_state_core = 194
+						remove_state_core = 204
+						remove_state_core = 206
+						remove_state_core = 207
+						remove_state_core = 224
+						remove_state_core = 241
+						remove_state_core = 243
+						remove_state_core = 823
+					}
+					WRT = {
+						add_state_core = 94
+						add_state_core = 95
+						add_state_core = 96
+						add_state_core = 194
+						add_state_core = 204
+						add_state_core = 206
+						add_state_core = 207
+						add_state_core = 224
+						add_state_core = 241
+						add_state_core = 243
+						add_state_core = 823
+						transfer_state = 94
+						transfer_state = 95
+						transfer_state = 96
+						transfer_state = 194
+						transfer_state = 204
+						transfer_state = 206
+						transfer_state = 207
+						transfer_state = 224
+						transfer_state = 241
+						transfer_state = 243
+						transfer_state = 823
+					}
+					PRU = {
+						set_autonomy = {
+							target = WRT
+							autonomy_state = autonomy_puppet
+							end_wars = no
+							end_civil_wars = no
+						}
+					}
+					WRT = {
+						set_politics = { ruling_party = democratic elections_allowed = no }
+						set_popularities = {
+							democratic = 63
+							socialism = 7
+							reactionist = 24
+							authoritarian = 6
+						}
+					}
+					WRT = {
+						load_oob = WRT_army
+					}
+					WRT = {
+						inherit_technology = PRU
+					}
+					PRU = {
+						add_to_variable = {
+							var = PRU.release_country_during_war
+							value = 1
+						}
+					}
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						PRU = {
+							has_war_with = RUS
+						}
+					}
+				}
+				WRT = {
+					add_stability = 0.05
+					add_political_power = 150
+				}
+			}
+		}
+	
+	}
+	
+	pru_giveukrainaland = {
+	
+		icon = generic_nationalism
+
+		allowed = {
+			
+		}
+
+		available = {
+			93 = {
+				is_controlled_by_ROOT_or_ally = yes
+			}
+			192 = {
+				is_controlled_by_ROOT_or_ally = yes
+			}
+			193 = {
+				is_controlled_by_ROOT_or_ally = yes
+			}
+			197 = {
+				is_controlled_by_ROOT_or_ally = yes
+			}
+			198 = {
+				is_controlled_by_ROOT_or_ally = yes
+			}
+			199 = {
+				is_controlled_by_ROOT_or_ally = yes
+			}
+			201 = {
+				is_controlled_by_ROOT_or_ally = yes
+			}
+			202 = {
+				is_controlled_by_ROOT_or_ally = yes
+			}
+			203 = {
+				is_controlled_by_ROOT_or_ally = yes
+			}
+			220 = {
+				is_controlled_by_ROOT_or_ally = yes
+			}
+			221 = {
+				is_controlled_by_ROOT_or_ally = yes
+			}
+			225 = {
+				is_controlled_by_ROOT_or_ally = yes
+			}
+			226 = {
+				is_controlled_by_ROOT_or_ally = yes
+			}
+			228 = {
+				is_controlled_by_ROOT_or_ally = yes
+			}
+			240 = {
+				is_controlled_by_ROOT_or_ally = yes
+			}
+			259 = {
+				is_controlled_by_ROOT_or_ally = yes
+			}
+			859 = {
+				is_controlled_by_ROOT_or_ally = yes
+			}
+			885 = {
+				is_controlled_by_ROOT_or_ally = yes
+			}
+			886 = {
+				is_controlled_by_ROOT_or_ally = yes
+			}
+		}
+
+		visible = {
+			original_tag = PRU
+			PRU = {
+				has_completed_focus = PRU_dialog_with_ukraina
+			}
+			PRU = {
+				has_war_with = RUS
+			}
+			NOT = {
+				country_exists = UKR
+			}
+		}
+
+		fire_only_once = yes
+
+		cost = 0
+		days_remove = 15
+		
+		ai_will_do = {
+			factor = 100
+		}
+		
+		remove_effect = {
+			if = {
+				limit = {
+					PRU = {
+						has_war_with = RUS
+					}
+				}
+				custom_effect_tooltip = pru_giveukrainaland_tt
+				hidden_effect = {
+					RUS = {
+						remove_state_core = 93
+						remove_state_core = 192
+						remove_state_core = 193
+						remove_state_core = 197
+						remove_state_core = 198
+						remove_state_core = 199
+						remove_state_core = 201
+						remove_state_core = 202
+						remove_state_core = 203
+						remove_state_core = 220
+						remove_state_core = 221
+						remove_state_core = 225
+						remove_state_core = 226
+						remove_state_core = 228
+						remove_state_core = 240
+						remove_state_core = 259
+						remove_state_core = 859
+						remove_state_core = 885
+						remove_state_core = 886
+					}
+					UKR = {
+						transfer_state = 93
+						add_state_core = 93
+						add_state_core = 137
+						transfer_state = 192
+						add_state_core = 192
+						transfer_state = 193
+						add_state_core = 193
+						add_state_core = 196
+						transfer_state = 197
+						add_state_core = 197
+						transfer_state = 198
+						add_state_core = 198
+						transfer_state = 199
+						add_state_core = 199
+						add_state_core = 200
+						transfer_state = 201
+						add_state_core = 201
+						transfer_state = 202
+						add_state_core = 202
+						transfer_state = 203
+						add_state_core = 203
+						transfer_state = 220
+						add_state_core = 220
+						transfer_state = 221
+						add_state_core = 221
+						transfer_state = 225
+						add_state_core = 225
+						transfer_state = 226
+						add_state_core = 226
+						add_state_core = 227
+						transfer_state = 228
+						add_state_core = 228
+						transfer_state = 240
+						add_state_core = 240
+						transfer_state = 259
+						add_state_core = 259
+						transfer_state = 859
+						add_state_core = 859
+						transfer_state = 885
+						add_state_core = 885
+						transfer_state = 886
+						add_state_core = 886
+					}
+					PRU = {
+						set_autonomy = {
+							target = UKR
+							autonomy_state = autonomy_puppet
+							end_wars = no
+							end_civil_wars = no
+						}
+					}
+					UKR = {
+						set_politics = { ruling_party = reactionist elections_allowed = no }
+						set_popularities = {
+							democratic = 6
+							socialism = 1
+							reactionist = 84
+							authoritarian = 9
+						}
+					}
+					UKR = {
+						load_oob = UKR_army
+					}
+					UKR = {
+						inherit_technology = PRU
+					}
+					PRU = {
+						add_to_variable = {
+							var = PRU.release_country_during_war
+							value = 1
+						}
+					}
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						PRU = {
+							has_war_with = RUS
+						}
+					}
+				}
+				UKR = {
+					add_stability = 0.05
+					add_political_power = 150
+				}
+			}
+		}
+	
+	}
+	
 }
 
 pru_war_decision = {
+
+	ask_frr_about_chritmac_thure = { 
+		
+		icon = eng_ally_imperialist_coup
+
+		allowed = {
+			original_tag = PRU
+		}
+
+		available = {
+			FRR = {
+				has_war_with = PRU 
+			}
+		}
+
+		visible = {
+			has_war_with = FRR
+			has_global_flag = firts_world_war
+			date > 1854.12.23
+			date < 1855.1.7
+		}
+
+		fire_only_once = yes
+
+		cost = 0
+		days_remove = 5
+
+		ai_will_do = {
+			factor = 100
+		}
+		
+		complete_effect = {
+			FRR = {
+				country_event = ger_warpolitic.7
+			}
+		}
+		
+	}
+
+	first_ultimatum = { 
+		
+		icon = eng_trade_unions_support
+
+		allowed = {
+			original_tag = PRU
+		}
+
+		available = {
+			RUS = {
+				has_war_with = PRU 
+			}
+			RUS = {
+				surrender_progress > 0.499
+			}
+			custom_trigger_tooltip = {
+				tooltip = pru_release_country_1_tt
+				check_variable = {
+					var = PRU.release_country_during_war
+					value > 1
+				}
+			}
+		}
+
+		visible = {
+			has_war_with = RUS
+			has_global_flag = firts_world_war
+		}
+
+		fire_only_once = yes
+
+		cost = 0
+		days_remove = 5
+
+		ai_will_do = {
+			factor = 100
+		}
+		
+		remove_effect = {
+			RUS = {
+				country_event = te.50
+			}
+		}
+		
+	}
+	
+	second_ultimatum = { 
+		
+		icon = eng_trade_unions_support
+
+		allowed = {
+			original_tag = PRU
+		}
+
+		available = {
+			RUS = {
+				has_war_with = PRU 
+			}
+			RUS = {
+				surrender_progress > 0.599
+			}
+			custom_trigger_tooltip = {
+				tooltip = pru_release_country_2_tt
+				check_variable = {
+					var = PRU.release_country_during_war
+					value > 1
+				}
+			}
+		}
+
+		visible = {
+			has_war_with = RUS
+			has_global_flag = firts_world_war
+			has_global_flag = rus_denied_first_ultimatum
+		}
+
+		fire_only_once = yes
+
+		cost = 0
+		days_remove = 5
+
+		ai_will_do = {
+			factor = 100
+		}
+		
+		remove_effect = {
+			RUS = {
+				country_event = te.51
+			}
+		}
+		
+	}
+	
+	third_ultimatum = { 
+		
+		icon = eng_trade_unions_support
+
+		allowed = {
+			original_tag = PRU
+		}
+
+		available = {
+			RUS = {
+				has_war_with = PRU 
+			}
+			RUS = {
+				surrender_progress > 0.799
+			}
+			custom_trigger_tooltip = {
+				tooltip = pru_release_country_3_tt
+				check_variable = {
+					var = PRU.release_country_during_war
+					value > 2
+				}
+			}
+		}
+
+		visible = {
+			has_war_with = RUS
+			has_global_flag = firts_world_war
+			has_global_flag = rus_denied_first_ultimatum
+			has_global_flag = rus_denied_second_ultimatum
+		}
+
+		fire_only_once = yes
+
+		cost = 0
+		days_remove = 5
+
+		ai_will_do = {
+			factor = 100
+		}
+		
+		remove_effect = {
+			RUS = {
+				country_event = te.52
+			}
+		}
+		
+	}
 	
 	use_gas_attack_decision = { 
 		
@@ -1067,7 +2064,8 @@ pru_war_decision = {
 		}
 
 		available = {
-			date > 1855.5.20
+			date > 1855.5.18
+			has_global_flag = Fritz_Gaber_success
 		}
 
 		visible = {
@@ -1097,12 +2095,14 @@ pru_war_decision = {
 				RUS = {
 					add_timed_idea = {
 						idea = gas_attack_idea
-						days = 40
+						days = 35
 					}
 				}
-				news_event = {
-					id = news.66
-					days = 14
+				hidden_effect = {
+					country_event = {
+						id = script_event.15
+						days = 14
+					}
 				}
 			}
 			if = {
@@ -1114,7 +2114,7 @@ pru_war_decision = {
 				FRR = {
 					add_timed_idea = {
 						idea = gas_attack_idea
-						days = 30
+						days = 35
 					}
 				}
 			}
@@ -1146,6 +2146,7 @@ pru_war_decision = {
 		}
 
 		visible = {
+			has_country_flag = pru_nicolays_war_plan
 			OR = {
 				has_war_with = RUS
 				has_war_with = FRR
@@ -1216,28 +2217,97 @@ pru_war_decision = {
 		}
 
 		available = {
-			has_stability > 0.5
+			has_stability > 0.54
 		}
 
 		visible = {
+			NOT = {
+				has_idea = pru_mass_war_production_idea
+			}
 			OR = {
 				has_war_with = RUS
 				has_war_with = FRR
 			}
 		}
 
-		fire_only_once = yes
+		fire_only_once = no
 
 		cost = 0
 		
 		days_re_enable = 365
 
 		ai_will_do = {
-			factor = 100
+			factor = 1
+			modifier = {
+				factor = 25
+				PRU = {
+					has_stability > 0.55
+				}
+			}
+			modifier = {
+				factor = 50
+				PRU = {
+					has_stability > 0.59
+				}
+			}
 		}
 		
 		complete_effect = {
 			add_ideas = pru_mass_war_production_idea
+		}
+		
+	}
+	
+	pru_additional_food_for_worker = { 
+		
+		icon = generic_form_nation
+
+		allowed = {
+			original_tag = PRU
+		}
+
+		available = {
+			has_stability > 0.49
+		}
+
+		visible = {
+			NOT = {
+				has_idea = pru_mass_war_production_idea_with_sawdust_soup
+			}
+			has_idea = pru_mass_war_production_idea
+			OR = {
+				has_war_with = RUS
+				has_war_with = FRR
+			}
+		}
+
+		fire_only_once = no
+
+		cost = 0
+		
+		days_re_enable = 1
+
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 0
+				PRU = {
+					has_stability > 0.59
+				}
+			}
+			modifier = {
+				factor = 25
+				PRU = {
+					has_stability > 0.49
+				}
+			}
+		}
+		
+		complete_effect = {
+			swap_ideas = {
+				remove_idea = pru_mass_war_production_idea
+				add_idea = pru_mass_war_production_idea_with_sawdust_soup
+			}
 		}
 		
 	}
@@ -1555,13 +2625,10 @@ mat_decision = {
 				transfer_state = 824
 				add_state_core = 824
 			}
-			CAS = {
+			AUS = {
 				remove_state_core = 297
 				remove_state_core = 705
 				remove_state_core = 824
-				add_state_claim = 297
-				add_state_claim = 705
-				add_state_claim = 824
 			}
 		}
 	
@@ -1784,6 +2851,885 @@ mat_decision = {
 			BUR = {
 				set_country_flag = BUR_vs_MAT
 			}
+		}
+	
+	}
+
+}
+
+pru_integration_decision = {
+
+	integrat_mcs = {
+
+		icon = generic_nationalism
+
+		allowed = {
+
+		}
+
+		available = {
+			NOT = {
+				country_exists = MCS
+			}
+			owns_state = 897
+		}
+
+		visible = {
+			PRU = {
+				has_completed_focus = PRU_integration
+			}
+		}
+
+		fire_only_once = yes
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 100
+		}
+		
+		modifier = {
+			political_power_factor = -0.05
+		}
+		
+		days_remove = 25
+		
+		remove_effect = {
+			add_state_core = 897
+		}
+	
+	}
+	
+	integrat_mcl = {
+
+		icon = generic_nationalism
+
+		allowed = {
+
+		}
+
+		available = {
+			NOT = {
+				country_exists = MCL
+			}
+			owns_state = 61
+		}
+
+		visible = {
+			PRU = {
+				has_completed_focus = PRU_integration
+			}
+		}
+
+		fire_only_once = yes
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 100
+		}
+		
+		modifier = {
+			political_power_factor = -0.05
+		}
+		
+		days_remove = 25
+		
+		remove_effect = {
+			add_state_core = 61
+		}
+	
+	}
+	
+	integrat_lbe = {
+
+		icon = generic_nationalism
+
+		allowed = {
+
+		}
+
+		available = {
+			NOT = {
+				country_exists = MCL
+			}
+			owns_state = 892
+		}
+
+		visible = {
+			PRU = {
+				has_completed_focus = PRU_integration
+			}
+		}
+
+		fire_only_once = yes
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 100
+		}
+		
+		modifier = {
+			political_power_factor = -0.05
+		}
+		
+		days_remove = 25
+		
+		remove_effect = {
+			add_state_core = 892
+		}
+	
+	}
+	
+	integrat_hls = {
+
+		icon = generic_nationalism
+
+		allowed = {
+
+		}
+
+		available = {
+			NOT = {
+				country_exists = HLS
+			}
+			owns_state = 58
+		}
+
+		visible = {
+			PRU = {
+				has_completed_focus = PRU_integration
+			}
+		}
+
+		fire_only_once = yes
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 100
+		}
+		
+		modifier = {
+			political_power_factor = -0.05
+		}
+		
+		days_remove = 25
+		
+		remove_effect = {
+			add_state_core = 58
+		}
+	
+	}
+	
+	integrat_slg = {
+
+		icon = generic_nationalism
+
+		allowed = {
+
+		}
+
+		available = {
+			NOT = {
+				country_exists = SLG
+			}
+			owns_state = 829
+		}
+
+		visible = {
+			PRU = {
+				has_completed_focus = PRU_integration
+			}
+		}
+
+		fire_only_once = yes
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 100
+		}
+		
+		modifier = {
+			political_power_factor = -0.05
+		}
+		
+		days_remove = 25
+		
+		remove_effect = {
+			add_state_core = 829
+		}
+	
+	}
+	
+	integrat_ham = {
+
+		icon = generic_nationalism
+
+		allowed = {
+
+		}
+
+		available = {
+			NOT = {
+				country_exists = HAM
+			}
+			owns_state = 893
+		}
+
+		visible = {
+			PRU = {
+				has_completed_focus = PRU_integration
+			}
+		}
+
+		fire_only_once = yes
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 100
+		}
+		
+		modifier = {
+			political_power_factor = -0.05
+		}
+		
+		days_remove = 25
+		
+		remove_effect = {
+			add_state_core = 893
+		}
+	
+	}
+	
+	integrat_han = {
+
+		icon = generic_nationalism
+
+		allowed = {
+
+		}
+
+		available = {
+			NOT = {
+				country_exists = HAN
+			}
+			owns_state = 56
+			owns_state = 57
+			owns_state = 59
+		}
+
+		visible = {
+			PRU = {
+				has_completed_focus = PRU_integration
+			}
+		}
+
+		fire_only_once = yes
+
+		cost = 30
+
+		ai_will_do = {
+			factor = 100
+		}
+		
+		modifier = {
+			political_power_factor = -0.05
+		}
+		
+		days_remove = 75
+		
+		remove_effect = {
+			add_state_core = 56
+			add_state_core = 57
+			add_state_core = 59
+		}
+	
+	}
+	
+	integrat_brm = {
+
+		icon = generic_nationalism
+
+		allowed = {
+
+		}
+
+		available = {
+			NOT = {
+				country_exists = BRM
+			}
+			owns_state = 896
+		}
+
+		visible = {
+			PRU = {
+				has_completed_focus = PRU_integration
+			}
+		}
+
+		fire_only_once = yes
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 100
+		}
+		
+		modifier = {
+			political_power_factor = -0.05
+		}
+		
+		days_remove = 25
+		
+		remove_effect = {
+			add_state_core = 896
+		}
+	
+	}
+	
+	integrat_old = {
+
+		icon = generic_nationalism
+
+		allowed = {
+
+		}
+
+		available = {
+			NOT = {
+				country_exists = OLD
+			}
+			owns_state = 895
+		}
+
+		visible = {
+			PRU = {
+				has_completed_focus = PRU_integration
+			}
+		}
+
+		fire_only_once = yes
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 100
+		}
+		
+		modifier = {
+			political_power_factor = -0.05
+		}
+		
+		days_remove = 25
+		
+		remove_effect = {
+			add_state_core = 895
+		}
+	
+	}
+	
+	integrat_sak = {
+
+		icon = generic_nationalism
+
+		allowed = {
+
+		}
+
+		available = {
+			NOT = {
+				country_exists = SAK
+			}
+			owns_state = 65
+		}
+
+		visible = {
+			PRU = {
+				has_completed_focus = PRU_integration
+			}
+		}
+
+		fire_only_once = yes
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 100
+		}
+		
+		modifier = {
+			political_power_factor = -0.05
+		}
+		
+		days_remove = 25
+		
+		remove_effect = {
+			add_state_core = 65
+		}
+	
+	}
+	
+	integrat_tyr = {
+
+		icon = generic_nationalism
+
+		allowed = {
+
+		}
+
+		available = {
+			NOT = {
+				country_exists = TYR
+			}
+			owns_state = 60
+		}
+
+		visible = {
+			PRU = {
+				has_completed_focus = PRU_integration
+			}
+		}
+
+		fire_only_once = yes
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 100
+		}
+		
+		modifier = {
+			political_power_factor = -0.05
+		}
+		
+		days_remove = 25
+		
+		remove_effect = {
+			add_state_core = 60
+		}
+	
+	}
+	
+	integrat_wei = {
+
+		icon = generic_nationalism
+
+		allowed = {
+
+		}
+
+		available = {
+			NOT = {
+				country_exists = WEI
+			}
+			owns_state = 901
+		}
+
+		visible = {
+			PRU = {
+				has_completed_focus = PRU_integration
+			}
+		}
+
+		fire_only_once = yes
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 100
+		}
+		
+		modifier = {
+			political_power_factor = -0.05
+		}
+		
+		days_remove = 25
+		
+		remove_effect = {
+			add_state_core = 901
+		}
+	
+	}
+	
+	integrat_mei = {
+
+		icon = generic_nationalism
+
+		allowed = {
+
+		}
+
+		available = {
+			NOT = {
+				country_exists = MEI
+			}
+			owns_state = 900
+		}
+
+		visible = {
+			PRU = {
+				has_completed_focus = PRU_integration
+			}
+		}
+
+		fire_only_once = yes
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 100
+		}
+		
+		modifier = {
+			political_power_factor = -0.05
+		}
+		
+		days_remove = 25
+		
+		remove_effect = {
+			add_state_core = 900
+		}
+	
+	}
+	
+	integrat_hes = {
+
+		icon = generic_nationalism
+
+		allowed = {
+
+		}
+
+		available = {
+			NOT = {
+				country_exists = HES
+			}
+			owns_state = 898
+		}
+
+		visible = {
+			PRU = {
+				has_completed_focus = PRU_integration
+			}
+		}
+
+		fire_only_once = yes
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 100
+		}
+		
+		modifier = {
+			political_power_factor = -0.05
+		}
+		
+		days_remove = 25
+		
+		remove_effect = {
+			add_state_core = 898
+		}
+	
+	}
+	
+	integrat_wld = {
+
+		icon = generic_nationalism
+
+		allowed = {
+
+		}
+
+		available = {
+			NOT = {
+				country_exists = WLD
+			}
+			owns_state = 899
+		}
+
+		visible = {
+			PRU = {
+				has_completed_focus = PRU_integration
+			}
+		}
+
+		fire_only_once = yes
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 100
+		}
+		
+		modifier = {
+			political_power_factor = -0.05
+		}
+		
+		days_remove = 25
+		
+		remove_effect = {
+			add_state_core = 899
+		}
+	
+	}
+	
+	integrat_frn = {
+
+		icon = generic_nationalism
+
+		allowed = {
+
+		}
+
+		available = {
+			NOT = {
+				country_exists = FRN
+			}
+			owns_state = 55
+		}
+
+		visible = {
+			PRU = {
+				has_completed_focus = PRU_integration
+			}
+		}
+
+		fire_only_once = yes
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 100
+		}
+		
+		modifier = {
+			political_power_factor = -0.05
+		}
+		
+		days_remove = 25
+		
+		remove_effect = {
+			add_state_core = 55
+		}
+	
+	}
+	
+	integrat_kol = {
+
+		icon = generic_nationalism
+
+		allowed = {
+
+		}
+
+		available = {
+			NOT = {
+				country_exists = KOL
+			}
+			owns_state = 42
+			owns_state = 51
+			owns_state = 888
+		}
+
+		visible = {
+			PRU = {
+				has_completed_focus = PRU_integration
+			}
+		}
+
+		fire_only_once = yes
+
+		cost = 30
+
+		ai_will_do = {
+			factor = 100
+		}
+		
+		modifier = {
+			political_power_factor = -0.05
+		}
+		
+		days_remove = 75
+		
+		remove_effect = {
+			add_state_core = 42
+			add_state_core = 51
+			add_state_core = 888
+		}
+	
+	}
+	
+	integrat_bav = {
+
+		icon = generic_nationalism
+
+		allowed = {
+
+		}
+
+		available = {
+			NOT = {
+				country_exists = BAV
+			}
+			owns_state = 52
+			owns_state = 53
+			owns_state = 54
+			owns_state = 894
+		}
+
+		visible = {
+			PRU = {
+				has_completed_focus = PRU_integration_2
+			}
+		}
+
+		fire_only_once = yes
+
+		cost = 40
+
+		ai_will_do = {
+			factor = 100
+		}
+		
+		modifier = {
+			political_power_factor = -0.05
+		}
+		
+		days_remove = 100
+		
+		remove_effect = {
+			add_state_core = 52
+			add_state_core = 53
+			add_state_core = 54
+			add_state_core = 894
+		}
+	
+	}
+	
+	integrat_vur = {
+
+		icon = generic_nationalism
+
+		allowed = {
+
+		}
+
+		available = {
+			NOT = {
+				country_exists = VUR
+			}
+			owns_state = 808
+		}
+
+		visible = {
+			PRU = {
+				has_completed_focus = PRU_integration_2
+			}
+		}
+
+		fire_only_once = yes
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 100
+		}
+		
+		modifier = {
+			political_power_factor = -0.05
+		}
+		
+		days_remove = 25
+		
+		remove_effect = {
+			add_state_core = 808
+		}
+	
+	}
+	
+	integrat_hoh = {
+
+		icon = generic_nationalism
+
+		allowed = {
+
+		}
+
+		available = {
+			NOT = {
+				country_exists = HOH
+			}
+			owns_state = 890
+		}
+
+		visible = {
+			PRU = {
+				has_completed_focus = PRU_integration_2
+			}
+		}
+
+		fire_only_once = yes
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 100
+		}
+		
+		modifier = {
+			political_power_factor = -0.05
+		}
+		
+		days_remove = 25
+		
+		remove_effect = {
+			add_state_core = 890
+		}
+	
+	}
+	
+	integrat_bad = {
+
+		icon = generic_nationalism
+
+		allowed = {
+
+		}
+
+		available = {
+			NOT = {
+				country_exists = BAD
+			}
+			owns_state = 50
+		}
+
+		visible = {
+			PRU = {
+				has_completed_focus = PRU_integration_2
+			}
+		}
+
+		fire_only_once = yes
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 100
+		}
+		
+		modifier = {
+			political_power_factor = -0.05
+		}
+		
+		days_remove = 25
+		
+		remove_effect = {
+			add_state_core = 50
 		}
 	
 	}

@@ -4,15 +4,545 @@
 #################
 
 add_namespace = aus
+add_namespace = aus_iogan
+add_namespace = aus_ferdinand
+add_namespace = aus_napoleon
+add_namespace = aus_diplomacy
+add_namespace = aus_kaiser
 add_namespace = aus_dem
 add_namespace = aus_ref
+add_namespace = end_of_austrian
+add_namespace = aus_industrian_reform
+
+#Base aus
+
+country_event = {
+	id = aus.1
+	title = aus.1.t
+	desc = aus.1.d
+	picture = GFX_report_event_gre_greece_and_turkey_relations
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = {
+		name = aus.1.a
+		ai_chance = {
+			factor = 0
+			modifier = {
+				add = 500
+				has_game_rule = {
+					rule = AUS_fall_or_not
+					option = AUS_TRY_TO_NO_FALL
+				}
+			}
+		}
+		add_timed_idea = {
+			idea = AUS_additional_education_of_kaiser
+			days = 365
+		} 
+		hidden_effect = {
+			country_event = {
+				id = aus_kaiser.1
+				days = 180
+			}
+		}
+		custom_effect_tooltip = austrian_story_yes_tt
+	}
+	
+	option = {
+		name = aus.1.b	
+		ai_chance = {
+			factor = 100
+			modifier = {
+				add = -100
+				has_game_rule = {
+					rule = AUS_fall_or_not
+					option = AUS_TRY_TO_NO_FALL
+				}
+			}
+		}
+		set_country_flag = AUS_no_story_of_empire
+		custom_effect_tooltip = austrian_story_no_tt
+	}
+}
+
+country_event = {
+	id = aus.2 #Elections
+	title = aus.2.t
+	desc = aus.2.d
+	picture = GFX_report_event_election_vote
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = { #Iogan win
+		name = aus.2.a
+		ai_chance = {
+			factor = 20
+		}
+		set_country_flag = iogan_win_aus
+		complete_national_focus = AUS_iogan_win
+		promote_character = {
+			character = AUS_Iogann_von_Rechbergund_Rotenleven
+		}
+		mark_focus_tree_layout_dirty = yes
+		hidden_effect = {
+			news_event = {
+				id = news.133
+				days = 17
+			}
+		}
+	}
+	
+	option = { #Ferdinand win
+		name = aus.2.b	
+		ai_chance = {
+			factor = 75
+		}
+		set_country_flag = ferdinand_win_aus
+		complete_national_focus = AUS_ferdinand_win
+		promote_character = {
+			character = AUS_Karl_von_Buol_Shauenstein
+		}
+		mark_focus_tree_layout_dirty = yes
+		hidden_effect = {
+			news_event = {
+				id = news.133
+				days = 17
+			}
+		}
+	}
+	
+	option = { #Napoleon win
+		name = aus.2.c	
+		ai_chance = {
+			factor = 5
+			modifier = {
+				factor = 1000
+				FRR = {
+					has_country_leader = {
+						character = FRR_Louis_Napoleon
+						ruling_only = yes
+					}
+				}
+			}
+		}
+		set_country_flag = napoleon_win_aus
+		complete_national_focus = AUS_napoleon_win
+		promote_character = {
+			character = AUS_Napoleon_II
+		}
+		mark_focus_tree_layout_dirty = yes
+	}
+}
+
+country_event = { #Prioritet of empire
+	id = aus.10
+	title = aus.10.t
+	desc = aus.10.d
+	picture = GFX_report_event_generic_usa_treaty
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = {#army
+		name = aus.10.a
+		ai_chance = {
+			factor = 33
+		}
+		add_timed_idea = {
+			idea = AUS_prioritet_army
+			days = 180
+		}
+	}
+	
+	option = {#industria
+		name = aus.10.b	
+		ai_chance = {
+			factor = 34
+		}
+		add_timed_idea = {
+			idea = AUS_prioritet_industria
+			days = 180
+		}
+	}
+	
+	option = {#infrasture
+		name = aus.10.c
+		ai_chance = {
+			factor = 33
+		}
+		add_timed_idea = {
+			idea = AUS_prioritet_infrastructure
+			days = 180
+		}
+	}
+	
+}
+
+country_event = {#new monarchy
+	id = aus.11
+	title = aus.11.t
+	desc = aus.11.d
+	picture = GFX_report_event_king_speech
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = {
+		name = aus.11.a
+		complete_national_focus = AUS_new_gold_age
+	}
+	
+}
+
+country_event = {#what do next
+	id = aus.12
+	title = aus.12.t
+	desc = aus.12.d
+	picture = GFX_report_event_generic_sign_treaty1
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = { #reform
+		name = aus.12.a
+	}
+	
+}
+
+#aus iogan
+
+country_event = {
+	id = aus_iogan.1 #main enemy
+	title = aus_iogan.1.t
+	desc = aus_iogan.1.d
+	picture = GFX_report_event_german_troops
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = { #CBI wil pay!
+		name = aus_iogan.1.a
+		add_opinion_modifier = {
+			target = CBI
+			modifier = history_enemy
+		}
+		CBI = {
+			add_opinion_modifier = {
+				target = AUS
+				modifier = history_enemy
+			}
+		}
+	}
+	
+}
+
+country_event = {
+	id = aus_iogan.2 #compromiss
+	title = aus_iogan.2.t
+	desc = aus_iogan.2.d
+	picture = GFX_report_event_gre_cabinet_meeting
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = { #with byzantium
+		name = aus_iogan.2.a
+		ai_chance = {
+			factor = 0
+		}
+	}
+	
+	option = { #with russian
+		name = aus_iogan.2.b
+		ai_chance = {
+			factor = 5
+		}
+		add_opinion_modifier = {
+			target = RUS
+			modifier = history_friend
+		}
+		RUS = {
+			add_opinion_modifier = {
+				target = AUS
+				modifier = history_friend
+			}
+		}
+	}
+	
+	option = { #Compromis what it is?
+		name = aus_iogan.2.c
+		ai_chance = {
+			factor = 95
+		}
+		add_stability = 0.05
+	}
+	
+}
+
+#aus ferdinand
+
+country_event = {
+	id = aus_ferdinand.1 #what hungary want
+	title = aus_ferdinand.1.t
+	desc = aus_ferdinand.1.d
+	picture = GFX_report_event_generic_usa_treaty
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = {
+		name = aus_ferdinand.1.a
+	}
+	
+}
+
+country_event = {
+	id = aus_ferdinand.2 #what slavane want
+	title = aus_ferdinand.2.t
+	desc = aus_ferdinand.2.d
+	picture = GFX_report_event_finnish_letter
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = {
+		name = aus_ferdinand.2.a
+	}
+	
+}
+
+#aus napoleon
+
+country_event = {
+	id = aus_napoleon.1 #visit on corsica
+	title = aus_napoleon.1.t
+	desc = aus_napoleon.1.d
+	picture = GFX_report_event_french_british_officers
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = {
+		name = aus_napoleon.1.a
+		news_event = news.138
+	}
+	
+}
+
+#aus diplomacy
+
+country_event = { #Will country help Aus
+	id = aus_diplomacy.1
+	title = aus_diplomacy.1.t
+	desc = aus_diplomacy.1.d
+	picture = GFX_report_event_gre_city_siege
+	
+	is_triggered_only = yes
+	
+	fire_only_once = no
+	
+	option = { #Yes
+		name = aus_diplomacy.1.a
+		ai_chance = {
+			factor = 75
+		}
+		add_to_array = { global.austrian_help = ROOT }
+		AUS = {
+			country_event = {
+				id = aus_diplomacy.2
+				days = 1
+			}
+		}
+		if = {
+			limit = {
+				tag = RUS
+			}
+			AUS = {
+				add_timed_idea = {
+					idea = rus_help_to_aus
+					days = 120
+				}
+			}
+		}
+		if = {
+			limit = {
+				tag = FRR
+			}
+			AUS = {
+				add_timed_idea = {
+					idea = frr_help_to_aus
+					days = 120
+				}
+			}
+		}
+		if = {
+			limit = {
+				tag = CBI
+			}
+			AUS = {
+				add_timed_idea = {
+					idea = cbi_help_to_aus
+					days = 120
+				}
+			}
+		}
+		if = {
+			limit = {
+				NOT = {
+					any_country = {
+						has_country_flag = first_place_in_help_to_aus
+					}
+				}
+			}
+			set_country_flag = first_place_in_help_to_aus
+		}
+		if = {
+			limit = {
+				NOT = {
+					has_country_flag = first_place_in_help_to_aus
+				}
+				NOT = {
+					any_country = {
+						has_country_flag = second_place_in_help_to_aus
+					}
+				}
+			}
+			set_country_flag = second_place_in_help_to_aus
+		}
+		if = {
+			limit = {
+				NOT = {
+					has_country_flag = first_place_in_help_to_aus
+				}
+				NOT = {
+					has_country_flag = second_place_in_help_to_aus
+				}
+				NOT = {
+					any_country = {
+						has_country_flag = third_place_in_help_to_aus
+					}
+				}
+			}
+			set_country_flag = third_place_in_help_to_aus
+		}
+		ROOT = {
+			set_country_flag = chose_help_to_aus_flag
+		}
+	}
+	
+	option = { #No
+		name = aus_diplomacy.1.b	
+		ai_chance = {
+			factor = 25
+			modifier = {
+				factor = 0
+				has_game_rule = {
+					rule = AUS_fall_or_not
+					option = AUS_TRY_TO_NO_FALL
+				}
+			}
+		}
+		AUS = {
+			country_event = {
+				id = aus_diplomacy.3
+				days = 1
+			}
+		}
+	}
+}
+
+country_event = { #They say yes
+	id = aus_diplomacy.2
+	title = aus_diplomacy.2.t
+	desc = aus_diplomacy.2.d
+	picture = GFX_report_event_spain_civil_war_volunteers_02
+	
+	is_triggered_only = yes
+	
+	fire_only_once = no
+	
+	option = { 
+		name = aus_diplomacy.2.a
+	}
+}
+
+country_event = { #They say no
+	id = aus_diplomacy.3
+	title = aus_diplomacy.3.t
+	desc = aus_diplomacy.3.d
+	picture = GFX_report_event_gre_city_siege
+	
+	is_triggered_only = yes
+	
+	fire_only_once = no
+	
+	option = { 
+		name = aus_diplomacy.3.a
+	}
+}
+
+country_event = { #AUS ask for peace(Fun Event)
+	id = aus_diplomacy.4
+	title = aus_diplomacy.4.t
+	desc = aus_diplomacy.4.d
+	picture = GFX_report_event_gre_allied_diplomacy_military
+	
+	is_triggered_only = yes
+	
+	fire_only_once = no
+	
+	option = { #They say only no :3
+		name = aus_diplomacy.4.a
+	}
+}
+
+#aus kaiser
+
+country_event = {
+	id = aus_kaiser.1
+	title = aus_kaiser.1.t
+	desc = aus_kaiser.1.d
+	picture = GFX_report_event_eng_royal_family
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = {
+		name = aus_kaiser.1.a
+		remove_trait = {
+			character = AUS_Franz_Joseph_I
+			ideology = monarchist
+			trait = mediocre_1
+		}
+		add_trait = {
+			 character = AUS_Franz_Joseph_I
+			 ideology = monarchist
+			 trait = mediocre_2
+		}
+	}
+}
+
+#aus dem
 
 country_event = {
 	id = aus_dem.1
 	title = aus_dem.1.t
 	desc = aus_dem.1.d
-	picture = GFX_report_event_molotov_signing_pact
-	
+	picture = GFX_report_event_aotsm_generic_signing_the_contract	
 	is_triggered_only = yes
 	
 	fire_only_once = yes
@@ -21,6 +551,8 @@ country_event = {
 		name = aus_dem.1.a	
 	}
 }
+
+#aus ref
 
 country_event = {
 	id = aus_ref.1
@@ -84,10 +616,12 @@ country_event = {
 			transfer_state = 88
 			transfer_state = 89
 			transfer_state = 91
+			transfer_state = 902
 			add_state_core = 80
 			add_state_core = 88
 			add_state_core = 89
 			add_state_core = 91
+			add_state_core = 902
 		}
 		VEN = {
 			transfer_state = 159
@@ -125,6 +659,785 @@ country_event = {
 			remove_state_core = 736
 			remove_state_core = 764
 			remove_state_core = 810
-			}
+			remove_state_core = 902
+		}
 	}
+}
+
+#end of austrian
+
+country_event = {
+	id = end_of_austrian.1 #Hungary out
+	title = end_of_austrian.1.t
+	desc = end_of_austrian.1.d
+	picture = GFX_report_event_german_troops_paris
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = { 
+		name = end_of_austrian.1.a	
+		if = {
+			limit = {
+				NOT = {
+					PRU = {
+						has_country_flag = victory_R_V_A_3
+					}
+				}
+			}
+			43 = {	
+				remove_dynamic_modifier = { modifier = AUS_state_hungarian_probleb_dynamic_modifier }
+			}
+			45 = {
+				remove_dynamic_modifier = { modifier = AUS_state_hungarian_probleb_dynamic_modifier }
+			}
+			70 = {
+				remove_dynamic_modifier = { modifier = AUS_state_hungarian_probleb_dynamic_modifier }
+			}
+			71 = {
+				remove_dynamic_modifier = { modifier = AUS_state_hungarian_probleb_dynamic_modifier }
+			}
+			73 = {
+				remove_dynamic_modifier = { modifier = AUS_state_hungarian_probleb_dynamic_modifier }
+			}
+			76 = {
+				remove_dynamic_modifier = { modifier = AUS_state_hungarian_probleb_dynamic_modifier }
+			}
+			82 = {
+				remove_dynamic_modifier = { modifier = AUS_state_hungarian_probleb_dynamic_modifier }
+			}
+			83 = {
+				remove_dynamic_modifier = { modifier = AUS_state_hungarian_probleb_dynamic_modifier }
+			}
+			84 = {
+				remove_dynamic_modifier = { modifier = AUS_state_hungarian_probleb_dynamic_modifier }
+			}
+			154 = {
+				remove_dynamic_modifier = { modifier = AUS_state_hungarian_probleb_dynamic_modifier }
+			}
+			155 = {
+				remove_dynamic_modifier = { modifier = AUS_state_hungarian_probleb_dynamic_modifier }
+			}
+			664 = {
+				remove_dynamic_modifier = { modifier = AUS_state_hungarian_probleb_dynamic_modifier }
+			}
+			764 = {
+				remove_dynamic_modifier = { modifier = AUS_state_hungarian_probleb_dynamic_modifier }
+			}
+			HUN = {
+				inherit_technology = AUS
+				transfer_state = 43
+				transfer_state = 154
+				transfer_state = 155
+				add_ideas = revolution_power
+				load_oob = revolution_force_HUN
+				set_politics  = {
+					ruling_party = reactionist
+				}
+				set_country_flag = hun_has_revolution_aus
+			}
+			HUN = {
+				declare_war_on = {
+					target = AUS
+					type = annex_everything
+				}
+			}
+			AUS = {
+				remove_state_core = 43
+				remove_state_core = 154
+				remove_state_core = 155
+				hidden_effect = {
+					43 = {
+						teleport_armies = {
+							limit = {
+								has_war_with = HUN
+							}
+							to_state = 4
+						}
+					}
+					154 = {
+						teleport_armies = {
+							limit = {
+								has_war_with = HUN
+							}
+							to_state = 4
+						}
+					}
+					155 = {
+						teleport_armies = {
+							limit = {
+								has_war_with = HUN
+							}
+							to_state = 4
+						}
+					}
+				}
+			}
+			AUS = {
+				swap_ideas = {
+					remove_idea = fight_for_empire_1
+					add_idea = fight_for_empire_2
+				}
+			}
+			hidden_effect = {
+				AUS = {
+					country_event = {
+						id = end_of_austrian.2 
+						days = 2
+					}
+				}
+			}
+		}
+	}
+}
+
+country_event = {
+	id = end_of_austrian.2 #Moldavia annex south bykovina
+	title = end_of_austrian.2.t
+	desc = end_of_austrian.2.d
+	picture = GFX_report_event_gre_city_siege
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = { 
+		name = end_of_austrian.2.a	
+		if = {
+			limit = {
+				NOT = {
+					PRU = {
+						has_country_flag = victory_R_V_A_3
+					}
+				}
+			}
+			902 = {
+				remove_dynamic_modifier = { modifier = AUS_state_slavic_probleb_dynamic_modifier }
+			}
+			if = {
+				limit = {
+					AUS = {
+						owns_state = 902
+					}
+				}
+				if = {
+					limit = {
+						country_exists = MOL
+					}
+					MOL = {
+						transfer_state = 902
+						add_state_core = 902
+					}
+				}
+				if = {
+					limit = {
+						NOT = {
+							country_exists = MOL
+						}
+					}
+					VLH = {
+						transfer_state = 902
+						add_state_core = 902
+					}
+				}
+			}
+			AUS = {
+				hidden_effect = {
+					902 = {
+						teleport_armies = {
+							limit = {
+								has_war_with = PRU
+							}
+							to_state = 4
+						}
+					}
+					remove_state_core = 902
+				}
+			}
+			hidden_effect = {
+				AUS = {
+					country_event = {
+						id = end_of_austrian.3
+						days = 4
+					}
+				}
+			}
+		}
+	}
+}
+
+country_event = {
+	id = end_of_austrian.3 #Galisian Revolution
+	title = end_of_austrian.3.t
+	desc = end_of_austrian.3.d
+	picture = GFX_report_event_bul_military_parade_vidin
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = { 
+		name = end_of_austrian.3.a	
+		if = {
+			limit = {
+				NOT = {
+					PRU = {
+						has_country_flag = victory_R_V_A_3
+					}
+				}
+			}
+			80 = {
+				remove_dynamic_modifier = { modifier = AUS_state_slavic_probleb_dynamic_modifier }
+			}
+			88 = {
+				remove_dynamic_modifier = { modifier = AUS_state_slavic_probleb_dynamic_modifier }
+			}
+			89 = {
+				remove_dynamic_modifier = { modifier = AUS_state_slavic_probleb_dynamic_modifier }
+			}
+			91 = {
+				remove_dynamic_modifier = { modifier = AUS_state_slavic_probleb_dynamic_modifier }
+			}
+			GLA = {
+				inherit_technology = AUS
+				transfer_state = 80
+				transfer_state = 89
+				transfer_state = 91
+				add_ideas = revolution_power
+				load_oob = revolution_force_GLA
+				set_country_flag = gla_has_revolution_aus
+			}
+			GLA = {
+				declare_war_on = {
+					target = AUS
+					type = annex_everything
+				}
+			}
+			if = {
+				limit = {
+					country_exists = HUN
+				}
+				HUN = {
+					transfer_state = 73
+					transfer_state = 76
+					transfer_state = 83
+					transfer_state = 84
+				}
+			}
+			AUS = {
+				remove_state_core = 73
+				remove_state_core = 76
+				remove_state_core = 80
+				remove_state_core = 83
+				remove_state_core = 84
+				remove_state_core = 89
+				remove_state_core = 91
+				hidden_effect = {
+					73 = {
+						teleport_armies = {
+							limit = {
+								has_war_with = HUN
+							}
+							to_state = 4
+						}
+					}
+					76 = {
+						teleport_armies = {
+							limit = {
+								has_war_with = HUN
+							}
+							to_state = 4
+						}
+					}
+					83 = {
+						teleport_armies = {
+							limit = {
+								has_war_with = HUN
+							}
+							to_state = 4
+						}
+					}
+					84 = {
+						teleport_armies = {
+							limit = {
+								has_war_with = HUN
+							}
+							to_state = 4
+						}
+					}
+					80 = {
+						teleport_armies = {
+							limit = {
+								has_war_with = GLA
+							}
+							to_state = 4
+						}
+					}
+					89 = {
+						teleport_armies = {
+							limit = {
+								has_war_with = GLA
+							}
+							to_state = 4
+						}
+					}
+					91 = {
+						teleport_armies = {
+							limit = {
+								has_war_with = GLA
+							}
+							to_state = 4
+						}
+					}
+				}
+			}
+			AUS = {
+				swap_ideas = {
+					remove_idea = fight_for_empire_2
+					add_idea = fight_for_empire_3
+				}
+			}
+			hidden_effect = {
+				AUS = {
+					country_event = {
+						id = end_of_austrian.4
+						days = 3
+					}
+				}
+			}
+		}
+	}
+}
+
+country_event = {
+	id = end_of_austrian.4 #Venetian Revolution
+	title = end_of_austrian.4.t
+	desc = end_of_austrian.4.d
+	picture = GFX_report_event_dutch_soldiers_indonesia
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = { 
+		name = end_of_austrian.4.a	
+		if = {
+			limit = {
+				NOT = {
+					PRU = {
+						has_country_flag = victory_R_V_A_3
+					}
+				}
+			}
+			159 = {
+				remove_dynamic_modifier = { modifier = AUS_state_italian_probleb_dynamic_modifier }
+			}
+			160 = {	
+				remove_dynamic_modifier = { modifier = AUS_state_italian_probleb_dynamic_modifier }
+			}
+			VEN = {
+				inherit_technology = AUS
+				transfer_state = 159
+				transfer_state = 160
+				add_ideas = revolution_power
+				load_oob = revolution_force_VEN
+				set_country_flag = ven_has_revolution_aus
+			}
+			VEN = {
+				declare_war_on = {
+					target = AUS
+					type = annex_everything
+				}
+			}
+			AUS = {
+				remove_state_core = 159
+				remove_state_core = 160
+				hidden_effect = {
+					159 = {
+						teleport_armies = {
+							limit = {
+								has_war_with = VEN
+							}
+							to_state = 4
+						}
+					}
+					160 = {
+						teleport_armies = {
+							limit = {
+								has_war_with = VEN
+							}
+							to_state = 4
+						}
+					}
+				}
+			}
+			AUS = {
+				swap_ideas = {
+					remove_idea = fight_for_empire_3
+					add_idea = fight_for_empire_4
+				}
+			}
+			news_event = news.109
+		}
+	}
+}
+
+country_event = {
+	id = aus_industrian_reform.1 #Austria or Hungary
+	title = aus_industrian_reform.1.t
+	desc = aus_industrian_reform.1.d
+	picture = GFX_report_event_generic_factory
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = { #Austria
+		name = aus_industrian_reform.1.a	
+		ai_chance = {
+			factor = 100
+		}
+		AUS = {
+			set_country_flag = aus_choose_austrian_land
+		}
+		4 = {
+			add_extra_state_shared_building_slots = 3
+			add_building_construction = {
+				type = industrial_complex
+				level = 3
+				instant_build = yes
+			}
+		}
+	}
+	
+	option = { #Hungary
+		name = aus_industrian_reform.1.b
+		ai_chance = {
+			factor = 0
+		}
+		AUS = {
+			set_country_flag = aus_choose_hungary_land
+		}
+		43 = {
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}
+		154 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}
+		155 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}
+	}
+	
+}
+
+country_event = {
+	id = aus_industrian_reform.2 #Austria or Bohemia or Galitia or Hungary
+	title = aus_industrian_reform.2.t
+	desc = aus_industrian_reform.2.d
+	picture = GFX_report_event_austrian_land
+	
+	is_triggered_only = yes
+	
+	fire_only_once = no
+	
+	option = { #Austria
+		name = aus_industrian_reform.2.a	
+		trigger = {
+			NOT = {
+				AUS = {
+					has_country_flag = aus_choose_austrian_land
+				}
+			}
+		}
+		ai_chance = {
+			factor = 25
+		}
+		4 = {
+			add_extra_state_shared_building_slots = 3
+			add_building_construction = {
+				type = industrial_complex
+				level = 3
+				instant_build = yes
+			}
+		}
+		AUS = {
+			set_country_flag = aus_choose_austrian_land
+		}
+	}
+	
+	option = { #Bohemia
+		name = aus_industrian_reform.2.b
+		trigger = {
+			NOT = {
+				AUS = {
+					has_country_flag = aus_choose_bohemia_land
+				}
+			}
+		}
+		ai_chance = {
+			factor = 25
+		}
+		9 = {
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+			add_building_construction = {
+				type = arms_factory
+				level = 1
+				instant_build = yes
+			}
+		}
+		75 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}
+		AUS = {
+			set_country_flag = aus_choose_bohemia_land
+		}
+	}
+	
+	option = { #Galitia
+		name = aus_industrian_reform.2.g
+		trigger = {
+			NOT = {
+				AUS = {
+					has_country_flag = aus_choose_galitian_land
+				}
+			}
+		}
+		ai_chance = {
+			factor = 25
+		}
+		80 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = infrastructure
+				level = 1
+				instant_build = yes
+			}
+		}
+		88 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = infrastructure
+				level = 1
+				instant_build = yes
+			}
+		}
+		89 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = infrastructure
+				level = 1
+				instant_build = yes
+			}
+		}
+		91 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = infrastructure
+				level = 1
+				instant_build = yes
+			}
+		}
+		902 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = infrastructure
+				level = 1
+				instant_build = yes
+			}
+		}
+		AUS = {
+			set_country_flag = aus_choose_galitian_land
+		}
+	}
+	
+	option = { #Hungary
+		name = aus_industrian_reform.2.h
+		trigger = {
+			NOT = {
+				AUS = {
+					has_country_flag = aus_choose_hungary_land
+				}
+			}
+		}
+		ai_chance = {
+			factor = 25
+		}
+		43 = {
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}
+		154 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}
+		155 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}
+		AUS = {
+			set_country_flag = aus_choose_hungary_land
+		}
+	}
+	
+	option = { #end
+		name = aus_industrian_reform.2.e
+		trigger = {
+			AUS = {
+				has_country_flag = aus_choose_austrian_land
+			}
+			AUS = {
+				has_country_flag = aus_choose_bohemia_land
+			}
+			AUS = {
+				has_country_flag = aus_choose_galitian_land
+			}
+			AUS = {
+				has_country_flag = aus_choose_hungary_land
+			}
+		}
+		ai_chance = {
+			factor = 100
+		}
+		random_state = {
+			prioritize = {
+				4 9 43 91
+			}
+			limit = {
+				is_core_of = AUS
+				is_owned_and_controlled_by = AUS
+			}
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+				type = industrial_complex
+				level = 2
+				instant_build = yes
+			}
+		}
+		random_state = {
+			prioritize = {
+				4 9 43 91
+			}
+			limit = {
+				is_core_of = AUS
+				is_owned_and_controlled_by = AUS
+			}
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+				type = industrial_complex
+				level = 2
+				instant_build = yes
+			}
+		}
+		random_state = {
+			prioritize = {
+				4 9 43 91
+			}
+			limit = {
+				is_core_of = AUS
+				is_owned_and_controlled_by = AUS
+			}
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+				type = industrial_complex
+				level = 2
+				instant_build = yes
+			}
+		}
+		random_state = {
+			prioritize = {
+				4 9 43 91
+			}
+			limit = {
+				is_core_of = AUS
+				is_owned_and_controlled_by = AUS
+			}
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+				type = industrial_complex
+				level = 2
+				instant_build = yes
+			}
+		}
+	}
+}
+	
+country_event = {
+	id = aus_industrian_reform.3 #Land of Hungary
+	title = aus_industrian_reform.3.t
+	desc = aus_industrian_reform.3.d
+	picture = GFX_report_event_hungary_industrialisation
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = { #Agrarian Hungary
+		name = aus_industrian_reform.3.a	
+		ai_chance = {
+			factor = 75
+		}
+		AUS = {
+			add_ideas = AUS_hungary_agrarian
+		}
+		hidden_effect = {
+			HUN = {
+				add_ideas = AUS_hungary_agrarian
+			}
+		}
+	}
+	
+	option = { #Industrilist Hungary
+		name = aus_industrian_reform.3.b	
+		ai_chance = {
+			factor = 25
+		}
+		AUS = {
+			add_ideas = AUS_hungary_industrialism
+		}
+		hidden_effect = {
+			HUN = {
+				add_ideas = AUS_hungary_industrialism
+			}
+		}
+	}
+	
 }
