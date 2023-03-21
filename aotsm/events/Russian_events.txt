@@ -10,7 +10,7 @@ add_namespace = political_confrontation #
 add_namespace = finland_quiestion #
 add_namespace = russian_far_east_politic #
 add_namespace = russian_central_asia_politic #
-add_namespace = russian_old_way_political_event #
+add_namespace = russian_old_order_event #
 add_namespace = russian_socialist_political_event #
 
 
@@ -3672,9 +3672,9 @@ country_event = {
 ##############################OLD_WAY_EVENT_SECTION###################################
 
 country_event = {
-	id = russian_old_way_political_event.1 # 
-	title = russian_old_way_political_event.1.t
-	desc = russian_old_way_political_event.1.d
+	id = russian_old_order_event.1 # Дворцовый переворот
+	title = russian_old_order_event.1.t
+	desc = russian_old_order_event.1.d
 	picture = GFX_report_event_aotsm_generic_signing_the_contract
 	
 	is_triggered_only = yes
@@ -3682,18 +3682,51 @@ country_event = {
 	fire_only_once = yes
 	
 	option = {
-		name = russian_old_way_political_event.1.a	
+		name = russian_old_order_event.1.a	
 		ai_chance = {
-			factor = 5
+			factor = 10
 		}
-		custom_effect_tooltip = RUS_choose_ignatiev_pn
+		custom_effect_tooltip = RUS_complete_old_oder_coup
 		hidden_effect = {
 			retire_country_leader = yes
 			add_popularity = {
 				ideology = authoritarian
-				popularity = 0.15
+				popularity = 0.1
 			}
 			set_politics = { ruling_party = authoritarian }
+			add_country_leader_role = {
+				character = RUS_national_council
+				promote_leader = yes
+				
+				country_leader = {
+					expire = "1900.1.1"
+					ideology = centrism
+					traits = {  }
+				}
+			}
+			#news_event = { id = news.58 days = 3 }
+		}
+	}
+}
+
+country_event = {
+	id = russian_old_order_event.2 # 
+	title = russian_old_order_event.2.t
+	desc = russian_old_order_event.2.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = {
+		name = russian_old_order_event.2.a	
+		ai_chance = {
+			factor = 20
+		}
+		custom_effect_tooltip = RUS_choose_ignatiev_pn
+		hidden_effect = {
+			retire_country_leader = yes
 			add_country_leader_role = {
 				character = RUS_Pavel_Nikolaevich_Ignatiev
 				promote_leader = yes
@@ -3705,12 +3738,12 @@ country_event = {
 				}
 			}
 			complete_national_focus = RUS_ignatiev
-			#news_event = { id = news.199 days = 2 }
+			news_event = { id = news.55 days = 2 }
 		}
 	}
 	
 	option = {
-		name = russian_old_way_political_event.1.b	
+		name = russian_old_order_event.2.b	
 		
 		trigger = {
 			RUS = { has_country_flag = RUS_church_take_power }
@@ -3725,13 +3758,8 @@ country_event = {
 		custom_effect_tooltip = RUS_choose_church
 		hidden_effect = {
 			retire_country_leader = yes
-			add_popularity = {
-				ideology = authoritarian
-				popularity = 0.15
-			}
-			set_politics = { ruling_party = authoritarian }
 			add_country_leader_role = {
-				character = RUS_national_council
+				character = RUS_church_soviet
 				promote_leader = yes
 				
 				country_leader = {
@@ -3740,24 +3768,19 @@ country_event = {
 					traits = {  }
 				}
 			}
-			complete_national_focus = RUS_churh_take_the_power
-			#news_event = { id = news.200 days = 2 }
+			complete_national_focus = RUS_church_take_power
+			news_event = { id = news.56 days = 2 }
 		}
 	}
 	
 	option = {
-		name = russian_old_way_political_event.1.c	
+		name = russian_old_order_event.2.c	
 		ai_chance = {
 			factor = 15
 		}
 		custom_effect_tooltip = RUS_choose_romanov_an
 		hidden_effect = {
 			retire_country_leader = yes
-			add_popularity = {
-				ideology = authoritarian
-				popularity = 0.15
-			}
-			set_politics = { ruling_party = authoritarian }
 			add_country_leader_role = {
 				character = RUS_Romanov_Alexandr_Nikolaevich
 				promote_leader = yes
@@ -3769,7 +3792,7 @@ country_event = {
 				}
 			}
 			complete_national_focus = RUS_romanov_an
-			#news_event = { id = news.201 days = 2 }
+			news_event = { id = news.57 days = 2 }
 		}
 	}
 }
@@ -3973,7 +3996,52 @@ country_event = {
 	
 	option = {
 		name = russian_socialist_political_event.4.a	
-		
+		ORL = {
+						transfer_state = 16
+						add_state_core = 16
+						transfer_state = 24
+						add_state_core = 24
+						transfer_state = 30
+						add_state_core = 30
+					}
+					BRE = {
+						transfer_state = 14
+						transfer_state = 917
+						add_state_core = 14
+						add_state_core = 917
+					}
+					NRM = {
+						transfer_state = 15
+						add_state_core = 15
+					}
+					BRG = {
+						transfer_state = 17
+						transfer_state = 27
+						add_state_core = 17
+						add_state_core = 27
+					}
+					SHM = {
+						transfer_state = 18
+						transfer_state = 29
+						transfer_state = 785
+						add_state_core = 18
+						add_state_core = 29
+						add_state_core = 785
+					}
+					AKV = {
+						transfer_state = 23
+						transfer_state = 33
+						add_state_core = 23
+						add_state_core = 33
+					}
+					PRU = {
+						add_to_faction = FRA
+						add_to_faction = BRE
+						add_to_faction = NRM
+						add_to_faction = BRG
+						add_to_faction = SHM
+					}
+						
 		hidden_effect = {
 			
 		}
