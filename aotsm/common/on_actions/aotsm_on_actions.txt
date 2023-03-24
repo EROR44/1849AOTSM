@@ -337,23 +337,6 @@ on_actions = {
 		}
 	}
 	
-#	on_daily_RUS = { #Переделать в единый скрипт на начало great_war - должно происходить при объявлении войны Германиией россии, через польское восстание.
-#		effect = {
-#			if = {
-#				limit = {
-#					date > 1854.6.1
-#					has_war_with = PRU
-#					is_historical_focus_on = yes
-#				}
-#				country_event = aotsm_notification_event.1
-#				add_timed_idea = {
-#					idea = RUS_historical_germany_suddden_attak_russia
-#					days = 45
-#				}
-#			}
-#		}
-#	}
-	
 	on_daily_BYZ = {
 		effect = {	
 			if = {
@@ -391,6 +374,35 @@ on_actions = {
 	
 	on_capitulation = {
 		effect = {
+			#PLH capitulation - Polish uprising failed - Germany ignore Poland
+			if = {
+				limit = {
+					tag = PLH
+					RUS = { has_country_flag = pru_ignore_poland_uprising }
+				}
+				RUS = {
+					white_peace = {
+						tag = PLH
+						message = PLH_uprising_failed
+					} 					
+					RUS = {
+						annex_country = {
+							target = PLH
+							transfer_troops = no
+						}
+					}
+				}
+				JAP = {
+					remove_state_core = 10
+					remove_state_core = 87
+					remove_state_core = 90
+					remove_state_core = 92
+					remove_state_core = 97
+					remove_state_core = 98
+					remove_state_core = 853
+				}
+				add_threat = 3
+			}
 			#JAP capitulation - RUS annex sakhalin
 			if = {
 				limit = {
@@ -466,128 +478,27 @@ on_actions = {
 
 				add_threat = 2
 			}
-			#QIN capitulation - RUS annex tuva
+			#KAZ capitulation - RUS annex region
 			if = {
 				limit = {
-					tag = QIN
-					RUS = { has_country_flag = RUS_tuva_war_plan }
+					tag = KAZ
+					RUS = { has_country_flag = RUS_invasion_in_kaz_flag }
 				}
 				RUS = {
 					white_peace = {
-						tag = QIN
-						message = QIN_lost_tuva
-					} 					
-					transfer_state = 329
-			
-					clr_country_flag = RUS_tuva_war_plan
-					set_country_flag = RUS_tuva_war_plan_end
+						tag = KAZ
+						message = KAZ_conquered
+					}
+					transfer_state = 402
+					transfer_state = 404
+					transfer_state = 405
+					transfer_state = 586
+					transfer_state = 587
+					transfer_state = 589
+					clr_country_flag = RUS_invasion_in_kaz_flag
+					set_country_flag = RUS_invasion_in_kaz_flag_end
 				}
-				QIN = {
-					remove_state_core = 329
-				}
-				MON = {
-					remove_state_core = 329
-				}
-				add_threat = 1
-			}
-			#QIN capitulation - RUS war on far east - small
-			if = {
-				limit = {
-					tag = QIN
-					RUS = { has_country_flag = RUS_china_far_east_small_plan }
-				}
-				RUS = {
-					white_peace = {
-						tag = QIN
-						message = QIN_lost_north_man
-					} 					
-					transfer_state = 560
-					transfer_state = 657
-					add_state_core = 560
-					add_state_core = 657
-			
-					clr_country_flag = RUS_china_far_east_small_plan
-					set_country_flag = RUS_china_far_east_small_plan_end
-				}
-				QIN = {
-					remove_state_core = 560
-					remove_state_core = 657
-				}
-				MAN = {
-					remove_state_core = 560
-					remove_state_core = 657
-				}
-				add_threat = 5
-			}
-			#QIN capitulation - RUS war on far east - medium
-			if = {
-				limit = {
-					tag = QIN
-					RUS = { has_country_flag = RUS_china_far_east_medium_plan }
-				}
-				RUS = {
-					white_peace = {
-						tag = QIN
-						message = QIN_lost_north_man
-					} 
-					transfer_state = 408
-					transfer_state = 409
-					transfer_state = 560
-					transfer_state = 657
-
-			
-					clr_country_flag = RUS_china_far_east_medium_plan
-					set_country_flag = RUS_china_far_east_medium_plan_end
-				}
-				QIN = {
-					remove_state_core = 408
-					remove_state_core = 409
-					remove_state_core = 560
-					remove_state_core = 657
-				}
-				MAN = {
-					remove_state_core = 408
-					remove_state_core = 409
-					remove_state_core = 560
-					remove_state_core = 657
-				}
-				add_threat = 5
-			}
-			#QIN capitulation - RUS war on far east - big
-			if = {
-				limit = {
-					tag = QIN
-					RUS = { has_country_flag = RUS_china_far_east_big_plan }
-				}
-				RUS = {
-					white_peace = {
-						tag = QIN
-						message = QIN_lost_north_man
-					} 
-					transfer_state = 408
-					transfer_state = 409
-					transfer_state = 560
-					transfer_state = 657
-					transfer_state = 714
-					transfer_state = 717
-					transfer_state = 761
-			
-					clr_country_flag = RUS_china_far_east_big_plan
-					set_country_flag = RUS_china_far_east_big_plan_end
-				}
-				QIN = {
-					remove_state_core = 408
-					remove_state_core = 409
-					remove_state_core = 560
-					remove_state_core = 657
-				}
-				MAN = {
-					remove_state_core = 408
-					remove_state_core = 409
-					remove_state_core = 560
-					remove_state_core = 657
-				}
-				add_threat = 5
+				add_threat = 2
 			}
 			#HIV capitulation - RUS annex region
 			if = {
@@ -622,28 +533,6 @@ on_actions = {
 					transfer_state = 742
 					clr_country_flag = RUS_invasion_in_buk_flag
 					set_country_flag = RUS_invasion_in_buk_flag_end
-				}
-				add_threat = 2
-			}
-			#KAZ capitulation - RUS annex region
-			if = {
-				limit = {
-					tag = KAZ
-					RUS = { has_country_flag = RUS_invasion_in_kaz_flag }
-				}
-				RUS = {
-					white_peace = {
-						tag = KAZ
-						message = KAZ_conquered
-					}
-					transfer_state = 402
-					transfer_state = 404
-					transfer_state = 405
-					transfer_state = 586
-					transfer_state = 587
-					transfer_state = 589
-					clr_country_flag = RUS_invasion_in_kaz_flag
-					set_country_flag = RUS_invasion_in_kaz_flag_end
 				}
 				add_threat = 2
 			}
@@ -9788,6 +9677,295 @@ on_actions = {
 	}
 	on_state_control_changed = {
 		effect = {
+			#QIN capitulation - RUS annex tuva
+			if = {
+				limit = {
+					RUS = {
+						has_country_flag = RUS_tuva_war_plan
+					}
+					RUS = {
+						has_war_with = QIN
+						has_war_with = MON
+					}
+					MON = {
+						surrender_progress > 0.30
+					}
+					OR = {
+						329 = {
+							controller = {
+								OR = {
+									tag = RUS
+									is_subject_of = RUS
+									is_in_faction_with = RUS
+								}
+							}
+						}
+					}
+				}
+				RUS = {
+					white_peace = {
+						tag = QIN
+						message = QIN_lost_tuva
+					} 					
+					transfer_state = 329
+			
+					clr_country_flag = RUS_tuva_war_plan
+					set_country_flag = RUS_tuva_war_plan_end
+				}
+				QIN = {
+					remove_state_core = 329
+				}
+				MON = {
+					remove_state_core = 329
+				}
+				add_threat = 1
+			}
+			#QIN capitulation - RUS war on far east - small
+			if = {
+				limit = {
+					RUS = {
+						has_country_flag = RUS_china_far_east_small_plan
+					}
+					RUS = {
+						has_war_with = MAN
+						has_war_with = QIN
+					}
+					MAN = {
+						surrender_progress > 0.30
+					}
+					OR = {
+						560 = {
+							controller = {
+								OR = {
+									tag = RUS
+									is_subject_of = RUS
+									is_in_faction_with = RUS
+								}
+							}
+						}
+						657 = {
+							controller = {
+								OR = {
+									tag = RUS
+									is_subject_of = RUS
+									is_in_faction_with = RUS
+								}
+							}
+						}
+					}
+				}
+				RUS = {
+					white_peace = {
+						tag = QIN
+						message = QIN_lost_north_man
+					} 					
+					transfer_state = 560
+					transfer_state = 657
+					add_state_core = 560
+					add_state_core = 657
+			
+					clr_country_flag = RUS_china_far_east_small_plan
+					set_country_flag = RUS_china_far_east_small_plan_end
+				}
+				QIN = {
+					remove_state_core = 560
+					remove_state_core = 657
+				}
+				MAN = {
+					remove_state_core = 560
+					remove_state_core = 657
+				}
+				add_threat = 5
+			}
+			#QIN capitulation - RUS war on far east - medium
+			if = {
+				limit = {
+					RUS = {
+						has_country_flag = RUS_china_far_east_medium_plan
+					}
+					RUS = {
+						has_war_with = QIN
+						has_war_with = MAN
+					}
+					MAN = {
+						surrender_progress > 0.30
+					}
+					OR = {
+						408 = {
+							controller = {
+								OR = {
+									tag = RUS
+									is_subject_of = RUS
+									is_in_faction_with = RUS
+								}
+							}
+						}
+						409 = {
+							controller = {
+								OR = {
+									tag = RUS
+									is_subject_of = RUS
+									is_in_faction_with = RUS
+								}
+							}
+						}
+						560 = {
+							controller = {
+								OR = {
+									tag = RUS
+									is_subject_of = RUS
+									is_in_faction_with = RUS
+								}
+							}
+						}
+						657 = {
+							controller = {
+								OR = {
+									tag = RUS
+									is_subject_of = RUS
+									is_in_faction_with = RUS
+								}
+							}
+						}
+					}
+				}
+				RUS = {
+					white_peace = {
+						tag = QIN
+						message = QIN_lost_north_man
+					} 
+					transfer_state = 408
+					transfer_state = 409
+					transfer_state = 560
+					transfer_state = 657
+
+			
+					clr_country_flag = RUS_china_far_east_medium_plan
+					set_country_flag = RUS_china_far_east_medium_plan_end
+				}
+				QIN = {
+					remove_state_core = 408
+					remove_state_core = 409
+					remove_state_core = 560
+					remove_state_core = 657
+				}
+				MAN = {
+					remove_state_core = 408
+					remove_state_core = 409
+					remove_state_core = 560
+					remove_state_core = 657
+				}
+				add_threat = 5
+			}
+			#QIN capitulation - RUS war on far east - big
+			if = {
+				limit = {
+					RUS = {
+						has_country_flag = RUS_china_far_east_big_plan
+					}
+					RUS = {
+						has_war_with = QIN
+						has_war_with = MAN
+					}
+					MAN = {
+						surrender_progress > 0.50
+					}
+					OR = {
+						408 = {
+							controller = {
+								OR = {
+									tag = RUS
+									is_subject_of = RUS
+									is_in_faction_with = RUS
+								}
+							}
+						}
+						409 = {
+							controller = {
+								OR = {
+									tag = RUS
+									is_subject_of = RUS
+									is_in_faction_with = RUS
+								}
+							}
+						}
+						560 = {
+							controller = {
+								OR = {
+									tag = RUS
+									is_subject_of = RUS
+									is_in_faction_with = RUS
+								}
+							}
+						}
+						657 = {
+							controller = {
+								OR = {
+									tag = RUS
+									is_subject_of = RUS
+									is_in_faction_with = RUS
+								}
+							}
+						}
+						714 = {
+							controller = {
+								OR = {
+									tag = RUS
+									is_subject_of = RUS
+									is_in_faction_with = RUS
+								}
+							}
+						}
+						717 = {
+							controller = {
+								OR = {
+									tag = RUS
+									is_subject_of = RUS
+									is_in_faction_with = RUS
+								}
+							}
+						}
+						761 = {
+							controller = {
+								OR = {
+									tag = RUS
+									is_subject_of = RUS
+									is_in_faction_with = RUS
+								}
+							}
+						}
+					}
+				}
+				RUS = {
+					white_peace = {
+						tag = QIN
+						message = QIN_lost_north_man
+					} 
+					transfer_state = 408
+					transfer_state = 409
+					transfer_state = 560
+					transfer_state = 657
+					transfer_state = 714
+					transfer_state = 717
+					transfer_state = 761
+			
+					clr_country_flag = RUS_china_far_east_big_plan
+					set_country_flag = RUS_china_far_east_big_plan_end
+				}
+				QIN = {
+					remove_state_core = 408
+					remove_state_core = 409
+					remove_state_core = 560
+					remove_state_core = 657
+				}
+				MAN = {
+					remove_state_core = 408
+					remove_state_core = 409
+					remove_state_core = 560
+					remove_state_core = 657
+				}
+				add_threat = 5
+			}
 			#First Prussian-Austrian war
 			if = {
 				limit = {
