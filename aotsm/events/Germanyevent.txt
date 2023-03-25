@@ -76,6 +76,14 @@ country_event = {
 		PRU = {
 			country_event = ger_answer.l
 		}
+		hidden_effect = {
+			PRU = {
+				country_event = {
+					id = ger_blackorder.1
+					days = 17
+				}
+			}
+		}
 	}
 	
 	option = {
@@ -964,7 +972,7 @@ country_event = {
 }
 
 country_event = {
-	id = ger.7 #Bismark or Autharitatian
+	id = ger.7 #Next Ruller
 	title = ger.7.t
 	desc = ger.7.d
 	picture = GFX_report_event_german_reichstag_gathering
@@ -978,25 +986,76 @@ country_event = {
 	option = {
 		name = ger.7.a 
 		ai_chance = {
-			factor = 25
+			factor = 33
 			modifier = {
 				factor = 0
 				OR = {
 					is_historical_focus_on = yes
+					has_game_rule = { 
+						rule = PRU_ai_behavior 
+						option = DEFAULT 
+					}
+					has_game_rule = { 
+						rule = PRU_ai_behavior 
+						option = PRU_IMPERIAL_WAY 
+					}
 					PRU = { has_country_flag = PRU_AI_RANDOM_HISTORICAL }
 				}
 			}
 		}
 		set_country_flag = pru_bismark
+		custom_effect_tooltip = pru_complete_bismark_focus_tt
+		hidden_effect = {
+			PRU = {
+				complete_national_focus = PRU_bismark_first_kanzler
+			}
+		}
+		mark_focus_tree_layout_dirty = yes
 	}
 	
 	option = {
 		name = ger.7.b 
 		ai_chance = {
-			factor = 75
+			factor = 34
 		}
-		set_country_flag = pru_autharitarian
-		country_event = { id = ger.8 days = 14 } 
+		set_country_flag = pru_kaiser
+		custom_effect_tooltip = pru_complete_kaiser_focus_tt
+		hidden_effect = {
+			PRU = {
+				complete_national_focus = PRU_emperor_save_power
+			}
+		}
+		mark_focus_tree_layout_dirty = yes
+	}
+	
+	option = {
+		name = ger.7.c
+		ai_chance = {
+			factor = 33
+			modifier = {
+				factor = 0
+				OR = {
+					is_historical_focus_on = yes
+					has_game_rule = { 
+						rule = PRU_ai_behavior 
+						option = DEFAULT 
+					}
+					has_game_rule = { 
+						rule = PRU_ai_behavior 
+						option = PRU_IMPERIAL_WAY 
+					}
+					PRU = { has_country_flag = PRU_AI_RANDOM_HISTORICAL }
+				}
+			}
+		}
+		set_country_flag = pru_junker
+		custom_effect_tooltip = pru_complete_junker_focus_tt
+		hidden_effect = {
+			PRU = {
+				complete_national_focus = PRU_juncker_take_power
+			}
+		}
+		mark_focus_tree_layout_dirty = yes
 	}
 }
 
@@ -2376,9 +2435,7 @@ country_event = {
 		if = {
 			limit = {
 				PRU = {
-					PRU_Carl_Bosch = {
-						is_character_slot = political_advisor
-					}
+					has_idea = carl_bosch
 				}
 			}
 			add_political_power = 150
@@ -2391,6 +2448,179 @@ country_event = {
 		PRU = {
 			set_country_flag = pru_bosch_out
 		}
+	}
+}
+
+country_event = {
+	id = ger.26 #Austria Future
+	title = ger.26.t
+	desc = ger.26.d
+	picture = GFX_report_event_austrian_future
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event ger.26"
+	}
+	
+	option = { #Autonomy
+		name = ger.26.a 
+		ai_chance = {
+			factor = 50
+			modifier = {
+				PRU = {
+					has_government = socialism
+				}
+				factor = 2
+			}
+			modifier = {
+				PRU = {
+					has_government = democratic
+				}
+				factor = 1
+			}
+			modifier = {
+				PRU = {
+					has_government = reactionist
+				}
+				factor = 0.25
+			}
+			modifier = {
+				PRU = {
+					has_government = authoritarian
+				}
+				factor = 0.5
+			}
+		}
+		complete_national_focus = PRU_integration_of_austria
+	}
+	
+	option = { #Annex
+		name = ger.26.b
+		ai_chance = {
+			factor = 50
+			modifier = {
+				PRU = {
+					has_government = socialism
+				}
+				factor = 0.5
+			}
+			modifier = {
+				PRU = {
+					has_government = democratic
+				}
+				factor = 1
+			}
+			modifier = {
+				PRU = {
+					has_government = reactionist
+				}
+				factor = 4
+			}
+			modifier = {
+				PRU = {
+					has_government = authoritarian
+				}
+				factor = 2
+			}
+		}
+		complete_national_focus = PRU_oppressing_of_austria
+	}
+}
+
+country_event = {
+	id = ger.27 #Curfiew in Germany
+	title = ger.27.t
+	desc = ger.27.d
+	picture = GFX_report_event_berlin_in_19_century
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event ger.27"
+	}
+	
+	option = { #Only for Children
+		name = ger.27.a 
+		ai_chance = {
+			factor = 33
+		}
+		add_stability = 0.025
+	}
+	
+	option = { #For all
+		name = ger.27.b
+		ai_chance = {
+			factor = 34
+		}
+		PRU ={
+			add_ideas = curfew_in_germany
+		}
+	}
+	
+	option = { #Military time
+		name = ger.27.с
+		ai_chance = {
+			factor = 33
+		}
+		PRU ={
+			add_ideas = martial_law_in_germany
+		}
+	}
+}
+
+country_event = {
+	id = ger.28 #Hunt for the Witch
+	title = ger.28.t
+	desc = ger.28.d
+	picture = GFX_report_event_prussian_soldar
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event ger.28"
+	}
+	
+	option = { #Clean only for the sake of appearance
+		name = ger.28.a 
+		ai_chance = {
+			factor = 33
+		}
+		add_manpower = -750
+	}
+	
+	option = { #Hunt for Radical
+		name = ger.28.b
+		ai_chance = {
+			factor = 34
+		}
+		trigger = {
+			PRU = {
+				has_manpower > 49999
+			}
+		}
+		add_manpower = -50000
+		add_stability = 0.05
+	}
+	
+	option = { #All witch must die
+		name = ger.28.с
+		ai_chance = {
+			factor = 33
+		}
+		trigger = {
+			PRU = {
+				has_manpower > 149999
+			}
+		}
+		add_manpower = -150000
+		add_stability = 0.10
 	}
 }
 
