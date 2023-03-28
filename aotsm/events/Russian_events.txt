@@ -3001,6 +3001,7 @@ country_event = {
 		}
 		hidden_effect = {
 			ROOT = {
+				set_country_flag = RUS_accept_russian_diplomaty
 				add_opinion_modifier = {
 					target = RUS
 					modifier = rus_central_asia_diplomaty
@@ -3019,13 +3020,13 @@ country_event = {
 			}
 		}
 		hidden_effect = {
-			
+			set_country_flag = RUS_refuse_russian_diplomaty
 		}
 	}
 
 }
 country_event = {
-	id = russian_central_asia_politic.3 #
+	id = russian_central_asia_politic.3 #Дальнейшее продолжение сотрудничества - ивент для 3 стран
 	title = russian_central_asia_politic.3.t
 	desc = russian_central_asia_politic.3.d
 	picture = GFX_report_event_aotsm_generic_signing_the_contract
@@ -3035,9 +3036,26 @@ country_event = {
 	fire_only_once = yes
 	
 	option = {
-		name = russian_central_asia_politic.3.a #
+		name = russian_central_asia_politic.3.a #Согласиться
 		ai_chance = {
-			factor = 5
+			factor = 25
+		}
+		hidden_effect = {
+			if = {
+				limit = {
+					ROOT = {
+						NOT = { is_guaranteed_by = RUS }
+					}			
+				}
+				RUS = { give_guarantee = ROOT }
+			}
+		}
+	}
+	
+	option = {
+		name = russian_central_asia_politic.3.b #Отказаться
+		ai_chance = {
+			factor = 0
 		}
 		hidden_effect = {
 			
@@ -3046,7 +3064,7 @@ country_event = {
 
 }
 country_event = {
-	id = russian_central_asia_politic.4 #
+	id = russian_central_asia_politic.4 #Дружба с казахстаном - приглашение в альянс
 	title = russian_central_asia_politic.4.t
 	desc = russian_central_asia_politic.4.d
 	picture = GFX_report_event_aotsm_generic_signing_the_contract
@@ -3056,10 +3074,24 @@ country_event = {
 	fire_only_once = yes
 	
 	option = {
-		name = russian_central_asia_politic.4.a #
+		name = russian_central_asia_politic.4.a #Cогласие
 		ai_chance = {
-			factor = 5
+			factor = 25
 		}
+		RUS = {
+			add_to_faction = KAZ
+		}
+		hidden_effect = {
+			
+		}
+	}
+	
+	option = {
+		name = russian_central_asia_politic.4.b #Отказ
+		ai_chance = {
+			factor = 0
+		}
+		
 		hidden_effect = {
 			
 		}
@@ -3067,7 +3099,7 @@ country_event = {
 
 }
 country_event = {
-	id = russian_central_asia_politic.5 #
+	id = russian_central_asia_politic.5 # Предложение о поддержке - ивент для Афганистана - в войне с Парфией
 	title = russian_central_asia_politic.5.t
 	desc = russian_central_asia_politic.5.d
 	picture = GFX_report_event_aotsm_generic_signing_the_contract
@@ -3077,7 +3109,17 @@ country_event = {
 	fire_only_once = yes
 	
 	option = {
-		name = russian_central_asia_politic.5.a #
+		name = russian_central_asia_politic.5.a #Согласиться
+		ai_chance = {
+			factor = 5
+		}
+		hidden_effect = {
+			
+		}
+	}
+	
+	option = {
+		name = russian_central_asia_politic.5.b #Отказаться
 		ai_chance = {
 			factor = 5
 		}

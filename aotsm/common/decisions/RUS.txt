@@ -1575,6 +1575,51 @@ rus_factions_decisions_category = {
 	
 }
 
+RUS_finland_separatism_cat = {
+
+	RUS_start_solutin_id_finland_problem = {
+	
+		icon = eng_trade_unions_support
+					
+		available = {
+		
+		}
+		
+		allowed = { 
+			
+		}
+		
+		visible = {
+			
+		}
+	
+		cost = 50
+		#days_remove = 150
+		fire_only_once = yes
+	
+		modifier = {
+			
+		}
+
+		ai_will_do = {
+			factor = 5
+			
+		}
+		
+		complete_effect = {
+			
+		}
+
+		remove_effect = {
+			custom_effect_tooltip = RUS_low_separatism_1_uusima
+			hidden_effect = {
+				111 = { remove_dynamic_modifier = { modifier = FIN_separatism_dynamic_modifier } }
+				111 = { add_dynamic_modifier = { modifier = FIN_separatism_dynamic_modifier_1 } }
+			}
+		}
+	}
+}
+
 rus_missions_cat = {
 	
 	RUS_conquer_kazahstan = { 
@@ -2314,6 +2359,7 @@ rus_modernise_railway_network_cat = {
 		icon = usa_congress
 					
 		available = {
+			NOT = { has_country_flag = RUS_break_decision_build_raiway }
 			ROOT = { has_country_flag = RUS_start_railway_modernisation }
 		}
 		
@@ -2325,24 +2371,30 @@ rus_modernise_railway_network_cat = {
 			ROOT = { has_country_flag = RUS_start_railway_modernisation }
 		}
 	
-		days_remove = 60
+		days_remove = 150
 		fire_only_once = yes
 	
 		modifier = {
-			civilian_factory_use = 3
+			civilian_factory_use = 2
 		}
 
 		ai_will_do = {
-			factor = 20
+			factor = 50
 		}
 		
 		complete_effect = {
-			
+			hidden_effect  ={
+				set_country_flag = {
+					flag = RUS_break_decision_build_raiway
+					days = 30
+					value = 1
+				}
+			}	
 		}
 
 		remove_effect = {
 			build_railway = {
-				level = 5
+				level = 3
 				build_only_on_allied = yes
 				controller_priority = {
 				}
@@ -2358,6 +2410,7 @@ rus_modernise_railway_network_cat = {
 		icon = usa_congress
 					
 		available = {
+			NOT = { has_country_flag = RUS_break_decision_build_raiway }
 			ROOT = { has_country_flag = RUS_start_railway_modernisation }
 		}
 		
@@ -2369,24 +2422,30 @@ rus_modernise_railway_network_cat = {
 			ROOT = { has_country_flag = RUS_start_railway_modernisation }
 		}
 	
-		days_remove = 60
+		days_remove = 150
 		fire_only_once = yes
 	
 		modifier = {
-			civilian_factory_use = 3
+			civilian_factory_use = 2
 		}
 
 		ai_will_do = {
-			factor = 20
+			factor = 50
 		}
 		
 		complete_effect = {
-			
+			hidden_effect  ={
+				set_country_flag = {
+					flag = RUS_break_decision_build_raiway
+					days = 30
+					value = 1
+				}
+			}	
 		}
 
 		remove_effect = {
 			build_railway = {
-				level = 5
+				level = 3
 				build_only_on_allied = yes
 				controller_priority = {
 				}
@@ -2435,6 +2494,61 @@ RUS_ai_boost_cat = {
 			experience_gain_army = 0.05
 			experience_gain_navy = 0.05
 			experience_gain_air	= 0.05
+		}
+		
+	}
+
+}
+
+RUS_resource_exploration_cat = {
+	
+	RUS_develop_donbass_cola_mimes = { 
+		
+		icon = generic_form_nation
+
+		allowed = {
+			
+		}
+
+		available = {
+			NOT = { has_country_flag = RUS_break_decision_resource_exploration }
+			has_completed_focus = RUS_exploration_new_resources
+			ROOT = { owns_state = 221 }
+			ROOT = { owns_state = 227 }
+			ROOT = { owns_state = 228 }
+		}
+
+		visible = {
+			has_completed_focus = RUS_exploration_new_resources
+			ROOT = { owns_state = 221 }
+			ROOT = { owns_state = 227 }
+			ROOT = { owns_state = 228 }
+		}
+		
+		modifier = {
+			civilian_factory_use = 2
+		}
+		
+		fire_only_once = yes
+		
+		days_remove = 90
+
+		ai_will_do = {
+			factor = 100
+		}
+		
+		complete_effect = {
+			hidden_effect  ={
+				set_country_flag = {
+					flag = RUS_break_decision_resource_exploration
+					days = 14
+					value = 1
+				}
+			}	
+		}
+
+		remove_effect = {
+			
 		}
 		
 	}
