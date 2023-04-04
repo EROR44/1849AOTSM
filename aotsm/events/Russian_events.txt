@@ -7,7 +7,7 @@ add_namespace = rusRomAN #Александр Павлович
 add_namespace = rusPus #Пушкин
 add_namespace = russian_european_politic #
 add_namespace = political_confrontation #
-add_namespace = finland_quiestion #
+add_namespace = finland_quiestion_event #
 add_namespace = russian_far_east_politic #
 add_namespace = russian_central_asia_politic #
 add_namespace = russian_old_order_event #
@@ -3565,9 +3565,9 @@ country_event = {
 ##############################FINLAND_QUIESTION_EVENTS###################################
 
 country_event = {
-	id = finland_quiestion.1 # Финский вопрос
-	title = finland_quiestion.1.t
-	desc = finland_quiestion.1.d
+	id = finland_quiestion_event.1 # Финский вопрос
+	title = finland_quiestion_event.1.t
+	desc = finland_quiestion_event.1.d
 	picture = GFX_report_event_aotsm_generic_signing_the_contract
 	
 	is_triggered_only = yes
@@ -3575,21 +3575,7 @@ country_event = {
 	fire_only_once = yes
 	
 	option = {
-		name = finland_quiestion.1.a	
-		ai_chance = {
-			factor = 10
-			modifier = {
-				is_historical_focus_on = yes
-				factor = 50
-			}
-		}
-		hidden_effect = {
-			set_country_flag = RUS_fin_supress_way
-		}
-	}
-	
-	option = {
-		name = finland_quiestion.1.b	
+		name = finland_quiestion_event.1.a #автономия для финов
 		ai_chance = {
 			factor = 10
 			modifier = {
@@ -3597,16 +3583,72 @@ country_event = {
 				factor = 0
 			}
 		}
+		custom_effect_tooltip = RUS_give_finalnd_autonomy
 		hidden_effect = {
-			set_country_flag = RUS_fin_compromis_way
+			FIN = {
+				transfer_state = 111
+				transfer_state = 147
+				transfer_state = 149
+				transfer_state = 150
+				set_cosmetic_tag = RUS_FIN
+			}
+			RUS = {
+				set_autonomy = {
+					target = FIN
+					autonomous_state = autonomy_colony
+				}
+			}
+			FIN = {
+				retire_country_leader = yes
+				add_popularity = {
+					ideology = authoritarian
+					popularity = 0.30
+				}
+				set_politics = { ruling_party = authoritarian }
+				add_country_leader_role = {
+					character = FIN_temporary_goverment
+					promote_leader = yes
+					
+					country_leader = {
+						expire = "1900.1.1"
+						ideology = centrism
+						traits = {  }
+					}
+				}
+			}
+			RUS = { country_event = { id = finland_quiestion_event.2 days = 7 } }
+		}
+	}
+	
+	option = {
+		name = finland_quiestion_event.1.b#Расширение интеграции земель
+		ai_chance = {
+			factor = 10
+			modifier = {
+				is_historical_focus_on = yes
+				factor = 50
+			}
+		}
+		custom_effect_tooltip = RUS_continue_finland_integration
+		hidden_effect = {
+			RUS = {
+				add_state_core = 111
+				add_state_core = 147
+				add_state_core = 149
+				add_state_core = 150
+			}
+			111 = { add_dynamic_modifier = { modifier = RUS_integrated_finland_dynamic_modifier } }
+			147 = { add_dynamic_modifier = { modifier = RUS_integrated_finland_dynamic_modifier } }
+			149 = { add_dynamic_modifier = { modifier = RUS_integrated_finland_dynamic_modifier } }
+			150 = { add_dynamic_modifier = { modifier = RUS_integrated_finland_dynamic_modifier } }
 		}
 	}
 }
 
 country_event = {
-	id = finland_quiestion.2 #
-	title = finland_quiestion.2.t
-	desc = finland_quiestion.2.d
+	id = finland_quiestion_event.2 # Назначение генерал-губернатора
+	title = finland_quiestion_event.2.t
+	desc = finland_quiestion_event.2.d
 	picture = GFX_report_event_aotsm_generic_signing_the_contract
 	
 	is_triggered_only = yes
@@ -3614,41 +3656,105 @@ country_event = {
 	fire_only_once = yes
 	
 	option = {
-		name = finland_quiestion.2.a	
-		
-		add_timed_idea = {
-			idea = RUS_fight_witch_fins_separatism
-			days = 100
-		}
-		hidden_effect = {
+		name = finland_quiestion_event.2.a	#Меньшиков
+		ai_chance = {
+			factor = 25
 			
 		}
+		custom_effect_tooltip = RUS_menshikov_as_delete_other_roles
+		hidden_effect = {
+			set_nationality = {
+				target_country = FIN
+				character = RUS_Alexander_Sergeevich_Menshikov
+			}
+			FIN = {
+				retire_country_leader = yes
+				add_popularity = {
+					ideology = authoritarian
+					popularity = 0.30
+				}
+				set_politics = { ruling_party = authoritarian }
+				add_country_leader_role = {
+					character = RUS_Alexander_Sergeevich_Menshikov
+					promote_leader = yes
+					
+					country_leader = {
+						expire = "1900.1.1"
+						ideology = centrism
+						traits = {  }
+					}
+				}
+			}
+		}
 	}
-}
-
-country_event = {
-	id = finland_quiestion.3 # 
-	title = finland_quiestion.3.t
-	desc = finland_quiestion.3.d
-	picture = GFX_report_event_aotsm_generic_signing_the_contract
-	
-	is_triggered_only = yes
-	
-	fire_only_once = yes
 	
 	option = {
-		name = finland_quiestion.4.a	
+		name = finland_quiestion_event.2.b #Граббе
+		ai_chance = {
+			factor = 15
+			
+		}
+		custom_effect_tooltip = RUS_grabbe_ph_delete_other_roles
+		hidden_effect = {
+			set_nationality = {
+				target_country = FIN
+				character = RUS_Pavel_Hristoforovich_Grabbe
+			}
+			FIN = {
+				retire_country_leader = yes
+				add_popularity = {
+					ideology = authoritarian
+					popularity = 0.30
+				}
+				set_politics = { ruling_party = authoritarian }
+				add_country_leader_role = {
+					character = RUS_Pavel_Hristoforovich_Grabbe
+					promote_leader = yes
+					
+					country_leader = {
+						expire = "1900.1.1"
+						ideology = centrism
+						traits = {  }
+					}
+				}
+			}
+		}
+	}
+	
+	option = {
+		name = finland_quiestion_event.2.c #Меурман
+		ai_chance = {
+			factor = 5
+			
+		}
 		
 		hidden_effect = {
-			
+			FIN = {
+				retire_country_leader = yes
+				add_popularity = {
+					ideology = authoritarian
+					popularity = 0.30
+				}
+				set_politics = { ruling_party = authoritarian }
+				add_country_leader_role = {
+					character = FIN_Agafon_Meurman
+					promote_leader = yes
+					
+					country_leader = {
+						expire = "1900.1.1"
+						ideology = centrism
+						traits = {  }
+					}
+				}
+			}
 		}
 	}
 }
 
 country_event = {
-	id = finland_quiestion.4 # 
-	title = finland_quiestion.4.t
-	desc = finland_quiestion.4.d
+	id = finland_quiestion_event.3 # 
+	title = finland_quiestion_event.3.t
+	desc = finland_quiestion_event.3.d
 	picture = GFX_report_event_aotsm_generic_signing_the_contract
 	
 	is_triggered_only = yes
@@ -3656,26 +3762,7 @@ country_event = {
 	fire_only_once = yes
 	
 	option = {
-		name = finland_quiestion.4.a	
-		
-		hidden_effect = {
-			
-		}
-	}
-}
-
-country_event = {
-	id = finland_quiestion.5 # 
-	title = finland_quiestion.5.t
-	desc = finland_quiestion.5.d
-	picture = GFX_report_event_aotsm_generic_signing_the_contract
-	
-	is_triggered_only = yes
-	
-	fire_only_once = yes
-	
-	option = {
-		name = finland_quiestion.5.a	
+		name = finland_quiestion_event.4.a	
 		
 		hidden_effect = {
 			
