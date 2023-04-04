@@ -113,6 +113,26 @@ FIN_separatism_dynamic_modifier_2 = { #STATE MODIFIER
 	resistance_growth = 0.01	
 }
 
+RUS_integrated_finland_dynamic_modifier = { #STATE MODIFIER
+
+	enable = { always = yes }
+	remove_trigger = {
+		ROOT = { 
+			OR = {
+				owner = {
+					original_tag = SCA
+				}
+				owner = {
+					original_tag = FIN
+				}
+			}
+		}
+	}
+	
+	icon = GFX_modifiers_FIN_separatism_dynamic_modifier
+	recruitable_population_factor = -0.5
+}
+
 BYZ_constantinopolis_area_modifier = { #STATE MODIFIER
 
 	enable = { always = yes }
@@ -133,5 +153,49 @@ RUS_partisan_resistance_activity_state_modifier = { #STATE MODIFIER
 	resistance_decay = 0.5
 	local_factory_sabotage = 0.5
 	resistance_growth = 0.25
+	
+}
+
+PRU_loyal_to_prussian_state_modifier = { #STATE MODIFIER
+
+	enable = { always = yes }
+	remove_trigger = {
+		OR = {
+			AND = {
+				owner = {
+					original_tag = PRU
+				}
+				is_core_of = PRU
+			}
+			NOT = {
+				owner = {
+					original_tag = PRU
+				}
+			}
+		}
+	}
+	
+	icon = GFX_modifier_loyal_to_prussian
+	required_garrison_factor = -0.75
+	resistance_activity = -0.75
+	resistance_growth = -0.50
+	compliance_growth = 0.50
+	
+}
+
+PRU_part_of_german_confederacy_state_modifier = { #STATE MODIFIER
+
+	enable = { always = yes }
+	remove_trigger = {
+		NOT = {
+			owner = {
+				original_tag = PRU
+			}
+		}
+	}
+	
+	icon = GFX_modifier_part_of_german_confederacy
+	production_speed_buildings_factor = -0.25
+	local_building_slots_factor = -0.10
 	
 }
