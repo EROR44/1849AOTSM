@@ -4747,7 +4747,7 @@ country_event = { #Caucause start
 		}			
 	}
 	
-	option = { №Investigate
+	option = { #Investigate
 		name = byz_caucause_revolt.1.b
 		ai_chance = {
             base = 50
@@ -4877,7 +4877,7 @@ country_event = { #They start Prepered
 	
 }
 
-country_event = { #They start Prepered
+country_event = { #Revolt start
 	id = byz_caucause_revolt.4
 	title = byz_caucause_revolt.4.t
 	desc = byz_caucause_revolt.4.d
@@ -4889,20 +4889,156 @@ country_event = { #They start Prepered
 	
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event byz_caucause_revolt.4"
+		hidden_effect = {
+			set_global_flag = BYZ_islamic_revolt_inprogress
+			RKA = {
+				add_state_core = 233
+			}
+			233 = {
+				set_state_owner_to = RKA
+			}
+			RKA = {
+				set_cosmetic_tag = RKA_REVOLT
+			}
+			RKA = {
+				add_state_core = 229
+				add_state_core = 230
+				add_state_core = 231
+				add_state_core = 232
+			}
+			RKA = {
+				inherit_technology = BYZ
+			}
+			BYZ = {
+				declare_war_on = {
+					target = RKA
+					type = annex_everything
+				}
+			}
+			RKA = {
+				set_province_controller = 3672
+				set_province_controller = 6701
+				set_province_controller = 9628
+				set_province_controller = 9663
+				load_oob = RKA_ARMY
+				add_equipment_to_stockpile = {
+					type = infantry_equipment
+					amount = 9100
+					producer = RKA
+				}
+				add_equipment_to_stockpile = {
+					type = artillery_equipment
+					amount = 1200
+					producer = RKA
+				}
+				add_equipment_to_stockpile = {
+					type = support_equipment
+					amount = 3000
+					producer = RKA
+				}
+			}
+			RKA = {
+				add_offsite_building = { type = arms_factory level = 5 }
+			}
+			BYZ = {
+				activate_mission = war_with_islamicrevolt_decision
+			}
+		}
 	}
 
 	option = { #Fight with them!
 		name = byz_caucause_revolt.4.a
-		BYZ = {
-			declare_war_on = {
-				target = RKA
-				type = annex_everything
-			}
+		custom_effect_tooltip = byz_declare_war_on_rka_tt
+		hidden_effect = {
+			news_event = news.217
 		}
+	}
+	
+}
+
+country_event = { #Revolt was crush
+	id = byz_caucause_revolt.5
+	title = byz_caucause_revolt.5.t
+	desc = byz_caucause_revolt.5.d
+	picture = GFX_report_event_isalmic_revolt_fail
+	
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event byz_caucause_revolt.5"
 		hidden_effect = {
 			RKA = {
-				inherit_technology = BYZ
+				remove_state_core = 229
+				remove_state_core = 230
+				remove_state_core = 231
+				remove_state_core = 232
+				remove_state_core = 233
 			}
+			BYZ = {
+				annex_country = {
+					target = RKA
+					transfer_troops = no
+				}
+			}
+			clr_global_flag = BYZ_islamic_revolt_inprogress
+			BYZ = {
+				remove_mission = war_with_islamicrevolt_decision
+			}
+		}
+	}
+
+	option = { #Very good news
+		name = byz_caucause_revolt.5.a
+		hidden_effect = {
+			news_event = news.218
+		}
+	}
+	
+}
+
+country_event = { #Revolt was win
+	id = byz_caucause_revolt.6
+	title = byz_caucause_revolt.6.t
+	desc = byz_caucause_revolt.6.d
+	picture = GFX_report_event_isalmic_revolt_win
+	
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event byz_caucause_revolt.6"
+		hidden_effect = {
+			RKA = {
+				remove_state_core = 229
+				remove_state_core = 230
+				remove_state_core = 231
+				remove_state_core = 232
+				remove_state_core = 233
+			}
+			BYZ = {
+				annex_country = {
+					target = RKA
+					transfer_troops = no
+				}
+			}
+			clr_global_flag = BYZ_islamic_revolt_inprogress
+			BYZ = {
+				remove_mission = war_with_islamicrevolt_decision
+			}
+		}
+	}
+
+	option = { #Fuck
+		name = byz_caucause_revolt.6.a
+		add_timed_idea = {
+			idea = byz_reparation_to_minority
+			days = 730
+		}
+		hidden_effect = {
+			news_event = news.219
 		}
 	}
 	
