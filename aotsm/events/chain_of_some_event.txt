@@ -463,7 +463,7 @@ country_event = { #Aleksander Batenberg die
 	}
 }
 
-country_event = { #Far East leave Russian
+country_event = { #Second Time of Trouble
 	id = chain.11
 	title = chain.11.t
 	desc = chain.11.d
@@ -475,6 +475,41 @@ country_event = { #Far East leave Russian
 	
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event chain.11"
+		hidden_effect = {
+			RUS = {
+				country_event = {
+					id = chain.12
+					days = 3
+					random_days = 10
+				}
+			}
+			news_event = {
+				id = news.220
+				days = 3
+			}
+		}
+	}
+	
+	option = { #End is near
+		name = chain.11.a 
+		add_stability = -0.15
+		add_war_support = -0.15
+	}
+	
+}
+
+country_event = { #Far East leave Russian
+	id = chain.12
+	title = chain.12.t
+	desc = chain.12.d
+	picture = GFX_report_event_china_ledo_road
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event chain.12"
 		hidden_effect = {
 			if = {
 				limit = {
@@ -917,6 +952,12 @@ country_event = { #Far East leave Russian
 				inherit_technology = RUS
 			}
 			RUS = {
+				set_nationality = {
+					target_country = FER
+					character = RUS_Petr_Vasilievich_Kazakevich
+				}
+			}
+			RUS = {
 				transfer_units_fraction= {
 					target = FER
 					size = 0.20
@@ -947,16 +988,34 @@ country_event = { #Far East leave Russian
 			}
 			RUS = {
 				country_event = {
-					id = chain.12
+					id = chain.13
 					days = 6
 					random_days = 5
 				}
+			}
+			news_event = {
+				id = news.188
+				days = 3
 			}
 		}
 	}
 	
 	option = { #Declare war
-		name = chain.11.a 
+		name = chain.12.a 
+		ai_chance = {
+			factor = 40
+			modifier = {
+				factor = 0
+				OR = {
+					RUS = {
+						has_war_with = PRU
+					}
+					RUS = {
+						has_war_with = BYZ
+					}
+				}
+			}
+		}
 		add_stability = -0.15
 		add_war_support = -0.15
 		add_political_power = -500
@@ -1123,7 +1182,10 @@ country_event = { #Far East leave Russian
 	}
 	
 	option = { #Not time to war
-		name = chain.11.b
+		name = chain.12.b
+		ai_chance = {
+			factor = 60
+		}
 		add_stability = -0.10
 		add_war_support = -0.10
 		hidden_effect = {
@@ -1283,7 +1345,10 @@ country_event = { #Far East leave Russian
 	}
 	
 	option = { #Play as Far East
-		name = chain.11.c
+		name = chain.12.c
+		ai_chance = {
+			factor = 0
+		}
 		add_stability = -0.15
 		add_war_support = -0.15
 		add_political_power = -500
@@ -1452,9 +1517,9 @@ country_event = { #Far East leave Russian
 }
 
 country_event = { #Alaska Out
-	id = chain.12
-	title = chain.12.t
-	desc = chain.12.d
+	id = chain.13
+	title = chain.13.t
+	desc = chain.13.d
 	picture = GFX_report_event_china_ledo_road
 	
 	is_triggered_only = yes
@@ -1462,7 +1527,7 @@ country_event = { #Alaska Out
 	fire_only_once = yes
 	
 	immediate = {
-		log = "[GetDateText]: [Root.GetName]: event chain.12"
+		log = "[GetDateText]: [Root.GetName]: event chain.13"
 		hidden_effect = {
 			if = {
 				limit = {
@@ -1590,11 +1655,18 @@ country_event = { #Alaska Out
 					days = 2
 				}
 			}
+			news_event = {
+				id = news.189
+				days = 3
+			}
 		}
 	}
 	
 	option = { #bad news
-		name = chain.12.a 
+		name = chain.13.a
+		ai_chance = {
+			factor = 100
+		}
 		add_stability = -0.10
 		add_war_support = -0.10
 		hidden_effect = {
@@ -1658,7 +1730,10 @@ country_event = { #Alaska Out
 	}
 	
 	option = { #Play as Alaska
-		name = chain.12.b
+		name = chain.13.b
+		ai_chance = {
+			factor = 0
+		}
 		add_stability = -0.10
 		add_war_support = -0.10
 		ALS = { change_tag_from = ROOT }
@@ -1724,9 +1799,9 @@ country_event = { #Alaska Out
 }
 
 country_event = { #Turkish Out
-	id = chain.13
-	title = chain.13.t
-	desc = chain.13.d
+	id = chain.14
+	title = chain.14.t
+	desc = chain.14.d
 	picture = GFX_report_event_china_ledo_road
 	
 	is_triggered_only = yes
@@ -1734,7 +1809,7 @@ country_event = { #Turkish Out
 	fire_only_once = yes
 	
 	immediate = {
-		log = "[GetDateText]: [Root.GetName]: event chain.13"
+		log = "[GetDateText]: [Root.GetName]: event chain.14"
 		hidden_effect = {
 			if = {
 				limit = {
@@ -1814,7 +1889,7 @@ country_event = { #Turkish Out
 			}
 			RUS = {
 				country_event = {
-					id = chain.14
+					id = chain.15
 					days = 3
 					random_days = 12
 				}
@@ -1823,7 +1898,10 @@ country_event = { #Turkish Out
 	}
 	
 	option = { #bad news
-		name = chain.13.a 
+		name = chain.14.a 
+		ai_chance = {
+			factor = 100
+		}
 		add_stability = -0.10
 		add_war_support = -0.10
 		hidden_effect = {
@@ -1871,7 +1949,10 @@ country_event = { #Turkish Out
 	}
 	
 	option = { #Play as Turkish
-		name = chain.13.b
+		name = chain.14.b
+		ai_chance = {
+			factor = 0
+		}
 		add_stability = -0.10
 		add_war_support = -0.10
 		SKZ = { change_tag_from = ROOT }
@@ -1921,9 +2002,9 @@ country_event = { #Turkish Out
 }
 
 country_event = { #Kazah front
-	id = chain.14
-	title = chain.14.t
-	desc = chain.14.d
+	id = chain.15
+	title = chain.15.t
+	desc = chain.15.d
 	picture = GFX_report_event_china_ledo_road
 	
 	is_triggered_only = yes
@@ -1931,7 +2012,7 @@ country_event = { #Kazah front
 	fire_only_once = yes
 	
 	immediate = {
-		log = "[GetDateText]: [Root.GetName]: event chain.14"
+		log = "[GetDateText]: [Root.GetName]: event chain.15"
 		hidden_effect = {
 			if = {
 				limit = {
@@ -2125,7 +2206,7 @@ country_event = { #Kazah front
 			}
 			RUS = {
 				country_event = {
-					id = chain.17
+					id = chain.18
 					days = 4
 					random_days = 13
 				}
@@ -2134,7 +2215,10 @@ country_event = { #Kazah front
 	}
 	
 	option = { #Not so bad
-		name = chain.14.a 
+		name = chain.15.a 
+		ai_chance = {
+			factor = 100
+		}
 		add_stability = 0.05
 		add_war_support = 0.15
 		hidden_effect = {
@@ -2238,7 +2322,10 @@ country_event = { #Kazah front
 	}
 	
 	option = { #Play as Russian force in Kazak
-		name = chain.14.b
+		name = chain.15.b
+		ai_chance = {
+			factor = 0
+		}
 		add_stability = 0.05
 		add_war_support = 0.15
 		NKZ = { change_tag_from = ROOT }
@@ -2344,9 +2431,9 @@ country_event = { #Kazah front
 }
 
 country_event = { #Kazah Out
-	id = chain.15
-	title = chain.15.t
-	desc = chain.15.d
+	id = chain.16
+	title = chain.16.t
+	desc = chain.16.d
 	picture = GFX_report_event_china_ledo_road
 	
 	is_triggered_only = yes
@@ -2354,7 +2441,7 @@ country_event = { #Kazah Out
 	fire_only_once = yes
 	
 	immediate = {
-		log = "[GetDateText]: [Root.GetName]: event chain.15"
+		log = "[GetDateText]: [Root.GetName]: event chain.16"
 		hidden_effect = {
 			if = {
 				limit = {
@@ -2448,7 +2535,7 @@ country_event = { #Kazah Out
 			}
 			RUS = {
 				country_event = {
-					id = chain.17
+					id = chain.18
 					days = 4
 					random_days = 13
 				}
@@ -2457,7 +2544,10 @@ country_event = { #Kazah Out
 	}
 	
 	option = { #bad news
-		name = chain.15.a 
+		name = chain.16.a 
+		ai_chance = {
+			factor = 100
+		}
 		add_stability = -0.10
 		add_war_support = -0.10
 		hidden_effect = {
@@ -2513,7 +2603,10 @@ country_event = { #Kazah Out
 	}
 	
 	option = { #Play as Kazak
-		name = chain.15.b
+		name = chain.16.b
+		ai_chance = {
+			factor = 0
+		}
 		add_stability = -0.10
 		add_war_support = -0.10
 		KAZ = { change_tag_from = ROOT }
@@ -2571,9 +2664,9 @@ country_event = { #Kazah Out
 }
 
 country_event = { #Kazah move north
-	id = chain.16
-	title = chain.16.t
-	desc = chain.16.d
+	id = chain.17
+	title = chain.17.t
+	desc = chain.17.d
 	picture = GFX_report_event_china_ledo_road
 	
 	is_triggered_only = yes
@@ -2581,7 +2674,7 @@ country_event = { #Kazah move north
 	fire_only_once = yes
 	
 	immediate = {
-		log = "[GetDateText]: [Root.GetName]: event chain.16"
+		log = "[GetDateText]: [Root.GetName]: event chain.17"
 		hidden_effect = {
 			if = {
 				limit = {
@@ -2669,7 +2762,7 @@ country_event = { #Kazah move north
 			}
 			RUS = {
 				country_event = {
-					id = chain.17
+					id = chain.18
 					days = 4
 					random_days = 13
 				}
@@ -2678,7 +2771,10 @@ country_event = { #Kazah move north
 	}
 	
 	option = { #very bad news
-		name = chain.16.a 
+		name = chain.17.a 
+		ai_chance = {
+			factor = 100
+		}
 		add_stability = -0.10
 		add_war_support = -0.10
 		hidden_effect = {
@@ -2734,7 +2830,10 @@ country_event = { #Kazah move north
 	}
 	
 	option = { #Play as Kazak
-		name = chain.16.b
+		name = chain.17.b
+		ai_chance = {
+			factor = 0
+		}
 		add_stability = -0.10
 		add_war_support = -0.10
 		KAZ = { change_tag_from = ROOT }
@@ -2792,9 +2891,9 @@ country_event = { #Kazah move north
 }
 
 country_event = { #Ignatiev make move
-	id = chain.17
-	title = chain.17.t
-	desc = chain.17.d
+	id = chain.18
+	title = chain.18.t
+	desc = chain.18.d
 	picture = GFX_report_event_china_ledo_road
 	
 	is_triggered_only = yes
@@ -2802,7 +2901,7 @@ country_event = { #Ignatiev make move
 	fire_only_once = yes
 	
 	immediate = {
-		log = "[GetDateText]: [Root.GetName]: event chain.17"
+		log = "[GetDateText]: [Root.GetName]: event chain.18"
 		hidden_effect = {
 			if = {
 				limit = {
@@ -3171,6 +3270,33 @@ country_event = { #Ignatiev make move
 			CSG = {
 				inherit_technology = RUS
 			}
+			if = {
+				limit = {
+					RUS = {
+						has_country_leader = {
+							character = RUS_Pavel_Nikolaevich_Ignatiev
+							ruling_only = yes
+						}
+					}
+				}
+				RUS = {
+					add_country_leader_role = {
+						character = RUS_national_council
+						promote_leader = yes
+						country_leader = {
+							ideology = paternalism
+							expire = "1900.1.1.1"
+							traits = {  }
+						}
+					}
+				}
+			}
+			RUS = {
+				set_nationality = {
+					target_country = CSG
+					character = RUS_Pavel_Nikolaevich_Ignatiev
+				}
+			}
 			RUS = {
 				transfer_units_fraction= {
 					target = CSG
@@ -3224,8 +3350,8 @@ country_event = { #Ignatiev make move
 				}
 				RUS = {
 					country_event = {
-						id = chain.18
-						days = 3
+						id = chain.19
+						days = 5
 					}
 				}
 			}
@@ -3244,16 +3370,34 @@ country_event = { #Ignatiev make move
 			}
 			RUS = {
 				country_event = {
-					id = chain.19
-					days = 4
-					random_days = 13
+					id = chain.20
+					days = 20
+					random_days = 10
 				}
+			}
+			news_event = {
+				id = news.191
+				days = 3
 			}
 		}
 	}
 	
 	option = { #War with Ignatiev
-		name = chain.17.a 
+		name = chain.18.a 
+		ai_chance = {
+			factor = 40
+			modifier = {
+				factor = 0
+				OR = {
+					RUS = {
+						has_war_with = PRU
+					}
+					RUS = {
+						has_war_with = BYZ
+					}
+				}
+			}
+		}
 		add_stability = -0.15
 		add_war_support = -0.15
 		add_political_power = -500
@@ -3476,7 +3620,10 @@ country_event = { #Ignatiev make move
 	}
 	
 	option = { #nothing to do
-		name = chain.17.b
+		name = chain.18.b
+		ai_chance = {
+			factor = 60
+		}
 		add_stability = -0.10
 		add_war_support = -0.10
 		hidden_effect = {
@@ -3692,7 +3839,10 @@ country_event = { #Ignatiev make move
 	}
 	
 	option = { #Play as Ignatiev
-		name = chain.17.c
+		name = chain.18.c
+		ai_chance = {
+			factor = 0
+		}
 		add_stability = -0.15
 		add_war_support = -0.15
 		add_political_power = -500
@@ -3917,530 +4067,6 @@ country_event = { #Ignatiev make move
 }
 
 country_event = { #Peace in war
-	id = chain.18
-	title = chain.18.t
-	desc = chain.18.d
-	picture = GFX_report_event_china_ledo_road
-	
-	is_triggered_only = yes
-	
-	fire_only_once = yes
-	
-	immediate = {
-		log = "[GetDateText]: [Root.GetName]: event chain.18"
-		hidden_effect = {
-		}
-	}
-	
-	option = { #Time to any peace
-		name = chain.18.a
-		if = {
-			limit = {
-				NOT = {
-					country_exists = POL
-				}
-			}
-			PLH = {
-				if = {
-					limit = {
-						RUS = {
-							owns_state = 10
-						}
-					}
-					transfer_state = 10
-					RUS = {
-						remove_state_core = 10
-					}
-				}
-				if = {
-					limit = {
-						RUS = {
-							owns_state = 87
-						}
-					}
-					transfer_state = 87
-					RUS = {
-						remove_state_core = 87
-					}
-				}
-				if = {
-					limit = {
-						RUS = {
-							owns_state = 90
-						}
-					}
-					transfer_state = 90
-					RUS = {
-						remove_state_core = 90
-					}
-				}
-				if = {
-					limit = {
-						RUS = {
-							owns_state = 92
-						}
-					}
-					transfer_state = 92
-					RUS = {
-						remove_state_core = 92
-					}
-				}
-				if = {
-					limit = {
-						RUS = {
-							owns_state = 97
-						}
-					}
-					transfer_state = 97
-					RUS = {
-						remove_state_core = 97
-					}
-				}
-				if = {
-					limit = {
-						RUS = {
-							owns_state = 98
-						}
-					}
-					transfer_state = 98
-					RUS = {
-						remove_state_core = 98
-					}
-				}
-				if = {
-					limit = {
-						RUS = {
-							owns_state = 853
-						}
-					}
-					transfer_state = 853
-					RUS = {
-						remove_state_core = 853
-					}
-				}
-			}
-		}
-		if = {
-			limit = {
-				NOT = {
-					country_exists = BLT
-				}
-			}
-			BLT = {
-				add_state_core = 915
-				transfer_state = 11
-				transfer_state = 12
-				transfer_state = 13
-				transfer_state = 189
-				transfer_state = 190
-				transfer_state = 191
-				transfer_state = 784
-				transfer_state = 915
-			}
-			EST = {
-				add_state_core = 13
-				add_state_core = 191
-			}
-			LAT = {
-				add_state_core = 12
-				add_state_core = 190
-				add_state_core = 915
-			}
-			LIT = {
-				add_state_core = 11
-				add_state_core = 189
-				add_state_core = 784
-			}
-			hidden_effect = {
-				PRU = {
-					set_autonomy = {
-						target = BLT
-						autonomy_state = autonomy_integrated_puppet
-						end_wars = yes
-						end_civil_wars = yes
-					}
-				}
-				BLT = {
-					set_politics = { ruling_party = democratic elections_allowed = no }
-					set_popularities = {
-						democratic = 34
-						socialism = 0
-						reactionist = 33
-						authoritarian = 33
-					}
-				}
-				BLT = {
-					load_oob = BLT_army
-				}
-				EST = {
-					inherit_technology = RUS
-				}
-				LIT = {
-					inherit_technology = RUS
-				}
-				LAT = {
-					inherit_technology = RUS
-				}
-				BLT = {
-					inherit_technology = PRU
-				}
-			}
-		}
-		if = {
-			limit = {
-				NOT = {
-					country_exists = WRT
-				}
-			}
-			WRT = {
-				transfer_state = 94
-				add_state_core = 94
-				transfer_state = 95
-				add_state_core = 95
-				transfer_state = 96
-				add_state_core = 96
-				transfer_state = 194
-				add_state_core = 194
-				transfer_state = 204
-				add_state_core = 204
-				transfer_state = 206
-				add_state_core = 206
-				transfer_state = 207
-				add_state_core = 207
-				transfer_state = 224
-				add_state_core = 224
-				transfer_state = 241
-				add_state_core = 241
-				transfer_state = 243
-				add_state_core = 243
-				transfer_state = 823
-				add_state_core = 823
-			}
-			hidden_effect = {
-				PRU = {
-					set_autonomy = {
-						target = WRT
-						autonomy_state = autonomy_dominion
-						end_wars = yes
-						end_civil_wars = yes
-					}
-				}
-				WRT = {
-					set_politics = { ruling_party = democratic elections_allowed = no }
-					set_popularities = {
-						democratic = 63
-						socialism = 7
-						reactionist = 24
-						authoritarian = 6
-					}
-				}
-				WRT = {
-					load_oob = WRT_army
-				}
-				WRT = {
-					inherit_technology = PRU
-				}
-			}
-		}
-		if = {
-			limit = {
-				NOT = {
-					country_exists = UKR
-				}
-			}
-			UKR = {
-				transfer_state = 93
-				add_state_core = 93
-				add_state_core = 137
-				transfer_state = 192
-				add_state_core = 192
-				transfer_state = 193
-				add_state_core = 193
-				add_state_core = 196
-				transfer_state = 197
-				add_state_core = 197
-				transfer_state = 198
-				add_state_core = 198
-				transfer_state = 199
-				add_state_core = 199
-				add_state_core = 200
-				transfer_state = 201
-				add_state_core = 201
-				transfer_state = 202
-				add_state_core = 202
-				transfer_state = 203
-				add_state_core = 203
-				transfer_state = 220
-				add_state_core = 220
-				transfer_state = 221
-				add_state_core = 221
-				transfer_state = 225
-				add_state_core = 225
-				transfer_state = 226
-				add_state_core = 226
-				add_state_core = 227
-				transfer_state = 228
-				add_state_core = 228
-				transfer_state = 240
-				add_state_core = 240
-				transfer_state = 259
-				add_state_core = 259
-				transfer_state = 859
-				add_state_core = 859
-				transfer_state = 885
-				add_state_core = 885
-				transfer_state = 886
-				add_state_core = 886
-			}
-			hidden_effect = {
-				PRU = {
-					add_to_faction = UKR
-				}
-				UKR = {
-					set_politics = { ruling_party = reactionist elections_allowed = no }
-					set_popularities = {
-						democratic = 6
-						socialism = 1
-						reactionist = 84
-						authoritarian = 9
-					}
-				}
-				UKR = {
-					load_oob = UKR_army
-				}
-				UKR = {
-					inherit_technology = PRU
-				}
-			}
-		}
-		if = {
-			limit = {
-				OR = {
-					BYZ = {
-						is_in_faction_with = PRU
-					}
-					BYZ = {
-						has_war_with = RUS
-					}
-				}
-			}
-			BCH = {
-				transfer_state = 137
-				add_state_core = 137
-				transfer_state = 196
-				add_state_core = 196
-				transfer_state = 200
-				add_state_core = 200
-				transfer_state = 218
-				add_state_core = 218
-				transfer_state = 227
-				add_state_core = 227
-				transfer_state = 234
-				add_state_core = 234
-			}
-			hidden_effect = {
-				BYZ = {
-					set_autonomy = {
-						target = BCH
-						autonomy_state = autonomy_aotsm_province
-						end_wars = yes
-						end_civil_wars = yes
-					}
-				}
-				BCH = {
-					set_politics = { ruling_party = reactionist elections_allowed = no }
-					set_popularities = {
-						democratic = 3
-						socialism = 1
-						reactionist = 77
-						authoritarian = 19
-					}
-				}
-				BCH = {
-					load_oob = BCH_army
-				}
-				BCH = {
-					inherit_technology = BYZ
-				}
-			}
-			KUK = {
-				transfer_state = 217
-				add_state_core = 217
-				transfer_state = 235
-				add_state_core = 235
-				transfer_state = 236
-				add_state_core = 236
-				transfer_state = 237
-				add_state_core = 237
-				transfer_state = 238
-				add_state_core = 238
-				transfer_state = 245
-				add_state_core = 245
-				transfer_state = 858
-				add_state_core = 858
-			}
-			hidden_effect = {
-				BYZ = {
-					set_autonomy = {
-						target = KUK
-						autonomy_state = autonomy_aotsm_protectorat
-						end_wars = yes
-						end_civil_wars = yes
-					}
-				}
-				KUK = {
-					set_politics = { ruling_party = reactionist elections_allowed = no }
-					set_popularities = {
-						democratic = 18
-						socialism = 1
-						reactionist = 62
-						authoritarian = 19
-					}
-				}
-				KUK = {
-					load_oob = KUK_army
-				}
-				KUK = {
-					inherit_technology = BYZ
-				}
-			}
-		}
-		RUS = {
-			remove_state_core = 10
-			remove_state_core = 11
-			remove_state_core = 12
-			remove_state_core = 13
-			remove_state_core = 87
-			remove_state_core = 90
-			remove_state_core = 92
-			remove_state_core = 93
-			remove_state_core = 94
-			remove_state_core = 95
-			remove_state_core = 96
-			remove_state_core = 97
-			remove_state_core = 98
-			remove_state_core = 137
-			remove_state_core = 189
-			remove_state_core = 190
-			remove_state_core = 191
-			remove_state_core = 192
-			remove_state_core = 193
-			remove_state_core = 194
-			remove_state_core = 196
-			remove_state_core = 197
-			remove_state_core = 198
-			remove_state_core = 199
-			remove_state_core = 200
-			remove_state_core = 201
-			remove_state_core = 202
-			remove_state_core = 203
-			remove_state_core = 204
-			remove_state_core = 206
-			remove_state_core = 207
-			remove_state_core = 217
-			remove_state_core = 218
-			remove_state_core = 221
-			remove_state_core = 225
-			remove_state_core = 226
-			remove_state_core = 227
-			remove_state_core = 228
-			remove_state_core = 234
-			remove_state_core = 235
-			remove_state_core = 236
-			remove_state_core = 237
-			remove_state_core = 238
-			remove_state_core = 241
-			remove_state_core = 245
-			remove_state_core = 259
-			remove_state_core = 784
-			remove_state_core = 823
-			remove_state_core = 858
-			remove_state_core = 885
-			remove_state_core = 886
-			remove_state_core = 915
-		}
-		if = {
-			limit = {
-				AND = {
-					SCA = {
-						has_country_flag = SCA_VS_RUS_2
-					}
-					SCA = {
-						is_in_faction_with = PRU
-					}
-					SCA = {
-						has_war_with = RUS
-					}	
-				}
-			}
-			SCA = {
-				transfer_state = 111
-				transfer_state = 145
-				transfer_state = 146
-				transfer_state = 147
-				transfer_state = 149
-				transfer_state = 150
-				transfer_state = 213
-				transfer_state = 215
-				transfer_state = 216
-				transfer_state = 722
-			}
-			RUS = {
-				remove_state_core = 213
-				remove_state_core = 215
-				remove_state_core = 216
-				remove_state_core = 722
-			}
-		}	
-		RUS = {
-			leave_faction = yes
-		}		
-		every_country = {
-			limit = {
-				has_war_with = RUS
-				NOT = {
-					tag = CSG
-				}
-			}
-			white_peace = RUS
-		}
-		hidden_effect = {
-			if = {
-				limit = {
-					BYZ = {
-						has_idea = russian_history_enemy_1
-					}
-				}
-				BYZ = {
-					remove_ideas = russian_history_enemy_1
-				}
-			}
-			if = {
-				limit = {
-					BYZ = {
-						has_idea = russian_history_enemy_2
-					}
-				}
-				BYZ = {
-					remove_ideas = russian_history_enemy_2
-				}
-			}
-			if = {
-				limit = {
-					BYZ = {
-						has_idea = russian_history_enemy_3
-					}
-				}
-				BYZ = {
-					remove_ideas = russian_history_enemy_3
-				}
-			}
-		}
-		set_global_flag = russian_capitulation
-	}
-}
-
-country_event = { #End of Russia
 	id = chain.19
 	title = chain.19.t
 	desc = chain.19.d
@@ -4452,6 +4078,543 @@ country_event = { #End of Russia
 	
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event chain.19"
+		hidden_effect = {
+		}
+	}
+	
+	option = { #Time to any peace
+		name = chain.19.a
+		ai_chance = {
+			factor = 100
+		}
+		custom_effect_tooltip = rus_lose_all_war_with_tt
+		hidden_effect = {
+			if = {
+				limit = {
+					PRU = {
+						has_war_with = RUS
+					}
+				}
+				if = {
+					limit = {
+						NOT = {
+							country_exists = POL
+						}
+					}
+					PLH = {
+						if = {
+							limit = {
+								RUS = {
+									owns_state = 10
+								}
+							}
+							transfer_state = 10
+							RUS = {
+								remove_state_core = 10
+							}
+						}
+						if = {
+							limit = {
+								RUS = {
+									owns_state = 87
+								}
+							}
+							transfer_state = 87
+							RUS = {
+								remove_state_core = 87
+							}
+						}
+						if = {
+							limit = {
+								RUS = {
+									owns_state = 90
+								}
+							}
+							transfer_state = 90
+							RUS = {
+								remove_state_core = 90
+							}
+						}
+						if = {
+							limit = {
+								RUS = {
+									owns_state = 92
+								}
+							}
+							transfer_state = 92
+							RUS = {
+								remove_state_core = 92
+							}
+						}
+						if = {
+							limit = {
+								RUS = {
+									owns_state = 97
+								}
+							}
+							transfer_state = 97
+							RUS = {
+								remove_state_core = 97
+							}
+						}
+						if = {
+							limit = {
+								RUS = {
+									owns_state = 98
+								}
+							}
+							transfer_state = 98
+							RUS = {
+								remove_state_core = 98
+							}
+						}
+						if = {
+							limit = {
+								RUS = {
+									owns_state = 853
+								}
+							}
+							transfer_state = 853
+							RUS = {
+								remove_state_core = 853
+							}
+						}
+					}
+				}
+				if = {
+					limit = {
+						NOT = {
+							country_exists = BLT
+						}
+					}
+					BLT = {
+						add_state_core = 915
+						transfer_state = 11
+						transfer_state = 12
+						transfer_state = 13
+						transfer_state = 189
+						transfer_state = 190
+						transfer_state = 191
+						transfer_state = 784
+						transfer_state = 915
+					}
+					EST = {
+						add_state_core = 13
+						add_state_core = 191
+					}
+					LAT = {
+						add_state_core = 12
+						add_state_core = 190
+						add_state_core = 915
+					}
+					LIT = {
+						add_state_core = 11
+						add_state_core = 189
+						add_state_core = 784
+					}
+					hidden_effect = {
+						PRU = {
+							set_autonomy = {
+								target = BLT
+								autonomy_state = autonomy_integrated_puppet
+								end_wars = yes
+								end_civil_wars = yes
+							}
+						}
+						BLT = {
+							set_politics = { ruling_party = democratic elections_allowed = no }
+							set_popularities = {
+								democratic = 34
+								socialism = 0
+								reactionist = 33
+								authoritarian = 33
+							}
+						}
+						BLT = {
+							load_oob = BLT_army
+						}
+						EST = {
+							inherit_technology = RUS
+						}
+						LIT = {
+							inherit_technology = RUS
+						}
+						LAT = {
+							inherit_technology = RUS
+						}
+						BLT = {
+							inherit_technology = PRU
+						}
+					}
+				}
+				if = {
+					limit = {
+						NOT = {
+							country_exists = WRT
+						}
+					}
+					WRT = {
+						transfer_state = 94
+						add_state_core = 94
+						transfer_state = 95
+						add_state_core = 95
+						transfer_state = 96
+						add_state_core = 96
+						transfer_state = 194
+						add_state_core = 194
+						transfer_state = 204
+						add_state_core = 204
+						transfer_state = 206
+						add_state_core = 206
+						transfer_state = 207
+						add_state_core = 207
+						transfer_state = 224
+						add_state_core = 224
+						transfer_state = 241
+						add_state_core = 241
+						transfer_state = 243
+						add_state_core = 243
+						transfer_state = 823
+						add_state_core = 823
+					}
+					hidden_effect = {
+						PRU = {
+							set_autonomy = {
+								target = WRT
+								autonomy_state = autonomy_dominion
+								end_wars = yes
+								end_civil_wars = yes
+							}
+						}
+						WRT = {
+							set_politics = { ruling_party = democratic elections_allowed = no }
+							set_popularities = {
+								democratic = 63
+								socialism = 7
+								reactionist = 24
+								authoritarian = 6
+							}
+						}
+						WRT = {
+							load_oob = WRT_army
+						}
+						WRT = {
+							inherit_technology = PRU
+						}
+					}
+				}
+				if = {
+					limit = {
+						NOT = {
+							country_exists = UKR
+						}
+					}
+					UKR = {
+						transfer_state = 93
+						add_state_core = 93
+						add_state_core = 137
+						transfer_state = 192
+						add_state_core = 192
+						transfer_state = 193
+						add_state_core = 193
+						add_state_core = 196
+						transfer_state = 197
+						add_state_core = 197
+						transfer_state = 198
+						add_state_core = 198
+						transfer_state = 199
+						add_state_core = 199
+						add_state_core = 200
+						transfer_state = 201
+						add_state_core = 201
+						transfer_state = 202
+						add_state_core = 202
+						transfer_state = 203
+						add_state_core = 203
+						transfer_state = 220
+						add_state_core = 220
+						transfer_state = 221
+						add_state_core = 221
+						transfer_state = 225
+						add_state_core = 225
+						transfer_state = 226
+						add_state_core = 226
+						add_state_core = 227
+						transfer_state = 228
+						add_state_core = 228
+						transfer_state = 240
+						add_state_core = 240
+						transfer_state = 259
+						add_state_core = 259
+						transfer_state = 859
+						add_state_core = 859
+						transfer_state = 885
+						add_state_core = 885
+						transfer_state = 886
+						add_state_core = 886
+					}
+					hidden_effect = {
+						PRU = {
+							add_to_faction = UKR
+						}
+						UKR = {
+							set_politics = { ruling_party = reactionist elections_allowed = no }
+							set_popularities = {
+								democratic = 6
+								socialism = 1
+								reactionist = 84
+								authoritarian = 9
+							}
+						}
+						UKR = {
+							load_oob = UKR_army
+						}
+						UKR = {
+							inherit_technology = PRU
+						}
+					}
+				}
+			}
+			if = {
+				limit = {
+					OR = {
+						BYZ = {
+							is_in_faction_with = PRU
+						}
+						BYZ = {
+							has_war_with = RUS
+						}
+					}
+				}
+				BCH = {
+					transfer_state = 137
+					add_state_core = 137
+					transfer_state = 196
+					add_state_core = 196
+					transfer_state = 200
+					add_state_core = 200
+					transfer_state = 218
+					add_state_core = 218
+					transfer_state = 227
+					add_state_core = 227
+					transfer_state = 234
+					add_state_core = 234
+				}
+				hidden_effect = {
+					BYZ = {
+						set_autonomy = {
+							target = BCH
+							autonomy_state = autonomy_aotsm_province
+							end_wars = yes
+							end_civil_wars = yes
+						}
+					}
+					BCH = {
+						set_politics = { ruling_party = reactionist elections_allowed = no }
+						set_popularities = {
+							democratic = 3
+							socialism = 1
+							reactionist = 77
+							authoritarian = 19
+						}
+					}
+					BCH = {
+						load_oob = BCH_army
+					}
+					BCH = {
+						inherit_technology = BYZ
+					}
+				}
+				KUK = {
+					transfer_state = 217
+					add_state_core = 217
+					transfer_state = 235
+					add_state_core = 235
+					transfer_state = 236
+					add_state_core = 236
+					transfer_state = 237
+					add_state_core = 237
+					transfer_state = 238
+					add_state_core = 238
+					transfer_state = 245
+					add_state_core = 245
+					transfer_state = 858
+					add_state_core = 858
+				}
+				hidden_effect = {
+					BYZ = {
+						set_autonomy = {
+							target = KUK
+							autonomy_state = autonomy_aotsm_protectorat
+							end_wars = yes
+							end_civil_wars = yes
+						}
+					}
+					KUK = {
+						set_politics = { ruling_party = reactionist elections_allowed = no }
+						set_popularities = {
+							democratic = 18
+							socialism = 1
+							reactionist = 62
+							authoritarian = 19
+						}
+					}
+					KUK = {
+						load_oob = KUK_army
+					}
+					KUK = {
+						inherit_technology = BYZ
+					}
+				}
+			}
+			RUS = {
+				remove_state_core = 10
+				remove_state_core = 11
+				remove_state_core = 12
+				remove_state_core = 13
+				remove_state_core = 87
+				remove_state_core = 90
+				remove_state_core = 92
+				remove_state_core = 93
+				remove_state_core = 94
+				remove_state_core = 95
+				remove_state_core = 96
+				remove_state_core = 97
+				remove_state_core = 98
+				remove_state_core = 137
+				remove_state_core = 189
+				remove_state_core = 190
+				remove_state_core = 191
+				remove_state_core = 192
+				remove_state_core = 193
+				remove_state_core = 194
+				remove_state_core = 196
+				remove_state_core = 197
+				remove_state_core = 198
+				remove_state_core = 199
+				remove_state_core = 200
+				remove_state_core = 201
+				remove_state_core = 202
+				remove_state_core = 203
+				remove_state_core = 204
+				remove_state_core = 206
+				remove_state_core = 207
+				remove_state_core = 217
+				remove_state_core = 218
+				remove_state_core = 221
+				remove_state_core = 225
+				remove_state_core = 226
+				remove_state_core = 227
+				remove_state_core = 228
+				remove_state_core = 234
+				remove_state_core = 235
+				remove_state_core = 236
+				remove_state_core = 237
+				remove_state_core = 238
+				remove_state_core = 241
+				remove_state_core = 245
+				remove_state_core = 259
+				remove_state_core = 784
+				remove_state_core = 823
+				remove_state_core = 858
+				remove_state_core = 885
+				remove_state_core = 886
+				remove_state_core = 915
+			}
+			if = {
+				limit = {
+					AND = {
+						SCA = {
+							has_country_flag = SCA_VS_RUS_2
+						}
+						SCA = {
+							is_in_faction_with = PRU
+						}
+						SCA = {
+							has_war_with = RUS
+						}	
+					}
+				}
+				SCA = {
+					transfer_state = 111
+					transfer_state = 145
+					transfer_state = 146
+					transfer_state = 147
+					transfer_state = 149
+					transfer_state = 150
+					transfer_state = 213
+					transfer_state = 215
+					transfer_state = 216
+					transfer_state = 722
+				}
+				RUS = {
+					remove_state_core = 213
+					remove_state_core = 215
+					remove_state_core = 216
+					remove_state_core = 722
+				}
+			}	
+			RUS = {
+				leave_faction = yes
+			}		
+			every_country = {
+				limit = {
+					has_war_with = RUS
+					NOT = {
+						tag = CSG
+					}
+				}
+				white_peace = RUS
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						BYZ = {
+							has_idea = russian_history_enemy_1
+						}
+					}
+					BYZ = {
+						remove_ideas = russian_history_enemy_1
+					}
+				}
+				if = {
+					limit = {
+						BYZ = {
+							has_idea = russian_history_enemy_2
+						}
+					}
+					BYZ = {
+						remove_ideas = russian_history_enemy_2
+					}
+				}
+				if = {
+					limit = {
+						BYZ = {
+							has_idea = russian_history_enemy_3
+						}
+					}
+					BYZ = {
+						remove_ideas = russian_history_enemy_3
+					}
+				}
+			}
+			set_global_flag = russian_capitulation
+		}
+	}
+}
+
+country_event = { #End of Russia
+	id = chain.20
+	title = chain.20.t
+	desc = chain.20.d
+	picture = GFX_report_event_china_ledo_road
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event chain.20"
 		hidden_effect = {
 			if = {
 				limit = {
@@ -5012,11 +5175,31 @@ country_event = { #End of Russia
 			MSK = {
 				load_oob = MSK_army
 			}
+			if = {
+				limit = {
+					RUS = {
+						has_war_with = CSG 
+					}
+				}
+				RUS = {
+					white_peace = {
+						tag = CSG
+						message = rus_white_peace_with_csg
+					}
+				}
+			}
+			news_event = {
+				id = news.192
+				days = 3
+			}
 		}
 	}
 	
 	option = { #Play as Moskovia
-		name = chain.19.a
+		name = chain.20.a
+		ai_chance = {
+			factor = 0
+		}
 		MSK = { change_tag_from = ROOT }
 		hidden_effect = {
 			if = {
@@ -5040,7 +5223,10 @@ country_event = { #End of Russia
 	}
 	
 	option = { #I don't what to see it
-		name = chain.19.b
+		name = chain.20.b
+		ai_chance = {
+			factor = 100
+		}
 		hidden_effect = {	
 			if = {
 				limit = {
@@ -5059,6 +5245,439 @@ country_event = { #End of Russia
 			RUS = {
 				country_event = script_event.28
 			}
+		}
+	}
+}
+
+country_event = { #Coup in Moskovia
+	id = chain.21
+	title = chain.21.t
+	desc = chain.21.d
+	picture = GFX_report_event_china_ledo_road
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event chain.21"
+		hidden_effect = {
+		}
+	}
+	
+	option = { #Romanov Can save Russian
+		name = chain.21.a
+		ai_chance = {
+			factor = 100
+		}
+		hidden_effect = {
+			MSK = {
+				promote_character = RUS_Romanov_Alexandr_Nikolaevich
+			}
+		}
+		MSK = {
+			add_popularity = {
+				ideology = authoritarian
+				popularity = 0.5
+			}
+			set_politics = {
+				ruling_party = authoritarian
+				elections_allowed = no
+			}
+		}
+		MSK = {
+			country_event = {
+				id = chain.22
+				days = 3
+			}
+		}
+	}
+}
+
+country_event = { #Coronation of Aleksander II
+	id = chain.22
+	title = chain.22.t
+	desc = chain.22.d
+	picture = GFX_report_event_china_ledo_road
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event chain.22"
+		hidden_effect = {
+			MSK = {
+				country_event = {
+					id = chain.23
+					days = 5
+					random_days = 20
+				}
+			}
+			news_event = {
+				id = news.221
+				days = 3
+			}
+			MSK = {
+				set_character_name = {
+					character = RUS_Romanov_Alexandr_Nikolaevich
+					name = RUS_Romanov_Alexandr_Nikolaevich_tsar
+				}
+			}
+		}
+	}
+	
+	option = { #God Save tha Tsar
+		name = chain.22.a
+		ai_chance = {
+			factor = 100
+		}
+		add_stability = 0.10
+		add_war_support = 0.05
+	}
+}
+
+country_event = { #North Revolt
+	id = chain.23
+	title = chain.23.t
+	desc = chain.23.d
+	picture = GFX_report_event_china_ledo_road
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event chain.23"
+		hidden_effect = {
+			195 = {
+				set_demilitarized_zone = yes
+			}
+			208 = {
+				set_demilitarized_zone = yes
+			}
+			209 = {
+				set_demilitarized_zone = yes
+			}
+			210 = {
+				set_demilitarized_zone = yes
+			}
+			214 = {
+				set_demilitarized_zone = yes
+			}
+			244 = {
+				set_demilitarized_zone = yes
+			}
+			246 = {
+				set_demilitarized_zone = yes
+			}
+			247 = {
+				set_demilitarized_zone = yes
+			}
+			248 = {
+				set_demilitarized_zone = yes
+			}
+			262 = {
+				set_demilitarized_zone = yes
+			}
+			263 = {
+				set_demilitarized_zone = yes
+			}
+			264 = {
+				set_demilitarized_zone = yes
+			}
+			351 = {
+				set_demilitarized_zone = yes
+			}
+			397 = {
+				set_demilitarized_zone = yes
+			}
+			400 = {
+				set_demilitarized_zone = yes
+			}
+		}
+	}
+	
+	option = { #Start of Revolt
+		name = chain.23.a
+		ai_chance = {
+			factor = 100
+		}
+		add_stability = -0.25
+		add_war_support = 0.15
+		add_manpower = -7129
+		MSK = {
+			country_event = {
+				id = chain.24
+				days = 3
+			}
+		}
+	}
+}
+
+country_event = { #Sankt-Peterburg Freedom
+	id = chain.24
+	title = chain.24.t
+	desc = chain.24.d
+	picture = GFX_report_event_china_ledo_road
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event chain.24"
+		hidden_effect = {
+			195 = {
+				set_demilitarized_zone = no
+				set_province_name = {
+					id = 3151
+					name = 3151_old_name
+				}
+			}
+			SPB = {
+				transfer_state = 195
+				add_state_core = 195
+			}
+			MSK = {
+				remove_state_core = 195
+			}
+			MSK = {
+				country_event = {
+					id = chain.26
+					days = 20
+					random_days = 10
+				}
+			}
+		}
+	}
+	
+	option = { #We can't do anything
+		name = chain.24.a
+		ai_chance = {
+			factor = 100
+		}
+		MSK = {
+			country_event = {
+				id = chain.25
+				days = 5
+			}
+		}
+		custom_effect_tooltip = msk_situation_is_very_bad_tt
+	}
+}
+
+country_event = { #Mandat of Sankt-Peterburg
+	id = chain.25
+	title = chain.25.t
+	desc = chain.25.d
+	picture = GFX_report_event_china_ledo_road
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event chain.25"
+		hidden_effect = {
+			if = {
+				limit = {
+					NOT = {
+						has_global_flag = sca_capitulation
+					}
+				}
+				SCA = {
+					diplomatic_relation = {
+						country = SPB
+						relation = guarantee
+						active = yes
+					}
+				}
+			}
+			if = {
+				limit = {
+					has_global_flag = sca_capitulation
+				}
+				FIN = {
+					diplomatic_relation = {
+						country = SPB
+						relation = guarantee
+						active = yes
+					}
+				}
+			}
+		}
+	}
+	
+	option = { #We can take city later
+		name = chain.25.a
+		ai_chance = {
+			factor = 100
+		}
+		if = {
+			limit = {
+				NOT = {
+					has_global_flag = pru_capitulation
+				}
+			}
+			PRU = {
+				diplomatic_relation = {
+					country = SPB
+					relation = guarantee
+					active = yes
+				}
+			}
+		}	
+		MSK = {
+			diplomatic_relation = {
+				country = SPB
+				relation = guarantee
+				active = yes
+			}
+		}
+	}
+
+}
+
+country_event = { #Revolt Start
+	id = chain.26
+	title = chain.26.t
+	desc = chain.26.d
+	picture = GFX_report_event_china_ledo_road
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event chain.26"
+		hidden_effect = {
+			NOV = {
+				transfer_state = 208
+				add_state_core = 208
+				transfer_state = 209
+				add_state_core = 209
+				transfer_state = 210
+				add_state_core = 210
+				transfer_state = 214
+				add_state_core = 214
+				transfer_state = 244
+				add_state_core = 244
+				transfer_state = 246
+				add_state_core = 246
+				transfer_state = 247
+				add_state_core = 247
+				transfer_state = 248
+				add_state_core = 248
+				transfer_state = 262
+				add_state_core = 262
+				transfer_state = 263
+				add_state_core = 263
+				transfer_state = 264
+				add_state_core = 264
+				transfer_state = 351
+				add_state_core = 351
+				transfer_state = 397
+				add_state_core = 397
+				transfer_state = 400
+				add_state_core = 400
+			}
+			208 = {
+				set_demilitarized_zone = no
+			}
+			209 = {
+				set_demilitarized_zone = no
+			}
+			210 = {
+				set_demilitarized_zone = no
+			}
+			214 = {
+				set_demilitarized_zone = no
+			}
+			244 = {
+				set_demilitarized_zone = no
+			}
+			246 = {
+				set_demilitarized_zone = no
+			}
+			247 = {
+				set_demilitarized_zone = no
+			}
+			248 = {
+				set_demilitarized_zone = no
+			}
+			262 = {
+				set_demilitarized_zone = no
+			}
+			263 = {
+				set_demilitarized_zone = no
+			}
+			264 = {
+				set_demilitarized_zone = no
+			}
+			351 = {
+				set_demilitarized_zone = no
+			}
+			397 = {
+				set_demilitarized_zone = no
+			}
+			400 = {
+				set_demilitarized_zone = no
+			}
+			MSK = {
+				transfer_units_fraction= {
+					target = NOV
+					size = 0.40
+					stockpile_ratio = 0.50
+					army_ratio = 0.40
+					navy_ratio = 0.75
+					air_ratio = 0.40
+					keep_unit_leaders_trigger = {
+						has_trait = RUS_house_of_romanov
+					}
+				}
+			}
+			NOV = {
+				load_oob = NOV_army
+			}
+			NOV = {
+				diplomatic_relation = {
+					country = SPB
+					relation = guarantee
+					active = yes
+				}
+			}
+			news_event = {
+				id = news.193
+				days = 3
+			}
+		}
+	}
+	
+	option = { #Fight for Moskovia
+		name = chain.26.a
+		ai_chance = {
+			factor = 100
+		}
+		MSK = {
+			declare_war_on = {
+				target = NOV
+				type = annex_everything
+			} 
+		}
+	}
+	
+	option = { #Fight for Novgorod
+		name = chain.26.a
+		ai_chance = {
+			factor = 0
+		}
+		NOV = { change_tag_from = ROOT }
+		NOV = {
+			declare_war_on = {
+				target = MSK
+				type = annex_everything
+			} 
 		}
 	}
 }
