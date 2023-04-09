@@ -487,6 +487,9 @@ country_event = { #Second Time of Trouble
 				id = news.220
 				days = 3
 			}
+			RUS = {
+				add_ideas = second_smuta_rus
+			}
 		}
 	}
 	
@@ -494,6 +497,7 @@ country_event = { #Second Time of Trouble
 		name = chain.11.a 
 		add_stability = -0.15
 		add_war_support = -0.15
+		custom_effect_tooltip = add_idea_second_smuta_rus_tt
 	}
 	
 }
@@ -1546,6 +1550,20 @@ country_event = { #Alaska Out
 			if = {
 				limit = {
 					RUS = {
+						owns_state = 388
+					}
+				}
+				ALS = {
+					transfer_state = 388
+					add_state_core = 388
+				}
+				RUS = {
+					remove_state_core = 388
+				}
+			}
+			if = {
+				limit = {
+					RUS = {
 						owns_state = 463
 					}
 				}
@@ -1555,6 +1573,34 @@ country_event = { #Alaska Out
 				}
 				RUS = {
 					remove_state_core = 463
+				}
+			}
+			if = {
+				limit = {
+					RUS = {
+						owns_state = 469
+					}
+				}
+				ALS = {
+					transfer_state = 469
+					add_state_core = 469
+				}
+				RUS = {
+					remove_state_core = 469
+				}
+			}
+			if = {
+				limit = {
+					RUS = {
+						owns_state = 470
+					}
+				}
+				ALS = {
+					transfer_state = 470
+					add_state_core = 470
+				}
+				RUS = {
+					remove_state_core = 470
 				}
 			}
 			if = {
@@ -1574,6 +1620,20 @@ country_event = { #Alaska Out
 			if = {
 				limit = {
 					RUS = {
+						owns_state = 472
+					}
+				}
+				ALS = {
+					transfer_state = 472
+					add_state_core = 472
+				}
+				RUS = {
+					remove_state_core = 472
+				}
+			}
+			if = {
+				limit = {
+					RUS = {
 						owns_state = 473
 					}
 				}
@@ -1583,6 +1643,42 @@ country_event = { #Alaska Out
 				}
 				RUS = {
 					remove_state_core = 473
+				}
+			}
+			if = {
+				limit = {
+					RUS = {
+						owns_state = 683
+					}
+					VIN = {
+						owns_state = 682
+					}
+				}
+				VIN = {
+					transfer_state = 683
+					add_state_core = 683
+				}
+				RUS = {
+					remove_state_core = 683
+				}
+			}
+			if = {
+				limit = {
+					RUS = {
+						owns_state = 683
+					}
+					NOT = {
+						VIN = {
+							owns_state = 682
+						}
+					}
+				}
+				ALS = {
+					transfer_state = 683
+					add_state_core = 683
+				}
+				RUS = {
+					remove_state_core = 683
 				}
 			}
 			if = {
@@ -5340,6 +5436,12 @@ country_event = { #Coronation of Aleksander II
 		}
 		add_stability = 0.10
 		add_war_support = 0.05
+		MSK = {
+			swap_ideas = {
+				remove_idea = republic
+				add_idea = monarchy
+			}
+		}
 	}
 }
 
@@ -5680,6 +5782,12 @@ country_event = { #Revolt Start
 				type = annex_everything
 			} 
 		}
+		MSK = {
+			add_ideas = for_the_tsar_msk
+		}
+		NOV = {
+			add_ideas = for_the_republic_nov
+		}
 	}
 	
 	option = { #Fight for Novgorod
@@ -5693,6 +5801,12 @@ country_event = { #Revolt Start
 				target = MSK
 				type = annex_everything
 			} 
+		}
+		NOV = {
+			add_ideas = for_the_republic_nov
+		}
+		MSK = {
+			add_ideas = for_the_tsar_msk
 		}
 	}
 }
@@ -5710,7 +5824,10 @@ country_event = { #End of Russian Spirit
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event chain.27"
 		hidden_effect = {
-			ROOT = {
+			every_country = {
+				limit = {
+					has_idea = post_second_smuta_rus
+				}
 				remove_ideas = post_second_smuta_rus
 				add_timed_idea = {
 					idea = post_second_smuta_rus
@@ -5720,7 +5837,7 @@ country_event = { #End of Russian Spirit
 		}
 	}
 	
-	option = { #Fight for Moskovia
+	option = { #Smuta time out
 		name = chain.27.a
 		ai_chance = {
 			factor = 100
