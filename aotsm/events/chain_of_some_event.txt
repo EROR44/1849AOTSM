@@ -2204,6 +2204,9 @@ country_event = { #Kazah front
 			NKZ = {
 				load_oob = NKZ_army
 			}
+			NKZ = {
+				set_cosmetic_tag = NKZ_russian
+			}
 			RUS = {
 				country_event = {
 					id = chain.18
@@ -3334,6 +3337,9 @@ country_event = { #Ignatiev make move
 							reactionist = 52
 							authoritarian = 44
 						}
+					}
+					NKZ = {
+						set_cosmetic_tag = NKZ_russian_ignatiev
 					}
 				}
 			}
@@ -5218,7 +5224,7 @@ country_event = { #End of Russia
 			}
 			RUS = {
 				country_event = script_event.28
-			}
+			}	
 		}
 	}
 	
@@ -5651,6 +5657,15 @@ country_event = { #Revolt Start
 				id = news.193
 				days = 3
 			}
+			every_country = {
+				limit = {
+					has_idea = post_second_smuta_rus
+				}
+				country_event = {
+					id = chain.27
+					days = 5
+				}
+			}
 		}
 	}
 	
@@ -5668,7 +5683,7 @@ country_event = { #Revolt Start
 	}
 	
 	option = { #Fight for Novgorod
-		name = chain.26.a
+		name = chain.26.b
 		ai_chance = {
 			factor = 0
 		}
@@ -5679,5 +5694,37 @@ country_event = { #Revolt Start
 				type = annex_everything
 			} 
 		}
+	}
+}
+
+country_event = { #End of Russian Spirit
+	id = chain.27
+	title = chain.27.t
+	desc = chain.27.d
+	picture = GFX_report_event_china_ledo_road
+	
+	is_triggered_only = yes
+	
+	fire_only_once = no
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event chain.27"
+		hidden_effect = {
+			ROOT = {
+				remove_ideas = post_second_smuta_rus
+				add_timed_idea = {
+					idea = post_second_smuta_rus
+					days = 1825
+				}
+			}
+		}
+	}
+	
+	option = { #Fight for Moskovia
+		name = chain.27.a
+		ai_chance = {
+			factor = 100
+		}
+		custom_effect_tooltip = post_smuta_idea_end_for_1825_days_tt
 	}
 }
