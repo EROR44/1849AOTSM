@@ -1,0 +1,32 @@
+scripted_gui = {
+	aotsm_soundevent = {
+		context_type = player_context
+		window_name = "aotsm_eventsound_container"
+		parent_window_token = top_bar
+
+		ai_enabled = {
+			always = no
+		}
+
+		effects = {
+			toggle_eventsound_button_click = {
+				if = {
+					limit = { NOT = { has_global_flag = soundevent_off_flag } }
+					set_global_flag = soundevent_off_flag
+					set_variable = { global.eventsound_frame = 2 }
+				}
+				else_if = {
+					limit = { has_global_flag = soundevent_off_flag }
+					clr_global_flag = soundevent_off_flag
+					set_variable = { global.eventsound_frame = 1 }
+				}
+			}
+		}
+
+		properties = {
+			toggle_eventsound_button = {
+				frame = global.eventsound_frame
+			}
+		}
+	}
+}
