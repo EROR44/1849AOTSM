@@ -4,6 +4,17 @@ on_actions = {
 	
 	on_startup = {
 		effect = {
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = division_limite_rule 
+						option = yes
+					}
+				}
+				every_country = {
+					calculate_maximum_divisions = yes
+				}
+			}
 			every_country = {
 				limit = {
 					is_ai = no
@@ -184,7 +195,15 @@ on_actions = {
 	
 	on_weekly = {
 		effect = {	
-
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = division_limite_rule 
+						option = yes
+					}
+				}
+				calculate_maximum_divisions = yes
+			}
 			if = {
 				limit = {
 					date > 1853.9.1
@@ -192,12 +211,18 @@ on_actions = {
 						is_ai = yes
 						has_idea = limited_conscription
 					}
+					NOT = {
+						RUS = {
+							has_country_flag = idea_swap_flag_r
+						}
+					}
 				}
 				RUS = {
 					swap_ideas = {
 						remove_idea = limited_conscription
 						add_idea = extensive_conscription
 					}
+					set_country_flag = idea_swap_flag_r
 				}
 			}
 			if = {
@@ -6828,42 +6853,138 @@ on_actions = {
 				}
 				if = {
 					limit = {
-						PRU = {
-							owns_state = 28
+						FRA = {
+							owns_state = 16
 						}
 					}
-					FRA = {
-						transfer_state = 28
+					if = {
+						limit = {
+							PRU = {
+								owns_state = 28
+							}
+						}
+						FRA = {
+							transfer_state = 28
+						}
+					}
+					if = {
+						limit = {
+							PRU = {
+								owns_state = 828
+							}
+						}
+						FRA = {
+							transfer_state = 828
+						}
+					}
+					if = {
+						limit = {
+							PRU = {
+								owns_state = 862
+							}
+						}
+						FRA = {
+							transfer_state = 862
+						}
+					}
+					if = {
+						limit = {
+							HOL = {
+								owns_state = 861
+							}
+						}
+						FRA = {
+							transfer_state = 861
+						}
 					}
 				}
 				if = {
 					limit = {
-						PRU = {
-							owns_state = 828
+						NOT ={
+							FRA = {
+								owns_state = 16
+							}
 						}
 					}
-					FRA = {
-						transfer_state = 828
-					}
-				}
-				if = {
-					limit = {
-						PRU = {
-							owns_state = 862
+					if = {
+						limit = {
+							PRU = {
+								owns_state = 8
+							}
+						}
+						REU = {
+							transfer_state = 8
 						}
 					}
-					FRA = {
-						transfer_state = 862
-					}
-				}
-				if = {
-					limit = {
-						HOL = {
-							owns_state = 861
+					if = {
+						limit = {
+							PRU = {
+								owns_state = 28
+							}
+						}
+						REU = {
+							transfer_state = 28
 						}
 					}
-					FRA = {
-						transfer_state = 861
+					if = {
+						limit = {
+							PRU = {
+								owns_state = 42
+							}
+						}
+						REU = {
+							transfer_state = 42
+						}
+					}
+					if = {
+						limit = {
+							PRU = {
+								owns_state = 51
+							}
+						}
+						REU = {
+							transfer_state = 51
+						}
+					}
+					if = {
+						limit = {
+							PRU = {
+								owns_state = 828
+							}
+						}
+						REU = {
+							transfer_state = 828
+						}
+					}
+					if = {
+						limit = {
+							PRU = {
+								owns_state = 862
+							}
+						}
+						REU = {
+							transfer_state = 862
+						}
+					}
+					if = {
+						limit = {
+							HOL = {
+								owns_state = 861
+							}
+						}
+						BEL = {
+							transfer_state = 861
+						}
+					}
+					if = {
+						limit = {
+							PRU = {
+								owns_state = 894
+							}
+						}
+						REU = {
+							transfer_state = 894
+						}
 					}
 				}
 				if = {
