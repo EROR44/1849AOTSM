@@ -9934,6 +9934,125 @@ on_actions = {
 					}
 				}
 			}
+			#PRT capitulation
+			if = {
+				limit = {
+					tag = PRT
+					PRT = {
+						has_war_with = CAS
+						has_completed_focus = PRT_The_War_with_Castile
+					}
+					NOT = {
+						has_global_flag = PRT_capitilation_proxy
+					}
+					NOT = {
+						PRT = {
+							has_war_with = CBI
+						}
+					}
+				}
+				CBI = {
+					annex_country = {
+						target = PRT
+						transfer_troops = no
+					}
+				}
+				PRT = {
+					transfer_state = 112
+					transfer_state = 179
+					transfer_state = 180
+					transfer_state = 181
+					transfer_state = 795
+				}
+				CAS = {
+					puppet = PRT
+				}
+				set_global_flag = PRT_capitilation_proxy
+			}
+			if = {
+				limit = {
+					tag = PRT
+					PRT = {
+						has_war_with = CBI
+					}
+					NOT = {
+						has_global_flag = PRT_capitilation_proxy
+					}
+					CBI = {
+						has_completed_focus = CBI_last_ultimatum
+					}
+				}
+				CBI = {
+					annex_country = {
+						target  = PRT
+						transfer_troops = no
+					}
+				}
+				set_global_flag = PRT_capitilation_proxy
+			}
+			#CAS
+			if = {
+				limit = {
+					tag = CAS
+					PRT = {
+						has_war_with = CAS
+						has_completed_focus = PRT_The_War_with_Castile
+					}
+					NOT = {
+						has_global_flag = CAS_capituliation
+					}
+				}
+				PRT = {
+					annex_country = {
+						target = CAS
+						transfer_troops = no
+					}
+				}
+				set_global_flag = CAS_capituliation
+			}
+			#GRA
+			if = {
+				limit = {
+					tag = GRA
+					PRT = {
+						has_war_with = GRA
+						has_completed_focus = PRT_The_war_with_Granada
+					}
+					NOT = {
+						has_global_flag = GRA_capituliation
+					}
+				}
+				PRT = {
+					annex_country = {
+						target = GRA
+						transfer_troops = no
+					}
+				}
+				set_global_flag = GRA_capituliation
+			}
+			#ARA
+			if = {
+				limit = {
+					tag = ARA
+					PRT = {
+						has_war_with = ARA
+						OR = {
+							has_completed_focus = PRT_Unite_with_Aragon
+							has_completed_focus = PRT_To_fight_for_Aragon
+						}
+					}
+					NOT = {
+						has_global_flag = ARA_capituliation
+					}
+				}
+				PRT = {
+					annex_country = {
+						target = ARA
+						transfer_troops = no
+					}
+				}
+				set_global_flag = ARA_capituliation
+			}
 		}
 	}
 	on_state_control_changed = {
