@@ -204,27 +204,27 @@ on_actions = {
 				}
 				calculate_maximum_divisions = yes
 			}
-			if = {
-				limit = {
-					date > 1853.9.1
-					RUS = {
-						is_ai = yes
-						has_idea = limited_conscription
-					}
-					NOT = {
-						RUS = {
-							has_country_flag = idea_swap_flag_r
-						}
-					}
-				}
-				RUS = {
-					swap_ideas = {
-						remove_idea = limited_conscription
-						add_idea = extensive_conscription
-					}
-					set_country_flag = idea_swap_flag_r
-				}
-			}
+#			if = {
+#				limit = {
+#					date > 1853.9.1
+#					RUS = {
+#						is_ai = yes
+#						has_idea = limited_conscription
+#					}
+#					NOT = {
+#						RUS = {
+#							has_country_flag = idea_swap_flag_r
+#						}
+#					}
+#				}
+#				RUS = {
+#					swap_ideas = {
+#						remove_idea = limited_conscription
+#						add_idea = extensive_conscription
+#					}
+#					set_country_flag = idea_swap_flag_r
+#				}
+#			}
 			if = {
 				limit = {
 					tag = MON
@@ -321,22 +321,22 @@ on_actions = {
 				}
 				PAS = { drop_cosmetic_tag = yes }
 			}
-			if = {
-				limit = {
-					tag = SON
-					has_idea = SON_portugal_colonial_administration
-					NOT = { is_puppet_of = PRT }
-				}
-				SON = { remove_ideas = SON_portugal_colonial_administration }
-			}
-			if = {
-				limit = {
-					tag = PAS
-					has_idea = SON_portugal_colonial_administration
-					NOT = { is_puppet_of = PRT }
-				}
-				PAS = { remove_ideas = SON_portugal_colonial_administration }
-			}
+#			if = {
+#				limit = {
+#					tag = SON
+#					has_idea = SON_portugal_colonial_administration
+#					NOT = { is_puppet_of = PRT }
+#				}
+#				SON = { remove_ideas = SON_portugal_colonial_administration }
+#			}
+#			if = {
+#				limit = {
+#					tag = PAS
+#					has_idea = SON_portugal_colonial_administration
+#					NOT = { is_puppet_of = PRT }
+#				}
+#				PAS = { remove_ideas = SON_portugal_colonial_administration }
+#			}
 			if = {
 				limit = {
 					RUS = {
@@ -345,19 +345,6 @@ on_actions = {
 					}			
 				}
 				RUS = { remove_ideas = RUS_dependence_from_import }
-			}
-			if = { #временная мера
-				limit = {
-					QIN = {
-						has_war_with = TPN
-					}			
-				}
-				QIN ={	
-					swap_ideas = { 
-						remove_idea = large_country
-						add_idea = potential_world_power
-					}
-				}
 			}
 		}
 	}
@@ -5423,6 +5410,7 @@ on_actions = {
 					tag = SEL
 					RUS = {
 						has_war_with = SEL
+						has_country_flag = RUS_salish_war_plan
 					}
 					NOT = {
 						has_global_flag = SEL_capitulation
@@ -5439,7 +5427,10 @@ on_actions = {
 						target = SEL
 						transfer_troops = no
 					}
+					clr_country_flag = RUS_salish_war_plan
+					set_country_flag = RUS_salish_war_plan_end
 				}
+				add_threat = 1
 				set_global_flag = SEL_capitulation
 			}
 		#Afganistan company
