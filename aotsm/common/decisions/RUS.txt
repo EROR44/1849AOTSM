@@ -2835,6 +2835,7 @@ rus_war_time_decisions_cat = {
 			add_ideas =  RUS_improved_mil_production
 		}
 	}
+	
 	RUS_recruirt_peoples = {
 		icon = usa_congress
 					
@@ -2892,6 +2893,7 @@ rus_war_time_decisions_cat = {
 			add_manpower = 2000
 		}
 	}
+	
 	RUS_recruirt_more_peoples = {
 		icon = usa_congress
 					
@@ -2952,6 +2954,7 @@ rus_war_time_decisions_cat = {
 			add_manpower = 9000
 		}
 	}
+	
 	RUS_defence_of_homeland_decision = {
 		icon = usa_congress
 					
@@ -3105,6 +3108,57 @@ rus_modernise_railway_network_cat = {
 		}
 	}
 	
+	RUS_railway_moscow_varshava = { #Расширение жд между мск и Варшавой
+		icon = usa_congress
+					
+		available = {
+			NOT = { has_country_flag = RUS_break_decision_build_raiway }
+			ROOT = { has_country_flag = RUS_start_railway_modernisation }
+		}
+		
+		allowed = { 
+			
+		}
+		
+		visible = {
+			ROOT = { has_country_flag = RUS_start_railway_modernisation }
+		}
+	
+		days_remove = 150
+		fire_only_once = yes
+	
+		modifier = {
+			civilian_factory_use = 4
+		}
+
+		ai_will_do = {
+			factor = 50
+		}
+		
+		complete_effect = {
+			hidden_effect  ={
+				set_country_flag = {
+					flag = RUS_break_decision_build_raiway
+					days = 45
+					value = 1
+				}
+			}	
+		}
+
+		remove_effect = {
+			#build_railway = {
+			#	level = 3
+			#	build_only_on_allied = yes
+			#	controller_priority = {
+			#	}
+			#	fallback = yes
+			#	path = { 11666 6739 3718 557 3569 569 11556 9429 11542 }
+			#	start_province = 11666
+			#	target_province = 11542
+			#}
+		}
+	}
+	
 }
 
 RUS_ai_boost_cat = {
@@ -3150,7 +3204,7 @@ RUS_ai_boost_cat = {
 
 RUS_resource_exploration_cat = {
 	
-	RUS_develop_donbass_cola_mimes = { 
+	RUS_develop_donbass_coal_mines_1 = { 
 		
 		icon = generic_form_nation
 
@@ -3179,7 +3233,7 @@ RUS_resource_exploration_cat = {
 		
 		fire_only_once = yes
 		
-		days_remove = 90
+		days_remove = 60
 
 		ai_will_do = {
 			factor = 100
@@ -3196,7 +3250,27 @@ RUS_resource_exploration_cat = {
 		}
 
 		remove_effect = {
-			
+			221 = {
+				add_resource = {
+					type = oil
+					amount = 3
+				}
+				set_state_flag = RUS_add_resource_coal_1
+			}
+			227 = {
+				add_resource = {
+					type = oil
+					amount = 2
+				}
+				set_state_flag = RUS_add_resource_coal_1
+			}
+			227 = {
+				add_resource = {
+					type = oil
+					amount = 3
+				}
+				set_state_flag = RUS_add_resource_coal_1
+			}
 		}
 		
 	}

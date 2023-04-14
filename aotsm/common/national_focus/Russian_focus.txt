@@ -117,6 +117,7 @@ focus_tree = {
 		
 		available = {
 			has_completed_focus = RUS_industry_situation
+			RUS_no_opposition_way = yes
 		}
 		
 		relative_position_id = RUS_investment_in_civil_industry
@@ -163,6 +164,10 @@ focus_tree = {
 		y = 1
 		cost = 5
 		
+		available = {
+			RUS_no_opposition_way = yes
+		}
+		
 		relative_position_id = RUS_start_forced_industrialisation
 		prerequisite = { focus = RUS_start_forced_industrialisation }
 		
@@ -188,6 +193,7 @@ focus_tree = {
 		
 		available = {
 			NOT = { has_idea = RUS_invest_in_industry }
+			RUS_no_opposition_way = yes
 		}
 		
 		relative_position_id = RUS_start_forced_industrialisation
@@ -234,6 +240,10 @@ focus_tree = {
 		y = 1
 		cost = 5
 		
+		available = {
+			RUS_no_opposition_way = yes
+		}
+		
 		relative_position_id = RUS_investment_in_military_prodiuction
 		prerequisite = { focus = RUS_investment_in_military_prodiuction }
 		
@@ -260,6 +270,7 @@ focus_tree = {
 				has_full_control_of_state = 223
 				has_full_control_of_state = 252
 			}
+			RUS_no_opposition_way = yes
 		}
 		
 		mutually_exclusive = { focus = RUS_mass_production_of_weapon }
@@ -318,6 +329,10 @@ focus_tree = {
 		y = 1
 		cost = 5
 		
+		available = {
+			RUS_no_opposition_way = yes
+		}
+		
 		mutually_exclusive = { focus = RUS_expand_heavy_industry }
 		
 		relative_position_id = RUS_exploration_new_resources
@@ -348,6 +363,7 @@ focus_tree = {
 				has_full_control_of_state = 221
 				has_full_control_of_state = 398
 			}
+			RUS_no_opposition_way = yes
 		}
 
 		relative_position_id = RUS_exploration_new_resources
@@ -407,6 +423,10 @@ focus_tree = {
 		x = -1
 		y = 1
 		cost = 5
+		
+		available = {
+			RUS_no_opposition_way = yes
+		}
 
 		relative_position_id = RUS_develop_of_mixed_fabrics
 		prerequisite = { focus = RUS_expand_heavy_industry }
@@ -429,6 +449,10 @@ focus_tree = {
 		x = 1
 		y = 1
 		cost = 5
+		
+		available = {
+			RUS_no_opposition_way = yes
+		}
 
 		relative_position_id = RUS_develop_of_mixed_fabrics
 		prerequisite = { focus = RUS_mass_production_of_weapon }
@@ -451,6 +475,10 @@ focus_tree = {
 		x = 2
 		y = 1
 		cost = 5
+		
+		available = {
+			RUS_no_opposition_way = yes
+		}
 		
 		mutually_exclusive = { focus = RUS_use_foreign_specialists }
 		
@@ -479,6 +507,10 @@ focus_tree = {
 		y = 1
 		cost = 5
 		
+		available = {
+			RUS_no_opposition_way = yes
+		}
+		
 		mutually_exclusive = { focus = RUS_use_own_specialists }
 		
 		relative_position_id = RUS_start_forced_industrialisation
@@ -506,6 +538,10 @@ focus_tree = {
 		y = 1
 		cost = 5
 		
+		available = {
+			RUS_no_opposition_way = yes
+		}
+		
 		mutually_exclusive = { focus = RUS_coop_witch_foreign_industrialists }
 
 		relative_position_id = RUS_use_own_specialists
@@ -531,6 +567,10 @@ focus_tree = {
 		y = 1
 		cost = 5
 		
+		available = {
+			RUS_no_opposition_way = yes
+		}
+		
 		mutually_exclusive = { focus = RUS_coop_witch_own_industrialists }
 
 		relative_position_id = RUS_use_own_specialists
@@ -555,6 +595,10 @@ focus_tree = {
 		x = -1
 		y = 1
 		cost = 5
+		
+		available = {
+			RUS_no_opposition_way = yes
+		}
 
 		relative_position_id = RUS_coop_witch_foreign_industrialists
 		prerequisite = { 
@@ -607,6 +651,10 @@ focus_tree = {
 		x = 0
 		y = 2
 		cost = 5
+		
+		available = {
+			RUS_no_opposition_way = yes
+		}
 
 		relative_position_id = RUS_invest_in_intellect_of_nation
 		prerequisite = { focus = RUS_invest_in_intellect_of_nation }
@@ -634,6 +682,7 @@ focus_tree = {
 				arms_factory > 29
 				NOT = { has_idea = RUS_dependence_from_import }
 			}
+			RUS_no_opposition_way = yes
 		}
 
 		relative_position_id = RUS_expand_petrograd_goverment_university
@@ -716,6 +765,7 @@ focus_tree = {
 		
 		available = {
 			aotsm_performed_by_event_or_solution = yes
+			has_completed_focus = RUS_liquidate_backwardness
 		}
 
 		relative_position_id = RUS_liquidate_backwardness
@@ -1139,9 +1189,14 @@ focus_tree = {
 		y = 0
 		cost = 2
 		
-		allow_branch = {
-			always = no #отключено тк не успею сделать
+		offset = {
+			x = -1
+			y = 0
+			trigger ={
+				NOT = { has_country_flag = RUS_church_complete_coup }
+			}
 		}
+		
 		
 		available = {
 			always = no
@@ -1174,12 +1229,13 @@ focus_tree = {
 		cost = 2
 		
 		offset = {
-			x = -19
+			x = -3
 			y = 0
-			trigger = {
-				always = yes
+			trigger ={
+				NOT = { has_country_flag = RUS_church_complete_coup }
 			}
 		}
+		
 		
 		available = {
 			always = no
@@ -1198,6 +1254,10 @@ focus_tree = {
 			RUS_add_10_socialist_influence = yes
 			RUS_add_10_army_influence = yes
 			add_stability = -0.1
+			add_timed_idea = {
+				idea = RUS_socialist_on_the_raise
+				days = 365
+			}
 		}
 	}
 
@@ -2323,6 +2383,14 @@ focus_tree = {
 		y = 1
 		cost = 0
 		
+		offset = {
+			x = 3
+			y = 0
+			trigger ={
+				NOT = { has_country_flag = RUS_church_complete_coup }
+			}
+		}
+		
 		available = {
 			aotsm_performed_by_event_or_solution = yes
 		}
@@ -2745,6 +2813,10 @@ focus_tree = {
 		y = 1
 		cost = 0
 		
+		allow_branch = {
+			has_country_flag = RUS_church_complete_coup
+		}
+		
 		available = {
 			aotsm_performed_by_event_or_solution = yes
 		}
@@ -2853,6 +2925,15 @@ focus_tree = {
 		x = 6
 		y = 1
 		cost = 0
+		
+		offset = {
+			x = -3
+			y = 0
+			trigger ={
+				NOT = { has_country_flag = RUS_church_complete_coup }
+			}
+		}
+		
 		
 		available = {
 			aotsm_performed_by_event_or_solution = yes
@@ -3129,6 +3210,10 @@ focus_tree = {
 		x = 0
 		y = 1
 		cost = 5
+		
+		available = {
+			socialism > 0.35
+		}
 
 		relative_position_id = RUS_raise_of_the_red
 		prerequisite = { focus = RUS_raise_of_the_red }
@@ -3792,7 +3877,7 @@ focus_tree = {
 	
 	focus = {
 		id = RUS_new_economic_politic
-		icon = GFX_goal_generic_improve_relations
+		icon = GFX_focus_rus_new_economic_politic
 		
 		x = 13
 		y = 2
@@ -3818,7 +3903,7 @@ focus_tree = {
 	
 	focus = {
 		id = RUS_first_four_year_plan
-		icon = GFX_goal_generic_improve_relations
+		icon = GFX_focus_rus_first_four_year_plan
 		
 		x = 2
 		y = 0
@@ -3847,7 +3932,7 @@ focus_tree = {
 	
 	focus = {
 		id = RUS_create_industrial_comission
-		icon = GFX_goal_generic_improve_relations
+		icon = GFX_focus_rus_create_industrial_comission
 		
 		x = 1
 		y = 1
@@ -3875,7 +3960,7 @@ focus_tree = {
 	
 	focus = {
 		id = RUS_save_individual_farming #сохранение собственных хозяйств
-		icon = GFX_goal_generic_improve_relations
+		icon = GFX_focus_rus_save_individual_farming
 		
 		x = -1
 		y = 1
@@ -3901,7 +3986,7 @@ focus_tree = {
 	
 	focus = {
 		id = RUS_program_support_for_economic
-		icon = GFX_goal_generic_improve_relations
+		icon = GFX_focus_rus_program_support_economic
 		
 		x = 0
 		y = 1
@@ -3928,7 +4013,7 @@ focus_tree = {
 	
 	focus = {
 		id = RUS_collectivisation
-		icon = GFX_goal_generic_improve_relations
+		icon = GFX_focus_rus_collectivisation
 		
 		x = 1
 		y = 1
@@ -3954,7 +4039,7 @@ focus_tree = {
 	
 	focus = {
 		id = RUS_expand_industry
-		icon = GFX_goal_generic_improve_relations
+		icon = GFX_focus_rus_expand_industry
 		
 		x = 0
 		y = 1
@@ -3981,7 +4066,7 @@ focus_tree = {
 	
 	focus = {
 		id = RUS_profit_from_reform
-		icon = GFX_goal_generic_improve_relations
+		icon = GFX_focus_rus_profit_from_reforms
 		
 		x = -1
 		y = 1
@@ -4010,7 +4095,7 @@ focus_tree = {
 	
 	focus = {
 		id = RUS_support_small_bisness
-		icon = GFX_goal_generic_improve_relations
+		icon = GFX_focus_rus_support_small_bisness
 		
 		x = -2
 		y = 1
@@ -4030,13 +4115,16 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_INDUSTRY }
 
 		completion_reward = {
-			
+			swap_ideas = {
+				remove_idea = RUS_new_economic_politic_idea
+				add_idea = RUS_new_economic_politic_idea_smal_bisness
+			}
 		}
 	}
 	
 	focus = {
 		id = RUS_support_medium_and_big_bisness
-		icon = GFX_goal_generic_improve_relations
+		icon = GFX_focus_rus_support_average_and_big_bisness
 		
 		x = -4
 		y = 1
@@ -4056,13 +4144,16 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_INDUSTRY }
 
 		completion_reward = {
-			
+			swap_ideas = {
+				remove_idea = RUS_new_economic_politic_idea
+				add_idea = RUS_new_economic_politic_idea_average_ad_big_bisness
+			}
 		}
 	}
 	
 	focus = {
 		id = RUS_coop_witch_yung_constructors
-		icon = GFX_goal_generic_improve_relations
+		icon = GFX_focus_rus_cooperate_witch_yung_ingeners
 		
 		x = -1
 		y = 1
@@ -4083,13 +4174,13 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_INDUSTRY }
 
 		completion_reward = {
-			
+			custom_effect_tooltip = RUS_unlock_new_advisors_manufacturers
 		}
 	}
 	
 	focus = {
 		id = RUS_investment_in_railway_construction
-		icon = GFX_goal_generic_improve_relations
+		icon = GFX_focus_rus_develop_railway_building
 		
 		x = 0
 		y = 2
@@ -4116,7 +4207,7 @@ focus_tree = {
 	
 	focus = {
 		id = RUS_stipend_for_the_poor #пособие для бедных
-		icon = GFX_goal_generic_improve_relations
+		icon = GFX_focus_rus_stipend_for_the_poor
 		
 		x = 0
 		y = 2
@@ -4137,13 +4228,13 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_INDUSTRY }
 
 		completion_reward = {
-			
+			add_ideas = RUS_dotations_for_poor_idea
 		}
 	}
 	
 	focus = {
 		id = RUS_attain_economic_stability #достигнуть экономической стабильности
-		icon = GFX_goal_generic_improve_relations
+		icon = GFX_focus_rus_attain_economic_stability
 		
 		x = 0
 		y = 2
@@ -4163,7 +4254,60 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_INDUSTRY }
 
 		completion_reward = {
-			
+			if = {
+				limit = {
+					ROOT = { has_idea = RUS_new_economic_politic_idea }
+				}
+				remove_idea = RUS_new_economic_politic_idea
+			}
+			if = {
+				limit = {
+					ROOT = { has_idea = RUS_new_economic_politic_idea_smal_bisness }
+				}
+				remove_idea = RUS_new_economic_politic_idea_smal_bisness
+			}
+			if = {
+				limit = {
+					ROOT = { has_idea = RUS_new_economic_politic_idea_average_ad_big_bisness }
+				}
+				remove_idea = RUS_new_economic_politic_idea_average_ad_big_bisness
+			}
+			if = {
+				limit = {
+					ROOT = { has_idea = medium_developed_industry }
+				}
+				swap_ideas = {
+					remove_idea = medium_developed_industry
+					add_idea = modern_industry
+				}
+			}
+			if = {
+				limit = {
+					ROOT = { has_idea = backward_industry }
+				}
+				swap_ideas = {
+					remove_idea = backward_industry
+					add_idea = medium_developed_industry
+				}
+			}
+			if = {
+				limit = {
+					ROOT = { has_idea = manufactory_production }
+				}
+				swap_ideas = {
+					remove_idea = manufactory_production
+					add_idea = backward_industry
+				}
+			}
+			if = {
+				limit = {
+					ROOT = { has_idea = agrarian_country }
+				}
+				swap_ideas = {
+					remove_idea = agrarian_country
+					add_idea = manufactory_production
+				}
+			}
 		}
 	}
 	
@@ -4171,7 +4315,7 @@ focus_tree = {
 	
 	focus = {
 		id = RUS_military_factories_priority
-		icon = GFX_goal_generic_improve_relations
+		icon = GFX_focus_rus_military_industry_priority
 		
 		x = 2
 		y = 1
@@ -4235,7 +4379,7 @@ focus_tree = {
 	
 	focus = {
 		id = RUS_civil_factories_priority
-		icon = GFX_goal_generic_improve_relations
+		icon = GFX_focus_rus_light_industry_priority
 		
 		x = 4
 		y = 1
@@ -4300,7 +4444,7 @@ focus_tree = {
 	
 	focus = {
 		id = RUS_encouragement_yung_talants #фокус добавляющий новые кб и советников
-		icon = GFX_goal_generic_improve_relations
+		icon = GFX_focus_rus_encouragement_of_yung_talants
 		
 		x = -1
 		y = 1
@@ -4322,13 +4466,13 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_INDUSTRY }
 
 		completion_reward = {
-			
+			custom_effect_tooltip = RUS_unlock_new_advisors_manufacturers
 		}
 	}
 	
 	focus = {
 		id = RUS_infrastructure_development
-		icon = GFX_goal_generic_improve_relations
+		icon = GFX_focus_rus_infrastructure_development
 		
 		x =-1
 		y = 1
@@ -4355,7 +4499,7 @@ focus_tree = {
 	
 	focus = {
 		id = RUS_cult_of_workers
-		icon = GFX_goal_generic_improve_relations
+		icon = GFX_focus_rus_cult_of_worker
 		
 		x = 1
 		y = 1
@@ -4382,7 +4526,7 @@ focus_tree = {
 	
 	focus = {
 		id = RUS_end_first_four_year_plan
-		icon = GFX_goal_generic_improve_relations
+		icon = GFX_focus_rus_end_first_four_year_plan
 		
 		x = 0
 		y = 2 
@@ -4402,7 +4546,48 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_INDUSTRY }
 
 		completion_reward = {
-			
+			if = {
+				limit = {
+					ROOT = { has_idea = RUS_first_four_year_plan_idea }
+				}
+				remove_idea = RUS_first_four_year_plan_idea
+			}
+			if = {
+				limit = {
+					ROOT = { has_idea = medium_developed_industry }
+				}
+				swap_ideas = {
+					remove_idea = medium_developed_industry
+					add_idea = modern_industry
+				}
+			}
+			if = {
+				limit = {
+					ROOT = { has_idea = backward_industry }
+				}
+				swap_ideas = {
+					remove_idea = backward_industry
+					add_idea = medium_developed_industry
+				}
+			}
+			if = {
+				limit = {
+					ROOT = { has_idea = manufactory_production }
+				}
+				swap_ideas = {
+					remove_idea = manufactory_production
+					add_idea = backward_industry
+				}
+			}
+			if = {
+				limit = {
+					ROOT = { has_idea = agrarian_country }
+				}
+				swap_ideas = {
+					remove_idea = agrarian_country
+					add_idea = manufactory_production
+				}
+			}
 		}
 	}
 
@@ -4604,7 +4789,7 @@ focus_tree = {
 		
 		x = 1
 		y = 1
-		cost = 2 
+		cost = 5 
 
 		relative_position_id = RUS_the_giant_has_awakened
 		prerequisite = { focus = RUS_the_giant_has_awakened }
@@ -4614,7 +4799,7 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
 		completion_reward = {
-			add_political_power = 200
+			country_event = rusPol.13
 		}
 	}
 
@@ -4932,7 +5117,7 @@ focus_tree = {
 		
 		x = 6
 		y = 1
-		cost = 2
+		cost = 5
 
 		relative_position_id = RUS_the_giant_has_awakened
 		prerequisite = { focus = RUS_the_giant_has_awakened }
@@ -4942,7 +5127,7 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
 		completion_reward = {
-			add_political_power = 200
+			country_event = rusPol.14
 		}
 	}
 
@@ -5246,10 +5431,10 @@ focus_tree = {
 		
 		x = 14
 		y = 1
-		cost = 2
+		cost = 5
 		
 		available = {
-			aotsm_performed_by_event_or_solution = yes
+			has_war = no
 		}
 
 		relative_position_id = RUS_the_giant_has_awakened
@@ -5260,7 +5445,7 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
 		completion_reward = {
-			add_political_power = 200
+			country_event = rusPol.15
 		}
 	}
 	
@@ -5273,7 +5458,7 @@ focus_tree = {
 		cost = 5 
 		
 		available = {
-			aotsm_performed_by_event_or_solution = yes
+			
 		}
 
 		relative_position_id = RUS_kromwlend_politick
@@ -5284,7 +5469,8 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
 		completion_reward = {
-			custom_effect_tooltip = RUS_unlock_colonial_decisions
+			#custom_effect_tooltip = RUS_unlock_colonial_decisions
+			add_ideas = RUS_russian_colonial_society
 		}
 	}	
 	
@@ -5423,7 +5609,7 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
 		completion_reward = {
-			
+			custom_effect_tooltip = RUS_unlock_integration_kromwland_lands_decisions
 		}
 	}
 	
@@ -5435,7 +5621,7 @@ focus_tree = {
 		
 		x = -11
 		y = 1
-		cost = 2 
+		cost = 5
 		
 		available = {
 			NOT = { 
@@ -5454,7 +5640,7 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
 		completion_reward = {
-			add_political_power = 200
+			country_event = rusPol.12
 		}
 	}
 
@@ -5551,7 +5737,7 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
 		completion_reward = {
-			country_event = russian_european_politic.12
+			CBI = { country_event = russian_european_politic.12 }
 		}
 	}
 
