@@ -14,6 +14,7 @@ add_namespace = russian_old_order_event #
 add_namespace = russian_socialist_political_event #
 add_namespace = russian_socialist_industry_event #
 add_namespace = russian_kromwland_politic #
+add_namespace = russian_armed_forces_event #
 
 
 country_event = {
@@ -528,6 +529,16 @@ country_event = { # Убийство Трубецкого
 		}
 	}
 	
+	option = {
+		name = rusPol.17.b	
+		ai_chance = {
+			base = 20
+		}
+		hidden_effect = {
+			news_event = { id = news.225 days = 3 }
+		}
+	}
+	
 }
 
 country_event = { # 
@@ -553,7 +564,143 @@ country_event = { #
 	
 }
 
+#######################ARMED_FORCES_DEPARTMENT_SECTION##########################
 
+country_event = { # 
+	id = russian_armed_forces_event.1 #Русские воруженные силы
+	title = russian_armed_forces_event.1.t
+	desc = russian_armed_forces_event.1.d
+	picture = GFX_report_event_russian_millitary_planning
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event russian_armed_forces_event.1"
+	}
+	
+	option = {
+		name = russian_armed_forces_event.1.a	
+		ai_chance = {
+			base = 20
+		}
+		army_experience = 10
+		air_experience = 10
+		navy_experience = 10
+	}
+	
+}
+
+country_event = { # 
+	id = russian_armed_forces_event.2 #Мобилизация населения
+	title = russian_armed_forces_event.2.t
+	desc = russian_armed_forces_event.2.d
+	picture = GFX_report_event_russian_millitary_planning
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event russian_armed_forces_event.2"
+	}
+	
+	option = {
+		name = russian_armed_forces_event.2.a	
+		ai_chance = {
+			base = 20
+		}
+		custom_effect_tooltip = RUS_start_hidden_mobilisation
+		hidden_effect = {
+			add_timed_idea = {
+				days = 365
+				idea = RUS_hidden_mobilisation
+			}
+			if = {
+				limit = {
+					ROOT = {
+						has_idea = extensive_conscription
+					}
+				}
+				swap_ideas = {
+					remove_idea = extensive_conscription
+					add_idea = service_by_requirement
+				}
+			}
+			if = {
+				limit = {
+					ROOT = {
+						has_idea = limited_conscription
+					}
+				}
+				swap_ideas = {
+					remove_idea = limited_conscription
+					add_idea = extensive_conscription
+				}
+			}
+			if = {
+				limit = {
+					ROOT = {
+						has_idea = volunteer_only
+					}
+				}
+				swap_ideas = {
+					remove_idea = volunteer_only
+					add_idea = limited_conscription
+				}
+			}
+			if = {
+				limit = {
+					ROOT = {
+						has_idea = disarmed_nation
+					}
+				}
+				swap_ideas = {
+					remove_idea = disarmed_nation
+					add_idea = volunteer_only
+				}
+			}
+		}
+	}
+	option = {
+		name = russian_armed_forces_event.2.b	
+		ai_chance = {
+			base = 0
+		}
+	}
+	
+}
+
+country_event = { # 
+	id = russian_armed_forces_event.3 #Разработки Андрея Мурома
+	title = russian_armed_forces_event.3.t
+	desc = russian_armed_forces_event.3.d
+	picture = GFX_report_event_russian_millitary_planning
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event russian_armed_forces_event.3"
+	}
+	
+	option = {
+		name = russian_armed_forces_event.3.a	
+		ai_chance = {
+			base = 20
+		}
+		custom_effect_tooltip = RUS_unlock_advisor_andrey_murom
+		add_doctrine_cost_reduction = {
+			name =  air_doc_bonus
+			cost_reduction = 0.8
+			uses = 1
+			category = air_doctrine
+		}
+	}
+	
+}
 
 #######################MILUTIN_SECTION##########################
 
