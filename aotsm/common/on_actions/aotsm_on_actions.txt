@@ -350,41 +350,6 @@ on_actions = {
 		}
 	}
 	
-	on_daily_BYZ = {
-		effect = {	
-			if = {
-				limit = {
-					BYZ = {
-						has_country_flag = byz_rulling_demmer
-					}
-				}
-				clear_variable = byz_demmer_faction_support
-				add_to_variable = { byz_demmer_faction_support = byz_merchants_faction_support }
-				add_to_variable = { byz_demmer_faction_support = byz_democrats_faction_support }
-				clamp_variable = {
-					var = byz_demmer_faction_support
-					min = 0
-					max = 200
-				}
-			}
-			if = {
-				limit = {
-					BYZ = {
-						has_country_flag = byz_rulling_impgov
-					}
-				}
-				clear_variable = byz_impgov_faction_support
-				add_to_variable = { byz_impgov_faction_support = byz_imperial_faction_support }
-				add_to_variable = { byz_impgov_faction_support = byz_generals_faction_support }
-				clamp_variable = {
-					var = byz_impgov_faction_support
-					min = 0
-					max = 200
-				}
-			}
-		}
-	}
-	
 	on_capitulation = {
 		effect = {
 			#PLH capitulation - Polish uprising failed - Germany ignore Poland
@@ -10334,6 +10299,50 @@ on_actions = {
 					remove_state_core = 657
 				}
 				add_threat = 5
+			}
+			#PAP capitulation
+			if = {
+				limit = {
+					tag = PAP
+					SAR = {
+						has_country_flag = claim_central_italy_flag
+					}
+					SAR = {
+						has_war_with = PAP
+					}
+				}
+				SAR = {
+					annex_country = { target = PAP transfer_troops = yes }
+				}
+				PAP = {
+					transfer_state = 922
+					promote_character = PAP_Curia_Romana
+					set_cosmetic_tag = PAP_VAT
+					set_capital = {
+						state = 922
+						remember_old_capital = no
+					}
+				}
+				if = {
+					limit = {
+						SAR = {
+							has_war_with = PAP
+						}
+					}
+					SAR = {
+						white_peace = PAP
+					}
+				}
+				SAR = {
+					diplomatic_relation = {
+						country = PAP
+						relation = guarantee
+						active = yes
+					}
+				}
+				SAR = {
+					clr_country_flag = claim_central_italy_flag
+				}
 			}
 			#First Prussian-Austrian war
 			if = {
