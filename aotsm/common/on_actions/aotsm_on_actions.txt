@@ -123,6 +123,7 @@ on_actions = {
 			set_variable = { global.help_aus_1_var = 0 }
 			set_variable = { global.help_aus_2_var = 0 }
 			set_variable = { global.help_aus_3_var = 0 }
+			set_variable = { global.help_aus_var = 1 }
 			
 			FRR = {
 				if = {
@@ -346,41 +347,6 @@ on_actions = {
 					}			
 				}
 				RUS = { remove_ideas = RUS_dependence_from_import }
-			}
-		}
-	}
-	
-	on_daily_BYZ = {
-		effect = {	
-			if = {
-				limit = {
-					BYZ = {
-						has_country_flag = byz_rulling_demmer
-					}
-				}
-				clear_variable = byz_demmer_faction_support
-				add_to_variable = { byz_demmer_faction_support = byz_merchants_faction_support }
-				add_to_variable = { byz_demmer_faction_support = byz_democrats_faction_support }
-				clamp_variable = {
-					var = byz_demmer_faction_support
-					min = 0
-					max = 200
-				}
-			}
-			if = {
-				limit = {
-					BYZ = {
-						has_country_flag = byz_rulling_impgov
-					}
-				}
-				clear_variable = byz_impgov_faction_support
-				add_to_variable = { byz_impgov_faction_support = byz_imperial_faction_support }
-				add_to_variable = { byz_impgov_faction_support = byz_generals_faction_support }
-				clamp_variable = {
-					var = byz_impgov_faction_support
-					min = 0
-					max = 200
-				}
 			}
 		}
 	}
@@ -7409,6 +7375,18 @@ on_actions = {
 						transfer_state = 231
 						transfer_state = 232
 						transfer_state = 233
+						transfer_state = 926
+						transfer_state = 927
+						transfer_state = 928
+						transfer_state = 929
+						transfer_state = 930
+						transfer_state = 931
+						transfer_state = 932
+						transfer_state = 933
+						transfer_state = 934
+						transfer_state = 936
+						transfer_state = 937
+						transfer_state = 938
 					}
 					RUS = {
 						if = {
@@ -7790,6 +7768,8 @@ on_actions = {
 						add_state_core = 800
 						transfer_state = 913
 						add_state_core = 913
+						transfer_state = 935
+						add_state_core = 935
 					}
 					RUS = {
 						set_autonomy = {
@@ -9617,6 +9597,7 @@ on_actions = {
 				set_variable = { global.help_aus_1_var = 0 }
 				set_variable = { global.help_aus_2_var = 0 }
 				set_variable = { global.help_aus_3_var = 0 }
+				set_variable = { global.help_aus_var = 1 }
 				every_state = {
 					limit = {
 						owner = {
@@ -10335,6 +10316,51 @@ on_actions = {
 				}
 				add_threat = 5
 			}
+			#PAP capitulation
+			if = {
+				limit = {
+					tag = PAP
+					SAR = {
+						has_country_flag = claim_central_italy_flag
+					}
+					SAR = {
+						has_war_with = PAP
+					}
+				}
+				SAR = {
+					annex_country = { target = PAP transfer_troops = yes }
+				}
+				PAP = {
+					transfer_state = 922
+					promote_character = PAP_Curia_Romana
+					set_cosmetic_tag = PAP_VAT
+					set_capital = {
+						state = 922
+						remember_old_capital = no
+					}
+				}
+				if = {
+					limit = {
+						SAR = {
+							has_war_with = PAP
+						}
+					}
+					SAR = {
+						white_peace = PAP
+					}
+				}
+				SAR = {
+					diplomatic_relation = {
+						country = PAP
+						relation = guarantee
+						active = yes
+					}
+				}
+				SAR = {
+					clr_country_flag = claim_central_italy_flag
+				}
+				news_event = news.226
+			}
 			#First Prussian-Austrian war
 			if = {
 				limit = {
@@ -10794,6 +10820,7 @@ on_actions = {
 				set_variable = { global.help_aus_1_var = 0 }
 				set_variable = { global.help_aus_2_var = 0 }
 				set_variable = { global.help_aus_3_var = 0 }
+				set_variable = { global.help_aus_var = 1 }
 				AUS = {
 					mark_focus_tree_layout_dirty = yes
 				}
@@ -11272,6 +11299,7 @@ on_actions = {
 				set_variable = { global.help_aus_1_var = 0 }
 				set_variable = { global.help_aus_2_var = 0 }
 				set_variable = { global.help_aus_3_var = 0 }
+				set_variable = { global.help_aus_var = 1 }
 				every_state = {
 					limit = {
 						owner = {
