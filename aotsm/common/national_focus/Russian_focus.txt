@@ -19,7 +19,7 @@ focus_tree = {
 		}
 	}
 	
-	continuous_focus_position = { x = 50 y = 1700 }
+	continuous_focus_position = { x = 1100 y = 50 }
 	
 	default = no
 	reset_on_civilwar = no
@@ -771,19 +771,25 @@ focus_tree = {
 		}
 	}
 
+############################################################################################
 ############################SECOND_BRANCH_OF_INDUSTRIALISATION##############################
+############################################################################################
 	
 	focus = {
-		id = RUS_second_branch_of_industrialisation #послевоенный блок фокусов
+		id = RUS_second_branch_of_industrialisation 
 		icon = GFX_goal_generic_construct_civilian
 		
 		x = 0
-		y = 1
-		cost = 5
+		y = 3
+		cost = 10
 		
 		available = {
-			aotsm_performed_by_event_or_solution = yes
 			has_completed_focus = RUS_liquidate_backwardness
+			has_war = no
+			has_country_flag = {
+				flag = RUS_liquidate_backwardness_flag
+				days < 90
+			}
 		}
 
 		relative_position_id = RUS_liquidate_backwardness
@@ -793,17 +799,27 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_INDUSTRY }
 
 		completion_reward = {
-			
+			log = "[GetDateText]: [Root.GetName]: focus RUS_second_branch_of_industrialisation"
+			add_timed_idea = {
+				idea = RUS_second_branch_of_industrialisation_idea
+				days = 730
+			}
 		}
 	}
+
+############################EUROPEAN_INDUSTRY_SECTION##############################
 	
 	focus = {
-		id = RUS_economic_demobilisation
+		id = RUS_develop_west_russia
 		icon = GFX_goal_generic_construct_civilian
 		
-		x = -2
+		x = -4
 		y = 1
 		cost = 5
+		
+		available = {
+			has_war = no
+		}
 
 		relative_position_id = RUS_second_branch_of_industrialisation
 		prerequisite = { focus = RUS_second_branch_of_industrialisation }
@@ -813,212 +829,63 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_INDUSTRY }
 
 		completion_reward = {
-			if = {
-				limit = {
-					has_idea = tot_economic_mobilisation
-				}
-				swap_ideas = {
-					remove_idea = tot_economic_mobilisation
-					add_idea = low_economic_mobilisation
-				}
-			}
-			if = {
-				limit = {
-					has_idea = war_economy
-				}
-				swap_ideas = {
-					remove_idea = war_economy
-					add_idea = low_economic_mobilisation
-				}
-			}
-			if = {
-				limit = {
-					has_idea = partial_economic_mobilisation
-				}
-				swap_ideas = {
-					remove_idea = partial_economic_mobilisation
-					add_idea = civilian_economy
-				}
-			}
-			if = {
-				limit = {
-					has_idea = low_economic_mobilisation
-				}
-				swap_ideas = {
-					remove_idea = low_economic_mobilisation
-					add_idea = civilian_economy
-				}
-			}
-		}
-	}
-	
-	focus = {
-		id = RUS_west_russia_recovery
-		icon = GFX_goal_generic_construct_civilian
-		
-		x = -1
-		y = 1
-		cost = 15
-		
-		available = {
-			has_full_control_of_state = 853
-			has_full_control_of_state = 206
-			has_full_control_of_state = 915
-			has_full_control_of_state = 202
-			has_full_control_of_state = 221
-		}
-
-		relative_position_id = RUS_economic_demobilisation
-		prerequisite = { focus = RUS_economic_demobilisation }
-		
-		available_if_capitulated = yes
-		
-		search_filters = { FOCUS_FILTER_INDUSTRY }
-
-		completion_reward = {
-			853 = {
-				add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-					type = industrial_complex
-					level = 1
-					instant_build = yes
-				}
-			}
-			206 = {
-				add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-					type = industrial_complex
-					level = 1
-					instant_build = yes
-				}
-			}
-			915 = {
-				add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-					type = industrial_complex
-					level = 1
-					instant_build = yes
-				}
-			}	
-			202 = {
-				add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-					type = industrial_complex
-					level = 1
-					instant_build = yes
-				}
-			}	
-			221 = {
-				add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-					type = industrial_complex
-					level = 1
-					instant_build = yes
-				}
-			}				
-		}
-	}
-	
-	focus = {
-		id = RUS_central_russia_recovery
-		icon = GFX_goal_generic_construct_civilian
-		
-		x = 1
-		y = 1
-		cost = 15
-		
-		available = {
-			has_full_control_of_state = 219
-			has_full_control_of_state = 217
-			has_full_control_of_state = 195
-			has_full_control_of_state = 202
-			has_full_control_of_state = 221
-		}
-
-		relative_position_id = RUS_economic_demobilisation
-		prerequisite = { focus = RUS_economic_demobilisation }
-		
-		available_if_capitulated = yes
-		
-		search_filters = { FOCUS_FILTER_INDUSTRY }
-
-		completion_reward = {
-			219 = {
-				add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-					type = industrial_complex
-					level = 1
-					instant_build = yes
-				}
-			}
-			217 = {
-				add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-					type = industrial_complex
-					level = 1
-					instant_build = yes
-				}
-			}
-			195 = {
-				add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-					type = industrial_complex
-					level = 1
-					instant_build = yes
-				}
-			}	
-			249 = {
-				add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-					type = industrial_complex
-					level = 1
-					instant_build = yes
-				}
-			}	
-			218 = {
-				add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-					type = industrial_complex
-					level = 1
-					instant_build = yes
-				}
-			}
-		}
-	}
-	
-	focus = {
-		id = RUS_integrate_prom_in_new_regions
-		icon = GFX_goal_generic_construct_civilian
-		
-		x = -1
-		y = 1
-		cost = 15
-		
-		available = {
+			log = "[GetDateText]: [Root.GetName]: focus RUS_develop_west_russia"
 			
 		}
+	}
+	
+	focus = {
+		id = RUS_baltic_industry
+		icon = GFX_goal_generic_construct_civilian
+		
+		x = -2
+		y = 1
+		cost = 5
+		
+		available = {
+			has_war = no
+		}
 
-		relative_position_id = RUS_central_russia_recovery
-		prerequisite = { focus = RUS_central_russia_recovery }
-		prerequisite = { focus = RUS_west_russia_recovery }
+		relative_position_id = RUS_develop_west_russia
+		prerequisite = { focus = RUS_develop_west_russia }
 		
 		available_if_capitulated = yes
 		
 		search_filters = { FOCUS_FILTER_INDUSTRY }
 
 		completion_reward = {
-			add_stability = 0.1
-			if = {
-				limit = {
-					ROOT = { has_idea = RUS_an_echo_of_serfdom_1 }
-				}
-				remove_ideas = RUS_an_echo_of_serfdom_1	
-			}
+			log = "[GetDateText]: [Root.GetName]: focus RUS_baltic_industry"
+			custom_effect_tooltip = RUS_unlock_baltic_development_decisions
 		}
 	}
 	
 	focus = {
-		id = RUS_siberia_development
+		id = RUS_belorussian_industry
+		icon = GFX_goal_generic_construct_civilian
+		
+		x = 0
+		y = 1
+		cost = 5
+		
+		available = {
+			has_war = no
+		}
+
+		relative_position_id = RUS_develop_west_russia
+		prerequisite = { focus = RUS_develop_west_russia }
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus RUS_belorussian_industry"
+			custom_effect_tooltip = RUS_unlock_belorussia_development_decisions
+		}
+	}
+	
+	focus = {
+		id = RUS_malorossian_industry
 		icon = GFX_goal_generic_construct_civilian
 		
 		x = 2
@@ -1026,7 +893,62 @@ focus_tree = {
 		cost = 5
 		
 		available = {
-			
+			has_war = no
+		}
+
+		relative_position_id = RUS_develop_west_russia
+		prerequisite = { focus = RUS_develop_west_russia }
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus RUS_malorossian_industry"
+			custom_effect_tooltip = RUS_unlock_malorossia_development_decisions
+		}
+	}
+	
+	focus = {
+		id = RUS_polish_industry
+		icon = GFX_goal_generic_construct_civilian
+		
+		x = 0
+		y = 1
+		cost = 5
+		
+		available = {
+			has_war = no
+			RUS_solve_polish_problem = yes
+		}
+
+		relative_position_id = RUS_belorussian_industry
+		prerequisite = { focus = RUS_baltic_industry }
+		prerequisite = { focus = RUS_belorussian_industry }
+		prerequisite = { focus = RUS_malorossian_industry }
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus RUS_polish_industry"
+			custom_effect_tooltip = RUS_unlock_poland_development_decisions
+		}
+	}
+
+############################CENTRAL_RUSSIA_INDUSTRY_SECTION##############################
+
+	focus = {
+		id = RUS_develop_central_russia
+		icon = GFX_goal_generic_construct_civilian
+		
+		x = 1
+		y = 1
+		cost = 5
+		
+		available = {
+			has_war = no
 		}
 
 		relative_position_id = RUS_second_branch_of_industrialisation
@@ -1037,138 +959,191 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_INDUSTRY }
 
 		completion_reward = {
-			add_stability = 0.1
+			log = "[GetDateText]: [Root.GetName]: focus RUS_expand_petrograd_goverment_university"
+			
 		}
 	}
 	
 	focus = {
-		id = RUS_develop_urals_coal
+		id = RUS_siberian_industry
 		icon = GFX_goal_generic_construct_civilian
 		
 		x = -1
 		y = 1
-		cost = 15
+		cost = 5
 		
 		available = {
-			has_full_control_of_state = 573
-			has_full_control_of_state = 581
-			has_full_control_of_state = 653
+			has_war = no
 		}
 
-		relative_position_id = RUS_siberia_development
-		prerequisite = { focus = RUS_siberia_development }
+		relative_position_id = RUS_develop_central_russia
+		prerequisite = { focus = RUS_develop_central_russia }
 		
 		available_if_capitulated = yes
 		
 		search_filters = { FOCUS_FILTER_INDUSTRY }
 
 		completion_reward = {
-			573 = {
-				add_resource = {
-					type = oil
-					amount = 8
-				}
-			}
-			581 = {
-				add_resource = {
-					type = oil
-					amount = 12
-				}
-			}
-			653 = {
-				add_resource = {
-					type = oil
-					amount = 5
-				}
-			}
+			log = "[GetDateText]: [Root.GetName]: focus RUS_baltic_industry"
+			custom_effect_tooltip = RUS_unlock_siberia_development_decisions
 		}
 	}
 	
 	focus = {
-		id = RUS_develop_sib_industry
+		id = RUS_across_ural_industry
 		icon = GFX_goal_generic_construct_civilian
 		
 		x = 1
 		y = 1
-		cost = 15
+		cost = 5
 		
 		available = {
-			has_full_control_of_state = 218
-			has_full_control_of_state = 571
+			has_war = no
 		}
 
-		relative_position_id = RUS_siberia_development
-		prerequisite = { focus = RUS_siberia_development }
+		relative_position_id = RUS_develop_central_russia
+		prerequisite = { focus = RUS_develop_central_russia }
 		
 		available_if_capitulated = yes
 		
 		search_filters = { FOCUS_FILTER_INDUSTRY }
 
 		completion_reward = {
-			218 = {
-				add_extra_state_shared_building_slots = 2
-				add_building_construction = {
-					type = industrial_complex
-					level = 2
-					instant_build = yes
-				}
-			}
-			571 = {
-				add_extra_state_shared_building_slots = 2
-				add_building_construction = {
-					type = industrial_complex
-					level = 2
-					instant_build = yes
-				}
-			}
+			log = "[GetDateText]: [Root.GetName]: focus RUS_across_ural_industry"
+			custom_effect_tooltip = RUS_unlock_across_ural_development_decisions
+		}
+	}
+	
+	
+	focus = {
+		id = RUS_industrialisation_of_steppe
+		icon = GFX_goal_generic_construct_civilian
+		
+		x = 1
+		y = 1
+		cost = 5
+		
+		available = {
+			has_war = no
+			RUS_central_asia_is_owned_by_russia = yes
+		}
+
+		relative_position_id = RUS_siberian_industry
+		prerequisite = { focus = RUS_siberian_industry }
+		prerequisite = { focus = RUS_across_ural_industry }
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus RUS_industrialisation_of_steppe"
+			custom_effect_tooltip = RUS_unlock_steppe_development_decisions
+		}
+	}
+	
+############################CENTRAL_RUSSIA_INDUSTRY_SECTION##############################
+
+	focus = {
+		id = RUS_develop_far_east_russia
+		icon = GFX_goal_generic_construct_civilian
+		
+		x = 5
+		y = 1
+		cost = 5
+		
+		available = {
+			has_war = no
+		}
+
+		relative_position_id = RUS_second_branch_of_industrialisation
+		prerequisite = { focus = RUS_second_branch_of_industrialisation }
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus RUS_develop_far_east_russia"
+			
 		}
 	}
 	
 	focus = {
-		id = RUS_far_east_ports
+		id = RUS_industrialisation_of_irkutsk
 		icon = GFX_goal_generic_construct_civilian
 		
 		x = -1
 		y = 1
-		cost = 15
+		cost = 5
 		
 		available = {
-			has_full_control_of_state = 562
+			has_war = no
 		}
 
-		relative_position_id = RUS_develop_sib_industry
-		prerequisite = { focus = RUS_develop_sib_industry }
-		prerequisite = { focus = RUS_develop_urals_coal }
+		relative_position_id = RUS_develop_far_east_russia
+		prerequisite = { focus = RUS_develop_far_east_russia }
 		
 		available_if_capitulated = yes
 		
 		search_filters = { FOCUS_FILTER_INDUSTRY }
 
 		completion_reward = {
-			562 = {
-				add_extra_state_shared_building_slots = 2
-				add_building_construction = {
-					type = dockyard
-					level = 2
-					instant_build = yes
-				}
-			}
-			if = {
-				limit = {
-					has_full_control_of_state = 408
-				}
-				408 = {
-					add_extra_state_shared_building_slots = 2
-					add_building_construction = {
-						type = dockyard
-						level = 2
-						instant_build = yes
-					}
-				}
-			}
+			log = "[GetDateText]: [Root.GetName]: focus RUS_industrialisation_of_irkutsk"
+			custom_effect_tooltip = RUS_unlock_irkutsk_development_decisions
 		}
 	}
 	
+	focus = {
+		id = RUS_develop_of_primorie
+		icon = GFX_goal_generic_construct_civilian
+		
+		x = 1
+		y = 1
+		cost = 5
+		
+		available = {
+			has_war = no
+		}
+
+		relative_position_id = RUS_develop_far_east_russia
+		prerequisite = { focus = RUS_develop_far_east_russia }
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus RUS_industrialisation_of_irkutsk"
+			custom_effect_tooltip = RUS_unlock_primorie_development_decisions
+		}
+	}
+	
+	focus = {
+		id = RUS_investment_in_alaska
+		icon = GFX_goal_generic_construct_civilian
+		
+		x = 0
+		y = 2
+		cost = 5
+		
+		available = {
+			has_war = no
+		}
+
+		relative_position_id = RUS_develop_far_east_russia
+		prerequisite = { focus = RUS_industrialisation_of_irkutsk }
+		prerequisite = { focus = RUS_develop_of_primorie }
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus RUS_industrialisation_of_irkutsk"
+			custom_effect_tooltip = RUS_unlock_alaska_development_decisions
+		}
+	}	
 	
 	
 #################################################################################
@@ -1181,7 +1156,7 @@ focus_tree = {
 		id = RUS_end_of_political_isolation
 		icon = GFX_focus_rus_end_of_political_isolation
 		
-		x = 14
+		x = 15
 		y = 0
 		cost = 2
 		
@@ -1232,11 +1207,12 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: focus RUS_return_of_old_orders"
-			RUS_add_10_monarhist_influence = yes
-			RUS_add_10_reactioner_influence = yes
-			RUS_add_10_churchman_influence = yes
-			RUS_add_10_army_influence = yes
-			add_stability = -0.1
+			#RUS_add_10_monarhist_influence = yes
+			#RUS_add_10_reactioner_influence = yes
+			#RUS_add_10_churchman_influence = yes
+			#RUS_add_10_army_influence = yes
+			#add_stability = -0.1
+			custom_effect_tooltip = aotsm_branch_in_development
 		}
 	}
 	
@@ -5710,6 +5686,7 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: focus RUS_inuits_quiestion"
+			country_event = russian_kromwland_politic.5
 		}
 	}
 	
@@ -5730,6 +5707,7 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: focus RUS_sks_lands"
+			country_event = russian_kromwland_politic.8
 		}
 	}
 	
@@ -6254,6 +6232,7 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: focus RUS_antibuzantium_politick"
+			custom_effect_tooltip = aotsm_branch_in_development
 		}
 	}
 	
@@ -6337,6 +6316,7 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: focus RUS_antiaustrian_politick"
+			custom_effect_tooltip = aotsm_branch_in_development
 		}
 	}
 	
