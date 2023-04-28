@@ -610,6 +610,15 @@ on_actions = {
 					remove_ideas = QIN_stagnation_of_empire_1 #временная мера, потом вырезать
 					remove_ideas = QIN_tpn_uprising 
 				}
+				every_country = {
+					if = {
+						limit = {
+							is_in_faction_with = QIN
+							has_war_with = TPN
+						}
+						white_peace = TPN
+					}
+				}
 				TPN = {
 					remove_state_core = 325
 					remove_state_core = 524
@@ -10110,6 +10119,15 @@ on_actions = {
 						message = RUS_fail_SEL
 					}
 				}
+				every_country = {
+					if = {
+						limit = {
+							is_in_faction_with = RUS
+							has_war_with = SEL
+						}
+						white_peace = SEL
+					}
+				}
 				RUS = {
 					clr_country_flag = RUS_salish_war_plan
 					set_country_flag = RUS_salish_war_plan_end
@@ -10147,6 +10165,15 @@ on_actions = {
 					white_peace = {
 						tag = RUS
 						message = RUS_fail_SKS
+					}
+				}
+				every_country = {
+					if = {
+						limit = {
+							is_in_faction_with = RUS
+							has_war_with = SKS
+						}
+						white_peace = SKS
 					}
 				}
 				RUS = {
@@ -10188,6 +10215,15 @@ on_actions = {
 						message = RUS_fail_INU
 					}
 				}
+				every_country = {
+					if = {
+						limit = {
+							is_in_faction_with = RUS
+							has_war_with = INU
+						}
+						white_peace = INU
+					}
+				}
 				RUS = {
 					clr_country_flag = RUS_inuit_war_plan
 					set_country_flag = RUS_inuit_war_plan_end
@@ -10199,15 +10235,12 @@ on_actions = {
 				limit = {
 					RUS = {
 						has_country_flag = RUS_tuva_war_plan
-					}
-					RUS = {
 						has_war_with = QIN
-						has_war_with = MON
-					}
-					MON = {
-						surrender_progress > 0.30
 					}
 					OR = {
+						MON = {
+							surrender_progress > 0.30
+						}
 						329 = {
 							controller = {
 								OR = {
@@ -10229,11 +10262,32 @@ on_actions = {
 					clr_country_flag = RUS_tuva_war_plan
 					set_country_flag = RUS_tuva_war_plan_end
 				}
+				
+				every_country = {
+					if = {
+						limit = {
+							is_in_faction_with = RUS
+							has_war_with = QIN
+						}
+						white_peace = QIN
+						if = {
+							limit = {
+								MON = { country_exists = yes }
+							}
+							white_peace = MON
+						}
+					}
+				}
 				QIN = {
 					remove_state_core = 329
 				}
-				MON = {
-					remove_state_core = 329
+				if = {
+					limit = {
+						MAN = { country_exists = yes } 
+					}
+					MON = {
+						remove_state_core = 329
+					}
 				}
 				add_threat = 1
 			}
@@ -10242,30 +10296,29 @@ on_actions = {
 				limit = {
 					RUS = {
 						has_country_flag = RUS_china_far_east_small_plan
-					}
-					RUS = {
-						has_war_with = MAN
 						has_war_with = QIN
 					}
-					MAN = {
-						surrender_progress > 0.30
-					}
 					OR = {
-						560 = {
-							controller = {
-								OR = {
-									tag = RUS
-									is_subject_of = RUS
-									is_in_faction_with = RUS
+						MAN = {
+							surrender_progress > 0.30
+						}
+						AND = {
+							560 = {
+								controller = {
+									OR = {
+										tag = RUS
+										is_subject_of = RUS
+										is_in_faction_with = RUS
+									}
 								}
 							}
-						}
-						657 = {
-							controller = {
-								OR = {
-									tag = RUS
-									is_subject_of = RUS
-									is_in_faction_with = RUS
+							657 = {
+								controller = {
+									OR = {
+										tag = RUS
+										is_subject_of = RUS
+										is_in_faction_with = RUS
+									}
 								}
 							}
 						}
@@ -10284,13 +10337,33 @@ on_actions = {
 					clr_country_flag = RUS_china_far_east_small_plan
 					set_country_flag = RUS_china_far_east_small_plan_end
 				}
+				every_country = {
+					if = {
+						limit = {
+							is_in_faction_with = RUS
+							has_war_with = QIN
+						}
+						white_peace = QIN
+						if = {
+							limit = {
+								MAN = { country_exists = yes }
+							}
+							white_peace = MAN
+						}
+					}
+				}
 				QIN = {
 					remove_state_core = 560
 					remove_state_core = 657
 				}
-				MAN = {
-					remove_state_core = 560
-					remove_state_core = 657
+				if = {
+					limit = {
+						MAN = { country_exists = yes } 
+					}
+					MAN = {
+						remove_state_core = 560
+						remove_state_core = 657
+					}
 				}
 				add_threat = 5
 			}
@@ -10299,48 +10372,47 @@ on_actions = {
 				limit = {
 					RUS = {
 						has_country_flag = RUS_china_far_east_medium_plan
-					}
-					RUS = {
 						has_war_with = QIN
-						has_war_with = MAN
-					}
-					MAN = {
-						surrender_progress > 0.30
-					}
+					}					
 					OR = {
-						408 = {
-							controller = {
-								OR = {
-									tag = RUS
-									is_subject_of = RUS
-									is_in_faction_with = RUS
+						MAN = {
+							surrender_progress > 0.30
+						}
+						AND = {
+							408 = {
+								controller = {
+									OR = {
+										tag = RUS
+										is_subject_of = RUS
+										is_in_faction_with = RUS
+									}
 								}
 							}
-						}
-						409 = {
-							controller = {
-								OR = {
-									tag = RUS
-									is_subject_of = RUS
-									is_in_faction_with = RUS
+							409 = {
+								controller = {
+									OR = {
+										tag = RUS
+										is_subject_of = RUS
+										is_in_faction_with = RUS
+									}
 								}
 							}
-						}
-						560 = {
-							controller = {
-								OR = {
-									tag = RUS
-									is_subject_of = RUS
-									is_in_faction_with = RUS
+							560 = {
+								controller = {
+									OR = {
+										tag = RUS
+										is_subject_of = RUS
+										is_in_faction_with = RUS
+									}
 								}
 							}
-						}
-						657 = {
-							controller = {
-								OR = {
-									tag = RUS
-									is_subject_of = RUS
-									is_in_faction_with = RUS
+							657 = {
+								controller = {
+									OR = {
+										tag = RUS
+										is_subject_of = RUS
+										is_in_faction_with = RUS
+									}
 								}
 							}
 						}
@@ -10360,17 +10432,37 @@ on_actions = {
 					clr_country_flag = RUS_china_far_east_medium_plan
 					set_country_flag = RUS_china_far_east_medium_plan_end
 				}
+				every_country = {
+					if = {
+						limit = {
+							is_in_faction_with = RUS
+							has_war_with = QIN
+						}
+						white_peace = QIN
+						if = {
+							limit = {
+								MAN = { country_exists = yes }
+							}
+							white_peace = MAN
+						}
+					}
+				}
 				QIN = {
 					remove_state_core = 408
 					remove_state_core = 409
 					remove_state_core = 560
 					remove_state_core = 657
 				}
-				MAN = {
-					remove_state_core = 408
-					remove_state_core = 409
-					remove_state_core = 560
-					remove_state_core = 657
+				if = {
+					limit = {
+						MAN = { country_exists = yes } 
+					}
+					MAN = {
+						remove_state_core = 408
+						remove_state_core = 409
+						remove_state_core = 560
+						remove_state_core = 657
+					}
 				}
 				add_threat = 5
 			}
@@ -10379,75 +10471,74 @@ on_actions = {
 				limit = {
 					RUS = {
 						has_country_flag = RUS_china_far_east_big_plan
-					}
-					RUS = {
 						has_war_with = QIN
-						has_war_with = MAN
-					}
-					MAN = {
-						surrender_progress > 0.50
 					}
 					OR = {
-						408 = {
-							controller = {
-								OR = {
-									tag = RUS
-									is_subject_of = RUS
-									is_in_faction_with = RUS
+						MAN = {
+							surrender_progress > 0.30
+						}
+						AND = {
+							408 = {
+								controller = {
+									OR = {
+										tag = RUS
+										is_subject_of = RUS
+										is_in_faction_with = RUS
+									}
 								}
 							}
-						}
-						409 = {
-							controller = {
-								OR = {
-									tag = RUS
-									is_subject_of = RUS
-									is_in_faction_with = RUS
+							409 = {
+								controller = {
+									OR = {
+										tag = RUS
+										is_subject_of = RUS
+										is_in_faction_with = RUS
+									}
 								}
 							}
-						}
-						560 = {
-							controller = {
-								OR = {
-									tag = RUS
-									is_subject_of = RUS
-									is_in_faction_with = RUS
+							560 = {
+								controller = {
+									OR = {
+										tag = RUS
+										is_subject_of = RUS
+										is_in_faction_with = RUS
+									}
 								}
 							}
-						}
-						657 = {
-							controller = {
-								OR = {
-									tag = RUS
-									is_subject_of = RUS
-									is_in_faction_with = RUS
+							657 = {
+								controller = {
+									OR = {
+										tag = RUS
+										is_subject_of = RUS
+										is_in_faction_with = RUS
+									}
 								}
 							}
-						}
-						714 = {
-							controller = {
-								OR = {
-									tag = RUS
-									is_subject_of = RUS
-									is_in_faction_with = RUS
+							714 = {
+								controller = {
+									OR = {
+										tag = RUS
+										is_subject_of = RUS
+										is_in_faction_with = RUS
+									}
 								}
 							}
-						}
-						717 = {
-							controller = {
-								OR = {
-									tag = RUS
-									is_subject_of = RUS
-									is_in_faction_with = RUS
+							717 = {
+								controller = {
+									OR = {
+										tag = RUS
+										is_subject_of = RUS
+										is_in_faction_with = RUS
+									}
 								}
 							}
-						}
-						761 = {
-							controller = {
-								OR = {
-									tag = RUS
-									is_subject_of = RUS
-									is_in_faction_with = RUS
+							761 = {
+								controller = {
+									OR = {
+										tag = RUS
+										is_subject_of = RUS
+										is_in_faction_with = RUS
+									}
 								}
 							}
 						}
@@ -10469,19 +10560,170 @@ on_actions = {
 					clr_country_flag = RUS_china_far_east_big_plan
 					set_country_flag = RUS_china_far_east_big_plan_end
 				}
+				every_country = {
+					if = {
+						limit = {
+							is_in_faction_with = RUS
+							has_war_with = QIN
+						}
+						white_peace = QIN
+						if = {
+							limit = {
+								MAN = { country_exists = yes }
+							}
+							white_peace = MAN
+						}
+					}
+				}
 				QIN = {
 					remove_state_core = 408
 					remove_state_core = 409
 					remove_state_core = 560
 					remove_state_core = 657
 				}
-				MAN = {
-					remove_state_core = 408
-					remove_state_core = 409
-					remove_state_core = 560
-					remove_state_core = 657
+				if = {
+					limit = {
+						MAN = { country_exists = yes } 
+					}
+					MAN = {
+						remove_state_core = 408
+						remove_state_core = 409
+						remove_state_core = 560
+						remove_state_core = 657
+					}
 				}
 				add_threat = 5
+			}
+			#RUS capitulation - RUS war on far east - RUS fail invasion on far east
+			if = {
+				limit = {
+					RUS = {
+						OR = {
+							has_country_flag = RUS_china_far_east_small_plan
+							has_country_flag = RUS_china_far_east_medium_plan
+							has_country_flag = RUS_china_far_east_big_plan
+							has_country_flag = RUS_tuva_war_plan
+						}
+						has_war_with = QIN
+					}
+					OR = {
+						RUS = {
+							surrender_progress > 0.30
+						}
+						AND = {
+							561 = {
+								controller = {
+									OR = {
+										tag = QIN
+										is_subject_of = QIN
+										is_in_faction_with = QIN
+									}
+								}
+							}
+							563 = {
+								controller = {
+									OR = {
+										tag = QIN
+										is_subject_of = QIN
+										is_in_faction_with = QIN
+									}
+								}
+							}
+							564 = {
+								controller = {
+									OR = {
+										tag = QIN
+										is_subject_of = QIN
+										is_in_faction_with = QIN
+									}
+								}
+							}
+							565 = {
+								controller = {
+									OR = {
+										tag = QIN
+										is_subject_of = QIN
+										is_in_faction_with = QIN
+									}
+								}
+							}
+							566 = {
+								controller = {
+									OR = {
+										tag = QIN
+										is_subject_of = QIN
+										is_in_faction_with = QIN
+									}
+								}
+							}
+							574 = {
+								controller = {
+									OR = {
+										tag = QIN
+										is_subject_of = QIN
+										is_in_faction_with = QIN
+									}
+								}
+							}
+						}
+					}
+				}
+				QIN = {
+					white_peace = RUS
+					transfer_state = 561
+					transfer_state = 563
+					transfer_state = 564
+					add_state_core = 561
+					add_state_core = 563
+					add_state_core = 564
+				}
+				if = {
+					limit = {
+						RUS = { has_country_flag = RUS_china_far_east_big_plan } 
+					}
+					RUS = {
+						clr_country_flag = RUS_china_far_east_big_plan
+						set_country_flag = RUS_china_far_east_big_plan_end
+					}
+				}
+				if = {
+					limit = {
+						RUS = { has_country_flag = RUS_china_far_east_big_plan } 
+					}
+					RUS = {
+						clr_country_flag = RUS_china_far_east_medium_plan
+						set_country_flag = RUS_china_far_east_medium_plan_end
+					}
+				}
+				if = {
+					limit = {
+						RUS = { has_country_flag = RUS_china_far_east_small_plan } 
+					}
+					RUS = {
+						clr_country_flag = RUS_china_far_east_small_plan
+						set_country_flag = RUS_china_far_east_small_plan_end
+					}
+				}
+				if = {
+					limit = {
+						RUS = { has_country_flag = RUS_tuva_war_plan_plan } 
+					}
+					RUS = {
+						clr_country_flag = RUS_tuva_war_plan
+						set_country_flag = RUS_tuva_war_plan_end
+					}
+				}
+
+				every_country = {
+					if = {
+						limit = {
+							is_in_faction_with = RUS
+							has_war_with = QIN
+						}
+						white_peace = QIN
+					}
+				}
+				add_threat = 3
 			}
 			#PAP capitulation
 			if = {
