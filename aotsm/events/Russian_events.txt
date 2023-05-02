@@ -287,7 +287,7 @@ country_event = { #
 	id = rusPol.7
 	title = rusPol.7.t
 	desc = rusPol.7.d
-	picture = GFX_report_event_city_square
+	picture = GFX_report_event_russian_villagers
 	
 	is_triggered_only = yes
 	
@@ -559,6 +559,55 @@ country_event = { #
 		name = rusPol.18.a	
 		ai_chance = {
 			base = 20
+		}
+	}
+	
+}
+
+country_event = { # 
+	id = rusPol.19 #Удаление идеи отголоски крепостного права
+	title = rusPol.19.t
+	desc = rusPol.19.d
+	picture = GFX_report_event_russian_villagers
+	
+	#is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	trigger = {
+		tag = RUS
+		OR = {
+			has_idea = RUS_an_echo_of_serfdom
+			has_idea = RUS_an_echo_of_serfdom_1
+		}
+		industrial_complex > 79
+		arms_factory > 29
+	}
+	
+	mean_time_to_happen = {
+		days = 30
+	}
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event rusPol.19"
+	}
+	
+	option = {
+		name = rusPol.19.a	
+		ai_chance = {
+			base = 20
+		}
+		if = {
+			limit = {
+				has_idea = RUS_an_echo_of_serfdom_1
+			}
+			remove_ideas = RUS_an_echo_of_serfdom_1
+		}
+		if = {
+			limit = {
+				has_idea = RUS_an_echo_of_serfdom
+			}
+			remove_ideas = RUS_an_echo_of_serfdom
 		}
 	}
 	
