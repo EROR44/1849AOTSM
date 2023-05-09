@@ -1870,6 +1870,10 @@ on_actions = {
 					transfer_state = 82
 					transfer_state = 83
 					transfer_state = 84
+					annex_country = {
+						target = BNT
+						transfer_troops = yes
+					}
 				}
 				BYZ = {
 					set_autonomy = {
@@ -2611,14 +2615,18 @@ on_actions = {
 								FRR = {
 									owns_state = 1
 								}
-								NOT = {
+								OR = {
 									SAR = {
-										is_in_faction_with = PRU
+										is_subject_of = BYZ
+									}
+									SAR = {
+										is_puppet_of = BYZ
 									}
 								}
 							}
 							SAR = {
 								transfer_state = 1
+								add_state_core = 1
 							}
 						}
 						if = {
@@ -2626,8 +2634,41 @@ on_actions = {
 								FRR = {
 									owns_state = 1
 								}
+								NOT = {
+									SAR = {
+										is_subject_of = BYZ
+									}
+									SAR = {
+										is_puppet_of = BYZ
+									}
+								}
+								country_exists = SAR
 							}
-							transfer_state = 1
+							SAR = {
+								transfer_state = 1
+								add_state_core = 1
+							}
+						}
+						if = {
+							limit = {
+								FRR = {
+									owns_state = 1
+								}
+								NOT = {
+									SAR = {
+										is_subject_of = BYZ
+									}
+									SAR = {
+										is_puppet_of = BYZ
+									}
+								}
+								NOT = {
+									country_exists = SAR
+								}
+							}
+							BYZ = {
+								transfer_state = 1
+							}
 						}
 						if = {
 							limit = {
@@ -8537,10 +8578,49 @@ on_actions = {
 							has_country_flag = GLA_with_VLH
 						}
 					}
-					GLA = {
+					SLA = {
+						transfer_state = 70
 						transfer_state = 71
 						transfer_state = 73
+						transfer_state = 664
 					}
+					GLA = {
+						puppet = SLA
+					}
+					SLA = {
+						set_politics = { ruling_party = democratic elections_allowed = no }
+						set_popularities = {
+							democratic = 47
+							socialism = 23
+							reactionist = 14
+							authoritarian = 16
+						}
+						swap_ideas = {
+							remove_idea = monarchy
+							add_idea = republic
+						}
+						load_oob = SLA_force
+					}
+				}
+				BNT = {
+					add_state_core = 45
+					transfer_state = 45
+					add_state_core = 82
+					add_state_core = 764
+					transfer_state = 764
+				}
+				BYZ = {
+					puppet = BNT
+				}
+				BNT = {
+					set_politics = { ruling_party = authoritarian elections_allowed = no }
+					set_popularities = {
+						democratic = 23
+						socialism = 17
+						reactionist = 23
+						authoritarian = 37
+					}
+					load_oob = BNT_force
 				}
 				VLH = { clr_country_flag = VLH_war_with_HUN }
 				GLA = { leave_faction = yes }
@@ -8548,6 +8628,64 @@ on_actions = {
 				VLH = { give_guarantee = GLA }
 				GLA = { give_guarantee = VLH }
 				PRU = { add_to_faction = HUN }
+				if = {
+					limit = {
+						RUS = {
+							has_country_flag = rus_send_volonter_to_vlh
+						}
+					}
+					set_variable_to_random = {
+						var = manpower_back_vlh
+						min = 42912
+						max = 59613
+					}
+					set_variable_to_random = {
+						var = weapon_back_vlh
+						min = 711
+						max = 981
+					}
+					VLH = {
+						delete_unit_template_and_units = {
+							division_template = "Russian Volunteers"
+							disband = no
+						}
+					}
+					RUS = {
+						country_event = {
+							id = war_event.4
+							days = 1
+						}
+					}
+				}
+				if = {
+					limit = {
+						RUS = {
+							has_country_flag = rus_send_volonter_to_gla
+						}
+					}
+					set_variable_to_random = {
+						var = manpower_back_gla
+						min = 42912
+						max = 59613
+					}
+					set_variable_to_random = {
+						var = weapon_back_gla
+						min = 711
+						max = 981
+					}
+					GLA = {
+						delete_unit_template_and_units = {
+							division_template = "Russian Volunteers"
+							disband = no
+						}
+					}
+					RUS = {
+						country_event = {
+							id = war_event.5
+							days = 1
+						}
+					}
+				}
 				HUN = {
 					set_politics = { ruling_party = authoritarian elections_allowed = no }
 					set_popularities = {
@@ -8596,6 +8734,11 @@ on_actions = {
 					tag = VLH
 					VLH = {
 						has_country_flag = PRU_destroed_russian_allience_VLH
+					}
+					NOT = {
+						VLH = {
+							has_country_flag = vlh_capitulation
+						}
 					}
 				}
 				if = {
@@ -8673,12 +8816,31 @@ on_actions = {
 					transfer_state = 91
 				}
 				HUN = {
-					transfer_state = 71
-					transfer_state = 73
+					annex_country = {
+						target = SLA
+						transfer_troops = no
+					}
 				}
-				PLH = {
-					transfer_state = 88
-					add_state_core = 88
+				if = {
+					limit = {
+						country_exists = PLH
+					}
+					PLH = {
+						transfer_state = 88
+						add_state_core = 88
+					}
+				}
+				if = {
+					limit = {
+						country_exists = POL
+					}
+					POL = {
+						transfer_state = 88
+						add_state_core = 88
+					}
+					PLH = {
+						remove_state_core = 88
+					}
 				}
 				GLA = { clr_country_flag = PRU_destroed_russian_allience_GLA }
 			}
