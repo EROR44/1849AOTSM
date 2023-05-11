@@ -4280,6 +4280,9 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: focus RUS_coop_witch_yung_constructors"
 			custom_effect_tooltip = RUS_unlock_new_advisors_manufacturers
+			hidden_effect = {
+				set_country_flag = RUS_unlock_socialist_manufacturers_and_advisors
+			}
 		}
 	}
 	
@@ -4447,8 +4450,24 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: focus RUS_military_factories_priority"
-			custom_effect_tooltip = RUS_add_arms_factory_in_219_221_206_249
+			custom_effect_tooltip = RUS_add_arms_factory_in_206_217_219_221_206_249
 			hidden_effect = {
+				206 = {
+					add_extra_state_shared_building_slots = 1
+					add_building_construction = {
+						type = arms_factory
+						level = 1
+						instant_build = yes
+					}
+				}
+				217 = {
+					add_extra_state_shared_building_slots = 1
+					add_building_construction = {
+						type = arms_factory
+						level = 1
+						instant_build = yes
+					}
+				}
 				219 = {
 					add_extra_state_shared_building_slots = 1
 					add_building_construction = {
@@ -4473,7 +4492,7 @@ focus_tree = {
 						instant_build = yes
 					}
 				}
-				206 = {
+				254 = {
 					add_extra_state_shared_building_slots = 1
 					add_building_construction = {
 						type = arms_factory
@@ -4513,9 +4532,9 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: focus RUS_civil_factories_priority"
-			custom_effect_tooltip = RUS_add_industrial_complex_in_195_254_221_206
+			custom_effect_tooltip = RUS_add_industrial_complex_206_217_219_221_206_249
 			hidden_effect = {
-				195 = {
+				206 = {
 					add_extra_state_shared_building_slots = 1
 					add_building_construction = {
 						type = industrial_complex
@@ -4523,7 +4542,23 @@ focus_tree = {
 						instant_build = yes
 					}
 				}
-				254 = {
+				217 = {
+					add_extra_state_shared_building_slots = 1
+					add_building_construction = {
+						type = industrial_complex
+						level = 1
+						instant_build = yes
+					}
+				}
+				219 = {
+					add_extra_state_shared_building_slots = 1
+					add_building_construction = {
+						type = industrial_complex
+						level = 1
+						instant_build = yes
+					}
+				}
+				249 = {
 					add_extra_state_shared_building_slots = 1
 					add_building_construction = {
 						type = industrial_complex
@@ -4539,7 +4574,7 @@ focus_tree = {
 						instant_build = yes
 					}
 				}
-				206 = {
+				254 = {
 					add_extra_state_shared_building_slots = 1
 					add_building_construction = {
 						type = industrial_complex
@@ -4577,6 +4612,9 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: focus RUS_encouragement_yung_talants"
 			custom_effect_tooltip = RUS_unlock_new_advisors_manufacturers
+			hidden_effect = {
+				set_country_flag = RUS_unlock_socialist_manufacturers_and_advisors
+			}
 		}
 	}
 	
@@ -4631,6 +4669,7 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: focus RUS_cult_of_workers"
+			add_ideas = RUS_cult_of_worker_idea
 		}
 	}
 	
@@ -4810,6 +4849,90 @@ focus_tree = {
 			log = "[GetDateText]: [Root.GetName]: focus RUS_lopatin_ga_constututianal_project"
 		}
 	}
+	
+####################################################################################
+#########################SOCIALIST_ARMY_BLOCK##############################
+####################################################################################
+	
+	focus = {
+		id = RUS_update_russian_army
+		icon = GFX_goal_generic_improve_relations
+		
+		x = -1
+		y = 14
+		cost = 5
+		
+		available = {
+			RUS_end_focus_block_one_of_socialist_leaders = yes
+		}
+		
+		mutually_exclusive = { focus = RUS_create_red_army }
+
+		relative_position_id = RUS_choose_our_leader
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus RUS_update_russian_army"
+		}
+	}
+	
+	focus = {
+		id = RUS_create_red_army 
+		icon = GFX_goal_generic_improve_relations
+		
+		x = 1
+		y = 14
+		cost = 5
+		
+		available = {
+			RUS_end_focus_block_one_of_socialist_leaders = yes
+		}
+		
+		mutually_exclusive = { focus = RUS_update_russian_army }
+
+		relative_position_id = RUS_choose_our_leader
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus RUS_create_red_army"
+		}
+	}
+
+#########################RELOAD_OFFICERS_CORPUS_SECTION##############################
+
+	focus = {
+		id = RUS_start_recruitment_officers 
+		icon = GFX_goal_generic_improve_relations
+		
+		x = 1
+		y = 1
+		cost = 5
+		
+		available = {
+	
+		}
+
+		relative_position_id = RUS_update_russian_army
+		prerequisite = { 
+			focus = RUS_update_russian_army 
+			focus = RUS_create_red_army 
+		}
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus RUS_start_recruitment_officers"
+		}
+	}
+
 
 #########################FOREIGN_POLICY##############################
 	
