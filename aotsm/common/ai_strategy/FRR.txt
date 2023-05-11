@@ -10,7 +10,7 @@
 # protect
 # influence
 
-FRR_help_to_live_prussian_potential_world_power = {
+FRR_help_to_live_french_potential_world_power = {
 
 	allowed = {
 
@@ -79,7 +79,7 @@ FRR_help_to_live_prussian_potential_world_power = {
 
 }
 
-FRR_help_to_live_prussian_world_power = {
+FRR_help_to_live_french_world_power = {
 
 	allowed = {
 
@@ -88,7 +88,7 @@ FRR_help_to_live_prussian_world_power = {
 	enable = {
 		has_idea = world_power
 		FRR = {
-			num_divisions > 139
+			num_divisions > 144
 		}
 		tag = FRR
 	}
@@ -99,7 +99,7 @@ FRR_help_to_live_prussian_world_power = {
 				has_idea = world_power
 			}
 			FRR = {
-				num_divisions < 140
+				num_divisions < 145
 			}
 		}
 	}
@@ -230,6 +230,164 @@ FRA_area_priority = {
 #		id = NWA
 # 	}
 
+}
+
+FRR_anti_armor = {
+	allowed = {
+		original_tag = FRR
+	}
+	enable = {
+		ai_wants_divisions > 5 
+
+		any_enemy_country = {
+			ROOT = {
+				estimated_intel_max_armor = {
+					tag = PREV
+					value > 25
+				}
+			}
+		}
+	}
+	abort = {
+		ai_wants_divisions < 6 
+	}
+
+	ai_strategy = {
+		type = role_ratio
+		id = motorized
+		value = 15
+	}
+}
+
+FRR_armored_production = {
+	allowed = {
+		original_tag = FRR
+	}
+	enable = {
+		date > 1849.1.1
+		ai_wants_divisions > 1
+	}
+	abort = {
+		ai_wants_divisions < 90 
+	}
+
+	ai_strategy = {
+		type = role_ratio
+		id = armor
+		value = 30
+	}
+}
+
+FRR_halt_light_armor_production_in_transitioning = {
+	allowed = {
+		original_tag = FRR
+	}
+	enable = {
+		has_template_majority_unit = medium_armor
+		has_equipment = { light_tank_chassis > 600 }
+	}
+	abort = {
+		# once we start we never go back to light armor
+	}
+
+	ai_strategy = {
+		type = equipment_variant_production_factor
+		id = light_tank_chassis
+		value = -100
+	}
+}
+
+
+
+PRU_super_boost_light_for_med_armor = {
+	allowed = {
+		original_tag = PRU
+	}
+	enable = {
+		OR = {
+			has_tech = basic_medium_tank
+			has_tech = basic_medium_tank_chassis
+		}
+		NOT = { has_template_ai_majority_unit = medium_armor }
+	}
+
+	abort = {
+		has_template_ai_majority_unit = medium_armor
+	}
+
+	ai_strategy = {
+		type = land_xp_spend_priority
+		id = division_template
+		value = 100
+	}
+
+	ai_strategy = {
+		type = template_prio
+		id = light_armor
+		value = 100
+	}
+
+	ai_strategy = {
+		type = template_prio
+		id = medium_armor
+		value = 150
+	}
+
+	ai_strategy = {
+		type = template_prio
+		id = motorized
+		value = 200
+	}
+}
+
+
+
+FRR_template_design = {
+	allowed = {
+		original_tag = FRR
+	}
+	enable = {
+		date < 1849.1.1
+	}
+	abort = {
+		date > 1854.1.1
+	}
+
+	ai_strategy = {
+		type = template_prio
+		id = infantry
+		value = 20
+	}
+
+	ai_strategy = {
+		type = template_prio
+		id = artillery
+		value = 20
+	}
+
+	ai_strategy = {
+		type = template_prio
+		id = motorized
+		value = -50
+	}
+
+	ai_strategy = {
+		type = template_prio
+		id = cavalry
+		value = -100
+	}
+
+	ai_strategy = {
+		type = template_prio
+		id = light_armor
+		value = 30
+	}
+
+	ai_strategy = {
+		type = template_prio
+		id = heavy_armor
+		value = -50
+	}
 }
 
 french_wants_civ = {
@@ -375,7 +533,7 @@ FRR_unit_production = {
 	ai_strategy = {
 		type = role_ratio
 		id = armor
-		value = 20
+		value = 45 
 	}
 
 	ai_strategy = {
@@ -471,7 +629,7 @@ FRR_unit_production = {
 	ai_strategy = {
 		type = equipment_production_factor
 		id = infantry
-		value = 15
+		value = 25
 	}
 
 	ai_strategy = {
@@ -489,13 +647,13 @@ FRR_unit_production = {
 	ai_strategy = {
 		type = equipment_production_factor
 		id = artillery
-		value = 100
+		value = 80
 	}
 
 	ai_strategy = {
 		type = equipment_production_factor
 		id = armor
-		value = 5
+		value = 15
 	}
 	ai_strategy = {
 		type = equipment_production_factor
@@ -612,7 +770,7 @@ prepare_for_great_war = {
 #		country_trigger = {
 #			is_ai = yes
 #			OR = {
-#				tag = PRU
+#				tag = FRR
 #			}
 ##		}
 #		value = 200
@@ -1353,4 +1511,50 @@ FRR_more_divisions_on_front = {
 		value = -200
 	}
 	
+}
+
+FRR_xp_upgrade_spending_land = {
+	allowed = {
+		original_tag = FRR
+	}
+
+	enable = {
+		date < 1852.6.1
+	}
+	
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = land_xp_spend_priority
+		id = upgrade_xp_cutoff
+		value = 100
+	}
+}
+
+FRR_never_help_pru = {
+
+	allowed = {
+		tag = FRR
+	}
+	
+	enable = {
+		date > 1849.1.1
+	}
+	
+	abort_when_not_enabled = yes
+	
+	ai_strategy = {
+		type = diplo_action_desire
+		id = PRU
+		target = send_lend_lease_desire
+		value = -1000
+	}	
+	
+	ai_strategy = {
+		type = diplo_action_desire
+		id = PRU
+		target = send_volunteers_desire
+		value = -1000
+	}	
+
 }
