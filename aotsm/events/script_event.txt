@@ -5348,6 +5348,366 @@ country_event = {
 	}
 }
 
+country_event = {
+	id = script_event.29
+	title = script_event.29.t
+	desc = script_event.29.d
+	picture = GFX_report_event_communist_leader
+	
+	trigger = {
+		tag = PRU
+		has_global_flag = firts_world_war
+		OR = {
+			NOT = {
+				PRU = {
+					controls_state = 64
+				}
+			}
+			PRU = {
+				surrender_progress > 0.4999
+			}
+		}
+		NOT = {
+			PRU = {
+				has_country_flag = revolution_start_pru
+			}
+		}
+	}
+	
+	mean_time_to_happen = {
+		days = 10
+	}
+	
+	hidden = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event script_event.29"}
+	
+	option = {
+		name = script_event.29.a
+		PRU = {
+			set_country_flag = revolution_start_pru
+		}
+		PRU = {
+			set_politics = { ruling_party = reactionist elections_allowed = no }
+			set_popularities = {
+				democratic = 20
+				socialism = 0
+				reactionist = 51
+				authoritarian = 29
+			}
+			set_cosmetic_tag = PRU_LOSE
+		}
+		PRU = {
+			load_focus_tree = lose_germany_focus
+		}
+		SGE = {
+			load_focus_tree = rev_germany_focus
+		}
+		PRR = {
+			load_focus_tree = prussian_lose_focus
+		}
+		PRU = {
+			if = {
+				limit = {
+					has_idea = monarchy
+				}
+				PRU = {
+					swap_ideas = {
+						remove_idea = monarchy
+						add_idea = republic
+					}
+				}
+			}
+		}
+		PRU = {
+			if = {
+				limit = {
+					has_idea = constitutional_monarchy_fg
+				}
+				PRU = {
+					swap_ideas = {
+						remove_idea = constitutional_monarchy_fg
+						add_idea = republic
+					}
+				}
+			}
+		}
+		PRU = {
+			if = {
+				limit = {
+					has_idea = parliament_monarchy
+				}
+				PRU = {
+					swap_ideas = {
+						remove_idea = parliament_monarchy
+						add_idea = republic
+					}
+				}
+			}
+		}
+		PRU = {
+			if = {
+				limit = {
+					has_idea = dictature_fg
+				}
+				PRU = {
+					swap_ideas = {
+						remove_idea = dictature_fg
+						add_idea = republic
+					}
+				}
+			}
+		}
+		if = {
+			limit = {
+				PRU = {
+					has_idea = world_power
+				}
+			}
+			PRU = {
+				swap_ideas = {
+					remove_idea = world_power
+					add_idea = large_country
+				}
+			}
+		}
+		if = {
+			limit = {
+				PRU = {
+					has_idea = potential_world_power
+				}
+			}
+			PRU = {
+				swap_ideas = {
+					remove_idea = potential_world_power
+					add_idea = large_country
+				}
+			}
+		}
+	}
+	
+}
+
+country_event = {
+	id = script_event.30
+	title = script_event.30.t
+	desc = script_event.30.d
+	picture = GFX_report_event_communist_leader
+	
+	trigger = {
+		tag = BYZ
+		has_global_flag = firts_world_war
+		OR = {
+			NOT = {
+				PRU = {
+					controls_state = 797
+				}
+			}
+			BYZ = {
+				surrender_progress > 0.3999
+			}
+		}
+		NOT = {
+			BYZ = {
+				has_country_flag = start_of_fall_byz
+			}
+		}
+	}
+	
+	mean_time_to_happen = {
+		days = 10
+	}
+	
+	hidden = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event script_event.30"}
+	
+	option = {
+		name = script_event.30.a
+		BYZ = {
+			set_country_flag = start_of_fall_byz
+		}
+		BYZ = {
+			set_autonomy = {
+				target = CPT
+				autonomy_state = autonomy_free
+				end_wars = yes
+				end_civil_wars = yes
+			}
+		}
+		CPT = {
+			transfer_state = 816
+		}
+		BYZ = {
+			country_event = {
+				id = script_event.31
+				days = 5
+			}
+		}
+	}
+}
+
+country_event = {
+	id = script_event.31
+	title = script_event.31.t
+	desc = script_event.31.d
+	picture = GFX_report_event_communist_leader
+	
+	is_triggered_only = yes
+	
+	hidden = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event script_event.31"}
+	
+	option = {
+		name = script_event.31.a
+		BYZ = {
+			set_country_flag = byz_save_country_by_sar
+			set_autonomy = {
+				target = SAR
+				autonomy_state = autonomy_free
+				end_wars = yes
+				end_civil_wars = yes
+			}
+		}
+		SAR = {
+			transfer_state = 116
+		}
+		BYZ = {
+			country_event = {
+				id = script_event.32
+				days = 5
+			}
+		}
+	}
+}
+
+country_event = {
+	id = script_event.32
+	title = script_event.32.t
+	desc = script_event.32.d
+	picture = GFX_report_event_communist_leader
+	
+	is_triggered_only = yes
+	
+	hidden = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event script_event.32"}
+	
+	option = {
+		name = script_event.31.a
+		BYZ = {
+			set_autonomy = {
+				target = KUR
+				autonomy_state = autonomy_free
+				end_wars = yes
+				end_civil_wars = yes
+			}
+		}
+		BYZ = {
+			country_event = {
+				id = script_event.33
+				days = 5
+			}
+		}
+	}
+}
+
+country_event = {
+	id = script_event.33
+	title = script_event.33.t
+	desc = script_event.33.d
+	picture = GFX_report_event_communist_leader
+	
+	is_triggered_only = yes
+	
+	hidden = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event script_event.33"}
+	
+	option = {
+		name = script_event.31.a
+		BYZ = {
+			set_autonomy = {
+				target = SYR
+				autonomy_state = autonomy_free
+				end_wars = yes
+				end_civil_wars = yes
+			}
+		}
+		BYZ = {
+			country_event = {
+				id = script_event.34
+				days = 5
+			}
+		}
+	}
+}
+
+country_event = {
+	id = script_event.34
+	title = script_event.34.t
+	desc = script_event.34.d
+	picture = GFX_report_event_communist_leader
+	
+	is_triggered_only = yes
+	
+	hidden = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event script_event.34"}
+	
+	option = {
+		name = script_event.31.a
+		HAL = {
+			transfer_state = 873
+			transfer_state = 874
+		}
+		if = {
+			limit = {
+				country_exists = SOS
+			}
+			SOS = {
+				transfer_state = 875
+			}
+		}
+		if = {
+			limit = {
+				country_exists = SOR
+			}
+			SOR = {
+				transfer_state = 875
+			}
+		}
+		if = {
+			limit = {
+				country_exists = PER
+			}
+			PER = {
+				transfer_state = 872
+				transfer_state = 876
+			}
+		}
+		if = {
+			limit = {
+				country_exists = IRA
+			}
+			IRA = {
+				transfer_state = 872
+				transfer_state = 876
+			}
+		}
+		if = {
+			limit = {
+				country_exists = PAR
+			}
+			PAR = {
+				transfer_state = 872
+				transfer_state = 876
+			}
+		}
+	}
+}
+
 country_event = { #state rename
 	id = script_event.9999
 	title = script_event.9999.t

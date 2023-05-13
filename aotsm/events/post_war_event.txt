@@ -311,3 +311,124 @@ country_event = { #End of Romea
 		}
 	}
 }
+
+country_event = { #Occupation of Prussian
+	id = postwar.5
+	title = postwar.5.t
+	desc = postwar.5.d
+	
+	picture = GFX_report_event_generic_sign_treaty2
+
+	is_triggered_only = yes
+	
+	option = { #Yes
+		name = postwar.5.a
+		PRU = {
+			country_event = {
+				id = postwar.6
+				days = 5
+			}
+		}
+	}
+	
+	option = { #no
+		name = postwar.5.b
+	}
+	
+	option = { #but replace him
+		name = postwar.5.a
+		trigger = {
+			RUS = {
+				has_government = socialism 
+			}
+		}
+		PRU = {
+			country_event = {
+				id = postwar.6
+				days = 5
+			}
+		}
+		PRR = {
+			country_event = {
+				id = postwar.7
+				days = 10
+			}
+		}
+	}
+}
+
+country_event = { #Creating of Prussian
+	id = postwar.6
+	title = postwar.6.t
+	desc = postwar.6.d
+	
+	picture = GFX_report_event_generic_sign_treaty2
+
+	is_triggered_only = yes
+	
+	option = { #Bad news
+		name = postwar.6.a
+		PRR = {
+			transfer_state = 5
+			add_state_core = 5
+			transfer_state = 85
+			add_state_core = 85
+			add_state_core = 188
+			transfer_state = 763
+			add_state_core = 763
+		}
+		PRU = {
+			transfer_units_fraction= {
+				target = PRR
+				size = 0.00
+				stockpile_ratio = 0.10
+				army_ratio = 0.10
+				navy_ratio = 0.10
+				air_ratio = 0.10
+			}
+		}
+		PRR = {
+			inherit_technology = PRU
+		}
+		RUS = {
+			set_autonomy = {
+				target = PRR
+				autonomy_state = autonomy_puppet
+				end_wars = yes
+				end_civil_wars = yes
+			}
+		}
+		PRR = {
+			set_politics = { ruling_party = authoritarian elections_allowed = no }
+			set_popularities = {
+				democratic = 6
+				socialism = 14
+				reactionist = 29
+				authoritarian = 51
+			}
+		}
+	}
+}
+
+country_event = { #Socialist coup
+	id = postwar.7
+	title = postwar.7.t
+	desc = postwar.7.d
+	
+	picture = GFX_report_event_generic_sign_treaty2
+
+	is_triggered_only = yes
+	
+	option = { #Fucking Russian
+		name = postwar.7.a
+		PRR = {
+			set_politics = { ruling_party = socialism elections_allowed = no }
+			set_popularities = {
+				democratic = 26
+				socialism = 54
+				reactionist = 5
+				authoritarian = 5
+			}
+		}
+	}
+}
