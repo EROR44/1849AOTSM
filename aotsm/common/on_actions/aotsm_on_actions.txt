@@ -123,7 +123,6 @@ on_actions = {
 			set_variable = { global.help_aus_1_var = 0 }
 			set_variable = { global.help_aus_2_var = 0 }
 			set_variable = { global.help_aus_3_var = 0 }
-			set_variable = { global.help_aus_var = 1 }
 			
 			FRR = {
 				if = {
@@ -6246,6 +6245,8 @@ on_actions = {
 				PRU = {
 					transfer_state = 151
 					add_state_core = 151
+					transfer_state = 940
+					add_state_core = 940
 				}
 				BRG = {
 					transfer_state = 3
@@ -6258,12 +6259,16 @@ on_actions = {
 					SAR = {
 						transfer_state = 884
 						add_state_core = 884
+						transfer_state = 939
+						add_state_core = 939
 					}
 				}
 				else = {
 					BYZ = {
 						transfer_state = 884
 						add_state_core = 884
+						transfer_state = 939
+						add_state_core = 939
 					}
 				}
 			}
@@ -8089,7 +8094,6 @@ on_actions = {
 				set_variable = { global.help_aus_1_var = 0 }
 				set_variable = { global.help_aus_2_var = 0 }
 				set_variable = { global.help_aus_3_var = 0 }
-				set_variable = { global.help_aus_var = 1 }
 				every_state = {
 					limit = {
 						owner = {
@@ -10043,7 +10047,7 @@ on_actions = {
 						if = {
 							limit = {
 								check_variable = {
-									global.help_aus_1_var < 0.26
+									global.help_aus_1_procent < 26
 								}
 							}
 							add_timed_idea = {
@@ -10054,10 +10058,10 @@ on_actions = {
 						if = {
 							limit = {
 								check_variable = {
-									global.help_aus_1_var > 0.25
+									global.help_aus_1_procent > 25
 								}
 								check_variable = {
-									global.help_aus_1_var < 0.51
+									global.help_aus_1_procent < 51
 								}
 							}
 							add_timed_idea = {
@@ -10068,7 +10072,7 @@ on_actions = {
 						if = {
 							limit = {
 								check_variable = {
-									global.help_aus_1_var > 0.50
+									global.help_aus_1_procent > 50
 								}
 							}
 							add_timed_idea = {
@@ -10117,7 +10121,7 @@ on_actions = {
 						if = {
 							limit = {
 								check_variable = {
-									global.help_aus_2_var < 0.26
+									global.help_aus_2_procent < 26
 								}
 							}
 							add_timed_idea = {
@@ -10128,10 +10132,10 @@ on_actions = {
 						if = {
 							limit = {
 								check_variable = {
-									global.help_aus_2_var > 0.25
+									global.help_aus_2_procent > 25
 								}
 								check_variable = {
-									global.help_aus_2_var < 0.51
+									global.help_aus_2_procent < 51
 								}
 							}
 							add_timed_idea = {
@@ -10142,7 +10146,7 @@ on_actions = {
 						if = {
 							limit = {
 								check_variable = {
-									global.help_aus_2_var > 0.50
+									global.help_aus_2_procent > 50
 								}
 							}
 							add_timed_idea = {
@@ -10185,7 +10189,7 @@ on_actions = {
 						if = {
 							limit = {
 								check_variable = {
-									global.help_aus_3_var < 0.26
+									global.help_aus_3_procent < 26
 								}
 							}
 							add_timed_idea = {
@@ -10196,10 +10200,10 @@ on_actions = {
 						if = {
 							limit = {
 								check_variable = {
-									global.help_aus_3_var > 0.25
+									global.help_aus_3_procent > 25
 								}
 								check_variable = {
-									global.help_aus_3_var < 0.51
+									global.help_aus_3_procent < 51
 								}
 							}
 							add_timed_idea = {
@@ -10210,7 +10214,7 @@ on_actions = {
 						if = {
 							limit = {
 								check_variable = {
-									global.help_aus_3_var > 0.50
+									global.help_aus_3_procent > 50
 								}
 							}
 							add_timed_idea = {
@@ -10243,7 +10247,6 @@ on_actions = {
 				set_variable = { global.help_aus_1_var = 0 }
 				set_variable = { global.help_aus_2_var = 0 }
 				set_variable = { global.help_aus_3_var = 0 }
-				set_variable = { global.help_aus_var = 1 }
 				AUS = {
 					mark_focus_tree_layout_dirty = yes
 				}
@@ -10511,219 +10514,218 @@ on_actions = {
 					}
 				}
 				if = {
-					limit = {
-						any_country = {
+						limit = {
+							any_country = {
+									has_country_flag = first_place_in_help_to_aus
+							}
+						}
+						every_country = {
+							limit = {
 								has_country_flag = first_place_in_help_to_aus
+							}
+							if = {
+								limit = {
+									check_variable = {
+										global.help_aus_1_procent < 26
+									}
+								}
+								add_timed_idea = {
+									idea = aus_reparation_for_help_little
+									days = 180
+								}
+							}
+							if = {
+								limit = {
+									check_variable = {
+										global.help_aus_1_procent > 25
+									}
+									check_variable = {
+										global.help_aus_1_procent < 51
+									}
+								}
+								add_timed_idea = {
+									idea = aus_reparation_for_help_medium
+									days = 180
+								}
+							}
+							if = {
+								limit = {
+									check_variable = {
+										global.help_aus_1_procent > 50
+									}
+								}
+								add_timed_idea = {
+									idea = aus_reparation_for_help_more
+									days = 180
+								}
+							}
+							clr_country_flag = chose_help_to_aus_flag
+							clr_country_flag = first_place_in_help_to_aus
+							if = {
+								limit = {
+									tag = RUS
+								}
+								remove_from_array = { global.austrian_help = RUS }
+							}
+							if = {
+								limit = {
+									tag = FRR
+								}
+								remove_from_array = { global.austrian_help = FRR }
+							}
+							if = {
+								limit = {
+									tag = CBI
+								}
+								remove_from_array = { global.austrian_help = CBI }
+							}
+						}
+						AUS = {
+							add_timed_idea = {
+								idea = aus_reparation_for_help_for_aus
+								days = 180
+							}
 						}
 					}
-					every_country = {
+					if = {
 						limit = {
-							has_country_flag = first_place_in_help_to_aus
+							any_country = {
+								has_country_flag = second_place_in_help_to_aus
+							}
 						}
-						if = {
+						every_country = {
 							limit = {
-								check_variable = {
-									global.help_aus_1_var < 0.26
+								has_country_flag = second_place_in_help_to_aus
+							}
+							if = {
+								limit = {
+									check_variable = {
+										global.help_aus_2_procent < 26
+									}
+								}
+								add_timed_idea = {
+									idea = aus_reparation_for_help_little
+									days = 180
 								}
 							}
-							add_timed_idea = {
-								idea = aus_reparation_for_help_little
-								days = 180
-							}
-						}
-						if = {
-							limit = {
-								check_variable = {
-									global.help_aus_1_var > 0.25
+							if = {
+								limit = {
+									check_variable = {
+										global.help_aus_2_procent > 25
+									}
+									check_variable = {
+										global.help_aus_2_procent < 51
+									}
 								}
-								check_variable = {
-									global.help_aus_1_var < 0.51
-								}
-							}
-							add_timed_idea = {
-								idea = aus_reparation_for_help_medium
-								days = 180
-							}
-						}
-						if = {
-							limit = {
-								check_variable = {
-									global.help_aus_1_var > 0.50
+								add_timed_idea = {
+									idea = aus_reparation_for_help_medium
+									days = 180
 								}
 							}
-							add_timed_idea = {
-								idea = aus_reparation_for_help_more
-								days = 180
+							if = {
+								limit = {
+									check_variable = {
+										global.help_aus_2_procent > 50
+									}
+								}
+								add_timed_idea = {
+									idea = aus_reparation_for_help_more
+									days = 180
+								}
 							}
-						}
-						clr_country_flag = chose_help_to_aus_flag
-						clr_country_flag = first_place_in_help_to_aus
-						if = {
-							limit = {
-								tag = RUS
+							clr_country_flag = chose_help_to_aus_flag
+							clr_country_flag = second_place_in_help_to_aus
+							if = {
+								limit = {
+									tag = RUS
+								}
+								remove_from_array = { global.austrian_help = RUS }
 							}
-							remove_from_array = { global.austrian_help = RUS }
-						}
-						if = {
-							limit = {
-								tag = FRR
+							if = {
+								limit = {
+									tag = FRR
+								}
+								remove_from_array = { global.austrian_help = FRR }
 							}
-							remove_from_array = { global.austrian_help = FRR }
-						}
-						if = {
-							limit = {
-								tag = CBI
+							if = {
+								limit = {
+									tag = CBI
+								}
+								remove_from_array = { global.austrian_help = CBI }
 							}
-							remove_from_array = { global.austrian_help = CBI }
 						}
 					}
-					AUS = {
-						add_timed_idea = {
-							idea = aus_reparation_for_help_for_aus
-							days = 180
-						}
-					}
-				}
-				if = {
-					limit = {
-						any_country = {
-							has_country_flag = second_place_in_help_to_aus
-						}
-					}
-					every_country = {
+					if = {
 						limit = {
-							has_country_flag = second_place_in_help_to_aus
+							any_country = {
+								has_country_flag = third_place_in_help_to_aus
+							}
 						}
-						if = {
+						every_country = {
 							limit = {
-								check_variable = {
-									global.help_aus_2_var < 0.26
+								has_country_flag = third_place_in_help_to_aus
+							}
+							if = {
+								limit = {
+									check_variable = {
+										global.help_aus_3_procent < 26
+									}
+								}
+								add_timed_idea = {
+									idea = aus_reparation_for_help_little
+									days = 180
 								}
 							}
-							add_timed_idea = {
-								idea = aus_reparation_for_help_little
-								days = 180
-							}
-						}
-						if = {
-							limit = {
-								check_variable = {
-									global.help_aus_2_var > 0.25
+							if = {
+								limit = {
+									check_variable = {
+										global.help_aus_3_procent > 25
+									}
+									check_variable = {
+										global.help_aus_3_procent < 51
+									}
 								}
-								check_variable = {
-									global.help_aus_2_var < 0.51
-								}
-							}
-							add_timed_idea = {
-								idea = aus_reparation_for_help_medium
-								days = 180
-							}
-						}
-						if = {
-							limit = {
-								check_variable = {
-									global.help_aus_2_var > 0.50
+								add_timed_idea = {
+									idea = aus_reparation_for_help_medium
+									days = 180
 								}
 							}
-							add_timed_idea = {
-								idea = aus_reparation_for_help_more
-								days = 180
+							if = {
+								limit = {
+									check_variable = {
+										global.help_aus_3_procent > 50
+									}
+								}
+								add_timed_idea = {
+									idea = aus_reparation_for_help_more
+									days = 180
+								}
 							}
-						}
-						clr_country_flag = chose_help_to_aus_flag
-						clr_country_flag = second_place_in_help_to_aus
-						if = {
-							limit = {
-								tag = RUS
+							clr_country_flag = chose_help_to_aus_flag
+							clr_country_flag = third_place_in_help_to_aus
+							if = {
+								limit = {
+									tag = RUS
+								}
+								remove_from_array = { global.austrian_help = RUS }
 							}
-							remove_from_array = { global.austrian_help = RUS }
-						}
-						if = {
-							limit = {
-								tag = FRR
+							if = {
+								limit = {
+									tag = FRR
+								}
+								remove_from_array = { global.austrian_help = FRR }
 							}
-							remove_from_array = { global.austrian_help = FRR }
-						}
-						if = {
-							limit = {
-								tag = CBI
+							if = {
+								limit = {
+									tag = CBI
+								}
+								remove_from_array = { global.austrian_help = CBI }
 							}
-							remove_from_array = { global.austrian_help = CBI }
 						}
 					}
-				}
-				if = {
-					limit = {
-						any_country = {
-							has_country_flag = third_place_in_help_to_aus
-						}
-					}
-					every_country = {
-						limit = {
-							has_country_flag = third_place_in_help_to_aus
-						}
-						if = {
-							limit = {
-								check_variable = {
-									global.help_aus_3_var < 0.26
-								}
-							}
-							add_timed_idea = {
-								idea = aus_reparation_for_help_little
-								days = 180
-							}
-						}
-						if = {
-							limit = {
-								check_variable = {
-									global.help_aus_3_var > 0.25
-								}
-								check_variable = {
-									global.help_aus_3_var < 0.51
-								}
-							}
-							add_timed_idea = {
-								idea = aus_reparation_for_help_medium
-								days = 180
-							}
-						}
-						if = {
-							limit = {
-								check_variable = {
-									global.help_aus_3_var > 0.50
-								}
-							}
-							add_timed_idea = {
-								idea = aus_reparation_for_help_more
-								days = 180
-							}
-						}
-						clr_country_flag = chose_help_to_aus_flag
-						clr_country_flag = third_place_in_help_to_aus
-						if = {
-							limit = {
-								tag = RUS
-							}
-							remove_from_array = { global.austrian_help = RUS }
-						}
-						if = {
-							limit = {
-								tag = FRR
-							}
-							remove_from_array = { global.austrian_help = FRR }
-						}
-						if = {
-							limit = {
-								tag = CBI
-							}
-							remove_from_array = { global.austrian_help = CBI }
-						}
-					}
-				}
-				set_variable = { global.help_aus_1_var = 0 }
-				set_variable = { global.help_aus_2_var = 0 }
-				set_variable = { global.help_aus_3_var = 0 }
-				set_variable = { global.help_aus_var = 1 }
+					set_variable = { global.help_aus_1_var = 0 }
+					set_variable = { global.help_aus_2_var = 0 }
+					set_variable = { global.help_aus_3_var = 0 }
 				every_state = {
 					limit = {
 						owner = {
