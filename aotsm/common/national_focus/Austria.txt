@@ -4506,11 +4506,199 @@ focus_tree = {
 		#search_filters = {  }
 		
 		completion_reward = {
-			air_experience = 25
-			add_doctrine_cost_reduction = {
-				cost_reduction = 0.5
-				uses = 2
-				category = air_doctrine
+			set_temp_variable = {
+				var = AUS.air_experience
+				value = 0
+			}
+			if = {
+				limit = {
+					AUS = {
+						has_tech = iw_basic_airframe
+					}
+				}
+				add_to_temp_variable = {
+					var = AUS.air_experience
+					value = 1
+				}
+			}
+			if = {
+				limit = {
+					AUS = {
+						has_tech = iw_small_airframe
+					}
+				}
+				add_to_temp_variable = {
+					var = AUS.air_experience
+					value = 1
+				}
+			}
+			if = {
+				limit = {
+					AUS = {
+						has_tech = iw_medium_airframe
+					}
+				}
+				add_to_temp_variable = {
+					var = AUS.air_experience
+					value = 1
+				}
+			}
+			if = {
+				limit = {
+					AUS = {
+						has_tech = iw_large_airframe
+					}
+				}
+				add_to_temp_variable = {
+					var = AUS.air_experience
+					value = 1
+				}
+			}
+			if = {
+				limit = {
+					AUS = {
+						has_tech = early_bombs
+					}
+				}
+				add_to_temp_variable = {
+					var = AUS.air_experience
+					value = 1
+				}
+			}
+			if = {
+				limit = {
+					AUS = {
+						has_tech = aa_lmg
+					}
+				}
+				add_to_temp_variable = {
+					var = AUS.air_experience
+					value = 1
+				}
+			}
+			if = {
+				limit = {
+					AUS = {
+						has_tech = engines_1
+					}
+				}
+				add_to_temp_variable = {
+					var = AUS.air_experience
+					value = 1
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						AUS = {
+							has_tech = iw_basic_airframe
+						}
+					}
+				}
+				AUS = {
+					set_technology = {
+						iw_basic_airframe = 1
+					}
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						AUS = {
+							has_tech = iw_small_airframe
+						}
+					}
+				}
+				AUS = {
+					set_technology = {
+						iw_small_airframe = 1
+					}
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						AUS = {
+							has_tech = iw_medium_airframe
+						}
+					}
+				}
+				AUS = {
+					set_technology = {
+						iw_medium_airframe = 1
+					}
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						AUS = {
+							has_tech = iw_large_airframe
+						}
+					}
+				}
+				AUS = {
+					set_technology = {
+						iw_large_airframe = 1
+					}
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						AUS = {
+							has_tech = early_bombs
+						}
+					}
+				}
+				AUS = {
+					set_technology = {
+						early_bombs = 1
+					}
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						AUS = {
+							has_tech = aa_lmg
+						}
+					}
+				}
+				AUS = {
+					set_technology = {
+						aa_lmg = 1
+					}
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						AUS = {
+							has_tech = engines_1
+						}
+					}
+				}
+				AUS = {
+					set_technology = {
+						engines_1 = 1
+					}
+				}
+			}
+			set_temp_variable = {
+				var = AUS.air_experience_give
+				value = 5
+			}
+			if = {
+				limit = {
+					check_variable = {
+						AUS.air_experience > 0
+					}
+				}
+				multiply_temp_variable = { AUS.air_experience_give = AUS.air_experience }
+				AUS = {
+					air_experience = AUS.air_experience_give
+				}
 			}
 		}
 		

@@ -5173,13 +5173,199 @@ focus_tree = {
 		#search_filters = {  }
 		
 		completion_reward = {
-			set_technology = {
-				early_fighter = 1
-				naval_bomber1 = 1
-				fighter1 = 1
-				CAS1 = 1
-				early_bomber = 1
-				strategic_bomber1 = 1
+			set_temp_variable = {
+				var = BYZ.air_experience
+				value = 0
+			}
+			if = {
+				limit = {
+					BYZ = {
+						has_tech = iw_basic_airframe
+					}
+				}
+				add_to_temp_variable = {
+					var = BYZ.air_experience
+					value = 1
+				}
+			}
+			if = {
+				limit = {
+					BYZ = {
+						has_tech = iw_small_airframe
+					}
+				}
+				add_to_temp_variable = {
+					var = BYZ.air_experience
+					value = 1
+				}
+			}
+			if = {
+				limit = {
+					BYZ = {
+						has_tech = iw_medium_airframe
+					}
+				}
+				add_to_temp_variable = {
+					var = BYZ.air_experience
+					value = 1
+				}
+			}
+			if = {
+				limit = {
+					BYZ = {
+						has_tech = iw_large_airframe
+					}
+				}
+				add_to_temp_variable = {
+					var = BYZ.air_experience
+					value = 1
+				}
+			}
+			if = {
+				limit = {
+					BYZ = {
+						has_tech = early_bombs
+					}
+				}
+				add_to_temp_variable = {
+					var = BYZ.air_experience
+					value = 1
+				}
+			}
+			if = {
+				limit = {
+					BYZ = {
+						has_tech = aa_lmg
+					}
+				}
+				add_to_temp_variable = {
+					var = BYZ.air_experience
+					value = 1
+				}
+			}
+			if = {
+				limit = {
+					BYZ = {
+						has_tech = engines_1
+					}
+				}
+				add_to_temp_variable = {
+					var = BYZ.air_experience
+					value = 1
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						BYZ = {
+							has_tech = iw_basic_airframe
+						}
+					}
+				}
+				BYZ = {
+					set_technology = {
+						iw_basic_airframe = 1
+					}
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						BYZ = {
+							has_tech = iw_small_airframe
+						}
+					}
+				}
+				BYZ = {
+					set_technology = {
+						iw_small_airframe = 1
+					}
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						BYZ = {
+							has_tech = iw_medium_airframe
+						}
+					}
+				}
+				BYZ = {
+					set_technology = {
+						iw_medium_airframe = 1
+					}
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						BYZ = {
+							has_tech = iw_large_airframe
+						}
+					}
+				}
+				BYZ = {
+					set_technology = {
+						iw_large_airframe = 1
+					}
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						BYZ = {
+							has_tech = early_bombs
+						}
+					}
+				}
+				BYZ = {
+					set_technology = {
+						early_bombs = 1
+					}
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						BYZ = {
+							has_tech = aa_lmg
+						}
+					}
+				}
+				BYZ = {
+					set_technology = {
+						aa_lmg = 1
+					}
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						BYZ = {
+							has_tech = engines_1
+						}
+					}
+				}
+				BYZ = {
+					set_technology = {
+						engines_1 = 1
+					}
+				}
+			}
+			set_temp_variable = {
+				var = BYZ.political_power_give
+				value = 50
+			}
+			if = {
+				limit = {
+					check_variable = {
+						BYZ.air_experience > 0
+					}
+				}
+				multiply_temp_variable = { BYZ.political_power_give = BYZ.air_experience }
+				BYZ = {
+					add_political_power = BYZ.political_power_give
+				}
 			}
 		}
 	}
