@@ -5708,6 +5708,69 @@ country_event = {
 	}
 }
 
+country_event = {
+	id = script_event.35
+	title = script_event.35.t
+	desc = script_event.35.d
+	picture = GFX_report_event_communist_leader
+	
+	trigger = {
+		OR = {
+			has_global_flag = PRU_LOSE_WAR_FOR_ELSAS
+			has_global_flag = FRR_LOSE_WAR_FOR_ELSAS
+		}
+		NOT = {
+			PRU = {
+				has_war_with = FRR
+			}
+		}
+		NOT = {
+			FRR = {
+				has_war_with = PRU
+			}
+		}
+		NOT = {
+			has_global_flag = pru_capitulation
+		}
+		NOT = {
+			has_global_flag = france_capitulation
+		}
+		date < 1855.01.01
+	}
+	
+	mean_time_to_happen = {
+		days = 2
+	}
+	
+	hidden = yes
+	
+	#immediate = {log = "[GetDateText]: [Root.GetName]: event script_event.35"}
+	
+	option = {
+		name = script_event.35.a
+		if = {
+			limit = {
+				has_global_flag = PRU_LOSE_WAR_FOR_ELSAS
+			}
+			28 = {
+				set_demilitarized_zone = yes
+			}
+			828 = {
+				set_demilitarized_zone = yes
+			}
+		}
+		if = {
+			limit = {
+				has_global_flag = FRR_LOSE_WAR_FOR_ELSAS
+			}
+			816 = {
+				set_demilitarized_zone = yes
+			}
+		}
+	}
+	
+}
+
 country_event = { #state rename
 	id = script_event.9999
 	title = script_event.9999.t
