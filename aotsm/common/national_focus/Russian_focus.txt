@@ -72,7 +72,7 @@ focus_tree = {
 		id = RUS_investment_in_civil_industry
 		icon = GFX_focus_rus_invest_in_civil_industry
 		
-		x = 2
+		x = 1
 		y = 0
 		cost = 5
 		
@@ -162,7 +162,7 @@ focus_tree = {
 		id = RUS_modernise_railway_network
 		icon = GFX_focus_rus_expand_railway_network
 		
-		x = -2
+		x = -3
 		y = 1
 		cost = 5
 		
@@ -504,7 +504,7 @@ focus_tree = {
 		id = RUS_use_own_specialists
 		icon = GFX_focus_rus_use_own_specialists
 		
-		x = 2
+		x = 3
 		y = 1
 		cost = 5
 		
@@ -536,7 +536,7 @@ focus_tree = {
 		id = RUS_use_foreign_specialists
 		icon = GFX_focus_rus_coop_witch_foreign_industrialists
 		
-		x = 4 
+		x = 5 
 		y = 1
 		cost = 5
 		
@@ -791,6 +791,11 @@ focus_tree = {
 			#add_stability = 0.1
 			hidden_effect = {
 				set_country_flag = RUS_liquidate_backwardness_flag
+				load_focus_tree = {
+					tree = russian_state_focus   
+					keep_completed = yes    
+				}
+				mark_focus_tree_layout_dirty = yes 
 			}
 		}
 	}
@@ -806,6 +811,10 @@ focus_tree = {
 		x = 0
 		y = 3
 		cost = 10
+		
+		allow_branch = {
+			has_completed_focus = RUS_liquidate_backwardness 
+		}
 		
 		available = {
 			has_completed_focus = RUS_liquidate_backwardness
@@ -834,7 +843,7 @@ focus_tree = {
 		id = RUS_develop_west_russia
 		icon = GFX_focus_rus_west_russia_development
 		
-		x = -4
+		x = -3
 		y = 1
 		cost = 5
 		
@@ -967,7 +976,7 @@ focus_tree = {
 		id = RUS_develop_central_russia
 		icon = GFX_focus_rus_central_russia_development
 		
-		x = 1
+		x = 2
 		y = 1
 		cost = 5
 		
@@ -1072,7 +1081,7 @@ focus_tree = {
 		id = RUS_develop_far_east_russia
 		icon = GFX_focus_rus_far_east_russia_development
 		
-		x = 5
+		x = 6
 		y = 1
 		cost = 5
 		
@@ -1180,7 +1189,7 @@ focus_tree = {
 		id = RUS_end_of_political_isolation
 		icon = GFX_focus_rus_end_of_political_isolation
 		
-		x = 15
+		x = 18
 		y = 0
 		cost = 2
 		
@@ -1196,6 +1205,13 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: focus RUS_end_of_political_isolation"
 			country_event = { id = rusPol.1 }
+			hidden_effect = {
+				load_focus_tree = {
+					tree = russian_state_focus   
+					keep_completed = yes    
+				}
+				mark_focus_tree_layout_dirty = yes 
+			}
 		}
 	}
 	
@@ -1258,7 +1274,7 @@ focus_tree = {
 		
 		
 		available = {
-			always = no
+			#always = no
 		}
 		
 		mutually_exclusive = { focus = RUS_end_of_political_isolation }
@@ -3350,6 +3366,13 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: focus RUS_chernyshevsky_ng"
+			hidden_effect = {
+				load_focus_tree = {
+					tree = russian_state_focus   
+					keep_completed = yes    
+				}
+				mark_focus_tree_layout_dirty = yes 
+			}
 		}
 	}
 	
@@ -3994,6 +4017,9 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: focus RUS_new_economic_politic"
 			add_ideas = RUS_new_economic_politic_idea
+			hidden_effect = {
+				set_country_flag = RUS_choose_nep
+			}
 		}
 	}
 	
@@ -4022,6 +4048,9 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: focus RUS_first_four_year_plan"
 			add_ideas = RUS_first_four_year_plan_idea
+			hidden_effect = {
+				set_country_flag = RUS_choose_1st_year_plan
+			}
 		}
 	}
 	
@@ -4350,7 +4379,10 @@ focus_tree = {
 		cost = 5
 		
 		available = {
-			
+			ROOT = { 
+				industrial_complex > 49
+				arms_factory > 29
+			}
 		}
 
 		relative_position_id = RUS_coop_witch_yung_constructors
@@ -4682,7 +4714,7 @@ focus_tree = {
 		cost = 5
 		
 		available = {
-			
+			NOT = { has_idea = RUS_first_four_year_plan_idea }
 		}
 
 		relative_position_id = RUS_encouragement_yung_talants
@@ -4696,12 +4728,6 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: focus RUS_end_first_four_year_plan"
-			if = {
-				limit = {
-					ROOT = { has_idea = RUS_first_four_year_plan_idea }
-				}
-				remove_ideas = RUS_first_four_year_plan_idea
-			}
 			if = {
 				limit = {
 					ROOT = { has_idea = medium_developed_industry }
@@ -4776,10 +4802,10 @@ focus_tree = {
 		
 		x = -3
 		y = 1 
-		cost = 5
+		cost = 0
 		
 		available = {
-			
+			aotsm_performed_by_event_or_solution = yes
 		}
 		
 		mutually_exclusive = { focus = RUS_polivanov_sp_constututianal_project }  
@@ -4798,15 +4824,62 @@ focus_tree = {
 	}
 	
 	focus = {
-		id = RUS_polivanov_sp_constututianal_project #эсэрская конституция - выборность, гласность, отмена частной собственности на землю(всю землю крестьянам)
+		id = RUS_12
 		icon = GFX_goal_generic_improve_relations
 		
-		x = 0
+		x = -1
 		y = 1 
 		cost = 5
 		
 		available = {
 			
+		}		
+
+		relative_position_id = RUS_muraviev_nm_constututianal_project
+		prerequisite = { focus = RUS_muraviev_nm_constututianal_project }
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus RUS_"
+		}
+	}
+	focus = {
+		id = RUS_1
+		icon = GFX_goal_generic_improve_relations
+		
+		x = 1
+		y = 1 
+		cost = 5
+		
+		available = {
+			
+		}		
+
+		relative_position_id = RUS_muraviev_nm_constututianal_project
+		prerequisite = { focus = RUS_muraviev_nm_constututianal_project }
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus RUS_t"
+		}
+	}
+	
+	focus = {
+		id = RUS_polivanov_sp_constututianal_project #эсэрская конституция - выборность, гласность, отмена частной собственности на землю(всю землю крестьянам)
+		icon = GFX_goal_generic_improve_relations
+		
+		x = 0
+		y = 1 
+		cost = 0
+		
+		available = {
+			aotsm_performed_by_event_or_solution = yes
 		}
 		
 		mutually_exclusive = { focus = RUS_muraviev_nm_constututianal_project }  
@@ -4829,10 +4902,10 @@ focus_tree = {
 		
 		x = 3
 		y = 1
-		cost = 5
+		cost = 0
 		
 		available = {
-			
+			aotsm_performed_by_event_or_solution = yes
 		}
 		
 		mutually_exclusive = { focus = RUS_muraviev_nm_constututianal_project }  
@@ -4943,6 +5016,10 @@ focus_tree = {
 		x = 0
 		y = 7
 		cost = 5
+	
+		allow_branch = {
+			has_completed_focus = RUS_end_of_political_isolation 
+		}
 		
 		available = {
 			has_completed_focus = RUS_results_of_conferention
@@ -6603,6 +6680,10 @@ focus_tree = {
 		y = 0
 		cost = 5 
 		
+		allow_branch = {
+			has_completed_focus = RUS_end_of_political_isolation 
+		}
+		
 		available = {
 			has_completed_focus = RUS_the_giant_has_awakened
 		}
@@ -6617,6 +6698,7 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: focus RUS_department_of_armed_forces"
 			country_event = russian_armed_forces_event.1
+			
 		}
 	}
 	
