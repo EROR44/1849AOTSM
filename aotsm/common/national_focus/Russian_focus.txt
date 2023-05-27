@@ -4390,8 +4390,8 @@ focus_tree = {
 		id = RUS_new_economic_politic
 		icon = GFX_focus_rus_new_economic_politic
 		
-		x = -1
-		y = 2
+		x = 12
+		y = 0
 		
 		cost = 5
 		
@@ -4401,7 +4401,7 @@ focus_tree = {
 		
 		mutually_exclusive = { focus = RUS_first_four_year_plan }
 
-		relative_position_id = RUS_new_capital
+		relative_position_id = RUS_constututional_referendum
 		
 		available_if_capitulated = yes
 		
@@ -4432,7 +4432,6 @@ focus_tree = {
 
 
 		relative_position_id = RUS_new_economic_politic
-		#prerequisite = { focus = RUS_pushkin_as }
 		
 		available_if_capitulated = yes
 		
@@ -5167,22 +5166,25 @@ focus_tree = {
 	}
 	
 ####################################################################################
-#########################SOCIALIST_ARMY_BLOCK##############################
+#########################SOCIALIST_ARMY_BLOCK#######################################
 ####################################################################################
-	
+
+
+################################LAND_SECTION#######################################
+
 	focus = {
 		id = RUS_update_russian_army
 		icon = GFX_goal_generic_improve_relations
 		
 		x = 0
-		y = 6
+		y = 2
 		cost = 5
 		
 		available = {
 			RUS_end_focus_block_one_of_socialist_leaders = yes
 		}
 
-		relative_position_id = RUS_choose_our_leader
+		relative_position_id = RUS_profit_from_reform
 		
 		available_if_capitulated = yes
 		
@@ -5531,6 +5533,622 @@ focus_tree = {
 			add_ideas = RUS_red_army_idea_idea
 		}
 	}
+	
+################################AIR_SECTION#######################################
+
+	focus = {
+		id = RUS_create_russian_air_forces
+		icon = GFX_goal_generic_improve_relations
+		
+		x = -6
+		y = 0
+		cost = 5
+		
+		available = {
+			RUS_end_focus_block_one_of_socialist_leaders = yes
+		}
+
+		relative_position_id = RUS_update_russian_army
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus RUS_create_russian_air_forces"
+			country_event = russian_socialist_air_event.1
+		}
+	}
+	
+	focus = {
+		id = RUS_soc_front_aviation_priority
+		icon = GFX_goal_generic_improve_relations
+		
+		x = -2
+		y = 1
+		cost = 5
+		
+		available = {
+			
+		}
+		
+		mutually_exclusive = { focus = RUS_soc_bomber_prioity }
+		
+		prerequisite = { focus = RUS_create_russian_air_forces }
+		relative_position_id = RUS_create_russian_air_forces
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus RUS_soc_front_aviation_priority"
+			air_experience = 10
+			add_tech_bonus = {
+				name = fighter_bonus
+				bonus = 1.0
+				uses = 1
+				technology = early_fighter
+				technology = fighter1
+				technology = fighter2
+				technology = fighter3
+				technology = heavy_fighter1
+				technology = heavy_fighter2
+				technology = heavy_fighter3
+			}
+			
+		}
+	}
+	
+	focus = {
+		id = RUS_soc_front_aviation_development
+		icon = GFX_goal_generic_improve_relations
+		
+		x = 0
+		y = 1
+		cost = 5
+		
+		available = {
+			
+		}
+		
+		prerequisite = { focus = RUS_soc_front_aviation_priority }
+		relative_position_id = RUS_soc_front_aviation_priority
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus RUS_soc_front_aviation_priority"
+			air_experience = 10
+			add_tech_bonus = {
+				name = fighter_bonus
+				bonus = 0.5
+				uses = 2
+				technology = early_fighter
+				technology = fighter1
+				technology = fighter2
+				technology = fighter3
+				technology = heavy_fighter1
+				technology = heavy_fighter2
+				technology = heavy_fighter3
+			}
+			
+		}
+	}
+	
+	focus = {
+		id = RUS_soc_bomber_prioity
+		icon = GFX_goal_generic_improve_relations
+		
+		x = 2
+		y = 1
+		cost = 5
+		
+		available = {
+			
+		}
+		
+		mutually_exclusive = { focus = RUS_soc_front_aviation_priority }
+		
+		prerequisite = { focus = RUS_create_russian_air_forces }
+		relative_position_id = RUS_create_russian_air_forces
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus RUS_soc_bomber_prioity"
+			air_experience = 10
+			add_tech_bonus = {
+				name = fighter_bonus
+				bonus = 1.0
+				uses = 1
+				technology = strategic_bomber1
+				technology = strategic_bomber2
+				technology = strategic_bomber3
+				category = tactical_bomber
+			}
+			
+		}
+	}
+	
+	focus = {
+		id = RUS_soc_bomber_development
+		icon = GFX_goal_generic_improve_relations
+		
+		x = 0
+		y = 1
+		cost = 5
+		
+		available = {
+			
+		}
+		
+		prerequisite = { focus = RUS_soc_bomber_prioity }
+		relative_position_id = RUS_soc_bomber_prioity
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus RUS_soc_bomber_prioity"
+			air_experience = 10
+			add_tech_bonus = {
+				name = fighter_bonus
+				bonus = 0.5
+				uses = 2
+				technology = strategic_bomber1
+				technology = strategic_bomber2
+				technology = strategic_bomber3
+				category = tactical_bomber
+			}
+		}
+	}
+	
+	focus = {
+		id = RUS_soc_methodic_of_air_war
+		icon = GFX_goal_generic_improve_relations
+		
+		x = 0
+		y = 2
+		cost = 5
+		
+		available = {
+			
+		}
+		
+		
+		prerequisite = { focus = RUS_create_russian_air_forces }
+		relative_position_id = RUS_create_russian_air_forces
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus RUS_soc_methodic_of_air_war"
+			country_event = russian_socialist_air_event.2
+		}
+	}
+	
+	focus = {
+		id = RUS_soc_cooperation_with_land_forces
+		icon = GFX_goal_generic_improve_relations
+		
+		x = -1
+		y = 1
+		cost = 5
+		
+		available = {
+			
+		}
+		
+		relative_position_id = RUS_soc_methodic_of_air_war
+		
+		prerequisite = { focus = RUS_soc_methodic_of_air_war }
+		prerequisite = { focus = RUS_soc_front_aviation_development }
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus RUS_soc_cooperation_with_land_forces"
+			add_ideas = RUS_coop_witch_land_forces_idea
+		}
+	}
+	
+	focus = {
+		id = RUS_soc_strikes_on_the_rear
+		icon = GFX_goal_generic_improve_relations
+		
+		x = 1
+		y = 1
+		cost = 5
+		
+		available = {
+			
+		}
+		
+		relative_position_id = RUS_soc_methodic_of_air_war
+		
+		prerequisite = { focus = RUS_soc_methodic_of_air_war }
+		prerequisite = { focus = RUS_soc_bomber_development }
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus RUS_soc_strikes_on_the_rear"
+			add_ideas = RUS_strategik_strikes_idea
+		}
+	}
+	
+	focus = {
+		id = RUS_soc_create_russian_aviation
+		icon = GFX_goal_generic_improve_relations
+		
+		x = 0
+		y = 2
+		cost = 5
+		
+		available = {
+			
+		}
+		
+		relative_position_id = RUS_soc_methodic_of_air_war
+		
+		prerequisite = { 
+			focus = RUS_soc_cooperation_with_land_forces 
+			focus = RUS_soc_strikes_on_the_rear 	
+		}
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus RUS_soc_create_russian_aviation"
+			country_event = russian_socialist_air_event.3
+			
+		}
+	}
+
+################################NAVY_SECTION#######################################
+
+	focus = {
+		id = RUS_soc_update_russian_navy
+		icon = GFX_goal_generic_improve_relations
+		
+		x = -6
+		y = 0
+		cost = 5
+		
+		available = {
+			RUS_end_focus_block_one_of_socialist_leaders = yes
+		}
+
+		relative_position_id = RUS_create_russian_air_forces
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus RUS_soc_update_russian_navy"
+
+		}
+	}
+	
+	focus = {
+		id = RUS_soc_navy_tactic
+		icon = GFX_goal_generic_improve_relations
+		
+		x = -3
+		y = 1
+		cost = 5
+		
+		available = {
+		
+		}
+
+		relative_position_id = RUS_soc_update_russian_navy
+		prerequisite = { focus = RUS_soc_update_russian_navy }
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus RUS_soc_navy_tactic"
+
+		}
+	}
+	
+	focus = {
+		id = RUS_soc_flot_impact_doctrine
+		icon = GFX_goal_generic_improve_relations
+		
+		x = -2
+		y = 1
+		cost = 5
+		
+		available = {
+			
+		}
+
+		mutually_exclusive = { focus = RUS_soc_barrier_navy_ways_doctrine }
+		mutually_exclusive = { focus = RUS_soc_strike_on_bases_doctrine }
+
+		relative_position_id = RUS_soc_navy_tactic
+		prerequisite = { focus = RUS_soc_navy_tactic }
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus RUS_soc_flot_impact_doctrine"
+
+		}
+	}
+	
+	focus = {
+		id = RUS_soc_barrier_navy_ways_doctrine
+		icon = GFX_goal_generic_improve_relations
+		
+		x = 0
+		y = 1
+		cost = 5
+		
+		available = {
+			
+		}
+
+		mutually_exclusive = { focus = RUS_soc_flot_impact_doctrine }
+		mutually_exclusive = { focus = RUS_soc_strike_on_bases_doctrine }
+
+		relative_position_id = RUS_soc_navy_tactic
+		prerequisite = { focus = RUS_soc_navy_tactic }
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus RUS_soc_barrier_navy_ways_doctrine"
+
+		}
+	}
+	
+	focus = {
+		id = RUS_soc_strike_on_bases_doctrine
+		icon = GFX_goal_generic_improve_relations
+		
+		x = 2
+		y = 1
+		cost = 5
+		
+		available = {
+			
+		}
+
+		mutually_exclusive = { focus = RUS_soc_flot_impact_doctrine }
+		mutually_exclusive = { focus = RUS_soc_barrier_navy_ways_doctrine }
+
+		relative_position_id = RUS_soc_navy_tactic
+		prerequisite = { focus = RUS_soc_navy_tactic }
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus RUS_soc_strike_on_bases_doctrine"
+
+		}
+	}
+	
+	focus = {
+		id = RUS_soc_navy_training
+		icon = GFX_goal_generic_improve_relations
+		
+		x = 0
+		y = 1
+		cost = 5
+		
+		available = {
+		
+		}
+
+		relative_position_id = RUS_soc_barrier_navy_ways_doctrine
+		prerequisite = { 
+			focus = RUS_soc_flot_impact_doctrine 
+			focus = RUS_soc_barrier_navy_ways_doctrine 
+			focus = RUS_soc_strike_on_bases_doctrine 
+		}
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus RUS_soc_navy_training"
+
+		}
+	}
+	
+	focus = {
+		id = RUS_soc_recruit_yung_navy_officers
+		icon = GFX_goal_generic_improve_relations
+		
+		x = 0
+		y = 1
+		cost = 5
+		
+		available = {
+		
+		}
+
+		relative_position_id = RUS_soc_update_russian_navy
+		prerequisite = { focus = RUS_soc_update_russian_navy }
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus RUS_soc_recruit_yung_navy_officers"
+
+		}
+	}
+	
+	focus = {
+		id = RUS_soc_expand_dockyards
+		icon = GFX_goal_generic_improve_relations
+		
+		x = 2
+		y = 1
+		cost = 5
+		
+		available = {
+		
+		}
+
+		relative_position_id = RUS_soc_update_russian_navy
+		prerequisite = { focus = RUS_soc_update_russian_navy }
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus RUS_soc_expand_dockyards"
+			custom_effect_tooltip = RUS_add_dockyard_in_195_218_915
+			hidden_effect = {
+				195 = {	
+					add_extra_state_shared_building_slots = 1
+					add_building_construction = {
+						type = dockyard
+						level = 1
+						instant_build = yes
+					}
+				}
+				218 = {	
+					add_extra_state_shared_building_slots = 1
+					add_building_construction = {
+						type = dockyard
+						level = 1
+						instant_build = yes
+					}
+				}
+				915 = {	
+					add_extra_state_shared_building_slots = 1
+					add_building_construction = {
+						type = dockyard
+						level = 1
+						instant_build = yes
+					}
+				}
+			}
+		}
+	}
+	
+	focus = {
+		id = RUS_soc_small_ships_dedvelopment
+		icon = GFX_goal_generic_improve_relations
+		
+		x = 0
+		y = 1
+		cost = 5
+		
+		available = {
+		
+		}
+
+		relative_position_id = RUS_soc_expand_dockyards
+		prerequisite = { focus = RUS_soc_expand_dockyards }
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus RUS_soc_small_ships_dedvelopment"
+			add_tech_bonus = {
+				name = dd_bonus
+				bonus = 0.5
+				uses = 2
+				category = dd_tech
+				category = ss_tech
+			}
+		}
+	}
+	
+	focus = {
+		id = RUS_soc_west_navy_experiance
+		icon = GFX_goal_generic_improve_relations
+		
+		x = -1
+		y = 1
+		cost = 5
+		
+		available = {
+		
+		}
+
+		relative_position_id = RUS_soc_small_ships_dedvelopment
+		prerequisite = { focus = RUS_soc_small_ships_dedvelopment }
+		prerequisite = { focus = RUS_soc_recruit_yung_navy_officers }
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus RUS_soc_west_navy_experiance"
+			navy_experience = 20
+			add_tech_bonus = {
+				name = cr_bonus
+				bonus = 0.5
+				uses = 2
+				category = cl_tech
+				category = ca_tech
+			}
+		}
+	}
+	
+	focus = {
+		id = RUS_soc_end_navy_modernisation
+		icon = GFX_goal_generic_improve_relations
+		
+		x = -2
+		y = 1
+		cost = 5
+		
+		available = {
+		
+		}
+
+		relative_position_id = RUS_soc_west_navy_experiance
+		prerequisite = { focus = RUS_soc_west_navy_experiance }
+		prerequisite = { focus = RUS_soc_navy_training}
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus RUS_soc_end_navy_modernisation"
+
+		}
+	}
+
 
 
 #########################FOREIGN_POLICY##############################
