@@ -1274,7 +1274,7 @@ focus_tree = {
 		
 		
 		available = {
-			#always = no
+			always = no
 		}
 		
 		mutually_exclusive = { focus = RUS_end_of_political_isolation }
@@ -4094,6 +4094,7 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: focus RUS_national_minorities_problem_comission"
+			country_event = russian_socialist_const_ref_event.7
 		}
 	}
 	
@@ -4194,6 +4195,7 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: focus RUS_community_socialism"
+			country_event = russian_socialist_const_ref_event.8
 		}
 	}
 	
@@ -4214,6 +4216,7 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: focus RUS_publick_freedoms_quiestion"
+			country_event = russian_socialist_const_ref_event.9
 		}
 	}
 	
@@ -4316,6 +4319,7 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: focus RUS_land_to_villagers_factories_to_workers"
+			country_event = russian_socialist_const_ref_event.10
 		}
 	}
 	
@@ -4340,6 +4344,7 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: focus RUS_maintaining_labor_standards"
+			country_event = russian_socialist_const_ref_event.11
 		}
 	}
 	
@@ -4371,7 +4376,7 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: focus RUS_new_capital"
-			
+			country_event = russian_socialist_const_ref_event.12		
 		}
 	}
 
@@ -5169,15 +5174,13 @@ focus_tree = {
 		id = RUS_update_russian_army
 		icon = GFX_goal_generic_improve_relations
 		
-		x = -1
+		x = 0
 		y = 6
 		cost = 5
 		
 		available = {
 			RUS_end_focus_block_one_of_socialist_leaders = yes
 		}
-		
-		mutually_exclusive = { focus = RUS_create_red_army }
 
 		relative_position_id = RUS_choose_our_leader
 		
@@ -5187,42 +5190,18 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: focus RUS_update_russian_army"
-		}
-	}
-	
-	focus = {
-		id = RUS_create_red_army 
-		icon = GFX_goal_generic_improve_relations
-		
-		x = 2
-		y = 0
-		
-		cost = 5
-		
-		available = {
-			RUS_end_focus_block_one_of_socialist_leaders = yes
-		}
-		
-		mutually_exclusive = { focus = RUS_update_russian_army }
-
-		relative_position_id = RUS_update_russian_army
-		
-		available_if_capitulated = yes
-		
-		search_filters = { FOCUS_FILTER_POLITICAL }
-
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: focus RUS_create_red_army"
+			add_timed_idea = {
+				days = 365
+				idea = RUS_soc_army_reorganisation_idea
+			}
 		}
 	}
 
-#########################RELOAD_OFFICERS_CORPUS_SECTION##############################
-
 	focus = {
-		id = RUS_start_recruitment_officers 
+		id = RUS_modernise_infantry_equipment
 		icon = GFX_goal_generic_improve_relations
 		
-		x = 1
+		x = -2
 		y = 1
 		cost = 5
 		
@@ -5231,10 +5210,74 @@ focus_tree = {
 		}
 
 		relative_position_id = RUS_update_russian_army
-		prerequisite = { 
-			focus = RUS_update_russian_army 
-			focus = RUS_create_red_army 
+		prerequisite = { focus = RUS_update_russian_army }
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus RUS_modernise_infantry_equipment"
+			add_tech_bonus = {
+				bonus = 1.0
+				uses = 1
+				category = infantry_weapons
+			}
+			add_tech_bonus = {
+				bonus = 1.0
+				uses = 1
+				category = support_tech
+			}
 		}
+	}
+
+	focus = {
+		id = RUS_expand_millttary_production
+		icon = GFX_goal_generic_improve_relations
+		
+		x = 0
+		y = 1
+		cost = 5
+		
+		available = {
+	
+		}
+
+		relative_position_id = RUS_modernise_infantry_equipment
+		prerequisite = { focus = RUS_modernise_infantry_equipment }
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus RUS_expand_millttary_production"
+			add_tech_bonus = {
+				bonus = 0.5
+				uses = 1
+				category = industry
+			}
+			add_offsite_building = { 
+				type = arms_factory 
+				level = 2 
+			}
+		}
+	}
+
+	focus = {
+		id = RUS_start_recruitment_officers 
+		icon = GFX_goal_generic_improve_relations
+		
+		x = 0
+		y = 1
+		cost = 5
+		
+		available = {
+	
+		}
+
+		relative_position_id = RUS_update_russian_army
+		prerequisite = { focus = RUS_update_russian_army }
 		
 		available_if_capitulated = yes
 		
@@ -5242,6 +5285,250 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: focus RUS_start_recruitment_officers"
+		}
+	}
+
+	focus = {
+		id = RUS_low_about_military_duty #закон о воинской обязанности
+		icon = GFX_goal_generic_improve_relations
+		
+		x = -1
+		y = 2
+		cost = 5
+		
+		bypass = {
+			has_idea = extensive_conscription
+		}
+		
+		available = {
+	
+		}
+
+		relative_position_id = RUS_start_recruitment_officers
+		prerequisite = { focus = RUS_expand_millttary_production }
+		prerequisite = { focus = RUS_start_recruitment_officers }
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus RUS_low_about_military_duty"
+			if = {
+				limit = {
+					ROOT = {
+						has_idea = limited_conscription
+					}
+				}
+				swap_ideas = {
+					remove_idea = limited_conscription
+					add_idea = extensive_conscription
+				}
+			}
+			if = {
+				limit = {
+					ROOT = {
+						has_idea = volunteer_only
+					}
+				}
+				swap_ideas = {
+					remove_idea = volunteer_only
+					add_idea = limited_conscription
+				}
+			}
+			if = {
+				limit = {
+					ROOT = {
+						has_idea = disarmed_nation
+					}
+				}
+				swap_ideas = {
+					remove_idea = disarmed_nation
+					add_idea = volunteer_only
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = RUS_new_doctrine
+		icon = GFX_goal_generic_improve_relations
+		
+		x = 3
+		y = 1
+		cost = 5
+		
+		available = {
+	
+		}
+
+		relative_position_id = RUS_update_russian_army
+		prerequisite = { focus = RUS_update_russian_army }
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus RUS_new_doctrine"
+			army_experience = 20
+		}
+	}
+
+	focus = {
+		id = RUS_artillery_doctrine
+		icon = GFX_goal_generic_improve_relations
+		
+		x = -2
+		y = 1
+		cost = 5
+		
+		available = {
+	
+		}
+		
+		mutually_exclusive = { focus = RUS_planning_priroty }
+		mutually_exclusive = { focus = RUS_motorisation_priority }
+
+		relative_position_id = RUS_new_doctrine
+		prerequisite = { focus = RUS_new_doctrine }
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus RUS_artillery_doctrine"
+			army_experience = 15
+			add_doctrine_cost_reduction = {
+				name = land_doc_bonus
+				cost_reduction = 1.0
+				uses = 2
+				category = cat_superior_firepower
+			}
+		}
+	}
+
+	focus = {
+		id = RUS_planning_priroty
+		icon = GFX_goal_generic_improve_relations
+		
+		x = 0
+		y = 1
+		cost = 5
+		
+		available = {
+	
+		}
+		
+		mutually_exclusive = { focus = RUS_artillery_doctrine }
+		mutually_exclusive = { focus = RUS_motorisation_priority }
+
+		relative_position_id = RUS_new_doctrine
+		prerequisite = { focus = RUS_new_doctrine }
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus RUS_planning_priroty"
+			army_experience = 15
+			add_doctrine_cost_reduction = {
+				name = land_doc_bonus
+				cost_reduction = 1.0
+				uses = 2
+				category = cat_grand_battle_plan
+			}
+		}
+	}
+
+	focus = {
+		id = RUS_motorisation_priority
+		icon = GFX_goal_generic_improve_relations
+		
+		x = 2
+		y = 1
+		cost = 5
+		
+		available = {
+	
+		}
+		
+		mutually_exclusive = { focus = RUS_planning_priroty }
+		mutually_exclusive = { focus = RUS_artillery_doctrine }
+
+		relative_position_id = RUS_new_doctrine
+		prerequisite = { focus = RUS_new_doctrine }
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus RUS_motorisation_priority"
+			army_experience = 15
+			add_doctrine_cost_reduction = {
+				name = land_doc_bonus
+				cost_reduction = 1.0
+				uses = 2
+				category = cat_mobile_warfare
+			}
+		}
+	}
+	
+	focus = {
+		id = RUS_from_theory_to_practice
+		icon = GFX_goal_generic_improve_relations
+		
+		x = 0
+		y = 1
+		cost = 5
+		
+		available = {
+	
+		}
+
+		relative_position_id = RUS_planning_priroty
+		prerequisite = { 
+			focus = RUS_artillery_doctrine
+			focus = RUS_planning_priroty
+			focus = RUS_motorisation_priority
+		}
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus RUS_from_theory_to_practice"
+			army_experience = 25
+		}
+	}
+	
+	focus = {
+		id = RUS_create_red_army
+		icon = GFX_goal_generic_improve_relations
+		
+		x = -2
+		y = 1
+		cost = 5
+		
+		available = {
+	
+		}
+
+		relative_position_id = RUS_from_theory_to_practice
+		prerequisite = { focus = RUS_from_theory_to_practice }
+		prerequisite = { focus = RUS_low_about_military_duty }
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus RUS_create_red_army"
+			add_ideas = RUS_red_army_idea_idea
 		}
 	}
 
