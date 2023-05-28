@@ -453,9 +453,32 @@ pru_leypoldit_bomb = {
 		}
 		
 		remove_effect = { 
-			set_technology = {
-				atomic_research = 1
+			if = {
+				limit = {
+					NOT = {
+						PRU = {
+							has_tech = industrial_leypoldit_development_1
+						}
+					}
+				}
+				PRU = {
+					set_technology = {
+						industrial_leypoldit_development_1 = 1
+					}
+				}
 			}
+			if = {
+				limit = {
+					PRU = {
+						has_tech = industrial_leypoldit_development_1
+					}
+				}
+				PRU = {
+					add_stability = 0.05
+					add_war_support = 0.05
+				}
+			}
+			custom_effect_tooltip = pru_leypoldit_bomb_way_tt
 			PRU = {
 				set_country_flag = pru_tech_bomb
 			}
@@ -498,8 +521,30 @@ pru_leypoldit_bomb = {
 		}
 		
 		remove_effect = { 
-			set_technology = {
-				nuclear_reactor = 1
+			if = {
+				limit = {
+					NOT = {
+						PRU = {
+							has_tech = nuclear_reactor
+						}
+					}
+				}
+				PRU = {
+					set_technology = {
+						nuclear_reactor = 1
+					}
+				}
+			}
+			if = {
+				limit = {
+					PRU = {
+						has_tech = nuclear_reactor
+					}
+				}
+				PRU = {
+					add_stability = 0.05
+					add_war_support = 0.05
+				}
 			}
 			720 = {
 				add_extra_state_shared_building_slots = 1
@@ -509,6 +554,7 @@ pru_leypoldit_bomb = {
 					instant_build = yes
 				}
 			}
+			custom_effect_tooltip = pru_leypoldit_bomb_way_tt
 			PRU = {
 				set_country_flag = pru_bomb_infrastructure
 			}
@@ -551,11 +597,33 @@ pru_leypoldit_bomb = {
 		}
 		
 		remove_effect = { 
-			set_technology = {
-				nukes = 1
+			if = {
+				limit = {
+					NOT = {
+						PRU = {
+							has_tech = nukes
+						}
+					}
+				}
+				PRU = {
+					set_technology = {
+						nukes = 1
+					}
+				}
+			}
+			if = {
+				limit = {
+					PRU = {
+						has_tech = nukes
+					}
+				}
+				PRU = {
+					add_stability = 0.05
+					add_war_support = 0.05
+				}
 			}
 			random_list = {
-				50 = { #Success
+				75 = { #Success
 					modifier = {
 						PRU = {
 							is_ai = no
@@ -573,7 +641,7 @@ pru_leypoldit_bomb = {
 						}
 					}
 				}
-				50 = { #Fail
+				25 = { #Fail
 					PRU = {
 						country_event = ger.12
 					}
@@ -585,6 +653,7 @@ pru_leypoldit_bomb = {
 					}
 				}
 			}
+			custom_effect_tooltip = pru_leypoldit_bomb_way_tt
 			PRU = {
 				set_country_flag = pru_bomb_complete
 			}
@@ -2217,7 +2286,7 @@ pru_war_decision = {
 		}
 
 		available = {
-			has_stability > 0.54
+			has_stability > 0.59
 		}
 
 		visible = {
@@ -2237,7 +2306,7 @@ pru_war_decision = {
 		days_re_enable = 365
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 			modifier = {
 				factor = 25
 				PRU = {
@@ -2267,7 +2336,7 @@ pru_war_decision = {
 		}
 
 		available = {
-			has_stability > 0.49
+			has_stability > 0.54
 		}
 
 		visible = {
@@ -2288,7 +2357,7 @@ pru_war_decision = {
 		days_re_enable = 1
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 			modifier = {
 				factor = 0
 				PRU = {
@@ -2298,7 +2367,7 @@ pru_war_decision = {
 			modifier = {
 				factor = 25
 				PRU = {
-					has_stability > 0.49
+					has_stability > 0.54
 				}
 			}
 		}
@@ -4450,6 +4519,860 @@ pru_air_base_decision = {
 		}
 	
 	}
+	
+	air_base_853 = {
+		
+		icon = generic_air
 
+		allowed = {
+
+		}
+
+		available = {
+			853 = {
+				is_controlled_by_ROOT_or_ally = yes
+			}
+			num_of_civilian_factories_available_for_projects > 5
+		}
+
+		visible = {
+			PRU = {
+				has_completed_focus = PRU_air_reform
+				has_completed_focus = PRU_dialog_with_poland
+			}
+			tag = PRU
+		}
+		
+		highlight_states = {
+			highlight_state_targets = {
+				state = 853
+			}
+			highlight_color_while_active = 3
+			highlight_color_before_active = 2
+		}
+
+		fire_only_once = yes
+
+		cost = 0
+
+		ai_will_do = {
+			factor = 100
+		}
+		
+		modifier = {
+			civilian_factory_use = 5
+		}
+		
+		days_remove = 50
+		
+		remove_effect = {
+			853 = {
+				add_building_construction = {
+					type = air_base
+					level = 5
+					instant_build = yes
+				}
+			}
+		}
+	
+	}
+	
+	air_base_87 = {
+		
+		icon = generic_air
+
+		allowed = {
+
+		}
+
+		available = {
+			87 = {
+				is_controlled_by_ROOT_or_ally = yes
+			}
+			num_of_civilian_factories_available_for_projects > 2
+		}
+
+		visible = {
+			PRU = {
+				has_completed_focus = PRU_air_reform
+				has_completed_focus = PRU_dialog_with_poland
+			}
+			tag = PRU
+		}
+		
+		highlight_states = {
+			highlight_state_targets = {
+				state = 87
+			}
+			highlight_color_while_active = 3
+			highlight_color_before_active = 2
+		}
+
+		fire_only_once = yes
+
+		cost = 0
+
+		ai_will_do = {
+			factor = 100
+		}
+		
+		modifier = {
+			civilian_factory_use = 2
+		}
+		
+		days_remove = 50
+		
+		remove_effect = {
+			87 = {
+				add_building_construction = {
+					type = air_base
+					level = 3
+					instant_build = yes
+				}
+			}
+		}
+	
+	}
+	
+	air_base_92 = {
+		
+		icon = generic_air
+
+		allowed = {
+
+		}
+
+		available = {
+			92 = {
+				is_controlled_by_ROOT_or_ally = yes
+			}
+			num_of_civilian_factories_available_for_projects > 2
+		}
+
+		visible = {
+			PRU = {
+				has_completed_focus = PRU_air_reform
+				has_completed_focus = PRU_dialog_with_poland
+			}
+			tag = PRU
+		}
+		
+		highlight_states = {
+			highlight_state_targets = {
+				state = 92
+			}
+			highlight_color_while_active = 3
+			highlight_color_before_active = 2
+		}
+
+		fire_only_once = yes
+
+		cost = 0
+
+		ai_will_do = {
+			factor = 100
+		}
+		
+		modifier = {
+			civilian_factory_use = 2
+		}
+		
+		days_remove = 50
+		
+		remove_effect = {
+			92 = {
+				add_building_construction = {
+					type = air_base
+					level = 3
+					instant_build = yes
+				}
+			}
+		}
+	
+	}
+	
+	air_base_915 = {
+		
+		icon = generic_air
+
+		allowed = {
+
+		}
+
+		available = {
+			915 = {
+				is_controlled_by_ROOT_or_ally = yes
+			}
+			num_of_civilian_factories_available_for_projects > 5
+		}
+
+		visible = {
+			PRU = {
+				has_completed_focus = PRU_air_reform
+				has_completed_focus = PRU_dialog_with_pribaltika
+			}
+			tag = PRU
+		}
+		
+		highlight_states = {
+			highlight_state_targets = {
+				state = 915
+			}
+			highlight_color_while_active = 3
+			highlight_color_before_active = 2
+		}
+
+		fire_only_once = yes
+
+		cost = 0
+
+		ai_will_do = {
+			factor = 100
+		}
+		
+		modifier = {
+			civilian_factory_use = 5
+		}
+		
+		days_remove = 50
+		
+		remove_effect = {
+			915 = {
+				add_building_construction = {
+					type = air_base
+					level = 5
+					instant_build = yes
+				}
+			}
+		}
+	
+	}
+	
+	air_base_13 = {
+		
+		icon = generic_air
+
+		allowed = {
+
+		}
+
+		available = {
+			13 = {
+				is_controlled_by_ROOT_or_ally = yes
+			}
+			num_of_civilian_factories_available_for_projects > 2
+		}
+
+		visible = {
+			PRU = {
+				has_completed_focus = PRU_air_reform
+				has_completed_focus = PRU_dialog_with_pribaltika
+			}
+			tag = PRU
+		}
+		
+		highlight_states = {
+			highlight_state_targets = {
+				state = 13
+			}
+			highlight_color_while_active = 3
+			highlight_color_before_active = 2
+		}
+
+		fire_only_once = yes
+
+		cost = 0
+
+		ai_will_do = {
+			factor = 100
+		}
+		
+		modifier = {
+			civilian_factory_use = 2
+		}
+		
+		days_remove = 50
+		
+		remove_effect = {
+			13 = {
+				add_building_construction = {
+					type = air_base
+					level = 3
+					instant_build = yes
+				}
+			}
+		}
+	
+	}
+	
+	air_base_11 = {
+		
+		icon = generic_air
+
+		allowed = {
+
+		}
+
+		available = {
+			11 = {
+				is_controlled_by_ROOT_or_ally = yes
+			}
+			num_of_civilian_factories_available_for_projects > 2
+		}
+
+		visible = {
+			PRU = {
+				has_completed_focus = PRU_air_reform
+				has_completed_focus = PRU_dialog_with_pribaltika
+			}
+			tag = PRU
+		}
+		
+		highlight_states = {
+			highlight_state_targets = {
+				state = 11
+			}
+			highlight_color_while_active = 3
+			highlight_color_before_active = 2
+		}
+
+		fire_only_once = yes
+
+		cost = 0
+
+		ai_will_do = {
+			factor = 100
+		}
+		
+		modifier = {
+			civilian_factory_use = 2
+		}
+		
+		days_remove = 50
+		
+		remove_effect = {
+			11 = {
+				add_building_construction = {
+					type = air_base
+					level = 3
+					instant_build = yes
+				}
+			}
+		}
+	
+	}
+	
+	air_base_206 = {
+		
+		icon = generic_air
+
+		allowed = {
+
+		}
+
+		available = {
+			206 = {
+				is_controlled_by_ROOT_or_ally = yes
+			}
+			num_of_civilian_factories_available_for_projects > 5
+		}
+
+		visible = {
+			PRU = {
+				has_completed_focus = PRU_air_reform
+				has_completed_focus = PRU_dialog_with_white_ruttenia
+			}
+			tag = PRU
+		}
+		
+		highlight_states = {
+			highlight_state_targets = {
+				state = 206
+			}
+			highlight_color_while_active = 3
+			highlight_color_before_active = 2
+		}
+
+		fire_only_once = yes
+
+		cost = 0
+
+		ai_will_do = {
+			factor = 100
+		}
+		
+		modifier = {
+			civilian_factory_use = 5
+		}
+		
+		days_remove = 50
+		
+		remove_effect = {
+			206 = {
+				add_building_construction = {
+					type = air_base
+					level = 5
+					instant_build = yes
+				}
+			}
+		}
+	
+	}
+	
+	air_base_243 = {
+		
+		icon = generic_air
+
+		allowed = {
+
+		}
+
+		available = {
+			243 = {
+				is_controlled_by_ROOT_or_ally = yes
+			}
+			num_of_civilian_factories_available_for_projects > 2
+		}
+
+		visible = {
+			PRU = {
+				has_completed_focus = PRU_air_reform
+				has_completed_focus = PRU_dialog_with_white_ruttenia
+			}
+			tag = PRU
+		}
+		
+		highlight_states = {
+			highlight_state_targets = {
+				state = 243
+			}
+			highlight_color_while_active = 3
+			highlight_color_before_active = 2
+		}
+
+		fire_only_once = yes
+
+		cost = 0
+
+		ai_will_do = {
+			factor = 100
+		}
+		
+		modifier = {
+			civilian_factory_use = 2
+		}
+		
+		days_remove = 50
+		
+		remove_effect = {
+			243 = {
+				add_building_construction = {
+					type = air_base
+					level = 3
+					instant_build = yes
+				}
+			}
+		}
+	
+	}
+	
+	air_base_194 = {
+		
+		icon = generic_air
+
+		allowed = {
+
+		}
+
+		available = {
+			194 = {
+				is_controlled_by_ROOT_or_ally = yes
+			}
+			num_of_civilian_factories_available_for_projects > 2
+		}
+
+		visible = {
+			PRU = {
+				has_completed_focus = PRU_air_reform
+				has_completed_focus = PRU_dialog_with_white_ruttenia
+			}
+			tag = PRU
+		}
+		
+		highlight_states = {
+			highlight_state_targets = {
+				state = 194
+			}
+			highlight_color_while_active = 3
+			highlight_color_before_active = 2
+		}
+
+		fire_only_once = yes
+
+		cost = 0
+
+		ai_will_do = {
+			factor = 100
+		}
+		
+		modifier = {
+			civilian_factory_use = 2
+		}
+		
+		days_remove = 50
+		
+		remove_effect = {
+			194 = {
+				add_building_construction = {
+					type = air_base
+					level = 3
+					instant_build = yes
+				}
+			}
+		}
+	
+	}
+	
+	air_base_207 = {
+		
+		icon = generic_air
+
+		allowed = {
+
+		}
+
+		available = {
+			207 = {
+				is_controlled_by_ROOT_or_ally = yes
+			}
+			num_of_civilian_factories_available_for_projects > 2
+		}
+
+		visible = {
+			PRU = {
+				has_completed_focus = PRU_air_reform
+				has_completed_focus = PRU_dialog_with_white_ruttenia
+			}
+			tag = PRU
+		}
+		
+		highlight_states = {
+			highlight_state_targets = {
+				state = 207
+			}
+			highlight_color_while_active = 3
+			highlight_color_before_active = 2
+		}
+
+		fire_only_once = yes
+
+		cost = 0
+
+		ai_will_do = {
+			factor = 100
+		}
+		
+		modifier = {
+			civilian_factory_use = 2
+		}
+		
+		days_remove = 50
+		
+		remove_effect = {
+			207 = {
+				add_building_construction = {
+					type = air_base
+					level = 3
+					instant_build = yes
+				}
+			}
+		}
+	
+	}
+	
+	air_base_202 = {
+		
+		icon = generic_air
+
+		allowed = {
+
+		}
+
+		available = {
+			202 = {
+				is_controlled_by_ROOT_or_ally = yes
+			}
+			num_of_civilian_factories_available_for_projects > 5
+		}
+
+		visible = {
+			PRU = {
+				has_completed_focus = PRU_air_reform
+				has_completed_focus = PRU_dialog_with_ukraina
+			}
+			tag = PRU
+		}
+		
+		highlight_states = {
+			highlight_state_targets = {
+				state = 202
+			}
+			highlight_color_while_active = 3
+			highlight_color_before_active = 2
+		}
+
+		fire_only_once = yes
+
+		cost = 0
+
+		ai_will_do = {
+			factor = 100
+		}
+		
+		modifier = {
+			civilian_factory_use = 5
+		}
+		
+		days_remove = 50
+		
+		remove_effect = {
+			202 = {
+				add_building_construction = {
+					type = air_base
+					level = 5
+					instant_build = yes
+				}
+			}
+		}
+	
+	}
+	
+	air_base_221 = {
+		
+		icon = generic_air
+
+		allowed = {
+
+		}
+
+		available = {
+			221 = {
+				is_controlled_by_ROOT_or_ally = yes
+			}
+			num_of_civilian_factories_available_for_projects > 5
+		}
+
+		visible = {
+			PRU = {
+				has_completed_focus = PRU_air_reform
+				has_completed_focus = PRU_dialog_with_ukraina
+			}
+			tag = PRU
+		}
+		
+		highlight_states = {
+			highlight_state_targets = {
+				state = 221
+			}
+			highlight_color_while_active = 3
+			highlight_color_before_active = 2
+		}
+
+		fire_only_once = yes
+
+		cost = 0
+
+		ai_will_do = {
+			factor = 100
+		}
+		
+		modifier = {
+			civilian_factory_use = 5
+		}
+		
+		days_remove = 50
+		
+		remove_effect = {
+			221 = {
+				add_building_construction = {
+					type = air_base
+					level = 3
+					instant_build = yes
+				}
+			}
+		}
+	
+	}
+	
+	air_base_228 = {
+		
+		icon = generic_air
+
+		allowed = {
+
+		}
+
+		available = {
+			228 = {
+				is_controlled_by_ROOT_or_ally = yes
+			}
+			num_of_civilian_factories_available_for_projects > 2
+		}
+
+		visible = {
+			PRU = {
+				has_completed_focus = PRU_air_reform
+				has_completed_focus = PRU_dialog_with_ukraina
+			}
+			tag = PRU
+		}
+		
+		highlight_states = {
+			highlight_state_targets = {
+				state = 228
+			}
+			highlight_color_while_active = 3
+			highlight_color_before_active = 2
+		}
+
+		fire_only_once = yes
+
+		cost = 0
+
+		ai_will_do = {
+			factor = 100
+		}
+		
+		modifier = {
+			civilian_factory_use = 2
+		}
+		
+		days_remove = 50
+		
+		remove_effect = {
+			228 = {
+				add_building_construction = {
+					type = air_base
+					level = 3
+					instant_build = yes
+				}
+			}
+		}
+	
+	}
+	
+	air_base_201 = {
+		
+		icon = generic_air
+
+		allowed = {
+
+		}
+
+		available = {
+			201 = {
+				is_controlled_by_ROOT_or_ally = yes
+			}
+			num_of_civilian_factories_available_for_projects > 2
+		}
+
+		visible = {
+			PRU = {
+				has_completed_focus = PRU_air_reform
+				has_completed_focus = PRU_dialog_with_ukraina
+			}
+			tag = PRU
+		}
+		
+		highlight_states = {
+			highlight_state_targets = {
+				state = 201
+			}
+			highlight_color_while_active = 3
+			highlight_color_before_active = 2
+		}
+
+		fire_only_once = yes
+
+		cost = 0
+
+		ai_will_do = {
+			factor = 100
+		}
+		
+		modifier = {
+			civilian_factory_use = 2
+		}
+		
+		days_remove = 50
+		
+		remove_effect = {
+			201 = {
+				add_building_construction = {
+					type = air_base
+					level = 3
+					instant_build = yes
+				}
+			}
+		}
+	
+	}
+	
+	air_base_225 = {
+		
+		icon = generic_air
+
+		allowed = {
+
+		}
+
+		available = {
+			225 = {
+				is_controlled_by_ROOT_or_ally = yes
+			}
+			num_of_civilian_factories_available_for_projects > 2
+		}
+
+		visible = {
+			PRU = {
+				has_completed_focus = PRU_air_reform
+				has_completed_focus = PRU_dialog_with_ukraina
+			}
+			tag = PRU
+		}
+		
+		highlight_states = {
+			highlight_state_targets = {
+				state = 225
+			}
+			highlight_color_while_active = 3
+			highlight_color_before_active = 2
+		}
+
+		fire_only_once = yes
+
+		cost = 0
+
+		ai_will_do = {
+			factor = 100
+		}
+		
+		modifier = {
+			civilian_factory_use = 2
+		}
+		
+		days_remove = 50
+		
+		remove_effect = {
+			225 = {
+				add_building_construction = {
+					type = air_base
+					level = 3
+					instant_build = yes
+				}
+			}
+		}
+	
+	}
 
 }
