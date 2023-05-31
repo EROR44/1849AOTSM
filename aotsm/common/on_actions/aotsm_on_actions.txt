@@ -8520,6 +8520,109 @@ on_actions = {
 				}
 				set_global_flag = ARA_capituliation
 			}
+			#PAP capitulation
+			if = {
+				limit = {
+					tag = PAP
+					SAR = {
+						has_country_flag = claim_central_italy_flag
+					}
+					SAR = {
+						has_war_with = PAP
+					}
+				}
+				SAR = {
+					annex_country = { target = PAP transfer_troops = yes }
+				}
+				PAP = {
+					transfer_state = 922
+					promote_character = PAP_Curia_Romana
+					set_cosmetic_tag = PAP_VAT
+					set_capital = {
+						state = 922
+						remember_old_capital = no
+					}
+				}
+				if = {
+					limit = {
+						SAR = {
+							has_war_with = PAP
+						}
+					}
+					SAR = {
+						white_peace = PAP
+					}
+				}
+				SAR = {
+					diplomatic_relation = {
+						country = PAP
+						relation = guarantee
+						active = yes
+					}
+				}
+				SAR = {
+					clr_country_flag = claim_central_italy_flag
+				}
+				news_event = news.226
+			}
+			#MSK capitulation
+			if = {
+				limit = {
+					tag = MSK
+					MSK = {
+						has_war_with = MSK
+					}
+					has_global_flag = msk_nov_civilwar
+				}
+				clr_global_flag = msk_nov_civilwar
+				MSK = {
+					white_peace = {
+						tag = NOV
+						message = MSK_WIN_NOV
+					}
+					annex_country = {
+						target = NOV
+						transfer_troops = no
+					}
+				}
+				every_state = {
+					limit = {
+						is_core_of = NOV
+					}
+					remove_core_of = NOV
+					add_core_of = MSK
+				}
+				news_event = news.223
+			}
+			#NOV capitulation
+			if = {
+				limit = {
+					tag = NOV
+					NOV = {
+						has_war_with = MSK
+					}
+					has_global_flag = msk_nov_civilwar
+				}
+				clr_global_flag = msk_nov_civilwar
+				NOV = {
+					white_peace = {
+						tag = MSK
+						message = NOV_WIN_MSK
+					}
+					annex_country = {
+						target = NOV
+						transfer_troops = no
+					}
+				}
+				every_state = {
+					limit = {
+						is_core_of = MSK
+					}
+					remove_core_of = MSK
+					add_core_of = NOV
+				}
+				news_event = news.222
+			}
 		}
 	}
 	on_state_control_changed = {
@@ -9743,51 +9846,6 @@ on_actions = {
 					}
 				}
 				add_threat = 3
-			}
-			#PAP capitulation
-			if = {
-				limit = {
-					tag = PAP
-					SAR = {
-						has_country_flag = claim_central_italy_flag
-					}
-					SAR = {
-						has_war_with = PAP
-					}
-				}
-				SAR = {
-					annex_country = { target = PAP transfer_troops = yes }
-				}
-				PAP = {
-					transfer_state = 922
-					promote_character = PAP_Curia_Romana
-					set_cosmetic_tag = PAP_VAT
-					set_capital = {
-						state = 922
-						remember_old_capital = no
-					}
-				}
-				if = {
-					limit = {
-						SAR = {
-							has_war_with = PAP
-						}
-					}
-					SAR = {
-						white_peace = PAP
-					}
-				}
-				SAR = {
-					diplomatic_relation = {
-						country = PAP
-						relation = guarantee
-						active = yes
-					}
-				}
-				SAR = {
-					clr_country_flag = claim_central_italy_flag
-				}
-				news_event = news.226
 			}
 			#First Prussian-Austrian war
 			if = {
