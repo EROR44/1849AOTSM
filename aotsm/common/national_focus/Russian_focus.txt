@@ -1,11 +1,13 @@
 ### search_filters = {FOCUS_FILTER_POLITICAL}
-### search_filters = {FOCUS_FILTER_POLITICAL}
 ### search_filters = {FOCUS_FILTER_RESEARCH}
 ### search_filters = {FOCUS_FILTER_INDUSTRY}
 ### search_filters = {FOCUS_FILTER_STABILITY}
 ### search_filters = {FOCUS_FILTER_WAR_SUPPORT}
 ### search_filters = {FOCUS_FILTER_MANPOWER}
 ### search_filters = {FOCUS_FILTER_ANNEXATION}
+### search_filters = {FOCUS_FILTER_RUSSIAN_BLACK_LEAGUE}
+### search_filters = {FOCUS_FILTER_NEW_ECONOMIC_POLITIC}
+### search_filters = {FOCUS_FILTER_1ST_FOUR_YEAR_PLAN}
 
 focus_tree = {
 	id = russian_state_focus
@@ -5837,11 +5839,14 @@ focus_tree = {
 		
 		available_if_capitulated = yes
 		
-		search_filters = { FOCUS_FILTER_POLITICAL }
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_SOCIALIST }
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: focus RUS_soc_update_russian_navy"
-
+			add_timed_idea = {
+				days = 365
+				idea = RUS_soc_navy_reorganisation_idea
+			}
 		}
 	}
 	
@@ -5866,7 +5871,7 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: focus RUS_soc_navy_tactic"
-
+			navy_experience = 20
 		}
 	}
 	
@@ -5894,7 +5899,13 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: focus RUS_soc_flot_impact_doctrine"
-
+			navy_experience = 15
+			add_doctrine_cost_reduction = {
+				name = naval_doc_bonus
+				cost_reduction = 1.0
+				uses = 2
+				category = cat_fleet_in_being
+			}
 		}
 	}
 	
@@ -5922,7 +5933,13 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: focus RUS_soc_barrier_navy_ways_doctrine"
-
+			navy_experience = 15
+			add_doctrine_cost_reduction = {
+				name = naval_doc_bonus
+				cost_reduction = 1.0
+				uses = 2
+				category = cat_trade_interdiction
+			}
 		}
 	}
 	
@@ -5950,7 +5967,13 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: focus RUS_soc_strike_on_bases_doctrine"
-
+			navy_experience = 15
+			add_doctrine_cost_reduction = {
+				name = naval_doc_bonus
+				cost_reduction = 1.0
+				uses = 2
+				category = cat_base_strike
+			}
 		}
 	}
 	
@@ -5979,7 +6002,7 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: focus RUS_soc_navy_training"
-
+			navy_experience = 25
 		}
 	}
 	
@@ -6145,12 +6168,127 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: focus RUS_soc_end_navy_modernisation"
-
+			add_ideas = RUS_soc_updated_russian_navy_idea
 		}
 	}
 
 
 
+#####################################################################################
+##########################SOCIALIST_SAME_POLITIC_BLOCK###############################
+#####################################################################################
+	
+	focus = {
+		id = RUS_socialist_sphere
+		icon = GFX_goal_generic_improve_relations
+		
+		x = 0
+		y = 6
+		cost = 5
+		
+		available = {
+			RUS_end_focus_block_one_of_socialist_leaders = yes
+		}
+
+		relative_position_id = RUS_choose_our_leader
+		#prerequisite = { focus = RUS_return_of_old_orders }
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus RUS_socialist_sphere"
+			
+		}
+	}
+
+################################CHOOSE_SECTION####################################
+	
+	focus = {
+		id = RUS_concentrate_on_internal_problems
+		icon = GFX_goal_generic_improve_relations
+		
+		x = -2
+		y = 1
+		cost = 5
+		
+		available = {
+			
+		}
+		
+		mutually_exclusive = { focus = RUS_save_political_balance }
+		mutually_exclusive = { focus = RUS_internationalism_politick }
+
+		relative_position_id = RUS_socialist_sphere
+		prerequisite = { focus = RUS_socialist_sphere }
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus RUS_concentrate_on_internal_problems"
+			
+		}
+	}
+	
+	focus = {
+		id = RUS_save_political_balance
+		icon = GFX_goal_generic_improve_relations
+		
+		x = 0
+		y = 1
+		cost = 5
+		
+		available = {
+			
+		}
+		
+		mutually_exclusive = { focus = RUS_concentrate_on_internal_problems }
+		mutually_exclusive = { focus = RUS_internationalism_politick }
+
+		relative_position_id = RUS_socialist_sphere
+		prerequisite = { focus = RUS_socialist_sphere }
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus RUS_save_political_balance"
+			
+		}
+	}
+	
+	focus = {
+		id = RUS_internationalism_politick
+		icon = GFX_goal_generic_improve_relations
+		
+		x = 2
+		y = 1
+		cost = 5
+		
+		available = {
+			
+		}
+		
+		mutually_exclusive = { focus = RUS_concentrate_on_internal_problems }
+		mutually_exclusive = { focus = RUS_save_political_balance }
+
+		relative_position_id = RUS_socialist_sphere
+		prerequisite = { focus = RUS_socialist_sphere }
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus RUS_internationalism_politick"
+			
+		}
+	}
+	
 #########################FOREIGN_POLICY##############################
 	
 	focus = {
