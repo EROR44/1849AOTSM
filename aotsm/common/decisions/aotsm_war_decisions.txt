@@ -1179,8 +1179,7 @@ war_with_islamicrevolt_categories = {
 	
 	}
 
-}
-
+} 
 battle_for_crimea_categories = {
 
 	battle_for_crimea_decision = {
@@ -1336,6 +1335,270 @@ battle_for_crimea_categories = {
 		
 		cancel_effect = {
 			custom_effect_tooltip = BYZ_what_to_do_for_win_crimea_effect_tt
+		}
+	
+	}
+
+}
+
+russian_moscovia_novgorod_civilwar = {
+
+	russian_civil_war_MSK = {
+	
+		activation = {
+			has_global_flag = msk_nov_civilwar
+		}
+		
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = MSK_what_to_do_for_win_tt	
+				always = no
+			}
+		}
+		
+		visible = {
+			tag = MSK
+			MSK = {
+				has_war_with = NOV
+			}
+			has_global_flag = msk_nov_civilwar
+		}
+		
+		icon = generic_ignite_civil_war
+		
+		ai_will_do = {
+			factor = 100
+		}
+		
+		days_mission_timeout = 180
+		
+		timeout_effect = {
+			custom_effect_tooltip = MSK_what_to_do_for_lose_time_tt
+			hidden_effect = {
+				set_variable = {
+					var = surrend_msk
+					value = MSK.surrender_progress
+				}
+				set_variable = {
+					var = surrend_nov
+					value = NOV.surrender_progress
+				}
+				set_variable = {
+					var = surrend_result
+					value = surrend_msk
+				}
+				add_to_variable = {
+					var = surrend_result
+					value = -surrend_nov
+				}
+				if = {
+					limit = {
+						check_variable = { surrend_result > 0.599 }
+					}
+					MSK = {
+						remove_mission = russian_civil_war_MSK
+					}
+					NOV = {
+						remove_mission = russian_civil_war_NOV
+					}
+					clr_global_flag = msk_nov_civilwar
+					MSK = {
+						white_peace = {
+							tag = NOV
+							message = MSK_WIN_NOV_FULL
+						}
+						annex_country = {
+							target = NOV
+							transfer_troops = no
+						}
+					}
+					every_state = {
+						limit = {
+							is_core_of = NOV
+						}
+						remove_core_of = NOV
+						add_core_of = MSK
+					}
+					news_event = news.222
+				}
+				if = {
+					limit = {
+						check_variable = { surrend_result > 0.249 }
+						check_variable = { surrend_result < 0.600 }
+					}
+					MSK = {
+						white_peace = {
+							tag = NOV
+							message = MSK_WIN_NOV
+						}
+					}
+					MSK = {
+						transfer_state = 208
+						add_state_core = 208
+						transfer_state = 209
+						add_state_core = 209
+						transfer_state = 210
+						add_state_core = 210
+						transfer_state = 246
+						add_state_core = 246
+						transfer_state = 247
+						add_state_core = 247
+						transfer_state = 248
+						add_state_core = 248
+						transfer_state = 400
+						add_state_core = 400
+					}
+					263 = {
+						set_demilitarized_zone = yes
+					}
+					news_event = news.222
+				}
+				if = {
+					limit = {
+						check_variable = { surrend_result > 0.000 }
+						check_variable = { surrend_result < 0.250 }
+					}
+					MSK = {
+						white_peace = {
+							tag = NOV
+							message = NOV_MSK_WHITE_PEACE
+						}
+					}
+					MSK = {
+						remove_mission = russian_civil_war_MSK
+					}
+					NOV = {
+						remove_mission = russian_civil_war_NOV
+					}
+					clr_global_flag = msk_nov_civilwar
+					news_event = news.224
+				}
+				if = {
+					limit = {
+						check_variable = { surrend_result < 0.000 }
+						check_variable = { surrend_result > -0.250 }
+					}
+					NOV = {
+						white_peace = {
+							tag = MSK
+							message = NOV_MSK_WHITE_PEACE
+						}
+					}
+					MSK = {
+						remove_mission = russian_civil_war_MSK
+					}
+					NOV = {
+						remove_mission = russian_civil_war_NOV
+					}
+					clr_global_flag = msk_nov_civilwar
+					news_event = news.224
+				}
+				if = {
+					limit = {
+						check_variable = { surrend_result < -0.249 }
+						check_variable = { surrend_result > -0.600 }
+					}
+					NOV = {
+						white_peace = {
+							tag = MSK
+							message = NOV_WIN_MSK
+						}
+					}
+					NOV = {
+						transfer_state = 242
+						add_state_core = 242
+						transfer_state = 249
+						add_state_core = 249
+						transfer_state = 252
+						add_state_core = 252
+						transfer_state = 253
+						add_state_core = 253
+						transfer_state = 256
+						add_state_core = 256
+						transfer_state = 398
+						add_state_core = 398
+						transfer_state = 399
+						add_state_core = 399
+						transfer_state = 651
+						add_state_core = 651
+					}
+					219 = {
+						set_demilitarized_zone = yes
+					}
+					news_event = news.223
+				}
+				if = {
+					limit = {
+						check_variable = { surrend_result < -0.599 }
+					}
+					clr_global_flag = msk_nov_civilwar
+					MSK = {
+						remove_mission = russian_civil_war_MSK
+					}
+					NOV = {
+						remove_mission = russian_civil_war_NOV
+					}
+					NOV = {
+						white_peace = {
+							tag = MSK
+							message = NOV_WIN_MSK_FULL
+						}
+						annex_country = {
+							target = MSK
+							transfer_troops = no
+						}
+					}
+					every_state = {
+						limit = {
+							is_core_of = MSK
+						}
+						remove_core_of = MSK
+						add_core_of = NOV
+					}
+					news_event = news.223
+					MSK = {
+						remove_ideas = heart_of_russian_world_msk
+					}
+					NOV = {
+						add_ideas = heart_of_russian_world_msk
+					}
+				}
+			}
+		}
+	
+	}
+	
+	russian_civil_war_NOV = {
+	
+		activation = {
+			has_global_flag = msk_nov_civilwar
+		}
+		
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = NOV_what_to_do_for_win_tt	
+				always = no
+			}
+		}
+		
+		visible = {
+			tag = NOV
+			NOV = {
+				has_war_with = MSK
+			}
+			has_global_flag = msk_nov_civilwar
+		}
+		
+		icon = generic_ignite_civil_war
+		
+		ai_will_do = {
+			factor = 100
+		}
+		
+		days_mission_timeout = 180
+		
+		timeout_effect = {
+			custom_effect_tooltip = NOV_what_to_do_for_lose_time_tt
 		}
 	
 	}
