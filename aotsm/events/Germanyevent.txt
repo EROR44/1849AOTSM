@@ -4818,6 +4818,86 @@ country_event = { #Hunting is going well
 	
 }
 
+country_event = { #Maestro want Burgundia
+	id = ger_blackorder.12
+	title = ger_blackorder.12.t
+	desc = ger_blackorder.12.d
+	picture = GFX_report_event_black_sun_symbol
+	
+	trigger = {
+		tag = PRU
+		PRU = {
+			has_completed_focus = PRU_rise_of_evil
+		}
+		OR = {
+			BRG = {
+				is_puppet_of = PRU
+			}
+			BRG = {
+				is_subject_of = PRU
+			}
+			BRG = {
+				is_in_faction_with = PRU
+			}
+		}
+	}
+	
+	mean_time_to_happen = {
+		days = 25
+	}
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger_blackorder.12"}
+	
+	option = { #Good Idea
+		name = ger_blackorder.12.a
+		ai_chance = {
+			base = 75
+		}
+		PRU = {
+			puppet = BRG
+		}
+		PRU = {
+			KOL_Maestro_Second = {
+				set_nationality = BRG
+			}
+		}
+		BRG = {
+			set_politics = {
+				ruling_party = reactionist
+			}
+			set_political_party = {
+				ideology = reactionist
+				popularity = 50
+			}
+			add_country_leader_role = {
+				character = KOL_Maestro_Second
+				promote_leader = yes
+				country_leader = {
+					ideology = radical_nationalism
+					expire = "1900.1.1.1"
+					traits = { }
+				}
+			}
+			set_party_name = {
+				ideology = reactionist
+				long_name = BRG_bs_party_long
+				name = BRG_bs_party
+			}
+			set_cosmetic_tag = BRG_bs
+		}
+	}
+	
+	option = { #I need your here
+		name = ger_blackorder.12.b
+		ai_chance = {
+			base = 25
+		}
+	}
+	
+}
+
 country_event = { #Qustian about Poland
 	id = ger_warpolitic.1
 	title = ger_warpolitic.1.t
