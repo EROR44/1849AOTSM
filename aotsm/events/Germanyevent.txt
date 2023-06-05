@@ -2942,6 +2942,7 @@ country_event = {
 			}
 		}
 		add_war_support = 0.05
+		set_global_flag = FRR_leave_ELS
 	}
 	
 	option = { #attack!
@@ -4626,6 +4627,24 @@ country_event = { #Black Sun succesd coup
 			PRU = {
 				set_country_flag = blacksun_end_germany
 			}
+			if = {
+				limit = {
+					PRU = {
+						has_idea = pru_blacksun_hunt_partisan_1
+					}
+				}
+				remove_ideas = pru_blacksun_hunt_partisan_1
+			}
+			if = {
+				limit = {
+					NOT = {
+						PRU = {
+							has_idea = pru_blacksun_hunt_partisan_2
+						}
+					}
+				}
+				add_ideas = pru_blacksun_hunt_partisan_2
+			}
 			KOL = {
 				set_nationality = {
 					target_country = PRU
@@ -4675,6 +4694,23 @@ country_event = { #Black Sun succesd coup
 				}
 			}
 			news_event = news.184
+			hidden_effect = {
+				if = {
+					limit = {
+						NOT = {
+							PRU = {
+								has_country_flag = pru_solder_in_bs
+							}
+						}
+					}
+					PRU = {
+						country_event = {
+							id = script_event.39
+							days = 30
+						}
+					}
+				}
+			}
 		}
 	}
 	
@@ -4771,6 +4807,9 @@ country_event = { #Black Sun fail coup
 					}
 				}
 				remove_ideas = pru_blacksun_hunt_partisan_2
+			}
+			PRU = {
+				set_country_flag = pru_black_sun_fall
 			}
 			set_variable = {
 				var = PRU.blacksun_influence
@@ -4893,6 +4932,223 @@ country_event = { #Maestro want Burgundia
 		name = ger_blackorder.12.b
 		ai_chance = {
 			base = 25
+		}
+	}
+	
+}
+
+country_event = { #Solder flow into Black Sun
+	id = ger_blackorder.13
+	title = ger_blackorder.13.t
+	desc = ger_blackorder.13.d
+	picture = GFX_report_event_black_sun_solder
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger_blackorder.13"}
+	
+	option = { #It's not bad
+		name = ger_blackorder.13.a
+		ai_chance = {
+			base = 25
+		}
+		hidden_effect = {
+			PRU = {
+				country_event = {
+					id = script_event.39
+					days = 90
+				}
+			}
+		}
+	}
+	
+	option = { #Stop this!
+		name = ger_blackorder.13.b
+		ai_chance = {
+			base = 75
+		}
+		PRU = {
+			add_manpower = -50000
+		}
+		custom_effect_tooltip = pru_blacksun_influince_fall
+		hidden_effect = {
+			add_to_variable = {
+				var = PRU.blacksun_influence
+				value = -1
+			}
+			PRU = {
+				country_event = {
+					id = script_event.39
+					days = 90
+				}
+				set_country_flag = pru_solder_in_bs
+			}
+		}
+	}
+	
+}
+
+country_event = { #General flow into Black Sun
+	id = ger_blackorder.14
+	title = ger_blackorder.14.t
+	desc = ger_blackorder.14.d
+	picture = GFX_report_event_black_sun_oficcer
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger_blackorder.14"}
+	
+	option = { #We cant do something
+		name = ger_blackorder.14.a
+		ai_chance = {
+			base = 75
+		}
+		remove_trait = {
+			character = PRU_Eduard_von_Yahman
+			trait = junker_general
+		}
+		add_trait = {
+			 character = PRU_Eduard_von_Yahman
+			 trait = blacksun_general
+		}
+		remove_trait = {
+			character = PRU_Eduard_von_Bonin
+			trait = junker_general
+		}
+		add_trait = {
+			 character = PRU_Eduard_von_Bonin
+			 trait = blacksun_general
+		}
+		remove_trait = {
+			character = PRU_Albrecht_von_Stosch
+			trait = junker_general
+		}
+		add_trait = {
+			 character = PRU_Albrecht_von_Stosch
+			 trait = blacksun_general
+		}
+		custom_effect_tooltip = pru_blacksun_influince_rise
+		hidden_effect = {
+			add_to_variable = {
+				var = PRU.blacksun_influence
+				value = 1
+			}
+			PRU = {
+				#set_portraits = {
+				#	character = PRU_Eduard_von_Yahman
+				#	army = { small ="" }
+				#	civilian = { large ="" }
+				#}
+				#set_portraits = {
+				#	character = PRU_Eduard_von_Bonin
+				#	army = { small ="" }
+				#	civilian = { large ="" }
+				#}
+				#set_portraits = {
+				#	character = PRU_Albrecht_von_Stosch
+				#	army = { small ="" }
+				#	civilian = { large ="" }
+				#}
+			}
+			PRU = {
+				country_event = {
+					id = script_event.39
+					days = 90
+				}
+			}
+		}
+	}
+	
+	option = { #Disband them
+		name = ger_blackorder.14.b
+		ai_chance = {
+			base = 25
+		}
+		PRU = {
+			remove_unit_leader = 18
+			remove_unit_leader = 19
+			remove_unit_leader = 26
+			add_war_support = -0.10
+			army_experience = -100
+		}
+		custom_effect_tooltip = pru_blacksun_influince_fall
+		hidden_effect = {
+			add_to_variable = {
+				var = PRU.blacksun_influence
+				value = -1
+			}
+			PRU = {
+				country_event = {
+					id = script_event.39
+					days = 90
+				}
+			}
+		}
+	}
+	
+}
+
+country_event = { #Marshal flow into Black Sun
+	id = ger_blackorder.15
+	title = ger_blackorder.15.t
+	desc = ger_blackorder.15.d
+	picture = GFX_report_event_blacksun_document
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger_blackorder.15"}
+	
+	option = { #We cant do something
+		name = ger_blackorder.15.a
+		ai_chance = {
+			base = 75
+		}
+		remove_trait = {
+			character = PRU_Fridrich_Ernst_von_Wrangel
+			trait = junker_general
+		}
+		add_trait = {
+			 character = PRU_Fridrich_Ernst_von_Wrangel
+			 trait = blacksun_general
+		}
+		custom_effect_tooltip = pru_blacksun_influince_rise
+		hidden_effect = {
+			add_to_variable = {
+				var = PRU.blacksun_influence
+				value = 1
+			}
+			PRU = {
+				#set_portraits = {
+				#	character = PRU_Fridrich_Ernst_von_Wrangel
+				#	army = { small ="" }
+				#	civilian = { large ="" }
+				#}
+			}
+		}
+	}
+	
+	option = { #Disband them
+		name = ger_blackorder.15.b
+		ai_chance = {
+			base = 25
+		}
+		PRU = {
+			remove_unit_leader = 3
+			add_war_support = -0.15
+			army_experience = -150
+		}
+		custom_effect_tooltip = pru_blacksun_influince_fall
+		hidden_effect = {
+			add_to_variable = {
+				var = PRU.blacksun_influence
+				value = -1
+			}
 		}
 	}
 	
