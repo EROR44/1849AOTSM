@@ -4926,6 +4926,11 @@ country_event = { #Maestro want Burgundia
 			}
 			set_cosmetic_tag = BRG_bs
 		}
+		hidden_effect = {
+			PRU = {
+				set_country_flag = brg_is_state_of_bs
+			}
+		}
 	}
 	
 	option = { #I need your here
@@ -5038,21 +5043,21 @@ country_event = { #General flow into Black Sun
 				value = 1
 			}
 			PRU = {
-				#set_portraits = {
-				#	character = PRU_Eduard_von_Yahman
-				#	army = { small ="" }
-				#	civilian = { large ="" }
-				#}
-				#set_portraits = {
-				#	character = PRU_Eduard_von_Bonin
-				#	army = { small ="" }
-				#	civilian = { large ="" }
-				#}
-				#set_portraits = {
-				#	character = PRU_Albrecht_von_Stosch
-				#	army = { small ="" }
-				#	civilian = { large ="" }
-				#}
+				set_portraits = {
+					character = PRU_Eduard_von_Yahman
+					army = { small = "GFX_idea_Eduard_von_Yahman_bs" }
+					army = { large = "GFX_Portrait_Eduard_von_Yahman_bs" }
+				}
+				set_portraits = {
+					character = PRU_Eduard_von_Bonin
+					army = { small = "GFX_idea_Eduard_von_Bonin_bs" }
+					army = { large = "GFX_Portrait_Eduard_von_Bonin_bs" }
+				}
+				set_portraits = {
+					character = PRU_Albrecht_von_Stosch
+					army = { small = "GFX_idea_Albrecht_von_Stosch_bs" }
+					army = { large = "GFX_Portrai_Albrecht_von_Stosch_bs" }
+				}
 			}
 			PRU = {
 				country_event = {
@@ -5124,11 +5129,11 @@ country_event = { #Marshal flow into Black Sun
 				value = 1
 			}
 			PRU = {
-				#set_portraits = {
-				#	character = PRU_Fridrich_Ernst_von_Wrangel
-				#	army = { small ="" }
-				#	civilian = { large ="" }
-				#}
+				set_portraits = {
+					character = PRU_Fridrich_Ernst_von_Wrangel
+					army = { small = "GFX_idea_Fridrich_Ernst_von_Wrangel_bs" }
+					army = { large = "GFX_Portrait_Fridrich_Ernst_von_Wrangel_bs" }
+				}
 			}
 		}
 	}
@@ -5148,6 +5153,86 @@ country_event = { #Marshal flow into Black Sun
 			add_to_variable = {
 				var = PRU.blacksun_influence
 				value = -1
+			}
+		}
+	}
+	
+}
+
+country_event = { #Black Sun succesor
+	id = ger_blackorder.16
+	title = ger_blackorder.16.t
+	desc = ger_blackorder.16.d
+	picture = GFX_report_event_black_sun_cabinet_of_furor
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger_blackorder.16"}
+	
+	option = { #We have only one option
+		name = ger_blackorder.16.a
+		ai_chance = {
+			base = 75
+		}
+		custom_effect_tooltip = pru_choose_jh_heir_of_bs_tt
+		hidden_effect = {
+			PRU = {
+				set_country_flag = joseph_himmler_heir
+			}
+		}
+	}
+	
+}
+
+country_event = { #Long Night
+	id = ger_blackorder.17
+	title = ger_blackorder.17.t
+	desc = ger_blackorder.17.d
+	picture = GFX_report_event_black_sun_long_night
+	
+	trigger = {
+		tag = PRU
+		PRU = {
+			has_country_flag = blacksun_end_germany
+			has_country_flag = brg_is_state_of_bs
+			has_country_flag = joseph_himmler_heir
+			has_country_leader = {
+				character = KOL_Wilgelm_Austrian
+				ruling_only = yes
+			}
+		}
+	}
+	
+	mean_time_to_happen = {
+		days = 210
+	}
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger_blackorder.17"}
+	
+	option = { #Intresting
+		name = ger_blackorder.17.a
+		ai_chance = {
+			base = 75
+		}
+		PRU = {
+			kill_country_leader = yes
+			add_country_leader_role = {
+				character = KOL_Joseph_Himmler
+				promote_leader = yes
+				country_leader = {
+					ideology = radical_nationalism
+					expire = "1900.1.1.1"
+					traits = { dictator_bs leader_of_bs }
+				}
+			}
+		}
+		hidden_effect = {
+			PRU = {
+				remove_unit_leader = 4400
 			}
 		}
 	}
