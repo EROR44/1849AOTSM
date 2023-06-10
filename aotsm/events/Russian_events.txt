@@ -5610,10 +5610,10 @@ country_event = {
 ####################SOCIALIST_INDUTRY_EVENTS###############################
 
 country_event = {
-	id = russian_socialist_industry_event.1 # 
+	id = russian_socialist_industry_event.1 # Комиссия по промышленным вопроса
 	title = russian_socialist_industry_event.1.t
 	desc = russian_socialist_industry_event.1.d
-	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	picture = GFX_report_event_inside_factory
 	
 	is_triggered_only = yes
 	
@@ -5624,27 +5624,29 @@ country_event = {
 	}
 	
 	option = {
-		name = russian_socialist_industry_event.1.a	
+		name = russian_socialist_industry_event.1.a	#Коллективизация
 			
 		hidden_effect = {
-			
+			set_country_flag = RUS_choose_collectivisation
+			secountry_event = { id = russian_socialist_industry_event.2 days = 30}
 		}
 	}
 	
 	option = {
-		name = russian_socialist_industry_event.1.b
+		name = russian_socialist_industry_event.1.b #Сохранение индивидуальных хозяйств
 			
 		hidden_effect = {
-			
+			set_country_flag = RUS_choose_individualism
+			country_event = { id = russian_socialist_industry_event.2 days = 30}
 		}
 	}
 }
 
 country_event = {
-	id = russian_socialist_industry_event.2 # 
+	id = russian_socialist_industry_event.2 # Расширение гражданского производства - где будем строить?
 	title = russian_socialist_industry_event.2.t
 	desc = russian_socialist_industry_event.2.d
-	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	picture = GFX_report_event_inside_factory
 	
 	is_triggered_only = yes
 	
@@ -5655,8 +5657,323 @@ country_event = {
 	}
 	
 	option = {
-		name = russian_socialist_industry_event.2.a	
+		name = russian_socialist_industry_event.2.a	# Район Москвы
+		
+		ai_chance = {
+			base = 15
+		}
 			
+		219 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}	
+		253 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}	
+			
+		hidden_effect = {
+			country_event = { id = russian_socialist_industry_event.3 days = 21}
+		}
+	}
+	
+	option = {
+		name = russian_socialist_industry_event.2.b	# Район Волгограда
+		
+		ai_chance = {
+			base = 15
+		}
+		
+		217 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}	
+		236 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}	
+		
+		hidden_effect = {
+			country_event = { id = russian_socialist_industry_event.3 days = 21}
+		}
+	}
+	
+	option = {
+		name = russian_socialist_industry_event.2.c	# Район Петрограда
+		
+		ai_chance = {
+			base = 15
+		}
+			
+		195 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}	
+		208 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}	
+			
+		hidden_effect = {
+			country_event = { id = russian_socialist_industry_event.3 days = 21}
+		}
+	}
+}
+
+country_event = {
+	id = russian_socialist_industry_event.3 # Расширение военного производства - где будем строить?
+	title = russian_socialist_industry_event.3.t
+	desc = russian_socialist_industry_event.3.d
+	picture = GFX_report_event_inside_factory
+
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event russian_socialist_industry_event.3"
+	}
+	
+	option = {
+		name = russian_socialist_industry_event.3.a	#Тула
+		
+		ai_chance = {
+			base = 15
+		}
+	
+		223 = {
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+				type = arms_factory
+				level = 2
+				instant_build = yes
+			}
+		}	
+			
+		hidden_effect = {
+			
+		}
+	}
+	
+	option = {
+		name = russian_socialist_industry_event.3.b	#Смоленск
+		
+		ai_chance = {
+			base = 15
+		}
+		
+		242 = {
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+				type = arms_factory
+				level = 2
+				instant_build = yes
+			}
+		}	
+			
+		hidden_effect = {
+			
+		}
+	}
+	
+	option = {
+		name = russian_socialist_industry_event.3.c	#Регион Спб
+		
+		ai_chance = {
+			base = 15
+		}
+			
+		195 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = arms_factory
+				level = 1
+				instant_build = yes
+			}
+		}	
+		208 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = arms_factory
+				level = 1
+				instant_build = yes
+			}
+		}	
+			
+		hidden_effect = {
+			
+		}
+	}
+}
+
+country_event = {
+	id = russian_socialist_industry_event.4 # 
+	title = russian_socialist_industry_event.4.t
+	desc = russian_socialist_industry_event.4.d
+	picture = GFX_report_event_inside_factory
+
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event russian_socialist_industry_event.4"
+	}
+	
+	option = {
+		name = russian_socialist_industry_event.4.a	#
+		ai_chance = {
+			base = 15
+		}
+	
+		hidden_effect = {
+			
+		}
+	}
+	
+	option = {
+		name = russian_socialist_industry_event.4.b	#
+		
+		ai_chance = {
+			base = 15
+		}
+		
+		hidden_effect = {
+			
+		}
+	}
+	
+	option = {
+		name = russian_socialist_industry_event.4.c	#
+		
+		ai_chance = {
+			base = 15
+		}
+		
+		hidden_effect = {
+			
+		}
+	}
+}
+
+country_event = {
+	id = russian_socialist_industry_event.5 # Расширение военного производства - где будем строить?
+	title = russian_socialist_industry_event.5.t
+	desc = russian_socialist_industry_event.5.d
+	picture = GFX_report_event_inside_factory
+
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event russian_socialist_industry_event.5"
+	}
+	
+	option = {
+		name = russian_socialist_industry_event.5.a	#
+		ai_chance = {
+			base = 15
+		}
+	
+		hidden_effect = {
+			
+		}
+	}
+	
+	option = {
+		name = russian_socialist_industry_event.5.b	#
+		
+		ai_chance = {
+			base = 15
+		}
+		
+		hidden_effect = {
+			
+		}
+	}
+	
+	option = {
+		name = russian_socialist_industry_event.5.c	#
+		
+		ai_chance = {
+			base = 15
+		}
+		
+		hidden_effect = {
+			
+		}
+	}
+}
+
+country_event = {
+	id = russian_socialist_industry_event.6 # Расширение военного производства - где будем строить?
+	title = russian_socialist_industry_event.6.t
+	desc = russian_socialist_industry_event.6.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event russian_socialist_industry_event.6"
+	}
+	
+	option = {
+		name = russian_socialist_industry_event.6.a	#
+		ai_chance = {
+			base = 15
+		}
+	
+		hidden_effect = {
+			
+		}
+	}
+	
+	option = {
+		name = russian_socialist_industry_event.6.b	#
+		
+		ai_chance = {
+			base = 15
+		}
+		
+		hidden_effect = {
+			
+		}
+	}
+	
+	option = {
+		name = russian_socialist_industry_event.6.c	#
+		
+		ai_chance = {
+			base = 15
+		}
+		
 		hidden_effect = {
 			
 		}
