@@ -793,10 +793,6 @@ focus_tree = {
 			#add_stability = 0.1
 			hidden_effect = {
 				set_country_flag = RUS_liquidate_backwardness_flag
-				load_focus_tree = {
-					tree = russian_state_focus   
-					keep_completed = yes    
-				}
 				mark_focus_tree_layout_dirty = yes 
 			}
 		}
@@ -1208,10 +1204,6 @@ focus_tree = {
 			log = "[GetDateText]: [Root.GetName]: focus RUS_end_of_political_isolation"
 			country_event = { id = rusPol.1 }
 			hidden_effect = {
-				load_focus_tree = {
-					tree = russian_state_focus   
-					keep_completed = yes    
-				}
 				mark_focus_tree_layout_dirty = yes 
 			}
 		}
@@ -3369,10 +3361,6 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: focus RUS_chernyshevsky_ng"
 			hidden_effect = {
-				load_focus_tree = {
-					tree = russian_state_focus   
-					keep_completed = yes    
-				}
 				mark_focus_tree_layout_dirty = yes 
 			}
 		}
@@ -3564,6 +3552,9 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: focus RUS_new_socialist_economic"
 			country_event = russian_socialist_political_event.6
+			hidden_effect = {
+				country_event = { id = rus_leave_officers_event.1 days = 31 }
+			}	
 		}
 	}
 
@@ -3739,6 +3730,9 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: focus RUS_organise_goverment_control_market"
 			country_event = russian_socialist_political_event.9
+			hidden_effect = {
+				country_event = { id = rus_leave_officers_event.1 days = 31 }
+			}
 		}
 	}
 
@@ -3851,26 +3845,26 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: focus RUS_purge_not_loyal_officers"
 			custom_effect_tooltip = RUS_delete_not_loyal_officers
-			#hidden_effect = {
-				RUS = { 
-					remove_unit_leader = 905
-					
+			RUS = { 
+				remove_unit_leader = 905	
+			}
+			every_unit_leader = {
+				limit = {
+					#tag = RUS
+					has_trait = RUS_house_of_romanov
 				}
-				every_unit_leader = {
-					limit = {
-						#tag = RUS
-						has_trait = RUS_house_of_romanov
-					}
-					remove_unit_leader = yes
+				remove_unit_leader = yes
+			}
+			every_unit_leader = {
+				limit = {
+					#tag = RUS
+					has_trait = RUS_black_league
 				}
-				every_unit_leader = {
-					limit = {
-						#tag = RUS
-						has_trait = RUS_black_league
-					}
-					remove_unit_leader = yes
-				}
-			#}
+				remove_unit_leader = yes
+			}
+			hidden_effect = {
+				set_country_flag = RUS_not_loyal_officers_purged
+			}
 		}
 	}
 	
@@ -3985,6 +3979,9 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: focus RUS_go_to_plan_economic"
 			country_event = russian_socialist_political_event.12
+			hidden_effect = {
+				country_event = { id = rus_leave_officers_event.3 days = 12 }
+			}
 		}
 	}
 	
@@ -3994,7 +3991,7 @@ focus_tree = {
 	
 	focus = {
 		id = RUS_constututional_referendum
-		icon = GFX_goal_generic_improve_relations
+		icon = GFX_focus_rus_constitutional_referendum
 		
 		x = 14
 		y = 2
@@ -4021,7 +4018,7 @@ focus_tree = {
 	
 	focus = {
 		id = RUS_muraviev_nm_constututianal_project #в духе декабристов - свобода слова, вероисповедания, федератизация
-		icon = GFX_goal_generic_improve_relations
+		icon = GFX_focus_rus_muraviev_constitution
 		
 		x = -3
 		y = 1 
@@ -4048,7 +4045,7 @@ focus_tree = {
 	
 	focus = {
 		id = RUS_religion_question
-		icon = GFX_goal_generic_improve_relations
+		icon = GFX_focus_rus_religious_status_quiestion
 		
 		x = -1
 		y = 1 
@@ -4077,7 +4074,7 @@ focus_tree = {
 	
 	focus = {
 		id = RUS_national_minorities_problem_comission
-		icon = GFX_goal_generic_improve_relations
+		icon = GFX_focus_rus_national_minorities_problem
 		
 		x = 0
 		y = 1 
@@ -4102,7 +4099,7 @@ focus_tree = {
 	
 	focus = {
 		id = RUS_federalisation
-		icon = GFX_goal_generic_improve_relations
+		icon = GFX_focus_rus_federatisation
 		
 		x = 1
 		y = 1 
@@ -4130,7 +4127,7 @@ focus_tree = {
 	
 	focus = {
 		id = RUS_universal_right_to_vote #всеобщее право голоса
-		icon = GFX_goal_generic_improve_relations
+		icon = GFX_focus_rus_universal_right_to_vote
 		
 		x = 0
 		y = 1 
@@ -4155,7 +4152,7 @@ focus_tree = {
 	
 	focus = {
 		id = RUS_polivanov_sp_constututianal_project #эсэрская конституция - выборность, гласность, отмена частной собственности на землю(всю землю крестьянам)
-		icon = GFX_goal_generic_improve_relations
+		icon = GFX_focus_rus_polivanov_constitution
 		
 		x = 0
 		y = 1 
@@ -4182,7 +4179,7 @@ focus_tree = {
 	
 	focus = {
 		id = RUS_community_socialism
-		icon = GFX_goal_generic_improve_relations
+		icon = GFX_focus_rus_community_socialism
 		
 		x = 0
 		y = 1 
@@ -4203,7 +4200,7 @@ focus_tree = {
 	
 	focus = {
 		id = RUS_publick_freedoms_quiestion #Вопрос общественных свобод
-		icon = GFX_goal_generic_improve_relations
+		icon = GFX_focus_rus_publick_freedoms_quiestion
 		
 		x = 0
 		y = 1 
@@ -4224,7 +4221,7 @@ focus_tree = {
 	
 	focus = {
 		id = RUS_lopatin_ga_constututianal_project #радикальные изменения - отмена частной собственности и прочие прелести коллективизма и коммунизма
-		icon = GFX_goal_generic_improve_relations
+		icon = GFX_focus_rus_lopatin_constitution
 		
 		x = 3
 		y = 1
@@ -4250,7 +4247,7 @@ focus_tree = {
 	}
 	focus = {
 		id = RUS_save_unitar_structure
-		icon = GFX_goal_generic_improve_relations
+		icon = GFX_focus_rus_save_unitar_structure
 		
 		x = -1
 		y = 1 
@@ -4277,7 +4274,7 @@ focus_tree = {
 	}
 	focus = {
 		id = RUS_electability_quiestion #вопрос выборности - полная - номинальная
-		icon = GFX_goal_generic_improve_relations
+		icon = GFX_focus_rus_elections_quiestion
 		
 		x = 0
 		y = 1 
@@ -4302,7 +4299,7 @@ focus_tree = {
 	
 	focus = {
 		id = RUS_land_to_villagers_factories_to_workers #Землю крестьянам, заводы рабочим
-		icon = GFX_goal_generic_improve_relations
+		icon = GFX_focus_rus_land_for_villagers_factories_for_workers
 		
 		x = 1
 		y = 1 
@@ -4327,7 +4324,7 @@ focus_tree = {
 	
 	focus = {
 		id = RUS_maintaining_labor_standards #введение трудовых норм
-		icon = GFX_goal_generic_improve_relations
+		icon = GFX_focus_rus_set_work_standarts
 		
 		x = 0
 		y = 1 
@@ -4352,7 +4349,7 @@ focus_tree = {
 	
 	focus = {
 		id = RUS_new_capital
-		icon = GFX_goal_generic_improve_relations
+		icon = GFX_focus_rus_where_is_capital
 		
 		x = 0
 		y = 3
@@ -4488,7 +4485,7 @@ focus_tree = {
 		cost = 5
 		
 		available = {
-			
+			has_country_flag = RUS_choose_individualism
 		}
 		
 		mutually_exclusive = { focus = RUS_collectivisation }  
@@ -4543,7 +4540,7 @@ focus_tree = {
 		cost = 5
 		
 		available = {
-			
+			has_country_flag = RUS_choose_collectivisation
 		}
 		
 		mutually_exclusive = { focus = RUS_save_individual_farming }  
@@ -5074,6 +5071,8 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: focus RUS_infrastructure_development"
+			
+			#custom_effect_tooltip = RUS_unlock_
 		}
 	}
 	
@@ -5176,7 +5175,7 @@ focus_tree = {
 
 	focus = {
 		id = RUS_update_russian_army
-		icon = GFX_goal_generic_improve_relations
+		icon = GFX_focus_rus_russian_army_modernisation
 		
 		x = 0
 		y = 2
@@ -5203,7 +5202,7 @@ focus_tree = {
 
 	focus = {
 		id = RUS_modernise_infantry_equipment
-		icon = GFX_goal_generic_improve_relations
+		icon = GFX_focus_rus_updated_infantry_equipment
 		
 		x = -2
 		y = 1
@@ -5237,7 +5236,7 @@ focus_tree = {
 
 	focus = {
 		id = RUS_expand_millttary_production
-		icon = GFX_goal_generic_improve_relations
+		icon = GFX_focus_rus_expand_millitary_production
 		
 		x = 0
 		y = 1
@@ -5270,7 +5269,7 @@ focus_tree = {
 
 	focus = {
 		id = RUS_start_recruitment_officers 
-		icon = GFX_goal_generic_improve_relations
+		icon = GFX_focus_rus_update_command_structure
 		
 		x = 0
 		y = 1
@@ -5289,12 +5288,85 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: focus RUS_start_recruitment_officers"
+			custom_effect_tooltip = RUS_soc_add_new_generals
+			hidden_effect = {
+				add_corps_commander_role = {
+					character = RUS_Mikhail_Vasilyevich_Frunse
+					traits = { inflexible_strategist career_officer infantry_officer }
+					skill = 2
+					attack_skill = 1
+					defense_skill = 3
+					planning_skill = 3
+					logistics_skill = 2
+					legacy_id=931
+				}
+				add_corps_commander_role = {
+					character = RUS_Nechaev_Sergey_Alexeevich
+					traits = { offensive_doctrine expert_improviser engineer_officer }
+					skill = 3
+					attack_skill = 3
+					defense_skill = 2
+					planning_skill = 1
+					logistics_skill = 2
+					legacy_id=933
+				}
+				add_corps_commander_role = {
+					character = RUS_Adelberg_Alexander_Vladimirovich
+					traits = { infantry_officer career_officer organizer }
+					skill = 2
+					attack_skill = 1
+					defense_skill = 1
+					planning_skill = 2
+					logistics_skill = 2
+					legacy_id=934
+				}
+				add_corps_commander_role = {
+					character = RUS_Kolobanov_Zinovii_Grigorievich
+					traits = { offensive_doctrine panzer_leader trait_engineer }
+					skill = 2
+					attack_skill = 2
+					defense_skill = 2
+					planning_skill = 3
+					logistics_skill = 1
+					legacy_id=935
+				}
+				add_corps_commander_role = {
+					character = RUS_Gurko_Iosif_Vladimirovich
+					traits = { infantry_officer bearer_of_artillery brilliant_strategist }
+					skill = 3
+					attack_skill = 3
+					defense_skill = 2
+					planning_skill = 4
+					logistics_skill = 3
+					legacy_id=936
+				}
+				add_corps_commander_role = {
+					character = RUS_Chernyaev_Mikhail_Grigorievich
+					traits = { politically_connected infantry_officer }
+					skill = 2
+					attack_skill = 2
+					defense_skill = 1
+					planning_skill = 2
+					logistics_skill = 2
+					legacy_id=937
+				}
+				add_corps_commander_role = {
+					character = RUS_Tidebel_Sizigmund_Andreevich
+					traits = { trickster infantry_officer trait_engineer }
+					skill = 2
+					attack_skill = 1
+					defense_skill = 2
+					planning_skill = 2
+					logistics_skill = 2
+					legacy_id=938
+				}
+			}
 		}
 	}
 
 	focus = {
 		id = RUS_low_about_military_duty #закон о воинской обязанности
-		icon = GFX_goal_generic_improve_relations
+		icon = GFX_focus_rus_the_low_about_millitary_service
 		
 		x = -1
 		y = 2
@@ -5356,7 +5428,7 @@ focus_tree = {
 
 	focus = {
 		id = RUS_new_doctrine
-		icon = GFX_goal_generic_improve_relations
+		icon = GFX_focus_rus_war_methodick
 		
 		x = 3
 		y = 1
@@ -5381,7 +5453,7 @@ focus_tree = {
 
 	focus = {
 		id = RUS_artillery_doctrine
-		icon = GFX_goal_generic_improve_relations
+		icon = GFX_focus_rus_firepower_superiority_doctrine
 		
 		x = -2
 		y = 1
@@ -5415,7 +5487,7 @@ focus_tree = {
 
 	focus = {
 		id = RUS_planning_priroty
-		icon = GFX_goal_generic_improve_relations
+		icon = GFX_focus_rus_large_scale_planning
 		
 		x = 0
 		y = 1
@@ -5449,7 +5521,7 @@ focus_tree = {
 
 	focus = {
 		id = RUS_motorisation_priority
-		icon = GFX_goal_generic_improve_relations
+		icon = GFX_focus_rus_maneuvre_war_doctrine
 		
 		x = 2
 		y = 1
@@ -5483,7 +5555,7 @@ focus_tree = {
 	
 	focus = {
 		id = RUS_from_theory_to_practice
-		icon = GFX_goal_generic_improve_relations
+		icon = GFX_focus_rus_from_theory_to_practice
 		
 		x = 0
 		y = 1
@@ -5512,7 +5584,7 @@ focus_tree = {
 	
 	focus = {
 		id = RUS_create_red_army
-		icon = GFX_goal_generic_improve_relations
+		icon = GFX_focus_rus_create_the_red_army
 		
 		x = -2
 		y = 1
@@ -5540,7 +5612,7 @@ focus_tree = {
 
 	focus = {
 		id = RUS_create_russian_air_forces
-		icon = GFX_goal_generic_improve_relations
+		icon = GFX_focus_rus_russian_vvs
 		
 		x = -6
 		y = 0
@@ -5564,7 +5636,7 @@ focus_tree = {
 	
 	focus = {
 		id = RUS_soc_front_aviation_priority
-		icon = GFX_goal_generic_improve_relations
+		icon = GFX_focus_rus_front_aviation_priority
 		
 		x = -2
 		y = 1
@@ -5604,7 +5676,7 @@ focus_tree = {
 	
 	focus = {
 		id = RUS_soc_front_aviation_development
-		icon = GFX_goal_generic_improve_relations
+		icon = GFX_focus_rus_develop_new_support_airplanes
 		
 		x = 0
 		y = 1
@@ -5642,7 +5714,7 @@ focus_tree = {
 	
 	focus = {
 		id = RUS_soc_bomber_prioity
-		icon = GFX_goal_generic_improve_relations
+		icon = GFX_focus_rus_long_range_aviation_priority
 		
 		x = 2
 		y = 1
@@ -5679,7 +5751,7 @@ focus_tree = {
 	
 	focus = {
 		id = RUS_soc_bomber_development
-		icon = GFX_goal_generic_improve_relations
+		icon = GFX_focus_rus_develop_new_bombers
 		
 		x = 0
 		y = 1
@@ -5713,7 +5785,7 @@ focus_tree = {
 	
 	focus = {
 		id = RUS_soc_methodic_of_air_war
-		icon = GFX_goal_generic_improve_relations
+		icon = GFX_focus_rus_air_war_methodick
 		
 		x = 0
 		y = 2
@@ -5739,7 +5811,7 @@ focus_tree = {
 	
 	focus = {
 		id = RUS_soc_cooperation_with_land_forces
-		icon = GFX_goal_generic_improve_relations
+		icon = GFX_focus_rus_coop_witch_land_forces
 		
 		x = -1
 		y = 1
@@ -5766,7 +5838,7 @@ focus_tree = {
 	
 	focus = {
 		id = RUS_soc_strikes_on_the_rear
-		icon = GFX_goal_generic_improve_relations
+		icon = GFX_focus_rus_strikes_on_the_rear
 		
 		x = 1
 		y = 1
@@ -5793,7 +5865,7 @@ focus_tree = {
 	
 	focus = {
 		id = RUS_soc_create_russian_aviation
-		icon = GFX_goal_generic_improve_relations
+		icon = GFX_focus_rus_create_russian_vvs
 		
 		x = 0
 		y = 2
@@ -5825,7 +5897,7 @@ focus_tree = {
 
 	focus = {
 		id = RUS_soc_update_russian_navy
-		icon = GFX_goal_generic_improve_relations
+		icon = GFX_focus_rus_soc_end_navy_modernisation
 		
 		x = -6
 		y = 0
@@ -5852,7 +5924,7 @@ focus_tree = {
 	
 	focus = {
 		id = RUS_soc_navy_tactic
-		icon = GFX_goal_generic_improve_relations
+		icon = GFX_focus_rus_navy_war_strategy
 		
 		x = -3
 		y = 1
@@ -5877,7 +5949,7 @@ focus_tree = {
 	
 	focus = {
 		id = RUS_soc_flot_impact_doctrine
-		icon = GFX_goal_generic_improve_relations
+		icon = GFX_focus_rus_flot_impact_doctrine
 		
 		x = -2
 		y = 1
@@ -5911,7 +5983,7 @@ focus_tree = {
 	
 	focus = {
 		id = RUS_soc_barrier_navy_ways_doctrine
-		icon = GFX_goal_generic_improve_relations
+		icon = GFX_focus_rus_barrier_navy_ways_doctrine
 		
 		x = 0
 		y = 1
@@ -5945,7 +6017,7 @@ focus_tree = {
 	
 	focus = {
 		id = RUS_soc_strike_on_bases_doctrine
-		icon = GFX_goal_generic_improve_relations
+		icon = GFX_focus_rus_naval_bases_strikes_doctrine
 		
 		x = 2
 		y = 1
@@ -5979,7 +6051,7 @@ focus_tree = {
 	
 	focus = {
 		id = RUS_soc_navy_training
-		icon = GFX_goal_generic_improve_relations
+		icon = GFX_focus_rus_soc_navy_training
 		
 		x = 0
 		y = 1
@@ -6008,7 +6080,7 @@ focus_tree = {
 	
 	focus = {
 		id = RUS_soc_recruit_yung_navy_officers
-		icon = GFX_goal_generic_improve_relations
+		icon = GFX_focus_rus_set_of_a_new_navy_officers
 		
 		x = 0
 		y = 1
@@ -6027,13 +6099,55 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: focus RUS_soc_recruit_yung_navy_officers"
-
+			custom_effect_tooltip = RUS_soc_add_new_admirals
+			hidden_effect = {
+				add_naval_commander_role = {
+					character = RUS_Bereskin_Vsevolod_Alexandrovich
+					traits = { superior_tactician }
+					skill=2
+					attack_skill=1
+					defense_skill=1
+					maneuvering_skill=3
+					coordination_skill=2
+					legacy_id = 932
+				}
+				add_naval_commander_role = {
+					character = RUS_Birilev_Nivolay_Alexeevich
+					traits = { }
+					skill=1
+					attack_skill=1
+					defense_skill=1
+					maneuvering_skill=1
+					coordination_skill=1
+					legacy_id = 939
+				}
+				add_naval_commander_role = {
+					character = RUS_Butakov_Grigoriy_Ivanovich
+					traits = { }
+					skill=1
+					attack_skill=1
+					defense_skill=1
+					maneuvering_skill=1
+					coordination_skill=1
+					legacy_id = 940
+				}
+				add_naval_commander_role = {
+					character = RUS_Shevchenko_Ignatiy_Vasilevich
+					traits = { }
+					skill=1
+					attack_skill=1
+					defense_skill=1
+					maneuvering_skill=1
+					coordination_skill=1
+					legacy_id = 941
+				}
+			}
 		}
 	}
 	
 	focus = {
 		id = RUS_soc_expand_dockyards
-		icon = GFX_goal_generic_improve_relations
+		icon = GFX_focus_rus_soc_new_dockyards
 		
 		x = 2
 		y = 1
@@ -6084,7 +6198,7 @@ focus_tree = {
 	
 	focus = {
 		id = RUS_soc_small_ships_dedvelopment
-		icon = GFX_goal_generic_improve_relations
+		icon = GFX_focus_rus_soc_develop_small_ships
 		
 		x = 0
 		y = 1
@@ -6115,7 +6229,7 @@ focus_tree = {
 	
 	focus = {
 		id = RUS_soc_west_navy_experiance
-		icon = GFX_goal_generic_improve_relations
+		icon = GFX_focus_rus_west_countries_experiance
 		
 		x = -1
 		y = 1
@@ -6148,7 +6262,7 @@ focus_tree = {
 	
 	focus = {
 		id = RUS_soc_end_navy_modernisation
-		icon = GFX_goal_generic_improve_relations
+		icon = GFX_focus_rus_navy_modernisation
 		
 		x = -2
 		y = 1
@@ -6191,7 +6305,6 @@ focus_tree = {
 		}
 
 		relative_position_id = RUS_choose_our_leader
-		#prerequisite = { focus = RUS_return_of_old_orders }
 		
 		available_if_capitulated = yes
 		
@@ -6288,6 +6401,210 @@ focus_tree = {
 			
 		}
 	}
+	
+#########################CONCENTRATE_ON_INTERNAL_PROBLEMS_SECTION##############################
+
+	focus = {
+		id = RUS_soc_strenghern_borders
+		icon = GFX_goal_generic_improve_relations
+		
+		x = -2
+		y = 1
+		cost = 5
+		
+		available = {
+			
+		}
+
+		relative_position_id = RUS_concentrate_on_internal_problems
+		prerequisite = { focus = RUS_concentrate_on_internal_problems }
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus RUS_soc_strenghern_borders"
+			
+		}
+	}	
+	
+	focus = {
+		id = RUS_soc_fortificate_west_borders
+		icon = GFX_goal_generic_improve_relations
+		
+		x = -1
+		y = 1
+		cost = 5
+		
+		available = {
+			
+		}
+
+		relative_position_id = RUS_soc_strenghern_borders
+		prerequisite = { focus = RUS_soc_strenghern_borders }
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus RUS_soc_fortificate_west_borders"
+			
+		}
+	}	
+	
+	focus = {
+		id = RUS_soc_fortificate_south_borders
+		icon = GFX_goal_generic_improve_relations
+		
+		x = 1
+		y = 1
+		cost = 5
+		
+		available = {
+			
+		}
+
+		relative_position_id = RUS_soc_strenghern_borders
+		prerequisite = { focus = RUS_soc_strenghern_borders }
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus RUS_soc_fortificate_west_borders"
+			
+		}
+	}		
+	
+	focus = {
+		id = RUS_soc_prepare_for_the_storm #аодготовится к буре
+		icon = GFX_goal_generic_improve_relations
+		
+		x = 0
+		y = 2
+		cost = 5
+		
+		available = {
+			
+		}
+
+		relative_position_id = RUS_soc_strenghern_borders
+		prerequisite = { focus = RUS_soc_fortificate_west_borders }
+		prerequisite = { focus = RUS_soc_fortificate_south_borders }
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus RUS_soc_prepare_for_the_storm"
+			
+		}
+	}	
+	
+	focus = {
+		id = RUS_soc_new_diplomatic_strategy
+		icon = GFX_goal_generic_improve_relations
+		
+		x = 1
+		y = 1
+		cost = 5
+		
+		available = {
+			
+		}
+
+		relative_position_id = RUS_concentrate_on_internal_problems
+		prerequisite = { focus = RUS_concentrate_on_internal_problems }
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus RUS_soc_new_diplomatic_strategy"
+			
+		}
+	}	
+	
+	focus = {
+		id = RUS_soc_russo_french_relations #оборонительный пакт?
+		icon = GFX_goal_generic_improve_relations
+		
+		x = 0
+		y = 1
+		cost = 5
+		
+		available = {
+			
+		}
+
+		relative_position_id = RUS_soc_new_diplomatic_strategy
+		prerequisite = { focus = RUS_soc_new_diplomatic_strategy }
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus RUS_soc_russo_french_relations"
+			
+		}
+	}		
+	
+	focus = {
+		id = RUS_soc_economic_mobilisation #
+		icon = GFX_goal_generic_improve_relations
+		
+		x = 0
+		y = 1
+		cost = 5
+		
+		available = {
+			
+		}
+
+		relative_position_id = RUS_soc_russo_french_relations
+		prerequisite = { focus = RUS_soc_russo_french_relations }
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus RUS_soc_economic_mobilisation"
+			
+		}
+	}			
+	
+	focus = {
+		id = RUS_soc_global_defence_strategy #
+		icon = GFX_goal_generic_improve_relations
+		
+		x = -1
+		y = 1
+		cost = 5
+		
+		available = {
+			
+		}
+
+		relative_position_id = RUS_soc_economic_mobilisation
+		prerequisite = { focus = RUS_soc_prepare_for_the_storm }
+		prerequisite = { focus = RUS_soc_economic_mobilisation }
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus RUS_soc_russo_french_relations"
+			
+		}
+	}	
 	
 #########################FOREIGN_POLICY##############################
 	
