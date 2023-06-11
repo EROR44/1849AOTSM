@@ -19,6 +19,7 @@ add_namespace = russian_socialist_air_event #
 add_namespace = russian_socialist_navy_event #
 add_namespace = russian_kromwland_politic #
 add_namespace = russian_armed_forces_event #
+add_namespace = rus_leave_officers_event #
 
 
 country_event = {
@@ -5609,10 +5610,10 @@ country_event = {
 ####################SOCIALIST_INDUTRY_EVENTS###############################
 
 country_event = {
-	id = russian_socialist_industry_event.1 # 
+	id = russian_socialist_industry_event.1 # Комиссия по промышленным вопроса
 	title = russian_socialist_industry_event.1.t
 	desc = russian_socialist_industry_event.1.d
-	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	picture = GFX_report_event_inside_factory
 	
 	is_triggered_only = yes
 	
@@ -5623,27 +5624,29 @@ country_event = {
 	}
 	
 	option = {
-		name = russian_socialist_industry_event.1.a	
+		name = russian_socialist_industry_event.1.a	#Коллективизация
 			
 		hidden_effect = {
-			
+			set_country_flag = RUS_choose_collectivisation
+			country_event = { id = russian_socialist_industry_event.2 days = 30}
 		}
 	}
 	
 	option = {
-		name = russian_socialist_industry_event.1.b
+		name = russian_socialist_industry_event.1.b #Сохранение индивидуальных хозяйств
 			
 		hidden_effect = {
-			
+			set_country_flag = RUS_choose_individualism
+			country_event = { id = russian_socialist_industry_event.2 days = 30}
 		}
 	}
 }
 
 country_event = {
-	id = russian_socialist_industry_event.2 # 
+	id = russian_socialist_industry_event.2 # Расширение гражданского производства - где будем строить?
 	title = russian_socialist_industry_event.2.t
 	desc = russian_socialist_industry_event.2.d
-	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	picture = GFX_report_event_inside_factory
 	
 	is_triggered_only = yes
 	
@@ -5654,8 +5657,323 @@ country_event = {
 	}
 	
 	option = {
-		name = russian_socialist_industry_event.2.a	
+		name = russian_socialist_industry_event.2.a	# Район Москвы
+		
+		ai_chance = {
+			base = 15
+		}
 			
+		219 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}	
+		253 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}	
+			
+		hidden_effect = {
+			country_event = { id = russian_socialist_industry_event.3 days = 21}
+		}
+	}
+	
+	option = {
+		name = russian_socialist_industry_event.2.b	# Район Волгограда
+		
+		ai_chance = {
+			base = 15
+		}
+		
+		217 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}	
+		236 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}	
+		
+		hidden_effect = {
+			country_event = { id = russian_socialist_industry_event.3 days = 21}
+		}
+	}
+	
+	option = {
+		name = russian_socialist_industry_event.2.c	# Район Петрограда
+		
+		ai_chance = {
+			base = 15
+		}
+			
+		195 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}	
+		208 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}	
+			
+		hidden_effect = {
+			country_event = { id = russian_socialist_industry_event.3 days = 21}
+		}
+	}
+}
+
+country_event = {
+	id = russian_socialist_industry_event.3 # Расширение военного производства - где будем строить?
+	title = russian_socialist_industry_event.3.t
+	desc = russian_socialist_industry_event.3.d
+	picture = GFX_report_event_inside_factory
+
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event russian_socialist_industry_event.3"
+	}
+	
+	option = {
+		name = russian_socialist_industry_event.3.a	#Тула
+		
+		ai_chance = {
+			base = 15
+		}
+	
+		223 = {
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+				type = arms_factory
+				level = 2
+				instant_build = yes
+			}
+		}	
+			
+		hidden_effect = {
+			
+		}
+	}
+	
+	option = {
+		name = russian_socialist_industry_event.3.b	#Смоленск
+		
+		ai_chance = {
+			base = 15
+		}
+		
+		242 = {
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+				type = arms_factory
+				level = 2
+				instant_build = yes
+			}
+		}	
+			
+		hidden_effect = {
+			
+		}
+	}
+	
+	option = {
+		name = russian_socialist_industry_event.3.c	#Регион Спб
+		
+		ai_chance = {
+			base = 15
+		}
+			
+		195 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = arms_factory
+				level = 1
+				instant_build = yes
+			}
+		}	
+		208 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = arms_factory
+				level = 1
+				instant_build = yes
+			}
+		}	
+			
+		hidden_effect = {
+			
+		}
+	}
+}
+
+country_event = {
+	id = russian_socialist_industry_event.4 # 
+	title = russian_socialist_industry_event.4.t
+	desc = russian_socialist_industry_event.4.d
+	picture = GFX_report_event_inside_factory
+
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event russian_socialist_industry_event.4"
+	}
+	
+	option = {
+		name = russian_socialist_industry_event.4.a	#
+		ai_chance = {
+			base = 15
+		}
+	
+		hidden_effect = {
+			
+		}
+	}
+	
+	option = {
+		name = russian_socialist_industry_event.4.b	#
+		
+		ai_chance = {
+			base = 15
+		}
+		
+		hidden_effect = {
+			
+		}
+	}
+	
+	option = {
+		name = russian_socialist_industry_event.4.c	#
+		
+		ai_chance = {
+			base = 15
+		}
+		
+		hidden_effect = {
+			
+		}
+	}
+}
+
+country_event = {
+	id = russian_socialist_industry_event.5 # Расширение военного производства - где будем строить?
+	title = russian_socialist_industry_event.5.t
+	desc = russian_socialist_industry_event.5.d
+	picture = GFX_report_event_inside_factory
+
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event russian_socialist_industry_event.5"
+	}
+	
+	option = {
+		name = russian_socialist_industry_event.5.a	#
+		ai_chance = {
+			base = 15
+		}
+	
+		hidden_effect = {
+			
+		}
+	}
+	
+	option = {
+		name = russian_socialist_industry_event.5.b	#
+		
+		ai_chance = {
+			base = 15
+		}
+		
+		hidden_effect = {
+			
+		}
+	}
+	
+	option = {
+		name = russian_socialist_industry_event.5.c	#
+		
+		ai_chance = {
+			base = 15
+		}
+		
+		hidden_effect = {
+			
+		}
+	}
+}
+
+country_event = {
+	id = russian_socialist_industry_event.6 # Расширение военного производства - где будем строить?
+	title = russian_socialist_industry_event.6.t
+	desc = russian_socialist_industry_event.6.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event russian_socialist_industry_event.6"
+	}
+	
+	option = {
+		name = russian_socialist_industry_event.6.a	#
+		ai_chance = {
+			base = 15
+		}
+	
+		hidden_effect = {
+			
+		}
+	}
+	
+	option = {
+		name = russian_socialist_industry_event.6.b	#
+		
+		ai_chance = {
+			base = 15
+		}
+		
+		hidden_effect = {
+			
+		}
+	}
+	
+	option = {
+		name = russian_socialist_industry_event.6.c	#
+		
+		ai_chance = {
+			base = 15
+		}
+		
 		hidden_effect = {
 			
 		}
@@ -6059,7 +6377,7 @@ country_event = {
 	
 	option = {
 		name = russian_socialist_const_ref_event.12.c #Славенск - Н.Новгород
-		
+		custom_effect_tooltip = RUS_set_capital_in_slavensk
 		hidden_effect = {
 			252 = { add_extra_state_shared_building_slots = 2 }
 			set_capital = {
@@ -6239,5 +6557,223 @@ country_event = {
 			
 		}
 	}	
+
+}
+
+###############################LEAVE_OFFICERS_EVENTS###############################
+
+country_event = {
+	id = rus_leave_officers_event.1 # Романовы покидают страну - для Чернышевского и Герцена
+	title = rus_leave_officers_event.1.t
+	desc = rus_leave_officers_event.1.d
+	picture = GFX_report_event_political_discussion
+	
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event rus_leave_officers_event.1"
+	}
+	
+	option = {
+		name = rus_leave_officers_event.1.a	
+		every_unit_leader = {
+			limit = {
+				#tag = RUS
+				has_trait = RUS_house_of_romanov
+			}
+			remove_unit_leader = yes
+		}
+		hidden_effect = {
+			country_event = { id = rus_leave_officers_event.2 days = 12 }
+		}
+	}	
+
+}
+
+country_event = {
+	id = rus_leave_officers_event.2 # Исчезновение Игнатьева - для Чернышевского и Герцена
+	title = rus_leave_officers_event.2.t
+	desc = rus_leave_officers_event.2.d
+	picture = GFX_report_event_political_discussion
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event rus_leave_officers_event.2"
+	}
+	
+	option = {
+		name = rus_leave_officers_event.2.a	
+		
+		ai_chance = {
+			base = 15
+		}
+		
+		hidden_effect = {
+			every_unit_leader = {
+				limit = {
+					#tag = RUS
+					has_trait = RUS_black_league
+					}
+				remove_unit_leader = yes
+			}
+			set_country_flag = RUS_ignatiev_fade
+		}
+	}	
+	
+	option = {
+		name = rus_leave_officers_event.2.b	#тут должна активироваться цепочка ивентов "Исчезновение Игнатьева" 
+		
+		ai_chance = {
+			base = 0
+		}
+		
+		hidden_effect = {
+			every_unit_leader = {
+				limit = {
+					#tag = RUS
+					has_trait = RUS_black_league
+					}
+				remove_unit_leader = yes
+			}
+			set_country_flag = RUS_ignatiev_fade
+		}
+	}	
+
+}
+
+country_event = {
+	id = rus_leave_officers_event.3 # Бегство офицеров
+	title = rus_leave_officers_event.3.t
+	desc = rus_leave_officers_event.3.d
+	picture = GFX_report_event_political_discussion
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event rus_leave_officers_event.3"
+	}
+	
+	option = {
+		name = rus_leave_officers_event.3.a	
+		
+		ai_chance = {
+			base = 15
+		}
+		
+		hidden_effect = {
+			RUS = { 
+				remove_unit_leader = 901	
+				remove_unit_leader = 902	
+				remove_unit_leader = 904		
+				remove_unit_leader = 906	
+				remove_unit_leader = 908	
+				remove_unit_leader = 909	
+				remove_unit_leader = 910	
+				remove_unit_leader = 912	
+				remove_unit_leader = 913	
+				remove_unit_leader = 915	
+			}
+			country_event = { id = rus_leave_officers_event.4 days = 11 }
+		}
+	}	
+	
+	option = {
+		name = rus_leave_officers_event.3.b	
+		add_political_power = -100
+		
+		ai_chance = {
+			base = 0
+		}
+		
+		hidden_effect = {
+			RUS = { 
+				remove_unit_leader = 901	
+				remove_unit_leader = 902	
+				remove_unit_leader = 904		
+				remove_unit_leader = 906	
+				remove_unit_leader = 908	
+				remove_unit_leader = 909	
+				remove_unit_leader = 910	
+				remove_unit_leader = 912	
+				remove_unit_leader = 913	
+				remove_unit_leader = 915	
+			}
+		}
+	}	
+
+}
+
+country_event = {
+	id = rus_leave_officers_event.4 # Исчезновение офицеров флота
+	title = rus_leave_officers_event.4.t
+	desc = rus_leave_officers_event.4.d
+	picture = GFX_report_event_political_discussion
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event rus_leave_officers_event.4"
+	}
+	
+	option = {
+		name = rus_leave_officers_event.4.a	
+		
+		hidden_effect = {
+			RUS = { 
+				remove_unit_leader = 922	
+				remove_unit_leader = 923
+				remove_unit_leader = 930
+			}
+			country_event = { id = rus_leave_officers_event.5 days = 15 }
+		}
+	}	
+
+}
+
+country_event = {
+	id = rus_leave_officers_event.5 # Бегство офицеров продолжается
+	title = rus_leave_officers_event.5.t
+	desc = rus_leave_officers_event.5.d
+	picture = GFX_report_event_political_discussion
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event rus_leave_officers_event.5"
+	}
+	
+	option = {
+		name = rus_leave_officers_event.5.a	
+		
+		hidden_effect = {
+			if = {
+				limit = {
+					NOT = { has_country_flag = RUS_not_loyal_officers_purged }
+				}
+				remove_unit_leader = 905
+			}
+			RUS = { 
+				remove_unit_leader = 907		
+				remove_unit_leader = 916		
+				remove_unit_leader = 918		
+				remove_unit_leader = 924	
+				remove_unit_leader = 925	
+				remove_unit_leader = 927	
+				remove_unit_leader = 928	
+				remove_unit_leader = 929		
+			}
+		}
+	}		
 
 }
