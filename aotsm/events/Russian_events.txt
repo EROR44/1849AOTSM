@@ -15,6 +15,7 @@ add_namespace = russian_socialist_political_event #
 add_namespace = russian_socialist_industry_event #
 add_namespace = russian_socialist_const_ref_event #
 add_namespace = russian_socialist_army_event #
+add_namespace = russian_socialist_trigger_event #
 add_namespace = russian_socialist_air_event #
 add_namespace = russian_socialist_navy_event #
 add_namespace = russian_kromwland_politic #
@@ -5312,7 +5313,7 @@ country_event = {
 	
 	option = {
 		name = russian_socialist_political_event.4.a	
-
+		
 		hidden_effect = {
 			
 		}
@@ -5335,12 +5336,14 @@ country_event = {
 	
 	option = {
 		name = russian_socialist_political_event.5.a	
-			
+		
+		add_timed_idea = {
+			days = 365
+			idea = RUS_dissatisfied_nobility
+		}	
+		
 		hidden_effect = {
-			add_timed_idea = {
-				days = 365
-				idea = RUS_dissatisfied_nobility
-			}
+			
 		}
 	}
 }
@@ -5489,7 +5492,9 @@ country_event = {
 	
 	option = {
 		name = russian_socialist_political_event.10.a	
-			
+		
+		add_ideas = RUS_to_support_worker_classs
+		
 		hidden_effect = {
 			
 		}
@@ -5513,14 +5518,19 @@ country_event = {
 	option = {
 		name = russian_socialist_political_event.11.a	
 			
-		hidden_effect = {
+		add_timed_idea = {
+			idea = RUS_outflow_of_foreign_capital_1
+			days = 730
+		}	
 			
+		hidden_effect = {
+			set_country_flag = RUS_outflow_of_foreign_capital_started
 		}
 	}
 }
 
 country_event = {
-	id = russian_socialist_political_event.12 # 
+	id = russian_socialist_political_event.12 # Переход к плановой экономике
 	title = russian_socialist_political_event.12.t
 	desc = russian_socialist_political_event.12.d
 	picture = GFX_report_event_aotsm_generic_signing_the_contract
@@ -5535,7 +5545,9 @@ country_event = {
 	
 	option = {
 		name = russian_socialist_political_event.12.a	
-			
+		
+		remove_ideas = RUS_dependence_from_import	
+		
 		hidden_effect = {
 			if = {
 				limit = {
@@ -6481,6 +6493,140 @@ country_event = {
 	
 	option = {
 		name = russian_socialist_const_ref_event.14.a	
+		
+		hidden_effect = {
+			
+		}
+	}	
+
+}
+
+####################SOCIALIST_TRIGGER_EVENTS###############################
+
+country_event = {
+	id = russian_socialist_trigger_event.1 # Свап оттока иностранного капитала 1
+	title = russian_socialist_trigger_event.1.t
+	desc = russian_socialist_trigger_event.1.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	trigger = {
+		tag = RUS
+		has_idea = RUS_outflow_of_foreign_capital_1
+		has_country_flag = {
+			flag = RUS_outflow_of_foreign_capital_started
+			days > 180
+		}
+	}
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event russian_socialist_trigger_event.1"
+	}
+	
+	option = {
+		name = russian_socialist_trigger_event.1.a	
+		
+		swap_ideas = {
+			remove_idea = RUS_outflow_of_foreign_capital_1
+			add_idea = RUS_outflow_of_foreign_capital_2
+		}
+		
+		hidden_effect = {
+			
+		}
+	}	
+
+}
+
+country_event = {
+	id = russian_socialist_trigger_event.2 # Свап оттока иностранного капитала 2
+	title = russian_socialist_trigger_event.2.t
+	desc = russian_socialist_trigger_event.2.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	trigger = {
+		tag = RUS
+		has_idea = RUS_outflow_of_foreign_capital_2
+		has_country_flag = {
+			flag = RUS_outflow_of_foreign_capital_started
+			days > 365
+		}
+	}
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event russian_socialist_trigger_event.2"
+	}
+	
+	option = {
+		name = russian_socialist_trigger_event.2.a	
+		
+		swap_ideas = {
+			remove_idea = RUS_outflow_of_foreign_capital_2
+			add_idea = RUS_outflow_of_foreign_capital_3
+		}
+		
+		hidden_effect = {
+			
+		}
+	}	
+
+}
+
+country_event = {
+	id = russian_socialist_trigger_event.3 # Свап оттока иностранного капитала 3
+	title = russian_socialist_trigger_event.3.t
+	desc = russian_socialist_trigger_event.3.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	trigger = {
+		tag = RUS
+		has_idea = RUS_outflow_of_foreign_capital_3
+		has_country_flag = {
+			flag = RUS_outflow_of_foreign_capital_started
+			days > 580
+		}
+	}
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event russian_socialist_trigger_event.3"
+	}
+	
+	option = {
+		name = russian_socialist_trigger_event.3.a	
+		
+		remove_ideas = RUS_outflow_of_foreign_capital_3
+		
+		hidden_effect = {
+			
+		}
+	}	
+
+}
+
+country_event = {
+	id = russian_socialist_trigger_event.4 # 
+	title = russian_socialist_trigger_event.4.t
+	desc = russian_socialist_trigger_event.4.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	trigger = {
+		#tag = RUS
+		always = no
+	}
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event russian_socialist_trigger_event.4"
+	}
+	
+	option = {
+		name = russian_socialist_trigger_event.4.a	
 		
 		hidden_effect = {
 			
