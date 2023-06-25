@@ -5376,3 +5376,220 @@ pru_air_base_decision = {
 	}
 
 }
+
+prussian_midnight = {
+
+	pru_start_of_civil_war_decision = {
+	
+		activation = {
+			has_country_flag = decaing_reich 
+		}
+		
+		available = {
+			NOT = {
+				has_country_flag = decaing_reich
+			}
+		}
+		
+		cancel_trigger = {
+			NOT = {
+				has_country_flag = decaing_reich
+			}
+		}
+		
+		visible = {
+			tag = PRU
+			has_country_flag = BYZ_vs_BUL_win 
+		}
+		
+		icon = generic_prepare_civil_war
+		
+		days_mission_timeout = 330
+		
+		fire_only_once = yes
+		
+		timeout_effect = {
+			pru_blacksun_civilwar = yes
+		}
+		
+	}
+
+	pru_decing_of_reich_stability = {
+	
+		activation = {
+			has_country_flag = decaing_reich 
+		}
+		
+		available = {
+			NOT = {
+				has_country_flag = decaing_reich
+			}
+		}
+		
+		cancel_trigger = {
+			NOT = {
+				has_country_flag = decaing_reich
+			}
+		}
+		
+		visible = {
+			tag = PRU
+			has_country_flag = BYZ_vs_BUL_win 
+		}
+		
+		icon = generic_prepare_civil_war
+		
+		days_mission_timeout = 5
+		
+		fire_only_once = no
+		
+		timeout_effect = {
+			add_stability = PRU.stab_decaing
+		}
+		
+	}
+	
+	pru_decing_of_reich_extra_stability = { 
+		
+		icon = generic_brainwash
+
+		allowed = {
+			original_tag = PRU
+		}
+
+		available = {
+		}
+
+		visible = {
+			tag = PRU
+			has_country_flag = decaing_reich
+			NOT = {
+				check_variable = { PRU.extra_stability > 1 }
+			}
+		}
+
+		fire_only_once = no
+
+		cost = 500	
+		
+		days_re_enable = 30
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = 25
+				PRU = {
+					has_stability > 0.749
+				}
+			}
+			modifier = {
+				add = 50
+				PRU = {
+					has_stability > 0.549
+				}
+			}
+		}
+		
+		complete_effect = {
+			add_stability = 0.10
+			add_to_variable = {
+				var = PRU.extra_stability
+				value = 1
+			}
+		}
+		
+	}
+	
+	pru_decing_of_reich_extra_stability_by_manpower = { 
+		
+		icon = generic_military
+
+		allowed = {
+			original_tag = PRU
+		}
+
+		available = {
+			has_manpower > 75000
+		}
+
+		visible = {
+			tag = PRU
+			has_country_flag = decaing_reich
+		}
+
+		fire_only_once = no
+
+		cost = 0
+		
+		days_re_enable = 30
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = 25
+				PRU = {
+					has_stability > 0.749
+				}
+			}
+			modifier = {
+				add = 50
+				PRU = {
+					has_stability > 0.549
+				}
+			}
+		}
+		
+		complete_effect = {
+			add_stability = 0.025
+			add_manpower = -75000
+		}
+		
+	}
+	
+	pru_decing_of_reich_extra_stability_by_armyxp = { 
+		
+		icon = generic_army_support
+
+		allowed = {
+			original_tag = PRU
+		}
+
+		available = {
+			has_army_experience > 100
+		}
+
+		visible = {
+			tag = PRU
+			has_country_flag = decaing_reich
+		}
+
+		fire_only_once = no
+
+		cost = 0
+		
+		days_re_enable = 30
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = 25
+				PRU = {
+					has_stability > 0.749
+				}
+			}
+			modifier = {
+				add = 50
+				PRU = {
+					has_stability > 0.549
+				}
+			}
+		}
+		
+		complete_effect = {
+			add_stability = 0.025
+			army_experience = -100
+		}
+		
+	}
+	
+}
