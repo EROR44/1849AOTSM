@@ -5449,7 +5449,7 @@ prussian_midnight = {
 			has_country_flag = BYZ_vs_BUL_win 
 		}
 		
-		icon = generic_prepare_civil_war
+		icon = generic_civil_support
 		
 		days_mission_timeout = 15
 		
@@ -5522,7 +5522,7 @@ prussian_midnight = {
 		}
 
 		available = {
-			has_manpower > 75000
+			has_manpower > 50000
 		}
 
 		visible = {
@@ -5554,7 +5554,7 @@ prussian_midnight = {
 		
 		complete_effect = {
 			add_stability = 0.025
-			add_manpower = -75000
+			add_manpower = -50000
 		}
 		
 	}
@@ -5568,7 +5568,7 @@ prussian_midnight = {
 		}
 
 		available = {
-			has_army_experience > 100
+			has_army_experience > 49.99
 		}
 
 		visible = {
@@ -5600,7 +5600,189 @@ prussian_midnight = {
 		
 		complete_effect = {
 			add_stability = 0.025
-			army_experience = -100
+			army_experience = -50
+		}
+		
+	}
+	
+	pru_decing_of_reich_extra_stability_by_fabric = { 
+		
+		icon = generic_factory
+
+		allowed = {
+			original_tag = PRU
+		}
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = pru_numb_of_state_with_fabric_tt
+				PRU = {
+					any_owned_state = {
+						industrial_complex > 0
+						is_fully_controlled_by = PRU
+					}
+					any_owned_state = {
+						industrial_complex > 0
+						is_fully_controlled_by = PRU
+					}
+					any_owned_state = {
+						industrial_complex > 0
+						is_fully_controlled_by = PRU
+					}
+				}
+			}
+		}
+
+		visible = {
+			tag = PRU
+			has_country_flag = decaing_reich
+		}
+
+		fire_only_once = no
+
+		cost = 0
+		
+		days_re_enable = 30
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = 25
+				PRU = {
+					has_stability > 0.749
+				}
+			}
+			modifier = {
+				add = 50
+				PRU = {
+					has_stability > 0.549
+				}
+			}
+		}
+		
+		complete_effect = {
+			add_stability = 0.025
+			random_state = {
+				limit = {
+					is_fully_controlled_by = PRU
+					is_core_of = PRU
+				}
+				remove_building = {
+					type = industrial_complex
+					level = 1
+				}
+			}
+			random_state = {
+				limit = {
+					is_fully_controlled_by = PRU
+					is_core_of = PRU
+				}
+				remove_building = {
+					type = industrial_complex
+					level = 1
+				}
+			}
+			random_state = {
+				limit = {
+					is_fully_controlled_by = PRU
+					is_core_of = PRU
+				}
+				remove_building = {
+					type = industrial_complex
+					level = 1
+				}
+			}
+		}
+		
+	}
+	
+	pru_decing_of_reich_extra_stability_by_armsfabric = { 
+		
+		icon = generic_merge_plant_tank
+
+		allowed = {
+			original_tag = PRU
+		}
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = pru_numb_of_state_with_armsfabric_tt		
+				PRU = {
+					any_owned_state = {
+						arms_factory > 0
+						is_fully_controlled_by = PRU
+					}
+					any_owned_state = {
+						arms_factory > 0
+						is_fully_controlled_by = PRU
+					}
+					any_owned_state = {
+						arms_factory > 0
+						is_fully_controlled_by = PRU
+					}
+				}
+			}
+		}
+
+		visible = {
+			tag = PRU
+			has_country_flag = decaing_reich
+		}
+
+		fire_only_once = no
+
+		cost = 0
+		
+		days_re_enable = 30
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = 25
+				PRU = {
+					has_stability > 0.749
+				}
+			}
+			modifier = {
+				add = 50
+				PRU = {
+					has_stability > 0.549
+				}
+			}
+		}
+		
+		complete_effect = {
+			add_stability = 0.025
+			random_state = {
+				limit = {
+					is_fully_controlled_by = PRU
+					is_core_of = PRU
+				}
+				remove_building = {
+					type = arms_factory
+					level = 1
+				}
+			}
+			random_state = {
+				limit = {
+					is_fully_controlled_by = PRU
+					is_core_of = PRU
+				}
+				remove_building = {
+					type = arms_factory
+					level = 1
+				}
+			}
+			random_state = {
+				limit = {
+					is_fully_controlled_by = PRU
+					is_core_of = PRU
+				}
+				remove_building = {
+					type = arms_factory
+					level = 1
+				}
+			}
 		}
 		
 	}
