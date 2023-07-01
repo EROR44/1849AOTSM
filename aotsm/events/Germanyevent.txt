@@ -4286,14 +4286,34 @@ country_event = { #Black Order Hail Kaiser
 	
 	option = {
 		name = ger_blackorder.1.a
-		custom_effect_tooltip = pru_blacksun_influince_rise
 		ai_chance = {
 			base = 25
+			modifier = {
+				add = -25
+				has_game_rule = { 
+					rule = PRU_BS_ai_behavior 
+					option = PRU_BS_NOT_COME_TO_RULE 
+				}
+			}
+			modifier = {
+				add = 75
+				has_game_rule = { 
+					rule = PRU_BS_ai_behavior 
+					option = PRU_BS_COME_TO_RULE 
+				}
+			}
 		}
+		custom_effect_tooltip = pru_blacksun_influince_rise
 		hidden_effect = {
 			add_to_variable = {
 				var = PRU.blacksun_influence
 				value = 1
+			}
+			PRU = {
+				country_event = {
+					id = ger_blackorder.7
+					days = 210
+				}
 			}
 		}
 	}
@@ -4302,6 +4322,28 @@ country_event = { #Black Order Hail Kaiser
 		name = ger_blackorder.1.b
 		ai_chance = {
 			base = 75
+			modifier = {
+				add = -75
+				has_game_rule = { 
+					rule = PRU_BS_ai_behavior 
+					option = PRU_BS_NOT_COME_TO_RULE 
+				}
+			}
+			modifier = {
+				add = -75
+				has_game_rule = { 
+					rule = PRU_BS_ai_behavior 
+					option = PRU_BS_COME_TO_RULE 
+				}
+			}
+		}
+		hidden_effect = {
+			PRU = {
+				country_event = {
+					id = ger_blackorder.7
+					days = 210
+				}
+			}
 		}
 	}
 	
@@ -4310,6 +4352,13 @@ country_event = { #Black Order Hail Kaiser
 		custom_effect_tooltip = pru_blacksun_influince_fall
 		ai_chance = {
 			base = 0
+			modifier = {
+				add = 100
+				has_game_rule = { 
+					rule = PRU_BS_ai_behavior 
+					option = PRU_BS_NOT_COME_TO_RULE 
+				}
+			}
 		}
 		hidden_effect = {
 			add_to_variable = {
@@ -4340,6 +4389,13 @@ country_event = { #Black Sun helping Hand
 		name = ger_blackorder.2.a
 		ai_chance = {
 			base = 20
+			modifier = {
+				add = 80
+				has_game_rule = { 
+					rule = PRU_BS_ai_behavior 
+					option = PRU_BS_COME_TO_RULE 
+				}
+			}
 		}
 		add_equipment_to_stockpile = {
 			type = infantry_equipment
@@ -4440,6 +4496,13 @@ country_event = { #Black Sun helping Hand
 		name = ger_blackorder.2.b
 		ai_chance = {
 			base = 30
+			modifier = {
+				add = -30
+				has_game_rule = { 
+					rule = PRU_BS_ai_behavior 
+					option = PRU_BS_COME_TO_RULE 
+				}
+			}
 		}
 		add_equipment_to_stockpile = {
 			type = infantry_equipment
@@ -4474,6 +4537,13 @@ country_event = { #Black Sun helping Hand
 		name = ger_blackorder.2.c
 		ai_chance = {
 			base = 50
+			modifier = {
+				add = -50
+				has_game_rule = { 
+					rule = PRU_BS_ai_behavior 
+					option = PRU_BS_COME_TO_RULE 
+				}
+			}
 		}
 		custom_effect_tooltip = pru_blacksun_influince_fall
 		hidden_effect = {
@@ -4502,6 +4572,13 @@ country_event = { #Black Sun in goverment
 		name = ger_blackorder.3.a
 		ai_chance = {
 			base = 30
+			modifier = {
+				add = 70
+				has_game_rule = { 
+					rule = PRU_BS_ai_behavior 
+					option = PRU_BS_COME_TO_RULE 
+				}
+			}
 		}
 		custom_effect_tooltip = pru_blacksun_influince_rise
 		hidden_effect = {
@@ -4516,6 +4593,13 @@ country_event = { #Black Sun in goverment
 		name = ger_blackorder.3.b
 		ai_chance = {
 			base = 70
+			modifier = {
+				add = -70
+				has_game_rule = { 
+					rule = PRU_BS_ai_behavior 
+					option = PRU_BS_COME_TO_RULE 
+				}
+			}
 		}
 		custom_effect_tooltip = pru_blacksun_influince_fall
 		hidden_effect = {
@@ -4560,6 +4644,13 @@ country_event = { #Black Sun try coup the goverment
 			}
 			random_list = {
 				74 = {
+					modifier = {
+						add = 26
+						has_game_rule = { 
+							rule = PRU_BS_ai_behavior 
+							option = PRU_BS_COME_TO_RULE 
+						}
+					}
 					PRU = {
 						country_event = {
 							id = ger_blackorder.5
@@ -4568,6 +4659,13 @@ country_event = { #Black Sun try coup the goverment
 					}
 				}
 				26 = {
+					modifier = {
+						add = -26
+						has_game_rule = { 
+							rule = PRU_BS_ai_behavior 
+							option = PRU_BS_COME_TO_RULE 
+						}
+					}
 					PRU = {
 						country_event = {
 							id = ger_blackorder.6
@@ -4681,6 +4779,14 @@ country_event = { #Black Sun succesd coup
 					target_country = PRU
 					character = KOL_Maestro_Second
 				}
+				set_nationality = {
+					target_country = PRU
+					character = KOL_Alexandre_Seslavine
+				}
+				set_nationality = {
+					target_country = PRU
+					character = KOL_Alexandre_Seslavine_mil
+				}
 			}
 			PRU = {
 				set_politics = {
@@ -4708,6 +4814,12 @@ country_event = { #Black Sun succesd coup
 							id = script_event.39
 							days = 30
 						}
+					}
+				}
+				PRU = {
+					country_event = {
+						id = ger_blackorder.9
+						days = 330
 					}
 				}
 			}
@@ -4820,6 +4932,112 @@ country_event = { #Black Sun fail coup
 	
 }
 
+country_event = { #Aleksander in BS
+	id = ger_blackorder.7
+	title = ger_blackorder.7.t
+	desc = ger_blackorder.7.d
+	picture = GFX_
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger_blackorder.7"}
+	
+	option = {
+		name = ger_blackorder.7.a
+		hidden_effect = {
+			PRU = {
+				country_event = {
+					id = ger_blackorder.8
+					days = 170
+				}
+			}
+		}
+	}
+	
+}
+
+country_event = { #Aleksander ready to shoot
+	id = ger_blackorder.8
+	title = ger_blackorder.8.t
+	desc = ger_blackorder.8.d
+	picture = GFX_
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger_blackorder.8"}
+	
+	option = {
+		name = ger_blackorder.8.a
+	}
+	
+}
+
+country_event = { #Aleksander is it good way?
+	id = ger_blackorder.9
+	title = ger_blackorder.9.t
+	desc = ger_blackorder.9.d
+	picture = GFX_
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger_blackorder.9"}
+	
+	option = {
+		name = ger_blackorder.9.a
+	}
+	
+}
+
+country_event = { #Aleksander last decision
+	id = ger_blackorder.10
+	title = ger_blackorder.10.t
+	desc = ger_blackorder.10.d
+	picture = GFX_
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger_blackorder.10"}
+	
+	option = {
+		name = ger_blackorder.10.a
+		ai_chance = {
+			base = 30
+		}
+		hidden_effect = {
+			PRU = {
+				country_event = {
+					id = ger_blackorder.104
+					hours = 2
+				}
+			}
+		}
+	}
+	
+	option = {
+		name = ger_blackorder.10.b
+		ai_chance = {
+			base = 70
+		}
+		hidden_effect = {
+			PRU = {
+				country_event = {
+					id = ger_blackorder.107
+					hours = 2
+				}
+			}
+		}
+	}
+	
+}
+
 country_event = { #Hunting is going well
 	id = ger_blackorder.11
 	title = ger_blackorder.11.t
@@ -4836,6 +5054,13 @@ country_event = { #Hunting is going well
 		name = ger_blackorder.11.a
 		ai_chance = {
 			base = 30
+			modifier = {
+				add = 70
+				has_game_rule = { 
+					rule = PRU_BS_ai_behavior 
+					option = PRU_BS_COME_TO_RULE 
+				}
+			}
 		}
 		custom_effect_tooltip = pru_acces_to_all_partisan_must_die_tt
 		custom_effect_tooltip = pru_blacksun_influince_rise
@@ -4851,6 +5076,13 @@ country_event = { #Hunting is going well
 		name = ger_blackorder.11.b
 		ai_chance = {
 			base = 70
+			modifier = {
+				add = -70
+				has_game_rule = { 
+					rule = PRU_BS_ai_behavior 
+					option = PRU_BS_COME_TO_RULE 
+				}
+			}
 		}
 		custom_effect_tooltip = pru_acces_to_all_partisan_must_die_tt
 	}
@@ -4892,7 +5124,7 @@ country_event = { #Maestro want Burgundia
 	option = { #Good Idea
 		name = ger_blackorder.12.a
 		ai_chance = {
-			base = 75
+			base = 95
 		}
 		PRU = {
 			puppet = BRG
@@ -4936,7 +5168,7 @@ country_event = { #Maestro want Burgundia
 	option = { #I need your here
 		name = ger_blackorder.12.b
 		ai_chance = {
-			base = 25
+			base = 5
 		}
 	}
 	
@@ -4958,6 +5190,13 @@ country_event = { #Solder flow into Black Sun
 		name = ger_blackorder.13.a
 		ai_chance = {
 			base = 25
+			modifier = {
+				add = 75
+				has_game_rule = { 
+					rule = PRU_BS_ai_behavior 
+					option = PRU_BS_COME_TO_RULE 
+				}
+			}
 		}
 		hidden_effect = {
 			PRU = {
@@ -4973,6 +5212,13 @@ country_event = { #Solder flow into Black Sun
 		name = ger_blackorder.13.b
 		ai_chance = {
 			base = 75
+			modifier = {
+				add = -75
+				has_game_rule = { 
+					rule = PRU_BS_ai_behavior 
+					option = PRU_BS_COME_TO_RULE 
+				}
+			}
 		}
 		PRU = {
 			add_manpower = -50000
@@ -5011,6 +5257,13 @@ country_event = { #General flow into Black Sun
 		name = ger_blackorder.14.a
 		ai_chance = {
 			base = 75
+			modifier = {
+				add = 25
+				has_game_rule = { 
+					rule = PRU_BS_ai_behavior 
+					option = PRU_BS_COME_TO_RULE 
+				}
+			}
 		}
 		remove_trait = {
 			character = PRU_Eduard_von_Yahman
@@ -5072,6 +5325,13 @@ country_event = { #General flow into Black Sun
 		name = ger_blackorder.14.b
 		ai_chance = {
 			base = 25
+			modifier = {
+				add = -25
+				has_game_rule = { 
+					rule = PRU_BS_ai_behavior 
+					option = PRU_BS_COME_TO_RULE 
+				}
+			}
 		}
 		PRU = {
 			remove_unit_leader = 18
@@ -5113,6 +5373,13 @@ country_event = { #Marshal flow into Black Sun
 		name = ger_blackorder.15.a
 		ai_chance = {
 			base = 75
+			modifier = {
+				add = 25
+				has_game_rule = { 
+					rule = PRU_BS_ai_behavior 
+					option = PRU_BS_COME_TO_RULE 
+				}
+			}
 		}
 		remove_trait = {
 			character = PRU_Fridrich_Ernst_von_Wrangel
@@ -5142,6 +5409,13 @@ country_event = { #Marshal flow into Black Sun
 		name = ger_blackorder.15.b
 		ai_chance = {
 			base = 25
+			modifier = {
+				add = -25
+				has_game_rule = { 
+					rule = PRU_BS_ai_behavior 
+					option = PRU_BS_COME_TO_RULE 
+				}
+			}
 		}
 		PRU = {
 			remove_unit_leader = 3
@@ -5174,7 +5448,7 @@ country_event = { #Black Sun succesor
 	option = { #We have only one option
 		name = ger_blackorder.16.a
 		ai_chance = {
-			base = 75
+			base = 100
 		}
 		custom_effect_tooltip = pru_choose_jh_heir_of_bs_tt
 		hidden_effect = {
@@ -5216,7 +5490,7 @@ country_event = { #Long Night
 	option = { #Intresting
 		name = ger_blackorder.17.a
 		ai_chance = {
-			base = 75
+			base = 100
 		}
 		PRU = {
 			kill_country_leader = yes
@@ -5254,7 +5528,7 @@ country_event = { #First edict
 	option = { #Intresting
 		name = ger_blackorder.18.a
 		ai_chance = {
-			base = 75
+			base = 100
 		}
 		add_stability = -0.05
 		add_popularity = {
@@ -5432,10 +5706,10 @@ country_event = { #Midnight is comming
 		ai_chance = {
 			base = 75
 		}
-		set_stability = 1.00
 		custom_effect_tooltip = start_of_pru_decaing_tt
 		hidden_effect = {
 			PRU = {
+				set_stability = 1.00
 				set_country_flag = decaing_reich
 				set_variable = {
 					var = PRU.stab_decaing
@@ -5445,6 +5719,51 @@ country_event = { #Midnight is comming
 				activate_mission = pru_decing_of_reich_stability
 			}
 		}
+	}
+	
+}
+
+country_event = { #Clean of Reich
+	id = ger_blackorder.23
+	title = ger_blackorder.23.t
+	desc = ger_blackorder.23.d
+	picture = GFX_
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger_blackorder.23"}
+	
+	option = { #Intresting
+		name = ger_blackorder.23.a
+		ai_chance = {
+			base = 100
+		}
+		add_stability = -0.10
+		custom_effect_tooltip = pru_reich_clean_himself_tt
+	}
+	
+}
+
+country_event = { #Plan O
+	id = ger_blackorder.24
+	title = ger_blackorder.24.t
+	desc = ger_blackorder.24.d
+	picture = GFX_
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger_blackorder.24"}
+	
+	option = { #Intresting
+		name = ger_blackorder.24.a
+		ai_chance = {
+			base = 100
+		}
+		add_manpower = -1
 	}
 	
 }
@@ -5511,6 +5830,116 @@ country_event = { #End of Reichmasariat
 					end_wars = yes
 					end_civil_wars = yes
 				}
+			}
+		}
+		if = {
+			limit = {
+				PRU = {
+					owns_state = 69
+				}
+			}
+			BOH = {
+				transfer_state = 69
+			}
+		}
+		if = {
+			limit = {
+				PRU = {
+					owns_state = 74
+				}
+			}
+			BOH = {
+				transfer_state = 74
+			}
+		}
+		if = {
+			limit = {
+				PRU = {
+					owns_state = 10
+				}
+			}
+			PLH = {
+				transfer_state = 10
+			}
+		}
+		if = {
+			limit = {
+				PRU = {
+					owns_state = 87
+				}
+			}
+			PLH = {
+				transfer_state = 87
+			}
+		}
+		if = {
+			limit = {
+				PRU = {
+					owns_state = 88
+				}
+			}
+			PLH = {
+				transfer_state = 88
+			}
+		}
+		if = {
+			limit = {
+				PRU = {
+					owns_state = 90
+				}
+			}
+			PLH = {
+				transfer_state = 90
+			}
+		}
+		if = {
+			limit = {
+				PRU = {
+					owns_state = 92
+				}
+			}
+			PLH = {
+				transfer_state = 92
+			}
+		}
+		if = {
+			limit = {
+				PRU = {
+					owns_state = 97
+				}
+			}
+			PLH = {
+				transfer_state = 97
+			}
+		}
+		if = {
+			limit = {
+				PRU = {
+					owns_state = 98
+				}
+			}
+			PLH = {
+				transfer_state = 98
+			}
+		}
+		if = {
+			limit = {
+				PRU = {
+					owns_state = 853
+				}
+			}
+			PLH = {
+				transfer_state = 853
+			}
+		}
+		if = {
+			limit = {
+				PRU = {
+					owns_state = 903
+				}
+			}
+			PLH = {
+				transfer_state = 903
 			}
 		}
 		hidden_effect = {
@@ -5581,7 +6010,7 @@ country_event = { #Revolt of Junkers
 				}
 				country_event = {
 					id = ger_blackorder.53
-					days = 4
+					hours = 6
 				}
 				transfer_units_fraction= {
 					target = KGR
@@ -5601,7 +6030,7 @@ country_event = { #Revolt of Junkers
 	option = { #Intresting
 		name = ger_blackorder.52.a
 		ai_chance = {
-			base = 75
+			base = 100
 		}
 	}
 	
@@ -5647,7 +6076,7 @@ country_event = { #Revolt of Socialism
 			PRU = {
 				country_event = {
 					id = ger_blackorder.54
-					days = 4
+					hours = 6
 				}
 				transfer_units_fraction= {
 					target = SGE
@@ -5667,7 +6096,7 @@ country_event = { #Revolt of Socialism
 	option = { #Intresting
 		name = ger_blackorder.53.a
 		ai_chance = {
-			base = 75
+			base = 100
 		}
 	}
 	
@@ -5683,7 +6112,7 @@ country_event = { #Revolt of Socialism
 	
 }
 
-country_event = { #Revolt of Socialism
+country_event = { #Start of Civilianwar
 	id = ger_blackorder.54
 	title = ger_blackorder.54.t
 	desc = ger_blackorder.54.d
@@ -5700,6 +6129,7 @@ country_event = { #Revolt of Socialism
 				country_event = {
 					id = ger_blackorder.55
 					days = 20
+					random_days = 15
 				}
 			}
 		}
@@ -5708,7 +6138,7 @@ country_event = { #Revolt of Socialism
 	option = { #Intresting
 		name = ger_blackorder.54.a
 		ai_chance = {
-			base = 75
+			base = 100
 		}
 		SGE = {
             declare_war_on = {
@@ -5727,6 +6157,10 @@ country_event = { #Revolt of Socialism
                 target = PRU
                 type = annex_everything
             }
+		}
+		hidden_effect = {
+			clr_global_flag = blacksun_civilwar_prepered
+			set_global_flag = blacksun_civilwar_going
 		}
 	}
 	
@@ -5788,7 +6222,7 @@ country_event = { #Revolt of Socialism
 	option = { #Intresting
 		name = ger_blackorder.55.a
 		ai_chance = {
-			base = 75
+			base = 100
 		}
 		RGR = {
             declare_war_on = {
@@ -5835,6 +6269,544 @@ country_event = { #Revolt of Socialism
                 target = SGE
                 type = annex_everything
             }
+		}
+	}
+	
+}
+
+country_event = { #END IS NEAR
+	id = ger_blackorder.100
+	title = ger_blackorder.100.t
+	desc = ger_blackorder.100.d
+	picture = GFX_report_event_nuke_buttom
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger_blackorder.100" }
+	
+	option = { #I accept it
+		name = ger_blackorder.100.a
+		ai_chance = {
+			base = 50
+		}
+		custom_effect_tooltip = pru_want_nuks_himself_first_tt
+		hidden_effect = {
+			PRU = {
+				country_event = {
+					id = ger_blackorder.101
+					hours = 8
+				}
+			}
+		}
+	}
+	
+	option = { #Stop it
+		name = ger_blackorder.100.b
+		ai_chance = {
+			base = 50
+		}
+	}
+	
+}
+
+country_event = { #END IS COMING
+	id = ger_blackorder.101
+	title = ger_blackorder.101.t
+	desc = ger_blackorder.101.d
+	picture = GFX_report_event_nuke_key
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger_blackorder.101" }
+	
+	option = { #I accept it
+		name = ger_blackorder.101.a
+		ai_chance = {
+			base = 50
+		}
+		custom_effect_tooltip = pru_want_nuks_himself_second_tt
+		hidden_effect = {
+			PRU = {
+				country_event = {
+					id = ger_blackorder.102
+					hours = 10
+				}
+			}
+		}
+	}
+	
+	option = { #Stop it
+		name = ger_blackorder.101.b
+		ai_chance = {
+			base = 50
+		}
+	}
+	
+}
+
+country_event = { #END COME
+	id = ger_blackorder.102
+	title = ger_blackorder.102.t
+	desc = ger_blackorder.102.d
+	picture = GFX_report_event_nuked_germany
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger_blackorder.102" }
+	
+	option = { #I accept it
+		name = ger_blackorder.102.a
+		ai_chance = {
+			base = 50
+		}
+		custom_effect_tooltip = pru_want_nuks_himself_third_tt
+		news_event = news.236
+		hidden_effect = {
+			PRU = {
+				country_event = {
+					id = ger_blackorder.103
+					hours = 20
+				}
+			}
+			launch_nuke = {
+				province = 241
+			}
+			launch_nuke = {
+				province = 279
+			}
+			launch_nuke = {
+				province = 321
+			}
+			launch_nuke = {
+				province = 336
+			}
+			launch_nuke = {
+				province = 362
+			}
+			launch_nuke = {
+				province = 425
+			}
+			launch_nuke = {
+				province = 495
+			}
+			launch_nuke = {
+				province = 514
+			}
+			launch_nuke = {
+				province = 519
+			}
+			launch_nuke = {
+				province = 538
+			}
+			launch_nuke = {
+				province = 564
+			}
+			launch_nuke = {
+				province = 587
+			}
+			launch_nuke = {
+				province = 663
+			}
+			launch_nuke = {
+				province = 678
+			}
+			launch_nuke = {
+				province = 692
+			}
+			launch_nuke = {
+				province = 708
+			}
+			launch_nuke = {
+				province = 3258
+			}
+			launch_nuke = {
+				province = 3288
+			}
+			launch_nuke = {
+				province = 3295
+			}
+			launch_nuke = {
+				province = 3326
+			}
+			launch_nuke = {
+				province = 3423
+			}
+			launch_nuke = {
+				province = 3473
+			}
+			launch_nuke = {
+				province = 3500
+			}
+			launch_nuke = {
+				province = 3522
+			}
+			launch_nuke = {
+				province = 3530
+			}
+			launch_nuke = {
+				province = 3535
+			}
+			launch_nuke = {
+				province = 3558
+			}
+			launch_nuke = {
+				province = 3560
+			}
+			launch_nuke = {
+				province = 3561
+			}
+			launch_nuke = {
+				province = 6282
+			}
+			launch_nuke = {
+				province = 6332
+			}
+			launch_nuke = {
+				province = 6375
+			}
+			launch_nuke = {
+				province = 6389
+			}
+			launch_nuke = {
+				province = 6464
+			}
+			launch_nuke = {
+				province = 6469
+			}
+			launch_nuke = {
+				province = 6488
+			}
+			launch_nuke = {
+				province = 6521
+			}
+			launch_nuke = {
+				province = 6535
+			}
+			launch_nuke = {
+				province = 6558
+			}
+			launch_nuke = {
+				province = 6583
+			}
+			launch_nuke = {
+				province = 6680
+			}
+			launch_nuke = {
+				province = 9347
+			}
+			launch_nuke = {
+				province = 9388
+			}
+			launch_nuke = {
+				province = 9503
+			}
+			launch_nuke = {
+				province = 9511
+			}
+			launch_nuke = {
+				province = 9515
+			}
+			launch_nuke = {
+				province = 9517
+			}
+			launch_nuke = {
+				province = 9559
+			}
+			launch_nuke = {
+				province = 9570
+			}
+			launch_nuke = {
+				province = 9575
+			}
+			launch_nuke = {
+				province = 9620
+			}
+			launch_nuke = {
+				province = 11305
+			}
+			launch_nuke = {
+				province = 11360
+			}
+			launch_nuke = {
+				province = 11366
+			}
+			launch_nuke = {
+				province = 11372
+			}
+			launch_nuke = {
+				province = 11431
+			}
+			launch_nuke = {
+				province = 11435
+			}
+			launch_nuke = {
+				province = 11467
+			}
+			launch_nuke = {
+				province = 11499
+			}
+			launch_nuke = {
+				province = 11516
+			}
+			launch_nuke = {
+				province = 11531
+			}
+			launch_nuke = {
+				province = 11544
+			}
+			launch_nuke = {
+				province = 11562
+			}
+		}
+	}
+	
+}
+
+country_event = { #SILENSE
+	id = ger_blackorder.103
+	title = ger_blackorder.103.t
+	desc = ger_blackorder.103.d
+	picture = GFX_report_event_nuked_silense
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger_blackorder.103" }
+	
+	option = { #It's fun
+		name = ger_blackorder.103.a
+		ai_chance = {
+			base = 50
+		}
+		custom_effect_tooltip = pru_only_silense_in_germany_tt
+		hidden_effect = {
+			NON = {
+				transfer_state = 5
+				transfer_state = 8
+				transfer_state = 28
+				transfer_state = 42
+				transfer_state = 50
+				transfer_state = 51
+				transfer_state = 52
+				transfer_state = 53
+				transfer_state = 54
+				transfer_state = 55
+				transfer_state = 56
+				transfer_state = 57
+				transfer_state = 58
+				transfer_state = 59
+				transfer_state = 60
+				transfer_state = 61
+				transfer_state = 62
+				transfer_state = 63
+				transfer_state = 64
+				transfer_state = 65
+				transfer_state = 66
+				transfer_state = 67
+				transfer_state = 68
+				transfer_state = 85
+				transfer_state = 86
+				transfer_state = 151
+				transfer_state = 188
+				transfer_state = 762
+				transfer_state = 763
+				transfer_state = 808
+				transfer_state = 828
+				transfer_state = 829
+				transfer_state = 862
+				transfer_state = 863
+				transfer_state = 887
+				transfer_state = 888
+				transfer_state = 890
+				transfer_state = 891
+				transfer_state = 892
+				transfer_state = 893
+				transfer_state = 894
+				transfer_state = 895
+				transfer_state = 896
+				transfer_state = 897
+				transfer_state = 898
+				transfer_state = 899
+				transfer_state = 900
+				transfer_state = 901
+				transfer_state = 940
+			}
+			every_state = {
+				limit = {
+					is_owned_by = NON
+				}
+				remove_core_of = owner
+			}
+		}
+	}
+	
+}
+
+country_event = { #Aleksander shoot Furer
+	id = ger_blackorder.104
+	title = ger_blackorder.104.t
+	desc = ger_blackorder.104.d
+	picture = GFX_
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger_blackorder.104" }
+	
+	option = { #Good ending
+		name = ger_blackorder.104.a
+		ai_chance = {
+			base = 100
+		}
+		custom_effect_tooltip = pru_end_of_black_sun_tt
+		PRU = {
+			kill_country_leader = yes
+			add_country_leader_role = {
+				character = KOL_Alexandre_Seslavine
+				promote_leader = yes
+				country_leader = {
+					ideology = radical_nationalism
+					expire = "1900.1.1.1"
+					traits = { }
+				}
+			}
+		}
+		hidden_effect = {
+			PRU = {
+				remove_unit_leader = 4414
+				country_event = {
+					id = ger_blackorder.105
+					days = 5
+				}
+			}
+		}
+	}
+	
+}
+
+country_event = { #Non radical reich
+	id = ger_blackorder.105
+	title = ger_blackorder.105.t
+	desc = ger_blackorder.105.d
+	picture = GFX_
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger_blackorder.105" }
+	
+	option = { #Good ending
+		name = ger_blackorder.105.a
+		ai_chance = {
+			base = 100
+		}
+		PRU = {
+			set_cosmetic_tag = PRU_SECOND_REPUBLIC
+		}
+		hidden_effect = {
+			PRU = {
+				set_country_leader_portrait = {
+					portrait = GFX_Portrait_Alexandre_Seslavine_military_nobs
+				}
+				set_portraits = {
+					character = KOL_Alexandre_Seslavine_mil
+					army = { small = "GFX_idea_Alexandre_Seslavine" }
+					army = { large = "GFX_Portrait_Alexandre_Seslavine_military_nobs" }
+				}
+				remove_trait = {
+					character = KOL_Alexandre_Seslavine_mil
+					trait = blacksun_general
+				}
+				country_event = {
+					id = ger_blackorder.106
+					days = 10 
+				}
+			}
+		}
+	}
+	
+}
+
+country_event = { #New democratic Reich
+	id = ger_blackorder.106
+	title = ger_blackorder.106.t
+	desc = ger_blackorder.106.d
+	picture = GFX_
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger_blackorder.106" }
+	
+	option = { #Good ending
+		name = ger_blackorder.106.a
+		ai_chance = {
+			base = 100
+		}
+		PRU = {
+			set_party_name = {
+				ideology = democratic
+				name = PRU_democratic_second
+				long_name = PRU_democratic_second_long
+			}
+			set_party_name = {
+				ideology = socialism
+				name = PRU_socialism_second
+				long_name = PRU_socialism_second_long
+			}
+			set_party_name = {
+				ideology = reactionist
+				name = PRU_reactionist_second
+				long_name = PRU_reactionist_second_long
+			}
+			set_party_name = {
+				ideology = authoritarian
+				name = PRU_authoritarian_second
+				long_name = PRU_authoritarian_second_long
+			}
+			set_country_flag = pru_second_republic
+			mark_focus_tree_layout_dirty = yes
+		}
+		hidden_effect = {
+			PRU = {
+				set_country_leader_portrait = {
+					portrait = GFX_Portrait_Alexandre_Seslavine
+				}
+			}
+		}
+	}
+	
+}
+
+country_event = { #Death of Dream
+	id = ger_blackorder.107
+	title = ger_blackorder.107.t
+	desc = ger_blackorder.107.d
+	picture = GFX_
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger_blackorder.107" }
+	
+	option = { #Bad end
+		name = ger_blackorder.106.a
+		PRU = {
+			remove_unit_leader = 4417
+		}
+		ai_chance = {
+			base = 100
 		}
 	}
 	
