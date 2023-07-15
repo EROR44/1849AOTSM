@@ -365,6 +365,37 @@ on_actions = {
 	
 	on_capitulation = {
 		effect = {
+			#KAZ capitulation - rus socialist invasion completed
+			if = {
+				limit = {
+					tag = KAZ
+					RUS = { has_country_flag = RUS_soc_agressive_politic_c_a }
+				}
+				RUS = {
+					white_peace = {
+						tag = KAZ
+						message = KAZ_conquered
+					} 					
+					RUS = {
+						annex_country = {
+							target = KAZ
+							transfer_troops = no
+						}
+					}
+				}
+				
+				every_country = {
+					if = {
+						limit = {
+							is_in_faction_with = RUS
+							has_war_with = KAZ
+						}
+						white_peace = KAZ
+					}
+				}
+				#news_event = news.1 #тут должен быть новостной о успешном завершении вторжения России
+				add_threat = 2
+			}
 			#PLH capitulation - Polish uprising failed - Germany ignore Poland
 			if = {
 				limit = {
