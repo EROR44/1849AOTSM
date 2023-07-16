@@ -1950,6 +1950,12 @@ on_actions = {
 						transfer_troops = yes
 					}
 				}
+				VLH = {
+					set_cosmetic_tag = BYZ_ROM
+				}
+				VLH = {
+					set_country_flag = VLHBYZ
+				}
 				BYZ = {
 					set_autonomy = {
 						target = VLH
@@ -1957,12 +1963,10 @@ on_actions = {
 						end_wars = yes
 						end_civil_wars = yes
 					}
-				}
-				VLH = {
-					set_cosmetic_tag = BYZ_ROM
-				}
-				VLH = {
-					set_country_flag = VLHBYZ
+					set_nationality = {
+						target_country = VLH
+						character = BYZ_Theodor_Aman
+					}
 				}
 				VLH = {
 					set_politics = { ruling_party = authoritarian elections_allowed = no }
@@ -9012,6 +9016,11 @@ on_actions = {
 					NEN = {
 						has_country_flag = NEN_vs_CHE
 					}
+					NOT = {
+						NEN = {
+							has_country_flag = NEN_win_che
+						}
+					}
 				}
 				NEN = {
 					annex_country = {
@@ -9028,12 +9037,18 @@ on_actions = {
 					NEN = {
 						has_country_flag = NEN_vs_TEK
 					}
+					NOT = {
+						NEN = {
+							has_country_flag = NEN_win_tek
+						}
+					}
 				}
 				NEN = {
 					annex_country = {
 						target = TEK
 						transfer_troops = no
 					}
+					set_country_flag = NEN_win_tek
 				}
 			}
 			#NEN capitulation
@@ -9046,6 +9061,11 @@ on_actions = {
 						}
 						NEN = {
 							has_country_flag = NEN_vs_TEK
+						}
+					}
+					NOT = {
+						NEN = {
+							has_country_flag = lose_expansion_war
 						}
 					}
 				}
@@ -9063,6 +9083,9 @@ on_actions = {
 							white_peace = CHE
 						}
 					}
+					CHE = {
+						transfer_state = 363
+					}
 				}
 				if = {
 					limit = {
@@ -9078,6 +9101,184 @@ on_actions = {
 							white_peace = TEK
 						}
 					}
+					TEK = {
+						transfer_state = 261
+					}
+				}
+				NEN = {
+					set_country_flag = lose_expansion_war
+				}
+			}
+			#GOT capitulation
+			if = {
+				limit = {
+					tag = GOT
+					SAB = {
+						has_country_flag = SAB_vs_GOT
+					}
+					NOT = {
+						SAB = {
+							has_country_flag = SAB_win_GOT
+						}
+					}
+				}
+				SAB = {
+					annex_country = {
+						target = GOT
+						transfer_troops = no
+					}
+					set_country_flag = SAB_win_GOT
+				}
+			}
+			#GRI capitulation
+			if = {
+				limit = {
+					tag = GRI
+					SAB = {
+						has_country_flag = SAB_vs_GRI
+					}
+					NOT = {
+						SAB = {
+							has_country_flag = SAB_win_GRI
+						}
+					}
+				}
+				SAB = {
+					annex_country = {
+						target = GRI
+						transfer_troops = no
+					}
+					set_country_flag = SAB_win_GRI
+				}
+			}
+			#BOT capitulation
+			if = {
+				limit = {
+					tag = BOT
+					SAB = {
+						has_country_flag = SAB_vs_BOT
+					}
+					NOT = {
+						SAB = {
+							has_country_flag = SAB_win_BOT
+						}
+					}
+				}
+				SAB = {
+					annex_country = {
+						target = BOT
+						transfer_troops = no
+					}
+					set_country_flag = SAB_win_BOT
+				}
+			}
+			#LUN capitulation
+			if = {
+				limit = {
+					tag = LUN
+					SAB = {
+						has_country_flag = SAB_vs_LUN
+					}
+					NOT = {
+						SAB = {
+							has_country_flag = SAB_win_LUN
+						}
+					}
+				}
+				SAB = {
+					annex_country = {
+						target = BOT
+						transfer_troops = no
+					}
+					set_country_flag = SAB_win_LUN
+				}
+			}
+			#SAB capitulation
+			if = {
+				limit = {
+					tag = SAB
+					OR = {
+						SAB = {
+							has_country_flag = SAB_vs_GOT
+						}
+						SAB = {
+							has_country_flag = SAB_vs_GRI
+						}
+						SAB = {
+							has_country_flag = SAB_vs_BOT
+						}
+						SAB = {
+							has_country_flag = SAB_vs_LUN
+						}
+					}
+					NOT = {
+						SAB = {
+							has_country_flag = lose_expansion_war
+						}
+					}
+				}
+				if = {
+					limit = {
+						SAB = {
+							has_country_flag = SAB_vs_GOT
+						}
+					}
+					every_country = {
+						if = {
+							limit = {
+								has_war_with = GOT
+							}
+							white_peace = GOT
+						}
+					}
+				}
+				if = {
+					limit = {
+						SAB = {
+							has_country_flag = SAB_vs_GRI
+						}
+					}
+					every_country = {
+						if = {
+							limit = {
+								has_war_with = GRI
+							}
+							white_peace = GRI
+						}
+					}
+				}
+				if = {
+					limit = {
+						SAB = {
+							has_country_flag = SAB_vs_BOT
+						}
+					}
+					every_country = {
+						if = {
+							limit = {
+								has_war_with = BOT
+							}
+							white_peace = BOT
+						}
+					}
+				}
+				if = {
+					limit = {
+						SAB = {
+							has_country_flag = SAB_vs_LUN
+						}
+					}
+					every_country = {
+						if = {
+							limit = {
+								has_war_with = LUN
+							}
+							white_peace = LUN
+						}
+					}
+				}
+				SAB = {
+					set_country_flag = lose_expansion_war
 				}
 			}
 		}
