@@ -2633,6 +2633,50 @@ country_event = { #Young General
 
 }
 
+country_event = { #Creating of South Africa
+	id = cbi.21
+	title = cbi.21.t
+	desc = cbi.21.d
+	picture = GFX_report_event_creating_of_south_africa
+	
+	is_triggered_only = yes
+	
+	option = { #We have no choise
+		name = cbi.21.a
+		add_political_power = 150
+		SAB = {
+			transfer_state = 681
+			add_state_core = 681
+		}
+		CBI = {
+			set_autonomy = {
+				target = SAB
+				autonomy_state = autonomy_dominion
+				end_wars = no
+				end_civil_wars = no
+			}
+		}
+		news_event = {
+			id = news.253
+			days = 3
+		}
+		hidden_effect = {
+			SAB = {
+				load_oob = SAB_army
+				if = {
+					limit = { has_dlc = "Man the Guns" }
+						load_oob = SAB_naval_mtg
+					else = {
+						load_oob = SAB_naval_legacy
+					}
+				}
+				set_cosmetic_tag = SAB_CBI
+			}
+		}
+	}
+
+}
+
 ### RIP ###
 
 country_event = { #Lem found dead
