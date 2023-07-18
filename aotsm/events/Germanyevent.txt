@@ -1656,6 +1656,23 @@ country_event = {
 			PRU = {
 				add_to_faction = IRE
 			}
+			IRE = {
+				set_politics = {
+					ruling_party = reactionist
+					elections_allowed = no
+					last_election = "1854.5.15"
+					election_frequency = 48
+				}
+				add_popularity = {
+					ideology = reactionist
+					popularity = 0.10
+				}
+				set_party_name = {
+					ideology = reactionist
+					long_name = IRE_reactionist_party_free_long
+					name = IRE_reactionist_party_free
+				}
+			}
 			CBI = {
 				remove_state_core = 113
 				remove_state_core = 119
@@ -1718,8 +1735,36 @@ country_event = {
 			CBI = {
 				remove_state_core = 123
 			}
-			ZUL = {
-				transfer_state = 681
+			BYZ = {
+				set_autonomy = {
+					target = SAB
+					autonomy_state = autonomy_aotsm_protectorat
+					end_wars = yes
+					end_civil_wars = yes
+				}
+				set_nationality = {
+					target_country = SAB
+					character = BYZ_Konstantinos_Mavromichalis
+				}
+				SAB = {
+					set_politics = { ruling_party = authoritarian elections_allowed = no }
+					set_popularities = {
+						democratic = 20
+						socialism = 3
+						reactionist = 21
+						authoritarian = 56
+					}
+					add_country_leader_role = {
+						character = BYZ_Konstantinos_Mavromichalis
+						promote_leader = yes
+						country_leader = {
+							ideology = unirtarism
+							expire = "1900.1.1.1"
+							traits = { roman_lord }
+						}
+					}
+					set_cosmetic_tag = SAB_BYZ
+				}
 			}
 			RIT = {
 				annex_country = {
@@ -1768,6 +1813,168 @@ country_event = {
 				white_peace = NEN
 			}
 			transfer_state = 696
+			set_cosmetic_tag = NEN_FREE
+			promote_character = NEN_Abraham_Lincoln
+			set_party_name = {
+				ideology = democratic
+				long_name = NEN_democratic_party_free_long
+				name = NEN_democratic_party_free
+			}
+			set_party_name = {
+				ideology = authoritarian
+				long_name = NEN_authoritarian_party_free_long
+				name = NEN_authoritarian_party_free
+			}
+			swap_ideas = {
+				remove_idea = oligarhy
+				add_idea = republic
+			}
+			if = {
+				limit = {
+					date > 1849.1.1
+					date < 1850.12.31
+				}
+				set_politics = {
+					ruling_party = democratic
+					elections_allowed = no
+					last_election = "1849.11.10"
+				}
+			}
+			if = {
+				limit = {
+					date > 1851.1.1
+					date < 1852.12.31
+				}
+				set_politics = {
+					ruling_party = democratic
+					elections_allowed = no
+					last_election = "1850.11.10"
+				}
+			}
+			if = {
+				limit = {
+					date > 1852.1.1
+					date < 1852.12.31
+				}
+				set_politics = {
+					ruling_party = democratic
+					elections_allowed = no
+					last_election = "1851.11.10"
+				}
+			}
+			if = {
+				limit = {
+					date > 1853.1.1
+					date < 1853.12.31
+				}
+				set_politics = {
+					ruling_party = democratic
+					elections_allowed = no
+					last_election = "1852.11.10"
+				}
+			}
+			if = {
+				limit = {
+					date > 1854.1.1
+					date < 1854.12.31
+				}
+				set_politics = {
+					ruling_party = democratic
+					elections_allowed = no
+					last_election = "1853.11.10"
+				}
+			}
+			if = {
+				limit = {
+					date > 1855.1.1
+					date < 1855.12.31
+				}
+				set_politics = {
+					ruling_party = democratic
+					elections_allowed = no
+					last_election = "1854.11.10"
+				}
+			}
+			if = {
+				limit = {
+					date > 1856.1.1
+					date < 1856.12.31
+				}
+				set_politics = {
+					ruling_party = democratic
+					elections_allowed = no
+					last_election = "1855.11.10"
+				}
+			}
+			if = {
+				limit = {
+					date > 1857.1.1
+					date < 1857.12.31
+				}
+				set_politics = {
+					ruling_party = democratic
+					elections_allowed = no
+					last_election = "1856.11.10"
+				}
+			}
+			if = {
+				limit = {
+					date > 1858.1.1
+					date < 1858.12.31
+				}
+				set_politics = {
+					ruling_party = democratic
+					elections_allowed = no
+					last_election = "1857.11.10"
+				}
+			}
+			if = {
+				limit = {
+					date > 1859.1.1
+					date < 1859.12.31
+				}
+				set_politics = {
+					ruling_party = democratic
+					elections_allowed = no
+					last_election = "1858.11.10"
+				}
+			}
+			if = {
+				limit = {
+					date > 1860.1.1
+					date < 1860.12.31
+				}
+				set_politics = {
+					ruling_party = democratic
+					elections_allowed = no
+					last_election = "1859.11.10"
+				}
+			}
+			if = {
+				limit = {
+					date > 1861.1.1
+					date < 1861.12.31
+				}
+				set_politics = {
+					ruling_party = democratic
+					elections_allowed = no
+					last_election = "1860.11.10"
+				}
+			}
+		}
+		news_event = {
+			id = news.254
+			days = 10
+		}
+		NEN = {
+			every_country = {
+				limit = {
+					has_war_with = NEN
+				}
+				white_peace = NEN
+			}
+			transfer_state = 696
+			set_cosmetic_tag = NEN_FREE
 		}
 		if = {
 			limit = {
@@ -2013,6 +2220,7 @@ country_event = {
 			}
 		}
 		set_global_flag = cbi_capitulation
+		set_global_flag = NEN_IS_FREE_FROM_BRITISH
 		if = {
 			limit = {
 				NOT = {
@@ -4748,9 +4956,6 @@ country_event = { #Black Sun succesd coup
 					target_country = PRU
 					character = KOL_Wilgelm_Austrian
 				}
-				KOL_Wilgelm_Austrian = {
-					promote_character = yes
-				}
 				set_nationality = {
 					target_country = PRU
 					character = KOL_Anton_Viktor_Osterreich
@@ -4789,6 +4994,9 @@ country_event = { #Black Sun succesd coup
 				}
 			}
 			PRU = {
+				KOL_Wilgelm_Austrian = {
+					promote_character = yes
+				}
 				set_politics = {
 					ruling_party = reactionist
 					elections_allowed = no
@@ -7188,6 +7396,56 @@ country_event = { #End of Reichmasariat
 			}
 			PLH = {
 				transfer_state = 98
+			}
+		}
+		if = {
+			limit = {
+				PRU = {
+					owns_state = 308
+				}
+			}
+			MEC = {
+				transfer_state = 308
+			}
+		}
+		if = {
+			limit = {
+				PRU = {
+					owns_state = 691
+				}
+			}
+			MEC = {
+				transfer_state = 691
+			}
+		}
+		if = {
+			limit = {
+				PRU = {
+					owns_state = 692
+				}
+			}
+			MEC = {
+				transfer_state = 692
+			}
+		}
+		if = {
+			limit = {
+				PRU = {
+					owns_state = 694
+				}
+			}
+			MEC = {
+				transfer_state = 694
+			}
+		}
+		if = {
+			limit = {
+				PRU = {
+					owns_state = 695
+				}
+			}
+			MEC = {
+				transfer_state = 695
 			}
 		}
 		if = {
