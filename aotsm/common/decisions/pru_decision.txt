@@ -830,147 +830,6 @@ pru_diplomat_missia = {
 		
 	}
 	
-	pru_help_hungary_win = { 
-		
-		icon = generic_nationalism
-
-		allowed = {
-			
-		}
-
-		available = {
- 
-		}
-
-		visible = {
-			original_tag = PRU
-			has_global_flag = russian_capitulation
-			VLH = { 
-				has_country_flag = VLH_war_with_HUN 
-			}
-			NOT = {
-				VLH = {
-					has_country_flag = vlh_capitulation
-				}
-			}
-			OR = {
-				country_exists = GLA
-				NOT = {
-					VLH = {
-						is_puppet = yes
-					}
-				}
-			}
-		}
-
-		fire_only_once = yes
-
-		cost = 0
-		days_remove = 12
-
-		ai_will_do = {
-			factor = 100
-		}
-		
-		remove_effect = {
-			PRU = {
-				add_to_faction = HUN
-			}
-			if = {
-				limit = {
-					country_exists = GLA
-				}
-				PRU = {
-					declare_war_on = {
-						target = GLA
-						type = annex_everything
-					}
-				}
-				hidden_effect = {
-					GLA = {
-						set_country_flag = PRU_destroed_russian_allience_GLA
-					}
-				}
-			}
-			if = {
-				limit = {
-					NOT = {
-						VLH = {
-							is_puppet = yes
-						}
-					}
-				}
-				PRU = {
-					declare_war_on = {
-						target = VLH
-						type = annex_everything
-					}
-				}
-				hidden_effect = {
-					VLH = {
-						set_country_flag = PRU_destroed_russian_allience_VLH
-						clr_country_flag = VLH_war_with_HUN
-					}
-				}
-			}
-		}
-		
-	}
-	
-	tranfer_west_ukrain = { 
-		
-		icon = generic_nationalism
-
-		allowed = {
-			original_tag = PRU
-		}
-
-		available = {
- 
-		}
-
-		visible = {
-			original_tag = PRU
-			has_global_flag = russian_capitulation
-			controls_state = 78
-			controls_state = 80
-			controls_state = 89
-			controls_state = 91
-		}
-
-		fire_only_once = yes
-
-		cost = 0
-		days_remove = 12
-
-		ai_will_do = {
-			factor = 100
-		}
-		
-		remove_effect = {
-			UKR = {
-				transfer_state = 78
-				add_state_core = 78
-				transfer_state = 80
-				add_state_core = 80
-				transfer_state = 89
-				add_state_core = 89
-				transfer_state = 91
-				add_state_core = 91
-				if = {
-					limit = {
-						PRU = {
-							owns_state = 766
-						}
-					}
-					transfer_state = 766
-				}
-				add_state_core = 766
-			}
-		}
-		
-	}
-	
 	creating_of_mittleafrika = {
 		icon = eng_trade_unions_support
 		
@@ -1799,15 +1658,15 @@ pru_diplomat_missia = {
 
 		visible = {
 			original_tag = PRU
-			PRU = {
-				has_completed_focus = PRU_dialog_with_ukraina
-			}
-			PRU = {
-				has_war_with = RUS
-			}
-			NOT = {
-				country_exists = UKR
-			}
+			#PRU = {
+			#	has_completed_focus = PRU_dialog_with_ukraina
+			#}
+			#PRU = {
+			#	has_war_with = RUS
+			#}
+			#NOT = {
+			#	country_exists = UKR
+			#}
 		}
 
 		fire_only_once = yes
@@ -1849,7 +1708,7 @@ pru_diplomat_missia = {
 						remove_state_core = 885
 						remove_state_core = 886
 					}
-					UKR = {
+					WUK = {
 						transfer_state = 93
 						add_state_core = 93
 						add_state_core = 137
@@ -1893,28 +1752,45 @@ pru_diplomat_missia = {
 						transfer_state = 886
 						add_state_core = 886
 					}
-					PRU = {
-						set_autonomy = {
-							target = UKR
-							autonomy_state = autonomy_puppet
-							end_wars = no
-							end_civil_wars = no
+					if = {
+						limit = {
+							NOT = {
+								WUK = {
+									is_puppet_of = PRU
+								}
+								WUK = {
+									is_subject_of = PRU
+								}
+							}
+						}
+						PRU = {
+							set_autonomy = {
+								target = WUK
+								autonomy_state = autonomy_puppet
+								end_wars = no
+								end_civil_wars = no
+							}
+						}
+						WUK = {
+							set_politics = { ruling_party = reactionist elections_allowed = no }
+							set_popularities = {
+								democratic = 6
+								socialism = 1
+								reactionist = 84
+								authoritarian = 9
+							}
 						}
 					}
-					UKR = {
-						set_politics = { ruling_party = reactionist elections_allowed = no }
-						set_popularities = {
-							democratic = 6
-							socialism = 1
-							reactionist = 84
-							authoritarian = 9
-						}
-					}
-					UKR = {
+					WUK = {
 						load_oob = UKR_army
 					}
-					UKR = {
+					WUK = {
 						inherit_technology = PRU
+						set_capital = {
+						  state = 202
+						  remember_old_capital = no
+						}
+						set_cosmetic_name = UKR_name
 					}
 					PRU = {
 						add_to_variable = {
@@ -1922,6 +1798,7 @@ pru_diplomat_missia = {
 							value = 1
 						}
 					}
+					set_global_flag = pru_steal_ukraina
 				}
 			}
 			if = {
@@ -1932,7 +1809,7 @@ pru_diplomat_missia = {
 						}
 					}
 				}
-				UKR = {
+				WUK = {
 					add_stability = 0.05
 					add_political_power = 150
 				}
