@@ -5575,6 +5575,7 @@ country_event = {
 		remove_ideas = RUS_dependence_from_import	
 		
 		hidden_effect = {
+			set_country_flag = RUS_country_has_plan_economic
 			if = {
 				limit = {
 					has_idea = export_focus
@@ -6988,6 +6989,162 @@ country_event = {
 
 }
 
+###############################SOCIALIST_NAVY_ARMY_EVENTS###############################
+
+country_event = {
+	id = russian_socialist_navy_event.1 #Вопрос реорганизации ВМФ
+	title = russian_socialist_navy_event.1.t
+	desc = russian_socialist_navy_event.1.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event russian_socialist_navy_event.1"
+	}
+	
+	option = {
+		name = russian_socialist_navy_event.1.a	
+		add_timed_idea = {
+			days = 365
+			idea = RUS_soc_navy_reorganisation_idea
+		}
+		hidden_effect = {
+			
+		}
+	}	
+
+}
+
+country_event = {
+	id = russian_socialist_navy_event.2 #Утверждение доктрины ВМФ
+	title = russian_socialist_navy_event.2.t
+	desc = russian_socialist_navy_event.2.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event russian_socialist_navy_event.2"
+	}
+	
+	option = {
+		name = russian_socialist_navy_event.2.a	
+		navy_experience = 20
+		hidden_effect = {
+			set_country_flag = RUS_soc_flot_impact_doctrine_flag
+		}
+	}	
+	
+	option = {
+		name = russian_socialist_navy_event.2.b
+		navy_experience = 20
+		hidden_effect = {
+			set_country_flag = RUS_soc_barrier_navy_ways_doctrine_flag
+		}
+	}	
+	
+	option = {
+		name = russian_socialist_navy_event.2.c	
+		navy_experience = 20
+		hidden_effect = {
+			set_country_flag = RUS_soc_strike_on_bases_doctrine_flag
+		}
+	}	
+
+}
+
+country_event = {
+	id = russian_socialist_navy_event.3 #Новые офицеры ВМФ
+	title = russian_socialist_navy_event.3.t
+	desc = russian_socialist_navy_event.3.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event russian_socialist_navy_event.3"
+	}
+	
+	option = {
+		name = russian_socialist_navy_event.3.a	
+		custom_effect_tooltip = RUS_soc_add_new_admirals
+		hidden_effect = {
+			add_naval_commander_role = {
+					character = RUS_Bereskin_Vsevolod_Alexandrovich
+					traits = { superior_tactician }
+					skill=2
+					attack_skill=1
+					defense_skill=1
+					maneuvering_skill=3
+					coordination_skill=2
+					legacy_id = 932
+				}
+				add_naval_commander_role = {
+					character = RUS_Birilev_Nivolay_Alexeevich
+					traits = { }
+					skill=1
+					attack_skill=1
+					defense_skill=1
+					maneuvering_skill=1
+					coordination_skill=1
+					legacy_id = 939
+				}
+				add_naval_commander_role = {
+					character = RUS_Butakov_Grigoriy_Ivanovich
+					traits = { }
+					skill=1
+					attack_skill=1
+					defense_skill=1
+					maneuvering_skill=1
+					coordination_skill=1
+					legacy_id = 940
+				}
+				add_naval_commander_role = {
+					character = RUS_Shevchenko_Ignatiy_Vasilevich
+					traits = { }
+					skill=1
+					attack_skill=1
+					defense_skill=1
+					maneuvering_skill=1
+					coordination_skill=1
+					legacy_id = 941
+				}
+		}
+	}	
+
+}
+
+country_event = {
+	id = russian_socialist_navy_event.4 #Завершение модернизации флота
+	title = russian_socialist_navy_event.4.t
+	desc = russian_socialist_navy_event.4.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event russian_socialist_navy_event.4"
+	}
+	
+	option = {
+		name = russian_socialist_navy_event.4.a	
+		add_ideas = RUS_soc_updated_russian_navy_idea
+		hidden_effect = {
+			
+		}
+	}	
+
+}
+
 ###############################SOCIALIST_SPHERE_EVENTS###############################
 
 country_event = {
@@ -7307,6 +7464,9 @@ country_event = {
 		ai_chance = {
 			base = 5
 		}
+		trigger = {
+			NOT = { has_country_flag = RUS_country_has_plan_economic }
+		}
 		add_ideas = RUS_soc_politic_expand_trade_relation_idea
 		hidden_effect = {
 			
@@ -7314,7 +7474,7 @@ country_event = {
 	}	
 	
 	option = {
-		name = russian_socialist_sphere_event.13.a	#бонус на закрытую экономику
+		name = russian_socialist_sphere_event.13.b	#бонус на закрытую экономику
 		ai_chance = {
 			base = 5
 		}
@@ -7342,7 +7502,10 @@ country_event = {
 	
 	option = {
 		name = russian_socialist_sphere_event.14.a	
-		add_ideas = RUS_soc_prepare_for_the_storm_idea
+		add_timed_idea = {
+			days = 730		
+			idea = RUS_soc_prepare_for_the_storm_idea
+		}
 		hidden_effect = {
 			
 		}
@@ -7629,7 +7792,7 @@ country_event = {
 			type = annex_everything
 		}
 		hidden_effect = {
-			#news_event = news.1 #тут должен быть новостной о вторжении россии в центральную азию
+			news_event = { id = news.256 days = 3 }#тут должен быть новостной о вторжении россии в центральную азию
 		}
 	}	
 
@@ -7637,7 +7800,7 @@ country_event = {
 }
 
 country_event = {
-	id = russian_socialist_sphere_event.22 # 
+	id = russian_socialist_sphere_event.22 # Вопрос дальнейшего расширения в центральную азию
 	title = russian_socialist_sphere_event.22.t
 	desc = russian_socialist_sphere_event.22.d
 	picture = GFX_report_event_aotsm_generic_signing_the_contract
@@ -7651,7 +7814,31 @@ country_event = {
 	}
 	
 	option = {
-		name = russian_socialist_sphere_event.22.a	#
+		name = russian_socialist_sphere_event.22.a	#Продолжить
+		ai_chance = {
+			base = 20
+		}
+		activate_mission = RUS_soc_annex_buk
+		activate_mission = RUS_soc_annex_hiv
+
+		declare_war_on = {
+			target = BUK
+			type = annex_everything
+		}
+		declare_war_on = {
+			target = HIV
+			type = annex_everything
+		}
+		hidden_effect = {
+			set_country_flag = RUS_unlock_mission_annex_buk
+			set_country_flag = RUS_unlock_mission_annex_hiv
+			news_event = { id = news.259 days = 2 }
+			news_event = { id = news.260 days = 3 }
+		}
+	}	
+	
+	option = {
+		name = russian_socialist_sphere_event.22.b	#Хватит 
 		ai_chance = {
 			base = 20
 		}
