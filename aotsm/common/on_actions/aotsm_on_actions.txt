@@ -370,6 +370,30 @@ on_actions = {
 				limit = {
 					tag = KAZ
 					RUS = { has_country_flag = RUS_soc_agressive_politic_c_a }
+				}			
+				
+				every_country = {
+					if = {
+						limit = {
+							is_in_faction_with = RUS
+							has_war_with = KAZ
+						}
+						white_peace = KAZ
+					}
+					if = {
+						limit = {
+							is_in_faction_with = KAZ
+						}
+						white_peace = RUS
+					}
+				}
+				KAZ = {
+					if = {
+						limit = {
+							is_faction_leader = yes
+						}
+						dismantle_faction = yes
+					}
 				}
 				RUS = {
 					white_peace = {
@@ -382,7 +406,18 @@ on_actions = {
 							transfer_troops = no
 						}
 					}
+					country_event = { id = russian_socialist_sphere_event.22 days = 20 } #ивент вопрос - расширяться дальше или нет
 				}
+				
+				news_event = news.257 #тут должен быть новостной о успешном завершении вторжения России
+				add_threat = 2
+			}
+			#RUS capitulation - KAZ win - rus socialist invasion fail
+			if = {
+				limit = {
+					tag = RUS
+					RUS = { has_country_flag = RUS_soc_agressive_politic_c_a }
+				}			
 				
 				every_country = {
 					if = {
@@ -392,8 +427,49 @@ on_actions = {
 						}
 						white_peace = KAZ
 					}
+					if = {
+						limit = {
+							is_in_faction_with = KAZ
+							has_war_with = RUS
+						}
+						white_peace = RUS
+					}
 				}
-				#news_event = news.1 #тут должен быть новостной о успешном завершении вторжения России
+				KAZ = {
+					white_peace = RUS					
+				}
+				
+				news_event = news.258 #
+				add_threat = 2
+			}
+			#BUK capitulation - rus socialist invasion completed
+			if = {
+				limit = {
+					tag = BUK
+					RUS = { has_country_flag = RUS_unlock_mission_annex_buk }
+				}			
+				
+				every_country = {
+					if = {
+						limit = {
+							is_in_faction_with = RUS
+							has_war_with = BUK
+						}
+						white_peace = BUK
+					}
+				}
+				RUS = {
+					white_peace = BUK					
+					RUS = {
+						annex_country = {
+							target = BUK
+							transfer_troops = no
+						}
+					}
+					
+				}
+				
+				news_event = news.258 #
 				add_threat = 2
 			}
 			#PLH capitulation - Polish uprising failed - Germany ignore Poland
