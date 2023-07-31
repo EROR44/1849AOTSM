@@ -6,6 +6,7 @@ add_namespace = fren
 add_namespace = fren_colonial
 add_namespace = fren_mil_up
 add_namespace = frr_his_claims
+add_namespace = fren_fober_agreement
 
 	
 country_event = { #покушение на лагранжа
@@ -1733,6 +1734,61 @@ country_event = {
 			
 		}
 	
+	}	
+}
+
+#######################FOBER_AGREEMENT_SECTION##########################
+
+country_event = { 
+	id = fren_fober_agreement.1 #уведомление о оккупации побережья нубии коптами
+	title = fren_fober_agreement.1.t
+	desc = fren_fober_agreement.1.d
+	picture = GFX_report_event_spain_civil_war_soldiers
+	
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+
+	option = {
+		name = fren_fober_agreement.1.a
+		ai_chance = {
+			base = 5
+		}
+#		remove_opinion_modifier = {
+#			target = BYZ
+#			modifier = history_friend
+#		}
+		add_opinion_modifier = {
+			target = BYZ
+			modifier = small_decrease
+		}
+		add_opinion_modifier = {
+			target = CPT
+			modifier = large_decrease
+		}
+		hidden_effect = {
+			BYZ = { country_event = { id = fren_fober_agreement.2 days = 3 } }
+		}
+	
+	}	
+}
+
+country_event = { 
+	id = fren_fober_agreement.2 #Французское правительство выражает недовольство - ивент для Ромеи
+	title = fren_fober_agreement.2.t
+	desc = fren_fober_agreement.2.d
+	picture = GFX_report_event_political_discussion
+	
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+
+	option = {
+		name = fren_fober_agreement.2.a
+		ai_chance = {
+			base = 5
+		}
+
 	}	
 }
 
