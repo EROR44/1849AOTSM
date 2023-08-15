@@ -9813,6 +9813,81 @@ on_actions = {
 	}
 	on_state_control_changed = {
 		effect = {
+			#QIN capitulation - soc russia annex north_manguria
+			if = {
+				limit = {
+					tag = QIN
+					RUS = { has_country_flag = RUS_soc_invade_in_north_manchguria }
+					657 = {
+						controller = {
+							OR = {
+								tag = RUS
+								is_subject_of = RUS
+								is_in_faction_with = RUS
+							}
+						}
+					}
+					560 = {
+						controller = {
+							OR = {
+								tag = RUS
+								is_subject_of = RUS
+								is_in_faction_with = RUS
+							}
+						}
+					}				
+
+				}
+				RUS = {
+					white_peace = QIN
+					clr_country_flag = RUS_soc_invade_in_north_manchguria
+					set_country_flag = RUS_soc_invade_in_north_manchguria_end
+				}
+				every_country = {
+					if = {
+						limit = {
+							is_in_faction_with = RUS
+							has_war_with = QIN
+						}
+						white_peace = QIN
+					}
+				}
+				if = {
+					limit = {
+						QIN = {
+							owns_state = 408
+							owns_state = 409
+							owns_state = 560
+							owns_state = 657
+						}
+					}
+					RUS = {
+						transfer_state = 408
+						transfer_state = 409
+						transfer_state = 560
+						transfer_state = 657
+					}
+				}
+				if = {
+					limit = {
+						MAN = {
+							owns_state = 408
+							owns_state = 409
+							owns_state = 560
+							owns_state = 657
+						}
+					}
+					RUS = {
+						transfer_state = 408
+						transfer_state = 409
+						transfer_state = 560
+						transfer_state = 657
+					}
+				}
+				#ews_event = { id = news.262 days = 3 }
+				add_threat = 3
+			}
+			
 			#RUS capitulation - RUS fail invasion in china
 			if = {
 				limit = {
