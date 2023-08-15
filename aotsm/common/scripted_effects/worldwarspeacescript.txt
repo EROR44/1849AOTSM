@@ -186,24 +186,45 @@ prussian_capitulation_all = {
 			transfer_state = 828
 			add_state_core = 828
 		}
-		REU = {
-			transfer_state = 8
-			add_state_core = 8
-			transfer_state = 42
-			add_state_core = 42
-			transfer_state = 51
-			add_state_core = 51
-			transfer_state = 894
-			add_state_core = 894
-		}
-		FRR = {
-			set_autonomy = {
-				target = REU
-				autonomy_state = autonomy_puppet
-				end_wars = yes
-				end_civil_wars = yes
+		if = {
+			limit = { 
+				FRR = { NOT = { has_government = reactionist }}
+			}
+			REU = {
+				transfer_state = 8
+				add_state_core = 8
+				transfer_state = 42
+				add_state_core = 42
+				transfer_state = 51
+				add_state_core = 51
+				transfer_state = 894
+				add_state_core = 894
+			}
+			FRR = {
+				set_autonomy = {
+					target = REU
+					autonomy_state = autonomy_puppet
+					end_wars = yes
+					end_civil_wars = yes
+				}
 			}
 		}
+		if = {
+			limit = { 
+				FRR = { has_government = reactionist }
+			}
+			FRR = {
+				transfer_state = 8
+				add_state_core = 8
+				transfer_state = 42
+				add_state_core = 42
+				transfer_state = 51
+				add_state_core = 51
+				transfer_state = 894
+				add_state_core = 894
+			}
+		}
+
 		BEL = {
 			transfer_state = 6
 			add_state_core = 6
@@ -1557,6 +1578,20 @@ byzanatium_capitulation_all = {
 		BYZ = {
 			set_autonomy = {
 				target = SAR
+				autonomy_state = autonomy_free
+				end_wars = yes
+				end_civil_wars = yes
+			}
+		}
+	}
+	if = {
+		limit = {
+			country_exists = YPS
+			YPS = { is_subject_of = BYZ}
+		}
+		BYZ = {
+			set_autonomy = {
+				target = YPS
 				autonomy_state = autonomy_free
 				end_wars = yes
 				end_civil_wars = yes
