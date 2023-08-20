@@ -22,6 +22,7 @@ add_namespace = russian_kromwland_politic #
 add_namespace = russian_armed_forces_event #
 add_namespace = russian_socialist_sphere_event #
 add_namespace = rus_leave_officers_event #
+add_namespace = rus_poland_situation_event #
 
 
 country_event = {
@@ -1569,6 +1570,11 @@ country_event = {
 		ai_chance = {
 			base = 20
 		}
+		add_trait = {
+			character = RUS_Mihail_Fedorovich_Orlov
+			ideology = paternalism
+			trait = leader_of_the_black_union
+		}
 		hidden_effect = {
 			
 		}
@@ -1632,6 +1638,7 @@ country_event = {
 					traits = { leader_of_the_black_union }
 				}
 			}
+			set_cosmetic_tag = RUS_RBL
 			news_event = { id = news.141 days = 3 }
 		}
 	}
@@ -5308,6 +5315,9 @@ country_event = {
 	
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event political_confrontation.1"
+		hidden_effect = {
+			news_event = { id = news.213 days = 3 }
+		}
 	}
 	
 	option = { #Киреевский Иван Васильевич - славянофил, церковник - ставка на церковь, пропаганду и национализм - пропаганда, закручивание гаек
@@ -9855,6 +9865,99 @@ country_event = {
 				remove_unit_leader = 928	
 				remove_unit_leader = 929		
 			}
+		}
+	}		
+
+}
+
+#################################POLAND_QUIESTION_EVENTS#####################################
+
+country_event = {
+	id = rus_poland_situation_event.1 # Что делать с польскими националистами?
+	title = rus_poland_situation_event.1.t
+	desc = rus_poland_situation_event.1.d
+	picture = GFX_report_event_political_discussion
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event rus_poland_situation_event.1"
+	}
+	
+	option = {
+		name = rus_poland_situation_event.1.a	
+		
+		hidden_effect = {
+			RUS = { country_event = { id = rus_poland_situation_event.2 days = 7} }
+		}
+	}		
+
+}
+
+country_event = {
+	id = rus_poland_situation_event.2 # Депортация поляков
+	title = rus_poland_situation_event.2.t
+	desc = rus_poland_situation_event.2.d
+	picture = GFX_report_event_polands_deportation
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event rus_poland_situation_event.2"
+	}
+	
+	option = {
+		name = rus_poland_situation_event.2.a	
+		853 = {
+			add_manpower = -255111
+		}
+		10 = {
+			add_manpower = -120357
+		}
+		87 = {
+			add_manpower = -21431
+		}
+		90 = {
+			add_manpower = -71357
+		}
+		92 = {
+			add_manpower = -50391
+		}
+		97 = {
+			add_manpower = -28567
+		}
+		98 = {
+			add_manpower = -21359
+		}
+		236 = {
+			add_manpower = 155001
+		}
+		237 = {
+			add_manpower = 100110
+		}
+		566 = {
+			add_manpower = 92788
+		}		
+		562 = {
+			add_manpower = 28567
+		}		
+		471 = {
+			add_manpower = 21359
+		}
+		
+		hidden_effect = {
+			10 = { remove_dynamic_modifier = { modifier = POL_nationalist_resistance_dynamic_modifier } }
+			87 = { remove_dynamic_modifier = { modifier = POL_nationalist_resistance_dynamic_modifier } }
+			90 = { remove_dynamic_modifier = { modifier = POL_nationalist_resistance_dynamic_modifier } }
+			92 = { remove_dynamic_modifier = { modifier = POL_nationalist_resistance_dynamic_modifier } }
+			97 = { remove_dynamic_modifier = { modifier = POL_nationalist_resistance_dynamic_modifier } }
+			98 = { remove_dynamic_modifier = { modifier = POL_nationalist_resistance_dynamic_modifier } }
+			853 = { remove_dynamic_modifier = { modifier = POL_nationalist_resistance_dynamic_modifier } }
+			news_event = { id = new.207 days = 7 }
 		}
 	}		
 
