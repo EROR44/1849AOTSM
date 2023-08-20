@@ -527,9 +527,20 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: focus RUS_use_own_specialists"
-			swap_ideas = {
-				remove_idea = RUS_russian_intelligentsia
-				add_idea = RUS_intelligentsia_1	
+			if = {
+				limit = {
+					has_idea = RUS_russian_intelligentsia
+				}
+				swap_ideas = {
+					remove_idea = RUS_russian_intelligentsia
+					add_idea = RUS_intelligentsia_1	
+				}
+			}
+			if = {
+				limit = {
+					has_idea = RUS_russian_identity
+				}
+				add_ideas = RUS_russian_specialist
 			}
 			RUS_add_5_autocrat_opinion = yes
 			RUS_add_5_monarhist_opinion = yes
@@ -559,9 +570,20 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: focus RUS_use_foreign_specialists"
-			swap_ideas = {
-				remove_idea = RUS_russian_intelligentsia
-				add_idea = RUS_foreign_advisors	
+			if = {
+				limit = {
+					has_idea = RUS_russian_intelligentsia
+				}
+				swap_ideas = {
+					remove_idea = RUS_russian_intelligentsia
+					add_idea = RUS_foreign_advisors	
+				}
+			}
+			if = {
+				limit = {
+					NOT = { has_idea = RUS_russian_intelligentsia }
+				}
+				add_ideas = RUS_foreign_advisors	
 			}
 			RUS_add_5_conservator_opinion = yes
 			RUS_remove_5_autocrat_opinion = yes
@@ -2403,6 +2425,7 @@ focus_tree = {
 		
 		available = {
 			RUS_has_more_than_50_influence_of_army = yes
+			has_country_leader = { ruling_only = yes character = RUS_Mihail_Fedorovich_Orlov }
 		}
 
 		relative_position_id = RUS_promote_respublikan_moods
