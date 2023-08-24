@@ -4598,7 +4598,7 @@ on_actions = {
 				set_global_flag = prt_capitulation
 				news_event = news.78
 			}
-			if = {
+			if = { #RUS capitulation - russia luse the great war
 				limit = {
 					tag = RUS
 					has_global_flag = firts_world_war
@@ -5071,10 +5071,23 @@ on_actions = {
 						remove_state_core = 216
 						remove_state_core = 722
 					}
-				}	
+				}
+				if = { #заглушка на случай участия Казахстана в великой войне на стороне России
+					limit = {
+						KAZ = { 
+							is_in_faction_with = RUS
+						}
+					}
+					every_country = {
+						limit = {
+							has_war_with = KAZ
+						}
+						white_peace = KAZ
+					}
+				}				
 				RUS = {
 					leave_faction = yes
-				}		
+				}
 				every_country = {
 					limit = {
 						has_war_with = RUS
@@ -10155,6 +10168,7 @@ on_actions = {
 					}
 					JRU = {
 						transfer_state = 714
+						transfer_state = 717
 						transfer_state = 761
 						add_state_core = 714
 						add_state_core = 717
