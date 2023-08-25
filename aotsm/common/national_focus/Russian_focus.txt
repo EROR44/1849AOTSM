@@ -6297,11 +6297,11 @@ focus_tree = {
 		cost = 5
 		
 		allow_branch = {
-			OR = {
-				has_completed_focus = RUS_new_socialist_economic 
-				has_completed_focus = RUS_organise_goverment_control_market 
-				has_completed_focus = RUS_go_to_plan_economic
-			}
+			#OR = {
+			#	has_completed_focus = RUS_new_socialist_economic 
+			#	has_completed_focus = RUS_organise_goverment_control_market 
+			#	has_completed_focus = RUS_go_to_plan_economic
+			#}
 		}
 		
 		available = {
@@ -6639,7 +6639,11 @@ focus_tree = {
 		cost = 5
 		
 		available = {
-			
+			has_war = no
+			OR = {
+				has_country_flag = pru_ignore_poland_uprising
+				date > 1855.1.1
+			}
 		}
 
 		relative_position_id = RUS_soc_why_is_our_ally
@@ -6719,7 +6723,8 @@ focus_tree = {
 		cost = 5
 		
 		available = {
-			
+			has_war = no
+			date > 1855.1.1
 		}
 
 		relative_position_id = RUS_soc_reorganise_ohranka
@@ -6761,7 +6766,7 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: focus RUS_soc_european_diplomaty"
-			
+			country_event = russian_socialist_sphere_event.44
 		}
 	}
 	
@@ -6769,14 +6774,43 @@ focus_tree = {
 		id = RUS_soc_frendship_witch_france #
 		icon = GFX_focus_rus_soc_friendship_witch_france
 		
-		x = -1
+		x = -2
 		y = 1
 		cost = 5
 		
 		available = {
-			FRR =  { has_government = socialism }
+			has_country_flag = RUS_soc_ally_with_frr
 		}
 		
+		mutually_exclusive = { focus = RUS_soc_own_way }
+		mutually_exclusive = { focus = RUS_soc_frendship_witch_cbi }
+
+		relative_position_id = RUS_soc_european_diplomaty
+		prerequisite = { focus = RUS_soc_european_diplomaty }
+		
+		available_if_capitulated = yes
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus RUS_soc_frendship_witch_france"
+			FRR = { country_event = { id = russian_socialist_sphere_event.45 days = 3 } }
+		}
+	}	
+	
+	focus = {
+		id = RUS_soc_own_way #
+		icon = GFX_focus_rus_soc_own_way
+		
+		x = 0
+		y = 1
+		cost = 5
+		
+		available = {
+			has_country_flag = RUS_soc_own_dip_way
+		}
+		
+		mutually_exclusive = { focus = RUS_soc_frendship_witch_france}
 		mutually_exclusive = { focus = RUS_soc_frendship_witch_cbi}
 
 		relative_position_id = RUS_soc_european_diplomaty
@@ -6788,7 +6822,11 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: focus RUS_soc_frendship_witch_france"
-			
+			create_faction = first_international
+			hidden_effect = {
+				set_country_flag = is_international_member
+				add_to_variable = { global.number_of_international_faction_members = 1 }
+			}
 		}
 	}	
 	
@@ -6796,15 +6834,16 @@ focus_tree = {
 		id = RUS_soc_frendship_witch_cbi #
 		icon = GFX_focus_rus_soc_friendship_witch_britain
 		
-		x = 1
+		x = 2
 		y = 1
 		cost = 5
 		
 		available = {
-			#CBI = { has_government = socialism }
+			#has_country_flag = RUS_soc_ally_with_cbi
 			aotsm_performed_by_event_or_solution = yes
 		}
 		
+		mutually_exclusive = { focus = RUS_soc_own_way }
 		mutually_exclusive = { focus = RUS_soc_frendship_witch_france }
 
 		relative_position_id = RUS_soc_european_diplomaty
@@ -6817,6 +6856,7 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: focus RUS_soc_european_diplomaty"
 			custom_effect_tooltip = aotsm_branch_in_development
+			#CBI = { country_event = { id = russian_socialist_sphere_event.48 days = 3 } }
 		}
 	}		
 	
@@ -6829,12 +6869,14 @@ focus_tree = {
 		cost = 5
 		
 		available = {
-			
+			has_country_flag = is_international_member
+			number_of_international_members_2_or_more = yes
 		}
 
 		relative_position_id = RUS_soc_european_diplomaty
 		prerequisite = { 
 			focus = RUS_soc_frendship_witch_france 
+			focus = RUS_soc_own_way 
 			focus = RUS_soc_frendship_witch_cbi 
 		}
 		
@@ -6857,7 +6899,8 @@ focus_tree = {
 		cost = 5
 		
 		available = {
-			
+			has_country_flag = is_international_member
+			number_of_international_members_2_or_more = yes
 		}
 
 		relative_position_id = RUS_soc_coop_researches
@@ -7036,7 +7079,7 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: focus RUS_soc_scandinavian_diplomaty"
-			
+			country_event = russian_socialist_sphere_event.51
 		}
 	}
 	
@@ -7061,7 +7104,10 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: focus RUS_soc_finland_quiestion"
-			
+			custom_effect_tooltip = RUS_unlock_finland_problem_decision_cat
+			hidden_effect = {
+				set_country_flag = RUS_unlock_fight_witch_finland_separatism
+			}
 		}
 	}
 	
@@ -7074,7 +7120,7 @@ focus_tree = {
 		cost = 5
 		
 		available = {
-			
+			has_country_flag = RUS_soc_war_sca_diplomaty
 		}
 		
 		mutually_exclusive = { focus = RUS_soc_set_diplomatic_relations_with_scandinavy }
@@ -7088,7 +7134,7 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: focus RUS_soc_intervention_in_scandinavy"
-			
+			country_event = russian_socialist_sphere_event.52
 		}
 	}
 	
@@ -7101,7 +7147,7 @@ focus_tree = {
 		cost = 5
 		
 		available = {
-			
+			148 = { is_owned_and_controlled_by = RUS }
 		}
 
 		relative_position_id = RUS_soc_intervention_in_scandinavy
@@ -7113,7 +7159,10 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: focus RUS_soc_intervention_in_scandinavy"
-			
+			custom_effect_tooltip = RUS_unlock_148_state_integration
+			hidden_effect = {
+				set_country_flag = RUS_unlock_148_integration
+			}
 		}
 	}
 	
@@ -7127,6 +7176,7 @@ focus_tree = {
 		
 		available = {
 			aotsm_performed_by_event_or_solution = yes
+			#has_country_flag = RUS_soc_peace_sca_diplomaty
 		}
 		
 		mutually_exclusive = { focus = RUS_soc_intervention_in_scandinavy }
@@ -7166,6 +7216,9 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: focus RUS_soc_buy_northern_finland"
 			
+			hidden_effect = {
+				set_country_flag = RUS_unlock_148_integration
+			}
 		}
 	}
 
@@ -8370,6 +8423,9 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: focus RUS_moscow_pact"
 			create_faction = RUS_moscow_agreement
+			hidden_effect = {
+				news_event = { id = news.269 days = 3 }
+			}
 		}
 	}
 	
