@@ -1681,7 +1681,13 @@ RUS_finland_separatism_cat = {
 		}
 		
 		complete_effect = {
-			country_event = finland_quiestion_event.1
+			log = "[GetDateText]: [Root.GetName]: Decision RUS_solve_finland_qiestion"
+			if = { 
+				limit = { 
+					RUS = { NOT = { has_government = socialism } }
+				}
+				country_event = finland_quiestion_event.1
+			}
 		}
 	}
 	
@@ -2497,6 +2503,44 @@ RUS_finland_separatism_cat = {
 }
 
 rus_missions_cat = {
+	
+	RUS_mission_intervention_in_scandinavy = { 
+	
+		icon = generic_prepare_civil_war
+		
+		available = {
+			always = no
+		}
+		
+		allowed = { 
+			
+		}
+		
+		visible = {	
+			has_war_with = SCA
+			has_war_with = SWE
+			NOT = { has_country_flag = RUS_soc_end_intervention_in_scandinavy }					
+		}
+		
+		activation = {
+			has_country_flag = RUS_soc_start_intervention_in_scandinavy
+		}
+		
+		fixed_random_seed = no
+		cancel_if_not_visible = yes
+		is_good = no
+		days_mission_timeout = 150
+		fire_only_once = yes
+		
+		complete_effect = {
+			add_stability = -0.02
+			add_war_support = -0.03
+		}
+
+		remove_effect = {
+
+		}
+	}
 	
 	RUS_conquer_kazahstan = { 
 	
@@ -3375,6 +3419,50 @@ rus_political_decisions_cat = {
 			469 = { is_owned_by = RUS }
 			470 = { is_owned_by = RUS }
 			has_completed_focus = RUS_organise_new_regions
+		}
+		
+		cost = 10
+		days_remove = 30
+		fire_only_once = yes
+	
+		modifier = {
+			
+		}
+
+		ai_will_do = {
+			factor = 35
+		}
+		
+		complete_effect = {
+			
+		}
+
+		remove_effect = {
+			custom_effect_tooltip = RUS_integrate_sks_lands_tt
+			hidden_effect = {
+				RUS = {
+					add_state_core = 388	
+					add_state_core = 469	
+					add_state_core = 470		
+				}
+			}
+		}
+	}
+	
+	RUS_integrate_148 = {
+		icon = usa_congress
+					
+		available = {
+			148 = { is_owned_by = RUS }
+		}
+		
+		allowed = { 
+			
+		}
+		
+		visible = {
+			148 = { is_owned_by = RUS }
+			has_country_flag = RUS_unlock_148_integration
 		}
 		
 		cost = 10
@@ -11864,3 +11952,4 @@ RUS_socialist_borders_fortification_cat = {
 	}
 
 }
+
