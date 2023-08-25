@@ -22,6 +22,8 @@ on_actions = {
 				country_event = history.1
 			}
 			
+			set_variable = { global.number_of_international_faction_members = 0 }
+			
 			set_variable = { var = leaver_number value = 0 }
 			
 			RUS = { country_event = { id = pol.1 days = 2100 } }
@@ -4598,7 +4600,7 @@ on_actions = {
 				set_global_flag = prt_capitulation
 				news_event = news.78
 			}
-			if = {
+			if = { #RUS capitulation - russia luse the great war
 				limit = {
 					tag = RUS
 					has_global_flag = firts_world_war
@@ -5071,10 +5073,23 @@ on_actions = {
 						remove_state_core = 216
 						remove_state_core = 722
 					}
-				}	
+				}
+				if = { #заглушка на случай участия Казахстана в великой войне на стороне России
+					limit = {
+						KAZ = { 
+							is_in_faction_with = RUS
+						}
+					}
+					every_country = {
+						limit = {
+							has_war_with = KAZ
+						}
+						white_peace = KAZ
+					}
+				}				
 				RUS = {
 					leave_faction = yes
-				}		
+				}
 				every_country = {
 					limit = {
 						has_war_with = RUS
@@ -9817,6 +9832,330 @@ on_actions = {
 	}
 	on_state_control_changed = {
 		effect = {
+			if = {#RUS capitulation - Russia fail invasion in scandinavy - SCA annex finland
+				limit ={
+					tag = RUS
+					RUS = { has_country_flag = RUS_soc_start_intervention_in_scandinavy }
+					11 = {
+						controller = {
+							OR = {
+								tag = SCA
+								is_subject_of = SCA
+								is_in_faction_with = SCA
+							}
+						}
+					}
+					147 = {
+						controller = {
+							OR = {
+								tag = SCA
+								is_subject_of = SCA
+								is_in_faction_with = SCA
+							}
+						}
+					}
+					149 = {
+						controller = {
+							OR = {
+								tag = SCA
+								is_subject_of = SCA
+								is_in_faction_with = SCA
+							}
+						}
+					}
+					150 = {
+						controller = {
+							OR = {
+								tag = SCA
+								is_subject_of = SCA
+								is_in_faction_with = SCA
+							}
+						}
+					}
+				}
+				if = {
+					limit = {
+						111 = { is_core_of = RUS }
+					}
+					RUS = {
+						remove_state_core = 111
+					}
+				}
+				if = {
+					limit = {
+						145 = { is_core_of = RUS }
+					}
+					RUS = {
+						remove_state_core = 145
+					}
+				}
+				if = {
+					limit = {
+						147 = { is_core_of = RUS }
+					}
+					RUS = {
+						remove_state_core = 147
+					}
+				}
+				if = {
+					limit = {
+						149 = { is_core_of = RUS }
+					}
+					RUS = {
+						remove_state_core = 147
+					}
+				}
+				if = {
+					limit = {
+						150 = { is_core_of = RUS }
+					}
+					RUS = {
+						remove_state_core = 150
+					}
+				}
+				SCA = {
+					transfer_state = 111
+					transfer_state = 145
+					transfer_state = 147
+					transfer_state = 149
+					transfer_state = 150
+					add_state_core = 111
+					add_state_core = 145
+					add_state_core = 147
+					add_state_core = 149
+					add_state_core = 150
+				}
+				RUS = { 
+					clr_country_flag = RUS_soc_start_intervention_in_scandinavy
+					set_country_flag = RUS_soc_fail_intervention_in_scandinavy
+				}
+				if = {
+					limit = {
+						RUS = { has_country_flag = RUS_unlock_fight_witch_finland_separatism }
+					}
+					clr_country_flag = RUS_unlock_fight_witch_finland_separatism
+				}
+				RUS = {
+					white_peace = SCA
+				}
+				news_event = { id = news.267 days = 3}
+			}
+			if = {#RUS capitulation - Russia fail invasion in scandinavy - SWE annex finland
+				limit ={
+					tag = RUS
+					RUS = { has_country_flag = RUS_soc_start_intervention_in_scandinavy }
+					11 = {
+						controller = {
+							OR = {
+								tag = SWE
+								is_subject_of = SWE
+								is_in_faction_with = SWE
+							}
+						}
+					}
+					147 = {
+						controller = {
+							OR = {
+								tag = SWE
+								is_subject_of = SWE
+								is_in_faction_with = SWE
+							}
+						}
+					}
+					149 = {
+						controller = {
+							OR = {
+								tag = SWE
+								is_subject_of = SWE
+								is_in_faction_with = SWE
+							}
+						}
+					}
+					150 = {
+						controller = {
+							OR = {
+								tag = SWE
+								is_subject_of = SWE
+								is_in_faction_with = SWE
+							}
+						}
+					}
+				}
+				if = {
+					limit = {
+						111 = { is_core_of = RUS }
+					}
+					RUS = {
+						remove_state_core = 111
+					}
+				}
+				if = {
+					limit = {
+						145 = { is_core_of = RUS }
+					}
+					RUS = {
+						remove_state_core = 145
+					}
+				}
+				if = {
+					limit = {
+						147 = { is_core_of = RUS }
+					}
+					RUS = {
+						remove_state_core = 147
+					}
+				}
+				if = {
+					limit = {
+						149 = { is_core_of = RUS }
+					}
+					RUS = {
+						remove_state_core = 147
+					}
+				}
+				if = {
+					limit = {
+						150 = { is_core_of = RUS }
+					}
+					RUS = {
+						remove_state_core = 150
+					}
+				}
+				SWE = {
+					transfer_state = 111
+					transfer_state = 145
+					transfer_state = 147
+					transfer_state = 149
+					transfer_state = 150
+					add_state_core = 111
+					add_state_core = 145
+					add_state_core = 147
+					add_state_core = 149
+					add_state_core = 150
+				}
+				if = {
+					limit = {
+						RUS = { has_country_flag = RUS_unlock_fight_witch_finland_separatism }
+					}
+					clr_country_flag = RUS_unlock_fight_witch_finland_separatism
+				}
+				RUS = {
+					white_peace = SWE
+				}
+				news_event = { id = news.267 days = 3}
+			}
+			if = {#SCA capitulation - Russia annex 148 state
+				limit ={
+					tag = SCA
+					RUS = { has_country_flag = RUS_soc_start_intervention_in_scandinavy }
+					148 = {
+						controller = {
+							OR = {
+								tag = RUS
+								is_subject_of = RUS
+								is_in_faction_with = RUS
+							}
+						}
+					}
+					666 = {
+						controller = {
+							OR = {
+								tag = RUS
+								is_subject_of = RUS
+								is_in_faction_with = RUS
+							}
+						}
+					}
+				}
+				SCA = {
+					remove_state_core = 148
+				}
+				RUS = {
+					transfer_state = 148
+				}
+				if = {
+					limit = {
+						RUS = { has_country_flag = RUS_integrate_finland }
+					}
+					148 = { add_dynamic_modifier = { modifier = RUS_integrated_finland_dynamic_modifier } }
+				}
+				if = {
+					limit = {
+						RUS = {
+							NOT = {
+								OR = {
+									has_country_flag = RUS_give_autonomy_finland
+									has_country_flag = RUS_integrate_finland
+								}
+							}
+						}
+					}
+					148 = { add_dynamic_modifier = { modifier = FIN_separatism_dynamic_modifier } }
+				}
+				RUS = { 
+					white_peace = SCA
+					clr_country_flag = RUS_soc_start_intervention_in_scandinavy
+					set_country_flag = RUS_soc_end_intervention_in_scandinavy
+				}
+				set_global_flag = finland_is_russian
+				news_event = { id = news.266 days = 3}
+			}
+			if = {#SWE capitulation - Russia annex 148 state
+				limit ={
+					tag = SWE
+					RUS = { has_country_flag = RUS_soc_start_intervention_in_scandinavy }
+					148 = {
+						controller = {
+							OR = {
+								tag = RUS
+								is_subject_of = RUS
+								is_in_faction_with = RUS
+							}
+						}
+					}
+					666 = {
+						controller = {
+							OR = {
+								tag = RUS
+								is_subject_of = RUS
+								is_in_faction_with = RUS
+							}
+						}
+					}
+				}
+				SWE = {
+					remove_state_core = 148
+				}
+				RUS = {
+					transfer_state = 148
+				}
+				if = {
+					limit = {
+						RUS = { has_country_flag = RUS_integrate_finland }
+					}
+					148 = { add_dynamic_modifier = { modifier = RUS_integrated_finland_dynamic_modifier } }
+				}
+				if = {
+					limit = {
+						RUS = {
+							NOT = {
+								OR = {
+									has_country_flag = RUS_give_autonomy_finland
+									has_country_flag = RUS_integrate_finland
+								}
+							}
+						}
+					}
+					148 = { add_dynamic_modifier = { modifier = FIN_separatism_dynamic_modifier } }
+				}
+				RUS = { 
+					white_peace = SWE
+					clr_country_flag = RUS_soc_start_intervention_in_scandinavy
+					set_country_flag = RUS_soc_end_intervention_in_scandinavy
+				}
+				set_global_flag = finland_is_russian 	
+				news_event = { id = news.266 days = 3}
+			}	
 			#QIN capitulation - soc russia annex north_manguria
 			if = {
 				limit = {
@@ -10155,6 +10494,7 @@ on_actions = {
 					}
 					JRU = {
 						transfer_state = 714
+						transfer_state = 717
 						transfer_state = 761
 						add_state_core = 714
 						add_state_core = 717

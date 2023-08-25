@@ -897,7 +897,7 @@ country_event = {
 	id = rusRomKN.1
 	title = rusRomKN.1.t
 	desc = rusRomKN.1.d
-	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	picture = GFX_report_event_russian_army_on_parade
 	
 	is_triggered_only = yes
 	
@@ -972,7 +972,7 @@ country_event = {
 	id = rusRomKN.3
 	title = rusRomKN.3.t
 	desc = rusRomKN.3.d
-	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	picture = GFX_report_event_city_square
 	
 	is_triggered_only = yes
 	
@@ -1610,7 +1610,7 @@ country_event = {
 	id = rusOrl.19 # Государственный переворот - при успехе приходит Игнатьев
 	title = rusOrl.19.t
 	desc = rusOrl.19.d
-	picture = GFX_report_event_political_discussion
+	picture = GFX_report_event_black_league_coup
 	
 	is_triggered_only = yes
 	
@@ -3118,6 +3118,7 @@ country_event = {
 				create_faction = RUS_kharkov_agreement
 				add_to_faction = AUS
 			}
+			news_event = { id = news.270 days = 3 }
 		}
 	}
 }
@@ -5629,6 +5630,7 @@ country_event = {
 		}
 		custom_effect_tooltip = RUS_give_finalnd_autonomy
 		hidden_effect = {
+			RUS = { set_country_flag = RUS_give_autonomy_finland }
 			FIN = {
 				transfer_state = 111
 				transfer_state = 145
@@ -5676,6 +5678,7 @@ country_event = {
 		}
 		custom_effect_tooltip = RUS_continue_finland_integration
 		hidden_effect = {
+			RUS = { set_country_flag = RUS_integrate_finland }
 			RUS = {
 				add_state_core = 111
 				add_state_core = 147
@@ -9505,7 +9508,18 @@ country_event = {
 		}
 			
 		hidden_effect = {
+			RUS = { country_event = { id = russian_socialist_sphere_event.42 days = 3 } }
+		}
+	}	
+	
+	option = {
+		name = russian_socialist_sphere_event.41.b	#
+		ai_chance = {
+			base = 20
+		}
 			
+		hidden_effect = {
+			RUS = { country_event = { id = russian_socialist_sphere_event.43 days = 3 } }
 		}
 	}	
 
@@ -9513,7 +9527,7 @@ country_event = {
 }
 
 country_event = {
-	id = russian_socialist_sphere_event.42 #
+	id = russian_socialist_sphere_event.42 #Русская Дипломатическая миссия - согласие
 	title = russian_socialist_sphere_event.42.t
 	desc = russian_socialist_sphere_event.42.d
 	picture = GFX_report_event_aotsm_generic_signing_the_contract
@@ -9541,7 +9555,7 @@ country_event = {
 }
 
 country_event = {
-	id = russian_socialist_sphere_event.43 #
+	id = russian_socialist_sphere_event.43 # Русская Дипломатическая миссия - отказ
 	title = russian_socialist_sphere_event.43.t
 	desc = russian_socialist_sphere_event.43.d
 	picture = GFX_report_event_aotsm_generic_signing_the_contract
@@ -9569,7 +9583,7 @@ country_event = {
 }
 
 country_event = {
-	id = russian_socialist_sphere_event.44 #
+	id = russian_socialist_sphere_event.44 # Отношения со странами европпы - выбор с кем вступать в союз
 	title = russian_socialist_sphere_event.44.t
 	desc = russian_socialist_sphere_event.44.d
 	picture = GFX_report_event_aotsm_generic_signing_the_contract
@@ -9580,16 +9594,52 @@ country_event = {
 	
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event russian_socialist_sphere_event.44"
+		hidden_effect = {
+			news_event = { id = news.263 days = 5 }
+		}
 	}
 	
 	option = {
-		name = russian_socialist_sphere_event.44.a	#
+		name = russian_socialist_sphere_event.44.a	#Направленность к союзу с Францией
 		ai_chance = {
 			base = 20
 		}
+		trigger = {
+			FRR = {
+				has_government = socialism
+			}
+		}
 
 		hidden_effect = {
-			
+			set_country_flag = RUS_soc_ally_with_frr
+		}
+	}	
+	
+	option = {
+		name = russian_socialist_sphere_event.44.b	#Направленность к союзу с Британией
+		ai_chance = {
+			base = 20
+		}
+		trigger = {
+			#CBI = {
+			#	has_government = socialism
+			#}
+			always = no #не должен тригериться - чартисты в британии еще не сделаны
+		}
+
+		hidden_effect = {
+			set_country_flag = RUS_soc_ally_with_cbi
+		}
+	}		
+	
+	option = {
+		name = russian_socialist_sphere_event.44.c	#Сами справимся
+		ai_chance = {
+			base = 0
+		}
+
+		hidden_effect = {
+			set_country_flag = RUS_soc_own_dip_way
 		}
 	}	
 
@@ -9597,7 +9647,7 @@ country_event = {
 }
 
 country_event = {
-	id = russian_socialist_sphere_event.45 #
+	id = russian_socialist_sphere_event.45 # Приглашение в альянс - ивент для Франции
 	title = russian_socialist_sphere_event.45.t
 	desc = russian_socialist_sphere_event.45.d
 	picture = GFX_report_event_aotsm_generic_signing_the_contract
@@ -9611,13 +9661,45 @@ country_event = {
 	}
 	
 	option = {
-		name = russian_socialist_sphere_event.45.a	#
+		name = russian_socialist_sphere_event.45.a	# Согласие
 		ai_chance = {
 			base = 20
+			modifier = {
+				add = -20
+				is_in_faction = yes
+			}
+			modifier = {
+				add = -20
+				is_faction_leader = yes
+			}
+		}
+		RUS = { 
+			create_faction = first_international 
+			add_to_faction = FRR
+		}
+		add_stability = 0.01
+		add_war_support = 0.01
+		hidden_effect = {
+			set_global_flag = first_international_created #для механики - надо продумать взаимодействие между членами интернационала
+			FRR = { 
+				set_country_flag = is_international_member 
+				add_ideas = FI_international_member
+			}
+			RUS = { country_event = { id = russian_socialist_sphere_event.46 days = 3 } }
+			add_to_variable = { global.number_of_international_faction_members = 1 }
+			add_to_array = { global.first_international_members = RUS }
+			add_to_array = { global.first_international_members = FRR }
+		}
+	}	
+	
+	option = {
+		name = russian_socialist_sphere_event.45.b	# Отказ
+		ai_chance = {
+			base = 2
 		}
 
 		hidden_effect = {
-			
+			RUS = { country_event = { id = russian_socialist_sphere_event.47 days = 3 } }
 		}
 	}	
 
@@ -9625,7 +9707,7 @@ country_event = {
 }
 
 country_event = {
-	id = russian_socialist_sphere_event.46 #
+	id = russian_socialist_sphere_event.46 # Приглашение в альянс - Ответ для России - Согласие
 	title = russian_socialist_sphere_event.46.t
 	desc = russian_socialist_sphere_event.46.d
 	picture = GFX_report_event_aotsm_generic_signing_the_contract
@@ -9640,6 +9722,567 @@ country_event = {
 	
 	option = {
 		name = russian_socialist_sphere_event.46.a	#
+		ai_chance = {
+			base = 20
+		}
+		
+		hidden_effect = {
+			RUS = { 
+				set_country_flag = is_international_member 
+				add_ideas = FI_international_leader
+			}
+			add_to_variable = { global.number_of_international_faction_members = 1 }
+			news_event = { id = news.268 days = 3 }
+		}
+	}	
+
+
+}
+
+country_event = {
+	id = russian_socialist_sphere_event.47 # Приглашение в альянс - Ответ для России - Отказ
+	title = russian_socialist_sphere_event.47.t
+	desc = russian_socialist_sphere_event.47.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event russian_socialist_sphere_event.47"
+	}
+	
+	option = {
+		name = russian_socialist_sphere_event.47.a	#
+		ai_chance = {
+			base = 20
+		}
+
+		hidden_effect = {
+			
+		}
+	}	
+
+
+}
+
+country_event = {
+	id = russian_socialist_sphere_event.48 # Приглашение в альянс - ивент для Британии
+	title = russian_socialist_sphere_event.48.t
+	desc = russian_socialist_sphere_event.48.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event russian_socialist_sphere_event.48"
+	}
+	
+	option = {
+		name = russian_socialist_sphere_event.48.a	# Да
+		ai_chance = {
+			base = 20
+			modifier = {
+				add = -20
+				is_in_faction = yes
+			}
+			modifier = {
+				add = -20
+				is_faction_leader = yes
+			}
+		}
+		RUS = { 
+			create_faction = first_international 
+			add_to_faction = CBI
+		}
+		add_stability = 0.01
+		add_war_support = 0.01
+		hidden_effect = {
+			set_global_flag = first_international_created #для механики - надо продумать взаимодействие между членами интернационала
+			CBI = { set_country_flag = is_international_member }
+			RUS = { country_event = { id = russian_socialist_sphere_event.49 days = 3 } }
+			add_to_variable = { number_of_international_faction_members = 1 }
+			add_to_array = { global.first_international_members = RUS }
+			add_to_array = { global.first_international_members = CBI }
+		}
+	}	
+	
+	option = {
+		name = russian_socialist_sphere_event.48.b	# Нет
+		ai_chance = {
+			base = 2
+		}
+
+		hidden_effect = {
+			RUS = { country_event = { id = russian_socialist_sphere_event.51 days = 3 } }
+		}
+	}	
+
+
+}
+
+country_event = {
+	id = russian_socialist_sphere_event.49 # Приглашение в альянс - Ответ для России - Согласие
+	title = russian_socialist_sphere_event.49.t
+	desc = russian_socialist_sphere_event.49.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event russian_socialist_sphere_event.49"
+	}
+	
+	option = {
+		name = russian_socialist_sphere_event.49.a	#
+		ai_chance = {
+			base = 20
+		}
+
+		hidden_effect = {
+			RUS = { set_country_flag = is_international_member }
+			add_to_variable = { number_of_international_faction_members = 1 }
+			news_event = { id = news.268 days = 3 }
+		}
+	}	
+
+
+}
+
+country_event = {
+	id = russian_socialist_sphere_event.50 # Приглашение в альянс - Ответ для России - Отказ
+	title = russian_socialist_sphere_event.50.t
+	desc = russian_socialist_sphere_event.50.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event russian_socialist_sphere_event.50"
+	}
+	
+	option = {
+		name = russian_socialist_sphere_event.50.a	#
+		ai_chance = {
+			base = 20
+		}
+
+		hidden_effect = {
+			
+		}
+	}	
+
+
+}
+
+country_event = {
+	id = russian_socialist_sphere_event.51 # Отношения с Скандинавией
+	title = russian_socialist_sphere_event.51.t
+	desc = russian_socialist_sphere_event.51.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event russian_socialist_sphere_event.51"
+	}
+	
+	option = {
+		name = russian_socialist_sphere_event.51.a	# Конфронтация
+		ai_chance = {
+			base = 20
+		}
+
+		hidden_effect = {
+			set_country_flag = RUS_soc_war_sca_diplomaty
+		}
+	}	
+	
+	option = {
+		name = russian_socialist_sphere_event.51.b	# Налаживание отношений
+		ai_chance = {
+			base = 20
+		}
+
+		hidden_effect = {
+			set_country_flag = RUS_soc_peace_sca_diplomaty
+		}
+	}	
+
+
+}
+
+country_event = {
+	id = russian_socialist_sphere_event.52 # Интервенция в скандинавию - ивент для России
+	title = russian_socialist_sphere_event.52.t
+	desc = russian_socialist_sphere_event.52.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event russian_socialist_sphere_event.52"
+	}
+	
+	option = {
+		name = russian_socialist_sphere_event.52.a	#
+		ai_chance = {
+			base = 20
+		}
+		
+		hidden_effect = {	
+			if = {
+				limit = {
+					SCA = {
+						owns_state = 148
+					}
+				}
+				SCA = { country_event = { id = russian_socialist_sphere_event.53 days = 3 } }
+			}
+			if = {
+				limit = {
+					SWE = {
+						owns_state = 148
+					}
+				}
+				SWE = { country_event = { id = russian_socialist_sphere_event.53 days = 3 } }
+			}
+		}
+	}	
+	
+	option = {
+		name = russian_socialist_sphere_event.52.b	#
+		ai_chance = {
+			base = 5
+		}
+		activate_mission = RUS_mission_intervention_in_scandinavy
+		if = {
+			limit = {
+				SCA = { 
+					country_exists = yes
+					owns_state = 148
+				}
+			}
+			declare_war_on = {
+				target = SCA
+				type = annex_everything
+			}
+		}
+		if = {
+			limit = {
+				SWE = { 
+					country_exists = yes
+					owns_state = 148
+				}
+			}
+			declare_war_on = {
+				target = SWE
+				type = annex_everything
+			}
+		}
+		hidden_effect = {
+			RUS = { set_country_flag = RUS_soc_start_intervention_in_scandinavy }
+			news_event = { id = news.264 days = 3 }
+		}
+	}	
+
+
+}
+
+country_event = {
+	id = russian_socialist_sphere_event.53 # Интервенция в скандинавию - Ивент для Сканинавии - Ультиматум
+	title = russian_socialist_sphere_event.53.t
+	desc = russian_socialist_sphere_event.53.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event russian_socialist_sphere_event.53"
+	}
+	
+	option = {
+		name = russian_socialist_sphere_event.53.a	# Согласие
+		ai_chance = {
+			base = 5
+		}
+		custom_effect_tooltip = RUS_give_region_148_to_russia
+		hidden_effect = {
+			RUS = { country_event = { id = russian_socialist_sphere_event.54 days = 3 } }
+		}
+	}	
+	
+	option = {
+		name = russian_socialist_sphere_event.53.a	# Отказ
+		ai_chance = {
+			base = 20
+		}
+		custom_effect_tooltip = RUS_leads_to_war_with_russia
+		hidden_effect = {
+			RUS = { country_event = { id = russian_socialist_sphere_event.55 days = 3 } }
+		}
+	}	
+
+
+}
+
+country_event = {
+	id = russian_socialist_sphere_event.54 # Интервенция в скандинавию - ответ на ультиматум - ивент для России - согласие
+	title = russian_socialist_sphere_event.54.t
+	desc = russian_socialist_sphere_event.54.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event russian_socialist_sphere_event.54"
+	}
+	
+	option = {
+		name = russian_socialist_sphere_event.54.a	#
+		ai_chance = {
+			base = 20
+		}
+		
+		hidden_effect = {
+			SCA = {
+				remove_state_core = 148
+			}
+			RUS = {
+				transfer_state = 148
+			}
+			if = {
+				limit = {
+					RUS = { has_country_flag = RUS_integrate_finland }
+				}
+				148 = { add_dynamic_modifier = { modifier = RUS_integrated_finland_dynamic_modifier } }
+			}
+			if = {
+				limit = {
+					RUS = {
+						NOT = {
+							OR = {
+								has_country_flag = RUS_give_autonomy_finland
+								has_country_flag = RUS_integrate_finland
+							}
+						}
+					}
+				}
+				148 = { add_dynamic_modifier = { modifier = FIN_separatism_dynamic_modifier } }
+			}
+			news_event = { id = news.265 days = 3 }
+			
+		}
+	}	
+
+
+}
+
+
+country_event = {
+	id = russian_socialist_sphere_event.55 # Интервенция в скандинавию - ответ на ультиматум - ивент для России - отказ
+	title = russian_socialist_sphere_event.55.t
+	desc = russian_socialist_sphere_event.55.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event russian_socialist_sphere_event.55"
+	}
+	
+	option = {
+		name = russian_socialist_sphere_event.55.a	#
+		ai_chance = {
+			base = 20
+		}
+		activate_mission = RUS_mission_intervention_in_scandinavy
+		if = {
+			limit = {
+				SCA = { 
+					owns_state = 148
+				}
+			}
+			declare_war_on = {
+				target = SCA
+				type = annex_everything
+			}
+		}
+		if = {
+			limit = {
+				SWE = { 
+					owns_state = 148
+				}
+			}
+			declare_war_on = {
+				target = SWE
+				type = annex_everything
+			}
+		}
+		hidden_effect = {
+			RUS = { set_country_flag = RUS_soc_start_intervention_in_scandinavy }
+			news_event = { id = news.264 days = 3 }
+		}
+	}	
+
+
+}
+
+
+
+country_event = {
+	id = russian_socialist_sphere_event.56 # 
+	title = russian_socialist_sphere_event.56.t
+	desc = russian_socialist_sphere_event.56.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event russian_socialist_sphere_event.56"
+	}
+	
+	option = {
+		name = russian_socialist_sphere_event.56.a	#
+		ai_chance = {
+			base = 20
+		}
+
+		hidden_effect = {
+			
+		}
+	}	
+
+
+}
+
+
+
+country_event = {
+	id = russian_socialist_sphere_event.57 # 
+	title = russian_socialist_sphere_event.57.t
+	desc = russian_socialist_sphere_event.57.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event russian_socialist_sphere_event.57"
+	}
+	
+	option = {
+		name = russian_socialist_sphere_event.57.a	#
+		ai_chance = {
+			base = 20
+		}
+
+		hidden_effect = {
+			
+		}
+	}	
+
+
+}
+
+
+
+country_event = {
+	id = russian_socialist_sphere_event.58 # 
+	title = russian_socialist_sphere_event.58.t
+	desc = russian_socialist_sphere_event.58.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event russian_socialist_sphere_event.58"
+	}
+	
+	option = {
+		name = russian_socialist_sphere_event.58.a	#
+		ai_chance = {
+			base = 20
+		}
+
+		hidden_effect = {
+			
+		}
+	}	
+
+
+}
+
+
+
+country_event = {
+	id = russian_socialist_sphere_event.59 # 
+	title = russian_socialist_sphere_event.59.t
+	desc = russian_socialist_sphere_event.59.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event russian_socialist_sphere_event.59"
+	}
+	
+	option = {
+		name = russian_socialist_sphere_event.59.a	#
+		ai_chance = {
+			base = 20
+		}
+
+		hidden_effect = {
+			
+		}
+	}	
+
+
+}
+
+
+
+country_event = {
+	id = russian_socialist_sphere_event.60 # 
+	title = russian_socialist_sphere_event.60.t
+	desc = russian_socialist_sphere_event.60.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event russian_socialist_sphere_event.60"
+	}
+	
+	option = {
+		name = russian_socialist_sphere_event.60.a	#
 		ai_chance = {
 			base = 20
 		}
@@ -9961,4 +10604,27 @@ country_event = {
 		}
 	}		
 
+}		
+
+country_event = {
+	id = rus_poland_situation_event.3 # 
+	title = rus_poland_situation_event.3.t
+	desc = rus_poland_situation_event.3.d
+	picture = GFX_report_event_polands_deportation
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event rus_poland_situation_event.3"
+	}
+	
+	option = {
+		name = rus_poland_situation_event.3.a	
+		
+		hidden_effect = {
+			
+		}
+	}
 }
