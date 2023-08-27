@@ -1292,7 +1292,7 @@ focus_tree = {
 		
 		
 		available = {
-			always = no
+			#always = no
 		}
 		
 		mutually_exclusive = { focus = RUS_end_of_political_isolation }
@@ -6304,11 +6304,11 @@ focus_tree = {
 		cost = 5
 		
 		allow_branch = {
-			#OR = {
-			#	has_completed_focus = RUS_new_socialist_economic 
-			#	has_completed_focus = RUS_organise_goverment_control_market 
-			#	has_completed_focus = RUS_go_to_plan_economic
-			#}
+			OR = {
+				has_completed_focus = RUS_new_socialist_economic 
+				has_completed_focus = RUS_organise_goverment_control_market 
+				has_completed_focus = RUS_go_to_plan_economic
+			}
 		}
 		
 		available = {
@@ -6893,7 +6893,14 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: focus RUS_soc_coop_researches"
-			
+			custom_effect_tooltip = RUS_join_fi_research_group
+			hidden_effect = {
+				add_ideas = FI_scientific_research_group_member
+				swap_ideas = {
+					remove_idea = russian_science_manufacturer
+					add_idea = first_international_science_manufacturer
+				}
+			}
 		}
 	}			
 	
@@ -6908,6 +6915,7 @@ focus_tree = {
 		available = {
 			has_country_flag = is_international_member
 			number_of_international_members_2_or_more = yes
+			always = no
 		}
 
 		relative_position_id = RUS_soc_coop_researches
