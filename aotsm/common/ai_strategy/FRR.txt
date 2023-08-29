@@ -297,11 +297,55 @@ FRR_halt_light_armor_production_in_transitioning = {
 	}
 }
 
-
-
-PRU_super_boost_light_for_med_armor = {
+FRR_anti_armor = {
 	allowed = {
-		original_tag = PRU
+		original_tag = FRR
+	}
+	enable = {
+		ai_wants_divisions > 5 
+
+		any_enemy_country = {
+			ROOT = {
+				estimated_intel_max_armor = {
+					tag = PREV
+					value > 25
+				}
+			}
+		}
+	}
+	abort = {
+		ai_wants_divisions < 6 
+	}
+
+	ai_strategy = {
+		type = role_ratio
+		id = motorized
+		value = 15
+	}
+}
+
+FRR_armored_production = {
+	allowed = {
+		original_tag = FRR
+	}
+	enable = {
+		date > 1852.1.1
+		ai_wants_divisions > 1
+	}
+	abort = {
+		ai_wants_divisions < 90 
+	}
+
+	ai_strategy = {
+		type = role_ratio
+		id = armor
+		value = 15
+	}
+}
+
+FRR_super_boost_light_for_med_armor = {
+	allowed = {
+		original_tag = FRR
 	}
 	enable = {
 		OR = {
