@@ -646,7 +646,7 @@ focus_tree = {
 		}
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus PRT_Stabilize_society"			
-
+			add_war_support = 0.1
 			add_stability = 0.1
 		}
 	}
@@ -735,7 +735,7 @@ focus_tree = {
 		}
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus PRT_Invest_in_the_population"			
-
+			add_war_support = 0.05
 			add_stability = 0.05
 			add_offsite_building = { type = industrial_complex level = 1 }
 		}
@@ -1396,13 +1396,11 @@ focus_tree = {
 		focus = PRT_Portuguese_Democracy
 		}
 		available = {
-		
-		}
-		allow_branch = {
 			NOT = {
 				has_global_flag = prt_capitulation
 			}
 		}
+		
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus PRT_Reorganize_the_army"			
 
@@ -2125,7 +2123,7 @@ focus_tree = {
 		}
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus PRT_Remain_loyal_to_London"			
-
+			add_political_power = 100
 			add_command_power = 50
 		}
 	}
@@ -2179,8 +2177,12 @@ focus_tree = {
 		}
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus PRT_An_Indestructible_union"			
-
-			add_political_power = 100
+			PRT = {
+				add_stability = 0.05
+			}
+			CBI = {
+				add_stability = 0.05
+			}
 		}
 	}
 
@@ -2200,9 +2202,11 @@ focus_tree = {
 			is_in_faction_with = CBI		
 			OR = {
 				PRU = {
-					has_war_with = RUS
-					has_war_with = CBI
-					has_war_with = FRR
+					OR = {
+						has_war_with = RUS
+						has_war_with = CBI
+						has_war_with = FRR
+					}
 				}
 			}
 		}
@@ -2213,7 +2217,7 @@ focus_tree = {
 		}
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus PRT_The_German_aggressor"			
-
+			add_war_support = 0.05
 			add_ideas = PRT_Anti_German_Society
 		}
 	}
@@ -2232,14 +2236,10 @@ focus_tree = {
 		}
 		available = {
 			is_in_faction_with = CBI		
-			OR = {
-				PRU = {
+			PRU = {
+				OR = {
 					has_war_with = RUS
-				}
-				PRU = {
 					has_war_with = CBI
-				}
-				PRU = {
 					has_war_with = FRR
 				}
 			}
@@ -2250,8 +2250,63 @@ focus_tree = {
 			}
 		}
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus PRT_Mass_appeal"			
-
+			log = "[GetDateText]: [Root.GetName]: Focus PRT_Mass_appeal"	
+			if = {
+				limit = {
+					ROOT = {
+						has_idea = extensive_conscription
+					}
+				}
+				swap_ideas = {
+					remove_idea = extensive_conscription
+					add_idea = service_by_requirement
+				}
+			}
+			if = {
+				limit = {
+					ROOT = {
+						has_idea = limited_conscription
+					}
+				}
+				swap_ideas = {
+					remove_idea = limited_conscription
+					add_idea = extensive_conscription
+				}
+			}
+			if = {
+				limit = {
+					ROOT = {
+						has_idea = volunteer_only
+					}
+				}
+				swap_ideas = {
+					remove_idea = volunteer_only
+					add_idea = limited_conscription
+				}
+			}
+			if = {
+				limit = {
+					ROOT = {
+						has_idea = disarmed_nation
+					}
+				}
+				swap_ideas = {
+					remove_idea = disarmed_nation
+					add_idea = volunteer_only
+				}
+			}
+			180 = {
+				add_manpower = -25000
+			}
+			112 = {
+				add_manpower = -50000
+			}
+			181 = {
+				add_manpower = -12500
+			}
+			795 = {
+				add_manpower = -12500
+			}
 			add_manpower = 100000
 		}
 	}
@@ -2272,13 +2327,13 @@ focus_tree = {
 			controls_state = 540
 			controls_state = 796
 			is_in_faction_with = CBI	
-			OR = {
-				PRU = {
+			PRU = {
+				OR = {
 					has_war_with = RUS
 					has_war_with = CBI
 					has_war_with = FRR
 				}
-			}		
+			}	
 		}
 		allow_branch = {
 			NOT = {
@@ -2291,7 +2346,7 @@ focus_tree = {
             540 = {
 				add_building_construction = {
 					type = naval_base
-					level = 1
+					level = 2
 					province = 12958
 					instant_build = yes
 				}
@@ -2299,7 +2354,7 @@ focus_tree = {
 			540 = {
 				add_building_construction = {
 					type = bunker
-					level = 1
+					level = 2
 					province = 12958
 					instant_build = yes
 				}
@@ -2330,7 +2385,7 @@ focus_tree = {
 			796 = {
 				add_building_construction = {
 					type = bunker
-					level = 1
+					level = 2
 					province = 2115
 					instant_build = yes
 				}
@@ -2377,7 +2432,7 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus PRT_British_Maritime_experience"			
 
-            navy_experience = 10
+            navy_experience = 15
 			add_tech_bonus = {
 				name = cv_bonus
 				bonus = 0.50
@@ -2409,7 +2464,7 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus PRT_Strengthen_the_Atlantic"			
 
-            navy_experience = 10
+            navy_experience = 15
 			random_owned_controlled_state = {
 				prioritize = { 697 }
 				limit = {
@@ -2420,10 +2475,10 @@ focus_tree = {
 						include_locked = yes
 					}
 				}
-				add_extra_state_shared_building_slots = 1
+				add_extra_state_shared_building_slots = 2
 				add_building_construction = {
 					type = dockyard
-					level = 1
+					level = 2
 					instant_build = yes
 				}
 				set_state_flag = CAN_halifax_shipyards_DY
@@ -2485,7 +2540,7 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus PRT_Revolutionary_fortitude"			
 
-			add_ideas = PRT_The_Iberian_Revolution0
+			add_ideas = PRT_The_Iberian_Revolution_idea
 			add_popularity = {
 				ideology = socialism
                 popularity = 0.05
@@ -3180,6 +3235,15 @@ focus_tree = {
 					instant_build = yes
 				}
 			}
+			random_state = {
+				limit = { is_core_of = PRT }
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
 		}
 	}
 
@@ -3638,12 +3702,15 @@ focus_tree = {
 		}
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus PRT_Develop_machine_tool_construction"			
-
+			
 			add_tech_bonus = {
-				name = GER_four_year_plan
 				bonus = 1.0
 				uses = 1
 				category = industry
+			}
+			add_timed_idea = {
+				days = 730
+				idea = PRT_investments_in_industrial_production 
 			}
 		}
 	}
@@ -4657,18 +4724,19 @@ focus_tree = {
 		}
 		available = {
 			hidden_trigger = {
-			CBI = {
-				exists = no
-			}
-			has_war = no
-			has_government = authoritarian
-			controls_state = 126	
+				CBI = {
+					exists = no
+				}
+				has_war = no
+				has_government = authoritarian
+				controls_state = 126	
 			}
 		}
 		allow_branch = {
-			NOT = {
-				has_global_flag = prt_capitulation
-			}
+			always = no #временно отключено
+			#NOT = {
+			#	has_global_flag = prt_capitulation
+			#}
 		}
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus PRT_Unite_Empires"			
