@@ -864,6 +864,121 @@ country_event = { #Join London pack
 	}
 }
 
+country_event = { #Кооперация с КБО - Ивент для России
+	id = cbi_rus.7
+	title = cbi_rus.7.t
+	desc = cbi_rus.7.d
+	picture = GFX_report_event_military_planning
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event cbi_rus.7"
+	}
+	
+	option = { 
+		name = cbi_rus.7.a
+		ai_chance = {
+			base = 20
+			modifier = {
+				add = 100
+				is_historical_focus_on = yes
+			}
+			modifier = {
+				factor = 0
+				RUS = {
+					OR = {
+						is_faction_leader = yes
+						is_in_faction = yes
+					}
+				}
+			}
+		}
+		trigger = {
+			NOT = {
+				OR = {
+					is_faction_leader = yes
+					is_in_faction = yes
+					has_government = socialism 
+				}
+			}
+		}
+		CBI = { country_event = { id = cbi_rus.8 days = 3 } }
+	}
+	
+	option = { 
+		name = cbi_rus.7.b
+		ai_chance = {
+			base = 10
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+			}
+			modifier = {
+				add = 100
+				RUS = {
+					OR = {
+						is_faction_leader = yes
+						is_in_faction = yes
+					}
+				}
+			}
+		}
+		CBI = { country_event = { id = cbi_rus.9 days = 3 } }
+	}
+}
+
+country_event = { #Кооперация с КБО - Положительный ответ для Британии
+	id = cbi_rus.8
+	title = cbi_rus.8.t
+	desc = cbi_rus.8.d
+	picture = GFX_report_event_military_planning
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event cbi_rus.8"
+	}
+	
+	option = { 
+		name = cbi_rus.8.a
+		ai_chance = {
+			base = 20
+			
+		}
+		RUS = {
+			give_guarantee = CBI
+		}
+		CBI = {
+			give_guarantee = RUS
+		}
+	}
+
+}
+
+country_event = { #Кооперация с КБО - Отрицательный ответ для Британии
+	id = cbi_rus.9
+	title = cbi_rus.9.t
+	desc = cbi_rus.9.d
+	picture = GFX_report_event_military_planning
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event cbi_rus.9"
+	}
+	
+	option = { 
+		name = cbi_rus.9.a
+		ai_chance = {
+			base = 20
+			
+		}
+		
+	}
+
+}
+
 #### Byzantium ####
 
 country_event = { #deal with CBI
