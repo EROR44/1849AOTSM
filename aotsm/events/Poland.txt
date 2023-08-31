@@ -19,6 +19,7 @@ country_event = {
 	hidden =  yes
 	
 	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event pol.1"
 		PLH = {
 			transfer_state = 853
 		}
@@ -50,6 +51,7 @@ country_event = {
 	hidden =  yes
 	
 	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event pol.2"
 		PRU = { give_guarantee = PLH }
 	}
 	
@@ -79,12 +81,16 @@ country_event = {
 	
 	fire_only_once = yes
 	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event pol_ger.1"
+	}
+	
 	option = {
 		name = pol_ger.1.a
 		ai_chance = {
 			base = 50
 			modifier = {
-				factor = 100
+				add = 200
 				is_historical_focus_on = yes
 			}
 			modifier = {
@@ -95,6 +101,14 @@ country_event = {
 				}
 			}
 		}
+		trigger = {
+			NOT = {
+				has_game_rule = {
+					rule = start_world_war_rule 
+					option = only_not_historical
+				}
+			}
+		}
 		PLH = { country_event = { id = pol.2 days = 7 } }
 		news_event = news.68
 	}
@@ -102,23 +116,29 @@ country_event = {
 	option = {
 		name =  pol_ger.1.b 
 		ai_chance = {
-			factor = 50
+			base = 50
 			modifier = {
 				factor = 0
 				is_historical_focus_on = yes
 			}
 			modifier = {
-				factor = 200
+				add = 200
 				has_game_rule = {
 					rule = start_world_war_rule 
 					option = only_not_historical
 				}
 			}
+		}	
+		trigger = {
+			NOT = {
+				has_game_rule = {
+					rule = start_world_war_rule 
+					option = only_historical
+				}
+			}
 		}
 		hidden_effect = {
-			RUS = {
-				set_country_flag = pru_ignore_poland_uprising
-			}
+			set_global_flag = pru_ignore_poland_uprising
 		}
 	}
 	
@@ -133,6 +153,10 @@ country_event = {
 	is_triggered_only = yes
 	
 	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event pol_ger.2"
+	}
 	
 	option = {
 		name = pol_ger.2.a
@@ -308,6 +332,10 @@ country_event = {
 	
 	fire_only_once = yes
 	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event pol_ger.3"
+	}
+	
 	option = {
 		name = pol_ger.3.a
 		ai_chance = {
@@ -345,6 +373,10 @@ country_event = {
 	is_triggered_only = yes
 	
 	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event pol_ger.4"
+	}
 	
 	option = {
 		name = pol_ger.4.a
@@ -520,6 +552,10 @@ country_event = {
 	
 	fire_only_once = yes
 	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event pol_ger.5"
+	}
+	
 	option = {
 		name = pol_ger.5.a
 		ai_chance = {
@@ -558,10 +594,17 @@ country_event = {
 	
 	fire_only_once = yes
 	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event pol_rus.1"
+	}
+	
 	option = {
 		name = pol_rus.1.a
 		ai_chance = {
 			factor = 100
+		}
+		trigger = {
+			NOT = { has_global_flag = pru_ignore_poland_uprising }		
 		}
 		if = {
 			limit = {
@@ -760,7 +803,23 @@ country_event = {
 	}
 	
 	option = {
-		name =  pol_rus.1.b 
+			name = pol_rus.1.b
+			ai_chance = {
+				factor = 100
+			}
+			trigger = {
+				has_global_flag = pru_ignore_poland_uprising	
+			}
+			PLH = {
+				declare_war_on = {
+					target = RUS
+					type = annex_everything
+				}
+			}
+		}
+	
+	option = {
+		name = pol_rus.1.c 
 		ai_chance = {
 			factor = 0
 			modifier = {
@@ -790,6 +849,10 @@ country_event = {
 	is_triggered_only = yes
 	
 	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event pol_rus.2"
+	}
 	
 	option = {
 		name = pol_rus.2.a
@@ -893,6 +956,10 @@ country_event = {
 	is_triggered_only = yes
 	
 	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event pol_rus.3"
+	}
 	
 	option = {
 		name = pol_rus.3.a
