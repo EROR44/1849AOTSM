@@ -51,7 +51,13 @@ rus_first_international_decisions_cat = {
 		}
 
 		visible = {
-			NOT = { has_country_flag = is_international_member }
+			NOT = { 
+				has_country_flag = is_international_member 
+				OR = {
+					is_puppet = yes
+					is_subject = yes
+				}
+			}
 		}
 		
 		
@@ -82,7 +88,7 @@ rus_first_international_decisions_cat = {
 						is_faction_leader = yes 
 					}
 				}
-			RUS = { add_to_faction = FROM }
+				RUS = { add_to_faction = FROM }
 			}
 			if = {
 				limit = { 
@@ -107,6 +113,12 @@ rus_first_international_decisions_cat = {
 					set_country_flag = is_international_member 
 					add_ideas = FI_international_member
 				}
+				#ROOT = {
+				#	all_subject_countries ={
+				#		set_country_flag = is_international_member 
+				#		add_ideas = FI_international_member
+				#	}
+				#}
 				add_to_variable = { global.number_of_international_faction_members = 1 }
 				add_to_array = { global.first_international_members = ROOT }
 			}
