@@ -245,7 +245,12 @@ on_actions = {
 				limit = {
 					tag = MON
 					has_cosmetic_tag = MON_QIN_PUPPET	
-					NOT = { is_puppet_of = QIN }
+					NOT = { 
+						OR ={
+							is_puppet_of = QIN 
+							is_subject_of = QIN
+						}
+					}
 				}
 				MON = { drop_cosmetic_tag = yes }
 			}
@@ -253,7 +258,12 @@ on_actions = {
 				limit = {
 					tag = MAN
 					has_cosmetic_tag = MAN_QIN_PUPPET	
-					NOT = { is_puppet_of = QIN }
+					NOT = { 
+						OR ={
+							is_puppet_of = QIN 
+							is_subject_of = QIN
+						}
+					}
 				}
 				MAN = { drop_cosmetic_tag = yes }
 			}
@@ -261,7 +271,12 @@ on_actions = {
 				limit = {
 					tag = SHN
 					has_cosmetic_tag = SHN_QIN_PUPPET	
-					NOT = { is_puppet_of = QIN }
+					NOT = { 
+						OR ={
+							is_puppet_of = QIN 
+							is_subject_of = QIN
+						}
+					}
 				}
 				SHN = { drop_cosmetic_tag = yes }
 			}
@@ -269,7 +284,12 @@ on_actions = {
 				limit = {
 					tag = SHA
 					has_cosmetic_tag = SHA_QIN_PUPPET	
-					NOT = { is_puppet_of = QIN }
+					NOT = { 
+						OR ={
+							is_puppet_of = QIN 
+							is_subject_of = QIN
+						}
+					}
 				}
 				SHA = { drop_cosmetic_tag = yes }
 			}
@@ -277,7 +297,12 @@ on_actions = {
 				limit = {
 					tag = SIC
 					has_cosmetic_tag = SIC_QIN_PUPPET	
-					NOT = { is_puppet_of = QIN }
+					NOT = { 
+						OR ={
+							is_puppet_of = QIN 
+							is_subject_of = QIN
+						}
+					}
 				}
 				SIC = { drop_cosmetic_tag = yes }
 			}
@@ -285,7 +310,12 @@ on_actions = {
 				limit = {
 					tag = CHN
 					has_cosmetic_tag = CHN_QIN_PUPPET	
-					NOT = { is_puppet_of = QIN }
+					NOT = { 
+						OR ={
+							is_puppet_of = QIN 
+							is_subject_of = QIN
+						}
+					}
 				}
 				CHN = { drop_cosmetic_tag = yes }
 			}
@@ -293,7 +323,12 @@ on_actions = {
 				limit = {
 					tag = CND
 					has_cosmetic_tag = CND_QIN_PUPPET	
-					NOT = { is_puppet_of = QIN }
+					NOT = { 
+						OR ={
+							is_puppet_of = QIN 
+							is_subject_of = QIN
+						}
+					}
 				}
 				CND = { drop_cosmetic_tag = yes }
 			}
@@ -301,7 +336,12 @@ on_actions = {
 				limit = {
 					tag = GNS
 					has_cosmetic_tag = GNS_QIN_PUPPET	
-					NOT = { is_puppet_of = QIN }
+					NOT = { 
+						OR ={
+							is_puppet_of = QIN 
+							is_subject_of = QIN
+						}
+					}
 				}
 				GNS = { drop_cosmetic_tag = yes }
 			}
@@ -309,7 +349,12 @@ on_actions = {
 				limit = {
 					tag = SDZ
 					has_cosmetic_tag = SDZ_QIN_PUPPET	
-					NOT = { is_puppet_of = QIN }
+					NOT = { 
+						OR ={
+							is_puppet_of = QIN 
+							is_subject_of = QIN
+						}
+					}
 				}
 				SDZ = { drop_cosmetic_tag = yes }
 			}
@@ -317,7 +362,12 @@ on_actions = {
 				limit = {
 					tag = YUN
 					has_cosmetic_tag = YUN_QIN_PUPPET	
-					NOT = { is_puppet_of = QIN }
+					NOT = { 
+						OR ={
+							is_puppet_of = QIN 
+							is_subject_of = QIN
+						}
+					}
 				}
 				YUN = { drop_cosmetic_tag = yes }
 			}
@@ -325,7 +375,12 @@ on_actions = {
 				limit = {
 					tag = SON
 					has_cosmetic_tag = PRT_SON	
-					NOT = { is_puppet_of = PRT }
+					NOT = { 
+						OR ={
+							is_puppet_of = PRT 
+							is_subject_of = PRT
+						}
+					}
 				}
 				SON = { drop_cosmetic_tag = yes }
 			}
@@ -333,7 +388,12 @@ on_actions = {
 				limit = {
 					tag = PAS
 					has_cosmetic_tag = PRT_PUPPET	
-					NOT = { is_puppet_of = PRT }
+					NOT = { 
+						OR ={
+							is_puppet_of = PRT 
+							is_subject_of = PRT
+						}
+					}
 				}
 				PAS = { drop_cosmetic_tag = yes }
 			}
@@ -367,6 +427,48 @@ on_actions = {
 	
 	on_capitulation = {
 		effect = {
+			#RBL capitulation - ignatiev uprising failed
+			if = {
+				limit = {
+					tag = RBL
+					has_global_flag = rbl_uprising_started
+				}			
+				
+				every_country = {
+					if = {
+						limit = {
+							is_in_faction_with = RUS
+							has_war_with = RBL
+						}
+						white_peace = RBL
+					}
+				}
+				RUS = {
+					white_peace = {
+						tag = RBL
+						message = RBL_uprising_failed
+					} 					
+					RUS = {
+						annex_country = {
+							target = RBL
+							transfer_troops = no
+						}
+					}
+					
+				}
+				RBL = {
+					remove_state_core = 220
+					remove_state_core = 240
+					remove_state_core = 258
+					remove_state_core = 257
+					remove_state_core = 260
+				}
+				RUS = { country_event = { id = rus_rbl_uprising_event.5 days = 2 } }
+				clr_global_flag = rbl_uprising_started
+				set_global_flag = rbl_uprising_failed
+				news_event = news.273
+				add_threat = 1
+			}
 			#KAZ capitulation - rus socialist invasion completed
 			if = {
 				limit = {
@@ -471,14 +573,42 @@ on_actions = {
 					
 				}
 				
-				news_event = news.258 #
+				add_threat = 2
+			}
+			#HIV capitulation - rus socialist invasion completed
+			if = {
+				limit = {
+					tag = HIV
+					RUS = { has_country_flag = RUS_unlock_mission_annex_hiv }
+				}			
+				
+				every_country = {
+					if = {
+						limit = {
+							is_in_faction_with = RUS
+							has_war_with = HIV
+						}
+						white_peace = HIV
+					}
+				}
+				RUS = {
+					white_peace = HIV					
+					RUS = {
+						annex_country = {
+							target = HIV
+							transfer_troops = no
+						}
+					}
+					
+				}
+				
 				add_threat = 2
 			}
 			#PLH capitulation - Polish uprising failed - Germany ignore Poland
 			if = {
 				limit = {
 					tag = PLH
-					RUS = { has_country_flag = pru_ignore_poland_uprising }
+					has_global_flag = pru_ignore_poland_uprising
 				}
 				RUS = {
 					white_peace = {
@@ -4698,6 +4828,17 @@ on_actions = {
 							transfer_state = 853
 							RUS = {
 								remove_state_core = 853
+							}
+						}
+						if = { #на всякий случай - Краков
+							limit = {
+								RUS = {
+									owns_state = 903
+								}
+							}
+							transfer_state = 903
+							RUS = {
+								remove_state_core = 903
 							}
 						}
 					}
