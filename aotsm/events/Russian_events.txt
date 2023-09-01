@@ -21,6 +21,7 @@ add_namespace = russian_socialist_navy_event #
 add_namespace = russian_kromwland_politic #
 add_namespace = russian_armed_forces_event #
 add_namespace = russian_socialist_sphere_event #
+add_namespace = rus_rbl_uprising_event #
 add_namespace = rus_leave_officers_event #
 add_namespace = rus_poland_situation_event #
 
@@ -9502,6 +9503,12 @@ country_event = {
 		}
 		hidden_effect = {
 			set_country_flag = RUS_soc_invade_in_north_manchguria
+			MAN = { 
+				add_to_war = {
+					targeted_alliance = QIN
+					enemy = RUS
+				}
+			}
 		}
 	}	
 
@@ -10691,6 +10698,25 @@ country_event = {
 	
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event rus_leave_officers_event.2"
+		hidden_effect = {
+			every_unit_leader = {
+				limit = {
+					has_trait = RUS_black_league
+				}
+				set_nationality = {
+					target_country = RBL
+				}
+			}
+			every_unit_leader = {
+				limit = {
+					has_trait = RUS_black_league_navy
+				}
+				set_nationality = {
+					target_country = RBL
+				}
+			}
+			set_country_flag = RUS_ignatiev_fade
+		}
 	}
 	
 	option = {
@@ -10700,16 +10726,6 @@ country_event = {
 			base = 15
 		}
 		
-		hidden_effect = {
-			every_unit_leader = {
-				limit = {
-					#tag = RUS
-					has_trait = RUS_black_league
-					}
-				remove_unit_leader = yes
-			}
-			set_country_flag = RUS_ignatiev_fade
-		}
 	}	
 	
 	option = {
@@ -10720,15 +10736,8 @@ country_event = {
 		}
 		
 		hidden_effect = {
-			every_unit_leader = {
-				limit = {
-					#tag = RUS
-					has_trait = RUS_black_league
-					}
-				remove_unit_leader = yes
-			}
-			set_country_flag = RUS_ignatiev_fade
-		}
+			RUS = { country_event = { id = rus_rbl_uprising_event.1 days = 12 } }
+		}	
 	}	
 
 }
@@ -10862,6 +10871,234 @@ country_event = {
 			}
 		}
 	}		
+
+}
+
+#################################RBL_UPRISING_EVENTS#####################################
+
+country_event = {
+	id = rus_rbl_uprising_event.1 # Игнатьев замечен в окрестностях Воронежа
+	title = rus_rbl_uprising_event.1.t
+	desc = rus_rbl_uprising_event.1.d
+	picture = GFX_report_event_political_discussion
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event rus_rbl_uprising_event.1"
+	}
+	
+	option = {
+		name = rus_rbl_uprising_event.1.a #Это только слухи
+		
+		ai_chance = {
+			base = 15
+		}
+		
+		hidden_effect = {
+			
+			
+		}
+	}
+	
+	option = {
+		name = rus_rbl_uprising_event.1.b #Стоит проверить
+		
+		ai_chance = {
+			base = 15
+		}
+		
+		hidden_effect = {
+			RUS = { country_event = { id = rus_rbl_uprising_event.2 days = 7 } }
+			
+		}
+	}
+
+}
+
+country_event = {
+	id = rus_rbl_uprising_event.2 # Странная ситуация
+	title = rus_rbl_uprising_event.2.t
+	desc = rus_rbl_uprising_event.2.d
+	picture = GFX_report_event_political_discussion
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event rus_rbl_uprising_event.2"
+	}
+	
+	option = {
+		name = rus_rbl_uprising_event.2.a #Возможно что-то случится
+		
+		ai_chance = {
+			base = 15
+		}
+		
+		hidden_effect = {
+			RUS = { set_country_flag = RUS_ready_for_rbl_uprisinf_flag }
+			
+		}
+	}
+	
+	option = {
+		name = rus_rbl_uprising_event.2.b #Обыщите город
+		
+		ai_chance = {
+			base = 0
+		}
+		
+		hidden_effect = {
+			RUS = { set_country_flag = RUS_rbl_uprising_blocked }
+			RUS = { country_event = { id = rus_rbl_uprising_event.5 days = 15 } }
+		}
+	}
+
+}
+
+country_event = {
+	id = rus_rbl_uprising_event.3 # Восстание Игнатьева
+	title = rus_rbl_uprising_event.3.t
+	desc = rus_rbl_uprising_event.3.d
+	picture = GFX_report_event_political_discussion
+	
+	fire_only_once = yes
+
+	trigger = {
+		tag = RUS
+		has_country_flag = {
+			flag = RUS_ignatiev_fade
+			days > 90
+		}
+		NOT = {
+			has_country_flag = RUS_rbl_uprising_blocked
+		}
+	}
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event rus_rbl_uprising_event.3"
+		hidden_effect = {	
+			set_global_flag = rbl_uprising_started
+			news_event = news.272
+			RBL = {
+				transfer_state = 220
+				transfer_state = 240
+				transfer_state = 258
+				transfer_state = 257
+				transfer_state = 260
+				add_state_core = 220
+				add_state_core = 240
+				add_state_core = 258
+				add_state_core = 257
+				add_state_core = 260
+				load_oob = "RBL_uprising"
+			}
+			RBL = {
+				inherit_technology = RUS
+			}
+			add_country_leader_role = {
+				character = RUS_Pavel_Nikolaevich_Ignatiev
+				promote_leader = yes
+			
+				country_leader = {
+					expire = "1900.1.1"
+					ideology = paternalism
+					traits = { leader_of_the_black_union }
+				}
+			}
+		}
+	}
+	
+	option = {
+		name = rus_rbl_uprising_event.3.a	
+		
+		ai_chance = {
+			base = 15
+		}
+		
+		hidden_effect = {
+			RUS = { country_event = { id = rus_rbl_uprising_event.4 days = 7 } }
+			
+		}
+	}
+
+}
+
+
+
+country_event = {
+	id = rus_rbl_uprising_event.4 # Марш игнатьевцев
+	title = rus_rbl_uprising_event.4.t
+	desc = rus_rbl_uprising_event.4.d
+	picture = GFX_report_event_political_discussion
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event rus_rbl_uprising_event.4"
+		hidden_effect = {
+			if = {
+				limit = {
+					RUS = { has_country_flag = RUS_ready_for_rbl_uprisinf_flag }
+				}
+				add_timed_idea = {
+					days = 120
+					idea = RUS_ready_for_rbl_uprising
+				}
+			}
+		}
+	}
+	
+	option = {
+		name = rus_rbl_uprising_event.4.a #Начинается борьба
+		
+		ai_chance = {
+			base = 15
+		}
+		RBL = {
+			declare_war_on = {
+				target = RUS
+				type = annex_everything
+			}
+		}
+		hidden_effect = {
+			
+		}
+	}
+
+}
+
+country_event = {
+	id = rus_rbl_uprising_event.5 # Арест Игнатьева
+	title = rus_rbl_uprising_event.5.t
+	desc = rus_rbl_uprising_event.5.d
+	picture = GFX_report_event_political_discussion
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event rus_rbl_uprising_event.5"
+	}
+	
+	option = {
+		name = rus_rbl_uprising_event.5.a #
+		
+		ai_chance = {
+			base = 15
+		}
+
+		hidden_effect = {
+			
+		}
+	}
 
 }
 
