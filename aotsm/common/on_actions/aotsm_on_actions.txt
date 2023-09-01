@@ -427,6 +427,48 @@ on_actions = {
 	
 	on_capitulation = {
 		effect = {
+			#RBL capitulation - ignatiev uprising failed
+			if = {
+				limit = {
+					tag = RBL
+					has_global_flag = rbl_uprising_started
+				}			
+				
+				every_country = {
+					if = {
+						limit = {
+							is_in_faction_with = RUS
+							has_war_with = RBL
+						}
+						white_peace = RBL
+					}
+				}
+				RUS = {
+					white_peace = {
+						tag = RBL
+						message = RBL_uprising_failed
+					} 					
+					RUS = {
+						annex_country = {
+							target = RBL
+							transfer_troops = no
+						}
+					}
+					
+				}
+				RBL = {
+					remove_state_core = 220
+					remove_state_core = 240
+					remove_state_core = 258
+					remove_state_core = 257
+					remove_state_core = 260
+				}
+				RUS = { country_event = { id = rus_rbl_uprising_event.5 days = 2 } }
+				clr_global_flag = rbl_uprising_started
+				set_global_flag = rbl_uprising_failed
+				news_event = news.273
+				add_threat = 1
+			}
 			#KAZ capitulation - rus socialist invasion completed
 			if = {
 				limit = {
