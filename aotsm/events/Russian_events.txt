@@ -5830,7 +5830,21 @@ country_event = {
 			type = annex_everything
 		}
 		hidden_effect = {
-			news_event = { id = news.69 days = 2 }
+			first_world_war_begin = yes
+			if = {
+				limit = {
+					PRU = {
+						is_in_faction_with = BYZ
+					}
+				}
+				PRU = {
+					add_to_war = {
+						targeted_alliance = BYZ
+						enemy = RUS
+					}
+				}
+			}
+			news_event = { id = news.271 days = 2 }
 		}
 	}
 	
@@ -5867,7 +5881,9 @@ country_event = {
 		ai_chance = {
 			base = 0
 		}
-		
+		trigger = {
+			always = no #не проработано
+		}
 		hidden_effect = {
 			RUS = {
 				country_event = { id = political_confrontation.8 days = 2}
@@ -5936,7 +5952,21 @@ country_event = {
 			type = annex_everything
 		}
 		hidden_effect = {
-			news_event = { id = news.69 days = 2 }
+			first_world_war_begin = yes
+			if = {
+				limit = {
+					PRU = {
+						is_in_faction_with = BYZ
+					}
+				}
+				PRU = {
+					add_to_war = {
+						targeted_alliance = BYZ
+						enemy = RUS
+					}
+				}
+			}
+			news_event = { id = news.271 days = 2 }
 		}
 	}
 	
@@ -5944,6 +5974,9 @@ country_event = {
 		name = political_confrontation.9.b	
 		ai_chance = {
 			base = 1
+		}
+		trigger = {
+			always = no #не пропаботано
 		}
 		add_war_support = -0.05
 		hidden_effect = {
@@ -8409,6 +8442,12 @@ country_event = {
 		name = russian_socialist_sphere_event.3.a	
 		add_stability = 0.03
 		add_war_support = 0.01
+		PRU = {
+			add_opinion_modifier = {
+				target = RUS
+				modifier = medium_decrease
+			}
+		}
 		hidden_effect = {
 			
 		}
@@ -8432,7 +8471,25 @@ country_event = {
 	
 	option = {
 		name = russian_socialist_sphere_event.4.a	
-		
+		ai_chance = {
+			base = 20
+		}
+		trigger = {
+			
+		}
+		hidden_effect = {
+			
+		}
+	}	
+	
+	option = {
+		name = russian_socialist_sphere_event.4.b	
+		ai_chance = {
+			base = 20
+		}
+		trigger = {
+			CBI = { has_government = socialism }
+		}
 		hidden_effect = {
 			
 		}
@@ -8456,17 +8513,28 @@ country_event = {
 	
 	option = {
 		name = russian_socialist_sphere_event.5.a	
-		
+		ai_chance = {
+			base = 20
+		}
+		trigger = {
+			
+		}
+		PRU = { country_event = { id = russian_socialist_sphere_event.6 days = 3 } }
 		hidden_effect = {
-			PRU = { country_event = russian_socialist_sphere_event.6 }
+			
 		}
 	}	
 	
 	option = {
 		name = russian_socialist_sphere_event.5.b
-		
-		hidden_effect = {
+		ai_chance = {
+			base = 20
+		}
+		trigger = {
 			
+		}
+		hidden_effect = {
+			set_country_flag = RUS_war_witch_germany_is_postponed
 		}
 	}	
 
@@ -8487,8 +8555,42 @@ country_event = {
 	}
 	
 	option = {
-		name = russian_socialist_sphere_event.6.a	
-		
+		name = russian_socialist_sphere_event.6.a #Не уступать	
+		ai_chance = {
+			base = 20
+		}
+		RUS = {
+			declare_war_on = {
+				target = PRU
+				type = annex_everything
+			}
+		}
+		hidden_effect = {
+			first_world_war_begin = yes
+			if = {
+				limit = {
+					BYZ = {
+						is_in_faction_with = PRU
+					}
+				}
+				BYZ = {
+					add_to_war = {
+						targeted_alliance = PRU
+						enemy = RUS
+					}
+				}
+			}
+		}
+	}	
+	
+	option = {
+		name = russian_socialist_sphere_event.6.a #Уступить
+		ai_chance = {
+			base = 0
+		}
+		trigger = {
+			always = no #не проработано в принципе
+		}
 		hidden_effect = {
 			
 		}
@@ -8512,7 +8614,8 @@ country_event = {
 	
 	option = {
 		name = russian_socialist_sphere_event.7.a	
-		
+		add_stability = 0.03
+		add_war_support = 0.01
 		hidden_effect = {
 			
 		}
@@ -8536,9 +8639,222 @@ country_event = {
 	
 	option = {
 		name = russian_socialist_sphere_event.8.a	
-		
+		custom_effect_tooltip = RUS_get_socialism_propaganda_in_neighbour_european_countries
 		hidden_effect = {
-			
+			if = {
+				limit = {
+					MOL = { 
+						country_exists = yes 
+						NOT = { has_government = socialism }
+					}		
+				}
+				MOL = {
+					add_timed_idea = {
+						days = 730
+						idea = RUS_add_socialism
+					}
+				}
+			}
+			if = {
+				limit = {
+					GLA = { 
+						country_exists = yes 
+						NOT = { has_government = socialism }
+					}
+				}
+				GLA = {
+					add_timed_idea = {
+						days = 730
+						idea = RUS_add_socialism
+					}
+				}
+			}
+			if = {
+				limit = {
+					VLH = { 
+						country_exists = yes 
+						NOT = { has_government = socialism }
+					}
+				}
+				VLH = {
+					add_timed_idea = {
+						days = 730
+						idea = RUS_add_socialism
+					}
+				}
+			}
+			if = {
+				limit = {
+					SCA = { 
+						country_exists = yes 
+						NOT = { has_government = socialism }
+					}
+				}
+				SCA = {
+					add_timed_idea = {
+						days = 730
+						idea = RUS_add_socialism
+					}
+				}
+			}
+			if = {
+				limit = {
+					ARM = { 
+						country_exists = yes 
+						NOT = { has_government = socialism }
+					}
+				}
+				ARM = {
+					add_timed_idea = {
+						days = 730
+						idea = RUS_add_socialism
+					}
+				}
+			}
+			if = {
+				limit = {
+					KAZ = { 
+						country_exists = yes 
+						NOT = { has_government = socialism }
+					}
+				}
+				KAZ = {
+					add_timed_idea = {
+						days = 730
+						idea = RUS_add_socialism
+					}
+				}
+			}
+			if = {
+				limit = {
+					HIV = { 
+						country_exists = yes 
+						NOT = { has_government = socialism }
+					}
+				}
+				HIV = {
+					add_timed_idea = {
+						days = 730
+						idea = RUS_add_socialism
+					}
+				}
+			}
+			if = {
+				limit = {
+					BUK = { 
+						country_exists = yes 
+						NOT = { has_government = socialism }
+					}
+				}
+				BUK = {
+					add_timed_idea = {
+						days = 730
+						idea = RUS_add_socialism
+					}
+				}
+			}
+			if = {
+				limit = {
+					CBI = { 
+						country_exists = yes 
+						NOT = { has_government = socialism }
+					}
+				}
+				CBI = {
+					add_timed_idea = {
+						days = 730
+						idea = RUS_add_socialism
+					}
+				}
+			}
+			if = {
+				limit = {
+					BRI = { 
+						country_exists = yes 
+						NOT = { has_government = socialism }
+					}
+				}
+				BRI = {
+					add_timed_idea = {
+						days = 730
+						idea = RUS_add_socialism
+					}
+				}
+			}
+			if = {
+				limit = {
+					WAL = { 
+						country_exists = yes 
+						NOT = { has_government = socialism }
+					}
+				}
+				WAL = {
+					add_timed_idea = {
+						days = 730
+						idea = RUS_add_socialism
+					}
+				}
+			}
+			if = {
+				limit = {
+					SCO = { 
+						country_exists = yes 
+						NOT = { has_government = socialism }
+					}
+				}
+				SCO = {
+					add_timed_idea = {
+						days = 730
+						idea = RUS_add_socialism
+					}
+				}
+			}
+			if = {
+				limit = {
+					IRE = { 
+						country_exists = yes 
+						NOT = { has_government = socialism }
+					}
+				}
+				IRE = {
+					add_timed_idea = {
+						days = 730
+						idea = RUS_add_socialism
+					}
+				}
+			}
+			if = {
+				limit = {
+					PRT = { 
+						country_exists = yes 
+						NOT = { has_government = socialism }
+					}
+				}
+				PRT = {
+					add_timed_idea = {
+						days = 730
+						idea = RUS_add_socialism
+					}
+				}
+			}
+			if = {
+				limit = {
+					AUS = { 
+						country_exists = yes 
+						NOT = { 
+							has_government = socialism 
+							is_puppet = yes
+							is_subject = yes
+						}
+					}
+				}
+				AUS = {
+					add_timed_idea = {
+						days = 730
+						idea = RUS_add_socialism
+					}
+				}
+			}
 		}
 	}	
 
@@ -8560,7 +8876,7 @@ country_event = {
 	
 	option = {
 		name = russian_socialist_sphere_event.9.a	
-		
+		add_ideas = RUS_soc_ohranka
 		hidden_effect = {
 			
 		}
@@ -8584,9 +8900,29 @@ country_event = {
 	
 	option = {
 		name = russian_socialist_sphere_event.10.a	
+		ai_chance = {
+			base = 20
+		}
+		trigger = {
+			
+		}
+		BYZ = { country_event = { id = russian_socialist_sphere_event.11 days = 3 } }
+		hidden_effect = {
+			
+		}
+	}	
+	
+	option = {
+		name = russian_socialist_sphere_event.10.b	
+		ai_chance = {
+			base = 0
+		}
+		trigger = {
+			
+		}
 		
 		hidden_effect = {
-			BYZ = { country_event = russian_socialist_sphere_event.11 }
+			set_country_flag = RUS_war_witch_byzantuim_is_postponed
 		}
 	}	
 	
@@ -8610,9 +8946,30 @@ country_event = {
 	
 	option = {
 		name = russian_socialist_sphere_event.11.a	
-		
+		ai_chance = {
+			base = 20
+		}
+		RUS = {
+			declare_war_on = {
+				target = BYZ
+				type = annex_everything
+			}
+		}
 		hidden_effect = {
-			
+			first_world_war_begin = yes
+			if = {
+				limit = {
+					PRU = {
+						is_in_faction_with = BYZ
+					}
+				}
+				PRU = {
+					add_to_war = {
+						targeted_alliance = BYZ
+						enemy = RUS
+					}
+				}
+			}
 		}
 	}	
 
@@ -10657,65 +11014,104 @@ country_event = {
 ###############################LEAVE_OFFICERS_EVENTS###############################
 
 country_event = {
-	id = rus_leave_officers_event.1 # Романовы покидают страну - для Чернышевского и Герцена
+	id = rus_leave_officers_event.1 # Романовы покидают страну - для Пушкина и Герцена
 	title = rus_leave_officers_event.1.t
 	desc = rus_leave_officers_event.1.d
 	picture = GFX_report_event_political_discussion
 	
 	fire_only_once = yes
 	
-	is_triggered_only = yes
+	trigger = {
+		tag = RUS
+		has_country_flag = {
+			flag = RUS_start_leave_officers
+			days > 14
+		}
+		NOT = {
+			has_country_leader = {
+				character = RUS_Chernyshevskiy_Nikolay_Gavrilovich
+				ruling_only = yes
+			}
+		}
+	}
 	
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event rus_leave_officers_event.1"
+		hidden_effect ={
+			if = {
+				limit = {
+					RUS = { NOT = { has_country_flag = RUS_not_loyal_officers_purged } }
+				}
+				every_unit_leader = {
+				limit = {
+					#tag = RUS
+					has_trait = RUS_house_of_romanov
+				}
+				remove_unit_leader = yes
+				}
+			
+			}
+		}
 	}
 	
 	option = {
 		name = rus_leave_officers_event.1.a	
-		every_unit_leader = {
-			limit = {
-				#tag = RUS
-				has_trait = RUS_house_of_romanov
-			}
-			remove_unit_leader = yes
-		}
+		
 		hidden_effect = {
-			country_event = { id = rus_leave_officers_event.2 days = 12 }
+			#country_event = { id = rus_leave_officers_event.2 days = 12 } #переделано на флаг триггер
 		}
 	}	
 
 }
 
 country_event = {
-	id = rus_leave_officers_event.2 # Исчезновение Игнатьева - для Чернышевского и Герцена
+	id = rus_leave_officers_event.2 # Исчезновение Игнатьева - для Пушкина и Герцена
 	title = rus_leave_officers_event.2.t
 	desc = rus_leave_officers_event.2.d
 	picture = GFX_report_event_political_discussion
 	
 	fire_only_once = yes
 
-	is_triggered_only = yes
+	trigger = {
+		tag = RUS
+		RUS = { has_government = socialism }
+		has_country_flag = {
+			flag = RUS_start_leave_officers
+			days > 28
+		}
+		NOT = {
+			has_country_leader = {
+				character = RUS_Chernyshevskiy_Nikolay_Gavrilovich
+				ruling_only = yes
+			}
+		}
+	}
 	
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event rus_leave_officers_event.2"
 		hidden_effect = {
-			every_unit_leader = {
+			if = {
 				limit = {
-					has_trait = RUS_black_league
+					RUS = { NOT = { has_country_flag = RUS_not_loyal_officers_purged } }
 				}
-				set_nationality = {
-					target_country = RBL
+				every_unit_leader = {
+					limit = {
+						has_trait = RUS_black_league
+					}
+					set_nationality = {
+						target_country = RBL
+					}
 				}
+				every_unit_leader = {
+					limit = {
+						has_trait = RUS_black_league_navy
+					}
+					set_nationality = {
+						target_country = RBL
+					}
+				}
+				set_country_flag = RUS_ignatiev_fade
 			}
-			every_unit_leader = {
-				limit = {
-					has_trait = RUS_black_league_navy
-				}
-				set_nationality = {
-					target_country = RBL
-				}
-			}
-			set_country_flag = RUS_ignatiev_fade
 		}
 	}
 	
@@ -10749,20 +11145,24 @@ country_event = {
 	picture = GFX_report_event_political_discussion
 	
 	fire_only_once = yes
-
-	is_triggered_only = yes
+	
+	trigger = {
+		tag = RUS
+		RUS = { has_government = socialism }
+		has_country_flag = {
+			flag = RUS_start_leave_officers
+			days > 42
+		}
+		NOT = {
+			has_country_leader = {
+				character = RUS_Chernyshevskiy_Nikolay_Gavrilovich
+				ruling_only = yes
+			}
+		}
+	}
 	
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event rus_leave_officers_event.3"
-	}
-	
-	option = {
-		name = rus_leave_officers_event.3.a	
-		
-		ai_chance = {
-			base = 15
-		}
-		
 		hidden_effect = {
 			RUS = { 
 				remove_unit_leader = 901	
@@ -10776,7 +11176,19 @@ country_event = {
 				remove_unit_leader = 913	
 				remove_unit_leader = 915	
 			}
-			country_event = { id = rus_leave_officers_event.4 days = 11 }
+		}
+	}
+	
+	option = {
+		name = rus_leave_officers_event.3.a	
+		
+		ai_chance = {
+			base = 15
+		}
+		
+		hidden_effect = {
+			
+			country_event = { id = rus_leave_officers_event.4 days = 12 }
 		}
 	}	
 	
@@ -10789,18 +11201,7 @@ country_event = {
 		}
 		
 		hidden_effect = {
-			RUS = { 
-				remove_unit_leader = 901	
-				remove_unit_leader = 902	
-				remove_unit_leader = 904		
-				remove_unit_leader = 906	
-				remove_unit_leader = 908	
-				remove_unit_leader = 909	
-				remove_unit_leader = 910	
-				remove_unit_leader = 912	
-				remove_unit_leader = 913	
-				remove_unit_leader = 915	
-			}
+
 		}
 	}	
 
@@ -10818,17 +11219,22 @@ country_event = {
 	
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event rus_leave_officers_event.4"
-	}
-	
-	option = {
-		name = rus_leave_officers_event.4.a	
-		
 		hidden_effect = {
 			RUS = { 
 				remove_unit_leader = 922	
 				remove_unit_leader = 923
-				remove_unit_leader = 930
+				#remove_unit_leader = 930 #Исчезает вместе с др членами РЧЛ
 			}
+		}
+	}
+	
+	option = {
+		name = rus_leave_officers_event.4.a	
+		ai_chance = {
+			base = 20
+		}
+		
+		hidden_effect = {
 			country_event = { id = rus_leave_officers_event.5 days = 15 }
 		}
 	}	
@@ -10847,11 +11253,6 @@ country_event = {
 	
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event rus_leave_officers_event.5"
-	}
-	
-	option = {
-		name = rus_leave_officers_event.5.a	
-		
 		hidden_effect = {
 			if = {
 				limit = {
@@ -10869,6 +11270,16 @@ country_event = {
 				remove_unit_leader = 928	
 				remove_unit_leader = 929		
 			}
+		}
+	}
+	
+	option = {
+		name = rus_leave_officers_event.5.a	
+		ai_chance = {
+			base = 20
+		}
+		hidden_effect = {
+		
 		}
 	}		
 
@@ -10983,7 +11394,7 @@ country_event = {
 		log = "[GetDateText]: [Root.GetName]: event rus_rbl_uprising_event.3"
 		hidden_effect = {	
 			set_global_flag = rbl_uprising_started
-			news_event = news.272
+			news_event = { id = news.272 days = 3 }
 			RBL = {
 				transfer_state = 220
 				transfer_state = 240
@@ -11009,6 +11420,10 @@ country_event = {
 					ideology = paternalism
 					traits = { leader_of_the_black_union }
 				}
+			}
+			set_country_leader_portrait = {
+				ideology = reactionist
+				portrait = GFX_rus_Pavel_Ignatiev_leader_rbl
 			}
 		}
 	}
