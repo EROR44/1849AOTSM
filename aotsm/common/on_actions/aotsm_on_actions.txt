@@ -642,10 +642,66 @@ on_actions = {
 					remove_state_core = 98
 					remove_state_core = 853
 				}
+				if = {
+					limit = {
+						853 = {
+							NOT = { is_core_of = RUS }
+						}
+					}
+					RUS = { add_state_core = 853 }
+				}
+				if = {
+					limit = {
+						98 = {
+							NOT = { is_core_of = RUS }
+						}					
+					}
+					RUS = { add_state_core = 98 }
+				}
+				if = {
+					limit = {
+						97 = {
+							NOT = { is_core_of = RUS }
+						}						
+					}
+					RUS = { add_state_core = 97 }
+				}
+				if = {
+					limit = {
+						92 = {
+							NOT = { is_core_of = RUS }
+						}
+					}
+					RUS = { add_state_core = 92 }
+				}
+				if = {
+					limit = {
+						90 = {
+							NOT = { is_core_of = RUS }
+						}					
+					}
+					RUS = { add_state_core = 90 }
+				}
+				if = {
+					limit = {
+						87 = {
+							NOT = { is_core_of = RUS }
+						}
+					}
+					RUS = { add_state_core = 87 }
+				}
+				if = {
+					limit = {
+						10 = {
+							NOT = { is_core_of = RUS }
+						}
+					}
+					RUS = { add_state_core = 10 }
+				}
 				RUS = {
 					country_event = { id = rus_poland_situation_event.1 days = 7}
 				}
-				add_threat = 3
+				add_threat = 5
 			}
 			#JAP capitulation - RUS annex sakhalin
 			if = {
@@ -9973,6 +10029,93 @@ on_actions = {
 	}
 	on_state_control_changed = {
 		effect = {
+			if = { #RUS capitulation - RBL uprising success
+				limit = {
+					has_global_flag = rbl_uprising_started
+					195 = {
+						controller = {
+							OR = {
+								tag = RBL
+								is_subject_of = RBL
+								is_in_faction_with = RBL
+							}
+						}
+					}
+					219 = {
+						controller = {
+							OR = {
+								tag = RBL
+								is_subject_of = RBL
+								is_in_faction_with = RBL
+							}
+						}
+					}
+				}			
+				
+				every_country = {
+					if = {
+						limit = {
+							is_in_faction_with = RUS
+							has_war_with = RBL
+						}
+						white_peace = RBL
+					}
+				}
+				RUS = {
+					white_peace = {
+						tag = RBL
+						message = RBL_uprising_sucsess
+					} 			
+				}
+				RBL = {
+					remove_state_core = 220
+					remove_state_core = 240
+					remove_state_core = 258
+					remove_state_core = 257
+					remove_state_core = 260
+				}
+				every_unit_leader = {
+					limit = {
+						has_trait = RUS_black_league
+					}
+					set_nationality = {
+						target_country = RUS
+					}
+				}
+				every_unit_leader = {
+					limit = {
+						has_trait = RUS_black_league_navy
+					}
+					set_nationality = {
+						target_country = RUS
+					}
+				}
+				RUS = { change_tag_from = RBL }				
+				RUS = {
+					annex_country = {
+						target = RBL
+						transfer_troops = yes
+					}
+				}
+				RUS = {
+					set_cosmetic_tag = RUS_RBL
+					retire_country_leader = yes
+					add_country_leader_role = {
+						character = RUS_Pavel_Nikolaevich_Ignatiev
+						promote_leader = yes
+					
+						country_leader = {
+							expire = "1900.1.1"
+							ideology = paternalism
+							traits = { leader_of_the_black_union }
+						}
+					}
+				}
+				clr_global_flag = rbl_uprising_started
+				set_global_flag = rbl_uprising_eb
+				news_event = news.274
+				add_threat = 1
+			}
 			if = {#RUS capitulation - Russia fail invasion in scandinavy - SCA annex finland
 				limit ={
 					tag = RUS

@@ -80,6 +80,15 @@ focus_tree = {
 		y = 0
 		cost = 5
 		
+		allow_branch = {
+			NOT = {
+				OR = {
+					has_completed_focus = RUS_return_of_old_orders
+					has_completed_focus = RUS_raise_of_the_red
+				}
+			}
+		}
+		
 		available_if_capitulated = yes
 		
 		search_filters = { FOCUS_FILTER_INDUSTRY }
@@ -1215,6 +1224,15 @@ focus_tree = {
 		y = 0
 		cost = 2
 		
+		allow_branch = {
+			NOT = {
+				OR = {
+					has_completed_focus = RUS_return_of_old_orders
+					has_completed_focus = RUS_raise_of_the_red
+				}
+			}
+		}
+		
 		mutually_exclusive = { focus = RUS_return_of_old_orders }
 		mutually_exclusive = { focus = RUS_raise_of_the_red }
 
@@ -1240,6 +1258,15 @@ focus_tree = {
 		x = 23
 		y = 0
 		cost = 2
+		
+		allow_branch = {
+			NOT = {
+				OR = {
+					has_completed_focus = RUS_return_of_old_orders
+					has_completed_focus = RUS_raise_of_the_red
+				}
+			}
+		}
 		
 		offset = {
 			x = -1
@@ -1282,11 +1309,18 @@ focus_tree = {
 		y = 0
 		cost = 2
 		
+		#offset = {
+		#	x = -3
+		#	y = 0
+		#	trigger ={
+		#		NOT = { has_country_flag = RUS_church_complete_coup }
+		#	}
+		#}
 		offset = {
-			x = -3
+			x = -33
 			y = 0
 			trigger ={
-				NOT = { has_country_flag = RUS_church_complete_coup }
+				has_completed_focus = RUS_raise_of_the_red
 			}
 		}
 		
@@ -1312,6 +1346,9 @@ focus_tree = {
 			add_timed_idea = {
 				idea = RUS_socialist_on_the_raise
 				days = 365
+			}
+			hidden_effect = {
+				mark_focus_tree_layout_dirty = yes 
 			}
 		}
 	}
@@ -1416,6 +1453,14 @@ focus_tree = {
 		x = 11
 		y = 2
 		cost = 0
+		
+		offset = {
+			x = -16
+			y = 2
+			trigger ={
+				has_completed_focus = RUS_raise_of_the_red
+			}
+		}
 		
 		available = {
 			aotsm_performed_by_event_or_solution = yes
@@ -4029,7 +4074,8 @@ focus_tree = {
 			log = "[GetDateText]: [Root.GetName]: focus RUS_go_to_plan_economic"
 			country_event = russian_socialist_political_event.12
 			hidden_effect = {
-				country_event = { id = rus_leave_officers_event.3 days = 12 }
+				#country_event = { id = rus_leave_officers_event.3 days = 12 } #переделано на флаг
+				set_country_flag = RUS_start_leave_officers
 				mark_focus_tree_layout_dirty = yes 
 			}
 		}
@@ -6647,6 +6693,7 @@ focus_tree = {
 		
 		available = {
 			has_war = no
+			NOT = { has_global_flag = firts_world_war}
 			OR = {
 				has_global_flag = pru_ignore_poland_uprising
 				date > 1855.1.1
@@ -6731,6 +6778,7 @@ focus_tree = {
 		
 		available = {
 			has_war = no
+			NOT = { has_global_flag = firts_world_war}
 			date > 1855.1.1
 		}
 
