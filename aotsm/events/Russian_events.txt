@@ -2857,15 +2857,15 @@ country_event = {
 			base = 20
 			modifier = {
 				FRR = { is_faction_leader = yes }
-				add  = 0
+				factor  = 0
 			}
 			modifier = {
 				FRR = { is_in_faction = yes }
-				add  = 0
+				factor  = 0
 			}		
 			modifier = {
 				FRR = { has_government = reactionist }
-				add  = 0
+				factor  = 0
 			}
 		}
 
@@ -6189,7 +6189,7 @@ country_event = {
 }
 
 country_event = {
-	id = finland_quiestion_event.3 # 
+	id = finland_quiestion_event.3 # Решение финского вопроса - ивент для Социалистов
 	title = finland_quiestion_event.3.t
 	desc = finland_quiestion_event.3.d
 	picture = GFX_report_event_aotsm_generic_signing_the_contract
@@ -6203,7 +6203,137 @@ country_event = {
 	}
 	
 	option = {
+		name = finland_quiestion_event.3.a	
+		custom_effect_tooltip = RUS_finland_get_autonomy_as_part_of_russia
+		hidden_effect = {
+			FIN = {
+				transfer_state = 111
+				transfer_state = 145
+				transfer_state = 147
+				transfer_state = 149
+				transfer_state = 150	
+			}
+			if = {
+				limit = { 148 = { is_owned_and_controlled_by = RUS } }
+				FIN = { transfer_state = 148 }	
+			}
+			RUS = {
+				set_autonomy = {
+					target = FIN
+					autonomous_state = autonomy_colony
+				}
+			}
+			FIN = {
+				swap_ideas = {
+					remove_idea = medium_country
+					add_idea = average_colony
+				}
+				swap_ideas = {
+					remove_idea = protestantism
+					add_idea = orthodox_christian
+				}
+				swap_ideas = {
+					remove_idea = constitutional_monarchy_fg
+					add_idea = republic
+				}
+				set_cosmetic_tag = RUS_SFIN
+				add_popularity = {
+					ideology = socialism
+					popularity = 0.70
+				}
+				set_politics = { ruling_party = socialism }
+				retire_country_leader = yes
+				if = {
+					limit = {
+						RUS = { has_country_leader_ideology = market_socialism }
+					}
+					add_country_leader_role = {
+						character = FIN_okrug_soviet
+						promote_leader = yes
+						
+						country_leader = {
+							expire = "1900.1.1"
+							ideology = market_socialism
+							traits = {  }
+						}
+					}
+				}
+				if = {
+					limit = {
+						RUS = { has_country_leader_ideology = engelsism }
+					}
+					add_country_leader_role = {
+						character = FIN_okrug_soviet
+						promote_leader = yes
+						
+						country_leader = {
+							expire = "1900.1.1"
+							ideology = engelsism
+							traits = {  }
+						}
+					}
+				}
+				if = {
+					limit = {
+						RUS = { has_country_leader_ideology = marxism }
+					}
+					add_country_leader_role = {
+						character = FIN_okrug_soviet
+						promote_leader = yes
+						
+						country_leader = {
+							expire = "1900.1.1"
+							ideology = marxism
+							traits = {  }
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+
+country_event = {
+	id = finland_quiestion_event.4 # 
+	title = finland_quiestion_event.4.t
+	desc = finland_quiestion_event.4.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event finland_quiestion_event.4"
+	}
+	
+	option = {
 		name = finland_quiestion_event.4.a	
+		
+		hidden_effect = {
+			
+		}
+	}
+}
+
+
+country_event = {
+	id = finland_quiestion_event.5 # 
+	title = finland_quiestion_event.5.t
+	desc = finland_quiestion_event.5.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event finland_quiestion_event.5"
+	}
+	
+	option = {
+		name = finland_quiestion_event.5.a	
 		
 		hidden_effect = {
 			
@@ -8477,6 +8607,10 @@ country_event = {
 		trigger = {
 			
 		}
+		add_opinion_modifier = {
+			target = RUS
+			modifier = medium_increase 
+		}
 		hidden_effect = {
 			
 		}
@@ -8580,6 +8714,7 @@ country_event = {
 					}
 				}
 			}
+			news_event = { id = news.275 days = 3 }
 		}
 	}	
 	
@@ -8992,7 +9127,20 @@ country_event = {
 	
 	option = {
 		name = russian_socialist_sphere_event.12.a	
-		
+		ai_chance = {
+			base = 20
+		}
+		SOR = { add_ideas = RUS_russian_millitary_advisors }
+		hidden_effect = {
+			
+		}
+	}	
+	
+	option = {
+		name = russian_socialist_sphere_event.12.b	
+		ai_chance = {
+			base = 0
+		}
 		hidden_effect = {
 			
 		}
