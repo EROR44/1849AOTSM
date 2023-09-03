@@ -5023,6 +5023,7 @@ focus_tree = {
 			log = "[GetDateText]: [Root.GetName]: focus RUS_military_factories_priority"
 			custom_effect_tooltip = RUS_add_arms_factory_in_206_217_219_221_206_249
 			hidden_effect = {
+				set_country_flag = RUS_soc_unlock_extra_building_projects
 				206 = {
 					add_extra_state_shared_building_slots = 1
 					add_building_construction = {
@@ -5105,6 +5106,7 @@ focus_tree = {
 			log = "[GetDateText]: [Root.GetName]: focus RUS_civil_factories_priority"
 			custom_effect_tooltip = RUS_add_industrial_complex_206_217_219_221_206_249
 			hidden_effect = {
+				set_country_flag = RUS_soc_unlock_extra_building_projects
 				206 = {
 					add_extra_state_shared_building_slots = 1
 					add_building_construction = {
@@ -6963,7 +6965,6 @@ focus_tree = {
 		available = {
 			has_country_flag = is_international_member
 			number_of_international_members_2_or_more = yes
-			always = no
 		}
 
 		relative_position_id = RUS_soc_coop_researches
@@ -6975,7 +6976,10 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: focus RUS_soc_unite_against_threats"
-			
+			every_country = {
+				limit = { has_country_flag = is_international_member }
+				country_event = fi_political_event.2
+			}
 		}
 	}	
 	
@@ -7115,7 +7119,13 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: focus RUS_soc_russo_japan_diplomaty"
-			JAP = { country_event = { id = russian_socialist_sphere_event.41 days = 3 } }
+			#JAP = { country_event = { id = russian_socialist_sphere_event.41 days = 3 } }
+			JAP = {
+				add_opinion_modifier = {
+					target = RUS
+					modifier = large_increase
+				}
+			}
 		}
 	}	
 	
