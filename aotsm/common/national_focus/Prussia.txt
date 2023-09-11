@@ -3344,15 +3344,23 @@ focus_tree = {
 			}
 		}
 		
-		#cancel = { }
+		cancel = { 
+			has_country_flag = blacksun_end_germany 
+		}
 		
-		#available = { }
+		available = {
+			NOT = { has_country_flag = blacksun_end_germany }
+		}
 		
 		#bypass = { }
 		
 		#search_filters = {  }
 		
 		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus PRU_kontinental_europa_reform"
+			hidden_effect = {
+				set_country_flag = PRU_start_kep_economic_reform
+			}
 		}
 	}
 	
@@ -3369,7 +3377,9 @@ focus_tree = {
 			factor = 2000
 		}
 		
-		#cancel = { }
+		cancel = { 
+			has_country_flag = blacksun_end_germany 
+		}
 		
 		#available = { }
 		
@@ -3378,6 +3388,7 @@ focus_tree = {
 		#search_filters = {  }
 		
 		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus PRU_financy_reform"
 			swap_ideas = {
 				remove_idea = local_corruption
 				add_idea = no_corruption
@@ -3398,16 +3409,84 @@ focus_tree = {
 			factor = 2000
 		}
 		
-		#cancel = { }
+		cancel = { 
+			has_country_flag = blacksun_end_germany 
+		}
 		
-		#available = { }
+		available = {
+			64 = { is_owned_and_controlled_by = PRU }
+			52 = { is_owned_and_controlled_by = PRU }
+			763 = { is_owned_and_controlled_by = PRU }
+		}
 		
 		#bypass = { }
 		
 		#search_filters = {  }
 		
 		completion_reward = {
-		
+			log = "[GetDateText]: [Root.GetName]: focus PRU_fund_industria"
+			#custom_effect_tooltip = #тут должен быть кастом эффект
+			64 = {
+				add_extra_state_shared_building_slots = 2
+				#if = {
+				#	limit = { 
+				#		64 = { infrastructure_level < 5 } #параметр не коректно работает
+				#	}
+				#	add_building_construction = {
+				#		type = infrastructure
+				#		level = 1
+				#		instant_build = yes
+				#	}
+				#}
+				#if = {
+				#	limit = { 
+				#		64 = { 
+				#			infrastructure_level > 4 
+				#		}
+				#	}
+				#	add_extra_state_shared_building_slots = 1
+				#}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}	
+			
+			52 = {
+				add_extra_state_shared_building_slots = 2
+
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}	
+			
+			763 = {
+				add_extra_state_shared_building_slots = 2
+
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
 		}
 	}
 	
@@ -3425,7 +3504,9 @@ focus_tree = {
 			factor = 2000
 		}
 		
-		#cancel = { }
+		cancel = { 
+			has_country_flag = blacksun_end_germany 
+		}
 		
 		#available = { }
 		
@@ -3434,7 +3515,8 @@ focus_tree = {
 		#search_filters = {  }
 		
 		completion_reward = {
-		
+			log = "[GetDateText]: [Root.GetName]: focus PRU_open_new_company"
+			custom_effect_tooltip = PRU_unlock_des_develop_german_industry
 		}
 	}
 	
@@ -3451,7 +3533,9 @@ focus_tree = {
 			factor = 2000
 		}
 		
-		#cancel = { }
+		cancel = { 
+			has_country_flag = blacksun_end_germany 
+		}
 		
 		#available = { }
 		
@@ -3460,6 +3544,7 @@ focus_tree = {
 		#search_filters = {  }
 		
 		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus PRU_all_union_build"
 			add_offsite_building = { type = industrial_complex level = 2 }
 			every_country = {
 				limit = {
@@ -3488,7 +3573,9 @@ focus_tree = {
 			factor = 2000
 		}
 		
-		#cancel = { }
+		cancel = { 
+			has_country_flag = blacksun_end_germany 
+		}
 		
 		#available = { }
 		
@@ -3497,6 +3584,7 @@ focus_tree = {
 		#search_filters = {  }
 		
 		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus PRU_creating_of_byzantian_german_trade_company"
 			BYZ = { country_event = { id = ger_byz.2 hours = 12 } }
 		}
 	}
@@ -3514,7 +3602,9 @@ focus_tree = {
 			factor = 2000
 		}
 		
-		#cancel = { }
+		cancel = { 
+			has_country_flag = blacksun_end_germany 
+		}
 		
 		#available = { }
 		
@@ -3523,7 +3613,23 @@ focus_tree = {
 		#search_filters = {  }
 		
 		completion_reward = {
-			add_political_power = 150
+			log = "[GetDateText]: [Root.GetName]: focus PRU_reform_packt"
+			custom_effect_tooltip = PRU_add_100_pp_2_of_ic_and_ally_add_50_pp_1_of_ic
+			hidden_effect = {
+				add_offsite_building = { type = industrial_complex level = 2 }
+				add_political_power = 100
+				every_country = {
+					limit = {
+						is_in_faction_with = PRU
+						NOT = {
+							is_puppet_of = PRU
+							is_subject_of = PRU
+						}
+					}
+					add_political_power = 50
+					add_offsite_building = { type = industrial_complex level = 1 }
+				}
+			}
 		}
 	}
 	
@@ -3540,7 +3646,9 @@ focus_tree = {
 			factor = 2000
 		}
 		
-		#cancel = { }
+		cancel = { 
+			has_country_flag = blacksun_end_germany 
+		}
 		
 		#available = { }
 		
@@ -3549,6 +3657,7 @@ focus_tree = {
 		#search_filters = {  }
 		
 		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus PRU_new_trade_contract"
 			
 		}
 	}
@@ -3567,7 +3676,10 @@ focus_tree = {
 			factor = 2000
 		}
 		
-		#cancel = { }
+		cancel = { 
+			has_war = yes
+			has_country_flag = blacksun_end_germany 
+		}
 		
 		available = {
 			has_war = no
@@ -3578,12 +3690,14 @@ focus_tree = {
 		#search_filters = {  }
 		
 		completion_reward = {
-			
+			log = "[GetDateText]: [Root.GetName]: focus PRU_organise_international_company"
+			add_political_power = 100
+			custom_effect_tooltip = PRU_unlock_des_develop_ally_industry
 		}
 	}
 	
 	focus = {
-		id = PRU_free_european_trade_company
+		id = PRU_free_european_trade_company 
 		icon = GFX_focus_PRU_free_european_trade_company
 		x = 0
 		y = 5
@@ -3595,16 +3709,25 @@ focus_tree = {
 			factor = 2000
 		}
 		
-		#cancel = { }
+		cancel = { 
+			has_war = yes
+			has_country_flag = blacksun_end_germany 
+		}
 		
-		#available = { }
+		available = {
+			has_war = no
+		}
 		
 		#bypass = { }
 		
 		#search_filters = {  }
 		
 		completion_reward = {
-			
+			log = "[GetDateText]: [Root.GetName]: focus PRU_free_european_trade_company"
+			add_timed_idea = {
+				idea = PRU_kep_trade_free_trade
+				days = 1095
+			}
 		}
 	}
 	
@@ -3636,6 +3759,7 @@ focus_tree = {
 		#search_filters = {  }
 		
 		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus PRU_war_economi"
 			64 = {
 				add_building_construction = {
 					type = arms_factory
@@ -3667,6 +3791,7 @@ focus_tree = {
 		#search_filters = {  }
 		
 		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus PRU_economi"
 			random_state = {
 				limit = { is_core_of = PRU }
 				add_extra_state_shared_building_slots = 1
@@ -3719,6 +3844,7 @@ focus_tree = {
 		#search_filters = {  }
 		
 		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus PRU_economi_sauer"
 			random_state = {
 				limit = { is_core_of = PRU }
 				add_extra_state_shared_building_slots = 2
@@ -6611,7 +6737,7 @@ focus_tree = {
 	
 	focus = {
 		id = PRU_germanreich
-		icon = GFX_focus_ger_revive_kaiserreich
+		icon = GFX_focus_pru_germanreich
 		x = 0
 		y = 20
 		cost = 4.3
@@ -6637,6 +6763,7 @@ focus_tree = {
 		}
 		
 		completion_reward = {
+			custom_effect_tooltip = aotsm_branch_in_development
 		}
 	}
 }
