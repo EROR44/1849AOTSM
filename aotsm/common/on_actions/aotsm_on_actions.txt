@@ -4915,7 +4915,7 @@ on_actions = {
 								remove_state_core = 853
 							}
 						}
-						if = { #на всякий случай - Краков
+						if = { #на всякий случай - Краков - если он под Россией
 							limit = {
 								RUS = {
 									owns_state = 903
@@ -4924,6 +4924,15 @@ on_actions = {
 							transfer_state = 903
 							RUS = {
 								remove_state_core = 903
+							}
+						}
+						if = { #на всякий случай - Краков - если он существует
+							limit = {
+								country_exists = KRA
+							}
+							annex_country = {
+								target = KRA
+								transfer_troops = yes
 							}
 						}
 					}
@@ -5050,9 +5059,10 @@ on_actions = {
 						}
 					}
 				}
-				if = {
+				if = { #Выделение независимой Украины с Шевченко
 					limit = {
 						NOT = {
+							has_global_flag = pru_steal_ukraina #Проверка на существование Украины, как марионетки Пруссии - тег WUK
 							country_exists = UKR
 						}
 					}
@@ -5321,6 +5331,20 @@ on_actions = {
 						has_war_with = RUS
 					}
 					white_peace = RUS
+				}
+				every_country = {
+					limit = {
+						is_in_faction_with = RUS
+						has_war_with = PRU
+					}
+					white_peace = PRU
+				}
+				every_country = {
+					limit = {
+						is_in_faction_with = RUS
+						has_war_with = BYZ
+					}
+					white_peace = BYZ
 				}
 				hidden_effect = {
 					if = {
