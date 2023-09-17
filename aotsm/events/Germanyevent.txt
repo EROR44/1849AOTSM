@@ -5309,27 +5309,42 @@ country_event = { #Black Sun succesd coup
 				}
 			}
 			news_event = news.184
-			hidden_effect = {
-				if = {
-					limit = {
-						NOT = {
-							PRU = {
-								has_country_flag = pru_solder_in_bs
-							}
-						}
-					}
-					PRU = {
-						country_event = {
-							id = script_event.39
-							days = 30
+			if = {
+				limit = {
+					NOT = {
+						PRU = {
+							has_country_flag = pru_solder_in_bs
 						}
 					}
 				}
 				PRU = {
 					country_event = {
-						id = ger_blackorder.9
-						days = 330
+						id = script_event.39
+						days = 30
 					}
+				}
+			}
+			PRU = {
+				country_event = {
+					id = ger_blackorder.9
+					days = 330
+				}
+			}
+			PRU = {
+				PRU_Adolf_Arnim_Boitzenburg = {
+					retire = yes
+				}
+				PRU_Chlodwig_Hohenlohe = {
+					retire = yes
+				}
+				PRU_Wilhelm_Grabow = {
+					retire = yes
+				}
+				PRU_Wilhelm_Liebknecht = {
+					retire = yes
+				}
+				PRU_Rosa_Ludmilla_Assing = {
+					retire = yes
 				}
 			}
 		}
@@ -8548,6 +8563,11 @@ country_event = { #Non radical reich
 		PRU = {
 			set_cosmetic_tag = PRU_SECOND_REPUBLIC
 		}
+		swap_ideas = {
+			remove_idea = slavery_allowed
+			add_idea = slavery_forbidden
+		}
+		add_country_leader_trait = destroer_of_black_sun
 		hidden_effect = {
 			PRU = {
 				set_country_leader_portrait = {
@@ -8613,6 +8633,10 @@ country_event = { #New democratic Reich
 			set_country_flag = pru_second_republic
 			mark_focus_tree_layout_dirty = yes
 		}
+		add_country_leader_trait = german_liberator
+		PRU = {
+			country_event = epilog_germany.1
+		}
 		hidden_effect = {
 			PRU = {
 				set_country_leader_portrait = {
@@ -8642,8 +8666,132 @@ country_event = { #Death of Dream
 		PRU = {
 			remove_unit_leader = 4417
 		}
+		PRU = {
+			country_event = epilog_germany.1
+		}
 		ai_chance = {
 			base = 100
+		}
+	}
+	
+}
+
+country_event = { #Question about loyal
+	id = ger_blackorder.108
+	title = ger_blackorder.108.t
+	desc = ger_blackorder.108.d
+	picture = GFX_report_event_bs_loylity
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger_blackorder.108" }
+	
+	option = { #Corruption is head of proggress
+		name = ger_blackorder.108.a
+		ai_chance = {
+			base = 100
+		}
+		add_political_power = -200
+	}
+	
+	option = { #ignore probleb
+		name = ger_blackorder.108.b
+		ai_chance = {
+			base = 100
+		}
+		add_stability = -0.05
+	}
+	
+}
+
+country_event = { #New german man
+	id = ger_blackorder.109
+	title = ger_blackorder.109.t
+	desc = ger_blackorder.109.d
+	picture = GFX_report_event_bs_new_german
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger_blackorder.109" }
+	
+	option = { 
+		name = ger_blackorder.109.a
+		ai_chance = {
+			base = 100
+		}
+		add_ideas = pru_new_german_man
+	}
+	
+}
+
+country_event = { #True German
+	id = ger_blackorder.110
+	title = ger_blackorder.110.t
+	desc = ger_blackorder.110.d
+	picture = GFX_report_event_bs_true_german
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger_blackorder.110" }
+	
+	option = { 
+		name = ger_blackorder.110.a
+		ai_chance = {
+			base = 100
+		}
+		add_ideas = pru_true_german
+	}
+	
+}
+
+country_event = { #Army main power
+	id = ger_blackorder.111
+	title = ger_blackorder.111.t
+	desc = ger_blackorder.111.d
+	picture = GFX_report_event_bs_army_corruption
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger_blackorder.111" }
+	
+	option = { 
+		name = ger_blackorder.111.a
+		ai_chance = {
+			base = 100
+		}
+		add_ideas = pru_corruption_in_army
+	}
+	
+}
+
+country_event = { #Grand parad
+	id = ger_blackorder.112
+	title = ger_blackorder.112.t
+	desc = ger_blackorder.112.d
+	picture = GFX_report_event_bs_army_march
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger_blackorder.112" }
+	
+	option = { 
+		name = ger_blackorder.112.a
+		ai_chance = {
+			base = 100
+		}
+		add_timed_idea = {
+			idea = pru_intimidation_march
+			days = 60
 		}
 	}
 	
