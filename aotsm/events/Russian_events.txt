@@ -4062,6 +4062,12 @@ country_event = {
 		}
 		hidden_effect = {
 			set_country_flag = RUS_tuva_war_plan
+			MON = { 
+				add_to_war = {
+					targeted_alliance = QIN
+					enemy = RUS
+				}
+			}
 		}
 	}
 
@@ -4867,7 +4873,7 @@ country_event = {
 	id = russian_central_asia_politic.8 #Отказ - ответ для России - от KAZ
 	title = russian_central_asia_politic.8.t
 	desc = russian_central_asia_politic.8.d
-	picture = report_event_russian_millitary_planning
+	picture = GFX_report_event_russian_millitary_planning
 	
 	is_triggered_only = yes
 	
@@ -4888,6 +4894,30 @@ country_event = {
 		}
 		hidden_effect = {
 			RUS = { set_country_flag = RUS_invasion_in_kaz_flag }
+			if = {
+				limit = {
+					HIV = {
+						is_in_faction_with = KAZ
+					}
+				}
+				RUS = { set_country_flag = RUS_invasion_in_hiv_flag }
+				add_to_war = {
+					targeted_alliance = KAZ
+					enemy = RUS
+				}
+			}
+			if = {
+				limit = {
+					BUK = {
+						is_in_faction_with = KAZ
+					}
+				}
+				RUS = { set_country_flag = RUS_invasion_in_buk_flag }
+				add_to_war = {
+					targeted_alliance = KAZ
+					enemy = RUS
+				}
+			}
 		}
 	}
 	
@@ -6685,6 +6715,7 @@ country_event = {
 				
 				country_leader = {
 					expire = "1900.1.1"
+					desc = "POLITICS_ALEXANDER_SERGEYEVICH_PUSHKIN_DESC"
 					ideology = marxism
 					traits = {  }
 				}

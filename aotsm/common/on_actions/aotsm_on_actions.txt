@@ -817,20 +817,6 @@ on_actions = {
 					tag = KAZ
 					RUS = { has_country_flag = RUS_invasion_in_kaz_flag }
 				}
-				RUS = {
-					white_peace = {
-						tag = KAZ
-						message = KAZ_conquered
-					}
-					transfer_state = 402
-					transfer_state = 404
-					transfer_state = 405
-					transfer_state = 586
-					transfer_state = 587
-					transfer_state = 589
-					clr_country_flag = RUS_invasion_in_kaz_flag
-					set_country_flag = RUS_invasion_in_kaz_flag_end
-				}
 				
 				if = {
 					limit = {
@@ -860,6 +846,21 @@ on_actions = {
 							transfer_troops = no
 						}
 					}
+				}				
+				
+				RUS = {
+					white_peace = {
+						tag = KAZ
+						message = KAZ_conquered
+					}
+					transfer_state = 402
+					transfer_state = 404
+					transfer_state = 405
+					transfer_state = 586
+					transfer_state = 587
+					transfer_state = 589
+					clr_country_flag = RUS_invasion_in_kaz_flag
+					set_country_flag = RUS_invasion_in_kaz_flag_end
 				}
 				
 				every_country = {
@@ -869,6 +870,20 @@ on_actions = {
 							has_war_with = KAZ
 						}
 						white_peace = KAZ
+					}
+				}
+				
+				every_country = {
+					if = {
+						limit = {
+							is_in_faction_with = KAZ
+							has_war_with = RUS
+							NOT = {
+								tag = HIV
+								tag = BUK
+							}
+						}
+						white_peace = RUS
 					}
 				}
 				
@@ -11527,13 +11542,10 @@ on_actions = {
 					white_peace = {
 						tag = QIN
 						message = QIN_lost_tuva
-					} 					
-					transfer_state = 329
-			
+					} 							
 					clr_country_flag = RUS_tuva_war_plan
 					set_country_flag = RUS_tuva_war_plan_end
 				}
-				
 				every_country = {
 					if = {
 						limit = {
@@ -11541,12 +11553,15 @@ on_actions = {
 							has_war_with = QIN
 						}
 						white_peace = QIN
-						if = {
-							limit = {
-								MON = { country_exists = yes }
-							}
-							white_peace = MON
+					}
+				}
+				every_country = {
+					if = {
+						limit = {
+							is_in_faction_with = QIN
+							has_war_with = RUS
 						}
+						white_peace = RUS
 					}
 				}
 				QIN = {
@@ -11559,6 +11574,9 @@ on_actions = {
 					MON = {
 						remove_state_core = 329
 					}
+				}				
+				RUS = {
+					transfer_state = 329
 				}
 				add_threat = 1
 			}
