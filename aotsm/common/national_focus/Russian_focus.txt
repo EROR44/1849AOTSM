@@ -7662,9 +7662,32 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: focus RUS_conquer_central_asia"
 			custom_effect_tooltip = RUS_activate_missions_conquer_central_asia
-			KAZ = { country_event = { id = russian_central_asia_politic.6 days = 2 } }
-			HIV = { country_event = { id = russian_central_asia_politic.9 days = 2 } }
-			BUK = { country_event = { id = russian_central_asia_politic.12 days = 2 } }
+			if = {
+				limit = {
+					HIV = {
+						is_in_faction_with = KAZ
+					}
+					BUK = {
+						is_in_faction_with = KAZ
+					}
+				}
+				KAZ = { country_event = { id = russian_central_asia_politic.6 days = 2 } }
+			}
+			if = {
+				limit = {
+					NOT = {
+						HIV = {
+							is_in_faction_with = KAZ
+						}
+						BUK = {
+							is_in_faction_with = KAZ
+						}
+					}
+				}
+				KAZ = { country_event = { id = russian_central_asia_politic.6 days = 2 } }
+				HIV = { country_event = { id = russian_central_asia_politic.9 days = 2 } }
+				BUK = { country_event = { id = russian_central_asia_politic.12 days = 2 } }
+			}						
 			hidden_effect = {
 				add_timed_idea = { 
 					days = 90
@@ -7684,11 +7707,12 @@ focus_tree = {
 		cost = 5 
 		
 		available = {
-			NOT = {
-				has_war_with = KAZ
-				has_war_with = BUK
-				has_war_with = HIV
-			}
+			#NOT = {
+			#	has_war_with = KAZ
+			#	has_war_with = BUK
+			#	has_war_with = HIV
+			#}
+			controls_central_asia = yes
 		}
 
 		relative_position_id = RUS_conquer_central_asia
