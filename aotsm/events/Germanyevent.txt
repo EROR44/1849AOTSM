@@ -12,6 +12,8 @@ add_namespace = ger_warplane
 add_namespace = ger_blackorder
 add_namespace = ger_warpolitic
 add_namespace = ger_bismark
+add_namespace = ger_kep
+add_namespace = ger_kep_te
 
 country_event = {
 	id = gerultimate.1
@@ -27,12 +29,27 @@ country_event = {
 	option = {
 		name = gerultimate.1.a	
 		ai_chance = {
-			factor = 10
+			base = 25
 			modifier = {
 				factor = 0
-				OR = {
-					is_historical_focus_on = yes
-					PRU = { has_country_flag = PRU_AI_RANDOM_HISTORICAL }
+				is_historical_focus_on = yes
+			}
+			modifier = {
+				factor = 2
+				PRU = {
+					strength_ratio = {
+					tag = AUS
+						ratio > 0.75
+					}
+				}
+			}
+			modifier = {
+				factor = 2
+				PRU = {
+					strength_ratio = {
+					tag = AUS
+						ratio > 1
+					}
 				}
 			}
 		}
@@ -76,12 +93,75 @@ country_event = {
 		PRU = {
 			country_event = ger_answer.l
 		}
+		hidden_effect = {
+			PRU = {
+				country_event = {
+					id = ger_blackorder.1
+					days = 17
+				}
+				add_ideas = collapse_of_administration
+			}
+			every_state = {
+				limit = {
+					owner = {
+						original_tag = PRU
+					}
+					NOT = {
+						is_core_of = PRU
+					}
+					NOT = {
+						has_dynamic_modifier = {
+							modifier = PRU_loyal_to_prussian_state_modifier
+						}
+					}
+				}
+				add_dynamic_modifier = {
+					modifier = PRU_loyal_to_prussian_state_modifier
+				}
+			}
+			every_state = {
+				limit = {
+					owner = {
+						original_tag = PRU
+					}
+					NOT = {
+						is_core_of = PRU
+					}
+					NOT = {
+						has_dynamic_modifier = {
+							modifier = PRU_part_of_german_confederacy_state_modifier
+						}
+					}
+				}
+				add_dynamic_modifier = {
+					modifier = PRU_part_of_german_confederacy_state_modifier
+				}
+			}
+		}
 	}
 	
 	option = {
 		name = gerultimate.1.b	
 		ai_chance = {
-			factor = 90
+			base = 75
+			modifier = {
+				factor = 0.5
+				PRU = {
+					strength_ratio = {
+					tag = AUS
+						ratio > 0.75
+					}
+				}
+			}
+			modifier = {
+				factor = 0.5
+				PRU = {
+					strength_ratio = {
+					tag = AUS
+						ratio > 1
+					}
+				}
+			}
 		}
 		hidden_effect = {
 			PRU = { create_faction = "Prussian_sphere" }
@@ -148,12 +228,27 @@ country_event = {
 	option = {
 		name = gerultimate.2.a	
 		ai_chance = {
-			factor = 1
+			base = 50
 			modifier = {
 				factor = 0
-				OR = {
-					is_historical_focus_on = yes
-					PRU = { has_country_flag = PRU_AI_RANDOM_HISTORICAL }
+				is_historical_focus_on = yes
+			}
+			modifier = {
+				factor = 0.5
+				PRU = {
+					strength_ratio = {
+					tag = BEL
+						ratio > 0.75
+					}
+				}
+			}
+			modifier = {
+				factor = 0.5
+				PRU = {
+					strength_ratio = {
+					tag = BEL
+						ratio > 1
+					}
 				}
 			}
 		}
@@ -173,7 +268,52 @@ country_event = {
 	option = {
 		name = gerultimate.2.b	
 		ai_chance = {
-			factor = 99
+			factor = 50
+			modifier = {
+				factor = 2
+				PRU = {
+					strength_ratio = {
+					tag = BEL
+						ratio > 0.75
+					}
+				}
+			}
+			modifier = {
+				factor = 2
+				PRU = {
+					strength_ratio = {
+					tag = BEL
+						ratio > 1
+					}
+				}
+			}
+			modifier = {
+				factor = 2
+				BEL = {
+					has_opinion = {
+						target = PRU
+						value > 49
+					}
+				}
+			}
+			modifier = {
+				factor = 2
+				BEL = {
+					has_opinion = {
+						target = PRU
+						value > 99
+					}
+				}
+			}
+			modifier = {
+				factor = 2
+				BEL = {
+					has_opinion = {
+						target = PRU
+						value > 149
+					}
+				}
+			}
 		}
 		HOL = {
 			transfer_state = 6
@@ -216,6 +356,18 @@ country_event = {
 		PRU = {
 			country_event = ger_answer.4
 		}
+		hidden_effect = {
+			8 = {
+				add_dynamic_modifier = {
+					modifier = PRU_part_of_german_confederacy_state_modifier
+				}
+			}
+			863 = {
+				add_dynamic_modifier = {
+					modifier = PRU_part_of_german_confederacy_state_modifier
+				}
+			}
+		}
 	}	
 }
 
@@ -233,7 +385,25 @@ country_event = {
 	option = {
 		name = gerultimate.3.a	
 		ai_chance = {
-			factor = 80
+			base = 80
+			modifier = {
+				factor = 0.5
+				PRU = {
+					strength_ratio = {
+					tag = HOL
+						ratio > 0.75
+					}
+				}
+			}
+			modifier = {
+				factor = 0.5
+				PRU = {
+					strength_ratio = {
+					tag = HOL
+						ratio > 1
+					}
+				}
+			}
 		}
 		PRU = {
 			declare_war_on = {
@@ -250,12 +420,54 @@ country_event = {
 	option = {
 		name = gerultimate.3.b	
 		ai_chance = {
-			factor = 20
+			base = 20
 			modifier = {
 				factor = 0
-				OR = {
-					is_historical_focus_on = yes
-					PRU = { has_country_flag = PRU_AI_RANDOM_HISTORICAL }
+				is_historical_focus_on = yes
+			}
+			modifier = {
+				factor = 2
+				PRU = {
+					strength_ratio = {
+					tag = HOL
+						ratio > 0.75
+					}
+				}
+			}
+			modifier = {
+				factor = 2
+				PRU = {
+					strength_ratio = {
+					tag = HOL
+						ratio > 1
+					}
+				}
+			}
+			modifier = {
+				factor = 2
+				HOL = {
+					has_opinion = {
+						target = PRU
+						value > 49
+					}
+				}
+			}
+			modifier = {
+				factor = 2
+				HOL = {
+					has_opinion = {
+						target = PRU
+						value > 99
+					}
+				}
+			}
+			modifier = {
+				factor = 2
+				HOL = {
+					has_opinion = {
+						target = PRU
+						value > 149
+					}
 				}
 			}
 		}
@@ -282,7 +494,7 @@ country_event = {
 	option = {
 		name = gerultimate.4.a	
 		ai_chance = {
-			factor = 10
+			base = 10
 		}
 		hidden_effect = { 
 			every_other_country = {
@@ -323,12 +535,50 @@ country_event = {
 		PRU = {
 			country_event = ger_answer.7
 		}
+		hidden_effect = {
+			every_state = {
+				limit = {
+					owner = {
+						original_tag = PRU
+					}
+					NOT = {
+						is_core_of = PRU
+					}
+					NOT = {
+						has_dynamic_modifier = {
+							modifier = PRU_loyal_to_prussian_state_modifier
+						}
+					}
+				}
+				add_dynamic_modifier = {
+					modifier = PRU_loyal_to_prussian_state_modifier
+				}
+			}
+			every_state = {
+				limit = {
+					owner = {
+						original_tag = PRU
+					}
+					NOT = {
+						is_core_of = PRU
+					}
+					NOT = {
+						has_dynamic_modifier = {
+							modifier = PRU_part_of_german_confederacy_state_modifier
+						}
+					}
+				}
+				add_dynamic_modifier = {
+					modifier = PRU_part_of_german_confederacy_state_modifier
+				}
+			}
+		}
 	}
 	
 	option = {
 		name = gerultimate.4.b	
 		ai_chance = {
-			factor = 90
+			base = 90
 		}
 		hidden_effect = {
 			every_other_country = {
@@ -375,7 +625,7 @@ country_event = {
 	id = gerultimate.5
 	title = gerultimate.5.t
 	desc = gerultimate.5.d
-	picture = GFX_report_event_aotsm_generic_signing_the_contract	
+	picture = GFX_report_event_byzantium_and_germany	
 	is_triggered_only = yes
 	
 	fire_only_once = yes
@@ -385,7 +635,7 @@ country_event = {
 	option = {
 		name = gerultimate.5.a	
 		ai_chance = {
-			factor = 10
+			base = 10
 			modifier = {
 				factor = 0
 				OR = {
@@ -413,7 +663,7 @@ country_event = {
 	option = {
 		name = gerultimate.5.b	
 		ai_chance = {
-			factor = 90
+			base = 90
 		}
 		PRU = {
 			declare_war_on = {
@@ -447,7 +697,7 @@ country_event = {
 	option = {
 		name = gerultimate.6.a	
 		ai_chance = {
-			factor = 10
+			base = 10
 		}
 		if = {
 			limit = {
@@ -539,7 +789,7 @@ country_event = {
 	option = {
 		name = gerultimate.6.b	
 		ai_chance = {
-			factor = 90
+			base = 90
 		}
 		if = {
 			limit = {
@@ -641,7 +891,7 @@ country_event = {
 	option = {
 		name = gerultimate.7.a	
 		ai_chance = {
-			factor = 25
+			base = 25
 			modifier = {
 				factor = 0
 				has_country_flag = german_union_for_prussian
@@ -666,12 +916,50 @@ country_event = {
 	option = {
 		name = gerultimate.7.b
 		ai_chance = {
-			factor = 75
+			base = 75
 		}
 		PRU = {
 			annex_country = {
 				target = ROOT
 				transfer_troops = no
+			}
+		}
+		hidden_effect = {
+			every_state = {
+				limit = {
+					owner = {
+						original_tag = PRU
+					}
+					NOT = {
+						is_core_of = PRU
+					}
+					NOT = {
+						has_dynamic_modifier = {
+							modifier = PRU_loyal_to_prussian_state_modifier
+						}
+					}
+				}
+				add_dynamic_modifier = {
+					modifier = PRU_loyal_to_prussian_state_modifier
+				}
+			}
+			every_state = {
+				limit = {
+					owner = {
+						original_tag = PRU
+					}
+					NOT = {
+						is_core_of = PRU
+					}
+					NOT = {
+						has_dynamic_modifier = {
+							modifier = PRU_part_of_german_confederacy_state_modifier
+						}
+					}
+				}
+				add_dynamic_modifier = {
+					modifier = PRU_part_of_german_confederacy_state_modifier
+				}
 			}
 		}
 	}
@@ -784,14 +1072,14 @@ country_event = {
 	option = {
 		name = ger.4.a
 		ai_chance = {
-			factor = 10
+			base = 10
 		}
 	}
 	
 	option = {
 		name = ger.4.b
 		ai_chance = {
-			factor = 90
+			base = 90
 		}
 		if = {
 			limit = {
@@ -828,14 +1116,14 @@ country_event = {
 	option = {
 		name = ger.5.a 
 		ai_chance = {
-			factor = 10
+			base = 10
 		}
 	}
 	
 	option = {
 		name = ger.5.b 
 		ai_chance = {
-			factor = 0
+			base = 0
 			modifier = {
 				FRR = {
 					has_country_flag = FRR_pru_choosen
@@ -913,7 +1201,7 @@ country_event = {
 	option = {
 		name = ger.6.b 
 		ai_chance = {
-			factor = 0
+			base = 0
 		}
 		SGE = { change_tag_from = PRU }
 		hidden_effect = {
@@ -964,7 +1252,7 @@ country_event = {
 }
 
 country_event = {
-	id = ger.7 #Bismark or Autharitatian
+	id = ger.7 #Next Ruller
 	title = ger.7.t
 	desc = ger.7.d
 	picture = GFX_report_event_german_reichstag_gathering
@@ -978,25 +1266,76 @@ country_event = {
 	option = {
 		name = ger.7.a 
 		ai_chance = {
-			factor = 25
+			base = 33
 			modifier = {
 				factor = 0
 				OR = {
 					is_historical_focus_on = yes
+					has_game_rule = { 
+						rule = PRU_ai_behavior 
+						option = DEFAULT 
+					}
+					has_game_rule = { 
+						rule = PRU_ai_behavior 
+						option = PRU_IMPERIAL_WAY 
+					}
 					PRU = { has_country_flag = PRU_AI_RANDOM_HISTORICAL }
 				}
 			}
 		}
 		set_country_flag = pru_bismark
+		custom_effect_tooltip = pru_complete_bismark_focus_tt
+		hidden_effect = {
+			PRU = {
+				complete_national_focus = PRU_bismark_first_kanzler
+			}
+		}
+		mark_focus_tree_layout_dirty = yes
 	}
 	
 	option = {
 		name = ger.7.b 
 		ai_chance = {
-			factor = 75
+			base = 34
 		}
-		set_country_flag = pru_autharitarian
-		country_event = { id = ger.8 days = 14 } 
+		set_country_flag = pru_kaiser
+		custom_effect_tooltip = pru_complete_kaiser_focus_tt
+		hidden_effect = {
+			PRU = {
+				complete_national_focus = PRU_emperor_save_power
+			}
+		}
+		mark_focus_tree_layout_dirty = yes
+	}
+	
+	option = {
+		name = ger.7.c
+		ai_chance = {
+			base = 33
+			modifier = {
+				factor = 0
+				OR = {
+					is_historical_focus_on = yes
+					has_game_rule = { 
+						rule = PRU_ai_behavior 
+						option = DEFAULT 
+					}
+					has_game_rule = { 
+						rule = PRU_ai_behavior 
+						option = PRU_IMPERIAL_WAY 
+					}
+					PRU = { has_country_flag = PRU_AI_RANDOM_HISTORICAL }
+				}
+			}
+		}
+		set_country_flag = pru_junker
+		custom_effect_tooltip = pru_complete_junker_focus_tt
+		hidden_effect = {
+			PRU = {
+				complete_national_focus = PRU_juncker_take_power
+			}
+		}
+		mark_focus_tree_layout_dirty = yes
 	}
 }
 
@@ -1015,7 +1354,7 @@ country_event = {
 	option = {
 		name = ger.8.a 
 		ai_chance = {
-			factor = 10
+			base = 10
 			modifier = {
 				factor = 0
 				OR = {
@@ -1030,7 +1369,7 @@ country_event = {
 	option = {
 		name = ger.8.b 
 		ai_chance = {
-			factor = 90
+			base = 90
 		}
 		set_country_flag = pru_kaiser
 	}
@@ -1051,7 +1390,7 @@ country_event = {
 	option = {
 		name = ger.9.a 
 		ai_chance = {
-			factor = 100
+			base = 100
 		}
 		401 = {
 			add_manpower = -232913
@@ -1319,6 +1658,23 @@ country_event = {
 			PRU = {
 				add_to_faction = IRE
 			}
+			IRE = {
+				set_politics = {
+					ruling_party = reactionist
+					elections_allowed = no
+					last_election = "1854.5.15"
+					election_frequency = 48
+				}
+				add_popularity = {
+					ideology = reactionist
+					popularity = 0.10
+				}
+				set_party_name = {
+					ideology = reactionist
+					long_name = IRE_reactionist_party_free_long
+					name = IRE_reactionist_party_free
+				}
+			}
 			CBI = {
 				remove_state_core = 113
 				remove_state_core = 119
@@ -1381,8 +1737,36 @@ country_event = {
 			CBI = {
 				remove_state_core = 123
 			}
-			ZUL = {
-				transfer_state = 681
+			BYZ = {
+				set_autonomy = {
+					target = SAB
+					autonomy_state = autonomy_aotsm_protectorat
+					end_wars = yes
+					end_civil_wars = yes
+				}
+				set_nationality = {
+					target_country = SAB
+					character = BYZ_Konstantinos_Mavromichalis
+				}
+				SAB = {
+					set_politics = { ruling_party = authoritarian elections_allowed = no }
+					set_popularities = {
+						democratic = 20
+						socialism = 3
+						reactionist = 21
+						authoritarian = 56
+					}
+					add_country_leader_role = {
+						character = BYZ_Konstantinos_Mavromichalis
+						promote_leader = yes
+						country_leader = {
+							ideology = unirtarism
+							expire = "1900.1.1.1"
+							traits = { roman_lord }
+						}
+					}
+					set_cosmetic_tag = SAB_BYZ
+				}
 			}
 			RIT = {
 				annex_country = {
@@ -1431,6 +1815,168 @@ country_event = {
 				white_peace = NEN
 			}
 			transfer_state = 696
+			set_cosmetic_tag = NEN_FREE
+			promote_character = NEN_Abraham_Lincoln
+			set_party_name = {
+				ideology = democratic
+				long_name = NEN_democratic_party_free_long
+				name = NEN_democratic_party_free
+			}
+			set_party_name = {
+				ideology = authoritarian
+				long_name = NEN_authoritarian_party_free_long
+				name = NEN_authoritarian_party_free
+			}
+			swap_ideas = {
+				remove_idea = oligarhy
+				add_idea = republic
+			}
+			if = {
+				limit = {
+					date > 1849.1.1
+					date < 1850.12.31
+				}
+				set_politics = {
+					ruling_party = democratic
+					elections_allowed = no
+					last_election = "1849.11.10"
+				}
+			}
+			if = {
+				limit = {
+					date > 1851.1.1
+					date < 1852.12.31
+				}
+				set_politics = {
+					ruling_party = democratic
+					elections_allowed = no
+					last_election = "1850.11.10"
+				}
+			}
+			if = {
+				limit = {
+					date > 1852.1.1
+					date < 1852.12.31
+				}
+				set_politics = {
+					ruling_party = democratic
+					elections_allowed = no
+					last_election = "1851.11.10"
+				}
+			}
+			if = {
+				limit = {
+					date > 1853.1.1
+					date < 1853.12.31
+				}
+				set_politics = {
+					ruling_party = democratic
+					elections_allowed = no
+					last_election = "1852.11.10"
+				}
+			}
+			if = {
+				limit = {
+					date > 1854.1.1
+					date < 1854.12.31
+				}
+				set_politics = {
+					ruling_party = democratic
+					elections_allowed = no
+					last_election = "1853.11.10"
+				}
+			}
+			if = {
+				limit = {
+					date > 1855.1.1
+					date < 1855.12.31
+				}
+				set_politics = {
+					ruling_party = democratic
+					elections_allowed = no
+					last_election = "1854.11.10"
+				}
+			}
+			if = {
+				limit = {
+					date > 1856.1.1
+					date < 1856.12.31
+				}
+				set_politics = {
+					ruling_party = democratic
+					elections_allowed = no
+					last_election = "1855.11.10"
+				}
+			}
+			if = {
+				limit = {
+					date > 1857.1.1
+					date < 1857.12.31
+				}
+				set_politics = {
+					ruling_party = democratic
+					elections_allowed = no
+					last_election = "1856.11.10"
+				}
+			}
+			if = {
+				limit = {
+					date > 1858.1.1
+					date < 1858.12.31
+				}
+				set_politics = {
+					ruling_party = democratic
+					elections_allowed = no
+					last_election = "1857.11.10"
+				}
+			}
+			if = {
+				limit = {
+					date > 1859.1.1
+					date < 1859.12.31
+				}
+				set_politics = {
+					ruling_party = democratic
+					elections_allowed = no
+					last_election = "1858.11.10"
+				}
+			}
+			if = {
+				limit = {
+					date > 1860.1.1
+					date < 1860.12.31
+				}
+				set_politics = {
+					ruling_party = democratic
+					elections_allowed = no
+					last_election = "1859.11.10"
+				}
+			}
+			if = {
+				limit = {
+					date > 1861.1.1
+					date < 1861.12.31
+				}
+				set_politics = {
+					ruling_party = democratic
+					elections_allowed = no
+					last_election = "1860.11.10"
+				}
+			}
+		}
+		news_event = {
+			id = news.254
+			days = 10
+		}
+		NEN = {
+			every_country = {
+				limit = {
+					has_war_with = NEN
+				}
+				white_peace = NEN
+			}
+			transfer_state = 696
+			set_cosmetic_tag = NEN_FREE
 		}
 		if = {
 			limit = {
@@ -1676,6 +2222,7 @@ country_event = {
 			}
 		}
 		set_global_flag = cbi_capitulation
+		set_global_flag = NEN_IS_FREE_FROM_BRITISH
 		if = {
 			limit = {
 				NOT = {
@@ -1964,7 +2511,7 @@ country_event = {
 			owns_state = 64
 		}
 		ai_chance = {
-			factor = 65
+			base = 65
 		}
 		PRU = {
 			add_timed_idea = {
@@ -1980,7 +2527,7 @@ country_event = {
 			owns_state = 763
 		}
 		ai_chance = {
-			factor = 35
+			base = 35
 		}
 		PRU = {
 			add_timed_idea = {
@@ -2041,6 +2588,16 @@ country_event = {
 					days = 79
 				}
 			}
+			28 = {
+				add_dynamic_modifier = {
+					modifier = PRU_part_of_german_confederacy_state_modifier
+				}
+			}
+			828 = {
+				add_dynamic_modifier = {
+					modifier = PRU_part_of_german_confederacy_state_modifier
+				}
+			}			
 		}
 	}
 }
@@ -2099,8 +2656,8 @@ country_event = {
 				main_armament_slot = tank_medium_kaiser_cannon_2
 				turret_type_slot = tank_medium_two_man_kaiser_tank_turret
 				suspension_type_slot = tank_christie_suspension
-				armor_type_slot = tank_cast_armor
-				engine_type_slot = tank_petrol_electric_engine
+				armor_type_slot = tank_armor_30mm
+				engine_type_slot = small_steam_engine
 				special_type_slot_1 = tank_kaiser_radio_2
 				special_type_slot_2 = wet_ammo_storage
 				special_type_slot_3 = additional_machine_guns
@@ -2139,8 +2696,8 @@ country_event = {
 				main_armament_slot = tank_medium_kaiser_cannon_3
 				turret_type_slot = tank_medium_three_man_kaiser_tank_turret
 				suspension_type_slot = tank_christie_suspension
-				armor_type_slot = tank_cast_armor
-				engine_type_slot = tank_petrol_electric_engine
+				armor_type_slot = tank_armor_30mm
+				engine_type_slot = small_steam_engine
 				special_type_slot_1 = tank_kaiser_radio_3
 				special_type_slot_2 = wet_ammo_storage
 				special_type_slot_3 = additional_machine_guns
@@ -2175,10 +2732,6 @@ country_event = {
 				amount = 25
 			}
 		}
-		custom_effect_tooltip = unlock_teoretic_wilgelm_eduard_beber_tt
-		PRU = {
-			set_country_flag = unlock_wilhelm_eduard_beber
-		}
 		hidden_effect = {
 			PRU = {
 				country_event = {
@@ -2209,6 +2762,10 @@ country_event = {
 				type = leypoldit
 				amount = 25
 			}
+		}
+		custom_effect_tooltip = unlock_teoretic_wilgelm_eduard_beber_tt
+		PRU = {
+			set_country_flag = unlock_wilhelm_eduard_beber
 		}
 	}
 }
@@ -2376,9 +2933,7 @@ country_event = {
 		if = {
 			limit = {
 				PRU = {
-					PRU_Carl_Bosch = {
-						is_character_slot = political_advisor
-					}
+					has_idea = carl_bosch
 				}
 			}
 			add_political_power = 150
@@ -2390,6 +2945,478 @@ country_event = {
 		}
 		PRU = {
 			set_country_flag = pru_bosch_out
+		}
+	}
+}
+
+country_event = {
+	id = ger.26 #Austria Future
+	title = ger.26.t
+	desc = ger.26.d
+	picture = GFX_report_event_austrian_future
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event ger.26"
+	}
+	
+	option = { #Autonomy
+		name = ger.26.a 
+		ai_chance = {
+			base = 50
+			modifier = {
+				PRU = {
+					has_government = socialism
+				}
+				factor = 2
+			}
+			modifier = {
+				PRU = {
+					has_government = democratic
+				}
+				factor = 1
+			}
+			modifier = {
+				PRU = {
+					has_government = reactionist
+				}
+				factor = 0.25
+			}
+			modifier = {
+				PRU = {
+					has_government = authoritarian
+				}
+				factor = 0.5
+			}
+		}
+		complete_national_focus = PRU_integration_of_austria
+	}
+	
+	option = { #Annex
+		name = ger.26.b
+		ai_chance = {
+			base = 50
+			modifier = {
+				PRU = {
+					has_government = socialism
+				}
+				factor = 0.5
+			}
+			modifier = {
+				PRU = {
+					has_government = democratic
+				}
+				factor = 1
+			}
+			modifier = {
+				PRU = {
+					has_government = reactionist
+				}
+				factor = 4
+			}
+			modifier = {
+				PRU = {
+					has_government = authoritarian
+				}
+				factor = 2
+			}
+		}
+		complete_national_focus = PRU_oppressing_of_austria
+	}
+}
+
+country_event = {
+	id = ger.27 #Curfiew in Germany
+	title = ger.27.t
+	desc = ger.27.d
+	picture = GFX_report_event_berlin_in_19_century
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event ger.27"
+	}
+	
+	option = { #Only for Children
+		name = ger.27.a 
+		ai_chance = {
+			base = 33
+		}
+		add_stability = 0.025
+	}
+	
+	option = { #For all
+		name = ger.27.b
+		ai_chance = {
+			base = 34
+		}
+		PRU ={
+			add_ideas = curfew_in_germany
+		}
+	}
+	
+	option = { #Military time
+		name = ger.27.с
+		ai_chance = {
+			base = 33
+		}
+		PRU ={
+			add_ideas = martial_law_in_germany
+		}
+	}
+}
+
+country_event = {
+	id = ger.28 #Hunt for the Witch
+	title = ger.28.t
+	desc = ger.28.d
+	picture = GFX_report_event_prussian_soldar
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event ger.28"
+	}
+	
+	option = { #Clean only for the sake of appearance
+		name = ger.28.a 
+		ai_chance = {
+			base = 33
+		}
+		add_manpower = -750
+	}
+	
+	option = { #Hunt for Radical
+		name = ger.28.b
+		ai_chance = {
+			base = 34
+		}
+		trigger = {
+			PRU = {
+				has_manpower > 49999
+			}
+		}
+		add_manpower = -50000
+		add_stability = 0.05
+	}
+	
+	option = { #All witch must die
+		name = ger.28.c
+		ai_chance = {
+			base = 33
+		}
+		trigger = {
+			PRU = {
+				has_manpower > 149999
+			}
+		}
+		add_manpower = -150000
+		add_stability = 0.10
+	}
+}
+
+country_event = {
+	id = ger.29 #New Reich
+	title = ger.29.t
+	desc = ger.29.d
+	picture = GFX_report_event_prussian_soldar
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event ger.29"
+	}
+	
+	option = { 
+		name = ger.29.a 
+		ai_chance = {
+			base = 33
+		}
+		add_stability = 0.05
+		add_war_support = 0.025
+		add_political_power = 100
+	}
+}
+
+country_event = {
+	id = ger.30 #New Reich
+	title = ger.30.t
+	desc = ger.30.d
+	picture = GFX_report_event_german_volunteers
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event ger.30"
+	}
+	
+	option = { #east
+		name = ger.30.a 
+		ai_chance = {
+			base = 50
+		}
+		custom_effect_tooltip = pru_east_build_to_war_tt
+		hidden_effect = {
+			5 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = bunker
+					level = 2
+					instant_build = yes
+					province = 6375
+				}
+				add_building_construction = {
+					type = bunker
+					level = 2
+					instant_build = yes
+					province = 9327
+				}
+				add_building_construction = {
+					type = bunker
+					level = 2
+					instant_build = yes
+					province = 9346
+				}
+				add_building_construction = {
+					type = bunker
+					level = 2
+					instant_build = yes
+					province = 9372
+				}
+				add_building_construction = {
+					type = bunker
+					level = 2
+					instant_build = yes
+					province = 11386
+				}
+			}
+			67 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = bunker
+					level = 2
+					instant_build = yes
+					province = 479
+				}
+			}
+			85 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = bunker
+					level = 2
+					instant_build = yes
+					province = 243
+				}
+				add_building_construction = {
+					type = bunker
+					level = 2
+					instant_build = yes
+					province = 3295
+				}
+				add_building_construction = {
+					type = bunker
+					level = 2
+					instant_build = yes
+					province = 6347
+				}
+			}
+			86 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = bunker
+					level = 2
+					instant_build = yes
+					province = 17
+				}
+				add_building_construction = {
+					type = bunker
+					level = 2
+					instant_build = yes
+					province = 3381
+				}
+				add_building_construction = {
+					type = bunker
+					level = 2
+					instant_build = yes
+					province = 9532
+				}
+				add_building_construction = {
+					type = bunker
+					level = 2
+					instant_build = yes
+					province = 11558
+				}
+			}
+			188 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = bunker
+					level = 2
+					instant_build = yes
+					province = 3288
+				}
+			}
+			762 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = bunker
+					level = 2
+					instant_build = yes
+					province = 506
+				}
+				add_building_construction = {
+					type = bunker
+					level = 2
+					instant_build = yes
+					province = 6464
+				}
+			}
+			763 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = bunker
+					level = 2
+					instant_build = yes
+					province = 281
+				}
+				add_building_construction = {
+					type = bunker
+					level = 2
+					instant_build = yes
+					province = 3384
+				}
+			}
+		}
+	}
+	
+	option = { #west
+		name = ger.30.b
+		ai_chance = {
+			base = 50
+		}
+		custom_effect_tooltip = pru_west_build_to_war_tt
+		hidden_effect = {
+			28 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = bunker
+					level = 2
+					instant_build = yes
+					province = 3629
+				}
+				add_building_construction = {
+					type = bunker
+					level = 2
+					instant_build = yes
+					province = 9559
+				}
+				add_building_construction = {
+					type = bunker
+					level = 2
+					instant_build = yes
+					province = 11502
+				}
+			}
+			51 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = bunker
+					level = 2
+					instant_build = yes
+					province = 11562
+				}
+			}
+			828 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = bunker
+					level = 2
+					instant_build = yes
+					province = 678
+				}
+				add_building_construction = {
+					type = bunker
+					level = 2
+					instant_build = yes
+					province = 1346
+				}
+			}
+			863 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = bunker
+					level = 2
+					instant_build = yes
+					province = 6537
+				}
+				add_building_construction = {
+					type = bunker
+					level = 2
+					instant_build = yes
+					province = 9418
+				}
+				add_building_construction = {
+					type = bunker
+					level = 2
+					instant_build = yes
+					province = 9444
+				}
+			}
 		}
 	}
 }
@@ -2409,7 +3436,7 @@ country_event = {
 	option = { #Protest
 		name = ger_frr.1.a 
 		ai_chance = {
-			factor = 50
+			base = 50
 			modifier = {
 				FRR = {
 					has_government = socialism
@@ -2424,12 +3451,13 @@ country_event = {
 			}
 		}
 		add_war_support = 0.05
+		set_global_flag = FRR_leave_ELS
 	}
 	
 	option = { #attack!
 		name = ger_frr.1.b
 		ai_chance = {
-			factor = 50
+			base = 50
 			modifier = {
 				FRR = {
 					has_government = reactionist
@@ -2476,7 +3504,7 @@ country_event = {
 	id = ger_byz.1
 	title = ger_byz.1.t
 	desc = ger_byz.1.d
-	picture = GFX_report_event_hitler_handshake
+	picture = GFX_report_event_byzantium_and_germany
 	
 	is_triggered_only = yes
 	
@@ -2487,7 +3515,7 @@ country_event = {
 	option = {
 		name = ger_byz.1.a 
 		ai_chance = {
-			factor = 2
+			base = 2
 			modifier = {
 				factor = 0
 				OR = {
@@ -2501,7 +3529,7 @@ country_event = {
 	option = {
 		name = ger_byz.1.b 
 		ai_chance = {
-			factor = 98
+			base = 98
 		}
 		PRU = { add_to_faction = BYZ }
 		set_global_flag = byz_was_in_faction_with_pru
@@ -2525,7 +3553,7 @@ country_event = {
 	option = {
 		name = ger_byz.2.a 
 		ai_chance = {
-			factor = 10
+			base = 10
 			modifier = {
 				factor = 0
 				OR = {
@@ -2539,7 +3567,7 @@ country_event = {
 	option = {
 		name = ger_byz.2.b 
 		ai_chance = {
-			factor = 90
+			base = 90
 		}
 		PRU = { add_ideas = pru_byz_trade }
 		BYZ = { add_ideas = pru_byz_trade }
@@ -2560,7 +3588,7 @@ country_event = {
 	option = {
 		name = ger_byz.3.a 
 		ai_chance = {
-			factor = 10
+			base = 10
 			modifier = {
 				factor = 0
 				OR = {
@@ -2574,7 +3602,7 @@ country_event = {
 	option = {
 		name = ger_byz.3.b 
 		ai_chance = {
-			factor = 90
+			base = 90
 		}
 		PRU = { 
 			add_political_power = 150
@@ -2601,7 +3629,7 @@ country_event = {
 	option = {
 		name = ger_byz.4.a #NO
 		ai_chance = {
-			factor = 10
+			base = 10
 			modifier = {
 				factor = 0
 				OR = {
@@ -2615,7 +3643,7 @@ country_event = {
 	option = {
 		name = ger_byz.4.b #YES
 		ai_chance = {
-			factor = 90
+			base = 90
 		}
 		BYZ = { set_country_flag = BYZ_secret_protocol }
 	}
@@ -2928,7 +3956,7 @@ country_event = {
 	option = { #They know alternative
 		name = ger_answer.12.a	
 		ai_chance = {
-			factor = 60
+			base = 60
 			modifier = {
 				factor = 100
 				PRU = {
@@ -2963,7 +3991,7 @@ country_event = {
 	option = { #We can't resist
 		name = ger_answer.12.b
 		ai_chance = {
-			factor = 40
+			base = 40
 			modifier = {
 				factor = 0
 				PRU = {
@@ -3057,6 +4085,7 @@ country_event = {
 					navy_ratio = 0.25
 					air_ratio = 0.25
 				}
+				leave_faction = yes
 			}
 			POL = {
 				load_focus_tree = { tree = Poland_focus_101 keep_completed = yes }
@@ -3615,7 +4644,7 @@ country_event = {
 	option = {
 		name = ger_warplane.5.a
 		ai_chance = {
-			factor = 65
+			base = 65
 			modifier = {
 				factor = 20
 				OR = {
@@ -3636,7 +4665,7 @@ country_event = {
 	option = {
 		name = ger_warplane.5.b
 		ai_chance = {
-			factor = 10
+			base = 10
 			modifier = {
 				factor = 20
 				OR = {
@@ -3657,7 +4686,7 @@ country_event = {
 	option = {
 		name = ger_warplane.5.c
 		ai_chance = {
-			factor = 25
+			base = 25
 			modifier = {
 				factor = 60
 				OR = {
@@ -3767,14 +4796,34 @@ country_event = { #Black Order Hail Kaiser
 	
 	option = {
 		name = ger_blackorder.1.a
-		custom_effect_tooltip = pru_blacksun_influince_rise
 		ai_chance = {
-			factor = 25
+			base = 25
+			modifier = {
+				add = -25
+				has_game_rule = { 
+					rule = PRU_BS_ai_behavior 
+					option = PRU_BS_NOT_COME_TO_RULE 
+				}
+			}
+			modifier = {
+				add = 75
+				has_game_rule = { 
+					rule = PRU_BS_ai_behavior 
+					option = PRU_BS_COME_TO_RULE 
+				}
+			}
 		}
+		custom_effect_tooltip = pru_blacksun_influince_rise
 		hidden_effect = {
 			add_to_variable = {
 				var = PRU.blacksun_influence
 				value = 1
+			}
+			PRU = {
+				country_event = {
+					id = ger_blackorder.7
+					days = 210
+				}
 			}
 		}
 	}
@@ -3782,7 +4831,29 @@ country_event = { #Black Order Hail Kaiser
 	option = {
 		name = ger_blackorder.1.b
 		ai_chance = {
-			factor = 75
+			base = 75
+			modifier = {
+				add = -75
+				has_game_rule = { 
+					rule = PRU_BS_ai_behavior 
+					option = PRU_BS_NOT_COME_TO_RULE 
+				}
+			}
+			modifier = {
+				add = -75
+				has_game_rule = { 
+					rule = PRU_BS_ai_behavior 
+					option = PRU_BS_COME_TO_RULE 
+				}
+			}
+		}
+		hidden_effect = {
+			PRU = {
+				country_event = {
+					id = ger_blackorder.7
+					days = 210
+				}
+			}
 		}
 	}
 	
@@ -3790,7 +4861,14 @@ country_event = { #Black Order Hail Kaiser
 		name = ger_blackorder.1.c
 		custom_effect_tooltip = pru_blacksun_influince_fall
 		ai_chance = {
-			factor = 0
+			base = 0
+			modifier = {
+				add = 100
+				has_game_rule = { 
+					rule = PRU_BS_ai_behavior 
+					option = PRU_BS_NOT_COME_TO_RULE 
+				}
+			}
 		}
 		hidden_effect = {
 			add_to_variable = {
@@ -3820,7 +4898,14 @@ country_event = { #Black Sun helping Hand
 	option = {
 		name = ger_blackorder.2.a
 		ai_chance = {
-			factor = 20
+			base = 20
+			modifier = {
+				add = 80
+				has_game_rule = { 
+					rule = PRU_BS_ai_behavior 
+					option = PRU_BS_COME_TO_RULE 
+				}
+			}
 		}
 		add_equipment_to_stockpile = {
 			type = infantry_equipment
@@ -3920,7 +5005,14 @@ country_event = { #Black Sun helping Hand
 	option = {
 		name = ger_blackorder.2.b
 		ai_chance = {
-			factor = 30
+			base = 30
+			modifier = {
+				add = -30
+				has_game_rule = { 
+					rule = PRU_BS_ai_behavior 
+					option = PRU_BS_COME_TO_RULE 
+				}
+			}
 		}
 		add_equipment_to_stockpile = {
 			type = infantry_equipment
@@ -3954,7 +5046,14 @@ country_event = { #Black Sun helping Hand
 	option = {
 		name = ger_blackorder.2.c
 		ai_chance = {
-			factor = 50
+			base = 50
+			modifier = {
+				add = -50
+				has_game_rule = { 
+					rule = PRU_BS_ai_behavior 
+					option = PRU_BS_COME_TO_RULE 
+				}
+			}
 		}
 		custom_effect_tooltip = pru_blacksun_influince_fall
 		hidden_effect = {
@@ -3982,7 +5081,14 @@ country_event = { #Black Sun in goverment
 	option = {
 		name = ger_blackorder.3.a
 		ai_chance = {
-			factor = 30
+			base = 30
+			modifier = {
+				add = 70
+				has_game_rule = { 
+					rule = PRU_BS_ai_behavior 
+					option = PRU_BS_COME_TO_RULE 
+				}
+			}
 		}
 		custom_effect_tooltip = pru_blacksun_influince_rise
 		hidden_effect = {
@@ -3996,7 +5102,14 @@ country_event = { #Black Sun in goverment
 	option = {
 		name = ger_blackorder.3.b
 		ai_chance = {
-			factor = 70
+			base = 70
+			modifier = {
+				add = -70
+				has_game_rule = { 
+					rule = PRU_BS_ai_behavior 
+					option = PRU_BS_COME_TO_RULE 
+				}
+			}
 		}
 		custom_effect_tooltip = pru_blacksun_influince_fall
 		hidden_effect = {
@@ -4020,6 +5133,9 @@ country_event = { #Black Sun try coup the goverment
 		check_variable = {
 			PRU.blacksun_influence > 4
 		}
+		PRU = {
+			has_war = no
+		}
 	}
 	
 	mean_time_to_happen = {
@@ -4033,7 +5149,7 @@ country_event = { #Black Sun try coup the goverment
 	option = {
 		name = ger_blackorder.4.a
 		ai_chance = {
-			factor = 100
+			base = 100
 		}
 		if = {
 			limit = {
@@ -4041,6 +5157,13 @@ country_event = { #Black Sun try coup the goverment
 			}
 			random_list = {
 				74 = {
+					modifier = {
+						add = 26
+						has_game_rule = { 
+							rule = PRU_BS_ai_behavior 
+							option = PRU_BS_COME_TO_RULE 
+						}
+					}
 					PRU = {
 						country_event = {
 							id = ger_blackorder.5
@@ -4048,7 +5171,14 @@ country_event = { #Black Sun try coup the goverment
 						}
 					}
 				}
-				25 = {
+				26 = {
+					modifier = {
+						add = -26
+						has_game_rule = { 
+							rule = PRU_BS_ai_behavior 
+							option = PRU_BS_COME_TO_RULE 
+						}
+					}
 					PRU = {
 						country_event = {
 							id = ger_blackorder.6
@@ -4077,7 +5207,7 @@ country_event = { #Black Sun try coup the goverment
 			is_ai = no
 		}
 		ai_chance = {
-			factor = 0
+			base = 0
 		}
 		PRU = {
 			country_event = {
@@ -4108,16 +5238,64 @@ country_event = { #Black Sun succesd coup
 			PRU = {
 				set_country_flag = blacksun_end_germany
 			}
+			if = {
+				limit = {
+					PRU = {
+						has_idea = pru_blacksun_hunt_partisan_1
+					}
+				}
+				remove_ideas = pru_blacksun_hunt_partisan_1
+			}
+			if = {
+				limit = {
+					NOT = {
+						PRU = {
+							has_idea = pru_blacksun_hunt_partisan_2
+						}
+					}
+				}
+				add_ideas = pru_blacksun_hunt_partisan_2
+			}
 			KOL = {
 				set_nationality = {
 					target_country = PRU
 					character = KOL_Wilgelm_Austrian
 				}
-			}
-			PRU = {
-				promote_character = {
-					character = KOL_Wilgelm_Austrian
-					ideology = national_populism
+				set_nationality = {
+					target_country = PRU
+					character = KOL_Anton_Viktor_Osterreich
+				}
+				set_nationality = {
+					target_country = PRU
+					character = KOL_Alfred_Lindeman
+				}
+				set_nationality = {
+					target_country = PRU
+					character = KOL_Victor_Pauls
+				}
+				set_nationality = {
+					target_country = PRU
+					character = KOL_Hans_Hindenburg
+				}
+				set_nationality = {
+					target_country = PRU
+					character = KOL_Joseph_Himmler
+				}
+				set_nationality = {
+					target_country = PRU
+					character = KOL_Karl_Goebbels
+				}
+				set_nationality = {
+					target_country = PRU
+					character = KOL_Maestro_Second
+				}
+				set_nationality = {
+					target_country = PRU
+					character = KOL_Alexandre_Seslavine
+				}
+				set_nationality = {
+					target_country = PRU
+					character = KOL_Alexandre_Seslavine_mil
 				}
 			}
 			PRU = {
@@ -4130,8 +5308,47 @@ country_event = { #Black Sun succesd coup
 					long_name = pru_darksun_party_long
 					name = pru_darksun_party
 				}
+				promote_character = KOL_Wilgelm_Austrian
 			}
 			news_event = news.184
+			if = {
+				limit = {
+					NOT = {
+						PRU = {
+							has_country_flag = pru_solder_in_bs
+						}
+					}
+				}
+				PRU = {
+					country_event = {
+						id = script_event.39
+						days = 30
+					}
+				}
+			}
+			PRU = {
+				country_event = {
+					id = ger_blackorder.9
+					days = 330
+				}
+			}
+			PRU = {
+				PRU_Adolf_Arnim_Boitzenburg = {
+					retire = yes
+				}
+				PRU_Chlodwig_Hohenlohe = {
+					retire = yes
+				}
+				PRU_Wilhelm_Grabow = {
+					retire = yes
+				}
+				PRU_Wilhelm_Liebknecht = {
+					retire = yes
+				}
+				PRU_Rosa_Ludmilla_Assing = {
+					retire = yes
+				}
+			}
 		}
 	}
 	
@@ -4229,9 +5446,126 @@ country_event = { #Black Sun fail coup
 				}
 				remove_ideas = pru_blacksun_hunt_partisan_2
 			}
+			PRU = {
+				set_country_flag = pru_black_sun_fall
+			}
+			PRU = {
+				every_unit_leader = {
+					limit = {
+						has_trait = blacksun_general
+					}
+					remove_unit_leader = yes
+				}
+			}
 			set_variable = {
 				var = PRU.blacksun_influence
 				value = 0
+			}
+		}
+	}
+	
+}
+
+country_event = { #Aleksander in BS
+	id = ger_blackorder.7
+	title = ger_blackorder.7.t
+	desc = ger_blackorder.7.d
+	picture = GFX_report_event_koln_viev
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger_blackorder.7"}
+	
+	option = {
+		name = ger_blackorder.7.a
+		hidden_effect = {
+			PRU = {
+				country_event = {
+					id = ger_blackorder.8
+					days = 170
+				}
+			}
+		}
+	}
+	
+}
+
+country_event = { #Aleksander ready to shoot
+	id = ger_blackorder.8
+	title = ger_blackorder.8.t
+	desc = ger_blackorder.8.d
+	picture = GFX_report_event_alexandre_nikititch_seslavine
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger_blackorder.8"}
+	
+	option = {
+		name = ger_blackorder.8.a
+	}
+	
+}
+
+country_event = { #Aleksander is it good way?
+	id = ger_blackorder.9
+	title = ger_blackorder.9.t
+	desc = ger_blackorder.9.d
+	picture = GFX_report_event_is_it_good_reich
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger_blackorder.9"}
+	
+	option = {
+		name = ger_blackorder.9.a
+	}
+	
+}
+
+country_event = { #Aleksander last decision
+	id = ger_blackorder.10
+	title = ger_blackorder.10.t
+	desc = ger_blackorder.10.d
+	picture = GFX_report_event_reich_door
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger_blackorder.10"}
+	
+	option = {
+		name = ger_blackorder.10.a
+		ai_chance = {
+			base = 30
+		}
+		hidden_effect = {
+			PRU = {
+				country_event = {
+					id = ger_blackorder.104
+					hours = 2
+				}
+			}
+		}
+	}
+	
+	option = {
+		name = ger_blackorder.10.b
+		ai_chance = {
+			base = 70
+		}
+		hidden_effect = {
+			PRU = {
+				country_event = {
+					id = ger_blackorder.107
+					hours = 2
+				}
 			}
 		}
 	}
@@ -4253,7 +5587,14 @@ country_event = { #Hunting is going well
 	option = {
 		name = ger_blackorder.11.a
 		ai_chance = {
-			factor = 30
+			base = 30
+			modifier = {
+				add = 70
+				has_game_rule = { 
+					rule = PRU_BS_ai_behavior 
+					option = PRU_BS_COME_TO_RULE 
+				}
+			}
 		}
 		custom_effect_tooltip = pru_acces_to_all_partisan_must_die_tt
 		custom_effect_tooltip = pru_blacksun_influince_rise
@@ -4268,9 +5609,3192 @@ country_event = { #Hunting is going well
 	option = {
 		name = ger_blackorder.11.b
 		ai_chance = {
-			factor = 70
+			base = 70
+			modifier = {
+				add = -70
+				has_game_rule = { 
+					rule = PRU_BS_ai_behavior 
+					option = PRU_BS_COME_TO_RULE 
+				}
+			}
 		}
 		custom_effect_tooltip = pru_acces_to_all_partisan_must_die_tt
+	}
+	
+}
+
+country_event = { #Maestro want Burgundia
+	id = ger_blackorder.12
+	title = ger_blackorder.12.t
+	desc = ger_blackorder.12.d
+	picture = GFX_report_event_black_sun_symbol
+	
+	trigger = {
+		tag = PRU
+		PRU = {
+			has_completed_focus = PRU_rise_of_evil
+		}
+		OR = {
+			BRG = {
+				is_puppet_of = PRU
+			}
+			BRG = {
+				is_subject_of = PRU
+			}
+			BRG = {
+				is_in_faction_with = PRU
+			}
+		}
+	}
+	
+	mean_time_to_happen = {
+		days = 25
+	}
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger_blackorder.12"}
+	
+	option = { #Good Idea
+		name = ger_blackorder.12.a
+		ai_chance = {
+			base = 95
+		}
+		PRU = {
+			puppet = BRG
+		}
+		PRU = {
+			KOL_Maestro_Second = {
+				set_nationality = BRG
+			}
+		}
+		BRG = {
+			set_politics = {
+				ruling_party = reactionist
+			}
+			set_political_party = {
+				ideology = reactionist
+				popularity = 50
+			}
+			add_country_leader_role = {
+				character = KOL_Maestro_Second
+				promote_leader = yes
+				country_leader = {
+					ideology = radical_nationalism
+					expire = "1900.1.1.1"
+					traits = { }
+				}
+			}
+			set_party_name = {
+				ideology = reactionist
+				long_name = BRG_bs_party_long
+				name = BRG_bs_party
+			}
+			set_cosmetic_tag = BRG_bs
+		}
+		hidden_effect = {
+			PRU = {
+				set_country_flag = brg_is_state_of_bs
+			}
+		}
+	}
+	
+	option = { #I need your here
+		name = ger_blackorder.12.b
+		ai_chance = {
+			base = 5
+		}
+	}
+	
+}
+
+country_event = { #Solder flow into Black Sun
+	id = ger_blackorder.13
+	title = ger_blackorder.13.t
+	desc = ger_blackorder.13.d
+	picture = GFX_report_event_black_sun_solder
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger_blackorder.13"}
+	
+	option = { #It's not bad
+		name = ger_blackorder.13.a
+		ai_chance = {
+			base = 25
+			modifier = {
+				add = 75
+				has_game_rule = { 
+					rule = PRU_BS_ai_behavior 
+					option = PRU_BS_COME_TO_RULE 
+				}
+			}
+		}
+		hidden_effect = {
+			PRU = {
+				country_event = {
+					id = script_event.39
+					days = 90
+				}
+			}
+		}
+	}
+	
+	option = { #Stop this!
+		name = ger_blackorder.13.b
+		ai_chance = {
+			base = 75
+			modifier = {
+				add = -75
+				has_game_rule = { 
+					rule = PRU_BS_ai_behavior 
+					option = PRU_BS_COME_TO_RULE 
+				}
+			}
+		}
+		PRU = {
+			add_manpower = -50000
+		}
+		custom_effect_tooltip = pru_blacksun_influince_fall
+		hidden_effect = {
+			add_to_variable = {
+				var = PRU.blacksun_influence
+				value = -1
+			}
+			PRU = {
+				country_event = {
+					id = script_event.39
+					days = 90
+				}
+				set_country_flag = pru_solder_in_bs
+			}
+		}
+	}
+	
+}
+
+country_event = { #General flow into Black Sun
+	id = ger_blackorder.14
+	title = ger_blackorder.14.t
+	desc = ger_blackorder.14.d
+	picture = GFX_report_event_black_sun_oficcer
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger_blackorder.14"}
+	
+	option = { #We cant do something
+		name = ger_blackorder.14.a
+		ai_chance = {
+			base = 75
+			modifier = {
+				add = 25
+				has_game_rule = { 
+					rule = PRU_BS_ai_behavior 
+					option = PRU_BS_COME_TO_RULE 
+				}
+			}
+		}
+		remove_trait = {
+			character = PRU_Eduard_von_Yahman
+			trait = junker_general
+		}
+		add_trait = {
+			 character = PRU_Eduard_von_Yahman
+			 trait = blacksun_general
+		}
+		remove_trait = {
+			character = PRU_Eduard_von_Bonin
+			trait = junker_general
+		}
+		add_trait = {
+			 character = PRU_Eduard_von_Bonin
+			 trait = blacksun_general
+		}
+		remove_trait = {
+			character = PRU_Albrecht_von_Stosch
+			trait = junker_general
+		}
+		add_trait = {
+			 character = PRU_Albrecht_von_Stosch
+			 trait = blacksun_general
+		}
+		custom_effect_tooltip = pru_blacksun_influince_rise
+		hidden_effect = {
+			add_to_variable = {
+				var = PRU.blacksun_influence
+				value = 1
+			}
+			PRU = {
+				set_portraits = {
+					character = PRU_Eduard_von_Yahman
+					army = { small = "GFX_idea_Eduard_von_Yahman_bs" }
+					army = { large = "GFX_Portrait_Eduard_von_Yahman_bs" }
+				}
+				set_portraits = {
+					character = PRU_Eduard_von_Bonin
+					army = { small = "GFX_idea_Eduard_von_Bonin_bs" }
+					army = { large = "GFX_Portrait_Eduard_von_Bonin_bs" }
+				}
+				set_portraits = {
+					character = PRU_Albrecht_von_Stosch
+					army = { small = "GFX_idea_Albrecht_von_Stosch_bs" }
+					army = { large = "GFX_Portrai_Albrecht_von_Stosch_bs" }
+				}
+			}
+			PRU = {
+				country_event = {
+					id = script_event.39
+					days = 90
+				}
+			}
+		}
+	}
+	
+	option = { #Disband them
+		name = ger_blackorder.14.b
+		ai_chance = {
+			base = 25
+			modifier = {
+				add = -25
+				has_game_rule = { 
+					rule = PRU_BS_ai_behavior 
+					option = PRU_BS_COME_TO_RULE 
+				}
+			}
+		}
+		PRU = {
+			remove_unit_leader = 18
+			remove_unit_leader = 19
+			remove_unit_leader = 26
+			add_war_support = -0.10
+			army_experience = -100
+		}
+		custom_effect_tooltip = pru_blacksun_influince_fall
+		hidden_effect = {
+			add_to_variable = {
+				var = PRU.blacksun_influence
+				value = -1
+			}
+			PRU = {
+				country_event = {
+					id = script_event.39
+					days = 90
+				}
+			}
+		}
+	}
+	
+}
+
+country_event = { #Marshal flow into Black Sun
+	id = ger_blackorder.15
+	title = ger_blackorder.15.t
+	desc = ger_blackorder.15.d
+	picture = GFX_report_event_blacksun_document
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger_blackorder.15"}
+	
+	option = { #We cant do something
+		name = ger_blackorder.15.a
+		ai_chance = {
+			base = 75
+			modifier = {
+				add = 25
+				has_game_rule = { 
+					rule = PRU_BS_ai_behavior 
+					option = PRU_BS_COME_TO_RULE 
+				}
+			}
+		}
+		remove_trait = {
+			character = PRU_Fridrich_Ernst_von_Wrangel
+			trait = junker_general
+		}
+		add_trait = {
+			 character = PRU_Fridrich_Ernst_von_Wrangel
+			 trait = blacksun_general
+		}
+		custom_effect_tooltip = pru_blacksun_influince_rise
+		hidden_effect = {
+			add_to_variable = {
+				var = PRU.blacksun_influence
+				value = 1
+			}
+			PRU = {
+				set_portraits = {
+					character = PRU_Fridrich_Ernst_von_Wrangel
+					army = { small = "GFX_idea_Fridrich_Ernst_von_Wrangel_bs" }
+					army = { large = "GFX_Portrait_Fridrich_Ernst_von_Wrangel_bs" }
+				}
+			}
+		}
+	}
+	
+	option = { #Disband them
+		name = ger_blackorder.15.b
+		ai_chance = {
+			base = 25
+			modifier = {
+				add = -25
+				has_game_rule = { 
+					rule = PRU_BS_ai_behavior 
+					option = PRU_BS_COME_TO_RULE 
+				}
+			}
+		}
+		PRU = {
+			remove_unit_leader = 3
+			add_war_support = -0.15
+			army_experience = -150
+		}
+		custom_effect_tooltip = pru_blacksun_influince_fall
+		hidden_effect = {
+			add_to_variable = {
+				var = PRU.blacksun_influence
+				value = -1
+			}
+		}
+	}
+	
+}
+
+country_event = { #Black Sun succesor
+	id = ger_blackorder.16
+	title = ger_blackorder.16.t
+	desc = ger_blackorder.16.d
+	picture = GFX_report_event_black_sun_cabinet_of_furor
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger_blackorder.16"}
+	
+	option = { #We have only one option
+		name = ger_blackorder.16.a
+		ai_chance = {
+			base = 100
+		}
+		custom_effect_tooltip = pru_choose_jh_heir_of_bs_tt
+		hidden_effect = {
+			PRU = {
+				set_country_flag = joseph_himmler_heir
+			}
+		}
+	}
+	
+}
+
+country_event = { #Long Night
+	id = ger_blackorder.17
+	title = ger_blackorder.17.t
+	desc = ger_blackorder.17.d
+	picture = GFX_report_event_black_sun_long_night
+	
+	trigger = {
+		tag = PRU
+		PRU = {
+			has_country_flag = blacksun_end_germany
+			has_country_flag = brg_is_state_of_bs
+			has_country_flag = joseph_himmler_heir
+			has_country_leader = {
+				character = KOL_Wilgelm_Austrian
+				ruling_only = yes
+			}
+		}
+	}
+	
+	mean_time_to_happen = {
+		days = 210
+	}
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger_blackorder.17"}
+	
+	option = { #Intresting
+		name = ger_blackorder.17.a
+		ai_chance = {
+			base = 100
+		}
+		PRU = {
+			kill_country_leader = yes
+			add_country_leader_role = {
+				character = KOL_Joseph_Himmler
+				promote_leader = yes
+				country_leader = {
+					ideology = radical_nationalism
+					expire = "1900.1.1.1"
+					traits = { dictator_bs leader_of_bs }
+				}
+			}
+		}
+		hidden_effect = {
+			PRU = {
+				remove_unit_leader = 4400
+			}
+		}
+	}
+	
+}
+
+country_event = { #First edict
+	id = ger_blackorder.18
+	title = ger_blackorder.18.t
+	desc = ger_blackorder.18.d
+	picture = GFX_report_event_first_edict_in_reich
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger_blackorder.18"}
+	
+	option = { #Intresting
+		name = ger_blackorder.18.a
+		ai_chance = {
+			base = 100
+		}
+		add_stability = -0.05
+		add_popularity = {
+			ideology = authoritarian
+			popularity = -1
+		}
+		custom_effect_tooltip = pru_destroed_monarchism_tt
+		if = {
+			limit = {
+				PRU = {
+					has_idea = pru_kaiser_wilgelm_iv
+				}
+			}
+			PRU = {
+				remove_ideas = pru_kaiser_wilgelm_iv
+			}
+		}
+		if = {
+			limit = {
+				PRU = {
+					has_idea = pru_kaiser_fridrich_iii
+				}
+			}
+			PRU = {
+				remove_ideas = pru_kaiser_fridrich_iii
+			}
+		}
+		hidden_effect = {
+			PRU = {
+				promote_character = PRU_vacant_aut
+				set_party_name = {
+					ideology = authoritarian
+					name = PRU_authoritarian_party_none
+					long_name = PRU_authoritarian_party_none_long
+				}
+				country_event = {
+					id = ger_blackorder.19
+					days = 5
+				}
+			}
+		}
+	}
+	
+}
+
+country_event = { #Second edict
+	id = ger_blackorder.19
+	title = ger_blackorder.19.t
+	desc = ger_blackorder.19.d
+	picture = GFX_report_event_second_edict_in_reich
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger_blackorder.19"}
+	
+	option = { #Intresting
+		name = ger_blackorder.19.a
+		ai_chance = {
+			base = 75
+		}
+		add_stability = -0.05
+		add_popularity = {
+			ideology = democratic
+			popularity = -1
+		}
+		custom_effect_tooltip = pru_destroed_democraty_tt
+		hidden_effect = {
+			PRU = {
+				promote_character = PRU_vacant_dem
+				set_party_name = {
+					ideology = democratic
+					name = PRU_democratic_party_none
+					long_name = PRU_democratic_party_none_long
+				}
+				country_event = {
+					id = ger_blackorder.20
+					days = 5
+				}
+			}
+		}
+	}
+	
+}
+
+country_event = { #Third edict
+	id = ger_blackorder.20
+	title = ger_blackorder.20.t
+	desc = ger_blackorder.20.d
+	picture = GFX_report_event_third_edict_in_reich
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger_blackorder.20"}
+	
+	option = { #Intresting
+		name = ger_blackorder.20.a
+		ai_chance = {
+			base = 75
+		}
+		add_stability = -0.05
+		add_popularity = {
+			ideology = socialism
+			popularity = -1
+		}
+		custom_effect_tooltip = pru_destroed_socialism_tt
+		custom_effect_tooltip = pru_mark_and_engels_tt
+		hidden_effect = {
+			PRU = {
+				promote_character = PRU_vacant_soc
+				set_party_name = {
+					ideology = socialism
+					name = PRU_socialism_party_none
+					long_name = PRU_socialism_party_none_long
+				}
+				country_event = {
+					id = ger_blackorder.21
+					days = 5
+				}
+			}
+		}
+	}
+	
+}
+
+country_event = { #Slave is need
+	id = ger_blackorder.21
+	title = ger_blackorder.21.t
+	desc = ger_blackorder.21.d
+	picture = GFX_report_event_slave_return_to_germany
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger_blackorder.21"}
+	
+	option = { #Intresting
+		name = ger_blackorder.21.a
+		ai_chance = {
+			base = 75
+		}
+		swap_ideas = {
+			remove_idea = slavery_forbidden
+			add_idea = slavery_allowed
+		}
+		hidden_effect = {
+			PRU = {
+				country_event = {
+					id = ger_blackorder.22
+					days = 5
+				}
+			}
+		}
+	}
+	
+}
+
+country_event = { #Midnight is comming
+	id = ger_blackorder.22
+	title = ger_blackorder.22.t
+	desc = ger_blackorder.22.d
+	picture = GFX_report_event_almost_midnight
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger_blackorder.22"}
+	
+	option = { #Intresting
+		name = ger_blackorder.22.a
+		ai_chance = {
+			base = 75
+		}
+		custom_effect_tooltip = start_of_pru_decaing_tt
+		hidden_effect = {
+			PRU = {
+				set_stability = 1.00
+				set_country_flag = decaing_reich
+				set_variable = {
+					var = PRU.stab_decaing
+					value = 0.05
+				}
+				activate_mission = pru_start_of_civil_war_decision
+				activate_mission = pru_decing_of_reich_stability
+			}
+		}
+	}
+	
+}
+
+country_event = { #Clean of Reich
+	id = ger_blackorder.23
+	title = ger_blackorder.23.t
+	desc = ger_blackorder.23.d
+	picture = GFX_report_event_very_bad_picture
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event ger_blackorder.23"
+		hidden_effect = {
+			if = {
+				limit = {
+					PRU = {
+						owns_state = 5
+					}
+				}
+				5 = {
+					set_temp_variable = { temp_manstate = state_population }
+					set_variable_to_random = {
+						var = temp_randman
+						max = 12
+						min = 8
+						integer = yes
+					}
+					divide_temp_variable = { temp_manstate = temp_randman }
+					subtract_from_temp_variable = { temp_mantot = temp_manstate }
+					add_manpower = temp_mantot
+					add_to_variable = { global.totlose = temp_mantot }
+					set_temp_variable = { temp_mantot = 0 }	
+				}
+			}
+			if = {
+				limit = {
+					PRU = {
+						owns_state = 8
+					}
+				}
+				8 = {
+					set_temp_variable = { temp_manstate = state_population }
+					set_variable_to_random = {
+						var = temp_randman
+						max = 12
+						min = 8
+						integer = yes
+					}
+					divide_temp_variable = { temp_manstate = temp_randman }
+					subtract_from_temp_variable = { temp_mantot = temp_manstate }
+					add_manpower = temp_mantot
+					add_to_variable = { global.totlose = temp_mantot }
+					set_temp_variable = { temp_mantot = 0 }
+				}
+			}
+			if = {
+				limit = {
+					PRU = {
+						owns_state = 10
+					}
+				}
+				10 = {
+					set_temp_variable = { temp_manstate = state_population }
+					set_variable_to_random = {
+						var = temp_randman
+						max = 12
+						min = 8
+						integer = yes
+					}
+					divide_temp_variable = { temp_manstate = temp_randman }
+					subtract_from_temp_variable = { temp_mantot = temp_manstate }
+					add_manpower = temp_mantot
+					add_to_variable = { global.totlose = temp_mantot }
+					set_temp_variable = { temp_mantot = 0 }
+				}
+			}
+			if = {
+				limit = {
+					PRU = {
+						owns_state = 28
+					}
+				}
+				28 = {
+					set_temp_variable = { temp_manstate = state_population }
+					set_variable_to_random = {
+						var = temp_randman
+						max = 12
+						min = 8
+						integer = yes
+					}
+					divide_temp_variable = { temp_manstate = temp_randman }
+					subtract_from_temp_variable = { temp_mantot = temp_manstate }
+					add_manpower = temp_mantot
+					add_to_variable = { global.totlose = temp_mantot }
+					set_temp_variable = { temp_mantot = 0 }
+				}
+			}
+			if = {
+				limit = {
+					PRU = {
+						owns_state = 42
+					}
+				}
+				42 = {
+					set_temp_variable = { temp_manstate = state_population }
+					set_variable_to_random = {
+						var = temp_randman
+						max = 12
+						min = 8
+						integer = yes
+					}
+					divide_temp_variable = { temp_manstate = temp_randman }
+					subtract_from_temp_variable = { temp_mantot = temp_manstate }
+					add_manpower = temp_mantot
+					add_to_variable = { global.totlose = temp_mantot }
+					set_temp_variable = { temp_mantot = 0 }
+				}
+			}
+			if = {
+				limit = {
+					PRU = {
+						owns_state = 50
+					}
+				}
+				50 = {
+					set_temp_variable = { temp_manstate = state_population }
+					set_variable_to_random = {
+						var = temp_randman
+						max = 12
+						min = 8
+						integer = yes
+					}
+					divide_temp_variable = { temp_manstate = temp_randman }
+					subtract_from_temp_variable = { temp_mantot = temp_manstate }
+					add_manpower = temp_mantot
+					add_to_variable = { global.totlose = temp_mantot }
+					set_temp_variable = { temp_mantot = 0 }
+				}
+			}
+			if = {
+				limit = {
+					PRU = {
+						owns_state = 51
+					}
+				}
+				51 = {
+					set_temp_variable = { temp_manstate = state_population }
+					set_variable_to_random = {
+						var = temp_randman
+						max = 12
+						min = 8
+						integer = yes
+					}
+					divide_temp_variable = { temp_manstate = temp_randman }
+					subtract_from_temp_variable = { temp_mantot = temp_manstate }
+					add_manpower = temp_mantot
+					add_to_variable = { global.totlose = temp_mantot }
+					set_temp_variable = { temp_mantot = 0 }
+				}
+			}
+			if = {
+				limit = {
+					PRU = {
+						owns_state = 52
+					}
+				}
+				52 = {
+					set_temp_variable = { temp_manstate = state_population }
+					set_variable_to_random = {
+						var = temp_randman
+						max = 12
+						min = 8
+						integer = yes
+					}
+					divide_temp_variable = { temp_manstate = temp_randman }
+					subtract_from_temp_variable = { temp_mantot = temp_manstate }
+					add_manpower = temp_mantot
+					add_to_variable = { global.totlose = temp_mantot }
+					set_temp_variable = { temp_mantot = 0 }
+				}
+			}
+			if = {
+				limit = {
+					PRU = {
+						owns_state = 53
+					}
+				}
+				53 = {
+					set_temp_variable = { temp_manstate = state_population }
+					set_variable_to_random = {
+						var = temp_randman
+						max = 12
+						min = 8
+						integer = yes
+					}
+					divide_temp_variable = { temp_manstate = temp_randman }
+					subtract_from_temp_variable = { temp_mantot = temp_manstate }
+					add_manpower = temp_mantot
+					add_to_variable = { global.totlose = temp_mantot }
+					set_temp_variable = { temp_mantot = 0 }
+				}
+			}
+			if = {
+				limit = {
+					PRU = {
+						owns_state = 54
+					}
+				}
+				54 = {
+					set_temp_variable = { temp_manstate = state_population }
+					set_variable_to_random = {
+						var = temp_randman
+						max = 12
+						min = 8
+						integer = yes
+					}
+					divide_temp_variable = { temp_manstate = temp_randman }
+					subtract_from_temp_variable = { temp_mantot = temp_manstate }
+					add_manpower = temp_mantot
+					add_to_variable = { global.totlose = temp_mantot }
+					set_temp_variable = { temp_mantot = 0 }
+				}
+			}
+			if = {
+				limit = {
+					PRU = {
+						owns_state = 55
+					}
+				}
+				55 = {
+					set_temp_variable = { temp_manstate = state_population }
+					set_variable_to_random = {
+						var = temp_randman
+						max = 12
+						min = 8
+						integer = yes
+					}
+					divide_temp_variable = { temp_manstate = temp_randman }
+					subtract_from_temp_variable = { temp_mantot = temp_manstate }
+					add_manpower = temp_mantot
+					add_to_variable = { global.totlose = temp_mantot }
+					set_temp_variable = { temp_mantot = 0 }
+				}
+			}
+			if = {
+				limit = {
+					PRU = {
+						owns_state = 56
+					}
+				}
+				56 = {
+					set_temp_variable = { temp_manstate = state_population }
+					set_variable_to_random = {
+						var = temp_randman
+						max = 12
+						min = 8
+						integer = yes
+					}
+					divide_temp_variable = { temp_manstate = temp_randman }
+					subtract_from_temp_variable = { temp_mantot = temp_manstate }
+					add_manpower = temp_mantot
+					add_to_variable = { global.totlose = temp_mantot }
+					set_temp_variable = { temp_mantot = 0 }
+				}
+			}
+			if = {
+				limit = {
+					PRU = {
+						owns_state = 57
+					}
+				}
+				57 = {
+					set_temp_variable = { temp_manstate = state_population }
+					set_variable_to_random = {
+						var = temp_randman
+						max = 12
+						min = 8
+						integer = yes
+					}
+					divide_temp_variable = { temp_manstate = temp_randman }
+					subtract_from_temp_variable = { temp_mantot = temp_manstate }
+					add_manpower = temp_mantot
+					add_to_variable = { global.totlose = temp_mantot }
+					set_temp_variable = { temp_mantot = 0 }
+				}
+			}
+			if = {
+				limit = {
+					PRU = {
+						owns_state = 58
+					}
+				}
+				58 = {
+					set_temp_variable = { temp_manstate = state_population }
+					set_variable_to_random = {
+						var = temp_randman
+						max = 12
+						min = 8
+						integer = yes
+					}
+					divide_temp_variable = { temp_manstate = temp_randman }
+					subtract_from_temp_variable = { temp_mantot = temp_manstate }
+					add_manpower = temp_mantot
+					add_to_variable = { global.totlose = temp_mantot }
+					set_temp_variable = { temp_mantot = 0 }
+				}
+			}
+			if = {
+				limit = {
+					PRU = {
+						owns_state = 59
+					}
+				}
+				59 = {
+					set_temp_variable = { temp_manstate = state_population }
+					set_variable_to_random = {
+						var = temp_randman
+						max = 12
+						min = 8
+						integer = yes
+					}
+					divide_temp_variable = { temp_manstate = temp_randman }
+					subtract_from_temp_variable = { temp_mantot = temp_manstate }
+					add_manpower = temp_mantot
+					add_to_variable = { global.totlose = temp_mantot }
+					set_temp_variable = { temp_mantot = 0 }
+				}
+			}
+			if = {
+				limit = {
+					PRU = {
+						owns_state = 60
+					}
+				}
+				60 = {
+					set_temp_variable = { temp_manstate = state_population }
+					set_variable_to_random = {
+						var = temp_randman
+						max = 12
+						min = 8
+						integer = yes
+					}
+					divide_temp_variable = { temp_manstate = temp_randman }
+					subtract_from_temp_variable = { temp_mantot = temp_manstate }
+					add_manpower = temp_mantot
+					add_to_variable = { global.totlose = temp_mantot }
+					set_temp_variable = { temp_mantot = 0 }
+				}
+			}
+			if = {
+				limit = {
+					PRU = {
+						owns_state = 61
+					}
+				}
+				61 = {
+					set_temp_variable = { temp_manstate = state_population }
+					set_variable_to_random = {
+						var = temp_randman
+						max = 12
+						min = 8
+						integer = yes
+					}
+					divide_temp_variable = { temp_manstate = temp_randman }
+					subtract_from_temp_variable = { temp_mantot = temp_manstate }
+					add_manpower = temp_mantot
+					add_to_variable = { global.totlose = temp_mantot }
+					set_temp_variable = { temp_mantot = 0 }
+				}
+			}
+			if = {
+				limit = {
+					PRU = {
+						owns_state = 62
+					}
+				}
+				62 = {
+					set_temp_variable = { temp_manstate = state_population }
+					set_variable_to_random = {
+						var = temp_randman
+						max = 12
+						min = 8
+						integer = yes
+					}
+					divide_temp_variable = { temp_manstate = temp_randman }
+					subtract_from_temp_variable = { temp_mantot = temp_manstate }
+					add_manpower = temp_mantot
+					add_to_variable = { global.totlose = temp_mantot }
+					set_temp_variable = { temp_mantot = 0 }
+				}
+			}
+			if = {
+				limit = {
+					PRU = {
+						owns_state = 63
+					}
+				}
+				63 = {
+					set_temp_variable = { temp_manstate = state_population }
+					set_variable_to_random = {
+						var = temp_randman
+						max = 12
+						min = 8
+						integer = yes
+					}
+					divide_temp_variable = { temp_manstate = temp_randman }
+					subtract_from_temp_variable = { temp_mantot = temp_manstate }
+					add_manpower = temp_mantot
+					add_to_variable = { global.totlose = temp_mantot }
+					set_temp_variable = { temp_mantot = 0 }
+				}
+			}
+			if = {
+				limit = {
+					PRU = {
+						owns_state = 64
+					}
+				}
+				64 = {
+					set_temp_variable = { temp_manstate = state_population }
+					set_variable_to_random = {
+						var = temp_randman
+						max = 12
+						min = 8
+						integer = yes
+					}
+					divide_temp_variable = { temp_manstate = temp_randman }
+					subtract_from_temp_variable = { temp_mantot = temp_manstate }
+					add_manpower = temp_mantot
+					add_to_variable = { global.totlose = temp_mantot }
+					set_temp_variable = { temp_mantot = 0 }
+				}
+			}
+			if = {
+				limit = {
+					PRU = {
+						owns_state = 65
+					}
+				}
+				65 = {
+					set_temp_variable = { temp_manstate = state_population }
+					set_variable_to_random = {
+						var = temp_randman
+						max = 12
+						min = 8
+						integer = yes
+					}
+					divide_temp_variable = { temp_manstate = temp_randman }
+					subtract_from_temp_variable = { temp_mantot = temp_manstate }
+					add_manpower = temp_mantot
+					add_to_variable = { global.totlose = temp_mantot }
+					set_temp_variable = { temp_mantot = 0 }
+				}
+			}
+			if = {
+				limit = {
+					PRU = {
+						owns_state = 66
+					}
+				}
+				66 = {
+					set_temp_variable = { temp_manstate = state_population }
+					set_variable_to_random = {
+						var = temp_randman
+						max = 12
+						min = 8
+						integer = yes
+					}
+					divide_temp_variable = { temp_manstate = temp_randman }
+					subtract_from_temp_variable = { temp_mantot = temp_manstate }
+					add_manpower = temp_mantot
+					add_to_variable = { global.totlose = temp_mantot }
+					set_temp_variable = { temp_mantot = 0 }
+				}
+			}
+			if = {
+				limit = {
+					PRU = {
+						owns_state = 67
+					}
+				}
+				67 = {
+					set_temp_variable = { temp_manstate = state_population }
+					set_variable_to_random = {
+						var = temp_randman
+						max = 12
+						min = 8
+						integer = yes
+					}
+					divide_temp_variable = { temp_manstate = temp_randman }
+					subtract_from_temp_variable = { temp_mantot = temp_manstate }
+					add_manpower = temp_mantot
+					add_to_variable = { global.totlose = temp_mantot }
+					set_temp_variable = { temp_mantot = 0 }
+				}
+			}
+			if = {
+				limit = {
+					PRU = {
+						owns_state = 68
+					}
+				}
+				68 = {
+					set_temp_variable = { temp_manstate = state_population }
+					set_variable_to_random = {
+						var = temp_randman
+						max = 12
+						min = 8
+						integer = yes
+					}
+					divide_temp_variable = { temp_manstate = temp_randman }
+					subtract_from_temp_variable = { temp_mantot = temp_manstate }
+					add_manpower = temp_mantot
+					add_to_variable = { global.totlose = temp_mantot }
+					set_temp_variable = { temp_mantot = 0 }
+				}
+			}
+			if = {
+				limit = {
+					PRU = {
+						owns_state = 69
+					}
+				}
+				69 = {
+					set_temp_variable = { temp_manstate = state_population }
+					set_variable_to_random = {
+						var = temp_randman
+						max = 12
+						min = 8
+						integer = yes
+					}
+					divide_temp_variable = { temp_manstate = temp_randman }
+					subtract_from_temp_variable = { temp_mantot = temp_manstate }
+					add_manpower = temp_mantot
+					add_to_variable = { global.totlose = temp_mantot }
+					set_temp_variable = { temp_mantot = 0 }
+				}
+			}
+			if = {
+				limit = {
+					PRU = {
+						owns_state = 74
+					}
+				}
+				74 = {
+					set_temp_variable = { temp_manstate = state_population }
+					set_variable_to_random = {
+						var = temp_randman
+						max = 12
+						min = 8
+						integer = yes
+					}
+					divide_temp_variable = { temp_manstate = temp_randman }
+					subtract_from_temp_variable = { temp_mantot = temp_manstate }
+					add_manpower = temp_mantot
+					add_to_variable = { global.totlose = temp_mantot }
+					set_temp_variable = { temp_mantot = 0 }
+				}
+			}
+			if = {
+				limit = {
+					PRU = {
+						owns_state = 85
+					}
+				}
+				85 = {
+					set_temp_variable = { temp_manstate = state_population }
+					set_variable_to_random = {
+						var = temp_randman
+						max = 12
+						min = 8
+						integer = yes
+					}
+					divide_temp_variable = { temp_manstate = temp_randman }
+					subtract_from_temp_variable = { temp_mantot = temp_manstate }
+					add_manpower = temp_mantot
+					add_to_variable = { global.totlose = temp_mantot }
+					set_temp_variable = { temp_mantot = 0 }
+				}
+			}
+			if = {
+				limit = {
+					PRU = {
+						owns_state = 86
+					}
+				}
+				86 = {
+					set_temp_variable = { temp_manstate = state_population }
+					set_variable_to_random = {
+						var = temp_randman
+						max = 12
+						min = 8
+						integer = yes
+					}
+					divide_temp_variable = { temp_manstate = temp_randman }
+					subtract_from_temp_variable = { temp_mantot = temp_manstate }
+					add_manpower = temp_mantot
+					add_to_variable = { global.totlose = temp_mantot }
+					set_temp_variable = { temp_mantot = 0 }
+				}
+			}
+			if = {
+				limit = {
+					PRU = {
+						owns_state = 87
+					}
+				}
+				87 = {
+					set_temp_variable = { temp_manstate = state_population }
+					set_variable_to_random = {
+						var = temp_randman
+						max = 12
+						min = 8
+						integer = yes
+					}
+					divide_temp_variable = { temp_manstate = temp_randman }
+					subtract_from_temp_variable = { temp_mantot = temp_manstate }
+					add_manpower = temp_mantot
+					add_to_variable = { global.totlose = temp_mantot }
+					set_temp_variable = { temp_mantot = 0 }
+				}
+			}
+			if = {
+				limit = {
+					PRU = {
+						owns_state = 88
+					}
+				}
+				88 = {
+					set_temp_variable = { temp_manstate = state_population }
+					set_variable_to_random = {
+						var = temp_randman
+						max = 12
+						min = 8
+						integer = yes
+					}
+					divide_temp_variable = { temp_manstate = temp_randman }
+					subtract_from_temp_variable = { temp_mantot = temp_manstate }
+					add_manpower = temp_mantot
+					add_to_variable = { global.totlose = temp_mantot }
+					set_temp_variable = { temp_mantot = 0 }
+				}
+			}
+			if = {
+				limit = {
+					PRU = {
+						owns_state = 90
+					}
+				}
+				90 = {
+					set_temp_variable = { temp_manstate = state_population }
+					set_variable_to_random = {
+						var = temp_randman
+						max = 12
+						min = 8
+						integer = yes
+					}
+					divide_temp_variable = { temp_manstate = temp_randman }
+					subtract_from_temp_variable = { temp_mantot = temp_manstate }
+					add_manpower = temp_mantot
+					add_to_variable = { global.totlose = temp_mantot }
+					set_temp_variable = { temp_mantot = 0 }
+				}
+			}
+			if = {
+				limit = {
+					PRU = {
+						owns_state = 92
+					}
+				}
+				92 = {
+					set_temp_variable = { temp_manstate = state_population }
+					set_variable_to_random = {
+						var = temp_randman
+						max = 12
+						min = 8
+						integer = yes
+					}
+					divide_temp_variable = { temp_manstate = temp_randman }
+					subtract_from_temp_variable = { temp_mantot = temp_manstate }
+					add_manpower = temp_mantot
+					add_to_variable = { global.totlose = temp_mantot }
+					set_temp_variable = { temp_mantot = 0 }
+				}
+			}
+			if = {
+				limit = {
+					PRU = {
+						owns_state = 97
+					}
+				}
+				97 = {
+					set_temp_variable = { temp_manstate = state_population }
+					set_variable_to_random = {
+						var = temp_randman
+						max = 12
+						min = 8
+						integer = yes
+					}
+					divide_temp_variable = { temp_manstate = temp_randman }
+					subtract_from_temp_variable = { temp_mantot = temp_manstate }
+					add_manpower = temp_mantot
+					add_to_variable = { global.totlose = temp_mantot }
+					set_temp_variable = { temp_mantot = 0 }
+				}
+			}
+			if = {
+				limit = {
+					PRU = {
+						owns_state = 98
+					}
+				}
+				98 = {
+					set_temp_variable = { temp_manstate = state_population }
+					set_variable_to_random = {
+						var = temp_randman
+						max = 12
+						min = 8
+						integer = yes
+					}
+					divide_temp_variable = { temp_manstate = temp_randman }
+					subtract_from_temp_variable = { temp_mantot = temp_manstate }
+					add_manpower = temp_mantot
+					add_to_variable = { global.totlose = temp_mantot }
+					set_temp_variable = { temp_mantot = 0 }
+				}
+			}
+			if = {
+				limit = {
+					PRU = {
+						owns_state = 151
+					}
+				}
+				151 = {
+					set_temp_variable = { temp_manstate = state_population }
+					set_variable_to_random = {
+						var = temp_randman
+						max = 12
+						min = 8
+						integer = yes
+					}
+					divide_temp_variable = { temp_manstate = temp_randman }
+					subtract_from_temp_variable = { temp_mantot = temp_manstate }
+					add_manpower = temp_mantot
+					add_to_variable = { global.totlose = temp_mantot }
+					set_temp_variable = { temp_mantot = 0 }
+				}
+			}
+			if = {
+				limit = {
+					PRU = {
+						owns_state = 188
+					}
+				}
+				188 = {
+					set_temp_variable = { temp_manstate = state_population }
+					set_variable_to_random = {
+						var = temp_randman
+						max = 12
+						min = 8
+						integer = yes
+					}
+					divide_temp_variable = { temp_manstate = temp_randman }
+					subtract_from_temp_variable = { temp_mantot = temp_manstate }
+					add_manpower = temp_mantot
+					add_to_variable = { global.totlose = temp_mantot }
+					set_temp_variable = { temp_mantot = 0 }
+				}
+			}
+			if = {
+				limit = {
+					PRU = {
+						owns_state = 762
+					}
+				}
+				762 = {
+					set_temp_variable = { temp_manstate = state_population }
+					set_variable_to_random = {
+						var = temp_randman
+						max = 12
+						min = 8
+						integer = yes
+					}
+					divide_temp_variable = { temp_manstate = temp_randman }
+					subtract_from_temp_variable = { temp_mantot = temp_manstate }
+					add_manpower = temp_mantot
+					add_to_variable = { global.totlose = temp_mantot }
+					set_temp_variable = { temp_mantot = 0 }
+				}
+			}
+			if = {
+				limit = {
+					PRU = {
+						owns_state = 763
+					}
+				}
+				763 = {
+					set_temp_variable = { temp_manstate = state_population }
+					set_variable_to_random = {
+						var = temp_randman
+						max = 12
+						min = 8
+						integer = yes
+					}
+					divide_temp_variable = { temp_manstate = temp_randman }
+					subtract_from_temp_variable = { temp_mantot = temp_manstate }
+					add_manpower = temp_mantot
+					add_to_variable = { global.totlose = temp_mantot }
+					set_temp_variable = { temp_mantot = 0 }
+				}
+			}
+			if = {
+				limit = {
+					PRU = {
+						owns_state = 808
+					}
+				}
+				808 = {
+					set_temp_variable = { temp_manstate = state_population }
+					set_variable_to_random = {
+						var = temp_randman
+						max = 12
+						min = 8
+						integer = yes
+					}
+					divide_temp_variable = { temp_manstate = temp_randman }
+					subtract_from_temp_variable = { temp_mantot = temp_manstate }
+					add_manpower = temp_mantot
+					add_to_variable = { global.totlose = temp_mantot }
+					set_temp_variable = { temp_mantot = 0 }
+				}
+			}
+			if = {
+				limit = {
+					PRU = {
+						owns_state = 828
+					}
+				}
+				828 = {
+					set_temp_variable = { temp_manstate = state_population }
+					set_variable_to_random = {
+						var = temp_randman
+						max = 12
+						min = 8
+						integer = yes
+					}
+					divide_temp_variable = { temp_manstate = temp_randman }
+					subtract_from_temp_variable = { temp_mantot = temp_manstate }
+					add_manpower = temp_mantot
+					add_to_variable = { global.totlose = temp_mantot }
+					set_temp_variable = { temp_mantot = 0 }
+				}
+			}
+			if = {
+				limit = {
+					PRU = {
+						owns_state = 829
+					}
+				}
+				829 = {
+					set_temp_variable = { temp_manstate = state_population }
+					set_variable_to_random = {
+						var = temp_randman
+						max = 12
+						min = 8
+						integer = yes
+					}
+					divide_temp_variable = { temp_manstate = temp_randman }
+					subtract_from_temp_variable = { temp_mantot = temp_manstate }
+					add_manpower = temp_mantot
+					add_to_variable = { global.totlose = temp_mantot }
+					set_temp_variable = { temp_mantot = 0 }
+				}
+			}
+			if = {
+				limit = {
+					PRU = {
+						owns_state = 853
+					}
+				}
+				853 = {
+					set_temp_variable = { temp_manstate = state_population }
+					set_variable_to_random = {
+						var = temp_randman
+						max = 12
+						min = 8
+						integer = yes
+					}
+					divide_temp_variable = { temp_manstate = temp_randman }
+					subtract_from_temp_variable = { temp_mantot = temp_manstate }
+					add_manpower = temp_mantot
+					add_to_variable = { global.totlose = temp_mantot }
+					set_temp_variable = { temp_mantot = 0 }
+				}
+			}
+			if = {
+				limit = {
+					PRU = {
+						owns_state = 862
+					}
+				}
+				862 = {
+					set_temp_variable = { temp_manstate = state_population }
+					set_variable_to_random = {
+						var = temp_randman
+						max = 12
+						min = 8
+						integer = yes
+					}
+					divide_temp_variable = { temp_manstate = temp_randman }
+					subtract_from_temp_variable = { temp_mantot = temp_manstate }
+					add_manpower = temp_mantot
+					add_to_variable = { global.totlose = temp_mantot }
+					set_temp_variable = { temp_mantot = 0 }
+				}
+			}
+			if = {
+				limit = {
+					PRU = {
+						owns_state = 863
+					}
+				}
+				863 = {
+					set_temp_variable = { temp_manstate = state_population }
+					set_variable_to_random = {
+						var = temp_randman
+						max = 12
+						min = 8
+						integer = yes
+					}
+					divide_temp_variable = { temp_manstate = temp_randman }
+					subtract_from_temp_variable = { temp_mantot = temp_manstate }
+					add_manpower = temp_mantot
+					add_to_variable = { global.totlose = temp_mantot }
+					set_temp_variable = { temp_mantot = 0 }
+				}
+			}
+			if = {
+				limit = {
+					PRU = {
+						owns_state = 887
+					}
+				}
+				887 = {
+					set_temp_variable = { temp_manstate = state_population }
+					set_variable_to_random = {
+						var = temp_randman
+						max = 12
+						min = 8
+						integer = yes
+					}
+					divide_temp_variable = { temp_manstate = temp_randman }
+					subtract_from_temp_variable = { temp_mantot = temp_manstate }
+					add_manpower = temp_mantot
+					add_to_variable = { global.totlose = temp_mantot }
+					set_temp_variable = { temp_mantot = 0 }
+				}
+			}
+			if = {
+				limit = {
+					PRU = {
+						owns_state = 888
+					}
+				}
+				888 = {
+					set_temp_variable = { temp_manstate = state_population }
+					set_variable_to_random = {
+						var = temp_randman
+						max = 12
+						min = 8
+						integer = yes
+					}
+					divide_temp_variable = { temp_manstate = temp_randman }
+					subtract_from_temp_variable = { temp_mantot = temp_manstate }
+					add_manpower = temp_mantot
+					add_to_variable = { global.totlose = temp_mantot }
+					set_temp_variable = { temp_mantot = 0 }
+				}
+			}
+			if = {
+				limit = {
+					PRU = {
+						owns_state = 890
+					}
+				}
+				890 = {
+					set_temp_variable = { temp_manstate = state_population }
+					set_variable_to_random = {
+						var = temp_randman
+						max = 12
+						min = 8
+						integer = yes
+					}
+					divide_temp_variable = { temp_manstate = temp_randman }
+					subtract_from_temp_variable = { temp_mantot = temp_manstate }
+					add_manpower = temp_mantot
+					add_to_variable = { global.totlose = temp_mantot }
+					set_temp_variable = { temp_mantot = 0 }
+				}
+			}
+			if = {
+				limit = {
+					PRU = {
+						owns_state = 891
+					}
+				}
+				891 = {
+					set_temp_variable = { temp_manstate = state_population }
+					set_variable_to_random = {
+						var = temp_randman
+						max = 12
+						min = 8
+						integer = yes
+					}
+					divide_temp_variable = { temp_manstate = temp_randman }
+					subtract_from_temp_variable = { temp_mantot = temp_manstate }
+					add_manpower = temp_mantot
+					add_to_variable = { global.totlose = temp_mantot }
+					set_temp_variable = { temp_mantot = 0 }
+				}
+			}
+			if = {
+				limit = {
+					PRU = {
+						owns_state = 892
+					}
+				}
+				892 = {
+					set_temp_variable = { temp_manstate = state_population }
+					set_variable_to_random = {
+						var = temp_randman
+						max = 12
+						min = 8
+						integer = yes
+					}
+					divide_temp_variable = { temp_manstate = temp_randman }
+					subtract_from_temp_variable = { temp_mantot = temp_manstate }
+					add_manpower = temp_mantot
+					add_to_variable = { global.totlose = temp_mantot }
+					set_temp_variable = { temp_mantot = 0 }
+				}
+			}
+			if = {
+				limit = {
+					PRU = {
+						owns_state = 893
+					}
+				}
+				893 = {
+					set_temp_variable = { temp_manstate = state_population }
+					set_variable_to_random = {
+						var = temp_randman
+						max = 12
+						min = 8
+						integer = yes
+					}
+					divide_temp_variable = { temp_manstate = temp_randman }
+					subtract_from_temp_variable = { temp_mantot = temp_manstate }
+					add_manpower = temp_mantot
+					add_to_variable = { global.totlose = temp_mantot }
+					set_temp_variable = { temp_mantot = 0 }
+				}
+			}
+			if = {
+				limit = {
+					PRU = {
+						owns_state = 894
+					}
+				}
+				894 = {
+					set_temp_variable = { temp_manstate = state_population }
+					set_variable_to_random = {
+						var = temp_randman
+						max = 12
+						min = 8
+						integer = yes
+					}
+					divide_temp_variable = { temp_manstate = temp_randman }
+					subtract_from_temp_variable = { temp_mantot = temp_manstate }
+					add_manpower = temp_mantot
+					add_to_variable = { global.totlose = temp_mantot }
+					set_temp_variable = { temp_mantot = 0 }
+				}
+			}
+			if = {
+				limit = {
+					PRU = {
+						owns_state = 895
+					}
+				}
+				895 = {
+					set_temp_variable = { temp_manstate = state_population }
+					set_variable_to_random = {
+						var = temp_randman
+						max = 12
+						min = 8
+						integer = yes
+					}
+					divide_temp_variable = { temp_manstate = temp_randman }
+					subtract_from_temp_variable = { temp_mantot = temp_manstate }
+					add_manpower = temp_mantot
+					add_to_variable = { global.totlose = temp_mantot }
+					set_temp_variable = { temp_mantot = 0 }
+				}
+			}
+			if = {
+				limit = {
+					PRU = {
+						owns_state = 896
+					}
+				}
+				896 = {
+					set_temp_variable = { temp_manstate = state_population }
+					set_variable_to_random = {
+						var = temp_randman
+						max = 12
+						min = 8
+						integer = yes
+					}
+					divide_temp_variable = { temp_manstate = temp_randman }
+					subtract_from_temp_variable = { temp_mantot = temp_manstate }
+					add_manpower = temp_mantot
+					add_to_variable = { global.totlose = temp_mantot }
+					set_temp_variable = { temp_mantot = 0 }
+				}
+			}
+			if = {
+				limit = {
+					PRU = {
+						owns_state = 897
+					}
+				}
+				897 = {
+					set_temp_variable = { temp_manstate = state_population }
+					set_variable_to_random = {
+						var = temp_randman
+						max = 12
+						min = 8
+						integer = yes
+					}
+					divide_temp_variable = { temp_manstate = temp_randman }
+					subtract_from_temp_variable = { temp_mantot = temp_manstate }
+					add_manpower = temp_mantot
+					add_to_variable = { global.totlose = temp_mantot }
+					set_temp_variable = { temp_mantot = 0 }
+				}
+			}
+			if = {
+				limit = {
+					PRU = {
+						owns_state = 898
+					}
+				}
+				898 = {
+					set_temp_variable = { temp_manstate = state_population }
+					set_variable_to_random = {
+						var = temp_randman
+						max = 12
+						min = 8
+						integer = yes
+					}
+					divide_temp_variable = { temp_manstate = temp_randman }
+					subtract_from_temp_variable = { temp_mantot = temp_manstate }
+					add_manpower = temp_mantot
+					add_to_variable = { global.totlose = temp_mantot }
+					set_temp_variable = { temp_mantot = 0 }
+				}
+			}
+			if = {
+				limit = {
+					PRU = {
+						owns_state = 899
+					}
+				}
+				899 = {
+					set_temp_variable = { temp_manstate = state_population }
+					set_variable_to_random = {
+						var = temp_randman
+						max = 12
+						min = 8
+						integer = yes
+					}
+					divide_temp_variable = { temp_manstate = temp_randman }
+					subtract_from_temp_variable = { temp_mantot = temp_manstate }
+					add_manpower = temp_mantot
+					add_to_variable = { global.totlose = temp_mantot }
+					set_temp_variable = { temp_mantot = 0 }
+				}
+			}
+			if = {
+				limit = {
+					PRU = {
+						owns_state = 900
+					}
+				}
+				900 = {
+					set_temp_variable = { temp_manstate = state_population }
+					set_variable_to_random = {
+						var = temp_randman
+						max = 12
+						min = 8
+						integer = yes
+					}
+					divide_temp_variable = { temp_manstate = temp_randman }
+					subtract_from_temp_variable = { temp_mantot = temp_manstate }
+					add_manpower = temp_mantot
+					add_to_variable = { global.totlose = temp_mantot }
+					set_temp_variable = { temp_mantot = 0 }
+				}
+			}
+			if = {
+				limit = {
+					PRU = {
+						owns_state = 901
+					}
+				}
+				901 = {
+					set_temp_variable = { temp_manstate = state_population }
+					set_variable_to_random = {
+						var = temp_randman
+						max = 12
+						min = 8
+						integer = yes
+					}
+					divide_temp_variable = { temp_manstate = temp_randman }
+					subtract_from_temp_variable = { temp_mantot = temp_manstate }
+					add_manpower = temp_mantot
+					add_to_variable = { global.totlose = temp_mantot }
+					set_temp_variable = { temp_mantot = 0 }
+				}
+			}
+			if = {
+				limit = {
+					PRU = {
+						owns_state = 903
+					}
+				}
+				903 = {
+					set_temp_variable = { temp_manstate = state_population }
+					set_variable_to_random = {
+						var = temp_randman
+						max = 12
+						min = 8
+						integer = yes
+					}
+					divide_temp_variable = { temp_manstate = temp_randman }
+					subtract_from_temp_variable = { temp_mantot = temp_manstate }
+					add_manpower = temp_mantot
+					add_to_variable = { global.totlose = temp_mantot }
+					set_temp_variable = { temp_mantot = 0 }
+				}
+			}
+			if = {
+				limit = {
+					PRU = {
+						owns_state = 940
+					}
+				}
+				940 = {
+					set_temp_variable = { temp_manstate = state_population }
+					set_variable_to_random = {
+						var = temp_randman
+						max = 12
+						min = 8
+						integer = yes
+					}
+					divide_temp_variable = { temp_manstate = temp_randman }
+					subtract_from_temp_variable = { temp_mantot = temp_manstate }
+					add_manpower = temp_mantot
+					add_to_variable = { global.totlose = temp_mantot }
+					set_temp_variable = { temp_mantot = 0 }
+				}
+			}
+			round_variable = global.totlose
+			subtract_from_variable = { global.tlsnb = global.totlose }
+		}
+	}
+	
+	option = { #Intresting
+		name = ger_blackorder.23.a
+		ai_chance = {
+			base = 100
+		}
+		add_stability = -0.10
+		custom_effect_tooltip = pru_reich_clean_himself_tt
+		hidden_effect = {
+		}
+	}
+	
+}
+
+country_event = { #Plan O
+	id = ger_blackorder.24
+	title = ger_blackorder.24.t
+	desc = ger_blackorder.24.d
+	picture = GFX_report_event_plan_o
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger_blackorder.24"}
+	
+	option = { #Intresting
+		name = ger_blackorder.24.a
+		ai_chance = {
+			base = 100
+		}
+		add_manpower = -1
+	}
+	
+}
+
+country_event = { #End of Reich
+	id = ger_blackorder.50
+	title = ger_blackorder.50.t
+	desc = ger_blackorder.50.d
+	picture = GFX_report_event_black_sun_solder
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger_blackorder.50"}
+	
+	option = { #Intresting
+		name = ger_blackorder.50.a
+		ai_chance = {
+			base = 75
+		}
+		dismantle_faction = yes
+		hidden_effect = {
+			PRU = {
+				country_event = {
+					id = ger_blackorder.51
+					days = 2
+				}
+			}
+		}
+	}
+	
+}
+
+country_event = { #End of Reichmasariat
+	id = ger_blackorder.51
+	title = ger_blackorder.51.t
+	desc = ger_blackorder.51.d
+	picture = GFX_report_event_blacksun_document
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger_blackorder.51"}
+	
+	option = { #Intresting
+		name = ger_blackorder.51.a
+		ai_chance = {
+			base = 75
+		}
+		every_country = {
+			limit = {
+				NOT = {
+					tag = BRG
+				}
+				is_subject_of = PRU
+				is_puppet_of = PRU
+			}
+			PRU = {
+				set_autonomy = {
+					target = PREV
+					autonomy_state = autonomy_free
+					end_wars = yes
+					end_civil_wars = yes
+				}
+			}
+		}
+		if = {
+			limit = {
+				PRU = {
+					owns_state = 69
+				}
+			}
+			BOH = {
+				transfer_state = 69
+			}
+		}
+		if = {
+			limit = {
+				PRU = {
+					owns_state = 74
+				}
+			}
+			BOH = {
+				transfer_state = 74
+			}
+		}
+		if = {
+			limit = {
+				PRU = {
+					owns_state = 10
+				}
+			}
+			PLH = {
+				transfer_state = 10
+			}
+		}
+		if = {
+			limit = {
+				PRU = {
+					owns_state = 87
+				}
+			}
+			PLH = {
+				transfer_state = 87
+			}
+		}
+		if = {
+			limit = {
+				PRU = {
+					owns_state = 88
+				}
+			}
+			PLH = {
+				transfer_state = 88
+			}
+		}
+		if = {
+			limit = {
+				PRU = {
+					owns_state = 90
+				}
+			}
+			PLH = {
+				transfer_state = 90
+			}
+		}
+		if = {
+			limit = {
+				PRU = {
+					owns_state = 92
+				}
+			}
+			PLH = {
+				transfer_state = 92
+			}
+		}
+		if = {
+			limit = {
+				PRU = {
+					owns_state = 97
+				}
+			}
+			PLH = {
+				transfer_state = 97
+			}
+		}
+		if = {
+			limit = {
+				PRU = {
+					owns_state = 98
+				}
+			}
+			PLH = {
+				transfer_state = 98
+			}
+		}
+		if = {
+			limit = {
+				PRU = {
+					owns_state = 308
+				}
+			}
+			MEC = {
+				transfer_state = 308
+			}
+		}
+		if = {
+			limit = {
+				PRU = {
+					owns_state = 691
+				}
+			}
+			MEC = {
+				transfer_state = 691
+			}
+		}
+		if = {
+			limit = {
+				PRU = {
+					owns_state = 692
+				}
+			}
+			MEC = {
+				transfer_state = 692
+			}
+		}
+		if = {
+			limit = {
+				PRU = {
+					owns_state = 694
+				}
+			}
+			MEC = {
+				transfer_state = 694
+			}
+		}
+		if = {
+			limit = {
+				PRU = {
+					owns_state = 695
+				}
+			}
+			MEC = {
+				transfer_state = 695
+			}
+		}
+		if = {
+			limit = {
+				PRU = {
+					owns_state = 853
+				}
+			}
+			PLH = {
+				transfer_state = 853
+			}
+		}
+		if = {
+			limit = {
+				PRU = {
+					owns_state = 903
+				}
+			}
+			PLH = {
+				transfer_state = 903
+			}
+		}
+		hidden_effect = {
+			PRU = {
+				country_event = {
+					id = ger_blackorder.52
+					days = 2
+				}
+			}
+		}
+	}
+	
+}
+
+country_event = { #Revolt of Junkers
+	id = ger_blackorder.52
+	title = ger_blackorder.52.t
+	desc = ger_blackorder.52.d
+	picture = GFX_report_event_junker_revolt
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event ger_blackorder.52"
+		hidden_effect = {
+			PAT = {
+				transfer_state = 720
+			}
+			KGR = {
+				transfer_state = 5
+				transfer_state = 52
+				transfer_state = 53
+				transfer_state = 54
+				transfer_state = 65
+				transfer_state = 66
+				transfer_state = 67
+				transfer_state = 85
+				transfer_state = 86
+				transfer_state = 188
+				transfer_state = 762
+				transfer_state = 763
+				transfer_state = 808
+				transfer_state = 890
+				transfer_state = 900
+			}
+			PRU = {
+				every_unit_leader = {
+					limit = {
+						OR = {
+							has_trait = kaiserreich_general
+							has_trait = junker_general
+						}
+					}
+					set_nationality = KGR
+				}
+				set_nationality = {
+					target_country = KGR
+					character = PRU_Otton_Bismark
+				}
+				set_nationality = {
+					target_country = KGR
+					character = PRU_Fridrich_III
+				}
+				KGR = {
+					promote_character  = PRU_Fridrich_III
+				}
+				country_event = {
+					id = ger_blackorder.53
+					hours = 6
+				}
+				transfer_units_fraction= {
+					target = KGR
+					size = 0.40
+					stockpile_ratio = 0.40
+					army_ratio = 0.40
+					navy_ratio = 0.40
+					air_ratio = 0.40
+					keep_unit_leaders_trigger = {
+						has_trait = blacksun_general
+					}
+				}
+			}
+		}
+	}
+	
+	option = { #Intresting
+		name = ger_blackorder.52.a
+		ai_chance = {
+			base = 100
+		}
+	}
+	
+	option = { #Intresting
+		name = ger_blackorder.52.b
+		ai_chance = {
+			base = 0
+		}
+		KGR = {
+			change_tag_from = ROOT
+		}
+	}
+	
+}
+
+country_event = { #Revolt of Socialism
+	id = ger_blackorder.53
+	title = ger_blackorder.53.t
+	desc = ger_blackorder.53.d
+	picture = GFX_report_event_socialism_revolt
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event ger_blackorder.53"
+		hidden_effect = {
+			SGE = {
+				transfer_state = 55
+				transfer_state = 56
+				transfer_state = 57
+				transfer_state = 58
+				transfer_state = 59
+				transfer_state = 829
+				transfer_state = 888
+				transfer_state = 893
+				transfer_state = 895
+				transfer_state = 896
+				transfer_state = 898
+				transfer_state = 899
+			}
+			PRU = {
+				country_event = {
+					id = ger_blackorder.54
+					hours = 6
+				}
+				transfer_units_fraction= {
+					target = SGE
+					size = 0.40
+					stockpile_ratio = 0.40
+					army_ratio = 0.40
+					navy_ratio = 0.40
+					air_ratio = 0.40
+					keep_unit_leaders_trigger = {
+						has_trait = blacksun_general
+					}
+				}
+			}
+		}
+	}
+	
+	option = { #Intresting
+		name = ger_blackorder.53.a
+		ai_chance = {
+			base = 100
+		}
+	}
+	
+	option = { #Intresting
+		name = ger_blackorder.53.b
+		ai_chance = {
+			base = 0
+		}
+		SGE = {
+			change_tag_from = ROOT
+		}
+	}
+	
+}
+
+country_event = { #Start of Civilianwar
+	id = ger_blackorder.54
+	title = ger_blackorder.54.t
+	desc = ger_blackorder.54.d
+	picture = GFX_report_event_german_civilwar_bs
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = { 
+		log = "[GetDateText]: [Root.GetName]: event ger_blackorder.54" 
+		hidden_effect = {
+			KGR = {
+				country_event = {
+					id = ger_blackorder.55
+					days = 20
+					random_days = 15
+				}
+			}
+		}
+	}
+	
+	option = { #Intresting
+		name = ger_blackorder.54.a
+		ai_chance = {
+			base = 100
+		}
+		SGE = {
+            declare_war_on = {
+                target = PRU
+                type = annex_everything
+            }
+		}
+		SGE = {
+			declare_war_on = {
+                target = KGR
+                type = annex_everything
+            }
+		}
+		KGR = {
+			declare_war_on = {
+                target = PRU
+                type = annex_everything
+            }
+		}
+		hidden_effect = {
+			clr_global_flag = blacksun_civilwar_prepered
+			set_global_flag = blacksun_civilwar_going
+		}
+	}
+	
+}
+
+country_event = { #Revolt of Republicans
+	id = ger_blackorder.55
+	title = ger_blackorder.55.t
+	desc = ger_blackorder.55.d
+	picture = GFX_report_event_democratic_revolt
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = { 
+		log = "[GetDateText]: [Root.GetName]: event ger_blackorder.55" 
+		hidden_effect = {
+			if = {
+				limit = {
+					country_exists = KGR
+				}
+				RGR = {
+					transfer_state = 52
+					transfer_state = 53
+					transfer_state = 54
+					transfer_state = 65
+					transfer_state = 808
+					transfer_state = 890
+					transfer_state = 900
+				}
+				KGR = {
+					every_unit_leader = {
+						limit = {
+							has_trait = junker_general
+						}
+						set_nationality = RGR
+					}
+					set_nationality = {
+						target_country = RGR
+						character = PRU_Otton_Bismark
+					}
+					RGR = {
+						promote_character  = PRU_Otton_Bismark
+					}
+					transfer_units_fraction= {
+						target = RGR
+						size = 0.50
+						stockpile_ratio = 0.50
+						army_ratio = 0.50
+						navy_ratio = 0.50
+						air_ratio = 0.50
+					}
+				}
+			}
+		}
+	}
+	
+	option = { #Intresting
+		name = ger_blackorder.55.a
+		ai_chance = {
+			base = 100
+		}
+		RGR = {
+            declare_war_on = {
+                target = PRU
+                type = annex_everything
+            }
+		}
+		RGR = {
+			declare_war_on = {
+                target = KGR
+                type = annex_everything
+            }
+		}
+		RGR = {
+			declare_war_on = {
+                target = SGE
+                type = annex_everything
+            }
+		}
+	}
+	
+	option = { #Intresting
+		name = ger_blackorder.55.b
+		ai_chance = {
+			base = 0
+		}
+		RGR = {
+			change_tag_from = ROOT
+		}
+		RGR = {
+            declare_war_on = {
+                target = PRU
+                type = annex_everything
+            }
+		}
+		RGR = {
+			declare_war_on = {
+                target = KGR
+                type = annex_everything
+            }
+		}
+		RGR = {
+			declare_war_on = {
+                target = SGE
+                type = annex_everything
+            }
+		}
+	}
+	
+}
+
+country_event = { #END IS NEAR
+	id = ger_blackorder.100
+	title = ger_blackorder.100.t
+	desc = ger_blackorder.100.d
+	picture = GFX_report_event_nuke_buttom
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger_blackorder.100" }
+	
+	option = { #I accept it
+		name = ger_blackorder.100.a
+		ai_chance = {
+			base = 50
+		}
+		custom_effect_tooltip = pru_want_nuks_himself_first_tt
+		hidden_effect = {
+			PRU = {
+				country_event = {
+					id = ger_blackorder.101
+					hours = 8
+				}
+			}
+		}
+	}
+	
+	option = { #Stop it
+		name = ger_blackorder.100.b
+		ai_chance = {
+			base = 50
+		}
+	}
+	
+}
+
+country_event = { #END IS COMING
+	id = ger_blackorder.101
+	title = ger_blackorder.101.t
+	desc = ger_blackorder.101.d
+	picture = GFX_report_event_nuke_key
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger_blackorder.101" }
+	
+	option = { #I accept it
+		name = ger_blackorder.101.a
+		ai_chance = {
+			base = 50
+		}
+		custom_effect_tooltip = pru_want_nuks_himself_second_tt
+		hidden_effect = {
+			PRU = {
+				country_event = {
+					id = ger_blackorder.102
+					hours = 10
+				}
+			}
+		}
+	}
+	
+	option = { #Stop it
+		name = ger_blackorder.101.b
+		ai_chance = {
+			base = 50
+		}
+	}
+	
+}
+
+country_event = { #END COME
+	id = ger_blackorder.102
+	title = ger_blackorder.102.t
+	desc = ger_blackorder.102.d
+	picture = GFX_report_event_nuked_germany
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger_blackorder.102" }
+	
+	option = { #I accept it
+		name = ger_blackorder.102.a
+		ai_chance = {
+			base = 50
+		}
+		custom_effect_tooltip = pru_want_nuks_himself_third_tt
+		news_event = news.236
+		hidden_effect = {
+			PRU = {
+				country_event = {
+					id = ger_blackorder.103
+					hours = 20
+				}
+			}
+			launch_nuke = {
+				province = 241
+			}
+			launch_nuke = {
+				province = 279
+			}
+			launch_nuke = {
+				province = 321
+			}
+			launch_nuke = {
+				province = 336
+			}
+			launch_nuke = {
+				province = 362
+			}
+			launch_nuke = {
+				province = 425
+			}
+			launch_nuke = {
+				province = 495
+			}
+			launch_nuke = {
+				province = 514
+			}
+			launch_nuke = {
+				province = 519
+			}
+			launch_nuke = {
+				province = 538
+			}
+			launch_nuke = {
+				province = 564
+			}
+			launch_nuke = {
+				province = 587
+			}
+			launch_nuke = {
+				province = 663
+			}
+			launch_nuke = {
+				province = 678
+			}
+			launch_nuke = {
+				province = 692
+			}
+			launch_nuke = {
+				province = 708
+			}
+			launch_nuke = {
+				province = 3258
+			}
+			launch_nuke = {
+				province = 3288
+			}
+			launch_nuke = {
+				province = 3295
+			}
+			launch_nuke = {
+				province = 3326
+			}
+			launch_nuke = {
+				province = 3423
+			}
+			launch_nuke = {
+				province = 3473
+			}
+			launch_nuke = {
+				province = 3500
+			}
+			launch_nuke = {
+				province = 3522
+			}
+			launch_nuke = {
+				province = 3530
+			}
+			launch_nuke = {
+				province = 3535
+			}
+			launch_nuke = {
+				province = 3558
+			}
+			launch_nuke = {
+				province = 3560
+			}
+			launch_nuke = {
+				province = 3561
+			}
+			launch_nuke = {
+				province = 6282
+			}
+			launch_nuke = {
+				province = 6332
+			}
+			launch_nuke = {
+				province = 6375
+			}
+			launch_nuke = {
+				province = 6389
+			}
+			launch_nuke = {
+				province = 6464
+			}
+			launch_nuke = {
+				province = 6469
+			}
+			launch_nuke = {
+				province = 6488
+			}
+			launch_nuke = {
+				province = 6521
+			}
+			launch_nuke = {
+				province = 6535
+			}
+			launch_nuke = {
+				province = 6558
+			}
+			launch_nuke = {
+				province = 6583
+			}
+			launch_nuke = {
+				province = 6680
+			}
+			launch_nuke = {
+				province = 9347
+			}
+			launch_nuke = {
+				province = 9388
+			}
+			launch_nuke = {
+				province = 9503
+			}
+			launch_nuke = {
+				province = 9511
+			}
+			launch_nuke = {
+				province = 9515
+			}
+			launch_nuke = {
+				province = 9517
+			}
+			launch_nuke = {
+				province = 9559
+			}
+			launch_nuke = {
+				province = 9570
+			}
+			launch_nuke = {
+				province = 9575
+			}
+			launch_nuke = {
+				province = 9620
+			}
+			launch_nuke = {
+				province = 11305
+			}
+			launch_nuke = {
+				province = 11360
+			}
+			launch_nuke = {
+				province = 11366
+			}
+			launch_nuke = {
+				province = 11372
+			}
+			launch_nuke = {
+				province = 11431
+			}
+			launch_nuke = {
+				province = 11435
+			}
+			launch_nuke = {
+				province = 11467
+			}
+			launch_nuke = {
+				province = 11499
+			}
+			launch_nuke = {
+				province = 11516
+			}
+			launch_nuke = {
+				province = 11531
+			}
+			launch_nuke = {
+				province = 11544
+			}
+			launch_nuke = {
+				province = 11562
+			}
+		}
+	}
+	
+}
+
+country_event = { #SILENSE
+	id = ger_blackorder.103
+	title = ger_blackorder.103.t
+	desc = ger_blackorder.103.d
+	picture = GFX_report_event_nuked_silense
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger_blackorder.103" }
+	
+	option = { #It's fun
+		name = ger_blackorder.103.a
+		ai_chance = {
+			base = 50
+		}
+		custom_effect_tooltip = pru_only_silense_in_germany_tt
+		hidden_effect = {
+			NON = {
+				transfer_state = 5
+				transfer_state = 8
+				transfer_state = 28
+				transfer_state = 42
+				transfer_state = 50
+				transfer_state = 51
+				transfer_state = 52
+				transfer_state = 53
+				transfer_state = 54
+				transfer_state = 55
+				transfer_state = 56
+				transfer_state = 57
+				transfer_state = 58
+				transfer_state = 59
+				transfer_state = 60
+				transfer_state = 61
+				transfer_state = 62
+				transfer_state = 63
+				transfer_state = 64
+				transfer_state = 65
+				transfer_state = 66
+				transfer_state = 67
+				transfer_state = 68
+				transfer_state = 85
+				transfer_state = 86
+				transfer_state = 151
+				transfer_state = 188
+				transfer_state = 762
+				transfer_state = 763
+				transfer_state = 808
+				transfer_state = 828
+				transfer_state = 829
+				transfer_state = 862
+				transfer_state = 863
+				transfer_state = 887
+				transfer_state = 888
+				transfer_state = 890
+				transfer_state = 891
+				transfer_state = 892
+				transfer_state = 893
+				transfer_state = 894
+				transfer_state = 895
+				transfer_state = 896
+				transfer_state = 897
+				transfer_state = 898
+				transfer_state = 899
+				transfer_state = 900
+				transfer_state = 901
+				transfer_state = 940
+			}
+			every_state = {
+				limit = {
+					is_owned_by = NON
+				}
+				remove_core_of = owner
+			}
+		}
+	}
+	
+}
+
+country_event = { #Aleksander shoot Furer
+	id = ger_blackorder.104
+	title = ger_blackorder.104.t
+	desc = ger_blackorder.104.d
+	picture = GFX_report_event_black_sun_cabinet_of_furor
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger_blackorder.104" }
+	
+	option = { #Good ending
+		name = ger_blackorder.104.a
+		ai_chance = {
+			base = 100
+		}
+		custom_effect_tooltip = pru_end_of_black_sun_tt
+		PRU = {
+			kill_country_leader = yes
+			add_country_leader_role = {
+				character = KOL_Alexandre_Seslavine
+				promote_leader = yes
+				country_leader = {
+					ideology = paternalism
+					expire = "1900.1.1.1"
+					traits = { }
+				}
+			}
+		}
+		hidden_effect = {
+			PRU = {
+				remove_unit_leader = 4414
+				country_event = {
+					id = ger_blackorder.105
+					days = 5
+				}
+			}
+		}
+	}
+	
+}
+
+country_event = { #Non radical reich
+	id = ger_blackorder.105
+	title = ger_blackorder.105.t
+	desc = ger_blackorder.105.d
+	picture = GFX_report_event_democrat_return_to_reich
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger_blackorder.105" }
+	
+	option = { #Good ending
+		name = ger_blackorder.105.a
+		ai_chance = {
+			base = 100
+		}
+		PRU = {
+			set_cosmetic_tag = PRU_SECOND_REPUBLIC
+		}
+		swap_ideas = {
+			remove_idea = slavery_allowed
+			add_idea = slavery_forbidden
+		}
+		add_country_leader_trait = destroer_of_black_sun
+		hidden_effect = {
+			PRU = {
+				set_country_leader_portrait = {
+					portrait = GFX_Portrait_Alexandre_Seslavine_military_nobs
+				}
+				set_portraits = {
+					character = KOL_Alexandre_Seslavine_mil
+					army = { small = "GFX_idea_Alexandre_Seslavine" }
+					army = { large = "GFX_Portrait_Alexandre_Seslavine_military_nobs" }
+				}
+				remove_trait = {
+					character = KOL_Alexandre_Seslavine_mil
+					trait = blacksun_general
+				}
+				country_event = {
+					id = ger_blackorder.106
+					days = 10 
+				}
+			}
+		}
+	}
+	
+}
+
+country_event = { #New democratic Reich
+	id = ger_blackorder.106
+	title = ger_blackorder.106.t
+	desc = ger_blackorder.106.d
+	picture = GFX_report_event_reich_rebuild
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger_blackorder.106" }
+	
+	option = { #Good ending
+		name = ger_blackorder.106.a
+		ai_chance = {
+			base = 100
+		}
+		PRU = {
+			set_party_name = {
+				ideology = democratic
+				name = PRU_democratic_second
+				long_name = PRU_democratic_second_long
+			}
+			set_party_name = {
+				ideology = socialism
+				name = PRU_socialism_second
+				long_name = PRU_socialism_second_long
+			}
+			set_party_name = {
+				ideology = reactionist
+				name = PRU_reactionist_second
+				long_name = PRU_reactionist_second_long
+			}
+			set_party_name = {
+				ideology = authoritarian
+				name = PRU_authoritarian_second
+				long_name = PRU_authoritarian_second_long
+			}
+			set_country_flag = pru_second_republic
+			mark_focus_tree_layout_dirty = yes
+		}
+		add_country_leader_trait = german_liberator
+		PRU = {
+			country_event = epilog_germany.1
+		}
+		hidden_effect = {
+			PRU = {
+				set_country_leader_portrait = {
+					portrait = GFX_Portrait_Alexandre_Seslavine
+				}
+			}
+		}
+	}
+	
+}
+
+country_event = { #Death of Dream
+	id = ger_blackorder.107
+	title = ger_blackorder.107.t
+	desc = ger_blackorder.107.d
+	picture = GFX_report_event_black_sun_symbol
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger_blackorder.107" }
+	
+	option = { #Bad end
+		name = ger_blackorder.107.a
+		add_manpower = -1
+		PRU = {
+			remove_unit_leader = 4417
+		}
+		PRU = {
+			country_event = epilog_germany.1
+		}
+		ai_chance = {
+			base = 100
+		}
+	}
+	
+}
+
+country_event = { #Question about loyal
+	id = ger_blackorder.108
+	title = ger_blackorder.108.t
+	desc = ger_blackorder.108.d
+	picture = GFX_report_event_bs_loylity
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger_blackorder.108" }
+	
+	option = { #Corruption is head of proggress
+		name = ger_blackorder.108.a
+		ai_chance = {
+			base = 100
+		}
+		add_political_power = -200
+	}
+	
+	option = { #ignore probleb
+		name = ger_blackorder.108.b
+		ai_chance = {
+			base = 100
+		}
+		add_stability = -0.05
+	}
+	
+}
+
+country_event = { #New german man
+	id = ger_blackorder.109
+	title = ger_blackorder.109.t
+	desc = ger_blackorder.109.d
+	picture = GFX_report_event_bs_new_german
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger_blackorder.109" }
+	
+	option = { 
+		name = ger_blackorder.109.a
+		ai_chance = {
+			base = 100
+		}
+		add_ideas = pru_new_german_man
+	}
+	
+}
+
+country_event = { #True German
+	id = ger_blackorder.110
+	title = ger_blackorder.110.t
+	desc = ger_blackorder.110.d
+	picture = GFX_report_event_bs_true_german
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger_blackorder.110" }
+	
+	option = { 
+		name = ger_blackorder.110.a
+		ai_chance = {
+			base = 100
+		}
+		add_ideas = pru_true_german
+	}
+	
+}
+
+country_event = { #Army main power
+	id = ger_blackorder.111
+	title = ger_blackorder.111.t
+	desc = ger_blackorder.111.d
+	picture = GFX_report_event_bs_army_corruption
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger_blackorder.111" }
+	
+	option = { 
+		name = ger_blackorder.111.a
+		ai_chance = {
+			base = 100
+		}
+		add_ideas = pru_corruption_in_army
+	}
+	
+}
+
+country_event = { #Grand parad
+	id = ger_blackorder.112
+	title = ger_blackorder.112.t
+	desc = ger_blackorder.112.d
+	picture = GFX_report_event_bs_army_march
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event ger_blackorder.112" }
+	
+	option = { 
+		name = ger_blackorder.112.a
+		ai_chance = {
+			base = 100
+		}
+		add_timed_idea = {
+			idea = pru_intimidation_march
+			days = 60
+		}
 	}
 	
 }
@@ -4290,7 +8814,7 @@ country_event = { #Qustian about Poland
 	option = { #democraty in poland
 		name = ger_warpolitic.1.a
 		ai_chance = {
-			factor = 60
+			base = 60
 			modifier = {
 				factor = 80
 				PRU = {
@@ -4328,7 +8852,7 @@ country_event = { #Qustian about Poland
 	option = { #king or integration
 		name = ger_warpolitic.1.b
 		ai_chance = {
-			factor = 40
+			base = 40
 			modifier = {
 				factor = 20
 				PRU = {
@@ -4380,7 +8904,7 @@ country_event = { #Democraty in Poland
 	option = { #They chose own politic
 		name = ger_warpolitic.2.a
 		ai_chance = {
-			factor = 60
+			base = 60
 			modifier = {
 				factor = 60
 				PRU = {
@@ -4415,7 +8939,7 @@ country_event = { #Democraty in Poland
 	option = { #They choose our politic
 		name = ger_warpolitic.2.b
 		ai_chance = {
-			factor = 40
+			base = 40
 			modifier = {
 				factor = 40
 				PRU = {
@@ -4464,7 +8988,7 @@ country_event = { #King or integration
 	option = { #Kaisser of Poland
 		name = ger_warpolitic.3.a
 		ai_chance = {
-			factor = 60
+			base = 60
 			modifier = {
 				factor = 90
 				PRU = {
@@ -4499,7 +9023,7 @@ country_event = { #King or integration
 	option = { #Poland is part of Reich
 		name = ger_warpolitic.3.b
 		ai_chance = {
-			factor = 40
+			base = 40
 			modifier = {
 				factor = 10
 				PRU = {
@@ -4548,7 +9072,7 @@ country_event = { #German say that they want in our politic
 	option = { #say yes
 		name = ger_warpolitic.4.a
 		ai_chance = {
-			factor = 50
+			base = 50
 			modifier = {
 				factor = 80
 				PRU = {
@@ -4585,7 +9109,7 @@ country_event = { #German say that they want in our politic
 	option = { #say no
 		name = ger_warpolitic.4.b
 		ai_chance = {
-			factor = 50
+			base = 50
 			modifier = {
 				factor = 20
 				PRU = {
@@ -4636,7 +9160,7 @@ country_event = { #German say that they want kingdom with their candidat
 	option = { #say yes
 		name = ger_warpolitic.5.a
 		ai_chance = {
-			factor = 50
+			base = 50
 			modifier = {
 				factor = 70
 				PRU = {
@@ -4678,7 +9202,7 @@ country_event = { #German say that they want kingdom with their candidat
 			}
 		}
 		ai_chance = {
-			factor = 50
+			base = 50
 			modifier = {
 				factor = 30
 				PRU = {
@@ -4729,7 +9253,7 @@ country_event = { #German say that poland is mistake
 	option = { #say yes
 		name = ger_warpolitic.6.a
 		ai_chance = {
-			factor = 50
+			base = 50
 			modifier = {
 				factor = 10
 				PRU = {
@@ -4771,7 +9295,7 @@ country_event = { #German say that poland is mistake
 			}
 		}
 		ai_chance = {
-			factor = 50
+			base = 50
 			modifier = {
 				factor = 90
 				PRU = {
@@ -4822,7 +9346,7 @@ country_event = { #Christmas Thruce?
 	option = { #say yes
 		name = ger_warpolitic.7.a
 		ai_chance = {
-			factor = 50
+			base = 50
 			modifier = {
 				factor = 90
 				PRU = {
@@ -4856,7 +9380,7 @@ country_event = { #Christmas Thruce?
 	option = { #say no
 		name = ger_warpolitic.7.b
 		ai_chance = {
-			factor = 50
+			base = 50
 			modifier = {
 				factor = 10
 				PRU = {
@@ -4912,7 +9436,7 @@ country_event = { #Bismark missian in Russian
 	option = { #good news
 		name = ger_bismark.1.a
 		ai_chance = {
-			factor = 50
+			base = 50
 		}
 		RUS = {
 			country_event = {
@@ -4939,7 +9463,7 @@ country_event = { #Bismark complete his work in Russian
 	option = { #good news
 		name = ger_bismark.2.a
 		ai_chance = {
-			factor = 50
+			base = 50
 		}
 		PRU = {
 			country_event = {
@@ -4966,7 +9490,7 @@ country_event = { #Russian say no
 	option = { #end diplomacy with barbarian
 		name = ger_bismark.3.a
 		ai_chance = {
-			factor = 50
+			base = 50
 		}
 		PRU = {
 			country_event = {
@@ -5001,7 +9525,7 @@ country_event = { #missia in paris
 	option = { #say the French we don't want war
 		name = ger_bismark.4.a
 		ai_chance = {
-			factor = 50
+			base = 50
 		}
 		FRR = {
 			country_event = {
@@ -5047,7 +9571,7 @@ country_event = { #Bismark return with good news
 	option = { #Very good news
 		name = ger_bismark.5.a
 		ai_chance = {
-			factor = 50
+			base = 50
 		}
 	}
 
@@ -5068,7 +9592,7 @@ country_event = { #Bismark say no for nonagresive pact, but yes to war plan
 	option = { #Very good news
 		name = ger_bismark.6.a
 		ai_chance = {
-			factor = 50
+			base = 50
 		}
 		custom_effect_tooltip = if_war_with_france_opendecison_to_destrod_they_tt
 	}
@@ -5090,7 +9614,7 @@ country_event = { #France say no
 	option = { #Okey, end diplomacy
 		name = ger_bismark.7.a
 		ai_chance = {
-			factor = 50
+			base = 50
 		}
 		hidden_effect = {
 			FRR = {
@@ -5119,7 +9643,7 @@ country_event = { #French answer
 	option = { #He is Diplomat. He only do his work
 		name = ger_bismark.100.a
 		ai_chance = {
-			factor = 60
+			base = 60
 		}
 		FRR = {
 			country_event = {
@@ -5132,7 +9656,7 @@ country_event = { #French answer
 	option = { #If he want to speak with leader we need inspect him
 		name = ger_bismark.100.b
 		ai_chance = {
-			factor = 35
+			base = 35
 		}
 		FRR = {
 			country_event = {
@@ -5145,7 +9669,7 @@ country_event = { #French answer
 	option = { #Say no
 		name = ger_bismark.100.c
 		ai_chance = {
-			factor = 5
+			base = 5
 		}
 		hidden_effect = {
 			PRU = {
@@ -5174,7 +9698,7 @@ country_event = { #What Bismark ask
 	option = { #Nonaggresive pact is good decision
 		name = ger_bismark.101.a
 		ai_chance = {
-			factor = 10
+			base = 10
 		}
 		FRR = {
 			set_country_flag = fra_say_bismark_yes
@@ -5192,7 +9716,7 @@ country_event = { #What Bismark ask
 	option = { #If they don't give elsas back, we can't speak about peace
 		name = ger_bismark.101.b
 		ai_chance = {
-			factor = 90
+			base = 90
 		}
 		hidden_effect = {
 			PRU = {
@@ -5221,7 +9745,7 @@ country_event = { #Bismark has weapon with him
 	option = { #He travel in other country logic he need weapon
 		name = ger_bismark.102.a
 		ai_chance = {
-			factor = 30
+			base = 30
 		}
 		FRR = {
 			country_event = {
@@ -5234,7 +9758,7 @@ country_event = { #Bismark has weapon with him
 	option = { #Send him back
 		name = ger_bismark.102.b
 		ai_chance = {
-			factor = 70
+			base = 70
 		}
 		hidden_effect = {
 			PRU = {
@@ -5291,7 +9815,7 @@ country_event = { #Kontinental Europa end dimplomacy with France
 	option = { #Not what we expect
 		name = ger_bismark.103.a
 		ai_chance = {
-			factor = 70
+			base = 70
 		}
 		news_event = news.186
 	}
@@ -5313,7 +9837,7 @@ country_event = { #Russian answer
 	option = { #He is Diplomat. He only do his work
 		name = ger_bismark.200.a
 		ai_chance = {
-			factor = 70
+			base = 70
 		}
 		hidden_effect = {		
 			PRU = {
@@ -5334,7 +9858,7 @@ country_event = { #Russian answer
 	option = { ##It's suspisance we need know what he do
 		name = ger_bismark.200.b
 		ai_chance = {
-			factor = 20
+			base = 20
 		}
 		hidden_effect = {
 			PRU = {
@@ -5355,7 +9879,7 @@ country_event = { #Russian answer
 	option = { #It is't time to dimplomacy
 		name = ger_bismark.200.c
 		ai_chance = {
-			factor = 10
+			base = 10
 		}
 		hidden_effect = {
 			PRU = {
@@ -5384,7 +9908,7 @@ country_event = { #Wolgadeutsche discontent
 	option = { #Very bad news
 		name = ger_bismark.201.a
 		ai_chance = {
-			factor = 70
+			base = 70
 		}
 		RUS = {
 			remove_state_core = 401
@@ -5408,7 +9932,7 @@ country_event = { #Wolgadeutsche discontent fail
 	option = { #All german are bad
 		name = ger_bismark.202.a
 		ai_chance = {
-			factor = 70
+			base = 70
 		}
 	}
 
@@ -5429,7 +9953,7 @@ country_event = { #Bismar dialog with Wolgadeutsche
 	option = { #Army must know what is happend here
 		name = ger_bismark.203.a
 		ai_chance = {
-			factor = 70
+			base = 70
 		}
 		custom_effect_tooltip = wolgadeutschediscontdecision_tt
 		set_global_flag = wolgadeutsche_discont_begin
@@ -5438,7 +9962,7 @@ country_event = { #Bismar dialog with Wolgadeutsche
 	option = { #We not intresting
 		name = ger_bismark.203.b
 		ai_chance = {
-			factor = 30
+			base = 30
 		}
 		hidden_effect = {
 			RUS = {
@@ -5494,9 +10018,1963 @@ country_event = { #Kontinental Europa end diplomacy with us
 	option = { #Not what we expect
 		name = ger_bismark.204.a
 		ai_chance = {
-			factor = 70
+			base = 70
 		}
 		news_event = news.185
+	}
+
+}
+
+############################REFORM_K.E.P._EVENTS#############################
+
+country_event = { # Экономика континентальной европы
+	id = ger_kep.1
+	title = ger_kep.1.t
+	desc = ger_kep.1.d
+	picture = GFX_report_event_generic_read_write
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event ger_kep.1"
+	}
+	
+	option = { #
+		name = ger_kep.1.a
+		ai_chance = {
+			base = 10
+		}
+		
+	}
+
+}
+
+country_event = { #Вступлении Ромеи в ЕТС
+	id = ger_kep.2
+	title = ger_kep.2.t
+	desc = ger_kep.2.d
+	picture = GFX_report_event_generic_read_write
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event ger_kep.2"
+	}
+	
+	option = { #Да
+		name = ger_kep.2.a
+		ai_chance = {
+			base = 10
+		}
+		if = {
+			limit = {
+				BYZ = {
+					NOT = {
+						has_idea = PRU_kep_trade_agreement_others
+					}
+				}
+			}
+			add_ideas = PRU_kep_trade_agreement_others
+		}	
+		hidden_effect = {
+			set_country_flag = is_pru_ets_member
+			add_to_variable = { global.pru_ets_members_number = 1 }
+			PRU = { country_event = { id = ger_kep.3 days = 3 } }
+		}
+	}
+	
+	option = { #Нет
+		name = ger_kep.2.b
+		ai_chance = {
+			base = 0
+		}
+		hidden_effect = {
+			PRU = { country_event = { id = ger_kep.4 days = 3 } }
+		}
+	}
+
+}
+
+country_event = { #
+	id = ger_kep.3
+	title = ger_kep.3.t
+	desc = ger_kep.3.d
+	picture = GFX_report_event_generic_read_write
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event ger_kep.3"
+	}
+	
+	option = { #
+		name = ger_kep.3.a
+		ai_chance = {
+			base = 10
+		}
+		if = {
+			limit = {
+				PRU = {
+					has_idea = PRU_kep_trade_agreement_5
+				}
+			}
+			swap_ideas = {
+				remove_idea = PRU_kep_trade_agreement_5
+				add_idea = PRU_kep_trade_agreement_6
+			}
+		}
+		if = {
+			limit = {
+				PRU = {
+					has_idea = PRU_kep_trade_agreement_4
+				}
+			}
+			swap_ideas = {
+				remove_idea = PRU_kep_trade_agreement_4
+				add_idea = PRU_kep_trade_agreement_5
+			}
+		}
+		if = {
+			limit = {
+				PRU = {
+					has_idea = PRU_kep_trade_agreement_3
+				}
+			}
+			swap_ideas = {
+				remove_idea = PRU_kep_trade_agreement_3
+				add_idea = PRU_kep_trade_agreement_4
+			}
+		}	
+		if = {
+			limit = {
+				PRU = {
+					has_idea = PRU_kep_trade_agreement_2
+				}
+			}
+			swap_ideas = {
+				remove_idea = PRU_kep_trade_agreement_2
+				add_idea = PRU_kep_trade_agreement_3
+			}
+		}		
+		if = {
+			limit = {
+				PRU = {
+					has_idea = PRU_kep_trade_agreement_1
+				}
+			}	
+			swap_ideas = {
+				remove_idea = PRU_kep_trade_agreement_1
+				add_idea = PRU_kep_trade_agreement_2
+			}
+		}			
+		if = {
+			limit = {
+				PRU = {
+					NOT = {
+						OR = {
+							has_idea = PRU_kep_trade_agreement_6
+							has_idea = PRU_kep_trade_agreement_5
+							has_idea = PRU_kep_trade_agreement_4
+							has_idea = PRU_kep_trade_agreement_3
+							has_idea = PRU_kep_trade_agreement_2
+							has_idea = PRU_kep_trade_agreement_1
+						}
+					}
+				}
+			}
+			add_ideas = PRU_kep_trade_agreement_1	
+		}	
+		
+	}
+
+}
+
+country_event = { #
+	id = ger_kep.4
+	title = ger_kep.4.t
+	desc = ger_kep.4.d
+	picture = GFX_report_event_generic_read_write
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event ger_kep.4"
+	}
+	
+	option = { #
+		name = ger_kep.4.a
+		ai_chance = {
+			base = 10
+		}
+		
+	}
+
+}
+
+country_event = { #
+	id = ger_kep.5
+	title = ger_kep.5.t
+	desc = ger_kep.5.d
+	picture = GFX_report_event_generic_read_write
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event ger_kep.5"
+	}
+	
+	option = { #Да
+		name = ger_kep.5.a
+		ai_chance = {
+			base = 10
+		}
+		if = {
+			limit = {
+				SAR = {
+					NOT = {
+						has_idea = PRU_kep_trade_agreement_others
+					}
+				}
+			}
+			add_ideas = PRU_kep_trade_agreement_others
+		}	
+		hidden_effect = {
+			set_country_flag = is_pru_ets_member
+			add_to_variable = { global.pru_ets_members_number = 1 }
+			PRU = { country_event = { id = ger_kep.6 days = 3 } }
+		}
+	}
+	
+	option = { #Нет
+		name = ger_kep.5.b
+		ai_chance = {
+			base = 0
+		}
+		hidden_effect = {
+			PRU = { country_event = { id = ger_kep.7 days = 3 } }
+		}
+	}
+
+}
+
+country_event = { #
+	id = ger_kep.6
+	title = ger_kep.6.t
+	desc = ger_kep.6.d
+	picture = GFX_report_event_generic_read_write
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event ger_kep.6"
+	}
+	
+	option = { #
+		name = ger_kep.6.a
+		ai_chance = {
+			base = 10
+		}
+		if = {
+			limit = {
+				PRU = {
+					has_idea = PRU_kep_trade_agreement_5
+				}
+			}
+			swap_ideas = {
+				remove_idea = PRU_kep_trade_agreement_5
+				add_idea = PRU_kep_trade_agreement_6
+			}
+		}
+		if = {
+			limit = {
+				PRU = {
+					has_idea = PRU_kep_trade_agreement_4
+				}
+			}
+			swap_ideas = {
+				remove_idea = PRU_kep_trade_agreement_4
+				add_idea = PRU_kep_trade_agreement_5
+			}
+		}
+		if = {
+			limit = {
+				PRU = {
+					has_idea = PRU_kep_trade_agreement_3
+				}
+			}
+			swap_ideas = {
+				remove_idea = PRU_kep_trade_agreement_3
+				add_idea = PRU_kep_trade_agreement_4
+			}
+		}	
+		if = {
+			limit = {
+				PRU = {
+					has_idea = PRU_kep_trade_agreement_2
+				}
+			}
+			swap_ideas = {
+				remove_idea = PRU_kep_trade_agreement_2
+				add_idea = PRU_kep_trade_agreement_3
+			}
+		}		
+		if = {
+			limit = {
+				PRU = {
+					has_idea = PRU_kep_trade_agreement_1
+				}
+			}	
+			swap_ideas = {
+				remove_idea = PRU_kep_trade_agreement_1
+				add_idea = PRU_kep_trade_agreement_2
+			}
+		}			
+		if = {
+			limit = {
+				PRU = {
+					NOT = {
+						OR = {
+							has_idea = PRU_kep_trade_agreement_6
+							has_idea = PRU_kep_trade_agreement_5
+							has_idea = PRU_kep_trade_agreement_4
+							has_idea = PRU_kep_trade_agreement_3
+							has_idea = PRU_kep_trade_agreement_2
+							has_idea = PRU_kep_trade_agreement_1
+						}
+					}
+				}
+			}
+			add_ideas = PRU_kep_trade_agreement_1	
+		}
+		
+	}
+
+}
+
+country_event = { #
+	id = ger_kep.7
+	title = ger_kep.7.t
+	desc = ger_kep.7.d
+	picture = GFX_report_event_generic_read_write
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event ger_kep.7"
+	}
+	
+	option = { #
+		name = ger_kep.7.a
+		ai_chance = {
+			base = 10
+		}
+		
+	}
+
+}
+
+country_event = { #
+	id = ger_kep.8
+	title = ger_kep.8.t
+	desc = ger_kep.8.d
+	picture = GFX_report_event_generic_read_write
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event ger_kep.8"
+	}
+	
+	option = { #Да
+		name = ger_kep.8.a
+		ai_chance = {
+			base = 10
+		}
+		if = {
+			limit = {
+				HOL = {
+					NOT = {
+						has_idea = PRU_kep_trade_agreement_others
+					}
+				}
+			}
+			add_ideas = PRU_kep_trade_agreement_others
+		}	
+		hidden_effect = {
+			set_country_flag = is_pru_ets_member
+			add_to_variable = { global.pru_ets_members_number = 1 }
+			PRU = { country_event = { id = ger_kep.8 days = 3 } }
+		}
+	}
+	
+	option = { #Нет
+		name = ger_kep.8.b
+		ai_chance = {
+			base = 0
+		}
+		hidden_effect = {
+			PRU = { country_event = { id = ger_kep.9 days = 3 } }
+		}
+	}
+
+}
+
+country_event = { #
+	id = ger_kep.9
+	title = ger_kep.9.t
+	desc = ger_kep.9.d
+	picture = GFX_report_event_generic_read_write
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event ger_kep.9"
+	}
+	
+	option = { #
+		name = ger_kep.9.a
+		ai_chance = {
+			base = 10
+		}
+		if = {
+			limit = {
+				PRU = {
+					has_idea = PRU_kep_trade_agreement_5
+				}
+			}
+			swap_ideas = {
+				remove_idea = PRU_kep_trade_agreement_5
+				add_idea = PRU_kep_trade_agreement_6
+			}
+		}
+		if = {
+			limit = {
+				PRU = {
+					has_idea = PRU_kep_trade_agreement_4
+				}
+			}
+			swap_ideas = {
+				remove_idea = PRU_kep_trade_agreement_4
+				add_idea = PRU_kep_trade_agreement_5
+			}
+		}
+		if = {
+			limit = {
+				PRU = {
+					has_idea = PRU_kep_trade_agreement_3
+				}
+			}
+			swap_ideas = {
+				remove_idea = PRU_kep_trade_agreement_3
+				add_idea = PRU_kep_trade_agreement_4
+			}
+		}	
+		if = {
+			limit = {
+				PRU = {
+					has_idea = PRU_kep_trade_agreement_2
+				}
+			}
+			swap_ideas = {
+				remove_idea = PRU_kep_trade_agreement_2
+				add_idea = PRU_kep_trade_agreement_3
+			}
+		}		
+		if = {
+			limit = {
+				PRU = {
+					has_idea = PRU_kep_trade_agreement_1
+				}
+			}	
+			swap_ideas = {
+				remove_idea = PRU_kep_trade_agreement_1
+				add_idea = PRU_kep_trade_agreement_2
+			}
+		}			
+		if = {
+			limit = {
+				PRU = {
+					NOT = {
+						OR = {
+							has_idea = PRU_kep_trade_agreement_6
+							has_idea = PRU_kep_trade_agreement_5
+							has_idea = PRU_kep_trade_agreement_4
+							has_idea = PRU_kep_trade_agreement_3
+							has_idea = PRU_kep_trade_agreement_2
+							has_idea = PRU_kep_trade_agreement_1
+						}
+					}
+				}
+			}
+			add_ideas = PRU_kep_trade_agreement_1	
+		}	
+	}
+
+}
+
+country_event = { #
+	id = ger_kep.10
+	title = ger_kep.10.t
+	desc = ger_kep.10.d
+	picture = GFX_report_event_generic_read_write
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event ger_kep.10"
+	}
+	
+	option = { #
+		name = ger_kep.10.a
+		ai_chance = {
+			base = 10
+		}
+		
+	}
+
+}
+
+country_event = { #
+	id = ger_kep.11
+	title = ger_kep.11.t
+	desc = ger_kep.11.d
+	picture = GFX_report_event_generic_read_write
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event ger_kep.11"
+	}
+	
+	option = { #Да
+		name = ger_kep.11.a
+		ai_chance = {
+			base = 10
+		}
+		if = {
+			limit = {
+				SCA = {
+					NOT = {
+						has_idea = PRU_kep_trade_agreement_others
+					}
+				}
+			}
+			add_ideas = PRU_kep_trade_agreement_others
+		}	
+		hidden_effect = {
+			set_country_flag = is_pru_ets_member
+			add_to_variable = { global.pru_ets_members_number = 1 }
+			PRU = { country_event = { id = ger_kep.12 days = 3 } }
+		}
+	}
+	
+	option = { #Нет
+		name = ger_kep.11.b
+		ai_chance = {
+			base = 0
+		}
+		hidden_effect = {
+			PRU = { country_event = { id = ger_kep.13 days = 3 } }
+		}
+	}
+
+}
+
+country_event = { #
+	id = ger_kep.12
+	title = ger_kep.12.t
+	desc = ger_kep.12.d
+	picture = GFX_report_event_generic_read_write
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event ger_kep.12"
+	}
+	
+	option = { #
+		name = ger_kep.12.a
+		ai_chance = {
+			base = 10
+		}
+		if = {
+			limit = {
+				PRU = {
+					has_idea = PRU_kep_trade_agreement_5
+				}
+			}
+			swap_ideas = {
+				remove_idea = PRU_kep_trade_agreement_5
+				add_idea = PRU_kep_trade_agreement_6
+			}
+		}
+		if = {
+			limit = {
+				PRU = {
+					has_idea = PRU_kep_trade_agreement_4
+				}
+			}
+			swap_ideas = {
+				remove_idea = PRU_kep_trade_agreement_4
+				add_idea = PRU_kep_trade_agreement_5
+			}
+		}
+		if = {
+			limit = {
+				PRU = {
+					has_idea = PRU_kep_trade_agreement_3
+				}
+			}
+			swap_ideas = {
+				remove_idea = PRU_kep_trade_agreement_3
+				add_idea = PRU_kep_trade_agreement_4
+			}
+		}	
+		if = {
+			limit = {
+				PRU = {
+					has_idea = PRU_kep_trade_agreement_2
+				}
+			}
+			swap_ideas = {
+				remove_idea = PRU_kep_trade_agreement_2
+				add_idea = PRU_kep_trade_agreement_3
+			}
+		}		
+		if = {
+			limit = {
+				PRU = {
+					has_idea = PRU_kep_trade_agreement_1
+				}
+			}	
+			swap_ideas = {
+				remove_idea = PRU_kep_trade_agreement_1
+				add_idea = PRU_kep_trade_agreement_2
+			}
+		}			
+		if = {
+			limit = {
+				PRU = {
+					NOT = {
+						OR = {
+							has_idea = PRU_kep_trade_agreement_6
+							has_idea = PRU_kep_trade_agreement_5
+							has_idea = PRU_kep_trade_agreement_4
+							has_idea = PRU_kep_trade_agreement_3
+							has_idea = PRU_kep_trade_agreement_2
+							has_idea = PRU_kep_trade_agreement_1
+						}
+					}
+				}
+			}
+			add_ideas = PRU_kep_trade_agreement_1	
+		}
+	}
+
+}
+
+country_event = { #
+	id = ger_kep.13
+	title = ger_kep.13.t
+	desc = ger_kep.13.d
+	picture = GFX_report_event_generic_read_write
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event ger_kep.13"
+	}
+	
+	option = { #
+		name = ger_kep.13.a
+		ai_chance = {
+			base = 10
+		}
+		
+	}
+
+}
+
+country_event = { #
+	id = ger_kep.14
+	title = ger_kep.14.t
+	desc = ger_kep.14.d
+	picture = GFX_report_event_generic_read_write
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event ger_kep.14"
+	}
+	
+	option = { #Да
+		name = ger_kep.14.a
+		ai_chance = {
+			base = 10
+		}
+		if = {
+			limit = {
+				HOL = {
+					NOT = {
+						has_idea = PRU_kep_trade_agreement_others
+					}
+				}
+			}
+			add_ideas = PRU_kep_trade_agreement_others
+		}	
+		hidden_effect = {
+			set_country_flag = is_pru_ets_member
+			add_to_variable = { global.pru_ets_members_number = 1 }
+			PRU = { country_event = { id = ger_kep.15 days = 3 } }
+		}
+	}
+	
+	option = { #Нет
+		name = ger_kep.14.b
+		ai_chance = {
+			base = 0
+		}
+		hidden_effect = {
+			PRU = { country_event = { id = ger_kep.16 days = 3 } }
+		}
+	}
+
+}
+
+country_event = { #
+	id = ger_kep.15
+	title = ger_kep.15.t
+	desc = ger_kep.15.d
+	picture = GFX_report_event_generic_read_write
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event ger_kep.15"
+	}
+	
+	option = { #
+		name = ger_kep.15.a
+		ai_chance = {
+			base = 10
+		}
+		if = {
+			limit = {
+				PRU = {
+					has_idea = PRU_kep_trade_agreement_5
+				}
+			}
+			swap_ideas = {
+				remove_idea = PRU_kep_trade_agreement_5
+				add_idea = PRU_kep_trade_agreement_6
+			}
+		}
+		if = {
+			limit = {
+				PRU = {
+					has_idea = PRU_kep_trade_agreement_4
+				}
+			}
+			swap_ideas = {
+				remove_idea = PRU_kep_trade_agreement_4
+				add_idea = PRU_kep_trade_agreement_5
+			}
+		}
+		if = {
+			limit = {
+				PRU = {
+					has_idea = PRU_kep_trade_agreement_3
+				}
+			}
+			swap_ideas = {
+				remove_idea = PRU_kep_trade_agreement_3
+				add_idea = PRU_kep_trade_agreement_4
+			}
+		}	
+		if = {
+			limit = {
+				PRU = {
+					has_idea = PRU_kep_trade_agreement_2
+				}
+			}
+			swap_ideas = {
+				remove_idea = PRU_kep_trade_agreement_2
+				add_idea = PRU_kep_trade_agreement_3
+			}
+		}		
+		if = {
+			limit = {
+				PRU = {
+					has_idea = PRU_kep_trade_agreement_1
+				}
+			}	
+			swap_ideas = {
+				remove_idea = PRU_kep_trade_agreement_1
+				add_idea = PRU_kep_trade_agreement_2
+			}
+		}			
+		if = {
+			limit = {
+				PRU = {
+					NOT = {
+						OR = {
+							has_idea = PRU_kep_trade_agreement_6
+							has_idea = PRU_kep_trade_agreement_5
+							has_idea = PRU_kep_trade_agreement_4
+							has_idea = PRU_kep_trade_agreement_3
+							has_idea = PRU_kep_trade_agreement_2
+							has_idea = PRU_kep_trade_agreement_1
+						}
+					}
+				}
+			}
+			add_ideas = PRU_kep_trade_agreement_1	
+		}		
+	}
+
+}
+
+country_event = { #
+	id = ger_kep.16
+	title = ger_kep.16.t
+	desc = ger_kep.16.d
+	picture = GFX_report_event_generic_read_write
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event ger_kep.16"
+	}
+	
+	option = { #
+		name = ger_kep.16.a
+		ai_chance = {
+			base = 10
+		}
+		
+	}
+
+}
+
+country_event = { #
+	id = ger_kep.17
+	title = ger_kep.17.t
+	desc = ger_kep.17.d
+	picture = GFX_report_event_generic_read_write
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event ger_kep.17"
+	}
+	
+	option = { #Да
+		name = ger_kep.17.a
+		ai_chance = {
+			base = 10
+		}
+		if = {
+			limit = {
+				HOL = {
+					NOT = {
+						has_idea = PRU_kep_trade_agreement_others
+					}
+				}
+			}
+			add_ideas = PRU_kep_trade_agreement_others
+		}	
+		hidden_effect = {
+			set_country_flag = is_pru_ets_member
+			add_to_variable = { global.pru_ets_members_number = 1 }
+			PRU = { country_event = { id = ger_kep.18 days = 3 } }
+		}
+	}
+	
+	option = { #Нет
+		name = ger_kep.17.b
+		ai_chance = {
+			base = 0
+		}
+		hidden_effect = {
+			PRU = { country_event = { id = ger_kep.19 days = 3 } }
+		}
+	}
+
+}
+
+country_event = { #
+	id = ger_kep.18
+	title = ger_kep.18.t
+	desc = ger_kep.18.d
+	picture = GFX_report_event_generic_read_write
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event ger_kep.18"
+	}
+	
+	option = { #
+		name = ger_kep.18.a
+		ai_chance = {
+			base = 10
+		}
+		if = {
+			limit = {
+				PRU = {
+					has_idea = PRU_kep_trade_agreement_5
+				}
+			}
+			swap_ideas = {
+				remove_idea = PRU_kep_trade_agreement_5
+				add_idea = PRU_kep_trade_agreement_6
+			}
+		}
+		if = {
+			limit = {
+				PRU = {
+					has_idea = PRU_kep_trade_agreement_4
+				}
+			}
+			swap_ideas = {
+				remove_idea = PRU_kep_trade_agreement_4
+				add_idea = PRU_kep_trade_agreement_5
+			}
+		}
+		if = {
+			limit = {
+				PRU = {
+					has_idea = PRU_kep_trade_agreement_3
+				}
+			}
+			swap_ideas = {
+				remove_idea = PRU_kep_trade_agreement_3
+				add_idea = PRU_kep_trade_agreement_4
+			}
+		}	
+		if = {
+			limit = {
+				PRU = {
+					has_idea = PRU_kep_trade_agreement_2
+				}
+			}
+			swap_ideas = {
+				remove_idea = PRU_kep_trade_agreement_2
+				add_idea = PRU_kep_trade_agreement_3
+			}
+		}		
+		if = {
+			limit = {
+				PRU = {
+					has_idea = PRU_kep_trade_agreement_1
+				}
+			}	
+			swap_ideas = {
+				remove_idea = PRU_kep_trade_agreement_1
+				add_idea = PRU_kep_trade_agreement_2
+			}
+		}			
+		if = {
+			limit = {
+				PRU = {
+					NOT = {
+						OR = {
+							has_idea = PRU_kep_trade_agreement_6
+							has_idea = PRU_kep_trade_agreement_5
+							has_idea = PRU_kep_trade_agreement_4
+							has_idea = PRU_kep_trade_agreement_3
+							has_idea = PRU_kep_trade_agreement_2
+							has_idea = PRU_kep_trade_agreement_1
+						}
+					}
+				}
+			}
+			add_ideas = PRU_kep_trade_agreement_1	
+		}
+	}
+
+}
+
+country_event = { #
+	id = ger_kep.19
+	title = ger_kep.19.t
+	desc = ger_kep.19.d
+	picture = GFX_report_event_generic_read_write
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event ger_kep.19"
+	}
+	
+	option = { #
+		name = ger_kep.19.a
+		ai_chance = {
+			base = 10
+		}
+		
+	}
+
+}
+
+country_event = { #
+	id = ger_kep.20
+	title = ger_kep.20.t
+	desc = ger_kep.20.d
+	picture = GFX_report_event_generic_read_write
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event ger_kep.20"
+	}
+	
+	option = { #Да
+		name = ger_kep.20.a
+		ai_chance = {
+			base = 10
+		}
+		if = {
+			limit = {
+				HOL = {
+					NOT = {
+						has_idea = PRU_kep_trade_agreement_others
+					}
+				}
+			}
+			add_ideas = PRU_kep_trade_agreement_others
+		}	
+		hidden_effect = {
+			set_country_flag = is_pru_ets_member
+			add_to_variable = { global.pru_ets_members_number = 1 }
+			PRU = { country_event = { id = ger_kep.21 days = 3 } }
+		}
+	}
+	
+	option = { #Нет
+		name = ger_kep.20.b
+		ai_chance = {
+			base = 0
+		}
+		hidden_effect = {
+			PRU = { country_event = { id = ger_kep.22 days = 3 } }
+		}
+	}
+
+}
+
+country_event = { #
+	id = ger_kep.21
+	title = ger_kep.21.t
+	desc = ger_kep.21.d
+	picture = GFX_report_event_generic_read_write
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event ger_kep.21"
+	}
+	
+	option = { #
+		name = ger_kep.21.a
+		ai_chance = {
+			base = 10
+		}
+		if = {
+			limit = {
+				PRU = {
+					has_idea = PRU_kep_trade_agreement_5
+				}
+			}
+			swap_ideas = {
+				remove_idea = PRU_kep_trade_agreement_5
+				add_idea = PRU_kep_trade_agreement_6
+			}
+		}
+		if = {
+			limit = {
+				PRU = {
+					has_idea = PRU_kep_trade_agreement_4
+				}
+			}
+			swap_ideas = {
+				remove_idea = PRU_kep_trade_agreement_4
+				add_idea = PRU_kep_trade_agreement_5
+			}
+		}
+		if = {
+			limit = {
+				PRU = {
+					has_idea = PRU_kep_trade_agreement_3
+				}
+			}
+			swap_ideas = {
+				remove_idea = PRU_kep_trade_agreement_3
+				add_idea = PRU_kep_trade_agreement_4
+			}
+		}	
+		if = {
+			limit = {
+				PRU = {
+					has_idea = PRU_kep_trade_agreement_2
+				}
+			}
+			swap_ideas = {
+				remove_idea = PRU_kep_trade_agreement_2
+				add_idea = PRU_kep_trade_agreement_3
+			}
+		}		
+		if = {
+			limit = {
+				PRU = {
+					has_idea = PRU_kep_trade_agreement_1
+				}
+			}	
+			swap_ideas = {
+				remove_idea = PRU_kep_trade_agreement_1
+				add_idea = PRU_kep_trade_agreement_2
+			}
+		}			
+		if = {
+			limit = {
+				PRU = {
+					NOT = {
+						OR = {
+							has_idea = PRU_kep_trade_agreement_6
+							has_idea = PRU_kep_trade_agreement_5
+							has_idea = PRU_kep_trade_agreement_4
+							has_idea = PRU_kep_trade_agreement_3
+							has_idea = PRU_kep_trade_agreement_2
+							has_idea = PRU_kep_trade_agreement_1
+						}
+					}
+				}
+			}
+			add_ideas = PRU_kep_trade_agreement_1	
+		}
+	}
+
+}
+
+country_event = { #
+	id = ger_kep.22
+	title = ger_kep.22.t
+	desc = ger_kep.22.d
+	picture = GFX_report_event_generic_read_write
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event ger_kep.22"
+	}
+	
+	option = { #
+		name = ger_kep.22.a
+		ai_chance = {
+			base = 10
+		}
+		
+	}
+
+}
+
+country_event = { #
+	id = ger_kep.23
+	title = ger_kep.23.t
+	desc = ger_kep.23.d
+	picture = GFX_report_event_generic_read_write
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event ger_kep.23"
+	}
+	
+	option = { #Да
+		name = ger_kep.23.a
+		ai_chance = {
+			base = 10
+		}
+		if = {
+			limit = {
+				HOL = {
+					NOT = {
+						has_idea = PRU_kep_trade_agreement_others
+					}
+				}
+			}
+			add_ideas = PRU_kep_trade_agreement_others
+		}	
+		hidden_effect = {
+			set_country_flag = is_pru_ets_member
+			add_to_variable = { global.pru_ets_members_number = 1 }
+			PRU = { country_event = { id = ger_kep.24 days = 3 } }
+		}
+	}
+	
+	option = { #Нет
+		name = ger_kep.23.b
+		ai_chance = {
+			base = 0
+		}
+		hidden_effect = {
+			PRU = { country_event = { id = ger_kep.25 days = 3 } }
+		}
+	}
+}
+
+country_event = { #
+	id = ger_kep.24
+	title = ger_kep.24.t
+	desc = ger_kep.24.d
+	picture = GFX_report_event_generic_read_write
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event ger_kep.24"
+	}
+	
+	option = { #
+		name = ger_kep.24.a
+		ai_chance = {
+			base = 10
+		}
+		if = {
+			limit = {
+				PRU = {
+					has_idea = PRU_kep_trade_agreement_5
+				}
+			}
+			swap_ideas = {
+				remove_idea = PRU_kep_trade_agreement_5
+				add_idea = PRU_kep_trade_agreement_6
+			}
+		}
+		if = {
+			limit = {
+				PRU = {
+					has_idea = PRU_kep_trade_agreement_4
+				}
+			}
+			swap_ideas = {
+				remove_idea = PRU_kep_trade_agreement_4
+				add_idea = PRU_kep_trade_agreement_5
+			}
+		}
+		if = {
+			limit = {
+				PRU = {
+					has_idea = PRU_kep_trade_agreement_3
+				}
+			}
+			swap_ideas = {
+				remove_idea = PRU_kep_trade_agreement_3
+				add_idea = PRU_kep_trade_agreement_4
+			}
+		}	
+		if = {
+			limit = {
+				PRU = {
+					has_idea = PRU_kep_trade_agreement_2
+				}
+			}
+			swap_ideas = {
+				remove_idea = PRU_kep_trade_agreement_2
+				add_idea = PRU_kep_trade_agreement_3
+			}
+		}		
+		if = {
+			limit = {
+				PRU = {
+					has_idea = PRU_kep_trade_agreement_1
+				}
+			}	
+			swap_ideas = {
+				remove_idea = PRU_kep_trade_agreement_1
+				add_idea = PRU_kep_trade_agreement_2
+			}
+		}			
+		if = {
+			limit = {
+				PRU = {
+					NOT = {
+						OR = {
+							has_idea = PRU_kep_trade_agreement_6
+							has_idea = PRU_kep_trade_agreement_5
+							has_idea = PRU_kep_trade_agreement_4
+							has_idea = PRU_kep_trade_agreement_3
+							has_idea = PRU_kep_trade_agreement_2
+							has_idea = PRU_kep_trade_agreement_1
+						}
+					}
+				}
+			}
+			add_ideas = PRU_kep_trade_agreement_1	
+		}
+	}
+
+}
+
+country_event = { #
+	id = ger_kep.25
+	title = ger_kep.25.t
+	desc = ger_kep.25.d
+	picture = GFX_report_event_generic_read_write
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event ger_kep.25"
+	}
+	
+	option = { #
+		name = ger_kep.25.a
+		ai_chance = {
+			base = 10
+		}
+		
+	}
+
+}
+
+country_event = { #
+	id = ger_kep.26
+	title = ger_kep.26.t
+	desc = ger_kep.26.d
+	picture = GFX_report_event_generic_read_write
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event ger_kep.26"
+	}
+	
+	option = { #Да
+		name = ger_kep.26.a
+		ai_chance = {
+			base = 10
+		}
+		if = {
+			limit = {
+				HOL = {
+					NOT = {
+						has_idea = PRU_kep_trade_agreement_others
+					}
+				}
+			}
+			add_ideas = PRU_kep_trade_agreement_others
+		}	
+		hidden_effect = {
+			set_country_flag = is_pru_ets_member
+			add_to_variable = { global.pru_ets_members_number = 1 }
+			PRU = { country_event = { id = ger_kep.27 days = 3 } }
+		}
+	}
+	
+	option = { #Нет
+		name = ger_kep.26.b
+		ai_chance = {
+			base = 0
+		}
+		hidden_effect = {
+			PRU = { country_event = { id = ger_kep.28 days = 3 } }
+		}
+	}
+
+}
+
+country_event = { #
+	id = ger_kep.27
+	title = ger_kep.27.t
+	desc = ger_kep.27.d
+	picture = GFX_report_event_generic_read_write
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event ger_kep.27"
+	}
+	
+	option = { #
+		name = ger_kep.27.a
+		ai_chance = {
+			base = 10
+		}
+		if = {
+			limit = {
+				PRU = {
+					has_idea = PRU_kep_trade_agreement_5
+				}
+			}
+			swap_ideas = {
+				remove_idea = PRU_kep_trade_agreement_5
+				add_idea = PRU_kep_trade_agreement_6
+			}
+		}
+		if = {
+			limit = {
+				PRU = {
+					has_idea = PRU_kep_trade_agreement_4
+				}
+			}
+			swap_ideas = {
+				remove_idea = PRU_kep_trade_agreement_4
+				add_idea = PRU_kep_trade_agreement_5
+			}
+		}
+		if = {
+			limit = {
+				PRU = {
+					has_idea = PRU_kep_trade_agreement_3
+				}
+			}
+			swap_ideas = {
+				remove_idea = PRU_kep_trade_agreement_3
+				add_idea = PRU_kep_trade_agreement_4
+			}
+		}	
+		if = {
+			limit = {
+				PRU = {
+					has_idea = PRU_kep_trade_agreement_2
+				}
+			}
+			swap_ideas = {
+				remove_idea = PRU_kep_trade_agreement_2
+				add_idea = PRU_kep_trade_agreement_3
+			}
+		}		
+		if = {
+			limit = {
+				PRU = {
+					has_idea = PRU_kep_trade_agreement_1
+				}
+			}	
+			swap_ideas = {
+				remove_idea = PRU_kep_trade_agreement_1
+				add_idea = PRU_kep_trade_agreement_2
+			}
+		}			
+		if = {
+			limit = {
+				PRU = {
+					NOT = {
+						OR = {
+							has_idea = PRU_kep_trade_agreement_6
+							has_idea = PRU_kep_trade_agreement_5
+							has_idea = PRU_kep_trade_agreement_4
+							has_idea = PRU_kep_trade_agreement_3
+							has_idea = PRU_kep_trade_agreement_2
+							has_idea = PRU_kep_trade_agreement_1
+						}
+					}
+				}
+			}
+			add_ideas = PRU_kep_trade_agreement_1	
+		}
+	}
+
+}
+
+country_event = { #
+	id = ger_kep.28
+	title = ger_kep.28.t
+	desc = ger_kep.28.d
+	picture = GFX_report_event_generic_read_write
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event ger_kep.28"
+	}
+	
+	option = { #
+		name = ger_kep.28.a
+		ai_chance = {
+			base = 10
+		}
+		
+	}
+
+}
+
+country_event = { #
+	id = ger_kep.29
+	title = ger_kep.29.t
+	desc = ger_kep.29.d
+	picture = GFX_report_event_generic_read_write
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event ger_kep.29"
+	}
+	
+	option = { #Да
+		name = ger_kep.29.a
+		ai_chance = {
+			base = 10
+		}
+		if = {
+			limit = {
+				HOL = {
+					NOT = {
+						has_idea = PRU_kep_trade_agreement_others
+					}
+				}
+			}
+			add_ideas = PRU_kep_trade_agreement_others
+		}	
+		hidden_effect = {
+			set_country_flag = is_pru_ets_member
+			add_to_variable = { global.pru_ets_members_number = 1 }
+			PRU = { country_event = { id = ger_kep.30 days = 3 } }
+		}
+	}
+	
+	option = { #Нет
+		name = ger_kep.29.b
+		ai_chance = {
+			base = 0
+		}
+		hidden_effect = {
+			PRU = { country_event = { id = ger_kep.31 days = 3 } }
+		}
+	}
+
+}
+
+country_event = { #
+	id = ger_kep.30
+	title = ger_kep.30.t
+	desc = ger_kep.30.d
+	picture = GFX_report_event_generic_read_write
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event ger_kep.30"
+	}
+	
+	option = { #
+		name = ger_kep.30.a
+		ai_chance = {
+			base = 10
+		}
+		if = {
+			limit = {
+				PRU = {
+					has_idea = PRU_kep_trade_agreement_5
+				}
+			}
+			swap_ideas = {
+				remove_idea = PRU_kep_trade_agreement_5
+				add_idea = PRU_kep_trade_agreement_6
+			}
+		}
+		if = {
+			limit = {
+				PRU = {
+					has_idea = PRU_kep_trade_agreement_4
+				}
+			}
+			swap_ideas = {
+				remove_idea = PRU_kep_trade_agreement_4
+				add_idea = PRU_kep_trade_agreement_5
+			}
+		}
+		if = {
+			limit = {
+				PRU = {
+					has_idea = PRU_kep_trade_agreement_3
+				}
+			}
+			swap_ideas = {
+				remove_idea = PRU_kep_trade_agreement_3
+				add_idea = PRU_kep_trade_agreement_4
+			}
+		}	
+		if = {
+			limit = {
+				PRU = {
+					has_idea = PRU_kep_trade_agreement_2
+				}
+			}
+			swap_ideas = {
+				remove_idea = PRU_kep_trade_agreement_2
+				add_idea = PRU_kep_trade_agreement_3
+			}
+		}		
+		if = {
+			limit = {
+				PRU = {
+					has_idea = PRU_kep_trade_agreement_1
+				}
+			}	
+			swap_ideas = {
+				remove_idea = PRU_kep_trade_agreement_1
+				add_idea = PRU_kep_trade_agreement_2
+			}
+		}			
+		if = {
+			limit = {
+				PRU = {
+					NOT = {
+						OR = {
+							has_idea = PRU_kep_trade_agreement_6
+							has_idea = PRU_kep_trade_agreement_5
+							has_idea = PRU_kep_trade_agreement_4
+							has_idea = PRU_kep_trade_agreement_3
+							has_idea = PRU_kep_trade_agreement_2
+							has_idea = PRU_kep_trade_agreement_1
+						}
+					}
+				}
+			}
+			add_ideas = PRU_kep_trade_agreement_1	
+		}
+	}
+
+}
+
+country_event = { #
+	id = ger_kep.31
+	title = ger_kep.31.t
+	desc = ger_kep.31.d
+	picture = GFX_report_event_generic_read_write
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event ger_kep.31"
+	}
+	
+	option = { #
+		name = ger_kep.31.a
+		ai_chance = {
+			base = 10
+		}
+		
+	}
+
+}
+
+###################################KET_TRIGGER_EVENT##########################################
+
+country_event = { #ЕТС - проверка переменной для идеи на пруссии
+	id = ger_kep_te.1
+	title = ger_kep_te.1.t
+	desc = ger_kep_te.1.d
+	picture = GFX_report_event_generic_read_write
+	
+	hidden =  yes
+	
+	trigger = {
+		tag = PRU
+		PRU = {
+			has_idea = PRU_kep_trade_agreement_6
+		}
+		check_variable = { global.pru_ets_members_number < 6 }
+	}
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event ger_kep_te.1"
+		swap_ideas = {
+			remove_idea = PRU_kep_trade_agreement_6
+			add_idea = PRU_kep_trade_agreement_5
+		}
+	}
+	
+	option = { #
+		name = ger_kep_te.1.a
+		ai_chance = {
+			base = 10
+		}
+		
+	}
+
+}
+
+country_event = { #ЕТС - проверка переменной для идеи на пруссии
+	id = ger_kep_te.2
+	title = ger_kep_te.2.t
+	desc = ger_kep_te.2.d
+	picture = GFX_report_event_generic_read_write
+	
+	hidden =  yes
+	
+	trigger = {
+		tag = PRU
+		PRU = {
+			has_idea = PRU_kep_trade_agreement_5
+		}
+		check_variable = { global.pru_ets_members_number < 5 }
+	}
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event ger_kep_te.2"
+		PRU = {
+			swap_ideas = {
+				remove_idea = PRU_kep_trade_agreement_5
+				add_idea = PRU_kep_trade_agreement_4
+			}
+		}
+	}
+	
+	option = { #
+		name = ger_kep_te.1.a
+		ai_chance = {
+			base = 10
+		}
+		
+	}
+
+}
+
+country_event = { #ЕТС - проверка переменной для идеи на пруссии
+	id = ger_kep_te.3
+	title = ger_kep_te.3.t
+	desc = ger_kep_te.3.d
+	picture = GFX_report_event_generic_read_write
+	
+	hidden =  yes
+	
+	trigger = {
+		tag = PRU
+		PRU = {
+			has_idea = PRU_kep_trade_agreement_4
+		}
+		check_variable = { global.pru_ets_members_number < 4 }
+	}
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event ger_kep_te.3"
+		PRU = {
+			swap_ideas = {
+				remove_idea = PRU_kep_trade_agreement_4
+				add_idea = PRU_kep_trade_agreement_3
+			}
+		}
+	}
+	
+	option = { #
+		name = ger_kep_te.3.a
+		ai_chance = {
+			base = 10
+		}
+		
+	}
+
+}
+
+country_event = { #ЕТС - проверка переменной для идеи на пруссии
+	id = ger_kep_te.4
+	title = ger_kep_te.4.t
+	desc = ger_kep_te.4.d
+	picture = GFX_report_event_generic_read_write
+	
+	hidden =  yes
+	
+	trigger = {
+		tag = PRU
+		PRU = {
+			has_idea = PRU_kep_trade_agreement_3
+		}
+		check_variable = { global.pru_ets_members_number < 3 }
+	}
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event ger_kep_te.4"
+		PRU = {
+			swap_ideas = {
+				remove_idea = PRU_kep_trade_agreement_3
+				add_idea = PRU_kep_trade_agreement_2
+			}
+		}
+	}
+	
+	option = { #
+		name = ger_kep_te.4.a
+		ai_chance = {
+			base = 10
+		}
+		
+	}
+
+}
+
+country_event = { #ЕТС - проверка переменной для идеи на пруссии
+	id = ger_kep_te.5
+	title = ger_kep_te.5.t
+	desc = ger_kep_te.5.d
+	picture = GFX_report_event_generic_read_write
+	
+	hidden =  yes
+	
+	trigger = {
+		tag = PRU
+		PRU = {
+			has_idea = PRU_kep_trade_agreement_2
+		}
+		check_variable = { global.pru_ets_members_number < 2 }
+	}
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event ger_kep_te.5"
+		PRU = {
+			swap_ideas = {
+				remove_idea = PRU_kep_trade_agreement_2
+				add_idea = PRU_kep_trade_agreement_1
+			}
+		}
+	}
+	
+	option = { #
+		name = ger_kep_te.5.a
+		ai_chance = {
+			base = 10
+		}
+		
+	}
+
+}
+
+country_event = { #ЕТС - проверка переменной для идеи на пруссии
+	id = ger_kep_te.6
+	title = ger_kep_te.6.t
+	desc = ger_kep_te.6.d
+	picture = GFX_report_event_generic_read_write
+	
+	hidden =  yes
+	
+	trigger = {
+		tag = PRU
+		PRU = {
+			has_idea = PRU_kep_trade_agreement_1
+		}
+		check_variable = { global.pru_ets_members_number < 1 }
+	}
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event ger_kep_te.6"
+		PRU = { remove_ideas = PRU_kep_trade_agreement_1 }
+	}
+	
+	option = { #
+		name = ger_kep_te.6.a
+		ai_chance = {
+			base = 10
+		}
+		
+	}
+
+}
+
+country_event = { #ЕТС - проверка переменной для идеи на остальных
+	id = ger_kep_te.7
+	title = ger_kep_te.7.t
+	desc = ger_kep_te.7.d
+	picture = GFX_report_event_generic_read_write
+	
+	hidden =  yes
+	
+	trigger = {
+		ROOT = {
+			has_idea = PRU_kep_trade_agreement_others
+			has_country_flag = is_pru_ets_member
+			has_war_with = PRU
+		}
+	}
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event ger_kep_te.7"
+		PRU = { remove_ideas = PRU_kep_trade_agreement_others }
+		clr_country_flag = is_pru_ets_member
+	}
+	
+	option = { #
+		name = ger_kep_te.7.a
+		ai_chance = {
+			base = 10
+		}
+		
 	}
 
 }

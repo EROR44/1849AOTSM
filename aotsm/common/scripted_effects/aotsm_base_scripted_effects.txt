@@ -7,4 +7,110 @@ first_world_war_begin = {
 		name = first_world_war
 	}
 	
+	if = {
+		limit = {
+			is_historical_focus_on = yes
+			RUS = {
+				has_war_with = PRU
+				has_defensive_war = yes
+			}
+		}
+		RUS = { 
+			country_event = aotsm_notification_event.1
+			add_timed_idea = {
+				idea = RUS_historical_germany_suddden_attak_russia
+				days = 30
+			}
+		}
+	}
+	
+	every_country = {
+		limit = {
+			OR = {
+				AND = {
+					tag = CBI
+					country_exists = CBI
+				}
+				AND = {
+					tag = FRR
+					country_exists = FRR
+				}
+				AND = {
+					tag = PRT
+					country_exists = FRR
+				}
+				AND = {
+					tag = PRU
+					country_exists = PRU
+				}
+				AND = {
+					tag = SCA
+					country_exists = SCA
+				}
+				AND = {
+					tag = SAR
+					country_exists = SAR
+				}
+				AND = {
+					tag = RUS
+					country_exists = RUS
+				}
+				AND = {
+					tag = AUS
+					country_exists = AUS
+				}
+				AND = {
+					tag = BYZ
+					country_exists = BYZ
+				}
+			}
+		}
+		log = "[GetDateText]: [Root.GetName]: add_timed_idea great_war_mobilisation"
+		add_timed_idea = {
+			idea = great_war_mobilisation
+			days = 365
+		}
+		country_event = aotsm_notification_event.2
+	}
+	
+}
+
+calculation_austrian_help = {
+	
+	#Base Info
+	
+	AUS = {
+		
+		set_variable = { global.numb_1 = 0 }
+		set_variable = { global.numb_2 = 0 }
+		set_variable = { global.numb_3 = 0 }
+		
+		set_variable = { global.numb_1 = global.help_aus_1_var }
+		set_variable = { global.numb_2 = global.help_aus_2_var }
+		set_variable = { global.numb_3 = global.help_aus_3_var }
+		
+		set_variable = { global.numb_123 = 0 }
+		add_to_variable = { global.numb_123 = global.numb_1 }
+		add_to_variable = { global.numb_123 = global.numb_2 }
+		add_to_variable = { global.numb_123 = global.numb_3 }
+		
+		set_variable = { global.numb_div = 0 }
+		set_variable = { global.numb_div = global.numb_123 }
+		
+		divide_variable = { global.numb_div = 100 }
+		
+		set_variable = { global.help_aus_1_div = global.numb_1 }
+		
+		set_variable = { global.help_aus_2_div = global.numb_2 }
+		
+		set_variable = { global.help_aus_3_div = global.numb_3 }
+		
+		divide_variable = { global.help_aus_1_div = global.numb_div }
+		
+		divide_variable = { global.help_aus_2_div = global.numb_div }
+		
+		divide_variable = { global.help_aus_3_div = global.numb_div }
+		
+	}
+
 }

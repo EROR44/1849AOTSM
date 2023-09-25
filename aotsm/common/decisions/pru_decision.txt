@@ -276,8 +276,8 @@ pru_army_hiring_category = {
 						main_armament_slot = tank_medium_kaiser_cannon_1
 						turret_type_slot = tank_medium_one_man_kaiser_tank_turret
 						suspension_type_slot = tank_christie_suspension
-						armor_type_slot = tank_welded_armor
-						engine_type_slot = tank_petrol_electric_engine
+						armor_type_slot = tank_armor_20mm
+						engine_type_slot = small_steam_engine
 						special_type_slot_1 = tank_kaiser_radio_1
 						special_type_slot_2 = wet_ammo_storage
 					}
@@ -453,9 +453,32 @@ pru_leypoldit_bomb = {
 		}
 		
 		remove_effect = { 
-			set_technology = {
-				atomic_research = 1
+			if = {
+				limit = {
+					NOT = {
+						PRU = {
+							has_tech = industrial_leypoldit_development_1
+						}
+					}
+				}
+				PRU = {
+					set_technology = {
+						industrial_leypoldit_development_1 = 1
+					}
+				}
 			}
+			if = {
+				limit = {
+					PRU = {
+						has_tech = industrial_leypoldit_development_1
+					}
+				}
+				PRU = {
+					add_stability = 0.05
+					add_war_support = 0.05
+				}
+			}
+			custom_effect_tooltip = pru_leypoldit_bomb_way_tt
 			PRU = {
 				set_country_flag = pru_tech_bomb
 			}
@@ -498,8 +521,30 @@ pru_leypoldit_bomb = {
 		}
 		
 		remove_effect = { 
-			set_technology = {
-				nuclear_reactor = 1
+			if = {
+				limit = {
+					NOT = {
+						PRU = {
+							has_tech = nuclear_reactor
+						}
+					}
+				}
+				PRU = {
+					set_technology = {
+						nuclear_reactor = 1
+					}
+				}
+			}
+			if = {
+				limit = {
+					PRU = {
+						has_tech = nuclear_reactor
+					}
+				}
+				PRU = {
+					add_stability = 0.05
+					add_war_support = 0.05
+				}
 			}
 			720 = {
 				add_extra_state_shared_building_slots = 1
@@ -509,6 +554,7 @@ pru_leypoldit_bomb = {
 					instant_build = yes
 				}
 			}
+			custom_effect_tooltip = pru_leypoldit_bomb_way_tt
 			PRU = {
 				set_country_flag = pru_bomb_infrastructure
 			}
@@ -551,11 +597,33 @@ pru_leypoldit_bomb = {
 		}
 		
 		remove_effect = { 
-			set_technology = {
-				nukes = 1
+			if = {
+				limit = {
+					NOT = {
+						PRU = {
+							has_tech = nukes
+						}
+					}
+				}
+				PRU = {
+					set_technology = {
+						nukes = 1
+					}
+				}
+			}
+			if = {
+				limit = {
+					PRU = {
+						has_tech = nukes
+					}
+				}
+				PRU = {
+					add_stability = 0.05
+					add_war_support = 0.05
+				}
 			}
 			random_list = {
-				50 = { #Success
+				75 = { #Success
 					modifier = {
 						PRU = {
 							is_ai = no
@@ -573,7 +641,7 @@ pru_leypoldit_bomb = {
 						}
 					}
 				}
-				50 = { #Fail
+				25 = { #Fail
 					PRU = {
 						country_event = ger.12
 					}
@@ -585,6 +653,7 @@ pru_leypoldit_bomb = {
 					}
 				}
 			}
+			custom_effect_tooltip = pru_leypoldit_bomb_way_tt
 			PRU = {
 				set_country_flag = pru_bomb_complete
 			}
@@ -605,6 +674,7 @@ pru_leypoldit_bomb = {
 
 		visible = {
 			original_tag = PRU
+			is_historical_focus_on = yes
 			PRU = {
 				has_war_with = CBI
 			}
@@ -709,6 +779,7 @@ pru_diplomat_missia = {
 					}
 				}
 			}
+			has_country_flag = test_flag_1
 		}
 
 		fire_only_once = yes
@@ -756,147 +827,6 @@ pru_diplomat_missia = {
 						set_country_flag = revenge_for_hungary_vlh
 					}
 				}
-			}
-		}
-		
-	}
-	
-	pru_help_hungary_win = { 
-		
-		icon = generic_nationalism
-
-		allowed = {
-			
-		}
-
-		available = {
- 
-		}
-
-		visible = {
-			original_tag = PRU
-			has_global_flag = russian_capitulation
-			VLH = { 
-				has_country_flag = VLH_war_with_HUN 
-			}
-			NOT = {
-				VLH = {
-					has_country_flag = vlh_capitulation
-				}
-			}
-			OR = {
-				country_exists = GLA
-				NOT = {
-					VLH = {
-						is_puppet = yes
-					}
-				}
-			}
-		}
-
-		fire_only_once = yes
-
-		cost = 0
-		days_remove = 12
-
-		ai_will_do = {
-			factor = 100
-		}
-		
-		remove_effect = {
-			PRU = {
-				add_to_faction = HUN
-			}
-			if = {
-				limit = {
-					country_exists = GLA
-				}
-				PRU = {
-					declare_war_on = {
-						target = GLA
-						type = annex_everything
-					}
-				}
-				hidden_effect = {
-					GLA = {
-						set_country_flag = PRU_destroed_russian_allience_GLA
-					}
-				}
-			}
-			if = {
-				limit = {
-					NOT = {
-						VLH = {
-							is_puppet = yes
-						}
-					}
-				}
-				PRU = {
-					declare_war_on = {
-						target = VLH
-						type = annex_everything
-					}
-				}
-				hidden_effect = {
-					VLH = {
-						set_country_flag = PRU_destroed_russian_allience_VLH
-						clr_country_flag = VLH_war_with_HUN
-					}
-				}
-			}
-		}
-		
-	}
-	
-	tranfer_west_ukrain = { 
-		
-		icon = generic_nationalism
-
-		allowed = {
-			original_tag = PRU
-		}
-
-		available = {
- 
-		}
-
-		visible = {
-			original_tag = PRU
-			has_global_flag = russian_capitulation
-			controls_state = 78
-			controls_state = 80
-			controls_state = 89
-			controls_state = 91
-		}
-
-		fire_only_once = yes
-
-		cost = 0
-		days_remove = 12
-
-		ai_will_do = {
-			factor = 100
-		}
-		
-		remove_effect = {
-			UKR = {
-				transfer_state = 78
-				add_state_core = 78
-				transfer_state = 80
-				add_state_core = 80
-				transfer_state = 89
-				add_state_core = 89
-				transfer_state = 91
-				add_state_core = 91
-				if = {
-					limit = {
-						PRU = {
-							owns_state = 766
-						}
-					}
-					transfer_state = 766
-				}
-				add_state_core = 766
 			}
 		}
 		
@@ -1048,12 +978,6 @@ pru_diplomat_missia = {
 					type = annex_everything
 				}
 			}
-			FRA = {
-				declare_war_on = {
-					target = SWI
-					type = annex_everything
-				}
-			}
 			SWI = {
 				set_country_flag = SWI_end_of_neutrality
 			}
@@ -1088,6 +1012,9 @@ pru_diplomat_missia = {
 			}
 			NOT = {
 				has_global_flag = pru_capitulation
+			}
+			NOT = {
+				has_country_flag = blacksun_end_germany
 			}
 		}
 
@@ -1167,6 +1094,9 @@ pru_diplomat_missia = {
 			}
 			NOT = {
 				has_global_flag = pru_capitulation
+			}
+			NOT = {
+				has_country_flag = blacksun_end_germany
 			}
 		}
 
@@ -1252,8 +1182,24 @@ pru_diplomat_missia = {
 			PRU = {
 				has_completed_focus = PRU_dialog_with_poland
 			}
-			PLH = {
-				is_in_faction_with = PRU
+			OR = {
+				PLH = {
+					is_in_faction_with = PRU
+				}
+				AND = {
+					NOT = {
+						country_exists = PLH
+					}
+					RUS = {
+						owns_state = 10
+						owns_state = 87
+						owns_state = 90
+						owns_state = 92
+						owns_state = 97
+						owns_state = 98
+						owns_state = 853
+					}
+				}
 			}
 			PRU = {
 				has_war_with = RUS
@@ -1316,6 +1262,24 @@ pru_diplomat_missia = {
 						transfer_state = 98
 						transfer_state = 97
 						transfer_state = 853
+					}
+					if = { #на случай если Польша изначально не в войне с Россией
+						limit = {
+							PLH = {
+								NOT = {
+									is_in_faction_with = PRU
+								}
+							}	
+						}
+						PRU = {
+							add_to_faction = PLH
+						}
+						PLH = { 
+							add_to_war = {
+								targeted_alliance = PRU
+								enemy = RUS
+							}
+						}
 					}
 					PRU = {
 						add_to_variable = {
@@ -1738,6 +1702,7 @@ pru_diplomat_missia = {
 			}
 			NOT = {
 				country_exists = UKR
+				country_exists = WUK
 			}
 		}
 
@@ -1780,7 +1745,7 @@ pru_diplomat_missia = {
 						remove_state_core = 885
 						remove_state_core = 886
 					}
-					UKR = {
+					WUK = {
 						transfer_state = 93
 						add_state_core = 93
 						add_state_core = 137
@@ -1824,28 +1789,45 @@ pru_diplomat_missia = {
 						transfer_state = 886
 						add_state_core = 886
 					}
-					PRU = {
-						set_autonomy = {
-							target = UKR
-							autonomy_state = autonomy_puppet
-							end_wars = no
-							end_civil_wars = no
+					if = {
+						limit = {
+							NOT = {
+								WUK = {
+									is_puppet_of = PRU
+								}
+								WUK = {
+									is_subject_of = PRU
+								}
+							}
+						}
+						PRU = {
+							set_autonomy = {
+								target = WUK
+								autonomy_state = autonomy_puppet
+								end_wars = no
+								end_civil_wars = no
+							}
+						}
+						WUK = {
+							set_politics = { ruling_party = reactionist elections_allowed = no }
+							set_popularities = {
+								democratic = 6
+								socialism = 1
+								reactionist = 84
+								authoritarian = 9
+							}
 						}
 					}
-					UKR = {
-						set_politics = { ruling_party = reactionist elections_allowed = no }
-						set_popularities = {
-							democratic = 6
-							socialism = 1
-							reactionist = 84
-							authoritarian = 9
-						}
-					}
-					UKR = {
+					WUK = {
 						load_oob = UKR_army
 					}
-					UKR = {
+					WUK = {
 						inherit_technology = PRU
+						set_capital = {
+						  state = 202
+						  remember_old_capital = no
+						}
+						set_cosmetic_tag = UKR_name
 					}
 					PRU = {
 						add_to_variable = {
@@ -1853,6 +1835,7 @@ pru_diplomat_missia = {
 							value = 1
 						}
 					}
+					set_global_flag = pru_steal_ukraina
 				}
 			}
 			if = {
@@ -1863,7 +1846,7 @@ pru_diplomat_missia = {
 						}
 					}
 				}
-				UKR = {
+				WUK = {
 					add_stability = 0.05
 					add_political_power = 150
 				}
@@ -2217,7 +2200,7 @@ pru_war_decision = {
 		}
 
 		available = {
-			has_stability > 0.54
+			has_stability > 0.59
 		}
 
 		visible = {
@@ -2237,7 +2220,7 @@ pru_war_decision = {
 		days_re_enable = 365
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 			modifier = {
 				factor = 25
 				PRU = {
@@ -2267,7 +2250,7 @@ pru_war_decision = {
 		}
 
 		available = {
-			has_stability > 0.49
+			has_stability > 0.54
 		}
 
 		visible = {
@@ -2288,7 +2271,7 @@ pru_war_decision = {
 		days_re_enable = 1
 
 		ai_will_do = {
-			factor = 1
+			base = 1
 			modifier = {
 				factor = 0
 				PRU = {
@@ -2298,7 +2281,7 @@ pru_war_decision = {
 			modifier = {
 				factor = 25
 				PRU = {
-					has_stability > 0.49
+					has_stability > 0.54
 				}
 			}
 		}
@@ -2872,6 +2855,7 @@ pru_integration_decision = {
 				country_exists = MCS
 			}
 			owns_state = 897
+			num_of_civilian_factories_available_for_projects > 1
 		}
 
 		visible = {
@@ -2889,10 +2873,11 @@ pru_integration_decision = {
 		}
 		
 		modifier = {
-			political_power_factor = -0.05
+			political_power_factor = -0.10
+			civilian_factory_use = 1
 		}
 		
-		days_remove = 25
+		days_remove = 50
 		
 		remove_effect = {
 			add_state_core = 897
@@ -2913,6 +2898,7 @@ pru_integration_decision = {
 				country_exists = MCL
 			}
 			owns_state = 61
+			num_of_civilian_factories_available_for_projects > 1
 		}
 
 		visible = {
@@ -2930,10 +2916,11 @@ pru_integration_decision = {
 		}
 		
 		modifier = {
-			political_power_factor = -0.05
+			political_power_factor = -0.10
+			civilian_factory_use = 1
 		}
 		
-		days_remove = 25
+		days_remove = 50
 		
 		remove_effect = {
 			add_state_core = 61
@@ -2954,6 +2941,7 @@ pru_integration_decision = {
 				country_exists = MCL
 			}
 			owns_state = 892
+			num_of_civilian_factories_available_for_projects > 1
 		}
 
 		visible = {
@@ -2971,10 +2959,11 @@ pru_integration_decision = {
 		}
 		
 		modifier = {
-			political_power_factor = -0.05
+			political_power_factor = -0.10
+			civilian_factory_use = 1
 		}
 		
-		days_remove = 25
+		days_remove = 50
 		
 		remove_effect = {
 			add_state_core = 892
@@ -2995,6 +2984,7 @@ pru_integration_decision = {
 				country_exists = HLS
 			}
 			owns_state = 58
+			num_of_civilian_factories_available_for_projects > 1
 		}
 
 		visible = {
@@ -3012,10 +3002,11 @@ pru_integration_decision = {
 		}
 		
 		modifier = {
-			political_power_factor = -0.05
+			political_power_factor = -0.10
+			civilian_factory_use = 1
 		}
 		
-		days_remove = 25
+		days_remove = 50
 		
 		remove_effect = {
 			add_state_core = 58
@@ -3056,7 +3047,7 @@ pru_integration_decision = {
 			political_power_factor = -0.05
 		}
 		
-		days_remove = 25
+		days_remove = 50
 		
 		remove_effect = {
 			add_state_core = 829
@@ -3077,6 +3068,7 @@ pru_integration_decision = {
 				country_exists = HAM
 			}
 			owns_state = 893
+			num_of_civilian_factories_available_for_projects > 1
 		}
 
 		visible = {
@@ -3094,10 +3086,11 @@ pru_integration_decision = {
 		}
 		
 		modifier = {
-			political_power_factor = -0.05
+			political_power_factor = -0.10
+			civilian_factory_use = 1
 		}
 		
-		days_remove = 25
+		days_remove = 50
 		
 		remove_effect = {
 			add_state_core = 893
@@ -3120,6 +3113,7 @@ pru_integration_decision = {
 			owns_state = 56
 			owns_state = 57
 			owns_state = 59
+			num_of_civilian_factories_available_for_projects > 3
 		}
 
 		visible = {
@@ -3137,10 +3131,11 @@ pru_integration_decision = {
 		}
 		
 		modifier = {
-			political_power_factor = -0.05
+			political_power_factor = -0.30
+			civilian_factory_use = 3
 		}
 		
-		days_remove = 75
+		days_remove = 150
 		
 		remove_effect = {
 			add_state_core = 56
@@ -3163,6 +3158,7 @@ pru_integration_decision = {
 				country_exists = BRM
 			}
 			owns_state = 896
+			num_of_civilian_factories_available_for_projects > 1
 		}
 
 		visible = {
@@ -3180,10 +3176,11 @@ pru_integration_decision = {
 		}
 		
 		modifier = {
-			political_power_factor = -0.05
+			political_power_factor = -0.10
+			civilian_factory_use = 1
 		}
 		
-		days_remove = 25
+		days_remove = 50
 		
 		remove_effect = {
 			add_state_core = 896
@@ -3204,6 +3201,7 @@ pru_integration_decision = {
 				country_exists = OLD
 			}
 			owns_state = 895
+			num_of_civilian_factories_available_for_projects > 1
 		}
 
 		visible = {
@@ -3221,10 +3219,11 @@ pru_integration_decision = {
 		}
 		
 		modifier = {
-			political_power_factor = -0.05
+			political_power_factor = -0.10
+			civilian_factory_use = 1
 		}
 		
-		days_remove = 25
+		days_remove = 50
 		
 		remove_effect = {
 			add_state_core = 895
@@ -3245,6 +3244,7 @@ pru_integration_decision = {
 				country_exists = SAK
 			}
 			owns_state = 65
+			num_of_civilian_factories_available_for_projects > 1
 		}
 
 		visible = {
@@ -3262,10 +3262,11 @@ pru_integration_decision = {
 		}
 		
 		modifier = {
-			political_power_factor = -0.05
+			political_power_factor = -0.10
+			civilian_factory_use = 1
 		}
 		
-		days_remove = 25
+		days_remove = 50
 		
 		remove_effect = {
 			add_state_core = 65
@@ -3286,6 +3287,7 @@ pru_integration_decision = {
 				country_exists = TYR
 			}
 			owns_state = 60
+			num_of_civilian_factories_available_for_projects > 1
 		}
 
 		visible = {
@@ -3303,10 +3305,11 @@ pru_integration_decision = {
 		}
 		
 		modifier = {
-			political_power_factor = -0.05
+			political_power_factor = -0.10
+			civilian_factory_use = 1
 		}
 		
-		days_remove = 25
+		days_remove = 50
 		
 		remove_effect = {
 			add_state_core = 60
@@ -3327,6 +3330,7 @@ pru_integration_decision = {
 				country_exists = WEI
 			}
 			owns_state = 901
+			num_of_civilian_factories_available_for_projects > 1
 		}
 
 		visible = {
@@ -3344,10 +3348,11 @@ pru_integration_decision = {
 		}
 		
 		modifier = {
-			political_power_factor = -0.05
+			political_power_factor = -0.10
+			civilian_factory_use = 1
 		}
 		
-		days_remove = 25
+		days_remove = 50
 		
 		remove_effect = {
 			add_state_core = 901
@@ -3368,6 +3373,7 @@ pru_integration_decision = {
 				country_exists = MEI
 			}
 			owns_state = 900
+			num_of_civilian_factories_available_for_projects > 1
 		}
 
 		visible = {
@@ -3385,10 +3391,11 @@ pru_integration_decision = {
 		}
 		
 		modifier = {
-			political_power_factor = -0.05
+			political_power_factor = -0.10
+			civilian_factory_use = 1
 		}
 		
-		days_remove = 25
+		days_remove = 50
 		
 		remove_effect = {
 			add_state_core = 900
@@ -3409,6 +3416,7 @@ pru_integration_decision = {
 				country_exists = HES
 			}
 			owns_state = 898
+			num_of_civilian_factories_available_for_projects > 1
 		}
 
 		visible = {
@@ -3426,10 +3434,11 @@ pru_integration_decision = {
 		}
 		
 		modifier = {
-			political_power_factor = -0.05
+			political_power_factor = -0.10
+			civilian_factory_use = 1
 		}
 		
-		days_remove = 25
+		days_remove = 50
 		
 		remove_effect = {
 			add_state_core = 898
@@ -3450,6 +3459,7 @@ pru_integration_decision = {
 				country_exists = WLD
 			}
 			owns_state = 899
+			num_of_civilian_factories_available_for_projects > 1
 		}
 
 		visible = {
@@ -3467,10 +3477,11 @@ pru_integration_decision = {
 		}
 		
 		modifier = {
-			political_power_factor = -0.05
+			political_power_factor = -0.10
+			civilian_factory_use = 1
 		}
 		
-		days_remove = 25
+		days_remove = 50
 		
 		remove_effect = {
 			add_state_core = 899
@@ -3491,6 +3502,7 @@ pru_integration_decision = {
 				country_exists = FRN
 			}
 			owns_state = 55
+			num_of_civilian_factories_available_for_projects > 1
 		}
 
 		visible = {
@@ -3508,10 +3520,11 @@ pru_integration_decision = {
 		}
 		
 		modifier = {
-			political_power_factor = -0.05
+			political_power_factor = -0.10
+			civilian_factory_use = 1
 		}
 		
-		days_remove = 25
+		days_remove = 50
 		
 		remove_effect = {
 			add_state_core = 55
@@ -3534,6 +3547,7 @@ pru_integration_decision = {
 			owns_state = 42
 			owns_state = 51
 			owns_state = 888
+			num_of_civilian_factories_available_for_projects > 3
 		}
 
 		visible = {
@@ -3551,10 +3565,11 @@ pru_integration_decision = {
 		}
 		
 		modifier = {
-			political_power_factor = -0.05
+			political_power_factor = -0.30
+			civilian_factory_use = 3
 		}
 		
-		days_remove = 75
+		days_remove = 150
 		
 		remove_effect = {
 			add_state_core = 42
@@ -3580,6 +3595,7 @@ pru_integration_decision = {
 			owns_state = 53
 			owns_state = 54
 			owns_state = 894
+			num_of_civilian_factories_available_for_projects > 4
 		}
 
 		visible = {
@@ -3597,10 +3613,11 @@ pru_integration_decision = {
 		}
 		
 		modifier = {
-			political_power_factor = -0.05
+			political_power_factor = -0.40
+			civilian_factory_use = 4
 		}
 		
-		days_remove = 100
+		days_remove = 200
 		
 		remove_effect = {
 			add_state_core = 52
@@ -3624,6 +3641,7 @@ pru_integration_decision = {
 				country_exists = VUR
 			}
 			owns_state = 808
+			num_of_civilian_factories_available_for_projects > 1
 		}
 
 		visible = {
@@ -3641,10 +3659,11 @@ pru_integration_decision = {
 		}
 		
 		modifier = {
-			political_power_factor = -0.05
+			political_power_factor = -0.10
+			civilian_factory_use = 1
 		}
 		
-		days_remove = 25
+		days_remove = 50
 		
 		remove_effect = {
 			add_state_core = 808
@@ -3665,6 +3684,7 @@ pru_integration_decision = {
 				country_exists = HOH
 			}
 			owns_state = 890
+			num_of_civilian_factories_available_for_projects > 1
 		}
 
 		visible = {
@@ -3682,10 +3702,11 @@ pru_integration_decision = {
 		}
 		
 		modifier = {
-			political_power_factor = -0.05
+			political_power_factor = -0.10
+			civilian_factory_use = 1
 		}
 		
-		days_remove = 25
+		days_remove = 50
 		
 		remove_effect = {
 			add_state_core = 890
@@ -3706,6 +3727,7 @@ pru_integration_decision = {
 				country_exists = BAD
 			}
 			owns_state = 50
+			num_of_civilian_factories_available_for_projects > 1
 		}
 
 		visible = {
@@ -3723,15 +3745,3815 @@ pru_integration_decision = {
 		}
 		
 		modifier = {
-			political_power_factor = -0.05
+			political_power_factor = -0.10
+			civilian_factory_use = 1
 		}
 		
-		days_remove = 25
+		days_remove = 50
 		
 		remove_effect = {
 			add_state_core = 50
 		}
 	
+	}
+
+}
+
+pru_air_base_decision = {
+
+	air_base_763 = {
+		
+		icon = generic_air
+
+		allowed = {
+
+		}
+
+		available = {
+			owns_state = 763
+			num_of_civilian_factories_available_for_projects > 5
+		}
+
+		visible = {
+			PRU = {
+				has_completed_focus = PRU_air_reform
+			}
+			tag = PRU
+		}
+		
+		highlight_states = {
+			highlight_state_targets = {
+				state = 763
+			}
+			highlight_color_while_active = 3
+			highlight_color_before_active = 2
+		}
+
+		fire_only_once = yes
+
+		cost = 25
+
+		ai_will_do = {
+			factor = 100
+		}
+		
+		modifier = {
+			civilian_factory_use = 5
+		}
+		
+		days_remove = 50
+		
+		remove_effect = {
+			763 = {
+				add_building_construction = {
+					type = air_base
+					level = 5
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = anti_air_building
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	
+	}
+	
+	air_base_64 = {
+		
+		icon = generic_air
+
+		allowed = {
+
+		}
+
+		available = {
+			owns_state = 64
+			num_of_civilian_factories_available_for_projects > 5
+		}
+
+		visible = {
+			PRU = {
+				has_completed_focus = PRU_air_reform
+			}
+			tag = PRU
+		}
+		
+		highlight_states = {
+			highlight_state_targets = {
+				state = 64
+			}
+			highlight_color_while_active = 3
+			highlight_color_before_active = 2
+		}
+
+		fire_only_once = yes
+
+		cost = 25
+
+		ai_will_do = {
+			factor = 100
+		}
+		
+		modifier = {
+			civilian_factory_use = 5
+		}
+		
+		days_remove = 75
+		
+		remove_effect = {
+			64 = {
+				add_building_construction = {
+					type = air_base
+					level = 10
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = anti_air_building
+					level = 5
+					instant_build = yes
+				}
+			}
+		}
+	
+	}
+	
+	air_base_55 = {
+		
+		icon = generic_air
+
+		allowed = {
+
+		}
+
+		available = {
+			owns_state = 55
+			num_of_civilian_factories_available_for_projects > 5
+		}
+
+		visible = {
+			PRU = {
+				has_completed_focus = PRU_air_reform
+			}
+			tag = PRU
+		}
+		
+		highlight_states = {
+			highlight_state_targets = {
+				state = 55
+			}
+			highlight_color_while_active = 3
+			highlight_color_before_active = 2
+		}
+
+		fire_only_once = yes
+
+		cost = 25
+
+		ai_will_do = {
+			factor = 100
+		}
+		
+		modifier = {
+			civilian_factory_use = 5
+		}
+		
+		days_remove = 50
+		
+		remove_effect = {
+			55 = {
+				add_building_construction = {
+					type = air_base
+					level = 5
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = anti_air_building
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	
+	}
+	
+	air_base_52 = {
+		
+		icon = generic_air
+
+		allowed = {
+
+		}
+
+		available = {
+			owns_state = 52
+			num_of_civilian_factories_available_for_projects > 5
+		}
+
+		visible = {
+			PRU = {
+				has_completed_focus = PRU_air_reform
+			}
+			tag = PRU
+		}
+		
+		highlight_states = {
+			highlight_state_targets = {
+				state = 52
+			}
+			highlight_color_while_active = 3
+			highlight_color_before_active = 2
+		}
+
+		fire_only_once = yes
+
+		cost = 25
+
+		ai_will_do = {
+			factor = 100
+		}
+		
+		modifier = {
+			civilian_factory_use = 5
+		}
+		
+		days_remove = 50
+		
+		remove_effect = {
+			52 = {
+				add_building_construction = {
+					type = air_base
+					level = 5
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = anti_air_building
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	
+	}
+	
+	air_base_58 = {
+		
+		icon = generic_air
+
+		allowed = {
+
+		}
+
+		available = {
+			owns_state = 58
+			num_of_civilian_factories_available_for_projects > 5
+		}
+
+		visible = {
+			PRU = {
+				has_completed_focus = PRU_air_reform
+			}
+			tag = PRU
+		}
+		
+		highlight_states = {
+			highlight_state_targets = {
+				state = 58
+			}
+			highlight_color_while_active = 3
+			highlight_color_before_active = 2
+		}
+
+		fire_only_once = yes
+
+		cost = 25
+
+		ai_will_do = {
+			factor = 100
+		}
+		
+		modifier = {
+			civilian_factory_use = 5
+		}
+		
+		days_remove = 50
+		
+		remove_effect = {
+			58 = {
+				add_building_construction = {
+					type = air_base
+					level = 5
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = anti_air_building
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	
+	}
+	
+	air_base_894 = {
+		
+		icon = generic_air
+
+		allowed = {
+
+		}
+
+		available = {
+			owns_state = 894
+			num_of_civilian_factories_available_for_projects > 2
+		}
+
+		visible = {
+			PRU = {
+				has_completed_focus = PRU_air_reform
+			}
+			tag = PRU
+		}
+		
+		highlight_states = {
+			highlight_state_targets = {
+				state = 894
+			}
+			highlight_color_while_active = 3
+			highlight_color_before_active = 2
+		}
+
+		fire_only_once = yes
+
+		cost = 0
+
+		ai_will_do = {
+			factor = 100
+		}
+		
+		modifier = {
+			civilian_factory_use = 2
+		}
+		
+		days_remove = 50
+		
+		remove_effect = {
+			894 = {
+				add_building_construction = {
+					type = air_base
+					level = 3
+					instant_build = yes
+				}
+			}
+		}
+	
+	}
+	
+	air_base_67 = {
+		
+		icon = generic_air
+
+		allowed = {
+
+		}
+
+		available = {
+			owns_state = 67
+			num_of_civilian_factories_available_for_projects > 2
+		}
+
+		visible = {
+			PRU = {
+				has_completed_focus = PRU_air_reform
+			}
+			tag = PRU
+		}
+		
+		highlight_states = {
+			highlight_state_targets = {
+				state = 67
+			}
+			highlight_color_while_active = 3
+			highlight_color_before_active = 2
+		}
+
+		fire_only_once = yes
+
+		cost = 0
+
+		ai_will_do = {
+			factor = 100
+		}
+		
+		modifier = {
+			civilian_factory_use = 2
+		}
+		
+		days_remove = 50
+		
+		remove_effect = {
+			67 = {
+				add_building_construction = {
+					type = air_base
+					level = 3
+					instant_build = yes
+				}
+			}
+		}
+	
+	}
+	
+	air_base_56 = {
+		
+		icon = generic_air
+
+		allowed = {
+
+		}
+
+		available = {
+			owns_state = 56
+			num_of_civilian_factories_available_for_projects > 2
+		}
+
+		visible = {
+			PRU = {
+				has_completed_focus = PRU_air_reform
+			}
+			tag = PRU
+		}
+		
+		highlight_states = {
+			highlight_state_targets = {
+				state = 56
+			}
+			highlight_color_while_active = 3
+			highlight_color_before_active = 2
+		}
+
+		fire_only_once = yes
+
+		cost = 0
+
+		ai_will_do = {
+			factor = 100
+		}
+		
+		modifier = {
+			civilian_factory_use = 2
+		}
+		
+		days_remove = 50
+		
+		remove_effect = {
+			56 = {
+				add_building_construction = {
+					type = air_base
+					level = 3
+					instant_build = yes
+				}
+			}
+		}
+	
+	}
+	
+	air_base_890 = {
+		
+		icon = generic_air
+
+		allowed = {
+
+		}
+
+		available = {
+			owns_state = 890
+			num_of_civilian_factories_available_for_projects > 2
+		}
+
+		visible = {
+			PRU = {
+				has_completed_focus = PRU_air_reform
+			}
+			tag = PRU
+		}
+		
+		highlight_states = {
+			highlight_state_targets = {
+				state = 890
+			}
+			highlight_color_while_active = 3
+			highlight_color_before_active = 2
+		}
+
+		fire_only_once = yes
+
+		cost = 0
+
+		ai_will_do = {
+			factor = 100
+		}
+		
+		modifier = {
+			civilian_factory_use = 2
+		}
+		
+		days_remove = 50
+		
+		remove_effect = {
+			890 = {
+				add_building_construction = {
+					type = air_base
+					level = 3
+					instant_build = yes
+				}
+			}
+		}
+	
+	}
+	
+	air_base_51 = {
+		
+		icon = generic_air
+
+		allowed = {
+
+		}
+
+		available = {
+			owns_state = 51
+			num_of_civilian_factories_available_for_projects > 2
+		}
+
+		visible = {
+			PRU = {
+				has_completed_focus = PRU_air_reform
+			}
+			tag = PRU
+		}
+		
+		highlight_states = {
+			highlight_state_targets = {
+				state = 51
+			}
+			highlight_color_while_active = 3
+			highlight_color_before_active = 2
+		}
+
+		fire_only_once = yes
+
+		cost = 0
+
+		ai_will_do = {
+			factor = 100
+		}
+		
+		modifier = {
+			civilian_factory_use = 2
+		}
+		
+		days_remove = 50
+		
+		remove_effect = {
+			51 = {
+				add_building_construction = {
+					type = air_base
+					level = 3
+					instant_build = yes
+				}
+			}
+		}
+	
+	}
+	
+	air_base_901 = {
+		
+		icon = generic_air
+
+		allowed = {
+
+		}
+
+		available = {
+			owns_state = 901
+			num_of_civilian_factories_available_for_projects > 2
+		}
+
+		visible = {
+			PRU = {
+				has_completed_focus = PRU_air_reform
+			}
+			tag = PRU
+		}
+		
+		highlight_states = {
+			highlight_state_targets = {
+				state = 901
+			}
+			highlight_color_while_active = 3
+			highlight_color_before_active = 2
+		}
+
+		fire_only_once = yes
+
+		cost = 0
+
+		ai_will_do = {
+			factor = 100
+		}
+		
+		modifier = {
+			civilian_factory_use = 2
+		}
+		
+		days_remove = 50
+		
+		remove_effect = {
+			901 = {
+				add_building_construction = {
+					type = air_base
+					level = 3
+					instant_build = yes
+				}
+			}
+		}
+	
+	}
+	
+	air_base_85 = {
+		
+		icon = generic_air
+
+		allowed = {
+
+		}
+
+		available = {
+			owns_state = 85
+			num_of_civilian_factories_available_for_projects > 2
+		}
+
+		visible = {
+			PRU = {
+				has_completed_focus = PRU_air_reform
+			}
+			tag = PRU
+		}
+		
+		highlight_states = {
+			highlight_state_targets = {
+				state = 85
+			}
+			highlight_color_while_active = 3
+			highlight_color_before_active = 2
+		}
+
+		fire_only_once = yes
+
+		cost = 0
+
+		ai_will_do = {
+			factor = 100
+		}
+		
+		modifier = {
+			civilian_factory_use = 2
+		}
+		
+		days_remove = 50
+		
+		remove_effect = {
+			85 = {
+				add_building_construction = {
+					type = air_base
+					level = 3
+					instant_build = yes
+				}
+			}
+		}
+	
+	}
+	
+	air_base_853 = {
+		
+		icon = generic_air
+
+		allowed = {
+
+		}
+
+		available = {
+			853 = {
+				is_controlled_by_ROOT_or_ally = yes
+			}
+			num_of_civilian_factories_available_for_projects > 5
+		}
+
+		visible = {
+			PRU = {
+				has_completed_focus = PRU_air_reform
+				has_completed_focus = PRU_dialog_with_poland
+			}
+			tag = PRU
+		}
+		
+		highlight_states = {
+			highlight_state_targets = {
+				state = 853
+			}
+			highlight_color_while_active = 3
+			highlight_color_before_active = 2
+		}
+
+		fire_only_once = yes
+
+		cost = 0
+
+		ai_will_do = {
+			factor = 100
+		}
+		
+		modifier = {
+			civilian_factory_use = 5
+		}
+		
+		days_remove = 50
+		
+		remove_effect = {
+			853 = {
+				add_building_construction = {
+					type = air_base
+					level = 5
+					instant_build = yes
+				}
+			}
+		}
+	
+	}
+	
+	air_base_87 = {
+		
+		icon = generic_air
+
+		allowed = {
+
+		}
+
+		available = {
+			87 = {
+				is_controlled_by_ROOT_or_ally = yes
+			}
+			num_of_civilian_factories_available_for_projects > 2
+		}
+
+		visible = {
+			PRU = {
+				has_completed_focus = PRU_air_reform
+				has_completed_focus = PRU_dialog_with_poland
+			}
+			tag = PRU
+		}
+		
+		highlight_states = {
+			highlight_state_targets = {
+				state = 87
+			}
+			highlight_color_while_active = 3
+			highlight_color_before_active = 2
+		}
+
+		fire_only_once = yes
+
+		cost = 0
+
+		ai_will_do = {
+			factor = 100
+		}
+		
+		modifier = {
+			civilian_factory_use = 2
+		}
+		
+		days_remove = 50
+		
+		remove_effect = {
+			87 = {
+				add_building_construction = {
+					type = air_base
+					level = 3
+					instant_build = yes
+				}
+			}
+		}
+	
+	}
+	
+	air_base_92 = {
+		
+		icon = generic_air
+
+		allowed = {
+
+		}
+
+		available = {
+			92 = {
+				is_controlled_by_ROOT_or_ally = yes
+			}
+			num_of_civilian_factories_available_for_projects > 2
+		}
+
+		visible = {
+			PRU = {
+				has_completed_focus = PRU_air_reform
+				has_completed_focus = PRU_dialog_with_poland
+			}
+			tag = PRU
+		}
+		
+		highlight_states = {
+			highlight_state_targets = {
+				state = 92
+			}
+			highlight_color_while_active = 3
+			highlight_color_before_active = 2
+		}
+
+		fire_only_once = yes
+
+		cost = 0
+
+		ai_will_do = {
+			factor = 100
+		}
+		
+		modifier = {
+			civilian_factory_use = 2
+		}
+		
+		days_remove = 50
+		
+		remove_effect = {
+			92 = {
+				add_building_construction = {
+					type = air_base
+					level = 3
+					instant_build = yes
+				}
+			}
+		}
+	
+	}
+	
+	air_base_915 = {
+		
+		icon = generic_air
+
+		allowed = {
+
+		}
+
+		available = {
+			915 = {
+				is_controlled_by_ROOT_or_ally = yes
+			}
+			num_of_civilian_factories_available_for_projects > 5
+		}
+
+		visible = {
+			PRU = {
+				has_completed_focus = PRU_air_reform
+				has_completed_focus = PRU_dialog_with_pribaltika
+			}
+			tag = PRU
+		}
+		
+		highlight_states = {
+			highlight_state_targets = {
+				state = 915
+			}
+			highlight_color_while_active = 3
+			highlight_color_before_active = 2
+		}
+
+		fire_only_once = yes
+
+		cost = 0
+
+		ai_will_do = {
+			factor = 100
+		}
+		
+		modifier = {
+			civilian_factory_use = 5
+		}
+		
+		days_remove = 50
+		
+		remove_effect = {
+			915 = {
+				add_building_construction = {
+					type = air_base
+					level = 5
+					instant_build = yes
+				}
+			}
+		}
+	
+	}
+	
+	air_base_13 = {
+		
+		icon = generic_air
+
+		allowed = {
+
+		}
+
+		available = {
+			13 = {
+				is_controlled_by_ROOT_or_ally = yes
+			}
+			num_of_civilian_factories_available_for_projects > 2
+		}
+
+		visible = {
+			PRU = {
+				has_completed_focus = PRU_air_reform
+				has_completed_focus = PRU_dialog_with_pribaltika
+			}
+			tag = PRU
+		}
+		
+		highlight_states = {
+			highlight_state_targets = {
+				state = 13
+			}
+			highlight_color_while_active = 3
+			highlight_color_before_active = 2
+		}
+
+		fire_only_once = yes
+
+		cost = 0
+
+		ai_will_do = {
+			factor = 100
+		}
+		
+		modifier = {
+			civilian_factory_use = 2
+		}
+		
+		days_remove = 50
+		
+		remove_effect = {
+			13 = {
+				add_building_construction = {
+					type = air_base
+					level = 3
+					instant_build = yes
+				}
+			}
+		}
+	
+	}
+	
+	air_base_11 = {
+		
+		icon = generic_air
+
+		allowed = {
+
+		}
+
+		available = {
+			11 = {
+				is_controlled_by_ROOT_or_ally = yes
+			}
+			num_of_civilian_factories_available_for_projects > 2
+		}
+
+		visible = {
+			PRU = {
+				has_completed_focus = PRU_air_reform
+				has_completed_focus = PRU_dialog_with_pribaltika
+			}
+			tag = PRU
+		}
+		
+		highlight_states = {
+			highlight_state_targets = {
+				state = 11
+			}
+			highlight_color_while_active = 3
+			highlight_color_before_active = 2
+		}
+
+		fire_only_once = yes
+
+		cost = 0
+
+		ai_will_do = {
+			factor = 100
+		}
+		
+		modifier = {
+			civilian_factory_use = 2
+		}
+		
+		days_remove = 50
+		
+		remove_effect = {
+			11 = {
+				add_building_construction = {
+					type = air_base
+					level = 3
+					instant_build = yes
+				}
+			}
+		}
+	
+	}
+	
+	air_base_206 = {
+		
+		icon = generic_air
+
+		allowed = {
+
+		}
+
+		available = {
+			206 = {
+				is_controlled_by_ROOT_or_ally = yes
+			}
+			num_of_civilian_factories_available_for_projects > 5
+		}
+
+		visible = {
+			PRU = {
+				has_completed_focus = PRU_air_reform
+				has_completed_focus = PRU_dialog_with_white_ruttenia
+			}
+			tag = PRU
+		}
+		
+		highlight_states = {
+			highlight_state_targets = {
+				state = 206
+			}
+			highlight_color_while_active = 3
+			highlight_color_before_active = 2
+		}
+
+		fire_only_once = yes
+
+		cost = 0
+
+		ai_will_do = {
+			factor = 100
+		}
+		
+		modifier = {
+			civilian_factory_use = 5
+		}
+		
+		days_remove = 50
+		
+		remove_effect = {
+			206 = {
+				add_building_construction = {
+					type = air_base
+					level = 5
+					instant_build = yes
+				}
+			}
+		}
+	
+	}
+	
+	air_base_243 = {
+		
+		icon = generic_air
+
+		allowed = {
+
+		}
+
+		available = {
+			243 = {
+				is_controlled_by_ROOT_or_ally = yes
+			}
+			num_of_civilian_factories_available_for_projects > 2
+		}
+
+		visible = {
+			PRU = {
+				has_completed_focus = PRU_air_reform
+				has_completed_focus = PRU_dialog_with_white_ruttenia
+			}
+			tag = PRU
+		}
+		
+		highlight_states = {
+			highlight_state_targets = {
+				state = 243
+			}
+			highlight_color_while_active = 3
+			highlight_color_before_active = 2
+		}
+
+		fire_only_once = yes
+
+		cost = 0
+
+		ai_will_do = {
+			factor = 100
+		}
+		
+		modifier = {
+			civilian_factory_use = 2
+		}
+		
+		days_remove = 50
+		
+		remove_effect = {
+			243 = {
+				add_building_construction = {
+					type = air_base
+					level = 3
+					instant_build = yes
+				}
+			}
+		}
+	
+	}
+	
+	air_base_194 = {
+		
+		icon = generic_air
+
+		allowed = {
+
+		}
+
+		available = {
+			194 = {
+				is_controlled_by_ROOT_or_ally = yes
+			}
+			num_of_civilian_factories_available_for_projects > 2
+		}
+
+		visible = {
+			PRU = {
+				has_completed_focus = PRU_air_reform
+				has_completed_focus = PRU_dialog_with_white_ruttenia
+			}
+			tag = PRU
+		}
+		
+		highlight_states = {
+			highlight_state_targets = {
+				state = 194
+			}
+			highlight_color_while_active = 3
+			highlight_color_before_active = 2
+		}
+
+		fire_only_once = yes
+
+		cost = 0
+
+		ai_will_do = {
+			factor = 100
+		}
+		
+		modifier = {
+			civilian_factory_use = 2
+		}
+		
+		days_remove = 50
+		
+		remove_effect = {
+			194 = {
+				add_building_construction = {
+					type = air_base
+					level = 3
+					instant_build = yes
+				}
+			}
+		}
+	
+	}
+	
+	air_base_207 = {
+		
+		icon = generic_air
+
+		allowed = {
+
+		}
+
+		available = {
+			207 = {
+				is_controlled_by_ROOT_or_ally = yes
+			}
+			num_of_civilian_factories_available_for_projects > 2
+		}
+
+		visible = {
+			PRU = {
+				has_completed_focus = PRU_air_reform
+				has_completed_focus = PRU_dialog_with_white_ruttenia
+			}
+			tag = PRU
+		}
+		
+		highlight_states = {
+			highlight_state_targets = {
+				state = 207
+			}
+			highlight_color_while_active = 3
+			highlight_color_before_active = 2
+		}
+
+		fire_only_once = yes
+
+		cost = 0
+
+		ai_will_do = {
+			factor = 100
+		}
+		
+		modifier = {
+			civilian_factory_use = 2
+		}
+		
+		days_remove = 50
+		
+		remove_effect = {
+			207 = {
+				add_building_construction = {
+					type = air_base
+					level = 3
+					instant_build = yes
+				}
+			}
+		}
+	
+	}
+	
+	air_base_202 = {
+		
+		icon = generic_air
+
+		allowed = {
+
+		}
+
+		available = {
+			202 = {
+				is_controlled_by_ROOT_or_ally = yes
+			}
+			num_of_civilian_factories_available_for_projects > 5
+		}
+
+		visible = {
+			PRU = {
+				has_completed_focus = PRU_air_reform
+				has_completed_focus = PRU_dialog_with_ukraina
+			}
+			tag = PRU
+		}
+		
+		highlight_states = {
+			highlight_state_targets = {
+				state = 202
+			}
+			highlight_color_while_active = 3
+			highlight_color_before_active = 2
+		}
+
+		fire_only_once = yes
+
+		cost = 0
+
+		ai_will_do = {
+			factor = 100
+		}
+		
+		modifier = {
+			civilian_factory_use = 5
+		}
+		
+		days_remove = 50
+		
+		remove_effect = {
+			202 = {
+				add_building_construction = {
+					type = air_base
+					level = 5
+					instant_build = yes
+				}
+			}
+		}
+	
+	}
+	
+	air_base_221 = {
+		
+		icon = generic_air
+
+		allowed = {
+
+		}
+
+		available = {
+			221 = {
+				is_controlled_by_ROOT_or_ally = yes
+			}
+			num_of_civilian_factories_available_for_projects > 5
+		}
+
+		visible = {
+			PRU = {
+				has_completed_focus = PRU_air_reform
+				has_completed_focus = PRU_dialog_with_ukraina
+			}
+			tag = PRU
+		}
+		
+		highlight_states = {
+			highlight_state_targets = {
+				state = 221
+			}
+			highlight_color_while_active = 3
+			highlight_color_before_active = 2
+		}
+
+		fire_only_once = yes
+
+		cost = 0
+
+		ai_will_do = {
+			factor = 100
+		}
+		
+		modifier = {
+			civilian_factory_use = 5
+		}
+		
+		days_remove = 50
+		
+		remove_effect = {
+			221 = {
+				add_building_construction = {
+					type = air_base
+					level = 3
+					instant_build = yes
+				}
+			}
+		}
+	
+	}
+	
+	air_base_228 = {
+		
+		icon = generic_air
+
+		allowed = {
+
+		}
+
+		available = {
+			228 = {
+				is_controlled_by_ROOT_or_ally = yes
+			}
+			num_of_civilian_factories_available_for_projects > 2
+		}
+
+		visible = {
+			PRU = {
+				has_completed_focus = PRU_air_reform
+				has_completed_focus = PRU_dialog_with_ukraina
+			}
+			tag = PRU
+		}
+		
+		highlight_states = {
+			highlight_state_targets = {
+				state = 228
+			}
+			highlight_color_while_active = 3
+			highlight_color_before_active = 2
+		}
+
+		fire_only_once = yes
+
+		cost = 0
+
+		ai_will_do = {
+			factor = 100
+		}
+		
+		modifier = {
+			civilian_factory_use = 2
+		}
+		
+		days_remove = 50
+		
+		remove_effect = {
+			228 = {
+				add_building_construction = {
+					type = air_base
+					level = 3
+					instant_build = yes
+				}
+			}
+		}
+	
+	}
+	
+	air_base_201 = {
+		
+		icon = generic_air
+
+		allowed = {
+
+		}
+
+		available = {
+			201 = {
+				is_controlled_by_ROOT_or_ally = yes
+			}
+			num_of_civilian_factories_available_for_projects > 2
+		}
+
+		visible = {
+			PRU = {
+				has_completed_focus = PRU_air_reform
+				has_completed_focus = PRU_dialog_with_ukraina
+			}
+			tag = PRU
+		}
+		
+		highlight_states = {
+			highlight_state_targets = {
+				state = 201
+			}
+			highlight_color_while_active = 3
+			highlight_color_before_active = 2
+		}
+
+		fire_only_once = yes
+
+		cost = 0
+
+		ai_will_do = {
+			factor = 100
+		}
+		
+		modifier = {
+			civilian_factory_use = 2
+		}
+		
+		days_remove = 50
+		
+		remove_effect = {
+			201 = {
+				add_building_construction = {
+					type = air_base
+					level = 3
+					instant_build = yes
+				}
+			}
+		}
+	
+	}
+	
+	air_base_225 = {
+		
+		icon = generic_air
+
+		allowed = {
+
+		}
+
+		available = {
+			225 = {
+				is_controlled_by_ROOT_or_ally = yes
+			}
+			num_of_civilian_factories_available_for_projects > 2
+		}
+
+		visible = {
+			PRU = {
+				has_completed_focus = PRU_air_reform
+				has_completed_focus = PRU_dialog_with_ukraina
+			}
+			tag = PRU
+		}
+		
+		highlight_states = {
+			highlight_state_targets = {
+				state = 225
+			}
+			highlight_color_while_active = 3
+			highlight_color_before_active = 2
+		}
+
+		fire_only_once = yes
+
+		cost = 0
+
+		ai_will_do = {
+			factor = 100
+		}
+		
+		modifier = {
+			civilian_factory_use = 2
+		}
+		
+		days_remove = 50
+		
+		remove_effect = {
+			225 = {
+				add_building_construction = {
+					type = air_base
+					level = 3
+					instant_build = yes
+				}
+			}
+		}
+	
+	}
+
+}
+
+prussian_midnight = {
+
+	pru_start_of_civil_war_decision = {
+	
+		activation = {
+			has_country_flag = decaing_reich 
+		}
+		
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = pru_none_text_trigger_tt
+				NOT = {
+					has_country_flag = decaing_reich
+				}
+			}
+		}
+		
+		cancel_trigger = {
+			custom_trigger_tooltip = {
+				tooltip = pru_none_text_trigger_tt
+				NOT = {
+					has_country_flag = decaing_reich
+				}
+			}
+		}
+		
+		visible = {
+			tag = PRU
+			has_country_flag = BYZ_vs_BUL_win 
+		}
+		
+		icon = generic_prepare_civil_war
+		
+		days_mission_timeout = 330
+		
+		fire_only_once = yes
+		
+		timeout_effect = {
+			pru_blacksun_civilwar = yes
+		}
+		
+	}
+
+	pru_decing_of_reich_stability = {
+	
+		activation = {
+			has_country_flag = decaing_reich 
+		}
+		
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = pru_none_text_trigger_tt
+				NOT = {
+					has_country_flag = decaing_reich
+				}
+			}
+		}
+		
+		cancel_trigger = {
+			custom_trigger_tooltip = {
+				tooltip = pru_none_text_trigger_tt
+				NOT = {
+					has_country_flag = decaing_reich
+				}
+			}
+		}
+		
+		visible = {
+			tag = PRU
+			has_country_flag = BYZ_vs_BUL_win 
+		}
+		
+		icon = generic_civil_support
+		
+		days_mission_timeout = 15
+		
+		fire_only_once = no
+		
+		timeout_effect = {
+			add_stability = PRU.stab_decaing
+		}
+		
+	}
+	
+	pru_decing_of_reich_extra_stability = { 
+		
+		icon = generic_brainwash
+
+		allowed = {
+			original_tag = PRU
+		}
+
+		available = {
+		}
+
+		visible = {
+			tag = PRU
+			has_country_flag = decaing_reich
+			NOT = {
+				check_variable = { PRU.extra_stability > 1 }
+			}
+		}
+
+		fire_only_once = no
+
+		cost = 250
+		
+		days_re_enable = 30
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = 25
+				PRU = {
+					has_stability > 0.749
+				}
+			}
+			modifier = {
+				add = 50
+				PRU = {
+					has_stability > 0.549
+				}
+			}
+		}
+		
+		complete_effect = {
+			add_stability = 0.10
+			custom_effect_tooltip = decision_up_to_2_tt
+			add_to_variable = {
+				var = PRU.extra_stability
+				value = 1
+			}
+		}
+		
+	}
+	
+	pru_decing_of_reich_extra_stability_by_manpower = { 
+		
+		icon = generic_military
+
+		allowed = {
+			original_tag = PRU
+		}
+
+		available = {
+			has_manpower > 50000
+		}
+
+		visible = {
+			tag = PRU
+			has_country_flag = decaing_reich
+		}
+
+		fire_only_once = no
+
+		cost = 0
+		
+		days_re_enable = 30
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = 25
+				PRU = {
+					has_stability > 0.749
+				}
+			}
+			modifier = {
+				add = 50
+				PRU = {
+					has_stability > 0.549
+				}
+			}
+		}
+		
+		complete_effect = {
+			add_stability = 0.025
+			add_manpower = -50000
+		}
+		
+	}
+	
+	pru_decing_of_reich_extra_stability_by_armyxp = { 
+		
+		icon = generic_army_support
+
+		allowed = {
+			original_tag = PRU
+		}
+
+		available = {
+			has_army_experience > 49.99
+		}
+
+		visible = {
+			tag = PRU
+			has_country_flag = decaing_reich
+		}
+
+		fire_only_once = no
+
+		cost = 0
+		
+		days_re_enable = 30
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = 25
+				PRU = {
+					has_stability > 0.749
+				}
+			}
+			modifier = {
+				add = 50
+				PRU = {
+					has_stability > 0.549
+				}
+			}
+		}
+		
+		complete_effect = {
+			add_stability = 0.025
+			army_experience = -50
+		}
+		
+	}
+	
+	pru_decing_of_reich_extra_stability_by_fabric = { 
+		
+		icon = generic_factory
+
+		allowed = {
+			original_tag = PRU
+		}
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = pru_numb_of_state_with_fabric_tt
+				PRU = {
+					any_owned_state = {
+						industrial_complex > 0
+						is_fully_controlled_by = PRU
+					}
+					any_owned_state = {
+						industrial_complex > 0
+						is_fully_controlled_by = PRU
+					}
+					any_owned_state = {
+						industrial_complex > 0
+						is_fully_controlled_by = PRU
+					}
+				}
+			}
+		}
+
+		visible = {
+			tag = PRU
+			has_country_flag = decaing_reich
+		}
+
+		fire_only_once = no
+
+		cost = 0
+		
+		days_re_enable = 30
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = 25
+				PRU = {
+					has_stability > 0.749
+				}
+			}
+			modifier = {
+				add = 50
+				PRU = {
+					has_stability > 0.549
+				}
+			}
+		}
+		
+		complete_effect = {
+			add_stability = 0.025
+			random_state = {
+				limit = {
+					is_fully_controlled_by = PRU
+					is_core_of = PRU
+					industrial_complex > 0
+				}
+				remove_building = {
+					type = industrial_complex
+					level = 1
+				}
+			}
+			random_state = {
+				limit = {
+					is_fully_controlled_by = PRU
+					is_core_of = PRU
+					industrial_complex > 0
+				}
+				remove_building = {
+					type = industrial_complex
+					level = 1
+				}
+			}
+			random_state = {
+				limit = {
+					is_fully_controlled_by = PRU
+					is_core_of = PRU
+					industrial_complex > 0
+				}
+				remove_building = {
+					type = industrial_complex
+					level = 1
+				}
+			}
+		}
+		
+	}
+	
+	pru_decing_of_reich_extra_stability_by_armsfabric = { 
+		
+		icon = generic_merge_plant_tank
+
+		allowed = {
+			original_tag = PRU
+		}
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = pru_numb_of_state_with_armsfabric_tt		
+				PRU = {
+					any_owned_state = {
+						arms_factory > 0
+						is_fully_controlled_by = PRU
+					}
+					any_owned_state = {
+						arms_factory > 0
+						is_fully_controlled_by = PRU
+					}
+					any_owned_state = {
+						arms_factory > 0
+						is_fully_controlled_by = PRU
+					}
+				}
+			}
+		}
+
+		visible = {
+			tag = PRU
+			has_country_flag = decaing_reich
+		}
+
+		fire_only_once = no
+
+		cost = 0
+		
+		days_re_enable = 30
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = 25
+				PRU = {
+					has_stability > 0.749
+				}
+			}
+			modifier = {
+				add = 50
+				PRU = {
+					has_stability > 0.549
+				}
+			}
+		}
+		
+		complete_effect = {
+			add_stability = 0.025
+			random_state = {
+				limit = {
+					is_fully_controlled_by = PRU
+					is_core_of = PRU
+					arms_factory > 0
+				}
+				remove_building = {
+					type = arms_factory
+					level = 1
+				}
+			}
+			random_state = {
+				limit = {
+					is_fully_controlled_by = PRU
+					is_core_of = PRU
+					arms_factory > 0
+				}
+				remove_building = {
+					type = arms_factory
+					level = 1
+				}
+			}
+			random_state = {
+				limit = {
+					is_fully_controlled_by = PRU
+					is_core_of = PRU
+					arms_factory > 0
+				}
+				remove_building = {
+					type = arms_factory
+					level = 1
+				}
+			}
+		}
+		
+	}
+	
+}
+
+prussian_civilianwar = {
+
+	pru_last_edict_of_furer = { 
+		
+		icon = generic_scorched_earth
+
+		allowed = {
+			original_tag = PRU
+		}
+
+		available = {
+			surrender_progress > 0.80
+		}
+
+		visible = {
+			tag = PRU
+			has_global_flag = blacksun_civilwar_going
+		}
+
+		fire_only_once = yes
+
+		cost = 0
+
+		ai_will_do = {
+			base = 0
+		}
+		
+		complete_effect = {
+			country_event = {
+				id = ger_blackorder.100
+				hours = 6
+			}
+		}
+		
+	}
+	
+	pru_civilwar_manpower = { 
+		
+		icon = generic_military
+
+		allowed = {
+			OR = {
+				tag = PRU
+				tag = SGE
+				tag = KGR
+				tag = RGR
+			}
+		}
+
+		available = {
+			any_state = {
+				state_population > 99999
+				is_fully_controlled_by = ROOT
+				is_core_of = ROOT
+			}
+		}
+
+		visible = {
+			OR = {
+				tag = PRU
+				tag = SGE
+				tag = KGR
+				tag = RGR
+			}
+			has_global_flag = blacksun_civilwar_going
+		}
+
+		fire_only_once = no
+
+		cost = 0
+		
+		days_remove = 10
+		
+		days_re_enable = 40
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = 25
+				has_manpower < 100000
+			}
+			modifier = {
+				add = 50
+				has_manpower < 10000
+			}
+		}
+		
+		complete_effect = {
+		}
+		
+		remove_effect = {
+			add_manpower = 50000
+		}
+		
+	}
+	
+	pru_civilwar_armsfabric = { 
+		
+		icon = generic_factory
+
+		allowed = {
+			OR = {
+				tag = PRU
+				tag = SGE
+				tag = KGR
+				tag = RGR
+			}
+		}
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = pru_numb_of_state_with_fabric_tt
+				any_owned_state = {
+					industrial_complex > 0
+					is_fully_controlled_by = ROOT
+				}
+				any_owned_state = {
+					industrial_complex > 0
+					is_fully_controlled_by = ROOT
+				}
+				any_owned_state = {
+					industrial_complex > 0
+					is_fully_controlled_by = ROOT
+				}
+			}
+		}
+
+		visible = {
+			OR = {
+				tag = PRU
+				tag = SGE
+				tag = KGR
+				tag = RGR
+			}
+			has_global_flag = blacksun_civilwar_going
+		}
+
+		fire_only_once = no
+
+		cost = 0
+		
+		days_remove = 15
+		
+		days_re_enable = 40
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = 25
+				has_manpower < 100000
+			}
+			modifier = {
+				add = 50
+				has_manpower < 10000
+			}
+		}
+		
+		complete_effect = {
+		}
+		
+		remove_effect = {
+			random_state = {
+				limit = {
+					is_fully_controlled_by = ROOT
+					is_core_of = ROOT
+					industrial_complex > 0
+				}
+				remove_building = {
+					type = industrial_complex
+					level = 1
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_state = {
+				limit = {
+					is_fully_controlled_by = ROOT
+					is_core_of = ROOT
+					industrial_complex > 0
+				}
+				remove_building = {
+					type = industrial_complex
+					level = 1
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_state = {
+				limit = {
+					is_fully_controlled_by = ROOT
+					is_core_of = ROOT
+					industrial_complex > 0
+				}
+				remove_building = {
+					type = industrial_complex
+					level = 1
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		
+	}
+
+}
+
+PRU_kep_decision_cat = {
+
+	PRU_kep_develop_german_industry = { 
+		
+		icon = generic_factory
+
+		allowed = {
+			tag = PRU
+		}
+
+		available = {
+			has_war = no
+		}
+
+		visible = {
+			has_completed_focus = PRU_open_new_company
+		}
+		
+		fixed_random_seed = no
+
+		cost = 25
+		days_remove = 50
+		days_re_enable = 90
+		
+		fire_only_once = no
+
+		ai_will_do = {
+			base = 50			
+		}
+		
+		modifier = {
+			civilian_factory_use = 2
+		}
+		
+		complete_effect = {
+		
+		}
+		
+		remove_effect = {
+			random_list = {
+				50 = {
+					random_state = {
+						limit = {
+							is_fully_controlled_by = ROOT
+							is_core_of = ROOT
+							industrial_complex > 0
+						}
+						add_extra_state_shared_building_slots = 1
+						add_building_construction = {
+							type = arms_factory
+							level = 1
+							instant_build = yes
+						}
+					}
+				}
+				50 = {
+					random_state = {
+						limit = {
+							is_fully_controlled_by = ROOT
+							is_core_of = ROOT
+							industrial_complex > 0
+						}
+						add_extra_state_shared_building_slots = 1
+						add_building_construction = {
+							type = industrial_complex
+							level = 1
+							instant_build = yes
+						}
+					}
+				}
+			}
+		}
+		
+	}
+
+	PRU_kep_develop_ally_industry = { 
+		
+		icon = generic_factory
+
+		allowed = {
+			tag = PRU
+		}
+
+		available = {
+			has_war = no
+			is_faction_leader = yes
+		}
+
+		visible = {
+			has_completed_focus = PRU_open_new_company
+		}
+		
+		fixed_random_seed = no
+
+		cost = 25
+		days_remove = 50
+		days_re_enable = 90
+		
+		fire_only_once = no
+
+		ai_will_do = {
+			base = 30			
+		}
+		
+		modifier = {
+			civilian_factory_use = 2
+		}
+		
+		complete_effect = {
+		
+		}
+		
+		remove_effect = {
+			random_country = {
+				limit = {
+					OR = {
+						is_in_faction_with = PRU
+						is_puppet_of = PRU
+						is_subject_of = PRU
+					}
+				}
+				random_list = {
+					50 = {
+						add_offsite_building = { type = industrial_complex level = 1 }
+					}
+					50 = {
+						add_offsite_building = { type = arms_factory level = 1 }
+					}
+				}
+			}
+		}
+		
+	}
+
+	PRU_kep_trade_with_byz = { 
+		
+		icon = hol_exchange_intelligence_data
+
+		allowed = {
+			tag = PRU
+		}
+
+		available = {
+			NOT = {
+				has_country_flag = PRU_5_kep_deals_in_process
+			}
+		}
+
+		visible = {
+			has_country_flag = PRU_unlock_kep_trade_decisions
+			country_exists = BYZ
+			BYZ = { NOT = { has_war_with = SAR } }
+			NOT = {
+				has_country_flag = blacksun_end_germany
+			}
+		}
+		
+		cost = 15
+		days_remove = 15
+		
+		fire_only_once = yes
+
+		ai_will_do = {
+			base = 30			
+		}
+		
+		modifier = {
+			
+		}
+		
+		complete_effect = {
+			hidden_effect = {
+				if = {
+					limit = {
+						PRU = {
+							has_country_flag = PRU_4_kep_deals_in_process
+						}
+					}
+					set_country_flag = PRU_5_kep_deals_in_process
+					clr_country_flag = PRU_4_kep_deals_in_process
+				}
+				if = {
+					limit = {
+						PRU = {
+							has_country_flag = PRU_3_kep_deals_in_process
+						}
+					}
+					set_country_flag = PRU_4_kep_deals_in_process
+					clr_country_flag = PRU_3_kep_deals_in_process
+				}
+				if = {
+					limit = {
+						PRU = {
+							has_country_flag = PRU_2_kep_deals_in_process
+						}
+					}
+					set_country_flag = PRU_3_kep_deals_in_process
+					clr_country_flag = PRU_2_kep_deals_in_process
+				}
+				if = {
+					limit = {
+						PRU = {
+							has_country_flag = PRU_1_kep_deals_in_process
+						}
+					}
+					set_country_flag = PRU_2_kep_deals_in_process
+					clr_country_flag = PRU_1_kep_deals_in_process
+				}
+				if = {
+					limit = {
+						NOT = {
+							PRU = {
+								OR = {
+									has_country_flag = PRU_5_kep_deals_in_process
+									has_country_flag = PRU_4_kep_deals_in_process
+									has_country_flag = PRU_3_kep_deals_in_process
+									has_country_flag = PRU_2_kep_deals_in_process
+									has_country_flag = PRU_1_kep_deals_in_process
+								}
+							}
+						}
+					}
+					set_country_flag = PRU_1_kep_deals_in_process
+				}
+			}
+		}
+		
+		remove_effect = {
+			BYZ = { country_event = ger_kep.2 }
+			hidden_effect = {
+				if = {
+					limit = {
+						PRU = {
+							has_country_flag = PRU_5_kep_deals_in_process
+						}
+					}
+					set_country_flag = PRU_4_kep_deals_in_process
+					clr_country_flag = PRU_5_kep_deals_in_process
+				}
+				if = {
+					limit = {
+						PRU = {
+							has_country_flag = PRU_4_kep_deals_in_process
+						}
+					}
+					set_country_flag = PRU_3_kep_deals_in_process
+					clr_country_flag = PRU_4_kep_deals_in_process
+				}
+				if = {
+					limit = {
+						PRU = {
+							has_country_flag = PRU_3_kep_deals_in_process
+						}
+					}
+					set_country_flag = PRU_2_kep_deals_in_process
+					clr_country_flag = PRU_3_kep_deals_in_process
+				}
+				if = {
+					limit = {
+						PRU = {
+							has_country_flag = PRU_2_kep_deals_in_process
+						}
+					}
+					set_country_flag = PRU_1_kep_deals_in_process
+					clr_country_flag = PRU_2_kep_deals_in_process
+				}
+				if = {
+					limit = {
+						PRU = {
+							has_country_flag = PRU_1_kep_deals_in_process
+						}
+					}
+					clr_country_flag = PRU_1_kep_deals_in_process
+				}
+				
+			}
+		}
+		
+	}
+
+	PRU_kep_trade_with_sar = { 
+		
+		icon = hol_exchange_intelligence_data
+
+		allowed = {
+			tag = PRU
+		}
+
+		available = {
+			NOT = {
+				has_country_flag = PRU_5_kep_deals_in_process
+			}
+		}
+
+		visible = {
+			has_country_flag = PRU_unlock_kep_trade_decisions
+			country_exists = SAR
+			PRU = { NOT = { has_war_with = SAR } }
+			NOT = {
+				has_country_flag = blacksun_end_germany
+			}
+		}
+		
+		cost = 15
+		days_remove = 15
+		
+		fire_only_once = yes
+
+		ai_will_do = {
+			base = 30			
+		}
+		
+		modifier = {
+			
+		}
+		
+		complete_effect = {
+			hidden_effect = {
+				if = {
+					limit = {
+						PRU = {
+							has_country_flag = PRU_4_kep_deals_in_process
+						}
+					}
+					set_country_flag = PRU_5_kep_deals_in_process
+					clr_country_flag = PRU_4_kep_deals_in_process
+				}
+				if = {
+					limit = {
+						PRU = {
+							has_country_flag = PRU_3_kep_deals_in_process
+						}
+					}
+					set_country_flag = PRU_4_kep_deals_in_process
+					clr_country_flag = PRU_3_kep_deals_in_process
+				}
+				if = {
+					limit = {
+						PRU = {
+							has_country_flag = PRU_2_kep_deals_in_process
+						}
+					}
+					set_country_flag = PRU_3_kep_deals_in_process
+					clr_country_flag = PRU_2_kep_deals_in_process
+				}
+				if = {
+					limit = {
+						PRU = {
+							has_country_flag = PRU_1_kep_deals_in_process
+						}
+					}
+					set_country_flag = PRU_2_kep_deals_in_process
+					clr_country_flag = PRU_1_kep_deals_in_process
+				}
+				if = {
+					limit = {
+						NOT = {
+							PRU = {
+								OR = {
+									has_country_flag = PRU_5_kep_deals_in_process
+									has_country_flag = PRU_4_kep_deals_in_process
+									has_country_flag = PRU_3_kep_deals_in_process
+									has_country_flag = PRU_2_kep_deals_in_process
+									has_country_flag = PRU_1_kep_deals_in_process
+								}
+							}
+						}
+					}
+					set_country_flag = PRU_1_kep_deals_in_process
+				}
+			}
+		}
+		
+		remove_effect = {
+			SAR = { country_event = ger_kep.5 }
+			hidden_effect = {
+				if = {
+					limit = {
+						PRU = {
+							has_country_flag = PRU_5_kep_deals_in_process
+						}
+					}
+					set_country_flag = PRU_4_kep_deals_in_process
+					clr_country_flag = PRU_5_kep_deals_in_process
+				}
+				if = {
+					limit = {
+						PRU = {
+							has_country_flag = PRU_4_kep_deals_in_process
+						}
+					}
+					set_country_flag = PRU_3_kep_deals_in_process
+					clr_country_flag = PRU_4_kep_deals_in_process
+				}
+				if = {
+					limit = {
+						PRU = {
+							has_country_flag = PRU_3_kep_deals_in_process
+						}
+					}
+					set_country_flag = PRU_2_kep_deals_in_process
+					clr_country_flag = PRU_3_kep_deals_in_process
+				}
+				if = {
+					limit = {
+						PRU = {
+							has_country_flag = PRU_2_kep_deals_in_process
+						}
+					}
+					set_country_flag = PRU_1_kep_deals_in_process
+					clr_country_flag = PRU_2_kep_deals_in_process
+				}
+				if = {
+					limit = {
+						PRU = {
+							has_country_flag = PRU_1_kep_deals_in_process
+						}
+					}
+					clr_country_flag = PRU_1_kep_deals_in_process
+				}
+				
+			}
+		}
+		
+	}
+
+	PRU_kep_trade_with_hol = { 
+		
+		icon = hol_exchange_intelligence_data
+
+		allowed = {
+			tag = PRU
+		}
+
+		available = {
+			NOT = {
+				has_country_flag = PRU_5_kep_deals_in_process
+			}
+		}
+
+		visible = {
+			has_country_flag = PRU_unlock_kep_trade_decisions
+			country_exists = HOL
+			PRU = { NOT = { has_war_with = HOL } }
+			NOT = {
+				has_country_flag = blacksun_end_germany
+			}
+		}
+		
+		cost = 15
+		days_remove = 15
+		
+		fire_only_once = yes
+
+		ai_will_do = {
+			base = 30			
+		}
+		
+		modifier = {
+			
+		}
+		
+		complete_effect = {
+			hidden_effect = {
+				if = {
+					limit = {
+						PRU = {
+							has_country_flag = PRU_4_kep_deals_in_process
+						}
+					}
+					set_country_flag = PRU_5_kep_deals_in_process
+					clr_country_flag = PRU_4_kep_deals_in_process
+				}
+				if = {
+					limit = {
+						PRU = {
+							has_country_flag = PRU_3_kep_deals_in_process
+						}
+					}
+					set_country_flag = PRU_4_kep_deals_in_process
+					clr_country_flag = PRU_3_kep_deals_in_process
+				}
+				if = {
+					limit = {
+						PRU = {
+							has_country_flag = PRU_2_kep_deals_in_process
+						}
+					}
+					set_country_flag = PRU_3_kep_deals_in_process
+					clr_country_flag = PRU_2_kep_deals_in_process
+				}
+				if = {
+					limit = {
+						PRU = {
+							has_country_flag = PRU_1_kep_deals_in_process
+						}
+					}
+					set_country_flag = PRU_2_kep_deals_in_process
+					clr_country_flag = PRU_1_kep_deals_in_process
+				}
+				if = {
+					limit = {
+						NOT = {
+							PRU = {
+								OR = {
+									has_country_flag = PRU_5_kep_deals_in_process
+									has_country_flag = PRU_4_kep_deals_in_process
+									has_country_flag = PRU_3_kep_deals_in_process
+									has_country_flag = PRU_2_kep_deals_in_process
+									has_country_flag = PRU_1_kep_deals_in_process
+								}
+							}
+						}
+					}
+					set_country_flag = PRU_1_kep_deals_in_process
+				}
+			}
+		}
+		
+		remove_effect = {
+			HOL = { country_event = ger_kep.8 }
+			hidden_effect = {
+				if = {
+					limit = {
+						PRU = {
+							has_country_flag = PRU_5_kep_deals_in_process
+						}
+					}
+					set_country_flag = PRU_4_kep_deals_in_process
+					clr_country_flag = PRU_5_kep_deals_in_process
+				}
+				if = {
+					limit = {
+						PRU = {
+							has_country_flag = PRU_4_kep_deals_in_process
+						}
+					}
+					set_country_flag = PRU_3_kep_deals_in_process
+					clr_country_flag = PRU_4_kep_deals_in_process
+				}
+				if = {
+					limit = {
+						PRU = {
+							has_country_flag = PRU_3_kep_deals_in_process
+						}
+					}
+					set_country_flag = PRU_2_kep_deals_in_process
+					clr_country_flag = PRU_3_kep_deals_in_process
+				}
+				if = {
+					limit = {
+						PRU = {
+							has_country_flag = PRU_2_kep_deals_in_process
+						}
+					}
+					set_country_flag = PRU_1_kep_deals_in_process
+					clr_country_flag = PRU_2_kep_deals_in_process
+				}
+				if = {
+					limit = {
+						PRU = {
+							has_country_flag = PRU_1_kep_deals_in_process
+						}
+					}
+					clr_country_flag = PRU_1_kep_deals_in_process
+				}
+				
+			}
+		}
+		
+	}
+
+	PRU_kep_trade_with_sca = { 
+		
+		icon = hol_exchange_intelligence_data
+
+		allowed = {
+			tag = PRU
+		}
+
+		available = {
+			NOT = {
+				has_country_flag = PRU_5_kep_deals_in_process
+			}
+		}
+
+		visible = {
+			has_country_flag = PRU_unlock_kep_trade_decisions
+			country_exists = SCA
+			PRU = { NOT = { has_war_with = SCA } }
+			NOT = {
+				has_country_flag = blacksun_end_germany
+			}
+		}
+		
+		cost = 15
+		days_remove = 15
+		
+		fire_only_once = yes
+
+		ai_will_do = {
+			base = 30			
+		}
+		
+		modifier = {
+			
+		}
+		
+		complete_effect = {
+			hidden_effect = {
+				if = {
+					limit = {
+						PRU = {
+							has_country_flag = PRU_4_kep_deals_in_process
+						}
+					}
+					set_country_flag = PRU_5_kep_deals_in_process
+					clr_country_flag = PRU_4_kep_deals_in_process
+				}
+				if = {
+					limit = {
+						PRU = {
+							has_country_flag = PRU_3_kep_deals_in_process
+						}
+					}
+					set_country_flag = PRU_4_kep_deals_in_process
+					clr_country_flag = PRU_3_kep_deals_in_process
+				}
+				if = {
+					limit = {
+						PRU = {
+							has_country_flag = PRU_2_kep_deals_in_process
+						}
+					}
+					set_country_flag = PRU_3_kep_deals_in_process
+					clr_country_flag = PRU_2_kep_deals_in_process
+				}
+				if = {
+					limit = {
+						PRU = {
+							has_country_flag = PRU_1_kep_deals_in_process
+						}
+					}
+					set_country_flag = PRU_2_kep_deals_in_process
+					clr_country_flag = PRU_1_kep_deals_in_process
+				}
+				if = {
+					limit = {
+						NOT = {
+							PRU = {
+								OR = {
+									has_country_flag = PRU_5_kep_deals_in_process
+									has_country_flag = PRU_4_kep_deals_in_process
+									has_country_flag = PRU_3_kep_deals_in_process
+									has_country_flag = PRU_2_kep_deals_in_process
+									has_country_flag = PRU_1_kep_deals_in_process
+								}
+							}
+						}
+					}
+					set_country_flag = PRU_1_kep_deals_in_process
+				}
+			}
+		}
+		
+		remove_effect = {
+			SCA = { country_event = ger_kep.11 }
+			hidden_effect = {
+				if = {
+					limit = {
+						PRU = {
+							has_country_flag = PRU_5_kep_deals_in_process
+						}
+					}
+					set_country_flag = PRU_4_kep_deals_in_process
+					clr_country_flag = PRU_5_kep_deals_in_process
+				}
+				if = {
+					limit = {
+						PRU = {
+							has_country_flag = PRU_4_kep_deals_in_process
+						}
+					}
+					set_country_flag = PRU_3_kep_deals_in_process
+					clr_country_flag = PRU_4_kep_deals_in_process
+				}
+				if = {
+					limit = {
+						PRU = {
+							has_country_flag = PRU_3_kep_deals_in_process
+						}
+					}
+					set_country_flag = PRU_2_kep_deals_in_process
+					clr_country_flag = PRU_3_kep_deals_in_process
+				}
+				if = {
+					limit = {
+						PRU = {
+							has_country_flag = PRU_2_kep_deals_in_process
+						}
+					}
+					set_country_flag = PRU_1_kep_deals_in_process
+					clr_country_flag = PRU_2_kep_deals_in_process
+				}
+				if = {
+					limit = {
+						PRU = {
+							has_country_flag = PRU_1_kep_deals_in_process
+						}
+					}
+					clr_country_flag = PRU_1_kep_deals_in_process
+				}
+				
+			}
+		}
+		
+	}
+
+	PRU_kep_trade_with_frr = { 
+		
+		icon = hol_exchange_intelligence_data
+
+		allowed = {
+			tag = PRU
+		}
+
+		available = {
+			NOT = {
+				has_country_flag = PRU_5_kep_deals_in_process
+			}
+		}
+
+		visible = {
+			has_country_flag = PRU_unlock_kep_trade_decisions
+			country_exists = FRR
+			PRU = { NOT = { has_war_with = FRR } }
+			NOT = {
+				has_country_flag = blacksun_end_germany
+			}
+		}
+		
+		cost = 15
+		days_remove = 15
+		
+		fire_only_once = yes
+
+		ai_will_do = {
+			base = 30			
+		}
+		
+		modifier = {
+			
+		}
+		
+		complete_effect = {
+			hidden_effect = {
+				if = {
+					limit = {
+						PRU = {
+							has_country_flag = PRU_4_kep_deals_in_process
+						}
+					}
+					set_country_flag = PRU_5_kep_deals_in_process
+					clr_country_flag = PRU_4_kep_deals_in_process
+				}
+				if = {
+					limit = {
+						PRU = {
+							has_country_flag = PRU_3_kep_deals_in_process
+						}
+					}
+					set_country_flag = PRU_4_kep_deals_in_process
+					clr_country_flag = PRU_3_kep_deals_in_process
+				}
+				if = {
+					limit = {
+						PRU = {
+							has_country_flag = PRU_2_kep_deals_in_process
+						}
+					}
+					set_country_flag = PRU_3_kep_deals_in_process
+					clr_country_flag = PRU_2_kep_deals_in_process
+				}
+				if = {
+					limit = {
+						PRU = {
+							has_country_flag = PRU_1_kep_deals_in_process
+						}
+					}
+					set_country_flag = PRU_2_kep_deals_in_process
+					clr_country_flag = PRU_1_kep_deals_in_process
+				}
+				if = {
+					limit = {
+						NOT = {
+							PRU = {
+								OR = {
+									has_country_flag = PRU_5_kep_deals_in_process
+									has_country_flag = PRU_4_kep_deals_in_process
+									has_country_flag = PRU_3_kep_deals_in_process
+									has_country_flag = PRU_2_kep_deals_in_process
+									has_country_flag = PRU_1_kep_deals_in_process
+								}
+							}
+						}
+					}
+					set_country_flag = PRU_1_kep_deals_in_process
+				}
+			}
+		}
+		
+		remove_effect = {
+			FRR = { country_event = ger_kep.14 }
+			hidden_effect = {
+				if = {
+					limit = {
+						PRU = {
+							has_country_flag = PRU_5_kep_deals_in_process
+						}
+					}
+					set_country_flag = PRU_4_kep_deals_in_process
+					clr_country_flag = PRU_5_kep_deals_in_process
+				}
+				if = {
+					limit = {
+						PRU = {
+							has_country_flag = PRU_4_kep_deals_in_process
+						}
+					}
+					set_country_flag = PRU_3_kep_deals_in_process
+					clr_country_flag = PRU_4_kep_deals_in_process
+				}
+				if = {
+					limit = {
+						PRU = {
+							has_country_flag = PRU_3_kep_deals_in_process
+						}
+					}
+					set_country_flag = PRU_2_kep_deals_in_process
+					clr_country_flag = PRU_3_kep_deals_in_process
+				}
+				if = {
+					limit = {
+						PRU = {
+							has_country_flag = PRU_2_kep_deals_in_process
+						}
+					}
+					set_country_flag = PRU_1_kep_deals_in_process
+					clr_country_flag = PRU_2_kep_deals_in_process
+				}
+				if = {
+					limit = {
+						PRU = {
+							has_country_flag = PRU_1_kep_deals_in_process
+						}
+					}
+					clr_country_flag = PRU_1_kep_deals_in_process
+				}
+				
+			}
+		}
+		
+	}
+
+	PRU_kep_trade_with_cbi = { 
+		
+		icon = hol_exchange_intelligence_data
+
+		allowed = {
+			tag = PRU
+		}
+
+		available = {
+			NOT = {
+				has_country_flag = PRU_5_kep_deals_in_process
+			}
+		}
+
+		visible = {
+			has_country_flag = PRU_unlock_kep_trade_decisions
+			country_exists = CBI
+			PRU = { NOT = { has_war_with = CBI } }
+			NOT = {
+				has_country_flag = blacksun_end_germany
+			}
+		}
+		
+		cost = 15
+		days_remove = 15
+		
+		fire_only_once = yes
+
+		ai_will_do = {
+			base = 30			
+		}
+		
+		modifier = {
+			
+		}
+		
+		complete_effect = {
+			hidden_effect = {
+				if = {
+					limit = {
+						PRU = {
+							has_country_flag = PRU_4_kep_deals_in_process
+						}
+					}
+					set_country_flag = PRU_5_kep_deals_in_process
+					clr_country_flag = PRU_4_kep_deals_in_process
+				}
+				if = {
+					limit = {
+						PRU = {
+							has_country_flag = PRU_3_kep_deals_in_process
+						}
+					}
+					set_country_flag = PRU_4_kep_deals_in_process
+					clr_country_flag = PRU_3_kep_deals_in_process
+				}
+				if = {
+					limit = {
+						PRU = {
+							has_country_flag = PRU_2_kep_deals_in_process
+						}
+					}
+					set_country_flag = PRU_3_kep_deals_in_process
+					clr_country_flag = PRU_2_kep_deals_in_process
+				}
+				if = {
+					limit = {
+						PRU = {
+							has_country_flag = PRU_1_kep_deals_in_process
+						}
+					}
+					set_country_flag = PRU_2_kep_deals_in_process
+					clr_country_flag = PRU_1_kep_deals_in_process
+				}
+				if = {
+					limit = {
+						NOT = {
+							PRU = {
+								OR = {
+									has_country_flag = PRU_5_kep_deals_in_process
+									has_country_flag = PRU_4_kep_deals_in_process
+									has_country_flag = PRU_3_kep_deals_in_process
+									has_country_flag = PRU_2_kep_deals_in_process
+									has_country_flag = PRU_1_kep_deals_in_process
+								}
+							}
+						}
+					}
+					set_country_flag = PRU_1_kep_deals_in_process
+				}
+			}
+		}
+		
+		remove_effect = {
+			CBI = { country_event = ger_kep.17 }
+			hidden_effect = {
+				if = {
+					limit = {
+						PRU = {
+							has_country_flag = PRU_5_kep_deals_in_process
+						}
+					}
+					set_country_flag = PRU_4_kep_deals_in_process
+					clr_country_flag = PRU_5_kep_deals_in_process
+				}
+				if = {
+					limit = {
+						PRU = {
+							has_country_flag = PRU_4_kep_deals_in_process
+						}
+					}
+					set_country_flag = PRU_3_kep_deals_in_process
+					clr_country_flag = PRU_4_kep_deals_in_process
+				}
+				if = {
+					limit = {
+						PRU = {
+							has_country_flag = PRU_3_kep_deals_in_process
+						}
+					}
+					set_country_flag = PRU_2_kep_deals_in_process
+					clr_country_flag = PRU_3_kep_deals_in_process
+				}
+				if = {
+					limit = {
+						PRU = {
+							has_country_flag = PRU_2_kep_deals_in_process
+						}
+					}
+					set_country_flag = PRU_1_kep_deals_in_process
+					clr_country_flag = PRU_2_kep_deals_in_process
+				}
+				if = {
+					limit = {
+						PRU = {
+							has_country_flag = PRU_1_kep_deals_in_process
+						}
+					}
+					clr_country_flag = PRU_1_kep_deals_in_process
+				}
+				
+			}
+		}
+		
+	}
+
+	PRU_kep_trade_with_prt = { 
+		
+		icon = hol_exchange_intelligence_data
+
+		allowed = {
+			tag = PRU
+		}
+
+		available = {
+			NOT = {
+				has_country_flag = PRU_5_kep_deals_in_process
+			}
+		}
+
+		visible = {
+			has_country_flag = PRU_unlock_kep_trade_decisions
+			country_exists = PRT
+			PRU = { NOT = { has_war_with = PRT } }
+			NOT = {
+				has_country_flag = blacksun_end_germany
+			}
+		}
+		
+		cost = 15
+		days_remove = 15
+		
+		fire_only_once = yes
+
+		ai_will_do = {
+			base = 30			
+		}
+		
+		modifier = {
+			
+		}
+		
+		complete_effect = {
+			hidden_effect = {
+				if = {
+					limit = {
+						PRU = {
+							has_country_flag = PRU_4_kep_deals_in_process
+						}
+					}
+					set_country_flag = PRU_5_kep_deals_in_process
+					clr_country_flag = PRU_4_kep_deals_in_process
+				}
+				if = {
+					limit = {
+						PRU = {
+							has_country_flag = PRU_3_kep_deals_in_process
+						}
+					}
+					set_country_flag = PRU_4_kep_deals_in_process
+					clr_country_flag = PRU_3_kep_deals_in_process
+				}
+				if = {
+					limit = {
+						PRU = {
+							has_country_flag = PRU_2_kep_deals_in_process
+						}
+					}
+					set_country_flag = PRU_3_kep_deals_in_process
+					clr_country_flag = PRU_2_kep_deals_in_process
+				}
+				if = {
+					limit = {
+						PRU = {
+							has_country_flag = PRU_1_kep_deals_in_process
+						}
+					}
+					set_country_flag = PRU_2_kep_deals_in_process
+					clr_country_flag = PRU_1_kep_deals_in_process
+				}
+				if = {
+					limit = {
+						NOT = {
+							PRU = {
+								OR = {
+									has_country_flag = PRU_5_kep_deals_in_process
+									has_country_flag = PRU_4_kep_deals_in_process
+									has_country_flag = PRU_3_kep_deals_in_process
+									has_country_flag = PRU_2_kep_deals_in_process
+									has_country_flag = PRU_1_kep_deals_in_process
+								}
+							}
+						}
+					}
+					set_country_flag = PRU_1_kep_deals_in_process
+				}
+			}
+		}
+		
+		remove_effect = {
+			PRT = { country_event = ger_kep.20}
+			hidden_effect = {
+				if = {
+					limit = {
+						PRU = {
+							has_country_flag = PRU_5_kep_deals_in_process
+						}
+					}
+					set_country_flag = PRU_4_kep_deals_in_process
+					clr_country_flag = PRU_5_kep_deals_in_process
+				}
+				if = {
+					limit = {
+						PRU = {
+							has_country_flag = PRU_4_kep_deals_in_process
+						}
+					}
+					set_country_flag = PRU_3_kep_deals_in_process
+					clr_country_flag = PRU_4_kep_deals_in_process
+				}
+				if = {
+					limit = {
+						PRU = {
+							has_country_flag = PRU_3_kep_deals_in_process
+						}
+					}
+					set_country_flag = PRU_2_kep_deals_in_process
+					clr_country_flag = PRU_3_kep_deals_in_process
+				}
+				if = {
+					limit = {
+						PRU = {
+							has_country_flag = PRU_2_kep_deals_in_process
+						}
+					}
+					set_country_flag = PRU_1_kep_deals_in_process
+					clr_country_flag = PRU_2_kep_deals_in_process
+				}
+				if = {
+					limit = {
+						PRU = {
+							has_country_flag = PRU_1_kep_deals_in_process
+						}
+					}
+					clr_country_flag = PRU_1_kep_deals_in_process
+				}
+				
+			}
+		}
+		
+	}
+
+	PRU_kep_trade_with_cas = { 
+		
+		icon = hol_exchange_intelligence_data
+
+		allowed = {
+			tag = PRU
+		}
+
+		available = {
+			NOT = {
+				has_country_flag = PRU_5_kep_deals_in_process
+			}
+		}
+
+		visible = {
+			has_country_flag = PRU_unlock_kep_trade_decisions
+			country_exists = CAS
+			PRU = { NOT = { has_war_with = CAS } }
+			NOT = {
+				has_country_flag = blacksun_end_germany
+			}
+		}
+		
+		cost = 15
+		days_remove = 15
+		
+		fire_only_once = yes
+
+		ai_will_do = {
+			base = 30			
+		}
+		
+		modifier = {
+			
+		}
+		
+		complete_effect = {
+			hidden_effect = {
+				if = {
+					limit = {
+						PRU = {
+							has_country_flag = PRU_4_kep_deals_in_process
+						}
+					}
+					set_country_flag = PRU_5_kep_deals_in_process
+					clr_country_flag = PRU_4_kep_deals_in_process
+				}
+				if = {
+					limit = {
+						PRU = {
+							has_country_flag = PRU_3_kep_deals_in_process
+						}
+					}
+					set_country_flag = PRU_4_kep_deals_in_process
+					clr_country_flag = PRU_3_kep_deals_in_process
+				}
+				if = {
+					limit = {
+						PRU = {
+							has_country_flag = PRU_2_kep_deals_in_process
+						}
+					}
+					set_country_flag = PRU_3_kep_deals_in_process
+					clr_country_flag = PRU_2_kep_deals_in_process
+				}
+				if = {
+					limit = {
+						PRU = {
+							has_country_flag = PRU_1_kep_deals_in_process
+						}
+					}
+					set_country_flag = PRU_2_kep_deals_in_process
+					clr_country_flag = PRU_1_kep_deals_in_process
+				}
+				if = {
+					limit = {
+						NOT = {
+							PRU = {
+								OR = {
+									has_country_flag = PRU_5_kep_deals_in_process
+									has_country_flag = PRU_4_kep_deals_in_process
+									has_country_flag = PRU_3_kep_deals_in_process
+									has_country_flag = PRU_2_kep_deals_in_process
+									has_country_flag = PRU_1_kep_deals_in_process
+								}
+							}
+						}
+					}
+					set_country_flag = PRU_1_kep_deals_in_process
+				}
+			}
+		}
+		
+		remove_effect = {
+			CAS = { country_event = ger_kep.23 }
+			hidden_effect = {
+				if = {
+					limit = {
+						PRU = {
+							has_country_flag = PRU_5_kep_deals_in_process
+						}
+					}
+					set_country_flag = PRU_4_kep_deals_in_process
+					clr_country_flag = PRU_5_kep_deals_in_process
+				}
+				if = {
+					limit = {
+						PRU = {
+							has_country_flag = PRU_4_kep_deals_in_process
+						}
+					}
+					set_country_flag = PRU_3_kep_deals_in_process
+					clr_country_flag = PRU_4_kep_deals_in_process
+				}
+				if = {
+					limit = {
+						PRU = {
+							has_country_flag = PRU_3_kep_deals_in_process
+						}
+					}
+					set_country_flag = PRU_2_kep_deals_in_process
+					clr_country_flag = PRU_3_kep_deals_in_process
+				}
+				if = {
+					limit = {
+						PRU = {
+							has_country_flag = PRU_2_kep_deals_in_process
+						}
+					}
+					set_country_flag = PRU_1_kep_deals_in_process
+					clr_country_flag = PRU_2_kep_deals_in_process
+				}
+				if = {
+					limit = {
+						PRU = {
+							has_country_flag = PRU_1_kep_deals_in_process
+						}
+					}
+					clr_country_flag = PRU_1_kep_deals_in_process
+				}
+				
+			}
+		}
+		
+	}
+
+	PRU_kep_trade_with_rus = { 
+		
+		icon = hol_exchange_intelligence_data
+
+		allowed = {
+			tag = PRU
+		}
+
+		available = {
+			NOT = {
+				has_country_flag = PRU_5_kep_deals_in_process
+			}
+		}
+
+		visible = {
+			has_country_flag = PRU_unlock_kep_trade_decisions
+			OR = {
+				AND = {
+					country_exists = MSK
+					PRU = { NOT = { has_war_with = MSK } }
+				}
+				AND = {
+					country_exists = RUS
+					PRU = { NOT = { has_war_with = RUS } }
+				}
+			}
+			NOT = {
+				has_country_flag = blacksun_end_germany
+			}
+		}
+		
+		cost = 15
+		days_remove = 15
+		
+		fire_only_once = yes
+
+		ai_will_do = {
+			base = 30			
+		}
+		
+		modifier = {
+			
+		}
+		
+		complete_effect = {
+			hidden_effect = {
+				if = {
+					limit = {
+						PRU = {
+							has_country_flag = PRU_4_kep_deals_in_process
+						}
+					}
+					set_country_flag = PRU_5_kep_deals_in_process
+					clr_country_flag = PRU_4_kep_deals_in_process
+				}
+				if = {
+					limit = {
+						PRU = {
+							has_country_flag = PRU_3_kep_deals_in_process
+						}
+					}
+					set_country_flag = PRU_4_kep_deals_in_process
+					clr_country_flag = PRU_3_kep_deals_in_process
+				}
+				if = {
+					limit = {
+						PRU = {
+							has_country_flag = PRU_2_kep_deals_in_process
+						}
+					}
+					set_country_flag = PRU_3_kep_deals_in_process
+					clr_country_flag = PRU_2_kep_deals_in_process
+				}
+				if = {
+					limit = {
+						PRU = {
+							has_country_flag = PRU_1_kep_deals_in_process
+						}
+					}
+					set_country_flag = PRU_2_kep_deals_in_process
+					clr_country_flag = PRU_1_kep_deals_in_process
+				}
+				if = {
+					limit = {
+						NOT = {
+							PRU = {
+								OR = {
+									has_country_flag = PRU_5_kep_deals_in_process
+									has_country_flag = PRU_4_kep_deals_in_process
+									has_country_flag = PRU_3_kep_deals_in_process
+									has_country_flag = PRU_2_kep_deals_in_process
+									has_country_flag = PRU_1_kep_deals_in_process
+								}
+							}
+						}
+					}
+					set_country_flag = PRU_1_kep_deals_in_process
+				}
+			}
+		}
+		
+		remove_effect = {
+			if = {
+				limit = {
+					country_exists = RUS
+				}
+				RUS = { country_event = ger_kep.26 }
+			}
+			if = {
+				limit = {
+					country_exists = MSK
+				}
+				MSK = { country_event = ger_kep.26 }
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						PRU = {
+							has_country_flag = PRU_5_kep_deals_in_process
+						}
+					}
+					set_country_flag = PRU_4_kep_deals_in_process
+					clr_country_flag = PRU_5_kep_deals_in_process
+				}
+				if = {
+					limit = {
+						PRU = {
+							has_country_flag = PRU_4_kep_deals_in_process
+						}
+					}
+					set_country_flag = PRU_3_kep_deals_in_process
+					clr_country_flag = PRU_4_kep_deals_in_process
+				}
+				if = {
+					limit = {
+						PRU = {
+							has_country_flag = PRU_3_kep_deals_in_process
+						}
+					}
+					set_country_flag = PRU_2_kep_deals_in_process
+					clr_country_flag = PRU_3_kep_deals_in_process
+				}
+				if = {
+					limit = {
+						PRU = {
+							has_country_flag = PRU_2_kep_deals_in_process
+						}
+					}
+					set_country_flag = PRU_1_kep_deals_in_process
+					clr_country_flag = PRU_2_kep_deals_in_process
+				}
+				if = {
+					limit = {
+						PRU = {
+							has_country_flag = PRU_1_kep_deals_in_process
+						}
+					}
+					clr_country_flag = PRU_1_kep_deals_in_process
+				}
+				
+			}
+		}
+		
+	}
+
+	PRU_kep_trade_with_ukr = { 
+		
+		icon = hol_exchange_intelligence_data
+
+		allowed = {
+			tag = PRU
+		}
+
+		available = {
+			NOT = {
+				has_country_flag = PRU_5_kep_deals_in_process
+			}
+		}
+
+		visible = {
+			has_country_flag = PRU_unlock_kep_trade_decisions
+			OR = {
+				AND = {
+					country_exists = UKR
+					PRU = { NOT = { has_war_with = UKR } }
+				}
+				AND = {
+					country_exists = WUK
+					PRU = { NOT = { has_war_with = WUK } }
+				}
+			}
+			NOT = {
+				has_country_flag = blacksun_end_germany
+			}
+		}
+		
+		cost = 15
+		days_remove = 15
+		
+		fire_only_once = yes
+
+		ai_will_do = {
+			base = 30			
+		}
+		
+		modifier = {
+			
+		}
+		
+		complete_effect = {
+			hidden_effect = {
+				if = {
+					limit = {
+						PRU = {
+							has_country_flag = PRU_4_kep_deals_in_process
+						}
+					}
+					set_country_flag = PRU_5_kep_deals_in_process
+					clr_country_flag = PRU_4_kep_deals_in_process
+				}
+				if = {
+					limit = {
+						PRU = {
+							has_country_flag = PRU_3_kep_deals_in_process
+						}
+					}
+					set_country_flag = PRU_4_kep_deals_in_process
+					clr_country_flag = PRU_3_kep_deals_in_process
+				}
+				if = {
+					limit = {
+						PRU = {
+							has_country_flag = PRU_2_kep_deals_in_process
+						}
+					}
+					set_country_flag = PRU_3_kep_deals_in_process
+					clr_country_flag = PRU_2_kep_deals_in_process
+				}
+				if = {
+					limit = {
+						PRU = {
+							has_country_flag = PRU_1_kep_deals_in_process
+						}
+					}
+					set_country_flag = PRU_2_kep_deals_in_process
+					clr_country_flag = PRU_1_kep_deals_in_process
+				}
+				if = {
+					limit = {
+						NOT = {
+							PRU = {
+								OR = {
+									has_country_flag = PRU_5_kep_deals_in_process
+									has_country_flag = PRU_4_kep_deals_in_process
+									has_country_flag = PRU_3_kep_deals_in_process
+									has_country_flag = PRU_2_kep_deals_in_process
+									has_country_flag = PRU_1_kep_deals_in_process
+								}
+							}
+						}
+					}
+					set_country_flag = PRU_1_kep_deals_in_process
+				}
+			}
+		}
+		
+		remove_effect = {
+			if = {
+				limit = {
+					country_exists = WUK
+				}
+				WUK = { country_event = ger_kep.29 }
+			}
+			if = {
+				limit = {
+					country_exists = UKR
+				}
+				UKR = { country_event = ger_kep.29 }
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						PRU = {
+							has_country_flag = PRU_5_kep_deals_in_process
+						}
+					}
+					set_country_flag = PRU_4_kep_deals_in_process
+					clr_country_flag = PRU_5_kep_deals_in_process
+				}
+				if = {
+					limit = {
+						PRU = {
+							has_country_flag = PRU_4_kep_deals_in_process
+						}
+					}
+					set_country_flag = PRU_3_kep_deals_in_process
+					clr_country_flag = PRU_4_kep_deals_in_process
+				}
+				if = {
+					limit = {
+						PRU = {
+							has_country_flag = PRU_3_kep_deals_in_process
+						}
+					}
+					set_country_flag = PRU_2_kep_deals_in_process
+					clr_country_flag = PRU_3_kep_deals_in_process
+				}
+				if = {
+					limit = {
+						PRU = {
+							has_country_flag = PRU_2_kep_deals_in_process
+						}
+					}
+					set_country_flag = PRU_1_kep_deals_in_process
+					clr_country_flag = PRU_2_kep_deals_in_process
+				}
+				if = {
+					limit = {
+						PRU = {
+							has_country_flag = PRU_1_kep_deals_in_process
+						}
+					}
+					clr_country_flag = PRU_1_kep_deals_in_process
+				}
+				
+			}
+		}
+		
 	}
 
 }

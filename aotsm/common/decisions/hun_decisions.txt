@@ -1,0 +1,167 @@
+hun_war_decision_categories = {
+
+		hungary_return_land = { 
+		
+		icon = generic_nationalism
+
+		allowed = {
+			
+		}
+
+		available = {
+			OR = {
+				PRU = {
+					controls_state = 202
+				}
+				UKR = {
+					controls_state = 202
+				}
+				BYZ = {
+					controls_state = 202
+				}
+			}
+		}
+
+		visible = {
+			original_tag = HUN
+			OR = {
+				is_in_faction_with = PRU
+				is_in_faction_with = BYZ
+			}
+			NOT = {
+				VLH = { 
+					has_country_flag = VLH_war_with_HUN 
+				}
+			}
+			NOT = {
+				VLH = {
+					has_country_flag = vlh_capitulation
+				}
+			}
+			OR = {
+				country_exists = GLA
+				NOT = {
+					VLH = {
+						is_puppet = yes
+					}
+				}
+			}
+		}
+
+		fire_only_once = yes
+
+		cost = 0
+		days_remove = 10
+
+		ai_will_do = {
+			factor = 100
+		}
+		
+		remove_effect = {
+			if = {
+				limit = {
+					country_exists = GLA
+				}
+				HUN = {
+					declare_war_on = {
+						target = GLA
+						type = annex_everything
+					}
+				}
+				hidden_effect = {
+					GLA = {
+						set_country_flag = revenge_for_hungary_gla
+					}
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						VLH = {
+							is_puppet = yes
+						}
+					}
+				}
+				HUN = {
+					declare_war_on = {
+						target = VLH
+						type = annex_everything
+					}
+				}
+				hidden_effect = {
+					VLH = {
+						set_country_flag = revenge_for_hungary_vlh
+					}
+				}
+			}
+			if = {
+				limit = {
+					is_in_faction_with = PRU
+				}
+				PRU = {
+					country_event = {
+						id = hun_war.1
+						hours = 10
+					}
+				}
+			}
+			if = {
+				limit = {
+					is_in_faction_with = BYZ
+				}
+				BYZ = {
+					country_event = {
+						id = hun_war.1
+						hours = 10
+					}
+				}
+			}
+		}
+		
+	}
+	
+	hungary_return_voevodina = { 
+		
+		icon = generic_nationalism
+
+		allowed = {
+			
+		}
+
+		available = {
+			is_in_faction_with = BYZ
+		}
+
+		visible = {
+			original_tag = HUN
+			owns_state = 70
+			owns_state = 71
+			owns_state = 73
+			owns_state = 76
+			owns_state = 82
+			owns_state = 83
+			owns_state = 84
+			owns_state = 664
+		}
+
+		fire_only_once = yes
+
+		cost = 0
+		days_remove = 10
+
+		ai_will_do = {
+			factor = 100
+		}
+		
+		remove_effect = {
+			BYZ = {
+				country_event = {
+					id = hun.1
+					hours = 10
+				}
+			}
+		}
+		
+	}
+
+}

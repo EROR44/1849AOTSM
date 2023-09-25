@@ -6,6 +6,7 @@ add_namespace = fren
 add_namespace = fren_colonial
 add_namespace = fren_mil_up
 add_namespace = frr_his_claims
+add_namespace = fren_fober_agreement
 
 	
 country_event = { #покушение на лагранжа
@@ -363,7 +364,10 @@ country_event = { #уроки алжирской кампании
 			
 		}
 		hidden_effect = {
-			
+			add_timed_idea = {
+				idea = FRR_economic_stimulation
+				days = 1100
+			}
 		}
 	
 	}
@@ -1340,7 +1344,7 @@ country_event = {
 		}
 		add_stability = 0.03
 		hidden_effect = {
-			news_event = { hours = 24 id = news.41}
+			#news_event = { hours = 24 id = news.41}
 		}
 	
 	}	
@@ -1459,7 +1463,7 @@ country_event = {
 		}
 		add_stability = 0.03
 		hidden_effect = {
-			news_event = { hours = 24 id = news.42}
+			#news_event = { hours = 24 id = news.42}
 		}
 	
 	}	
@@ -1730,6 +1734,130 @@ country_event = {
 			
 		}
 	
+	}	
+}
+
+#######################FOBER_AGREEMENT_SECTION##########################
+
+country_event = { 
+	id = fren_fober_agreement.1 #уведомление о оккупации побережья нубии коптами
+	title = fren_fober_agreement.1.t
+	desc = fren_fober_agreement.1.d
+	picture = GFX_report_event_spain_civil_war_soldiers
+	
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event fren_fober_agreement.1"
+	}
+
+	option = {
+		name = fren_fober_agreement.1.a
+		ai_chance = {
+			base = 5
+		}
+#		remove_opinion_modifier = {
+#			target = BYZ
+#			modifier = history_friend
+#		}
+		add_opinion_modifier = {
+			target = BYZ
+			modifier = small_decrease
+		}
+		add_opinion_modifier = {
+			target = CPT
+			modifier = large_decrease
+		}
+		hidden_effect = {
+			remove_opinion_modifier = {
+				target = CPT
+				modifier = small_decrease
+			}	
+			BYZ = { country_event = { id = fren_fober_agreement.2 days = 3 } }
+		}
+	
+	}	
+}
+
+country_event = { 
+	id = fren_fober_agreement.2 #Французское правительство выражает недовольство - ивент для Ромеи
+	title = fren_fober_agreement.2.t
+	desc = fren_fober_agreement.2.d
+	picture = GFX_report_event_political_discussion
+	
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event fren_fober_agreement.2"
+	}
+
+	option = {
+		name = fren_fober_agreement.2.a
+		ai_chance = {
+			base = 5
+		}
+		custom_effect_tooltip = FRR_cpt_bad_relations_frr_witch_byz
+		add_stability = -0.01
+		add_war_support = -0.03
+		add_political_power = -70
+	}	
+}
+
+country_event = { 
+	id = fren_fober_agreement.3 #Агрессивная экспансия проромейского Египта
+	title = fren_fober_agreement.3.t
+	desc = fren_fober_agreement.3.d
+	picture = GFX_report_event_political_discussion
+	
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event fren_fober_agreement.3"
+	}
+
+	option = {
+		name = fren_fober_agreement.3.a
+		ai_chance = {
+			base = 5
+		}
+		add_war_support = 0.03
+		add_opinion_modifier = {
+			target = CPT
+			modifier = small_decrease
+		}
+		hidden_effect = {
+			BYZ = { country_event = { id = fren_fober_agreement.4 days = 3 } }
+		}
+	}	
+}
+
+country_event = { 
+	id = fren_fober_agreement.4 #Франция выражает недовольство - ивент для Ромеи
+	title = fren_fober_agreement.4.t
+	desc = fren_fober_agreement.4.d
+	picture = GFX_report_event_political_discussion
+	
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event fren_fober_agreement.4"
+	}
+
+	option = {
+		name = fren_fober_agreement.4.a
+		ai_chance = {
+			base = 5
+		}
+		custom_effect_tooltip = FRR_cpt_leads_to_bad_relations_frr_witch_byz
+		add_political_power = -50
 	}	
 }
 

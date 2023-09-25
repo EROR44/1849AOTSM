@@ -1,0 +1,344 @@
+rus_first_international_decisions_cat = {	
+	
+	FI_general_council_meeting = {
+	
+		icon = hol_radio_oranje
+	
+		activation = {
+			has_global_flag = FI_general_council_created
+		}
+		
+		available = {
+			#has_country_flag = is_international_member
+			always = no 
+		}
+		
+		cancel_trigger = {
+			NOT = {
+				has_country_flag = is_international_member 
+			}
+		}
+		
+		visible = {
+			has_country_flag = is_international_member
+			has_global_flag = FI_general_council_created
+		}
+		
+		is_good = yes
+		
+		selectable_mission = no
+		days_mission_timeout = 365
+		
+		fire_only_once = yes
+		
+		timeout_effect = {
+			country_event = fi_political_event.1
+			
+		}
+		
+	}	
+	
+	FI_join_to_international = { 
+		
+		icon = hol_exchange_intelligence_data
+
+		allowed = {
+			
+		}
+
+		available = {
+			#always = no
+		}
+
+		visible = {
+			NOT = { 
+				has_country_flag = is_international_member 
+				OR = {
+					is_puppet = yes
+					is_subject = yes
+				}
+			}
+		}
+		
+		
+		modifier = {
+			
+		}
+		
+		fire_only_once = yes
+		
+		cost = 25
+		days_remove = 30
+
+		ai_will_do = {
+			factor = 5
+		}
+		
+		complete_effect = {
+			hidden_effect  ={
+				
+			}	
+		}
+
+		remove_effect = { #возможно придется переделать, на текущий момент проверка для 3 стран
+			if = {
+				limit = { 
+					RUS = { 
+						has_country_flag = is_international_member
+						is_faction_leader = yes 
+					}
+				}
+				RUS = { add_to_faction = FROM }
+			}
+			if = {
+				limit = { 
+					FRR = { 
+						has_country_flag = is_international_member
+						is_faction_leader = yes 
+					}
+				}
+			FRR = { add_to_faction = FROM }
+			}
+			if = {
+				limit = { 
+					CBI = { 
+						has_country_flag = is_international_member
+						is_faction_leader = yes 
+					}
+				}
+			CBI = { add_to_faction = FROM }
+			}
+			hidden_effect  = {
+				ROOT = { 
+					set_country_flag = is_international_member 
+					add_ideas = FI_international_member
+				}
+				#ROOT = {
+				#	all_subject_countries ={
+				#		set_country_flag = is_international_member 
+				#		add_ideas = FI_international_member
+				#	}
+				#}
+				add_to_variable = { global.number_of_international_faction_members = 1 }
+				add_to_array = { global.first_international_members = ROOT }
+			}
+		}
+	}
+
+	FI_join_to_international_scientific_research_group = { 
+		
+		icon = generic_research
+
+		allowed = {
+			
+		}
+
+		available = {
+			has_country_flag = is_international_member
+		}
+
+		visible = {
+			has_country_flag = is_international_member
+			NOT = { has_idea = FI_scientific_research_group_member }
+			NOT = { original_tag = RUS }
+		}
+		
+		
+		modifier = {
+			political_power_factor = -0.1
+		}
+		
+		fire_only_once = yes
+		
+		#cost = 20
+		days_remove = 30
+
+		ai_will_do = {
+			factor = 5
+		}
+		
+		complete_effect = {
+			hidden_effect  ={
+				
+			}	
+		}
+
+		remove_effect = {
+			add_ideas = FI_scientific_research_group_member
+			hidden_effect = { #прописано для 3 стран
+				if = {
+					limit = {
+						has_idea = russian_science_manufacturer
+					}
+					swap_ideas = {
+						remove_idea = russian_science_manufacturer
+						add_idea = first_international_science_manufacturer
+					}
+				}
+				if = {
+					limit = {
+						has_idea = french_science_manufacturer
+					}
+					swap_ideas = {
+						remove_idea = french_science_manufacturer
+						add_idea = first_international_science_manufacturer
+					}
+				}	
+				if = {
+					limit = {
+						has_idea = britain_science_manufacturer
+					}
+					swap_ideas = {
+						remove_idea = britain_science_manufacturer
+						add_idea = first_international_science_manufacturer
+					}
+				}
+				if = { #затычка на случай если у страны нет идеи ВПК
+					limit = {
+						NOT = {
+							OR = {
+								has_idea = russian_science_manufacturer
+								has_idea = french_science_manufacturer
+								has_idea = britain_science_manufacturer
+							}
+						}
+					}
+					add_ideas = first_international_science_manufacturer
+				}	
+			}
+		}
+	}
+	
+	FI_initiate_the_convocation_of_the_general_concil = { 
+		
+		icon = eng_trade_unions_support
+
+		allowed = {
+			
+		}
+
+		available = {
+			has_country_flag = is_international_member		
+		}
+
+		visible = {
+			#has_country_flag = is_international_member 		
+			#NOT = { has_global_flag = FI_general_council_created }
+			always = no
+		}
+		
+		
+		modifier = {
+			
+		}
+		
+		fire_only_once = yes
+		
+		cost = 10
+		#days_remove = 60
+
+		ai_will_do = {
+			factor = 5
+		}
+		
+		complete_effect = {
+			activate_mission = FI_general_council_meeting
+			hidden_effect  ={
+				set_global_flag = FI_general_council_created
+			}	
+		}
+
+		remove_effect = {
+			
+		}
+	}
+	
+	FI_invite_sor = { 
+		
+		icon = generic_operation
+
+		allowed = {
+			
+		}
+
+		available = {
+			has_country_flag = is_international_member
+			has_idea = FI_international_leader
+		}
+
+		visible = {
+			has_country_flag = is_international_member 
+			SOR = { 
+				country_exists = yes
+				has_war = no
+			}
+			always = no
+		}
+		
+		
+		modifier = {
+			
+		}
+		
+		fire_only_once = yes
+		
+		#cost = 20
+		#days_remove = 60
+
+		ai_will_do = {
+			factor = 5
+		}
+		
+		complete_effect = {
+			hidden_effect  ={
+				
+			}	
+		}
+
+		remove_effect = {
+			
+		}
+	}
+	
+	FI_join_to_test = { 
+		
+		icon = hol_exchange_intelligence_data
+
+		allowed = {
+			
+		}
+
+		available = {
+			has_country_flag = is_international_member
+		}
+
+		visible = {
+			has_country_flag = is_international_member 
+			always = no
+		}
+		
+		
+		modifier = {
+			
+		}
+		
+		fire_only_once = yes
+		
+		#cost = 20
+		#days_remove = 60
+
+		ai_will_do = {
+			factor = 5
+		}
+		
+		complete_effect = {
+			hidden_effect  ={
+				
+			}	
+		}
+
+		remove_effect = {
+			
+		}
+	}
+}

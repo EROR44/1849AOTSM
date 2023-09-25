@@ -91,6 +91,9 @@ focus_tree = {
 				}
 				custom_effect_tooltip = byz_politic_way
 			}
+			hidden_effect = {
+				mark_focus_tree_layout_dirty = yes
+			}
 		}
 	}
 	
@@ -182,7 +185,7 @@ focus_tree = {
 	focus = {
 		id = BYZ_eighth_senat_meeting
 		icon = GFX_goal_generic_demand_territory
-		x = 40
+		x = 46
 		y = -1
 		cost = 4.3
 		#mutually_exclusive = { }
@@ -232,8 +235,14 @@ focus_tree = {
 		#search_filters = {  }
 		
 		completion_reward = {
+			add_stability = 0.05
 			hidden_effect = {
-				promote_character = BYZ_Mihael_IV_Zachareas_decentalisation
+				BYZ = {
+					set_country_leader_portrait = {
+						ideology = authoritarian
+						portrait = GFX_byz_Mikhail_IV_Zahareas1
+					}
+				}
 			}
 		}
 	}
@@ -273,6 +282,7 @@ focus_tree = {
 				min = 0
 				max = 200
 			}
+			byz_coalition_calculation = yes
 		}
 	}
 	
@@ -317,6 +327,7 @@ focus_tree = {
 				min = 0
 				max = 200
 			}
+			byz_coalition_calculation = yes
 		}
 	}
 	
@@ -355,6 +366,7 @@ focus_tree = {
 				min = 0
 				max = 200
 			}
+			byz_coalition_calculation = yes
 		}
 	}
 	
@@ -418,6 +430,7 @@ focus_tree = {
 		#search_filters = {  }
 		
 		completion_reward = {
+			add_stability = 0.05
 		}
 	}
 	
@@ -576,6 +589,9 @@ focus_tree = {
 					remove_state_core = 798
 					remove_state_core = 799
 					remove_state_core = 913
+					remove_state_core = 941
+					remove_state_core = 942
+					remove_state_core = 943
 				}
 				ARM = {
 					remove_state_core = 229
@@ -586,6 +602,20 @@ focus_tree = {
 					remove_state_core = 353
 					remove_state_core = 354
 					remove_state_core = 800
+					remove_state_core = 926
+					remove_state_core = 927
+					remove_state_core = 928
+					remove_state_core = 929
+					remove_state_core = 930
+					remove_state_core = 931
+					remove_state_core = 932
+					remove_state_core = 933
+					remove_state_core = 934
+					remove_state_core = 935
+					remove_state_core = 936
+					remove_state_core = 937
+					remove_state_core = 938
+					remove_state_core = 943
 				}
 				BYZ = {
 					add_state_core = 49
@@ -608,6 +638,22 @@ focus_tree = {
 					add_state_core = 799
 					add_state_core = 800
 					add_state_core = 913
+					add_state_core = 926
+					add_state_core = 927
+					add_state_core = 928
+					add_state_core = 929
+					add_state_core = 930
+					add_state_core = 931
+					add_state_core = 932
+					add_state_core = 933
+					add_state_core = 934
+					add_state_core = 935
+					add_state_core = 936
+					add_state_core = 937
+					add_state_core = 938
+					add_state_core = 941
+					add_state_core = 942
+					add_state_core = 943
 				}
 				news_event = {
 					id = news.154
@@ -832,9 +878,18 @@ focus_tree = {
 		#search_filters = {  }
 		
 		completion_reward = {
+			add_stability = 0.075
+			add_war_support = 0.15
 			hidden_effect = {
-				PRU = {
-					unlock_national_focus = PRU_italia_quastion
+				if = {
+					limit = {
+						PRU = {
+							has_completed_focus = PRU_emperor_save_power
+						}
+					}
+					PRU = {
+						unlock_national_focus = PRU_emperor_italia_plan
+					}
 				}
 			}
 		}
@@ -1455,41 +1510,22 @@ focus_tree = {
 			set_cosmetic_tag = BYZROM
 			custom_effect_tooltip = byz_roman_decision_tt
 			hidden_effect = {
-				if = {
-					limit = {
-						has_government = democratic
+				BYZ = {
+					set_country_leader_portrait = {
+						ideology = democratic
+						portrait = GFX_byz_Mikhail_IV_Zahareas_rome_emperror
 					}
-					promote_character = {
-						character = BYZ_Mihael_IV_Zachareas_roman
-						ideology = liberalism
+					set_country_leader_portrait = {
+						ideology = socialism
+						portrait = GFX_byz_Mikhail_IV_Zahareas_rome_emperror
 					}
-				}
-				if = {
-					limit = {
-						has_government = socialism
+					set_country_leader_portrait = {
+						ideology = authoritarian
+						portrait = GFX_byz_Mikhail_IV_Zahareas_rome_emperror
 					}
-					promote_character = {
-						character = BYZ_Mihael_IV_Zachareas_roman
-						ideology = social_monarchism
-					}
-					remove_trait = {
-						character = BYZ_Mihael_IV_Zachareas_roman
-						ideology = social_monarchism
-						trait = byz_empire
-					}
-					add_trait = {
-						 character = BYZ_Mihael_IV_Zachareas_roman
-						 ideology = social_monarchism
-						 trait = red_empire
-					}
-				}
-				if = {
-					limit = {
-						has_government = authoritarian
-					}
-					promote_character = {
-						character = BYZ_Mihael_IV_Zachareas_roman
-						ideology = monarchist
+					set_country_leader_portrait = {
+						ideology = reactionist
+						portrait = GFX_byz_Mikhail_IV_Zahareas_rome_emperror
 					}
 				}
 			}
@@ -1671,7 +1707,7 @@ focus_tree = {
 	
 	focus = {
 		id = BYZ_democratic_mandat
-		icon = GFX_focus_generic_self_management
+		icon = GFX_focus_BYZ_democratic_mandat
 		relative_position_id = BYZ_decentralisation
 		x = 0
 		y = 1
@@ -1698,7 +1734,7 @@ focus_tree = {
 	
 	focus = {
 		id = BYZ_democratic_trade_police
-		icon = GFX_goal_generic_positive_trade_relations
+		icon = GFX_focus_BYZ_democratic_trade_police
 		relative_position_id = BYZ_decentralisation
 		x = -1
 		y = 2
@@ -1757,7 +1793,7 @@ focus_tree = {
 	
 	focus = {
 		id = BYZ_democratic_taxing_free
-		icon = GFX_goal_generic_improve_relations
+		icon = GFX_focus_BYZ_democratic_taxing_free
 		relative_position_id = BYZ_decentralisation
 		x = 1
 		y = 2
@@ -1807,7 +1843,7 @@ focus_tree = {
 	
 	focus = {
 		id = BYZ_democratic_task
-		icon = GFX_goal_generic_military_sphere
+		icon = GFX_focus_BYZ_democratic_task
 		relative_position_id = BYZ_decentralisation
 		x = 0
 		y = 3
@@ -1845,7 +1881,7 @@ focus_tree = {
 	
 	focus = {
 		id = BYZ_democratic_decision
-		icon = GFX_focus_generic_treaty
+		icon = GFX_focus_BYZ_democratic_decision
 		relative_position_id = BYZ_decentralisation
 		x = 3
 		y = 2
@@ -1874,7 +1910,7 @@ focus_tree = {
 	
 	focus = {
 		id = BYZ_imperial_march
-		icon = GFX_goal_generic_cavalry
+		icon = GFX_focus_BYZ_imperial_march
 		relative_position_id = BYZ_centralization
 		x = 0
 		y = 1
@@ -1904,7 +1940,7 @@ focus_tree = {
 
 	focus = {
 		id = BYZ_imperial_reform_army
-		icon = GFX_goal_generic_axis_build_infantry
+		icon = GFX_focus_BYZ_imperial_reform_army
 		relative_position_id = BYZ_centralization
 		x = -1
 		y = 2
@@ -1963,7 +1999,7 @@ focus_tree = {
 	
 	focus = {
 		id = BYZ_imperial_laws
-		icon = GFX_goal_generic_construct_mil_factory
+		icon = GFX_focus_BYZ_imperial_laws
 		relative_position_id = BYZ_centralization
 		x = 1
 		y = 2
@@ -2022,7 +2058,7 @@ focus_tree = {
 	
 	focus = {
 		id = BYZ_imperial_task
-		icon = GFX_focus_rom_royal_dictatorship
+		icon = GFX_focus_BYZ_imperial_task
 		relative_position_id = BYZ_centralization
 		x = 0
 		y = 3
@@ -2057,7 +2093,7 @@ focus_tree = {
 	
 	focus = {
 		id = BYZ_imperial_decision
-		icon = GFX_goal_tfv_strengthen_commonwealth_ties
+		icon = GFX_focus_BYZ_imperial_decision
 		relative_position_id = BYZ_centralization
 		x = -3
 		y = 2
@@ -3869,6 +3905,19 @@ focus_tree = {
 				idea = byz_army_training_idea
 				days = 365
 			}
+			hidden_effect = {
+				if = {
+					limit = {
+						date < 1852.1.1
+					}
+					BYZ = {
+						country_event = {
+							id = byz.50
+							days = 720
+						}
+					}
+				}
+			}
 		}
 	}
 	
@@ -4035,6 +4084,7 @@ focus_tree = {
 				remove_idea = byz_stagnat_army
 				add_idea = byz_old_army_1
 			}
+			set_country_flag = BYZ_old_doctrin
 		}
 	}
 	
@@ -4160,6 +4210,7 @@ focus_tree = {
 				remove_idea = byz_stagnat_army
 				add_idea = byz_new_army_1
 			}
+			set_country_flag = BYZ_new_doctrin
 		}
 	}
 	
@@ -4286,6 +4337,7 @@ focus_tree = {
 				remove_idea = byz_stagnat_army
 				add_idea = byz_pru_army_1
 			}
+			set_country_flag = BYZ_pru_will_help_army_reform
 		}
 	}
 	
@@ -5141,13 +5193,199 @@ focus_tree = {
 		#search_filters = {  }
 		
 		completion_reward = {
-			set_technology = {
-				early_fighter = 1
-				naval_bomber1 = 1
-				fighter1 = 1
-				CAS1 = 1
-				early_bomber = 1
-				strategic_bomber1 = 1
+			set_temp_variable = {
+				var = BYZ.air_experience
+				value = 0
+			}
+			if = {
+				limit = {
+					BYZ = {
+						has_tech = iw_basic_airframe
+					}
+				}
+				add_to_temp_variable = {
+					var = BYZ.air_experience
+					value = 1
+				}
+			}
+			if = {
+				limit = {
+					BYZ = {
+						has_tech = iw_small_airframe
+					}
+				}
+				add_to_temp_variable = {
+					var = BYZ.air_experience
+					value = 1
+				}
+			}
+			if = {
+				limit = {
+					BYZ = {
+						has_tech = iw_medium_airframe
+					}
+				}
+				add_to_temp_variable = {
+					var = BYZ.air_experience
+					value = 1
+				}
+			}
+			if = {
+				limit = {
+					BYZ = {
+						has_tech = iw_large_airframe
+					}
+				}
+				add_to_temp_variable = {
+					var = BYZ.air_experience
+					value = 1
+				}
+			}
+			if = {
+				limit = {
+					BYZ = {
+						has_tech = early_bombs
+					}
+				}
+				add_to_temp_variable = {
+					var = BYZ.air_experience
+					value = 1
+				}
+			}
+			if = {
+				limit = {
+					BYZ = {
+						has_tech = aa_lmg
+					}
+				}
+				add_to_temp_variable = {
+					var = BYZ.air_experience
+					value = 1
+				}
+			}
+			if = {
+				limit = {
+					BYZ = {
+						has_tech = engines_1
+					}
+				}
+				add_to_temp_variable = {
+					var = BYZ.air_experience
+					value = 1
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						BYZ = {
+							has_tech = iw_basic_airframe
+						}
+					}
+				}
+				BYZ = {
+					set_technology = {
+						iw_basic_airframe = 1
+					}
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						BYZ = {
+							has_tech = iw_small_airframe
+						}
+					}
+				}
+				BYZ = {
+					set_technology = {
+						iw_small_airframe = 1
+					}
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						BYZ = {
+							has_tech = iw_medium_airframe
+						}
+					}
+				}
+				BYZ = {
+					set_technology = {
+						iw_medium_airframe = 1
+					}
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						BYZ = {
+							has_tech = iw_large_airframe
+						}
+					}
+				}
+				BYZ = {
+					set_technology = {
+						iw_large_airframe = 1
+					}
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						BYZ = {
+							has_tech = early_bombs
+						}
+					}
+				}
+				BYZ = {
+					set_technology = {
+						early_bombs = 1
+					}
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						BYZ = {
+							has_tech = aa_lmg
+						}
+					}
+				}
+				BYZ = {
+					set_technology = {
+						aa_lmg = 1
+					}
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						BYZ = {
+							has_tech = engines_1
+						}
+					}
+				}
+				BYZ = {
+					set_technology = {
+						engines_1 = 1
+					}
+				}
+			}
+			set_temp_variable = {
+				var = BYZ.political_power_give
+				value = 50
+			}
+			if = {
+				limit = {
+					check_variable = {
+						BYZ.air_experience > 0
+					}
+				}
+				multiply_temp_variable = { BYZ.political_power_give = BYZ.air_experience }
+				BYZ = {
+					add_political_power = BYZ.political_power_give
+				}
 			}
 		}
 	}
@@ -6543,7 +6781,7 @@ focus_tree = {
 	
 	focus = {
 		id = BYZ_imperial_reform
-		icon = GFX_goal_generic_propaganda
+		icon = GFX_focus_BYZ_imperial_reform
 		relative_position_id = BYZ_fourth_senat_meeting
 		x = 0
 		y = 1
@@ -6782,83 +7020,19 @@ focus_tree = {
 					}
 				}
 				hidden_effect = {
-					if = {
-						limit = {
-							has_country_leader = {
-								character = BYZ_Mihael_IV_Zachareas
-								ruling_only = yes
-							}
+					BYZ = {
+						set_politics = {
+							ruling_party = socialism
+							elections_allowed = no
+							last_election = "1852.1.1"
+							election_frequency = 48
 						}
-						add_country_leader_role  = {
-							character = BYZ_Mihael_IV_Zachareas
-							promote_leader = yes
-							country_leader = {
-								ideology = social_monarchism
-							}
-						}
-						remove_trait = {
-							character = BYZ_Mihael_IV_Zachareas
-							ideology = social_monarchism
-							trait = byz_empire
-						}
-						add_trait = {
-							 character = BYZ_Mihael_IV_Zachareas
-							 ideology = social_monarchism
-							 trait = red_empire
-						}
-					}
-					if = {
-						limit = {
-							has_country_leader = {
-								character = BYZ_Mihael_IV_Zachareas_decentalisation
-								ruling_only = yes
-							}
-						}
-						add_country_leader_role  = {
-							character = BYZ_Mihael_IV_Zachareas_decentalisation
-							promote_leader = yes
-							country_leader = {
-								ideology = social_monarchism
-							}
-						}
-						remove_trait = {
-							character = BYZ_Mihael_IV_Zachareas_decentalisation
-							ideology = social_monarchism
-							trait = byz_empire
-						}
-						add_trait = {
-							 character = BYZ_Mihael_IV_Zachareas_decentalisation
-							 ideology = social_monarchism
-							 trait = red_empire
-						}
-					}
-					if = {
-						limit = {
-							has_country_leader = {
-								character = BYZ_Mihael_IV_Zachareas_roman
-								ruling_only = yes
-							}
-						}
-						add_country_leader_role  = {
-							character = BYZ_Mihael_IV_Zachareas_decentalisation
-							promote_leader = yes
-							country_leader = {
-								ideology = social_monarchism
-							}
-						}
-						remove_trait = {
-							character = BYZ_Mihael_IV_Zachareas_roman
-							ideology = social_monarchism
-							trait = byz_empire
-						}
-						add_trait = {
-							 character = BYZ_Mihael_IV_Zachareas_roman
-							 ideology = social_monarchism
-							 trait = red_empire
-						}
+						swap_ruler_traits = { remove = byz_empire add = red_empire }
 					}
 				}
-				add_stability = 0.15
+				
+				add_stability = 0.10
+				
 				set_politics = {
 					ruling_party = socialism
 					elections_allowed = no
@@ -6881,54 +7055,7 @@ focus_tree = {
 						}
 					}
 				}
-				hidden_effect = {
-					if = {
-						limit = {
-							has_country_leader = {
-								character = BYZ_Mihael_IV_Zachareas
-								ruling_only = yes
-							}
-						}
-						add_country_leader_role  = {
-							character = BYZ_Mihael_IV_Zachareas
-							promote_leader = yes
-							country_leader = {
-								ideology = liberalism
-							}
-						}
-					}
-					if = {
-						limit = {
-							has_country_leader = {
-								character = BYZ_Mihael_IV_Zachareas_decentalisation
-								ruling_only = yes
-							}
-						}
-						add_country_leader_role  = {
-							character = BYZ_Mihael_IV_Zachareas_decentalisation
-							promote_leader = yes
-							country_leader = {
-								ideology = liberalism
-							}
-						}
-					}
-					if = {
-						limit = {
-							has_country_leader = {
-								character = BYZ_Mihael_IV_Zachareas_roman
-								ruling_only = yes
-							}
-						}
-						add_country_leader_role  = {
-							character = BYZ_Mihael_IV_Zachareas_roman
-							promote_leader = yes
-							country_leader = {
-								ideology = liberalism
-							}
-						}
-					}
-				}
-				add_stability = 0.15
+				add_stability = 0.10
 				set_politics = {
 					ruling_party = democratic
 					elections_allowed = no
@@ -6992,14 +7119,7 @@ focus_tree = {
 		#cancel = { }
 		
 		available = {
-			OR = {
-				AUS = {
-					has_country_flag = victory_R_V_A_1
-				}
-				AUS = {
-					has_country_flag = victory_R_V_A_2
-				}
-			}
+			austria_exists_and_won_1_or_more_war_witch_pru = yes
 			date > 1853.1.1
 		}
 		
@@ -7458,7 +7578,11 @@ focus_tree = {
 		#cancel = { }
 		
 		available = {
-			has_country_flag = first_world_war_won
+			custom_trigger_tooltip = {
+				tooltip = focus_will_open_in_path_tt		
+				has_country_flag = first_world_war_won
+				always = no
+			}
 		}
 		
 		#bypass = { }
@@ -7466,6 +7590,9 @@ focus_tree = {
 		#search_filters = {  }
 		
 		completion_reward = {
+			custom_effect_tooltip = byz_path_purple_dawn_tt
+			#custom_effect_tooltip = byz_purple_dawn_tt
+			#set_stability = 1.00
 		}	
 	}
 	
@@ -7477,6 +7604,67 @@ focus_tree = {
 		y = 2
 		cost = 4.3
 		prerequisite = { focus = BYZ_purple_dawn }
+		#mutually_exclusive = { }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		allow_branch = {
+			always = no
+		}
+		
+		#cancel = { }
+		
+		available = { 
+			
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			add_war_support = -1.00
+		}	
+	}
+	
+	#Post war Colonial
+	
+	focus = {
+		id = BYZ_new_colonial_conference
+		icon = GFX_
+		relative_position_id = BYZ_eighth_senat_meeting
+		x = -10
+		y = 3
+		cost = 4.3
+		prerequisite = { focus = BYZ_gigant_fall_a_sleep }
+		#mutually_exclusive = { }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		available = {
+			has_completed_focus = BYZ_colonial_conference
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+		}	
+	}
+	
+	focus = {
+		id = BYZ_indian_direction
+		icon = GFX_
+		relative_position_id = BYZ_new_colonial_conference
+		x = -3
+		y = 1
+		cost = 4.3
+		prerequisite = { focus = BYZ_new_colonial_conference }
 		#mutually_exclusive = { }
 		ai_will_do = {
 			factor = 2500
@@ -7494,4 +7682,377 @@ focus_tree = {
 		}	
 	}
 	
+	focus = {
+		id = BYZ_africa_direction
+		icon = GFX_
+		relative_position_id = BYZ_new_colonial_conference
+		x = 3
+		y = 1
+		cost = 4.3
+		prerequisite = { focus = BYZ_new_colonial_conference }
+		#mutually_exclusive = { }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+		}	
+	}
+	
+	#Arabia focus
+	
+	focus = {
+		id = BYZ_arabian_question
+		icon = GFX_
+		relative_position_id = BYZ_eighth_senat_meeting
+		x = 0
+		y = 3
+		cost = 4.3
+		prerequisite = { focus = BYZ_gigant_fall_a_sleep }
+		#mutually_exclusive = { }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+		}	
+	}
+	
+	focus = {
+		id = BYZ_where_crusader_fall_roman_stand
+		icon = GFX_
+		relative_position_id = BYZ_arabian_question
+		x = 3
+		y = 1
+		cost = 4.3
+		prerequisite = { focus = BYZ_arabian_question }
+		mutually_exclusive = { focus = BYZ_where_crusader_win_we_help }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = byz_crusader_lost_or_not_exist_tt
+				OR = {
+					has_country_flag = byz_crusader_lost_flag
+					HAL = {
+						has_country_flag = {
+							flag = fed_inv
+							value < -2
+						}
+					}
+					NOT = {
+						country_exists = YPS
+					}
+				}
+			}
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+		}	
+	}
+	
+	focus = {
+		id = BYZ_where_crusader_win_we_help
+		icon = GFX_
+		relative_position_id = BYZ_arabian_question
+		x = -3
+		y = 1
+		cost = 4.3
+		prerequisite = { focus = BYZ_arabian_question }
+		mutually_exclusive = { focus = BYZ_where_crusader_fall_roman_stand }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = byz_crusader_win_tt
+				has_country_flag = byz_crusader_exist_flag
+			}
+		}
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+		}	
+	}
+	
+	#After war Politic
+	
+	focus = {
+		id = BYZ_new_era
+		icon = GFX_
+		relative_position_id = BYZ_gigant_fall_a_sleep
+		x = 10
+		y = 1
+		cost = 4.3
+		prerequisite = { focus = BYZ_gigant_fall_a_sleep }
+		#mutually_exclusive = { }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+		}	
+	}
+	
+	focus = {
+		id = BYZ_russian_politic
+		icon = GFX_
+		relative_position_id = BYZ_new_era
+		x = -2
+		y = 1
+		cost = 4.3
+		prerequisite = { focus = BYZ_new_era }
+		#mutually_exclusive = { }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+		}	
+	}
+	
+	focus = {
+		id = BYZ_german_politic
+		icon = GFX_
+		relative_position_id = BYZ_new_era
+		x = 2
+		y = 1
+		cost = 4.3
+		prerequisite = { focus = BYZ_new_era }
+		#mutually_exclusive = { }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+		}	
+	}
+	
+	focus = {
+		id = BYZ_cold_war_with_german
+		icon = GFX_
+		relative_position_id = BYZ_german_politic
+		x = -1
+		y = 1
+		cost = 4.3
+		prerequisite = { focus = BYZ_german_politic }
+		mutually_exclusive = { focus = BYZ_hot_war_with_german }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+		}	
+	}
+	
+	focus = {
+		id = BYZ_hot_war_with_german
+		icon = GFX_
+		relative_position_id = BYZ_german_politic
+		x = 1
+		y = 1
+		cost = 4.3
+		prerequisite = { focus = BYZ_german_politic }
+		mutually_exclusive = { focus = BYZ_cold_war_with_german }
+		ai_will_do = {
+			factor = 0
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+		}	
+	}
+	
+	focus = {
+		id = BYZ_world_politic
+		icon = GFX_
+		relative_position_id = BYZ_new_era
+		x = 6
+		y = 1
+		cost = 4.3
+		prerequisite = { focus = BYZ_new_era }
+		#mutually_exclusive = { }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+		}	
+	}
+	
+	#Main Post war tree
+	
+	focus = {
+		id = BYZ_byzantium_future
+		icon = GFX_
+		relative_position_id = BYZ_gigant_fall_a_sleep
+		x = 20
+		y = 1
+		cost = 4.3
+		prerequisite = { focus = BYZ_gigant_fall_a_sleep }
+		#mutually_exclusive = { }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		allow_branch = {
+			NOT = { 
+				has_completed_focus = BYZ_power_to_senat
+				has_completed_focus = BYZ_counteraction_of_senat
+			}
+		}
+		
+		completion_reward = {
+			custom_effect_tooltip = byz_focus_change_tree_from_old_focus_tt
+		}	
+	}
+	
+	#Decentralise politic
+	
+	focus = {
+		id = BYZ_not_vassals_but_allies
+		icon = GFX_
+		relative_position_id = BYZ_gigant_fall_a_sleep
+		x = 20
+		y = 1
+		cost = 4.3
+		prerequisite = { focus = BYZ_gigant_fall_a_sleep }
+		#mutually_exclusive = { }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		allow_branch = {
+			has_completed_focus = BYZ_power_to_senat
+		}
+		
+		completion_reward = {
+			
+		}	
+	}
+	
+	#Centralise politic
+	
+	focus = {
+		id = BYZ_chain_them_up
+		icon = GFX_
+		relative_position_id = BYZ_gigant_fall_a_sleep
+		x = 20
+		y = 1
+		cost = 4.3
+		prerequisite = { focus = BYZ_gigant_fall_a_sleep }
+		#mutually_exclusive = { }
+		ai_will_do = {
+			factor = 2500
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		allow_branch = {
+			has_completed_focus = BYZ_counteraction_of_senat
+		}
+		
+		completion_reward = {
+			
+		}	
+	}
 }

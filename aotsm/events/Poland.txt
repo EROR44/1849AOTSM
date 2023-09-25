@@ -19,6 +19,7 @@ country_event = {
 	hidden =  yes
 	
 	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event pol.1"
 		PLH = {
 			transfer_state = 853
 		}
@@ -31,6 +32,7 @@ country_event = {
 		name = pol.1.a
 		PRU = { country_event = { id = pol_ger.1 days = 7 } }
 		RUS = { country_event = { id = pol_rus.1 days = 28 } }
+		PLH = { load_oob = PLH_REVOLUTION }
 		PLH = { inherit_technology = RUS }
 		news_event = news.67
 	}
@@ -50,12 +52,12 @@ country_event = {
 	hidden =  yes
 	
 	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event pol.2"
 		PRU = { give_guarantee = PLH }
 	}
 	
 	option = {
 		name = pol.2.a
-		PLH = { load_oob = PLH_REVOLUTION }
 		add_stability = 0.05
 		10 = {
 			add_building_construction = {
@@ -79,10 +81,33 @@ country_event = {
 	
 	fire_only_once = yes
 	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event pol_ger.1"
+	}
+	
 	option = {
 		name = pol_ger.1.a
 		ai_chance = {
-			factor = 50
+			base = 50
+			modifier = {
+				add = 200
+				is_historical_focus_on = yes
+			}
+			modifier = {
+				factor = 200
+				has_game_rule = {
+					rule = start_world_war_rule 
+					option = only_historical
+				}
+			}
+		}
+		trigger = {
+			NOT = {
+				has_game_rule = {
+					rule = start_world_war_rule 
+					option = only_not_historical
+				}
+			}
 		}
 		PLH = { country_event = { id = pol.2 days = 7 } }
 		news_event = news.68
@@ -91,16 +116,29 @@ country_event = {
 	option = {
 		name =  pol_ger.1.b 
 		ai_chance = {
-			factor = 50
+			base = 50
 			modifier = {
 				factor = 0
 				is_historical_focus_on = yes
 			}
+			modifier = {
+				add = 200
+				has_game_rule = {
+					rule = start_world_war_rule 
+					option = only_not_historical
+				}
+			}
+		}	
+		trigger = {
+			NOT = {
+				has_game_rule = {
+					rule = start_world_war_rule 
+					option = only_historical
+				}
+			}
 		}
 		hidden_effect = {
-			RUS = {
-				set_country_flag = pru_ignore_poland_uprising
-			}
+			set_global_flag = pru_ignore_poland_uprising
 		}
 	}
 	
@@ -115,6 +153,10 @@ country_event = {
 	is_triggered_only = yes
 	
 	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event pol_ger.2"
+	}
 	
 	option = {
 		name = pol_ger.2.a
@@ -290,6 +332,10 @@ country_event = {
 	
 	fire_only_once = yes
 	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event pol_ger.3"
+	}
+	
 	option = {
 		name = pol_ger.3.a
 		ai_chance = {
@@ -327,6 +373,10 @@ country_event = {
 	is_triggered_only = yes
 	
 	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event pol_ger.4"
+	}
 	
 	option = {
 		name = pol_ger.4.a
@@ -502,6 +552,10 @@ country_event = {
 	
 	fire_only_once = yes
 	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event pol_ger.5"
+	}
+	
 	option = {
 		name = pol_ger.5.a
 		ai_chance = {
@@ -540,6 +594,10 @@ country_event = {
 	
 	fire_only_once = yes
 	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event pol_rus.1"
+	}
+	
 	option = {
 		name = pol_rus.1.a
 		ai_chance = {
@@ -548,165 +606,215 @@ country_event = {
 		if = {
 			limit = {
 				NOT = {
-					has_global_flag = firts_world_war
+					has_global_flag = pru_ignore_poland_uprising
 				}
 			}
-			hidden_effect = {
-				first_world_war_begin = yes
-			}
-			PLH = {
-				declare_war_on = {
-					target = RUS
-					type = annex_everything
-				}
-			}
-			PRU = { add_to_faction = PLH }
-			PLH = { 
-				add_to_war = {
-					targeted_alliance = PRU
-					enemy = RUS
-				}
-			}
-			PRU = {
-				add_to_war = {
-					targeted_alliance = PLH
-					enemy = RUS
-				}
-			}
-			BYZ = {
-				add_to_war = {
-					targeted_alliance = PLH
-					enemy = RUS
-				}
-			}
-			hidden_effect = {
-				if = {
-					limit = {
-						BYZ = {
-							has_idea = russian_history_enemy_2
-						}
-					}
-					BYZ = {
-						swap_ideas = {
-							remove_idea = russian_history_enemy_2
-							add_idea = russian_history_enemy_3
-						}
+			if = {
+				limit = {
+					NOT = {
+						has_global_flag = firts_world_war
 					}
 				}
-				if = {
-					limit = {
-						BYZ = {
-							has_idea = russian_history_enemy_1
-						}
-					}
-					BYZ = {
-						swap_ideas = {
-							remove_idea = russian_history_enemy_1
-							add_idea = russian_history_enemy_2
-						}
+				hidden_effect = {
+					first_world_war_begin = yes
+				}
+				PLH = {
+					declare_war_on = {
+						target = RUS
+						type = annex_everything
 					}
 				}
-				if = {
-					limit = {
-						country_exists = KRA
-					}
-					PLH = {
-						change_tag_from = KRA
-					}
-					KRA = {
-						transfer_units_fraction= {
-							target = PLH
-							size = 1.0
-							stockpile_ratio = 1.0
-							army_ratio = 1.0
-							navy_ratio = 1.0
-							air_ratio = 1.0
-						}
-					}
-					PLH = {
-						annex_country = {
-							target = KRA
-							transfer_troops = yes
-						}
-					}	
-					KRA = {
-						remove_state_core = 903
-					}
-					PLH = {
-						add_state_core = 903
+				PRU = { add_to_faction = PLH }
+				PLH = { 
+					add_to_war = {
+						targeted_alliance = PRU
+						enemy = RUS
 					}
 				}
 				PRU = {
-					complete_national_focus = PRU_first_world_war
+					add_to_war = {
+						targeted_alliance = PLH
+						enemy = RUS
+					}
 				}
-				if = {
-					limit = {
-						PRU = {
-							has_country_flag = pru_wrangel_war_plan
+				BYZ = {
+					add_to_war = {
+						targeted_alliance = PLH
+						enemy = RUS
+					}
+				}
+				hidden_effect = {
+					if = {
+						limit = {
+							BYZ = {
+								has_idea = russian_history_enemy_2
+							}
+						}
+						BYZ = {
+							swap_ideas = {
+								remove_idea = russian_history_enemy_2
+								add_idea = russian_history_enemy_3
+							}
+						}
+					}
+					if = {
+						limit = {
+							BYZ = {
+								has_idea = russian_history_enemy_1
+							}
+						}
+						BYZ = {
+							swap_ideas = {
+								remove_idea = russian_history_enemy_1
+								add_idea = russian_history_enemy_2
+							}
+						}
+					}
+					if = {
+						limit = {
+							country_exists = KRA
+						}
+						PLH = {
+							change_tag_from = KRA
+						}
+						KRA = {
+							transfer_units_fraction= {
+								target = PLH
+								size = 1.0
+								stockpile_ratio = 1.0
+								army_ratio = 1.0
+								navy_ratio = 1.0
+								air_ratio = 1.0
+							}
+						}
+						PLH = {
+							annex_country = {
+								target = KRA
+								transfer_troops = yes
+							}
+						}	
+						KRA = {
+							remove_state_core = 903
+						}
+						PLH = {
+							add_state_core = 903
 						}
 					}
 					PRU = {
-						country_event = ger_warplane.6
+						complete_national_focus = PRU_first_world_war
 					}
-					news_event = {
-						id = news.168
-						days = 2
-					}
-				}
-				if = {
-					limit = {
+					if = {
+						limit = {
+							PRU = {
+								has_country_flag = pru_wrangel_war_plan
+							}
+						}
 						PRU = {
-							has_country_flag = pru_bismark_war_plan
+							country_event = ger_warplane.6
+						}
+						news_event = {
+							id = news.168
+							days = 2
 						}
 					}
-					PRU = {
-						country_event = ger_warplane.7
+					if = {
+						limit = {
+							PRU = {
+								has_country_flag = pru_bismark_war_plan
+							}
+						}
+						PRU = {
+							country_event = ger_warplane.7
+						}
+						news_event = {
+							id = news.171
+							days = 3
+						}
 					}
-					news_event = {
-						id = news.171
-						days = 3
+				}
+			}
+			if = {
+				limit = {
+					has_global_flag = firts_world_war
+				}
+				RUS = {
+					declare_war_on = {
+						target = PLH
+						type = annex_everything
+					}
+				}
+				PRU = { add_to_faction = PLH }
+				hidden_effect = {
+					if = {
+						limit = {
+							BYZ = {
+								has_idea = russian_history_enemy_2
+							}
+						}
+						BYZ = {
+							swap_ideas = {
+								remove_idea = russian_history_enemy_2
+								add_idea = russian_history_enemy_3
+							}
+						}
+					}
+					if = {
+						limit = {
+							BYZ = {
+								has_idea = russian_history_enemy_1
+							}
+						}
+						BYZ = {
+							swap_ideas = {
+								remove_idea = russian_history_enemy_1
+								add_idea = russian_history_enemy_2
+							}
+						}
+					}
+					if = {
+						limit = {
+							country_exists = KRA
+						}
+						PLH = {
+							change_tag_from = KRA
+						}
+						KRA = {
+							transfer_units_fraction= {
+								target = PLH
+								size = 1.0
+								stockpile_ratio = 1.0
+								army_ratio = 1.0
+								navy_ratio = 1.0
+								air_ratio = 1.0
+							}
+						}
+						PLH = {
+							annex_country = {
+								target = KRA
+								transfer_troops = yes
+							}
+						}	
+						KRA = {
+							remove_state_core = 903
+						}
+						PLH = {
+							add_state_core = 903
+						}
 					}
 				}
 			}
 		}
 		if = {
 			limit = {
-				has_global_flag = firts_world_war
+				has_global_flag = pru_ignore_poland_uprising
 			}
-			PLH = {
+			RUS = {
 				declare_war_on = {
-					target = RUS
+					target = PLH
 					type = annex_everything
 				}
 			}
-			PRU = { add_to_faction = PLH }
 			hidden_effect = {
-				if = {
-					limit = {
-						BYZ = {
-							has_idea = russian_history_enemy_2
-						}
-					}
-					BYZ = {
-						swap_ideas = {
-							remove_idea = russian_history_enemy_2
-							add_idea = russian_history_enemy_3
-						}
-					}
-				}
-				if = {
-					limit = {
-						BYZ = {
-							has_idea = russian_history_enemy_1
-						}
-					}
-					BYZ = {
-						swap_ideas = {
-							remove_idea = russian_history_enemy_1
-							add_idea = russian_history_enemy_2
-						}
-					}
-				}
 				if = {
 					limit = {
 						country_exists = KRA
@@ -742,7 +850,7 @@ country_event = {
 	}
 	
 	option = {
-		name =  pol_rus.1.b 
+		name = pol_rus.1.b
 		ai_chance = {
 			factor = 0
 			modifier = {
@@ -772,6 +880,10 @@ country_event = {
 	is_triggered_only = yes
 	
 	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event pol_rus.2"
+	}
 	
 	option = {
 		name = pol_rus.2.a
@@ -875,6 +987,10 @@ country_event = {
 	is_triggered_only = yes
 	
 	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event pol_rus.3"
+	}
 	
 	option = {
 		name = pol_rus.3.a

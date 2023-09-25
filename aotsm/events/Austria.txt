@@ -14,6 +14,7 @@ add_namespace = aus_ref
 add_namespace = end_of_austrian
 add_namespace = aus_industrian_reform
 
+
 #Base aus
 
 country_event = {
@@ -338,6 +339,88 @@ country_event = {
 	option = {
 		name = aus_napoleon.1.a
 		news_event = news.138
+	}
+	
+}
+
+country_event = {
+	id = aus_napoleon.100 #Napoleon Return
+	title = aus_napoleon.100.t
+	desc = aus_napoleon.100.d
+	picture = GFX_report_event_return_of_napoleon
+	
+	trigger = {
+		tag = FRR
+		FRR = {
+			has_country_leader = {
+				character = FRR_Louis_Napoleon
+				ruling_only = yes
+			}
+		}
+		AUS = {
+			has_country_leader = {
+				character = AUS_Napoleon_II
+				ruling_only = yes
+			}
+		}
+		AUS = {
+			has_completed_focus = AUS_visit_corsica
+		}
+	}
+	
+	mean_time_to_happen = {
+		days = 50
+	}
+	
+	fire_only_once = yes
+	
+	option = { #We need Napoleon!
+		name = aus_napoleon.100.a
+		promote_character = FRR_Napoleon_Bonaparte
+		FRR = {
+			set_party_name = {
+				ideology = reactionist
+				long_name = FRR_napoleon_party_long
+				name = FRR_napoleon_party
+			}
+			set_cosmetic_tag = FRR_napoleon_empire
+		}
+		hidden_effect = {
+			FRR = {
+				country_event = {
+					id = aus_napoleon.101
+					days = 63
+				}
+			}
+		}
+	}
+	
+	option = { #He is to old
+		name = aus_napoleon.100.b
+	
+	}
+	
+}
+
+country_event = {
+	id = aus_napoleon.101 #Napoleon Return
+	title = aus_napoleon.101.t
+	desc = aus_napoleon.101.d
+	picture = GFX_report_event_death_of_napoleon
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = { #We need Napoleon!
+		name = aus_napoleon.101.a
+		custom_effect_tooltip = death_of_napoleon_tt
+		hidden_effect = {
+			FRR_Napoleon_Bonaparte = {
+				retire = yes
+			}
+			promote_character = FRR_Louis_Napoleon
+		}
 	}
 	
 }
@@ -732,9 +815,6 @@ country_event = {
 				transfer_state = 155
 				add_ideas = revolution_power
 				load_oob = revolution_force_HUN
-				set_politics  = {
-					ruling_party = reactionist
-				}
 				set_country_flag = hun_has_revolution_aus
 			}
 			HUN = {
@@ -786,6 +866,9 @@ country_event = {
 						id = end_of_austrian.2 
 						days = 2
 					}
+				}
+				HUN = {
+					set_cosmetic_tag = HUN_revolt_AUS
 				}
 			}
 		}
@@ -1005,6 +1088,9 @@ country_event = {
 						days = 3
 					}
 				}
+				GLA = {
+					set_cosmetic_tag = GLA_revolt_AUS
+				}
 			}
 		}
 	}
@@ -1079,6 +1165,11 @@ country_event = {
 				}
 			}
 			news_event = news.109
+			hidden_effect = {
+				VEN = {
+					set_cosmetic_tag = VEN_revolt_AUS
+				}
+			}
 		}
 	}
 }

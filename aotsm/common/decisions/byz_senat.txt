@@ -213,6 +213,7 @@ byz_senat_decision_category = {
 					}
 				}
 			}
+			byz_coalition_calculation = yes
 		}
 	}
 	
@@ -324,6 +325,7 @@ byz_senat_decision_category = {
 					}
 				}
 			}
+			byz_coalition_calculation = yes
 		}
 	}
 	
@@ -428,6 +430,7 @@ byz_senat_decision_category = {
 					}
 				}
 			}
+			byz_coalition_calculation = yes
 		}
 	}
 	
@@ -628,6 +631,7 @@ byz_senat_decision_category = {
 					custom_effect_tooltip = byz_trade_way_dm
 				}
 			}
+			byz_coalition_calculation = yes
 		}
 	}
 	
@@ -676,6 +680,7 @@ byz_senat_decision_category = {
 				min = 0
 				max = 200
 			}
+			byz_coalition_calculation = yes
 		}
 		
 		complete_effect = {
@@ -693,6 +698,7 @@ byz_senat_decision_category = {
 				min = 0
 				max = 200
 			}
+			byz_coalition_calculation = yes
 		}
 	}
 	
@@ -746,6 +752,7 @@ byz_senat_decision_category = {
 				}
 				custom_effect_tooltip = byz_general_more_peace
 			}
+			byz_coalition_calculation = yes
 		}
 		
 		complete_effect = {
@@ -767,6 +774,7 @@ byz_senat_decision_category = {
 				clr_country_flag = byz_rulling_impgov
 				set_country_flag = byz_rulling_imp
 			}
+			byz_coalition_calculation = yes
 		}
 	}
 	
@@ -811,6 +819,7 @@ byz_senat_decision_category = {
 				min = 0
 				max = 200
 			}
+			byz_coalition_calculation = yes
 		}
 		
 		complete_effect = {
@@ -855,6 +864,7 @@ byz_senat_decision_category = {
 					add_idea = free_trade
 				}
 			}
+			byz_coalition_calculation = yes
 		}
 	}
 	
@@ -901,16 +911,39 @@ byz_senat_decision_category = {
 			add_manpower = -25000
 			if = {
 				limit = {
+					BYZ = {
+						check_variable = {
+							byz_military_unrest > 2
+						}
+					}
+				}
+				custom_effect_tooltip = byz_military_leave_coalition
+				BYZ = {
+					clr_country_flag = byz_rulling_impgov
+					set_country_flag = byz_rulling_imp
+				}
+			}
+			if = {
+				limit = {
+					BYZ = {
+						has_country_flag = byz_rulling_impgov
+					}
 					BUL = {
-						has_idea = balkan_wars
+						has_idea = balkan_wars_1
+					}
+					NOT = {
+						BYZ = {
+							check_variable = {
+								byz_military_unrest > 2
+							}
+						}
 					}
 				}
-				BUL = {
-					swap_ideas = {
-						remove_idea = balkan_wars
-						add_idea = balkan_wars_1
-					}
+				BYZ = {
+					add_war_support = -0.05
+					add_to_variable = { byz_military_unrest = 1 }
 				}
+				custom_effect_tooltip = byz_military_may_leave_coalition
 			}
 			custom_effect_tooltip = byz_losses_hight
 			if = {
@@ -922,6 +955,19 @@ byz_senat_decision_category = {
 				custom_effect_tooltip = byz_general_more_angry
 			}
 			activate_mission = byz_bulgaria_war_missia
+			if = {
+				limit = {
+					BUL = {
+						has_idea = balkan_wars
+					}
+				}
+				BUL = {
+					swap_ideas = {
+						remove_idea = balkan_wars
+						add_idea = balkan_wars_1
+					}
+				}
+			}
 		}
 	}
 	
@@ -963,16 +1009,39 @@ byz_senat_decision_category = {
 			add_manpower = -25000
 			if = {
 				limit = {
+					BYZ = {
+						check_variable = {
+							byz_military_unrest > 2
+						}
+					}
+				}
+				custom_effect_tooltip = byz_military_leave_coalition
+				BYZ = {
+					clr_country_flag = byz_rulling_impgov
+					set_country_flag = byz_rulling_imp
+				}
+			}
+			if = {
+				limit = {
+					BYZ = {
+						has_country_flag = byz_rulling_impgov
+					}
 					ALB = {
-						has_idea = balkan_wars
+						has_idea = balkan_wars_1
+					}
+					NOT = {
+						BYZ = {
+							check_variable = {
+								byz_military_unrest > 2
+							}
+						}
 					}
 				}
-				ALB = {
-					swap_ideas = {
-						remove_idea = balkan_wars
-						add_idea = balkan_wars_1
-					}
+				BYZ = {
+					add_war_support = -0.05
+					add_to_variable = { byz_military_unrest = 1 }
 				}
+				custom_effect_tooltip = byz_military_may_leave_coalition
 			}
 			custom_effect_tooltip = byz_losses_hight
 			if = {
@@ -984,6 +1053,19 @@ byz_senat_decision_category = {
 				custom_effect_tooltip = byz_general_more_angry
 			}
 			activate_mission = byz_albania_war_missia
+			if = {
+				limit = {
+					ALB = {
+						has_idea = balkan_wars
+					}
+				}
+				ALB = {
+					swap_ideas = {
+						remove_idea = balkan_wars
+						add_idea = balkan_wars_1
+					}
+				}
+			}
 		}
 	}
 	
@@ -1028,16 +1110,39 @@ byz_senat_decision_category = {
 			add_manpower = -25000
 			if = {
 				limit = {
+					BYZ = {
+						check_variable = {
+							byz_military_unrest > 2
+						}
+					}
+				}
+				custom_effect_tooltip = byz_military_leave_coalition
+				BYZ = {
+					clr_country_flag = byz_rulling_impgov
+					set_country_flag = byz_rulling_imp
+				}
+			}
+			if = {
+				limit = {
+					BYZ = {
+						has_country_flag = byz_rulling_impgov
+					}
 					SER = {
-						has_idea = balkan_wars
+						has_idea = balkan_wars_1
+					}
+					NOT = {
+						BYZ = {
+							check_variable = {
+								byz_military_unrest > 2
+							}
+						}
 					}
 				}
-				SER = {
-					swap_ideas = {
-						remove_idea = balkan_wars
-						add_idea = balkan_wars_1
-					}
+				BYZ = {
+					add_war_support = -0.05
+					add_to_variable = { byz_military_unrest = 1 }
 				}
+				custom_effect_tooltip = byz_military_may_leave_coalition
 			}
 			custom_effect_tooltip = byz_losses_hight
 			if = {
@@ -1049,6 +1154,19 @@ byz_senat_decision_category = {
 				custom_effect_tooltip = byz_general_more_angry
 			}
 			activate_mission = byz_serbia_war_missia
+			if = {
+				limit = {
+					SER = {
+						has_idea = balkan_wars
+					}
+				}
+				SER = {
+					swap_ideas = {
+						remove_idea = balkan_wars
+						add_idea = balkan_wars_1
+					}
+				}
+			}
 		}
 	}
 	
@@ -1099,16 +1217,39 @@ byz_senat_decision_category = {
 			add_manpower = -25000
 			if = {
 				limit = {
+					BYZ = {
+						check_variable = {
+							byz_military_unrest > 2
+						}
+					}
+				}
+				custom_effect_tooltip = byz_military_leave_coalition
+				BYZ = {
+					clr_country_flag = byz_rulling_impgov
+					set_country_flag = byz_rulling_imp
+				}
+			}
+			if = {
+				limit = {
+					BYZ = {
+						has_country_flag = byz_rulling_impgov
+					}
 					BOS = {
-						has_idea = balkan_wars
+						has_idea = balkan_wars_1
+					}
+					NOT = {
+						BYZ = {
+							check_variable = {
+								byz_military_unrest > 2
+							}
+						}
 					}
 				}
-				BOS = {
-					swap_ideas = {
-						remove_idea = balkan_wars
-						add_idea = balkan_wars_1
-					}
+				BYZ = {
+					add_war_support = -0.05
+					add_to_variable = { byz_military_unrest = 1 }
 				}
+				custom_effect_tooltip = byz_military_may_leave_coalition
 			}
 			custom_effect_tooltip = byz_losses_hight
 			if = {
@@ -1120,6 +1261,19 @@ byz_senat_decision_category = {
 				custom_effect_tooltip = byz_general_more_angry
 			}
 			activate_mission = byz_bosnia_war_missia
+			if = {
+				limit = {
+					BOS = {
+						has_idea = balkan_wars
+					}
+				}
+				BOS = {
+					swap_ideas = {
+						remove_idea = balkan_wars
+						add_idea = balkan_wars_1
+					}
+				}
+			}
 		}
 	}
 	
@@ -1470,22 +1624,45 @@ byz_senat_decision_category = {
 		}
 		
 		available = {
+			RUS = {
+				controls_state = 137
+			}
+			custom_trigger_tooltip = {
+				tooltip = byz_ready_to_take_back_turida_tt
+				OR = {
+					AND = {
+						has_war_with = RUS
+						BYZ = {
+							has_country_flag = byz_prepered_to_take_back_taurida
+						}
+						has_global_flag = firts_world_war
+						date > 1855.4.15
+					}
+					AND = {
+						NOT = {
+							has_war_with = RUS
+						}
+						BYZ = {
+							has_country_flag = byz_prepered_to_take_back_taurida
+						}
+						date > 1855.2.10
+					}
+				}
+			}
+		}
+		
+		cancel_trigger = {
+			NOT = {
+				RUS = {
+					controls_state = 137
+				}
+			}
 		}
 		
 		visible = {
 			tag = BYZ
-			OR = {
-				AND = {
-					has_war_with = RUS
-					has_global_flag = firts_world_war
-					date > 1855.4.15
-				}
-				AND = {
-					date > 1855.2.10
-					NOT = {
-						has_war_with = RUS
-					}
-				}
+			BYZ = {
+				has_country_flag = byz_prepered_to_take_back_taurida
 			}
 		}
 		
@@ -1497,7 +1674,7 @@ byz_senat_decision_category = {
 			}
 		}
 		
-		days_remove = 30
+		days_remove = 15
 		
 		fire_only_once = yes
 		
@@ -1539,6 +1716,10 @@ byz_senat_decision_category = {
 								add_idea = russian_history_enemy_2
 							}
 						}
+					}
+					news_event = {
+						id = news.277
+						days = 3
 					}
 					PRU = {
 						complete_national_focus = PRU_first_world_war
@@ -1669,7 +1850,7 @@ byz_senat_decision_category = {
 							country_leader = {
 								ideology = paternalism
 								expire = "1880.1.1"
-								traits = { }
+								traits = { roman_lord }
 							}
 						}
 					}
@@ -1695,7 +1876,7 @@ byz_senat_decision_category = {
 							country_leader = {
 								ideology = paternalism
 								expire = "1880.1.1"
-								traits = { }
+								traits = { roman_lord }
 							}
 						}
 					}
@@ -1774,6 +1955,7 @@ byz_senat_decision_category = {
 				max = 200
 			}
 			custom_effect_tooltip = byz_impgov_id
+			byz_coalition_calculation = yes
 		}
 		
 		remove_effect = {
@@ -1851,6 +2033,7 @@ byz_senat_decision_category = {
 				max = 200
 			}
 			custom_effect_tooltip = byz_impgov_im
+			byz_coalition_calculation = yes
 		}
 		
 		remove_effect = {
@@ -1925,6 +2108,7 @@ byz_senat_decision_category = {
 				max = 200
 			}
 			custom_effect_tooltip = byz_imp_ig
+			byz_coalition_calculation = yes
 		}
 		
 		remove_effect = {
@@ -1987,6 +2171,7 @@ byz_senat_decision_category = {
 				max = 200
 			}
 			custom_effect_tooltip = byz_impgov_gd
+			byz_coalition_calculation = yes
 		}
 		
 		remove_effect = {
@@ -2053,6 +2238,7 @@ byz_senat_decision_category = {
 				max = 200
 			}
 			custom_effect_tooltip = byz_impgov_gm
+			byz_coalition_calculation = yes
 		}
 		
 		remove_effect = {
@@ -2127,6 +2313,7 @@ byz_senat_decision_category = {
 				max = 200
 			}
 			custom_effect_tooltip = byz_gov_gi
+			byz_coalition_calculation = yes
 		}
 		
 		remove_effect = {
@@ -2204,6 +2391,7 @@ byz_senat_decision_category = {
 				max = 200
 			}
 			custom_effect_tooltip = byz_demmer_mi
+			byz_coalition_calculation = yes
 		}
 		
 		remove_effect = {
@@ -2270,6 +2458,7 @@ byz_senat_decision_category = {
 				max = 200
 			}
 			custom_effect_tooltip = byz_demmer_mg
+			byz_coalition_calculation = yes
 		}
 		
 		remove_effect = {
@@ -2329,6 +2518,7 @@ byz_senat_decision_category = {
 				max = 200
 			}
 			custom_effect_tooltip = byz_mer_md
+			byz_coalition_calculation = yes
 		}
 		
 		remove_effect = {
@@ -2391,6 +2581,7 @@ byz_senat_decision_category = {
 				max = 200
 			}
 			custom_effect_tooltip = byz_demmer_di
+			byz_coalition_calculation = yes
 		}
 		
 		remove_effect = {
@@ -2453,6 +2644,7 @@ byz_senat_decision_category = {
 				max = 200
 			}
 			custom_effect_tooltip = byz_denmer_dg
+			byz_coalition_calculation = yes
 		}
 		
 		remove_effect = {
@@ -2512,6 +2704,7 @@ byz_senat_decision_category = {
 				max = 200
 			}
 			custom_effect_tooltip = byz_dem_dm
+			byz_coalition_calculation = yes
 		}
 		
 		remove_effect = {

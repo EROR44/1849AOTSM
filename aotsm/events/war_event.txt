@@ -1,5 +1,9 @@
 
 add_namespace = war_event
+add_namespace = war_russian
+add_namespace = war_prussian
+add_namespace = war_russian_czapski
+add_namespace = war_russian_monarchist
 
 country_event = { #Anti-Hungarian coalition want help
 	id = war_event.1
@@ -11,10 +15,12 @@ country_event = { #Anti-Hungarian coalition want help
 	
 	fire_only_once = yes
 	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event war_event.1"}
+	
 	option = { #Yes
 		name = war_event.1.a
 		ai_chance = {
-			factor = 75
+			base = 75
 			modifier = {
 				factor = 10
 				HUN = {
@@ -49,7 +55,7 @@ country_event = { #Anti-Hungarian coalition want help
 	option = { #No
 		name = war_event.1.b
 		ai_chance = {
-			factor = 25
+			base = 25
 			modifier = {
 				factor = 0
 				HUN = {
@@ -92,6 +98,8 @@ country_event = { #Russian say yes
 	
 	fire_only_once = yes
 	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event war_event.2"}
+	
 	option = { #Together to victory 
 		name = war_event.2.a
 	}
@@ -108,6 +116,8 @@ country_event = { #Russian say no
 	
 	fire_only_once = yes
 	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event war_event.3"}
+	
 	option = { #Sad news
 		name = war_event.3.a
 	}
@@ -123,6 +133,8 @@ country_event = { #Volunteers back
 	is_triggered_only = yes
 	
 	fire_only_once = no
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event war_event.4"}
 	
 	option = { #God news
 		name = war_event.4.a
@@ -148,6 +160,8 @@ country_event = { #Volunteers back
 	
 	fire_only_once = no
 	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event war_event.5"}
+	
 	option = { #God news
 		name = war_event.4.a
 		army_experience = 75
@@ -171,10 +185,12 @@ country_event = { #What do with Russian
 	
 	fire_only_once = no
 	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event war_event.6"}
+	
 	option = { #send them back
 		name = war_event.6.a
 		ai_chance = {
-			factor = 25
+			base = 25
 		}
 		if = {
 			limit = {
@@ -212,7 +228,7 @@ country_event = { #What do with Russian
 	option = { #jail them
 		name = war_event.6.b
 		ai_chance = {
-			factor = 75
+			base = 75
 		}
 		RUS = {
 			country_event = {
@@ -233,6 +249,8 @@ country_event = { #Hungary send our people back
 	is_triggered_only = yes
 	
 	fire_only_once = no
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event war_event.7"}
 	
 	option = { #good
 		name = war_event.7.a
@@ -267,9 +285,1344 @@ country_event = { #Hungary jail our people back
 	
 	fire_only_once = no
 	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event war_event.8"}
+	
 	option = { #What they say?!
 		name = war_event.8.a
 		add_war_support = 0.10
+	}
+	
+}
+
+country_event = { #Polish raids
+	id = war_russian.1
+	title = war_russian.1.t
+	desc = war_russian.1.d
+	picture = GFX_report_event_raiding_polish_village
+	
+	trigger = {
+		tag = RUS
+		RUS = {
+			has_war_with = PRU
+			owns_state = 10
+			owns_state = 87
+			owns_state = 90
+			owns_state = 92
+			owns_state = 97
+			owns_state = 98
+		}
+		has_global_flag = {
+			flag = firts_world_war
+			days > 7
+		}
+		NOT = {
+			has_global_flag = russian_capitulation
+		}
+	}
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event war_russian.1"}
+	
+	option = { #We can't do it
+		name = war_russian.1.a
+		ai_chance = {
+			base = 25
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+			}
+		}
+		RUS = {
+			add_war_support = -0.10
+		}
+	}
+	
+	option = { #Army can do it
+		name = war_russian.1.b
+		ai_chance = {
+			base = 25
+			modifier = {
+				factor = 4
+				is_historical_focus_on = yes
+			}
+		}
+		RUS = {
+			add_war_support = 0.05
+		}
+		10 = {
+			add_manpower = -1073
+			damage_building = {
+				type = infrastructure
+				damage = 1
+			}
+		}
+		87 = {
+			add_manpower = -2031
+			damage_building = {
+				type = infrastructure
+				damage = 1
+			}
+		}
+		90 = {
+			add_manpower = -563
+			damage_building = {
+				type = infrastructure
+				damage = 1
+			}
+		}
+		92 = {
+			add_manpower = -893
+			damage_building = {
+				type = infrastructure
+				damage = 1
+			}
+		}
+		97 = {
+			add_manpower = -3319
+			damage_building = {
+				type = infrastructure
+				damage = 1
+			}
+		}
+		98 = {
+			add_manpower = -217
+			damage_building = {
+				type = infrastructure
+				damage = 1
+			}
+		}
+		hidden_effect = {
+			news_event = {
+				id = news.231
+				days = 7
+			}
+		}
+	}
+	
+}
+
+country_event = { #Raid the Russian Germany
+	id = war_russian.2
+	title = war_russian.2.t
+	desc = war_russian.2.d
+	picture = GFX_report_event_german_on_volga
+	
+	trigger = {
+		tag = RUS
+		RUS = {
+			has_war_with = PRU
+		}
+		has_global_flag = {
+			flag = firts_world_war
+			days > 30
+		}
+		NOT = {
+			has_global_flag = russian_capitulation
+			RUS = {
+				OR = {
+					has_government = socialism #временное условие - убрать после доработки отношений черной лиги и социалистов
+					has_country_flag = RUS_ignatiev_not_alloved
+					has_country_leader = {
+						character = RUS_Pavel_Nikolaevich_Ignatiev
+						ruling_only = yes
+					}
+				}
+			}
+		}
+	}
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event war_russian.2"
+		hidden_effect = {
+			RUS = {
+				remove_state_core = 401
+			}	
+		}
+	}
+	
+	option = { #Ignatiev must knowing his place
+		name = war_russian.2.a
+		ai_chance = {
+			base = 25
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+			}
+		}
+	}
+	
+	option = { #Ignatiev do this
+		name = war_russian.2.b
+		ai_chance = {
+			base = 25
+			modifier = {
+				factor = 4
+				is_historical_focus_on = yes
+			}
+		}
+		401 = {
+			add_compliance = 50
+			add_resistance = 25
+			add_manpower = -78913
+			damage_building = {
+				type = infrastructure
+				damage = 5
+			}
+		}
+		hidden_effect = {
+			news_event = {
+				id = news.232
+				days = 5
+			}
+		}
+	}
+	
+}
+
+country_event = { #March of Russian
+	id = war_prussian.1
+	title = war_prussian.1.t
+	desc = war_prussian.1.d
+	picture = GFX_report_event_supres_russian_citizans
+	
+	trigger = {
+		tag = PRU
+		has_global_flag = {
+			flag = firts_world_war
+			days > 30
+		}
+		PRU = {
+			has_war_with = RUS
+		}
+		NOT = {
+			has_global_flag = pru_capitulation
+		}
+		NOT = {
+			has_global_flag = russian_capitulation
+		}
+	}
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event war_prussian.1"}
+	
+	option = { #This is Normal
+		name = war_prussian.1.a
+		ai_chance = {
+			base = 50
+			modifier = {
+				add = 25
+				PRU = {
+					has_completed_focus = PRU_bismark_first_kanzler 
+				}
+			}
+			modifier = {
+				add = -50
+				PRU = {
+					has_completed_focus = PRU_emperor_save_power 
+				}
+			}
+			modifier = {
+				add = 50
+				PRU = {
+					has_completed_focus = PRU_juncker_take_power 
+				}
+			}
+		}
+		PRU = {
+			add_stability = 0.05
+			add_war_support = 0.05
+		}
+		every_country = {
+			limit = {
+				has_war_with = PRU
+			}
+			add_stability = -0.025
+			add_war_support = -0.025
+		}
+		hidden_effect = {
+			news_event = {
+				id = news.233
+				days = 20
+			}
+		}
+	}
+	
+	option = { #No!
+		name = war_prussian.1.b
+		ai_chance = {
+			base = 50
+			modifier = {
+				add = -25
+				PRU = {
+					has_completed_focus = PRU_bismark_first_kanzler 
+				}
+			}
+			modifier = {
+				add = 50
+				PRU = {
+					has_completed_focus = PRU_emperor_save_power 
+				}
+			}
+			modifier = {
+				add = -50
+				PRU = {
+					has_completed_focus = PRU_juncker_take_power 
+				}
+			}
+		}
+		PRU = {
+			add_political_power = -250
+		}
+	}
+	
+}
+
+country_event = { #March of Russian Solder
+	id = war_prussian.2
+	title = war_prussian.2.t
+	desc = war_prussian.2.d
+	picture = GFX_report_event_supres_russian_army
+	
+	trigger = {
+		tag = PRU
+		has_global_flag = {
+			flag = firts_world_war
+			days > 60
+		}
+		PRU = {
+			has_war_with = RUS
+		}
+		RUS = {
+			casualties > 749999
+		}
+		NOT = {
+			has_global_flag = pru_capitulation
+		}
+		NOT = {
+			has_global_flag = russian_capitulation
+		}
+		PRU = {
+			surrender_progress < 0.05
+		}
+	}
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event war_prussian.2"}
+	
+	option = { #Black Sun can do this
+		name = war_prussian.2.a
+		ai_chance = {
+			base = 50
+			modifier = {
+				add = 25
+				PRU = {
+					has_completed_focus = PRU_bismark_first_kanzler 
+				}
+			}
+			modifier = {
+				add = 0
+				PRU = {
+					has_completed_focus = PRU_emperor_save_power 
+				}
+			}
+			modifier = {
+				add = 50
+				PRU = {
+					has_completed_focus = PRU_juncker_take_power 
+				}
+			}
+		}
+		custom_effect_tooltip = pru_blacksun_influince_rise
+		hidden_effect = {
+			add_to_variable = {
+				var = PRU.blacksun_influence
+				value = 1
+			}
+			news_event = {
+				id = news.234
+				days = 5
+			}
+		}
+		
+	}
+	
+	option = { #Stop the Black Sun!
+		name = war_prussian.2.b
+		ai_chance = {
+			base = 50
+			modifier = {
+				add = -25
+				PRU = {
+					has_completed_focus = PRU_bismark_first_kanzler 
+				}
+			}
+			modifier = {
+				add = 0
+				PRU = {
+					has_completed_focus = PRU_emperor_save_power 
+				}
+			}
+			modifier = {
+				add = -50
+				PRU = {
+					has_completed_focus = PRU_juncker_take_power 
+				}
+			}
+		}
+		PRU = {
+			add_stability = 0.05
+			add_war_support = -0.10
+			add_political_power = -150
+		}
+	}
+	
+}
+
+country_event = { #Emeryk Hutten-Czapski leave his work
+	id = war_russian_czapski.1
+	title = war_russian_czapski.1.t
+	desc = war_russian_czapski.1.d
+	picture = GFX_report_event_russian_сzapski
+	
+	trigger = {
+		tag = RUS
+		has_global_flag = {
+			flag = firts_world_war
+			days > 30
+		}
+	}
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event war_russian_czapski.1"}
+	
+	option = { #Very bad news
+		name = war_russian_czapski.1.a
+		ai_chance = {
+			base = 50
+		}
+		add_stability = -0.05
+		set_country_flag = rus_czapski_1
+		hidden_effect = {
+			RUS = {
+				country_event = {
+					id = script_event.37
+					days = 40
+				}
+			}
+		}
+	}
+}
+
+country_event = { #Emeryk Hutten-Czapski support growing
+	id = war_russian_czapski.2
+	title = war_russian_czapski.2.t
+	desc = war_russian_czapski.2.d
+	picture = GFX_report_event_russian_support_сzapski
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event war_russian_czapski.2"}
+	
+	option = { #What is going on?
+		name = war_russian_czapski.2.a
+		ai_chance = {
+			base = 50
+		}
+		custom_effect_tooltip = czapski_faction_creating_tt
+		set_country_flag = rus_czapski_2
+		hidden_effect = {
+			RUS = {
+				country_event = {
+					id = script_event.37
+					days = 25
+				}
+			}
+		}
+	}
+}
+
+country_event = { #Czapist start revolt
+	id = war_russian_czapski.3
+	title = war_russian_czapski.3.t
+	desc = war_russian_czapski.3.d
+	picture = GFX_report_event_russian_czapist_revolt
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event war_russian_czapski.3"}
+	
+	option = { #Very bad news
+		name = war_russian_czapski.3.a
+		ai_chance = {
+			base = 50
+		}
+		custom_effect_tooltip = czapski_faction_stronger_tt
+		set_country_flag = rus_czapski_3
+		set_country_flag = rus_czapski_begin_raids
+		RUS = {
+			country_event = {
+				id = script_event.38
+				days = 4
+			}
+		}
+		hidden_effect = {
+			RUS = {
+				country_event = {
+					id = script_event.37
+					days = 25
+				}
+			}
+		}
+	}
+}
+
+country_event = { #Emeryk Hutten-Czapski lost
+	id = war_russian_czapski.4
+	title = war_russian_czapski.4.t
+	desc = war_russian_czapski.4.d
+	picture = GFX_report_event_russian_novgorod
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event war_russian_czapski.4"}
+	
+	option = { #Very bad news
+		name = war_russian_czapski.4.a
+		ai_chance = {
+			base = 50
+		}
+		custom_effect_tooltip = czapski_faction_stronger_tt
+		set_country_flag = rus_czapski_4
+		hidden_effect = {
+			RUS = {
+				country_event = {
+					id = script_event.37
+					days = 55
+				}
+			}
+		}
+	}
+}
+
+country_event = { #Emeryk Hutten-Czapski rise Novgorod
+	id = war_russian_czapski.5
+	title = war_russian_czapski.5.t
+	desc = war_russian_czapski.5.d
+	picture = GFX_report_event_russian_czapist_in_novgorod
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event war_russian_czapski.5"}
+	
+	option = { #Very bad news
+		name = war_russian_czapski.5.a
+		ai_chance = {
+			base = 50
+		}
+		custom_effect_tooltip = czapski_faction_stronger_tt
+		set_country_flag = rus_czapski_max
+	}
+}
+
+country_event = { #Emeryk Hutten-Czapski vote of no confidence
+	id = war_russian_czapski.6
+	title = war_russian_czapski.6.t
+	desc = war_russian_czapski.6.d
+	picture = GFX_report_event_russian_vote_of_no_confidence
+	
+	trigger = {
+		tag = RUS
+		RUS = {
+			has_country_flag = rus_czapski_max
+			casualties > 2499999
+		}
+		OR = {
+			RUS = {
+				has_war_with = PRU
+			}
+			RUS = {
+				has_war_with = BYZ
+			}
+		}
+		has_global_flag = firts_world_war
+		NOT = {
+			has_global_flag = russian_capitulation
+		}
+		RUS = {
+			surrender_progress > 0.19
+		}
+	}
+	
+	mean_time_to_happen = {
+		days = 10
+	}
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event war_russian_czapski.6"}
+	
+	option = { #Very bad news
+		name = war_russian_czapski.6.a
+		ai_chance = {
+			base = 50
+		}
+		add_stability = -0.50
+		add_war_support = -0.50
+		add_political_power = -5000
+		news_event = {
+			id = news.235
+			days = 2
+		}
+	}
+}
+
+
+country_event = { #Czapist raid target
+	id = war_russian_czapski.11
+	title = war_russian_czapski.11.t
+	desc = war_russian_czapski.11.d
+	picture = GFX_report_event_russian_czapist_raid
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event war_russian_czapski.11"}
+	
+	option = { #Fucking Czapist
+		name = war_russian_czapski.11.a
+		ai_chance = {
+			base = 50
+		}
+		RUS = {
+			random_list = {
+				50 = {
+					modifier = {
+						add = -10
+						RUS = {
+							has_country_flag = rus_monarchist_divisian_yes
+						}
+					}
+					modifier = {
+						add = -10
+						RUS = {
+							has_country_flag = rus_monarchist_weapon_yes
+						}
+					}
+					RUS = {
+						country_event = {
+							id = war_russian_czapski.12
+							days = 2
+						}
+					}
+				}
+				35 = {
+					modifier = {
+						add = -5
+						RUS = {
+							has_country_flag = rus_monarchist_divisian_yes
+						}
+					}
+					modifier = {
+						add = -5
+						RUS = {
+							has_country_flag = rus_monarchist_weapon_yes
+						}
+					}
+					RUS = {
+						country_event = {
+							id = war_russian_czapski.13
+							days = 2
+						}
+					}
+				}
+				15 = {
+					modifier = {
+						add = 15
+						RUS = {
+							has_country_flag = rus_monarchist_divisian_yes
+						}
+					}
+					modifier = {
+						add = 15
+						RUS = {
+							has_country_flag = rus_monarchist_weapon_yes
+						}
+					}
+					RUS = {
+						country_event = {
+							id = war_russian_czapski.14
+							days = 2
+						}
+					}
+				}
+			}
+		}
+		hidden_effect = {
+			RUS = {
+				country_event = {
+					id = script_event.8
+					days = 10
+					random_days = 30
+				}
+			}
+		}
+	}
+}
+
+country_event = { #Czapist raid weapon
+	id = war_russian_czapski.12
+	title = war_russian_czapski.12.t
+	desc = war_russian_czapski.12.d
+	picture = GFX_report_event_russian_czartist_raid_succes
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event war_russian_czapski.12"
+		hidden_effect = {
+			if = {
+				limit = {
+					NOT = {
+						RUS = {
+							has_country_flag = weapon_set
+						}
+					}
+				}
+				RUS = {
+					set_country_flag = weapon_set
+					set_variable = {
+						var = weap_to_cz_min
+						value = 100
+					}
+					set_variable = {
+						var = weap_to_cz_norm
+						value = 1000
+					}
+					set_variable = {
+						var = weap_to_cz_max
+						value = 2500
+					}
+				}
+			}
+			RUS = {
+				set_variable_to_random = {
+					var = rus_min_weap_r
+					min = 100
+					max = 500
+					integer = yes
+				}
+				add_to_variable = {
+					var = weap_to_cz_min
+					value = rus_min_weap_r
+				}
+				set_variable_to_random = {
+					var = rus_norm_weap_r
+					min = 100
+					max = 500
+					integer = yes
+				}
+				add_to_variable = {
+					var = weap_to_cz_norm
+					value = rus_norm_weap_r
+				}
+				set_variable_to_random = {
+					var = rus_max_weap_r
+					min = 100
+					max = 500
+					integer = yes
+				}
+				add_to_variable = {
+					var = weap_to_cz_max
+					value = rus_max_weap_r
+				}
+				set_variable = {
+					var = art_to_cz_min
+					value = weap_to_cz_min
+				}
+				divide_variable = {
+					var = art_to_cz_min
+					value = 100
+				}
+				round_variable = art_to_cz_min
+				set_variable = {
+					var = art_to_cz_norm
+					value = weap_to_cz_norm
+				}
+				divide_variable = {
+					var = art_to_cz_norm
+					value = 100
+				}
+				round_variable = art_to_cz_norm
+				set_variable = {
+					var = art_to_cz_max
+					value = weap_to_cz_max
+				}
+				divide_variable = {
+					var = art_to_cz_max
+					value = 100
+				}
+				round_variable = art_to_cz_max
+			}
+		}
+	}
+	
+	option = { #Fucking Czapist
+		name = war_russian_czapski.12.a
+		ai_chance = {
+			base = 50
+		}
+		RUS = {
+			random_list = {
+				33 = {
+					if = {
+						limit = {
+							RUS = {
+								has_equipment = {
+									infantry_equipment > weap_to_cz_min
+								}
+								has_equipment = {
+									artillery_equipment > art_to_cz_min
+								}
+							}
+						}
+						RUS = {
+							add_equipment_to_stockpile = {
+								type = infantry_equipment
+								amount = weap_to_cz_min
+								producer = RUS
+							}
+							add_equipment_to_stockpile = {
+								type = artillery_equipment
+								amount = art_to_cz_min
+								producer = RUS
+							}
+						}
+						hidden_effect = {
+							RUS = {
+								add_to_variable = {
+									var = weap_nov_all
+									value = weap_to_cz_min
+								}
+								add_to_variable = {
+									var = art_nov_all
+									value = art_to_cz_min
+								}
+							}
+						}
+					}
+					if = {
+						limit = {
+							RUS = {
+								has_equipment = {
+									infantry_equipment < weap_to_cz_min
+								}
+								has_equipment = {
+									artillery_equipment < art_to_cz_min
+								}
+							}
+						}
+						add_war_support = -0.025
+					}
+				}
+				34 = {
+					if = {
+						limit = {
+							RUS = {
+								has_equipment = {
+									infantry_equipment > weap_to_cz_norm
+								}
+								has_equipment = {
+									artillery_equipment > art_to_cz_norm
+								}
+							}
+						}
+						RUS = {
+							add_equipment_to_stockpile = {
+								type = infantry_equipment
+								amount = weap_to_cz_norm
+								producer = RUS
+							}
+							add_equipment_to_stockpile = {
+								type = artillery_equipment
+								amount = art_to_cz_norm
+								producer = RUS
+							}
+						}
+						hidden_effect = {
+							RUS = {
+								add_to_variable = {
+									var = weap_nov_all
+									value = weap_to_cz_norm
+								}
+								add_to_variable = {
+									var = art_nov_all
+									value = art_to_cz_norm
+								}
+							}
+						}
+					}
+					if = {
+						limit = {
+							RUS = {
+								has_equipment = {
+									infantry_equipment < weap_to_cz_norm
+								}
+								has_equipment = {
+									artillery_equipment < art_to_cz_norm
+								}
+							}
+						}
+						add_war_support = -0.05
+					}
+				}
+				33 = {
+					if = {
+						limit = {
+							RUS = {
+								has_equipment = {
+									infantry_equipment > weap_to_cz_max
+								}
+								has_equipment = {
+									artillery_equipment > art_to_cz_max
+								}
+							}
+						}
+						RUS = {
+							add_equipment_to_stockpile = {
+								type = infantry_equipment
+								amount = weap_to_cz_max
+								producer = RUS
+							}
+							add_equipment_to_stockpile = {
+								type = artillery_equipment
+								amount = art_to_cz_max
+								producer = RUS
+							}
+						}
+						hidden_effect = {
+							RUS = {
+								add_to_variable = {
+									var = weap_nov_all
+									value = weap_to_cz_max
+								}
+								add_to_variable = {
+									var = art_nov_all
+									value = art_to_cz_max
+								}
+							}
+						}
+					}
+					if = {
+						limit = {
+							RUS = {
+								has_equipment = {
+									infantry_equipment < weap_to_cz_max
+								}
+								has_equipment = {
+									artillery_equipment < art_to_cz_max
+								}
+							}
+						}
+						add_war_support = -0.075
+					}
+				}
+			}
+		}
+	}
+}
+
+country_event = { #Czapist deserting
+	id = war_russian_czapski.13
+	title = war_russian_czapski.13.t
+	desc = war_russian_czapski.13.d
+	picture = GFX_report_event_russian_solder_desertir
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event war_russian_czapski.13"
+		hidden_effect = {
+			if = {
+				limit = {
+					NOT = {
+						RUS = {
+							has_country_flag = manpower_set
+						}
+					}
+				}
+				RUS = {
+					set_country_flag = manpower_set
+					set_variable = {
+						var = man_to_cz_min
+						value = 5000
+					}
+					set_variable = {
+						var = man_to_cz_norm
+						value = 10000
+					}
+					set_variable = {
+						var = man_to_cz_max
+						value = 15000
+					}
+				}
+			}
+			RUS = {
+				set_variable_to_random = {
+					var = rus_min_man_r
+					min = 1000
+					max = 2500
+					integer = yes
+				}
+				add_to_variable = {
+					var = man_to_cz_min
+					value = rus_min_man_r
+				}
+				set_variable_to_random = {
+					var = rus_norm_man_r
+					min = 2000
+					max = 3500
+					integer = yes
+				}
+				add_to_variable = {
+					var = man_to_cz_norm
+					value = rus_norm_man_r
+				}
+				set_variable_to_random = {
+					var = rus_max_man_r
+					min = 3000
+					max = 5000
+					integer = yes
+				}
+				add_to_variable = {
+					var = man_to_cz_max
+					value = rus_max_man_r
+				}
+			}
+		}
+	}
+	
+	option = { #Fucking Czapist
+		name = war_russian_czapski.13.a
+		ai_chance = {
+			base = 50
+		}
+		RUS = {
+			random_list = {
+				33 = {
+					if = {
+						limit = {
+							RUS = {
+								has_manpower > man_to_cz_min
+							}
+						}
+						add_manpower = -man_to_cz_min
+						hidden_effect = {
+							RUS = {
+								add_to_variable = {
+									var = man_nov_all
+									value = man_to_cz_min
+								}
+							}
+						}
+					}
+					if = {
+						limit = {
+							RUS = {
+								has_manpower < man_to_cz_min
+							}
+						}
+						add_war_support = -0.025
+					}
+				}
+				34 = {
+					if = {
+						limit = {
+							RUS = {
+								has_manpower > man_to_cz_norm
+							}
+						}
+						add_manpower = -man_to_cz_norm
+						hidden_effect = {
+							RUS = {
+								add_to_variable = {
+									var = man_nov_all
+									value = man_to_cz_norm
+								}
+							}
+						}
+					}
+					if = {
+						limit = {
+							RUS = {
+								has_manpower < man_to_cz_norm
+							}
+						}
+						add_war_support = -0.025
+					}
+				}
+				33 = {
+					if = {
+						limit = {
+							RUS = {
+								has_manpower > man_to_cz_max
+							}
+						}
+						add_manpower = -man_to_cz_max
+						hidden_effect = {
+							RUS = {
+								add_to_variable = {
+									var = man_nov_all
+									value = man_to_cz_max
+								}
+							}
+						}
+					}
+					if = {
+						limit = {
+							RUS = {
+								has_manpower < man_to_cz_max
+							}
+						}
+						add_war_support = -0.025
+					}
+				}
+			}
+		}
+	}
+}
+
+country_event = { #Czapist raid stop
+	id = war_russian_czapski.14
+	title = war_russian_czapski.14.t
+	desc = war_russian_czapski.14.d
+	picture = GFX_report_event_russian_czartist_raid_succes
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event war_russian_czapski.14"}
+	
+	option = { #Something is good
+		name = war_russian_czapski.14.a
+		ai_chance = {
+			base = 50
+		}
+		add_war_support = 0.025
+	}
+}
+
+country_event = { #Monarchist announced help
+	id = war_russian_monarchist.1
+	title = war_russian_monarchist.1.t
+	desc = war_russian_monarchist.1.d
+	picture = GFX_report_event_russian_monarchist_want_help
+	
+	trigger = {
+		tag = RUS
+		has_global_flag = {
+			flag = firts_world_war
+			days > 45
+		}
+		RUS = { NOT = { has_country_flag = RUS_soc_fractions_banned } } # запрещенная организация не будет сотрудничать с правительством
+	}
+	
+	mean_time_to_happen = {
+		days = 45
+	}
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event war_russian_monarchist.1"}
+	
+	option = { #We need any help
+		name = war_russian_monarchist.1.a
+		ai_chance = {
+			base = 50
+		}
+		add_stability = 0.05
+		add_war_support = 0.10
+		custom_effect_tooltip = rus_monarchist_can_ask_something_tt
+		hidden_effect = {
+			RUS = {
+				country_event = {
+					id = script_event.36
+					days = 290
+					random_days = 30
+				}
+			}
+		}
+	}
+	
+	option = { #We don't need thier help
+		name = war_russian_monarchist.1.b
+		ai_chance = {
+			base = 50
+		}
+		add_stability = 0.05
+	}	
+}
+
+country_event = { #Monarchist ask manpower
+	id = war_russian_monarchist.2
+	title = war_russian_monarchist.2.t
+	desc = war_russian_monarchist.2.d
+	picture = GFX_report_event_russian_monarchist_ask_manpower
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event war_russian_monarchist.2"}
+	
+	option = { #We need any help
+		name = war_russian_monarchist.2.a
+		ai_chance = {
+			base = 75
+		}
+		trigger = {
+			has_manpower > 74999
+		}
+		add_manpower = -75000
+		add_war_support = 0.05
+		custom_effect_tooltip = rus_will_low_chance_of_bad_tt
+		RUS = {
+			set_country_flag = rus_monarchist_divisian_yes
+		}
+		hidden_effect = {
+			RUS = {
+				country_event = {
+					id = script_event.36
+					days = 120
+					random_days = 30
+				}
+			}
+		}
+	}
+	
+	option = { #We don't need thier help
+		name = war_russian_monarchist.2.b
+		ai_chance = {
+			base = 25
+		}
+		trigger = {
+			has_manpower > 74999
+		}
+		add_political_power = -150
+	}
+	
+	option = { #We don't need thier help
+		name = war_russian_monarchist.2.c
+		ai_chance = {
+			base = 0
+		}
+		trigger = {
+			has_manpower < 74999
+		}
+		hidden_effect = {
+			RUS = {
+				country_event = {
+					id = script_event.36
+					days = 120
+					random_days = 30
+				}
+			}
+		}
+	}
+	
+}
+
+country_event = { #Monarchist ask weapon
+	id = war_russian_monarchist.3
+	title = war_russian_monarchist.3.t
+	desc = war_russian_monarchist.3.d
+	picture = GFX_report_event_russian_monarchist_ask_weapon
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event war_russian_monarchist.3"}
+	
+	option = { #We need any help
+		name = war_russian_monarchist.3.a
+		ai_chance = {
+			base = 75
+		}
+		trigger = {
+			has_equipment = {
+				infantry_equipment > 2499
+			}
+			has_equipment = {
+				artillery_equipment > 499
+			}
+		}
+		add_equipment_to_stockpile = {
+			type = infantry_equipment
+			amount = -2500
+			producer = RUS
+		}
+		add_equipment_to_stockpile = {
+			type = artillery_equipment
+			amount = -500
+			producer = RUS
+		}
+		RUS = {
+			set_country_flag = rus_monarchist_weapon_yes
+		}
+		custom_effect_tooltip = rus_will_low_chance_of_bad_tt
+	}
+	
+	option = { #We don't need thier help
+		name = war_russian_monarchist.3.b
+		ai_chance = {
+			base = 25
+		}
+		trigger = {
+			has_equipment = {
+				infantry_equipment > 2499
+			}
+			has_equipment = {
+				artillery_equipment > 499
+			}
+		}
+		add_political_power = -300
+	}
+	
+	option = { #We don't need thier help
+		name = war_russian_monarchist.3.c
+		ai_chance = {
+			base = 0
+		}
+		trigger = {
+			OR = {
+				has_equipment = {
+					infantry_equipment < 2499
+				}
+				has_equipment = {
+					artillery_equipment < 499
+				}
+			}
+		}
 	}
 	
 }

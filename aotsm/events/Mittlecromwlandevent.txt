@@ -1,5 +1,7 @@
 
 add_namespace = mec
+add_namespace = mec_diplo
+add_namespace = mec_nen
 
 country_event = {
 	id = mec.1
@@ -48,5 +50,106 @@ country_event = {
 		}
 		news_event = news.119
 	}
+	
+}
+
+country_event = {
+	id = mec_diplo.1
+	title = mec_diplo.1.t
+	desc = mec_diplo.1.d
+	picture = GFX_report_event_german_volunteersq
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = {
+		name = mec_diplo.1.a	
+		ai_chance = {
+			base = 90
+		}
+		MEC = {
+			set_country_flag = accept_nen_pact
+		}
+		NEN = {
+			country_event = {
+				id = mec_nen.1
+				days = 3
+			}
+		}
+	}
+	
+	option = {
+		name = mec_diplo.1.b	
+		ai_chance = {
+			base = 10
+		}
+		NEN = {
+			country_event = {
+				id = mec_nen.2
+				days = 3
+			}
+		}
+	}
+	
+}
+
+country_event = {
+	id = mec_nen.1
+	title = mec_nen.1.t
+	desc = mec_nen.1.d
+	picture = GFX_report_event_german_volunteersq
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = {
+		name = mec_nen.1.a	
+		ai_chance = {
+			base = 100
+		}
+		NEN = {
+			declare_war_on = {
+				target = KED
+				type = annex_everything
+			}
+		}
+		MEC = {
+			declare_war_on = {
+				target = KED
+				type = annex_everything
+			}
+		}
+		NEN = { set_country_flag = NEN_vs_KED }
+	}
+	
+	
+}
+
+country_event = {
+	id = mec_nen.2
+	title = mec_nen.2.t
+	desc = mec_nen.2.d
+	picture = GFX_report_event_german_volunteersq
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	option = {
+		name = mec_nen.2.a	
+		ai_chance = {
+			base = 100
+		}
+		NEN = {
+			declare_war_on = {
+				target = KED
+				type = annex_everything
+			}
+		}
+		NEN = { set_country_flag = NEN_vs_KED }
+	}
+	
 	
 }

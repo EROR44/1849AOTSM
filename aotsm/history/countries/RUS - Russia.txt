@@ -71,12 +71,18 @@ set_research_slots = 3
 set_stability = 0.85
 set_war_support = 0.55
 set_oob = "RUS_1849"
+if = {
+	limit = { has_dlc = "Man the Guns" }
+	set_naval_oob = "RUS_1936_naval_mtg"
+}
 
 recruit_character = RUS_Ivan_Pushin
 recruit_character = RUS_Dmitry_Alekseevich_Milyutin
 recruit_character = RUS_Pavel_Nikolaevich_Ignatiev
+recruit_character = RUS_Vasiliy_Andreevich_Dolgorukov
 recruit_character = RUS_national_council
 recruit_character = RUS_temporary_goverment
+recruit_character = RUS_church_soviet
 recruit_character = RUS_Konstantin_Nikolaevich
 recruit_character = RUS_Mihail_Fedorovich_Orlov
 recruit_character = RUS_Alexander_Sergeevich_Pushkin
@@ -96,6 +102,7 @@ recruit_character = RUS_Postolskiy_Petr_Ivanovich
 recruit_character = RUS_Istomin_Vladimir_Ivanovich
 recruit_character = RUS_Klavdiy_Alexeevich_Ermolov
 recruit_character = RUS_Karl_Karlovich_Vrangel
+recruit_character = RUS_Mickhail_Dorimedontovich_Lihutin
 recruit_character = RUS_Muraviev_Amurskiy_NN
 recruit_character = RUS_Ivan_Fedorovich_Paskevich
 recruit_character = RUS_Pavlov_Prokofiy_Yakovlevich
@@ -127,6 +134,31 @@ recruit_character = RUS_Lorer_Nicloas_Ivanovich
 recruit_character = RUS_Stepan_Osipovich_Makarov
 recruit_character = RUS_Andreev_Alexander_Nicolaevich
 recruit_character = RUS_Mikhail_Fedorovich_Efimov
+recruit_character = RUS_Alexander_Arkadievich_Suvorov
+recruit_character = RUS_Pavel_Hristoforovich_Grabbe
+recruit_character = RUS_Mikhail_Grigorievich_Homutov
+recruit_character = RUS_Ridiger_Fedor_Vasilyavich
+recruit_character = RUS_Alexander_Sergeevich_Menshikov
+recruit_character = RUS_Illya_Nikolaevich_Ylianov
+recruit_character = RUS_Mikhail_Vasilyevich_Frunse
+recruit_character = RUS_Bereskin_Vsevolod_Alexandrovich
+recruit_character = RUS_Nechaev_Sergey_Alexeevich
+recruit_character = RUS_Adelberg_Alexander_Vladimirovich
+recruit_character = RUS_Kolobanov_Zinovii_Grigorievich
+recruit_character = RUS_Gurko_Iosif_Vladimirovich
+recruit_character = RUS_Chernyaev_Mikhail_Grigorievich
+recruit_character = RUS_Tidebel_Sizigmund_Andreevich
+recruit_character = RUS_Birilev_Nivolay_Alexeevich
+recruit_character = RUS_Butakov_Grigoriy_Ivanovich
+recruit_character = RUS_Shevchenko_Ignatiy_Vasilevich
+recruit_character = RUS_Alexey_Petrovich_Ermolov
+recruit_character = RUS_Alexandr_Ivanovich_Baryatinsky
+recruit_character = RUS_Petr_Semenovich_Vannovsky
+recruit_character = RUS_Iosif_Vladimirovich_Gurko
+recruit_character = RUS_Konstantin_Petrovich_fon_Kaufman
+recruit_character = RUS_Mikhail_Semenovich_Vorontsov
+recruit_character = RUS_Pavel_Stepanovich_Nahimov
+recruit_character = RUS_Vsevolod_Beresin_Tyutchev
 
 set_politics = {
 	ruling_party = reactionist
@@ -148,19 +180,19 @@ add_ideas = {
 	export_focus
 	local_corruption
 	backward_industry
+	westernisation_end
 	low_investment_level
 	regional_corruption
 	medium_taxation
 	russian_science_manufacturer
 	
-	rus_Alexander_2
-	rus_the_Russian_intelligentsia
-	rus_unfinished_reforms
-	rus_an_echo_of_serfdom
-}
+	RUS_russian_intelligentsia
+	RUS_dependence_from_import
+	RUS_an_echo_of_serfdom
+	RUS_national_minorities_problems
 }
 add_timed_idea = {
-    idea = rus_population_boom
+    idea = RUS_population_boom
     days = 1460
 }
 
@@ -176,8 +208,8 @@ if = {
 			main_armament_slot = tank_heavy_machine_gun
 			turret_type_slot = tank_light_one_man_tank_turret
 			suspension_type_slot = tank_bogie_suspension
-			armor_type_slot = tank_riveted_armor
-			engine_type_slot = tank_gasoline_engine
+			armor_type_slot = bulletproof_protection
+			engine_type_slot = medium_steam_engine
 		}
 		upgrades = {
 			tank_nsb_engine_upgrade = 1
@@ -320,12 +352,6 @@ if = {
 		}
 	}
 }
-
-if = {
-	limit = { has_dlc = "Man the Guns" }
-	set_naval_oob = "RUS_1936_naval_mtg"
-}
-
 add_opinion_modifier = {
     target = CBI
     modifier = history_friend
@@ -336,3 +362,39 @@ diplomatic_relation = {
     relation = guarantee
     active = yes
 }
+
+set_variable = { RUS_liberal_relations = 81 }
+set_variable = { RUS_conservator_relations = 55 }
+set_variable = { RUS_autocrat_relations = 50 }
+set_variable = { RUS_reactioner_relations = 75}
+set_variable = { RUS_churchman_relations = 35 }
+set_variable = { RUS_monarhist_relations = 49 }
+set_variable = { RUS_socialist_relations = 15 }
+set_variable = { RUS_army_relations = 50 }
+
+set_variable = { RUS_liberal_influence = 65 }
+set_variable = { RUS_conservator_influence = 20 }
+set_variable = { RUS_autocrat_influence = 50 }
+set_variable = { RUS_reactioner_influence = 60 }
+set_variable = { RUS_churchman_influence = 15 }
+set_variable = { RUS_monarhist_influence = 25 }
+set_variable = { RUS_socialist_influence = 35 }
+set_variable = { RUS_army_influence = 55 }
+
+#MATH_DESICION_VARIABLE
+
+set_variable = { RUS_nep_add_ic = 0 }
+set_variable = { RUS_nep_add_af = 0 }
+set_variable = { RUS_nep_add_doc = 0 }
+
+set_variable = { RUS_1st_four_year_plan_add_ic = 0 }
+set_variable = { RUS_1st_four_year_plan_add_af = 0 }
+set_variable = { RUS_1st_four_year_plan_add_doc = 0 }
+
+#FINLAND SEPARATISM VARIABLES
+
+set_variable = { RUS_finland_separatism_111 = 3 }
+set_variable = { RUS_finland_separatism_145 = 3 }
+set_variable = { RUS_finland_separatism_147 = 3 }
+set_variable = { RUS_finland_separatism_149 = 3 }
+set_variable = { RUS_finland_separatism_150 = 3 }

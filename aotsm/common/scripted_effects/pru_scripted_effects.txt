@@ -1,0 +1,101 @@
+pru_blacksun_civilwar = {
+
+	PRU = {
+		clr_country_flag = decaing_reich
+	}
+	set_global_flag = blacksun_civilwar_prepered
+	every_state = {
+		limit = {
+			is_core_of = PRU
+			is_owned_by = PRU
+		}
+		add_core_of = KGR
+		add_core_of = RGR
+		add_core_of = SGE
+	}
+	PRU = {
+		country_event = ger_blackorder.50
+	}
+	hidden_effect = {
+		PRU = {
+			remove_mission = pru_start_of_civil_war_decision
+			remove_mission = pru_decing_of_reich_stability
+		}
+		if = {
+			limit = {
+				NOT = {
+					has_global_flag = news_237_happend_flag
+				}
+			}
+			news_event = news.237
+		}
+	}
+
+}
+
+pru_blacksun_civilwar_victory = {
+
+	if = {
+		limit = {
+			NOT = {
+				country_exists = SGE
+				country_exists = RGR
+				country_exists = KGR
+			}
+		}
+		clr_global_flag = blacksun_civilwar_going
+		PRU = {
+			set_country_flag = bs_win_civil_war
+		}
+		news_event = news.238
+		PRU = {
+			country_event = {
+				id = ger_blackorder.10
+				days = 70
+			}
+		}
+	}
+	if = {
+		limit = {
+			NOT = {
+				country_exists = PRU
+				country_exists = SGE
+				country_exists = KGR
+			}
+		}
+		clr_global_flag = blacksun_civilwar_going
+		RGR = {
+			set_country_flag = win_civil_war
+		}
+		news_event = news.241
+	}
+	if = {
+		limit = {
+			NOT = {
+				country_exists = PRU
+				country_exists = RGR
+				country_exists = SGE
+			}
+		}
+		clr_global_flag = blacksun_civilwar_going
+		KGR = {
+			set_country_flag = win_civil_war
+		}
+		news_event = news.240
+	}
+	if = {
+		limit = {
+			NOT = {
+				country_exists = PRU
+				country_exists = RGR
+				country_exists = KGR
+			}
+		}
+		clr_global_flag = blacksun_civilwar_going
+		SGE = {
+			set_country_flag = win_civil_war
+		}
+		news_event = news.239
+	}
+
+}

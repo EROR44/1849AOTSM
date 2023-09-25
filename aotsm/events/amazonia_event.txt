@@ -1,0 +1,341 @@
+add_namespace = amz
+
+country_event = {
+	id = amz.1 #religion 
+	title = amz.1.t
+	desc = amz.1.d
+	picture = GFX_report_event_aotsm_generic_speech	
+	is_triggered_only = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event amz.1"}
+	
+	option = {#catolicysm
+		name = amz.1.a
+		ai_chance = {
+			factor = 30
+		}
+		swap_ideas = {
+			remove_idea = paganism
+			add_idea = catolicysm
+		}
+	}
+	
+	option = {#islamism
+		name = amz.1.b
+		ai_chance = {
+			factor = 30
+		}
+		swap_ideas = {
+			remove_idea = paganism
+			add_idea = islamism
+		}
+		add_ideas = divided_islam_idea
+	}
+	
+	option = {#konfucianstvo
+		name = amz.1.c
+		ai_chance = {
+			factor = 30
+		}
+		swap_ideas = {
+			remove_idea = paganism
+			add_idea = konfucianstvo
+		}
+	}
+	
+	option = {#paganism
+		name = amz.1.f
+		ai_chance = {
+			factor = 10
+		}
+		add_stability = 0.05
+		add_political_power = 150
+	}
+}
+
+country_event = {
+	id = amz.2 #friend in europa
+	title = amz.2.t
+	desc = amz.2.d
+	picture = GFX_report_event_aotsm_generic_speech	
+	is_triggered_only = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event amz.2"}
+	
+	option = {#britania
+		name = amz.2.a
+		ai_chance = {
+			factor = 25
+		}
+		CBI = {
+			add_opinion_modifier = {
+				target = AMZ
+				modifier = history_friend
+			}
+		}
+		AMZ = {
+			add_opinion_modifier = {
+				target = CBI
+				modifier = history_friend
+			}
+		}
+	}
+	
+	option = {#francia
+		name = amz.2.b
+		ai_chance = {
+			factor = 25
+		}
+		FRR = {
+			add_opinion_modifier = {
+				target = AMZ
+				modifier = history_friend
+			}
+		}
+		AMZ = {
+			add_opinion_modifier = {
+				target = FRR
+				modifier = history_friend
+			}
+		}
+	}
+	
+	option = {#prussia
+		name = amz.2.c
+		ai_chance = {
+			factor = 25
+		}
+		PRU = {
+			add_opinion_modifier = {
+				target = AMZ
+				modifier = history_friend
+			}
+		}
+		AMZ = {
+			add_opinion_modifier = {
+				target = PRU
+				modifier = history_friend
+			}
+		}
+	}
+	
+	option = {#byzantium
+		name = amz.2.f
+		ai_chance = {
+			factor = 25
+		}
+		BYZ = {
+			add_opinion_modifier = {
+				target = AMZ
+				modifier = history_friend
+			}
+		}
+		AMZ = {
+			add_opinion_modifier = {
+				target = BYZ
+				modifier = history_friend
+			}
+		}
+	}
+}
+
+country_event = {
+	id = amz.3 #Type of Rule
+	title = amz.3.t
+	desc = amz.3.d
+	picture = GFX_report_event_aotsm_generic_speech	
+	is_triggered_only = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event amz.3"}
+	
+	option = {#Monarchy
+		name = amz.3.a
+		ai_chance = {
+			factor = 50
+		}
+		add_stability = 0.05
+		custom_effect_tooltip = amz_monarchy_type_tt
+	}
+	
+	option = {#Republic
+		name = amz.3.b
+		ai_chance = {
+			factor = 50
+		}
+		swap_ideas = {
+			remove_idea = monarchy
+			add_idea = republic
+		}
+		custom_effect_tooltip = amz_republic_type_tt
+	}
+	
+}
+
+
+country_event = {
+	id = amz.4 #Ruller
+	title = amz.4.t
+	desc = amz.4.d
+	picture = GFX_report_event_aotsm_generic_speech	
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event amz.4"
+		hidden_effect = {
+			AMZ = {
+				set_party_name = {
+					ideology = democratic
+					long_name = AMZ_democratic_party_tribe_long
+					name = AMZ_democratic_party_tribe
+				}
+				set_party_name = {
+					ideology = socialism
+					long_name = AMZ_socialism_party_tribe_long
+					name = AMZ_socialism_party_tribe
+				}
+				set_party_name = {
+					ideology = reactionist
+					long_name = AMZ_reactionist_party_tribe_long
+					name = AMZ_reactionist_party_tribe
+				}
+				set_party_name = {
+					ideology = authoritarian
+					long_name = AMZ_authoritarian_party_tribe_long
+					name = AMZ_authoritarian_party_tribe
+				}
+				promote_character = {
+					character = AMZ_Arta_Nita
+					ideology = federalism
+				}
+				promote_character = {
+					character = AMZ_Sumra_Icha
+					ideology = reformism
+				}
+				promote_character = {
+					character = AMZ_Echo_Nintago
+					ideology = shovinism
+				}
+			}
+		}
+	}
+	
+	option = {#socialism
+		name = amz.4.a
+		trigger = {
+			has_idea = republic
+		}
+		ai_chance = {
+			factor = 25
+		}
+		set_country_flag = AMZ_soc
+		add_popularity = {
+			ideology = socialism
+			popularity = 0.15
+		}
+		set_politics = {
+			ruling_party = socialism
+			elections_allowed = no
+			last_election = "1848.3.15"
+			election_frequency = 48
+		}
+		news_event = news.60
+		hidden_effect = {
+			AMZ = {
+				promote_character = {
+					character = AMZ_Mitra_Oni
+					ideology = tribe_monarchy_sub
+				}
+			}
+		}
+	}
+	
+	option = {#democratic
+		name = amz.4.b
+		trigger = {
+			has_idea = republic
+		}
+		ai_chance = {
+			factor = 25
+		}
+		set_country_flag = AMZ_dem
+		add_popularity = {
+			ideology = democratic
+			popularity = 0.15
+		}
+		set_politics = {
+			ruling_party = democratic
+			elections_allowed = no
+			last_election = "1848.3.15"
+			election_frequency = 48
+		}
+		news_event = news.61
+		hidden_effect = {
+			AMZ = {
+				promote_character = {
+					character = AMZ_Mitra_Oni
+					ideology = tribe_monarchy_sub
+				}
+			}
+		}
+	}
+	
+	option = {#reaction
+		name = amz.4.c
+		trigger = {
+			has_idea = monarchy
+		}
+		ai_chance = {
+			factor = 25
+		}
+		set_country_flag = AMZ_rea
+		add_popularity = {
+			ideology = reactionist
+			popularity = 0.15
+		}
+		set_politics = {
+			ruling_party = reactionist
+			elections_allowed = no
+			last_election = "1848.3.15"
+			election_frequency = 48
+		}
+		news_event = news.62
+		hidden_effect = {
+			AMZ = {
+				promote_character = {
+					character = AMZ_Mitra_Oni
+					ideology = tribe_monarchy_sub
+				}
+			}
+		}
+	}
+	
+	option = {#autharitarian
+		name = amz.4.f
+		trigger = {
+			has_idea = monarchy
+		}
+		ai_chance = {
+			factor = 25
+		}
+		set_country_flag = AMZ_auth
+		add_popularity = {
+			ideology = authoritarian
+			popularity = 0.15
+		}
+		set_politics = {
+			ruling_party = authoritarian
+			elections_allowed = no
+			last_election = "1848.3.15"
+			election_frequency = 48
+		}
+		news_event = news.63
+		hidden_effect = {
+			AMZ = {
+				promote_character = {
+					character = AMZ_Mitra_Oni
+					ideology = tribe_monarchy_sub
+				}
+			}
+		}
+	}
+}

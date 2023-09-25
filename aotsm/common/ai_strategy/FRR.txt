@@ -10,6 +10,144 @@
 # protect
 # influence
 
+FRR_help_to_live_french_potential_world_power = {
+
+	allowed = {
+
+	}
+	
+	enable = {
+		has_idea = potential_world_power
+		FRR = {
+			num_divisions > 89
+		}
+		tag = FRR
+	}
+	
+	abort = {
+		OR = {
+			NOT = {
+				has_idea = potential_world_power
+			}
+			FRR = {
+				num_divisions < 90
+			}
+		}
+	}
+
+	ai_strategy = {
+		type = build_army
+		id = infantry
+		value = -1000
+	}
+
+	ai_strategy = {
+		type = build_army
+		id = mountaineers
+		value = -1000
+	}
+
+	ai_strategy = {
+		type = build_army
+		id = marines
+		value = -1000
+	}
+
+	ai_strategy = {
+		type = build_army
+		id = cavalry
+		value = -1000
+	}
+
+	ai_strategy = {
+		type = build_army
+		id = motorized
+		value = -1000
+	}
+
+	ai_strategy = {
+		type = build_army
+		id = mechanized
+		value = -1000
+	}
+
+	ai_strategy = {
+		type = build_army
+		id = armor
+		value = -1000
+	}
+
+}
+
+FRR_help_to_live_french_world_power = {
+
+	allowed = {
+
+	}
+	
+	enable = {
+		has_idea = world_power
+		FRR = {
+			num_divisions > 144
+		}
+		tag = FRR
+	}
+	
+	abort = {
+		OR = {
+			NOT = {
+				has_idea = world_power
+			}
+			FRR = {
+				num_divisions < 145
+			}
+		}
+	}
+
+	ai_strategy = {
+		type = build_army
+		id = infantry
+		value = -1000
+	}
+
+	ai_strategy = {
+		type = build_army
+		id = mountaineers
+		value = -1000
+	}
+
+	ai_strategy = {
+		type = build_army
+		id = marines
+		value = -1000
+	}
+
+	ai_strategy = {
+		type = build_army
+		id = cavalry
+		value = -1000
+	}
+
+	ai_strategy = {
+		type = build_army
+		id = motorized
+		value = -1000
+	}
+
+	ai_strategy = {
+		type = build_army
+		id = mechanized
+		value = -1000
+	}
+
+	ai_strategy = {
+		type = build_army
+		id = armor
+		value = -1000
+	}
+
+}
+
 FRA_area_priority = {
 	enable = {
 		original_tag = FRR
@@ -94,6 +232,208 @@ FRA_area_priority = {
 
 }
 
+FRR_anti_armor = {
+	allowed = {
+		original_tag = FRR
+	}
+	enable = {
+		ai_wants_divisions > 5 
+
+		any_enemy_country = {
+			ROOT = {
+				estimated_intel_max_armor = {
+					tag = PREV
+					value > 25
+				}
+			}
+		}
+	}
+	abort = {
+		ai_wants_divisions < 6 
+	}
+
+	ai_strategy = {
+		type = role_ratio
+		id = motorized
+		value = 15
+	}
+}
+
+FRR_armored_production = {
+	allowed = {
+		original_tag = FRR
+	}
+	enable = {
+		date > 1849.1.1
+		ai_wants_divisions > 1
+	}
+	abort = {
+		ai_wants_divisions < 90 
+	}
+
+	ai_strategy = {
+		type = role_ratio
+		id = armor
+		value = 30
+	}
+}
+
+FRR_halt_light_armor_production_in_transitioning = {
+	allowed = {
+		original_tag = FRR
+	}
+	enable = {
+		has_template_majority_unit = medium_armor
+		has_equipment = { light_tank_chassis > 600 }
+	}
+	abort = {
+		# once we start we never go back to light armor
+	}
+
+	ai_strategy = {
+		type = equipment_variant_production_factor
+		id = light_tank_chassis
+		value = -100
+	}
+}
+
+FRR_anti_armor = {
+	allowed = {
+		original_tag = FRR
+	}
+	enable = {
+		ai_wants_divisions > 5 
+
+		any_enemy_country = {
+			ROOT = {
+				estimated_intel_max_armor = {
+					tag = PREV
+					value > 25
+				}
+			}
+		}
+	}
+	abort = {
+		ai_wants_divisions < 6 
+	}
+
+	ai_strategy = {
+		type = role_ratio
+		id = motorized
+		value = 15
+	}
+}
+
+FRR_armored_production = {
+	allowed = {
+		original_tag = FRR
+	}
+	enable = {
+		date > 1852.1.1
+		ai_wants_divisions > 1
+	}
+	abort = {
+		ai_wants_divisions < 90 
+	}
+
+	ai_strategy = {
+		type = role_ratio
+		id = armor
+		value = 15
+	}
+}
+
+FRR_super_boost_light_for_med_armor = {
+	allowed = {
+		original_tag = FRR
+	}
+	enable = {
+		OR = {
+			has_tech = basic_medium_tank
+			has_tech = basic_medium_tank_chassis
+		}
+		NOT = { has_template_ai_majority_unit = medium_armor }
+	}
+
+	abort = {
+		has_template_ai_majority_unit = medium_armor
+	}
+
+	ai_strategy = {
+		type = land_xp_spend_priority
+		id = division_template
+		value = 100
+	}
+
+	ai_strategy = {
+		type = template_prio
+		id = light_armor
+		value = 100
+	}
+
+	ai_strategy = {
+		type = template_prio
+		id = medium_armor
+		value = 150
+	}
+
+	ai_strategy = {
+		type = template_prio
+		id = motorized
+		value = 200
+	}
+}
+
+
+
+FRR_template_design = {
+	allowed = {
+		original_tag = FRR
+	}
+	enable = {
+		date < 1849.1.1
+	}
+	abort = {
+		date > 1854.1.1
+	}
+
+	ai_strategy = {
+		type = template_prio
+		id = infantry
+		value = 20
+	}
+
+	ai_strategy = {
+		type = template_prio
+		id = artillery
+		value = 20
+	}
+
+	ai_strategy = {
+		type = template_prio
+		id = motorized
+		value = -50
+	}
+
+	ai_strategy = {
+		type = template_prio
+		id = cavalry
+		value = -100
+	}
+
+	ai_strategy = {
+		type = template_prio
+		id = light_armor
+		value = 30
+	}
+
+	ai_strategy = {
+		type = template_prio
+		id = heavy_armor
+		value = -50
+	}
+}
+
 french_wants_civ = {
 	allowed = {
 		original_tag = FRR
@@ -107,7 +447,7 @@ french_wants_civ = {
 	ai_strategy = {
 		type = building_target
 		id = industrial_complex
-		value = 59
+		value = 200
 	}
 }
 
@@ -123,7 +463,7 @@ french_wants_arms_factory = {
 	ai_strategy = {
 		type = building_target
 		id = arms_factory
-		value = 45
+		value = 200
 	}
 }
 
@@ -237,7 +577,7 @@ FRR_unit_production = {
 	ai_strategy = {
 		type = role_ratio
 		id = armor
-		value = 10
+		value = 45 
 	}
 
 	ai_strategy = {
@@ -333,13 +673,13 @@ FRR_unit_production = {
 	ai_strategy = {
 		type = equipment_production_factor
 		id = infantry
-		value = 15
+		value = 25
 	}
 
 	ai_strategy = {
 		type = equipment_production_factor
 		id = anti_tank
-		value = 15
+		value = 20
 	}
 
 	ai_strategy = {
@@ -351,13 +691,13 @@ FRR_unit_production = {
 	ai_strategy = {
 		type = equipment_production_factor
 		id = artillery
-		value = 100
+		value = 80
 	}
 
 	ai_strategy = {
 		type = equipment_production_factor
 		id = armor
-		value = -10
+		value = 15
 	}
 	ai_strategy = {
 		type = equipment_production_factor
@@ -474,7 +814,7 @@ prepare_for_great_war = {
 #		country_trigger = {
 #			is_ai = yes
 #			OR = {
-#				tag = PRU
+#				tag = FRR
 #			}
 ##		}
 #		value = 200
@@ -1160,4 +1500,105 @@ FRR_support_sor_in_civil_war = {
 		id = SOR 
 		value = 20 
 	}
+}
+
+FRR_more_divisions_on_front = {
+
+	allowed = {
+		tag = FRR
+	}
+	
+	enable = {
+		date > 1854.1.1
+	}
+	
+	abort_when_not_enabled = yes
+	
+	ai_strategy = { 
+		type = garrison 
+		value = 10 
+	}
+	
+	ai_strategy = {
+		type = front_unit_request
+		tag = PRU
+		value = 200
+	}
+	
+	ai_strategy = {
+		type = front_unit_request
+		tag = BYZ
+		value = 200
+	}
+	
+	ai_strategy = {
+		type = front_unit_request
+		tag = ARA
+		value = -200
+	}
+	
+	ai_strategy = {
+		type = front_unit_request
+		tag = AND
+		value = -200
+	}
+	
+	ai_strategy = {
+		type = front_unit_request
+		tag = SWI
+		value = -200
+	}
+	
+	ai_strategy = {
+		type = front_unit_request
+		tag = CAS
+		value = -200
+	}
+	
+}
+
+FRR_xp_upgrade_spending_land = {
+	allowed = {
+		original_tag = FRR
+	}
+
+	enable = {
+		date < 1852.6.1
+	}
+	
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = land_xp_spend_priority
+		id = upgrade_xp_cutoff
+		value = 100
+	}
+}
+
+FRR_never_help_pru = {
+
+	allowed = {
+		tag = FRR
+	}
+	
+	enable = {
+		date > 1849.1.1
+	}
+	
+	abort_when_not_enabled = yes
+	
+	ai_strategy = {
+		type = diplo_action_desire
+		id = PRU
+		target = send_lend_lease_desire
+		value = -1000
+	}	
+	
+	ai_strategy = {
+		type = diplo_action_desire
+		id = PRU
+		target = send_volunteers_desire
+		value = -1000
+	}	
+
 }

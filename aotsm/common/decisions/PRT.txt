@@ -1,0 +1,188 @@
+PRT_SOC_REV = {
+    
+    PRT_Annex_AND = {
+
+		icon = infiltrate_state
+
+		available = {
+			
+			PRT = {
+                exists = yes
+                is_puppet = no
+                has_war = no
+                has_government = socialism
+            }
+		}
+ 
+		cost = 50
+		fire_only_once = yes
+		days_remove = 35
+		ai_will_do = {
+			factor = 100
+		}
+		modifier = {
+			political_power_gain = -0.1
+		}
+		remove_effect = {
+            diplomatic_relation = {
+                country = AND
+                relation = puppet
+                active = yes
+            }
+            AND = {
+                set_popularities = {
+	                democratic = 25
+	                authoritarian = 25
+             	    socialism = 50
+                }
+            }
+		}		
+	}
+
+    PRT_Annex_MNC = {
+
+		icon = infiltrate_state
+
+		available = {
+			
+			MNC = {
+                exists = yes
+                is_puppet = no
+                has_war = no
+            }
+		}
+ 
+		cost = 50
+		fire_only_once = yes
+		days_remove = 35
+		ai_will_do = {
+			factor = 100
+		}
+		modifier = {
+			political_power_gain = -0.1
+		}
+		remove_effect = {
+            diplomatic_relation = {
+                country = MNC
+                relation = puppet
+                active = yes
+            }
+            MNC = {
+                set_popularities = {
+	                authoritarian = 25
+             	    socialism = 75
+                }
+            }
+		}		
+	}
+
+    PRT_SOC_AFR = {
+
+		icon = infiltrate_state
+
+		available = {
+			
+			PRT ={
+                controls_state = 825
+                controls_state = 796
+                controls_state = 540
+                controls_state = 846
+                controls_state = 850
+            }
+		}
+
+		cost = 50
+		fire_only_once = yes
+		days_remove = 35
+		ai_will_do = {
+			factor = 100
+		}
+		modifier = {
+			political_power_gain = -0.1
+		}
+		remove_effect = {
+            NGA = {
+                transfer_state  = 825
+                transfer_state  = 796
+                transfer_state  = 540
+                transfer_state  = 846
+                transfer_state  = 850
+                add_state_core  = 825
+                add_state_core  = 796
+                add_state_core  = 540
+                add_state_core  = 846
+                add_state_core  = 850
+                set_popularities = {
+	                democratic = 30
+	                authoritarian = 40
+             	    socialism = 30
+                }
+                set_cosmetic_tag = PRT_NGA 
+            }
+            diplomatic_relation = {
+                country = NGA
+                relation = puppet
+                active = yes
+            }
+            hidden_effect = {
+			   news_event = { id = prt_news_event.11 hours = 3 }
+		    }
+		}		
+	}
+
+	PRT_WAR_FRR = {
+
+		icon = infiltrate_state
+
+		available = {			
+			PRT = {
+				controls_state = 792
+                controls_state = 172
+                controls_state = 166
+                controls_state = 794
+                controls_state = 165
+				}
+			FRR = {
+				NOT = {
+					has_government = socialism
+					has_war_with = PRT
+				}
+				has_war_with = PRU
+				has_war_with = BYZ
+			}
+			PRU = {
+				has_government = socialism
+				NOT = {
+					has_war_with = PRT
+				}
+			}
+			BYZ = {
+				has_government = socialism
+				NOT = {
+					has_war_with = PRT
+				}
+			}
+		}
+
+		cost = 50
+		fire_only_once = yes
+		days_remove = 35
+		ai_will_do = {
+			factor = 100
+		}
+		modifier = {
+			political_power_gain = -0.1
+		}
+		remove_effect = {
+            add_threat = 10
+			add_manpower = 10000
+			PRU = {
+				country_event = prt_event.22	
+			}
+			declare_war_on = {
+                target = FRR
+                type = puppet_wargoal_focus
+				}
+		}		
+	}
+}

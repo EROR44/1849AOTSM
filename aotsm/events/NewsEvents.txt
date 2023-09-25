@@ -371,7 +371,22 @@ news_event = { # New Roman Empire
 	
 	is_triggered_only = yes
 	
-	immediate = {log = "[GetDateText]: event news.18"}
+	immediate = {
+		log = "[GetDateText]: event news.18"
+		hidden_effect = {
+			every_country = {
+				limit = {
+					NOT = {
+						is_ai = yes
+					}
+					NOT = {
+						has_global_flag = soundevent_off_flag
+					}
+				}
+				scoped_sound_effect = "event_romanempire"
+			}
+		}
+	}
 
 	option = {
 		name = news.18.a
@@ -1293,7 +1308,7 @@ news_event = {
 	id = news.55 # Павел Игнатьев
 	title = news.55.t
 	desc = news.55.d
-	picture = GFX_news_event_generic_read_write
+	picture = GFX_news_event_political_discussion
 	
 	major = yes
 	
@@ -1306,11 +1321,11 @@ news_event = {
 	}
 }
 
-news_event = { # Романов КН - новый правитель России
+news_event = { # Власть в руках цервки - Россия
 	id = news.56
 	title = news.56.t
 	desc = news.56.d
-	picture = GFX_news_event_generic_read_write
+	picture = GFX_news_event_russian_religious_procession
 	
 	major = yes
 	
@@ -1324,10 +1339,10 @@ news_event = { # Романов КН - новый правитель Росси�
 }
 
 news_event = {
-	id = news.57 # Россия провозглашает Монархию
+	id = news.57 # Александр Романов у власти
 	title = news.57.t
 	desc = news.57.d
-	picture = GFX_news_event_generic_sign_treaty2
+	picture = GFX_news_event_alexander_romanov_koronation
 	
 	major = yes
 	
@@ -1341,10 +1356,10 @@ news_event = {
 }
 
 news_event = {
-	id = news.58 # Россия претендует на "Северные врата"
+	id = news.58 # Социалистический переворот
 	title = news.58.t
 	desc = news.58.d
-	picture = GFX_news_event_generic_sign_treaty1
+	picture = GFX_news_event_political_discussion
 	
 	major = yes
 	
@@ -1601,7 +1616,22 @@ news_event = {
 	
 	is_triggered_only = yes
 	
-	immediate = {log = "[GetDateText]: event news.69"}
+	immediate = {
+		log = "[GetDateText]: event news.69"
+		hidden_effect = {
+			every_country = {
+				limit = {
+					NOT = {
+						is_ai = yes
+					}
+					NOT = {
+						has_global_flag = soundevent_off_flag
+					}
+				}
+				scoped_sound_effect = "event_worldwar"
+			}
+		}
+	}
 	
 	option = {
 		name = news.69.a
@@ -1923,7 +1953,16 @@ news_event = {
 	
 	option = {
 		name = news.85.a
-
+		trigger = {
+			tag = SOR
+		}
+	}
+	
+	option = {
+		name = news.85.b
+		trigger = {
+			not = { tag = SOR }
+		}
 	}
 	
 }
@@ -2894,12 +2933,6 @@ news_event = {
 	option = {
 		name = news.111.a
 		trigger = {
-			OR = {
-				tag = PRU
-				is_subject_of = PRU
-				tag = BYZ
-				is_subject_of = BYZ
-			}
 			has_war_with = RUS
 		}
 	}
@@ -2907,10 +2940,6 @@ news_event = {
 	option = {
 		name = news.111.b
 		trigger = {
-			OR = {
-				tag = RUS
-				is_in_faction_with = RUS
-			}
 			OR = {
 				has_war_with = PRU
 				has_war_with = BYZ
@@ -2946,12 +2975,6 @@ news_event = {
 	option = {
 		name = news.112.a
 		trigger = {
-			OR = {
-				tag = PRU
-				is_subject_of = PRU
-				tag = BYZ
-				is_subject_of = BYZ
-			}
 			has_war_with = RUS
 		}
 	}
@@ -2959,10 +2982,6 @@ news_event = {
 	option = {
 		name = news.112.b
 		trigger = {
-			OR = {
-				tag = RUS
-				is_in_faction_with = RUS
-			}
 			OR = {
 				has_war_with = PRU
 				has_war_with = BYZ
@@ -4077,10 +4096,10 @@ news_event = {
 }
 
 news_event = {
-	id = news.141
+	id = news.141 #Русская черная лига устраивает переворот
 	title = news.141.t
 	desc = news.141.d
-	picture = GFX_news_event_generic_sign_treaty1
+	picture = GFX_news_event_black_league_coup
 	
 	major = yes
 	
@@ -4091,7 +4110,16 @@ news_event = {
 	option = {
 		name = news.141.a
 		trigger = {
+			tag = RUS
+		}
+	}
 	
+	option = {
+		name = news.141.b
+		trigger = {
+			NOT = {
+				tag = RUS
+			}
 		}
 	}
 }
@@ -5268,6 +5296,9 @@ news_event = {
 		trigger = {
 			tag = PRU
 		}
+		PRU = {
+			complete_national_focus = PRU_black_sun_rising
+		}
 	}
 	
 	option = {
@@ -5564,6 +5595,9 @@ news_event = {
 		trigger = {
 			is_in_faction_with = BYZ
 			has_war_with = RUS
+			NOT = {
+				tag = BYZ
+			}
 		}
 	}
 	
@@ -5579,6 +5613,9 @@ news_event = {
 		trigger = {
 			is_in_faction_with = RUS
 			has_war_with = BYZ
+			NOT = {
+				tag = RUS
+			}
 		}
 	}
 	
@@ -5617,7 +5654,9 @@ news_event = {
 		name = news.183.b
 		trigger = {
 			is_in_faction_with = BYZ
-			has_war_with = RUS
+			NOT = {
+				tag = BYZ
+			}
 		}
 	}
 	
@@ -5632,7 +5671,9 @@ news_event = {
 		name = news.183.f
 		trigger = {
 			is_in_faction_with = RUS
-			has_war_with = BYZ
+			NOT = {
+				tag = RUS
+			}
 		}
 	}
 	
@@ -5644,8 +5685,8 @@ news_event = {
 				tag = RUS
 			}
 			NOT = {
-				has_war_with = BYZ
-				has_war_with = RUS
+				is_in_faction_with = BYZ
+				is_in_faction_with = RUS
 			}
 		}
 	}
@@ -5804,7 +5845,7 @@ news_event = {
 	id = news.188 #Fareast lost
 	title = news.188.t
 	desc = news.188.d
-	picture = GFX_news_event_royalty_wedding_germany
+	picture = GFX_news_event_fareast_independent
 	
 	major = yes
 	
@@ -5822,7 +5863,7 @@ news_event = {
 	id = news.189 #Alaska lost
 	title = news.189.t
 	desc = news.189.d
-	picture = GFX_news_event_royalty_wedding_germany
+	picture = GFX_news_event_alaska_independent
 	
 	major = yes
 	
@@ -5840,7 +5881,7 @@ news_event = {
 	id = news.190 #Central Asia lost
 	title = news.190.t
 	desc = news.190.d
-	picture = GFX_news_event_royalty_wedding_germany
+	picture = GFX_news_event_centralasia_anarchy
 	
 	major = yes
 	
@@ -5858,7 +5899,7 @@ news_event = {
 	id = news.191 #Sibiria lost
 	title = news.191.t
 	desc = news.191.d
-	picture = GFX_news_event_royalty_wedding_germany
+	picture = GFX_news_event_blackleague_independent
 	
 	major = yes
 	
@@ -5876,7 +5917,7 @@ news_event = {
 	id = news.192 #Moskovia lost
 	title = news.192.t
 	desc = news.192.d
-	picture = GFX_news_event_royalty_wedding_germany
+	picture = GFX_news_event_end_of_russian
 	
 	major = yes
 	
@@ -5894,7 +5935,7 @@ news_event = {
 	id = news.193 #Moskovia civil war
 	title = news.193.t
 	desc = news.193.d
-	picture = GFX_news_event_royalty_wedding_germany
+	picture = GFX_news_event_russian_civilwar
 	
 	major = yes
 	
@@ -6076,6 +6117,8 @@ news_event = {
 	
 	is_triggered_only = yes
 	
+	immediate = {log = "[GetDateText]: event news.198"}
+	
 	option = {
 		name = news.198.a
 		trigger = {
@@ -6105,6 +6148,7 @@ news_event = {
 	
 	is_triggered_only = yes
 
+	immediate = {log = "[GetDateText]: event news.199"}
 	
 	option = {
 		name = news.199.a
@@ -6135,6 +6179,8 @@ news_event = {
 	
 	is_triggered_only = yes
 	
+	immediate = {log = "[GetDateText]: event news.200"}
+	
 	option = {
 		name = news.200.a
 		trigger = {
@@ -6164,6 +6210,8 @@ news_event = {
 	
 	is_triggered_only = yes
 	
+	immediate = {log = "[GetDateText]: event news.201"}
+	
 	option = {
 		name = news.201.a
 		trigger = {
@@ -6191,6 +6239,8 @@ news_event = {
 	major = yes
 	
 	is_triggered_only = yes
+	
+	immediate = {log = "[GetDateText]: event news.202"}
 	
 	immediate = {
 		hidden_effect = {
@@ -6231,6 +6281,8 @@ news_event = {
 	
 	is_triggered_only = yes
 	
+	immediate = {log = "[GetDateText]: event news.203"}
+	
 	option = {
 		name = news.203.a
 		trigger = {
@@ -6258,6 +6310,8 @@ news_event = {
 	major = yes
 	
 	is_triggered_only = yes
+	
+	immediate = {log = "[GetDateText]: event news.204"}
 	
 	option = {
 		name = news.204.a
@@ -6287,6 +6341,8 @@ news_event = {
 	
 	is_triggered_only = yes
 	
+	immediate = {log = "[GetDateText]: event news.205"}
+	
 	option = {
 		name = news.205.a
 		trigger = {
@@ -6315,6 +6371,8 @@ news_event = {
 	
 	is_triggered_only = yes
 	
+	immediate = {log = "[GetDateText]: event news.206"}
+	
 	option = {
 		name = news.206.a
 		trigger = {
@@ -6338,11 +6396,13 @@ news_event = {
 	id = news.207 #Депортация поляков
 	title = news.207.t
 	desc = news.207.d
-	picture = GFX_news_event_political_discussion
+	picture = GFX_news_event_polands_deportation
 	
 	major = yes
 	
 	is_triggered_only = yes
+	
+	immediate = {log = "[GetDateText]: event news.207"}
 	
 	option = {
 		name = news.207.a
@@ -6360,4 +6420,2428 @@ news_event = {
 		}
 	}
 	
+}
+
+
+news_event = {
+	id = news.208 #Bismark Germany
+	title = news.208.t
+	desc = news.208.d
+	picture = GFX_news_event_bismark_germany
+	
+	major = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {log = "[GetDateText]: event news.208"}
+	
+	option = {
+		name = news.208.a
+		trigger = {
+			tag = PRU
+		}
+	}
+	
+	option = {
+		name = news.208.b
+		trigger = {
+			NOT = {
+				tag = PRU
+			}
+		}
+	}
+	
+}
+
+news_event = {
+	id = news.209 #Kaiser Germany Socialism
+	title = news.209.t
+	desc = news.209.d
+	picture = GFX_news_event_fridrik_III_germany
+	
+	major = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {log = "[GetDateText]: event news.209"}
+	
+	option = {
+		name = news.209.a
+		trigger = {
+			tag = PRU
+		}
+	}
+	
+	option = {
+		name = news.209.b
+		trigger = {
+			NOT = {
+				tag = PRU
+			}
+		}
+	}
+	
+}
+
+news_event = {
+	id = news.210 #Kaiser Germany Autharitarian
+	title = news.210.t
+	desc = news.210.d
+	picture = GFX_news_event_old_germany
+	
+	major = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {log = "[GetDateText]: event news.210"}
+	
+	option = {
+		name = news.210.a
+		trigger = {
+			tag = PRU
+		}
+	}
+	
+	option = {
+		name = news.210.b
+		trigger = {
+			NOT = {
+				tag = PRU
+			}
+		}
+	}
+	
+}
+
+news_event = {
+	id = news.211 #Junker Germany
+	title = news.211.t
+	desc = news.211.d
+	picture = GFX_news_event_military_germany
+	
+	major = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {log = "[GetDateText]: event news.211"}
+	
+	option = {
+		name = news.211.a
+		trigger = {
+			tag = PRU
+		}
+	}
+	
+	option = {
+		name = news.211.b
+		trigger = {
+			NOT = {
+				tag = PRU
+			}
+		}
+	}
+	
+}
+
+news_event = {
+	id = news.212 #Wellcome to Holle
+	title = news.212.t
+	desc = news.212.d
+	picture = GFX_news_event_wellcome_to_holle
+	
+	major = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {log = "[GetDateText]: event news.212"}
+	
+	option = {
+		name = news.212.a
+		trigger = {
+			tag = PRU
+		}
+	}
+	
+	option = {
+		name = news.212.b
+		trigger = {
+			NOT = {
+				tag = PRU
+			}
+		}
+	}
+	
+}
+
+news_event = {
+	id = news.213 #Россия против германцев
+	title = news.213.t
+	desc = news.213.d
+	picture = GFX_news_event_russian_soldiers
+	
+	major = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {log = "[GetDateText]: event news.213"}
+	
+	option = {
+		name = news.213.a
+		trigger = {
+			tag = PRU
+		}
+	}
+	
+	option = {
+		name = news.213.b
+		trigger = {
+			NOT = {
+				tag = PRU
+			}
+		}
+	}
+	
+}
+
+news_event = {
+	id = news.214 #Давление на центральную азию
+	title = news.214.t
+	desc = news.214.d
+	picture = GFX_news_event_russian_soldiers
+	
+	major = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {log = "[GetDateText]: event news.214"}
+	
+	option = {
+		name = news.214.a
+		trigger = {
+			tag = RUS
+		}
+	}
+	
+	option = {
+		name = news.214.b
+		trigger = {
+			NOT = {
+				tag = RUS
+			}
+		}
+	}
+	
+}
+
+news_event = {
+	id = news.215 #Интервенция в Афганистан
+	title = news.215.t
+	desc = news.215.d
+	picture = GFX_news_event_russian_soldiers
+	
+	major = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {log = "[GetDateText]: event news.215"}
+	
+	option = {
+		name = news.215.a
+		trigger = {
+			tag = RUS
+		}
+	}
+	
+	option = {
+		name = news.215.b
+		trigger = {
+			NOT = {
+				tag = RUS
+			}
+		}
+	}
+	
+}
+
+news_event = {
+	id = news.216 #Аннексия Бадашхана
+	title = news.216.t
+	desc = news.216.d
+	picture = GFX_news_event_russian_soldiers
+	
+	major = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {log = "[GetDateText]: event news.215"}
+	
+	option = {
+		name = news.216.a
+		trigger = {
+			tag = RUS
+		}
+	}
+	
+	option = {
+		name = news.216.b
+		trigger = {
+			NOT = {
+				tag = RUS
+			}
+		}
+	}
+	
+}
+
+news_event = {
+	id = news.217 #Islamic revolt Start
+	title = news.217.t
+	desc = news.217.d
+	picture = GFX_news_event_islamic_revolt_start
+	
+	major = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {log = "[GetDateText]: event news.217"}
+	
+	option = {
+		name = news.217.a
+		trigger = {
+			tag = BYZ
+		}
+	}
+	
+	option = {
+		name = news.217.b
+		trigger = {
+			NOT = {
+				tag = BYZ
+			}
+		}
+	}
+	
+}
+
+news_event = {
+	id = news.218 #Islamic revolt Lose
+	title = news.218.t
+	desc = news.218.d
+	picture = GFX_news_event_islamic_revolt_crush
+	
+	major = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {log = "[GetDateText]: event news.218"}
+	
+	option = {
+		name = news.218.a
+		trigger = {
+			tag = BYZ
+		}
+	}
+	
+	option = {
+		name = news.218.b
+		trigger = {
+			NOT = {
+				tag = BYZ
+			}
+		}
+	}
+	
+}
+
+news_event = {
+	id = news.219 #Islamic revolt win
+	title = news.219.t
+	desc = news.219.d
+	picture = GFX_news_event_islamic_revolt_win
+	
+	major = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {log = "[GetDateText]: event news.219"}
+	
+	option = {
+		name = news.219.a
+		trigger = {
+			tag = BYZ
+		}
+	}
+	
+	option = {
+		name = news.219.b
+		trigger = {
+			NOT = {
+				tag = BYZ
+			}
+		}
+	}
+	
+}
+
+news_event = {
+	id = news.220 #Second Time of Trouble
+	title = news.220.t
+	desc = news.220.d
+	picture = GFX_news_event_second_smuta
+	
+	major = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: event news.220"
+		hidden_effect = {
+			every_country = {
+				limit = {
+					NOT = {
+						is_ai = yes
+					}
+					NOT = {
+						has_global_flag = soundevent_off_flag
+					}
+				}
+				scoped_sound_effect = "event_smuta"
+			}
+		}
+	}
+	
+	option = {
+		name = news.220.a
+		trigger = {
+			tag = RUS
+		}
+	}
+	
+	option = {
+		name = news.220.b
+		trigger = {
+			NOT = {
+				tag = RUS
+			}
+		}
+	}
+	
+}
+
+news_event = {
+	id = news.221 #Coronation of Aleksander II
+	title = news.221.t
+	desc = news.221.d
+	picture = GFX_news_event_aleksander_ii_coronation
+	
+	major = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {log = "[GetDateText]: event news.221"}
+	
+	option = {
+		name = news.221.a
+		trigger = {
+			tag = MSK
+		}
+	}
+	
+	option = {
+		name = news.221.b
+		trigger = {
+			NOT = {
+				tag = MSK
+			}
+		}
+	}
+	
+}
+
+news_event = {
+	id = news.222 #Moskovia win Civilwar
+	title = news.222.t
+	desc = news.222.d
+	picture = GFX_news_event_moskovia_win_civilwar
+	
+	major = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {log = "[GetDateText]: event news.222"}
+	
+	option = {
+		name = news.222.a
+		trigger = {
+			tag = MSK
+		}
+	}
+	
+	option = {
+		name = news.222.b
+		trigger = {
+			NOT = {
+				tag = MSK
+			}
+		}
+	}
+	
+}
+
+news_event = {
+	id = news.223 #Novgorod win Civilwar
+	title = news.223.t
+	desc = news.223.d
+	picture = GFX_news_event_novgorod_win_civilwar
+	
+	major = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {log = "[GetDateText]: event news.223"}
+	
+	option = {
+		name = news.223.a
+		trigger = {
+			tag = NOV
+		}
+	}
+	
+	option = {
+		name = news.223.b
+		trigger = {
+			NOT = {
+				tag = NOV
+			}
+		}
+	}
+	
+}
+
+news_event = {
+	id = news.224 #Civil war end
+	title = news.224.t
+	desc = news.224.d
+	picture = GFX_news_event_russian_civilwar_over
+	
+	major = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {log = "[GetDateText]: event news.224"}
+	
+	option = {
+		name = news.224.a
+		trigger = {
+			tag = MSK
+		}
+	}
+	
+	option = {
+		name = news.224.b
+		trigger = {
+			tag = NOV
+		}
+	}
+	
+	option = {
+		name = news.224.c
+		trigger = {
+			NOT = {
+				tag = MSK
+				tag = NOV
+			}
+		}
+	}
+	
+}
+
+news_event = {
+	id = news.225 #Убийство Трубецкого
+	title = news.225.t
+	desc = news.225.d
+	picture = GFX_news_event_generic_riot
+	
+	major = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {log = "[GetDateText]: event news.225"}
+	
+	option = {
+		name = news.225.a
+		trigger = {
+			NOT = { tag = RUS }
+		}
+	}
+	
+	option = {
+		name = news.225.b
+		trigger = {
+			tag = RUS
+		}
+	}
+	
+}
+
+news_event = {
+	id = news.226 #Lateran Treaty
+	title = news.226.t
+	desc = news.226.d
+	picture = GFX_news_event_lateran_treaty
+	
+	major = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {log = "[GetDateText]: event news.226"}
+	
+	option = {
+		name = news.226.a
+		trigger = {
+			NOT = { 
+				tag = SAR 
+				tag = PAP
+			}
+		}
+	}
+	
+	option = {
+		name = news.226.b
+		trigger = {
+			tag = SAR
+		}
+	}
+	
+	option = {
+		name = news.226.c
+		trigger = {
+			tag = PAP
+		}
+	}
+	
+}
+
+news_event = {
+	id = news.227 #Вторжение в государство Империя Цин
+	title = news.227.t
+	desc = news.227.d
+	picture = GFX_news_event_russian_soldiers
+	
+	major = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {log = "[GetDateText]: event news.227"}
+	
+	option = {
+		name = news.227.a
+		trigger = {
+			NOT = { 
+				tag = RUS
+			}
+		}
+	}
+	
+	option = {
+		name = news.227.b
+		trigger = {
+			tag = RUS
+		}
+	}
+	
+}
+
+news_event = {
+	id = news.228 #Создание Желтороссии
+	title = news.228.t
+	desc = news.228.d
+	picture = GFX_news_event_russian_soldiers
+	
+	major = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {log = "[GetDateText]: event news.228"}
+	
+	option = {
+		name = news.228.a
+		trigger = {
+			NOT = { 
+				tag = RUS
+			}
+		}
+	}
+	
+	option = {
+		name = news.228.b
+		trigger = {
+			tag = RUS
+		}
+	}
+	
+}
+
+news_event = {
+	id = news.229 #Крах русской колониальной стратегии
+	title = news.229.t
+	desc = news.229.d
+	picture = GFX_news_event_russian_soldiers
+	
+	major = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {log = "[GetDateText]: event news.229"}
+	
+	option = {
+		name = news.229.a
+		trigger = {
+			NOT = { 
+				tag = RUS
+			}
+		}
+	}
+	
+	option = {
+		name = news.229.b
+		trigger = {
+			tag = RUS
+		}
+	}
+	
+}
+
+news_event = {
+	id = news.230 #Death of Pile
+	title = news.230.t
+	desc = news.230.d
+	picture = GFX_news_event_death_of_robert_pile
+	
+	major = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: event news.230"
+		hidden_effect = {
+			BRI = {
+				retire_character = BRI_Robert_Pil
+				promote_character = BRI_Benjamin_Disraeli
+			}
+			CBI = {
+				if = {
+					limit = {
+						has_country_leader = {
+							character = CBI_Robert_Pil
+							ruling_only = yes
+						}
+					}
+					retire_country_leader = yes
+					promote_character = CBI_Benjamin_Disraeli
+				}
+				retire_character = CBI_Robert_Pil
+				remove_ideas = robert_pil
+			}
+		}
+	}
+	
+	option = {
+		name = news.230.a
+		trigger = {
+			NOT = { 
+				tag = CBI
+				tag = BRI
+			}
+		}
+	}
+	
+	option = {
+		name = news.230.b
+		trigger = {
+			tag = CBI
+		}
+	}
+	
+	option = {
+		name = news.230.c
+		trigger = {
+			tag = BRI
+		}
+	}
+	
+}
+
+news_event = { #Raid of Polish Town
+	id = news.231
+	title = news.231.t
+	desc = news.231.d
+	picture = GFX_news_event_burning_polish_town
+	
+	major = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {log = "[GetDateText]: event news.231"}
+	
+	option = {
+		name = news.231.a
+		trigger = {
+			OR = { 
+				tag = POL
+				tag = PLH
+			}
+		}
+	}
+	
+	option = {
+		name = news.231.b
+		trigger = {
+			tag = RUS
+		}
+	}
+	
+	option = {
+		name = news.231.b
+		trigger = {
+			NOT = {
+				tag = POL
+				tag = PLH
+				tag = RUS
+			}
+		}
+	}
+	
+}
+
+news_event = { #Genocide of Volga
+	id = news.232
+	title = news.232.t
+	desc = news.232.d
+	picture = GFX_news_event_genocid_on_volga
+	
+	major = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {log = "[GetDateText]: event news.232"}
+	
+	option = {
+		name = news.232.a
+		trigger = {
+			tag = RUS
+		}
+	}
+	
+	option = {
+		name = news.232.b
+		trigger = {
+			tag = PRU
+		}
+	}
+	
+	option = {
+		name = news.232.b
+		trigger = {
+			NOT = {
+				tag = RUS
+				tag = PRU
+			}
+		}
+	}
+	
+}
+
+news_event = { #Fate of Russian in Germany
+	id = news.233
+	title = news.233.t
+	desc = news.233.d
+	picture = GFX_news_event_fate_of_russian_in_germany
+	
+	major = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {log = "[GetDateText]: event news.233"}
+	
+	option = {
+		name = news.233.a
+		trigger = {
+			tag = PRU
+			NOT = {
+				has_completed_focus = PRU_bismark_first_kanzler
+			}
+			NOT = {
+				has_completed_focus = PRU_emperor_save_power
+			}
+			NOT = {
+				has_completed_focus = PRU_juncker_take_power
+			}
+			NOT = {
+				has_completed_focus = PRU_rise_of_evil
+			}
+		}
+	}
+	
+	option = {
+		name = news.233.b
+		trigger = {
+			tag = PRU
+			has_completed_focus = PRU_bismark_first_kanzler
+			NOT = {
+				has_completed_focus = PRU_rise_of_evil
+			}
+		}
+	}
+	
+	option = {
+		name = news.233.c
+		trigger = {
+			tag = PRU
+			has_completed_focus = PRU_emperor_save_power
+			NOT = {
+				has_completed_focus = PRU_rise_of_evil
+			}
+		}
+	}
+	
+	option = {
+		name = news.233.f
+		trigger = {
+			tag = PRU
+			has_completed_focus = PRU_juncker_take_power
+			NOT = {
+				has_completed_focus = PRU_rise_of_evil
+			}
+		}
+	}
+	
+	option = {
+		name = news.233.g
+		trigger = {
+			tag = PRU
+			has_completed_focus = PRU_rise_of_evil
+		}
+	}
+	
+	option = {
+		name = news.233.h
+		trigger = {
+			tag = RUS
+		}
+	}
+	
+	option = {
+		name = news.233.j
+		trigger = {
+			NOT = {
+				tag = RUS
+				tag = PRU
+			}
+		}
+	}
+	
+}
+
+news_event = { #March of Russian prisoner
+	id = news.234
+	title = news.234.t
+	desc = news.234.d
+	picture = GFX_news_event_march_of_russian_prisoner
+	
+	major = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {log = "[GetDateText]: event news.234"}
+	
+	option = {
+		name = news.234.a
+		trigger = {
+			tag = PRU
+			NOT = {
+				has_completed_focus = PRU_bismark_first_kanzler
+			}
+			NOT = {
+				has_completed_focus = PRU_emperor_save_power
+			}
+			NOT = {
+				has_completed_focus = PRU_juncker_take_power
+			}
+			NOT = {
+				has_completed_focus = PRU_rise_of_evil
+			}
+		}
+	}
+	
+	option = {
+		name = news.234.b
+		trigger = {
+			tag = PRU
+			has_completed_focus = PRU_bismark_first_kanzler
+			NOT = {
+				has_completed_focus = PRU_rise_of_evil
+			}
+		}
+	}
+	
+	option = {
+		name = news.234.c
+		trigger = {
+			tag = PRU
+			has_completed_focus = PRU_emperor_save_power
+			NOT = {
+				has_completed_focus = PRU_rise_of_evil
+			}
+		}
+	}
+	
+	option = {
+		name = news.234.f
+		trigger = {
+			tag = PRU
+			has_completed_focus = PRU_juncker_take_power
+			NOT = {
+				has_completed_focus = PRU_rise_of_evil
+			}
+		}
+	}
+	
+	option = {
+		name = news.234.g
+		trigger = {
+			tag = PRU
+			has_completed_focus = PRU_rise_of_evil
+		}
+	}
+	
+	option = {
+		name = news.234.h
+		trigger = {
+			tag = RUS
+		}
+	}
+	
+	option = {
+		name = news.234.j
+		trigger = {
+			NOT = {
+				tag = RUS
+				tag = PRU
+			}
+		}
+	}
+	
+}
+
+
+news_event = { #Vote of no confidence in Russian
+	id = news.235
+	title = news.235.t
+	desc = news.235.d
+	picture = GFX_news_event_vote_of_no_confidence
+	
+	major = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {log = "[GetDateText]: event news.235"}
+	
+	option = {
+		name = news.235.a
+		trigger = {
+			tag = RUS
+		}
+	}
+	
+	option = {
+		name = news.235.b
+		trigger = {
+			NOT ={
+				tag = RUS
+			}
+		}
+	}
+	
+}
+
+news_event = { #Lelpoldit fire Germany
+	id = news.236
+	title = news.236.t
+	desc = news.236.d
+	picture = GFX_news_event_end_of_germany_by_nuke
+	
+	major = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {log = "[GetDateText]: event news.236"}
+	
+	option = {
+		name = news.236.a
+		trigger = {
+			tag = PRU
+		}
+	}
+	
+	option = {
+		name = news.236.b
+		trigger = {
+			NOT ={
+				tag = PRU
+			}
+		}
+	}
+	
+}
+
+news_event = { #German Civilwar
+	id = news.237
+	title = news.237.t
+	desc = news.237.d
+	picture = GFX_news_event_germany_civilwar_starting
+	
+	major = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: event news.237"
+		hidden_effect = {
+			set_global_flag = news_237_happend_flag
+		}
+	}
+	
+	option = {
+		name = news.237.a
+		trigger = {
+			tag = PRU
+		}
+	}
+	
+	option = {
+		name = news.237.b
+		trigger = {
+			NOT ={
+				tag = PRU
+			}
+		}
+	}
+	
+}
+
+news_event = { #Black Sun Win CivilWar
+	id = news.238
+	title = news.238.t
+	desc = news.238.d
+	picture = GFX_news_event_germany_civilwar_blacksun_win
+	
+	major = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {log = "[GetDateText]: event news.238"}
+	
+	option = {
+		name = news.238.a
+		trigger = {
+			tag = PRU
+		}
+	}
+	
+	option = {
+		name = news.238.b
+		trigger = {
+			NOT ={
+				tag = PRU
+			}
+		}
+	}
+	
+}
+
+news_event = { #German Socialism Win CivilWar
+	id = news.239
+	title = news.239.t
+	desc = news.239.d
+	picture = GFX_news_event_germany_civilwar_socialism_win
+	
+	major = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {log = "[GetDateText]: event news.239"}
+	
+	option = {
+		name = news.239.a
+		trigger = {
+			tag = SGE
+		}
+	}
+	
+	option = {
+		name = news.239.b
+		trigger = {
+			NOT ={
+				tag = SGE
+			}
+		}
+	}
+	
+}
+
+news_event = { #German Monarchist Win CivilWar
+	id = news.240
+	title = news.240.t
+	desc = news.240.d
+	picture = GFX_news_event_germany_civilwar_monarchist_win
+	
+	major = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {log = "[GetDateText]: event news.240"}
+	
+	option = {
+		name = news.240.a
+		trigger = {
+			tag = KGR
+		}
+	}
+	
+	option = {
+		name = news.240.b
+		trigger = {
+			NOT ={
+				tag = KGR
+			}
+		}
+	}
+	
+}
+
+news_event = { #German Democrat Win CivilWar
+	id = news.241
+	title = news.241.t
+	desc = news.241.d
+	picture = GFX_news_event_germany_civilwar_democrat_win
+	
+	major = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {log = "[GetDateText]: event news.241"}
+	
+	option = {
+		name = news.241.a
+		trigger = {
+			tag = KGR
+		}
+	}
+	
+	option = {
+		name = news.241.b
+		trigger = {
+			NOT ={
+				tag = KGR
+			}
+		}
+	}
+	
+}
+
+
+news_event = {
+	id = news.242
+	title = news.242.t
+	desc = news.242.d
+	picture = GFX_news_event_por_salazar_franco
+	
+	major = yes
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = news.242.a
+		trigger = {
+			tag = PRT
+		}
+	}
+	
+	option = {
+		name = news.242.b
+		trigger = {
+			NOT ={
+				tag = PRT
+			}
+		}
+	}
+}
+
+news_event = {
+	id = news.243
+	title = news.243.t
+	desc = news.243.d
+	picture = GFX_news_event_por_salazar_franco
+	
+	major = yes
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = news.243.a
+		trigger = {
+			tag = PRT
+		}
+	}
+	
+	option = {
+		name = news.243.b
+		trigger = {
+			NOT ={
+				tag = PRT
+			}
+		}
+	}
+}
+
+news_event = {
+	id = news.244
+	title = news.244.t
+	desc = news.244.d
+	picture = GFX_news_event_por_salazar_franco
+	
+	major = yes
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = news.244.a
+		trigger = {
+			tag = PRT
+		}
+	}
+	
+	option = {
+		name = news.244.b
+		trigger = {
+			NOT ={
+				tag = PRT
+			}
+		}
+	}
+}
+
+news_event = {
+	id = news.245
+	title = news.245.t
+	desc = news.245.d
+	picture = GFX_news_event_por_salazar_franco
+	
+	major = yes
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = news.245.a
+		trigger = {
+			tag = PRT
+		}
+	}
+	
+	option = {
+		name = news.245.b
+		trigger = {
+			NOT ={
+				tag = PRT
+			}
+		}
+	}
+}
+
+news_event = {
+	id = news.246
+	title = news.246.t
+	desc = news.246.d
+	picture = GFX_news_event_por_salazar_franco
+	
+	major = yes
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = news.246.a
+		trigger = {
+			tag = PRT
+		}
+	}
+	
+	option = {
+		name = news.246.b
+		trigger = {
+			NOT ={
+				tag = PRT
+			}
+		}
+	}
+}
+
+news_event = {
+	id = news.247
+	title = news.247.t
+	desc = news.247.d
+	picture = GFX_news_event_por_salazar_franco
+	
+	major = yes
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = news.247.a
+		trigger = {
+			tag = PRT
+		}
+	}
+	
+	option = {
+		name = news.247.b
+		trigger = {
+			NOT ={
+				tag = PRT
+			}
+		}
+	}
+}
+
+news_event = {
+	id = news.248
+	title = news.248.t
+	desc = news.248.d
+	picture = GFX_news_event_por_salazar_franco
+	
+	major = yes
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = news.248.a
+		trigger = {
+			tag = PRT
+		}
+	}
+	
+	option = {
+		name = news.248.b
+		trigger = {
+			NOT ={
+				tag = PRT
+			}
+		}
+	}
+}
+
+news_event = {
+	id = news.249
+	title = news.249.t
+	desc = news.249.d
+	picture = GFX_news_event_por_salazar_franco
+	
+	major = yes
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = news.249.a
+		trigger = {
+			tag = PRT
+		}
+	}
+	
+	option = {
+		name = news.249.b
+		trigger = {
+			NOT ={
+				tag = PRT
+			}
+		}
+	}
+}
+
+news_event = {
+	id = news.250
+	title = news.250.t
+	desc = news.250.d
+	picture = GFX_news_event_por_salazar_franco
+	
+	major = yes
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = news.250.a
+		trigger = {
+			tag = PRT
+		}
+	}
+	
+	option = {
+		name = news.250.b
+		trigger = {
+			NOT ={
+				tag = PRT
+			}
+		}
+	}
+}
+
+news_event = {
+	id = news.251
+	title = news.251.t
+	desc = news.251.d
+	picture = GFX_news_event_por_salazar_franco
+	
+	major = yes
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = news.251.a
+		trigger = {
+			tag = PRT
+		}
+	}
+	
+	option = {
+		name = news.251.b
+		trigger = {
+			NOT ={
+				tag = PRT
+			}
+		}
+	}
+}
+
+news_event = {
+	id = news.252
+	title = news.252.t
+	desc = news.252.d
+	picture = GFX_news_event_por_salazar_franco
+	
+	major = yes
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = news.252.a
+		trigger = {
+			tag = PRT
+		}
+	}
+	
+	option = {
+		name = news.252.b
+		trigger = {
+			NOT ={
+				tag = PRT
+			}
+		}
+	}
+}
+
+
+news_event = { #Creating of South Africa
+	id = news.253
+	title = news.253.t
+	desc = news.253.d
+	picture = GFX_news_event_creating_of_south_africa
+	
+	major = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {log = "[GetDateText]: event news.253"}
+	
+	option = { 
+		name = news.253.a
+		trigger = {
+			tag = SAB
+		}
+	}
+	
+	option = { 
+		name = news.253.b
+		trigger = {
+			tag = CBI
+		}
+	}
+	
+	option = { 
+		name = news.253.c
+		trigger = {
+			NOT = {
+				tag = SAB
+				tag = CBI
+			}
+		}
+	}
+	
+}
+
+news_event = { #Freedom to New England
+	id = news.254
+	title = news.254.t
+	desc = news.254.d
+	picture = GFX_news_event_freedom_of_new_england
+	
+	major = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {log = "[GetDateText]: event news.254"}
+	
+	option = { 
+		name = news.254.a
+		trigger = {
+			tag = NEN
+		}
+	}
+	
+	option = { 
+		name = news.254.b
+		trigger = {
+			tag = CBI
+		}
+	}
+	
+	option = { 
+		name = news.254.c
+		trigger = {
+			NOT = {
+				tag = NEN
+				tag = CBI
+			}
+		}
+	}
+	
+}
+
+news_event = {
+	id = news.255
+	title = news.255.t
+	desc = news.255.d
+	picture = GFX_news_event_por_salazar_franco
+	
+	major = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {log = "[GetDateText]: event news.255"}
+	
+	option = {
+		name = news.255.a
+		trigger = {
+			tag = PRT
+		}
+	}
+	
+	option = {
+		name = news.255.b
+		trigger = {
+			NOT ={
+				tag = PRT
+			}
+		}
+	}
+}
+
+news_event = { #Россия вторгается в Казахстан - новостной для соц.России
+	id = news.256
+	title = news.256.t
+	desc = news.256.d
+	picture = GFX_news_event_russuan_soldiers_on_the_marsh
+	
+	major = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {log = "[GetDateText]: event news.256"}
+	
+	option = { 
+		name = news.256.a
+		trigger = {
+			tag = RUS
+		}
+	}
+	option = { 
+		name = news.256.b
+		trigger = {
+			NOT = {
+				tag = RUS
+			}
+		}
+	}
+}
+
+news_event = { #Оккупация Казахстана  - победа - новостной для соц.России
+	id = news.257
+	title = news.257.t
+	desc = news.257.d
+	picture = GFX_news_event_russuan_soldiers_on_the_marsh
+	
+	major = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {log = "[GetDateText]: event news.257"}
+	
+	option = { 
+		name = news.257.a
+		trigger = {
+			tag = RUS
+		}
+	}
+	option = { 
+		name = news.257.b
+		trigger = {
+			NOT = {
+				tag = RUS
+			}
+		}
+	}
+}
+
+news_event = { #Поражение русской армии - Казахстан победил - новостной для соц.России
+	id = news.258
+	title = news.258.t
+	desc = news.258.d
+	picture = GFX_news_event_russian_civilwar
+	
+	major = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {log = "[GetDateText]: event news.258"}
+	
+	option = { 
+		name = news.258.a
+		trigger = {
+			tag = RUS
+		}
+	}
+	
+	option = { 
+		name = news.258.b
+		trigger = {
+			NOT = {
+				tag = RUS
+			}
+		}
+	}
+}
+
+news_event = { #Вторжение в Хиву - новостной для соц.России
+	id = news.259
+	title = news.259.t
+	desc = news.259.d
+	picture = GFX_news_event_russuan_soldiers_on_the_marsh
+	
+	major = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {log = "[GetDateText]: event news.259"}
+	
+	option = { 
+		name = news.259.a
+		trigger = {
+			tag = RUS
+		}
+	}
+	
+	option = { 
+		name = news.259.b
+		trigger = {
+			NOT = {
+				tag = RUS
+			}
+		}
+	}
+}
+
+news_event = { #Вторжение в Бухару - новостной для соц.России
+	id = news.260
+	title = news.260.t
+	desc = news.260.d
+	picture = GFX_news_event_russuan_soldiers_on_the_marsh
+	
+	major = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {log = "[GetDateText]: event news.260"}
+	
+	option = { 
+		name = news.260.a
+		trigger = {
+			tag = RUS
+		}
+	}
+	
+	option = { 
+		name = news.260.b
+		trigger = {
+			NOT = {
+				tag = RUS
+			}
+		}
+	}
+}
+
+news_event = { #Оккупация северной маньчжурии
+	id = news.261
+	title = news.261.t
+	desc = news.261.d
+	picture = GFX_news_event_russuan_soldiers_on_the_marsh
+	
+	major = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {log = "[GetDateText]: event news.261"}
+	
+	option = { 
+		name = news.261.a
+		trigger = {
+			tag = RUS
+		}
+	}
+	
+	option = { 
+		name = news.261.b
+		trigger = {
+			NOT = {
+				tag = RUS
+			}
+		}
+	}
+}
+
+news_event = { #Захват северной маньчжурии
+	id = news.262
+	title = news.262.t
+	desc = news.262.d
+	picture = GFX_news_event_russuan_soldiers_on_the_marsh
+	
+	major = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {log = "[GetDateText]: event news.262"}
+	
+	option = { 
+		name = news.262.a
+		trigger = {
+			tag = RUS
+		}
+	}
+	
+	option = { 
+		name = news.262.b
+		trigger = {
+			NOT = {
+				tag = RUS
+			}
+		}
+	}
+}
+
+news_event = { #Россия в поисках союзников
+	id = news.263
+	title = news.263.t
+	desc = news.263.d
+	picture = GFX_news_event_russuan_soldiers_on_the_marsh
+	
+	major = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {log = "[GetDateText]: event news.263"}
+	
+	option = { 
+		name = news.263.a
+		trigger = {
+			tag = RUS
+		}
+	}
+	
+	option = { 
+		name = news.263.b
+		trigger = {
+			NOT = {
+				tag = RUS
+			}
+		}
+	}
+}
+
+news_event = { #Интервенция в Скандинавию
+	id = news.264
+	title = news.264.t
+	desc = news.264.d
+	picture = GFX_news_event_russuan_soldiers_on_the_marsh
+	
+	major = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {log = "[GetDateText]: event news.264"}
+	
+	option = { 
+		name = news.264.a
+		trigger = {
+			tag = RUS
+		}
+	}
+	
+	option = { 
+		name = news.264.b
+		trigger = {
+			NOT = {
+				tag = RUS
+			}
+		}
+	}
+}
+
+news_event = { #Оккупация Лаппи
+	id = news.265
+	title = news.265.t
+	desc = news.265.d
+	picture = GFX_news_event_russuan_soldiers_on_the_marsh
+	
+	major = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {log = "[GetDateText]: event news.265"}
+	
+	option = { 
+		name = news.265.a
+		trigger = {
+			tag = RUS
+		}
+	}
+	
+	option = { 
+		name = news.265.b
+		trigger = {
+			NOT = {
+				tag = RUS
+			}
+		}
+	}
+}
+
+news_event = { #Завешение интервенции в скандинавию
+	id = news.266
+	title = news.266.t
+	desc = news.266.d
+	picture = GFX_news_event_russuan_soldiers_on_the_marsh
+	
+	major = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {log = "[GetDateText]: event news.266"}
+	
+	option = { 
+		name = news.266.a
+		trigger = {
+			tag = RUS
+		}
+	}
+	
+	option = { 
+		name = news.266.b
+		trigger = {
+			NOT = {
+				tag = RUS
+			}
+		}
+	}
+}
+
+news_event = { #Провал интервенции в скандинавию
+	id = news.267
+	title = news.267.t
+	desc = news.267.d
+	picture = GFX_news_event_russuan_soldiers_on_the_marsh
+	
+	major = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {log = "[GetDateText]: event news.267"}
+	
+	option = { 
+		name = news.267.a
+		trigger = {
+			tag = RUS
+		}
+	}
+	
+	option = { 
+		name = news.267.b
+		trigger = {
+			NOT = {
+				tag = RUS
+			}
+		}
+	}
+}
+
+news_event = { #Создание интернационала
+	id = news.268
+	title = news.268.t
+	desc = news.268.d
+	picture = GFX_news_event_signing_the_contract
+	
+	major = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {log = "[GetDateText]: event news.268"}
+	
+	option = { 
+		name = news.268.a
+		trigger = {
+			has_government = socialism
+		}
+	}
+	
+	option = { 
+		name = news.268.b
+		trigger = {
+			NOT = {
+				has_government = socialism
+			}
+		}
+	}
+}
+
+news_event = { #Создание Московского пакта
+	id = news.269
+	title = news.269.t
+	desc = news.269.d
+	picture = GFX_news_event_signing_the_contract
+	
+	major = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {log = "[GetDateText]: event news.269"}
+	
+	option = { 
+		name = news.268.a
+		trigger = {
+			has_government = socialism
+		}
+	}
+	
+	option = { 
+		name = news.269.b
+		trigger = {
+			NOT = {
+				has_government = socialism
+			}
+		}
+	}
+}
+
+news_event = { #Создание харьковского договора
+	id = news.270
+	title = news.270.t
+	desc = news.270.d
+	picture = GFX_news_event_signing_the_contract
+	
+	major = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {log = "[GetDateText]: event news.270"}
+	
+	option = { 
+		name = news.270.a
+		trigger = {
+			tag = RUS
+		}
+	}
+	
+	option = { 
+		name = news.270.b
+		trigger = {
+			NOT = {
+				tag = RUS
+			}
+		}
+	}
+}
+
+news_event = { #Первая мировая война - Россия подавив польское восстание объявляет войну Германии
+	id = news.271
+	title = news.271.t
+	desc = news.271.d
+	picture = GFX_news_event_attack_of_russian_soldiers
+	
+	major = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {log = "[GetDateText]: event news.271"}
+	
+	option = { 
+		name = news.271.a
+		trigger = {
+			NOT = {
+				tag = RUS
+				tag = CBI
+				tag = FRR
+				tag = PRU
+				tag = BYZ
+			}
+		}
+	}
+	
+	option = { 
+		name = news.271.b
+		trigger = {
+			tag = RUS
+		}
+	}
+	
+	option = { 
+		name = news.271.c
+		trigger = {
+			OR = {
+				tag = CBI
+				tag = FRR
+			}
+		}
+	}
+	
+	option = { 
+		name = news.271.e
+		trigger = {
+			OR = {
+				tag = PRU
+				tag = BYZ
+			}
+		}
+	}
+}
+
+news_event = { #Восстание "Русской черной лиги"
+	id = news.272
+	title = news.272.t
+	desc = news.272.d
+	picture = GFX_news_event_black_league_coup
+	
+	major = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {log = "[GetDateText]: event news.272"}
+	
+	option = { 
+		name = news.272.a
+		trigger = {
+			NOT = {
+				tag = RUS
+			}
+		}
+	}
+	
+	option = { 
+		name = news.272.b
+		trigger = {
+			tag = RUS
+		}
+	}
+}
+
+news_event = { #Черная лига терпит поражение
+	id = news.273
+	title = news.273.t
+	desc = news.273.d
+	picture = GFX_news_event_black_league_coup
+	
+	major = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {log = "[GetDateText]: event news.273"}
+	
+	option = { 
+		name = news.273.a
+		trigger = {
+			tag = RUS
+		}
+	}
+	
+	option = { 
+		name = news.273.b
+		trigger = {
+			NOT = {
+				tag = RUS
+			}
+		}
+	}
+}
+
+news_event = { #Успех Русской черной лиги
+	id = news.274
+	title = news.274.t
+	desc = news.274.d
+	picture = GFX_news_event_black_league_coup
+	
+	major = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {log = "[GetDateText]: event news.274"}
+	
+	option = { 
+		name = news.274.a
+		trigger = {
+			tag = RUS
+		}
+	}
+	
+	option = { 
+		name = news.274.b
+		trigger = {
+			NOT = {
+				tag = RUS
+			}
+		}
+	}
+}
+
+news_event = { #Первая мировая война - соц. Россия подавив польское восстание объявляет войну Германии
+	id = news.275
+	title = news.275.t
+	desc = news.275.d
+	picture = GFX_news_event_attack_of_russian_soldiers
+	
+	major = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {log = "[GetDateText]: event news.275"}
+	
+	option = { 
+		name = news.275.a
+		trigger = {
+			tag = RUS
+		}
+	}
+	
+	option = { 
+		name = news.275.b
+		trigger = {
+			OR = {
+				tag = BYZ
+				tag = PRU
+			}
+		}
+	}
+	
+	option = { 
+		name = news.275.c
+		trigger = {
+			OR = {
+				tag = CBI
+				tag = FRR
+			}
+		}
+	}
+	
+	option = { 
+		name = news.275.e
+		trigger = {
+			NOT = {
+				tag = RUS
+				tag = PRU
+				tag = BYZ
+				tag = CBI
+				tag = FRR
+			}
+		}
+	}
+}
+
+news_event = { #Первая мировая война - соц. Россия подавив польское восстание объявляет войну Ромее
+	id = news.276
+	title = news.276.t
+	desc = news.276.d
+	picture = GFX_news_event_attack_of_russian_soldiers
+	
+	major = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {log = "[GetDateText]: event news.276"}
+	
+	option = { 
+		name = news.276.a
+		trigger = {
+			tag = RUS
+		}
+	}
+	
+	option = { 
+		name = news.276.b
+		trigger = {
+			OR = {
+				tag = BYZ
+				tag = PRU
+			}
+		}
+	}
+	
+	option = { 
+		name = news.276.c
+		trigger = {
+			OR = {
+				tag = CBI
+				tag = FRR
+			}
+		}
+	}
+	
+	option = { 
+		name = news.276.e
+		trigger = {
+			NOT = {
+				tag = RUS
+				tag = PRU
+				tag = BYZ
+				tag = CBI
+				tag = FRR
+			}
+		}
+	}
+}
+
+news_event = { #Первая мировая война - Ромея начинает ВВ из за Тавридской операции
+	id = news.277
+	title = news.277.t
+	desc = news.277.d
+	picture = GFX_news_event_byzantium_soldiers_parade
+	
+	major = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {log = "[GetDateText]: event news.277"}
+	
+	option = { 
+		name = news.277.a
+		trigger = {
+			tag = RUS
+		}
+	}
+	
+	option = { 
+		name = news.277.b
+		trigger = {
+			OR = {
+				tag = BYZ
+				tag = PRU
+			}
+		}
+	}
+	
+	option = { 
+		name = news.277.c
+		trigger = {
+			OR = {
+				tag = CBI
+				tag = FRR
+			}
+		}
+	}
+	
+	option = { 
+		name = news.277.e
+		trigger = {
+			NOT = {
+				tag = RUS
+				tag = PRU
+				tag = BYZ
+				tag = CBI
+				tag = FRR
+			}
+		}
+	}
+}
+
+news_event = { #Убийство Демида Цопанидиса
+	id = news.278
+	title = news.278.t
+	desc = news.278.d
+	picture = GFX_news_event_murder_of_demid_tsopanidis
+	
+	major = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {log = "[GetDateText]: event news.278"}
+	
+	option = { 
+		name = news.278.a
+		trigger = {
+			NOT = {
+				tag = BYZ
+			}
+		}
+	}
+	option = { 
+		name = news.278.b
+		trigger = {
+			tag = BYZ
+		}
+	}
+	
+
+}
+
+news_event = { #Дело Ахмеда Арифи
+	id = news.279
+	title = news.279.t
+	desc = news.279.d
+	picture = GFX_news_event_case_of_ahmed_arifi
+	
+	major = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {log = "[GetDateText]: event news.279"}
+	
+	option = { 
+		name = news.279.a
+		trigger = {
+			NOT = {
+				tag = BYZ
+			}
+		}
+	}
+	option = { 
+		name = news.279.b
+		trigger = {
+			tag = BYZ
+		}
+	}
+	
+
 }
