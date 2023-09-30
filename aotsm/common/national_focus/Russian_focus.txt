@@ -6613,6 +6613,9 @@ focus_tree = {
 		
 		available = {
 			somalian_reformist_uprising_in_process = yes
+			SOR = {
+				country_exists = yes
+			}
 		}
 
 		relative_position_id = RUS_soc_interveonism_politic
@@ -6624,12 +6627,13 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: focus RUS_soc_help_somalian_reformists_uprising"
-			if = {
-				limit = {
-					SOR = { country_exists = yes }
-				}
-				SOR = { country_event = { id = russian_socialist_sphere_event.12 days = 3 } }
-			}
+			#if = {
+			#	limit = {
+			#		SOR = { country_exists = yes }
+			#	}
+			#	SOR = { country_event = { id = russian_socialist_sphere_event.12 days = 3 } }
+			#}
+			SOR = { country_event = { id = russian_socialist_sphere_event.12 days = 3 } }
 		}
 	}
 
@@ -6696,10 +6700,7 @@ focus_tree = {
 		available = {
 			has_war = no
 			NOT = { has_global_flag = firts_world_war}
-			OR = {
-				has_global_flag = pru_ignore_poland_uprising
-				date > 1855.1.1
-			}
+			has_global_flag = pru_ignore_poland_uprising
 		}
 
 		relative_position_id = RUS_soc_why_is_our_ally
@@ -6781,7 +6782,7 @@ focus_tree = {
 		available = {
 			has_war = no
 			NOT = { has_global_flag = firts_world_war}
-			date > 1855.1.1
+			has_global_flag = pru_ignore_poland_uprising
 		}
 
 		relative_position_id = RUS_soc_reorganise_ohranka
@@ -7665,9 +7666,32 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: focus RUS_conquer_central_asia"
 			custom_effect_tooltip = RUS_activate_missions_conquer_central_asia
-			KAZ = { country_event = { id = russian_central_asia_politic.6 days = 2 } }
-			HIV = { country_event = { id = russian_central_asia_politic.9 days = 2 } }
-			BUK = { country_event = { id = russian_central_asia_politic.12 days = 2 } }
+			if = {
+				limit = {
+					HIV = {
+						is_in_faction_with = KAZ
+					}
+					BUK = {
+						is_in_faction_with = KAZ
+					}
+				}
+				KAZ = { country_event = { id = russian_central_asia_politic.6 days = 2 } }
+			}
+			if = {
+				limit = {
+					NOT = {
+						HIV = {
+							is_in_faction_with = KAZ
+						}
+						BUK = {
+							is_in_faction_with = KAZ
+						}
+					}
+				}
+				KAZ = { country_event = { id = russian_central_asia_politic.6 days = 2 } }
+				HIV = { country_event = { id = russian_central_asia_politic.9 days = 2 } }
+				BUK = { country_event = { id = russian_central_asia_politic.12 days = 2 } }
+			}						
 			hidden_effect = {
 				add_timed_idea = { 
 					days = 90
@@ -7687,11 +7711,12 @@ focus_tree = {
 		cost = 5 
 		
 		available = {
-			NOT = {
-				has_war_with = KAZ
-				has_war_with = BUK
-				has_war_with = HIV
-			}
+			#NOT = {
+			#	has_war_with = KAZ
+			#	has_war_with = BUK
+			#	has_war_with = HIV
+			#}
+			controls_central_asia = yes
 		}
 
 		relative_position_id = RUS_conquer_central_asia
@@ -8020,8 +8045,9 @@ focus_tree = {
 		cost = 5 
 		
 		available = {
-			has_country_flag = RUS_not_up_rus_jap_relations
-			has_war = no
+			#has_country_flag = RUS_not_up_rus_jap_relations
+			#has_war = no
+			aotsm_performed_by_event_or_solution = yes
 		}
 
 		relative_position_id = RUS_claims_on_sahalin
@@ -8033,6 +8059,7 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: focus RUS_colonial_fight_witch_japan"
+			custom_effect_tooltip = aotsm_branch_in_development
 		}
 	}
 	
@@ -8182,6 +8209,15 @@ focus_tree = {
 		x = 0
 		y = 2
 		cost = 5
+		
+		available = {
+			NOT = {
+				OR = {
+					has_war_with = PRU
+					has_war_with = BYZ
+				}
+			}
+		}
 
 		relative_position_id = RUS_kromwlend_politick
 		prerequisite = { focus = RUS_resume_activity_of_rcs }
@@ -8204,6 +8240,15 @@ focus_tree = {
 		x = -1
 		y = 1
 		cost = 10
+		
+		available = {
+			NOT = {
+				OR = {
+					has_war_with = PRU
+					has_war_with = BYZ
+				}
+			}
+		}
 
 		relative_position_id = RUS_conquer_salishes
 		prerequisite = { focus = RUS_conquer_salishes }
@@ -8225,6 +8270,15 @@ focus_tree = {
 		x = 1
 		y = 1
 		cost = 10
+		
+		available = {
+			NOT = {
+				OR = {
+					has_war_with = PRU
+					has_war_with = BYZ
+				}
+			}
+		}
 
 		relative_position_id = RUS_conquer_salishes
 		prerequisite = { focus = RUS_conquer_salishes }
@@ -8518,6 +8572,7 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: focus RUS_in_search_of_allies"
+			custom_effect_tooltip = RUS_unlock_des_in_search_of_allies
 		}
 	}
 	

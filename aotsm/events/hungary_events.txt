@@ -1,0 +1,320 @@
+
+add_namespace = hun #main Hungary event
+add_namespace = hun_war #Military event of Hungary
+add_namespace = hun_answer #Answer to Hungary
+
+country_event = {
+	id = hun.1
+	title = hun_.1.t
+	desc = hun.1.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract	
+	is_triggered_only = yes
+	
+	fire_only_once = no
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event hun.1"}
+	
+	option = {
+		name = hun.1.a	
+		ai_chance = {
+			base = 75
+			modifier = {
+				factor = 1
+				is_historical_focus_on = yes
+			}
+		}
+		HUN = {
+			country_event = {
+				id = hun_answer.5
+				hours = 5
+			}
+		}
+	}
+	
+	option = {
+		name = hun.1.b
+		ai_chance = {
+			base = 25
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+			}
+		}
+		HUN = {
+			country_event = {
+				id = hun_answer.6
+				hours = 5
+			}
+		}
+	}
+	
+}
+
+country_event = {
+	id = hun_war.1
+	title = hun_war.1.t
+	desc = hun_war.1.d
+	picture = GFX_report_event_russian_czapist_raid
+	is_triggered_only = yes
+	
+	fire_only_once = no
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event hun_war.1"}
+	
+	option = {
+		name = hun_war.1.a	
+		ai_chance = {
+			base = 75
+			modifier = {
+				factor = 1
+				is_historical_focus_on = yes
+			}
+		}
+		ROOT = {
+			if = {
+				limit = {
+					HUN = {
+						has_war_with = GLA
+					}
+				}
+				add_to_war = {
+					targeted_alliance = HUN
+					enemy = GLA
+					hostility_reason = asked_to_join
+				}
+			}
+			if = {
+				limit = {
+					HUN = {
+						has_war_with = VLH
+					}
+				}
+				add_to_war = {
+					targeted_alliance = HUN
+					enemy = VLH
+					hostility_reason = asked_to_join
+				}
+			}
+		}
+		if = {
+			limit = {
+				tag = PRU
+			}
+			HUN = {
+				country_event = {
+					id = hun_answer.1
+					hours = 5
+				}
+			}
+		}
+		if = {
+			limit = {
+				tag = BYZ
+			}
+			HUN = {
+				country_event = {
+					id = hun_answer.3
+					hours = 5
+				}
+			}
+		}
+	}
+	
+	option = {
+		name = hun_war.1.b
+		ai_chance = {
+			base = 25
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+			}
+		}
+		if = {
+			limit = {
+				tag = PRU
+			}
+			HUN = {
+				country_event = {
+					id = hun_answer.2
+					hours = 5
+				}
+				add_opinion_modifier = {
+					target = PRU
+					modifier = disappointed_opinion
+				}
+			}
+		}
+		if = {
+			limit = {
+				tag = BYZ
+			}
+			HUN = {
+				country_event = {
+					id = hun_answer.4
+					hours = 5
+				}
+				add_opinion_modifier = {
+					target = BYZ
+					modifier = disappointed_opinion
+				}
+			}
+		}
+	}
+	
+}
+
+country_event = { #PRU say yes
+	id = hun_answer.1
+	title = hun_answer.1.t
+	desc = hun_answer.1.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract	
+	is_triggered_only = yes
+	
+	fire_only_once = no
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event hun_answer.1"}
+	
+	option = {
+		name = hun_answer.1.a	
+		add_war_support = 0.05
+	}
+	
+}
+
+country_event = { #PRU say no
+	id = hun_answer.2
+	title = hun_answer.2.t
+	desc = hun_answer.2.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract	
+	is_triggered_only = yes
+	
+	fire_only_once = no
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event hun_answer.2"}
+	
+	option = {
+		name = hun_answer.2.a	
+		PRU = {
+			add_opinion_modifier = {
+				target = HUN
+				modifier = whiners_opinion
+			}
+		}
+	}
+	
+}
+
+country_event = { #BYZ say yes
+	id = hun_answer.3
+	title = hun_answer.3.t
+	desc = hun_answer.3.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract	
+	is_triggered_only = yes
+	
+	fire_only_once = no
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event hun_answer.3"}
+	
+	option = {
+		name = hun_answer.3.a	
+		add_war_support = 0.05
+	}
+	
+}
+
+country_event = { #BYZ say no
+	id = hun_answer.4
+	title = hun_answer.4.t
+	desc = hun_answer.4.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract	
+	is_triggered_only = yes
+	
+	fire_only_once = no
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event hun_answer.4"}
+	
+	option = {
+		name = hun_answer.4.a	
+		BYZ = {
+			add_opinion_modifier = {
+				target = HUN
+				modifier = whiners_opinion
+			}
+		}
+	}
+	
+}
+
+country_event = { #BYZ say yes to banat
+	id = hun_answer.5
+	title = hun_answer.5.t
+	desc = hun_answer.5.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract	
+	is_triggered_only = yes
+	
+	fire_only_once = no
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event hun_answer.5"}
+	
+	option = {
+		name = hun_answer.5.a	
+		HUN = {
+			transfer_state = 45
+			add_state_core = 45
+			transfer_state = 764
+			add_state_core = 764
+		}
+		hidden_effect = {
+			BYZ = {
+				set_nationality = {
+					target_country = HUN
+					character = BYZ_Constantin_Zahareas
+				}
+				set_autonomy = {
+					target = HUN
+					autonomy_state = autonomy_aotsm_personal_union
+					end_wars = no
+					end_civil_wars = no
+				}
+			}
+			HUN = {
+				promote_character = {
+					character = BYZ_Constantin_Zahareas
+					ideology = constitutional_monarchy_sub
+				}
+				set_politics = {
+					ruling_party = authoritarian
+				}
+				hidden_effect = {
+					set_popularities = {
+						democratic = 13
+						socialism = 7
+						reactionist = 26
+						authoritarian = 54
+					}
+				}
+			}
+		}
+	}
+	
+}
+
+country_event = { #BYZ say no to banat
+	id = hun_answer.6
+	title = hun_answer.6.t
+	desc = hun_answer.6.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract	
+	is_triggered_only = yes
+	
+	fire_only_once = no
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event hun_answer.6"}
+	
+	option = {
+		name = hun_answer.6.a	
+		HUN = {
+			set_country_flag = HUN_not_in_purple_dawn_flag
+		}
+	}
+	
+}

@@ -7505,7 +7505,12 @@ news_event = { #German Civilwar
 	
 	is_triggered_only = yes
 	
-	immediate = {log = "[GetDateText]: event news.237"}
+	immediate = {
+		log = "[GetDateText]: event news.237"
+		hidden_effect = {
+			set_global_flag = news_237_happend_flag
+		}
+	}
 	
 	option = {
 		name = news.237.a
@@ -8486,7 +8491,7 @@ news_event = { #Первая мировая война - Россия подав
 	id = news.271
 	title = news.271.t
 	desc = news.271.d
-	picture = GFX_news_event_signing_the_contract
+	picture = GFX_news_event_attack_of_russian_soldiers
 	
 	major = yes
 	
@@ -8500,6 +8505,9 @@ news_event = { #Первая мировая война - Россия подав
 			NOT = {
 				tag = RUS
 				tag = CBI
+				tag = FRR
+				tag = PRU
+				tag = BYZ
 			}
 		}
 	}
@@ -8514,7 +8522,20 @@ news_event = { #Первая мировая война - Россия подав
 	option = { 
 		name = news.271.c
 		trigger = {
-			tag = CBI
+			OR = {
+				tag = CBI
+				tag = FRR
+			}
+		}
+	}
+	
+	option = { 
+		name = news.271.e
+		trigger = {
+			OR = {
+				tag = PRU
+				tag = BYZ
+			}
 		}
 	}
 }
@@ -8610,7 +8631,7 @@ news_event = { #Первая мировая война - соц. Россия п
 	id = news.275
 	title = news.275.t
 	desc = news.275.d
-	picture = GFX_news_event_black_league_coup
+	picture = GFX_news_event_attack_of_russian_soldiers
 	
 	major = yes
 	
@@ -8619,17 +8640,41 @@ news_event = { #Первая мировая война - соц. Россия п
 	immediate = {log = "[GetDateText]: event news.275"}
 	
 	option = { 
-		name = news.274.a
+		name = news.275.a
 		trigger = {
 			tag = RUS
 		}
 	}
 	
 	option = { 
-		name = news.274.b
+		name = news.275.b
+		trigger = {
+			OR = {
+				tag = BYZ
+				tag = PRU
+			}
+		}
+	}
+	
+	option = { 
+		name = news.275.c
+		trigger = {
+			OR = {
+				tag = CBI
+				tag = FRR
+			}
+		}
+	}
+	
+	option = { 
+		name = news.275.e
 		trigger = {
 			NOT = {
 				tag = RUS
+				tag = PRU
+				tag = BYZ
+				tag = CBI
+				tag = FRR
 			}
 		}
 	}
@@ -8639,7 +8684,7 @@ news_event = { #Первая мировая война - соц. Россия п
 	id = news.276
 	title = news.276.t
 	desc = news.276.d
-	picture = GFX_news_event_black_league_coup
+	picture = GFX_news_event_attack_of_russian_soldiers
 	
 	major = yes
 	
@@ -8648,17 +8693,41 @@ news_event = { #Первая мировая война - соц. Россия п
 	immediate = {log = "[GetDateText]: event news.276"}
 	
 	option = { 
-		name = news.274.a
+		name = news.276.a
 		trigger = {
 			tag = RUS
 		}
 	}
 	
 	option = { 
-		name = news.274.b
+		name = news.276.b
+		trigger = {
+			OR = {
+				tag = BYZ
+				tag = PRU
+			}
+		}
+	}
+	
+	option = { 
+		name = news.276.c
+		trigger = {
+			OR = {
+				tag = CBI
+				tag = FRR
+			}
+		}
+	}
+	
+	option = { 
+		name = news.276.e
 		trigger = {
 			NOT = {
 				tag = RUS
+				tag = PRU
+				tag = BYZ
+				tag = CBI
+				tag = FRR
 			}
 		}
 	}
@@ -8668,7 +8737,7 @@ news_event = { #Первая мировая война - Ромея начина
 	id = news.277
 	title = news.277.t
 	desc = news.277.d
-	picture = GFX_news_event_black_league_coup
+	picture = GFX_news_event_byzantium_soldiers_parade
 	
 	major = yes
 	
@@ -8677,18 +8746,102 @@ news_event = { #Первая мировая война - Ромея начина
 	immediate = {log = "[GetDateText]: event news.277"}
 	
 	option = { 
-		name = news.274.a
+		name = news.277.a
 		trigger = {
 			tag = RUS
 		}
 	}
 	
 	option = { 
-		name = news.274.b
+		name = news.277.b
 		trigger = {
-			NOT = {
-				tag = RUS
+			OR = {
+				tag = BYZ
+				tag = PRU
 			}
 		}
 	}
+	
+	option = { 
+		name = news.277.c
+		trigger = {
+			OR = {
+				tag = CBI
+				tag = FRR
+			}
+		}
+	}
+	
+	option = { 
+		name = news.277.e
+		trigger = {
+			NOT = {
+				tag = RUS
+				tag = PRU
+				tag = BYZ
+				tag = CBI
+				tag = FRR
+			}
+		}
+	}
+}
+
+news_event = { #Убийство Демида Цопанидиса
+	id = news.278
+	title = news.278.t
+	desc = news.278.d
+	picture = GFX_news_event_murder_of_demid_tsopanidis
+	
+	major = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {log = "[GetDateText]: event news.278"}
+	
+	option = { 
+		name = news.278.a
+		trigger = {
+			NOT = {
+				tag = BYZ
+			}
+		}
+	}
+	option = { 
+		name = news.278.b
+		trigger = {
+			tag = BYZ
+		}
+	}
+	
+
+}
+
+news_event = { #Дело Ахмеда Арифи
+	id = news.279
+	title = news.279.t
+	desc = news.279.d
+	picture = GFX_news_event_case_of_ahmed_arifi
+	
+	major = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {log = "[GetDateText]: event news.279"}
+	
+	option = { 
+		name = news.279.a
+		trigger = {
+			NOT = {
+				tag = BYZ
+			}
+		}
+	}
+	option = { 
+		name = news.279.b
+		trigger = {
+			tag = BYZ
+		}
+	}
+	
+
 }

@@ -817,20 +817,6 @@ on_actions = {
 					tag = KAZ
 					RUS = { has_country_flag = RUS_invasion_in_kaz_flag }
 				}
-				RUS = {
-					white_peace = {
-						tag = KAZ
-						message = KAZ_conquered
-					}
-					transfer_state = 402
-					transfer_state = 404
-					transfer_state = 405
-					transfer_state = 586
-					transfer_state = 587
-					transfer_state = 589
-					clr_country_flag = RUS_invasion_in_kaz_flag
-					set_country_flag = RUS_invasion_in_kaz_flag_end
-				}
 				
 				if = {
 					limit = {
@@ -860,6 +846,21 @@ on_actions = {
 							transfer_troops = no
 						}
 					}
+				}				
+				
+				RUS = {
+					white_peace = {
+						tag = KAZ
+						message = KAZ_conquered
+					}
+					transfer_state = 402
+					transfer_state = 404
+					transfer_state = 405
+					transfer_state = 586
+					transfer_state = 587
+					transfer_state = 589
+					clr_country_flag = RUS_invasion_in_kaz_flag
+					set_country_flag = RUS_invasion_in_kaz_flag_end
 				}
 				
 				every_country = {
@@ -869,6 +870,20 @@ on_actions = {
 							has_war_with = KAZ
 						}
 						white_peace = KAZ
+					}
+				}
+				
+				every_country = {
+					if = {
+						limit = {
+							is_in_faction_with = KAZ
+							has_war_with = RUS
+							NOT = {
+								tag = HIV
+								tag = BUK
+							}
+						}
+						white_peace = RUS
 					}
 				}
 				
@@ -1049,6 +1064,26 @@ on_actions = {
 					remove_ideas = QIN_stagnation_of_empire_1 #временная мера, потом вырезать
 					remove_ideas = QIN_tpn_uprising 
 				}
+				every_country = { #временная мера
+					limit = {
+						OR = {
+							is_puppet_of = QIN
+							is_subject_of = QIN
+						}
+						has_idea = QIN_vassal_stagnation
+					}
+					remove_ideas = QIN_vassal_stagnation
+				}
+				every_country = { #временная мера
+					limit = {
+						OR = {
+							is_puppet_of = QIN
+							is_subject_of = QIN
+						}
+						has_idea = QIN_nominal_vassalitet
+					}
+					remove_ideas = QIN_nominal_vassalitet
+				}
 				every_country = {
 					if = {
 						limit = {
@@ -1056,6 +1091,15 @@ on_actions = {
 							has_war_with = TPN
 						}
 						white_peace = TPN
+					}
+				}
+				every_country = {
+					if = {
+						limit = {
+							is_in_faction_with = TPN
+							has_war_with = QIN
+						}
+						white_peace = QIN
 					}
 				}
 				TPN = {
@@ -2098,8 +2142,13 @@ on_actions = {
 			if = {
 				limit = {
 					tag = GLA
-					GLA = {
-						is_in_faction_with = RUS
+					OR = {
+						GLA = {
+							is_in_faction_with = RUS
+						}
+						GLA = {
+							has_country_flag = revenge_for_hungary_gla
+						}
 					}
 				}
 				PRU = {
@@ -2162,21 +2211,33 @@ on_actions = {
 						transfer_state = 91
 						add_state_core = 91
 					}
-					PRU = {
-						set_autonomy = {
-							target = WUK
-							autonomy_state = autonomy_puppet
-							end_wars = yes
-							end_civil_wars = yes
+					if = {
+						limit = {
+							NOT = {
+								WUK = {
+									is_puppet_of = PRU
+								}
+								WUK = {
+									is_subject_of = PRU
+								}
+							}
 						}
-					}
-					WUK = {
-						set_politics = { ruling_party = reactionist elections_allowed = no }
-						set_popularities = {
-							democratic = 13
-							socialism = 2
-							reactionist = 43
-							authoritarian = 42
+						PRU = {
+							set_autonomy = {
+								target = WUK
+								autonomy_state = autonomy_puppet
+								end_wars = yes
+								end_civil_wars = yes
+							}
+						}
+						WUK = {
+							set_politics = { ruling_party = reactionist elections_allowed = no }
+							set_popularities = {
+								democratic = 13
+								socialism = 2
+								reactionist = 43
+								authoritarian = 42
+							}
 						}
 					}
 				}
@@ -2220,8 +2281,13 @@ on_actions = {
 			if = {
 				limit = {
 					tag = VLH
-					VLH = {
-						is_in_faction_with = RUS
+					OR = {
+						VLH = {
+							is_in_faction_with = RUS
+						}
+						VLH = {
+							has_country_flag = revenge_for_hungary_gla
+						}
 					}
 				}
 				PRU = {
@@ -2315,21 +2381,33 @@ on_actions = {
 							add_state_core = 766
 						}
 					}
-					PRU = {
-						set_autonomy = {
-							target = WUK
-							autonomy_state = autonomy_puppet
-							end_wars = yes
-							end_civil_wars = yes
+					if = {
+						limit = {
+							NOT = {
+								WUK = {
+									is_puppet_of = PRU
+								}
+								WUK = {
+									is_subject_of = PRU
+								}
+							}
 						}
-					}
-					WUK = {
-						set_politics = { ruling_party = reactionist elections_allowed = no }
-						set_popularities = {
-							democratic = 13
-							socialism = 2
-							reactionist = 43
-							authoritarian = 42
+						PRU = {
+							set_autonomy = {
+								target = WUK
+								autonomy_state = autonomy_puppet
+								end_wars = yes
+								end_civil_wars = yes
+							}
+						}
+						WUK = {
+							set_politics = { ruling_party = reactionist elections_allowed = no }
+							set_popularities = {
+								democratic = 13
+								socialism = 2
+								reactionist = 43
+								authoritarian = 42
+							}
 						}
 					}
 				}
@@ -4886,7 +4964,7 @@ on_actions = {
 								remove_state_core = 853
 							}
 						}
-						if = { #на всякий случай - Краков
+						if = { #на всякий случай - Краков - если он под Россией
 							limit = {
 								RUS = {
 									owns_state = 903
@@ -4895,6 +4973,15 @@ on_actions = {
 							transfer_state = 903
 							RUS = {
 								remove_state_core = 903
+							}
+						}
+						if = { #на всякий случай - Краков - если он существует
+							limit = {
+								country_exists = KRA
+							}
+							annex_country = {
+								target = KRA
+								transfer_troops = yes
 							}
 						}
 					}
@@ -5026,6 +5113,9 @@ on_actions = {
 						NOT = {
 							country_exists = UKR
 						}
+						NOT = {
+							has_global_flag = pru_steal_ukraina
+						}
 					}
 					UKR = {
 						transfer_state = 93
@@ -5089,6 +5179,54 @@ on_actions = {
 						}
 						UKR = {
 							inherit_technology = PRU
+						}
+					}
+					if = {
+						limit = {
+							country_exists = WUK
+						}
+						WUK = {
+							transfer_state = 93
+							add_state_core = 93
+							transfer_state = 192
+							add_state_core = 192
+							transfer_state = 198
+							add_state_core = 198
+							transfer_state = 199
+							add_state_core = 199
+							transfer_state = 201
+							add_state_core = 201
+							transfer_state = 885
+							add_state_core = 885
+						}
+						if = {
+							limit = {
+								NOT = {
+									WUK = {
+										is_puppet_of = PRU
+									}
+									WUK = {
+										is_subject_of = PRU
+									}
+								}
+							}
+							PRU = {
+								set_autonomy = {
+									target = WUK
+									autonomy_state = autonomy_puppet
+									end_wars = yes
+									end_civil_wars = yes
+								}
+							}
+							WUK = {
+								set_politics = { ruling_party = reactionist elections_allowed = no }
+								set_popularities = {
+									democratic = 13
+									socialism = 2
+									reactionist = 43
+									authoritarian = 42
+								}
+							}
 						}
 					}
 				}
@@ -5264,6 +5402,16 @@ on_actions = {
 						transfer_state = 216
 						transfer_state = 722
 					}
+					if = {
+						limit = {
+							RUS = {
+								owns_state = 148
+							}
+						}
+						SCA = {
+							transfer_state = 148
+						}
+					}
 					RUS = {
 						remove_state_core = 213
 						remove_state_core = 215
@@ -5292,6 +5440,20 @@ on_actions = {
 						has_war_with = RUS
 					}
 					white_peace = RUS
+				}
+				every_country = {
+					limit = {
+						is_in_faction_with = RUS
+						has_war_with = PRU
+					}
+					white_peace = PRU
+				}
+				every_country = {
+					limit = {
+						is_in_faction_with = RUS
+						has_war_with = BYZ
+					}
+					white_peace = BYZ
 				}
 				hidden_effect = {
 					if = {
@@ -9153,8 +9315,9 @@ on_actions = {
 							has_war_with = CBI
 						}
 					}
-				}
+				}			
 				CBI = {
+					white_peace = PRT
 					annex_country = {
 						target = PRT
 						transfer_troops = no
@@ -9185,7 +9348,8 @@ on_actions = {
 						has_completed_focus = CBI_last_ultimatum
 					}
 				}
-				CBI = {
+				CBI  = {
+					white_peace = PRT
 					annex_country = {
 						target  = PRT
 						transfer_troops = no
@@ -9205,12 +9369,34 @@ on_actions = {
 						has_global_flag = CAS_capituliation
 					}
 				}
+				CAS = {
+					white_peace = PRT
+				}
 				PRT = {
 					annex_country = {
 						target = CAS
 						transfer_troops = no
 					}
 				}
+				every_country = {
+					if = {
+						limit = {
+							is_in_faction_with = PRT
+							has_war_with = CAS
+						}
+						white_peace = CAS
+					}
+				}
+				every_country = {
+					if = {
+						limit = {
+							is_in_faction_with = CAS
+							has_war_with = PRT
+						}
+						white_peace = PRT
+					}
+				}
+				#news_event = news.1 #Тут должен быть ивент о капитуляции Кастилии
 				set_global_flag = CAS_capituliation
 			}
 			#GRA
@@ -9225,12 +9411,34 @@ on_actions = {
 						has_global_flag = GRA_capituliation
 					}
 				}
+				GRA = {
+					white_peace = PRT
+				}
 				PRT = {
 					annex_country = {
 						target = GRA
 						transfer_troops = no
 					}
+				}		
+				every_country = {
+					if = {
+						limit = {
+							is_in_faction_with = PRT
+							has_war_with = GRA
+						}
+						white_peace = GRA
+					}
+				}		
+				every_country = {
+					if = {
+						limit = {
+							is_in_faction_with = GRA
+							has_war_with = PRT
+						}
+						white_peace = PRT
+					}
 				}
+				#news_event = news.1 #Тут должен быть ивент о капитуляции Грнады
 				set_global_flag = GRA_capituliation
 			}
 			#ARA
@@ -9248,12 +9456,34 @@ on_actions = {
 						has_global_flag = ARA_capituliation
 					}
 				}
+				ARA = {
+					white_peace = PRT
+				}
 				PRT = {
 					annex_country = {
 						target = ARA
 						transfer_troops = no
 					}
+				}					
+				every_country = {
+					if = {
+						limit = {
+							is_in_faction_with = PRT
+							has_war_with = ARA
+						}
+						white_peace = ARA
+					}
+				}		
+				every_country = {
+					if = {
+						limit = {
+							is_in_faction_with = ARA
+							has_war_with = PRT
+						}
+						white_peace = PRT
+					}
 				}
+				#news_event = news.1 #Тут должен быть ивент о капитуляции  Арагона
 				set_global_flag = ARA_capituliation
 			}
 			#PAP capitulation
@@ -9647,6 +9877,9 @@ on_actions = {
 							has_country_flag = NEN_win_che
 						}
 					}
+				}			
+				NEN = {
+					white_peace = CHE
 				}
 				NEN = {
 					annex_country = {
@@ -9654,6 +9887,24 @@ on_actions = {
 						transfer_troops = no
 					}
 					set_country_flag = NEN_win_che
+				}					
+				every_country = {
+					if = {
+						limit = {
+							is_in_faction_with = NEN
+							has_war_with = CHE
+						}
+						white_peace = CHE
+					}
+				}		
+				every_country = {
+					if = {
+						limit = {
+							is_in_faction_with = CHE
+							has_war_with = NEN
+						}
+						white_peace = NEN
+					}
 				}
 			}
 			#TEK capitulation
@@ -9670,11 +9921,32 @@ on_actions = {
 					}
 				}
 				NEN = {
+					white_peace = TEK
+				}
+				NEN = {
 					annex_country = {
 						target = TEK
 						transfer_troops = no
 					}
 					set_country_flag = NEN_win_tek
+				}							
+				every_country = {
+					if = {
+						limit = {
+							is_in_faction_with = NEN
+							has_war_with = TEK
+						}
+						white_peace = TEK
+					}
+				}		
+				every_country = {
+					if = {
+						limit = {
+							is_in_faction_with = TEK
+							has_war_with = NEN
+						}
+						white_peace = NEN
+					}
 				}
 			}
 			#KED capitulation
@@ -9880,6 +10152,7 @@ on_actions = {
 						}
 					}
 				}
+
 				SAB = {
 					annex_country = {
 						target = GRI
@@ -11269,13 +11542,10 @@ on_actions = {
 					white_peace = {
 						tag = QIN
 						message = QIN_lost_tuva
-					} 					
-					transfer_state = 329
-			
+					} 							
 					clr_country_flag = RUS_tuva_war_plan
 					set_country_flag = RUS_tuva_war_plan_end
 				}
-				
 				every_country = {
 					if = {
 						limit = {
@@ -11283,12 +11553,15 @@ on_actions = {
 							has_war_with = QIN
 						}
 						white_peace = QIN
-						if = {
-							limit = {
-								MON = { country_exists = yes }
-							}
-							white_peace = MON
+					}
+				}
+				every_country = {
+					if = {
+						limit = {
+							is_in_faction_with = QIN
+							has_war_with = RUS
 						}
+						white_peace = RUS
 					}
 				}
 				QIN = {
@@ -11301,6 +11574,9 @@ on_actions = {
 					MON = {
 						remove_state_core = 329
 					}
+				}				
+				RUS = {
+					transfer_state = 329
 				}
 				add_threat = 1
 			}

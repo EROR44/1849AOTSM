@@ -236,6 +236,7 @@ country_event = {
 				country_leader = {
 					expire = "1900.1.1"
 					ideology = centrism
+					desc = "POLITICS_ROMANOV_KONSTANTIN_NICOLAEVICH_DESC"
 					traits = {  }
 				}
 			}
@@ -329,7 +330,7 @@ country_event = { #
 	
 	option = {
 		name = rusPol.7.a	
-
+		add_political_power = 15
 	}
 }
  
@@ -349,7 +350,7 @@ country_event = { #
 	
 	option = {
 		name = rusPol.8.a	
-
+		add_political_power = 15
 	}
 }
 
@@ -369,7 +370,7 @@ country_event = { #
 	
 	option = {
 		name = rusPol.9.a	
-
+		add_political_power = 10
 	}
 }
 
@@ -4061,6 +4062,12 @@ country_event = {
 		}
 		hidden_effect = {
 			set_country_flag = RUS_tuva_war_plan
+			MON = { 
+				add_to_war = {
+					targeted_alliance = QIN
+					enemy = RUS
+				}
+			}
 		}
 	}
 
@@ -4866,7 +4873,7 @@ country_event = {
 	id = russian_central_asia_politic.8 #Отказ - ответ для России - от KAZ
 	title = russian_central_asia_politic.8.t
 	desc = russian_central_asia_politic.8.d
-	picture = report_event_russian_millitary_planning
+	picture = GFX_report_event_russian_millitary_planning
 	
 	is_triggered_only = yes
 	
@@ -4887,6 +4894,30 @@ country_event = {
 		}
 		hidden_effect = {
 			RUS = { set_country_flag = RUS_invasion_in_kaz_flag }
+			if = {
+				limit = {
+					HIV = {
+						is_in_faction_with = KAZ
+					}
+				}
+				RUS = { set_country_flag = RUS_invasion_in_hiv_flag }
+				add_to_war = {
+					targeted_alliance = KAZ
+					enemy = RUS
+				}
+			}
+			if = {
+				limit = {
+					BUK = {
+						is_in_faction_with = KAZ
+					}
+				}
+				RUS = { set_country_flag = RUS_invasion_in_buk_flag }
+				add_to_war = {
+					targeted_alliance = KAZ
+					enemy = RUS
+				}
+			}
 		}
 	}
 	
@@ -6492,7 +6523,7 @@ country_event = {
 ##############################SOCIALIST_EVENT_SECTION###################################
 
 country_event = {
-	id = russian_socialist_political_event.1 # возвращение Герцена из ссылки
+	id = russian_socialist_political_event.1 # возвращение Герцена из ссылки 
 	title = russian_socialist_political_event.1.t
 	desc = russian_socialist_political_event.1.d
 	picture = GFX_report_event_gersen_ai
@@ -6606,7 +6637,7 @@ country_event = {
 	id = russian_socialist_political_event.3 # 
 	title = russian_socialist_political_event.3.t
 	desc = russian_socialist_political_event.3.d
-	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	picture = GFX_report_event_political_discussion
 	
 	is_triggered_only = yes
 	
@@ -6684,6 +6715,7 @@ country_event = {
 				
 				country_leader = {
 					expire = "1900.1.1"
+					desc = "POLITICS_ALEXANDER_SERGEYEVICH_PUSHKIN_DESC"
 					ideology = marxism
 					traits = {  }
 				}
@@ -10694,7 +10726,7 @@ country_event = {
 		}
 
 		hidden_effect = {
-			RUS = { country_event = { id = russian_socialist_sphere_event.51 days = 3 } }
+			RUS = { country_event = { id = russian_socialist_sphere_event.50 days = 3 } }
 		}
 	}	
 
@@ -10789,6 +10821,9 @@ country_event = {
 		ai_chance = {
 			base = 20
 		}
+		trigger = {
+			always = no
+		}
 
 		hidden_effect = {
 			set_country_flag = RUS_soc_peace_sca_diplomaty
@@ -10847,7 +10882,7 @@ country_event = {
 		if = {
 			limit = {
 				SCA = { 
-					country_exists = yes
+					#country_exists = yes
 					owns_state = 148
 				}
 			}
@@ -10859,7 +10894,7 @@ country_event = {
 		if = {
 			limit = {
 				SWE = { 
-					country_exists = yes
+					#country_exists = yes
 					owns_state = 148
 				}
 			}
@@ -10903,7 +10938,7 @@ country_event = {
 	}	
 	
 	option = {
-		name = russian_socialist_sphere_event.53.a	# Отказ
+		name = russian_socialist_sphere_event.53.b	# Отказ
 		ai_chance = {
 			base = 20
 		}
