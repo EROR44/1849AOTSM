@@ -24,6 +24,7 @@ add_namespace = russian_socialist_sphere_event #
 add_namespace = rus_rbl_uprising_event #
 add_namespace = rus_leave_officers_event #
 add_namespace = rus_poland_situation_event #
+add_namespace = rus_te_event #
 
 
 country_event = {
@@ -45,7 +46,8 @@ country_event = {
 		ai_chance = {
 			base = 100
 		}
-
+		add_stability = 0.01
+		add_political_power = 15
 	}
 }
 
@@ -606,23 +608,20 @@ country_event = { #
 }
 
 country_event = { # 
-	id = rusPol.19 #Удаление идеи отголоски крепостного права
+	id = rusPol.19 #Удаление идеи отголоски крепостного права 
 	title = rusPol.19.t
 	desc = rusPol.19.d
 	picture = GFX_report_event_russian_villagers
-	
-	#is_triggered_only = yes
 	
 	fire_only_once = yes
 	
 	trigger = {
 		tag = RUS
-		OR = {
-			has_idea = RUS_an_echo_of_serfdom
-			has_idea = RUS_an_echo_of_serfdom_1
+		has_idea = RUS_an_echo_of_serfdom
+		RUS = { 
+			num_of_civilian_factories > 79	
+			num_of_military_factories > 29
 		}
-		industrial_complex > 79
-		arms_factory > 29
 	}
 	
 	mean_time_to_happen = {
@@ -638,18 +637,7 @@ country_event = { #
 		ai_chance = {
 			base = 20
 		}
-		if = {
-			limit = {
-				has_idea = RUS_an_echo_of_serfdom_1
-			}
-			remove_ideas = RUS_an_echo_of_serfdom_1
-		}
-		if = {
-			limit = {
-				has_idea = RUS_an_echo_of_serfdom
-			}
-			remove_ideas = RUS_an_echo_of_serfdom
-		}
+		remove_ideas = RUS_an_echo_of_serfdom
 	}
 	
 }
@@ -4559,6 +4547,18 @@ country_event = {
 		hidden_effect = {
 			RUS = { set_country_flag = RUS_invasion_in_qin_flag }
 			news_event = { id = news.227 days = 3 }
+			MON = {
+				add_to_war = {
+					targeted_alliance = QIN
+					enemy = RUS 
+				}
+			}
+			MAN = {
+				add_to_war = {
+					targeted_alliance = QIN
+					enemy = RUS 
+				}
+			}
 		}
 	}
 
@@ -6793,8 +6793,9 @@ country_event = {
 	
 	option = {
 		name = russian_socialist_political_event.6.a	
-			
+		add_political_power = 15	
 		hidden_effect = {
+			set_country_flag = RUS_country_save_market_economic
 			if = {
 				limit = {
 					has_idea = closed_economy
@@ -6891,7 +6892,7 @@ country_event = {
 		ai_chance = {
 			base = 15
 		}	
-		
+		add_political_power = 15
 		hidden_effect = {
 			set_country_flag = RUS_country_save_market_economic
 		}
@@ -6902,7 +6903,7 @@ country_event = {
 		ai_chance = {
 			base = 3
 		}
-			
+		add_political_power = 15	
 		hidden_effect = {
 			set_country_flag = RUS_country_has_plan_economic
 		}
@@ -6976,7 +6977,7 @@ country_event = {
 		name = russian_socialist_political_event.12.a	
 		
 		remove_ideas = RUS_dependence_from_import	
-		
+		add_political_power = 15
 		hidden_effect = {
 			set_country_flag = RUS_country_has_plan_economic
 			if = {
@@ -8206,11 +8207,16 @@ country_event = {
 	option = {
 		name = russian_socialist_army_event.1.a	
 		add_timed_idea = {
-			days = 365
+			days = 120
 			idea = RUS_soc_army_reorganisation_idea
 		}
 		hidden_effect = {
-			
+			if = {
+				limit ={
+					has_idea = RUS_army_purge
+				}
+				remove_ideas = RUS_army_purge
+			}
 		}
 	}	
 
@@ -8411,7 +8417,7 @@ country_event = {
 	option = {
 		name = russian_socialist_navy_event.1.a	
 		add_timed_idea = {
-			days = 365
+			days = 120
 			idea = RUS_soc_navy_reorganisation_idea
 		}
 		hidden_effect = {
@@ -8566,7 +8572,7 @@ country_event = {
 	
 	option = {
 		name = russian_socialist_sphere_event.1.a	
-		
+		add_political_power = 15
 		hidden_effect = {
 			
 		}
@@ -8590,7 +8596,11 @@ country_event = {
 	
 	option = {
 		name = russian_socialist_sphere_event.2.a	
-		
+		add_offsite_building = {
+			type = industrial_complex 
+			level = 1 
+		}
+		add_political_power = 50
 		hidden_effect = {
 			
 		}
@@ -8651,9 +8661,11 @@ country_event = {
 		trigger = {
 			
 		}
-		add_opinion_modifier = {
-			target = RUS
-			modifier = medium_increase 
+		FRR = {
+			add_opinion_modifier = {
+				target = RUS
+				modifier = medium_increase 
+			}
 		}
 		hidden_effect = {
 			
@@ -8667,6 +8679,12 @@ country_event = {
 		}
 		trigger = {
 			CBI = { has_government = socialism }
+		}
+		CBI = {
+			add_opinion_modifier = {
+				target = RUS
+				modifier = medium_increase 
+			}
 		}
 		hidden_effect = {
 			
@@ -8819,6 +8837,7 @@ country_event = {
 	option = {
 		name = russian_socialist_sphere_event.8.a	
 		custom_effect_tooltip = RUS_get_socialism_propaganda_in_neighbour_european_countries
+		add_war_support = 0.03
 		hidden_effect = {
 			if = {
 				limit = {
@@ -10810,7 +10829,7 @@ country_event = {
 		ai_chance = {
 			base = 20
 		}
-
+		add_stability = 0.01
 		hidden_effect = {
 			set_country_flag = RUS_soc_war_sca_diplomaty
 		}
@@ -10824,7 +10843,7 @@ country_event = {
 		trigger = {
 			always = no
 		}
-
+		add_war_support = 0.01
 		hidden_effect = {
 			set_country_flag = RUS_soc_peace_sca_diplomaty
 		}
@@ -11213,7 +11232,7 @@ country_event = {
 	id = rus_leave_officers_event.1 # Романовы покидают страну - для Пушкина и Герцена
 	title = rus_leave_officers_event.1.t
 	desc = rus_leave_officers_event.1.d
-	picture = GFX_report_event_political_discussion
+	picture = GFX_report_event_rus_topsecret
 	
 	fire_only_once = yes
 	
@@ -11264,7 +11283,7 @@ country_event = {
 	id = rus_leave_officers_event.2 # Исчезновение Игнатьева - для Пушкина и Герцена
 	title = rus_leave_officers_event.2.t
 	desc = rus_leave_officers_event.2.d
-	picture = GFX_report_event_political_discussion
+	picture = GFX_report_event_rus_topsecret
 	
 	fire_only_once = yes
 
@@ -11338,7 +11357,7 @@ country_event = {
 	id = rus_leave_officers_event.3 # Бегство офицеров
 	title = rus_leave_officers_event.3.t
 	desc = rus_leave_officers_event.3.d
-	picture = GFX_report_event_political_discussion
+	picture = GFX_report_event_rus_topsecret
 	
 	fire_only_once = yes
 	
@@ -11390,7 +11409,7 @@ country_event = {
 	
 	option = {
 		name = rus_leave_officers_event.3.b	
-		add_political_power = -100
+		add_political_power = -50
 		
 		ai_chance = {
 			base = 0
@@ -11407,7 +11426,7 @@ country_event = {
 	id = rus_leave_officers_event.4 # Исчезновение офицеров флота
 	title = rus_leave_officers_event.4.t
 	desc = rus_leave_officers_event.4.d
-	picture = GFX_report_event_political_discussion
+	picture = GFX_report_event_rus_topsecret
 	
 	fire_only_once = yes
 
@@ -11441,7 +11460,7 @@ country_event = {
 	id = rus_leave_officers_event.5 # Бегство офицеров продолжается
 	title = rus_leave_officers_event.5.t
 	desc = rus_leave_officers_event.5.d
-	picture = GFX_report_event_political_discussion
+	picture = GFX_report_event_rus_topsecret
 	
 	fire_only_once = yes
 
@@ -11516,7 +11535,7 @@ country_event = {
 		ai_chance = {
 			base = 15
 		}
-		
+		add_political_power = -10
 		hidden_effect = {
 			RUS = { country_event = { id = rus_rbl_uprising_event.2 days = 7 } }
 			
@@ -11558,7 +11577,7 @@ country_event = {
 		ai_chance = {
 			base = 0
 		}
-		
+		add_political_power = -50
 		hidden_effect = {
 			RUS = { set_country_flag = RUS_rbl_uprising_blocked }
 			RUS = { country_event = { id = rus_rbl_uprising_event.5 days = 15 } }
@@ -11707,7 +11726,8 @@ country_event = {
 		ai_chance = {
 			base = 15
 		}
-
+		add_stability = 0.03
+		add_political_power = 50
 		hidden_effect = {
 			
 		}
@@ -11825,6 +11845,67 @@ country_event = {
 	option = {
 		name = rus_poland_situation_event.3.a	
 		
+		hidden_effect = {
+			
+		}
+	}
+}
+
+######################################RUSSIAN_TRIGGER_EVENT###################################
+
+country_event = {
+	id = rus_te_event.1 # Зависимость от импорта
+	title = rus_te_event.1.t
+	desc = rus_te_event.1.d
+	picture = GFX_report_event_polands_deportation
+	
+	fire_only_once = yes
+
+	trigger = {
+		tag = RUS
+		has_idea = RUS_dependence_from_import
+		RUS = {
+			num_of_civilian_factories > 49
+		}
+	}
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event rus_te_event.1"
+	}
+	
+	option = {
+		name = rus_te_event.1.a	
+		remove_ideas = RUS_dependence_from_import
+		hidden_effect = {
+			
+		}
+	}
+}
+
+country_event = {
+	id = rus_te_event.2 # Зависимость от импорта
+	title = rus_te_event.2.t
+	desc = rus_te_event.2.d
+	picture = GFX_report_event_polands_deportation
+	
+	fire_only_once = yes
+
+	trigger = {
+		tag = RUS
+		has_idea = RUS_an_echo_of_serfdom_1
+		RUS = {
+			num_of_civilian_factories > 79
+			num_of_military_factories > 54
+		}
+	}
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event rus_te_event.2"
+	}
+	
+	option = {
+		name = rus_te_event.2.a	
+		remove_ideas = RUS_an_echo_of_serfdom_1
 		hidden_effect = {
 			
 		}
