@@ -1,0 +1,2495 @@
+search_filter_prios = { 
+
+}
+focus_tree = {
+	id = abs_focus
+	
+	country = {
+		factor = 0
+		
+		modifier = {
+			add = 100
+			tag = ABS
+		}
+	}
+	default = no
+	reset_on_civilwar = no
+
+	continuous_focus_position = { x = 0 y = 2000 } 
+    
+    focus = {
+		id = ABSW_Mobilize_supporters
+		icon = GFX_
+		cost = 10
+		x = 10
+		y = 0
+		ai_will_do = {
+			factor = 50
+		}
+		available = {
+		
+		}
+		allow_branch = {
+			has_idea = ABS_Unstable_power
+		}
+		completion_reward = {	
+            add_popularity = {
+                ideology = reactionist
+                popularity = 0.25
+            }
+		}
+	}
+
+    focus = {
+		id = ABSW_Army_of_Kings
+		icon = GFX_
+		cost = 10
+		x = 8
+		y = 1
+		ai_will_do = {
+			factor = 50
+		}
+        prerequisite = {
+		    focus = ABSW_Mobilize_supporters
+		}
+		available = {
+		
+		}
+		allow_branch = {
+			has_idea = ABS_Unstable_power
+		}
+		completion_reward = {		
+            add_command_power = 100
+		}
+	}
+    
+    focus = {
+		id = ABSW_Give_them_freedom
+		icon = GFX_
+		cost = 10
+		x = 12
+		y = 1
+		ai_will_do = {
+			factor = 50
+		}
+        prerequisite = {
+		    focus = ABSW_Mobilize_supporters
+		}
+		available = {
+		
+		}
+		allow_branch = {
+			has_idea = ABS_Unstable_power
+		}
+		completion_reward = {	
+            random_state = {
+				limit = { is_core_of = ABS }
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+    focus = {
+		id = ABSW_Finish_off_the_supporters_of_the_past
+		icon = GFX_
+		cost = 10
+		x = 10
+		y = 2
+		ai_will_do = {
+			factor = 50
+		}
+        prerequisite = {
+		    focus = ABSW_Army_of_Kings
+		}
+        prerequisite = {
+		    focus = ABSW_Give_them_freedom
+		}
+		available = {
+		
+		}
+		allow_branch = {
+			has_idea = ABS_Unstable_power
+		}
+		completion_reward = {		
+            add_war_support = 0.15
+		}
+	}
+
+    focus = {
+		id = ABSW_Private_armament
+		icon = GFX_
+		cost = 10
+		x = 8
+		y = 3
+		ai_will_do = {
+			factor = 50
+		}
+        prerequisite = {
+		    focus = ABSW_Army_of_Kings
+		}
+		available = {
+		
+		}
+		allow_branch = {
+			has_idea = ABS_Unstable_power
+		}
+		completion_reward = {	
+			add_equipment_to_stockpile = {
+                type = infantry_equipment
+                amount = 1000
+                producer = ABS
+            }
+		}
+	}
+
+    focus = {
+		id = ABSW_Support_for_landowners
+		icon = GFX_
+		cost = 10
+		x = 10
+		y = 3
+		ai_will_do = {
+			factor = 50
+		}
+        prerequisite = {
+		    focus = ABSW_Finish_off_the_supporters_of_the_past
+		}
+		available = {
+		
+		}
+		allow_branch = {
+			has_idea = ABS_Unstable_power
+		}
+		completion_reward = {	
+			add_manpower = 25000
+            271 = {
+                add_manpower = -25000
+            }
+		}
+	}
+
+    focus = {
+		id = ABSW_Free_enterprises
+		icon = GFX_
+		cost = 10
+		x = 12
+		y = 3
+		ai_will_do = {
+			factor = 50
+		}
+        prerequisite = {
+		    focus = ABSW_Give_them_freedom
+		}
+		available = {
+		
+		}
+		allow_branch = {
+			has_idea = ABS_Unstable_power
+		}
+		completion_reward = {		
+            add_political_power = 150
+		}
+	}
+
+    focus = {
+		id = ABSW_Reject_any_help
+		icon = GFX_
+		cost = 10
+		x = 9
+		y = 4
+		ai_will_do = {
+			factor = 50
+		}
+        prerequisite = {
+		    focus = ABSW_Private_armament
+		}
+        prerequisite = {
+		    focus = ABSW_Support_for_landowners
+		}
+		available = {
+		
+		}
+		allow_branch = {
+			has_idea = ABS_Unstable_power
+		}
+		completion_reward = {		
+			add_stability = 0.15
+		}
+	}
+
+    focus = {
+		id = ABSW_New_features
+		icon = GFX_
+		cost = 10
+		x = 11
+		y = 4
+		ai_will_do = {
+			factor = 50
+		}
+        prerequisite = {
+		    focus = ABSW_Support_for_landowners
+		}
+        prerequisite = {
+		    focus = ABSW_Free_enterprises 
+		}
+		available = {
+		
+		}
+		allow_branch = {
+			has_idea = ABS_Unstable_power
+		}
+		completion_reward = {		
+            add_ideas = ABS_Landowners_country
+		}
+	}
+
+    focus = {
+		id = ABSW_Deform_Abyssinia
+		icon = GFX_
+		cost = 10
+		x = 10
+		y = 5
+		ai_will_do = {
+			factor = 50
+		}
+        prerequisite = {
+		    focus = ABSW_Reject_any_help
+		}
+        prerequisite = {
+		    focus = ABSW_New_features
+		}
+		available = {
+		
+		}
+		allow_branch = {
+			has_idea = ABS_Unstable_power
+		}
+		completion_reward = {		
+			remove_ideas = ABS_The_decayed_army
+		}
+	}
+
+    focus = {
+		id = ABS_Resist_hunger
+		icon = GFX_
+		cost = 7
+		x = 8
+		y = 9
+		ai_will_do = {
+			factor = 50
+		}
+		available = {
+		
+		}
+		allow_branch = {
+            NOT = {
+                has_idea = ABS_Unstable_power
+            }
+		}
+		completion_reward = {		
+			country_event = abs_event.11
+		}
+	}
+
+    focus = {
+		id = ABS_Find_external_sources
+		icon = GFX_
+		cost = 5
+		x = 6
+		y = 10
+		ai_will_do = {
+			factor = 50
+		}
+        prerequisite = {
+		    focus = ABS_Resist_hunger
+		}
+		available = {
+		
+		}
+		allow_branch = {
+            NOT = {
+                has_idea = ABS_Unstable_power
+            }
+		}
+		completion_reward = {		
+			country_event = abs_event.10
+		}
+	}
+
+    focus = {
+		id = ABS_Save_on_industry
+		icon = GFX_
+		cost = 4
+		x = 8
+		y = 10
+		ai_will_do = {
+			factor = 50
+		}
+        prerequisite = {
+		    focus = ABS_Resist_hunger
+		}
+        mutually_exclusive = {
+            focus = ABS_Save_on_the_army
+        }
+		available = {
+		
+		}
+		allow_branch = {
+            NOT = {
+                has_idea = ABS_Unstable_power
+            }
+		}
+		completion_reward = {		
+			add_timed_idea = {
+				idea = ABS_Industrial_disruptions
+				days = 70
+			}
+		}
+	}
+
+    focus = {
+		id = ABS_Save_on_the_army
+		icon = GFX_
+		cost = 4
+		x = 10
+		y = 10
+		ai_will_do = {
+			factor = 50
+		}
+        prerequisite = {
+		    focus = ABS_Resist_hunger
+		}
+        mutually_exclusive = {
+            focus = ABS_Save_on_industry
+        }
+		available = {
+		
+		}
+		allow_branch = {
+            NOT = {
+                has_idea = ABS_Unstable_power
+            }
+		}
+		completion_reward = {		
+			add_timed_idea = {
+				idea = ABS_Interruptions_in_the_army
+				days = 140
+			}
+		}
+	}
+
+    focus = {
+		id = ABS_Increase_external_purchases
+		icon = GFX_
+		cost = 4
+		x = 5
+		y = 11
+		ai_will_do = {
+			factor = 50
+		}
+        prerequisite = {
+		    focus = ABS_Find_external_sources
+		}
+		available = {
+		
+		}
+		allow_branch = {
+            NOT = {
+                has_idea = ABS_Unstable_power
+            }
+		}
+		completion_reward = {		
+			add_timed_idea = {
+			    idea = ABS_Purchases_of_grain_from_Europe
+			    days = 70 
+		    }
+		}
+	}
+
+    focus = {
+		id = ABS_Loyalty_for_resources
+		icon = GFX_
+		cost = 5
+		x = 7
+		y = 11
+		ai_will_do = {
+			factor = 50
+		}
+        prerequisite = {
+		    focus = ABS_Find_external_sources
+		}
+		available = {
+		
+		}
+		allow_branch = {
+            NOT = {
+                has_idea = ABS_Unstable_power
+            }
+		}
+		completion_reward = {		
+            add_stability = 0.05
+            if = {
+				limit = {
+                    has_government = reactionist                 	
+				}
+				add_popularity = {
+				    ideology = reactionist
+                    popularity = 0.10
+			    }
+			}
+            if = {
+				limit = {
+                    has_government = authoritarian                 	
+				}
+				add_popularity = {
+				    ideology = authoritarian
+                    popularity = 0.10
+			    }
+			}
+		}
+	}
+
+    focus = {
+		id = ABS_Organize_distribution
+		icon = GFX_
+		cost = 5
+		x = 9
+		y = 11
+		ai_will_do = {
+			factor = 50
+		}
+        prerequisite = {
+		    focus = ABS_Save_on_industry
+            focus = ABS_Save_on_the_army
+		}
+		available = {
+		
+		}
+		allow_branch = {
+            NOT = {
+                has_idea = ABS_Unstable_power
+            }
+		}
+		completion_reward = {		
+			add_stability = 0.05
+			add_popularity = {
+				ideology = socialism
+                popularity = -0.05
+			}
+            add_popularity = {
+				ideology = democratic
+                popularity = -0.05
+			}
+		}
+	}
+
+    focus = {
+		id = ABS_Grain_Bank_of_Abyssinia
+		icon = GFX_
+		cost = 4
+		x = 6
+		y = 12
+		ai_will_do = {
+			factor = 50
+		}
+        prerequisite = {
+		    focus = ABS_Increase_external_purchases
+		}
+		available = {
+		
+		}
+		allow_branch = {
+            NOT = {
+                has_idea = ABS_Unstable_power
+            }
+		}
+		completion_reward = {		
+			country_event = abs_event.12
+		}
+	}
+
+    focus = {
+		id = ABS_Defeat_internal_pests
+		icon = GFX_
+		cost = 7
+		x = 8
+		y = 12
+		ai_will_do = {
+			factor = 50
+		}
+        prerequisite = {
+		    focus = ABS_Loyalty_for_resources
+		}
+        prerequisite = {
+		    focus = ABS_Organize_distribution
+		}
+		available = {
+		
+		}
+		allow_branch = {
+            NOT = {
+                has_idea = ABS_Unstable_power
+            }
+		}
+		completion_reward = {		
+            if = {
+				limit = {
+                    has_idea = local_corruption
+				}
+                swap_ideas = {
+					remove_idea = local_corruption
+					add_idea = no_corruptional
+				}
+			}
+            if = {
+				limit = {
+                    has_idea = regional_corruption
+				}
+                swap_ideas = {
+					remove_idea = regional_corruption
+					add_idea = local_corruption
+				}
+			}
+            if = {
+				limit = {
+                    has_idea = state_corruption
+				}
+                swap_ideas = {
+					remove_idea = state_corruption
+					add_idea = regional_corruption
+				}
+			}
+		}
+	}
+
+    focus = {
+		id = ABS_Defeat_hunger
+		icon = GFX_
+		cost = 2
+		x = 7
+		y = 13
+		ai_will_do = {
+			factor = 50
+		}
+        prerequisite = {
+		    focus = ABS_Grain_Bank_of_Abyssinia
+		}
+        prerequisite = {
+		    focus = ABS_Defeat_internal_pests
+		}
+		available = {
+            has_stability > 0.45
+		}
+		allow_branch = {
+            NOT = {
+                has_idea = ABS_Unstable_power
+            }
+		}
+		completion_reward = {		
+			remove_ideas = ABS_Growing_unrest
+		}
+	}
+
+    focus = {
+		id = ABS_Forced_reforms
+		icon = GFX_
+		cost = 5
+		x = 5
+		y = 4
+		ai_will_do = {
+			factor = 50
+		}
+		available = {
+            #has_completed_focus = ABS_Inspection_of_the_army
+            NOT = {
+                has_idea = ABS_Growing_unrest
+            }
+		}
+		allow_branch = {
+            NOT = {
+                has_idea = ABS_Unstable_power
+            }
+		}
+		completion_reward = {		
+			if = {
+				limit = {
+                    NOT = {
+                        has_completed_focus = ABS_Save_on_the_army
+                    }
+				}
+                country_event = abs_event.14
+			}
+            if = {
+				limit = {
+                    has_completed_focus = ABS_Save_on_the_army
+				}
+                country_event = abs_event.15
+			}
+		}
+	}
+
+    focus = {
+		id = ABS_Maritime_opportunities
+		icon = GFX_
+		cost = 5
+		x = 2
+		y = 5
+		ai_will_do = {
+			factor = 50
+		}
+        prerequisite = {
+		    focus = ABS_Forced_reforms
+		}
+		available = {
+            
+		}
+		allow_branch = {
+            NOT = {
+                has_idea = ABS_Unstable_power
+            }
+		}
+		completion_reward = {		
+			navy_experience = 25
+		}
+	}
+
+    focus = {
+		id = ABS_Learn_to_fly
+		icon = GFX_
+		cost = 5
+		x = 4
+		y = 5
+		ai_will_do = {
+			factor = 50
+		}
+        prerequisite = {
+		    focus = ABS_Forced_reforms
+		}
+		available = {
+            date > 1853.01.01
+		}
+		allow_branch = {
+            NOT = {
+                has_idea = ABS_Unstable_power
+            }
+		}
+		completion_reward = {		
+			air_experience = 25
+		}
+	}
+
+    focus = {
+		id = ABS_Mobilize_the_economy
+		icon = GFX_
+		cost = 5
+		x = 6
+		y = 5
+		ai_will_do = {
+			factor = 50
+		}
+        prerequisite = {
+		    focus = ABS_Forced_reforms
+		}
+		available = {
+			NOT = {
+                has_idea = ABS_Unfinished_industrialization
+            }
+            has_war = yes
+		}
+		allow_branch = {
+            NOT = {
+                has_idea = ABS_Unstable_power
+            }
+		}
+		completion_reward = {		
+            if = {
+				limit = {
+					NOT = {
+						has_idea = partial_economic_mobilisation
+						has_idea = low_economic_mobilisation
+						has_idea = civilian_economy
+					}
+				}
+                add_war_support = 0.10
+			}
+			if = {
+				limit = {
+                    has_idea = partial_economic_mobilisation
+				}
+                swap_ideas = {
+					remove_idea = partial_economic_mobilisation
+					add_idea = war_economy
+				}
+			}
+            if = {
+				limit = {
+                    has_idea = low_economic_mobilisation
+				}
+                swap_ideas = {
+					remove_idea = low_economic_mobilisation
+					add_idea = war_economy
+				}
+			}
+            if = {
+				limit = {
+                    has_idea = civilian_economy
+				}
+                swap_ideas = {
+					remove_idea = civilian_economy
+					add_idea = war_economy
+				}
+			}
+		}
+	}
+
+    focus = {
+		id = ABS_Rebuild_the_army
+		icon = GFX_
+		cost = 5
+		x = 8
+		y = 5
+		ai_will_do = {
+			factor = 50
+		}
+        prerequisite = {
+		    focus = ABS_Forced_reforms
+		}
+		available = {
+            
+		}
+		allow_branch = {
+            NOT = {
+                has_idea = ABS_Unstable_power
+            }
+		}
+		completion_reward = {		
+			army_experience = 25
+		}
+	}
+
+    focus = {
+		id = ABS_Marine_shipyards
+		icon = GFX_
+		cost = 7
+		x = 1
+		y = 6
+		ai_will_do = {
+			factor = 50
+		}
+        prerequisite = {
+		    focus = ABS_Maritime_opportunities
+		}
+		available = {
+            num_of_naval_factories > 1
+		}
+		allow_branch = {
+            NOT = {
+                has_idea = ABS_Unstable_power
+            }
+		}
+		completion_reward = {		
+			random_owned_controlled_state = {
+				prioritize = { 550 }
+				limit = {
+					is_coastal = yes
+					free_building_slots = {
+						building = dockyard
+						size > 1
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = dockyard
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+    focus = {
+		id = ABS_Bid_on_the_fence
+		icon = GFX_
+		cost = 7
+		x = 3
+		y = 6
+		ai_will_do = {
+			factor = 50
+		}
+        prerequisite = {
+		    focus = ABS_Maritime_opportunities
+		}
+		available = {
+            
+		}
+		allow_branch = {
+            NOT = {
+                has_idea = ABS_Unstable_power
+            }
+		}
+		completion_reward = {		
+			add_doctrine_cost_reduction = {
+				name = land_doc_bonus
+				cost_reduction = 0.75
+				uses = 1
+				category = 	cat_trade_interdiction
+			}
+		}
+	}
+
+    focus = {
+		id = ABS_Best_practices
+		icon = GFX_
+		cost = 5
+		x = 5
+		y = 6
+		ai_will_do = {
+			factor = 50
+		}
+        prerequisite = {
+		    focus = ABS_Rebuild_the_army
+		}
+		available = {
+            OR = {
+                has_idea = ABS_Complete_dependence_on_France
+                has_idea = ABS_Partial_dependence_on_France
+                has_idea = ABS_Strong_French_influence
+                has_idea = ABS_Strong_influence_of_Romea
+                has_idea = ABS_Partial_dependence_on_Romea
+                has_idea = ABS_Complete_dependence_on_Romea
+                has_army_experience > 35
+                has_navy_experience > 35
+            }
+		}
+		allow_branch = {
+            NOT = {
+                has_idea = ABS_Unstable_power
+            }
+		}
+		completion_reward = {
+            add_command_power = 25
+			add_tech_bonus = {
+				bonus = 0.25
+				uses = 2
+				name = ABS_a_bandits_war
+                technology = recon_tech
+                technology = logistics_tech
+			}
+		}
+	}
+
+    focus = {
+		id = ABS_Planning_Excellence
+		icon = GFX_
+		cost = 7
+		x = 7
+		y = 6
+		ai_will_do = {
+			factor = 50
+		}
+        prerequisite = {
+		    focus = ABS_Rebuild_the_army
+		}
+        mutually_exclusive = {
+            focus = ABS_The_superiority_of_the_assault
+        }
+		available = {
+            
+		}
+		allow_branch = {
+            NOT = {
+                has_idea = ABS_Unstable_power
+            }
+		}
+		completion_reward = {		
+			add_doctrine_cost_reduction = {
+				name = land_doc_bonus
+				cost_reduction = 0.75
+				uses = 1
+				category = 	cat_grand_battle_plan
+			}
+		}
+	}
+
+    focus = {
+		id = ABS_The_superiority_of_the_assault
+		icon = GFX_
+		cost = 7
+		x = 9
+		y = 6
+		ai_will_do = {
+			factor = 50
+		}
+        prerequisite = {
+		    focus = ABS_Rebuild_the_army
+		}
+        mutually_exclusive = {
+            focus = ABS_Planning_Excellence
+        }
+		available = {
+            
+		}
+		allow_branch = {
+            NOT = {
+                has_idea = ABS_Unstable_power
+            }
+		}
+		completion_reward = {		
+			add_doctrine_cost_reduction = {
+				name = land_doc_bonus
+				cost_reduction = 0.75
+				uses = 1
+				category = cat_mass_assault
+			}
+		}
+	}
+
+    focus = {
+		id = ABS_Coastal_Defense_ships
+		icon = GFX_
+		cost = 5
+		x = 0
+		y = 7
+		ai_will_do = {
+			factor = 50
+		}
+        prerequisite = {
+		    focus = ABS_Marine_shipyards
+		}
+		available = {
+            
+		}
+		allow_branch = {
+            NOT = {
+                has_idea = ABS_Unstable_power
+            }
+		}
+		completion_reward = {		
+			add_tech_bonus = {
+				name = cv_bonus
+				bonus = 0.75
+				uses = 1
+				category = dd_tech
+			}
+		}
+	}
+
+    focus = {
+		id = ABS_French_Infantry
+		icon = GFX_
+		cost = 5
+		x = 2
+		y = 7
+		ai_will_do = {
+			factor = 50
+		}
+        prerequisite = {
+		    focus = ABS_Best_practices
+		}
+        mutually_exclusive = {
+            focus = ABS_The_Roman_Fleet
+        }
+		available = {
+            OR = {
+                has_idea = ABS_Complete_dependence_on_France
+                has_idea = ABS_Partial_dependence_on_France
+                has_idea = ABS_Strong_French_influence
+                has_army_experience > 50
+            }
+		}
+		allow_branch = {
+            NOT = {
+                has_idea = ABS_Unstable_power
+                has_completed_focus = ABS_Independent_Army
+            }
+		}
+		completion_reward = {		
+			add_ideas = ABS_French_experience
+		}
+	}
+
+    focus = {
+		id = ABS_The_Roman_Fleet
+		icon = GFX_
+		cost = 5
+		x = 4
+		y = 7
+		ai_will_do = {
+			factor = 50
+		}
+        prerequisite = {
+		    focus = ABS_Best_practices
+		}
+        mutually_exclusive = {
+            focus = ABS_French_Infantry
+        }
+		available = {
+            OR = {
+                has_idea = ABS_Strong_influence_of_Romea
+                has_idea = ABS_Partial_dependence_on_Romea
+                has_idea = ABS_Complete_dependence_on_Romea
+                has_navy_experience > 50
+            }
+		}
+		allow_branch = {
+            NOT = {
+                has_idea = ABS_Unstable_power
+                has_completed_focus = ABS_Independent_Army
+            }
+		}
+		completion_reward = {		
+			add_ideas = ABS_Roman_experience
+		}
+	}
+
+    focus = {
+		id = ABS_The_best_artillery
+		icon = GFX_
+		cost = 7
+		x = 6
+		y = 7
+		ai_will_do = {
+			factor = 50
+		}
+        prerequisite = {
+		    focus = ABS_Planning_Excellence
+		}
+		available = {
+            
+		}
+		allow_branch = {
+            NOT = {
+                has_idea = ABS_Unstable_power
+            }
+		}
+		completion_reward = {		
+			add_tech_bonus = {
+				name = ABS_milizia_marittima_di_artiglieria
+				bonus = 0.5
+				uses = 1
+				category = artillery
+			}
+		}
+	}
+
+    focus = {
+		id = ABS_Army_of_the_Abyssinian_Mountains
+		icon = GFX_
+		cost = 7
+		x = 8
+		y = 7
+		ai_will_do = {
+			factor = 50
+		}
+        prerequisite = {
+		    focus = ABS_Planning_Excellence
+            focus = ABS_The_superiority_of_the_assault
+		}
+		available = {
+            has_army_manpower = {
+                size > 125000
+                }
+		}
+		allow_branch = {
+            NOT = {
+                has_idea = ABS_Unstable_power
+            }
+		}
+		completion_reward = {		
+			add_tech_bonus = {
+				name = ABS_divisioni_alpine
+				bonus = 1.0
+				uses = 1
+				category = mountaineers_tech
+			}
+            add_ideas = ABS_Abyssinian_Army
+		}
+	}
+
+    focus = {
+		id = ABS_Cheapen_rifles
+		icon = GFX_
+		cost = 7
+		x = 10
+		y = 7
+		ai_will_do = {
+			factor = 50
+		}
+        prerequisite = {
+		    focus = ABS_The_superiority_of_the_assault
+		}
+		available = {
+            
+		}
+		allow_branch = {
+            NOT = {
+                has_idea = ABS_Unstable_power
+            }
+		}
+		completion_reward = {		
+			add_tech_bonus = {
+				name = ABS_brescia_small_arms_industry
+				bonus = 0.50
+				uses = 1
+				category = infantry_weapons
+			}
+		}
+	}
+
+    focus = {
+		id = ABS_Take_into_account_its_specifics
+		icon = GFX_
+		cost = 5
+		x = 3
+		y = 8
+		ai_will_do = {
+			factor = 50
+		}
+        prerequisite = {
+		    focus = ABS_French_Infantry
+            focus = ABS_The_Roman_Fleet
+		}
+		available = {
+            
+		}
+		allow_branch = {
+            NOT = {
+                has_idea = ABS_Unstable_power
+                has_completed_focus = ABS_Independent_Army
+            }
+		}
+		completion_reward = {		
+			add_doctrine_cost_reduction = {
+				name = land_doc_bonus
+				cost_reduction = 0.50
+				uses = 1
+				category = 	land_doctrine
+			}
+		}
+	}
+
+    focus = {
+		id = ABS_Independent_Army
+		icon = GFX_
+		cost = 7
+		x = 3
+		y = 8
+		ai_will_do = {
+			factor = 50
+		}
+        prerequisite = {
+		    focus = ABS_French_Infantry
+		}
+		available = {
+            has_idea = ABS_Unstable_independence
+            NOT = {
+                has_completed_focus = ABS_French_Infantry
+                has_completed_focus = ABS_The_Roman_Fleet
+            }
+		}
+		allow_branch = {
+            has_idea = ABS_Unstable_independence
+            NOT = {
+                has_idea = ABS_Unstable_power
+                has_completed_focus = ABS_French_Infantry
+                has_completed_focus = ABS_The_Roman_Fleet
+                has_completed_focus = ABS_Take_into_account_its_specifics
+                has_completed_focus = ABS_Save_on_the_army
+            }
+		}
+		completion_reward = {		
+			add_war_support = 0.05
+            add_command_power = 25 
+            random_core_state = {
+				limit = {
+					is_controlled_by = ROOT
+					free_building_slots = {
+						building = arms_factory
+						size > 1
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 1 
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+    focus = {
+		id = ABS_Solid_rear
+		icon = GFX_
+		cost = 7
+		x = 7
+		y = 8
+		ai_will_do = {
+			factor = 50
+		}
+        prerequisite = {
+		    focus = ABS_The_best_artillery
+		}
+		available = {
+            
+		}
+		allow_branch = {
+            NOT = {
+                has_idea = ABS_Unstable_power
+            }
+		}
+		completion_reward = {		
+			add_tech_bonus = {
+				name = land_doc_bonus
+				bonus = 0.50
+				uses = 1
+				category = support_tech
+			}
+		}
+	}
+
+    focus = {
+		id = ABS_Mass_maneuvers
+		icon = GFX_
+		cost = 7
+		x = 9
+		y = 8
+		ai_will_do = {
+			factor = 50
+		}
+        prerequisite = {
+		    focus = ABS_Cheapen_rifles
+		}
+		available = {
+            
+		}
+		allow_branch = { 
+            NOT = {
+                has_idea = ABS_Unstable_power
+            }
+		}
+		completion_reward = {		
+			add_tech_bonus = {
+				name = ABS_redirect_alfa_romeo_production
+				bonus = 0.50
+				uses = 1
+				category = motorized_equipment
+			}
+		}
+	}
+
+	focus = {
+		id = PRT_To_pay_attention_to_France
+		icon = GFX_goal_generic_government_deals
+		cost = 3
+		x = 6
+		y = 0
+		ai_will_do = {
+			factor = 5
+		}
+		mutually_exclusive = {
+            focus = PRT_To_remain_a_Roman_friend 
+        }
+		available = {
+			OR = {
+				has_idea = ABS_Complete_dependence_on_France
+                has_idea = ABS_Partial_dependence_on_France
+                has_idea = ABS_Strong_French_influence
+			    has_idea = ABS_Moderate_influence_of_France
+			    has_idea = ABS_Weak_influence_of_France
+				has_idea = ABS_Unstable_independence
+			}
+			NOT = {
+				has_idea = ABS_Growing_unrest
+			}
+		}
+		allow_branch = { 
+            NOT = {
+                has_idea = ABS_Unstable_power
+            }
+		}
+		completion_reward = {		
+			country_event = abs_event.16
+			
+		}
+	}
+
+	focus = {
+		id = PRT_To_remain_a_Roman_friend
+		icon = GFX_goal_generic_government_deals
+		cost = 3
+		x = 10
+		y = 0
+		ai_will_do = {
+			factor = 5
+		}
+		mutually_exclusive = {
+            focus = PRT_To_pay_attention_to_France
+        }
+		available = {
+			OR = {
+				has_idea = ABS_Complete_dependence_on_Romea
+                has_idea = ABS_Partial_dependence_on_Romea
+                has_idea = ABS_Strong_influence_of_Romea
+			    has_idea = ABS_Moderate_influence_of_Romea
+			    has_idea = ABS_Weak_influence_of_Romea
+				has_idea = ABS_Unstable_independence
+			}
+			NOT = {
+				has_idea = ABS_Growing_unrest
+			}
+		}
+		allow_branch = { 
+            NOT = {
+                has_idea = ABS_Unstable_power
+            }
+		}
+		completion_reward = {			
+			country_event = abs_event.17
+			
+		}
+	}
+
+	focus = {
+		id = PRT_French_industrial_experience
+		icon = GFX_goal_generic_government_deals
+		cost = 5
+		x = 5
+		y = 1
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		    focus =  PRT_To_pay_attention_to_France
+		}
+		available = {
+		    NOT = {
+			    has_idea = ABS_Partial_dependence_on_Romea
+			    has_idea = ABS_Complete_dependence_on_Romea
+			}
+		}
+		allow_branch = { 
+            NOT = {
+                has_idea = ABS_Unstable_power
+            }
+		}
+		completion_reward = {				
+			add_tech_bonus = {
+				name = GER_four_year_plan
+				bonus = 0.50
+				uses = 1
+				category = industry
+			}		
+		}
+	}
+
+	focus = {
+		id = PRT_To_be_alone
+		icon = GFX_goal_generic_government_deals
+		cost = 7
+		x = 7 
+		y = 1
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		    focus = PRT_To_pay_attention_to_France
+			focus = PRT_To_remain_a_Roman_friend
+		}
+		mutually_exclusive = {
+            focus = PRT_African_cooperation
+        }
+		available = {
+			date > 1851.01.01
+		}
+		allow_branch = { 
+            NOT = {
+                has_idea = ABS_Unstable_power
+            }
+		}
+		completion_reward = {		
+			add_ideas = ABS_Own_plans		
+		}
+	}
+
+	focus = {
+		id = PRT_African_cooperation
+		icon = GFX_goal_generic_government_deals
+		cost = 7
+		x = 9
+		y = 1
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		    focus = PRT_To_pay_attention_to_France
+			focus = PRT_To_remain_a_Roman_friend
+		}
+		mutually_exclusive = {
+            focus = PRT_To_be_alone
+        }
+		available = {
+			date > 1851.01.01
+		}
+		allow_branch = { 
+            NOT = {
+                has_idea = ABS_Unstable_power
+            }
+		}
+		completion_reward = {	
+			add_ideas = ABS_African_diplomacy
+		}
+	}
+
+	focus = {
+		id = PRT_Roman_specialists
+		icon = GFX_goal_generic_government_deals
+		cost = 5
+		x = 11
+		y = 1
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		    focus =  PRT_To_remain_a_Roman_friend
+		}
+		available = {
+		    NOT = {
+			    has_idea = ABS_Complete_dependence_on_France
+			    has_idea = ABS_Partial_dependence_on_France
+			}
+		}
+		allow_branch = { 
+            NOT = {
+                has_idea = ABS_Unstable_power
+            }
+		}
+		completion_reward = {	
+			add_tech_bonus = {
+				name = GER_four_year_plan
+				bonus = 0.50
+				uses = 1
+				category = electronics
+			}		
+		}
+	}
+
+	focus = {
+		id = PRT_French_loans
+		icon = GFX_goal_generic_government_deals
+		cost = 7
+		x = 4
+		y = 2
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		    focus =  PRT_French_industrial_experience
+		}
+		available = {
+		    NOT = {
+			    has_idea = ABS_Partial_dependence_on_Romea
+			    has_idea = ABS_Complete_dependence_on_Romea
+			}
+		}
+		allow_branch = { 
+            NOT = {
+                has_idea = ABS_Unstable_power
+            }
+		}
+		completion_reward = {		
+			random_state = {
+				limit = { is_core_of = ABS }
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = PRT_The_dominance_of_Abyssinia
+		icon = GFX_goal_generic_government_deals
+		cost = 5
+		x = 6
+		y = 2
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		    focus =  PRT_To_be_alone
+		}
+		available = {
+		
+		}
+		allow_branch = { 
+            NOT = {
+                has_idea = ABS_Unstable_power
+            }
+		}
+		completion_reward = {	
+			country_event = abs_event.19
+			
+		}
+	}
+
+	focus = {
+		id = PRT_European_Partnership
+		icon = GFX_goal_generic_government_deals
+		cost = 2
+		x = 8
+		y = 2
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		    focus = PRT_To_be_alone
+			focus = PRT_African_cooperation
+		}
+		available = {
+			has_war = no
+			NOT = {
+                has_idea = ABS_Unfinished_industrialization
+            }
+		}
+		allow_branch = { 
+            NOT = {
+                has_idea = ABS_Unstable_power
+            }
+		}
+		completion_reward = {		
+			if = {
+				limit = {
+                    FRR = {
+						exists = yes
+						is_subject = no
+						has_war = no
+					}
+				}
+                FRR = {
+					country_event = abs_event.22
+				}
+			}
+			if = {
+				limit = {
+                    BYZ = {
+						exists = yes
+						is_subject = no
+						has_war = no
+					}
+				}
+                BYZ = {
+					country_event = abs_event.22
+				}
+			}		
+		}
+	}
+
+	focus = {
+		id = PRT_Trips_to_the_neighbors
+		icon = GFX_goal_generic_government_deals
+		cost = 5
+		x = 10
+		y = 2
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		    focus =  PRT_African_cooperation
+		}
+		available = {
+		
+		}
+		allow_branch = { 
+            NOT = {
+                has_idea = ABS_Unstable_power
+            }
+		}
+		completion_reward = {	
+			every_neighbor_country = {
+				country_event = abs_event.18
+			}
+			
+		}
+	}
+
+	focus = {
+		id = PRT_New_trade_supplies
+		icon = GFX_goal_generic_government_deals
+		cost = 7
+		x = 12
+		y = 2
+		ai_will_do = {
+			factor = 5 
+		}
+		prerequisite = {
+		    focus =  PRT_Roman_specialists
+		}
+		available = {
+		    NOT = {
+			    has_idea = ABS_Complete_dependence_on_France
+			    has_idea = ABS_Partial_dependence_on_France
+			}
+		}
+		allow_branch = { 
+            NOT = {
+                has_idea = ABS_Unstable_power
+            }
+		}
+		completion_reward = {		
+			add_political_power = 25
+			if = {
+				limit = {
+					has_full_control_of_state = 550
+				}
+				add_resource = {
+                    type = steel
+                    amount = 10
+                    state = 550
+				}
+			}
+			if = {
+				limit = {
+					has_full_control_of_state = 268
+				}
+				add_resource = {
+                    type = steel
+                    amount = 10
+                    state = 268
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = PRT_Add_your_own_prices
+		icon = GFX_goal_generic_government_deals
+		cost = 7
+		x = 5
+		y = 3
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		    focus =  PRT_The_dominance_of_Abyssinia
+		}
+		available = {
+		
+		}
+		allow_branch = { 
+            NOT = {
+                has_idea = ABS_Unstable_power
+            }
+		}
+		completion_reward = {		
+			country_event = abs_event.20
+			
+		}
+	}
+
+	focus = {
+		id = PRT_Diplomatic_fortitude
+		icon = GFX_goal_generic_government_deals
+		cost = 7
+		x = 7
+		y = 3
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		    focus =  PRT_The_dominance_of_Abyssinia
+		}
+		available = {
+		
+		}
+		allow_branch = { 
+            NOT = {
+                has_idea = ABS_Unstable_power
+            }
+		}
+		completion_reward = {		
+			add_ideas = ABS_Persistent_diplomacy
+		}
+	}
+
+	focus = {
+		id = PRT_Mutually_beneficial_trade
+		icon = GFX_goal_generic_government_deals
+		cost = 7
+		x = 9
+		y = 3
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		    focus =  PRT_Trips_to_the_neighbors
+		}
+		mutually_exclusive = {
+            focus =
+        }
+		available = {
+		
+		}
+		allow_branch = { 
+            NOT = {
+                has_idea = ABS_Unstable_power
+            }
+		}
+		completion_reward = {		
+			add_ideas = ABS_Successful_trading
+		}
+	}
+
+	focus = {
+		id = PRT_Buy_someone_elses_friendship
+		icon = GFX_goal_generic_government_deals
+		cost = 7
+		x = 11
+		y = 3
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		    focus =  PRT_Trips_to_the_neighbors
+		}
+		available = {
+		
+		}
+		allow_branch = { 
+            NOT = {
+                has_idea = ABS_Unstable_power
+            }
+		}
+		completion_reward = {		
+			if = {
+				limit = {
+                    KEN = {
+						exists = yes
+						is_subject = no
+						has_war = no
+					}
+				}
+                KEN = {
+					country_event = abs_event.21
+				}
+			}
+			if = {
+				limit = {
+                    NUB = {
+						exists = yes
+						is_subject = no
+						has_war = no
+					}
+				}
+                NUB = {
+					country_event = abs_event.21
+				}
+			}
+			if = {
+				limit = {
+                    GRI = {
+						exists = yes
+						is_subject = no
+						has_war = no
+					}
+				}
+                GRI = {
+					country_event = abs_event.21
+				}
+			}
+			if = {
+				limit = {
+                    MAD = {
+						exists = yes
+						is_subject = no
+						has_war = no
+					}
+				}
+                MAD = {
+					country_event = abs_event.21
+				}
+			}
+			if = {
+				limit = {
+                    CPT = {
+						exists = yes
+						is_subject = no
+						has_war = no
+					}
+				}
+                CPT = {
+					country_event = abs_event.21
+				}
+			}			
+		}
+	}
+
+	focus = {
+		id = PRT_Massauan_reforms
+		icon = GFX_goal_generic_government_deals
+		cost = 5
+		x = 27
+		y = 0
+		ai_will_do = {
+			factor = 5
+		}
+		available = {
+		
+		}
+		allow_branch = { 
+            NOT = {
+                has_idea = ABS_Unstable_power
+            }
+		}
+		completion_reward = {		
+			country_event = abs_event.27
+		}
+	}
+
+	focus = {
+		id = PRT_European_specialists
+		icon = GFX_goal_generic_government_deals
+		cost = 5
+		x = 27
+		y = 1
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		    focus =  PRT_Massauan_reforms
+		}
+		available = {
+			#has_completed_focus = ABS_Industry_inspection
+            NOT = {
+                has_idea = ABS_New_economic_reforms 
+            }
+			NOT = {
+                has_idea = ABS_Growing_unrest
+            }
+		}
+		allow_branch = { 
+            NOT = {
+                has_idea = ABS_Unstable_power
+            }
+		}
+		completion_reward = {		
+			if = {
+				limit = {
+                    NOT = {
+                        has_completed_focus = ABS_Save_on_industry
+                    }
+				}
+                country_event = abs_event.29
+			}
+            if = {
+				limit = {
+                    has_completed_focus = ABS_Save_on_industry
+				}
+                country_event = abs_event.30
+			}
+		}
+	}
+
+	focus = {
+		id = PRT_Abyssinian_Resource_base
+		icon = GFX_goal_generic_government_deals
+		cost = 7
+		x = 25
+		y = 2
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		    focus =  PRT_European_specialists
+		}
+		available = {
+			NOT = {
+                has_idea = ABS_Unfinished_industrialization
+            }
+		}
+		allow_branch = { 
+            NOT = {
+                has_idea = ABS_Unstable_power
+            }
+		}
+		completion_reward = {		
+			add_ideas = ABS_Abyssinian_resources
+		}
+	}
+
+	focus = {
+		id = PRT_Look_to_the_future
+		icon = GFX_goal_generic_government_deals
+		cost = 7
+		x = 27
+		y = 2
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		    focus =  PRT_European_specialists
+		}
+		available = {
+		
+		}
+		allow_branch = { 
+            NOT = {
+                has_idea = ABS_Unstable_power
+            }
+		}
+		completion_reward = {		
+			country_event = abs_event.31
+		}
+	}
+
+	focus = {
+		id = PRT_Stimulate_scientific_development
+		icon = GFX_goal_generic_government_deals
+		cost = 5
+		x = 29
+		y = 2
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		    focus =  PRT_European_specialists
+		}
+		available = {
+			NOT = {
+                has_idea = ABS_Unfinished_industrialization
+            }
+		}
+		allow_branch = { 
+            NOT = {
+                has_idea = ABS_Unstable_power
+            }
+		}
+		completion_reward = {		
+			if = {
+				limit = {
+                    has_idea = average_investment_level
+				}
+                swap_ideas = {
+				    remove_idea = average_investment_level
+				    add_idea = hight_investment_level
+			    }
+			}
+			if = {
+				limit = {
+                    has_idea = low_investment_level
+				}
+                swap_ideas = {
+				    remove_idea = low_investment_level
+				    add_idea = average_investment_level
+			    }
+			}
+			if = {
+				limit = {
+                    has_idea = no_investment
+				}
+                swap_ideas = {
+				    remove_idea = no_investment
+				    add_idea = low_investment_level
+			    }
+			}
+		}
+	}
+
+	focus = {
+		id = PRT_Export_policy
+		icon = GFX_goal_generic_government_deals
+		cost = 7
+		x = 26
+		y = 3
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		    focus =  PRT_Look_to_the_future
+		}
+		mutually_exclusive = {
+            focus = PRT_Technological_production
+        }
+		allow_branch = { 
+            NOT = {
+                has_idea = ABS_Unstable_power
+            }
+		}
+		available = {
+		
+		}
+		completion_reward = {		
+			if = {
+				limit = {
+                    has_idea = free_trade
+				}
+                add_political_power = 100
+			}
+			if = {
+				limit = {
+                    has_idea = export_focus
+				}
+                swap_ideas = {
+				    remove_idea = export_focus
+				    add_idea = free_trade
+			    }
+			}
+			if = {
+				limit = {
+                    has_idea = limited_exports
+				}
+                swap_ideas = {
+				    remove_idea = limited_exports
+				    add_idea = free_trade
+			    }
+			}
+			if = {
+				limit = {
+                    has_idea = closed_economy
+				}
+                swap_ideas = {
+				    remove_idea = closed_economy
+				    add_idea = free_trade
+			    }
+			}
+		}
+	}
+
+	focus = {
+		id = PRT_Technological_production
+		icon = GFX_goal_generic_government_deals
+		cost = 7
+		x = 28
+		y = 3
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		    focus =  PRT_Look_to_the_future
+		}
+		mutually_exclusive = {
+            focus = PRT_Export_policy
+        }
+		available = {
+			has_idea = ABS_Own_plans
+			has_political_power > 300
+			has_completed_focus = PRT_Scientific_Academy_in_Addis_Ababa
+			NOT = {
+				has_completed_focus = ABS_Save_on_industry
+			}
+		}
+		allow_branch = { 
+            NOT = {
+                has_idea = ABS_Unstable_power
+            }
+		}
+		completion_reward = {	
+			add_political_power = -300	
+			random_owned_controlled_state = {
+			    limit = {
+				    free_building_slots = {
+					    building = industrial_complex
+					    size > 2
+					    include_locked = yes
+				    }
+			    }
+			    add_extra_state_shared_building_slots = 2
+			    add_building_construction = {
+				    type = industrial_complex
+				    level = 2
+				    instant_build = yes
+			    }
+		    }
+			random_owned_controlled_state = {
+			    limit = {
+				    free_building_slots = {
+					    building = arms_factory
+					    size > 1
+					    include_locked = yes
+				    }
+			    }
+			    add_extra_state_shared_building_slots = 1
+			    add_building_construction = {
+				    type = arms_factory
+				    level = 1
+				    instant_build = yes
+			    }
+		    }
+		}
+	}
+
+	focus = {
+		id = PRT_Expand_coal_mines
+		icon = GFX_goal_generic_government_deals
+		cost = 5
+		x = 24
+		y = 4
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		    focus =  PRT_Abyssinian_Resource_base
+		}
+		available = {
+		
+		}
+		allow_branch = { 
+            NOT = {
+                has_idea = ABS_Unstable_power
+            }
+		}
+		completion_reward = {		
+			
+		}
+	}
+
+	focus = {
+		id = PRT_Link_Country
+		icon = GFX_goal_generic_government_deals
+		cost = 7
+		x = 27
+		y = 4
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		    focus =  PRT_Export_policy
+			focus =  PRT_Technological_production
+		}
+		available = {
+			date > 1851.01.01
+		}
+		allow_branch = { 
+            NOT = {
+                has_idea = ABS_Unstable_power
+            }
+		}
+		completion_reward = {		
+			random_owned_controlled_state = {
+				prioritize = { 271 }
+			    limit = {
+				    free_building_slots = {
+					    building = infrastructure
+					    size > 1
+					    include_locked = yes
+				    }
+			    }
+			    add_extra_state_shared_building_slots = 1
+			    add_building_construction = {
+				    type = infrastructure
+				    level = 1
+				    instant_build = yes
+			    }
+		    }
+		}
+	}
+
+	focus = {
+		id = PRT_European_technologies
+		icon = GFX_goal_generic_government_deals
+		cost = 5
+		x = 30
+		y = 4
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		    focus =  PRT_Stimulate_scientific_development
+		}
+		available = {
+		
+		}
+		allow_branch = { 
+            NOT = {
+                has_idea = ABS_Unstable_power
+            }
+		}
+		completion_reward = {		
+			add_tech_bonus = {
+			    name = GER_four_year_plan
+			    bonus = 0.5
+			    uses = 1
+			    category = industry
+		    }
+			add_tech_bonus = {
+			    name = GER_four_year_plan
+			    bonus = 0.5
+			    uses = 1
+			    category = electronics
+		    }
+		}
+	}
+
+	focus = {
+		id = PRT_Coffee_Monopolist
+		icon = GFX_goal_generic_government_deals
+		cost = 7
+		x = 25
+		y = 5
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		    focus =  PRT_Link_Country
+		}
+		prerequisite = {
+            focus = PRT_Export_policy
+        }
+		available = {
+		
+		}
+		allow_branch = { 
+            NOT = {
+                has_idea = ABS_Unstable_power
+            }
+		}
+		completion_reward = {		
+			add_offsite_building = { type = industrial_complex level = 1 }		
+			add_ideas = ABS_Coffee_exports
+		}
+	}
+
+	focus = {
+		id = PRT_Abyssinian_Railways
+		icon = GFX_goal_generic_government_deals
+		cost = 5
+		x = 27
+		y = 5
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+            focus = PRT_Link_Country
+        }
+		allow_branch = { 
+            NOT = {
+                has_idea = ABS_Unstable_power
+            }
+		}
+		completion_reward = {	
+			add_timed_idea = {
+			    idea = ABS_Investments_in_railways
+			    days = 365
+		    }
+		}
+	}
+
+	focus = {
+		id = PRT_Prepare_your_specialists
+		icon = GFX_goal_generic_government_deals
+		cost = 7
+		x = 29
+		y = 5
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		    focus =  PRT_Link_Country
+		}
+		prerequisite = {
+            focus = PRT_Technological_production
+        }
+		available = {
+		
+		}
+		allow_branch = { 
+            NOT = {
+                has_idea = ABS_Unstable_power
+            }
+		}
+		completion_reward = {	
+			add_stability = -0.05
+			random_owned_controlled_state = {
+			    limit = {
+				    free_building_slots = {
+					    building = industrial_complex
+					    size > 2
+					    include_locked = yes
+				    }
+			    }
+			    add_extra_state_shared_building_slots = 2
+			    add_building_construction = {
+				    type = industrial_complex
+				    level = 2
+				    instant_build = yes
+			    }
+		    }
+		}
+	}
+
+	focus = {
+		id = PRT_Expand_rubber_production
+		icon = GFX_goal_generic_government_deals
+		cost = 5
+		x = 24
+		y = 6
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		    focus =  PRT_Expand_coal_mines
+		}
+		available = {
+		
+		}
+		allow_branch = { 
+            NOT = {
+                has_idea = ABS_Unstable_power
+            }
+		}
+		completion_reward = {		
+			
+		}
+	}
+
+	focus = {
+		id = PRT_End_unfinished_industrialization
+		icon = GFX_goal_generic_government_deals
+		cost = 7
+		x = 27
+		y = 6
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		    focus =  PRT_Coffee_Monopolist
+			focus =  PRT_Prepare_your_specialists
+		}
+		available = {
+		
+		}
+		allow_branch = { 
+            NOT = {
+                has_idea = ABS_Unstable_power
+            }
+		}
+		completion_reward = {	
+			country_event = abs_event.28	
+		} 
+	}
+
+	focus = {
+		id = PRT_Scientific_Academy_in_Addis_Ababa
+		icon = GFX_goal_generic_government_deals
+		cost = 7
+		x = 30
+		y = 6
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		    focus =  PRT_European_technologies
+		}
+		available = {
+		
+		} 
+		allow_branch = { 
+            NOT = {
+                has_idea = ABS_Unstable_power
+            }
+		}
+		completion_reward = {		
+			add_research_slot = 1
+		}
+	}
+
+	focus = {
+		id = PRT_New_Abyssinia 
+		icon = GFX_goal_generic_government_deals
+		cost = 10
+		x = 27
+		y = 7
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		    focus =  PRT_Expand_rubber_production
+		}
+		prerequisite = {
+            focus = PRT_End_unfinished_industrialization
+        }
+		prerequisite = {
+            focus = PRT_Scientific_Academy_in_Addis_Ababa
+        }
+		available = {
+			has_stability > 0.60
+			date > 1853.01.01
+		}
+		allow_branch = { 
+            NOT = {
+                has_idea = ABS_Unstable_power
+            }
+		}
+		completion_reward = {	
+			add_offsite_building = { type = industrial_complex level = 1 }	
+			add_ideas = ABS_New_heights
+			add_stability = 0.05
+		}
+	}
+
+	focus = {
+		id = PRT_Trade_in_the_Red_Sea
+		icon = GFX_goal_generic_government_deals
+		cost = 7
+		x = 26
+		y = 8
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		    focus =  PRT_New_Abyssinia
+		}
+		mutually_exclusive = {
+            focus = PRT_Introduce_protectionism
+        }
+		available = {
+		
+		}
+		allow_branch = { 
+            NOT = {
+                has_idea = ABS_Unstable_power
+            }
+		}
+		completion_reward = {		
+			add_ideas = ABS_Profit_from_sea_trade
+		}
+	}
+
+	focus = {
+		id = PRT_Introduce_protectionism
+		icon = GFX_goal_generic_government_deals
+		cost = 7
+		x = 28
+		y = 8
+		ai_will_do = {
+			factor = 5
+		}
+		prerequisite = {
+		    focus =  PRT_New_Abyssinia
+		}
+		mutually_exclusive = {
+            focus = PRT_Trade_in_the_Red_Sea
+        }
+		available = {
+		
+		}
+		allow_branch = { 
+            NOT = {
+                has_idea = ABS_Unstable_power
+            }
+		}
+		completion_reward = {		
+			add_ideas = ABS_Forced_protectionism
+		}
+	}
+}

@@ -1,0 +1,426 @@
+ABS_Mass_Starvation = {
+
+	ABS_Lower_taxes_for_the_poor = {
+
+		icon = GFX_decision_hol_attract_foreign_investors
+
+		available = {
+            has_idea = ABS_Growing_unrest
+		}
+
+		days_remove = 25
+
+        modifier = {
+			consumer_goods_factor = 0.10
+            stability_factor = 0.05
+		}
+
+        cost = 0
+
+		remove_effect = {
+            add_days_mission_timeout = {
+                mission = ABS_Mass_starvation
+                days = 15
+                }
+		}
+
+		complete_effect = {
+		}
+
+		ai_will_do = {
+			factor = 200
+		}
+	}
+
+    ABS_Start_additional_distribution_of_grain = {
+
+		icon = GFX_decision_eng_propaganda_campaigns
+
+		available = {
+            has_idea = ABS_Growing_unrest
+            has_completed_focus = ABS_Organize_distribution
+		}
+
+		days_remove = 25
+
+        cost = 50
+
+		modifier = {
+            monthly_population = 0.10
+		}
+
+		complete_effect = {
+            add_days_mission_timeout = {
+                mission = ABS_Mass_starvation
+                days = 15
+                }
+		}
+
+		ai_will_do = {
+			factor = 200
+		}
+	}
+
+    ABS_Agitate_for_self_organization = {
+
+		icon = hol_exchange_intelligence_data
+
+		available = {
+            has_idea = ABS_Growing_unrest
+            has_completed_focus = ABS_Increase_external_purchases
+		}
+
+		days_remove = 75  
+        fire_only_once = yes
+        cost = 0
+
+        modifier = {
+            stability_weekly_factor = 0.01	
+			consumer_goods_factor = 0.10
+            monthly_population = 0.10
+		}
+
+		remove_effect = {
+		}
+
+		complete_effect = {
+            add_days_mission_timeout = {
+                mission = ABS_Mass_starvation
+                days = 100
+                }
+		}
+
+		ai_will_do = {
+			factor = 200
+		}
+	}
+
+    ABS_Mass_starvation = {
+
+		icon = generic_civil_support
+
+		available = {
+            NOT ={
+                has_idea = ABS_Growing_unrest
+            }
+		}
+
+		days_mission_timeout = 100
+		is_good = yes
+		fire_only_once = yes
+
+		days_remove = 0
+
+		remove_effect = {
+		}
+
+		modifier = {
+            
+		}
+
+		timeout_effect = {
+            country_event = {
+				id = abs_event.1
+				days = 1
+			}
+		}
+
+		ai_will_do = {
+			factor = 200
+		}
+	}
+}
+
+ABS_Grain_Bank = {
+
+	ABS_Print_more_currency = {
+
+		icon = GFX_decision_gre_paying_ifc_debt
+ 
+		available = {
+            NOT = {
+                has_idea = ABS_Green_Inflation
+				has_idea = ABS_Unstable_power
+            }
+		}
+
+		days_remove = 90
+
+        cost = 50
+
+		modifier = {    
+			consumer_goods_factor = -0.05  
+			production_speed_buildings_factor = 0.05
+		}
+
+        remove_effect = {
+            hidden_effect = {
+				random_list = {
+                    25 = {
+						country_event = abs_event.13
+					}
+					75 = {
+
+					}
+				}
+            }
+		}
+
+		ai_will_do = {
+			factor = 200
+		}
+	}
+
+	ABS_Investments_in_the_agricultural_sector = {
+
+		icon = GFX_decision_generic_operation
+
+		available = {
+            NOT = {
+                has_idea = ABS_Green_Inflation
+				has_idea = ABS_Unstable_power
+            }
+		}
+
+		days_remove = 90
+
+        cost = 50
+
+		modifier = {     
+			stability_factor = 0.05
+			monthly_population = 0.20
+		}
+
+		ai_will_do = {
+			factor = 200
+		}
+	}
+}
+
+ABS_Abyssinian_Diplomacy = {
+
+	ABS_To_attack_the_Roman_influence = {
+
+		icon = GFX_decision_generic_nationalism
+
+		available = {
+            NOT = {
+				has_idea = ABS_Complete_dependence_on_Romea
+            }
+		}
+
+		days_remove = 90
+
+        cost = 150
+
+		remove_effect = {     
+		if = {
+			limit = {
+				has_idea = ABS_Partial_dependence_on_France
+			}
+			swap_ideas = {
+				remove_idea = ABS_Partial_dependence_on_France
+				add_idea = ABS_Complete_dependence_on_France
+			}
+		}
+		if = {
+			limit = {
+				has_idea = ABS_Strong_French_influence
+			}
+			swap_ideas = {
+				remove_idea = ABS_Strong_French_influence
+				add_idea = ABS_Partial_dependence_on_France
+			}
+		}
+		if = {
+			limit = {
+				has_idea = ABS_Moderate_influence_of_France
+			}
+			swap_ideas = {
+				remove_idea = ABS_Moderate_influence_of_France
+				add_idea = ABS_Strong_French_influence
+			}
+		}
+        if = {
+			limit = {
+				has_idea = ABS_Weak_influence_of_France
+			}
+			swap_ideas = {
+				remove_idea = ABS_Weak_influence_of_France
+				add_idea = ABS_Moderate_influence_of_France
+			}
+		}
+        if = {
+			limit = {
+				has_idea = ABS_Weak_influence_of_Romea
+			}
+			swap_ideas = {
+				remove_idea = ABS_Weak_influence_of_Romea
+				add_idea = ABS_Weak_influence_of_France
+			}
+		}
+		if = {
+			limit = {
+				has_idea = ABS_Unstable_independence
+			}
+			swap_ideas = {
+				remove_idea = ABS_Unstable_independence
+				add_idea = ABS_Weak_influence_of_France
+			}
+		}
+        if = {
+			limit = {
+				has_idea = ABS_Moderate_influence_of_Romea
+			}
+			swap_ideas = {
+				remove_idea = ABS_Moderate_influence_of_Romea
+				add_idea = ABS_Weak_influence_of_Romea
+			}
+		}
+        if = {
+			limit = {
+				has_idea = ABS_Strong_influence_of_Romea
+			}   
+			swap_ideas = {
+				remove_idea = ABS_Strong_influence_of_Romea
+				add_idea = ABS_Moderate_influence_of_Romea
+			}
+		}
+        if = {
+			limit = {
+                has_idea = ABS_Partial_dependence_on_Romea
+			}
+            swap_ideas = {
+				remove_idea = ABS_Partial_dependence_on_Romea
+				add_idea = ABS_Strong_influence_of_Romea
+			}
+		}
+        if = {
+			limit = {
+                has_idea = ABS_Complete_dependence_on_Romea
+			}
+            swap_ideas = {
+				remove_idea = ABS_Complete_dependence_on_Romea
+				add_idea = ABS_Partial_dependence_on_Romea
+			}
+		}
+		}
+
+		ai_will_do = {
+			factor = 200
+		}
+	}
+
+	ABS_Attacking_French_influence = {
+
+		icon = GFX_decision_generic_nationalism
+
+		available = {
+            NOT = {
+				has_idea = ABS_Complete_dependence_on_France
+            }
+		}
+
+		days_remove = 90
+
+        cost = 150
+
+		remove_effect
+		 = {     
+		if = {
+			limit = {
+				has_idea = ABS_Partial_dependence_on_Romea
+			}
+			swap_ideas = {
+				remove_idea = ABS_Partial_dependence_on_Romea
+				add_idea = ABS_Complete_dependence_on_Romea
+			}
+		}
+		if = {
+			limit = {
+				has_idea = ABS_Strong_influence_of_Romea
+			}
+			swap_ideas = {
+				remove_idea = ABS_Strong_influence_of_Romea
+				add_idea = ABS_Partial_dependence_on_Romea
+			}
+		}
+		if = {
+			limit = {
+				has_idea = ABS_Moderate_influence_of_Romea
+			}
+			swap_ideas = {
+				remove_idea = ABS_Moderate_influence_of_Romea
+				add_idea = ABS_Strong_influence_of_Romea
+			}
+		}
+        if = {
+			limit = {
+				has_idea = ABS_Weak_influence_of_Romea
+			}
+			swap_ideas = {
+				remove_idea = ABS_Weak_influence_of_Romea
+				add_idea = ABS_Moderate_influence_of_Romea
+			}
+		}
+        if = {
+			limit = {
+				has_idea = ABS_Weak_influence_of_France
+			}
+			swap_ideas = {
+				remove_idea = ABS_Weak_influence_of_France
+				add_idea = ABS_Weak_influence_of_Romea
+			}
+		}
+		if = {
+			limit = {
+				has_idea = ABS_Unstable_independence
+			}
+			swap_ideas = {
+				remove_idea = ABS_Unstable_independence
+				add_idea = ABS_Weak_influence_of_Romea
+			}
+		}
+        if = {
+			limit = {
+				has_idea = ABS_Moderate_influence_of_France
+			}
+			swap_ideas = {
+				remove_idea = ABS_Moderate_influence_of_France
+				add_idea = ABS_Weak_influence_of_France
+			}
+		}
+        if = {
+			limit = {
+				has_idea = ABS_Strong_French_influence
+			}   
+			swap_ideas = {
+				remove_idea = ABS_Strong_French_influence
+				add_idea = ABS_Moderate_influence_of_France
+			}
+		}
+        if = {
+			limit = {
+                has_idea = ABS_Partial_dependence_on_France
+			}
+            swap_ideas = {
+				remove_idea = ABS_Partial_dependence_on_France
+				add_idea = ABS_Strong_French_influence
+			}
+		}
+        if = {
+			limit = {
+                has_idea = ABS_Complete_dependence_on_France
+			}
+            swap_ideas = {
+				remove_idea = ABS_Complete_dependence_on_France
+				add_idea = ABS_Partial_dependence_on_France
+			}
+		}
+		}
+
+		ai_will_do = {
+			factor = 200
+		}
+	}
+}

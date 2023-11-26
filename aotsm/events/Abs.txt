@@ -1,0 +1,1734 @@
+add_namespace = abs_event
+
+country_event = { 
+	id = abs_event.1
+	title = abs_event.1.t
+	desc = abs_event.1.d
+	picture = GFX_report_event_gre_athens
+
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event abs_event.1"
+	}
+	
+	option = {
+	    name = abs_event.1.a  
+		ai_chance = { 
+			base = 50 
+		}
+
+        add_stability = -0.25
+        add_war_support = -0.25  
+        add_manpower = -25000
+        add_political_power = -500
+        add_popularity = {
+            ideology = authoritarian
+            popularity = -0.25
+        }
+		remove_ideas = ABS_Growing_unrest
+		add_ideas = ABS_Unstable_power
+        swap_ideas = {
+				remove_idea = monarchy
+				add_idea = oligarhy
+			}
+        add_ideas = ABS_The_decayed_army
+        set_politics = {
+			ruling_party = reactionist
+			elections_allowed = no
+            last_election = "1935.12.17"
+            election_frequency = 48
+		}
+        
+    }
+}
+
+country_event = { 
+	id = abs_event.2
+	title = abs_event.2.t
+	desc = abs_event.2.d
+	picture = GFX_report_event_generic_sign_treaty2
+
+	fire_only_once = yes
+
+    trigger = { 
+        tag = ABS
+        date > 1850.03.03
+        NOT = {
+            has_idea = ABS_Unstable_power
+        }
+	}
+
+    mean_time_to_happen = {
+		days = 30
+	}
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event abs_event.2"
+	}
+	
+	option = {
+	    name = abs_event.2.a  
+		ai_chance = { 
+			base = 50 
+		}
+
+        add_political_power = -50
+        diplomatic_relation = {
+            country = KEN
+            relation = military_access
+            active = yes
+        }
+    }
+
+    option = {
+	    name = abs_event.2.b 
+		ai_chance = { 
+			base = 50 
+		}
+ 
+        KEN = {
+            add_stability = -0.05
+            add_war_support = -0.05
+            add_political_power = -50
+            add_opinion_modifier = {
+                target = ABS
+                modifier = refused_help
+            }
+        }
+    }
+}
+
+country_event = { 
+	id = abs_event.3
+	title = abs_event.3.t
+	desc = abs_event.3.d
+	picture = GFX_report_event_physics_lab_02
+
+	fire_only_once = yes
+	
+	trigger = { 
+        tag = ABS
+        date > 1851.01.01
+        NOT = {
+            has_idea = ABS_Unstable_power
+        }
+	}
+
+    mean_time_to_happen = {
+		days = 30
+	}
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event abs_event.3"
+	}
+	
+	option = {
+	    name = abs_event.3.a  
+		ai_chance = { 
+			base = 50 
+		}
+ 
+        add_tech_bonus = {
+				name = ABS_four_year_plan
+				bonus = 0.50
+				uses = 1
+				category = industry
+			}
+    }
+}
+
+country_event = { 
+	id = abs_event.4
+	title = abs_event.4.t
+	desc = abs_event.4.d
+	picture = GFX_report_event_merchant_ship_01
+
+	fire_only_once = yes
+	
+	trigger = { 
+        tag = ABS
+        date > 1852.01.01
+        NOT = {
+            has_idea = ABS_Unstable_power
+        }
+        OR = {
+            has_idea = ABS_Complete_dependence_on_Romea
+            has_idea = ABS_Partial_dependence_on_Romea
+            has_idea = ABS_Strong_influence_of_Romea
+        }
+	}
+
+    mean_time_to_happen = {
+		days = 10
+	}
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event abs_event.4"
+	}
+	
+	option = {
+	    name = abs_event.4.a  
+		ai_chance = { 
+			base = 50 
+		}
+
+        add_political_power = 100
+ 
+    }
+
+    option = {
+	    name = abs_event.4.b 
+		ai_chance = { 
+			base = 50 
+		}
+
+        add_political_power = -100
+
+        if = {
+				limit = {
+					has_idea = ABS_Strong_influence_of_Romea
+				}
+				swap_ideas = {
+					remove_idea = ABS_Strong_influence_of_Romea
+					add_idea = ABS_Moderate_influence_of_Romea
+				}
+			}
+        if = {
+				limit = {
+					has_idea = ABS_Partial_dependence_on_Romea
+				}
+				swap_ideas = {
+					remove_idea = ABS_Partial_dependence_on_Romea
+					add_idea = ABS_Strong_influence_of_Romea
+				}
+			}
+        if = {
+				limit = {
+					has_idea = ABS_Complete_dependence_on_Romea
+				}
+				swap_ideas = {
+					remove_idea = ABS_Complete_dependence_on_Romea
+					add_idea = ABS_Partial_dependence_on_Romea
+				}
+			}
+
+        BYZ = {
+            add_opinion_modifier = {
+                target = ABS
+                modifier = protest_action
+                }
+        }
+ 
+    }
+}
+
+country_event = { 
+	id = abs_event.5
+	title = abs_event.5.t
+	desc = abs_event.5.d
+	picture = GFX_report_event_ast_parliament_house
+
+	fire_only_once = yes
+	
+	trigger = { 
+        tag = ABS
+        date > 1852.09.01
+        NOT = {
+            has_idea = ABS_Unstable_power
+        }
+	}
+
+    mean_time_to_happen = {
+		days = 30
+	}
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event abs_event.5"
+	}
+	
+	option = {
+	    name = abs_event.5.a  
+		ai_chance = { 
+			base = 50 
+		}
+ 
+        add_political_power = 25
+        add_stability = 0.01
+    }
+}
+
+country_event = { 
+	id = abs_event.6
+	title = abs_event.6.t
+	desc = abs_event.6.d
+	picture = GFX_report_event_generic_panzer_attack
+
+	fire_only_once = yes
+	
+	trigger = { 
+        tag = ABS
+        date > 1853.03.03
+        NOT = {
+            has_idea = ABS_Unstable_power
+        }
+	}
+
+    mean_time_to_happen = {
+		days = 33
+	}
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event abs_event.6"
+	}
+	
+	option = {
+	    name = abs_event.6.a  
+		ai_chance = { 
+			base = 50 
+		}
+        add_political_power = 50
+    }
+
+    option = {
+	    name = abs_event.6.b 
+		ai_chance = { 
+			base = 50 
+		}
+
+        add_war_support = 0.01
+        army_experience = 10
+    }
+}
+
+country_event = { 
+	id = abs_event.7
+	title = abs_event.7.t
+	desc = abs_event.7.d
+	picture = GFX_report_event_destroyers
+
+	fire_only_once = yes
+	
+	trigger = { 
+        tag = ABS
+        date > 1849.01.01
+        NOT = {
+            has_idea = ABS_Unstable_power
+        }
+	}
+
+    mean_time_to_happen = {
+		days = 365
+	}
+	
+	option = {
+	    name = abs_event.7.a  
+        trigger = { 
+                NOT = {
+                    has_idea = ABS_Partial_dependence_on_Romea
+                    has_idea = ABS_Complete_dependence_on_Romea
+                }
+            }
+		ai_chance = { 
+			base = 50 
+		}
+
+        if = {
+				limit = {
+					has_idea = ABS_Moderate_influence_of_France
+				}
+				swap_ideas = {
+					remove_idea = ABS_Moderate_influence_of_France
+					add_idea = ABS_Strong_French_influence
+				}
+			}
+        if = {
+				limit = {
+					has_idea = ABS_Weak_influence_of_France
+				}
+				swap_ideas = {
+					remove_idea = ABS_Weak_influence_of_France
+					add_idea = ABS_Moderate_influence_of_France
+				}
+			}
+        if = {
+				limit = {
+					has_idea = ABS_Unstable_independence
+				}
+				swap_ideas = {
+					remove_idea = ABS_Unstable_independence
+					add_idea = ABS_Weak_influence_of_France
+				}
+			}
+        if = {
+				limit = {
+					has_idea = ABS_Weak_influence_of_Romea
+				}
+				swap_ideas = {
+					remove_idea = ABS_Weak_influence_of_Romea
+					add_idea = ABS_Unstable_independence
+				}
+			}
+        if = {
+				limit = {
+					has_idea = ABS_Moderate_influence_of_Romea
+				}
+				swap_ideas = {
+					remove_idea = ABS_Moderate_influence_of_Romea
+					add_idea = ABS_Weak_influence_of_Romea
+				}
+			}
+        if = {
+				limit = {
+					has_idea = ABS_Strong_influence_of_Romea
+				}
+				swap_ideas = {
+					remove_idea = ABS_Strong_influence_of_Romea
+					add_idea = ABS_Moderate_influence_of_Romea
+				}
+			}
+        if = {
+				limit = {
+					OR = {
+                        has_idea = ABS_Partial_dependence_on_France
+                        has_idea = ABS_Complete_dependence_on_France
+                    }
+				}
+				add_political_power = -100
+			}
+    }
+
+    option = {
+	    name = abs_event.7.b 
+        trigger = { 
+                NOT = {
+                    has_idea = ABS_Complete_dependence_on_France
+                    has_idea = ABS_Partial_dependence_on_France
+                }
+            }
+		ai_chance = { 
+			base = 50 
+		}
+
+        if = {
+				limit = {
+					has_idea = ABS_Moderate_influence_of_Romea
+				}
+				swap_ideas = {
+					remove_idea = ABS_Moderate_influence_of_Romea
+					add_idea = ABS_Strong_influence_of_Romea
+				}
+			}
+        if = {
+				limit = {
+					has_idea = ABS_Weak_influence_of_Romea
+				}
+				swap_ideas = {
+					remove_idea = ABS_Weak_influence_of_Romea
+					add_idea = ABS_Moderate_influence_of_Romea
+				}
+			}
+        if = {
+				limit = {
+					has_idea = ABS_Unstable_independence
+				}
+				swap_ideas = {
+					remove_idea = ABS_Unstable_independence
+					add_idea = ABS_Weak_influence_of_Romea
+				}
+			}
+        if = {
+				limit = {
+					has_idea = ABS_Weak_influence_of_France
+				}
+				swap_ideas = {
+					remove_idea = ABS_Weak_influence_of_France
+					add_idea = ABS_Unstable_independence
+				}
+			}
+        if = {
+				limit = {
+					has_idea = ABS_Moderate_influence_of_France
+				}
+				swap_ideas = {
+					remove_idea = ABS_Moderate_influence_of_France
+					add_idea = ABS_Weak_influence_of_France
+				}
+			}
+        if = {
+				limit = {
+					has_idea = ABS_Strong_French_influence
+				}   
+				swap_ideas = {
+					remove_idea = ABS_Strong_French_influence
+					add_idea = ABS_Moderate_influence_of_France
+				}
+			}
+        if = {
+				limit = {
+					OR = {
+                        has_idea = ABS_Partial_dependence_on_Romea
+                        has_idea = ABS_Complete_dependence_on_Romea
+                    }
+				}
+				add_political_power = -100
+			}
+    }
+}
+
+country_event = { 
+	id = abs_event.8
+	title = abs_event.8.t
+	desc = abs_event.8.d
+	picture = GFX_report_event_generic_read_write
+
+	fire_only_once = yes
+	
+	trigger = { 
+        tag = ABS
+        date > 1853.01.01
+        NOT = {
+            has_idea = ABS_Unstable_power
+        }
+	}
+
+    mean_time_to_happen = {
+		days = 365
+	}
+	
+	immediate = { 
+		log = "[GetDateText]: [Root.GetName]: event abs_event.8"
+	}
+	
+	option = {
+	    name = abs_event.8.a   
+		ai_chance = { 
+			base = 50 
+		}
+
+        add_offsite_building = { type = industrial_complex level = 1 }
+    }
+
+    option = {
+	    name = abs_event.8.b 
+		ai_chance = { 
+			base = 50 
+		}
+
+        add_ideas = ABS_Rich_Merchants
+    }
+
+    option = {
+	    name = abs_event.8.c
+		ai_chance = { 
+			base = 50 
+		}
+
+        add_political_power = 50
+        add_stability = 0.05
+    }
+}
+
+country_event = { 
+	id = abs_event.9
+	title = abs_event.9.t
+	desc = abs_event.9.d
+	picture = GFX_report_event_gre_athens
+
+	fire_only_once = yes
+	
+	trigger = { 
+        tag = ABS
+        date > 1853.10.10
+        NOT = {
+            has_idea = ABS_Unstable_power
+        }
+	}
+
+    mean_time_to_happen = {
+		days = 10
+	}
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event abs_event.9"
+	}
+	
+	option = {
+	    name = abs_event.9.a  
+		ai_chance = { 
+			base = 50 
+		}
+			
+		hidden_effect = {
+			set_country_flag = ABS_abs_event9
+		}
+    }
+
+}
+
+country_event = { 
+	id = abs_event.10
+	title = abs_event.10.t
+	desc = abs_event.10.d
+	picture = GFX_report_event_generic_sign_treaty2
+
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event abs_event.10"
+	}
+	
+	option = {
+	    name = abs_event.10.a   
+		ai_chance = { 
+			base = 50 
+		}
+
+        if = {
+				limit = {
+					has_idea = ABS_Moderate_influence_of_France
+				}
+				swap_ideas = {
+					remove_idea = ABS_Moderate_influence_of_France
+					add_idea = ABS_Strong_French_influence
+				}
+			}
+        if = {
+				limit = {
+					has_idea = ABS_Weak_influence_of_France
+				}
+				swap_ideas = {
+					remove_idea = ABS_Weak_influence_of_France
+					add_idea = ABS_Moderate_influence_of_France
+				}
+			}
+        if = {
+				limit = {
+					has_idea = ABS_Unstable_independence
+				}
+				swap_ideas = {
+					remove_idea = ABS_Unstable_independence
+					add_idea = ABS_Weak_influence_of_France
+				}
+			}
+        if = {
+				limit = {
+					has_idea = ABS_Weak_influence_of_Romea
+				}
+				swap_ideas = {
+					remove_idea = ABS_Weak_influence_of_Romea
+					add_idea = ABS_Unstable_independence
+				}
+			}
+        if = {
+				limit = {
+					has_idea = ABS_Moderate_influence_of_Romea
+				}
+				swap_ideas = {
+					remove_idea = ABS_Moderate_influence_of_Romea
+					add_idea = ABS_Weak_influence_of_Romea
+				}
+			}
+        if = {
+				limit = {
+					has_idea = ABS_Strong_influence_of_Romea
+				}
+				swap_ideas = {
+					remove_idea = ABS_Strong_influence_of_Romea
+					add_idea = ABS_Moderate_influence_of_Romea
+				}
+			}
+        if = {
+				limit = {
+                    has_idea = ABS_Partial_dependence_on_Romea
+				}
+                swap_ideas = {
+					remove_idea = ABS_Partial_dependence_on_Romea
+					add_idea = ABS_Strong_influence_of_Romea
+				}
+			}
+        if = {
+				limit = {
+                    has_idea = ABS_Complete_dependence_on_Romea
+				}
+                swap_ideas = {
+					remove_idea = ABS_Complete_dependence_on_Romea
+					add_idea = ABS_Partial_dependence_on_Romea
+				}
+			}
+    }
+
+    option = {
+	    name = abs_event.10.b 
+		ai_chance = { 
+			base = 50 
+		}
+
+        if = {
+				limit = {
+					has_idea = ABS_Moderate_influence_of_Romea
+				}
+				swap_ideas = {
+					remove_idea = ABS_Moderate_influence_of_Romea
+					add_idea = ABS_Strong_influence_of_Romea
+				}
+			}
+        if = {
+				limit = {
+					has_idea = ABS_Weak_influence_of_Romea
+				}
+				swap_ideas = {
+					remove_idea = ABS_Weak_influence_of_Romea
+					add_idea = ABS_Moderate_influence_of_Romea
+				}
+			}
+        if = {
+				limit = {
+					has_idea = ABS_Unstable_independence
+				}
+				swap_ideas = {
+					remove_idea = ABS_Unstable_independence
+					add_idea = ABS_Weak_influence_of_Romea
+				}
+			}
+        if = {
+				limit = {
+					has_idea = ABS_Weak_influence_of_France
+				}
+				swap_ideas = {
+					remove_idea = ABS_Weak_influence_of_France
+					add_idea = ABS_Unstable_independence
+				}
+			}
+        if = {
+				limit = {
+					has_idea = ABS_Moderate_influence_of_France
+				}
+				swap_ideas = {
+					remove_idea = ABS_Moderate_influence_of_France
+					add_idea = ABS_Weak_influence_of_France
+				}
+			}
+        if = {
+				limit = {
+					has_idea = ABS_Strong_French_influence
+				}   
+				swap_ideas = {
+					remove_idea = ABS_Strong_French_influence
+					add_idea = ABS_Moderate_influence_of_France
+				}
+			}
+        if = {
+				limit = {
+                    has_idea = ABS_Partial_dependence_on_France
+				}
+                swap_ideas = {
+					remove_idea = ABS_Partial_dependence_on_France
+					add_idea = ABS_Strong_French_influence
+				}
+			}
+        if = {
+				limit = {
+                    has_idea = ABS_Complete_dependence_on_France
+				}
+                swap_ideas = {
+					remove_idea = ABS_Complete_dependence_on_France
+					add_idea = ABS_Partial_dependence_on_France
+				}
+			}
+    }
+}
+
+country_event = { 
+	id = abs_event.11
+	title = abs_event.11.t
+	desc = abs_event.11.d
+	picture = GFX_report_event_ETH_ethiopian_warriors
+
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event abs_event.11"
+	}
+	
+	option = {
+	    name = abs_event.11.a  
+		ai_chance = { 
+			base = 50 
+		}
+
+        add_days_mission_timeout = {
+            mission = ABS_Mass_starvation
+            days = 25
+        }
+    }
+}
+
+country_event = { 
+	id = abs_event.12
+	title = abs_event.12.t
+	desc = abs_event.12.d
+	picture = GFX_report_event_gre_athens
+
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event abs_event.12"
+	}
+	
+	option = {
+	    name = abs_event.12.a  
+		ai_chance = { 
+			base = 50 
+		}
+ 
+    }
+}
+
+country_event = { 
+	id = abs_event.13
+	title = abs_event.13.t
+	desc = abs_event.13.d
+	picture = GFX_report_event_gre_athens
+
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event abs_event.13"
+	}
+	
+	option = {
+	    name = abs_event.13.a  
+		ai_chance = { 
+			base = 50 
+		}
+
+        add_timed_idea = {
+			idea = ABS_Green_Inflation
+			days = 365
+		}
+    }
+}
+
+country_event = { 
+	id = abs_event.14
+	title = abs_event.14.t
+	desc = abs_event.14.d
+	picture = GFX_report_event_gre_athens
+
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event abs_event.14"
+	}
+	
+	option = {
+	    name = abs_event.14.a  
+		ai_chance = { 
+			base = 50 
+		}
+
+        add_command_power = 50
+    }
+}
+
+country_event = { 
+	id = abs_event.15
+	title = abs_event.15.t
+	desc = abs_event.15.d
+	picture = GFX_report_event_gre_athens
+
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event abs_event.15"
+	}
+	
+	option = {
+	    name = abs_event.15.a  
+		ai_chance = { 
+			base = 50 
+		}
+
+		if = {
+				limit = {
+					has_idea = ABS_Moderate_influence_of_France
+				}
+				swap_ideas = {
+					remove_idea = ABS_Moderate_influence_of_France
+					add_idea = ABS_Strong_French_influence
+				}
+			}
+        if = {
+				limit = {
+					has_idea = ABS_Weak_influence_of_France
+				}
+				swap_ideas = {
+					remove_idea = ABS_Weak_influence_of_France
+					add_idea = ABS_Moderate_influence_of_France
+				}
+			}
+        if = {
+				limit = {
+					has_idea = ABS_Unstable_independence
+				}
+				swap_ideas = {
+					remove_idea = ABS_Unstable_independence
+					add_idea = ABS_Weak_influence_of_France
+				}
+			}
+        if = {
+				limit = {
+					has_idea = ABS_Weak_influence_of_Romea
+				}
+				swap_ideas = {
+					remove_idea = ABS_Weak_influence_of_Romea
+					add_idea = ABS_Unstable_independence
+				}
+			}
+        if = {
+				limit = {
+					has_idea = ABS_Moderate_influence_of_Romea
+				}
+				swap_ideas = {
+					remove_idea = ABS_Moderate_influence_of_Romea
+					add_idea = ABS_Weak_influence_of_Romea
+				}
+			}
+        if = {
+				limit = {
+					has_idea = ABS_Strong_influence_of_Romea
+				}
+				swap_ideas = {
+					remove_idea = ABS_Strong_influence_of_Romea
+					add_idea = ABS_Moderate_influence_of_Romea
+				}
+			}
+        if = {
+				limit = {
+                    has_idea = ABS_Partial_dependence_on_Romea
+				}
+                swap_ideas = {
+					remove_idea = ABS_Partial_dependence_on_Romea
+					add_idea = ABS_Strong_influence_of_Romea
+				}
+			}
+        if = {
+				limit = {
+                    has_idea = ABS_Complete_dependence_on_Romea
+				}
+                swap_ideas = {
+					remove_idea = ABS_Complete_dependence_on_Romea
+					add_idea = ABS_Partial_dependence_on_Romea
+				}
+			}
+    }
+}
+
+country_event = { 
+	id = abs_event.16
+	title = abs_event.16.t
+	desc = abs_event.16.d
+	picture = GFX_report_event_gre_athens
+
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event abs_event.16"
+	}
+	
+	option = {
+	    name = abs_event.16.a  
+		ai_chance = { 
+			base = 50 
+		}
+
+		if = {
+			limit = {
+				has_idea = ABS_Partial_dependence_on_France
+			}
+			swap_ideas = {
+				remove_idea = ABS_Partial_dependence_on_France
+				add_idea = ABS_Complete_dependence_on_France
+			}
+		}
+		if = {
+			limit = {
+				has_idea = ABS_Strong_French_influence
+			}
+			swap_ideas = {
+				remove_idea = ABS_Strong_French_influence
+				add_idea = ABS_Partial_dependence_on_France
+			}
+		}
+		if = {
+			limit = {
+				has_idea = ABS_Moderate_influence_of_France
+			}
+			swap_ideas = {
+				remove_idea = ABS_Moderate_influence_of_France
+				add_idea = ABS_Strong_French_influence
+			}
+			}
+        if = {
+			limit = {
+				has_idea = ABS_Weak_influence_of_France
+			}
+			swap_ideas = {
+				remove_idea = ABS_Weak_influence_of_France
+				add_idea = ABS_Moderate_influence_of_France
+			}
+		}
+        if = {
+			limit = {
+				has_idea = ABS_Unstable_independence
+			}
+			swap_ideas = {
+				remove_idea = ABS_Unstable_independence
+				add_idea = ABS_Weak_influence_of_France
+			}
+		}
+        if = {
+			limit = {
+				has_idea = ABS_Weak_influence_of_Romea
+			}
+			swap_ideas = {
+				remove_idea = ABS_Weak_influence_of_Romea
+				add_idea = ABS_Unstable_independence
+			}
+		}
+        if = {
+			limit = {
+				has_idea = ABS_Moderate_influence_of_Romea
+			}
+			swap_ideas = {
+				remove_idea = ABS_Moderate_influence_of_Romea
+				add_idea = ABS_Weak_influence_of_Romea
+			}
+		}
+        if = {
+			limit = {
+				has_idea = ABS_Strong_influence_of_Romea
+			}   
+			swap_ideas = {
+				remove_idea = ABS_Strong_influence_of_Romea
+				add_idea = ABS_Moderate_influence_of_Romea
+			}
+		}
+        if = {
+			limit = {
+                has_idea = ABS_Partial_dependence_on_Romea
+			}
+            swap_ideas = {
+				remove_idea = ABS_Partial_dependence_on_Romea
+				add_idea = ABS_Strong_influence_of_Romea
+			}
+		}
+        if = {
+			limit = {
+                has_idea = ABS_Complete_dependence_on_Romea
+			}
+            swap_ideas = {
+				remove_idea = ABS_Complete_dependence_on_Romea
+				add_idea = ABS_Partial_dependence_on_Romea
+			}
+		}
+    }
+}
+
+country_event = { 
+	id = abs_event.17
+	title = abs_event.17.t
+	desc = abs_event.17.d
+	picture = GFX_report_event_gre_athens
+
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event abs_event.17"
+	}
+	
+	option = {
+	    name = abs_event.17.a  
+		ai_chance = { 
+			base = 50 
+		}
+
+        if = {
+			limit = {
+				has_idea = ABS_Partial_dependence_on_Romea
+			}
+			swap_ideas = {
+				remove_idea = ABS_Partial_dependence_on_Romea
+				add_idea = ABS_Complete_dependence_on_Romea
+			}
+		}
+		if = {
+			limit = {
+				has_idea = ABS_Strong_influence_of_Romea
+			}
+			swap_ideas = {
+				remove_idea = ABS_Strong_influence_of_Romea
+				add_idea = ABS_Partial_dependence_on_Romea
+			}
+		}
+		if = {
+			limit = {
+				has_idea = ABS_Moderate_influence_of_Romea
+			}
+			swap_ideas = {
+				remove_idea = ABS_Moderate_influence_of_Romea
+				add_idea = ABS_Strong_influence_of_Romea
+			}
+			}
+        if = {
+			limit = {
+				has_idea = ABS_Weak_influence_of_Romea
+			}
+			swap_ideas = {
+				remove_idea = ABS_Weak_influence_of_Romea
+				add_idea = ABS_Moderate_influence_of_Romea
+			}
+		}
+        if = {
+			limit = {
+				has_idea = ABS_Unstable_independence
+			}
+			swap_ideas = {
+				remove_idea = ABS_Unstable_independence
+				add_idea = ABS_Weak_influence_of_Romea
+			}
+		}
+        if = {
+			limit = {
+				has_idea = ABS_Weak_influence_of_France
+			}
+			swap_ideas = {
+				remove_idea = ABS_Weak_influence_of_France
+				add_idea = ABS_Unstable_independence
+			}
+		}
+        if = {
+			limit = {
+				has_idea = ABS_Moderate_influence_of_France
+			}
+			swap_ideas = {
+				remove_idea = ABS_Moderate_influence_of_France
+				add_idea = ABS_Weak_influence_of_France
+			}
+		}
+        if = {
+			limit = {
+				has_idea = ABS_Strong_French_influence
+			}   
+			swap_ideas = {
+				remove_idea = ABS_Strong_French_influence
+				add_idea = ABS_Moderate_influence_of_France
+			}
+		}
+        if = {
+			limit = {
+                has_idea = ABS_Partial_dependence_on_France
+			}
+            swap_ideas = {
+				remove_idea = ABS_Partial_dependence_on_France
+				add_idea = ABS_Strong_French_influence
+			}
+		}
+        if = {
+			limit = {
+                has_idea = ABS_Complete_dependence_on_France
+			}
+            swap_ideas = {
+				remove_idea = ABS_Complete_dependence_on_France
+				add_idea = ABS_Partial_dependence_on_France
+			}
+		}
+    }
+}
+
+country_event = { 
+	id = abs_event.18
+	title = abs_event.18.t
+	desc = abs_event.18.d
+	picture = GFX_report_event_gre_athens
+
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event abs_event.18"
+	}
+	
+	option = {
+	    name = abs_event.18.a  
+		ai_chance = { 
+			base = 50 
+		}
+
+		add_political_power = 50
+    }
+}
+
+country_event = { 
+	id = abs_event.19
+	title = abs_event.19.t
+	desc = abs_event.19.d
+	picture = GFX_report_event_gre_athens
+
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event abs_event.19"
+	}
+	
+	option = {
+	    name = abs_event.19.a  
+		ai_chance = { 
+			base = 50 
+		}
+
+		add_stability = 0.05
+		add_war_support = 0.05
+    }
+}
+
+country_event = { 
+	id = abs_event.20
+	title = abs_event.20.t
+	desc = abs_event.20.d
+	picture = GFX_report_event_gre_athens
+
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event abs_event.20"
+	}
+	
+	option = {
+	    name = abs_event.20.a  
+		ai_chance = { 
+			base = 50 
+		}
+
+		add_stability = 0.05
+
+		if = {
+				limit = {
+					has_idea = ABS_Moderate_influence_of_France
+				}
+				swap_ideas = {
+					remove_idea = ABS_Moderate_influence_of_France
+					add_idea = ABS_Unstable_independence
+				}
+			}
+		if = {
+				limit = {
+					has_idea = ABS_Strong_French_influence
+				}
+				swap_ideas = {
+					remove_idea = ABS_Strong_French_influence
+					add_idea = ABS_Moderate_influence_of_France
+				}
+			}
+		if = {
+				limit = {
+					has_idea = ABS_Partial_dependence_on_France
+				}
+				swap_ideas = {
+					remove_idea = ABS_Partial_dependence_on_France
+					add_idea = ABS_Strong_French_influence
+				}
+			}
+        if = {
+				limit = {
+					has_idea = ABS_Complete_dependence_on_France
+				}
+				swap_ideas = {
+					remove_idea = ABS_Complete_dependence_on_France
+					add_idea = ABS_Partial_dependence_on_France
+				}
+			}
+        if = {
+				limit = {
+					has_idea = ABS_Partial_dependence_on_France
+				}
+				swap_ideas = {
+					remove_idea = ABS_Partial_dependence_on_France
+					add_idea = ABS_Complete_dependence_on_France
+				}
+			}
+        if = {
+				limit = {
+					has_idea = ABS_Weak_influence_of_Romea
+				}
+				swap_ideas = {
+					remove_idea = ABS_Weak_influence_of_Romea
+					add_idea = ABS_Unstable_independence
+				}
+			}
+        if = {
+				limit = {
+					has_idea = ABS_Moderate_influence_of_Romea
+				}
+				swap_ideas = {
+					remove_idea = ABS_Moderate_influence_of_Romea
+					add_idea = ABS_Weak_influence_of_Romea
+				}
+			}
+        if = {
+				limit = {
+					has_idea = ABS_Strong_influence_of_Romea
+				}
+				swap_ideas = {
+					remove_idea = ABS_Strong_influence_of_Romea
+					add_idea = ABS_Moderate_influence_of_Romea
+				}
+			}
+        if = {
+				limit = {
+                    has_idea = ABS_Partial_dependence_on_Romea
+				}
+                swap_ideas = {
+					remove_idea = ABS_Partial_dependence_on_Romea
+					add_idea = ABS_Strong_influence_of_Romea
+				}
+			}
+        if = {
+				limit = {
+                    has_idea = ABS_Complete_dependence_on_Romea
+				}
+                swap_ideas = {
+					remove_idea = ABS_Complete_dependence_on_Romea
+					add_idea = ABS_Partial_dependence_on_Romea
+				}
+			}
+    }
+}
+
+country_event = { 
+	id = abs_event.21
+	title = abs_event.21.t
+	desc = abs_event.21.d
+	picture = GFX_report_event_gre_athens
+
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event abs_event.21"
+	}
+	
+	option = {
+	    name = abs_event.21.a  
+		ai_chance = { 
+			base = 50 
+		}
+
+		add_timed_idea = {
+			idea = ABS_Treaties_with_Abyssinia
+			days = 365
+		}
+    }
+ 
+	option = {
+	    name = abs_event.21.b  
+		ai_chance = { 
+			base = 50 
+		}
+
+		add_political_power = -50
+    }
+}
+
+country_event = { 
+	id = abs_event.22
+	title = abs_event.22.t
+	desc = abs_event.22.d
+	picture = GFX_report_event_gre_athens
+
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event abs_event.22"
+	}
+	
+	option = {
+	    name = abs_event.22.a  
+		trigger = { 
+            tag = FRR
+        }
+		ai_chance = { 
+			base = 50 
+		}
+
+		country_event = {
+            id = abs_event.23
+            days = 1
+		}
+    }
+
+	option = {
+	    name = abs_event.22.b  
+		trigger = { 
+            tag = FRR
+        }
+		ai_chance = { 
+			base = 50 
+		}
+
+		country_event = {
+            id = abs_event.24
+            days = 1
+		}
+    }
+
+	option = {
+	    name = abs_event.22.c 
+		trigger = { 
+            tag = BYZ
+        }
+		ai_chance = { 
+			base = 50 
+		}
+
+		country_event = {
+            id = abs_event.25
+            days = 1
+		}
+    }
+
+	option = {
+	    name = abs_event.22.f
+		trigger = { 
+            tag = BYZ
+        }
+		ai_chance = { 
+			base = 50 
+		}
+
+		country_event = {
+            id = abs_event.26
+            days = 1
+		}
+    }
+}
+
+country_event = { 
+	id = abs_event.23
+	title = abs_event.23.t
+	desc = abs_event.23.d
+	picture = GFX_report_event_gre_athens
+
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event abs_event.23"
+	}
+	
+	option = {
+	    name = abs_event.23.a  
+		ai_chance = { 
+			base = 50 
+		}
+
+		add_offsite_building = { type = industrial_complex level = 1 }
+    }
+}
+
+country_event = { 
+	id = abs_event.24
+	title = abs_event.24.t
+	desc = abs_event.24.d
+	picture = GFX_report_event_gre_athens
+
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event abs_event.24"
+	}
+	
+	option = {
+	    name = abs_event.24.a  
+		ai_chance = { 
+			base = 50 
+		}
+
+		add_political_power = -50
+    }
+}
+
+country_event = { 
+	id = abs_event.25
+	title = abs_event.25.t
+	desc = abs_event.25.d
+	picture = GFX_report_event_gre_athens
+
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event abs_event.25"
+	}
+	
+	option = {
+	    name = abs_event.25.a  
+		ai_chance = { 
+			base = 50 
+		}
+
+		add_offsite_building = { type = industrial_complex level = 1 }
+    }
+}
+
+country_event = { 
+	id = abs_event.26
+	title = abs_event.26.t
+	desc = abs_event.26.d
+	picture = GFX_report_event_gre_athens
+
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event abs_event.26"
+	}
+	
+	option = {
+	    name = abs_event.26.a  
+		ai_chance = { 
+			base = 50 
+		}
+
+		add_political_power = -50
+    }
+}
+
+country_event = { 
+	id = abs_event.27
+	title = abs_event.27.t
+	desc = abs_event.27.d
+	picture = GFX_report_event_gre_athens
+
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event abs_event.27"
+	}
+	
+	option = {
+	    name = abs_event.27.a  
+		ai_chance = { 
+			base = 50 
+		}
+
+		add_timed_idea = {
+			idea = ABS_New_economic_reforms
+			days = 70
+		}
+    }
+}
+
+country_event = { 
+	id = abs_event.28
+	title = abs_event.28.t
+	desc = abs_event.28.d
+	picture = GFX_report_event_gre_athens
+
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event abs_event.28"
+	}
+	
+	option = {
+	    name = abs_event.28.a  
+		ai_chance = { 
+			base = 50 
+		}
+
+		remove_ideas = ABS_Unfinished_industrialization
+    }
+}
+
+country_event = { 
+	id = abs_event.29
+	title = abs_event.29.t
+	desc = abs_event.29.d
+	picture = GFX_report_event_gre_athens
+
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event abs_event.29"
+	}
+	
+	option = {
+	    name = abs_event.29.a  
+		ai_chance = { 
+			base = 50 
+		}
+
+		add_tech_bonus = {
+			name = GER_four_year_plan
+			bonus = 0.50
+			uses = 1
+			category = industry
+		}
+    }
+}
+
+country_event = { 
+	id = abs_event.30
+	title = abs_event.30.t
+	desc = abs_event.30.d
+	picture = GFX_report_event_gre_athens
+
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event abs_event.30"
+	}
+	
+	option = {
+	    name = abs_event.30.a  
+		ai_chance = { 
+			base = 50 
+		}
+
+    }
+}
+
+country_event = { 
+	id = abs_event.31
+	title = abs_event.31.t
+	desc = abs_event.31.d
+	picture = GFX_report_event_gre_athens
+
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event abs_event.31"
+	}
+	
+	option = {
+	    name = abs_event.31.a  
+		ai_chance = { 
+			base = 50 
+		}
+
+		random_owned_controlled_state = {
+			limit = {
+				free_building_slots = {
+					building = arms_factory
+					size > 1
+					include_locked = yes
+				}
+			}
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = arms_factory
+				level = 1
+				instant_build = yes
+			}
+			set_state_flag = GER_integrate_war_economies
+		}
+    }
+
+	option = {
+	    name = abs_event.31.b 
+		ai_chance = { 
+			base = 50 
+		}
+
+		random_owned_controlled_state = {
+			limit = {
+				free_building_slots = {
+					building = industrial_complex
+					size > 1
+					include_locked = yes
+				}
+			}
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+			set_state_flag = GER_integrate_war_economies
+		}
+    }
+}
+
+country_event = { 
+	id = abs_event.32
+	title = abs_event.32.t
+	desc = abs_event.32.d
+	picture = GFX_report_event_gre_athens
+
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event abs_event.32"
+	}
+	
+	option = {
+	    name = abs_event.32.a  
+		ai_chance = { 
+			base = 50 
+		}
+
+    }
+
+	option = {
+	    name = abs_event.32.b 
+		ai_chance = { 
+			base = 50 
+		}
+
+    }
+}
