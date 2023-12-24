@@ -18,6 +18,8 @@ ABS_Mass_Starvation = {
         cost = 0
 
 		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision ABS_Lower_taxes_for_the_poor start"
+			
             add_days_mission_timeout = {
                 mission = ABS_Mass_starvation
                 days = 15
@@ -25,6 +27,8 @@ ABS_Mass_Starvation = {
 		}
 
 		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision ABS_Lower_taxes_for_the_poor end"
+
 		}
 
 		ai_will_do = {
@@ -49,7 +53,14 @@ ABS_Mass_Starvation = {
             monthly_population = 0.10
 		}
 
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision ABS_Start_additional_distribution_of_grain start"
+			
+		}
+
 		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision ABS_Start_additional_distribution_of_grain end"
+			
             add_days_mission_timeout = {
                 mission = ABS_Mass_starvation
                 days = 15
@@ -81,9 +92,13 @@ ABS_Mass_Starvation = {
 		}
 
 		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision ABS_Agitate_for_self_organization start"
+			
 		}
 
 		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision ABS_Agitate_for_self_organization end"
+			
             add_days_mission_timeout = {
                 mission = ABS_Mass_starvation
                 days = 100
@@ -105,17 +120,20 @@ ABS_Mass_Starvation = {
             }
 		}
 
-		days_mission_timeout = 100
+		days_mission_timeout = 75
 		is_good = yes
 		fire_only_once = yes
 
 		days_remove = 0
 
 		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision ABS_Mass_starvation start"
+			
 		}
 
-		modifier = {
-            
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision ABS_Mass_starvation end"
+			
 		}
 
 		timeout_effect = {
@@ -154,6 +172,8 @@ ABS_Grain_Bank = {
 		}
 
         remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision ABS_Print_more_currency start"
+			
             hidden_effect = {
 				random_list = {
                     25 = {
@@ -164,6 +184,11 @@ ABS_Grain_Bank = {
 					}
 				}
             }
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision ABS_Print_more_currency end"
+			
 		}
 
 		ai_will_do = {
@@ -191,6 +216,16 @@ ABS_Grain_Bank = {
 			monthly_population = 0.20
 		}
 
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision ABS_Investments_in_the_agricultural_sector start"
+			
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision ABS_Investments_in_the_agricultural_sector end"
+			
+		}
+
 		ai_will_do = {
 			factor = 200
 		}
@@ -213,97 +248,104 @@ ABS_Abyssinian_Diplomacy = {
 
         cost = 150
 
-		remove_effect = {     
-		if = {
-			limit = {
-				has_idea = ABS_Partial_dependence_on_France
-			}
-			swap_ideas = {
-				remove_idea = ABS_Partial_dependence_on_France
-				add_idea = ABS_Complete_dependence_on_France
-			}
+		remove_effect = {   
+			log = "[GetDateText]: [Root.GetName]: Decision ABS_To_attack_the_Roman_influence start"
+			  
+		    if = {
+			    limit = {
+				    has_idea = ABS_Partial_dependence_on_France
+			    }
+			    swap_ideas = {
+				    remove_idea = ABS_Partial_dependence_on_France
+				    add_idea = ABS_Complete_dependence_on_France
+			    }
+		    }
+		    if = {
+			    limit = {
+				    has_idea = ABS_Strong_French_influence
+			    }
+			    swap_ideas = {
+				    remove_idea = ABS_Strong_French_influence
+				    add_idea = ABS_Partial_dependence_on_France
+			    }
+		    }
+		    if = {
+			    limit = {
+				    has_idea = ABS_Moderate_influence_of_France
+			    }
+			    swap_ideas = {
+				    remove_idea = ABS_Moderate_influence_of_France
+				    add_idea = ABS_Strong_French_influence
+			    }
+		    }
+            if = {
+			    limit = {
+				    has_idea = ABS_Weak_influence_of_France
+			    }
+			    swap_ideas = {
+				    remove_idea = ABS_Weak_influence_of_France
+				    add_idea = ABS_Moderate_influence_of_France
+			    }
+		    }
+            if = {
+			    limit = {
+				    has_idea = ABS_Weak_influence_of_Romea
+			    }
+			    swap_ideas = {
+				    remove_idea = ABS_Weak_influence_of_Romea
+				    add_idea = ABS_Weak_influence_of_France
+			    }
+		    }
+		    if = {
+			    limit = {
+				    has_idea = ABS_Unstable_independence
+			    }
+			    swap_ideas = {
+				    remove_idea = ABS_Unstable_independence
+				    add_idea = ABS_Weak_influence_of_France
+			    }
+		    }
+            if = {
+			    limit = {
+				    has_idea = ABS_Moderate_influence_of_Romea
+			    }
+			    swap_ideas = {
+				    remove_idea = ABS_Moderate_influence_of_Romea
+				    add_idea = ABS_Weak_influence_of_Romea
+			    }
+		    }
+            if = {
+			    limit = {
+				    has_idea = ABS_Strong_influence_of_Romea
+			    }   
+			    swap_ideas = {
+				    remove_idea = ABS_Strong_influence_of_Romea
+				    add_idea = ABS_Moderate_influence_of_Romea
+			    }
+		    }
+            if = {
+			    limit = {
+                    has_idea = ABS_Partial_dependence_on_Romea
+			    }
+                swap_ideas = {
+				    remove_idea = ABS_Partial_dependence_on_Romea
+				    add_idea = ABS_Strong_influence_of_Romea
+			    }
+		    }
+            if = {
+			    limit = {
+                    has_idea = ABS_Complete_dependence_on_Romea
+			    }
+                swap_ideas = {
+				    remove_idea = ABS_Complete_dependence_on_Romea
+				    add_idea = ABS_Partial_dependence_on_Romea
+			    }
+		    }
 		}
-		if = {
-			limit = {
-				has_idea = ABS_Strong_French_influence
-			}
-			swap_ideas = {
-				remove_idea = ABS_Strong_French_influence
-				add_idea = ABS_Partial_dependence_on_France
-			}
-		}
-		if = {
-			limit = {
-				has_idea = ABS_Moderate_influence_of_France
-			}
-			swap_ideas = {
-				remove_idea = ABS_Moderate_influence_of_France
-				add_idea = ABS_Strong_French_influence
-			}
-		}
-        if = {
-			limit = {
-				has_idea = ABS_Weak_influence_of_France
-			}
-			swap_ideas = {
-				remove_idea = ABS_Weak_influence_of_France
-				add_idea = ABS_Moderate_influence_of_France
-			}
-		}
-        if = {
-			limit = {
-				has_idea = ABS_Weak_influence_of_Romea
-			}
-			swap_ideas = {
-				remove_idea = ABS_Weak_influence_of_Romea
-				add_idea = ABS_Weak_influence_of_France
-			}
-		}
-		if = {
-			limit = {
-				has_idea = ABS_Unstable_independence
-			}
-			swap_ideas = {
-				remove_idea = ABS_Unstable_independence
-				add_idea = ABS_Weak_influence_of_France
-			}
-		}
-        if = {
-			limit = {
-				has_idea = ABS_Moderate_influence_of_Romea
-			}
-			swap_ideas = {
-				remove_idea = ABS_Moderate_influence_of_Romea
-				add_idea = ABS_Weak_influence_of_Romea
-			}
-		}
-        if = {
-			limit = {
-				has_idea = ABS_Strong_influence_of_Romea
-			}   
-			swap_ideas = {
-				remove_idea = ABS_Strong_influence_of_Romea
-				add_idea = ABS_Moderate_influence_of_Romea
-			}
-		}
-        if = {
-			limit = {
-                has_idea = ABS_Partial_dependence_on_Romea
-			}
-            swap_ideas = {
-				remove_idea = ABS_Partial_dependence_on_Romea
-				add_idea = ABS_Strong_influence_of_Romea
-			}
-		}
-        if = {
-			limit = {
-                has_idea = ABS_Complete_dependence_on_Romea
-			}
-            swap_ideas = {
-				remove_idea = ABS_Complete_dependence_on_Romea
-				add_idea = ABS_Partial_dependence_on_Romea
-			}
-		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision ABS_To_attack_the_Roman_influence end"
+			
 		}
 
 		ai_will_do = {
@@ -325,97 +367,104 @@ ABS_Abyssinian_Diplomacy = {
 
         cost = 150
 
-		remove_effect = {     
-		if = {
-			limit = {
-				has_idea = ABS_Partial_dependence_on_Romea
-			}
+		remove_effect = {   
+			log = "[GetDateText]: [Root.GetName]: Decision ABS_Attacking_French_influence start"
+			  
+		    if = {
+			    limit = {
+				    has_idea = ABS_Partial_dependence_on_Romea
+			    }
+			    swap_ideas = {
+				    remove_idea = ABS_Partial_dependence_on_Romea
+				    add_idea = ABS_Complete_dependence_on_Romea
+			    }
+		    }
+		    if = {
+			    limit = {
+				    has_idea = ABS_Strong_influence_of_Romea
+			    }
+			    swap_ideas = {
+				    remove_idea = ABS_Strong_influence_of_Romea
+				    add_idea = ABS_Partial_dependence_on_Romea
+			    }
+		    }
+		    if = {
+			    limit = {
+				    has_idea = ABS_Moderate_influence_of_Romea
+			    }
 			swap_ideas = {
-				remove_idea = ABS_Partial_dependence_on_Romea
-				add_idea = ABS_Complete_dependence_on_Romea
-			}
+				    remove_idea = ABS_Moderate_influence_of_Romea
+				    add_idea = ABS_Strong_influence_of_Romea
+			    }
+		    }
+            if = {
+			    limit = {
+				    has_idea = ABS_Weak_influence_of_Romea
+			    }
+			    swap_ideas = {
+				    remove_idea = ABS_Weak_influence_of_Romea
+				    add_idea = ABS_Moderate_influence_of_Romea
+			    }
+		    }
+            if = {
+			    limit = {
+				    has_idea = ABS_Weak_influence_of_France
+			    }
+			    swap_ideas = {
+				    remove_idea = ABS_Weak_influence_of_France
+				    add_idea = ABS_Weak_influence_of_Romea
+			    }
+		    }
+		    if = {
+			    limit = {
+				    has_idea = ABS_Unstable_independence
+			    }
+			    swap_ideas = {
+				    remove_idea = ABS_Unstable_independence
+				    add_idea = ABS_Weak_influence_of_Romea
+			    }
+		    }
+            if = {
+			    limit = {
+				    has_idea = ABS_Moderate_influence_of_France
+			    }
+			    swap_ideas = {
+				    remove_idea = ABS_Moderate_influence_of_France
+				    add_idea = ABS_Weak_influence_of_France
+			    }
+		    }
+            if = {
+			    limit = {
+				    has_idea = ABS_Strong_French_influence
+			    }   
+			    swap_ideas = {
+				    remove_idea = ABS_Strong_French_influence
+				    add_idea = ABS_Moderate_influence_of_France
+			    }
+		    }
+            if = {
+			    limit = {
+                    has_idea = ABS_Partial_dependence_on_France
+			    }
+                swap_ideas = {
+				    remove_idea = ABS_Partial_dependence_on_France
+				    add_idea = ABS_Strong_French_influence
+			    }
+		    }
+            if = {
+			    limit = {
+                    has_idea = ABS_Complete_dependence_on_France
+			    }
+                swap_ideas = {
+				    remove_idea = ABS_Complete_dependence_on_France
+				    add_idea = ABS_Partial_dependence_on_France
+			    }
+		    }
 		}
-		if = {
-			limit = {
-				has_idea = ABS_Strong_influence_of_Romea
-			}
-			swap_ideas = {
-				remove_idea = ABS_Strong_influence_of_Romea
-				add_idea = ABS_Partial_dependence_on_Romea
-			}
-		}
-		if = {
-			limit = {
-				has_idea = ABS_Moderate_influence_of_Romea
-			}
-			swap_ideas = {
-				remove_idea = ABS_Moderate_influence_of_Romea
-				add_idea = ABS_Strong_influence_of_Romea
-			}
-		}
-        if = {
-			limit = {
-				has_idea = ABS_Weak_influence_of_Romea
-			}
-			swap_ideas = {
-				remove_idea = ABS_Weak_influence_of_Romea
-				add_idea = ABS_Moderate_influence_of_Romea
-			}
-		}
-        if = {
-			limit = {
-				has_idea = ABS_Weak_influence_of_France
-			}
-			swap_ideas = {
-				remove_idea = ABS_Weak_influence_of_France
-				add_idea = ABS_Weak_influence_of_Romea
-			}
-		}
-		if = {
-			limit = {
-				has_idea = ABS_Unstable_independence
-			}
-			swap_ideas = {
-				remove_idea = ABS_Unstable_independence
-				add_idea = ABS_Weak_influence_of_Romea
-			}
-		}
-        if = {
-			limit = {
-				has_idea = ABS_Moderate_influence_of_France
-			}
-			swap_ideas = {
-				remove_idea = ABS_Moderate_influence_of_France
-				add_idea = ABS_Weak_influence_of_France
-			}
-		}
-        if = {
-			limit = {
-				has_idea = ABS_Strong_French_influence
-			}   
-			swap_ideas = {
-				remove_idea = ABS_Strong_French_influence
-				add_idea = ABS_Moderate_influence_of_France
-			}
-		}
-        if = {
-			limit = {
-                has_idea = ABS_Partial_dependence_on_France
-			}
-            swap_ideas = {
-				remove_idea = ABS_Partial_dependence_on_France
-				add_idea = ABS_Strong_French_influence
-			}
-		}
-        if = {
-			limit = {
-                has_idea = ABS_Complete_dependence_on_France
-			}
-            swap_ideas = {
-				remove_idea = ABS_Complete_dependence_on_France
-				add_idea = ABS_Partial_dependence_on_France
-			}
-		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision ABS_Attacking_French_influence end"
+			
 		}
 
 		ai_will_do = {
