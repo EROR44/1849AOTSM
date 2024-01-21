@@ -2262,7 +2262,7 @@ focus_tree = {
             focus = ABS_Introduce_protectionism
         }
 		available = {
-		
+			has_completed_focus = ABS_Trips_to_the_neighbors
 		}
 		allow_branch = { 
             NOT = {
@@ -2292,7 +2292,7 @@ focus_tree = {
             focus = ABS_Trade_in_the_Red_Sea
         }
 		available = {
-		
+			has_completed_focus = ABS_The_dominance_of_Abyssinia
 		}
 		allow_branch = { 
             NOT = {
@@ -3468,7 +3468,34 @@ focus_tree = {
 		}
 		completion_reward = {	
 			log = "[GetDateText]: [Root.GetName]: Focus ABS_To_put_pressure_on_nepotism"	
-			
+
+			if = {
+				limit = {
+                    has_idea = local_corruption
+				}
+                swap_ideas = {
+					remove_idea = local_corruption
+					add_idea = no_corruptional
+				}
+			}
+            if = {
+				limit = {
+                    has_idea = regional_corruption
+				}
+                swap_ideas = {
+					remove_idea = regional_corruption
+					add_idea = local_corruption
+				}
+			}
+            if = {
+				limit = {
+                    has_idea = state_corruption
+				}
+                swap_ideas = {
+					remove_idea = state_corruption
+					add_idea = regional_corruption
+				}
+			}
 		}
 	}
 
@@ -3495,6 +3522,7 @@ focus_tree = {
 		completion_reward = {	
 			log = "[GetDateText]: [Root.GetName]: Focus ABS_Take_popular_measures"	
 			
+			add_ideas = ABS_Popular_reforms
 		}
 	}
 
@@ -3551,6 +3579,11 @@ focus_tree = {
 		completion_reward = {	
 			log = "[GetDateText]: [Root.GetName]: Focus ABS_A_stable_country"	
 			
+			add_stability = 0.05
+			add_popularity = {
+			    ideology = reactionist
+                popularity = 0.10
+		    }
 		}
 	}
 
@@ -3577,6 +3610,7 @@ focus_tree = {
 		completion_reward = {	
 			log = "[GetDateText]: [Root.GetName]: Focus ABS_To_cleanse_the_country_of_pacifism"	
 			
+			add_ideas = ABS_Militarization_of_society
 		}
 	}
 
@@ -3604,6 +3638,7 @@ focus_tree = {
 			log = "[GetDateText]: [Root.GetName]: Focus ABS_Promotion_of_religious_values"	
 			
 			custom_effect_tooltip = ABS_unlock_Haile_Malakot
+			add_ideas = ABS_Religious_propaganda
 		}
 	}
 
@@ -3630,6 +3665,15 @@ focus_tree = {
 		completion_reward = {	
 			log = "[GetDateText]: [Root.GetName]: Focus ABS_To_remove_radicals_from_power"	
 			
+			add_stability = 0.05
+			add_popularity = {
+			    ideology = reactionist
+                popularity = -0.15
+		    }
+			add_popularity = {
+			    ideology = socialism
+                popularity = -0.15
+		    }
 		}
 	}
 
@@ -3658,6 +3702,7 @@ focus_tree = {
         }
 		completion_reward = {	
 			log = "[GetDateText]: [Root.GetName]: Focus ABS_"	
+			
 			
 		}
 	}
@@ -3714,6 +3759,7 @@ focus_tree = {
 		completion_reward = {	
 			log = "[GetDateText]: [Root.GetName]: Focus ABS_To_abandon_revolutions"	
 			
+			add_ideas = ABS_A_new_path_of_stability
 		}
 	}
 
@@ -3740,6 +3786,33 @@ focus_tree = {
 		completion_reward = {	
 			log = "[GetDateText]: [Root.GetName]: Focus ABS_Crack_down_on_corrupt_officials"	
 			
+			if = {
+				limit = {
+                    has_idea = local_corruption
+				}
+                swap_ideas = {
+					remove_idea = local_corruption
+					add_idea = no_corruptional
+				}
+			}
+            if = {
+				limit = {
+                    has_idea = regional_corruption
+				}
+                swap_ideas = {
+					remove_idea = regional_corruption
+					add_idea = local_corruption
+				}
+			}
+            if = {
+				limit = {
+                    has_idea = state_corruption
+				}
+                swap_ideas = {
+					remove_idea = state_corruption
+					add_idea = regional_corruption
+				}
+			}
 		}
 	}
 
@@ -3766,6 +3839,30 @@ focus_tree = {
 		completion_reward = {	
 			log = "[GetDateText]: [Root.GetName]: Focus ABS_Build_more_temples"	
 			
+			random_owned_controlled_state = {
+				prioritize = { 271 }
+				limit = {
+					is_coastal = yes
+					free_building_slots = {
+						building = industrial_complex
+						size > 1
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+			}
+			random_owned_controlled_state = {
+				prioritize = { 550 }
+				limit = {
+					is_coastal = yes
+					free_building_slots = {
+						building = industrial_complex
+						size > 1
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+			}
 		}
 	}
 
@@ -3795,6 +3892,7 @@ focus_tree = {
 		completion_reward = {	
 			log = "[GetDateText]: [Root.GetName]: Focus ABS_End_centralization"	
 			
+			remove_ideas = ABS_Resistance_to_centralization_processes
 		}
 	}
 
@@ -3825,6 +3923,7 @@ focus_tree = {
 		completion_reward = {	
 			log = "[GetDateText]: [Root.GetName]: Focus ABS_To_raise_politics_on_bayonets"	
 			
+			
 		}
 	}
 
@@ -3854,6 +3953,7 @@ focus_tree = {
 		completion_reward = {	
 			log = "[GetDateText]: [Root.GetName]: Focus ABS_Focus_on_federalization"	
 			
+			remove_ideas = ABS_Resistance_to_centralization_processes
 		}
 	}
  
@@ -3880,6 +3980,9 @@ focus_tree = {
 		completion_reward = {	
 			log = "[GetDateText]: [Root.GetName]: Focus ABS_To_introduce_the_penalty_for_poaching"	
 			
+			add_stability = 0.05
+            add_war_support = 0.05
+			add_manpower = -1000
 		}
 	}
 
@@ -3909,6 +4012,7 @@ focus_tree = {
 		completion_reward = {	
 			log = "[GetDateText]: [Root.GetName]: Focus ABS_Find_compromises"	
 			
+			add_stability = 0.10
 		}
 	}
 
@@ -3922,7 +4026,7 @@ focus_tree = {
 			factor = 5
 		}
         available = {
-			 
+			has_completed_focus = ABS_To_form_a_council_of_princes
 		}
         allow_branch = {
 			NOT = {
@@ -3938,6 +4042,7 @@ focus_tree = {
 		completion_reward = {	
 			log = "[GetDateText]: [Root.GetName]: Focus ABS_Dissolve_the_Council_of_feudal_lords"	
 			
+			country_event = abs_event.47
 		}
 	}
 
@@ -4045,6 +4150,7 @@ focus_tree = {
 		completion_reward = {	
 			log = "[GetDateText]: [Root.GetName]: Focus ABS_Power_to_the_monarch"	
 			
+			add_political_power = 100
 		}
 	}
 
@@ -4058,7 +4164,7 @@ focus_tree = {
 			factor = 5
 		}
         available = {
-			 
+			has_completed_focus = ABS_To_form_a_council_of_princes
 		}
         allow_branch = {
 			NOT = {
@@ -4074,6 +4180,7 @@ focus_tree = {
 		completion_reward = {	
 			log = "[GetDateText]: [Root.GetName]: Focus ABS_Power_to_the_Council"	
 			
+			country_event = abs_event.48
 		}
 	}
 
@@ -4228,7 +4335,10 @@ focus_tree = {
 			factor = 5
 		}
         available = {
-			
+			CPT = {
+				exists = yes
+				has_war = no
+			}
 		}
         allow_branch = {
 			NOT = {
@@ -4241,6 +4351,17 @@ focus_tree = {
 		completion_reward = {	
 			log = "[GetDateText]: [Root.GetName]: Focus ABS_Send_a_letter_to_Alexandria"	
 			
+			if = {
+				limit = {
+                    CPT = {
+						exists = yes
+						has_war = no
+					}
+				}
+                CPT = {
+					country_event = abs_event.49
+				}
+			}
 		}
 	}
 
