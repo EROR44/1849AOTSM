@@ -8671,7 +8671,6 @@ focus_tree = {
 		
 		available = {
 			has_war = no 
-			#date > 1854.8.1
 			has_global_flag = pru_ignore_poland_uprising
 		}
 		
@@ -8751,8 +8750,7 @@ focus_tree = {
 		
 		available = {
 			has_war = no 
-			date > 1854.8.1
-			aotsm_performed_by_event_or_solution = yes
+			has_global_flag = pru_ignore_poland_uprising
 		}
 
 		mutually_exclusive = { focus = RUS_antigerman_politick } 
@@ -8767,7 +8765,7 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: focus RUS_antibuzantium_politick"
-			custom_effect_tooltip = aotsm_branch_in_development
+			country_event = political_confrontation.10
 		}
 	}
 	
@@ -8792,6 +8790,7 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: focus RUS_fight_witch_trade_gegemony"
+			country_event = political_confrontation.13
 		}
 	}
 	
@@ -8816,10 +8815,8 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: focus RUS_tsargrad_will_be_ours"
-			declare_war_on = {
-				target = BYZ
-				type = annex_everything
-			}
+			country_event = political_confrontation.14
+			
 		}
 	}
 	
@@ -9943,7 +9940,7 @@ focus_tree = {
 		id = RUS_unexpected_prussian_invade
 		icon = GFX_focus_rus_unexpected_prussian_invade
 		
-		x = 1
+		x = -1
 		y = 8
 		cost = 5
 		
@@ -9965,7 +9962,10 @@ focus_tree = {
 		
 		relative_position_id = RUS_liquidate_backwardness
 		
-		mutually_exclusive = { focus = RUS_marh_to_our_enemies }
+		mutually_exclusive = { 
+			focus = RUS_war_becomes_to_russia 
+			focus = RUS_marh_to_our_enemies 
+		}
 		
 		available_if_capitulated = yes
 		
@@ -9982,7 +9982,7 @@ focus_tree = {
 		id = RUS_marh_to_our_enemies
 		icon = GFX_focus_rus_marh_to_our_enemies
 		
-		x = 3
+		x = 1
 		y = 8
 		cost = 5
 		
@@ -9992,7 +9992,10 @@ focus_tree = {
 		
 		relative_position_id = RUS_liquidate_backwardness
 		
-		mutually_exclusive = { focus = RUS_unexpected_prussian_invade }
+		mutually_exclusive = { 
+			focus = RUS_unexpected_prussian_invade 
+			focus = RUS_war_becomes_to_russia 
+		}
 		
 		available_if_capitulated = yes
 		
@@ -10006,10 +10009,40 @@ focus_tree = {
 	}
 	
 	focus = {
+		id = RUS_war_becomes_to_russia #для вариантов вторжения Ромеи или кого то еще 
+		icon = GFX_
+		
+		x = 3
+		y = 8
+		cost = 5
+		
+		available = {
+			aotsm_performed_by_event_or_solution = yes
+		}
+		
+		relative_position_id = RUS_liquidate_backwardness
+		
+		mutually_exclusive = { 
+			focus = RUS_unexpected_prussian_invade 
+			focus = RUS_marh_to_our_enemies 
+		}
+		
+		available_if_capitulated = yes
+		
+		search_filters = {  }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus RUS_marh_to_our_enemies "
+			
+			
+		}
+	}
+	
+	focus = {
 		id = RUS_defence_of_petrograd
 		icon = GFX_focus_rus_defence_of_petrograd
 		
-		x = -1
+		x = 0
 		y = 1
 		cost = 5
 		
@@ -10028,6 +10061,7 @@ focus_tree = {
 		prerequisite = { 
 			focus = RUS_unexpected_prussian_invade 
 			focus = RUS_marh_to_our_enemies 
+			focus = RUS_war_becomes_to_russia 
 		}
 		
 		available_if_capitulated = yes
@@ -10044,7 +10078,43 @@ focus_tree = {
 		id = RUS_defence_of_moscow
 		icon = GFX_focus_rus_defence_of_moscow 
 		
-		x = 1
+		x = 0
+		y = 1
+		cost = 5
+		
+		available = {
+			has_global_flag = firts_world_war
+			custom_trigger_tooltip = {
+				tooltip = not_world_war_has_ended
+				NOT = {
+					world_war_end = yes
+				}
+			}
+		}
+		
+		relative_position_id = RUS_war_becomes_to_russia
+		
+		prerequisite = { 
+			focus = RUS_unexpected_prussian_invade
+			focus = RUS_marh_to_our_enemies 
+			focus = RUS_war_becomes_to_russia 
+		}
+		
+		available_if_capitulated = yes
+		
+		search_filters = {  }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus RUS_defence_of_moscow "
+			
+		}
+	}
+	
+	focus = {
+		id = RUS_millitary_time_measures
+		icon = GFX_focus_rus_millitary_time_measures
+		
+		x = 0
 		y = 1
 		cost = 5
 		
@@ -10063,41 +10133,7 @@ focus_tree = {
 		prerequisite = { 
 			focus = RUS_unexpected_prussian_invade 
 			focus = RUS_marh_to_our_enemies 
-		}
-		
-		available_if_capitulated = yes
-		
-		search_filters = {  }
-
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: focus RUS_defence_of_moscow "
-			
-		}
-	}
-	
-	focus = {
-		id = RUS_millitary_time_measures
-		icon = GFX_focus_rus_millitary_time_measures
-		
-		x = 1
-		y = 1
-		cost = 5
-		
-		available = {
-			has_global_flag = firts_world_war
-			custom_trigger_tooltip = {
-				tooltip = not_world_war_has_ended
-				NOT = {
-					world_war_end = yes
-				}
-			}
-		}
-		
-		relative_position_id = RUS_unexpected_prussian_invade
-		
-		prerequisite = { 
-			focus = RUS_unexpected_prussian_invade 
-			focus = RUS_marh_to_our_enemies 
+			focus = RUS_war_becomes_to_russia 
 		}
 		
 		available_if_capitulated = yes
@@ -10898,7 +10934,7 @@ focus_tree = {
 		id = RUS_alliance_cooperation
 		icon = GFX_focus_rus_alliance_cooperation
 		
-		x = -6
+		x = -5
 		y = 1
 		cost = 5
 		
@@ -10917,6 +10953,7 @@ focus_tree = {
 		prerequisite = { 
 			focus = RUS_unexpected_prussian_invade 
 			focus = RUS_marh_to_our_enemies 
+			focus = RUS_war_becomes_to_russia 
 		}
 		
 		available_if_capitulated = yes
@@ -11121,7 +11158,7 @@ focus_tree = {
 		id = RUS_bureau_of_offensive_operations
 		icon = GFX_focus_rus_bureau_of_offensive_operations
 		
-		x = 6
+		x = 3
 		y = 1
 		cost = 5
 		
@@ -11135,11 +11172,12 @@ focus_tree = {
 			}
 		}
 		
-		relative_position_id = RUS_unexpected_prussian_invade
+		relative_position_id = RUS_war_becomes_to_russia
 		
 		prerequisite = { 
 			focus = RUS_unexpected_prussian_invade 
 			focus = RUS_marh_to_our_enemies 
+			focus = RUS_war_becomes_to_russia 
 		}
 		
 		available_if_capitulated = yes
