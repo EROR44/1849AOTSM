@@ -1,0 +1,252 @@
+
+add_namespace = nen
+
+country_event = { #Start Event NEN
+	id = nen.1
+	title = nen.1.t
+	desc = nen.1.d
+	picture = GFX_report_event_new_england
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: event nen.1"}
+	
+	option = {
+		name = nen.1.a	
+		CBI = {
+			country_event = {
+				id = nen.2
+				days = 5
+			}
+		}
+	}
+	
+}
+
+country_event = { #Start Event CBI
+	id = nen.2
+	title = nen.2.t
+	desc = nen.2.d
+	picture = GFX_report_event_robert_owen
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: event nen.2"}
+	
+	option = {
+		name = nen.2.a	
+		NEN = {
+			country_event = {
+				id = nen.3
+				days = 5
+			}
+		}
+		CBI = {
+			country_event = {
+				id = nen.4
+				days = 20
+			}
+		}
+	}
+	
+}
+
+country_event = { #CBI will rule us now NEN
+	id = nen.3
+	title = nen.3.t
+	desc = nen.3.d
+	picture = GFX_report_event_british_rule_nen
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: event nen.3"}
+	
+	option = {
+		name = nen.3.a	
+		add_political_power = -50
+		add_popularity = {
+			ideology = democratic
+			popularity = 0.05
+		}
+		set_politics = {
+			ruling_party = democratic
+		}
+		custom_effect_tooltip = nen_rule_from_london_tt
+		hidden_effect = {
+			news_event = news.281
+			NEN = {
+				promote_character = NEN_Palece_of_Lord_rule
+			}
+		}
+	}
+	
+}
+
+country_event = { #CBI will rule us now NEN
+	id = nen.4
+	title = nen.4.t
+	desc = nen.4.d
+	picture = GFX_report_event_chose_of_leader_nen
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: event nen.4"}
+	
+	option = {
+		name = nen.4.a	
+		ai_chance = {
+            base = 45
+        }
+		NEN = {
+			country_event = {
+				id = nen.41
+				days = 5
+			}
+		}
+		custom_effect_tooltip = nen_cbi_choose_bairon_tt
+	}
+	
+	option = {
+		name = nen.4.b
+		ai_chance = {
+            base = 10
+        }
+		NEN = {
+			country_event = {
+				id = nen.42
+				days = 5
+			}
+		}
+		custom_effect_tooltip = nen_cbi_choose_edward_tt
+	}
+	
+	option = {
+		name = nen.4.a	
+		ai_chance = {
+            base = 45
+        }
+		NEN = {
+			country_event = {
+				id = nen.43
+				days = 5
+			}
+		}
+		custom_effect_tooltip = nen_cbi_choose_stuart_tt
+	}
+	
+}
+
+country_event = { #NEN new leader Bairon
+	id = nen.41
+	title = nen.41.t
+	desc = nen.41.d
+	picture = GFX_report_event_bairon_rule_nen
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: event nen.41"}
+	
+	option = {
+		name = nen.41.a	
+		add_popularity = {
+			ideology = democratic
+			popularity = 0.075
+		}
+		add_political_power = -150
+		add_stability = -0.10
+		custom_effect_tooltip = nen_bairon_will_rule_tt
+		hidden_effect = {
+			news_event = {
+				id = news.282
+				days = 2
+			}
+			NEN = {
+				promote_character = NEN_George_Gordon_Byron
+			}
+		}
+	}
+	
+}
+
+country_event = { #NEN new leader Edward
+	id = nen.42
+	title = nen.42.t
+	desc = nen.42.d
+	picture = GFX_report_event_edward_rule_nen
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: event nen.42"}
+	
+	option = {
+		name = nen.42.a	
+		add_popularity = {
+			ideology = authoritarian
+			popularity = 0.30
+		}
+		set_politics = {
+			ruling_party = authoritarian
+		}
+		add_stability = -0.10
+		add_war_support = 0.05
+		custom_effect_tooltip = nen_edward_will_rule_tt
+		hidden_effect = {
+			news_event = {
+				id = news.283
+				days = 2
+			}
+			NEN = {
+				promote_character = NEN_Robert_Edward_Lee
+			}
+		}
+	}
+	
+}
+
+country_event = { #NEN new leader Stuard
+	id = nen.43
+	title = nen.43.t
+	desc = nen.43.d
+	picture = GFX_report_event_stuard_rule_nen
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: event nen.43"}
+	
+	option = {
+		name = nen.43.a	
+		add_popularity = {
+			ideology = reactionist
+			popularity = 0.30
+		}
+		set_politics = {
+			ruling_party = reactionist
+		}
+		add_stability = -0.20
+		custom_effect_tooltip = nen_stuard_will_rule_tt
+		hidden_effect = {
+			news_event = {
+				id = news.284
+				days = 2
+			}
+			NEN = {
+				promote_character = NEN_Frederick_William_Robert_Stewart
+			}
+		}
+	}
+	
+}
