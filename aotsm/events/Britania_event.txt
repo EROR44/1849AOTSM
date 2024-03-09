@@ -14,6 +14,7 @@ add_namespace = cbi_prt_situation
 add_namespace = cbi_prt_situation_answer
 add_namespace = cbi_london_crime
 add_namespace = cbi_futer_of_region
+add_namespace = cbi_gw_political_event
 
 #### FRANCE ####
 
@@ -3308,6 +3309,17 @@ country_event = { #British Ultimatum
 					set_politics = {
 						ruling_party = democratic
 					}
+					retire_country_leader = yes
+					add_country_leader_role = {
+						character = PRT_temporary_government
+						promote_leader = yes
+						
+						country_leader = {
+							expire = "1900.1.1"
+							ideology = conservatism
+							traits = { PRT_puppet_of_kbo }
+						}
+					}
 				}
 			}
 			if = {
@@ -3320,6 +3332,17 @@ country_event = { #British Ultimatum
 				PRT = {
 					set_politics = {
 						ruling_party = socialism
+					}
+					retire_country_leader = yes
+					add_country_leader_role = {
+						character = PRT_temporary_government
+						promote_leader = yes
+						
+						country_leader = {
+							expire = "1900.1.1"
+							ideology = social_democracy
+							traits = { PRT_puppet_of_kbo }
+						}
 					}
 				}
 			}
@@ -3334,6 +3357,17 @@ country_event = { #British Ultimatum
 					set_politics = {
 						ruling_party = reactionist
 					}
+					retire_country_leader = yes
+					add_country_leader_role = {
+						character = PRT_temporary_government
+						promote_leader = yes
+						
+						country_leader = {
+							expire = "1900.1.1"
+							ideology = paternalism
+							traits = { PRT_puppet_of_kbo }
+						}
+					}
 				}
 			}
 			if = {
@@ -3343,9 +3377,20 @@ country_event = { #British Ultimatum
 						value = 4
 					}
 				}
+				retire_country_leader = yes
 				PRT = {
 					set_politics = {
 						ruling_party = authoritarian
+					}
+					add_country_leader_role = {
+						character = PRT_temporary_government
+						promote_leader = yes
+						
+						country_leader = {
+							expire = "1900.1.1"
+							ideology = centrism
+							traits = { PRT_puppet_of_kbo }
+						}
 					}
 				}
 			}
@@ -6755,5 +6800,1149 @@ country_event = { ### ОТВЕТКА - НЕТ ###
 	
 	option = {
 	name = CBI.215.a
+	}
+}
+
+##########################################################################################
+#######################################GW_EVENT_SECTION###################################
+##########################################################################################
+
+country_event = { #Португальская проблема
+	id = cbi_gw_political_event.1
+	title = cbi_gw_political_event.1.t
+	desc = cbi_gw_political_event.1.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event cbi_gw_political_event.1"
+	}
+	
+	option = {
+		name = cbi_gw_political_event.1.a	
+		add_war_support = 0.05
+		hidden_effect = {
+			
+		}
+	}
+}
+
+country_event = { #Ситуация в Австралии
+	id = cbi_gw_political_event.2
+	title = cbi_gw_political_event.2.t
+	desc = cbi_gw_political_event.2.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event cbi_gw_political_event.2"
+	}
+	
+	option = {
+		name = cbi_gw_political_event.2.a	
+		if = {
+				limit = {
+					PAS = {
+						OR = {
+							is_subject_of = PRT
+							is_puppet_of = PRT
+						}
+					}
+				}
+				PAS = {
+					add_autonomy_ratio = {
+						value = 0.800004
+						localization = PAS_blockad_by_british_fleet
+					}
+				}
+				custom_effect_tooltip = CBI_increase_chance_of_loosing_control_on_pas
+				PRT = {
+					set_country_flag = cant_react_australia
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						PAS = {
+							OR = {
+								is_subject_of = PRT
+								is_puppet_of = PRT
+							}
+						}
+						NOT = {
+							PRT = {
+								has_idea = cbi_blockad
+							}
+						}
+					}
+				}
+				PRT = {
+					modify_timed_idea = {
+						idea = cbi_blockad
+						days = 365
+					}
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						PAS = {
+							OR = {
+								is_subject_of = PRT
+								is_puppet_of = PRT
+							}
+						}
+						PRT = {
+							has_idea = cbi_blockad
+						}
+					}
+				}
+				PRT = {
+					add_timed_idea = {
+						idea = cbi_blockad
+						days = 365
+					}
+				}
+			}
+		hidden_effect = {
+			
+		}
+	}
+}
+
+country_event = { #Морские пути закрыты
+	id = cbi_gw_political_event.3
+	title = cbi_gw_political_event.3.t
+	desc = cbi_gw_political_event.3.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event cbi_gw_political_event.3"
+	}
+	
+	option = {
+		name = cbi_gw_political_event.3.a	
+		
+		if = {
+			limit = {
+				PRT = {
+					has_idea = cbi_blockad
+				}
+			}
+			PRT = {
+				modify_timed_idea = {
+					idea = cbi_blockad
+					days = 365
+				}
+			}
+		}
+		if = {
+			limit = {
+				NOT = {
+					PRT = {
+						has_idea = cbi_blockad
+					}
+				}
+			}
+			PRT = {
+				add_timed_idea = {
+					idea = cbi_blockad
+					days = 365
+				}
+			}
+		}
+		hidden_effect = {
+			
+		}
+	}
+}
+
+country_event = { #Возвращение на путь истинный
+	id = cbi_gw_political_event.4
+	title = cbi_gw_political_event.4.t
+	desc = cbi_gw_political_event.4.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event cbi_gw_political_event.4"
+	}
+	
+	option = {
+		name = cbi_gw_political_event.4.a	
+		custom_effect_tooltip = CBI_get_prt_as_a_puppet
+		hidden_effect = {
+			CBI = {
+				country_event = { id = cbi_gw_political_event.5 days = 3 }
+			}
+			set_global_flag = prt_back_to_cbi
+		}
+	}
+	
+	option = {
+		name = cbi_gw_political_event.4.b	
+		custom_effect_tooltip = CBI_prt_will_leads_to_some_problems_with_britain
+		hidden_effect = {
+			CBI = {
+				country_event = { id = cbi_gw_political_event.6 days = 3 }
+			}
+		}
+	}
+}
+
+country_event = { #Португалия принимает предложение
+	id = cbi_gw_political_event.5
+	title = cbi_gw_political_event.5.t
+	desc = cbi_gw_political_event.5.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event cbi_gw_political_event.5"
+	}
+	
+	option = {
+		name = cbi_gw_political_event.5.a	
+		custom_effect_tooltip = CBI_prt_is_our_puppet_now
+		hidden_effect = {
+			CBI = {
+				set_autonomy = {
+					target = PRT
+					autonomy_state = autonomy_puppet
+					end_wars = no
+					end_civil_wars = no
+				}
+			}
+			if = {
+				limit = {
+					CBI = {
+						has_government = democratic
+					}
+				}
+				PRT = {
+					retire_country_leader = yes
+					set_politics = {
+						ruling_party = democratic
+						elections_allowed = no
+					}
+					add_country_leader_role = {
+						character = PRT_temporary_government
+						promote_leader = yes
+						
+						country_leader = {
+							expire = "1900.1.1"
+							ideology = conservatism
+							traits = { PRT_puppet_of_kbo }
+						}
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					CBI = {
+						has_government = socialism
+					}
+				}
+				PRT = {
+					retire_country_leader = yes
+					set_politics = {
+						ruling_party = socialism
+						elections_allowed = no
+					}
+					add_country_leader_role = {
+						character = PRT_temporary_government
+						promote_leader = yes
+						
+						country_leader = {
+							expire = "1900.1.1"
+							ideology = social_democracy
+							traits = { PRT_puppet_of_kbo }
+						}
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					CBI = {
+						has_government = authoritarian
+					}
+				}
+				PRT = {
+					retire_country_leader = yes
+					set_politics = {
+						ruling_party = authoritarian
+						elections_allowed = no
+					}
+					add_country_leader_role = {
+						character = PRT_temporary_government
+						promote_leader = yes
+						
+						country_leader = {
+							expire = "1900.1.1"
+							ideology = centrism
+							traits = { PRT_puppet_of_kbo }
+						}
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					CBI = {
+						has_government = reactionist
+					}
+				}
+				PRT = {
+					retire_country_leader = yes
+					set_politics = {
+						ruling_party = reactionist
+						elections_allowed = no
+					}
+					add_country_leader_role = {
+						character = PRT_temporary_government
+						promote_leader = yes
+						
+						country_leader = {
+							expire = "1900.1.1"
+							ideology = paternalism
+							traits = { PRT_puppet_of_kbo }
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+country_event = { #Правительство Португалии нам отказывает
+	id = cbi_gw_political_event.6
+	title = cbi_gw_political_event.6.t
+	desc = cbi_gw_political_event.6.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event cbi_gw_political_event.6"
+	}
+	
+	option = {
+		name = cbi_gw_political_event.6.a	
+		CBI = {
+			add_opinion_modifier = {
+				target = PRT
+				modifier = large_decrease
+			}
+		}
+		hidden_effect = {
+			
+		}
+	}
+}
+
+country_event = { #Высадка в континентальной Европе
+	id = cbi_gw_political_event.7
+	title = cbi_gw_political_event.7.t
+	desc = cbi_gw_political_event.7.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event cbi_gw_political_event.7"
+	}
+	
+	option = {
+		name = cbi_gw_political_event.7.a	
+		ai_chance = {
+			base = 10
+				modifier = {
+					factor = 0
+					FRR = {
+						is_in_faction_with = CBI
+					}
+				}
+		}
+		custom_effect_tooltip = CBI_choose_normandy_operation_tt
+		army_experience = 25
+		hidden_effect = {
+			CBI = {
+				set_country_flag = cbi_chose_normandy_plan
+			}
+		}
+	}
+	
+	option = {
+		name = cbi_gw_political_event.7.b	
+		ai_chance = {
+			base = 15
+				modifier = {
+					factor = 10
+					FRR = {
+						is_in_faction_with = CBI
+					}
+				}
+		}
+		custom_effect_tooltip = CBI_choose_bremen_operation_tt
+		navy_experience = 25
+		hidden_effect = {
+			CBI = {
+				set_country_flag = cbi_chose_bremen_plan
+			}
+		}
+	}
+}
+
+country_event = { #Высадка в Нормандии - ивент для Британии
+	id = cbi_gw_political_event.8
+	title = cbi_gw_political_event.8.t
+	desc = cbi_gw_political_event.8.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event cbi_gw_political_event.8"
+		hidden_effect = {
+			PRU = {
+				country_event = { id = cbi_gw_political_event.9 days = 3}
+			}
+		}
+	}
+	
+	option = {
+		name = cbi_gw_political_event.8.a	
+		
+	}
+}
+
+country_event = { #Высадка в Нормандии - ивент для Германии
+	id = cbi_gw_political_event.9
+	title = cbi_gw_political_event.9.t
+	desc = cbi_gw_political_event.9.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event cbi_gw_political_event.9"
+	}
+	
+	option = {
+		name = cbi_gw_political_event.9.a	
+		add_stability = -0.01
+		hidden_effect = {
+			
+		}
+	}
+}
+
+country_event = { #Высадка под Бременом - ивент для Британии
+	id = cbi_gw_political_event.10
+	title = cbi_gw_political_event.10.t
+	desc = cbi_gw_political_event.10.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event cbi_gw_political_event.10"
+		hidden_effect = {
+			PRU = {
+				country_event = { id = cbi_gw_political_event.11 days = 5 }
+			}
+			if = {
+				limit = {
+					15 = {
+						is_owned_by = FRR
+					}
+					FRR = {
+						OR = {
+							NOT = {
+								is_in_faction_with = CBI
+							}
+							has_war_with = CBI
+						}				
+					}
+
+				}
+				FRR = {
+					country_event = { id = cbi_gw_political_event.12 days = 5 }
+				}
+			}
+			else_if = {
+				limit = {
+					15 = {
+						is_owned_by = FRA
+					}
+					FRR = {
+						OR = {
+							NOT = {
+								is_in_faction_with = CBI
+							}
+							has_war_with = CBI
+						}				
+					}
+				}
+				FRA = {
+					country_event = { id = cbi_gw_political_event.12 days = 5 }
+				}
+			}
+		}
+	}
+	
+	option = {
+		name = cbi_gw_political_event.10.a	
+			
+	}
+}
+
+country_event = { #Высадка под Бременом - ивент для Германии
+	id = cbi_gw_political_event.11
+	title = cbi_gw_political_event.11.t
+	desc = cbi_gw_political_event.11.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event cbi_gw_political_event.11"
+	}
+	
+	option = {
+		name = cbi_gw_political_event.11.a	
+		add_stability = -0.01
+		hidden_effect = {
+			
+		}
+	}
+}
+
+country_event = { #Высадка под Бременом - ивент для Франции
+	id = cbi_gw_political_event.12
+	title = cbi_gw_political_event.12.t
+	desc = cbi_gw_political_event.12.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event cbi_gw_political_event.12"
+	}
+	
+	option = {
+		name = cbi_gw_political_event.12.a	
+		add_stability = -0.01
+		hidden_effect = {
+			
+		}
+	}
+}
+
+country_event = { # Смотр британского флота
+	id = cbi_gw_political_event.13 
+	title = cbi_gw_political_event.13.t
+	desc = cbi_gw_political_event.13.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event cbi_gw_political_event.13"
+	}
+	
+	option = {
+		name = cbi_gw_political_event.13.a	
+		#тут должно даваться несколько кораблей
+		hidden_effect = {
+			
+		}
+	}
+}
+
+country_event = { # Удар по противнику - высадка
+	id = cbi_gw_political_event.14
+	title = cbi_gw_political_event.14.t
+	desc = cbi_gw_political_event.14.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event cbi_gw_political_event.14"
+		
+		hidden_effect = {
+			if = {
+				limit = {
+					CBI = {
+						has_country_flag = cbi_chose_bremen_plan
+					}
+				}
+				CBI = { 
+					set_province_controller = 11630
+					set_province_controller = 241
+					set_province_controller = 3326
+					set_province_controller = 374
+					set_province_controller = 336
+					set_province_controller = 6349
+				}
+				if = {
+					limit = {
+						CBI = {
+							has_war_with = HOL
+						}
+					}
+					CBI = { 
+						set_province_controller = 11318
+					}
+				}
+				CBI = {
+					load_oob = "CBI_landing_under_bremen"
+				}
+				news_event = { id = news.286 days = 2}
+			}
+			else_if = {
+				limit = {
+					CBI = {
+						has_country_flag = cbi_chose_normandy_plan
+					}
+				}
+				CBI = { 
+					set_province_controller = 485
+					set_province_controller = 9434
+					set_province_controller = 3579
+					set_province_controller = 9550
+					set_province_controller = 3579
+				}
+				CBI = {
+					load_oob = "CBI_landing_in_normandy"
+				}
+				news_event = { id = news.285 days = 2}
+			}
+			
+		}
+	}
+	
+	option = {
+		name = cbi_gw_political_event.14.a	
+		add_timed_idea = {
+			idea = CBI_lading_on_kontinental_europe_idea
+			days = 120
+		}
+		add_political_power = 100
+		hidden_effect = {
+			
+		}
+	}
+}
+
+country_event = { # Дебаты в палате лордов
+	id = cbi_gw_political_event.15
+	title = cbi_gw_political_event.15.t
+	desc = cbi_gw_political_event.15.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event cbi_gw_political_event.15"
+	}
+	
+	option = {
+		name = cbi_gw_political_event.15.a	
+		add_war_support = -0.03
+		hidden_effect = {
+			
+		}
+	}
+}
+
+country_event = { # Призыв к миру
+	id = cbi_gw_political_event.16
+	title = cbi_gw_political_event.16.t
+	desc = cbi_gw_political_event.16.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event cbi_gw_political_event.16"
+	}
+	
+	option = {
+		name = cbi_gw_political_event.16.a	
+		
+		hidden_effect = {
+			
+		}
+	}
+	
+	option = {
+		name = cbi_gw_political_event.16.b	
+		add_war_support = 0.05
+		custom_effect_tooltip = CBI_reject_at_peace_tt
+		hidden_effect = {
+			set_country_flag = CBI_reject_to_peace_with_kontinental_europa_flag
+		}
+	}
+}
+
+country_event = { #Прибытие британских дипломатов - ивент для Пруссии
+	id = cbi_gw_political_event.17
+	title = cbi_gw_political_event.17.t
+	desc = cbi_gw_political_event.17.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event cbi_gw_political_event.17"
+	}
+	
+	option = {
+		name = cbi_gw_political_event.17.a	
+		
+		hidden_effect = {
+			CBI = {
+				country_event = { id = cbi_gw_political_event.18 days = 3 }
+			}
+		}
+	}
+	
+	option = {
+		name = cbi_gw_political_event.17.b	
+		
+		hidden_effect = {
+			CBI = {
+				country_event = { id = cbi_gw_political_event.19 days = 3 }
+			}
+		}
+	}
+}
+
+country_event = { #Согласие - ответ для Британии
+	id = cbi_gw_political_event.18
+	title = cbi_gw_political_event.18.t
+	desc = cbi_gw_political_event.18.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event cbi_gw_political_event.18"
+	}
+	
+	option = {
+		name = cbi_gw_political_event.18.a	
+		
+		hidden_effect = {
+			
+		}
+	}
+}
+
+country_event = { #Отказ - ответ для Британии
+	id = cbi_gw_political_event.19
+	title = cbi_gw_political_event.19.t
+	desc = cbi_gw_political_event.19.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event cbi_gw_political_event.19"
+	}
+	
+	option = {
+		name = cbi_gw_political_event.19.a	
+		
+		hidden_effect = {
+			
+		}
+	}
+}
+
+country_event = { #Прибытие британских дипломатов - ивент для Ромеи
+	id = cbi_gw_political_event.20
+	title = cbi_gw_political_event.20.t
+	desc = cbi_gw_political_event.20.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event cbi_gw_political_event.20"
+	}
+	
+	option = {
+		name = cbi_gw_political_event.20.a	
+		
+		hidden_effect = {
+			CBI = {
+				country_event = { id = cbi_gw_political_event.21 days = 3 }
+			}
+		}
+	}
+	
+	option = {
+		name = cbi_gw_political_event.20.b	
+		
+		hidden_effect = {
+			CBI = {
+				country_event = { id = cbi_gw_political_event.22 days = 3 }
+			}
+		}
+	}
+}
+
+country_event = { #Согласие - ответ для Британии
+	id = cbi_gw_political_event.21
+	title = cbi_gw_political_event.21.t
+	desc = cbi_gw_political_event.21.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event cbi_gw_political_event.21"
+	}
+	
+	option = {
+		name = cbi_gw_political_event.21.a	
+		
+		hidden_effect = {
+			
+		}
+	}
+}
+
+country_event = { #Отказ - ответ для Британии
+	id = cbi_gw_political_event.22
+	title = cbi_gw_political_event.22.t
+	desc = cbi_gw_political_event.22.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event cbi_gw_political_event.22"
+	}
+	
+	option = {
+		name = cbi_gw_political_event.22.a	
+		
+		hidden_effect = {
+			
+		}
+	}
+}
+
+country_event = { #
+	id = cbi_gw_political_event.23
+	title = cbi_gw_political_event.23.t
+	desc = cbi_gw_political_event.23.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event cbi_gw_political_event.23"
+	}
+	
+	option = {
+		name = cbi_gw_political_event.23.a	
+		
+		hidden_effect = {
+			
+		}
+	}
+}
+
+country_event = { #
+	id = cbi_gw_political_event.24
+	title = cbi_gw_political_event.24.t
+	desc = cbi_gw_political_event.24.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event cbi_gw_political_event.24"
+	}
+	
+	option = {
+		name = cbi_gw_political_event.24.a	
+		
+		hidden_effect = {
+			
+		}
+	}
+}
+
+country_event = { #
+	id = cbi_gw_political_event.25
+	title = cbi_gw_political_event.25.t
+	desc = cbi_gw_political_event.25.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event cbi_gw_political_event.25"
+	}
+	
+	option = {
+		name = cbi_gw_political_event.25.a	
+		
+		hidden_effect = {
+			
+		}
+	}
+}
+
+country_event = { #
+	id = cbi_gw_political_event.26
+	title = cbi_gw_political_event.26.t
+	desc = cbi_gw_political_event.26.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event cbi_gw_political_event.26"
+	}
+	
+	option = {
+		name = cbi_gw_political_event.26.a	
+		
+		hidden_effect = {
+			
+		}
+	}
+}
+
+country_event = { #
+	id = cbi_gw_political_event.27
+	title = cbi_gw_political_event.27.t
+	desc = cbi_gw_political_event.27.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event cbi_gw_political_event.27"
+	}
+	
+	option = {
+		name = cbi_gw_political_event.27.a	
+		
+		hidden_effect = {
+			
+		}
+	}
+}
+
+country_event = { #
+	id = cbi_gw_political_event.28
+	title = cbi_gw_political_event.28.t
+	desc = cbi_gw_political_event.28.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event cbi_gw_political_event.28"
+	}
+	
+	option = {
+		name = cbi_gw_political_event.28.a	
+		
+		hidden_effect = {
+			
+		}
+	}
+}
+
+country_event = { #
+	id = cbi_gw_political_event.29
+	title = cbi_gw_political_event.29.t
+	desc = cbi_gw_political_event.29.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event cbi_gw_political_event.29"
+	}
+	
+	option = {
+		name = cbi_gw_political_event.29.a	
+		
+		hidden_effect = {
+			
+		}
+	}
+}
+
+country_event = { #
+	id = cbi_gw_political_event.30
+	title = cbi_gw_political_event.30.t
+	desc = cbi_gw_political_event.30.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event cbi_gw_political_event.30"
+	}
+	
+	option = {
+		name = cbi_gw_political_event.30.a	
+		
+		hidden_effect = {
+			
+		}
+	}
+}
+
+country_event = { #
+	id = cbi_gw_political_event.31
+	title = cbi_gw_political_event.31.t
+	desc = cbi_gw_political_event.31.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event cbi_gw_political_event.31"
+	}
+	
+	option = {
+		name = cbi_gw_political_event.31.a	
+		
+		hidden_effect = {
+			
+		}
+	}
+}
+
+country_event = { #
+	id = cbi_gw_political_event.32
+	title = cbi_gw_political_event.32.t
+	desc = cbi_gw_political_event.32.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event cbi_gw_political_event.32"
+	}
+	
+	option = {
+		name = cbi_gw_political_event.32.a	
+		
+		hidden_effect = {
+			
+		}
 	}
 }

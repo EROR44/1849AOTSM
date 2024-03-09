@@ -22,7 +22,7 @@ focus_tree = {
 	
 	reset_on_civilwar = no
 	
-	continuous_focus_position = { x = 2200 y = 1325 }
+	continuous_focus_position = { x = 3800 y = 1600 }
 	
 	initial_show_position = {
 		focus = CBI_continue_line
@@ -7744,7 +7744,8 @@ focus_tree = {
 		#search_filters = {  }
 		
 		completion_reward = {
-			
+			log = "[GetDateText]: [Root.GetName]: focus CBI_great_adventure "
+			country_event = cbi_gw_political_event.7
 		}
 		
 	}
@@ -7796,7 +7797,8 @@ focus_tree = {
 		#search_filters = {  }
 		
 		completion_reward = {
-			
+			log = "[GetDateText]: [Root.GetName]: focus CBI_great_adventure_norman_plan "
+			country_event = cbi_gw_political_event.8
 		}
 		
 	}
@@ -7836,7 +7838,8 @@ focus_tree = {
 		#search_filters = {  }
 		
 		completion_reward = {
-			
+			log = "[GetDateText]: [Root.GetName]: focus CBI_great_adventure_bremen_plan "
+			country_event = cbi_gw_political_event.10
 		}
 		
 	}
@@ -7875,7 +7878,27 @@ focus_tree = {
 		#search_filters = {  }
 		
 		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus CBI_fast_logistic_of_france "
 			
+			add_timed_idea = {
+				days = 365
+				idea = CBI_gw_fast_french_logistic_idea
+			}
+			custom_effect_tooltip = CBI_in_case_war_with_pru_this_get_debuffs_against_cbi_tt
+			if = {
+				limit = {
+					OR = {
+						FRR = { is_in_faction_with = PRU }
+						FRA = { is_in_faction_with = PRU }
+					}
+				}
+				PRU = {
+					add_timed_idea = {
+						days = 365
+						idea = CBI_gw_pru_strike_on_enemy_pru_heart_idea
+					}
+				}
+			}
 		}
 		
 	}
@@ -7914,7 +7937,8 @@ focus_tree = {
 		#search_filters = {  }
 		
 		completion_reward = {
-			
+			log = "[GetDateText]: [Root.GetName]: focus CBI_ready_ship_to_operation "
+			country_event = cbi_gw_political_event.13
 		}
 		
 	}
@@ -7953,7 +7977,21 @@ focus_tree = {
 		#search_filters = {  }
 		
 		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus CBI_strike_the_enemy_heart "
 			
+			add_timed_idea = {
+				days = 365
+				idea = CBI_gw_strike_on_enemy_pru_heart_idea
+			}	
+			custom_effect_tooltip = CBI_gw_pru_get_debuffs_against_cbi_tt			
+			hidden_effect = {
+				PRU = {
+					add_timed_idea = {
+						days = 365
+						idea = CBI_gw_pru_strike_on_enemy_pru_heart_idea
+					}
+				}
+			}
 		}
 		
 	}
@@ -7993,7 +8031,8 @@ focus_tree = {
 		#search_filters = {  }
 		
 		completion_reward = {
-			
+			log = "[GetDateText]: [Root.GetName]: focus CBI_time_to_strike "
+			country_event = cbi_gw_political_event.14
 		}
 		
 	}
@@ -8032,7 +8071,8 @@ focus_tree = {
 		#search_filters = {  }
 		
 		completion_reward = {
-			
+			log = "[GetDateText]: [Root.GetName]: focus CBI_house_of_lords_doubts "
+			country_event = cbi_gw_political_event.15
 		}
 		
 	}
@@ -8066,12 +8106,88 @@ focus_tree = {
 			}
 		}
 		
-		#bypass = { }
+		bypass = { 
+		
+		}
 		
 		#search_filters = {  }
 		
 		completion_reward = {
-			
+			log = "[GetDateText]: [Root.GetName]: focus CBI_stop_mobilisation "
+			add_political_power = 200
+			add_stability = 0.05
+			if = {
+				limit = {
+					ROOT = {
+						has_idea = scraping_the_barrel
+					}
+				}
+				swap_ideas = {
+					remove_idea = scraping_the_barrel
+					add_idea = all_adults_serve
+				}
+			}
+			else_if = {
+				limit = {
+					ROOT = {
+						has_idea = all_adults_serve
+					}
+				}
+				swap_ideas = {
+					remove_idea = all_adults_serve
+					add_idea = service_by_requirement
+				}
+			}
+			else_if = {
+				limit = {
+					ROOT = {
+						has_idea = service_by_requirement
+					}
+				}
+				swap_ideas = {
+					remove_idea = service_by_requirement
+					add_idea = extensive_conscription
+				}
+			}
+			else_if = {
+				limit = {
+					ROOT = {
+						has_idea = extensive_conscription
+					}
+				}
+				swap_ideas = {
+					remove_idea = extensive_conscription
+					add_idea = limited_conscription
+				}
+			}
+			else_if = {
+				limit = {
+					ROOT = {
+						has_idea = limited_conscription
+					}
+				}
+				swap_ideas = {
+					remove_idea = limited_conscription
+					add_idea = volunteer_only
+				}
+			}
+			else_if = {
+				limit = {
+					ROOT = {
+						has_idea = volunteer_only
+					}
+				}
+				swap_ideas = {
+					remove_idea = volunteer_only
+					add_idea = disarmed_nation
+				}
+			}
+			if = {
+				limit = {
+					CBI = { has_idea = great_war_mobilisation }
+				}
+				remove_ideas = great_war_mobilisation
+			}
 		}
 		
 	}
@@ -8110,7 +8226,8 @@ focus_tree = {
 		#search_filters = {  }
 		
 		completion_reward = {
-			
+			log = "[GetDateText]: [Root.GetName]: focus CBI_return_to_diplomacy "
+			country_event = cbi_gw_political_event.16
 		}
 		
 	}
@@ -8142,6 +8259,9 @@ focus_tree = {
 					world_war_end = yes
 				}
 			}
+			NOT = {
+				has_country_flag = CBI_reject_to_peace_with_kontinental_europa_flag
+			}
 		}
 		
 		bypass = { 
@@ -8153,7 +8273,10 @@ focus_tree = {
 		#search_filters = {  }
 		
 		completion_reward = {
-			
+			log = "[GetDateText]: [Root.GetName]: focus CBI_dialog_with_prussia "
+			PRU = {
+				country_event = { id = cbi_gw_political_event.17 days = 3 }
+			}			
 		}
 		
 	}
@@ -8185,6 +8308,9 @@ focus_tree = {
 					world_war_end = yes
 				}
 			}
+			NOT = {
+				has_country_flag = CBI_reject_to_peace_with_kontinental_europa_flag
+			}
 		}
 		
 		bypass = {
@@ -8196,7 +8322,10 @@ focus_tree = {
 		#search_filters = {  }
 		
 		completion_reward = {
-			
+			log = "[GetDateText]: [Root.GetName]: focus CBI_dialog_with_byzantium "
+			BYZ = {
+				country_event = { id = cbi_gw_political_event.20 days = 3 }
+			}
 		}
 		
 	}
@@ -8240,7 +8369,7 @@ focus_tree = {
 		#search_filters = {  }
 		
 		completion_reward = {
-			
+			log = "[GetDateText]: [Root.GetName]: focus CBI_peace_with_honor "
 		}
 		
 	}
@@ -8279,7 +8408,11 @@ focus_tree = {
 		#search_filters = {  }
 		
 		completion_reward = {
-			
+			log = "[GetDateText]: [Root.GetName]: focus CBI_no_war_propaganda "
+			add_timed_idea = {
+				days = 365
+				idea =CBI_gw_peace_propaganda_idea
+			}
 		}
 		
 	}
@@ -8318,7 +8451,7 @@ focus_tree = {
 		#search_filters = {  }
 		
 		completion_reward = {
-			
+			log = "[GetDateText]: [Root.GetName]: focus CBI_trade_war "
 		}
 		
 	}
@@ -8358,7 +8491,7 @@ focus_tree = {
 		#search_filters = {  }
 		
 		completion_reward = {
-			
+			log = "[GetDateText]: [Root.GetName]: focus CBI_prioritet_byzantium "
 		}
 		
 	}
@@ -8398,7 +8531,7 @@ focus_tree = {
 		#search_filters = {  }
 		
 		completion_reward = {
-			
+			log = "[GetDateText]: [Root.GetName]: focus CBI_strike_the_africa "
 		}
 		
 	}
@@ -8438,7 +8571,7 @@ focus_tree = {
 		#search_filters = {  }
 		
 		completion_reward = {
-			
+			log = "[GetDateText]: [Root.GetName]: focus CBI_strike_the_india "
 		}
 		
 	}
@@ -8477,7 +8610,7 @@ focus_tree = {
 		#search_filters = {  }
 		
 		completion_reward = {
-			
+			log = "[GetDateText]: [Root.GetName]: focus CBI_battle_for_india_ocean "
 		}
 		
 	}
@@ -8516,7 +8649,7 @@ focus_tree = {
 		#search_filters = {  }
 		
 		completion_reward = {
-			
+			log = "[GetDateText]: [Root.GetName]: focus CBI_master_of_india_ocean "
 		}
 		
 	}
@@ -8556,7 +8689,7 @@ focus_tree = {
 		#search_filters = {  }
 		
 		completion_reward = {
-			
+			log = "[GetDateText]: [Root.GetName]: focus CBI_only_one_strongest_between_the_ocean_and_the_sky "
 		}
 		
 	}
@@ -8603,7 +8736,7 @@ focus_tree = {
 		#search_filters = {  }
 		
 		completion_reward = {
-			
+			log = "[GetDateText]: [Root.GetName]: focus CBI_prioritet_japan "
 		}
 		
 	}
@@ -8650,7 +8783,7 @@ focus_tree = {
 		#search_filters = {  }
 		
 		completion_reward = {
-			
+			log = "[GetDateText]: [Root.GetName]: focus CBI_strike_the_indochina "
 		}
 		
 	}
@@ -8697,7 +8830,7 @@ focus_tree = {
 		#search_filters = {  }
 		
 		completion_reward = {
-			
+			log = "[GetDateText]: [Root.GetName]: focus CBI_strike_the_tondo "
 		}
 		
 	}
@@ -8736,7 +8869,7 @@ focus_tree = {
 		#search_filters = {  }
 		
 		completion_reward = {
-			
+			log = "[GetDateText]: [Root.GetName]: focus CBI_grand_plan_of_industrialisation_of_britania "
 		}
 		
 	}
@@ -8776,6 +8909,7 @@ focus_tree = {
 		#search_filters = {  }
 		
 		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus CBI_beating_heart_of_industry "
 			add_political_power = -500
 			random_state = {
 				limit = {
@@ -8870,6 +9004,7 @@ focus_tree = {
 		#search_filters = {  }
 		
 		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus CBI_through_the_veins_of_our_industry "
 			every_state = {
 				limit = {
 					is_owned_by = CBI
@@ -8920,6 +9055,7 @@ focus_tree = {
 		#search_filters = {  }
 		
 		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus CBI_second_round_of_industrialisation "
 			random_state = {
 				limit = {
 					is_owned_by = CBI
@@ -9038,6 +9174,7 @@ focus_tree = {
 		#search_filters = {  }
 		
 		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus CBI_british_central_of_science "
 			add_research_slot = 1
 		}
 		
@@ -9077,6 +9214,7 @@ focus_tree = {
 		#search_filters = {  }
 		
 		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus CBI_unleash_the_scientists "
 			add_tech_bonus = {
 				bonus = 0.75
 				uses = 3
@@ -9130,6 +9268,7 @@ focus_tree = {
 		#search_filters = {  }
 		
 		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus CBI_global_experience "
 			add_tech_bonus = {
 				bonus = 0.75
 				uses = 3
@@ -9202,7 +9341,8 @@ focus_tree = {
 		#search_filters = {  }
 		
 		completion_reward = {
-			add_war_support = 0.05
+			log = "[GetDateText]: [Root.GetName]: focus CBI_portugalia_sutiation "
+			country_event =  cbi_gw_political_event.1 
 		}
 		
 	}
@@ -9250,6 +9390,7 @@ focus_tree = {
 		#search_filters = {  }
 		
 		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus CBI_portugalia_must_paid "
 			if = {
 				limit = {
 					NOT = {
@@ -9323,6 +9464,8 @@ focus_tree = {
 		#search_filters = {  }
 		
 		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus CBI_asian_blockad "
+			custom_effect_tooltip = CBI_get_pas_more_autonomy
 			if = {
 				limit = {
 					PAS = {
@@ -9332,61 +9475,11 @@ focus_tree = {
 						}
 					}
 				}
-				PAS = {
-					add_autonomy_ratio = {
-						value = 0.800004
-						localization = PAS_blockad_by_british_fleet
-					}
-				}
-				custom_effect_tooltip = prt_cant_reaction_if_we_attack_austria
 				PRT = {
-					set_country_flag = cant_react_australia
+					country_event = { id = cbi_gw_political_event.2 days = 3 }
 				}
 			}
-			if = {
-				limit = {
-					NOT = {
-						PAS = {
-							OR = {
-								is_subject_of = PRT
-								is_puppet_of = PRT
-							}
-						}
-						NOT = {
-							PRT = {
-								has_idea = cbi_blockad
-							}
-						}
-					}
-				}
-				PRT = {
-					modify_timed_idea = {
-						idea = cbi_blockad
-						days = 365
-					}
-				}
-			}
-			if = {
-				limit = {
-					NOT = {
-						PAS = {
-							OR = {
-								is_subject_of = PRT
-								is_puppet_of = PRT
-							}
-						}
-						PRT = {
-							has_idea = cbi_blockad
-						}
-					}
-				}
-				PRT = {
-					add_timed_idea = {
-						idea = cbi_blockad
-						days = 365
-					}
-				}
-			}
+			custom_effect_tooltip = CBI_prt_cant_reaction_if_we_attack_pas
 		}
 		
 	}
@@ -9430,33 +9523,9 @@ focus_tree = {
 		#search_filters = {  }
 		
 		completion_reward = {
-			if = {
-				limit = {
-					PRT = {
-						has_idea = cbi_blockad
-					}
-				}
-				PRT = {
-					modify_timed_idea = {
-						idea = cbi_blockad
-						days = 365
-					}
-				}
-			}
-			if = {
-				limit = {
-					NOT = {
-						PRT = {
-							has_idea = cbi_blockad
-						}
-					}
-				}
-				PRT = {
-					add_timed_idea = {
-						idea = cbi_blockad
-						days = 365
-					}
-				}
+			log = "[GetDateText]: [Root.GetName]: focus CBI_africa_blockad "
+			PRT = {
+				country_event = { id = cbi_gw_political_event.3 days = 3 }
 			}
 		}
 		
@@ -9502,6 +9571,7 @@ focus_tree = {
 		#search_filters = {  }
 		
 		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus CBI_my_enemy_is_enemy_for_my_enemy "
 			BYZ = {
 				country_event = {
 					id = cbi_prt_situation.1
@@ -9551,7 +9621,10 @@ focus_tree = {
 		#search_filters = {  }
 		
 		completion_reward = {
-			
+			log = "[GetDateText]: [Root.GetName]: focus CBI_last_true_to_peace "
+			PRT = {
+				country_event = { id = cbi_gw_political_event.4 days = 3 }
+			}
 		}
 		
 	}
@@ -9603,6 +9676,7 @@ focus_tree = {
 		#search_filters = {  }
 		
 		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus CBI_prepered_special_operation "
 			country_event = cbi_prt_situation.2
 		}
 		
@@ -9647,6 +9721,7 @@ focus_tree = {
 		#search_filters = {  }
 		
 		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus CBI_prepered_army "
 			army_experience = 50
 		}
 		
@@ -9691,6 +9766,7 @@ focus_tree = {
 		#search_filters = {  }
 		
 		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus CBI_prepered_navy "
 			navy_experience = 50
 		}
 		
@@ -9741,6 +9817,7 @@ focus_tree = {
 		will_lead_to_war_with = PRT
 		
 		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus CBI_austrian_operation "
 			if = {
 				limit = {
 					PAS = {
@@ -9842,6 +9919,7 @@ focus_tree = {
 		will_lead_to_war_with = PRT
 		
 		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus CBI_last_ultimatum "
 			PRT = {
 				country_event = {
 					id = cbi_prt_situation.4

@@ -10050,7 +10050,7 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: focus RUS_marh_to_our_enemies "
-			country_event = rus_great_war_event.6
+			country_event = rus_great_war_event.3
 			
 		}
 	}
@@ -10227,7 +10227,7 @@ focus_tree = {
 			
 			add_timed_idea = {
 				idea = RUS_great_war_time_measures_idea
-				days = 550
+				days = 720
 			}
 			
 			if = {
@@ -11044,7 +11044,7 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: focus RUS_alliance_cooperation "
-			country_event = rus_great_war_event.3 
+			country_event = rus_great_war_event.4 
 		}
 	}
 	
@@ -11079,7 +11079,7 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: focus RUS_to_support_france "
 			FRR = {
-				country_event = { id = rus_great_war_event.4 days = 3 }
+				country_event = { id = rus_great_war_event.5 days = 3 }
 			}
 		}
 	}
@@ -11114,8 +11114,19 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: focus RUS_coop_operations_planning "
-			add_ideas = RUS_gw_coop_operation_planning
-			#тута нужен блок решений с совместными операциями
+			country_event = rus_great_war_event.7
+			custom_effect_tooltip = RUS_gw_unlock_cat_coop_alliance_war_planning
+			hidden_effect = {
+				every_country = {
+					limit = {
+						is_puppet_of = RUS
+						is_subject_of = RUS
+						is_in_faction_with = RUS
+					}
+					country_event = { id = rus_great_war_event.8 days = 2}
+				}
+				set_global_flag = GW_lp_coop_war_planning_started_flag #флаг разблокирует категорию решений для совместного планнирования операций
+			}
 		}
 	}
 	
@@ -11150,7 +11161,7 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: focus RUS_to_support_cbi "
 			CBI = {
-				country_event = { id = rus_great_war_event.5 days = 3 }
+				country_event = { id = rus_great_war_event.6 days = 3 }
 			}
 		}
 	}
@@ -11769,6 +11780,10 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: focus RUS_wear_down_enemy "
+			swap_ideas = {
+				remove_idea = RUS_gw_all_on_defence_of_the_motherland
+				add_idea = RUS_gw_all_on_defence_of_the_motherland_1
+			}
 			
 		}
 	}
@@ -11803,7 +11818,10 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: focus RUS_and_destroy_it "
-			
+			swap_ideas = {
+				remove_idea = RUS_gw_all_on_defence_of_the_motherland_1
+				add_idea = RUS_gw_all_on_defence_of_the_motherland_2
+			}
 		}
 	}
 	
