@@ -473,6 +473,85 @@ on_actions = {
 	
 	on_capitulation = {
 		effect = {
+			#FRRvsFRM - result_of_french_civil_war 
+			if = {
+				limit = {
+					tag = FRR
+					has_global_flag = french_civil_war_started_flag
+				}			
+				
+				every_country = {
+					if = {
+						limit = {
+							is_in_faction_with = FRM
+							has_war_with = FRR
+						}
+						white_peace = FRR
+					}
+				}
+				FRM = {
+					white_peace = FRR
+					
+					transfer_state = 15
+					transfer_state = 29
+					transfer_state = 785
+					transfer_state = 16
+					transfer_state = 30
+					transfer_state = 24
+					transfer_state = 33
+					set_cosmetic_tag = FRM_LEGAL
+				}
+				if = {
+					limit = {
+						NWA = {
+							country_exists = yes
+						}
+					}
+					FRR = {
+						annex_country = {
+							target = NWA
+							transfer_troops = yes
+						}
+						set_capital = {
+							state = 459
+						}
+					}
+				}
+
+				clr_global_flag = french_civil_war_started_flag
+				set_global_flag = french_civil_war_end_flag
+				#news_event = news.273
+				add_threat = 5
+			}
+			if = {
+				limit = {
+					tag = FRM
+					has_global_flag = french_civil_war_started_flag
+				}			
+				
+				every_country = {
+					if = {
+						limit = {
+							is_in_faction_with = FRR
+							has_war_with = FRM
+						}
+						white_peace = FRM
+					}
+				}
+				FRR = {
+					white_peace = FRM
+					
+					transfer_state = 23
+					transfer_state = 27
+					transfer_state = 18
+					transfer_state = 17	
+				}
+
+				clr_global_flag = french_civil_war_started_flag
+				set_global_flag = french_civil_war_end_flag
+				#news_event = news.273 
+				add_threat = 5
+			}
 			#RBL capitulation - ignatiev uprising failed
 			if = {
 				limit = {
@@ -3005,53 +3084,56 @@ on_actions = {
 					PRU = {
 						transfer_state = 862
 					}
-					ORL = {
-						transfer_state = 16
-						add_state_core = 16
-						transfer_state = 24
-						add_state_core = 24
-						transfer_state = 30
-						add_state_core = 30
+					FRR = {
+						country_event = { id = frr_gw_fail_events.1 days = 30 }
 					}
-					BRE = {
-						transfer_state = 14
-						transfer_state = 917
-						add_state_core = 14
-						add_state_core = 917
-					}
-					NRM = {
-						transfer_state = 15
-						add_state_core = 15
-					}
-					BRG = {
-						transfer_state = 17
-						transfer_state = 27
-						add_state_core = 17
-						add_state_core = 27
-					}
-					SHM = {
-						transfer_state = 18
-						transfer_state = 29
-						transfer_state = 785
-						add_state_core = 18
-						add_state_core = 29
-						add_state_core = 785
-					}
-					AKV = {
-						transfer_state = 23
-						transfer_state = 33
-						add_state_core = 23
-						add_state_core = 33
-					}
-					PRU = {
-						add_to_faction = FRA
-						add_to_faction = BRE
-						add_to_faction = NRM
-						add_to_faction = BRG
-						add_to_faction = SHM
-						add_to_faction = ORL
-						add_to_faction = AKV
-					}
+					#ORL = { #переработано на ивенты
+					#	transfer_state = 16
+					#	add_state_core = 16
+					#	transfer_state = 24
+					#	add_state_core = 24
+					#	transfer_state = 30
+					#	add_state_core = 30
+					#}
+					#BRE = {
+					#	transfer_state = 14
+					#	transfer_state = 917
+					#	add_state_core = 14
+					#	add_state_core = 917
+					#}
+					#NRM = {
+					#	transfer_state = 15
+					#	add_state_core = 15
+					#}
+					#BRG = {
+					#	transfer_state = 17
+					#	transfer_state = 27
+					#	add_state_core = 17
+					#	add_state_core = 27
+					#}
+					#SHM = {
+					#	transfer_state = 18
+					#	transfer_state = 29
+					#	transfer_state = 785
+					#	add_state_core = 18
+					#	add_state_core = 29
+					#	add_state_core = 785
+					#}
+					#AKV = {
+					#	transfer_state = 23
+					#	transfer_state = 33
+					#	add_state_core = 23
+					#	add_state_core = 33
+					#}
+					#PRU = {
+					#	add_to_faction = FRA
+					#	add_to_faction = BRE
+					#	add_to_faction = NRM
+					#	add_to_faction = BRG
+					#	add_to_faction = SHM
+					#	add_to_faction = ORL
+					#	add_to_faction = AKV
+					#}
 					if = {
 						limit = {
 							HOL = {
@@ -3386,41 +3468,41 @@ on_actions = {
 						}
 					}
 				}
-				if = {
-					limit = {
-						NWA = {
-							owns_state = 459
-						}
-					}
-					FRR = {
-						transfer_state = 459
-						add_state_core = 459
-						set_capital = {
-							state = 459
-						}
-						set_province_name = {
-							id = 1145
-							name = ALGER_name
-						}
-					}
-				}
-				if = {
-					limit = {
-						FRR = {
-							owns_state = 459
-						}
-					}
-					FRR = {
-						add_state_core = 459
-						set_capital = {
-							state = 459
-						}
-						set_province_name = {
-							id = 1145
-							name = ALGER_name
-						}
-					}
-				}
+				#if = { #переработано на ивенты
+				#	limit = {
+				#		NWA = {
+				#			owns_state = 459
+				#		}
+				#	}
+				#	FRR = {
+				#		transfer_state = 459
+				#		add_state_core = 459
+				#		set_capital = {
+				#			state = 459
+				#		}
+				#		set_province_name = {
+				#			id = 1145
+				#			name = ALGER_name
+				#		}
+				#	}
+				#}
+				#if = {
+				#	limit = {
+				#		FRR = {
+				#			owns_state = 459
+				#		}
+				#	}
+				#	FRR = {
+				#		add_state_core = 459
+				#		set_capital = {
+				#			state = 459
+				#		}
+				#		set_province_name = {
+				#			id = 1145
+				#			name = ALGER_name
+				#		}
+				#	}
+				#}
 				#if not PRU
 				if = {
 					limit = {

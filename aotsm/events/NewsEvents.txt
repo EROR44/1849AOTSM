@@ -9117,22 +9117,27 @@ news_event = { #Конфедерация Британских островов �
 	option = { 
 		name = news.287.b
 		trigger = {
-			OR = {
-				tag = PRU
-				ROOT = {			
-					is_in_faction_with = PRU
-				}
+			ROOT = {	
+				NOT = { tag = CBI }
+				is_in_faction_with = CBI
 			}
-			
 		}
 	}
 	
 	option = { 
 		name = news.287.c
 		trigger = {
-			ROOT = {			
-				is_in_faction_with = CBI
+			OR = {
+				tag = PRU
+				tag = BYZ
+				ROOT = {
+					OR = {
+						is_in_faction_with = PRU
+						is_in_faction_with = BYZ
+					}
+				}
 			}
+			
 		}
 	}
 	
@@ -9142,9 +9147,11 @@ news_event = { #Конфедерация Британских островов �
 			NOT = {
 				OR = {
 					tag = CBI
-					TAG = PRU
+					tag = PRU
+					tag = BYZ
 					ROOT = { is_in_faction_with = CBI }
 					ROOT = { is_in_faction_with = PRU }
+					ROOT = { is_in_faction_with = BYZ }
 				}			
 			}
 		}

@@ -7422,11 +7422,12 @@ country_event = { # Удар по противнику - высадка
 			if = {
 				limit = {
 					CBI = {
+						is_ai = yes
 						has_country_flag = cbi_chose_bremen_plan
 					}
 				}
 				CBI = { 
-					set_province_controller = 11630
+					set_province_controller = 11360
 					set_province_controller = 241
 					set_province_controller = 3326
 					set_province_controller = 374
@@ -7451,6 +7452,7 @@ country_event = { # Удар по противнику - высадка
 			else_if = {
 				limit = {
 					CBI = {
+						is_ai = yes
 						has_country_flag = cbi_chose_normandy_plan
 					}
 				}
@@ -7477,6 +7479,26 @@ country_event = { # Удар по противнику - высадка
 			days = 120
 		}
 		add_political_power = 100
+		if = {
+			limit = {
+				CBI = {
+					has_country_flag = cbi_chose_bremen_plan
+				}
+			}
+			CBI = {
+				activate_mission = cbi_lading_near_bremen_mission
+			}
+		}
+		else_if = {
+			limit = {
+				CBI = {
+					has_country_flag = cbi_lading_in_normandy_mission
+				}
+			}
+			CBI = {
+				activate_mission = cbi_lading_near_bremen_mission
+			}
+		}
 		hidden_effect = {
 			
 		}
@@ -7556,7 +7578,10 @@ country_event = { #Прибытие британских дипломатов - 
 	
 	option = {
 		name = cbi_gw_political_event.17.a	
-		
+		add_timed_idea = {
+			idea = CBI_gw_peace_talks_with_cbi_idea
+			days = 90
+		}
 		hidden_effect = {
 			CBI = {
 				country_event = { id = cbi_gw_political_event.18 days = 3 }
@@ -7592,9 +7617,14 @@ country_event = { #Согласие - ответ для Британии
 	
 	option = {
 		name = cbi_gw_political_event.18.a	
-		
+		add_timed_idea = {
+			idea = CBI_gw_cbi_peace_talks_with_pru_idea
+			days = 90
+		}
 		hidden_effect = {
-			
+			CBI = {
+				set_country_flag = CBI_gw_pru_agree_white_peace_flag
+			}
 		}
 	}
 }
@@ -7640,7 +7670,10 @@ country_event = { #Прибытие британских дипломатов - 
 	
 	option = {
 		name = cbi_gw_political_event.20.a	
-		
+		add_timed_idea = {
+			idea = CBI_gw_peace_talks_with_cbi_idea
+			days = 90
+		}
 		hidden_effect = {
 			CBI = {
 				country_event = { id = cbi_gw_political_event.21 days = 3 }
@@ -7676,9 +7709,14 @@ country_event = { #Согласие - ответ для Британии
 	
 	option = {
 		name = cbi_gw_political_event.21.a	
-		
+		add_timed_idea = {
+			idea = CBI_gw_cbi_peace_talks_with_byz_idea
+			days = 90
+		}
 		hidden_effect = {
-			
+			CBI = {
+				set_country_flag = CBI_gw_byz_agree_white_peace_flag
+			}
 		}
 	}
 }
@@ -7707,7 +7745,7 @@ country_event = { #Отказ - ответ для Британии
 	}
 }
 
-country_event = { #
+country_event = { #Сепаратный мир
 	id = cbi_gw_political_event.23
 	title = cbi_gw_political_event.23.t
 	desc = cbi_gw_political_event.23.d
@@ -7720,13 +7758,68 @@ country_event = { #
 	
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event cbi_gw_political_event.23"
+		hidden_effect = { #тут надо будет доработать 
+			if = {
+				limit = {
+					CBI = {
+						OR = { 
+							is_faction_leader = yes
+							is_in_faction = yes
+						}
+					}
+				}
+				CBI = {
+					leave_faction = yes
+				}
+				every_other_country = {
+					limit = {
+						OR = {
+							is_puppet_of = CBI
+							is_subject_of = CBI
+						}
+					}
+					leave_faction = yes
+				}
+			}
+			if = {
+				limit = {
+					CBI = {
+						has_war_with = PRU
+					}
+				}
+				PRU = {
+					white_peace = CBI
+				}
+			}
+			if = {
+				limit = {
+					CBI = {
+						has_war_with = BYZ
+					}
+				}
+				PRU = {
+					white_peace = CBI
+				}
+			}
+			every_other_country = {
+				limit = {
+					has_war_with = CBI
+					OR = {
+						is_in_faction_with = PRU
+						is_in_faction_with = BYZ
+					}
+				}
+				white_peace = CBI
+			}
+
+		}
 	}
 	
 	option = {
 		name = cbi_gw_political_event.23.a	
 		
 		hidden_effect = {
-			
+			news_event = { id = news.287 days = 3 }
 		}
 	}
 }
