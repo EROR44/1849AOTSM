@@ -3910,6 +3910,16 @@ focus_tree = {
 				idea = byz_army_training_idea
 				days = 365
 			}
+			if = {
+				limit = {
+					NOT = {
+						BYZ = {
+							has_country_flag = first_meeting_with_generals
+						}
+					}
+				}
+				country_event = byz.52
+			}
 			hidden_effect = {
 				if = {
 					limit = {
@@ -3951,6 +3961,16 @@ focus_tree = {
 		
 		completion_reward = {
 			army_experience = 15
+			if = {
+				limit = {
+					NOT = {
+						BYZ = {
+							has_country_flag = second_meeting_with_generals
+						}
+					}
+				}
+				country_event = byz.52
+			}
 		}
 	}
 	
@@ -4058,6 +4078,16 @@ focus_tree = {
 		completion_reward = {
 			army_experience = 25
 			add_war_support = 0.05
+			if = {
+				limit = {
+					NOT = {
+						BYZ = {
+							has_country_flag = third_meeting_with_generals
+						}
+					}
+				}
+				country_event = byz.53
+			}
 		}
 	}
 	
@@ -4338,6 +4368,16 @@ focus_tree = {
 		
 		completion_reward = {
 			army_experience = 30
+			if = {
+				limit = {
+					NOT = {
+						BYZ = {
+							has_country_flag = second_meeting_with_generals
+						}
+					}
+				}
+				country_event = byz.52
+			}
 			swap_ideas = {
 				remove_idea = byz_stagnat_army
 				add_idea = byz_pru_army_1
@@ -4555,6 +4595,16 @@ focus_tree = {
 		completion_reward = {
 			add_stability = -0.025
 			army_experience = 30
+			if = {
+				limit = {
+					NOT = {
+						BYZ = {
+							has_country_flag = third_meeting_with_generals
+						}
+					}
+				}
+				country_event = byz.53
+			}
 		}
 	}
 	
@@ -6799,7 +6849,28 @@ focus_tree = {
 		
 		#cancel = { }
 		
-		#available = { }
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = august_ii_alive_or_not_regency_tt
+				OR = {
+					AND = {
+						NOT = {
+							has_country_flag = august_ii_dead
+						}
+						NOT = {
+							has_country_flag = byzantium_regency
+						}
+					}
+					AND = {
+						OR = {
+							has_country_flag = august_ii_dead
+							has_country_flag = byzantium_regency
+						}
+						has_country_flag = byzantium_regency_over
+					}
+				}
+			}
+		}
 	
 		#bypass = { }
 		
