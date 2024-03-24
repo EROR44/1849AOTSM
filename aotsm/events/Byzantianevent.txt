@@ -1408,8 +1408,12 @@ country_event = { #Regent of Byzantium
 					country_leader = {
 						ideology = imperial_system_sub
 						expire = "1900.1.1.1"
-						traits = { }
+						traits = { byz_regent }
 					}
+				}
+				set_country_leader_description = {
+					ideology = authoritarian
+					desc = POLITICS_CONSTANTIN_ZAHAREAS_REGENT_DESC
 				}
 			}
 		}
@@ -1429,8 +1433,12 @@ country_event = { #Regent of Byzantium
 					country_leader = {
 						ideology = imperial_system_sub
 						expire = "1900.1.1.1"
-						traits = { }
+						traits = { byz_regent }
 					}
+				}
+				set_country_leader_description = {
+					ideology = authoritarian
+					desc = POLITICS_EKATERINA_DESC
 				}
 			}
 		}
@@ -1450,7 +1458,183 @@ country_event = { #Regent of Byzantium
 					country_leader = {
 						ideology = imperial_system_sub
 						expire = "1900.1.1.1"
-						traits = { }
+						traits = { byz_regent }
+					}
+				}
+				set_country_leader_description = {
+					ideology = authoritarian
+					desc = POLITICS_JULIUS_ROMANUS_DESC
+				}
+			}
+		}
+	}
+	
+}
+
+country_event = { #Zakharias VI is 18
+	id = byz.64
+	title = byz.64.t
+	desc = {
+		text = byz.64.dnr
+		trigger = {
+			NOT = {
+				BYZ = {
+					has_country_flag = byzantium_regency
+				}
+			}
+		}
+	}
+	desc = {
+		text = byz.64.dr
+		trigger = {
+			BYZ = {
+				has_country_flag = byzantium_regency
+			}
+		}
+	}
+	picture = GFX_report_zakaharias_grow_up
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event byz.64"
+		hidden_effect = {
+			if = {
+				limit = {
+					BYZ = {
+						has_country_flag = byzantium_regency
+					}
+				}
+				BYZ = {
+					set_country_flag = byzantium_regency_over
+				}
+			}
+			BYZ = {
+				add_corps_commander_role = {
+					Character = BYZ_Octavian_II_Zakharias_corps
+					skill = 3
+					attack_skill = 3
+					defense_skill = 3
+					planning_skill = 2
+					logistics_skill = 2
+					traits = { politically_connected media_personality infantry_officer roman_prince_land }
+				}
+			}
+		}
+	}
+	
+	option = { #Octavian mature
+		name = byz.64.a
+		trigger = {
+			NOT = {
+				BYZ = {
+					has_country_flag = byzantium_regency
+				}
+			}
+		}
+		ai_chance = {
+			base = 50
+		}
+		custom_effect_tooltip = byz_zakharias_vi_complete_education_tt
+		hidden_effect = {
+			BYZ = {
+				set_character_name = {
+					character = BYZ_Octavian_II_Zakharias_corps
+					name = BYZ_Octavian_II_Zakharias_corps_non_vi
+				}
+			}
+		}
+	}
+	
+	option = { #Hail to New Empire
+		name = byz.64.b
+		trigger = {
+			BYZ = {
+				has_country_flag = byzantium_regency
+			}
+		}
+		ai_chance = {
+			base = 50
+		}
+		custom_effect_tooltip = byz_regency_end_tt
+		hidden_effect = {
+			BYZ = {
+				promote_character = {
+					character = BYZ_Octavian_II_Zakharias
+					ideology = imperial_system_sub
+				}
+				set_country_leader_portrait = {
+					ideology = authoritarian
+					portrait = GFX_byz_Octavian_II_Zakharias_18
+				}
+				set_country_leader_description = {
+					ideology = authoritarian
+					desc = POLITICS_OCTAVIAN_II_ZAKHARIAS_18_DESC
+				}
+				BYZ_Octavian_II_Zakharias = {
+					add_trait = {
+						ideology = imperial_system_sub
+						trait = byz_empire
+					}
+					remove_trait = {
+						ideology = imperial_system_sub
+						trait = young_emperor
+					}
+				}
+				set_country_leader_portrait = {
+					ideology = democratic
+					portrait = GFX_byz_Octavian_II_Zakharias_18
+				}
+				set_country_leader_description = {
+					ideology = democratic
+					desc = POLITICS_OCTAVIAN_II_ZAKHARIAS_18_DESC
+				}
+				BYZ_Octavian_II_Zakharias_dem = {
+					add_trait = {
+						ideology = senator_monarchy_sub
+						trait = byz_empire
+					}
+					remove_trait = {
+						ideology = senator_monarchy_sub
+						trait = young_emperor
+					}
+				}
+				set_country_leader_portrait = {
+					ideology = socialism
+					portrait = GFX_byz_Octavian_II_Zakharias_18
+				}
+				set_country_leader_description = {
+					ideology = socialism
+					desc = POLITICS_OCTAVIAN_II_ZAKHARIAS_18_DESC
+				}
+				BYZ_Octavian_II_Zakharias_soc = {
+					add_trait = {
+						ideology = social_monarchism
+						trait = byz_empire
+					}
+					remove_trait = {
+						ideology = social_monarchism
+						trait = young_emperor
+					}
+				}
+				set_country_leader_portrait = {
+					ideology = reactionist
+					portrait = GFX_byz_Octavian_II_Zakharias_18
+				}
+				set_country_leader_description = {
+					ideology = reactionist
+					desc = POLITICS_OCTAVIAN_II_ZAKHARIAS_18_DESC
+				}
+				BYZ_Octavian_II_Zakharias_rea = {
+					add_trait = {
+						ideology = military_monarchism_sub
+						trait = byz_empire
+					}
+					remove_trait = {
+						ideology = military_monarchism_sub
+						trait = young_emperor
 					}
 				}
 			}
