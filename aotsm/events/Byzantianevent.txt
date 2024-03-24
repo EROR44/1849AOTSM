@@ -1240,6 +1240,225 @@ country_event = { #Anthimus VI displaced
 	
 }
 
+country_event = { #Fighting for Emperor Live
+	id = byz.60
+	title = byz.60.t
+	desc = byz.60.d
+	picture = GFX_report_fight_for_emperor_live
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event byz.60"
+	}
+	
+	option = { #We must save him!
+		name = byz.60.a
+		ai_chance = {
+			base = 100
+		}
+		custom_effect_tooltip = byz_time_show_the_truth_tt
+		hidden_effect = {
+			random_list = {
+				75 = {
+					BYZ = {
+						country_event = {
+							id = byz.61
+							days = 10
+						}
+					}
+				}
+				25 = {
+					BYZ = {
+						country_event = {
+							id = byz.62
+							days = 10
+						}
+					}
+				}
+			}
+		}
+	}
+	
+}
+
+country_event = { #Emperor died
+	id = byz.61
+	title = byz.61.t
+	desc = byz.61.d
+	picture = GFX_report_emperor_died
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event byz.61"
+		hidden_effect = {
+			BYZ = {
+				set_country_flag = august_ii_dead
+			}
+		}
+	}
+	
+	option = { #Dark cloud upon us
+		name = byz.61.a
+		ai_chance = {
+			base = 100
+		}
+		add_stability = -0.05
+		custom_effect_tooltip = byz_dark_cloud_upon_us_tt
+		hidden_effect = {
+			BYZ = {
+				retire_character = BYZ_Mihael_IV_Zachareas
+				retire_character = BYZ_Mihael_IV_Zachareas_dem
+				retire_character = BYZ_Mihael_IV_Zachareas_rea
+				retire_character = BYZ_Mihael_IV_Zachareas_soc
+				retire_character = BYZ_Mihael_IV_Zachareas_marshal
+				BYZ_Octavian_II_Zakharias = {
+					promote_character = yes
+				}
+				BYZ_Octavian_II_Zakharias_dem = {
+					promote_character = senator_monarchy_sub
+				}
+				BYZ_Octavian_II_Zakharias_rea = {
+					promote_character = military_monarchism_sub
+				}
+				BYZ_Octavian_II_Zakharias_soc = {
+					promote_character = social_monarchism
+				}
+			}
+			BYZ = {
+				country_event = {
+					id = byz.63
+					days = 3
+				}
+			}
+			news_event = {
+				id = news.288
+				days = 2
+			}
+		}
+	}
+	
+}
+
+country_event = { #Emperor survive
+	id = byz.62
+	title = byz.62.t
+	desc = byz.62.d
+	picture = GFX_report_emperor_survive
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event byz.62"
+	}
+	
+	option = { #Prise the God
+		name = byz.62.a
+		ai_chance = {
+			base = 100
+		}
+		add_stability = 0.05
+		hidden_effect = {
+			news_event = {
+				id = news.161
+				days = 2
+			}
+		}
+	}
+	
+}
+
+country_event = { #Regent of Byzantium
+	id = byz.63
+	title = byz.63.t
+	desc = byz.63.d
+	picture = GFX_report_simbol_of_byzantium_empire
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event byz.63"
+		hidden_effect = {
+			BYZ = {
+				set_country_flag = byzantium_regency
+			}
+		}
+	}
+	
+	option = { #Constant is best
+		name = byz.63.a
+		ai_chance = {
+			base = 33
+		}
+		custom_effect_tooltip = byz_regency_constantine_tt
+		hidden_effect = {
+			BYZ = {
+				add_country_leader_role = {
+					character = BYZ_Constantin_Zahareas_regent
+					promote_leader = yes
+					country_leader = {
+						ideology = imperial_system_sub
+						expire = "1900.1.1.1"
+						traits = { }
+					}
+				}
+			}
+		}
+	}
+	
+	option = { #Ekaterina is best
+		name = byz.63.b
+		ai_chance = {
+			base = 34
+		}
+		custom_effect_tooltip = byz_regency_ekaterina_tt
+		hidden_effect = {
+			BYZ = {
+				add_country_leader_role = {
+					character = BYZ_Ekaterina
+					promote_leader = yes
+					country_leader = {
+						ideology = imperial_system_sub
+						expire = "1900.1.1.1"
+						traits = { }
+					}
+				}
+			}
+		}
+	}
+	
+	option = { #Cuscodian must be better
+		name = byz.63.c
+		ai_chance = {
+			base = 33
+		}
+		custom_effect_tooltip = byz_regency_cuscodian_tt
+		hidden_effect = {
+			BYZ = {
+				add_country_leader_role = {
+					character = BYZ_Julius_Romanus
+					promote_leader = yes
+					country_leader = {
+						ideology = imperial_system_sub
+						expire = "1900.1.1.1"
+						traits = { }
+					}
+				}
+			}
+		}
+	}
+	
+}
+
 country_event = { #Colonia Conference
 	id = byz.100
 	title = byz.100.t
@@ -5165,8 +5384,14 @@ country_event = { #Assasination on Empirer
 				}
 				set_country_flag = Tyutchev_is_dead
 			}
+			BYZ = {
+				country_event = {
+					id = byz.60
+					days = 2
+				}
+			}
 			news_event = {
-				id = news.161
+				id = news.287
 				days = 2
 			}
 		}
