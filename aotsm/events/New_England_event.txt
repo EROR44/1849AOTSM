@@ -144,6 +144,92 @@ country_event = { #CBI will rule us now NEN
 	
 }
 
+country_event = { #First election of Republic
+	id = nen.5
+	title = nen.5.t
+	desc = nen.5.d
+	picture = GFX_report_first_nen_election
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: event nen.5"}
+	
+	option = { #Second Term of Abraham
+		name = nen.5.a	
+		ai_chance = {
+            base = 50
+        }
+		custom_effect_tooltip = nen_second_president_abraham_tt
+		news_event = {
+			id = news.290
+			days = 2
+		}
+		hidden_effect = {
+			NEN = {
+				set_country_flag = nen_abraham_president
+			}
+		}
+	}
+	
+	option = {#Election Lee
+		name = nen.5.b
+		ai_chance = {
+            base = 45
+        }
+		add_popularity = {
+			ideology = authoritarian
+			popularity = 0.30
+		}
+		set_politics = {
+			ruling_party = authoritarian
+		}
+		custom_effect_tooltip = nen_second_president_lee_tt
+		news_event = {
+			id = news.290
+			days = 2
+		}
+		hidden_effect = {
+			if = {
+				limit = {
+					NEN = {
+						NEN_Robert_Edward_Lee = {
+							is_country_leader = no
+						}
+					}
+				}
+				NEN = {
+					set_country_flag = nen_lee_president
+					promote_character = NEN_Robert_Edward_Lee
+				}
+			}
+		}
+	}
+	
+	option = {
+		name = nen.5.a	
+		trigger = {
+			#has_global_flag = pru_himmler_leave_germany
+		}
+		ai_chance = {
+            base = 5
+        }
+		custom_effect_tooltip = nen_second_president_joshef_tt
+		news_event = {
+			id = news.290
+			days = 2
+		}
+		hidden_effect = {
+			NEN = {
+				set_country_flag = nen_joshef_president
+				promote_character = NEN_Joshef_Niydich
+			}
+		}
+	}
+	
+}
+
 country_event = { #NEN new leader Bairon
 	id = nen.41
 	title = nen.41.t
