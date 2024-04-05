@@ -1476,7 +1476,7 @@ FRR_prepare_for_war_with_cbi = {
 	}
 }
 
-FRR_xp_upgrade_spending_land = {
+FRR_xp_upgrade_spending_land_before_1851 = {
 	allowed = {
 		original_tag = FRR
 	}
@@ -1538,7 +1538,7 @@ FRR_more_divisions_on_front = {
 	
 	ai_strategy = { 
 		type = garrison 
-		value = 10 
+		value = 8
 	}
 	
 	ai_strategy = {
@@ -1579,13 +1579,13 @@ FRR_more_divisions_on_front = {
 	
 }
 
-FRR_xp_upgrade_spending_land = {
+FRR_xp_upgrade_spending_land_after_1852 = {
 	allowed = {
 		original_tag = FRR
 	}
 
 	enable = {
-		date < 1852.6.1
+		date > 1852.6.1 
 	}
 	
 	abort_when_not_enabled = yes
@@ -1593,8 +1593,40 @@ FRR_xp_upgrade_spending_land = {
 	ai_strategy = {
 		type = land_xp_spend_priority
 		id = upgrade_xp_cutoff
-		value = 100
+		value = 250
 	}
+}
+
+
+FRR_gw_italy_front_control_strategy = {
+
+	allowed = {
+		original_tag = FRR
+	}
+
+	enable = {	
+		date > 1854.1.1
+		has_war_with = SAR
+	}
+	
+	abort_when_not_enabled = yes	
+	
+	ai_strategy = {
+		type = front_unit_request
+		tag = SAR
+		value = 150
+	}
+	
+	ai_strategy = {
+        type = front_control
+        tag = "SAR"
+        priority = 1 
+        ordertype = front # front or invasion
+        execution_type = careful # one of careful balanced rush rush_weak (осторожно, сбалансированно, агрессивно, прорыв)
+        execute_order = yes # испольнять приказ или нет, если нет то просто будут стоять в обороне
+        manual_attack = yes # точечные атаки, если нет, то ИИ не будет совершать никаких отдельных атак, кроме батлплана (да да ИИ тоже умеет ручками)
+    }
+	
 }
 
 FRR_never_help_pru = {
