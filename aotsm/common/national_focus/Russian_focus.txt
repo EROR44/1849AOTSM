@@ -307,6 +307,10 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: focus RUS_expand_heavy_industry"
 			custom_effect_tooltip = RUS_add_6_arms_factory_in_tula_yar_kiev_n_novgorod
+			add_timed_idea = {
+				idea = RUS_expand_heavy_priduction_idea
+				days = 1095
+			}
 			hidden_effect = {
 				202 = {
 					add_extra_state_shared_building_slots = 1
@@ -368,7 +372,32 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: focus RUS_mass_production_of_weapon"
 			add_ideas = RUS_mass_weapons_production
+			custom_effect_tooltip = RUS_in_2_random_states_add_2_af
 			RUS_add_1_army_opinion = yes
+			hidden_effect = {
+				random_state = {
+					limit = {
+						is_owned_by = RUS
+					}
+					add_extra_state_shared_building_slots = 1
+					add_building_construction = {
+						type = arms_factory
+						level = 1
+						instant_build = yes
+					}
+				}
+				random_state = {
+					limit = {
+						is_owned_by = RUS
+					}
+					add_extra_state_shared_building_slots = 1
+					add_building_construction = {
+						type = arms_factory
+						level = 1
+						instant_build = yes
+					}
+				}
+			}
 		}
 	}
 	
@@ -753,7 +782,12 @@ focus_tree = {
 			ROOT = { 
 				num_of_civilian_factories > 49
 				num_of_military_factories > 29
-				NOT = { has_idea = RUS_dependence_from_import }
+				NOT = { 
+					OR = {
+						has_idea = RUS_dependence_from_import 
+						has_idea = RUS_dependence_from_import_1 
+					}
+				}
 			}
 			RUS_political_way_is_choosen = yes
 		}
@@ -1262,7 +1296,7 @@ focus_tree = {
 		allow_branch = {
 			NOT = {
 				OR = {
-					has_completed_focus = RUS_return_of_old_orders
+					has_completed_focus = RUS_end_of_political_isolation
 					has_completed_focus = RUS_raise_of_the_red
 				}
 			}
@@ -1308,6 +1342,15 @@ focus_tree = {
 		x = 40
 		y = 0
 		cost = 2
+		
+		allow_branch = {
+			NOT = {
+				OR = {
+					has_completed_focus = RUS_end_of_political_isolation 
+					has_completed_focus = RUS_end_of_political_isolation
+				}
+			}
+		}
 		
 		#offset = {
 		#	x = -3
@@ -7309,8 +7352,8 @@ focus_tree = {
 		id = RUS_the_giant_has_awakened #гигант пробудился
 		icon = GFX_focus_rus_tha_gigant_has_awakening
 		
-		x = 0
-		y = 7
+		x = 20
+		y = 1
 		cost = 5
 	
 		allow_branch = {
@@ -8977,9 +9020,13 @@ focus_tree = {
 		id = RUS_department_of_armed_forces
 		icon = GFX_focus_rus_armed_forces_department
 		
-		x = 26
-		y = 0
+		x = -10
+		y = 7
 		cost = 5 
+		
+		ai_will_do = {
+			factor = 1500
+		}
 		
 		allow_branch = {
 			has_completed_focus = RUS_end_of_political_isolation 
@@ -9010,6 +9057,10 @@ focus_tree = {
 		x = -6
 		y = 1
 		cost = 5 
+		
+		ai_will_do = {
+			factor = 1500
+		}
 		
 		available = {
 
@@ -9940,24 +9991,26 @@ focus_tree = {
 ######################################GREAT_WAR_FOCUSES_SECTION#####################################
 ####################################################################################################
 	
-	focus = {
+	focus = { 
 		id = RUS_unexpected_prussian_invade
 		icon = GFX_focus_rus_unexpected_prussian_invade
 		
-		x = -1
-		y = 8
+		x = -11
+		y = 5	
 		cost = 5
 		
 		#allow_branch = {
 		#	OR = {
 		#		has_completed_focus = RUS_end_of_political_isolation
-		#		has_completed_focus = RUS_raise_of_the_red
+		#		has_completed_focus = RUS_new_socialist_economic
+		#		has_completed_focus = RUS_organise_goverment_control_market
+		#		has_completed_focus = RUS_go_to_plan_economic
 		#	}
 		#}
 		
 		offset = {
-			x = -3
-			y = -9
+			x = 64
+			y = -10 
 			trigger ={
 				has_completed_focus = RUS_raise_of_the_red
 			}
@@ -9967,7 +10020,7 @@ focus_tree = {
 			aotsm_performed_by_event_or_solution = yes
 		}
 		
-		relative_position_id = RUS_liquidate_backwardness
+		relative_position_id = RUS_results_of_conferention
 		
 		mutually_exclusive = { 
 			focus = RUS_war_becomes_to_russia 
@@ -9996,7 +10049,9 @@ focus_tree = {
 		#allow_branch = {
 		#	OR = {
 		#		has_completed_focus = RUS_end_of_political_isolation
-		#		has_completed_focus = RUS_raise_of_the_red
+		#		has_completed_focus = RUS_new_socialist_economic
+		#		has_completed_focus = RUS_organise_goverment_control_market
+		#		has_completed_focus = RUS_go_to_plan_economic
 		#	}
 		#}
 		
@@ -10033,7 +10088,9 @@ focus_tree = {
 		#allow_branch = {
 		#	OR = {
 		#		has_completed_focus = RUS_end_of_political_isolation
-		#		has_completed_focus = RUS_raise_of_the_red
+		#		has_completed_focus = RUS_new_socialist_economic
+		#		has_completed_focus = RUS_organise_goverment_control_market
+		#		has_completed_focus = RUS_go_to_plan_economic
 		#	}
 		#}
 		
