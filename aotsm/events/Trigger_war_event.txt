@@ -14,6 +14,8 @@ country_event = {
 	
 	hidden =  yes
 	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event twe.1"}
+	
 	trigger = {
 		tag = BYZ
 		if = {
@@ -103,365 +105,47 @@ country_event = {
 	
 	hidden =  yes
 	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event twe.3"}
+	
 	trigger = {
 		tag = PRU
 		AUS = {
-			surrender_progress > 0.75
+			surrender_progress > 0.249
+		}
+		OR = {
+			9 = {
+				controller = {
+					OR = {
+						tag = PRU
+						is_subject_of = PRU
+						is_in_faction_with = PRU
+					}
+				}
+			}
+			4 = {
+				controller = {
+					OR = {
+						tag = PRU
+						is_subject_of = PRU
+						is_in_faction_with = PRU
+					}
+				}
+			}
 		}
 		PRU = { has_country_flag = PRU_vs_AUS_1 }
 		PRU = {
 			has_war_with = AUS
 		}
+		NOT = {
+			has_global_flag = austrian_capitulation_first_brotherwar_flag
+		}
 	}
+	
 	option = {
 		name = twe.3.a
 		hidden_effect = {
-			PRU = { white_peace = AUS }
-			AUS = { dismantle_faction = yes }
-			PRU = { dismantle_faction = yes }
-			every_other_country = {
-				limit = {
-					OR = {
-						has_country_flag = german_union_for_prussian
-						has_country_flag = german_union_for_austrian
-					}
-					OR = {
-						tag = MCS
-						tag = MCL
-						tag = LBE
-						tag = HLS
-						tag = SLG
-						tag = HAM
-						tag = HAN
-						tag = BRM
-						tag = OLD
-						tag = SAK
-						tag = TYR
-						tag = WEI
-						tag = MEI
-						tag = HES
-						tag = WLD
-						tag = FRN
-						tag = KOL
-					}
-				}
-				PRU = {
-					annex_country = { target = PREV transfer_troops = no }
-				}
-			}
-			PRU = { set_country_flag = victory_R_V_A_1 }
-			PRU = { set_cosmetic_tag = PRUNGU }
-			clr_global_flag = PRU_VS_AUS_1
-			if = {
-				limit = {
-					AUS = {
-						has_idea = AUS_never_surrender_idea
-					}
-				}
-				AUS = {
-					remove_ideas = AUS_never_surrender_idea
-				}
-			}
-			if = {
-				limit = {
-					PRU = {
-						has_idea = AUS_sabotage_pru
-					}
-				}
-				PRU = {
-					remove_ideas = AUS_sabotage_pru
-				}
-			}
-			if = {
-				limit = {
-					AUS = {
-						has_idea = rus_help_to_aus
-					}
-				}
-				AUS = {
-					remove_ideas = rus_help_to_aus
-				}
-			}
-			if = {
-				limit = {
-					AUS = {
-						has_idea = frr_help_to_aus
-					}
-				}
-				AUS = {
-					remove_ideas = frr_help_to_aus
-				}
-			}
-			if = {
-				limit = {
-					AUS = {
-						has_idea = cbi_help_to_aus
-					}
-				}
-				AUS = {
-					remove_ideas = cbi_help_to_aus
-				}
-			}
-			if = {
-				limit = {
-					AUS = {
-						has_country_flag = ask_russian
-					}
-				}
-				AUS = {
-					clr_country_flag = ask_russian
-				}
-			}
-			if = {
-				limit = {
-					AUS = {
-						has_country_flag = ask_france
-					}
-				}
-				AUS = {
-					clr_country_flag = ask_france
-				}
-			}
-			if = {
-				limit = {
-					AUS = {
-						has_country_flag = ask_cbi
-					}
-				}
-				AUS = {
-					clr_country_flag = ask_cbi
-				}
-			}
-			if = {
-				limit = {
-					any_country = {
-							has_country_flag = first_place_in_help_to_aus
-					}
-				}
-				every_country = {
-					limit = {
-						has_country_flag = first_place_in_help_to_aus
-					}
-					if = {
-						limit = {
-							check_variable = {
-								global.help_aus_1_var < 0.26
-							}
-						}
-						add_timed_idea = {
-							idea = aus_reparation_for_help_little
-							days = 180
-						}
-					}
-					if = {
-						limit = {
-							check_variable = {
-								global.help_aus_1_var > 0.25
-							}
-							check_variable = {
-								global.help_aus_1_var < 0.51
-							}
-						}
-						add_timed_idea = {
-							idea = aus_reparation_for_help_medium
-							days = 180
-						}
-					}
-					if = {
-						limit = {
-							check_variable = {
-								global.help_aus_1_var > 0.50
-							}
-						}
-						add_timed_idea = {
-							idea = aus_reparation_for_help_more
-							days = 180
-						}
-					}
-					clr_country_flag = chose_help_to_aus_flag
-					clr_country_flag = first_place_in_help_to_aus
-					if = {
-						limit = {
-							tag = RUS
-						}
-						remove_from_array = { global.austrian_help = RUS }
-					}
-					if = {
-						limit = {
-							tag = FRR
-						}
-						remove_from_array = { global.austrian_help = FRR }
-					}
-					if = {
-						limit = {
-							tag = CBI
-						}
-						remove_from_array = { global.austrian_help = CBI }
-					}
-				}
-				AUS = {
-					add_timed_idea = {
-						idea = aus_reparation_for_help_for_aus
-						days = 180
-					}
-				}
-			}
-			if = {
-				limit = {
-					any_country = {
-						has_country_flag = second_place_in_help_to_aus
-					}
-				}
-				every_country = {
-					limit = {
-						has_country_flag = second_place_in_help_to_aus
-					}
-					if = {
-						limit = {
-							check_variable = {
-								global.help_aus_2_var < 0.26
-							}
-						}
-						add_timed_idea = {
-							idea = aus_reparation_for_help_little
-							days = 180
-						}
-					}
-					if = {
-						limit = {
-							check_variable = {
-								global.help_aus_2_var > 0.25
-							}
-							check_variable = {
-								global.help_aus_2_var < 0.51
-							}
-						}
-						add_timed_idea = {
-							idea = aus_reparation_for_help_medium
-							days = 180
-						}
-					}
-					if = {
-						limit = {
-							check_variable = {
-								global.help_aus_2_var > 0.50
-							}
-						}
-						add_timed_idea = {
-							idea = aus_reparation_for_help_more
-							days = 180
-						}
-					}
-					clr_country_flag = chose_help_to_aus_flag
-					clr_country_flag = second_place_in_help_to_aus
-					if = {
-						limit = {
-							tag = RUS
-						}
-						remove_from_array = { global.austrian_help = RUS }
-					}
-					if = {
-						limit = {
-							tag = FRR
-						}
-						remove_from_array = { global.austrian_help = FRR }
-					}
-					if = {
-						limit = {
-							tag = CBI
-						}
-						remove_from_array = { global.austrian_help = CBI }
-					}
-				}
-			}
-			if = {
-				limit = {
-					any_country = {
-						has_country_flag = third_place_in_help_to_aus
-					}
-				}
-				every_country = {
-					limit = {
-						has_country_flag = first_place_in_help_to_aus
-					}
-					if = {
-						limit = {
-							check_variable = {
-								global.help_aus_3_var < 0.26
-							}
-						}
-						add_timed_idea = {
-							idea = aus_reparation_for_help_little
-							days = 180
-						}
-					}
-					if = {
-						limit = {
-							check_variable = {
-								global.help_aus_3_var > 0.25
-							}
-							check_variable = {
-								global.help_aus_3_var < 0.51
-							}
-						}
-						add_timed_idea = {
-							idea = aus_reparation_for_help_medium
-							days = 180
-						}
-					}
-					if = {
-						limit = {
-							check_variable = {
-								global.help_aus_3_var > 0.50
-							}
-						}
-						add_timed_idea = {
-							idea = aus_reparation_for_help_more
-							days = 180
-						}
-					}
-					clr_country_flag = chose_help_to_aus_flag
-					clr_country_flag = third_place_in_help_to_aus
-					if = {
-						limit = {
-							tag = RUS
-						}
-						remove_from_array = { global.austrian_help = RUS }
-					}
-					if = {
-						limit = {
-							tag = FRR
-						}
-						remove_from_array = { global.austrian_help = FRR }
-					}
-					if = {
-						limit = {
-							tag = CBI
-						}
-						remove_from_array = { global.austrian_help = CBI }
-					}
-				}
-			}
-			set_variable = { global.help_aus_1_var = 0 }
-			set_variable = { global.help_aus_2_var = 0 }
-			set_variable = { global.help_aus_3_var = 0 }
-			AUS = {
-				mark_focus_tree_layout_dirty = yes
-			}
-			AUS = {
-				delete_unit_template_and_units = {
-					division_template = "Baeuerliche Division"
-					disband = yes 
-				}
-			}
-			AUS = {
-				remove_mission = first_brother_war_decision
-			}
-			PRU = {
-				remove_mission = first_brother_war_decision
-			}
+			austrian_capitulation_first_brotherwar = yes
 		}
-		news_event = { hours = 24 id = news.2 }
 	}
 }
 
@@ -474,78 +158,34 @@ country_event = {
 	
 	hidden =  yes
 	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event twe.30"}
+	
 	trigger = {
 		tag = AUS
-		PRU = {
-			surrender_progress > 0.90
+		OR = {
+			PRU = {
+				surrender_progress > 0.499
+			}
+			64 = {
+				controller = {
+					OR = {
+						tag = AUS
+						is_subject_of = AUS
+						is_in_faction_with = AUS
+					}
+				}
+			}
 		}
 		PRU = { has_country_flag = PRU_vs_AUS_1 }
+		NOT = {
+			has_global_flag = prussian_capitulation_first_brotherwar_flag
+		}
 	}
+	
 	option = {
 		name = twe.30.a
-		AUS = {
-			white_peace = PRU
-		}
-		SIL = {
-			transfer_state = 66
-			transfer_state = 67
-			transfer_state = 762
-		}
-		AUS = {
-			set_autonomy = {
-				target = SIL
-				autonomy_state = autonomy_integrated_puppet
-				end_wars = yes
-				end_civil_wars = yes
-			}
-		}
-		SIL = {
-			set_politics = { ruling_party = democratic elections_allowed = no }
-			set_popularities = {
-				democratic = 55
-				socialism = 5
-				reactionist = 17
-				authoritarian = 13
-			}
-		}
-		add_to_array = { global.german_union_members = SIL }
-		add_to_array = { global.german_union_for_aus = SIL }
-		remove_from_array = { global.german_union_leader = PRU }
-		PRU = {
-			load_focus_tree = prussian_lose_focus
-		}
-		PRU = {
-			clr_country_flag = PRU_VS_AUS_1
-		}
-		every_other_country = {
-			limit = {
-				has_country_flag = german_union_for_prussian
-			}
-			clr_country_flag = german_union_for_prussian
-			remove_from_array = { global.german_union_for_pru = PREV }
-			set_country_flag = german_union_neutrality
-			add_to_array = { global.german_union_neutrality = PREV }
-		}
-		AUS = {
-			set_country_flag = victory_R_V_A_1
-		}
-		SIL = {
-			load_oob = SIL_army
-		}
-		PRU = {
-			remove_mission = first_brother_war_decision
-		}
-		AUS = {
-			remove_mission = first_brother_war_decision
-		}
-		PRU = {
-			set_country_flag = first_civilwar_scenario
-		}
-		PRU = {
-			country_event = {
-				id = ger.6
-				days = 17
-			}
+		hidden_effect = {
+			prussian_capitulation_first_brotherwar = yes
 		}
 	}
 }
@@ -559,6 +199,8 @@ country_event = {
 	
 	hidden =  yes
 	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event twe.4"}
+	
 	trigger = {
 		tag = PRU
 		BEL = {
@@ -566,6 +208,7 @@ country_event = {
 		}
 		PRU = { has_country_flag = P_V_B }
 	}
+	
 	option = {
 		name = twe.4.a
 		HOL = {
@@ -647,391 +290,47 @@ country_event = {
 	
 	hidden =  yes
 	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event twe.6"}
+	
 	trigger = {
 		tag = PRU
 		AUS = {
-			surrender_progress > 0.75
+			surrender_progress > 0.499
 		}
 		PRU = {
 			has_war_with = AUS
 		}
 		PRU = { has_country_flag = PRU_vs_AUS_2 }
-	}
-	option = {
-		name = twe.6.a
-		hidden_effect = {
-			PRU = { white_peace = AUS }
-			PRU = { set_country_flag = victory_R_V_A_2 }
-			PRU = { clr_country_flag = PRU_vs_AUS_2 }
-			if = {
-				limit = {
-					NOT = {
-						AUS = {
-							has_completed_focus = AUS_create_OEA
-						}
-					}
-				}
-				AUS = { dismantle_faction = yes }
-			}
-			if = {
-				limit = {
-					AUS = {
-						has_completed_focus = AUS_create_OEA
-					}
-				}
-				if = {
-					limit = {
-						has_country_flag = time_member_of_allience_aus
-					}
-					leave_faction = yes
-					clr_country_flag = time_member_of_allience_aus
-				}
-			}
-			if = {
-				limit = {
-					has_country_flag = time_member_of_allience
-				}
-				leave_faction = yes
-				clr_country_flag = time_member_of_allience
-			}
-			every_other_country = {
-				limit = {
+		OR = {
+			9 = {
+				controller = {
 					OR = {
-						has_country_flag = german_union_for_prussian
-						has_country_flag = german_union_for_austrian
+						tag = PRU
+						is_subject_of = PRU
+						is_in_faction_with = PRU
 					}
+				}
+			}
+			4 = {
+				controller = {
 					OR = {
-						tag = BAV
-						tag = VUR
-						tag = HOH
-						tag = BAD
-						tag = ELS
+						tag = PRU
+						is_subject_of = PRU
+						is_in_faction_with = PRU
 					}
-				}
-				PRU = {
-					annex_country = { target = PREV transfer_troops = no }
-				}
-			}
-			every_other_country = {
-				limit = {
-					has_country_flag = german_union_for_austrian
-				}
-				clr_country_flag = german_union_for_austrian
-				remove_from_array = { global.german_union_for_aus = ROOT }
-				set_country_flag = german_union_for_prussian
-				add_to_array = { global.german_union_for_pru = ROOT }
-			}
-			AUS = {
-				remove_from_array = { global.german_union_leader = ROOT }
-			}
-			if = {
-				limit = {
-					AUS = {
-						has_idea = AUS_never_surrender_idea
-					}
-				}
-				AUS = {
-					remove_ideas = AUS_never_surrender_idea
-				}
-			}
-			if = {
-				limit = {
-					PRU = {
-						has_idea = AUS_sabotage_pru
-					}
-				}
-				PRU = {
-					remove_ideas = AUS_sabotage_pru
-				}
-			}
-			if = {
-				limit = {
-					AUS = {
-						has_idea = rus_help_to_aus
-					}
-				}
-				AUS = {
-					remove_ideas = rus_help_to_aus
-				}
-			}
-			if = {
-				limit = {
-					AUS = {
-						has_idea = frr_help_to_aus
-					}
-				}
-				AUS = {
-					remove_ideas = frr_help_to_aus
-				}
-			}
-			if = {
-				limit = {
-					AUS = {
-						has_idea = cbi_help_to_aus
-					}
-				}
-				AUS = {
-					remove_ideas = cbi_help_to_aus
-				}
-			}
-			if = {
-				limit = {
-					AUS = {
-						has_country_flag = ask_russian
-					}
-				}
-				AUS = {
-					clr_country_flag = ask_russian
-				}
-			}
-			if = {
-				limit = {
-					AUS = {
-						has_country_flag = ask_france
-					}
-				}
-				AUS = {
-					clr_country_flag = ask_france
-				}
-			}
-			if = {
-				limit = {
-					AUS = {
-						has_country_flag = ask_cbi
-					}
-				}
-				AUS = {
-					clr_country_flag = ask_cbi
-				}
-			}
-			if = {
-				limit = {
-					any_country = {
-							has_country_flag = first_place_in_help_to_aus
-					}
-				}
-				every_country = {
-					limit = {
-						has_country_flag = first_place_in_help_to_aus
-					}
-					if = {
-						limit = {
-							check_variable = {
-								global.help_aus_1_var < 0.26
-							}
-						}
-						add_timed_idea = {
-							idea = aus_reparation_for_help_little
-							days = 180
-						}
-					}
-					if = {
-						limit = {
-							check_variable = {
-								global.help_aus_1_var > 0.25
-							}
-							check_variable = {
-								global.help_aus_1_var < 0.51
-							}
-						}
-						add_timed_idea = {
-							idea = aus_reparation_for_help_medium
-							days = 180
-						}
-					}
-					if = {
-						limit = {
-							check_variable = {
-								global.help_aus_1_var > 0.50
-							}
-						}
-						add_timed_idea = {
-							idea = aus_reparation_for_help_more
-							days = 180
-						}
-					}
-					clr_country_flag = chose_help_to_aus_flag
-					clr_country_flag = first_place_in_help_to_aus
-					if = {
-						limit = {
-							tag = RUS
-						}
-						remove_from_array = { global.austrian_help = RUS }
-					}
-					if = {
-						limit = {
-							tag = FRR
-						}
-						remove_from_array = { global.austrian_help = FRR }
-					}
-					if = {
-						limit = {
-							tag = CBI
-						}
-						remove_from_array = { global.austrian_help = CBI }
-					}
-				}
-				AUS = {
-					add_timed_idea = {
-						idea = aus_reparation_for_help_for_aus
-						days = 180
-					}
-				}
-			}
-			if = {
-				limit = {
-					any_country = {
-						has_country_flag = second_place_in_help_to_aus
-					}
-				}
-				every_country = {
-					limit = {
-						has_country_flag = second_place_in_help_to_aus
-					}
-					if = {
-						limit = {
-							check_variable = {
-								global.help_aus_2_var < 0.26
-							}
-						}
-						add_timed_idea = {
-							idea = aus_reparation_for_help_little
-							days = 180
-						}
-					}
-					if = {
-						limit = {
-							check_variable = {
-								global.help_aus_2_var > 0.25
-							}
-							check_variable = {
-								global.help_aus_2_var < 0.51
-							}
-						}
-						add_timed_idea = {
-							idea = aus_reparation_for_help_medium
-							days = 180
-						}
-					}
-					if = {
-						limit = {
-							check_variable = {
-								global.help_aus_2_var > 0.50
-							}
-						}
-						add_timed_idea = {
-							idea = aus_reparation_for_help_more
-							days = 180
-						}
-					}
-					clr_country_flag = chose_help_to_aus_flag
-					clr_country_flag = second_place_in_help_to_aus
-					if = {
-						limit = {
-							tag = RUS
-						}
-						remove_from_array = { global.austrian_help = RUS }
-					}
-					if = {
-						limit = {
-							tag = FRR
-						}
-						remove_from_array = { global.austrian_help = FRR }
-					}
-					if = {
-						limit = {
-							tag = CBI
-						}
-						remove_from_array = { global.austrian_help = CBI }
-					}
-				}
-			}
-			if = {
-				limit = {
-					any_country = {
-						has_country_flag = third_place_in_help_to_aus
-					}
-				}
-				every_country = {
-					limit = {
-						has_country_flag = first_place_in_help_to_aus
-					}
-					if = {
-						limit = {
-							check_variable = {
-								global.help_aus_3_var < 0.26
-							}
-						}
-						add_timed_idea = {
-							idea = aus_reparation_for_help_little
-							days = 180
-						}
-					}
-					if = {
-						limit = {
-							check_variable = {
-								global.help_aus_3_var > 0.25
-							}
-							check_variable = {
-								global.help_aus_3_var < 0.51
-							}
-						}
-						add_timed_idea = {
-							idea = aus_reparation_for_help_medium
-							days = 180
-						}
-					}
-					if = {
-						limit = {
-							check_variable = {
-								global.help_aus_3_var > 0.50
-							}
-						}
-						add_timed_idea = {
-							idea = aus_reparation_for_help_more
-							days = 180
-						}
-					}
-					clr_country_flag = chose_help_to_aus_flag
-					clr_country_flag = third_place_in_help_to_aus
-					if = {
-						limit = {
-							tag = RUS
-						}
-						remove_from_array = { global.austrian_help = RUS }
-					}
-					if = {
-						limit = {
-							tag = FRR
-						}
-						remove_from_array = { global.austrian_help = FRR }
-					}
-					if = {
-						limit = {
-							tag = CBI
-						}
-						remove_from_array = { global.austrian_help = CBI }
-					}
-				}
-			}
-			set_variable = { global.help_aus_1_var = 0 }
-			set_variable = { global.help_aus_2_var = 0 }
-			set_variable = { global.help_aus_3_var = 0 }
-			AUS = {
-				mark_focus_tree_layout_dirty = yes
-			}
-			if = {
-				limit = {
-					AUS = {
-						has_completed_focus = AUS_create_OEA
-					}
-				}
-				AUS = {
-					create_faction = OEA_faction
 				}
 			}
 		}
-		news_event = { hours = 24 id = news.13 }
+		NOT = {
+			has_global_flag = austrian_capitulation_second_brotherwar_flag
+		}
+	}
+	
+	option = {
+		name = twe.6.a
+		hidden_effect = {
+			austrian_capitulation_second_brotherwar = yes
+		}
 	}
 }
 
@@ -1044,262 +343,33 @@ country_event = {
 	
 	hidden =  yes
 	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event twe.60"}
+	
 	trigger = {
 		tag = AUS
 		PRU = {
-			surrender_progress > 0.95
+			surrender_progress > 0.749
+		}
+		64 = {
+			controller = {
+				OR = {
+					tag = AUS
+					is_subject_of = AUS
+					is_in_faction_with = AUS
+				}
+			}
 		}
 		PRU = { has_country_flag = PRU_vs_AUS_2 }
+		NOT = {
+			has_global_flag = prussian_capitulation_second_brotherwar_flag
+		}
 	}
+	
 	option = {
 		name = twe.6.a
-		hidden_effect = {
-			AUS = { set_country_flag = victory_R_V_A_2 }
-			PRU = { clr_country_flag = PRU_vs_AUS_2 }
-			remove_from_faction = AUS
-			remove_from_faction = BAD
-			remove_from_faction = VUR
-			remove_from_faction = BAV
-			AUS = { dismantle_faction = yes }
-			PRU = { white_peace = AUS }
-			PRU = { white_peace = BAD }
-			PRU = { white_peace = BAV }
-			PRU = { white_peace = VUR }
-		}
-		news_event = { hours = 24 id = news.14 }
-		PRU = { country_event = { hours = 24 id = ger.6 } }
-		PRU = { set_country_flag = PRU_revolution }
+		prussian_capitulation_second_brotherwar = yes
 	}
 }
-
-#country_event = {
-#	id = twe.7 #Third AUS vs PRU BYZ(Pru win)
-#	title = twe.7.t
-#	desc = twe.7.d
-#	picture = GFX_report_event_aotsm_generic_signing_the_contract#	
-#	fire_only_once = yes
-#
-#	hidden =  yes
-#	
-#	trigger = {
-#		tag = PRU
-#		AUS = {
-#			surrender_progress > 0.05
-#		}
-#		PRU = { has_country_flag = PRU_vs_AUS_3 }
-#	}
-#	option = {
-#		name = twe.7.a
-#		hidden_effect = {
-#			PRU = { set_country_flag = victory_R_V_A_3 }
-#			PRU = { clr_country_flag = PRU_vs_AUS_3 }
-#			PRU = { white_peace = AUS }
-#			BYZ = { white_peace = AUS }
-#			HUN = {
-#				transfer_state = 43
-#				transfer_state = 45
-#				transfer_state = 70
-#				transfer_state = 71
-#				transfer_state = 73
-#				transfer_state = 76
-#				transfer_state = 82
-#				transfer_state = 83
-#				transfer_state = 84
-#				transfer_state = 154
-#				transfer_state = 155
-#				transfer_state = 664
-#				transfer_state = 764
-#				add_state_core = 43
-#				add_state_core = 45
-#				add_state_core = 70
-#				add_state_core = 71
-#				add_state_core = 73
-#				add_state_core = 76
-#				add_state_core = 82
-#				add_state_core = 83
-#				add_state_core = 84
-#				add_state_core = 103
-#				add_state_core = 109
-#				add_state_core = 154
-#				add_state_core = 155
-#				add_state_core = 664
-#				add_state_core = 764
-#			}
-#			BOH = {
-#				transfer_state = 9
-#				transfer_state = 69
-#				transfer_state = 72
-#				transfer_state = 74
-#				transfer_state = 75
-#				add_state_core = 9
-#				add_state_core = 69
-#				add_state_core = 72
-#				add_state_core = 74
-#				add_state_core = 75
-#				add_state_core = 810
-#			}
-#			GLA = {
-#				transfer_state = 80
-#				transfer_state = 88
-#				transfer_state = 89
-#				transfer_state = 91
-#				add_state_core = 80
-#				add_state_core = 88
-#				add_state_core = 89
-#				add_state_core = 91
-#			}
-#			VEN = {
-#				transfer_state = 39
-#				transfer_state = 159
-#				transfer_state = 160
-#				add_state_core = 159
-#				add_state_core = 160
-#			}
-#			AUS = {
-#				remove_state_core = 4
-#				remove_state_core = 9
-#				remove_state_core = 39
-#				remove_state_core = 43
-#				remove_state_core = 45
-#				remove_state_core = 69
-#				remove_state_core = 70
-#				remove_state_core = 71
-#				remove_state_core = 72
-#				remove_state_core = 73
-#				remove_state_core = 74
-#				remove_state_core = 75
-#				remove_state_core = 76
-#				remove_state_core = 80
-#				remove_state_core = 83
-#				remove_state_core = 84
-#				remove_state_core = 88
-#				remove_state_core = 89
-#				remove_state_core = 91
-#				remove_state_core = 102
-#				remove_state_core = 103
-#				remove_state_core = 109
-#				remove_state_core = 152
-#				remove_state_core = 153
-#				remove_state_core = 154
-#				remove_state_core = 155
-#				remove_state_core = 159
-#				remove_state_core = 160
-#				remove_state_core = 163
-#				remove_state_core = 664
-#				remove_state_core = 736
-#				remove_state_core = 764
-#				remove_state_core = 810
-#				remove_state_core = 887
-#			}
-#			PRU = {
-#				transfer_state = 4
-#				transfer_state = 152
-#				transfer_state = 153
-#				transfer_state = 887
-#				add_state_core = 887
-#			}
-#			if = {
-#				limit = {
-#					BYZ = {
-#						has_country_flag = byz_imperia_politic
-#					}
-#				}
-#				BYZ = { 
-#					transfer_state = 102
-#					transfer_state = 103
-#					transfer_state = 109
-#					transfer_state = 163
-#					transfer_state = 736
-#				}
-#			}
-#			if = {
-#				limit = {
-#					BYZ = {
-#						has_country_flag = byz_democratic_politic
-#					}
-#				}
-#				DAL = {
-#					transfer_state = 102
-#					transfer_state = 103
-#					transfer_state = 109
-#					transfer_state = 163
-#					transfer_state = 736
-#				}
-#			}
-#			BYZ = { set_country_flag = BYZ_vs_AUS_win }
-#			PRU = { puppet = VEN }
-#			PRU = { puppet = BOH }
-#			PRU = {
-#				transfer_state = 69
-#				add_state_core = 69
-#				transfer_state = 810
-#				add_state_core = 810
-#			}
-#			BOH = {
-#				set_politics = { ruling_party = authoritarian elections_allowed = no }
-#				set_popularities = {
-#					democratic = 24
-#					socialism = 6
-#					reactionist = 26
-#					authoritarian = 44
-#				}
-#				add_country_leader_role = {
-#					character = BOH_Moris_fon_Bissing
-#					promote_leader = yes
-#					country_leader = {
-#						ideology = centrism
-#						expire = "1900.1.1.1"
-#						traits = { }
-#					}
-#				}
-#			}
-#			VEN = {
-#				inherit_technology = AUS
-#			}
-#			BOH = {
-#				inherit_technology = AUS
-#			}
-#			HUN = {
-#				inherit_technology = AUS
-#			}
-#			GLA = {
-#				inherit_technology = AUS
-#			}
-#			BOH = {
-#				load_oob = BOH_oob
-#			}
-#			BOH = {
-#				set_cosmetic_tag = BOHPRU
-#			}
-#			HUN = {
-#				load_oob = HUN_oob
-#			}
-#			GLA = {
-#				load_oob = GLA_oob
-#			}
-#			VEN = { 
-#				load_oob = VEN_oob
-#			}
-#			if = {
-#				limit = {
-#					VLH = {
-#						has_country_flag = VLH_CR
-#					}
-#				}
-#				VLH = {
-#					create_faction = ANTI-HUNGARY-ALLIENCE
-#				}
-#				GLA = {
-#					country_event = { id = te.13 hours = 12 }
-#				}
-#				VLH = {
-#					country_event = { id = te.14 days = 28 }
-#				}
-#			}
-#		}
-#		news_event = news.15 
-#	}
-#}
 
 #country_event = {
 #	id = twe.70 #Third AUS vs PRU BYZ(Aus win)
@@ -1309,6 +379,8 @@ country_event = {
 #	fire_only_once = yes
 #
 #	hidden =  yes
+#
+#	immediate = {log = "[GetDateText]: [Root.GetName]: event twe.70"}
 #	
 #	trigger = {
 #		tag = AUS
@@ -1339,6 +411,8 @@ country_event = {
 	fire_only_once = yes
 
 	hidden =  yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event twe.8"}
 	
 	trigger = {
 		OR = {
