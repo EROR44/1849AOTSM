@@ -1,0 +1,2561 @@
+austrian_capitulation_first_brotherwar = {
+	set_global_flag = austrian_capitulation_first_brotherwar_flag
+	every_other_country = {
+		limit = {
+			OR = {
+				has_country_flag = german_union_for_prussian
+				has_country_flag = german_union_for_austrian
+			}
+			OR = {
+				tag = MCS
+				tag = MCL
+				tag = LBE
+				tag = HLS
+				tag = SLG
+				tag = HAM
+				tag = HAN
+				tag = BRM
+				tag = OLD
+				tag = SAK
+				tag = TYR
+				tag = WEI
+				tag = MEI
+				tag = HES
+				tag = WLD
+				tag = FRN
+				tag = KOL
+			}
+		}
+		if = {
+			limit = {
+				tag = MCS
+			}
+		}
+		if = {
+			limit = {
+				tag = MCL
+			}
+		}
+		if = {
+			limit = {
+				tag = LBE
+			}
+		}
+		if = {
+			limit = {
+				tag = HLS
+			}
+		}
+		if = {
+			limit = {
+				tag = SLG
+			}
+		}
+		if = {
+			limit = {
+				tag = HAM
+			}
+		}
+		if = {
+			limit = {
+				tag = HAN
+			}
+			HAN = {
+				set_character_name = {
+					character = HAN_Georg_Hannoverskiy
+					name = HAN_Georg_Hannoverskiy_none_king
+				}
+				set_nationality = {
+					target_country = PRU
+					character = HAN_Georg_Hannoverskiy
+				}
+				set_nationality = {
+					target_country = PRU
+					character = HAN_Adolf_Frederick
+				}
+			}
+		}
+		if = {
+			limit = {
+				tag = BRM
+			}
+		}
+		if = {
+			limit = {
+				tag = OLD
+			}
+		}
+		if = {
+			limit = {
+				tag = SAK
+			}
+		}
+		if = {
+			limit = {
+				tag = TYR
+			}
+		}
+		if = {
+			limit = {
+				tag = WEI
+			}
+		}
+		if = {
+			limit = {
+				tag = MEI
+			}
+		}
+		if = {
+			limit = {
+				tag = HES
+			}
+		}
+		if = {
+			limit = {
+				tag = WLD
+			}
+		}
+		if = {
+			limit = {
+				tag = FRN
+			}
+		}
+		if = {
+			limit = {
+				tag = KOL
+			}
+		}
+		PRU = {
+			annex_country = { target = PREV transfer_troops = no }
+		}
+	}
+	PRU = { set_country_flag = victory_R_V_A_1 }
+	news_event = { 
+		id = news.2 
+		days = 1
+	}
+	PRU = { clr_country_flag = PRU_vs_AUS_1 }
+	if = {
+		limit = {
+			AUS = {
+				has_idea = AUS_never_surrender_idea
+			}
+		}
+		AUS = {
+			remove_ideas = AUS_never_surrender_idea
+		}
+	}
+	if = {
+		limit = {
+			PRU = {
+				has_idea = AUS_sabotage_pru
+			}
+		}
+		PRU = {
+			remove_ideas = AUS_sabotage_pru
+		}
+	}
+	if = {
+		limit = {
+			AUS = {
+				has_idea = rus_help_to_aus
+			}
+		}
+		AUS = {
+			remove_ideas = rus_help_to_aus
+		}
+	}
+	if = {
+		limit = {
+			AUS = {
+				has_idea = frr_help_to_aus
+			}
+		}
+		AUS = {
+			remove_ideas = frr_help_to_aus
+		}
+	}
+	if = {
+		limit = {
+			AUS = {
+				has_idea = cbi_help_to_aus
+			}
+		}
+		AUS = {
+			remove_ideas = cbi_help_to_aus
+		}
+	}
+	if = {
+		limit = {
+			AUS = {
+				has_country_flag = ask_russian
+			}
+		}
+		AUS = {
+			clr_country_flag = ask_russian
+		}
+	}
+	if = {
+		limit = {
+			AUS = {
+				has_country_flag = ask_france
+			}
+		}
+		AUS = {
+			clr_country_flag = ask_france
+		}
+	}
+	if = {
+		limit = {
+			AUS = {
+				has_country_flag = ask_cbi
+			}
+		}
+		AUS = {
+			clr_country_flag = ask_cbi
+		}
+	}
+	if = {
+		limit = {
+			any_country = {
+					has_country_flag = first_place_in_help_to_aus
+			}
+		}
+		every_country = {
+			limit = {
+				has_country_flag = first_place_in_help_to_aus
+			}
+			if = {
+				limit = {
+					check_variable = {
+						global.help_aus_1_div < 26
+					}
+				}
+				add_timed_idea = {
+					idea = aus_reparation_for_help_little
+					days = 180
+				}
+			}
+			if = {
+				limit = {
+					check_variable = {
+						global.help_aus_1_div > 25
+					}
+					check_variable = {
+						global.help_aus_1_div < 51
+					}
+				}
+				add_timed_idea = {
+					idea = aus_reparation_for_help_medium
+					days = 180
+				}
+			}
+			if = {
+				limit = {
+					check_variable = {
+						global.help_aus_1_div > 50
+					}
+				}
+				add_timed_idea = {
+					idea = aus_reparation_for_help_more
+					days = 180
+				}
+			}
+			clr_country_flag = chose_help_to_aus_flag
+			clr_country_flag = first_place_in_help_to_aus
+			if = {
+				limit = {
+					tag = RUS
+				}
+				remove_from_array = { global.austrian_help = RUS }
+			}
+			if = {
+				limit = {
+					tag = FRR
+				}
+				remove_from_array = { global.austrian_help = FRR }
+			}
+			if = {
+				limit = {
+					tag = CBI
+				}
+				remove_from_array = { global.austrian_help = CBI }
+			}
+		}
+		AUS = {
+			add_timed_idea = {
+				idea = aus_reparation_for_help_for_aus
+				days = 180
+			}
+		}
+	}
+	if = {
+		limit = {
+			any_country = {
+				has_country_flag = second_place_in_help_to_aus
+			}
+		}
+		every_country = {
+			limit = {
+				has_country_flag = second_place_in_help_to_aus
+			}
+			if = {
+				limit = {
+					check_variable = {
+						global.help_aus_2_div < 26
+					}
+				}
+				add_timed_idea = {
+					idea = aus_reparation_for_help_little
+					days = 180
+				}
+			}
+			if = {
+				limit = {
+					check_variable = {
+						global.help_aus_2_div > 25
+					}
+					check_variable = {
+						global.help_aus_2_div < 51
+					}
+				}
+				add_timed_idea = {
+					idea = aus_reparation_for_help_medium
+					days = 180
+				}
+			}
+			if = {
+				limit = {
+					check_variable = {
+						global.help_aus_2_div > 50
+					}
+				}
+				add_timed_idea = {
+					idea = aus_reparation_for_help_more
+					days = 180
+				}
+			}
+			clr_country_flag = chose_help_to_aus_flag
+			clr_country_flag = second_place_in_help_to_aus
+			if = {
+				limit = {
+					tag = RUS
+				}
+				remove_from_array = { global.austrian_help = RUS }
+			}
+			if = {
+				limit = {
+					tag = FRR
+				}
+				remove_from_array = { global.austrian_help = FRR }
+			}
+			if = {
+				limit = {
+					tag = CBI
+				}
+				remove_from_array = { global.austrian_help = CBI }
+			}
+		}
+	}
+	if = {
+		limit = {
+			any_country = {
+				has_country_flag = third_place_in_help_to_aus
+			}
+		}
+		every_country = {
+			limit = {
+				has_country_flag = third_place_in_help_to_aus
+			}
+			if = {
+				limit = {
+					check_variable = {
+						global.help_aus_3_div < 26
+					}
+				}
+				add_timed_idea = {
+					idea = aus_reparation_for_help_little
+					days = 180
+				}
+			}
+			if = {
+				limit = {
+					check_variable = {
+						global.help_aus_3_div > 25
+					}
+					check_variable = {
+						global.help_aus_3_div < 51
+					}
+				}
+				add_timed_idea = {
+					idea = aus_reparation_for_help_medium
+					days = 180
+				}
+			}
+			if = {
+				limit = {
+					check_variable = {
+						global.help_aus_3_div > 50
+					}
+				}
+				add_timed_idea = {
+					idea = aus_reparation_for_help_more
+					days = 180
+				}
+			}
+			clr_country_flag = chose_help_to_aus_flag
+			clr_country_flag = third_place_in_help_to_aus
+			if = {
+				limit = {
+					tag = RUS
+				}
+				remove_from_array = { global.austrian_help = RUS }
+			}
+			if = {
+				limit = {
+					tag = FRR
+				}
+				remove_from_array = { global.austrian_help = FRR }
+			}
+			if = {
+				limit = {
+					tag = CBI
+				}
+				remove_from_array = { global.austrian_help = CBI }
+			}
+		}
+	}
+	set_variable = { global.help_aus_1_var = 0 }
+	set_variable = { global.help_aus_2_var = 0 }
+	set_variable = { global.help_aus_3_var = 0 }
+	calculation_austrian_help = yes
+	AUS = {
+		mark_focus_tree_layout_dirty = yes
+	}
+	AUS = {
+		delete_unit_template_and_units = {
+			division_template = "Baeuerliche Division"
+			disband = yes 
+		}
+	}
+	AUS = {
+		remove_mission = first_brother_war_decision
+	}
+	PRU = {
+		remove_mission = first_brother_war_decision
+	}
+	PRU = {
+		country_event = {
+			id = ger_blackorder.1
+			days = 25
+		}
+		add_ideas = collapse_of_administration
+	}
+	PRU = { 
+		white_peace = {
+			tag = AUS
+			message = first_brotherwar_peace_pru_tt
+		}
+	}
+	AUS = { dismantle_faction = yes }
+	PRU = { dismantle_faction = yes }
+	every_state = {
+		limit = {
+			owner = {
+				original_tag = PRU
+			}
+			NOT = {
+				is_core_of = PRU
+			}
+			NOT = {
+				has_dynamic_modifier = {
+					modifier = PRU_loyal_to_prussian_state_modifier
+				}
+			}
+		}
+		add_dynamic_modifier = {
+			modifier = PRU_loyal_to_prussian_state_modifier
+		}
+	}
+	every_state = {
+		limit = {
+			owner = {
+				original_tag = PRU
+			}
+			NOT = {
+				is_core_of = PRU
+			}
+			NOT = {
+				has_dynamic_modifier = {
+					modifier = PRU_part_of_german_confederacy_state_modifier
+				}
+			}
+		}
+		add_dynamic_modifier = {
+			modifier = PRU_part_of_german_confederacy_state_modifier
+		}
+	}
+}
+
+prussian_capitulation_first_brotherwar = {
+	set_global_flag = prussian_capitulation_first_brotherwar_flag
+	SIL = {
+		transfer_state = 66
+		transfer_state = 67
+		transfer_state = 762
+	}
+	AUS = {
+		set_autonomy = {
+			target = SIL
+			autonomy_state = autonomy_integrated_puppet
+			end_wars = yes
+			end_civil_wars = yes
+		}
+	}
+	SIL = {
+		set_politics = { ruling_party = democratic elections_allowed = no }
+		set_popularities = {
+			democratic = 55
+			socialism = 5
+			reactionist = 17
+			authoritarian = 13
+		}
+	}
+	add_to_array = { global.german_union_members = SIL }
+	add_to_array = { global.german_union_for_aus = SIL }
+	remove_from_array = { global.german_union_leader = PRU }
+	PRU = {
+		load_focus_tree = prussian_lose_focus
+	}
+	PRU = {
+		clr_country_flag = PRU_VS_AUS_1
+	}
+	every_other_country = {
+		limit = {
+			has_country_flag = german_union_for_prussian
+		}
+		clr_country_flag = german_union_for_prussian
+		remove_from_array = { global.german_union_for_pru = PREV }
+		set_country_flag = german_union_neutrality
+		add_to_array = { global.german_union_neutrality = PREV }
+	}
+	AUS = {
+		set_country_flag = victory_R_V_A_1
+	}
+	SIL = {
+		load_oob = SIL_army
+	}
+	PRU = {
+		remove_mission = first_brother_war_decision
+	}
+	AUS = {
+		remove_mission = first_brother_war_decision
+	}
+	PRU = {
+		set_country_flag = first_civilwar_scenario
+	}
+	if = {
+		limit = {
+			AUS = {
+				has_idea = AUS_never_surrender_idea
+			}
+		}
+		AUS = {
+			remove_ideas = AUS_never_surrender_idea
+		}
+	}
+	if = {
+		limit = {
+			PRU = {
+				has_idea = AUS_sabotage_pru
+			}
+		}
+		PRU = {
+			remove_ideas = AUS_sabotage_pru
+		}
+	}
+	if = {
+		limit = {
+			AUS = {
+				has_idea = rus_help_to_aus
+			}
+		}
+		AUS = {
+			remove_ideas = rus_help_to_aus
+		}
+	}
+	if = {
+		limit = {
+			AUS = {
+				has_idea = frr_help_to_aus
+			}
+		}
+		AUS = {
+			remove_ideas = frr_help_to_aus
+		}
+	}
+	if = {
+		limit = {
+			AUS = {
+				has_idea = cbi_help_to_aus
+			}
+		}
+		AUS = {
+			remove_ideas = cbi_help_to_aus
+		}
+	}
+	if = {
+		limit = {
+			AUS = {
+				has_country_flag = ask_russian
+			}
+		}
+		AUS = {
+			clr_country_flag = ask_russian
+		}
+	}
+	if = {
+		limit = {
+			AUS = {
+				has_country_flag = ask_france
+			}
+		}
+		AUS = {
+			clr_country_flag = ask_france
+		}
+	}
+	if = {
+		limit = {
+			AUS = {
+				has_country_flag = ask_cbi
+			}
+		}
+		AUS = {
+			clr_country_flag = ask_cbi
+		}
+	}
+	if = {
+		limit = {
+			any_country = {
+					has_country_flag = first_place_in_help_to_aus
+			}
+		}
+		every_country = {
+			limit = {
+				has_country_flag = first_place_in_help_to_aus
+			}
+			if = {
+				limit = {
+					check_variable = {
+						global.help_aus_1_div < 26
+					}
+				}
+				add_timed_idea = {
+					idea = aus_reparation_for_help_little
+					days = 180
+				}
+			}
+			if = {
+				limit = {
+					check_variable = {
+						global.help_aus_1_div > 25
+					}
+					check_variable = {
+						global.help_aus_1_div < 51
+					}
+				}
+				add_timed_idea = {
+					idea = aus_reparation_for_help_medium
+					days = 180
+				}
+			}
+			if = {
+				limit = {
+					check_variable = {
+						global.help_aus_1_div > 50
+					}
+				}
+				add_timed_idea = {
+					idea = aus_reparation_for_help_more
+					days = 180
+				}
+			}
+			clr_country_flag = chose_help_to_aus_flag
+			clr_country_flag = first_place_in_help_to_aus
+			if = {
+				limit = {
+					tag = RUS
+				}
+				remove_from_array = { global.austrian_help = RUS }
+			}
+			if = {
+				limit = {
+					tag = FRR
+				}
+				remove_from_array = { global.austrian_help = FRR }
+			}
+			if = {
+				limit = {
+					tag = CBI
+				}
+				remove_from_array = { global.austrian_help = CBI }
+			}
+		}
+		AUS = {
+			add_timed_idea = {
+				idea = aus_reparation_for_help_for_aus
+				days = 180
+			}
+		}
+	}
+	if = {
+		limit = {
+			any_country = {
+				has_country_flag = second_place_in_help_to_aus
+			}
+		}
+		every_country = {
+			limit = {
+				has_country_flag = second_place_in_help_to_aus
+			}
+			if = {
+				limit = {
+					check_variable = {
+						global.help_aus_2_div < 26
+					}
+				}
+				add_timed_idea = {
+					idea = aus_reparation_for_help_little
+					days = 180
+				}
+			}
+			if = {
+				limit = {
+					check_variable = {
+						global.help_aus_2_div > 25
+					}
+					check_variable = {
+						global.help_aus_2_div < 51
+					}
+				}
+				add_timed_idea = {
+					idea = aus_reparation_for_help_medium
+					days = 180
+				}
+			}
+			if = {
+				limit = {
+					check_variable = {
+						global.help_aus_2_div > 50
+					}
+				}
+				add_timed_idea = {
+					idea = aus_reparation_for_help_more
+					days = 180
+				}
+			}
+			clr_country_flag = chose_help_to_aus_flag
+			clr_country_flag = second_place_in_help_to_aus
+			if = {
+				limit = {
+					tag = RUS
+				}
+				remove_from_array = { global.austrian_help = RUS }
+			}
+			if = {
+				limit = {
+					tag = FRR
+				}
+				remove_from_array = { global.austrian_help = FRR }
+			}
+			if = {
+				limit = {
+					tag = CBI
+				}
+				remove_from_array = { global.austrian_help = CBI }
+			}
+		}
+	}
+	if = {
+		limit = {
+			any_country = {
+				has_country_flag = third_place_in_help_to_aus
+			}
+		}
+		every_country = {
+			limit = {
+				has_country_flag = third_place_in_help_to_aus
+			}
+			if = {
+				limit = {
+					check_variable = {
+						global.help_aus_3_div < 26
+					}
+				}
+				add_timed_idea = {
+					idea = aus_reparation_for_help_little
+					days = 180
+				}
+			}
+			if = {
+				limit = {
+					check_variable = {
+						global.help_aus_3_div > 25
+					}
+					check_variable = {
+						global.help_aus_3_div < 51
+					}
+				}
+				add_timed_idea = {
+					idea = aus_reparation_for_help_medium
+					days = 180
+				}
+			}
+			if = {
+				limit = {
+					check_variable = {
+						global.help_aus_3_div > 50
+					}
+				}
+				add_timed_idea = {
+					idea = aus_reparation_for_help_more
+					days = 180
+				}
+			}
+			clr_country_flag = chose_help_to_aus_flag
+			clr_country_flag = third_place_in_help_to_aus
+			if = {
+				limit = {
+					tag = RUS
+				}
+				remove_from_array = { global.austrian_help = RUS }
+			}
+			if = {
+				limit = {
+					tag = FRR
+				}
+				remove_from_array = { global.austrian_help = FRR }
+			}
+			if = {
+				limit = {
+					tag = CBI
+				}
+				remove_from_array = { global.austrian_help = CBI }
+			}
+		}
+	}
+	set_variable = { global.help_aus_1_var = 0 }
+	set_variable = { global.help_aus_2_var = 0 }
+	set_variable = { global.help_aus_3_var = 0 }
+	calculation_austrian_help = yes
+	AUS = {
+		mark_focus_tree_layout_dirty = yes
+	}
+	AUS = {
+		delete_unit_template_and_units = {
+			division_template = "Baeuerliche Division"
+			disband = yes 
+		}
+	}
+	AUS = {
+		remove_mission = first_brother_war_decision
+	}
+	PRU = {
+		remove_mission = first_brother_war_decision
+	}
+	PRU = {
+		country_event = {
+			id = ger.6
+			days = 20
+		}
+	}
+	AUS = { 
+		white_peace = {
+			tag = PRU
+			message = first_brotherwar_peace_aus_tt
+		}
+	}
+	AUS = { dismantle_faction = yes }
+	PRU = { dismantle_faction = yes }
+}
+
+austrian_capitulation_second_brotherwar = {
+	set_global_flag = austrian_capitulation_second_brotherwar_flag
+	PRU = { set_country_flag = victory_R_V_A_2 }
+	PRU = { clr_country_flag = PRU_vs_AUS_2 }
+	AUS = { dismantle_faction = yes }
+	if = {
+		limit = {
+			has_country_flag = time_member_of_allience
+			NOT = {
+				tag = PRU
+			}
+		}
+		leave_faction = yes
+		clr_country_flag = time_member_of_allience
+	}
+	every_other_country = {
+		limit = {
+			OR = {
+				has_country_flag = german_union_for_prussian
+				has_country_flag = german_union_for_austrian
+			}
+			OR = {
+				tag = BAV
+				tag = VUR
+				tag = HOH
+				tag = BAD
+				tag = ELS
+			}
+		}
+		if = {
+			limit = {
+				tag = BAV
+			}
+			BAV = {
+				set_nationality = {
+					target_country = PRU
+					character = BAV_Karl_Bavarian
+				}
+				set_nationality = {
+					target_country = PRU
+					character = BAV_Luitpold_Karl_Iosif
+				}
+			}
+		}
+		if = {
+			limit = {
+				tag = VUR
+			}
+		}
+		if = {
+			limit = {
+				tag = HOH
+			}
+		}
+		if = {
+			limit = {
+				tag = BAD
+			}
+		}
+		if = {
+			limit = {
+				tag = ELS
+			}
+		}
+		PRU = {
+			annex_country = { target = PREV transfer_troops = no }
+		}
+	}
+	every_other_country = {
+		limit = {
+			has_country_flag = german_union_for_austrian
+		}
+		clr_country_flag = german_union_for_austrian
+		remove_from_array = { global.german_union_for_aus = ROOT }
+		set_country_flag = german_union_for_prussian
+		add_to_array = { global.german_union_for_pru = ROOT }
+	}
+	AUS = {
+		remove_from_array = { global.german_union_leader = AUS }
+		remove_ideas = creater_of_saint_allience_idea
+	}
+	news_event = { 
+		id = news.13 
+		days = 1
+	}
+	AUS = {
+		mark_focus_tree_layout_dirty = yes
+	}
+	if = {
+		limit = {
+			AUS = {
+				has_completed_focus = AUS_create_OEA
+			}
+		}
+		AUS = {
+			create_faction = OEA_faction
+		}
+	}
+	if = {
+		limit = {
+			AUS = {
+				has_idea = AUS_never_surrender_idea
+			}
+		}
+		AUS = {
+			remove_ideas = AUS_never_surrender_idea
+		}
+	}
+	if = {
+		limit = {
+			PRU = {
+				has_idea = AUS_sabotage_pru
+			}
+		}
+		PRU = {
+			remove_ideas = AUS_sabotage_pru
+		}
+	}
+	if = {
+		limit = {
+			AUS = {
+				has_idea = rus_help_to_aus
+			}
+		}
+		AUS = {
+			remove_ideas = rus_help_to_aus
+		}
+	}
+	if = {
+		limit = {
+			AUS = {
+				has_idea = frr_help_to_aus
+			}
+		}
+		AUS = {
+			remove_ideas = frr_help_to_aus
+		}
+	}
+	if = {
+		limit = {
+			AUS = {
+				has_idea = cbi_help_to_aus
+			}
+		}
+		AUS = {
+			remove_ideas = cbi_help_to_aus
+		}
+	}
+	if = {
+		limit = {
+			AUS = {
+				has_country_flag = ask_russian
+			}
+		}
+		AUS = {
+			clr_country_flag = ask_russian
+		}
+	}
+	if = {
+		limit = {
+			AUS = {
+				has_country_flag = ask_france
+			}
+		}
+		AUS = {
+			clr_country_flag = ask_france
+		}
+	}
+	if = {
+		limit = {
+			AUS = {
+				has_country_flag = ask_cbi
+			}
+		}
+		AUS = {
+			clr_country_flag = ask_cbi
+		}
+	}
+	if = {
+		limit = {
+			any_country = {
+					has_country_flag = first_place_in_help_to_aus
+			}
+		}
+		every_country = {
+			limit = {
+				has_country_flag = first_place_in_help_to_aus
+			}
+			if = {
+				limit = {
+					check_variable = {
+						global.help_aus_1_div < 26
+					}
+				}
+				add_timed_idea = {
+					idea = aus_reparation_for_help_little
+					days = 180
+				}
+			}
+			if = {
+				limit = {
+					check_variable = {
+						global.help_aus_1_div > 25
+					}
+					check_variable = {
+						global.help_aus_1_div < 51
+					}
+				}
+				add_timed_idea = {
+					idea = aus_reparation_for_help_medium
+					days = 180
+				}
+			}
+			if = {
+				limit = {
+					check_variable = {
+						global.help_aus_1_div > 50
+					}
+				}
+				add_timed_idea = {
+					idea = aus_reparation_for_help_more
+					days = 180
+				}
+			}
+			clr_country_flag = chose_help_to_aus_flag
+			clr_country_flag = first_place_in_help_to_aus
+			if = {
+				limit = {
+					tag = RUS
+				}
+				remove_from_array = { global.austrian_help = RUS }
+			}
+			if = {
+				limit = {
+					tag = FRR
+				}
+				remove_from_array = { global.austrian_help = FRR }
+			}
+			if = {
+				limit = {
+					tag = CBI
+				}
+				remove_from_array = { global.austrian_help = CBI }
+			}
+		}
+		AUS = {
+			add_timed_idea = {
+				idea = aus_reparation_for_help_for_aus
+				days = 180
+			}
+		}
+	}
+	if = {
+		limit = {
+			any_country = {
+				has_country_flag = second_place_in_help_to_aus
+			}
+		}
+		every_country = {
+			limit = {
+				has_country_flag = second_place_in_help_to_aus
+			}
+			if = {
+				limit = {
+					check_variable = {
+						global.help_aus_2_div < 26
+					}
+				}
+				add_timed_idea = {
+					idea = aus_reparation_for_help_little
+					days = 180
+				}
+			}
+			if = {
+				limit = {
+					check_variable = {
+						global.help_aus_2_div > 25
+					}
+					check_variable = {
+						global.help_aus_2_div < 51
+					}
+				}
+				add_timed_idea = {
+					idea = aus_reparation_for_help_medium
+					days = 180
+				}
+			}
+			if = {
+				limit = {
+					check_variable = {
+						global.help_aus_2_div > 50
+					}
+				}
+				add_timed_idea = {
+					idea = aus_reparation_for_help_more
+					days = 180
+				}
+			}
+			clr_country_flag = chose_help_to_aus_flag
+			clr_country_flag = second_place_in_help_to_aus
+			if = {
+				limit = {
+					tag = RUS
+				}
+				remove_from_array = { global.austrian_help = RUS }
+			}
+			if = {
+				limit = {
+					tag = FRR
+				}
+				remove_from_array = { global.austrian_help = FRR }
+			}
+			if = {
+				limit = {
+					tag = CBI
+				}
+				remove_from_array = { global.austrian_help = CBI }
+			}
+		}
+	}
+	if = {
+		limit = {
+			any_country = {
+				has_country_flag = third_place_in_help_to_aus
+			}
+		}
+		every_country = {
+			limit = {
+				has_country_flag = third_place_in_help_to_aus
+			}
+			if = {
+				limit = {
+					check_variable = {
+						global.help_aus_3_div < 26
+					}
+				}
+				add_timed_idea = {
+					idea = aus_reparation_for_help_little
+					days = 180
+				}
+			}
+			if = {
+				limit = {
+					check_variable = {
+						global.help_aus_3_div > 25
+					}
+					check_variable = {
+						global.help_aus_3_div < 51
+					}
+				}
+				add_timed_idea = {
+					idea = aus_reparation_for_help_medium
+					days = 180
+				}
+			}
+			if = {
+				limit = {
+					check_variable = {
+						global.help_aus_3_div > 50
+					}
+				}
+				add_timed_idea = {
+					idea = aus_reparation_for_help_more
+					days = 180
+				}
+			}
+			clr_country_flag = chose_help_to_aus_flag
+			clr_country_flag = third_place_in_help_to_aus
+			if = {
+				limit = {
+					tag = RUS
+				}
+				remove_from_array = { global.austrian_help = RUS }
+			}
+			if = {
+				limit = {
+					tag = FRR
+				}
+				remove_from_array = { global.austrian_help = FRR }
+			}
+			if = {
+				limit = {
+					tag = CBI
+				}
+				remove_from_array = { global.austrian_help = CBI }
+			}
+		}
+	}
+	set_variable = { global.help_aus_1_var = 0 }
+	set_variable = { global.help_aus_2_var = 0 }
+	set_variable = { global.help_aus_3_var = 0 }
+	calculation_austrian_help = yes
+	PRU = { 
+		white_peace = {
+			tag = AUS
+			message = second_brotherwar_peace_pru_tt
+		}
+	}
+	every_state = {
+		limit = {
+			owner = {
+				original_tag = PRU
+			}
+			NOT = {
+				is_core_of = PRU
+			}
+			NOT = {
+				has_dynamic_modifier = {
+					modifier = PRU_loyal_to_prussian_state_modifier
+				}
+			}
+		}
+		add_dynamic_modifier = {
+			modifier = PRU_loyal_to_prussian_state_modifier
+		}
+	}
+	every_state = {
+		limit = {
+			owner = {
+				original_tag = PRU
+			}
+			NOT = {
+				is_core_of = PRU
+			}
+			NOT = {
+				has_dynamic_modifier = {
+					modifier = PRU_part_of_german_confederacy_state_modifier
+				}
+			}
+		}
+		add_dynamic_modifier = {
+			modifier = PRU_part_of_german_confederacy_state_modifier
+		}
+	}
+}
+
+prussian_capitulation_second_brotherwar = {
+	set_global_flag = prussian_capitulation_second_brotherwar_flag
+	AUS = { set_country_flag = victory_R_V_A_2 }
+	AUS = { 
+		white_peace = {
+			tag = PRU
+			message = second_brotherwar_peace_aus_tt
+		}
+	}
+	PRU = { clr_country_flag = PRU_vs_AUS_2 }
+	remove_from_faction = AUS
+	remove_from_faction = BAD
+	remove_from_faction = VUR
+	remove_from_faction = BAV
+	AUS = { dismantle_faction = yes }
+	PRU = { dismantle_faction = yes }
+	if = {
+		limit = {
+			AUS = {
+				has_idea = rus_help_to_aus
+			}
+		}
+		AUS = {
+			remove_ideas = rus_help_to_aus
+		}
+	}
+	if = {
+		limit = {
+			AUS = {
+				has_idea = frr_help_to_aus
+			}
+		}
+		AUS = {
+			remove_ideas = frr_help_to_aus
+		}
+	}
+	if = {
+		limit = {
+			AUS = {
+				has_idea = cbi_help_to_aus
+			}
+		}
+		AUS = {
+			remove_ideas = cbi_help_to_aus
+		}
+	}
+	if = {
+		limit = {
+			AUS = {
+				has_country_flag = ask_russian
+			}
+		}
+		AUS = {
+			clr_country_flag = ask_russian
+		}
+	}
+	if = {
+		limit = {
+			AUS = {
+				has_country_flag = ask_france
+			}
+		}
+		AUS = {
+			clr_country_flag = ask_france
+		}
+	}
+	if = {
+		limit = {
+			AUS = {
+				has_country_flag = ask_cbi
+			}
+		}
+		AUS = {
+			clr_country_flag = ask_cbi
+		}
+	}
+	if = {
+		limit = {
+			any_country = {
+					has_country_flag = first_place_in_help_to_aus
+			}
+		}
+		every_country = {
+			limit = {
+				has_country_flag = first_place_in_help_to_aus
+			}
+			if = {
+				limit = {
+					check_variable = {
+						global.help_aus_1_div < 26
+					}
+				}
+				add_timed_idea = {
+					idea = aus_reparation_for_help_little
+					days = 180
+				}
+			}
+			if = {
+				limit = {
+					check_variable = {
+						global.help_aus_1_div > 25
+					}
+					check_variable = {
+						global.help_aus_1_div < 51
+					}
+				}
+				add_timed_idea = {
+					idea = aus_reparation_for_help_medium
+					days = 180
+				}
+			}
+			if = {
+				limit = {
+					check_variable = {
+						global.help_aus_1_div > 50
+					}
+				}
+				add_timed_idea = {
+					idea = aus_reparation_for_help_more
+					days = 180
+				}
+			}
+			clr_country_flag = chose_help_to_aus_flag
+			clr_country_flag = first_place_in_help_to_aus
+			if = {
+				limit = {
+					tag = RUS
+				}
+				remove_from_array = { global.austrian_help = RUS }
+			}
+			if = {
+				limit = {
+					tag = FRR
+				}
+				remove_from_array = { global.austrian_help = FRR }
+			}
+			if = {
+				limit = {
+					tag = CBI
+				}
+				remove_from_array = { global.austrian_help = CBI }
+			}
+		}
+		AUS = {
+			add_timed_idea = {
+				idea = aus_reparation_for_help_for_aus
+				days = 180
+			}
+		}
+	}
+	if = {
+		limit = {
+			any_country = {
+				has_country_flag = second_place_in_help_to_aus
+			}
+		}
+		every_country = {
+			limit = {
+				has_country_flag = second_place_in_help_to_aus
+			}
+			if = {
+				limit = {
+					check_variable = {
+						global.help_aus_2_div < 26
+					}
+				}
+				add_timed_idea = {
+					idea = aus_reparation_for_help_little
+					days = 180
+				}
+			}
+			if = {
+				limit = {
+					check_variable = {
+						global.help_aus_2_div > 25
+					}
+					check_variable = {
+						global.help_aus_2_div < 51
+					}
+				}
+				add_timed_idea = {
+					idea = aus_reparation_for_help_medium
+					days = 180
+				}
+			}
+			if = {
+				limit = {
+					check_variable = {
+						global.help_aus_2_div > 50
+					}
+				}
+				add_timed_idea = {
+					idea = aus_reparation_for_help_more
+					days = 180
+				}
+			}
+			clr_country_flag = chose_help_to_aus_flag
+			clr_country_flag = second_place_in_help_to_aus
+			if = {
+				limit = {
+					tag = RUS
+				}
+				remove_from_array = { global.austrian_help = RUS }
+			}
+			if = {
+				limit = {
+					tag = FRR
+				}
+				remove_from_array = { global.austrian_help = FRR }
+			}
+			if = {
+				limit = {
+					tag = CBI
+				}
+				remove_from_array = { global.austrian_help = CBI }
+			}
+		}
+	}
+	if = {
+		limit = {
+			any_country = {
+				has_country_flag = third_place_in_help_to_aus
+			}
+		}
+		every_country = {
+			limit = {
+				has_country_flag = third_place_in_help_to_aus
+			}
+			if = {
+				limit = {
+					check_variable = {
+						global.help_aus_3_div < 26
+					}
+				}
+				add_timed_idea = {
+					idea = aus_reparation_for_help_little
+					days = 180
+				}
+			}
+			if = {
+				limit = {
+					check_variable = {
+						global.help_aus_3_div > 25
+					}
+					check_variable = {
+						global.help_aus_3_div < 51
+					}
+				}
+				add_timed_idea = {
+					idea = aus_reparation_for_help_medium
+					days = 180
+				}
+			}
+			if = {
+				limit = {
+					check_variable = {
+						global.help_aus_3_div > 50
+					}
+				}
+				add_timed_idea = {
+					idea = aus_reparation_for_help_more
+					days = 180
+				}
+			}
+			clr_country_flag = chose_help_to_aus_flag
+			clr_country_flag = third_place_in_help_to_aus
+			if = {
+				limit = {
+					tag = RUS
+				}
+				remove_from_array = { global.austrian_help = RUS }
+			}
+			if = {
+				limit = {
+					tag = FRR
+				}
+				remove_from_array = { global.austrian_help = FRR }
+			}
+			if = {
+				limit = {
+					tag = CBI
+				}
+				remove_from_array = { global.austrian_help = CBI }
+			}
+		}
+	}
+	set_variable = { global.help_aus_1_var = 0 }
+	set_variable = { global.help_aus_2_var = 0 }
+	set_variable = { global.help_aus_3_var = 0 }
+	calculation_austrian_help = yes
+	AUS = {
+		mark_focus_tree_layout_dirty = yes
+	}
+	#AUS = {
+	#	remove_mission = second_brother_war_decision
+	#}
+	#PRU = {
+	#	remove_mission = second_brother_war_decision
+	#}
+	news_event = {
+		id = news.14
+		days = 1
+	}
+	PRU = {
+		country_event = {
+			id = ger.6
+			days = 20
+		}
+	}
+	PRU = { set_country_flag = PRU_revolution }
+}
+
+austrian_capitulation_third_brotherwar = {
+	set_global_flag = austrian_capitulation_third_brotherwar_flag
+	43 = {	
+		remove_dynamic_modifier = { modifier = AUS_state_hungarian_probleb_dynamic_modifier }
+	}
+	45 = {
+		remove_dynamic_modifier = { modifier = AUS_state_hungarian_probleb_dynamic_modifier }
+	}
+	70 = {
+		remove_dynamic_modifier = { modifier = AUS_state_hungarian_probleb_dynamic_modifier }
+	}
+	71 = {
+		remove_dynamic_modifier = { modifier = AUS_state_hungarian_probleb_dynamic_modifier }
+	}
+	73 = {
+		remove_dynamic_modifier = { modifier = AUS_state_hungarian_probleb_dynamic_modifier }
+	}
+	76 = {
+		remove_dynamic_modifier = { modifier = AUS_state_hungarian_probleb_dynamic_modifier }
+	}
+	82 = {
+		remove_dynamic_modifier = { modifier = AUS_state_hungarian_probleb_dynamic_modifier }
+	}
+	83 = {
+		remove_dynamic_modifier = { modifier = AUS_state_hungarian_probleb_dynamic_modifier }
+	}
+	84 = {
+		remove_dynamic_modifier = { modifier = AUS_state_hungarian_probleb_dynamic_modifier }
+	}
+	154 = {
+		remove_dynamic_modifier = { modifier = AUS_state_hungarian_probleb_dynamic_modifier }
+	}
+	155 = {
+		remove_dynamic_modifier = { modifier = AUS_state_hungarian_probleb_dynamic_modifier }
+	}
+	664 = {
+		remove_dynamic_modifier = { modifier = AUS_state_hungarian_probleb_dynamic_modifier }
+	}
+	764 = {
+		remove_dynamic_modifier = { modifier = AUS_state_hungarian_probleb_dynamic_modifier }
+	}
+	902 = {
+		remove_dynamic_modifier = { modifier = AUS_state_slavic_probleb_dynamic_modifier }
+	}
+	80 = {
+		remove_dynamic_modifier = { modifier = AUS_state_slavic_probleb_dynamic_modifier }
+	}
+	88 = {
+		remove_dynamic_modifier = { modifier = AUS_state_slavic_probleb_dynamic_modifier }
+	}
+	89 = {
+		remove_dynamic_modifier = { modifier = AUS_state_slavic_probleb_dynamic_modifier }
+	}
+	91 = {
+		remove_dynamic_modifier = { modifier = AUS_state_slavic_probleb_dynamic_modifier }
+	}
+	159 = {
+		remove_dynamic_modifier = { modifier = AUS_state_italian_probleb_dynamic_modifier }
+	}
+	160 = {	
+		remove_dynamic_modifier = { modifier = AUS_state_italian_probleb_dynamic_modifier }
+	}
+	102 = {
+		remove_dynamic_modifier = { modifier = AUS_state_slavic_probleb_dynamic_modifier }
+	}
+	103 = {
+		remove_dynamic_modifier = { modifier = AUS_state_slavic_probleb_dynamic_modifier }
+	}
+	109 = {
+		remove_dynamic_modifier = { modifier = AUS_state_slavic_probleb_dynamic_modifier }
+	}
+	163 = {
+		remove_dynamic_modifier = { modifier = AUS_state_slavic_probleb_dynamic_modifier }
+	}
+	763 = {
+		remove_dynamic_modifier = { modifier = AUS_state_slavic_probleb_dynamic_modifier }
+	}
+	if = {
+		limit = {
+			NOT = {
+				country_exists = HUN
+			}
+		}
+		HUN = {
+			transfer_state = 43
+			transfer_state = 45
+			transfer_state = 70
+			transfer_state = 71
+			transfer_state = 73
+			transfer_state = 76
+			transfer_state = 82
+			transfer_state = 83
+			transfer_state = 84
+			transfer_state = 154
+			transfer_state = 155
+			transfer_state = 664
+			transfer_state = 764
+			add_state_core = 43
+			add_state_core = 45
+			add_state_core = 70
+			add_state_core = 71
+			add_state_core = 73
+			add_state_core = 76
+			add_state_core = 82
+			add_state_core = 83
+			add_state_core = 84
+			add_state_core = 103
+			add_state_core = 109
+			add_state_core = 154
+			add_state_core = 155
+			add_state_core = 664
+			add_state_core = 764
+			#load_focus_tree = hungarian_focus_tree
+			inherit_technology = AUS
+			load_oob = HUN_oob
+		}
+		AUS = {
+			remove_state_core = 43
+			remove_state_core = 45
+			remove_state_core = 70
+			remove_state_core = 71
+			remove_state_core = 73
+			remove_state_core = 76
+			remove_state_core = 82
+			remove_state_core = 83
+			remove_state_core = 84
+			remove_state_core = 154
+			remove_state_core = 155
+			remove_state_core = 664
+			remove_state_core = 764
+		}
+	}
+	if = {
+		limit = {
+			country_exists = HUN
+		}
+		HUN = {
+			#load_focus_tree = hungarian_focus_tree
+			if = {
+				limit = {
+					AUS = {
+						owns_state = 45
+					}
+				}
+				HUN = {
+					transfer_state = 45
+					add_state_core = 45
+				}
+				AUS = {
+					remove_state_core = 45
+				}
+			}
+			if = {
+				limit = {
+					AUS = {
+						owns_state = 70
+					}
+				}
+				HUN = {
+					transfer_state = 70
+					add_state_core = 70
+				}
+				AUS = {
+					remove_state_core = 70
+				}
+			}
+			if = {
+				limit = {
+					AUS = {
+						owns_state = 71
+					}
+				}
+				HUN = {
+					transfer_state = 71
+					add_state_core = 71
+				}
+				AUS = {
+					remove_state_core = 71
+				}
+			}
+			if = {
+				limit = {
+					AUS = {
+						owns_state = 73
+					}
+				}
+				HUN = {
+					transfer_state = 73
+					add_state_core = 73
+				}
+				AUS = {
+					remove_state_core = 73
+				}
+			}
+			if = {
+				limit = {
+					AUS = {
+						owns_state = 76
+					}
+				}
+				HUN = {
+					transfer_state = 76
+					add_state_core = 76
+				}
+				AUS = {
+					remove_state_core = 76
+				}
+			}
+			if = {
+				limit = {
+					AUS = {
+						owns_state = 82
+					}
+				}
+				HUN = {
+					transfer_state = 82
+					add_state_core = 82
+				}
+				AUS = {
+					remove_state_core = 82
+				}
+			}
+			if = {
+				limit = {
+					AUS = {
+						owns_state = 83
+					}
+				}
+				HUN = {
+					transfer_state = 83
+					add_state_core = 83
+				}
+				AUS = {
+					remove_state_core = 83
+				}
+			}
+			if = {
+				limit = {
+					AUS = {
+						owns_state = 84
+					}
+				}
+				HUN = {
+					transfer_state = 84
+					add_state_core = 84
+				}
+				AUS = {
+					remove_state_core = 84
+				}
+			}
+			if = {
+				limit = {
+					AUS = {
+						owns_state = 664
+					}
+				}
+				HUN = {
+					transfer_state = 664
+					add_state_core = 664
+				}
+				AUS = {
+					remove_state_core = 664
+				}
+			}
+			if = {
+				limit = {
+					AUS = {
+						owns_state = 764
+					}
+				}
+				HUN = {
+					transfer_state = 764
+					add_state_core = 764
+				}
+				AUS = {
+					remove_state_core = 764
+				}
+			}
+		}
+	}
+	if = {
+		limit = {
+			NOT = {
+				country_exists = GLA
+			}
+		}
+		GLA = {
+			transfer_state = 80
+			transfer_state = 88
+			transfer_state = 89
+			transfer_state = 91
+			add_state_core = 80
+			add_state_core = 88
+			add_state_core = 89
+			add_state_core = 91
+			inherit_technology = AUS
+			load_oob = GLA_oob
+		}
+		AUS = {
+			remove_state_core = 80
+			remove_state_core = 88
+			remove_state_core = 89
+			remove_state_core = 91
+		}
+	}
+	if = {
+		limit = {
+			country_exists = GLA
+		}
+		if = {
+			limit = {
+				AUS = {
+					owns_state = 88
+				}
+			}
+			GLA = {
+				transfer_state = 88
+				add_state_core = 88
+			}
+			AUS = {
+				remove_state_core = 88
+			}
+		}
+	}
+	if = {
+		limit = {
+			NOT = {
+				country_exists = VEN
+			}
+			NOT = {
+				SAR = {
+					has_completed_focus = ITA_new_way_venetia_ultimatum
+				}
+				SAR = {
+					has_completed_focus = ITA_monarch_venetion_question
+				}
+				SAR = {
+					has_completed_focus = ITA_democratic_venetion_question
+				}
+			}
+		}
+		VEN = {
+			transfer_state = 159
+			transfer_state = 160
+			add_state_core = 159
+			add_state_core = 160
+			inherit_technology = AUS
+			load_oob = VEN_oob
+		}
+	}
+	BOH = {
+		transfer_state = 9
+		transfer_state = 69
+		transfer_state = 72
+		transfer_state = 74
+		transfer_state = 75
+		add_state_core = 9
+		add_state_core = 69
+		add_state_core = 72
+		add_state_core = 74
+		add_state_core = 75
+		add_state_core = 810
+		inherit_technology = AUS
+		load_oob = BOH_oob
+		set_cosmetic_tag = BOHPRU
+	}
+	AUS = {
+		remove_state_core = 9
+		remove_state_core = 69
+		remove_state_core = 72
+		remove_state_core = 74
+		remove_state_core = 75
+	}
+	if = {
+		limit = {
+			OR = {
+				BYZ = {
+					is_in_faction_with = PRU
+				}
+				BYZ = {
+					has_war_with = AUS
+				}
+			}
+		}
+		if = {
+			limit = {
+				BYZ = {
+					has_country_flag = byz_imperia_politic
+				}
+			}
+			BYZ = { 
+				transfer_state = 102
+				transfer_state = 103
+				transfer_state = 109
+				transfer_state = 163
+				transfer_state = 736
+			}
+		}
+		if = {
+			limit = {
+				BYZ = {
+					has_country_flag = byz_democratic_politic
+				}
+			}
+			DAL = {
+				transfer_state = 102
+				transfer_state = 103
+				transfer_state = 109
+				transfer_state = 163
+				transfer_state = 736
+			}
+		}
+		BYZ = { set_country_flag = BYZ_vs_AUS_win }
+		AUS = {
+			remove_state_core = 102
+			remove_state_core = 103
+			remove_state_core = 109
+			remove_state_core = 163
+			remove_state_core = 736
+		}
+	}
+	if = {
+		limit = {
+			NOT = {
+				BYZ = {
+					is_in_faction_with = PRU
+				}
+			}
+		}
+		CRO = {	
+			transfer_state = 103
+			transfer_state = 109
+			transfer_state = 163
+			add_state_core = 103
+			add_state_core = 109
+			add_state_core = 163
+		}
+		SLO = {
+			transfer_state = 102
+			transfer_state = 736
+			add_state_core = 102
+			add_state_core = 736
+		}
+		AUS = {
+			remove_state_core = 102
+			remove_state_core = 103
+			remove_state_core = 109
+			remove_state_core = 163
+			remove_state_core = 736
+		}
+	}
+	PRU = { puppet = BOH }
+	PRU = {
+		transfer_state = 69
+		add_state_core = 69
+		transfer_state = 810
+		add_state_core = 810
+	}
+	AUS = {
+		remove_state_core = 69
+		remove_state_core = 810
+	}
+	BOH = {
+		set_politics = { ruling_party = authoritarian elections_allowed = no }
+		set_popularities = {
+			democratic = 24
+			socialism = 6
+			reactionist = 26
+			authoritarian = 44
+		}
+		add_country_leader_role = {
+			character = BOH_Moris_fon_Bissing
+			promote_leader = yes
+			country_leader = {
+				ideology = centrism
+				expire = "1900.1.1.1"
+				traits = { }
+			}
+		}
+	}
+	if = {
+		limit = {
+			VLH = {
+				has_country_flag = VLH_CR
+			}
+		}
+		VLH = {
+			create_faction = ANTI-HUNGARY-ALLIENCE
+		}
+		GLA = {
+			country_event = { id = te.13 hours = 12 }
+		}
+		VLH = {
+			country_event = { id = te.14 days = 28 }
+		}
+	}
+	if = {
+		limit = {
+			AUS = {
+				owns_state = 902
+			}
+		}
+		if = {
+			limit = {
+				country_exists = MOL
+			}
+			MOL = {
+				transfer_state = 902
+				add_state_core = 902
+			}
+		}
+		if = {
+			limit = {
+				NOT = {
+					country_exists = MOL
+				}
+			}
+			VLH = {
+				transfer_state = 902
+				add_state_core = 902
+			}
+		}
+		AUS = {
+			remove_state_core = 902
+		}
+	}
+	PRU = { set_country_flag = victory_R_V_A_3 }
+	news_event = {
+		id = news.15 
+		days = 1
+	}
+	PRU = { clr_country_flag = PRU_vs_AUS_3 }
+	set_global_flag = german_empire_now_exist
+	if = {
+		limit = {
+			HUN = {
+				has_country_flag = hun_has_revolution_aus
+			}
+		}
+		HUN = {
+			clr_country_flag = hun_has_revolution_aus
+			remove_ideas = revolution_power
+		}
+	}
+	if = {
+		limit = {
+			GLA = {
+				has_country_flag = gla_has_revolution_aus
+			}
+		}
+		GLA = {
+			clr_country_flag = gla_has_revolution_aus
+			remove_ideas = revolution_power
+		}
+	}
+	if = {
+		limit = {
+			VEN = {
+				has_country_flag = ven_has_revolution_aus
+			}
+		}
+		VEN = {
+			clr_country_flag = ven_has_revolution_aus
+			remove_ideas = revolution_power
+		}
+	}
+	ZEN = {
+		transfer_state = 840
+		add_state_core = 840
+	}
+	if = {
+		limit = {
+			AUS = {
+				owns_state = 297
+			}
+			country_exists = MAT
+		}
+		MAT = {
+			transfer_state = 297
+		}
+	}
+	if = {
+		limit = {
+			AUS = {
+				owns_state = 297
+			}
+			country_exists = ZEN
+		}
+		ZEN = {
+			transfer_state = 297
+		}
+	}
+	if = {
+		limit = {
+			AUS = {
+				owns_state = 705
+			}
+			country_exists = MAT
+		}
+		MAT = {
+			transfer_state = 705
+		}
+	}
+	if = {
+		limit = {
+			AUS = {
+				owns_state = 705
+			}
+			country_exists = ZEN
+		}
+		ZEN = {
+			transfer_state = 705
+		}
+	}
+	if = {
+		limit = {
+			AUS = {
+				owns_state = 824
+			}
+			country_exists = MAT
+		}
+		MAT = {
+			transfer_state = 824
+		}
+	}
+	if = {
+		limit = {
+			AUS = {
+				owns_state = 824
+			}
+			country_exists = ZEN
+		}
+		ZEN = {
+			transfer_state = 824
+		}
+	}
+	if = {
+		limit = {
+			BYZ = {
+				is_in_faction_with = PRU
+			}
+		}
+		ZUL = {
+			transfer_state = 848
+			add_state_core = 848
+		}
+	}
+	if = {
+		limit = {
+			AUS = {
+				owns_state = 848
+			}
+			country_exists = MAT
+		}
+		MAT = {
+			transfer_state = 848
+			add_state_core = 848
+		}
+	}
+	if = {
+		limit = {
+			AUS = {
+				owns_state = 848
+			}
+			NOT = {
+				country_exists = MAT
+			}
+		}
+		PRU = {
+			transfer_state = 848
+		}
+	}
+	AUS = {
+		mark_focus_tree_layout_dirty = yes
+	}
+	ZEN = {
+		country_event = {
+			id = zen.1
+			days = 26
+		}
+	}
+	every_country = {
+		limit = {
+			has_idea = saint_allience_idea
+		}
+		remove_ideas = saint_allience_idea
+	}
+	every_country = {
+		limit = {
+			has_idea = creater_of_saint_allience_idea
+		}
+		remove_ideas = creater_of_saint_allience_idea
+	}
+	if = {
+		limit = {
+			AUS = {
+				has_idea = rus_help_to_aus
+			}
+		}
+		AUS = {
+			remove_ideas = rus_help_to_aus
+		}
+	}
+	if = {
+		limit = {
+			AUS = {
+				has_idea = frr_help_to_aus
+			}
+		}
+		AUS = {
+			remove_ideas = frr_help_to_aus
+		}
+	}
+	if = {
+		limit = {
+			AUS = {
+				has_idea = cbi_help_to_aus
+			}
+		}
+		AUS = {
+			remove_ideas = cbi_help_to_aus
+		}
+	}
+	if = {
+		limit = {
+			AUS = {
+				has_country_flag = ask_russian
+			}
+		}
+		AUS = {
+			clr_country_flag = ask_russian
+		}
+	}
+	if = {
+		limit = {
+			AUS = {
+				has_country_flag = ask_france
+			}
+		}
+		AUS = {
+			clr_country_flag = ask_france
+		}
+	}
+	if = {
+		limit = {
+			AUS = {
+				has_country_flag = ask_cbi
+			}
+		}
+		AUS = {
+			clr_country_flag = ask_cbi
+		}
+	}
+	if = {
+		limit = {
+			any_country = {
+					has_country_flag = first_place_in_help_to_aus
+			}
+		}
+		every_country = {
+			limit = {
+				has_country_flag = first_place_in_help_to_aus
+			}
+			clr_country_flag = chose_help_to_aus_flag
+			clr_country_flag = first_place_in_help_to_aus
+			if = {
+				limit = {
+					tag = RUS
+				}
+				remove_from_array = { global.austrian_help = RUS }
+			}
+			if = {
+				limit = {
+					tag = FRR
+				}
+				remove_from_array = { global.austrian_help = FRR }
+			}
+			if = {
+				limit = {
+					tag = CBI
+				}
+				remove_from_array = { global.austrian_help = CBI }
+			}
+		}
+	}
+	if = {
+		limit = {
+			any_country = {
+				has_country_flag = second_place_in_help_to_aus
+			}
+		}
+		every_country = {
+			limit = {
+				has_country_flag = second_place_in_help_to_aus
+			}
+			clr_country_flag = chose_help_to_aus_flag
+			clr_country_flag = second_place_in_help_to_aus
+			if = {
+				limit = {
+					tag = RUS
+				}
+				remove_from_array = { global.austrian_help = RUS }
+			}
+			if = {
+				limit = {
+					tag = FRR
+				}
+				remove_from_array = { global.austrian_help = FRR }
+			}
+			if = {
+				limit = {
+					tag = CBI
+				}
+				remove_from_array = { global.austrian_help = CBI }
+			}
+		}
+	}
+	if = {
+		limit = {
+			any_country = {
+				has_country_flag = third_place_in_help_to_aus
+			}
+		}
+		every_country = {
+			limit = {
+				has_country_flag = third_place_in_help_to_aus
+			}
+			clr_country_flag = chose_help_to_aus_flag
+			clr_country_flag = third_place_in_help_to_aus
+			if = {
+				limit = {
+					tag = RUS
+				}
+				remove_from_array = { global.austrian_help = RUS }
+			}
+			if = {
+				limit = {
+					tag = FRR
+				}
+				remove_from_array = { global.austrian_help = FRR }
+			}
+			if = {
+				limit = {
+					tag = CBI
+				}
+				remove_from_array = { global.austrian_help = CBI }
+			}
+		}
+	}
+	set_variable = { global.help_aus_1_var = 0 }
+	set_variable = { global.help_aus_2_var = 0 }
+	set_variable = { global.help_aus_3_var = 0 }
+	calculation_austrian_help = yes
+	HUN = {
+		drop_cosmetic_tag = yes
+	}
+	GLA = {
+		drop_cosmetic_tag = yes
+	}
+	VEN = {
+		drop_cosmetic_tag = yes
+	}
+	PRU = {
+		white_peace = {
+			tag = AUS
+			message = third_brotherwar_peace_pru_tt
+		}
+	}
+	PRU = {
+		transfer_state = 4
+		transfer_state = 39
+		transfer_state = 152
+		transfer_state = 153
+		transfer_state = 887
+		add_state_core = 887
+	}
+	AUS = {
+		remove_state_core = 4
+		remove_state_core = 39
+		remove_state_core = 152
+		remove_state_core = 153
+		remove_state_core = 159
+		remove_state_core = 160
+		remove_state_core = 887
+	}
+	every_state = {
+		limit = {
+			owner = {
+				original_tag = PRU
+			}
+			NOT = {
+				is_core_of = PRU
+			}
+			NOT = {
+				has_dynamic_modifier = {
+					modifier = PRU_loyal_to_prussian_state_modifier
+				}
+			}
+		}
+		add_dynamic_modifier = {
+			modifier = PRU_loyal_to_prussian_state_modifier
+		}
+	}
+	every_state = {
+		limit = {
+			owner = {
+				original_tag = PRU
+			}
+			NOT = {
+				is_core_of = PRU
+			}
+			NOT = {
+				has_dynamic_modifier = {
+					modifier = PRU_part_of_german_confederacy_state_modifier
+				}
+			}
+		}
+		add_dynamic_modifier = {
+			modifier = PRU_part_of_german_confederacy_state_modifier
+		}
+	}
+	PRU = {
+		annex_country = {
+			target = AUS
+			transfer_troops = no
+		}
+	}
+}
+
+prussian_capitulation_third_brotherwar = {
+	
+}

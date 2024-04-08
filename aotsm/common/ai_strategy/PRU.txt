@@ -523,15 +523,18 @@ PRU_armored_production = {
 }
 
 PRU_halt_light_armor_production_in_transitioning = {
+
 	allowed = {
 		original_tag = PRU
 	}
+	
 	enable = {
 		has_template_majority_unit = medium_armor
 		has_equipment = { light_tank_chassis > 600 }
 	}
+	
 	abort = {
-		# once we start we never go back to light armor
+		always = no
 	}
 
 	ai_strategy = {
@@ -952,6 +955,94 @@ pru_defendce_border_frr = {
 		type = prepare_for_war
 		id = "FRR"
 		value = 250
+	}
+	
+}
+
+pru_taktikal_war_with_rus = {
+
+	allowed = {
+		original_tag = PRU
+	}
+	
+	enable = {
+		PRU = {
+			has_war_with = RUS
+		}
+		NOT = {
+			has_global_flag = russian_capitulation
+		}
+		has_global_flag = firts_world_war
+		OR = {
+			PRU = {
+				strength_ratio = {
+					tag = RUS
+					ratio < 1
+				}
+			}
+			PRU = {
+				has_manpower < 75000
+			}
+		}	
+	}
+
+	abort = {
+		has_global_flag = russian_capitulation
+	}
+
+	ai_strategy = {
+		type = front_control
+		tag = RUS                
+		ratio = 0.75
+		priority = 10
+		ordertype = front
+		execution_type = careful
+		execute_order = yes
+		manual_attack = yes
+	}
+	
+}
+
+pru_taktikal_war_with_frr = {
+
+	allowed = {
+		original_tag = PRU
+	}
+	
+	enable = {
+		PRU = {
+			has_war_with = FRR
+		}
+		NOT = {
+			has_global_flag = france_capitulation
+		}
+		has_global_flag = firts_world_war
+		OR = {
+			PRU = {
+				strength_ratio = {
+					tag = FRR
+					ratio < 1
+				}
+			}
+			PRU = {
+				has_manpower < 75000
+			}
+		}	
+	}
+
+	abort = {
+		has_global_flag = france_capitulation
+	}
+
+	ai_strategy = {
+		type = front_control
+		tag = FRR                
+		ratio = 0.50
+		priority = 10
+		ordertype = front
+		execution_type = careful
+		execute_order = yes
+		manual_attack = yes
 	}
 	
 }
