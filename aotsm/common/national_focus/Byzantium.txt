@@ -665,6 +665,19 @@ focus_tree = {
 						id = byz_student_chain.1
 						days = 783
 					}
+					country_event = {
+						id = byz.15
+						days = 21
+					}
+					country_event = {
+						id = byz.16
+						days = 32
+					}
+					country_event = {
+						id = byz.69
+						days = 210
+						random_days = 40
+					}
 				}
 			}
 			add_stability = -0.1
@@ -1512,21 +1525,43 @@ focus_tree = {
 			custom_effect_tooltip = byz_roman_decision_tt
 			hidden_effect = {
 				BYZ = {
-					set_country_leader_portrait = {
-						ideology = democratic
-						portrait = GFX_byz_Mikhail_IV_Zahareas_rome_emperror
-					}
-					set_country_leader_portrait = {
-						ideology = socialism
-						portrait = GFX_byz_Mikhail_IV_Zahareas_rome_emperror
-					}
-					set_country_leader_portrait = {
-						ideology = authoritarian
-						portrait = GFX_byz_Mikhail_IV_Zahareas_rome_emperror
-					}
-					set_country_leader_portrait = {
-						ideology = reactionist
-						portrait = GFX_byz_Mikhail_IV_Zahareas_rome_emperror
+					if = {
+						limit = {
+							OR = {
+								has_country_leader = {
+									character = BYZ_Mihael_IV_Zachareas
+									ruling_only = yes
+								}
+								has_country_leader = {
+									character = BYZ_Mihael_IV_Zachareas_dem
+									ruling_only = yes
+								}
+								has_country_leader = {
+									character = BYZ_Mihael_IV_Zachareas_rea
+									ruling_only = yes
+								}
+								has_country_leader = {
+									character = BYZ_Mihael_IV_Zachareas_soc
+									ruling_only = yes
+								}
+							}
+						}
+						set_country_leader_portrait = {
+							ideology = democratic
+							portrait = GFX_byz_Mikhail_IV_Zahareas_rome_emperror
+						}
+						set_country_leader_portrait = {
+							ideology = socialism
+							portrait = GFX_byz_Mikhail_IV_Zahareas_rome_emperror
+						}
+						set_country_leader_portrait = {
+							ideology = authoritarian
+							portrait = GFX_byz_Mikhail_IV_Zahareas_rome_emperror
+						}
+						set_country_leader_portrait = {
+							ideology = reactionist
+							portrait = GFX_byz_Mikhail_IV_Zahareas_rome_emperror
+						}
 					}
 				}
 			}
@@ -3906,6 +3941,16 @@ focus_tree = {
 				idea = byz_army_training_idea
 				days = 365
 			}
+			if = {
+				limit = {
+					NOT = {
+						BYZ = {
+							has_country_flag = first_meeting_with_generals
+						}
+					}
+				}
+				country_event = byz.52
+			}
 			hidden_effect = {
 				if = {
 					limit = {
@@ -3947,6 +3992,16 @@ focus_tree = {
 		
 		completion_reward = {
 			army_experience = 15
+			if = {
+				limit = {
+					NOT = {
+						BYZ = {
+							has_country_flag = second_meeting_with_generals
+						}
+					}
+				}
+				country_event = byz.52
+			}
 		}
 	}
 	
@@ -4054,6 +4109,16 @@ focus_tree = {
 		completion_reward = {
 			army_experience = 25
 			add_war_support = 0.05
+			if = {
+				limit = {
+					NOT = {
+						BYZ = {
+							has_country_flag = third_meeting_with_generals
+						}
+					}
+				}
+				country_event = byz.53
+			}
 		}
 	}
 	
@@ -4334,6 +4399,16 @@ focus_tree = {
 		
 		completion_reward = {
 			army_experience = 30
+			if = {
+				limit = {
+					NOT = {
+						BYZ = {
+							has_country_flag = second_meeting_with_generals
+						}
+					}
+				}
+				country_event = byz.52
+			}
 			swap_ideas = {
 				remove_idea = byz_stagnat_army
 				add_idea = byz_pru_army_1
@@ -4551,6 +4626,16 @@ focus_tree = {
 		completion_reward = {
 			add_stability = -0.025
 			army_experience = 30
+			if = {
+				limit = {
+					NOT = {
+						BYZ = {
+							has_country_flag = third_meeting_with_generals
+						}
+					}
+				}
+				country_event = byz.53
+			}
 		}
 	}
 	
@@ -6795,7 +6880,28 @@ focus_tree = {
 		
 		#cancel = { }
 		
-		#available = { }
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = august_ii_alive_or_not_regency_tt
+				OR = {
+					AND = {
+						NOT = {
+							has_country_flag = august_ii_dead
+						}
+						NOT = {
+							has_country_flag = byzantium_regency
+						}
+					}
+					AND = {
+						OR = {
+							has_country_flag = august_ii_dead
+							has_country_flag = byzantium_regency
+						}
+						has_country_flag = byzantium_regency_over
+					}
+				}
+			}
+		}
 	
 		#bypass = { }
 		
@@ -7982,6 +8088,7 @@ focus_tree = {
 		#search_filters = {  }
 		
 		allow_branch = {
+			always = no
 			NOT = { 
 				has_completed_focus = BYZ_power_to_senat
 				has_completed_focus = BYZ_counteraction_of_senat
@@ -8017,6 +8124,7 @@ focus_tree = {
 		#search_filters = {  }
 		
 		allow_branch = {
+			always = no
 			has_completed_focus = BYZ_power_to_senat
 		}
 		
@@ -8049,6 +8157,7 @@ focus_tree = {
 		#search_filters = {  }
 		
 		allow_branch = {
+			always = no
 			has_completed_focus = BYZ_counteraction_of_senat
 		}
 		

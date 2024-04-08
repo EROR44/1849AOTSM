@@ -25,6 +25,8 @@ add_namespace = rus_rbl_uprising_event #
 add_namespace = rus_leave_officers_event #
 add_namespace = rus_poland_situation_event #
 add_namespace = rus_te_event #
+add_namespace = rus_inventorisation_on_army_warehouses_event #
+add_namespace = rus_great_war_event #
 
 
 country_event = {
@@ -179,6 +181,46 @@ country_event = {
 				factor = 100
 				is_historical_focus_on = yes
 			}
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+				has_game_rule = {
+					rule = RUS_ai_behavior
+					option = RUSSIA_ROMANOV_KN_WAY
+				}
+			}
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+				has_game_rule = {
+					rule = RUS_ai_behavior
+					option = RUSSIA_ORLOV_MF_WAY
+				}
+			}
+			modifier = {
+				factor = 100
+				is_historical_focus_on = no
+				has_game_rule = {
+					rule = RUS_ai_behavior
+					option = RUSSIA_MILYUTIN_DM_WAY
+				}
+			}
+			modifier = {
+				factor = 0
+				is_historical_focus_on = no
+				has_game_rule = {
+					rule = RUS_ai_behavior
+					option = RUSSIA_ROMANOV_KN_WAY
+				}
+			}
+			modifier = {
+				factor = 0
+				is_historical_focus_on = no
+				has_game_rule = {
+					rule = RUS_ai_behavior
+					option = RUSSIA_ORLOV_MF_WAY
+				}
+			}
 		}
 		custom_effect_tooltip = RUS_choose_milyutin_da_tt
 		hidden_effect = {
@@ -216,6 +258,46 @@ country_event = {
 			modifier = {
 				factor = 0
 				is_historical_focus_on = yes
+			}			
+			modifier = {
+				factor = 100
+				is_historical_focus_on = yes
+				has_game_rule = {
+					rule = RUS_ai_behavior
+					option = RUSSIA_ROMANOV_KN_WAY
+				}
+			}
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+				has_game_rule = {
+					rule = RUS_ai_behavior
+					option = RUSSIA_ORLOV_MF_WAY
+				}
+			}
+			modifier = {
+				factor = 0
+				is_historical_focus_on = no
+				has_game_rule = {
+					rule = RUS_ai_behavior
+					option = RUSSIA_MILYUTIN_DM_WAY
+				}
+			}
+			modifier = {
+				factor = 100
+				is_historical_focus_on = no
+				has_game_rule = {
+					rule = RUS_ai_behavior
+					option = RUSSIA_ROMANOV_KN_WAY
+				}
+			}
+			modifier = {
+				factor = 0
+				is_historical_focus_on = no
+				has_game_rule = {
+					rule = RUS_ai_behavior
+					option = RUSSIA_ORLOV_MF_WAY
+				}
 			}
 		}
 		custom_effect_tooltip = RUS_choose_romanov_kn_tt
@@ -260,6 +342,46 @@ country_event = {
 			modifier = {
 				factor = 0
 				is_historical_focus_on = yes
+			}
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+				has_game_rule = {
+					rule = RUS_ai_behavior
+					option = RUSSIA_ROMANOV_KN_WAY
+				}
+			}
+			modifier = {
+				factor = 100
+				is_historical_focus_on = yes
+				has_game_rule = {
+					rule = RUS_ai_behavior
+					option = RUSSIA_ORLOV_MF_WAY
+				}
+			}
+			modifier = {
+				factor = 0
+				is_historical_focus_on = no
+				has_game_rule = {
+					rule = RUS_ai_behavior
+					option = RUSSIA_MILYUTIN_DM_WAY
+				}
+			}
+			modifier = {
+				factor = 0
+				is_historical_focus_on = no
+				has_game_rule = {
+					rule = RUS_ai_behavior
+					option = RUSSIA_ROMANOV_KN_WAY
+				}
+			}
+			modifier = {
+				factor = 100
+				is_historical_focus_on = no
+				has_game_rule = {
+					rule = RUS_ai_behavior
+					option = RUSSIA_ORLOV_MF_WAY
+				}
 			}
 		}
 		custom_effect_tooltip = RUS_choose_orlov_mf_tt
@@ -5839,13 +5961,14 @@ country_event = {
 	
 	option = {
 		name = political_confrontation.5.a	
-
-		hidden_effect = {
+		add_political_power = 100
+		add_war_support = 0.05
+		#hidden_effect = {
 			add_timed_idea = {
-				days = 365
+				days = 730
 				idea = RUS_degermanisation
 			}
-		}
+		#}
 	}
 }
 
@@ -5861,6 +5984,9 @@ country_event = {
 	
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event political_confrontation.6"
+		hidden_effect = {
+			
+		}
 	}
 	
 	option = {
@@ -5873,6 +5999,8 @@ country_event = {
 			type = annex_everything
 		}
 		hidden_effect = {
+			complete_national_focus = RUS_marh_to_our_enemies
+			set_global_flag = wwi_russian_attack_germany
 			first_world_war_begin = yes
 			if = {
 				limit = {
@@ -5887,7 +6015,6 @@ country_event = {
 					}
 				}
 			}
-			news_event = { id = news.271 days = 2 }
 		}
 	}
 	
@@ -5995,6 +6122,8 @@ country_event = {
 			type = annex_everything
 		}
 		hidden_effect = {
+			complete_national_focus = RUS_marh_to_our_enemies
+			set_global_flag = wwi_russian_attack_germany
 			first_world_war_begin = yes
 			if = {
 				limit = {
@@ -6009,7 +6138,6 @@ country_event = {
 					}
 				}
 			}
-			news_event = { id = news.271 days = 2 }
 		}
 	}
 	
@@ -6028,6 +6156,173 @@ country_event = {
 				target = PRU 
 			}
 		}
+	}
+}
+
+country_event = {
+	id = political_confrontation.10 #Борьба с торговым гегемоном
+	title = political_confrontation.10.t
+	desc = political_confrontation.10.d
+	picture = GFX_report_event_russian_millitary_planning
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event political_confrontation.10"
+	}
+	
+	option = {
+		name = political_confrontation.10.a	#План Кашкина НС
+		ai_chance = {
+			base = 20
+		}
+		hidden_effect = {
+			country_event = political_confrontation.11
+		}
+	}
+	
+	option = {
+		name = political_confrontation.10.b	#План Киреевского
+		ai_chance = {
+			base = 1
+		}
+		hidden_effect = {
+			country_event = political_confrontation.12
+		}
+	}
+}
+
+country_event = {
+	id = political_confrontation.11 #План Кашкина
+	title = political_confrontation.11.t
+	desc = political_confrontation.11.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event political_confrontation.11"
+	}
+	
+	option = {
+		name = political_confrontation.11.a	
+		ai_chance = {
+			base = 20
+		}
+		add_timed_idea = {
+			days = 1095
+			idea = RUS_plan_of_kashkin
+		}
+		hidden_effect = {
+			set_country_flag = RUS_plan_kashkina_choosen
+		}
+		
+	}
+
+}
+
+country_event = {
+	id = political_confrontation.12 #План Киреевского
+	title = political_confrontation.12.t
+	desc = political_confrontation.12.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event political_confrontation.12"
+	}
+	
+	option = {
+		name = political_confrontation.12.a
+		ai_chance = {
+			base = 20
+		}
+		add_timed_idea = {
+			days = 1095
+			idea = RUS_plan_of_kireevsky
+		}
+		hidden_effect = {
+			set_country_flag = RUS_plan_kireevskogo_choosen
+		}
+		
+	}
+}
+
+country_event = {
+	id = political_confrontation.13 #Давление на противника
+	title = political_confrontation.13.t
+	desc = political_confrontation.13.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event political_confrontation.13"
+	}
+	
+	option = {
+		name = political_confrontation.13.a
+		ai_chance = {
+			base = 20
+		}
+		
+		
+	}
+}
+
+
+country_event = {
+	id = political_confrontation.14 #Марш на Царьград
+	title = political_confrontation.14.t
+	desc = political_confrontation.14.d
+	picture = GFX_report_event_russian_army_on_parade
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event political_confrontation.14"
+	}
+	
+	option = {
+		name = political_confrontation.14.a
+		ai_chance = {
+			base = 20
+		}
+		declare_war_on = {
+			target = BYZ
+			type = annex_everything
+		}
+		hidden_effect = {
+			complete_national_focus = RUS_marh_to_our_enemies
+			set_global_flag = wwi_russian_attack_byzantium
+			#Нет новостного события!
+			first_world_war_begin = yes
+			if = {
+				limit = {
+					BYZ = {
+						is_in_faction_with = PRU
+					}
+				}
+				BYZ = {
+					add_to_war = {
+						targeted_alliance = PRU
+						enemy = RUS
+					}
+				}
+			}
+		}
+		
 	}
 }
 
@@ -8770,6 +9065,7 @@ country_event = {
 			}
 		}
 		hidden_effect = {
+			set_global_flag = wwi_russiansoc_attack_germany
 			first_world_war_begin = yes
 			if = {
 				limit = {
@@ -8784,7 +9080,6 @@ country_event = {
 					}
 				}
 			}
-			news_event = { id = news.275 days = 3 }
 		}
 	}	
 	
@@ -9162,6 +9457,7 @@ country_event = {
 			}
 		}
 		hidden_effect = {
+			set_global_flag = wwi_russiansoc_attack_byzantium
 			first_world_war_begin = yes
 			if = {
 				limit = {
@@ -9176,7 +9472,6 @@ country_event = {
 					}
 				}
 			}
-			news_event = { id = news.276 days = 3 }
 		}
 	}	
 
@@ -11403,7 +11698,7 @@ country_event = {
 	}
 	
 	option = {
-		name = rus_leave_officers_event.3.a	
+		name = rus_leave_officers_event.3.a
 		
 		ai_chance = {
 			base = 15
@@ -11587,8 +11882,16 @@ country_event = {
 		}
 		add_political_power = -50
 		hidden_effect = {
-			RUS = { set_country_flag = RUS_rbl_uprising_blocked }
-			RUS = { country_event = { id = rus_rbl_uprising_event.5 days = 15 } }
+			random_list = {
+				25 = { 
+					RUS = { set_country_flag = RUS_rbl_uprising_blocked }
+					RUS = { country_event = { id = rus_rbl_uprising_event.5 days = 15 } }
+				}
+				45 = {
+					RUS = { set_country_flag = RUS_ready_for_rbl_uprisinf_flag }
+				}
+			}
+			
 		}
 	}
 
@@ -11914,6 +12217,706 @@ country_event = {
 	option = {
 		name = rus_te_event.2.a	
 		remove_ideas = RUS_an_echo_of_serfdom_1
+		hidden_effect = {
+			
+		}
+	}
+}
+
+##############################ARMY_INVENTARISAION_EVENTS##############################
+
+country_event = { # Проведение инвентаризации на войсковых складах
+	id = rus_inventorisation_on_army_warehouses_event.1 
+	title = rus_inventorisation_on_army_warehouses_event.1.t
+	desc = rus_inventorisation_on_army_warehouses_event.1.d
+	picture = GFX_report_event_russian_warehouse
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event rus_inventorisation_on_army_warehouses_event.1"
+	}
+	
+	option = {
+		name = rus_inventorisation_on_army_warehouses_event.1.a	
+		custom_effect_tooltip = RUS_start_army_warehouses_inventarisation_tt
+		add_political_power = -50
+		hidden_effect = {
+			country_event = { id = rus_inventorisation_on_army_warehouses_event.1 days = 27 }
+		}
+	}
+}
+
+country_event = { #Ситуация в Ивангородской крепости
+	id = rus_inventorisation_on_army_warehouses_event.2 
+	title = rus_inventorisation_on_army_warehouses_event.2.t
+	desc = rus_inventorisation_on_army_warehouses_event.2.d
+	picture = GFX_report_event_ivangorod_fortress
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event rus_inventorisation_on_army_warehouses_event.2"
+		hidden_effect = {
+			country_event = { id = rus_inventorisation_on_army_warehouses_event.3 days = 45 }
+		}
+	}
+	
+	option = {
+		name = rus_inventorisation_on_army_warehouses_event.2.a	
+		RUS = {
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = 637
+				producer = RUS
+			}
+		}
+		hidden_effect = {
+			
+		}
+	}
+}
+
+country_event = { # Воронежский скандал
+	id = rus_inventorisation_on_army_warehouses_event.3
+	title = rus_inventorisation_on_army_warehouses_event.3.t
+	desc = rus_inventorisation_on_army_warehouses_event.3.d
+	picture = GFX_report_event_russian_warehouse_2
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event rus_inventorisation_on_army_warehouses_event.3"
+		hidden_effect = {
+			country_event = { id = rus_inventorisation_on_army_warehouses_event.4 days = 21 }
+		}
+	}
+	
+	option = {
+		name = rus_inventorisation_on_army_warehouses_event.3.a	
+		add_equipment_to_stockpile = {
+			type = support_equipment
+			amount = 321
+			producer = RUS
+		}
+		hidden_effect = {
+			
+		}
+	}
+}
+
+country_event = { #
+	id = rus_inventorisation_on_army_warehouses_event.4 
+	title = rus_inventorisation_on_army_warehouses_event.4.t
+	desc = rus_inventorisation_on_army_warehouses_event.4.d
+	picture = GFX_report_event_russian_warehouse
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event rus_inventorisation_on_army_warehouses_event.4"
+		hidden_effect = {
+			country_event = { id = rus_inventorisation_on_army_warehouses_event.5 days = 15 }
+		}
+	}
+	
+	option = {
+		name = rus_inventorisation_on_army_warehouses_event.4.a	
+		add_equipment_to_stockpile = {
+			type = infantry_equipment
+			amount = 1331
+			producer = RUS
+		}
+		add_equipment_to_stockpile = {
+			type = support_equipment
+			amount = 469
+			producer = RUS
+		}
+		add_equipment_to_stockpile = {
+			type = artillery_equipment
+			amount = 238
+			producer = RUS
+		}
+		hidden_effect = {
+			
+		}
+	}
+}
+
+country_event = { # Проверка Ржевского отличника
+	id = rus_inventorisation_on_army_warehouses_event.5 
+	title = rus_inventorisation_on_army_warehouses_event.5.t
+	desc = rus_inventorisation_on_army_warehouses_event.5.d
+	picture = GFX_report_event_russian_army_on_parade
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event rus_inventorisation_on_army_warehouses_event.5"
+		hidden_effect = {
+			country_event = { id = rus_inventorisation_on_army_warehouses_event.6 days = 19 }
+		}
+	}
+	
+	option = {
+		name = rus_inventorisation_on_army_warehouses_event.5.a	
+		add_political_power = 25
+		hidden_effect = {
+			
+		}
+	}
+}
+
+country_event = { # Отчет о проверке Рижских частей
+	id = rus_inventorisation_on_army_warehouses_event.6 
+	title = rus_inventorisation_on_army_warehouses_event.6.t
+	desc = rus_inventorisation_on_army_warehouses_event.6.d
+	picture = GFX_report_event_russian_arlillerists
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event rus_inventorisation_on_army_warehouses_event.6"
+		hidden_effect = {
+			country_event = { id = rus_inventorisation_on_army_warehouses_event.7 days = 45 }
+		}
+	}
+	
+	option = {
+		name = rus_inventorisation_on_army_warehouses_event.6.a	
+		add_political_power = 25
+		add_equipment_to_stockpile = {
+			type = support_equipment
+			amount = 112
+			producer = RUS
+		}
+		add_equipment_to_stockpile = {
+			type = infantry_equipment
+			amount = 215
+			producer = RUS
+		}
+		hidden_effect = {
+			
+		}
+	}
+}
+
+country_event = { #Ситуация в Бресткой крепости
+	id = rus_inventorisation_on_army_warehouses_event.7
+	title = rus_inventorisation_on_army_warehouses_event.7.t
+	desc = rus_inventorisation_on_army_warehouses_event.7.d
+	picture = GFX_report_event_russian_warehouse
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event rus_inventorisation_on_army_warehouses_event.7"
+		hidden_effect = {
+			country_event = { id = rus_inventorisation_on_army_warehouses_event.8 days = 14 }
+		}
+	}
+	
+	option = {
+		name = rus_inventorisation_on_army_warehouses_event.7a	
+		
+		hidden_effect = {
+			
+		}
+	}
+}
+
+country_event = { #Отчет о проверке ставропольских частей
+	id = rus_inventorisation_on_army_warehouses_event.8 
+	title = rus_inventorisation_on_army_warehouses_event.8.t
+	desc = rus_inventorisation_on_army_warehouses_event.8.d
+	picture = GFX_report_event_russian_warehouse
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event rus_inventorisation_on_army_warehouses_event.8"
+		hidden_effect = {
+			country_event = { id = rus_inventorisation_on_army_warehouses_event.9 days = 25 }
+		}
+	}
+	
+	option = {
+		name = rus_inventorisation_on_army_warehouses_event.8.a	
+		
+		hidden_effect = {
+			
+		}
+	}
+}
+
+country_event = { #Результат проверки Севастополя
+	id = rus_inventorisation_on_army_warehouses_event.9
+	title = rus_inventorisation_on_army_warehouses_event.9.t
+	desc = rus_inventorisation_on_army_warehouses_event.9.d
+	picture = GFX_report_event_russian_warehouse
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event rus_inventorisation_on_army_warehouses_event.9"
+		hidden_effect = {
+			country_event = { id = rus_inventorisation_on_army_warehouses_event.10 days = 41 }
+		}
+	}
+	
+	option = {
+		name = rus_inventorisation_on_army_warehouses_event.9.a	
+		
+		hidden_effect = {
+			
+		}
+	}
+}
+
+country_event = { # Состояние дел в Киевском военном округе
+	id = rus_inventorisation_on_army_warehouses_event.10 
+	title = rus_inventorisation_on_army_warehouses_event.10.t
+	desc = rus_inventorisation_on_army_warehouses_event.10.d
+	picture = GFX_report_event_russian_warehouse
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event rus_inventorisation_on_army_warehouses_event.10"
+		hidden_effect = {
+			country_event = { id = rus_inventorisation_on_army_warehouses_event.11 days = 34 }
+		}
+	}
+	
+	option = {
+		name = rus_inventorisation_on_army_warehouses_event.10.a	
+		
+		hidden_effect = {
+			
+		}
+	}
+}
+
+country_event = { # Отчет о проверке частей Финлянской области
+	id = rus_inventorisation_on_army_warehouses_event.11 
+	title = rus_inventorisation_on_army_warehouses_event.11.t
+	desc = rus_inventorisation_on_army_warehouses_event.11.d
+	picture = GFX_report_event_russian_warehouse
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event rus_inventorisation_on_army_warehouses_event.11"
+		hidden_effect = {
+			country_event = { id = rus_inventorisation_on_army_warehouses_event.12 days = 15 }
+		}
+	}
+	
+	option = {
+		name = rus_inventorisation_on_army_warehouses_event.11.a	
+		
+		hidden_effect = {
+			
+		}
+	}
+}
+
+country_event = { #Завершение массовой инвентаризации
+	id = rus_inventorisation_on_army_warehouses_event.12 
+	title = rus_inventorisation_on_army_warehouses_event.12.t
+	desc = rus_inventorisation_on_army_warehouses_event.12.d
+	picture = GFX_report_event_russian_warehouse
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event rus_inventorisation_on_army_warehouses_event.12"
+	}
+	
+	option = {
+		name = rus_inventorisation_on_army_warehouses_event.12.a	
+		
+		hidden_effect = {
+			
+		}
+	}
+}
+
+
+##############################GREAT_WAR_RUSSIAN_EVENTS##############################
+
+country_event = { #Ситауция чрезвычайная
+	id = rus_great_war_event.1 
+	title = rus_great_war_event.1.t
+	desc = rus_great_war_event.1.d
+	picture = GFX_report_event_gw_russian_army_people
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event rus_great_war_event.1"
+	}
+	
+	option = {
+		name = rus_great_war_event.1.a	
+		add_timed_idea = {
+			idea = RUS_historical_germany_suddden_attak_russia
+			days = 30
+		}
+		hidden_effect = {
+			
+		}
+	}
+}
+
+country_event = { #Победоносное шествие
+	id = rus_great_war_event.2 
+	title = rus_great_war_event.2.t
+	desc = rus_great_war_event.2.d
+	picture = GFX_report_event_russian_arlillerists
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event rus_great_war_event.2"
+	}
+	
+	option = {
+		name = rus_great_war_event.2.a	
+		add_timed_idea = {
+			idea = RUS_gw_marhs_on_our_enemies_idea
+			days = 90
+		}
+		hidden_effect = {
+			
+		}
+	}
+}
+
+country_event = { #Война пришла в Россию
+	id = rus_great_war_event.3 
+	title = rus_great_war_event.3.t
+	desc = rus_great_war_event.3.d
+	picture = GFX_report_event_russian_arlillerists
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event rus_great_war_event.3"
+	}
+	
+	option = {
+		name = rus_great_war_event.3.a	
+		add_war_support = 0.05
+		hidden_effect = {
+			
+		}
+	}
+}
+
+country_event = { #Трудности военного времени
+	id = rus_great_war_event.4 
+	title = rus_great_war_event.4.t
+	desc = rus_great_war_event.4.d
+	picture = GFX_report_event_polands_deportation
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event rus_great_war_event.4"
+	}
+	
+	option = {
+		name = rus_great_war_event.4.a	
+		add_ideas = RUS_gw_support_france
+		hidden_effect = {
+			
+		}
+	}
+}
+
+country_event = { #Поддержка для друзей из Франции
+	id = rus_great_war_event.5 
+	title = rus_great_war_event.5.t
+	desc = rus_great_war_event.5.d
+	picture = GFX_report_event_polands_deportation
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event rus_great_war_event.5"
+	}
+	
+	option = {
+		name = rus_great_war_event.5.a	
+		add_ideas = RUS_gw_support_cbi
+		hidden_effect = {
+			
+		}
+	}
+}
+
+country_event = { #Поддержка для друзей из КБО
+	id = rus_great_war_event.6
+	title = rus_great_war_event.6.t
+	desc = rus_great_war_event.6.d
+	picture = GFX_report_event_polands_deportation
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event rus_great_war_event.6"
+	}
+	
+	option = {
+		name = rus_great_war_event.6.a	
+		
+		hidden_effect = {
+			
+		}
+	}
+}
+
+country_event = { #Кооперация действий в альянсе - ивент для России
+	id = rus_great_war_event.7
+	title = rus_great_war_event.7.t
+	desc = rus_great_war_event.7.d
+	picture = GFX_report_event_polands_deportation
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event rus_great_war_event.7"
+	}
+	
+	option = {
+		name = rus_great_war_event.7.a	
+		add_ideas = RUS_gw_coop_operation_planning
+		hidden_effect = {
+			
+		}
+	}
+}
+
+country_event = { ##Кооперация действий в альянсе - для остальных 
+	id = rus_great_war_event.8
+	title = rus_great_war_event.8.t
+	desc = rus_great_war_event.8.d
+	picture = GFX_report_event_polands_deportation
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event rus_great_war_event.8"
+	}
+	
+	option = {
+		name = rus_great_war_event.8.a	
+		add_ideas = RUS_gw_coop_operation_planning
+		hidden_effect = {
+			
+		}
+	}
+}
+
+country_event = { #
+	id = rus_great_war_event.9
+	title = rus_great_war_event.9.t
+	desc = rus_great_war_event.9.d
+	picture = GFX_report_event_polands_deportation
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event rus_great_war_event.9"
+	}
+	
+	option = {
+		name = rus_great_war_event.9.a	
+		
+		hidden_effect = {
+			
+		}
+	}
+}
+
+country_event = { #
+	id = rus_great_war_event.10
+	title = rus_great_war_event.10.t
+	desc = rus_great_war_event.10.d
+	picture = GFX_report_event_polands_deportation
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event rus_great_war_event.10"
+	}
+	
+	option = {
+		name = rus_great_war_event.10.a	
+		
+		hidden_effect = {
+			
+		}
+	}
+}
+
+country_event = { #
+	id = rus_great_war_event.11
+	title = rus_great_war_event.11.t
+	desc = rus_great_war_event.11.d
+	picture = GFX_report_event_polands_deportation
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event rus_great_war_event.11"
+	}
+	
+	option = {
+		name = rus_great_war_event.11.a	
+		
+		hidden_effect = {
+			
+		}
+	}
+}
+
+country_event = { #
+	id = rus_great_war_event.12
+	title = rus_great_war_event.12.t
+	desc = rus_great_war_event.12.d
+	picture = GFX_report_event_polands_deportation
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event rus_great_war_event.12"
+	}
+	
+	option = {
+		name = rus_great_war_event.12.a	
+		
+		hidden_effect = {
+			
+		}
+	}
+}
+
+country_event = { #
+	id = rus_great_war_event.13
+	title = rus_great_war_event.13.t
+	desc = rus_great_war_event.13.d
+	picture = GFX_report_event_polands_deportation
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event rus_great_war_event.13"
+	}
+	
+	option = {
+		name = rus_great_war_event.13.a	
+		
+		hidden_effect = {
+			
+		}
+	}
+}
+
+country_event = { #
+	id = rus_great_war_event.14
+	title = rus_great_war_event.14.t
+	desc = rus_great_war_event.14.d
+	picture = GFX_report_event_polands_deportation
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event rus_great_war_event.14"
+	}
+	
+	option = {
+		name = rus_great_war_event.14.a	
+		
 		hidden_effect = {
 			
 		}
