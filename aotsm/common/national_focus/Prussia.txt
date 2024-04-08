@@ -170,6 +170,33 @@ focus_tree = {
 		}
 	}
 	
+	#focus = {
+	#	id = PRU_start_austrian_operation
+	#	icon = GFX_
+	#	x = 0
+	#	y = 2
+	#	cost = 4.3
+	#	prerequisite = { focus = PRU_Austria_must_fall }
+	#	mutually_exclusive = { }
+	#	ai_will_do = {
+	#		factor = 5000
+	#	}
+	#	
+	#	#cancel = { }
+	#	
+	#	#available = {  }
+	#	
+	#	#bypass = { }
+	#	
+	#	#search_filters = {  }
+	#	
+	#	will_lead_to_war_with = AUS
+	#	
+	#	completion_reward = {
+	#		custom_effect_tooltip = pru_prepared_to_first_brotherwar_tt
+	#	}
+	#}
+	
 	focus = {
 		id = PRU_aus_ultimatum
 		icon = GFX_focus_pru_send_requirements
@@ -302,6 +329,7 @@ focus_tree = {
 		completion_reward = {
 			custom_effect_tooltip = PRU_faction_and_trade_union 
 			hidden_effect = {
+				PRU = { set_cosmetic_tag = PRUNGU }
 				PRU = { create_faction = "PRU_Kontinentaleuropa_pakt" }
 				PRU = {
 					remove_trait = {
@@ -491,6 +519,37 @@ focus_tree = {
 			}
 		}
 	}
+	
+	#focus = {
+	#	id = PRU_ready_to_talk
+	#	icon = GFX_
+	#	x = 0
+	#	y = 5
+	#	cost = 4.3
+	#	prerequisite = { focus = PRU_integration }
+	#	prerequisite = { focus = PRU_belgium_ultimatum }
+	#	prerequisite = { focus = PRU_army_domination_focus }
+	#	prerequisite = { focus = PRU_netherland_ultimatum }
+	#	prerequisite = { focus = PRU_new_german_way }
+	#	mutually_exclusive = { }
+	#	ai_will_do = {
+	#		factor = 5000
+	#	}
+	#	
+	#	#cancel = { }
+	#	
+	#	#available = {  }
+	#	
+	#	#bypass = { }
+	#	
+	#	#search_filters = {  }
+	#	
+	#	will_lead_to_war_with = AUS
+	#	
+	#	completion_reward = {
+	#		custom_effect_tooltip = pru_prepared_to_second_brotherwar_tt
+	#	}
+	#}
 	
 	focus = {
 		id = PRU_aus_ulimatum_2
@@ -776,6 +835,33 @@ focus_tree = {
 			BYZ = { country_event = ger_byz.1 }
 		}
 	}
+	
+	#focus = {
+	#	id = PRU_last_crusader_for_germany
+	#	icon = GFX_
+	#	x = 0
+	#	y = 9
+	#	cost = 4.3
+	#	prerequisite = { focus = PRU_invati_country_of_greates_city }
+	#	mutually_exclusive = { }
+	#	ai_will_do = {
+	#		factor = 5000
+	#	}
+	#	
+	#	#cancel = { }
+	#	
+	#	#available = {  }
+	#	
+	#	#bypass = { }
+	#	
+	#	#search_filters = {  }
+	#	
+	#	will_lead_to_war_with = AUS
+	#	
+	#	completion_reward = {
+	#		custom_effect_tooltip = pru_prepared_to_third_brotherwar_tt
+	#	}
+	#}
 	
 	focus = {
 		id = PRU_end_of_german_war
@@ -2882,10 +2968,21 @@ focus_tree = {
 			custom_effect_tooltip = black_sun_goverment_fall_tt
 			hidden_effect = {
 				PRU = {
-					set_country_flag = decaing_reich
+					if = {
+						limit = {
+							NOT = {
+								has_country_flag = decaing_reich
+							}
+						}
+						set_country_flag = decaing_reich
+					}
 					add_to_variable = {
 						var = PRU.stab_decaing
 						value = -0.025
+					}
+					set_variable = {
+						var = PRU.stab_for_blacksun
+						value = PRU.stability
 					}
 				}
 			}
@@ -2928,10 +3025,21 @@ focus_tree = {
 			custom_effect_tooltip = black_sun_goverment_fall_tt
 			hidden_effect = {
 				PRU = {
-					set_country_flag = decaing_reich
+					if = {
+						limit = {
+							NOT = {
+								has_country_flag = decaing_reich
+							}
+						}
+						set_country_flag = decaing_reich
+					}
 					add_to_variable = {
 						var = PRU.stab_decaing
 						value = -0.01
+					}
+					set_variable = {
+						var = PRU.stab_for_blacksun
+						value = PRU.stability
 					}
 				}
 			}
@@ -2973,10 +3081,21 @@ focus_tree = {
 			custom_effect_tooltip = black_sun_goverment_fall_tt
 			hidden_effect = {
 				PRU = {
-					set_country_flag = decaing_reich
+					if = {
+						limit = {
+							NOT = {
+								has_country_flag = decaing_reich
+							}
+						}
+						set_country_flag = decaing_reich
+					}
 					add_to_variable = {
 						var = PRU.stab_decaing
 						value = -0.025
+					}
+					set_variable = {
+						var = PRU.stab_for_blacksun
+						value = PRU.stability
 					}
 				}
 			}
@@ -3016,6 +3135,14 @@ focus_tree = {
 		completion_reward = {
 			add_stability = -0.05
 			country_event = ger_blackorder.16
+			hidden_effect = {
+				PRU = {
+					set_variable = {
+						var = PRU.stab_for_blacksun
+						value = PRU.stability
+					}
+				}
+			}
 		}
 	}
 	
@@ -3061,10 +3188,21 @@ focus_tree = {
 			custom_effect_tooltip = black_sun_goverment_fall_tt
 			hidden_effect = {
 				PRU = {
-					set_country_flag = decaing_reich
+					if = {
+						limit = {
+							NOT = {
+								has_country_flag = decaing_reich
+							}
+						}
+						set_country_flag = decaing_reich
+					}
 					add_to_variable = {
 						var = PRU.stab_decaing
 						value = -0.025
+					}
+					set_variable = {
+						var = PRU.stab_for_blacksun
+						value = PRU.stability
 					}
 				}
 			}
@@ -3107,10 +3245,21 @@ focus_tree = {
 			custom_effect_tooltip = black_sun_goverment_fall_tt
 			hidden_effect = {
 				PRU = {
-					set_country_flag = decaing_reich
+					if = {
+						limit = {
+							NOT = {
+								has_country_flag = decaing_reich
+							}
+						}
+						set_country_flag = decaing_reich
+					}
 					add_to_variable = {
 						var = PRU.stab_decaing
 						value = -0.01
+					}
+					set_variable = {
+						var = PRU.stab_for_blacksun
+						value = PRU.stability
 					}
 				}
 			}
@@ -3154,10 +3303,21 @@ focus_tree = {
 			custom_effect_tooltip = black_sun_goverment_fall_tt
 			hidden_effect = {
 				PRU = {
-					set_country_flag = decaing_reich
+					if = {
+						limit = {
+							NOT = {
+								has_country_flag = decaing_reich
+							}
+						}
+						set_country_flag = decaing_reich
+					}
 					add_to_variable = {
 						var = PRU.stab_decaing
 						value = -0.01
+					}
+					set_variable = {
+						var = PRU.stab_for_blacksun
+						value = PRU.stability
 					}
 				}
 			}
@@ -3201,10 +3361,21 @@ focus_tree = {
 			custom_effect_tooltip = black_sun_goverment_fall_tt
 			hidden_effect = {
 				PRU = {
-					set_country_flag = decaing_reich
+					if = {
+						limit = {
+							NOT = {
+								has_country_flag = decaing_reich
+							}
+						}
+						set_country_flag = decaing_reich
+					}
 					add_to_variable = {
 						var = PRU.stab_decaing
 						value = -0.01
+					}
+					set_variable = {
+						var = PRU.stab_for_blacksun
+						value = PRU.stability
 					}
 				}
 			}
@@ -3245,6 +3416,14 @@ focus_tree = {
 		completion_reward = {
 			news_event = news.212 
 			add_ideas = blacksun_germany
+			hidden_effect = {
+				PRU = {
+					set_variable = {
+						var = PRU.stab_for_blacksun
+						value = PRU.stability
+					}
+				}
+			}
 		}
 	}
 	
@@ -4257,16 +4436,38 @@ focus_tree = {
 		#search_filters = {  }
 		
 		completion_reward = {
-			news_event = { hours = 24 id = news.4 }
+			news_event = { days = 1 id = news.4 }
+			if = {
+				limit = {
+					NOT = {
+						has_completed_focus = PRU_economi_sauer
+						has_completed_focus = PRU_economi_domr
+						has_completed_focus = PRU_economi_ebik
+					}
+				}
+				custom_effect_tooltip = pru_economic_bonus_tt
+			}
+			if = {
+				limit = { has_completed_focus = PRU_economi_sauer }
+				add_timed_idea = { idea = PRU_sauer_wonder days = 365 }
+			}
+			if = {
+				limit = { has_completed_focus = PRU_economi_domr }
+				add_timed_idea = { idea = PRU_domr_wonder days = 365 }
+			}
+			if = {
+				limit = { has_completed_focus = PRU_economi_ebik }
+				add_timed_idea = { idea = PRU_ebik_wonder days = 365 }
+			}
 		}
 	}
 	
 	focus = {
 		id = PRU_resourse
 		icon = GFX_focus_pru_expand_resource_base
-		x = -17
+		x = -19
 		y = 1
-		cost = 7
+		cost = 4.3
 		prerequisite = { focus = PRU_war_economi }
 		#mutually_exclusive = { }
 		ai_will_do = {
@@ -4283,6 +4484,58 @@ focus_tree = {
 		
 		completion_reward = {
 			custom_effect_tooltip = PRU_resourse_effect
+		}
+	}
+	
+	focus = {
+		id = PRU_industrian_upgrade
+		icon = GFX_
+		x = -1
+		y = 1
+		cost = 4.3
+		prerequisite = { focus = PRU_resourse }
+		relative_position_id = PRU_resourse
+		#mutually_exclusive = { }
+		ai_will_do = {
+			factor = 750
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			
+		}
+	}
+	
+	focus = {
+		id = PRU_experimental_resource
+		icon = GFX_
+		x = 1
+		y = 1
+		cost = 4.3
+		prerequisite = { focus = PRU_resourse }
+		relative_position_id = PRU_resourse
+		#mutually_exclusive = { }
+		ai_will_do = {
+			factor = 750
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			
 		}
 	}
 	
@@ -5660,6 +5913,12 @@ focus_tree = {
 		
 		available = { 
 			has_global_flag = firts_world_war
+			custom_trigger_tooltip = {
+				tooltip = not_world_war_has_ended
+				NOT = {
+					world_war_end = yes
+				}
+			}
 		}
 		
 		#bypass = { }
@@ -5710,10 +5969,11 @@ focus_tree = {
 					has_country_flag = pru_say_no_to_blacksun
 				}
 			}
-			OR = {
-				has_war_with = RUS
-				has_war_with = FRR
-				has_war_with = CBI
+			custom_trigger_tooltip = {
+				tooltip = not_world_war_has_ended
+				NOT = {
+					world_war_end = yes
+				}
 			}
 			date < 1855.5.1
 		}
@@ -5761,11 +6021,12 @@ focus_tree = {
 		
 		#cancel = { }
 		
-		available = { 
-			OR = {
-				has_war_with = RUS
-				has_war_with = FRR
-				has_war_with = CBI
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = not_world_war_has_ended
+				NOT = {
+					world_war_end = yes
+				}
 			}
 		}
 		
@@ -5821,10 +6082,11 @@ focus_tree = {
 					}
 				}
 			}
-			OR = {
-				has_war_with = RUS
-				has_war_with = FRR
-				has_war_with = CBI
+			custom_trigger_tooltip = {
+				tooltip = not_world_war_has_ended
+				NOT = {
+					world_war_end = yes
+				}
 			}
 		}
 		
@@ -5865,10 +6127,11 @@ focus_tree = {
 		#cancel = { }
 		
 		available = {
-			OR = {
-				has_war_with = RUS
-				has_war_with = FRR
-				has_war_with = CBI
+			custom_trigger_tooltip = {
+				tooltip = not_world_war_has_ended
+				NOT = {
+					world_war_end = yes
+				}
 			}
 		}
 		
@@ -5911,11 +6174,12 @@ focus_tree = {
 		
 		#cancel = { }
 		
-		available = { 
-			OR = {
-				has_war_with = RUS
-				has_war_with = FRR
-				has_war_with = CBI
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = not_world_war_has_ended
+				NOT = {
+					world_war_end = yes
+				}
 			}
 		}
 		
@@ -6298,6 +6562,12 @@ focus_tree = {
 					has_full_control_of_state = 784
 				}
 			}
+			custom_trigger_tooltip = {
+				tooltip = not_world_war_has_ended
+				NOT = {
+					world_war_end = yes
+				}
+			}
 		}
 		
 		bypass = {
@@ -6349,6 +6619,12 @@ focus_tree = {
 					has_full_control_of_state = 241
 					has_full_control_of_state = 243
 					has_full_control_of_state = 823
+				}
+			}
+			custom_trigger_tooltip = {
+				tooltip = not_world_war_has_ended
+				NOT = {
+					world_war_end = yes
 				}
 			}
 		}
@@ -6413,6 +6689,12 @@ focus_tree = {
 					has_full_control_of_state = 886
 				}
 			}
+			custom_trigger_tooltip = {
+				tooltip = not_world_war_has_ended
+				NOT = {
+					world_war_end = yes
+				}
+			}
 		}
 		
 		bypass = {
@@ -6451,7 +6733,14 @@ focus_tree = {
 		
 		#cancel = { }
 		
-		#available = { }
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = not_world_war_has_ended
+				NOT = {
+					world_war_end = yes
+				}
+			}
+		}
 		
 		#bypass = { }
 		
@@ -6544,7 +6833,14 @@ focus_tree = {
 		
 		#cancel = { }
 		
-		#available = { }
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = not_world_war_has_ended
+				NOT = {
+					world_war_end = yes
+				}
+			}
+		}
 		
 		#bypass = { }
 		
@@ -6649,7 +6945,14 @@ focus_tree = {
 		
 		#cancel = { }
 		
-		#available = { }
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = not_world_war_has_ended
+				NOT = {
+					world_war_end = yes
+				}
+			}
+		}
 		
 		#bypass = { }
 		
