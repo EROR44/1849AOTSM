@@ -808,21 +808,23 @@ bosnia_war_preparation = {
 
 austria_war_preparation = {
 	allowed = {
-		OR = {
-			original_tag = BYZ
-			original_tag = PRU
-		}
+		original_tag = BYZ
 	}
 	enable = {
 		focus_progress = {
-			focus = PRU_end_of_german_war
+			focus = PRU_last_crusader_for_germany
 			progress > 0.01
 		}
 		NOT = {
-			has_completed_focus = PRU_end_of_german_war
+			has_completed_focus = PRU_last_crusader_for_germany
 			owns_state = 104
 		}
 		country_exists = AUS
+		NOT = {
+			PRU = {
+				has_completed_focus = PRU_aus_win_3
+			}
+		}
 	}
 
 	abort = {
@@ -830,18 +832,20 @@ austria_war_preparation = {
 			NOT = { country_exists = AUS }
 
 			AND = {
-				PRU = { has_completed_focus = PRU_end_of_german_war }
+				PRU = { has_completed_focus = PRU_last_crusader_for_germany }
 				BYZ = { has_war_with = AUS }
 			}
-
 			owns_state = 104
+		}
+		PRU = {
+			has_completed_focus = PRU_aus_win_3
 		}
 	}
 
 	ai_strategy = {
 		type = conquer
 		id = "AUS"
-		value = 100
+		value = 1000
 	}
 }
 
