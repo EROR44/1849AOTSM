@@ -170,14 +170,47 @@ focus_tree = {
 		}
 	}
 	
+	focus = {
+		id = PRU_start_austrian_operation
+		icon = GFX_
+		x = 0
+		y = 2
+		cost = 4.3
+		prerequisite = { focus = PRU_Austria_must_fall }
+		mutually_exclusive = { }
+		ai_will_do = {
+			factor = 5000
+		}
+		
+		#cancel = { }
+		
+		#available = {  }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		will_lead_to_war_with = AUS
+		
+		completion_reward = {
+			custom_effect_tooltip = pru_prepared_to_first_brotherwar_tt
+			PRU = {
+				add_timed_idea = {
+					idea = pru_preparation_to_war
+					days = 10
+				}
+			}
+		}
+	}
+	
 	#focus = {
-	#	id = PRU_start_austrian_operation
-	#	icon = GFX_
-	#	x = 0
+	#	id = PRU_aus_ultimatum
+	#	icon = GFX_focus_pru_send_requirements
+	#	x = -1
 	#	y = 2
-	#	cost = 4.3
+	#	cost =7
 	#	prerequisite = { focus = PRU_Austria_must_fall }
-	#	mutually_exclusive = { }
+	#	mutually_exclusive = { focus = PRU_aus_war }
 	#	ai_will_do = {
 	#		factor = 5000
 	#	}
@@ -193,119 +226,92 @@ focus_tree = {
 	#	will_lead_to_war_with = AUS
 	#	
 	#	completion_reward = {
-	#		custom_effect_tooltip = pru_prepared_to_first_brotherwar_tt
+	#		AUS = { 
+	#			country_event = {
+	#				id = gerultimate.1 
+	#				days = 2
+	#			}
+	#		}
+	#		custom_effect_tooltip = may_lead_to_war_with_aus_tt
+	#		hidden_effect = {
+	#			PRU = {
+	#				country_event = {
+	#					id = script_event.20
+	#					days = 51
+	#				}
+	#			}
+	#		}
 	#	}
 	#}
 	
-	focus = {
-		id = PRU_aus_ultimatum
-		icon = GFX_focus_pru_send_requirements
-		x = -1
-		y = 2
-		cost =7
-		prerequisite = { focus = PRU_Austria_must_fall }
-		mutually_exclusive = { focus = PRU_aus_war }
-		ai_will_do = {
-			factor = 5000
-		}
-		
-		#cancel = { }
-		
-		#available = {  }
-		
-		#bypass = { }
-		
-		#search_filters = {  }
-		
-		will_lead_to_war_with = AUS
-		
-		completion_reward = {
-			AUS = { 
-				country_event = {
-					id = gerultimate.1 
-					days = 2
-				}
-			}
-			custom_effect_tooltip = may_lead_to_war_with_aus_tt
-			hidden_effect = {
-				PRU = {
-					country_event = {
-						id = script_event.20
-						days = 51
-					}
-				}
-			}
-		}
-	}
-	
-	focus = {
-		id = PRU_aus_war
-		icon = GFX_focus_pru_send_the_army
-		x = 1
-		y = 2
-		cost =7
-		prerequisite = { focus = PRU_Austria_must_fall }
-		mutually_exclusive = { focus = PRU_aus_ultimatum }
-		ai_will_do = {
-			factor = 5000
-		}
-		
-		#cancel = { }
-		
-		#available = {  }
-		
-		#bypass = { }
-		
-		#search_filters = {  }
-		
-		will_lead_to_war_with = AUS
-		
-		completion_reward = {
-			hidden_effect = {
-				PRU = { create_faction = "Prussian_sphere" }
-				every_other_country = {
-					limit = {
-						has_country_flag = german_union_for_prussian
-					}
-					PRU = { add_to_faction = PREV }
-				}
-				AUS = {
-					create_faction = "Austrian_sphere"
-				}
-				every_other_country = {
-					limit = {
-						has_country_flag = german_union_for_austrian
-					}
-					AUS = { add_to_faction = PREV }
-				}
-				PRU = {
-					country_event = {
-						id = ger.16
-						days = 1
-					}
-				}
-				PRU = {
-					country_event = {
-						id = script_event.20
-						days = 49
-					}
-				}
-				AUS = {
-					mark_focus_tree_layout_dirty = yes
-				}
-			}
-			PRU = {
-				declare_war_on = {
-					target = AUS
-					type = annex_everything
-				}
-			}
-			set_global_flag = war_in_german_region
-			PRU = {
-				set_country_flag = PRU_vs_AUS_1
-			}
-		}
-	}
+	#focus = {
+	#	id = PRU_aus_war
+	#	icon = GFX_focus_pru_send_the_army
+	#	x = 1
+	#	y = 2
+	#	cost =7
+	#	prerequisite = { focus = PRU_Austria_must_fall }
+	#	mutually_exclusive = { focus = PRU_aus_ultimatum }
+	#	ai_will_do = {
+	#		factor = 5000
+	#	}
+	#	
+	#	#cancel = { }
+	#	
+	#	#available = {  }
+	#	
+	#	#bypass = { }
+	#	
+	#	#search_filters = {  }
+	#	
+	#	will_lead_to_war_with = AUS
+	#	
+	#	completion_reward = {
+	#		hidden_effect = {
+	#			PRU = { create_faction = "Prussian_sphere" }
+	#			every_other_country = {
+	#				limit = {
+	#					has_country_flag = german_union_for_prussian
+	#				}
+	#				PRU = { add_to_faction = PREV }
+	#			}
+	#			AUS = {
+	#				create_faction = "Austrian_sphere"
+	#			}
+	#			every_other_country = {
+	#				limit = {
+	#					has_country_flag = german_union_for_austrian
+	#				}
+	#				AUS = { add_to_faction = PREV }
+	#			}
+	#			PRU = {
+	#				country_event = {
+	#					id = ger.16
+	#					days = 1
+	#				}
+	#			}
+	#			PRU = {
+	#				country_event = {
+	#					id = script_event.20
+	#					days = 49
+	#				}
+	#			}
+	#			AUS = {
+	#				mark_focus_tree_layout_dirty = yes
+	#			}
+	#		}
+	#		PRU = {
+	#			declare_war_on = {
+	#				target = AUS
+	#				type = annex_everything
+	#			}
+	#		}
+	#		set_global_flag = war_in_german_region
+	#		PRU = {
+	#			set_country_flag = PRU_vs_AUS_1
+	#		}
+	#	}
+	#}
 	
 	focus = {
 		id = PRU_aus_win
@@ -313,7 +319,7 @@ focus_tree = {
 		x = 0
 		y = 3
 		cost =7
-		prerequisite = { focus = PRU_aus_ultimatum focus = PRU_aus_war }
+		prerequisite = { focus = PRU_start_austrian_operation }
 		ai_will_do = {
 			factor = 5000
 		}
@@ -520,25 +526,62 @@ focus_tree = {
 		}
 	}
 	
+	focus = {
+		id = PRU_ready_to_talk
+		icon = GFX_
+		x = 0
+		y = 5
+		cost = 4.3
+		prerequisite = { focus = PRU_integration }
+		prerequisite = { focus = PRU_belgium_ultimatum }
+		prerequisite = { focus = PRU_army_domination_focus }
+		prerequisite = { focus = PRU_netherland_ultimatum }
+		prerequisite = { focus = PRU_new_german_way }
+		mutually_exclusive = { }
+		ai_will_do = {
+			factor = 5000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		will_lead_to_war_with = AUS
+		
+		completion_reward = {
+			custom_effect_tooltip = pru_prepared_to_second_brotherwar_tt
+			PRU = {
+				add_timed_idea = {
+					idea = pru_preparation_to_war
+					days = 10
+				}
+			}
+		}
+	}
+	
 	#focus = {
-	#	id = PRU_ready_to_talk
-	#	icon = GFX_
-	#	x = 0
+	#	id = PRU_aus_ulimatum_2
+	#	icon = GFX_focus_pru_south_or_war
+	#	x = -1
 	#	y = 5
-	#	cost = 4.3
+	#	cost =7
 	#	prerequisite = { focus = PRU_integration }
 	#	prerequisite = { focus = PRU_belgium_ultimatum }
 	#	prerequisite = { focus = PRU_army_domination_focus }
 	#	prerequisite = { focus = PRU_netherland_ultimatum }
 	#	prerequisite = { focus = PRU_new_german_way }
-	#	mutually_exclusive = { }
+	#	mutually_exclusive = { focus = PRU_aus_war_2 }
 	#	ai_will_do = {
 	#		factor = 5000
 	#	}
 	#	
 	#	#cancel = { }
 	#	
-	#	#available = {  }
+	#	available = { date > 1851.6.1 }
 	#	
 	#	#bypass = { }
 	#	
@@ -547,119 +590,88 @@ focus_tree = {
 	#	will_lead_to_war_with = AUS
 	#	
 	#	completion_reward = {
-	#		custom_effect_tooltip = pru_prepared_to_second_brotherwar_tt
+	#		AUS = { 
+	#			country_event = {
+	#				id = gerultimate.4
+	#				days = 2
+	#			}
+	#		}
+	#		custom_effect_tooltip = may_lead_to_war_with_aus_tt
 	#	}
 	#}
 	
-	focus = {
-		id = PRU_aus_ulimatum_2
-		icon = GFX_focus_pru_south_or_war
-		x = -1
-		y = 5
-		cost =7
-		prerequisite = { focus = PRU_integration }
-		prerequisite = { focus = PRU_belgium_ultimatum }
-		prerequisite = { focus = PRU_army_domination_focus }
-		prerequisite = { focus = PRU_netherland_ultimatum }
-		prerequisite = { focus = PRU_new_german_way }
-		mutually_exclusive = { focus = PRU_aus_war_2 }
-		ai_will_do = {
-			factor = 5000
-		}
-		
-		#cancel = { }
-		
-		available = { date > 1851.6.1 }
-		
-		#bypass = { }
-		
-		#search_filters = {  }
-		
-		will_lead_to_war_with = AUS
-		
-		completion_reward = {
-			AUS = { 
-				country_event = {
-					id = gerultimate.4
-					days = 2
-				}
-			}
-			custom_effect_tooltip = may_lead_to_war_with_aus_tt
-		}
-	}
-	
-	focus = {
-		id = PRU_aus_war_2
-		icon = GFX_focus_pru_war_behind_south
-		x = 1
-		y = 5
-		cost =7
-		prerequisite = { focus = PRU_integration }
-		prerequisite = { focus = PRU_belgium_ultimatum }
-		prerequisite = { focus = PRU_army_domination_focus }
-		prerequisite = { focus = PRU_netherland_ultimatum }
-		prerequisite = { focus = PRU_new_german_way }
-		mutually_exclusive = { focus = PRU_aus_ulimatum_2 }
-		ai_will_do = {
-			factor = 5000
-		}
-		
-		#cancel = { }
-		
-		available = { date > 1851.6.1 }
-		
-		#bypass = { }
-		
-		#search_filters = {  }
-		
-		will_lead_to_war_with = AUS
-		
-		completion_reward = {
-			hidden_effect = {
-				every_other_country = {
-					limit = {
-						has_country_flag = german_union_for_prussian
-						NOT = {
-							tag = PRU
-						}
-					}
-					PRU = { add_to_faction = PREV }
-					PREV = {
-						set_country_flag = time_member_of_allience
-					}
-				}
-				AUS = {
-					create_faction = "Austrian_sphere"
-				}
-				every_other_country = {
-					limit = {
-						has_country_flag = german_union_for_austrian
-					}
-					AUS = { add_to_faction = PREV }
-					if = {
-						limit = {
-							AUS = {
-								has_completed_focus = AUS_create_OEA
-							}
-						}
-						PREV.PREV = {
-							set_country_flag = time_member_of_allience_aus
-						}
-					}
-				}
-				AUS = {
-					mark_focus_tree_layout_dirty = yes
-				}
-			}
-			PRU = {
-				declare_war_on = {
-					target = AUS
-					type = annex_everything
-				}
-			}
-			PRU = { set_country_flag = PRU_vs_AUS_2 }
-		}
-	}
+	#focus = {
+	#	id = PRU_aus_war_2
+	#	icon = GFX_focus_pru_war_behind_south
+	#	x = 1
+	#	y = 5
+	#	cost =7
+	#	prerequisite = { focus = PRU_integration }
+	#	prerequisite = { focus = PRU_belgium_ultimatum }
+	#	prerequisite = { focus = PRU_army_domination_focus }
+	#	prerequisite = { focus = PRU_netherland_ultimatum }
+	#	prerequisite = { focus = PRU_new_german_way }
+	#	mutually_exclusive = { focus = PRU_aus_ulimatum_2 }
+	#	ai_will_do = {
+	#		factor = 5000
+	#	}
+	#	
+	#	#cancel = { }
+	#	
+	#	available = { date > 1851.6.1 }
+	#	
+	#	#bypass = { }
+	#	
+	#	#search_filters = {  }
+	#	
+	#	will_lead_to_war_with = AUS
+	#	
+	#	completion_reward = {
+	#		hidden_effect = {
+	#			every_other_country = {
+	#				limit = {
+	#					has_country_flag = german_union_for_prussian
+	#					NOT = {
+	#						tag = PRU
+	#					}
+	#				}
+	#				PRU = { add_to_faction = PREV }
+	#				PREV = {
+	#					set_country_flag = time_member_of_allience
+	#				}
+	#			}
+	#			AUS = {
+	#				create_faction = "Austrian_sphere"
+	#			}
+	#			every_other_country = {
+	#				limit = {
+	#					has_country_flag = german_union_for_austrian
+	#				}
+	#				AUS = { add_to_faction = PREV }
+	#				if = {
+	#					limit = {
+	#						AUS = {
+	#							has_completed_focus = AUS_create_OEA
+	#						}
+	#					}
+	#					PREV.PREV = {
+	#						set_country_flag = time_member_of_allience_aus
+	#					}
+	#				}
+	#			}
+	#			AUS = {
+	#				mark_focus_tree_layout_dirty = yes
+	#			}
+	#		}
+	#		PRU = {
+	#			declare_war_on = {
+	#				target = AUS
+	#				type = annex_everything
+	#			}
+	#		}
+	#		PRU = { set_country_flag = PRU_vs_AUS_2 }
+	#	}
+	#}
 	
 	focus = {
 		id = PRU_aus_win_2
@@ -667,7 +679,7 @@ focus_tree = {
 		x = 0
 		y = 6
 		cost =7
-		prerequisite = { focus = PRU_aus_ulimatum_2 focus = PRU_aus_war_2 }
+		prerequisite = { focus = PRU_ready_to_talk }
 		ai_will_do = {
 			factor = 5000
 		}
@@ -836,47 +848,21 @@ focus_tree = {
 		}
 	}
 	
-	#focus = {
-	#	id = PRU_last_crusader_for_germany
-	#	icon = GFX_
-	#	x = 0
-	#	y = 9
-	#	cost = 4.3
-	#	prerequisite = { focus = PRU_invati_country_of_greates_city }
-	#	mutually_exclusive = { }
-	#	ai_will_do = {
-	#		factor = 5000
-	#	}
-	#	
-	#	#cancel = { }
-	#	
-	#	#available = {  }
-	#	
-	#	#bypass = { }
-	#	
-	#	#search_filters = {  }
-	#	
-	#	will_lead_to_war_with = AUS
-	#	
-	#	completion_reward = {
-	#		custom_effect_tooltip = pru_prepared_to_third_brotherwar_tt
-	#	}
-	#}
-	
 	focus = {
-		id = PRU_end_of_german_war
+		id = PRU_last_crusader_for_germany
 		icon = GFX_focus_pru_the_last_fratricide_war
 		x = 0
 		y = 9
-		cost =7
+		cost = 4.3
 		prerequisite = { focus = PRU_invati_country_of_greates_city }
+		mutually_exclusive = { }
 		ai_will_do = {
 			factor = 5000
 		}
 		
 		#cancel = { }
 		
-		available = { date > 1853.1.1 }
+		#available = {  }
 		
 		#bypass = { }
 		
@@ -885,18 +871,51 @@ focus_tree = {
 		will_lead_to_war_with = AUS
 		
 		completion_reward = {
-			country_event = gerultimate.5
-			PRU = { set_country_flag = PRU_vs_AUS_3 }
-			hidden_effect = {
-				AUS = {
-					country_event = {
-						id = end_of_austrian.1
-						days = 2
-					}
+			custom_effect_tooltip = pru_prepared_to_third_brotherwar_tt
+			PRU = {
+				add_timed_idea = {
+					idea = pru_preparation_to_war
+					days = 10
 				}
 			}
+			
 		}
 	}
+	
+	#focus = {
+	#	id = PRU_end_of_german_war
+	#	icon = GFX_focus_pru_the_last_fratricide_war
+	#	x = 0
+	#	y = 9
+	#	cost =7
+	#	prerequisite = { focus = PRU_invati_country_of_greates_city }
+	#	ai_will_do = {
+	#		factor = 5000
+	#	}
+	#	
+	#	#cancel = { }
+	#	
+	#	available = { date > 1853.1.1 }
+	#	
+	#	#bypass = { }
+	#	
+	#	#search_filters = {  }
+	#	
+	#	will_lead_to_war_with = AUS
+	#	
+	#	completion_reward = {
+	#		country_event = gerultimate.5
+	#		PRU = { set_country_flag = PRU_vs_AUS_3 }
+	#		hidden_effect = {
+	#			AUS = {
+	#				country_event = {
+	#					id = end_of_austrian.1
+	#					days = 2
+	#				}
+	#			}
+	#		}
+	#	}
+	#}
 	
 	focus = {
 		id = PRU_aus_win_3
@@ -904,7 +923,7 @@ focus_tree = {
 		x = 0
 		y = 10
 		cost =7
-		prerequisite = { focus = PRU_end_of_german_war }
+		prerequisite = { focus = PRU_last_crusader_for_germany }
 		ai_will_do = {
 			factor = 5000
 		}
@@ -3975,10 +3994,7 @@ focus_tree = {
 		#cancel = { }
 		
 		available = { 
-			OR = { 
-				has_completed_focus = PRU_aus_war 
-				has_completed_focus = PRU_aus_ultimatum
-			}
+			has_completed_focus = PRU_start_austrian_operation 
 		}
 		
 		#bypass = { }
@@ -4615,10 +4631,7 @@ focus_tree = {
 		#cancel = { }
 		
 		available = { 
-			OR = { 
-				has_completed_focus = PRU_aus_war 
-				has_completed_focus = PRU_aus_ultimatum
-			}
+			has_completed_focus = PRU_start_austrian_operation
 		}
 		
 		#bypass = { }
