@@ -1,28 +1,183 @@
 first_world_war_begin = {
 
 	set_global_flag = firts_world_war
-	news_event = news.69
+	if = {
+		limit = {
+			has_global_flag = wwi_poland_uprising
+		}
+		news_event = {
+			id = news.69
+			hours = 4
+		}
+	}
+	if = {
+		limit = {
+			has_global_flag = wwi_russian_attack_germany
+		}
+		news_event = {
+			id = news.271
+			hours = 4
+		}
+	}
+	if = {
+		limit = {
+			has_global_flag = wwi_russian_attack_byzantium
+		}
+		
+	}
+	if = {
+		limit = {
+			has_global_flag = wwi_russiansoc_attack_germany
+		}
+		news_event = {
+			id = news.275
+			hours = 4
+		}
+	}
+	if = {
+		limit = {
+			has_global_flag = wwi_russiansoc_attack_byzantium
+		}
+		news_event = {
+			id = news.276
+			hours = 4
+		}
+	}
+	if = {
+		limit = {
+			has_global_flag = wwi_tavrid_operation
+			
+		}
+		news_event = {
+			id = news.277
+			hours = 4
+		}
+	}
 	add_named_threat = {
 		threat = 50
 		name = first_world_war
 	}
 	
+	#Germany complete focus WORLD WAR
+	
 	if = {
 		limit = {
+			OR = {
+				PRU = {
+					has_war_with = RUS
+				}
+				PRU = {
+					has_war_with = FRR
+				}
+				PRU = {
+					has_war_with = CBI
+				}
+				AND = {
+					BYZ = {
+						has_war_with = RUS
+					}
+					PRU = {
+						is_in_faction_with = BYZ
+					}
+				}
+				AND = {
+					BYZ = {
+						has_war_with = FRR
+					}
+					PRU = {
+						is_in_faction_with = BYZ
+					}
+				}
+				AND = {
+					BYZ = {
+						has_war_with = CBI
+					}
+					PRU = {
+						is_in_faction_with = BYZ
+					}
+				}
+			}
+		}
+		PRU = {
+			complete_national_focus = PRU_first_world_war
+		}
+	}
+	
+	#Britania complete focus WORLD WAR
+	
+	if = {
+		limit = {
+			OR = {
+				CBI = {
+					has_war_with = PRU
+				}
+				CBI = {
+					has_war_with = BYZ
+				}
+				AND = {
+					RUS = {
+						has_war_with = PRU
+					}
+					CBI = {
+						is_in_faction_with = RUS
+					}
+				}
+				AND = {
+					RUS = {
+						has_war_with = BYZ
+					}
+					CBI = {
+						is_in_faction_with = RUS
+					}
+				}
+				AND = {
+					FRR = {
+						has_war_with = PRU
+					}
+					CBI = {
+						is_in_faction_with = FRR
+					}
+				}
+				AND = {
+					FRR = {
+						has_war_with = BYZ
+					}
+					CBI = {
+						is_in_faction_with = FRR
+					}
+				}
+			}
+		}
+		CBI = {
+			complete_national_focus = CBI_great_war
+		}
+	}
+	
+	if = { #эффекты для наложения бафов/дебафов на Россию в начале ВВ
+		limit = {
 			is_historical_focus_on = yes
+			has_global_flag = polish_uprising_is_started
 			RUS = {
 				has_war_with = PRU
-				has_defensive_war = yes
+				#has_defensive_war = yes
 			}
 		}
 		RUS = { 
-			country_event = aotsm_notification_event.1
-			add_timed_idea = {
-				idea = RUS_historical_germany_suddden_attak_russia
-				days = 30
-			}
+			complete_national_focus = RUS_unexpected_prussian_invade		
 		}
 	}
+	if = {
+		limit = {
+			has_global_flag = pru_ignore_poland_uprising 
+			has_global_flag = BYZ_start_tavrida_operation
+			RUS = {
+				has_war_with = BYZ
+			}
+		}
+		RUS = {
+			complete_national_focus = RUS_war_becomes_to_russia
+		}
+	}			
 	
 	every_country = {
 		limit = {

@@ -30,6 +30,39 @@
 #			}
 #		}
 
+DIPLOMACY_REQUEST_INTERNATIONAL_MARKET_ACCESS_RIGHTS_ENABLE_TRIGGER_OVERRIDES_GAME = {
+	NOT = {
+		has_game_rule = {
+			rule = allow_international_market
+			option = FREE
+		}
+	}
+}
+
+DIPLOMACY_REQUEST_INTERNATIONAL_MARKET_ACCESS_RIGHTS_ENABLE_TRIGGER = { #отвечает за блокировку рынка вне альянса
+	if = {
+		limit = {
+			has_game_rule = {
+				rule = allow_international_market
+				option = FREE
+			}
+		}
+		always = yes
+	}
+	if = {
+		limit = {
+			has_game_rule = {
+				rule = allow_international_market
+				option = BLOCKED
+			}
+		}
+		custom_trigger_tooltip = {
+			tooltip = RULE_INTERNATIONAL_MARKET_BLOCKED_TT
+			always = no
+		}
+	}
+}
+
 # This specifically overrides the rule check as to whether or not you can guarantee other ideologies
 DIPLOMACY_GUARANTEE_ENABLE_TRIGGER_OVERRIDES_GAME = {
 	NOT = {
@@ -654,3 +687,4 @@ DIPLOMACY_SEND_VOLUNTEERS_ENABLE_TRIGGER = {
 		}
 	}
 }
+

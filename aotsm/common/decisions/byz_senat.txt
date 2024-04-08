@@ -1657,12 +1657,16 @@ byz_senat_decision_category = {
 					controls_state = 137
 				}
 			}
+			has_global_flag = byz_capitulation
 		}
 		
 		visible = {
 			tag = BYZ
 			BYZ = {
 				has_country_flag = byz_prepered_to_take_back_taurida
+			}
+			NOT = {
+				has_global_flag = byz_capitulation
 			}
 		}
 		
@@ -1674,14 +1678,31 @@ byz_senat_decision_category = {
 			}
 		}
 		
-		days_remove = 15
+		days_remove = 32
 		
 		fire_only_once = yes
 		
 		war_with_on_remove = RUS
+		war_with_on_complete = RUS
 		
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision start byz_cremia_operation"
+			hidden_effect = {
+				set_global_flag = BYZ_start_tavrida_operation #триггер для эффектов у России
+				if = {
+					limit = {
+						NOT = {
+							has_global_flag = firts_world_war
+						}
+					}
+					RUS = {
+						country_event = {
+							id = byz.57
+							days = 3
+						}
+					}
+				}
+			}
 		}
 		
 		remove_effect = {
@@ -1693,6 +1714,7 @@ byz_senat_decision_category = {
 					}
 				}
 				hidden_effect = {
+					set_global_flag = wwi_tavrid_operation
 					first_world_war_begin = yes
 				}
 				hidden_effect = {

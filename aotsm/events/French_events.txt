@@ -7,6 +7,7 @@ add_namespace = fren_colonial
 add_namespace = fren_mil_up
 add_namespace = frr_his_claims
 add_namespace = fren_fober_agreement
+add_namespace = frr_gw_fail_events
 
 	
 country_event = { #покушение на лагранжа
@@ -65,8 +66,17 @@ country_event = { #покушение на лагранжа
 				is_historical_focus_on = yes
 			}
 		}
-		retire_character = FRR_Sharl_Lagranj
-		promote_character = FRR_Temporary_geverment
+		kill_country_leader = yes
+		add_country_leader_role = {
+			character = FRR_Temporary_geverment
+			promote_leader = yes
+			
+			country_leader = {
+				expire = "1900.1.1"
+				ideology = market_socialism
+				traits = {  }
+			}
+		}
 		
 		add_stability = -0.1
 		hidden_effect = {
@@ -2185,4 +2195,322 @@ country_event = {
 #	}
 #	
 #}
+
+country_event = {
+	id = frr_gw_fail_events.1 # 
+	title = frr_gw_fail_events.1.t
+	desc = frr_gw_fail_events.1.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event frr_gw_fail_events.1"
+		hidden_effect = {
+			country_event = { id = frr_gw_fail_events.2 days = 9 }
+			if = {
+				limit = {
+					FRR = {
+						has_country_leader = {
+							character = FRR_Louis_Napoleon
+							ruling_only = yes
+						}
+					}
+				}
+				FRR = {
+					set_country_flag = FRR_luis_napoleon_fail_war
+				}
+			}
+		}
+	}
+	
+	option = {
+		name = frr_gw_fail_events.1.a	#
+		ai_chance = {
+			base = 20
+		}
+		retire_country_leader = yes
+		set_politics = { 
+			ruling_party = democratic 
+			elections_allowed = yes
+		}
+		add_country_leader_role = {
+			character = FRR_Temporary_geverment
+			promote_leader = yes
+			
+			country_leader = {
+				expire = "1900.1.1"
+				ideology = conservatism
+				traits = {  }
+			}
+		}
+		hidden_effect = {
+			add_popularity = {
+				ideology = democratic  
+				popularity = 0.2
+			}
+		}
+	}	
+}
+
+country_event = {
+	id = frr_gw_fail_events.2 # Массовые выступления на улицах
+	title = frr_gw_fail_events.2.t
+	desc = frr_gw_fail_events.2.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event frr_gw_fail_events.2"
+		hidden_effect = {
+			country_event = { id = frr_gw_fail_events.3 days = 21 }
+		}
+	}
+	
+	option = {
+		name = frr_gw_fail_events.2.a	#
+		ai_chance = {
+			base = 20
+		}
+		add_stability = -0.05
+		hidden_effect = {
+			
+		}
+	}	
+		
+
+}
+
+
+country_event = {
+	id = frr_gw_fail_events.3 # Давление со стороны военных
+	title = frr_gw_fail_events.3.t
+	desc = frr_gw_fail_events.3.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event frr_gw_fail_events.3"
+		hidden_effect = {
+			country_event = { id = frr_gw_fail_events.4 days = 11 }
+		}
+	}
+	
+	option = {
+		name = frr_gw_fail_events.3.a	#
+		ai_chance = {
+			base = 20
+		}
+		add_war_support = 0.05
+		
+		hidden_effect = {
+			
+		}
+	}	
+		
+
+}
+
+
+country_event = {
+	id = frr_gw_fail_events.4 # Восстание военных
+	title = frr_gw_fail_events.4.t
+	desc = frr_gw_fail_events.4.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event frr_gw_fail_events.4"
+		hidden_effect = {
+			country_event = { id = frr_gw_fail_events.5 days = 9 }
+			FRM = {
+				inherit_technology = FRR
+			}
+			FRM = {
+				transfer_state = 17
+				transfer_state = 27
+				transfer_state = 18
+				transfer_state = 23
+				add_state_core = 15
+				add_state_core = 16
+				add_state_core = 17
+				add_state_core = 18
+				add_state_core = 23
+				add_state_core = 24
+				add_state_core = 785
+				add_state_core = 30
+				add_state_core = 33
+			}
+			FRR = {
+				transfer_units_fraction= {
+					target = FRM
+					size = 0.5
+					stockpile_ratio = 0.5
+					army_ratio = 0.8
+					navy_ratio = 0.05
+					air_ratio = 0.5
+				}
+			}
+			FRM = {
+				declare_war_on = {
+					target = FRR
+					type = annex_everything
+				}
+				add_manpower = 200000
+			}
+			if = {
+				limit = {
+					NOT = {
+						FRR = {
+							has_country_flag = FRR_luis_napoleon_fail_war
+						}
+					}
+				}
+				set_nationality = {
+					target_country = FRM
+					character = FRR_Louis_Napoleon
+				}
+				FRM = {
+					set_politics = { ruling_party = reactionist }
+					#add_country_leader_role = {
+					#	character = FRR_Louis_Napoleon
+					#	promote_leader = yes
+					#	
+					#	country_leader = {
+					#		expire = "1900.1.1"
+					#		ideology = paternalism
+					#		traits = { bonapart_trait }
+					#	}
+					#}
+				}
+			}
+			else_if = {
+				limit = {
+					FRR = {
+						has_country_flag = FRR_luis_napoleon_fail_war
+					}
+				}
+				set_nationality = {
+					target_country = FRM
+					character = FRR_Fransua_Ahil_Baset
+				}
+				FRM = {
+					add_country_leader_role = {
+						character = FRR_Fransua_Ahil_Baset
+						promote_leader = yes
+						
+						country_leader = {
+							expire = "1900.1.1"
+							ideology = paternalism
+							traits = { }
+						}
+					}
+				}
+			}
+			set_global_flag = french_civil_war_started_flag
+		}
+	}
+	
+	option = {
+		name = frr_gw_fail_events.4.a	#
+		ai_chance = {
+			base = 20
+		}
+		
+		hidden_effect = {
+			
+		}
+	}	
+		
+
+}
+
+
+country_event = {
+	id = frr_gw_fail_events.5 # Cитуация на Бретани
+	title = frr_gw_fail_events.5.t
+	desc = frr_gw_fail_events.5.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event frr_gw_fail_events.5"
+		hidden_effect = {
+			BRE = {
+				inherit_technology = FRR
+			}
+			BRE = {
+				transfer_state = 14
+				transfer_state = 917
+			}
+			FRR = {
+				transfer_units_fraction= {
+					target = BRE
+					size = 0.1
+					stockpile_ratio = 0.1
+					army_ratio = 0.2
+					navy_ratio = 0.03
+					air_ratio = 0.1
+				}
+			}
+		}
+	}
+	
+	option = {
+		name = frr_gw_fail_events.5.a	#
+		ai_chance = {
+			base = 20
+		}
+		
+		hidden_effect = {
+			
+		}
+	}	
+		
+
+}
+
+
+country_event = {
+	id = frr_gw_fail_events.6 # 
+	title = frr_gw_fail_events.6.t
+	desc = frr_gw_fail_events.6.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event frr_gw_fail_events.6"
+	}
+	
+	option = {
+		name = frr_gw_fail_events.6.a	#
+		ai_chance = {
+			base = 20
+		}
+		
+		hidden_effect = {
+			
+		}
+	}	
+		
+
+}
+
 
