@@ -4,6 +4,7 @@
 ###################
 
 add_namespace = byz
+add_namespace = byz_lore
 add_namespace = byz_ultimatum
 add_namespace = byz_chain
 add_namespace = byz_ita
@@ -12,6 +13,133 @@ add_namespace = byz_senat
 add_namespace = byz_goverment_idea
 add_namespace = byz_student_chain
 add_namespace = byz_caucause_revolt
+add_namespace = byz_anwser
+
+country_event = { #Adrianopole Polk Riot
+	id = byz_lore.1
+	title = byz_lore.1.t
+	desc = byz_lore.1.d
+	picture = GFX_report_byzantium_generals
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event byz_lore.1"
+	}
+	
+	option = {
+		name = byz_lore.1.a
+		ai_chance = {
+			base = 50
+		}
+		add_war_support = -0.025
+	}
+	
+	option = {
+		name = byz_lore.1.b
+		ai_chance = {
+			base = 50
+		}
+	}
+	
+}
+
+country_event = { #Fantastic Constantinople
+	id = byz_lore.2
+	title = byz_lore.2.t
+	desc = byz_lore.2.d
+	picture = GFX_report_constantinople_view
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event byz_lore.2"
+		hidden_effect = {
+			BYZ = {
+				country_event = {
+					id = byz_lore.3
+					days = 15
+				}
+			}
+		}
+	}
+	
+	option = {
+		name = byz_lore.2.a
+		ai_chance = {
+			base = 50
+		}
+		797 = {
+			add_building_construction = {
+				type = infrastructure
+				level = 1
+				instant_build = yes
+			}
+		}
+	}
+	
+}
+
+country_event = { #Jews from all Romea
+	id = byz_lore.3
+	title = byz_lore.3.t
+	desc = byz_lore.3.d
+	picture = GFX_report_byzantium_jews
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event byz_lore.3"
+		hidden_effect = {
+			BYZ = {
+				country_event = {
+					id = byz_lore.4
+					days = 12
+				}
+			}
+		}
+	}
+	
+	option = {
+		name = byz_lore.3.a
+		ai_chance = {
+			base = 50
+		}
+		add_stability = 0.05
+	}
+	
+}
+
+country_event = { #Germans and Constantinople
+	id = byz_lore.4
+	title = byz_lore.4.t
+	desc = byz_lore.4.d
+	picture = GFX_report_hagia_sophia_view
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event byz_lore.4"
+	}
+	
+	option = {
+		name = byz_lore.4.a
+		ai_chance = {
+			base = 50
+		}
+		add_political_power = 50
+	}
+	
+}
+
 
 country_event = {
 	id = byz.1
@@ -126,17 +254,29 @@ country_event = { #Sell of Gibraltar
 	option = { #Sell
 		name = byz.5.a
 		ai_chance = {
-			factor = 99
+			base = 100
 		}
 		BYZ = { transfer_state = 118 }
 		BYZ = { add_state_core = 118 }
 		GRA = { remove_state_core = 118 }
+		BYZ = {
+			country_event = {
+				id = byz.71
+				days = 5
+			}
+		}
 	}
 	
 	option = { #No
 		name = byz.5.b
 		ai_chance = {
-			factor = 1
+			base = 0
+		}
+		BYZ = {
+			country_event = {
+				id = byz.72
+				days = 5
+			}
 		}
 	}
 }
@@ -158,17 +298,29 @@ country_event = { #Sell of Seyta
 	option = { #Sell
 		name = byz.5.a
 		ai_chance = {
-			factor = 99
+			base = 100
 		}
 		BYZ = { transfer_state = 869 }
 		BYZ = { add_state_core = 869 }
 		MOR = { remove_state_core = 869 }
+		BYZ = {
+			country_event = {
+				id = byz.73
+				days = 5
+			}
+		}
 	}
 	
 	option = { #No
 		name = byz.5.b
 		ai_chance = {
-			factor = 1
+			base = 0
+		}
+		BYZ = {
+			country_event = {
+				id = byz.74
+				days = 5
+			}
 		}
 	}
 }
@@ -190,7 +342,7 @@ country_event = { #Join war
 	option = { #Join
 		name = byz.7.a
 		ai_chance = {
-			factor = 99
+			base = 99
 		}
 		BYZ = {
 			declare_war_on = {
@@ -203,7 +355,7 @@ country_event = { #Join war
 	option = { #No
 		name = byz.7.b
 		ai_chance = {
-			factor = 1
+			base = 1
 		}
 	}
 }
@@ -491,7 +643,7 @@ country_event = { #Fate of italy
 	option = { #no more italy
 		name = byz.13.a
 		ai_chance = {
-			factor = 0
+			base = 0
 		}
 		if = {
 			limit = {
@@ -559,7 +711,7 @@ country_event = { #Fate of italy
 	option = { #only Rome
 		name = byz.13.b
 		ai_chance = {
-			factor = 90
+			base = 90
 		}
 		BYZ = {
 			transfer_state = 2
@@ -570,7 +722,7 @@ country_event = { #Fate of italy
 	option = { #nothing
 		name = byz.13.c
 		ai_chance = {
-			factor = 10
+			base = 10
 		}
 		BYZ = {
 			add_stability = 0.10
@@ -597,7 +749,7 @@ country_event = { #New old Capital
 	option = { #Yes
 		name = byz.14.a
 		ai_chance = {
-			factor = 0
+			base = 0
 		}
 		BYZ = {
 			set_capital = {
@@ -609,14 +761,14 @@ country_event = { #New old Capital
 	option = { #No
 		name = byz.14.b
 		ai_chance = {
-			factor = 100
+			base = 100
 		}
 	}
 	
 	option = { #No
 		name = byz.14.c
 		ai_chance = {
-			factor = 0
+			base = 0
 		}
 		set_province_name = {
 			id = 9904
@@ -643,7 +795,7 @@ country_event = { #Armenia general whant serve
 	option = { #Yes
 		name = byz.15.a
 		ai_chance = {
-			factor = 90
+			base = 95
 		}
 		custom_effect_tooltip = byz_recive_arm_generals_tt
 		hidden_effect = {
@@ -661,9 +813,64 @@ country_event = { #Armenia general whant serve
 	option = { #No
 		name = byz.15.b
 		ai_chance = {
-			factor = 10
+			base = 5
 		}
 		custom_effect_tooltip = byz_zergarius_angry_tt
+	}
+
+}	
+
+country_event = { #Turkish general whant serve
+	id = byz.16
+	title = byz.16.t
+	desc = byz.16.d
+	picture = GFX_report_turkish_generals
+	
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event byz.16"
+	}
+	
+	option = { #Yes
+		name = byz.16.a
+		ai_chance = {
+			base = 95
+		}
+		custom_effect_tooltip = byz_recive_trk_generals_tt
+		hidden_effect = {
+			TRK = {
+				every_unit_leader = {
+					limit = {
+						OR = {
+							has_trait = turkish_general
+							has_trait = turkish_islam_general
+						}
+					}
+					set_nationality = BYZ
+				}
+			}
+		}
+	}
+	
+	option = { #No
+		name = byz.16.b
+		ai_chance = {
+			base = 5
+		}
+		custom_effect_tooltip = byz_turkish_general_leave_tt
+		hidden_effect = {
+			TRK = {
+				every_unit_leader = {
+					limit = {
+						has_trait = turkish_islam_general
+					}
+					set_nationality = RTU
+				}
+			}
+		}
 	}
 
 }	
@@ -685,7 +892,7 @@ country_event = { #Maratha deal
 	option = { #take help
 		name = byz.10.a
 		ai_chance = {
-			factor = 99
+			base = 99
 		}
 		BYZ = { 
 			give_guarantee = MRH
@@ -701,7 +908,7 @@ country_event = { #Maratha deal
 	option = { #We can win alone
 		name = byz.10.b
 		ai_chance = {
-			factor = 1
+			base = 1
 		}
 	}
 }
@@ -723,7 +930,7 @@ country_event = { #Zimbambe deal
 	option = { #Sell
 		name = byz.20.a
 		ai_chance = {
-			factor = 99
+			base = 99
 		}
 		ZUL = {
 			annex_country = {
@@ -742,7 +949,7 @@ country_event = { #Zimbambe deal
 	option = { #War
 		name = byz.20.b
 		ai_chance = {
-			factor = 1
+			base = 1
 		}
 		ZUL = {
 			add_state_claim = 544
@@ -757,7 +964,7 @@ country_event = { #Zimbambe deal
 	}
 }
 
-country_event = { #Colonia Conference
+country_event = { #Taurida Operation
 	id = byz.50
 	title = byz.50.t
 	desc = byz.50.d
@@ -772,11 +979,1233 @@ country_event = { #Colonia Conference
 	}
 	
 	option = { #Real
-		name = byz.100.a
+		name = byz.50.a
 		custom_effect_tooltip = byz_planing_war_with_rus_tt
 		army_experience = -25
 		add_command_power = -50
 		set_country_flag = byz_prepered_to_take_back_taurida
+	}
+	
+}
+
+country_event = { #First General Meeting
+	id = byz.51
+	title = byz.51.t
+	desc = byz.51.d
+	picture = GFX_report_event_first_general_meeting_byz
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event byz.51"
+		hidden_effect = {
+			BYZ = {
+				set_country_flag = first_meeting_with_generals
+			}
+		}
+	}
+	
+	option = { #Old general right
+		name = byz.51.a
+		ai_chance = {
+			base = 33
+		}
+		custom_effect_tooltip = byz_upgrade_unit_leader_old_first_tt
+		hidden_effect = {
+			BYZ = {
+				every_unit_leader = {
+					limit = {
+						has_trait = old_army_school_general
+					}
+					add_defense = 1
+					add_logistics = 1
+				}				
+			}
+		}
+	}
+	
+	option = { #New general right
+		name = byz.51.b
+		ai_chance = {
+			base = 67
+		}
+		custom_effect_tooltip = byz_upgrade_unit_leader_new_first_tt
+		hidden_effect = {
+			BYZ = {
+				every_unit_leader = {
+					limit = {
+						has_trait = new_army_school_general
+					}
+					add_attack = 1
+					add_logistics = 1
+				}	
+			}
+		}
+	}
+	
+}
+
+country_event = { #Second General Meeting
+	id = byz.52
+	title = byz.52.t
+	desc = byz.52.d
+	picture = GFX_report_event_second_general_meeting_byz
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event byz.52"
+		hidden_effect = {
+			BYZ = {
+				set_country_flag = second_meeting_with_generals
+			}
+		}
+	}
+	
+	option = { #Old general right
+		name = byz.52.a
+		ai_chance = {
+			base = 33
+		}
+		custom_effect_tooltip = byz_upgrade_unit_leader_old_second_tt
+		hidden_effect = {
+			BYZ = {
+				every_unit_leader = {
+					limit = {
+						has_trait = old_army_school_general
+					}
+					add_defense = 1
+					add_planning = 1
+				}	
+			}	
+		}
+	}
+	
+	option = { #New general right
+		name = byz.52.b
+		ai_chance = {
+			base = 67
+		}
+		custom_effect_tooltip = byz_upgrade_unit_leader_new_second_tt
+		hidden_effect = {
+			BYZ = {
+				every_unit_leader = {
+					limit = {
+						has_trait = new_army_school_general
+					}
+					add_defense = 1
+					add_attack = 1
+				}	
+			}	
+		}
+	}
+	
+}
+
+country_event = { #Third General Meeting
+	id = byz.53
+	title = byz.53.t
+	desc = byz.53.d
+	picture = GFX_report_event_third_general_meeting_byz
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event byz.53"
+		hidden_effect = {
+			BYZ = {
+				set_country_flag = third_meeting_with_generals
+			}
+		}
+	}
+	
+	option = { #Old general right
+		name = byz.53.a
+		ai_chance = {
+			base = 33
+		}
+		custom_effect_tooltip = byz_upgrade_unit_leader_old_third_tt
+		hidden_effect = {
+			BYZ = {
+				every_unit_leader = {
+					limit = {
+						has_trait = old_army_school_general
+					}
+					add_defense = 1
+					add_attack = 1
+				}	
+			}
+		}
+	}
+	
+	option = { #New general right
+		name = byz.53.b
+		ai_chance = {
+			base = 67
+		}
+		custom_effect_tooltip = byz_upgrade_unit_leader_new_third_tt
+		hidden_effect = {
+			BYZ = {
+				every_unit_leader = {
+					limit = {
+						has_trait = new_army_school_general
+					}
+					add_logistics = 1
+					add_planning = 1
+				}	
+			}	
+		}
+	}
+	
+}
+
+country_event = { #Anthimus IV leave
+	id = byz.54
+	title = byz.54.t
+	desc = byz.54.d
+	picture = GFX_report_event_hagai_sophia
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event byz.54"
+		hidden_effect = {
+			BYZ = {
+				country_event = {
+					id = byz.55
+					days = 309
+				}
+			}
+		}
+	}
+	
+	option = { #Sad News
+		name = byz.54.a
+		ai_chance = {
+			base = 100
+		}
+		custom_effect_tooltip = byz_anthimus_iv_leave_tt
+		hidden_effect = {
+			if = {
+				limit = {
+					BYZ = {
+						has_idea = anthimus_iv
+					}
+				}
+				BYZ = {
+					add_ideas = germanus_iv
+				}
+			}
+			BYZ = {
+				set_country_flag = byz_patriarch_anthimus_IV_leave
+			}
+			BYZ = {
+				BYZ_Anthimus_IV = {
+					remove_advisor_role = {
+						slot = political_advisor
+					}
+				}
+			}
+		}
+	}
+	
+}
+
+country_event = { #Germanus IV dead
+	id = byz.55
+	title = byz.55.t
+	desc = byz.55.d
+	picture = GFX_report_event_germanus_iv
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event byz.55"
+		hidden_effect = {
+			BYZ = {
+				country_event = {
+					id = byz.56
+					days = 735
+				}
+			}
+		}
+	}
+	
+	option = { #Rest in Peace
+		name = byz.55.a
+		ai_chance = {
+			base = 100
+		}
+		custom_effect_tooltip = byz_germanus_iv_died_tt
+		hidden_effect = {
+			if = {
+				limit = {
+					BYZ = {
+						has_idea = germanus_iv
+					}
+				}
+				BYZ = {
+					add_ideas = anthimus_vi
+				}
+			}
+			BYZ = {
+				set_country_flag = byz_patriarch_germanus_died
+			}
+			BYZ = {
+				BYZ_Germanus_IV = {
+					remove_advisor_role = {
+						slot = political_advisor
+					}
+				}
+			}
+		}
+	}
+	
+}
+
+country_event = { #Anthimus VI displaced
+	id = byz.56
+	title = byz.56.t
+	desc = byz.56.d
+	picture = GFX_report_hagia_sophia_mosaic
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event byz.56"
+	}
+	
+	option = { #Something strange happend
+		name = byz.56.a
+		ai_chance = {
+			base = 100
+		}
+		custom_effect_tooltip = byz_anthimus_iv_displaced_tt
+		hidden_effect = {
+			if = {
+				limit = {
+					BYZ = {
+						has_idea = anthimus_vi
+					}
+				}
+				BYZ = {
+					add_ideas = cyril_vii
+				}
+			}
+			BYZ = {
+				set_country_flag = byz_patriarch_anthimus_vi_displaced
+			}
+			BYZ = {
+				BYZ_Anthimus_VI = {
+					remove_advisor_role = {
+						slot = political_advisor
+					}
+				}
+			}
+		}
+	}
+	
+}
+
+country_event = { #Tavrida Navy training
+	id = byz.57
+	title = byz.57.t
+	desc = byz.57.d
+	picture = GFX_report_tavrida_training_navy
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event byz.57"
+	}
+	
+	option = { #Something strange happend
+		name = byz.57.a
+		ai_chance = {
+			base = 100
+		}
+		custom_effect_tooltip = byz_begin_prepered_to_tavrida_operation_tt
+	}
+	
+}
+
+
+country_event = { #Fighting for Emperor Live
+	id = byz.60
+	title = byz.60.t
+	desc = byz.60.d
+	picture = GFX_report_fight_for_emperor_live
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event byz.60"
+	}
+	
+	option = { #We must save him!
+		name = byz.60.a
+		ai_chance = {
+			base = 100
+		}
+		custom_effect_tooltip = byz_time_show_the_truth_tt
+		hidden_effect = {
+			random_list = {
+				75 = {
+					BYZ = {
+						country_event = {
+							id = byz.61
+							days = 10
+						}
+					}
+				}
+				25 = {
+					BYZ = {
+						country_event = {
+							id = byz.62
+							days = 10
+						}
+					}
+				}
+			}
+		}
+	}
+	
+}
+
+country_event = { #Emperor died
+	id = byz.61
+	title = byz.61.t
+	desc = byz.61.d
+	picture = GFX_report_emperor_died
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event byz.61"
+		hidden_effect = {
+			BYZ = {
+				set_country_flag = august_ii_dead
+			}
+		}
+	}
+	
+	option = { #Dark cloud upon us
+		name = byz.61.a
+		ai_chance = {
+			base = 100
+		}
+		add_stability = -0.05
+		custom_effect_tooltip = byz_dark_cloud_upon_us_tt
+		hidden_effect = {
+			BYZ = {
+				retire_character = BYZ_Mihael_IV_Zachareas
+				retire_character = BYZ_Mihael_IV_Zachareas_dem
+				retire_character = BYZ_Mihael_IV_Zachareas_rea
+				retire_character = BYZ_Mihael_IV_Zachareas_soc
+				retire_character = BYZ_Mihael_IV_Zachareas_marshal
+				BYZ_Octavian_II_Zakharias = {
+					promote_character = yes
+				}
+				BYZ_Octavian_II_Zakharias_dem = {
+					promote_character = senator_monarchy_sub
+				}
+				BYZ_Octavian_II_Zakharias_rea = {
+					promote_character = military_monarchism_sub
+				}
+				BYZ_Octavian_II_Zakharias_soc = {
+					promote_character = social_monarchism
+				}
+			}
+			BYZ = {
+				country_event = {
+					id = script_event.41
+					days = 20
+				}
+				country_event = {
+					id = byz.63
+					days = 35
+				}
+			}
+			news_event = {
+				id = news.288
+				days = 2
+			}
+		}
+	}
+	
+}
+
+country_event = { #Emperor survive
+	id = byz.62
+	title = byz.62.t
+	desc = byz.62.d
+	picture = GFX_report_emperor_survive
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event byz.62"
+	}
+	
+	option = { #Prise the God
+		name = byz.62.a
+		ai_chance = {
+			base = 100
+		}
+		add_stability = 0.05
+		hidden_effect = {
+			news_event = {
+				id = news.161
+				days = 2
+			}
+		}
+	}
+	
+}
+
+country_event = { #Regent of Byzantium
+	id = byz.63
+	title = byz.63.t
+	desc = byz.63.d
+	picture = GFX_report_simbol_of_byzantium_empire
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event byz.63"
+		hidden_effect = {
+			BYZ = {
+				set_country_flag = byzantium_regency
+			}
+		}
+	}
+	
+	option = { #Constant is best
+		name = byz.63.a
+		ai_chance = {
+			base = 33
+		}
+		custom_effect_tooltip = byz_regency_constantine_tt
+		if = {
+			limit = {
+				BYZ = {
+					has_country_flag = byz_zergios_and_ekaterina
+				}
+			}
+			custom_effect_tooltip = byz_zegarius_upset_by_choose_tt
+		}
+		hidden_effect = {
+			BYZ = {
+				add_country_leader_role = {
+					character = BYZ_Constantin_Zahareas_regent
+					promote_leader = yes
+					country_leader = {
+						ideology = imperial_system_sub
+						expire = "1900.1.1.1"
+						traits = { byz_regent }
+					}
+				}
+				set_country_leader_description = {
+					ideology = authoritarian
+					desc = POLITICS_CONSTANTIN_ZAHAREAS_REGENT_DESC
+				}
+			}
+		}
+	}
+	
+	option = { #Ekaterina is best
+		name = byz.63.b
+		ai_chance = {
+			base = 34
+		}
+		custom_effect_tooltip = byz_regency_ekaterina_tt
+		if = {
+			limit = {
+				BYZ = {
+					has_country_flag = byz_zergios_and_constantine
+				}
+			}
+			custom_effect_tooltip = byz_zegarius_upset_by_choose_tt
+		}
+		hidden_effect = {
+			BYZ = {
+				add_country_leader_role = {
+					character = BYZ_Ekaterina
+					promote_leader = yes
+					country_leader = {
+						ideology = imperial_system_sub
+						expire = "1900.1.1.1"
+						traits = { byz_regent }
+					}
+				}
+				set_country_leader_description = {
+					ideology = authoritarian
+					desc = POLITICS_EKATERINA_DESC
+				}
+			}
+		}
+	}
+	
+	option = { #Cuscodian must be better
+		name = byz.63.c
+		ai_chance = {
+			base = 33
+		}
+		custom_effect_tooltip = byz_regency_cuscodian_tt
+		hidden_effect = {
+			BYZ = {
+				add_country_leader_role = {
+					character = BYZ_Julius_Romanus
+					promote_leader = yes
+					country_leader = {
+						ideology = imperial_system_sub
+						expire = "1900.1.1.1"
+						traits = { byz_regent }
+					}
+				}
+				set_country_leader_description = {
+					ideology = authoritarian
+					desc = POLITICS_JULIUS_ROMANUS_DESC
+				}
+			}
+		}
+	}
+	
+}
+
+country_event = { #Zakharias VI is 18
+	id = byz.64
+	title = byz.64.t
+	desc = {
+		text = byz.64.dnr
+		trigger = {
+			NOT = {
+				BYZ = {
+					has_country_flag = byzantium_regency
+				}
+			}
+		}
+	}
+	desc = {
+		text = byz.64.dr
+		trigger = {
+			BYZ = {
+				has_country_flag = byzantium_regency
+			}
+		}
+	}
+	picture = GFX_report_zakaharias_grow_up
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event byz.64"
+		hidden_effect = {
+			if = {
+				limit = {
+					BYZ = {
+						has_country_flag = byzantium_regency
+					}
+				}
+				BYZ = {
+					set_country_flag = byzantium_regency_over
+				}
+			}
+			BYZ = {
+				add_corps_commander_role = {
+					Character = BYZ_Octavian_II_Zakharias_corps
+					skill = 3
+					attack_skill = 3
+					defense_skill = 3
+					planning_skill = 2
+					logistics_skill = 2
+					traits = { politically_connected media_personality infantry_officer roman_prince_land }
+				}
+			}
+		}
+	}
+	
+	option = { #Octavian mature
+		name = byz.64.a
+		trigger = {
+			NOT = {
+				BYZ = {
+					has_country_flag = byzantium_regency
+				}
+			}
+		}
+		ai_chance = {
+			base = 50
+		}
+		custom_effect_tooltip = byz_zakharias_vi_complete_education_tt
+		hidden_effect = {
+			BYZ = {
+				set_character_name = {
+					character = BYZ_Octavian_II_Zakharias_corps
+					name = BYZ_Octavian_II_Zakharias_corps_non_vi
+				}
+			}
+		}
+	}
+	
+	option = { #Hail to New Empire
+		name = byz.64.b
+		trigger = {
+			BYZ = {
+				has_country_flag = byzantium_regency
+			}
+		}
+		ai_chance = {
+			base = 50
+		}
+		custom_effect_tooltip = byz_regency_end_tt
+		hidden_effect = {
+			BYZ = {
+				promote_character = {
+					character = BYZ_Octavian_II_Zakharias
+					ideology = imperial_system_sub
+				}
+				set_country_leader_portrait = {
+					ideology = authoritarian
+					portrait = GFX_byz_Octavian_II_Zakharias_18
+				}
+				set_country_leader_description = {
+					ideology = authoritarian
+					desc = POLITICS_OCTAVIAN_II_ZAKHARIAS_18_DESC
+				}
+				BYZ_Octavian_II_Zakharias = {
+					add_trait = {
+						ideology = imperial_system_sub
+						trait = byz_empire
+					}
+					remove_trait = {
+						ideology = imperial_system_sub
+						trait = young_emperor
+					}
+				}
+				set_country_leader_portrait = {
+					ideology = democratic
+					portrait = GFX_byz_Octavian_II_Zakharias_18
+				}
+				set_country_leader_description = {
+					ideology = democratic
+					desc = POLITICS_OCTAVIAN_II_ZAKHARIAS_18_DESC
+				}
+				BYZ_Octavian_II_Zakharias_dem = {
+					add_trait = {
+						ideology = senator_monarchy_sub
+						trait = byz_empire
+					}
+					remove_trait = {
+						ideology = senator_monarchy_sub
+						trait = young_emperor
+					}
+				}
+				set_country_leader_portrait = {
+					ideology = socialism
+					portrait = GFX_byz_Octavian_II_Zakharias_18
+				}
+				set_country_leader_description = {
+					ideology = socialism
+					desc = POLITICS_OCTAVIAN_II_ZAKHARIAS_18_DESC
+				}
+				BYZ_Octavian_II_Zakharias_soc = {
+					add_trait = {
+						ideology = social_monarchism
+						trait = byz_empire
+					}
+					remove_trait = {
+						ideology = social_monarchism
+						trait = young_emperor
+					}
+				}
+				set_country_leader_portrait = {
+					ideology = reactionist
+					portrait = GFX_byz_Octavian_II_Zakharias_18
+				}
+				set_country_leader_description = {
+					ideology = reactionist
+					desc = POLITICS_OCTAVIAN_II_ZAKHARIAS_18_DESC
+				}
+				BYZ_Octavian_II_Zakharias_rea = {
+					add_trait = {
+						ideology = military_monarchism_sub
+						trait = byz_empire
+					}
+					remove_trait = {
+						ideology = military_monarchism_sub
+						trait = young_emperor
+					}
+				}
+			}
+		}
+	}
+	
+}
+
+country_event = { #Zergios and Constantine
+	id = byz.65
+	title = byz.65.t
+	desc = byz.65.d
+	picture = GFX_report_zergarias_and_constantine
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event byz.65"
+		hidden_effect = {
+			BYZ = {
+				set_country_flag = byz_zergios_and_constantine
+			}
+		}
+	}
+	
+	option = { #Interting choose
+		name = byz.65.a
+		ai_chance = {
+			base = 50
+		}
+	}
+	
+	option = { #They need go back
+		name = byz.65.b
+		ai_chance = {
+			base = 50
+		}
+		custom_effect_tooltip = byz_zergarius_be_upset_tt
+		hidden_effect = {
+			BYZ = {
+				country_event = {
+					id = byz.68
+					days = 15
+				}
+			}
+		}
+	}
+	
+}
+
+country_event = { #Zergios and Ekaterina
+	id = byz.66
+	title = byz.66.t
+	desc = byz.66.d
+	picture = GFX_report_zergarias_and_ekaterina
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event byz.66"
+		hidden_effect = {
+			BYZ = {
+				set_country_flag = byz_zergios_and_ekaterina
+			}
+		}
+	}
+	
+	option = { #Interting choose
+		name = byz.66.a
+		ai_chance = {
+			base = 50
+		}
+	}
+	
+	option = { #They need go back
+		name = byz.66.b
+		ai_chance = {
+			base = 50
+		}
+		custom_effect_tooltip = byz_zergarius_be_upset_tt
+		hidden_effect = {
+			BYZ = {
+				country_event = {
+					id = byz.68
+					days = 15
+				}
+			}
+		}
+	}
+	
+}
+
+country_event = { #Zergios and Julios
+	id = byz.67
+	title = byz.67.t
+	desc = byz.67.d
+	picture = GFX_report_zergarias_and_julios
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event byz.67"
+		hidden_effect = {
+			BYZ = {
+				set_country_flag = byz_zergios_and_julios
+			}
+		}
+	}
+	
+	option = { #Interting choose
+		name = byz.67.a
+		ai_chance = {
+			base = 95
+		}
+	}
+	
+	option = { #They need go back
+		name = byz.67.b
+		ai_chance = {
+			base = 5
+		}
+	}
+	
+}
+
+country_event = { #Praetorian work
+	id = byz.68
+	title = byz.68.t
+	desc = byz.68.d
+	picture = GFX_report_praetorian_work
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event byz.68"
+	}
+	
+	option = { #Give him second chance
+		name = byz.68.a
+		ai_chance = {
+			base = 95
+		}
+	}
+	
+	option = { #Preatorian must do something
+		name = byz.68.b
+		ai_chance = {
+			base = 5
+		}
+		custom_effect_tooltip = byz_zegarius_remove_tt
+		hidden_effect = {
+			if = {
+				limit = {
+					BYZ = {
+						has_character = ARM_Serj_Zahareas_Petrosyan
+					}
+				}
+				BYZ = {
+					ARM_Serj_Zahareas_Petrosyan = {
+						remove_unit_leader_role = yes
+					}
+				}
+			}
+		}
+	}
+	
+}
+
+country_event = { #Ankarian Manor
+	id = byz.69
+	title = byz.69.t
+	desc = byz.69.d
+	picture = GFX_report_event_byzantium_solo_solder
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event byz.69"
+	}
+	
+	option = { #Preatorian work with them
+		name = byz.69.a
+		ai_chance = {
+			base = 75
+		}
+		add_stability = 0.05
+		add_manpower = -8470
+		913 = {
+			add_manpower = -173
+		}
+	}
+	
+	option = { #Good Solder
+		name = byz.69.b
+		ai_chance = {
+			base = 25
+		}
+		add_stability = -0.05
+		913 = {
+			add_manpower = -173
+		}
+	}
+	
+}
+
+country_event = { #Zergios in Kavkaz
+	id = byz.70
+	title = byz.70.t
+	desc = byz.70.d
+	picture = GFX_report_event_trouble_in_kavkaz
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event byz.70"
+	}
+	
+	option = { #Project Venera is in danger
+		name = byz.70.a
+		ai_chance = {
+			base = 75
+		}
+		add_stability = -0.025
+		BYZ = {
+			add_opinion_modifier = {
+				target = ARM
+				modifier = byz_upset
+			}
+		}
+		ARM = {
+			add_opinion_modifier = {
+				target = BYZ
+				modifier = byz_upset
+			}
+		}
+	}
+	
+}
+
+country_event = { #Sel Gibraltar accept
+	id = byz.71
+	title = byz.71.t
+	desc = byz.71.d
+	picture = GFX_report_gibraltar_view
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event byz.71"
+	}
+	
+	option = { #Best anwser
+		name = byz.71.a
+		ai_chance = {
+			base = 100
+		}
+	}
+	
+}
+
+country_event = { #Sel Gibraltar denaed
+	id = byz.72
+	title = byz.72.t
+	desc = byz.72.d
+	picture = GFX_report_gibraltar_view
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event byz.72"
+	}
+	
+	option = { #Send Ultimatum
+		name = byz.72.a
+		ai_chance = {
+			base = 100
+		}
+		118 = {
+			owner = {
+				country_event = { id = byz.75 days = 5 }
+			}
+		}
+	}
+	
+	option = { #We can't do something
+		name = byz.72.b
+		ai_chance = {
+			base = 0
+		}
+	}
+	
+}
+
+country_event = { #Sel Ceyta accept
+	id = byz.73
+	title = byz.73.t
+	desc = byz.73.d
+	picture = GFX_report_ceyta_view
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event byz.73"
+	}
+	
+	option = { #Best anwser
+		name = byz.73.a
+		ai_chance = {
+			base = 100
+		}
+	}
+	
+}
+
+country_event = { #Sel Gibraltar denaed
+	id = byz.74
+	title = byz.74.t
+	desc = byz.74.d
+	picture = GFX_report_ceyta_view
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event byz.74"
+	}
+	
+	option = { #Send Ultimatum
+		name = byz.74.a
+		ai_chance = {
+			base = 100
+		}
+		869 = {
+			owner = {
+				country_event = { id = byz.76 days = 5 }
+			}
+		}
+	}
+	
+	option = { #We can't do something
+		name = byz.74.b
+		ai_chance = {
+			base = 0
+		}
+	}
+	
+}
+
+country_event = { #Gibraltar Ultimatum
+	id = byz.75
+	title = byz.75.t
+	desc = byz.75.d
+	picture = GFX_report_ship_1
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event byz.75"
+	}
+	
+	option = { #Accept
+		name = byz.75.a
+		ai_chance = {
+			base = 100
+		}
+		BYZ = { transfer_state = 118 }
+		BYZ = { add_state_core = 118 }
+		GRA = { remove_state_core = 118 }
+		BYZ = {
+			country_event = {
+				id = byz.71
+				days = 5
+			}
+		}
+	}
+	
+	option = { #denaed
+		name = byz.75.b
+		ai_chance = {
+			base = 0
+		}
+		trigger = {
+			always = no
+		}
+	}
+	
+}
+
+country_event = { #Ceyta Ultimatum
+	id = byz.76
+	title = byz.76.t
+	desc = byz.76.d
+	picture = GFX_report_ship_2
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event byz.76"
+	}
+	
+	option = { #Accept
+		name = byz.76.a
+		ai_chance = {
+			base = 100
+		}
+		BYZ = { transfer_state = 869 }
+		BYZ = { add_state_core = 869 }
+		MOR = { remove_state_core = 869 }
+		BYZ = {
+			country_event = {
+				id = byz.73
+				days = 5
+			}
+		}
+	}
+	
+	option = { #denaed
+		name = byz.76.b
+		ai_chance = {
+			base = 0
+		}
+		trigger = {
+			always = no
+		}
 	}
 	
 }
@@ -836,7 +2265,7 @@ country_event = { #Reform senat
 	option = { #Senat stay
 		name = byz.1000.a
 		ai_chance = {
-			factor = 0
+			base = 0
 		}
 		add_popularity = {
 			ideology = democratic	
@@ -853,7 +2282,7 @@ country_event = { #Reform senat
 	option = { #Senat in world
 		name = byz.1000.b
 		ai_chance = {
-			factor = 100
+			base = 100
 		}
 		add_popularity = {
 			ideology = socialism	
@@ -870,7 +2299,7 @@ country_event = { #Reform senat
 	option = { #Senat no more
 		name = byz.1000.c
 		ai_chance = {
-			factor = 0
+			base = 0
 		}
 		add_stability = -0.15
 		add_popularity = {
@@ -904,7 +2333,7 @@ country_event = { #Reform people
 	option = { #No compromis
 		name = byz.1001.a
 		ai_chance = {
-			factor = 0
+			base = 0
 		}
 		add_popularity = {
 			ideology = authoritarian
@@ -921,7 +2350,7 @@ country_event = { #Reform people
 	option = { #More freedom
 		name = byz.1001.b
 		ai_chance = {
-			factor = 100
+			base = 100
 		}
 		add_popularity = {
 			ideology = socialism
@@ -939,7 +2368,7 @@ country_event = { #Reform people
 	option = { #Power to people
 		name = byz.1001.c
 		ai_chance = {
-			factor = 0
+			base = 0
 		}
 		add_popularity = {
 			ideology = democratic
@@ -973,7 +2402,7 @@ country_event = { #Reform slave
 	option = { #Slavary stay
 		name = byz.1002.a
 		ai_chance = {
-			factor = 0
+			base = 0
 		}
 		add_popularity = {
 			ideology = authoritarian
@@ -990,7 +2419,7 @@ country_event = { #Reform slave
 	option = { #Abolish slavery in all ways, but slow
 		name = byz.1002.b
 		ai_chance = {
-			factor = 100
+			base = 100
 		}
 		add_popularity = {
 			ideology = socialism
@@ -1012,7 +2441,7 @@ country_event = { #Reform slave
 	option = { #Abolish slavery and give them all they want
 		name = byz.1002.c
 		ai_chance = {
-			factor = 0
+			base = 0
 		}
 		add_popularity = {
 			ideology = democratic
@@ -1050,7 +2479,7 @@ country_event = { #Reform religion
 	option = { #Religion is firtst!
 		name = byz.1003.a
 		ai_chance = {
-			factor = 0
+			base = 0
 		}
 		add_popularity = {
 			ideology = authoritarian
@@ -1067,7 +2496,7 @@ country_event = { #Reform religion
 	option = { #Reform region
 		name = byz.1003.b
 		ai_chance = {
-			factor = 100
+			base = 100
 		}
 		add_popularity = {
 			ideology = socialism
@@ -1085,7 +2514,7 @@ country_event = { #Reform religion
 	option = { #Seculiras country
 		name = byz.1003.c
 		ai_chance = {
-			factor = 0
+			base = 0
 		}
 		add_popularity = {
 			ideology = democratic
@@ -1119,7 +2548,7 @@ country_event = { #Reform economic
 	option = { #Protectionism
 		name = byz.1004.a
 		ai_chance = {
-			factor = 0
+			base = 0
 		}
 		add_popularity = {
 			ideology = authoritarian
@@ -1136,7 +2565,7 @@ country_event = { #Reform economic
 	option = { #Plan
 		name = byz.1004.b
 		ai_chance = {
-			factor = 100
+			base = 100
 		}
 		add_popularity = {
 			ideology = socialism
@@ -1153,7 +2582,7 @@ country_event = { #Reform economic
 	option = { #Free
 		name = byz.1004.c
 		ai_chance = {
-			factor = 0
+			base = 0
 		}
 		add_popularity = {
 			ideology = democratic
@@ -1186,7 +2615,7 @@ country_event = { #Reform law
 	option = { #No reform
 		name = byz.1005.a
 		ai_chance = {
-			factor = 0
+			base = 0
 		}
 		add_popularity = {
 			ideology = authoritarian
@@ -1203,7 +2632,7 @@ country_event = { #Reform law
 	option = { #Law is no difrent
 		name = byz.1005.b
 		ai_chance = {
-			factor = 100
+			base = 100
 		}
 		add_popularity = {
 			ideology = socialism
@@ -1221,7 +2650,7 @@ country_event = { #Reform law
 	option = { #Open law
 		name = byz.1005.c
 		ai_chance = {
-			factor = 0
+			base = 0
 		}
 		add_popularity = {
 			ideology = democratic
@@ -1378,7 +2807,7 @@ country_event = { #Balkan ultimatum
 	option = { #Peace is best
 		name = byz_ultimatum.1.a
 		ai_chance = {
-			factor = 10
+			base = 10
 		}
 		BYZ = {
 			set_country_flag = aus_byz_deal_complete
@@ -1392,7 +2821,7 @@ country_event = { #Balkan ultimatum
 	option = { #Lets Trade
 		name = byz_ultimatum.1.b
 		ai_chance = {
-			factor = 90
+			base = 90
 		}
 		BYZ = {
 			country_event = {
@@ -1405,7 +2834,7 @@ country_event = { #Balkan ultimatum
 	option = { #Say no
 		name = byz_ultimatum.1.c
 		ai_chance = {
-			factor = 0
+			base = 0
 		}
 		BYZ = {
 			set_country_flag = aus_byz_deal_fail
@@ -1437,7 +2866,7 @@ country_event = { #last letter
 	option = { #Peace is best
 		name = byz_ultimatum.2.a
 		ai_chance = {
-			factor = 30
+			base = 30
 		}
 		BYZ = {
 			set_country_flag = aus_say_yes_for_ultimatum
@@ -1451,7 +2880,7 @@ country_event = { #last letter
 	option = { #They don't declare war
 		name = byz_ultimatum.2.b
 		ai_chance = {
-			factor = 70
+			base = 70
 		}
 		BYZ = {
 			set_country_flag = aus_say_no_for_ultimatum
@@ -1713,7 +3142,7 @@ country_event = { #They want to trade
 	option = { #Okey let's trade
 		name = byz_chain.5.a
 		ai_chance = {
-			factor = 60
+			base = 60
 		}
 		AUS = {
 			country_event = {
@@ -1726,7 +3155,7 @@ country_event = { #They want to trade
 	option = { #It isn't deal it's ultimatum
 		name = byz_chain.5.b
 		ai_chance = {
-			factor = 40
+			base = 40
 		}
 		BYZ = {
 			set_country_flag = aus_byz_deal_fail
@@ -1750,7 +3179,7 @@ country_event = { #What we want
 	option = { #Non-agresiv-pact
 		name = byz_chain.6.a
 		ai_chance = {
-			factor = 40
+			base = 40
 		}
 		BYZ = {
 			country_event = {
@@ -1763,7 +3192,7 @@ country_event = { #What we want
 	option = { #Non-agresiv-pact and gurant
 		name = byz_chain.6.b
 		ai_chance = {
-			factor = 40
+			base = 40
 		}
 		BYZ = {
 			country_event = {
@@ -1776,7 +3205,7 @@ country_event = { #What we want
 	option = { #We need crown of West Roman Empire
 		name = byz_chain.6.с
 		ai_chance = {
-			factor = 10
+			base = 10
 		}
 		BYZ = {
 			country_event = {
@@ -1802,7 +3231,7 @@ country_event = { #Not a big prize
 	option = { #Yes
 		name = byz_chain.7.a
 		ai_chance = {
-			factor = 90
+			base = 90
 		}
 		AUS = {
 			set_country_flag = deal_1
@@ -1816,7 +3245,7 @@ country_event = { #Not a big prize
 	option = { #No
 		name = byz_chain.7.b
 		ai_chance = {
-			factor = 10
+			base = 10
 		}
 		BYZ = {
 			set_country_flag = aus_byz_deal_fail
@@ -1840,7 +3269,7 @@ country_event = { #Normal prize
 	option = { #Yes
 		name = byz_chain.8.a
 		ai_chance = {
-			factor = 60
+			base = 60
 		}
 		AUS = {
 			set_country_flag = deal_2
@@ -1854,7 +3283,7 @@ country_event = { #Normal prize
 	option = { #No
 		name = byz_chain.8.b
 		ai_chance = {
-			factor = 40
+			base = 40
 		}
 		BYZ = {
 			set_country_flag = aus_byz_deal_fail
@@ -1878,7 +3307,7 @@ country_event = { #Ultimate prize
 	option = { #Yes
 		name = byz_chain.9.a
 		ai_chance = {
-			factor = 20
+			base = 20
 		}
 		AUS = {
 			set_country_flag = deal_3
@@ -1892,7 +3321,7 @@ country_event = { #Ultimate prize
 	option = { #No
 		name = byz_chain.9.b
 		ai_chance = {
-			factor = 80
+			base = 80
 		}
 		BYZ = {
 			set_country_flag = aus_byz_deal_fail
@@ -3440,6 +4869,17 @@ country_event = { #Student Revolt start
 		custom_effect_tooltip = BYZ_913_is_demilitaz
 		set_global_flag = BYZ_student_revolt_proccess
 		custom_effect_tooltip = BYZ_start_of_student_revolt
+		custom_effect_tooltip = byz_turkish_general_with_revolution_tt
+		hidden_effect = {
+			BYZ = {
+				every_unit_leader = {
+					limit = {
+						has_trait = turkish_islam_general
+					}
+					set_nationality = RTU
+				}
+			}
+		}
 	}
 	
 }
@@ -4706,8 +6146,14 @@ country_event = { #Assasination on Empirer
 				}
 				set_country_flag = Tyutchev_is_dead
 			}
+			BYZ = {
+				country_event = {
+					id = byz.60
+					days = 2
+				}
+			}
 			news_event = {
-				id = news.161
+				id = news.287
 				days = 2
 			}
 		}

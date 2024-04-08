@@ -131,7 +131,7 @@ focus_tree = {
 		
 		available = {
 			has_completed_focus = RUS_industry_situation
-			RUS_no_opposition_way = yes
+			RUS_political_way_is_choosen = yes
 		}
 		
 		relative_position_id = RUS_investment_in_civil_industry
@@ -180,7 +180,7 @@ focus_tree = {
 		cost = 5
 		
 		available = {
-			RUS_no_opposition_way = yes
+			RUS_political_way_is_choosen = yes
 		}
 		
 		relative_position_id = RUS_start_forced_industrialisation
@@ -213,7 +213,7 @@ focus_tree = {
 		
 		available = {
 			NOT = { has_idea = RUS_invest_in_industry }
-			RUS_no_opposition_way = yes
+			RUS_political_way_is_choosen = yes
 		}
 		
 		relative_position_id = RUS_start_forced_industrialisation
@@ -262,7 +262,7 @@ focus_tree = {
 		cost = 5
 		
 		available = {
-			RUS_no_opposition_way = yes
+			RUS_political_way_is_choosen = yes
 		}
 		
 		relative_position_id = RUS_investment_in_military_prodiuction
@@ -292,7 +292,7 @@ focus_tree = {
 				has_full_control_of_state = 223
 				has_full_control_of_state = 252
 			}
-			RUS_no_opposition_way = yes
+			RUS_political_way_is_choosen = yes
 		}
 		
 		mutually_exclusive = { focus = RUS_mass_production_of_weapon }
@@ -307,6 +307,10 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: focus RUS_expand_heavy_industry"
 			custom_effect_tooltip = RUS_add_6_arms_factory_in_tula_yar_kiev_n_novgorod
+			add_timed_idea = {
+				idea = RUS_expand_heavy_priduction_idea
+				days = 1095
+			}
 			hidden_effect = {
 				202 = {
 					add_extra_state_shared_building_slots = 1
@@ -353,7 +357,7 @@ focus_tree = {
 		cost = 5
 		
 		available = {
-			RUS_no_opposition_way = yes
+			RUS_political_way_is_choosen = yes
 		}
 		
 		mutually_exclusive = { focus = RUS_expand_heavy_industry }
@@ -368,7 +372,32 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: focus RUS_mass_production_of_weapon"
 			add_ideas = RUS_mass_weapons_production
+			custom_effect_tooltip = RUS_in_2_random_states_add_2_af
 			RUS_add_1_army_opinion = yes
+			hidden_effect = {
+				random_state = {
+					limit = {
+						is_owned_by = RUS
+					}
+					add_extra_state_shared_building_slots = 1
+					add_building_construction = {
+						type = arms_factory
+						level = 1
+						instant_build = yes
+					}
+				}
+				random_state = {
+					limit = {
+						is_owned_by = RUS
+					}
+					add_extra_state_shared_building_slots = 1
+					add_building_construction = {
+						type = arms_factory
+						level = 1
+						instant_build = yes
+					}
+				}
+			}
 		}
 	}
 	
@@ -389,7 +418,7 @@ focus_tree = {
 				has_full_control_of_state = 254
 				has_full_control_of_state = 398
 			}
-			RUS_no_opposition_way = yes
+			RUS_political_way_is_choosen = yes
 		}
 
 		relative_position_id = RUS_exploration_new_resources
@@ -468,7 +497,7 @@ focus_tree = {
 		cost = 5
 		
 		available = {
-			RUS_no_opposition_way = yes
+			RUS_political_way_is_choosen = yes
 		}
 
 		relative_position_id = RUS_develop_of_mixed_fabrics
@@ -495,7 +524,7 @@ focus_tree = {
 		cost = 5
 		
 		available = {
-			RUS_no_opposition_way = yes
+			RUS_political_way_is_choosen = yes
 		}
 
 		relative_position_id = RUS_develop_of_mixed_fabrics
@@ -522,7 +551,7 @@ focus_tree = {
 		cost = 5
 		
 		available = {
-			RUS_no_opposition_way = yes
+			RUS_political_way_is_choosen = yes
 		}
 		
 		mutually_exclusive = { focus = RUS_use_foreign_specialists }
@@ -547,7 +576,7 @@ focus_tree = {
 			}
 			if = {
 				limit = {
-					has_idea = RUS_russian_identity
+					has_idea = RUS_idea_russian_identity
 				}
 				add_ideas = RUS_russian_specialist
 			}
@@ -565,7 +594,7 @@ focus_tree = {
 		cost = 5
 		
 		available = {
-			RUS_no_opposition_way = yes
+			RUS_political_way_is_choosen = yes
 		}
 		
 		mutually_exclusive = { focus = RUS_use_own_specialists }
@@ -608,7 +637,7 @@ focus_tree = {
 		cost = 5
 		
 		available = {
-			RUS_no_opposition_way = yes
+			RUS_political_way_is_choosen = yes
 		}
 		
 		mutually_exclusive = { focus = RUS_coop_witch_foreign_industrialists }
@@ -638,7 +667,7 @@ focus_tree = {
 		cost = 5
 		
 		available = {
-			RUS_no_opposition_way = yes
+			RUS_political_way_is_choosen = yes
 		}
 		
 		mutually_exclusive = { focus = RUS_coop_witch_own_industrialists }
@@ -668,7 +697,7 @@ focus_tree = {
 		cost = 5
 		
 		available = {
-			RUS_no_opposition_way = yes
+			RUS_political_way_is_choosen = yes
 		}
 
 		relative_position_id = RUS_coop_witch_foreign_industrialists
@@ -725,7 +754,7 @@ focus_tree = {
 		cost = 5
 		
 		available = {
-			RUS_no_opposition_way = yes
+			RUS_political_way_is_choosen = yes
 		}
 
 		relative_position_id = RUS_invest_in_intellect_of_nation
@@ -753,9 +782,14 @@ focus_tree = {
 			ROOT = { 
 				num_of_civilian_factories > 49
 				num_of_military_factories > 29
-				NOT = { has_idea = RUS_dependence_from_import }
+				NOT = { 
+					OR = {
+						has_idea = RUS_dependence_from_import 
+						has_idea = RUS_dependence_from_import_1 
+					}
+				}
 			}
-			RUS_no_opposition_way = yes
+			RUS_political_way_is_choosen = yes
 		}
 
 		relative_position_id = RUS_expand_petrograd_goverment_university
@@ -1262,7 +1296,7 @@ focus_tree = {
 		allow_branch = {
 			NOT = {
 				OR = {
-					has_completed_focus = RUS_return_of_old_orders
+					has_completed_focus = RUS_end_of_political_isolation
 					has_completed_focus = RUS_raise_of_the_red
 				}
 			}
@@ -1309,6 +1343,15 @@ focus_tree = {
 		y = 0
 		cost = 2
 		
+		allow_branch = {
+			NOT = {
+				OR = {
+					has_completed_focus = RUS_end_of_political_isolation 
+					has_completed_focus = RUS_return_of_old_orders
+				}
+			}
+		}
+		
 		#offset = {
 		#	x = -3
 		#	y = 0
@@ -1316,6 +1359,7 @@ focus_tree = {
 		#		NOT = { has_country_flag = RUS_church_complete_coup }
 		#	}
 		#}
+		
 		offset = {
 			x = -33
 			y = 0
@@ -7309,8 +7353,8 @@ focus_tree = {
 		id = RUS_the_giant_has_awakened #гигант пробудился
 		icon = GFX_focus_rus_tha_gigant_has_awakening
 		
-		x = 0
-		y = 7
+		x = 20
+		y = 1
 		cost = 5
 	
 		allow_branch = {
@@ -8107,6 +8151,10 @@ focus_tree = {
 		cost = 5
 		
 		available = {
+			OR = {
+				date < 1854.1.1
+				date > 1856.1.1
+			}		
 			has_war = no
 		}
 
@@ -8671,7 +8719,6 @@ focus_tree = {
 		
 		available = {
 			has_war = no 
-			#date > 1854.8.1
 			has_global_flag = pru_ignore_poland_uprising
 		}
 		
@@ -8751,8 +8798,7 @@ focus_tree = {
 		
 		available = {
 			has_war = no 
-			date > 1854.8.1
-			aotsm_performed_by_event_or_solution = yes
+			has_global_flag = pru_ignore_poland_uprising
 		}
 
 		mutually_exclusive = { focus = RUS_antigerman_politick } 
@@ -8767,7 +8813,7 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: focus RUS_antibuzantium_politick"
-			custom_effect_tooltip = aotsm_branch_in_development
+			country_event = political_confrontation.10
 		}
 	}
 	
@@ -8792,6 +8838,7 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: focus RUS_fight_witch_trade_gegemony"
+			country_event = political_confrontation.13
 		}
 	}
 	
@@ -8816,10 +8863,8 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: focus RUS_tsargrad_will_be_ours"
-			declare_war_on = {
-				target = BYZ
-				type = annex_everything
-			}
+			country_event = political_confrontation.14
+			
 		}
 	}
 	
@@ -8976,9 +9021,13 @@ focus_tree = {
 		id = RUS_department_of_armed_forces
 		icon = GFX_focus_rus_armed_forces_department
 		
-		x = 26
-		y = 0
+		x = -10
+		y = 7
 		cost = 5 
+		
+		ai_will_do = {
+			factor = 1500
+		}
 		
 		allow_branch = {
 			has_completed_focus = RUS_end_of_political_isolation 
@@ -9009,6 +9058,10 @@ focus_tree = {
 		x = -6
 		y = 1
 		cost = 5 
+		
+		ai_will_do = {
+			factor = 1500
+		}
 		
 		available = {
 
@@ -9934,6 +9987,2148 @@ focus_tree = {
 			}
 		}
 	}
+	
+####################################################################################################
+######################################GREAT_WAR_FOCUSES_SECTION#####################################
+####################################################################################################
+	
+	focus = { 
+		id = RUS_unexpected_prussian_invade
+		icon = GFX_focus_rus_unexpected_prussian_invade
+		
+		x = -11
+		y = 5	
+		cost = 5
+		
+		#allow_branch = {
+		#	OR = {
+		#		has_completed_focus = RUS_end_of_political_isolation
+		#		has_completed_focus = RUS_new_socialist_economic
+		#		has_completed_focus = RUS_organise_goverment_control_market
+		#		has_completed_focus = RUS_go_to_plan_economic
+		#	}
+		#}
+		
+		offset = {
+			x = 64
+			y = -10 
+			trigger ={
+				has_completed_focus = RUS_raise_of_the_red
+			}
+		}
+		
+		available = {
+			aotsm_performed_by_event_or_solution = yes
+		}
+		
+		relative_position_id = RUS_results_of_conferention
+		
+		mutually_exclusive = { 
+			focus = RUS_war_becomes_to_russia 
+			focus = RUS_marh_to_our_enemies 
+		}
+		
+		available_if_capitulated = yes
+		
+		search_filters = {  }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus RUS_unexpected_prussian_invade "
+			
+			country_event = rus_great_war_event.1
+		}
+	}
+	
+	focus = {
+		id = RUS_marh_to_our_enemies
+		icon = GFX_focus_rus_marh_to_our_enemies
+		
+		x = 2
+		y = 0
+		cost = 5
+		
+		#allow_branch = {
+		#	OR = {
+		#		has_completed_focus = RUS_end_of_political_isolation
+		#		has_completed_focus = RUS_new_socialist_economic
+		#		has_completed_focus = RUS_organise_goverment_control_market
+		#		has_completed_focus = RUS_go_to_plan_economic
+		#	}
+		#}
+		
+		available = {
+			aotsm_performed_by_event_or_solution = yes
+		}
+		
+		relative_position_id = RUS_unexpected_prussian_invade
+		
+		mutually_exclusive = { 
+			focus = RUS_unexpected_prussian_invade 
+			focus = RUS_war_becomes_to_russia 
+		}
+		
+		available_if_capitulated = yes
+		
+		search_filters = {  }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus RUS_marh_to_our_enemies "
+			
+			country_event = rus_great_war_event.2
+		}
+	}
+	
+	focus = {
+		id = RUS_war_becomes_to_russia #для вариантов вторжения Ромеи или кого то еще 
+		icon = GFX_focus_RUS_war_becomes_to_russia
+		
+		x = 2
+		y = 0
+		cost = 5
+		
+		#allow_branch = {
+		#	OR = {
+		#		has_completed_focus = RUS_end_of_political_isolation
+		#		has_completed_focus = RUS_new_socialist_economic
+		#		has_completed_focus = RUS_organise_goverment_control_market
+		#		has_completed_focus = RUS_go_to_plan_economic
+		#	}
+		#}
+		
+		available = {
+			aotsm_performed_by_event_or_solution = yes
+		}
+		
+		relative_position_id = RUS_marh_to_our_enemies
+		
+		mutually_exclusive = { 
+			focus = RUS_unexpected_prussian_invade 
+			focus = RUS_marh_to_our_enemies 
+		}
+		
+		available_if_capitulated = yes
+		
+		search_filters = {  }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus RUS_marh_to_our_enemies "
+			country_event = rus_great_war_event.3
+			
+		}
+	}
+	
+	focus = {
+		id = RUS_defence_of_petrograd
+		icon = GFX_focus_rus_defence_of_petrograd
+		
+		x = 0
+		y = 1
+		cost = 5
+		
+		available = {
+			has_global_flag = firts_world_war
+			custom_trigger_tooltip = {
+				tooltip = not_world_war_has_ended
+				NOT = {
+					world_war_end = yes
+				}
+			}
+		}
+		
+		relative_position_id = RUS_unexpected_prussian_invade
+		
+		prerequisite = { 
+			focus = RUS_unexpected_prussian_invade 
+			focus = RUS_marh_to_our_enemies 
+			focus = RUS_war_becomes_to_russia 
+		}
+		
+		available_if_capitulated = yes
+		
+		search_filters = {  }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus RUS_defence_of_petrograd "
+			208 = {
+				add_building_construction = {
+					type = bunker
+					level = 2
+					instant_build = yes
+					province = 104
+				}
+				add_building_construction = {
+					type = bunker
+					level = 2
+					instant_build = yes
+					province = 126
+				}
+				add_building_construction = {
+					type = bunker
+					level = 2
+					instant_build = yes
+					province = 3120
+				}
+				add_building_construction = {
+					type = bunker
+					level = 2
+					instant_build = yes
+					province = 6139
+				}	
+				add_building_construction = {
+					type = bunker
+					level = 2
+					instant_build = yes
+					province = 9098
+				}
+			}
+			263 = {
+				add_building_construction = {
+					type = bunker
+					level = 2
+					instant_build = yes
+					province = 11072
+				}
+				add_building_construction = {
+					type = bunker
+					level = 2
+					instant_build = yes
+					province = 117
+				}
+				add_building_construction = {
+					type = bunker
+					level = 2
+					instant_build = yes
+					province = 71
+				}
+			}
+			195 = {
+				add_building_construction = {
+					type = bunker
+					level = 2
+					instant_build = yes
+					province = 3151
+				}
+				add_building_construction = {
+					type = bunker
+					level = 2
+					instant_build = yes
+					province = 149
+				}
+			}
+		}
+	}
+	
+	focus = {
+		id = RUS_defence_of_moscow
+		icon = GFX_focus_rus_defence_of_moscow 
+		
+		x = 0
+		y = 1
+		cost = 5
+		
+		available = {
+			has_global_flag = firts_world_war
+			custom_trigger_tooltip = {
+				tooltip = not_world_war_has_ended
+				NOT = {
+					world_war_end = yes
+				}
+			}
+		}
+		
+		relative_position_id = RUS_war_becomes_to_russia
+		
+		prerequisite = { 
+			focus = RUS_unexpected_prussian_invade
+			focus = RUS_marh_to_our_enemies 
+			focus = RUS_war_becomes_to_russia 
+		}
+		
+		available_if_capitulated = yes
+		
+		search_filters = {  }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus RUS_defence_of_moscow "
+			
+		}
+	}
+	
+	focus = {
+		id = RUS_millitary_time_measures
+		icon = GFX_focus_rus_millitary_time_measures
+		
+		x = 0
+		y = 1
+		cost = 5
+		
+		available = {
+			has_global_flag = firts_world_war
+			custom_trigger_tooltip = {
+				tooltip = not_world_war_has_ended
+				NOT = {
+					world_war_end = yes
+				}
+			}
+		}
+		
+		relative_position_id = RUS_marh_to_our_enemies
+		
+		prerequisite = { 
+			focus = RUS_unexpected_prussian_invade 
+			focus = RUS_marh_to_our_enemies 
+			focus = RUS_war_becomes_to_russia 
+		}
+		
+		available_if_capitulated = yes
+		
+		search_filters = {  }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus RUS_millitary_time_measures "
+			
+			add_timed_idea = {
+				idea = RUS_great_war_time_measures_idea
+				days = 720
+			}
+			
+			if = {
+				limit = {
+					has_idea = low_economic_mobilisation
+				}
+				swap_ideas = {
+					remove_idea = low_economic_mobilisation
+					add_idea = partial_economic_mobilisation
+				}
+			}
+			if = {
+				limit = {
+					has_idea = low_economic_mobilisation
+				}
+				swap_ideas = {
+					remove_idea = low_economic_mobilisation
+					add_idea = partial_economic_mobilisation
+				}
+			}
+			if = {
+				limit = {
+					has_idea = civilian_economy
+				}
+				swap_ideas = {
+					remove_idea = civilian_economy
+					add_idea = low_economic_mobilisation
+				}
+			}
+		}
+	}
+	
+	focus = {
+		id = RUS_reorganise_production
+		icon = GFX_focus_rus_reorganise_production
+		
+		x = 1
+		y = 1
+		cost = 5
+		
+		available = {
+			has_global_flag = firts_world_war
+			custom_trigger_tooltip = {
+				tooltip = not_world_war_has_ended
+				NOT = {
+					world_war_end = yes
+				}
+			}
+		}
+		
+		relative_position_id = RUS_millitary_time_measures
+		
+		prerequisite = { 
+			focus = RUS_millitary_time_measures 
+		}
+		
+		available_if_capitulated = yes
+		
+		search_filters = {  }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus RUS_reorganise_production "
+			
+			random_state = {
+				limit = { 
+					is_core_of = RUS 
+					industrial_complex > 1
+					NOT = {
+						has_state_flag = RUS_converc_ic_in_af
+					}
+				}
+				set_state_flag = RUS_converc_ic_in_af
+				remove_building = {
+					type = industrial_complex
+					level = 2
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+			random_state = {
+				limit = { 
+					is_core_of = RUS 
+					industrial_complex > 1
+					NOT = {
+						has_state_flag = RUS_converc_ic_in_af
+					}
+				}
+				set_state_flag = RUS_converc_ic_in_af
+				remove_building = {
+					type = industrial_complex
+					level = 2
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+			random_state = {
+				limit = { 
+					is_core_of = RUS 
+					industrial_complex > 1
+					NOT = {
+						has_state_flag = RUS_converc_ic_in_af
+					}
+				}
+				set_state_flag = RUS_converc_ic_in_af
+				remove_building = {
+					type = industrial_complex
+					level = 2
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+			random_state = {
+				limit = { 
+					is_core_of = RUS 
+					industrial_complex > 1
+					NOT = {
+						has_state_flag = RUS_converc_ic_in_af
+					}
+				}
+				set_state_flag = RUS_converc_ic_in_af
+				remove_building = {
+					type = industrial_complex
+					level = 2
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+			random_state = {
+				prioritize = { 195 }
+				limit = { 
+					is_core_of = RUS 
+					industrial_complex > 1
+					NOT = {
+						has_state_flag = RUS_converc_ic_in_af
+					}
+				}
+				set_state_flag = RUS_converc_ic_in_af
+				remove_building = {
+					type = industrial_complex
+					level = 2
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+			random_state = {
+				prioritize = { 219 }
+				limit = { 
+					is_core_of = RUS 
+					industrial_complex > 1
+					NOT = {
+						has_state_flag = RUS_converc_ic_in_af
+					}
+				}
+				set_state_flag = RUS_converc_ic_in_af
+				remove_building = {
+					type = industrial_complex
+					level = 2
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+	
+	focus = {
+		id = RUS_mass_mobilisation
+		icon = GFX_focus_rus_mass_mobilisation
+		
+		x = -1
+		y = 1
+		cost = 5
+		
+		available = {
+			has_global_flag = firts_world_war
+			custom_trigger_tooltip = {
+				tooltip = not_world_war_has_ended
+				NOT = {
+					world_war_end = yes
+				}
+			}
+		}
+		
+		relative_position_id = RUS_millitary_time_measures
+		
+		prerequisite = { 
+			focus = RUS_millitary_time_measures 
+		}
+		
+		available_if_capitulated = yes
+		
+		search_filters = {  }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus RUS_mass_mobilisation "
+			custom_effect_tooltip = RUS_get_600k_manpower_from_random_state
+			hidden_effect = {
+				RUS = {
+					add_manpower = 600000
+				}
+				random_state = {
+					limit = { 
+						is_core_of = RUS 
+						
+						#random_state = {
+						#	has_manpower > 20000
+						#}
+						NOT = {
+							has_state_flag = RUS_is_mobilisated
+						}
+					}
+					set_state_flag = RUS_is_mobilisated
+					add_manpower = -15000
+				}
+				random_state = {
+					limit = { 
+						is_core_of = RUS 
+						
+						#random_state = {
+						#	has_manpower > 20000
+						#}
+						NOT = {
+							has_state_flag = RUS_is_mobilisated
+						}
+					}
+					set_state_flag = RUS_is_mobilisated
+					add_manpower = -15000
+				}
+				random_state = {
+					limit = { 
+						is_core_of = RUS 
+						
+						#random_state = {
+						#	has_manpower > 20000
+						#}
+						NOT = {
+							has_state_flag = RUS_is_mobilisated
+						}
+					}
+					set_state_flag = RUS_is_mobilisated
+					add_manpower = -15000
+				}
+				random_state = {
+					limit = { 
+						is_core_of = RUS 
+						
+						#random_state = {
+						#	has_manpower > 20000
+						#}
+						NOT = {
+							has_state_flag = RUS_is_mobilisated
+						}
+					}
+					set_state_flag = RUS_is_mobilisated
+					add_manpower = -15000
+				}
+				random_state = {
+					limit = { 
+						is_core_of = RUS 
+						
+						#random_state = {
+						#	has_manpower > 20000
+						#}
+						NOT = {
+							has_state_flag = RUS_is_mobilisated
+						}
+					}
+					set_state_flag = RUS_is_mobilisated
+					add_manpower = -15000
+				}
+				random_state = {
+					limit = { 
+						is_core_of = RUS 
+						
+						#random_state = {
+						#	has_manpower > 20000
+						#}
+						NOT = {
+							has_state_flag = RUS_is_mobilisated
+						}
+					}
+					set_state_flag = RUS_is_mobilisated
+					add_manpower = -15000
+				}
+				random_state = {
+					limit = { 
+						is_core_of = RUS 
+						
+						#random_state = {
+						#	has_manpower > 20000
+						#}
+						NOT = {
+							has_state_flag = RUS_is_mobilisated
+						}
+					}
+					set_state_flag = RUS_is_mobilisated
+					add_manpower = -15000
+				}
+				random_state = {
+					limit = { 
+						is_core_of = RUS 
+						
+						#random_state = {
+						#	has_manpower > 20000
+						#}
+						NOT = {
+							has_state_flag = RUS_is_mobilisated
+						}
+					}
+					set_state_flag = RUS_is_mobilisated
+					add_manpower = -15000
+				}
+				random_state = {
+					limit = { 
+						is_core_of = RUS 
+						
+						#random_state = {
+						#	has_manpower > 20000
+						#}
+						NOT = {
+							has_state_flag = RUS_is_mobilisated
+						}
+					}
+					set_state_flag = RUS_is_mobilisated
+					add_manpower = -15000
+				}
+				random_state = {
+					limit = { 
+						is_core_of = RUS 
+						
+						#random_state = {
+						#	has_manpower > 20000
+						#}
+						NOT = {
+							has_state_flag = RUS_is_mobilisated
+						}
+					}
+					set_state_flag = RUS_is_mobilisated
+					add_manpower = -15000
+				}
+				random_state = {
+					limit = { 
+						is_core_of = RUS 
+						
+						#random_state = {
+						#	has_manpower > 20000
+						#}
+						NOT = {
+							has_state_flag = RUS_is_mobilisated
+						}
+					}
+					set_state_flag = RUS_is_mobilisated
+					add_manpower = -15000
+				}
+				random_state = {
+					limit = { 
+						is_core_of = RUS 
+						
+						#random_state = {
+						#	has_manpower > 20000
+						#}
+						NOT = {
+							has_state_flag = RUS_is_mobilisated
+						}
+					}
+					set_state_flag = RUS_is_mobilisated
+					add_manpower = -15000
+				}
+				random_state = {
+					limit = { 
+						is_core_of = RUS 
+						
+						#random_state = {
+						#	has_manpower > 20000
+						#}
+						NOT = {
+							has_state_flag = RUS_is_mobilisated
+						}
+					}
+					set_state_flag = RUS_is_mobilisated
+					add_manpower = -15000
+				}
+				random_state = {
+					limit = { 
+						is_core_of = RUS 
+						
+						#random_state = {
+						#	has_manpower > 20000
+						#}
+						NOT = {
+							has_state_flag = RUS_is_mobilisated
+						}
+					}
+					set_state_flag = RUS_is_mobilisated
+					add_manpower = -15000
+				}
+				random_state = {
+					limit = { 
+						is_core_of = RUS 
+						
+						#random_state = {
+						#	has_manpower > 20000
+						#}
+						NOT = {
+							has_state_flag = RUS_is_mobilisated
+						}
+					}
+					set_state_flag = RUS_is_mobilisated
+					add_manpower = -15000
+				}
+				random_state = {
+					limit = { 
+						is_core_of = RUS 
+						
+						#random_state = {
+						#	has_manpower > 20000
+						#}
+						NOT = {
+							has_state_flag = RUS_is_mobilisated
+						}
+					}
+					set_state_flag = RUS_is_mobilisated
+					add_manpower = -15000
+				}
+				random_state = {
+					limit = { 
+						is_core_of = RUS 
+						
+						#random_state = {
+						#	has_manpower > 20000
+						#}
+						NOT = {
+							has_state_flag = RUS_is_mobilisated
+						}
+					}
+					set_state_flag = RUS_is_mobilisated
+					add_manpower = -15000
+				}
+				random_state = {
+					limit = { 
+						is_core_of = RUS 
+						
+						#random_state = {
+						#	has_manpower > 20000
+						#}
+						NOT = {
+							has_state_flag = RUS_is_mobilisated
+						}
+					}
+					set_state_flag = RUS_is_mobilisated
+					add_manpower = -15000
+				}
+				random_state = {
+					limit = { 
+						is_core_of = RUS 
+						
+						#random_state = {
+						#	has_manpower > 20000
+						#}
+						NOT = {
+							has_state_flag = RUS_is_mobilisated
+						}
+					}
+					set_state_flag = RUS_is_mobilisated
+					add_manpower = -15000
+				}
+				random_state = {
+					limit = { 
+						is_core_of = RUS 
+						
+						#random_state = {
+						#	has_manpower > 20000
+						#}
+						NOT = {
+							has_state_flag = RUS_is_mobilisated
+						}
+					}
+					set_state_flag = RUS_is_mobilisated
+					add_manpower = -15000
+				}
+				random_state = {
+					limit = { 
+						is_core_of = RUS 
+						
+						#random_state = {
+						#	has_manpower > 20000
+						#}
+						NOT = {
+							has_state_flag = RUS_is_mobilisated
+						}
+					}
+					set_state_flag = RUS_is_mobilisated
+					add_manpower = -15000
+				}
+				random_state = {
+					limit = { 
+						is_core_of = RUS 
+						
+						#random_state = {
+						#	has_manpower > 20000
+						#}
+						NOT = {
+							has_state_flag = RUS_is_mobilisated
+						}
+					}
+					set_state_flag = RUS_is_mobilisated
+					add_manpower = -15000
+				}
+				random_state = {
+					limit = { 
+						is_core_of = RUS 
+						
+						#random_state = {
+						#	has_manpower > 20000
+						#}
+						NOT = {
+							has_state_flag = RUS_is_mobilisated
+						}
+					}
+					set_state_flag = RUS_is_mobilisated
+					add_manpower = -15000
+				}
+				random_state = {
+					limit = { 
+						is_core_of = RUS 
+						
+						#random_state = {
+						#	has_manpower > 20000
+						#}
+						NOT = {
+							has_state_flag = RUS_is_mobilisated
+						}
+					}
+					set_state_flag = RUS_is_mobilisated
+					add_manpower = -15000
+				}
+				random_state = {
+					limit = { 
+						is_core_of = RUS 
+						
+						#random_state = {
+						#	has_manpower > 20000
+						#}
+						NOT = {
+							has_state_flag = RUS_is_mobilisated
+						}
+					}
+					set_state_flag = RUS_is_mobilisated
+					add_manpower = -15000
+				}
+				random_state = {
+					limit = { 
+						is_core_of = RUS 
+						
+						#random_state = {
+						#	has_manpower > 20000
+						#}
+						NOT = {
+							has_state_flag = RUS_is_mobilisated
+						}
+					}
+					set_state_flag = RUS_is_mobilisated
+					add_manpower = -15000
+				}
+				random_state = {
+					limit = { 
+						is_core_of = RUS 
+						
+						#random_state = {
+						#	has_manpower > 20000
+						#}
+						NOT = {
+							has_state_flag = RUS_is_mobilisated
+						}
+					}
+					set_state_flag = RUS_is_mobilisated
+					add_manpower = -15000
+				}
+				random_state = {
+					limit = { 
+						is_core_of = RUS 
+						
+						#random_state = {
+						#	has_manpower > 20000
+						#}
+						NOT = {
+							has_state_flag = RUS_is_mobilisated
+						}
+					}
+					set_state_flag = RUS_is_mobilisated
+					add_manpower = -15000
+				}
+				random_state = {
+					limit = { 
+						is_core_of = RUS 
+						
+						#random_state = {
+						#	has_manpower > 20000
+						#}
+						NOT = {
+							has_state_flag = RUS_is_mobilisated
+						}
+					}
+					set_state_flag = RUS_is_mobilisated
+					add_manpower = -15000
+				}
+				random_state = {
+					limit = { 
+						is_core_of = RUS 
+						
+						#random_state = {
+						#	has_manpower > 20000
+						#}
+						NOT = {
+							has_state_flag = RUS_is_mobilisated
+						}
+					}
+					set_state_flag = RUS_is_mobilisated
+					add_manpower = -15000
+				}
+				random_state = {
+					limit = { 
+						is_core_of = RUS 
+						
+						#random_state = {
+						#	has_manpower > 20000
+						#}
+						NOT = {
+							has_state_flag = RUS_is_mobilisated
+						}
+					}
+					set_state_flag = RUS_is_mobilisated
+					add_manpower = -15000
+				}
+				random_state = {
+					limit = { 
+						is_core_of = RUS 
+						
+						#random_state = {
+						#	has_manpower > 20000
+						#}
+						NOT = {
+							has_state_flag = RUS_is_mobilisated
+						}
+					}
+					set_state_flag = RUS_is_mobilisated
+					add_manpower = -15000
+				}
+				random_state = {
+					limit = { 
+						is_core_of = RUS 
+						
+						#random_state = {
+						#	has_manpower > 20000
+						#}
+						NOT = {
+							has_state_flag = RUS_is_mobilisated
+						}
+					}
+					set_state_flag = RUS_is_mobilisated
+					add_manpower = -15000
+				}
+				random_state = {
+					limit = { 
+						is_core_of = RUS 
+						
+						#random_state = {
+						#	has_manpower > 20000
+						#}
+						NOT = {
+							has_state_flag = RUS_is_mobilisated
+						}
+					}
+					set_state_flag = RUS_is_mobilisated
+					add_manpower = -15000
+				}
+				random_state = {
+					limit = { 
+						is_core_of = RUS 
+						
+						#random_state = {
+						#	has_manpower > 20000
+						#}
+						NOT = {
+							has_state_flag = RUS_is_mobilisated
+						}
+					}
+					set_state_flag = RUS_is_mobilisated
+					add_manpower = -15000
+				}
+				random_state = {
+					limit = { 
+						is_core_of = RUS 
+						
+						#random_state = {
+						#	has_manpower > 20000
+						#}
+						NOT = {
+							has_state_flag = RUS_is_mobilisated
+						}
+					}
+					set_state_flag = RUS_is_mobilisated
+					add_manpower = -15000
+				}
+				random_state = {
+					limit = { 
+						is_core_of = RUS 
+						
+						#random_state = {
+						#	has_manpower > 20000
+						#}
+						NOT = {
+							has_state_flag = RUS_is_mobilisated
+						}
+					}
+					set_state_flag = RUS_is_mobilisated
+					add_manpower = -15000
+				}
+				random_state = {
+					limit = { 
+						is_core_of = RUS 
+						
+						#random_state = {
+						#	has_manpower > 20000
+						#}
+						NOT = {
+							has_state_flag = RUS_is_mobilisated
+						}
+					}
+					set_state_flag = RUS_is_mobilisated
+					add_manpower = -15000
+				}
+				random_state = {
+					limit = { 
+						is_core_of = RUS 
+						
+						#random_state = {
+						#	has_manpower > 20000
+						#}
+						NOT = {
+							has_state_flag = RUS_is_mobilisated
+						}
+					}
+					set_state_flag = RUS_is_mobilisated
+					add_manpower = -15000
+				}
+				random_state = {
+					limit = { 
+						is_core_of = RUS 
+						
+						#random_state = {
+						#	has_manpower > 20000
+						#}
+						NOT = {
+							has_state_flag = RUS_is_mobilisated
+						}
+					}
+					set_state_flag = RUS_is_mobilisated
+					add_manpower = -15000
+				}
+			}			
+		}
+	}
+
+
+##################################КООПЕРАЦИЯ С СОЮЗНИКАМИ#################################################
+	
+	focus = {
+		id = RUS_alliance_cooperation
+		icon = GFX_focus_rus_alliance_cooperation
+		
+		x = -5
+		y = 1
+		cost = 5
+		
+		available = {
+			has_global_flag = firts_world_war
+			custom_trigger_tooltip = {
+				tooltip = not_world_war_has_ended
+				NOT = {
+					world_war_end = yes
+				}
+			}
+		}
+		
+		relative_position_id = RUS_marh_to_our_enemies
+		
+		prerequisite = { 
+			focus = RUS_unexpected_prussian_invade 
+			focus = RUS_marh_to_our_enemies 
+			focus = RUS_war_becomes_to_russia 
+		}
+		
+		available_if_capitulated = yes
+		
+		search_filters = {  }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus RUS_alliance_cooperation "
+			country_event = rus_great_war_event.4 
+		}
+	}
+	
+	focus = {
+		id = RUS_to_support_france
+		icon = GFX_focus_rus_to_support_france
+		
+		x = -2
+		y = 1
+		cost = 5
+		
+		available = {
+			is_in_faction_with = FRR
+			FRR = { 
+				OR = {
+					has_war_with = PRU 
+					has_war_with = BYZ 
+				}
+			}
+		}
+		
+		relative_position_id = RUS_alliance_cooperation
+		
+		prerequisite = { 
+			focus = RUS_alliance_cooperation 
+		}
+		
+		available_if_capitulated = yes
+		
+		search_filters = {  }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus RUS_to_support_france "
+			FRR = {
+				country_event = { id = rus_great_war_event.5 days = 3 }
+			}
+		}
+	}
+	
+	focus = {
+		id = RUS_coop_operations_planning
+		icon = GFX_focus_rus_coop_operations_planning
+		
+		x = 0
+		y = 1
+		cost = 5
+		
+		available = {
+			has_global_flag = firts_world_war
+			custom_trigger_tooltip = {
+				tooltip = not_world_war_has_ended
+				NOT = {
+					world_war_end = yes
+				}
+			}
+		}
+		
+		relative_position_id = RUS_alliance_cooperation
+		
+		prerequisite = { 
+			focus = RUS_alliance_cooperation 
+		}
+		
+		available_if_capitulated = yes
+		
+		search_filters = {  }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus RUS_coop_operations_planning "
+			country_event = rus_great_war_event.7
+			custom_effect_tooltip = RUS_gw_unlock_cat_coop_alliance_war_planning
+			hidden_effect = {
+				every_country = {
+					limit = {
+						is_puppet_of = RUS
+						is_subject_of = RUS
+						is_in_faction_with = RUS
+					}
+					country_event = { id = rus_great_war_event.8 days = 2}
+				}
+				set_global_flag = GW_lp_coop_war_planning_started_flag #флаг разблокирует категорию решений для совместного планнирования операций
+			}
+		}
+	}
+	
+	focus = {
+		id = RUS_to_support_cbi 
+		icon = GFX_focus_rus_to_support_cbi
+		
+		x = 2
+		y = 1
+		cost = 5
+		
+		available = {
+			is_in_faction_with = CBI
+			CBI = { 
+				OR = {
+					has_war_with = PRU 
+					has_war_with = BYZ 
+				}
+			}
+		}
+		
+		relative_position_id = RUS_alliance_cooperation
+		
+		prerequisite = { 
+			focus = RUS_alliance_cooperation 
+		}
+		
+		available_if_capitulated = yes
+		
+		search_filters = {  }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus RUS_to_support_cbi "
+			CBI = {
+				country_event = { id = rus_great_war_event.6 days = 3 }
+			}
+		}
+	}
+	
+	focus = {
+		id = RUS_fight_witch_japan_treat
+		icon = GFX_focus_rus_fight_witch_japan_treat
+		
+		x = -1
+		y = 2
+		cost = 5
+		
+		available = {
+			OR = {
+				has_war_with = JAP
+				CBI = {
+					is_in_faction_with = RUS
+					has_war_with = JAP
+				}
+			}
+		}
+		
+		relative_position_id = RUS_alliance_cooperation
+		
+		prerequisite = { 
+			focus = RUS_alliance_cooperation 
+		}
+		
+		available_if_capitulated = yes
+		
+		search_filters = {  }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus RUS_fight_witch_japan_treat "
+			add_ideas = RUS_gw_fight_with_jap
+			every_country = {
+				limit = {
+					NOT = { has_idea = RUS_gw_fight_with_jap }
+					is_in_faction_with = RUS
+				}
+				add_ideas = RUS_gw_fight_with_jap
+			}
+		}
+	}
+	
+	focus = {
+		id = RUS_coop_fight_with_parfian
+		icon = GFX_focus_rus_coop_fight_with_parfian
+		
+		x = 1
+		y = 2
+		cost = 5
+		
+		available = {
+			PAR = {
+				exists = yes
+				is_in_faction_with = BYZ
+			}
+		}
+		
+		relative_position_id = RUS_alliance_cooperation
+		
+		prerequisite = { 
+			focus = RUS_alliance_cooperation 
+		}
+		
+		available_if_capitulated = yes
+		
+		search_filters = {  }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus RUS_coop_fight_with_parfian "
+			add_ideas = RUS_gw_fight_with_parfia
+			every_country = {
+				limit = {
+					NOT = { has_idea = RUS_gw_fight_with_parfia }
+					is_in_faction_with = RUS
+				}
+				add_ideas = RUS_gw_fight_with_parfia
+			}
+		}
+	}
+
+##################################НАСТУПАТЕЛЬНЫЕ ОПЕРАЦИИ#################################################
+	
+	focus = {
+		id = RUS_bureau_of_offensive_operations
+		icon = GFX_focus_rus_bureau_of_offensive_operations
+		
+		x = 3
+		y = 1
+		cost = 5
+		
+		available = {
+			has_global_flag = firts_world_war
+			custom_trigger_tooltip = {
+				tooltip = not_world_war_has_ended
+				NOT = {
+					world_war_end = yes
+				}
+			}
+		}
+		
+		relative_position_id = RUS_war_becomes_to_russia
+		
+		prerequisite = { 
+			focus = RUS_unexpected_prussian_invade 
+			focus = RUS_marh_to_our_enemies 
+			focus = RUS_war_becomes_to_russia 
+		}
+		
+		available_if_capitulated = yes
+		
+		search_filters = {  }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus RUS_bureau_of_offensive_operations "
+			
+		}
+	}
+	
+	focus = {
+		id = RUS_tiflissk_operation
+		icon = GFX_focus_rus_tiflissk_operation
+		
+		x = -2
+		y = 1 
+		cost = 5
+		
+		available = {
+			has_global_flag = firts_world_war
+			custom_trigger_tooltip = {
+				tooltip = not_world_war_has_ended
+				NOT = {
+					world_war_end = yes
+				}
+			}
+		}
+		
+		relative_position_id = RUS_bureau_of_offensive_operations
+		
+		prerequisite = { 
+			focus = RUS_bureau_of_offensive_operations 
+		}
+		
+		available_if_capitulated = yes
+		
+		search_filters = {  }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus RUS_tiflissk_operation "
+			
+		}
+	}
+	
+	focus = {
+		id = RUS_northern_attack_operation #
+		icon = GFX_focus_rus_northern_attack_operation
+		
+		x = 0
+		y = 1 
+		cost = 5
+		
+		available = {
+			has_war_with = SCA
+			has_global_flag = firts_world_war
+			custom_trigger_tooltip = {
+				tooltip = not_world_war_has_ended
+				NOT = {
+					world_war_end = yes
+				}
+			}
+		}
+		
+		relative_position_id = RUS_bureau_of_offensive_operations
+		
+		prerequisite = { 
+			focus = RUS_bureau_of_offensive_operations 
+		}
+		
+		available_if_capitulated = yes
+		
+		search_filters = {  }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus RUS_tiflissk_operation "
+			#Доступна при нападении на Россию скандинавии
+		}
+	}
+	
+	focus = {
+		id = RUS_attack_on_eastern_prussia 
+		icon = GFX_focus_rus_attack_on_eastern_prussia
+		
+		x = 2
+		y = 1 
+		cost = 5
+		
+		available = {
+			has_global_flag = firts_world_war
+			custom_trigger_tooltip = {
+				tooltip = not_world_war_has_ended
+				NOT = {
+					world_war_end = yes
+				}
+			}
+		}
+		
+		relative_position_id = RUS_bureau_of_offensive_operations
+		
+		prerequisite = { 
+			focus = RUS_bureau_of_offensive_operations 
+		}
+		
+		available_if_capitulated = yes
+		
+		search_filters = {  }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus RUS_attack_on_eastern_prussia "
+			
+		}
+	}
+	
+	focus = {
+		id = RUS_offensive_on_the_constantinopol
+		icon = GFX_focus_rus_offensive_on_the_constantinopol
+		
+		x = -1
+		y = 2 
+		cost = 5
+		
+		available = {
+			has_global_flag = firts_world_war
+			custom_trigger_tooltip = {
+				tooltip = not_world_war_has_ended
+				NOT = {
+					world_war_end = yes
+				}
+			}
+		}
+		
+		relative_position_id = RUS_bureau_of_offensive_operations
+		
+		prerequisite = { 
+			focus = RUS_bureau_of_offensive_operations 
+		}
+		
+		available_if_capitulated = yes
+		
+		search_filters = {  }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus RUS_offensive_on_the_constantinopol "
+			
+		}
+	}
+	
+	focus = {
+		id = RUS_strike_on_berlin
+		icon = GFX_focus_rus_strike_on_berlin
+		
+		x = 1
+		y = 2 
+		cost = 5
+		
+		available = {
+			has_global_flag = firts_world_war
+			custom_trigger_tooltip = {
+				tooltip = not_world_war_has_ended
+				NOT = {
+					world_war_end = yes
+				}
+			}
+		}
+		
+		relative_position_id = RUS_bureau_of_offensive_operations
+		
+		prerequisite = { 
+			focus = RUS_bureau_of_offensive_operations 
+		}
+		
+		available_if_capitulated = yes
+		
+		search_filters = {  }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus RUS_strike_on_berlin "
+			
+		}
+	}
+	
+#################################WAR_PLANNING_SECTION###############################################
+	
+	focus = {
+		id = RUS_offensive_strategy
+		icon = GFX_focus_rus_offensive_strategy
+		
+		x = -1
+		y = 1 
+		cost = 5
+		
+		#allow_branch = {
+		#	OR = {
+		#		has_completed_focus = RUS_end_of_political_isolation
+		#		has_completed_focus = RUS_raise_of_the_red
+		#	}
+		#}
+		
+		available = {
+			has_global_flag = firts_world_war
+			custom_trigger_tooltip = {
+				tooltip = not_world_war_has_ended
+				NOT = {
+					world_war_end = yes
+				}
+			}
+		}
+		
+		relative_position_id = RUS_mass_mobilisation
+		
+		mutually_exclusive = { focus = RUS_defensive_strategy }
+		
+		available_if_capitulated = yes
+		
+		search_filters = {  }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus RUS_offensive_strategy "
+			add_ideas = RUS_gw_attack_strategy_idea
+		}
+	}
+	
+	
+	
+	focus = {
+		id = RUS_use_forst_war_experiance
+		icon = GFX_focus_rus_use_forst_war_experiance
+		
+		x = -2
+		y = 1 
+		cost = 5
+		
+		available = {
+			has_global_flag = firts_world_war
+			custom_trigger_tooltip = {
+				tooltip = not_world_war_has_ended
+				NOT = {
+					world_war_end = yes
+				}
+			}
+		}
+		
+		relative_position_id = RUS_offensive_strategy
+		
+		prerequisite = { 
+			focus = RUS_offensive_strategy 
+		}
+		
+		available_if_capitulated = yes
+		
+		search_filters = {  }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus RUS_use_forst_war_experiance "
+			army_experience = 30
+			add_doctrine_cost_reduction = {
+				name = land_doc_bonus
+				cost_reduction = 0.8
+				uses = 2
+				category = land_doctrine
+			}
+		}
+	}
+	
+	focus = {
+		id = RUS_the_strateghy_of_asymmetric_war
+		icon = GFX_focus_rus_the_strateghy_of_asymmetric_war
+		
+		x = -1
+		y = 1 
+		cost = 5
+		
+		available = {
+			has_global_flag = firts_world_war
+			custom_trigger_tooltip = {
+				tooltip = not_world_war_has_ended
+				NOT = {
+					world_war_end = yes
+				}
+			}
+		}
+		
+		relative_position_id = RUS_use_forst_war_experiance
+		
+		prerequisite = { 
+			focus = RUS_use_forst_war_experiance 
+		}
+		
+		available_if_capitulated = yes
+		
+		search_filters = {  }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus RUS_the_strateghy_of_asymmetric_war "
+			
+		}
+	}
+	
+	focus = {
+		id = RUS_the_power_of_man_vs_steel_monsters
+		icon = GFX_focus_rus_the_power_of_man_vs_steel_monsters
+		
+		x = 0
+		y = 1 
+		cost = 5
+		
+		available = {
+			has_global_flag = firts_world_war
+			custom_trigger_tooltip = {
+				tooltip = not_world_war_has_ended
+				NOT = {
+					world_war_end = yes
+				}
+			}
+		}
+		
+		relative_position_id = RUS_the_strateghy_of_asymmetric_war
+		
+		prerequisite = { 
+			focus = RUS_the_strateghy_of_asymmetric_war 
+		}
+		
+		available_if_capitulated = yes
+		
+		search_filters = {  }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus RUS_the_power_of_man_vs_steel_monsters "
+			
+		}
+	}
+	
+	focus = {
+		id = RUS_with_the_power_of_the_russian_bear
+		icon = GFX_focus_rus_with_the_power_of_the_russian_bear
+		
+		x = 1
+		y = 1 
+		cost = 5
+		
+		available = {
+			has_global_flag = firts_world_war
+			custom_trigger_tooltip = {
+				tooltip = not_world_war_has_ended
+				NOT = {
+					world_war_end = yes
+				}
+			}
+		}
+		
+		relative_position_id = RUS_use_forst_war_experiance
+		
+		prerequisite = { 
+			focus = RUS_use_forst_war_experiance 
+		}
+		
+		available_if_capitulated = yes
+		
+		search_filters = {  }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus RUS_with_the_power_of_the_russian_bear "
+			add_ideas = RUS_gw_the_power_of_russian_bear_1_idea
+		}
+	}
+	
+	focus = {
+		id = RUS_destroy_our_enemyes
+		icon = GFX_focus_rus_destroy_our_enemyes
+		
+		x = 0
+		y = 1 
+		cost = 5
+		
+		available = {
+			has_global_flag = firts_world_war
+			custom_trigger_tooltip = {
+				tooltip = not_world_war_has_ended
+				NOT = {
+					world_war_end = yes
+				}
+			}
+		}
+		
+		relative_position_id = RUS_with_the_power_of_the_russian_bear
+		
+		prerequisite = { 
+			focus = RUS_with_the_power_of_the_russian_bear 
+		}
+		
+		available_if_capitulated = yes
+		
+		search_filters = {  }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus RUS_methodic_of_actions_in_hot_climat "
+			swap_ideas = {
+				add_idea = RUS_gw_the_power_of_russian_bear_2_idea
+				remove_idea = RUS_gw_the_power_of_russian_bear_1_idea
+			}		
+		}
+	}
+	
+	focus = {
+		id = RUS_defensive_strategy
+		icon = GFX_focus_rus_defensive_strategy
+		
+		x = 1
+		y = 1 
+		cost = 5
+		
+		#allow_branch = {
+		#	OR = {
+		#		has_completed_focus = RUS_end_of_political_isolation
+		#		has_completed_focus = RUS_raise_of_the_red
+		#	}
+		#}
+		
+		available = {
+			has_global_flag = firts_world_war
+			custom_trigger_tooltip = {
+				tooltip = not_world_war_has_ended
+				NOT = {
+					world_war_end = yes
+				}
+			}
+		}
+		
+		relative_position_id = RUS_reorganise_production
+		
+		mutually_exclusive = { focus = RUS_offensive_strategy }
+		
+		available_if_capitulated = yes
+		
+		search_filters = {  }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus RUS_defensive_strategy "
+			add_ideas = RUS_gw_defence_strategy_idea
+		}
+	}
+	
+	focus = {
+		id = RUS_war_on_our_lands
+		icon = GFX_focus_rus_RUS_war_on_our_lands
+		
+		x = 2
+		y = 1 
+		cost = 5
+		
+		available = {
+			has_global_flag = firts_world_war
+			custom_trigger_tooltip = {
+				tooltip = not_world_war_has_ended
+				NOT = {
+					world_war_end = yes
+				}
+			}
+		}
+		
+		relative_position_id = RUS_defensive_strategy
+		
+		prerequisite = { 
+			focus = RUS_defensive_strategy 
+		}
+		
+		available_if_capitulated = yes
+		
+		search_filters = {  }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus RUS_war_on_our_lands "
+			army_experience = 30
+			add_ideas = RUS_gw_all_on_defence_of_the_motherland
+		}
+	}
+	
+	focus = { 
+		id = RUS_wear_down_enemy #измотать врага
+		icon = GFX_focus_rus_wear_down_enemy
+		
+		x = -1
+		y = 1 
+		cost = 5
+		
+		available = {
+			has_global_flag = firts_world_war
+			custom_trigger_tooltip = {
+				tooltip = not_world_war_has_ended
+				NOT = {
+					world_war_end = yes
+				}
+			}
+		}
+		
+		relative_position_id = RUS_war_on_our_lands
+		
+		prerequisite = { 
+			focus = RUS_war_on_our_lands 
+		}
+		
+		available_if_capitulated = yes
+		
+		search_filters = {  }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus RUS_wear_down_enemy "
+			swap_ideas = {
+				remove_idea = RUS_gw_all_on_defence_of_the_motherland
+				add_idea = RUS_gw_all_on_defence_of_the_motherland_1
+			}
+			
+		}
+	}
+	
+	focus = {
+		id = RUS_and_destroy_it #и уничтожить его
+		icon = GFX_focus_rus_and_destroy_it
+		
+		x = 0
+		y = 1 
+		cost = 5
+		
+		available = {
+			has_global_flag = firts_world_war
+			custom_trigger_tooltip = {
+				tooltip = not_world_war_has_ended
+				NOT = {
+					world_war_end = yes
+				}
+			}
+		}
+		
+		relative_position_id = RUS_wear_down_enemy
+		
+		prerequisite = { 
+			focus = RUS_wear_down_enemy 
+		}
+		
+		available_if_capitulated = yes
+		
+		search_filters = {  }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus RUS_and_destroy_it "
+			swap_ideas = {
+				remove_idea = RUS_gw_all_on_defence_of_the_motherland_1
+				add_idea = RUS_gw_all_on_defence_of_the_motherland_2
+			}
+		}
+	}
+	
+	focus = {
+		id = RUS_using_partisan_strategy
+		icon = GFX_focus_rus_using_partisan_strategy
+		
+		x = 1
+		y = 1 
+		cost = 5
+		
+		available = {
+			has_global_flag = firts_world_war
+			custom_trigger_tooltip = {
+				tooltip = not_world_war_has_ended
+				NOT = {
+					world_war_end = yes
+				}
+			}
+		}
+		
+		relative_position_id = RUS_war_on_our_lands
+		
+		prerequisite = { 
+			focus = RUS_war_on_our_lands 
+		}
+		
+		available_if_capitulated = yes
+		
+		search_filters = {  }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus RUS_using_partisan_strategy "
+			
+		}
+	}
+	
+	focus = {
+		id = RUS_the_explosion_of_partisan_activity
+		icon = GFX_focus_rus_the_explosion_of_partisan_activity
+		
+		x = 0
+		y = 1 
+		cost = 5
+		
+		available = {
+			has_global_flag = firts_world_war
+			custom_trigger_tooltip = {
+				tooltip = not_world_war_has_ended
+				NOT = {
+					world_war_end = yes
+				}
+			}
+		}
+		
+		relative_position_id = RUS_using_partisan_strategy
+		
+		prerequisite = { 
+			focus = RUS_using_partisan_strategy 
+		}
+		
+		available_if_capitulated = yes
+		
+		search_filters = {  }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus RUS_the_explosion_of_partisan_activity "
+			
+		}
+	}
+
+#################################SAVE_INDUSTRY_SECTION###############################################	
+	
+	focus = {
+		id = RUS_save_our_industry
+		icon = GFX_focus_rus_save_our_industry
+		
+		x = -2
+		y = 1 
+		cost = 5
+		
+		available = {
+			has_global_flag = firts_world_war
+			custom_trigger_tooltip = {
+				tooltip = not_world_war_has_ended
+				NOT = {
+					world_war_end = yes
+				}
+			}
+		}
+		
+		relative_position_id = RUS_defensive_strategy
+		
+		prerequisite = { 
+			focus = RUS_offensive_strategy 
+			focus = RUS_defensive_strategy 
+		}
+		
+		available_if_capitulated = yes
+		
+		search_filters = {  }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus RUS_save_our_industry "
+			
+		}
+	}
+	
+	focus = {
+		id = RUS_european_industry_quiestion
+		icon = GFX_focus_rus_european_industry_quiestion
+		
+		x = -1
+		y = 1 
+		cost = 5
+		
+		available = {
+			has_global_flag = firts_world_war
+			custom_trigger_tooltip = {
+				tooltip = not_world_war_has_ended
+				NOT = {
+					world_war_end = yes
+				}
+			}
+		}
+		
+		relative_position_id = RUS_save_our_industry
+		
+		prerequisite = { 
+			focus = RUS_save_our_industry 
+		}
+		
+		available_if_capitulated = yes
+		
+		search_filters = {  }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus RUS_european_industry_quiestion "
+			
+		}
+	}
+	
+	focus = {
+		id = RUS_introduction_of_night_shifts
+		icon = GFX_focus_rus_introduction_of_night_shifts
+		
+		x = 0
+		y = 1 
+		cost = 5
+		
+		available = {
+			has_global_flag = firts_world_war
+			custom_trigger_tooltip = {
+				tooltip = not_world_war_has_ended
+				NOT = {
+					world_war_end = yes
+				}
+			}
+		}
+		
+		relative_position_id = RUS_european_industry_quiestion
+		
+		prerequisite = { 
+			focus = RUS_european_industry_quiestion 
+		}
+		
+		available_if_capitulated = yes
+		
+		search_filters = {  }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus RUS_introduction_of_night_shifts "
+			
+		}
+	}
+	
+	focus = {
+		id = RUS_expand_rear_productions
+		icon = GFX_focus_rus_expand_rear_productions
+		
+		x = 1
+		y = 1 
+		cost = 5
+		
+		available = {
+			has_global_flag = firts_world_war
+			custom_trigger_tooltip = {
+				tooltip = not_world_war_has_ended
+				NOT = {
+					world_war_end = yes
+				}
+			}
+		}
+		
+		relative_position_id = RUS_save_our_industry
+		
+		prerequisite = { 
+			focus = RUS_save_our_industry 
+		}
+		
+		available_if_capitulated = yes
+		
+		search_filters = {  }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus RUS_expand_rear_productions "
+			
+		}
+	}
+	
+	focus = {
+		id = RUS_trans_ural_industry_strategion
+		icon = GFX_focus_rus_trans_ural_industry_strategion
+		
+		x = 0
+		y = 1 
+		cost = 5
+		
+		available = {
+			has_global_flag = firts_world_war
+			custom_trigger_tooltip = {
+				tooltip = not_world_war_has_ended
+				NOT = {
+					world_war_end = yes
+				}
+			}
+		}
+		
+		relative_position_id = RUS_expand_rear_productions
+		
+		prerequisite = { 
+			focus = RUS_expand_rear_productions 
+		}
+		
+		available_if_capitulated = yes
+		
+		search_filters = {  }
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus RUS_trans_ural_industry_strategion "
+			
+		}
+	}
+	
+	
 }
 
 focus_tree = {
