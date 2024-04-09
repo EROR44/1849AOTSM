@@ -1168,8 +1168,68 @@ country_event = {
 				}
 			}
 			SGE = {
-				transfer_state = 64
 				transfer_state = 62
+				transfer_state = 64
+			}
+			hidden_effect = {
+				PRU = {
+					transfer_units_fraction= {
+						target = SGE
+						size = 0.0
+						stockpile_ratio = 0.75
+						army_ratio = 0.65
+						navy_ratio = 0.50
+						air_ratio = 0.00
+						keep_unit_leaders_trigger = {
+							NOT = {
+								has_unit_leader_flag = is_sympathy_to_socialism
+							}
+						}
+					}
+				}
+			}
+			SGE = {
+				declare_war_on = {
+					target = PRU
+					type = annex_everything
+				}
+			}
+		}
+		if = {
+			limit = {
+				PRU = { has_country_flag = second_civilwar_scenario }
+			}
+			hidden_effect = {
+				every_core_state = {
+					limit = {
+						is_core_of = PRU
+					}
+					add_core_of = SGE
+				}
+			}
+			SGE = {
+				if = {
+					limit = {
+						PRU = {
+							owns_state = 8
+						}
+					}
+					transfer_state = 8
+				}
+				transfer_state = 42
+				transfer_state = 51
+				transfer_state = 55
+				transfer_state = 62
+				transfer_state = 64
+				if = {
+					limit = {
+						PRU = {
+							owns_state = 863
+						}
+					}
+					transfer_state = 863
+				}
+				transfer_state = 888
 			}
 			hidden_effect = {
 				PRU = {
@@ -1196,6 +1256,48 @@ country_event = {
 			}
 		}
 		set_global_flag = prussian_civilwar
+		every_country = {
+			limit = {
+				is_in_faction_with = PRU
+			}
+			leave_faction = yes
+		}
+		if = {
+			limit = {
+				BEL = {
+					OR = {
+						is_puppet_of = PRU
+						is_subject_of = PRU
+					}
+				}
+			}
+			PRU = {
+				set_autonomy = {
+					target = BEL
+					autonomous_state = autonomy_free
+					end_wars = yes
+					end_civil_wars = yes
+				}
+			}
+		}
+		if = {
+			limit = {
+				MAT = {
+					OR = {
+						is_puppet_of = PRU
+						is_subject_of = PRU
+					}
+				}
+			}
+			PRU = {
+				set_autonomy = {
+					target = MAT
+					autonomous_state = autonomy_free
+					end_wars = yes
+					end_civil_wars = yes
+				}
+			}
+		}
 	}
 	
 	option = {

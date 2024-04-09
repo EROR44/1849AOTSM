@@ -1,3 +1,4 @@
+#AUSTRO-PRUSSIAN WARS START#
 austrian_capitulation_first_brotherwar = {
 	set_global_flag = austrian_capitulation_first_brotherwar_flag
 	every_other_country = {
@@ -1664,6 +1665,9 @@ prussian_capitulation_second_brotherwar = {
 		days = 1
 	}
 	PRU = {
+		set_country_flag = second_civilwar_scenario
+	}
+	PRU = {
 		country_event = {
 			id = ger.6
 			days = 20
@@ -2617,3 +2621,111 @@ prussian_capitulation_third_brotherwar = {
 		}
 	}
 }
+#AUSTRO-PRUSSIAN WARS END#
+
+#CIVILIAN WAR IN PRUSSIAN START#
+prussian_win_civilianwar = {
+	clr_global_flag = prussian_civilwar
+	if = {
+		limit = {
+			PRU = {
+				has_country_flag = first_civilwar_scenario
+			}
+		}
+		PRU = {
+			clr_country_flag = first_civilwar_scenario
+		}
+	}
+	if = {
+		limit = {
+			PRU = {
+				has_country_flag = second_civilwar_scenario
+			}
+		}
+		PRU = {
+			clr_country_flag = second_civilwar_scenario
+		}
+	}
+	if = {
+		limit = {
+			PRU = {
+				has_country_flag = third_civilwar_scenarion
+			}
+		}
+		PRU = {
+			clr_country_flag = third_civilwar_scenarion
+		}
+	}
+	PRU = {
+		white_peace = {
+			tag = SGE
+			message = PRU_win_SGE
+		}
+	}
+	PRU = {
+		annex_country = {
+			target = SGE
+			transfer_troops = no
+		}
+	}
+}
+sge_win_civilianwar = {
+	clr_global_flag = prussian_civilwar
+	if = {
+		limit = {
+			PRU = {
+				has_country_flag = first_civilwar_scenario
+			}
+		}
+		PRU = {
+			clr_country_flag = first_civilwar_scenario
+		}
+	}
+	if = {
+		limit = {
+			PRU = {
+				has_country_flag = second_civilwar_scenario
+			}
+		}
+		PRU = {
+			clr_country_flag = second_civilwar_scenario
+		}
+	}
+	if = {
+		limit = {
+			PRU = {
+				has_country_flag = third_civilwar_scenarion
+			}
+		}
+		PRU = {
+			clr_country_flag = third_civilwar_scenarion
+		}
+	}
+	SGE = {
+		white_peace = {
+			tag = PRU
+			message = SGE_win_PRU
+		}
+	}
+	SGE = {
+		annex_country = {
+			target = PRU
+			transfer_troops = no
+		}
+	}
+	if = {
+		limit = {
+			country_exists = HOH
+		}
+		SGE = {
+			annex_country = {
+				target = HOH
+				transfer_troops = no
+			}
+		}
+	}
+	SGE = {
+		set_country_flag = sge_win_civilianwar_flag
+	}
+}
+#CIVILIAN WAR IN PRUSSIAN END#
