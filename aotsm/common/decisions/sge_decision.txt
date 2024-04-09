@@ -21,114 +21,124 @@ sge_main_focus_category = {
 			base = 50
 		}
 		
-		days_remove = 1
+		days_remove = 30
 		
 		fire_only_once = yes
 		
-		complete_effect = {		
+		complete_effect = {	
+			custom_effect_tooltip = sge_start_election_tt
+			hidden_effect = {
+				SGE = {
+					country_event = {
+						id = sge_lore.1
+						days = 5
+					}
+				}
+			}
 		}
 		
 		remove_effect = {
 			add_political_power = 150
-			random_list = {
-				25 = {
-					promote_character = SGE_Karl_Marx
-					set_party_name = {
-						ideology = socialism
-						long_name = SGE_socialism_marx_long
-						name = SGE_socialism_marx
-					}
-					hidden_effect = {
-						SGE = {
-							add_ideas = sge_marx_politic_1
-							add_ideas = sge_planing_economy_1
-						}
-						random_list = {
-							50 = {
-								SGE = {
-									add_ideas = sge_people_doctrine_1
-								}
-							}
-							25 = {
-								SGE = {
-									add_ideas = sge_panzer_doctrine_1
-								}
-							}
-							25 = {
-								SGE = {
-									add_ideas = sge_firedestroed_doctrine_1
-								}
-							}
-						}
-					}
+			SGE = { country_event = sge_election.5 }
+		}
+		
+	}
+	
+	sge_upgrade_tier_1 = {
+	
+		icon = hol_exchange_intelligence_data
+		
+		allowed = {
+			tag = SGE
+		}
+		
+		available = {
+			NOT = {
+				country_exists = PRU
+				country_exists = MCS
+				country_exists = MCL
+				country_exists = LBE
+				country_exists = HLS
+				country_exists = SLG
+				country_exists = HAM
+				country_exists = HAN
+				country_exists = BRM
+				country_exists = OLD
+				country_exists = WEI
+				country_exists = WLD
+				country_exists = HES
+				country_exists = MEI
+				country_exists = TYR
+				country_exists = SAK
+				country_exists = FRN
+				country_exists = KOL
+			}
+		}
+		
+		visible = {
+			tag = SGE
+		}		
+			
+		cost = 0
+		
+		ai_will_do = {
+			base = 50
+		}
+		
+		days_remove = 30
+		
+		fire_only_once = yes
+		
+		remove_effect = {
+			SGE = {
+				swap_ideas = {
+					remove_idea = large_country
+					add_idea = potential_world_power
 				}
-				25 = {
-					promote_character = SGE_Fridrich_Engels
-					set_party_name = {
-						ideology = socialism
-						long_name = SGE_socialism_engels_long
-						name = SGE_socialism_engels
-					}
-					hidden_effect = {
-						SGE = {
-							add_ideas = sge_engels_politic_1
-							add_ideas = sge_market_economy_1
-						}
-						random_list = {
-							50 = {
-								SGE = {
-									add_ideas = sge_planing_doctrine_1
-								}
-							}
-							25 = {
-								SGE = {
-									add_ideas = sge_panzer_doctrine_1
-								}
-							}
-							25 = {
-								SGE = {
-									add_ideas = sge_firedestroed_doctrine_1
-								}
-							}
-						}
-					}
+				set_country_flag = sge_second_tier_of_war
+			}
+		}
+		
+	}
+	
+	sge_upgrade_tier_2 = {
+	
+		icon = hol_exchange_intelligence_data
+		
+		allowed = {
+			tag = SGE
+		}
+		
+		available = {
+			NOT = {
+				country_exists = BAV
+				country_exists = VUR
+				country_exists = BAD
+				country_exists = HOH
+			}
+		}
+		
+		visible = {
+			tag = SGE
+		}		
+			
+		cost = 0
+		
+		ai_will_do = {
+			base = 50
+		}
+		
+		days_remove = 30
+		
+		fire_only_once = yes
+		
+		remove_effect = {
+			SGE = {
+				swap_ideas = {
+					remove_idea = potential_world_power
+					add_idea = world_power
 				}
-				50 = {
-					promote_character = SGE_Ludwig_Andreas_von_Feuerbach
-					set_party_name = {
-						ideology = socialism
-						long_name = SGE_socialism_feuerbach_long
-						name = SGE_socialism_feuerbach
-					}
-					hidden_effect = {
-						SGE = {
-							add_ideas = sge_faerbash_politic_1
-							add_ideas = sge_mixed_economy_1
-						}
-						random_list = {
-							25 = {
-								SGE = {
-									add_ideas = sge_planing_doctrine_1
-								}
-							}
-							25 = {
-								SGE = {
-									add_ideas = sge_people_doctrine_1
-								}
-							}
-							25 = {
-								SGE = {
-									add_ideas = sge_panzer_doctrine_1
-								}
-							}
-							25 = {
-								SGE = {
-									add_ideas = sge_firedestroed_doctrine_1
-								}
-							}
-						}
-					}
-				}
+				set_country_flag = sge_third_tier_of_war
 			}
 		}
 		
@@ -137,5 +147,1338 @@ sge_main_focus_category = {
 }
 
 sge_germany_fate_category = {
+
+	MCS_conquests_decision = {
+	
+		icon = generic_operation
+
+		allowed = {
+		}
+
+		available = {
+			country_exists = MCS
+			MCS = {
+				is_owner_neighbor_of = SGE
+			}
+			has_war = no
+			NOT = {
+				SGE = {
+					has_country_flag = attack_minor_in_germany
+				}
+			}
+		}
+		
+		visible = {
+			country_exists = MCS
+			tag = SGE
+		}
+		
+		ai_will_do = { factor = 5 }
+		
+		fire_only_once = yes
+		
+		cost = 25
+		
+		days_remove = 10
+		
+		war_with_on_remove = MCS
+
+		complete_effect = {
+			SGE = {
+				set_country_flag = {
+					flag = attack_minor_in_germany
+					days = 11
+					value = 1
+				}
+			}
+			SGE = {
+				add_state_core = 897
+			}
+		}
+		
+		remove_effect = {
+			SGE = {
+				declare_war_on = {
+					target = MCS
+					type = annex_everything
+				}
+			}
+		}
+	
+	}
+	
+	MCL_conquests_decision = {
+	
+		icon = generic_operation
+
+		allowed = {
+		}
+
+		available = {
+			country_exists = MCL
+			MCL = {
+				is_owner_neighbor_of = SGE
+			}
+			has_war = no
+			NOT = {
+				SGE = {
+					has_country_flag = attack_minor_in_germany
+				}
+			}
+		}
+		
+		visible = {
+			country_exists = MCL
+			tag = SGE
+		}
+		
+		ai_will_do = { factor = 5 }
+		
+		fire_only_once = yes
+		
+		cost = 25
+		
+		days_remove = 10
+		
+		war_with_on_remove = MCL
+
+		complete_effect = {
+			SGE = {
+				set_country_flag = {
+					flag = attack_minor_in_germany
+					days = 11
+					value = 1
+				}
+			}
+			SGE = {
+				add_state_core = 268
+			}
+		}
+		
+		remove_effect = {
+			SGE = {
+				declare_war_on = {
+					target = MCL
+					type = annex_everything
+				}
+			}
+		}
+	
+	}
+	
+	LBE_conquests_decision = {
+	
+		icon = generic_operation
+
+		allowed = {
+		}
+
+		available = {
+			country_exists = LBE
+			LBE = {
+				is_owner_neighbor_of = SGE
+			}
+			has_war = no
+			NOT = {
+				SGE = {
+					has_country_flag = attack_minor_in_germany
+				}
+			}
+		}
+		
+		visible = {
+			country_exists = LBE
+			tag = SGE
+		}
+		
+		ai_will_do = { factor = 5 }
+		
+		fire_only_once = yes
+		
+		cost = 25
+		
+		days_remove = 10
+		
+		war_with_on_remove = LBE
+
+		complete_effect = {
+			SGE = {
+				set_country_flag = {
+					flag = attack_minor_in_germany
+					days = 11
+					value = 1
+				}
+			}
+			SGE = {
+				add_state_core = 892
+			}
+		}
+		
+		remove_effect = {
+			SGE = {
+				declare_war_on = {
+					target = LBE
+					type = annex_everything
+				}
+			}
+		}
+	
+	}
+	
+	HLS_conquests_decision = {
+	
+		icon = generic_operation
+
+		allowed = {
+		}
+
+		available = {
+			country_exists = HLS
+			HLS = {
+				is_owner_neighbor_of = SGE
+			}
+			has_war = no
+			NOT = {
+				SGE = {
+					has_country_flag = attack_minor_in_germany
+				}
+			}
+		}
+		
+		visible = {
+			country_exists = HLS
+			tag = SGE
+		}
+		
+		ai_will_do = { factor = 5 }
+		
+		fire_only_once = yes
+		
+		cost = 25
+		
+		days_remove = 10
+		
+		war_with_on_remove = HLS
+
+		complete_effect = {
+			SGE = {
+				set_country_flag = {
+					flag = attack_minor_in_germany
+					days = 11
+					value = 1
+				}
+			}
+			SGE = {
+				add_state_core = 58
+			}
+		}
+		
+		remove_effect = {
+			SGE = {
+				declare_war_on = {
+					target = HLS
+					type = annex_everything
+				}
+			}
+		}
+	
+	}
+	
+	SLG_conquests_decision = {
+	
+		icon = generic_operation
+
+		allowed = {
+		}
+
+		available = {
+			country_exists = SLG
+			SLG = {
+				is_owner_neighbor_of = SGE
+			}
+			has_war = no
+			NOT = {
+				SGE = {
+					has_country_flag = attack_minor_in_germany
+				}
+			}
+		}
+		
+		visible = {
+			country_exists = SLG
+			tag = SGE
+		}
+		
+		ai_will_do = { factor = 5 }
+		
+		fire_only_once = yes
+		
+		cost = 25
+		
+		days_remove = 10
+		
+		war_with_on_remove = SLG
+
+		complete_effect = {
+			SGE = {
+				set_country_flag = {
+					flag = attack_minor_in_germany
+					days = 11
+					value = 1
+				}
+			}
+			SGE = {
+				add_state_core = 829
+			}
+		}
+		
+		remove_effect = {
+			SGE = {
+				declare_war_on = {
+					target = SLG
+					type = annex_everything
+				}
+			}
+		}
+	
+	}
+	
+	HAM_conquests_decision = {
+	
+		icon = generic_operation
+
+		allowed = {
+		}
+
+		available = {
+			country_exists = HAM
+			HAM = {
+				is_owner_neighbor_of = SGE
+			}
+			has_war = no
+			NOT = {
+				SGE = {
+					has_country_flag = attack_minor_in_germany
+				}
+			}
+		}
+		
+		visible = {
+			country_exists = HAM
+			tag = SGE
+		}
+		
+		ai_will_do = { factor = 5 }
+		
+		fire_only_once = yes
+		
+		cost = 25
+		
+		days_remove = 10
+		
+		war_with_on_remove = HAM
+
+		complete_effect = {
+			SGE = {
+				set_country_flag = {
+					flag = attack_minor_in_germany
+					days = 11
+					value = 1
+				}
+			}
+			SGE = {
+				add_state_core = 893
+			}
+		}
+		
+		remove_effect = {
+			SGE = {
+				declare_war_on = {
+					target = HAM
+					type = annex_everything
+				}
+			}
+		}
+	
+	}
+	
+	HAN_conquests_decision = {
+	
+		icon = generic_operation
+
+		allowed = {
+		}
+
+		available = {
+			country_exists = HAN
+			HAN = {
+				is_owner_neighbor_of = SGE
+			}
+			has_war = no
+			NOT = {
+				SGE = {
+					has_country_flag = attack_minor_in_germany
+				}
+			}
+		}
+		
+		visible = {
+			country_exists = HAN
+			tag = SGE
+		}
+		
+		ai_will_do = { factor = 5 }
+		
+		fire_only_once = yes
+		
+		cost = 25
+		
+		days_remove = 10
+		
+		war_with_on_remove = HAN
+
+		complete_effect = {
+			SGE = {
+				set_country_flag = {
+					flag = attack_minor_in_germany
+					days = 11
+					value = 1
+				}
+			}
+			SGE = {
+				add_state_core = 56
+				add_state_core = 57
+				add_state_core = 59
+			}
+		}
+		
+		remove_effect = {
+			SGE = {
+				declare_war_on = {
+					target = HAN
+					type = annex_everything
+				}
+			}
+		}
+	
+	}
+	
+	BRE_conquests_decision = {
+	
+		icon = generic_operation
+
+		allowed = {
+		}
+
+		available = {
+			country_exists = BRE
+			BRE = {
+				is_owner_neighbor_of = SGE
+			}
+			has_war = no
+			NOT = {
+				SGE = {
+					has_country_flag = attack_minor_in_germany
+				}
+			}
+		}
+		
+		visible = {
+			country_exists = BRE
+			tag = SGE
+		}
+		
+		ai_will_do = { factor = 5 }
+		
+		fire_only_once = yes
+		
+		cost = 25
+		
+		days_remove = 10
+		
+		war_with_on_remove = BRE
+
+		complete_effect = {
+			SGE = {
+				set_country_flag = {
+					flag = attack_minor_in_germany
+					days = 11
+					value = 1
+				}
+			}
+			SGE = {
+				add_state_core = 896
+			}
+		}
+		
+		remove_effect = {
+			SGE = {
+				declare_war_on = {
+					target = BRE
+					type = annex_everything
+				}
+			}
+		}
+	
+	}
+	
+	OLD_conquests_decision = {
+	
+		icon = generic_operation
+
+		allowed = {
+		}
+
+		available = {
+			country_exists = OLD
+			OLD = {
+				is_owner_neighbor_of = SGE
+			}
+			has_war = no
+			NOT = {
+				SGE = {
+					has_country_flag = attack_minor_in_germany
+				}
+			}
+		}
+		
+		visible = {
+			country_exists = OLD
+			tag = SGE
+		}
+		
+		ai_will_do = { factor = 5 }
+		
+		fire_only_once = yes
+		
+		cost = 25
+		
+		days_remove = 10
+		
+		war_with_on_remove = OLD
+
+		complete_effect = {
+			SGE = {
+				set_country_flag = {
+					flag = attack_minor_in_germany
+					days = 11
+					value = 1
+				}
+			}
+			SGE = {
+				add_state_core = 895
+			}
+		}
+		
+		remove_effect = {
+			SGE = {
+				declare_war_on = {
+					target = OLD
+					type = annex_everything
+				}
+			}
+		}
+	
+	}
+	
+	WEI_conquests_decision = {
+	
+		icon = generic_operation
+
+		allowed = {
+		}
+
+		available = {
+			country_exists = WEI
+			WEI = {
+				is_owner_neighbor_of = SGE
+			}
+			has_war = no
+			NOT = {
+				SGE = {
+					has_country_flag = attack_minor_in_germany
+				}
+			}
+		}
+		
+		visible = {
+			country_exists = WEI
+			tag = SGE
+		}
+		
+		ai_will_do = { factor = 5 }
+		
+		fire_only_once = yes
+		
+		cost = 25
+		
+		days_remove = 10
+		
+		war_with_on_remove = WEI
+
+		complete_effect = {
+			SGE = {
+				set_country_flag = {
+					flag = attack_minor_in_germany
+					days = 11
+					value = 1
+				}
+			}
+			SGE = {
+				add_state_core = 901
+			}
+		}
+		
+		remove_effect = {
+			SGE = {
+				declare_war_on = {
+					target = WEI
+					type = annex_everything
+				}
+			}
+		}
+	
+	}
+	
+	MEI_conquests_decision = {
+	
+		icon = generic_operation
+
+		allowed = {
+		}
+
+		available = {
+			country_exists = MEI
+			MEI = {
+				is_owner_neighbor_of = SGE
+			}
+			has_war = no
+			NOT = {
+				SGE = {
+					has_country_flag = attack_minor_in_germany
+				}
+			}
+		}
+		
+		visible = {
+			country_exists = MEI
+			tag = SGE
+		}
+		
+		ai_will_do = { factor = 5 }
+		
+		fire_only_once = yes
+		
+		cost = 25
+		
+		days_remove = 10
+		
+		war_with_on_remove = MEI
+
+		complete_effect = {
+			SGE = {
+				set_country_flag = {
+					flag = attack_minor_in_germany
+					days = 11
+					value = 1
+				}
+			}
+			SGE = {
+				add_state_core = 900
+			}
+		}
+		
+		remove_effect = {
+			SGE = {
+				declare_war_on = {
+					target = MEI
+					type = annex_everything
+				}
+			}
+		}
+	
+	}
+	
+	WLD_conquests_decision = {
+	
+		icon = generic_operation
+
+		allowed = {
+		}
+
+		available = {
+			country_exists = WLD
+			WLD = {
+				is_owner_neighbor_of = SGE
+			}
+			has_war = no
+			NOT = {
+				SGE = {
+					has_country_flag = attack_minor_in_germany
+				}
+			}
+		}
+		
+		visible = {
+			country_exists = WLD
+			tag = SGE
+		}
+		
+		ai_will_do = { factor = 5 }
+		
+		fire_only_once = yes
+		
+		cost = 25
+		
+		days_remove = 10
+		
+		war_with_on_remove = WLD
+
+		complete_effect = {
+			SGE = {
+				set_country_flag = {
+					flag = attack_minor_in_germany
+					days = 11
+					value = 1
+				}
+			}
+			SGE = {
+				add_state_core = 899
+			}
+		}
+		
+		remove_effect = {
+			SGE = {
+				declare_war_on = {
+					target = WLD
+					type = annex_everything
+				}
+			}
+		}
+	
+	}
+	
+	HES_conquests_decision = {
+	
+		icon = generic_operation
+
+		allowed = {
+		}
+
+		available = {
+			country_exists = HES
+			HES = {
+				is_owner_neighbor_of = SGE
+			}
+			has_war = no
+			NOT = {
+				SGE = {
+					has_country_flag = attack_minor_in_germany
+				}
+			}
+		}
+		
+		visible = {
+			country_exists = HES
+			tag = SGE
+		}
+		
+		ai_will_do = { factor = 5 }
+		
+		fire_only_once = yes
+		
+		cost = 25
+		
+		days_remove = 10
+		
+		war_with_on_remove = HES
+
+		complete_effect = {
+			SGE = {
+				set_country_flag = {
+					flag = attack_minor_in_germany
+					days = 11
+					value = 1
+				}
+			}
+			SGE = {
+				add_state_core = 898
+			}
+		}
+		
+		remove_effect = {
+			SGE = {
+				declare_war_on = {
+					target = HES
+					type = annex_everything
+				}
+			}
+		}
+	
+	}
+	
+	FRN_conquests_decision = {
+	
+		icon = generic_operation
+
+		allowed = {
+		}
+
+		available = {
+			country_exists = FRN
+			FRN = {
+				is_owner_neighbor_of = SGE
+			}
+			has_war = no
+			NOT = {
+				SGE = {
+					has_country_flag = attack_minor_in_germany
+				}
+			}
+		}
+		
+		visible = {
+			country_exists = FRN
+			tag = SGE
+		}
+		
+		ai_will_do = { factor = 5 }
+		
+		fire_only_once = yes
+		
+		cost = 25
+		
+		days_remove = 10
+		
+		war_with_on_remove = FRN
+
+		complete_effect = {
+			SGE = {
+				set_country_flag = {
+					flag = attack_minor_in_germany
+					days = 11
+					value = 1
+				}
+			}
+			SGE = {
+				add_state_core = 55
+			}
+		}
+		
+		remove_effect = {
+			SGE = {
+				declare_war_on = {
+					target = FRN
+					type = annex_everything
+				}
+			}
+		}
+	
+	}
+	
+	SAK_conquests_decision = {
+	
+		icon = generic_operation
+
+		allowed = {
+		}
+
+		available = {
+			country_exists = SAK
+			SAK = {
+				is_owner_neighbor_of = SGE
+			}
+			has_war = no
+			NOT = {
+				SGE = {
+					has_country_flag = attack_minor_in_germany
+				}
+			}
+		}
+		
+		visible = {
+			country_exists = SAK
+			tag = SGE
+		}
+		
+		ai_will_do = { factor = 5 }
+		
+		fire_only_once = yes
+		
+		cost = 25
+		
+		days_remove = 10
+		
+		war_with_on_remove = SAK
+		war_with_on_remove = TYR
+
+		complete_effect = {
+			SGE = {
+				set_country_flag = {
+					flag = attack_minor_in_germany
+					days = 11
+					value = 1
+				}
+			}
+			SGE = {
+				add_state_core = 60
+				add_state_core = 65
+			}
+		}
+		
+		remove_effect = {
+			SGE = {
+				declare_war_on = {
+					target = SAK
+					type = annex_everything
+				}
+			}
+			SGE = {
+				declare_war_on = {
+					target = TYR
+					type = annex_everything
+				}
+			}
+		}
+	
+	}
+	
+	KOL_conquests_decision = {
+	
+		icon = generic_operation
+
+		allowed = {
+		}
+
+		available = {
+			country_exists = KOL
+			KOL = {
+				is_owner_neighbor_of = SGE
+			}
+			has_war = no
+			NOT = {
+				SGE = {
+					has_country_flag = attack_minor_in_germany
+				}
+			}
+		}
+		
+		visible = {
+			country_exists = KOL
+			tag = SGE
+		}
+		
+		ai_will_do = { factor = 5 }
+		
+		fire_only_once = yes
+		
+		cost = 25
+		
+		days_remove = 10
+		
+		war_with_on_remove = KOL
+
+		complete_effect = {
+			SGE = {
+				set_country_flag = {
+					flag = attack_minor_in_germany
+					days = 11
+					value = 1
+				}
+			}
+			SGE = {
+				add_state_core = 42
+				add_state_core = 51
+				add_state_core = 888
+			}
+		}
+		
+		remove_effect = {
+			SGE = {
+				declare_war_on = {
+					target = KOL
+					type = annex_everything
+				}
+			}
+		}
+	
+	}
+	
+	BAV_conquests_decision = {
+	
+		icon = generic_operation
+
+		allowed = {
+		}
+
+		available = {
+			country_exists = BAV
+			BAV = {
+				is_owner_neighbor_of = SGE
+			}
+			has_war = no
+			NOT = {
+				SGE = {
+					has_country_flag = attack_minor_in_germany
+				}
+			}
+		}
+		
+		visible = {
+			country_exists = BAV
+			tag = SGE
+			has_country_flag = sge_second_tier_of_war
+		}
+		
+		ai_will_do = { factor = 5 }
+		
+		fire_only_once = yes
+		
+		cost = 25
+		
+		days_remove = 10
+		
+		war_with_on_remove = BAV
+
+		complete_effect = {
+			SGE = {
+				set_country_flag = {
+					flag = attack_minor_in_germany
+					days = 11
+					value = 1
+				}
+			}
+			SGE = {
+				add_state_core = 52
+				add_state_core = 53
+				add_state_core = 54
+				add_state_core = 894
+			}
+		}
+		
+		remove_effect = {
+			SGE = {
+				declare_war_on = {
+					target = BAV
+					type = annex_everything
+				}
+			}
+		}
+	
+	}
+	
+	VUR_conquests_decision = {
+	
+		icon = generic_operation
+
+		allowed = {
+		}
+
+		available = {
+			country_exists = VUR
+			VUR = {
+				is_owner_neighbor_of = SGE
+			}
+			has_war = no
+			NOT = {
+				SGE = {
+					has_country_flag = attack_minor_in_germany
+				}
+			}
+		}
+		
+		visible = {
+			country_exists = VUR
+			tag = SGE
+			has_country_flag = sge_second_tier_of_war
+		}
+		
+		ai_will_do = { factor = 5 }
+		
+		fire_only_once = yes
+		
+		cost = 25
+		
+		days_remove = 10
+		
+		war_with_on_remove = VUR
+
+		complete_effect = {
+			SGE = {
+				set_country_flag = {
+					flag = attack_minor_in_germany
+					days = 11
+					value = 1
+				}
+			}
+			SGE = {
+				add_state_core = 808
+			}
+		}
+		
+		remove_effect = {
+			SGE = {
+				declare_war_on = {
+					target = VUR
+					type = annex_everything
+				}
+			}
+		}
+	
+	}
+	
+	BAD_conquests_decision = {
+	
+		icon = generic_operation
+
+		allowed = {
+		}
+
+		available = {
+			country_exists = BAD
+			BAD = {
+				is_owner_neighbor_of = SGE
+			}
+			has_war = no
+			NOT = {
+				SGE = {
+					has_country_flag = attack_minor_in_germany
+				}
+			}
+		}
+		
+		visible = {
+			country_exists = BAD
+			tag = SGE
+			has_country_flag = sge_second_tier_of_war
+		}
+		
+		ai_will_do = { factor = 5 }
+		
+		fire_only_once = yes
+		
+		cost = 25
+		
+		days_remove = 10
+		
+		war_with_on_remove = BAD
+
+		complete_effect = {
+			SGE = {
+				set_country_flag = {
+					flag = attack_minor_in_germany
+					days = 11
+					value = 1
+				}
+			}
+			SGE = {
+				add_state_core = 50
+			}
+		}
+		
+		remove_effect = {
+			SGE = {
+				declare_war_on = {
+					target = BAD
+					type = annex_everything
+				}
+			}
+		}
+	
+	}
+	
+	SIL_annex_decision = {
+	
+		icon = generic_operation
+
+		allowed = {
+		}
+
+		available = {
+			country_exists = SIL
+			SIL = {
+				is_owner_neighbor_of = SGE
+			}
+			has_war = no
+		}
+		
+		visible = {
+			country_exists = BAD
+			tag = SGE
+			has_country_flag = sge_third_tier_of_war
+		}
+		
+		ai_will_do = { factor = 5 }
+		
+		fire_only_once = yes
+		
+		cost = 25
+		
+		days_remove = 10
+		
+		war_with_on_remove = SIL
+
+		complete_effect = {
+			SGE = {
+				set_country_flag = {
+					flag = last_war_decision_cooldawn
+					days = 210
+					value = 1
+				}
+			}
+			SGE = {
+				add_state_core = 66
+				add_state_core = 67
+				add_state_core = 762
+			}
+		}
+		
+		remove_effect = {
+			SGE = {
+				annex_country = {
+					target = SIL
+					transfer_troops = no
+				}
+			}
+		}
+	
+	}
+	
+	big_war_aus_decision = {
+	
+		icon = generic_operation
+
+		allowed = {
+		}
+
+		available = {
+			country_exists = AUS
+			owns_state = 66
+			owns_state = 67
+			owns_state = 762
+		}
+		
+		visible = {
+			NOT = {
+				country_exists = SIL
+			}
+			country_exists = AUS
+			tag = SGE
+			has_country_flag = sge_third_tier_of_war
+		}
+		
+		ai_will_do = { factor = 5 }
+		
+		fire_only_once = yes
+		
+		cost = 25
+		
+		days_remove = 30
+		
+		war_with_on_remove = AUS
+
+		complete_effect = {
+		}
+		
+		remove_effect = {
+			SGE = {
+				annex_country = {
+					target = AUS
+					transfer_troops = no
+				}
+			}
+		}
+	
+	}
+	
+	big_war_fra_decision = {
+	
+		icon = generic_operation
+
+		allowed = {
+		}
+
+		available = {
+			country_exists = FRR
+			owns_state = 4
+		}
+		
+		visible = {
+			NOT = {
+				country_exists = SIL
+			}
+			country_exists = FRR
+			tag = SGE
+			has_country_flag = sge_third_tier_of_war
+		}
+		
+		ai_will_do = { factor = 5 }
+		
+		fire_only_once = yes
+		
+		cost = 25
+		
+		days_remove = 30
+		
+		war_with_on_remove = FRR
+
+		complete_effect = {
+		}
+		
+		remove_effect = {
+			SGE = {
+				annex_country = {
+					target = FRR
+					transfer_troops = no
+				}
+			}
+		}
+	
+	}
+	
+	big_war_rus_decision = {
+	
+		icon = generic_operation
+
+		allowed = {
+		}
+
+		available = {
+			country_exists = RUS
+			owns_state = 16
+		}
+		
+		visible = {
+			NOT = {
+				country_exists = SIL
+			}
+			country_exists = RUS
+			tag = SGE
+			has_country_flag = sge_third_tier_of_war
+		}
+		
+		ai_will_do = { factor = 5 }
+		
+		fire_only_once = yes
+		
+		cost = 25
+		
+		days_remove = 30
+		
+		war_with_on_remove = RUS
+
+		complete_effect = {
+		}
+		
+		remove_effect = {
+			SGE = {
+				annex_country = {
+					target = RUS
+					transfer_troops = no
+				}
+			}
+		}
+	
+	}
 
 }
