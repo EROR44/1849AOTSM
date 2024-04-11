@@ -1587,40 +1587,37 @@ RUS_finland_separatism_cat = {
 	RUS_up_finland_separatism = {
 	
 		activation = {
-			#has_country_flag = RUS_unlock_fight_witch_finland_separatism
-			#111 = {
-			#	NOT = {
-			#		has_dynamic_modifier = {
-			#			modifier = FIN_separatism_dynamic_modifier
-			#		}
-			#	}
-			#}
-			#147 = {
-			#	NOT = {
-			#		has_dynamic_modifier = {
-			#			modifier = FIN_separatism_dynamic_modifier
-			#		}
-			#	}
-			#}
-			#149 = {
-			#	NOT = {
-			#		has_dynamic_modifier = {
-			#			modifier = FIN_separatism_dynamic_modifier
-			#		}
-			#	}
-			#}
-			#150 = {
-			#	NOT = {
-			#		has_dynamic_modifier = {
-			#			modifier = FIN_separatism_dynamic_modifier
-			#		}
-			#	}
-			#}
-			always = no #не работает на текущий момент
+			has_country_flag = RUS_unlock_fight_witch_finland_separatism
+			any_state = {
+				is_owned_and_controlled_by = RUS
+				is_core_of = FIN
+				NOT = {
+					state = 146
+					state = 148
+					has_dynamic_modifier = {
+						modifier = FIN_separatism_dynamic_modifier
+					}
+				}
+			}		
+		
 		}
 		
-		available = {
-			
+		available = {		
+			custom_trigger_tooltip = {
+				tooltip = none_trigger_tt	
+				has_country_flag = RUS_unlock_fight_witch_finland_separatism
+				any_state = {
+					is_owned_and_controlled_by = RUS
+					is_core_of = FIN
+					NOT = {
+						state = 146
+						state = 148
+						has_dynamic_modifier = {
+							modifier = FIN_separatism_dynamic_modifier
+						}
+					}
+				}
+			}			
 		}
 		
 		cancel_trigger = {
@@ -1635,9 +1632,10 @@ RUS_finland_separatism_cat = {
 		icon = generic_civil_support
 		
 		days_mission_timeout = 120
+		
 		is_good = no
 		
-		fire_only_once = yes
+		#fire_only_once = no
 
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision complete RUS_up_finland_separatism"
@@ -1645,9 +1643,115 @@ RUS_finland_separatism_cat = {
 		
 		timeout_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision timeout RUS_up_finland_separatism"
-			111 = { 
-				remove_dynamic_modifier = { modifier = FIN_separatism_dynamic_modifier_1 }
-				add_dynamic_modifier = { modifier = FIN_separatism_dynamic_modifier } 
+			custom_effect_tooltip = RUS_up_finland_separatism_in_random_state_tt
+			hidden_effect = {
+				random_list = {
+					25 = {
+						modifier = {
+							factor = 0
+							any_state = {
+								is_owned_and_controlled_by = RUS
+								is_core_of = FIN
+								NOT = {
+									state = 146
+									state = 148
+								}
+								NOT = {
+									has_dynamic_modifier = {
+										modifier = FIN_separatism_dynamic_modifier_1
+									}
+								}	
+							}
+						}
+						random_state = {
+							limit = {
+								is_owned_and_controlled_by = RUS
+								is_core_of = FIN
+								NOT = {
+									state = 146
+									state = 148
+								}
+								has_dynamic_modifier = {
+									modifier = FIN_separatism_dynamic_modifier_1
+								}
+							}
+							clr_state_flag = RUS_low_finland_separatism_1
+							remove_dynamic_modifier = { modifier = FIN_separatism_dynamic_modifier_1 }
+							add_dynamic_modifier = { modifier = FIN_separatism_dynamic_modifier } 
+						}
+					}
+					25 = {
+						modifier = {
+							factor = 0
+							any_state = {
+								is_owned_and_controlled_by = RUS
+								is_core_of = FIN
+								NOT = {
+									state = 146
+									state = 148
+								}
+								NOT = {
+									has_dynamic_modifier = {
+										modifier = FIN_separatism_dynamic_modifier_2
+									}
+								}	
+							}
+						}
+						random_state = {
+							limit = {
+								is_owned_and_controlled_by = RUS
+								is_core_of = FIN
+								NOT = {
+									state = 146
+									state = 148
+								}
+								has_dynamic_modifier = {
+									modifier = FIN_separatism_dynamic_modifier_2
+								}
+							}
+							clr_state_flag = RUS_low_finland_separatism_2
+							set_state_flag = RUS_low_finland_separatism_1
+							remove_dynamic_modifier = { modifier = FIN_separatism_dynamic_modifier_2 }
+							add_dynamic_modifier = { modifier = FIN_separatism_dynamic_modifier_1 } 
+						}
+					}
+					25 = {
+						modifier = {
+							factor = 0
+							any_state = {
+								is_owned_and_controlled_by = RUS
+								is_core_of = FIN
+								NOT = {
+									state = 146
+									state = 148
+								}
+								NOT = {
+									has_state_flag = RUS_end_fight_with_finland_separatism
+								}	
+							}
+						}
+						random_state = {
+							limit = {
+								is_owned_and_controlled_by = RUS
+								is_core_of = FIN
+								NOT = {
+									state = 146
+									state = 148
+								}
+								has_state_flag = RUS_end_fight_with_finland_separatism
+							}
+							clr_state_flag = RUS_end_fight_with_finland_separatism
+							set_state_flag = RUS_low_finland_separatism_2
+							add_dynamic_modifier = { modifier = FIN_separatism_dynamic_modifier_2 } 
+						}
+					}
+				}
+				if = {
+					limit = {
+						has_country_flag = RUS_finland_quiestion_solved
+					}
+					RUS = { activate_mission = RUS_up_finland_separatism }
+				}
 			}
 		}
 		
@@ -1726,7 +1830,16 @@ RUS_finland_separatism_cat = {
 		icon = eng_trade_unions_support
 					
 		available = {
-			111 = { is_owned_by = RUS }
+			111 = {
+				is_owned_by = RUS 
+				NOT = {
+					OR = {
+						has_state_flag = RUS_low_finland_separatism_1
+						has_state_flag = RUS_low_finland_separatism_2
+						has_state_flag = RUS_end_fight_with_finland_separatism
+					}
+				}
+			}
 			#has_completed_focus = RUS_finland_quiestion
 		}
 		
@@ -1735,7 +1848,16 @@ RUS_finland_separatism_cat = {
 		}
 		
 		visible = {
-			111 = { is_owned_by = RUS }
+			111 = {
+				is_owned_by = RUS 
+				NOT = {
+					OR = {
+						has_state_flag = RUS_low_finland_separatism_1
+						has_state_flag = RUS_low_finland_separatism_2
+						has_state_flag = RUS_end_fight_with_finland_separatism
+					}
+				}
+			}
 			#has_completed_focus = RUS_finland_quiestion
 		}
 	
@@ -1888,7 +2010,16 @@ RUS_finland_separatism_cat = {
 		icon = eng_trade_unions_support
 					
 		available = {
-			145 = { is_owned_by = RUS }
+			145 = {
+				is_owned_by = RUS 
+				NOT = {
+					OR = {
+						has_state_flag = RUS_low_finland_separatism_1
+						has_state_flag = RUS_low_finland_separatism_2
+						has_state_flag = RUS_end_fight_with_finland_separatism
+					}
+				}
+			}
 			#has_completed_focus = RUS_finland_quiestion
 		}
 		
@@ -1897,7 +2028,16 @@ RUS_finland_separatism_cat = {
 		}
 		
 		visible = {
-			145 = { is_owned_by = RUS }
+			145 = {
+				is_owned_by = RUS 
+				NOT = {
+					OR = {
+						has_state_flag = RUS_low_finland_separatism_1
+						has_state_flag = RUS_low_finland_separatism_2
+						has_state_flag = RUS_end_fight_with_finland_separatism
+					}
+				}
+			}
 			#has_completed_focus = RUS_finland_quiestion
 		}
 	
@@ -2050,7 +2190,16 @@ RUS_finland_separatism_cat = {
 		icon = eng_trade_unions_support
 					
 		available = {
-			150 = { is_owned_by = RUS }
+			150 = {
+				is_owned_by = RUS 
+				NOT = {
+					OR = {
+						has_state_flag = RUS_low_finland_separatism_1
+						has_state_flag = RUS_low_finland_separatism_2
+						has_state_flag = RUS_end_fight_with_finland_separatism
+					}
+				}
+			}
 			#has_completed_focus = RUS_finland_quiestion
 		}
 		
@@ -2059,7 +2208,16 @@ RUS_finland_separatism_cat = {
 		}
 		
 		visible = {
-			150 = { is_owned_by = RUS }
+			150 = {
+				is_owned_by = RUS 
+				NOT = {
+					OR = {
+						has_state_flag = RUS_low_finland_separatism_1
+						has_state_flag = RUS_low_finland_separatism_2
+						has_state_flag = RUS_end_fight_with_finland_separatism
+					}
+				}
+			}
 			#has_completed_focus = RUS_finland_quiestion
 		}
 	
@@ -2212,7 +2370,16 @@ RUS_finland_separatism_cat = {
 		icon = eng_trade_unions_support
 					
 		available = {
-			149 = { is_owned_by = RUS }
+			149 = {
+				is_owned_by = RUS 
+				NOT = {
+					OR = {
+						has_state_flag = RUS_low_finland_separatism_1
+						has_state_flag = RUS_low_finland_separatism_2
+						has_state_flag = RUS_end_fight_with_finland_separatism
+					}
+				}
+			}
 			#has_completed_focus = RUS_finland_quiestion
 		}
 		
@@ -2221,7 +2388,16 @@ RUS_finland_separatism_cat = {
 		}
 		
 		visible = {
-			149 = { is_owned_by = RUS }
+			149 = {
+				is_owned_by = RUS 
+				NOT = {
+					OR = {
+						has_state_flag = RUS_low_finland_separatism_1
+						has_state_flag = RUS_low_finland_separatism_2
+						has_state_flag = RUS_end_fight_with_finland_separatism
+					}
+				}
+			}
 			#has_completed_focus = RUS_finland_quiestion
 		}
 	
@@ -2374,7 +2550,16 @@ RUS_finland_separatism_cat = {
 		icon = eng_trade_unions_support
 					
 		available = {
-			147 = { is_owned_by = RUS }
+			147 = {
+				is_owned_by = RUS 
+				NOT = {
+					OR = {
+						has_state_flag = RUS_low_finland_separatism_1
+						has_state_flag = RUS_low_finland_separatism_2
+						has_state_flag = RUS_end_fight_with_finland_separatism
+					}
+				}
+			}
 			#has_completed_focus = RUS_finland_quiestion
 		}
 		
@@ -2383,7 +2568,16 @@ RUS_finland_separatism_cat = {
 		}
 		
 		visible = {
-			147 = { is_owned_by = RUS }
+			147 = {
+				is_owned_by = RUS 
+				NOT = {
+					OR = {
+						has_state_flag = RUS_low_finland_separatism_1
+						has_state_flag = RUS_low_finland_separatism_2
+						has_state_flag = RUS_end_fight_with_finland_separatism
+					}
+				}
+			}
 			#has_completed_focus = RUS_finland_quiestion
 		}
 	
