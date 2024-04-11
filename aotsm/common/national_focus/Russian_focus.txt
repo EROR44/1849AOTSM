@@ -1898,12 +1898,24 @@ focus_tree = {
 			}
 			if = { 
 				limit = {
-					ROOT = { has_idea = average_investment_level }
+					ROOT = { has_idea = low_investment_level }
 				}
 				swap_ideas = {
-					remove_idea = average_investment_level 
-					add_idea = hight_investment_level	
+					remove_idea = low_investment_level 
+					add_idea = average_investment_level	
 				}
+			}
+			if = { 
+				limit = {
+					ROOT = { has_idea = no_investment }
+				}
+				swap_ideas = {
+					remove_idea = no_investment 
+					add_idea = low_investment_level	
+				}
+			}
+			hidden_effect = {
+				country_event = { id = rusMil.4 days = 1095 }
 			}
 		}
 	}
@@ -7215,7 +7227,8 @@ focus_tree = {
 		cost = 5
 		
 		available = {
-			
+			controls_finland_region = yes
+			has_country_flag = RUS_unlock_fight_witch_finland_separatism
 		}
 
 		relative_position_id = RUS_soc_scandinavian_diplomaty
@@ -7227,9 +7240,65 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: focus RUS_soc_finland_quiestion"
-			custom_effect_tooltip = RUS_unlock_finland_problem_decision_cat
+			custom_effect_tooltip = RUS_separatism_in_finland_regions_will_down_tt				
 			hidden_effect = {
-				set_country_flag = RUS_unlock_fight_witch_finland_separatism
+				add_to_variable = {
+					var = RUS_finland_separatism_111
+					value = -1
+				}
+				add_to_variable = {
+					var = RUS_finland_separatism_145
+					value = -1
+				}
+				add_to_variable = {
+					var = RUS_finland_separatism_147
+					value = -1
+				}
+				add_to_variable = {
+					var = RUS_finland_separatism_149
+					value = -1
+				}
+				add_to_variable = {
+					var = RUS_finland_separatism_150
+					value = -1
+				}
+				
+				every_state = {
+					limit = {
+						is_owned_by = RUS
+						has_dynamic_modifier = {
+							modifier = FIN_separatism_dynamic_modifier_2
+						} 
+						has_state_flag = RUS_low_finland_separatism_2
+					}
+					clr_state_flag = RUS_low_finland_separatism_2 
+					set_state_flag = RUS_end_fight_with_finland_separatism 
+					remove_dynamic_modifier = { modifier = FIN_separatism_dynamic_modifier_2 }
+				}			
+				every_state = {
+					limit = {
+						is_owned_by = RUS
+						has_dynamic_modifier = {
+							modifier = FIN_separatism_dynamic_modifier_1
+						} 
+						has_state_flag = RUS_low_finland_separatism_1
+					}
+					set_state_flag = RUS_low_finland_separatism_2 
+					clr_state_flag = RUS_low_finland_separatism_1 
+					remove_dynamic_modifier = { modifier = FIN_separatism_dynamic_modifier_1 } 
+					add_dynamic_modifier = { modifier = FIN_separatism_dynamic_modifier_2 } 
+				}
+				every_state = {
+					limit = {
+						is_owned_by = RUS
+						has_dynamic_modifier = {
+							modifier = FIN_separatism_dynamic_modifier
+						} 
+					}
+					set_state_flag = RUS_low_finland_separatism_1 
+					remove_dynamic_modifier = { modifier = FIN_separatism_dynamic_modifier } 
+					add_dynamic_modifier = { modifier = FIN_separatism_dynamic_modifier_1 } 
+				}
 			}
 		}
 	}
@@ -7244,9 +7313,7 @@ focus_tree = {
 		
 		available = {
 			has_country_flag = RUS_soc_war_sca_diplomaty
-			NOT = {
-				has_war_with = SCA
-			}
+			RUS_not_is_in_faction_sca_or_at_war_with_sca_or_owns_state_148 = yes
 		}
 		
 		mutually_exclusive = { focus = RUS_soc_set_diplomatic_relations_with_scandinavy }
@@ -7302,10 +7369,8 @@ focus_tree = {
 		
 		available = {
 			aotsm_performed_by_event_or_solution = yes
-			#has_country_flag = RUS_soc_peace_sca_diplomaty
-			NOT = {
-				has_war_with = SCA
-			}
+			has_country_flag = RUS_soc_peace_sca_diplomaty
+			RUS_not_at_war_with_sca_or_owns_state_148 = yes
 		}
 		
 		mutually_exclusive = { focus = RUS_soc_intervention_in_scandinavy }
@@ -9001,6 +9066,7 @@ focus_tree = {
 		
 		available = {
 			controls_finland_region = yes
+			has_country_flag = RUS_unlock_fight_witch_finland_separatism
 		}
 
 		relative_position_id = RUS_european_politick
@@ -9012,9 +9078,65 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: focus RUS_finland_quiestion"
-			custom_effect_tooltip = RUS_unlock_finland_problem_decision_cat
+			custom_effect_tooltip = RUS_separatism_in_finland_regions_will_down_tt
 			hidden_effect = {
-				set_country_flag = RUS_unlock_fight_witch_finland_separatism
+				add_to_variable = {
+					var = RUS_finland_separatism_111
+					value = -1
+				}
+				add_to_variable = {
+					var = RUS_finland_separatism_145
+					value = -1
+				}
+				add_to_variable = {
+					var = RUS_finland_separatism_147
+					value = -1
+				}
+				add_to_variable = {
+					var = RUS_finland_separatism_149
+					value = -1
+				}
+				add_to_variable = {
+					var = RUS_finland_separatism_150
+					value = -1
+				}
+				
+				every_state = {
+					limit = {
+						is_owned_by = RUS
+						has_dynamic_modifier = {
+							modifier = FIN_separatism_dynamic_modifier_2
+						} 
+						has_state_flag = RUS_low_finland_separatism_2
+					}
+					clr_state_flag = RUS_low_finland_separatism_2 
+					set_state_flag = RUS_end_fight_with_finland_separatism 
+					remove_dynamic_modifier = { modifier = FIN_separatism_dynamic_modifier_2 }
+				}			
+				every_state = {
+					limit = {
+						is_owned_by = RUS
+						has_dynamic_modifier = {
+							modifier = FIN_separatism_dynamic_modifier_1
+						} 
+						has_state_flag = RUS_low_finland_separatism_1
+					}
+					set_state_flag = RUS_low_finland_separatism_2 
+					clr_state_flag = RUS_low_finland_separatism_1 
+					remove_dynamic_modifier = { modifier = FIN_separatism_dynamic_modifier_1 } 
+					add_dynamic_modifier = { modifier = FIN_separatism_dynamic_modifier_2 } 
+				}
+				every_state = {
+					limit = {
+						is_owned_by = RUS
+						has_dynamic_modifier = {
+							modifier = FIN_separatism_dynamic_modifier
+						} 
+					}
+					set_state_flag = RUS_low_finland_separatism_1 
+					remove_dynamic_modifier = { modifier = FIN_separatism_dynamic_modifier } 
+					add_dynamic_modifier = { modifier = FIN_separatism_dynamic_modifier_1 } 
+				}
 			}
 		}
 	}
