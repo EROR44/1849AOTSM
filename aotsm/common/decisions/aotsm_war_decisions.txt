@@ -605,32 +605,42 @@ first_brother_war = {
 		timeout_effect = {
 			custom_effect_tooltip = aus_win_first_war_tt
 			hidden_effect = {
+				if = {
+					limit = {
+						NOT = {
+							has_global_flag = pru_capitulation_f_b
+						}
+					}
+				}
+				set_global_flag = pru_capitulation_f_b
 				prussian_capitulation_first_brotherwar = yes
 			}
 		}
 		
 		cancel_trigger = {
 			custom_trigger_tooltip = {
-				tooltip = aus_lose_war_trigger_tt	
-				AUS = {
-					surrender_progress > 0.249
-				}
+				tooltip = aus_lose_war_trigger_tt
 				OR = {
-					9 = {
-						controller = {
-							OR = {
-								tag = PRU
-								is_subject_of = PRU
-								is_in_faction_with = PRU
+					AUS = {
+						surrender_progress > 0.249
+					}
+					OR = {
+						9 = {
+							controller = {
+								OR = {
+									tag = PRU
+									is_subject_of = PRU
+									is_in_faction_with = PRU
+								}
 							}
 						}
-					}
-					4 = {
-						controller = {
-							OR = {
-								tag = PRU
-								is_subject_of = PRU
-								is_in_faction_with = PRU
+						4 = {
+							controller = {
+								OR = {
+									tag = PRU
+									is_subject_of = PRU
+									is_in_faction_with = PRU
+								}
 							}
 						}
 					}
@@ -656,13 +666,277 @@ first_brother_war = {
 
 second_brother_war = {
 
-
+	second_brother_war_decision = {
+	
+		activation = {
+			OR = {
+				tag = PRU
+				tag = AUS
+			}
+			PRU = {
+				has_country_flag = PRU_VS_AUS_2
+			}
+			NOT = {
+				PRU = {
+					has_country_flag = victory_R_V_A_2
+				}
+			}
+			NOT = {
+				AUS = {
+					has_country_flag = victory_R_V_A_2
+				}
+			}
+		}
+		
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = aus_lose_war_trigger_decision_tt	
+				AUS = {
+					surrender_progress > 0499
+				}
+				OR = {
+					9 = {
+						controller = {
+							OR = {
+								tag = PRU
+								is_subject_of = PRU
+								is_in_faction_with = PRU
+							}
+						}
+					}
+					4 = {
+						controller = {
+							OR = {
+								tag = PRU
+								is_subject_of = PRU
+								is_in_faction_with = PRU
+							}
+						}
+					}
+				}
+			}
+		}
+		
+		visible = {
+			OR = {
+				tag = PRU
+				tag = AUS
+			}
+			PRU = {
+				has_war_with = AUS
+			}
+			PRU = {
+				has_country_flag = PRU_VS_AUS_2
+			}
+			NOT = {
+				PRU = {
+					has_country_flag = victory_R_V_A_2
+				}
+			}
+			NOT = {
+				AUS = {
+					has_country_flag = victory_R_V_A_2
+				}
+			}
+		}
+		
+		icon = generic_ignite_civil_war
+		
+		ai_will_do = {
+			factor = 40
+			modifier = {
+				factor = 100
+				is_historical_focus_on = yes
+			}
+		}
+		
+		days_mission_timeout = 210
+		
+		timeout_effect = {
+			custom_effect_tooltip = aus_win_second_war_tt
+			hidden_effect = {
+				if = {
+					limit = {
+						NOT = {
+							has_global_flag = pru_capitulation_f_b
+						}
+					}
+				}
+				set_global_flag = pru_capitulation_f_b
+				prussian_capitulation_second_brotherwar = yes
+			}
+		}
+		
+		cancel_trigger = {
+			custom_trigger_tooltip = {
+				tooltip = aus_lose_war_second_trigger_tt	
+				AUS = {
+					surrender_progress > 0499
+				}
+				OR = {
+					9 = {
+						controller = {
+							OR = {
+								tag = PRU
+								is_subject_of = PRU
+								is_in_faction_with = PRU
+							}
+						}
+					}
+					4 = {
+						controller = {
+							OR = {
+								tag = PRU
+								is_subject_of = PRU
+								is_in_faction_with = PRU
+							}
+						}
+					}
+				}
+			}
+		}
+		
+		cancel_effect = {
+			custom_effect_tooltip = aus_lose_second_war_tt
+			hidden_effect = {
+				AUS = {
+					remove_mission = second_brother_war_decision
+				}
+				PRU = {
+					remove_mission = second_brother_war_decision
+				}
+			}
+		}
+	
+	}
 
 }
 
 third_brother_war = {
 
-
+	third_brother_war_decision = {
+	
+		activation = {
+			OR = {
+				tag = PRU
+				tag = AUS
+			}
+			PRU = {
+				has_country_flag = PRU_VS_AUS_3
+			}
+			NOT = {
+				PRU = {
+					has_country_flag = victory_R_V_A_3
+				}
+			}
+			NOT = {
+				AUS = {
+					has_country_flag = victory_R_V_A_3
+				}
+			}
+		}
+		
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = aus_lose_war_trigger_decision_tt	
+				AUS = {
+					has_capitulated = yes
+				}
+			}
+		}
+		
+		visible = {
+			OR = {
+				tag = PRU
+				tag = AUS
+			}
+			PRU = {
+				has_war_with = AUS
+			}
+			PRU = {
+				has_country_flag = PRU_VS_AUS_3
+			}
+			NOT = {
+				PRU = {
+					has_country_flag = victory_R_V_A_3
+				}
+			}
+			NOT = {
+				AUS = {
+					has_country_flag = victory_R_V_A_3
+				}
+			}
+		}
+		
+		icon = generic_ignite_civil_war
+		
+		ai_will_do = {
+			factor = 40
+			modifier = {
+				factor = 100
+				is_historical_focus_on = yes
+			}
+		}
+		
+		days_mission_timeout = 365
+		
+		timeout_effect = {
+			custom_effect_tooltip = aus_win_third_war_tt
+			hidden_effect = {
+				if = {
+					limit = {
+						NOT = {
+							has_global_flag = pru_capitulation_f_b
+						}
+					}
+				}
+				set_global_flag = pru_capitulation_f_b
+				prussian_capitulation_second_brotherwar = yes
+			}
+		}
+		
+		cancel_trigger = {
+			custom_trigger_tooltip = {
+				tooltip = aus_lose_war_third_trigger_tt	
+				AUS = {
+					surrender_progress > 0499
+				}
+				OR = {
+					9 = {
+						controller = {
+							OR = {
+								tag = PRU
+								is_subject_of = PRU
+								is_in_faction_with = PRU
+							}
+						}
+					}
+					4 = {
+						controller = {
+							OR = {
+								tag = PRU
+								is_subject_of = PRU
+								is_in_faction_with = PRU
+							}
+						}
+					}
+				}
+			}
+		}
+		
+		cancel_effect = {
+			custom_effect_tooltip = aus_lose_third_war_tt
+			hidden_effect = {
+				AUS = {
+					remove_mission = second_brother_war_decision
+				}
+				PRU = {
+					remove_mission = second_brother_war_decision
+				}
+			}
+		}
+	
+	}
 
 }
 
