@@ -8,31 +8,6 @@
 
  #################### 
 
-
-PRU_porsche_organization = {
-	include = generic_heavy_tank_organization
-	icon = GFX_idea_porsche
-	
-	allowed = {	
-		OR = {
-			tag = PRU
-			tag = SGE
-		}
-	}
-
-	available = {
-		# When in a Foreign MIO, countries need to be at peace with original country
-		IF = {
-			limit = {
-				FROM = { NOT = { original_tag = PRU } }
-				FROM = { NOT = { original_tag = SGE } }
-			}
-			FROM = { NOT = { has_war_with = PRU } }
-			FROM = { NOT = { has_war_with = SGE } }
-		}
-	}
-}
-
 PRU_henschel_organization = {
 	include = generic_mobile_tank_organization
 	icon = GFX_idea_henschel
@@ -81,7 +56,6 @@ PRU_man_organization = {
 	}
 }
 
-#Benz 
 PRU_daimler_benz_organization = {
 	include = generic_tank_organization
 	icon = GFX_idea_generic_tank_manufacturer_2 # TODO change
@@ -137,13 +111,6 @@ PRU_daimler_benz_organization = {
 		}
 
 		position = { x=9 y=0 }  
-		ai_will_do = {
-			base = 2
-			modifier = {
-				factor = 1.5
-				date > 1937.1.1
-			}
-		}
 	}
 
 	add_trait = {
@@ -159,14 +126,91 @@ PRU_daimler_benz_organization = {
 		} 
 
 		position = { x=9 y=2 }  
-		ai_will_do = {
-			base = 2
-			modifier = {
-				factor = 1.5
-				date > 1937.1.1
+	}
+}
+
+PRU_mio_kingkaisser = {
+
+	#name = 
+
+	icon = GFX_idea_pru_focus_panzer
+	
+	#background = 
+	
+	equipment_type = { 
+		mio_cat_eq_all_light_tank
+		mio_cat_eq_all_medium_tank
+		mio_cat_eq_all_heavy_tank
+	}
+	
+	allowed = {
+		tag = PRU
+	}
+	
+	#visible = {
+	#}
+	
+	available = {
+		custom_trigger_tooltip = {
+			tooltip = kingkaisser_has_been_unlock_tt
+			PRU = {
+				has_completed_focus = PRU_creating_of_wehrmacht
 			}
 		}
 	}
+	
+	research_categories = { 
+		mio_cat_tech_light_armor_and_modules
+		mio_cat_tech_medium_armor_and_modules
+		mio_cat_tech_heavy_armor_and_modules
+	}
+	
+	ai_will_do = {
+		base = 1000
+	}
+	
+	tree_header_text = {
+		text = pru_mio_header_light_tank
+		x = 1
+	}
+	
+	tree_header_text = {
+		text = pru_mio_header_medium_tank
+		x = 4
+	}
+	
+	tree_header_text = {
+		text = pru_mio_header_heavy_tank
+		x = 7
+	}
+	
+	
+	initial_trait = { 
+		name = PRU_mio_initial_trait_kingkaisser
+		
+		organization_modifier = {
+			military_industrial_organization_research_bonus = 0.05
+		}
+
+	}
+	
+	trait = {
+		token = PRU_mio_
+		name = PRU_mio_
+		icon = GFX_generic_mio_department_icon_artillery_line_efficiency
+
+		position = { x = 0 y = 0 }
+		
+		#mutually_exclusive = {  }
+
+		limit_to_equipment_type = { artillery_equipment }
+
+		equipment_bonus = {
+			reliability = -0.05
+			build_cost_ic = -0.10
+		}
+	}
+	
 }
 
 #####################
@@ -181,7 +225,7 @@ PRU_daimler_benz_organization = {
 
 PRU_germaniawerft_organization = {
 	include = generic_battle_line_ship_organization
-	icon = GFX_idea_germaniawerft
+	icon = GFX_idea_pru_imperial_fleat
 	
 	allowed = {	
 		OR = {
@@ -193,7 +237,7 @@ PRU_germaniawerft_organization = {
 
 PRU_blohm_und_voss_organization = {
 	include = generic_raider_ship_organization
-	icon = GFX_idea_blohm_und_voss
+	icon = GFX_idea_pru_baltic_navy_company
 	
 	allowed = {	
 		OR = {
@@ -201,6 +245,90 @@ PRU_blohm_und_voss_organization = {
 			tag = SGE
 		}
 	}
+}
+
+PRU_mio_kriegsmarine = {
+
+	#name = 
+
+	icon = GFX_idea_pru_focus_navy
+	
+	#background = 
+	
+	equipment_type = { 
+		mio_cat_eq_all_battleship
+		mio_cat_eq_all_destroyer
+		submarine
+	}
+	
+	allowed = {
+		tag = PRU
+	}
+	
+	#visible = {
+	#}
+	
+	available = {
+		custom_trigger_tooltip = {
+			tooltip = kriegsmarine_has_been_unlock_tt
+			PRU = {
+				has_completed_focus = PRU_creating_of_kriegsmarine
+			}
+		}
+	}
+	
+	research_categories = { 
+		mio_cat_tech_all_capital_ship_and_modules
+		mio_cat_tech_all_screen_ship_and_modules
+		mio_cat_tech_all_submarine_and_modules
+	}
+	
+	ai_will_do = {
+		base = 1000
+	}
+	
+	tree_header_text = {
+		text = pru_mio_header_light_tank
+		x = 1
+	}
+	
+	tree_header_text = {
+		text = pru_mio_header_medium_tank
+		x = 4
+	}
+	
+	tree_header_text = {
+		text = pru_mio_header_heavy_tank
+		x = 7
+	}
+	
+	
+	initial_trait = { 
+		name = PRU_mio_initial_trait_kriegsmarine
+		
+		organization_modifier = {
+			military_industrial_organization_research_bonus = 0.05
+		}
+
+	}
+	
+	trait = {
+		token = PRU_mio_
+		name = PRU_mio_
+		icon = GFX_generic_mio_department_icon_artillery_line_efficiency
+
+		position = { x = 0 y = 0 }
+		
+		#mutually_exclusive = {  }
+
+		limit_to_equipment_type = { artillery_equipment }
+
+		equipment_bonus = {
+			reliability = -0.05
+			build_cost_ic = -0.10
+		}
+	}
+	
 }
 
 ###########################
@@ -215,7 +343,7 @@ PRU_blohm_und_voss_organization = {
 
 PRU_messerschmitt_organization = {
 	include = generic_light_aircraft_organization
-	icon = GFX_idea_messerschmitt
+	icon = GFX_idea_pru_heavy_air
 	
 	allowed = {	
 		OR = {
@@ -278,7 +406,7 @@ PRU_messerschmitt_organization = {
 
 PRU_junkers_organization = {
 	include = generic_cas_aircraft_organization
-	icon = GFX_idea_junkers
+	icon = GFX_idea_pru_strateg_bombing_air
 	
 	allowed = {	 
 		OR = {
@@ -317,7 +445,7 @@ PRU_junkers_organization = {
 
 PRU_focke_wulf_organization = {
 	include = generic_multi_role_aircraft_organization
-	icon = GFX_idea_focke_wulf
+	icon = GFX_idea_pru_light_air
 	
 	allowed = {	
 		OR = {
@@ -329,7 +457,7 @@ PRU_focke_wulf_organization = {
 
 PRU_heinkel_organization = {
 	include = generic_medium_aircraft_organization
-	icon = GFX_idea_heinkel
+	icon = GFX_idea_pru_medium_air
 	
 	allowed = {	
 		OR = {
@@ -351,16 +479,86 @@ PRU_heinkel_organization = {
 	}
 }
 
-PRU_dornier_organization = {
-	include = generic_naval_aircraft_organization
-	icon = GFX_idea_dornier
+PRU_mio_luftwaffe = {
+
+	#name = 
+
+	icon = GFX_idea_pru_focus_air
 	
-	allowed = {	
-		OR = {
-			tag = PRU
-			tag = SGE
-		} 
+	#background = 
+	
+	equipment_type = { 
+		mio_cat_eq_all_small_plane
+		mio_cat_eq_all_medium_plane
+		mio_cat_eq_all_large_plane
 	}
+	
+	allowed = {
+		tag = PRU
+	}
+	
+	#visible = {
+	#}
+	
+	available = {
+		custom_trigger_tooltip = {
+			tooltip = luftwaffe_has_been_unlock_tt
+			PRU = {
+				has_completed_focus = PRU_creating_of_luftwaffe
+			}
+		}
+	}
+	
+	research_categories = { 
+		air_equipment
+	}
+	
+	ai_will_do = {
+		base = 1000
+	}
+	
+	tree_header_text = {
+		text = pru_mio_header_light_tank
+		x = 1
+	}
+	
+	tree_header_text = {
+		text = pru_mio_header_medium_tank
+		x = 4
+	}
+	
+	tree_header_text = {
+		text = pru_mio_header_heavy_tank
+		x = 7
+	}
+	
+	
+	initial_trait = { 
+		name = PRU_mio_initial_trait_luftwaffe
+		
+		organization_modifier = {
+			military_industrial_organization_research_bonus = 0.05
+		}
+
+	}
+	
+	trait = {
+		token = PRU_mio_
+		name = PRU_mio_
+		icon = GFX_generic_mio_department_icon_artillery_line_efficiency
+
+		position = { x = 0 y = 0 }
+		
+		#mutually_exclusive = {  }
+
+		limit_to_equipment_type = { artillery_equipment }
+
+		equipment_bonus = {
+			reliability = -0.05
+			build_cost_ic = -0.10
+		}
+	}
+	
 }
 
 
@@ -400,7 +598,7 @@ PRU_rheinmetall_organization = {
 
 PRU_mauser_organization = {
 	include = generic_infantry_equipment_organization
-	icon = GFX_idea_mauser
+	icon = GFX_idea_pru_focus_sauer
 	
 	allowed = {	 
 		OR = {
@@ -446,6 +644,88 @@ PRU_opel_organization = {
 	}
 }
 
+PRU_mio_wehrmacht = {
+
+	#name = 
+
+	icon = GFX_idea_pru_light_panzer
+	
+	#background = 
+	
+	equipment_type = { 
+		infantry_equipment
+		support_equipment
+	}
+	
+	allowed = {
+		tag = PRU
+	}
+	
+	#visible = {
+	#}
+	
+	available = {
+		custom_trigger_tooltip = {
+			tooltip = wehrmacht_has_been_unlock_tt
+			PRU = {
+				has_completed_focus = PRU_creating_of_wehrmacht
+			}
+		}
+	}
+	
+	research_categories = { 
+		infantry_weapons
+		support_tech
+	}
+	
+	ai_will_do = {
+		base = 1000
+	}
+	
+	tree_header_text = {
+		text = pru_mio_header_light_tank
+		x = 1
+	}
+	
+	tree_header_text = {
+		text = pru_mio_header_medium_tank
+		x = 4
+	}
+	
+	tree_header_text = {
+		text = pru_mio_header_heavy_tank
+		x = 7
+	}
+	
+	
+	initial_trait = { 
+		name = PRU_mio_initial_trait_wehrmacht
+		
+		organization_modifier = {
+			military_industrial_organization_research_bonus = 0.05
+		}
+
+	}
+	
+	trait = {
+		token = PRU_mio_
+		name = PRU_mio_
+		icon = GFX_generic_mio_department_icon_artillery_line_efficiency
+
+		position = { x = 0 y = 0 }
+		
+		#mutually_exclusive = {  }
+
+		limit_to_equipment_type = { artillery_equipment }
+
+		equipment_bonus = {
+			reliability = -0.05
+			build_cost_ic = -0.10
+		}
+	}
+	
+}
+
 PRU_mio_krupp = {
 
 	#name = 
@@ -481,6 +761,10 @@ PRU_mio_krupp = {
 		motorized_equipment
 		artillery
 		train_tech
+	}
+	
+	ai_will_do = {
+		base = 1000
 	}
 	
 	tree_header_text = {
@@ -874,7 +1158,5 @@ PRU_mio_krupp = {
 			hardness = 0.05
 		}
 	}
-	
-	ai_will_do = 1000
 	
 }
