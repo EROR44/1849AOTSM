@@ -153,14 +153,10 @@ first_world_war_begin = {
 		}
 	}
 	
-	if = { #эффекты для наложения бафов/дебафов на Россию в начале ВВ
+	if = { #эффекты для наложения бафов/дебафов на Россию в начале ВВ - ни в какую не пашет 
 		limit = {
-			is_historical_focus_on = yes
+			#is_historical_focus_on = yes
 			has_global_flag = polish_uprising_is_started
-			RUS = {
-				has_war_with = PRU
-				#has_defensive_war = yes
-			}
 		}
 		RUS = { 
 			complete_national_focus = RUS_unexpected_prussian_invade		
@@ -169,13 +165,23 @@ first_world_war_begin = {
 	if = {
 		limit = {
 			has_global_flag = pru_ignore_poland_uprising 
-			has_global_flag = BYZ_start_tavrida_operation
-			RUS = {
-				has_war_with = BYZ
-			}
+			has_global_flag = wwi_tavrid_operation #BYZ_start_tavrida_operation
 		}
 		RUS = {
 			complete_national_focus = RUS_war_becomes_to_russia
+		}
+	}	
+	if = { #
+		limit = {
+			OR = {
+				has_global_flag = wwi_russian_attack_germany
+				has_global_flag = wwi_russian_attack_byzantium
+				has_global_flag = wwi_russiansoc_attack_germany
+				has_global_flag = wwi_russiansoc_attack_byzantium
+			}
+		}
+		RUS = {
+			complete_national_focus = RUS_marh_to_our_enemies
 		}
 	}			
 	
