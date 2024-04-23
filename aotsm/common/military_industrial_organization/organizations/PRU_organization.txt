@@ -34,7 +34,7 @@ PRU_henschel_organization = {
 
 PRU_man_organization = {
 	include = generic_medium_tank_organization
-	icon = GFX_idea_GER_MAN
+	icon = GFX_idea_man
 	
 	allowed = {	
 		OR = {
@@ -58,7 +58,7 @@ PRU_man_organization = {
 
 PRU_daimler_benz_organization = {
 	include = generic_tank_organization
-	icon = GFX_idea_generic_tank_manufacturer_2 # TODO change
+	icon = GFX_idea_benz
 	
 	allowed = {	
 		OR = {
@@ -195,19 +195,449 @@ PRU_mio_kingkaisser = {
 	}
 	
 	trait = {
-		token = PRU_mio_
-		name = PRU_mio_
-		icon = GFX_generic_mio_department_icon_artillery_line_efficiency
+		token = PRU_mio_light_tank_speed_bonus
+		name = PRU_mio_light_tank_speed_bonus
+		icon = GFX_generic_mio_department_icon_tank_light_tank_line_efficiency
 
 		position = { x = 0 y = 0 }
 		
+		mutually_exclusive = { PRU_mio_light_tank_reliablity_bonus }
+
+		limit_to_equipment_type = { mio_cat_eq_all_light_tank }
+
+		equipment_bonus = {
+			maximum_speed = 0.05
+			breakthrough = 0.05
+		}
+	}
+	
+	trait = {
+		token = PRU_mio_light_tank_reliablity_bonus
+		name = PRU_mio_light_tank_reliablity_bonus
+		icon = GFX_generic_mio_department_icon_tank_light_tank_engine
+
+		position = { x = 2 y = 0 }
+		
+		mutually_exclusive = { PRU_mio_light_tank_speed_bonus }
+
+		limit_to_equipment_type = { mio_cat_eq_all_light_tank }
+
+		equipment_bonus = {
+			reliability = 0.05
+			build_cost_ic = -0.05
+			fuel_consumption = -0.10
+		}
+	}
+	
+	trait = {
+		token = PRU_mio_light_tank_oil_bonus
+		name = PRU_mio_light_tank_oil_bonus
+		icon = GFX_generic_mio_trait_icon_fuel_consumption
+
+		position = { x = 1 y = 1 }
+		relative_position_id = PRU_mio_light_tank_speed_bonus
+		
+		#all_parents = { }
+		any_parent = { PRU_mio_light_tank_speed_bonus PRU_mio_light_tank_reliablity_bonus }
+		
 		#mutually_exclusive = {  }
 
-		limit_to_equipment_type = { artillery_equipment }
+		limit_to_equipment_type = { mio_cat_eq_all_light_tank }
+
+		equipment_bonus = {
+			maximum_speed = 0.10
+			fuel_consumption = -0.10
+		}
+	}
+	
+	trait = {
+		token = PRU_mio_all_tank_speed_bonus
+		name = PRU_mio_all_tank_speed_bonus
+		icon = GFX_generic_mio_trait_icon_maximum_speed
+
+		position = { x = -1 y = 1 }
+		relative_position_id = PRU_mio_light_tank_oil_bonus
+		
+		all_parents = { PRU_mio_light_tank_oil_bonus }
+		#any_parent = { }
+		
+		#mutually_exclusive = {  }
+
+		limit_to_equipment_type = { armor }
+
+		equipment_bonus = {
+			maximum_speed = 0.05
+		}
+	}
+	
+	trait = {
+		token = PRU_mio_light_tank_production_bonus
+		name = PRU_mio_light_tank_production_bonus
+		icon = GFX_generic_mio_department_icon_tank_light_tank_conversion
+
+		position = { x = 1 y = 1 }
+		relative_position_id = PRU_mio_light_tank_oil_bonus
+		
+		all_parents = { PRU_mio_light_tank_oil_bonus }
+		#any_parent = { }
+		
+		#mutually_exclusive = {  }
+
+		limit_to_equipment_type = { mio_cat_eq_all_light_tank }
+
+		production_bonus = {
+			production_resource_penalty_factor = -0.15
+			production_capacity_factor = 0.075
+		}
+	}
+	
+	trait = {
+		token = PRU_mio_light_tank_antiinfentry_bonus
+		name = PRU_mio_light_tank_antiinfentry_bonus
+		icon = GFX_generic_mio_department_icon_tank_light_tank_weapons
+
+		position = { x = 0 y = 1 }
+		relative_position_id = PRU_mio_all_tank_speed_bonus
+		
+		all_parents = { PRU_mio_all_tank_speed_bonus PRU_mio_light_tank_production_bonus }
+		#any_parent = { }
+		
+		mutually_exclusive = { PRU_mio_light_tank_reliablity_production_bonus }
+		mutually_exclusive = { PRU_mio_light_tank_antitank_bonus }
+
+		limit_to_equipment_type = { mio_cat_eq_all_light_tank }
+
+		equipment_bonus = {
+			soft_attack = 0.075
+			breakthrough = 0.075
+			build_cost_ic = 0.10
+		}
+	}
+	
+	trait = {
+		token = PRU_mio_light_tank_reliablity_production_bonus
+		name = PRU_mio_light_tank_reliablity_production_bonus
+		icon = GFX_generic_mio_department_icon_tank_light_tank_production
+
+		position = { x = 1 y = 1 }
+		relative_position_id = PRU_mio_all_tank_speed_bonus
+		
+		all_parents = { PRU_mio_all_tank_speed_bonus PRU_mio_light_tank_production_bonus }
+		#any_parent = { }
+		
+		mutually_exclusive = { PRU_mio_light_tank_antiinfentry_bonus }
+		mutually_exclusive = { PRU_mio_light_tank_antitank_bonus }
+
+		limit_to_equipment_type = { mio_cat_eq_all_light_tank }
+
+		equipment_bonus = {
+			reliability = 0.05
+			build_cost_ic = -0.05
+		}
+	}
+	
+	trait = {
+		token = PRU_mio_light_tank_antitank_bonus
+		name = PRU_mio_light_tank_antitank_bonus
+		icon = GFX_generic_mio_department_icon_tank_light_tank_at
+
+		position = { x = 2 y = 1 }
+		relative_position_id = PRU_mio_all_tank_speed_bonus
+		
+		all_parents = { PRU_mio_all_tank_speed_bonus PRU_mio_light_tank_production_bonus }
+		#any_parent = { }
+		
+		mutually_exclusive = { PRU_mio_light_tank_antiinfentry_bonus }
+		mutually_exclusive = { PRU_mio_light_tank_reliablity_production_bonus }
+
+		limit_to_equipment_type = { mio_cat_eq_all_light_tank }
+
+		equipment_bonus = {
+			hard_attack = 0.075
+			ap_attack = 0.50
+			build_cost_ic = 0.10
+		}
+	}
+	
+	trait = {
+		token = PRU_mio_light_tank_final_bonus
+		name = PRU_mio_light_tank_final_bonus
+		icon = GFX_generic_mio_department_icon_tank_light_tank
+
+		position = { x = 0 y = 1 }
+		relative_position_id = PRU_mio_light_tank_reliablity_production_bonus
+		
+		#all_parents = {  }
+		any_parent = { PRU_mio_light_tank_antiinfentry_bonus PRU_mio_light_tank_reliablity_production_bonus PRU_mio_light_tank_antitank_bonus }
+		
+		#mutually_exclusive = {  }
+
+		limit_to_equipment_type = { mio_cat_eq_all_light_tank }
+
+		equipment_bonus = {
+			breakthrough = 0.05
+			soft_attack = 0.05
+			ap_attack = 0.25
+			reliability = 0.05
+			maximum_speed = 0.10
+		}
+	}
+	
+	trait = {
+		token = PRU_mio_meduim_tank_bonus
+		name = PRU_mio_meduim_tank_bonus
+		icon = GFX_generic_mio_department_icon_tank_medium_tank
+
+		position = { x = 4 y = 2 }
+		
+		#mutually_exclusive = { }
+		
+		all_parents = { PRU_mio_light_tank_oil_bonus PRU_mio_heavy_tank_attack_bonus }
+		#any_parent = { }
+
+		limit_to_equipment_type = { mio_cat_eq_all_medium_tank }
+
+		equipment_bonus = {
+			reliability = 0.05
+			build_cost_ic = -0.05
+		}
+	}
+	
+	trait = {
+		token = PRU_mio_meduim_tank_easy_bonus
+		name = PRU_mio_meduim_tank_easy_bonus
+		icon = GFX_generic_mio_department_icon_tank_medium_tank_engine
+
+		position = { x = -1 y = 1 }
+		
+		relative_position_id = PRU_mio_meduim_tank_bonus
+		
+		mutually_exclusive = { PRU_mio_meduim_tank_hard_bonus }
+		
+		all_parents = { PRU_mio_meduim_tank_bonus }
+		#any_parent = {  }
+
+		limit_to_equipment_type = { mio_cat_eq_all_medium_tank }
+
+		equipment_bonus = {
+			maximum_speed = 0.025
+			soft_attack = 0.025
+			hard_attack = 0.025
+			build_cost_ic = -0.05
+		}
+	}
+	
+	trait = {
+		token = PRU_mio_meduim_tank_hard_bonus
+		name = PRU_mio_meduim_tank_hard_bonus
+		icon = GFX_generic_mio_department_icon_tank_medium_tank_technology
+
+		position = { x = 1 y = 1 }
+		
+		relative_position_id = PRU_mio_meduim_tank_bonus
+		
+		mutually_exclusive = { PRU_mio_meduim_tank_easy_bonus }
+		
+		all_parents = { PRU_mio_meduim_tank_bonus }
+		#any_parent = { }
+
+		limit_to_equipment_type = { mio_cat_eq_all_medium_tank }
+
+		equipment_bonus = {
+			soft_attack = 0.05
+			hard_attack = 0.05
+			ap_attack = 0.25
+			defense = 0.10
+			armor_value = 0.10
+			reliability = 0.10
+			build_cost_ic = 0.25
+		}
+	}
+	
+	trait = {
+		token = PRU_mio_meduim_tank_final_bonus
+		name = PRU_mio_meduim_tank_final_bonus
+		icon = GFX_generic_mio_department_icon_tank_medium_tank_quality
+
+		position = { x = 1 y = 1 }
+		
+		relative_position_id = PRU_mio_meduim_tank_easy_bonus
+		
+		#mutually_exclusive = {  }
+		
+		#all_parents = {  }
+		any_parent = { PRU_mio_meduim_tank_easy_bonus PRU_mio_meduim_tank_hard_bonus }
+
+		limit_to_equipment_type = { mio_cat_eq_all_medium_tank }
+
+		equipment_bonus = {
+			soft_attack = 0.05
+			hard_attack = 0.05
+			breakthrough = 0.05
+			reliability = 0.05
+			build_cost_ic = -0.05
+		}
+	}
+	
+	trait = {
+		token = PRU_mio_heavy_tank_armor_bonus
+		name = PRU_mio_heavy_tank_armor_bonus
+		icon = GFX_generic_mio_department_icon_tank_heavy_tank_armor
+
+		position = { x = 6 y = 0 }
+		
+		mutually_exclusive = { PRU_mio_heavy_tank_production_bonus }
+
+		limit_to_equipment_type = { mio_cat_eq_all_heavy_tank }
+
+		equipment_bonus = {
+			armor_value = 0.10
+			defense = 0.05
+			build_cost_ic = 0.10
+		}
+	}
+	
+	trait = {
+		token = PRU_mio_heavy_tank_production_bonus
+		name = PRU_mio_heavy_tank_production_bonus
+		icon = GFX_generic_mio_department_icon_tank_heavy_tank_production
+
+		position = { x = 8 y = 0 }
+		
+		mutually_exclusive = { PRU_mio_heavy_tank_armor_bonus }
+
+		limit_to_equipment_type = { mio_cat_eq_all_heavy_tank }
 
 		equipment_bonus = {
 			reliability = -0.05
-			build_cost_ic = -0.10
+			build_cost_ic = -0.075
+		}
+	}
+	
+	trait = {
+		token = PRU_mio_heavy_tank_attack_bonus
+		name = PRU_mio_heavy_tank_attack_bonus
+		icon = GFX_generic_mio_department_icon_tank_heavy_tank_spg
+
+		position = { x = 1 y = 1 }
+		relative_position_id = PRU_mio_heavy_tank_armor_bonus
+		
+		#all_parents = {  }
+		any_parent = { PRU_mio_heavy_tank_armor_bonus PRU_mio_heavy_tank_production_bonus }
+		
+		#mutually_exclusive = {  }
+
+		limit_to_equipment_type = { mio_cat_eq_all_heavy_tank }
+
+		equipment_bonus = {
+			soft_attack = 0.05
+			hard_attack = 0.05
+		}
+	}
+	
+	trait = {
+		token = PRU_mio_all_tank_armor_bonus
+		name = PRU_mio_all_tank_armor_bonus
+		icon = GFX_generic_mio_trait_icon_armor_value
+
+		position = { x = 2 y = 1 }
+		relative_position_id = PRU_mio_heavy_tank_attack_bonus
+		
+		all_parents = { PRU_mio_heavy_tank_attack_bonus }
+		#any_parent = {  }
+		
+		#mutually_exclusive = {  }
+
+		limit_to_equipment_type = { armor }
+
+		equipment_bonus = {
+			armor_value = 0.05
+			defense = 0.05
+		}
+	}
+	
+	trait = {
+		token = PRU_mio_heavy_tank_engine_bonus
+		name = PRU_mio_heavy_tank_engine_bonus
+		icon = GFX_generic_mio_department_icon_tank_heavy_tank_line_efficiency
+
+		position = { x = 0 y = 1 }
+		relative_position_id = PRU_mio_heavy_tank_attack_bonus
+		
+		all_parents = { PRU_mio_heavy_tank_attack_bonus }
+		#any_parent = {  }
+		
+		#mutually_exclusive = {  }
+
+		limit_to_equipment_type = { mio_cat_eq_all_heavy_tank }
+
+		equipment_bonus = {
+			fuel_consumption = -0.05
+			maximum_speed = 0.05
+		}
+	}
+	
+	trait = {
+		token = PRU_mio_heavy_tank_antiinfantry_bonus
+		name = PRU_mio_heavy_tank_antiinfantry_bonus
+		icon = GFX_generic_mio_department_icon_tank_heavy_tank_weapons
+
+		position = { x = -1 y = 1 }
+		relative_position_id = PRU_mio_heavy_tank_engine_bonus
+		
+		all_parents = { PRU_mio_heavy_tank_engine_bonus }
+		#any_parent = {  }
+		
+		mutually_exclusive = { PRU_mio_heavy_tank_antitank_bonus }
+
+		limit_to_equipment_type = { mio_cat_eq_all_heavy_tank }
+
+		equipment_bonus = {
+			soft_attack = 0.10
+			breakthrough = 0.075
+		}
+	}
+
+	trait = {
+		token = PRU_mio_heavy_tank_antitank_bonus
+		name = PRU_mio_heavy_tank_antitank_bonus
+		icon = GFX_generic_mio_department_icon_tank_heavy_tank_at
+
+		position = { x = 1 y = 1 }
+		relative_position_id = PRU_mio_heavy_tank_engine_bonus
+		
+		all_parents = { PRU_mio_heavy_tank_engine_bonus }
+		#any_parent = {  }
+		
+		mutually_exclusive = { PRU_mio_heavy_tank_antiinfantry_bonus }
+
+		limit_to_equipment_type = { mio_cat_eq_all_heavy_tank }
+
+		equipment_bonus = {
+			hard_attack = 0.25
+			ap_attack = 0.10
+		}
+	}
+	
+	trait = {
+		token = PRU_mio_heavy_tank_final_bonus
+		name = PRU_mio_heavy_tank_final_bonus
+		icon = GFX_generic_mio_department_icon_tank_heavy_tank
+
+		position = { x = 1 y = 1 }
+		relative_position_id = PRU_mio_heavy_tank_antiinfantry_bonus
+		
+		#all_parents = { }
+		any_parent = { PRU_mio_heavy_tank_antiinfantry_bonus PRU_mio_heavy_tank_antitank_bonus }
+		
+		#mutually_exclusive = {  }
+
+		limit_to_equipment_type = { mio_cat_eq_all_heavy_tank }
+
+		equipment_bonus = {
+			defense = 0.075
+			armor_value = 0.075
+			reliability = 0.05
 		}
 	}
 	
@@ -288,17 +718,17 @@ PRU_mio_kriegsmarine = {
 	}
 	
 	tree_header_text = {
-		text = pru_mio_header_light_tank
+		text = pru_mio_header_bigship
 		x = 1
 	}
 	
 	tree_header_text = {
-		text = pru_mio_header_medium_tank
+		text = pru_mio_header_mediumship
 		x = 4
 	}
 	
 	tree_header_text = {
-		text = pru_mio_header_heavy_tank
+		text = pru_mio_header_submarin
 		x = 7
 	}
 	
@@ -318,10 +748,14 @@ PRU_mio_kriegsmarine = {
 		icon = GFX_generic_mio_department_icon_artillery_line_efficiency
 
 		position = { x = 0 y = 0 }
+		#relative_position_id = 
+		
+		#all_parents = {  }
+		any_parent = {  }
 		
 		#mutually_exclusive = {  }
 
-		limit_to_equipment_type = { artillery_equipment }
+		limit_to_equipment_type = { mio_cat_eq_all_heavy_tank }
 
 		equipment_bonus = {
 			reliability = -0.05
@@ -518,17 +952,17 @@ PRU_mio_luftwaffe = {
 	}
 	
 	tree_header_text = {
-		text = pru_mio_header_light_tank
+		text = pru_mio_header_light_aircraft
 		x = 1
 	}
 	
 	tree_header_text = {
-		text = pru_mio_header_medium_tank
+		text = pru_mio_header_medium_aircraft
 		x = 4
 	}
 	
 	tree_header_text = {
-		text = pru_mio_header_heavy_tank
+		text = pru_mio_header_heavy_aircraft
 		x = 7
 	}
 	
@@ -648,7 +1082,7 @@ PRU_mio_wehrmacht = {
 
 	#name = 
 
-	icon = GFX_idea_pru_light_panzer
+	icon = GFX_idea_wehrmacht
 	
 	#background = 
 	
@@ -683,17 +1117,12 @@ PRU_mio_wehrmacht = {
 	}
 	
 	tree_header_text = {
-		text = pru_mio_header_light_tank
+		text = pru_mio_header_infantry
 		x = 1
 	}
 	
 	tree_header_text = {
-		text = pru_mio_header_medium_tank
-		x = 4
-	}
-	
-	tree_header_text = {
-		text = pru_mio_header_heavy_tank
+		text = pru_mio_header_support
 		x = 7
 	}
 	
