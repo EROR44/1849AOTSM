@@ -1652,12 +1652,15 @@ byz_senat_decision_category = {
 		}
 		
 		cancel_trigger = {
-			NOT = {
-				RUS = {
-					controls_state = 137
+			OR = {
+				NOT = {
+					RUS = {
+						controls_state = 137
+					}
 				}
+				has_global_flag = byz_capitulation
+				has_global_flag = russian_capitulation
 			}
-			has_global_flag = byz_capitulation
 		}
 		
 		visible = {
@@ -1688,7 +1691,7 @@ byz_senat_decision_category = {
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision start byz_cremia_operation"
 			hidden_effect = {
-				set_global_flag = BYZ_start_tavrida_operation #триггер для эффектов у России
+				set_global_flag = BYZ_start_tavrida_operation #trigger for Russian effect
 				if = {
 					limit = {
 						NOT = {
@@ -1700,6 +1703,13 @@ byz_senat_decision_category = {
 							id = byz.57
 							days = 3
 						}
+					}
+				}
+				BYZ = {
+					country_event = {
+						id = byz.84
+						days = 31
+						hours = 12
 					}
 				}
 			}

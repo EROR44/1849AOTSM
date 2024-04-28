@@ -11444,13 +11444,44 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: focus RUS_fight_witch_japan_treat "
-			add_ideas = RUS_gw_fight_with_jap
-			every_country = {
+			if = {
 				limit = {
-					NOT = { has_idea = RUS_gw_fight_with_jap }
-					is_in_faction_with = RUS
+					country_exists = JAP
 				}
 				add_ideas = RUS_gw_fight_with_jap
+				every_country = {
+					limit = {
+						NOT = { has_idea = RUS_gw_fight_with_jap }
+						is_in_faction_with = RUS
+					}
+					add_ideas = RUS_gw_fight_with_jap
+				}
+			}
+			else_if = {
+				limit = {
+					country_exists = JAS
+				}
+				add_ideas = RUS_gw_fight_with_jas
+				every_country = {
+					limit = {
+						NOT = { has_idea = RUS_gw_fight_with_jas }
+						is_in_faction_with = RUS
+					}
+					add_ideas = RUS_gw_fight_with_jas
+				}
+			}
+			else_if = {
+				limit = {
+					country_exists = TUK
+				}
+				add_ideas = RUS_gw_fight_with_tuk
+				every_country = {
+					limit = {
+						NOT = { has_idea = RUS_gw_fight_with_tuk }
+						is_in_faction_with = RUS
+					}
+					add_ideas = RUS_gw_fight_with_tuk
+				}
 			}
 		}
 	}
@@ -11528,7 +11559,7 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: focus RUS_bureau_of_offensive_operations "
-			
+			country_event = rus_great_war_event.9
 		}
 	}
 	
@@ -11548,6 +11579,9 @@ focus_tree = {
 					world_war_end = yes
 				}
 			}
+			NOT = {
+				has_idea = RUS_gw_east_prussian_operation_idea
+			}
 		}
 		
 		relative_position_id = RUS_bureau_of_offensive_operations
@@ -11562,7 +11596,28 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: focus RUS_tiflissk_operation "
-			
+			if = {
+				limit = {
+					country_exists = ARM
+					country_exists = TRK
+				}
+				add_timed_idea = {
+					idea = RUS_gw_tiflis_offensove_operation_2_idea
+					days = 90
+				}
+			}
+			else_if = {
+				limit = {
+					NOT = {
+						country_exists = ARM
+						country_exists = TRK
+					}
+				}
+				add_timed_idea = {
+					idea = RUS_gw_tiflis_offensove_operation_1_idea
+					days = 90
+				}
+			}
 		}
 	}
 	
@@ -11597,7 +11652,10 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: focus RUS_tiflissk_operation "
-			#Доступна при нападении на Россию скандинавии
+			add_timed_idea = {
+				idea = RUS_gw_northern_offensive_operation_idea
+				days = 90
+			}
 		}
 	}
 	
@@ -11617,6 +11675,12 @@ focus_tree = {
 					world_war_end = yes
 				}
 			}
+			NOT = { #потом в сложный триггре переписать
+				OR = {
+					has_idea = RUS_gw_tiflis_offensove_operation_1_idea
+					has_idea = RUS_gw_tiflis_offensove_operation_2_idea
+				}
+			}
 		}
 		
 		relative_position_id = RUS_bureau_of_offensive_operations
@@ -11631,7 +11695,10 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: focus RUS_attack_on_eastern_prussia "
-			
+			add_timed_idea = {
+				idea = RUS_gw_east_prussian_operation_idea
+				days = 90
+			}
 		}
 	}
 	
@@ -11644,6 +11711,7 @@ focus_tree = {
 		cost = 5
 		
 		available = {
+			has_completed_focus = RUS_tiflissk_operation
 			has_global_flag = firts_world_war
 			custom_trigger_tooltip = {
 				tooltip = not_world_war_has_ended
@@ -11665,7 +11733,10 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: focus RUS_offensive_on_the_constantinopol "
-			
+			add_timed_idea = {
+				idea = RUS_gw_strike_on_konstantinopol_idea
+				days = 90
+			}
 		}
 	}
 	
@@ -11678,6 +11749,7 @@ focus_tree = {
 		cost = 5
 		
 		available = {
+			has_completed_focus = RUS_attack_on_eastern_prussia
 			has_global_flag = firts_world_war
 			custom_trigger_tooltip = {
 				tooltip = not_world_war_has_ended
@@ -11699,7 +11771,10 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: focus RUS_strike_on_berlin "
-			
+			add_timed_idea = {
+				idea = RUS_gw_strike_on_berlin_idea
+				days = 90
+			}
 		}
 	}
 	
@@ -12104,6 +12179,26 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: focus RUS_using_partisan_strategy "
+			every_state = {
+				limit = {
+					is_core_of = RUS
+					CONTROLLER = {
+						OR = {
+							tag = PRU
+							tag = BYZ
+							is_subject_of = PRU
+							is_subject_of = BYZ
+							is_in_faction_with = PRU
+							is_in_faction_with = BYZ
+						}
+					}
+				}
+				add_compliance = -10
+				add_resistance = 10
+				add_dynamic_modifier = { 
+					modifier = RUS_partisan_resistance_activity_state_modifier 
+				} 
+			}
 			
 		}
 	}
@@ -12137,8 +12232,58 @@ focus_tree = {
 		search_filters = {  }
 
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: focus RUS_the_explosion_of_partisan_activity "
-			
+			log = "[GetDateText]: [Root.GetName]: focus RUS_the_explosion_of_partisan_activity "			
+			every_state = { #
+				limit = {
+					has_dynamic_modifier = {
+						modifier = RUS_partisan_resistance_activity_state_modifier
+					}
+					is_core_of = RUS
+					CONTROLLER = {
+						OR = {
+							tag = PRU
+							tag = BYZ
+							is_subject_of = PRU
+							is_subject_of = BYZ
+							is_in_faction_with = PRU
+							is_in_faction_with = BYZ
+						}
+					}
+				}
+				add_compliance = -5
+				add_resistance = 5
+				remove_dynamic_modifier = {
+					modifier = RUS_partisan_resistance_activity_state_modifier 
+				}
+				add_dynamic_modifier = { 
+					modifier = RUS_partisan_resistance_activity_state_modifier_1 
+				} 
+			}
+			every_state = {
+				limit = {
+					NOT = {
+						has_dynamic_modifier = {
+							modifier = RUS_partisan_resistance_activity_state_modifier
+						}
+					}
+					is_core_of = RUS
+					CONTROLLER = {
+						OR = {
+							tag = PRU
+							tag = BYZ
+							is_subject_of = PRU
+							is_subject_of = BYZ
+							is_in_faction_with = PRU
+							is_in_faction_with = BYZ
+						}
+					}
+				}
+				add_compliance = -5
+				add_resistance = 5
+				add_dynamic_modifier = { 
+					modifier = RUS_partisan_resistance_activity_state_modifier 
+				} 
+			}
 		}
 	}
 
@@ -12175,7 +12320,7 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: focus RUS_save_our_industry "
-			
+			country_event = rus_great_war_event.10
 		}
 	}
 	
@@ -12209,7 +12354,7 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: focus RUS_european_industry_quiestion "
-			
+			country_event = rus_great_war_event.11
 		}
 	}
 	
@@ -12243,7 +12388,7 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: focus RUS_introduction_of_night_shifts "
-			
+			country_event = rus_great_war_event.12
 		}
 	}
 	
@@ -12277,7 +12422,7 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: focus RUS_expand_rear_productions "
-			
+			country_event = rus_great_war_event.13
 		}
 	}
 	
@@ -12311,7 +12456,7 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: focus RUS_trans_ural_industry_strategion "
-			
+			country_event = rus_great_war_event.14
 		}
 	}
 	
