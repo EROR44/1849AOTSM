@@ -326,7 +326,7 @@ RUS_mio_moscow_artillery_factory_organization = {
 	}
 	
 	initial_trait = { #Базовый эффект
-		name = RUS_mio_initial_trait_
+		name = RUS_mio_initial_trait_moscow_artillery_factory
 		
 		organization_modifier = {
 			military_industrial_organization_research_bonus = 0.05
@@ -339,16 +339,291 @@ RUS_mio_moscow_artillery_factory_organization = {
 			hard_attack = 0.1
 		}
 	}
-	
+
 	trait = {
-		token = RUS_mio_
-		name = RUS_mio_
+		token = RUS_mio_trait_mobile_limbers
+		name = RUS_mio_trait_mobile_limbers
+		icon = GFX_generic_mio_trait_icon_breakthrough
+
+		position = { x=0 y=0 }
+		
+		mutually_exclusive = { RUS_mio_trait_stable_platforms }
+
+		equipment_bonus = {
+			breakthrough = 0.1
+		}
+	}
+
+	trait = {
+		token = RUS_mio_trait_stable_platforms
+		name = RUS_mio_trait_stable_platforms
 		icon = GFX_generic_mio_trait_icon_defense
 
-		position = { x=1 y=0 }
-		
+		position = { x=2 y=0 }
+		relative_position_id = RUS_mio_trait_mobile_limbers
+
+		mutually_exclusive = { RUS_mio_trait_mobile_limbers }
+
 		equipment_bonus = {
+			defense = 0.05
+		}
+	}
+
+	trait = {
+		token = RUS_mio_trait_improved_hydraulic_recoil_system
+		name = RUS_mio_trait_improved_hydraulic_recoil_system
+		icon = GFX_generic_mio_trait_icon_reliability
+
+		position = { x=1 y=1 }
+		relative_position_id = RUS_mio_trait_mobile_limbers
+
+		any_parent = {
+			RUS_mio_trait_stable_platforms
+			RUS_mio_trait_mobile_limbers
+		}
+
+		equipment_bonus = {
+			reliability = 0.05
+		}
+	}
+
+	trait = {
+		token = RUS_mio_trait_improved_direct_fire_targeting
+		name = RUS_mio_trait_improved_direct_fire_targeting
+		icon = GFX_generic_mio_department_icon_anti_tank
+
+		position = { x=-1 y= 2 }
+		relative_position_id = RUS_mio_trait_improved_hydraulic_recoil_system
+
+		all_parents = {
+			RUS_mio_trait_improved_hydraulic_recoil_system
+		}
+
+		mutually_exclusive = { 
+			RUS_mio_trait_advanced_trajectory_calculations 
+		}
+		
+		limit_to_equipment_type = { 
+			anti_tank_equipment
+		}
+
+		equipment_bonus = {
+			ap_attack = 0.05
+			hard_attack = 0.1
+		}
+	}
+
+	trait = {
+		token = RUS_mio_trait_improved_direct_fire_targeting_2
+		name = RUS_mio_trait_improved_direct_fire_targeting
+		icon = GFX_generic_mio_department_icon_anti_tank
+
+		position = { x= 0 y= 1 }
+		relative_position_id = RUS_mio_trait_improved_direct_fire_targeting
+
+		all_parents = {
+			RUS_mio_trait_improved_direct_fire_targeting
+		}	
+		
+		limit_to_equipment_type = { 
+			anti_tank_equipment
+		}
+
+		equipment_bonus = {
+			ap_attack = 0.05
+			hard_attack = 0.1
+		}
+	}
+
+	trait = {
+		token = RUS_mio_trait_advanced_trajectory_calculations
+		name = RUS_mio_trait_advanced_trajectory_calculations
+		icon = GFX_generic_mio_department_icon_artillery
+
+		position = { x=2 y=0 }
+		relative_position_id = RUS_mio_trait_improved_direct_fire_targeting
+
+		all_parents = {
+			RUS_mio_trait_improved_hydraulic_recoil_system
+		}
+
+		mutually_exclusive = { 
+			RUS_mio_trait_improved_direct_fire_targeting
+		}
+
+		limit_to_equipment_type = { 
+			artillery_equipment
+		}
+
+		equipment_bonus = {
+			hard_attack = 1
+			breakthrough = 0.05
+		}
+	}
+
+	trait = {
+		token = RUS_mio_trait_advanced_trajectory_calculations_2
+		name = RUS_mio_trait_advanced_trajectory_calculations
+		icon = GFX_generic_mio_department_icon_artillery
+
+		position = { x = 0 y = 1 }
+		relative_position_id = RUS_mio_trait_advanced_trajectory_calculations
+
+		all_parents = {
+			RUS_mio_trait_advanced_trajectory_calculations
+		}
+
+		limit_to_equipment_type = { 
+			artillery_equipment
+		}
+
+		equipment_bonus = {
+			hard_attack = 0.5		
+			breakthrough = 0.05
+		}
+	}
+
+	trait = {
+		token = RUS_mio_trait_sliding_breech_block
+		name = RUS_mio_trait_sliding_breech_block
+		icon = GFX_generic_mio_trait_icon_soft_attack
+
+		position = { x=0 y=2 }
+		
+		relative_position_id = RUS_mio_trait_rapid_fire	
+
+		all_parents = {
+			RUS_mio_trait_improved_hydraulic_recoil_system
+			RUS_mio_trait_rapid_fire
+		}
+
+		equipment_bonus = {
+			soft_attack = 0.03
+			breakthrough = 0.03
+		}
+	}
+
+	trait = {
+		token = RUS_mio_trait_rapid_fire
+		name = RUS_mio_trait_rapid_fire
+		icon = GFX_generic_mio_department_icon_tank_general_weapons
+
+		position = { x=4 y=0 }
 			
+		relative_position_id = RUS_mio_trait_mobile_limbers	
+
+		limit_to_equipment_type = { 
+			anti_tank_equipment
+			anti_air_equipment
+		}
+
+		equipment_bonus = {
+			soft_attack = 0.1
+			hard_attack = 0.04
+			air_attack = 0.04
+		}
+	}
+
+	trait = {
+		token = RUS_mio_trait_advanced_barrel_forging
+		name = RUS_mio_trait_advanced_barrel_forging
+		icon = GFX_generic_mio_trait_icon_efficiency_gain
+
+		position = { x=2 y=0 }
+		
+		relative_position_id = RUS_mio_trait_rapid_fire
+
+		production_bonus = {
+			production_efficiency_gain_factor = 0.05
+		}
+	}
+
+	trait = {
+		token = RUS_mio_trait_big_guns
+		name = RUS_mio_trait_big_guns
+		icon = GFX_generic_mio_trait_icon_soft_attack
+
+		position = { x=2 y=0 }
+		
+		relative_position_id = RUS_mio_trait_advanced_barrel_forging
+
+		limit_to_equipment_type = { 
+			artillery_equipment
+		}
+
+		equipment_bonus = {
+			soft_attack = 0.02
+			build_cost_ic = 0.03
+		}
+	}
+
+	trait = {
+		token = RUS_mio_trait_gun_mass_production
+		name = RUS_mio_trait_gun_mass_production
+		icon = GFX_generic_mio_department_icon_facilities
+
+		position = { x=0 y=2 }
+		
+		relative_position_id = RUS_mio_trait_advanced_barrel_forging
+
+		all_parents = {	RUS_mio_trait_advanced_barrel_forging }
+
+		production_bonus = {
+			production_efficiency_gain_factor = 0.03
+			production_efficiency_cap_factor = 0.03
+		}
+
+		organization_modifier = {
+			military_industrial_organization_design_team_assign_cost = -0.15
+		}
+	}
+
+	trait = {
+		token = RUS_mio_trait_super_charges
+		name = RUS_mio_trait_super_charges
+		icon = GFX_generic_mio_department_icon_facilities
+
+		position = { x=0 y=2 }
+		relative_position_id = RUS_mio_trait_big_guns
+
+		all_parents = {	RUS_mio_trait_big_guns }
+
+		limit_to_equipment_type = { 
+			artillery_equipment
+		}
+
+		production_bonus = {
+			production_efficiency_gain_factor = 0.03
+			production_efficiency_cap_factor = 0.03
+		}
+
+		organization_modifier = {
+			military_industrial_organization_design_team_assign_cost = -0.15
+		}
+	}
+
+	trait = {
+		token = RUS_mio_trait_light_weight_barrels
+		name = RUS_mio_trait_light_weight_barrels
+		icon = GFX_generic_mio_trait_icon_breakthrough
+
+		position = { x=0 y=2 }
+		
+		relative_position_id = RUS_mio_trait_gun_mass_production
+
+		all_parents = {
+			RUS_mio_trait_super_charges
+			RUS_mio_trait_gun_mass_production
+			RUS_mio_trait_sliding_breech_block
+		}
+
+		production_bonus = {
+			production_cost_factor = -0.03
+		}
+
+		equipment_bonus = {
+			breakthrough = 0.06
+			defense = 0.1
 		}
 	}
 	
@@ -373,17 +648,17 @@ RUS_mio_society_of_mechanical_plants_bromley = {
 	}
 	
 	tree_header_text = {
-		text = mio_header_mechanical_design
+		text = mio_header_motorized
 		x = 1
 	}
 
 	tree_header_text = {
-		text = mio_header_armament_and_ammunition
-		x = 6
+		text = mio_header_mechanized
+		x = 7
 	}
 	
 	initial_trait = { #Базовый эффект
-		name = RUS_mio_initial_trait_
+		name = RUS_mio_initial_trait_society_of_mechanical_plants_bromley
 		
 		organization_modifier = {
 			military_industrial_organization_research_bonus = 0.05
@@ -394,16 +669,217 @@ RUS_mio_society_of_mechanical_plants_bromley = {
 			reliability = -0.05
 		}
 	}
-	
-	trait = {
-		token = RUS_mio_
-		name = RUS_mio_
-		icon = GFX_generic_mio_trait_icon_defense
 
-		position = { x=1 y=0 }
+	trait = {
+		token = RUS_mio_trait_composite_cargo_bed
+		name = RUS_mio_trait_composite_cargo_bed
+		icon = GFX_generic_mio_department_icon_motorized_production
+		
+		position = { x=0 y=0 }
+		
+		mutually_exclusive = { RUS_mio_trait_steel_cargo_bed }
+
+		limit_to_equipment_type = { motorized_equipment }
+
+		equipment_bonus = {
+			reliability = -0.03
+			build_cost_ic = -0.05
+		}
+	}
+
+	trait = {
+		token = RUS_mio_trait_steel_cargo_bed
+		name = RUS_mio_trait_steel_cargo_bed
+		icon = GFX_generic_mio_trait_icon_reliability
+		
+		position = { x=2 y=0 }
+		relative_position_id = RUS_mio_trait_composite_cargo_bed
+		
+		mutually_exclusive = { RUS_mio_trait_composite_cargo_bed }
+
+		limit_to_equipment_type = { motorized_equipment }
+
+		equipment_bonus = {
+			reliability = 0.05
+		}
+		production_bonus = {
+			production_resource_need_factor = 0.02
+		}
+	}
+
+	trait = {
+		token = RUS_mio_trait_all_wheel_drive
+		name = RUS_mio_trait_all_wheel_drive
+		icon = GFX_generic_mio_trait_icon_breakthrough
+		
+		position = { x=1 y=2 }
+		relative_position_id = RUS_mio_trait_composite_cargo_bed
+		
+		any_parent = { RUS_mio_trait_composite_cargo_bed RUS_mio_trait_steel_cargo_bed }
+
+		limit_to_equipment_type = { motorized_equipment }
 		
 		equipment_bonus = {
-			
+			breakthrough = 0.035
+		}
+	}
+
+	trait = {
+		token = RUS_mio_trait_attached_wood_gas_generator
+		name = RUS_mio_trait_attached_wood_gas_generator
+		icon = GFX_generic_mio_trait_icon_fuel_consumption
+		
+		position = { x=-1 y=2 }
+		relative_position_id = RUS_mio_trait_all_wheel_drive
+		
+		all_parents = { RUS_mio_trait_all_wheel_drive }
+		
+		mutually_exclusive = { RUS_mio_trait_high_powered_engine }
+
+		limit_to_equipment_type = { motorized_equipment }
+
+		equipment_bonus = {
+			fuel_consumption = -0.05
+		}
+	}
+
+	trait = {
+		token = RUS_mio_trait_high_powered_engine
+		name = RUS_mio_trait_high_powered_engine
+		icon = GFX_generic_mio_trait_icon_maximum_speed
+		
+		position = { x=2 y=0 }
+		relative_position_id = RUS_mio_trait_attached_wood_gas_generator
+		
+		all_parents = { RUS_mio_trait_all_wheel_drive }
+		
+		mutually_exclusive = { RUS_mio_trait_attached_wood_gas_generator }
+
+		limit_to_equipment_type = { motorized_equipment }
+
+		equipment_bonus = {
+			fuel_consumption = 0.05
+			maximum_speed = 0.05
+		}
+	}
+
+	trait = {
+		token = RUS_mio_trait_medium_machinegun_mounts
+		name = RUS_mio_trait_medium_machinegun_mounts
+		icon = GFX_generic_mio_trait_icon_breakthrough
+		
+		position = { x=2 y=0 }
+		relative_position_id = RUS_mio_trait_steel_cargo_bed
+
+		equipment_bonus = {
+			breakthrough = 0.03
+		}
+	}
+
+	trait = {
+		token = RUS_mio_trait_armored_pulpit_mount
+		name = RUS_mio_trait_armored_pulpit_mount
+		icon = GFX_generic_mio_trait_icon_hardness
+		
+		position = { x=0 y=2 }
+		relative_position_id = RUS_mio_trait_medium_machinegun_mounts
+
+		all_parents = { RUS_mio_trait_medium_machinegun_mounts }
+
+		equipment_bonus = {
+			hardness = 0.05
+			reliability = 0.02
+		}
+	}
+	
+	trait = {
+		token = RUS_mio_trait_open_chassi
+		name = RUS_mio_trait_open_chassi
+		icon = GFX_generic_mio_department_icon_mechanized_production
+		
+		position = { x=2 y=0 }
+		relative_position_id = RUS_mio_trait_medium_machinegun_mounts
+		
+		limit_to_equipment_type = { mechanized_equipment }
+		
+		mutually_exclusive = { RUS_mio_trait_closed_chassi }
+
+		equipment_bonus = {
+			defense = -0.02
+			build_cost_ic = -0.03
+		}
+	}
+
+	trait = {
+		token = RUS_mio_trait_closed_chassi
+		name = RUS_mio_trait_closed_chassi
+		icon = GFX_generic_mio_department_icon_mechanized_hull
+		
+		position = { x=2 y=0 }
+		relative_position_id = RUS_mio_trait_open_chassi
+		
+		limit_to_equipment_type = { mechanized_equipment }
+		
+		mutually_exclusive = { RUS_mio_trait_open_chassi }
+
+		equipment_bonus = {
+			armor_value = 0.05
+		}
+	}
+
+
+	trait = {
+		token = RUS_mio_trait_bulletproof_panels
+		name = RUS_mio_trait_bulletproof_panels
+		icon = GFX_generic_mio_trait_icon_hardness
+		
+		position = { x=-1 y=2 }
+		relative_position_id = RUS_mio_trait_closed_chassi
+		
+		limit_to_equipment_type = { mechanized_equipment }
+		
+		any_parent = { RUS_mio_trait_closed_chassi RUS_mio_trait_open_chassi }
+
+		equipment_bonus = {
+			hardness = 0.05
+			armor_value = 0.03
+		}
+	}	
+
+	trait = {
+		token = RUS_mio_trait_mounted_light_anti_tank_gun 
+		name = RUS_mio_trait_mounted_light_anti_tank_gun
+		icon = GFX_generic_mio_trait_icon_ap_attack
+		
+		position = { x=-1 y= 2 }
+		relative_position_id = RUS_mio_trait_bulletproof_panels
+		
+		all_parents = { RUS_mio_trait_bulletproof_panels }
+		
+		limit_to_equipment_type = { mechanized_equipment }
+
+		equipment_bonus = {
+			ap_attack = 0.1
+			hard_attack = 0.02
+		}
+	}
+
+
+	trait = {
+		token = RUS_mio_trait_land_mine_racks
+		name = RUS_mio_trait_land_mine_racks
+		icon = GFX_generic_mio_department_icon_mechanized_hull
+		
+		position = { x=1 y=2 }
+		relative_position_id = RUS_mio_trait_bulletproof_panels
+		
+		limit_to_equipment_type = { mechanized_equipment }
+		
+		all_parents = { RUS_mio_trait_bulletproof_panels }
+
+		equipment_bonus = {
+			defense = 0.06
+			maximum_speed = -0.02
 		}
 	}
 	
