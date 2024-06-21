@@ -918,7 +918,12 @@ focus_tree = {
 		cost = 5
 		
 		available = {
-			has_war = no
+			NOT = {
+				OR = {
+					has_war_with = PRU
+					has_war_with = BYZ
+				}
+			}
 		}
 
 		relative_position_id = RUS_second_branch_of_industrialisation
@@ -943,7 +948,12 @@ focus_tree = {
 		cost = 5
 		
 		available = {
-			has_war = no
+			NOT = {
+				OR = {
+					has_war_with = PRU
+					has_war_with = BYZ
+				}
+			}
 			RUS_controls_baltica = yes
 		}
 
@@ -969,7 +979,12 @@ focus_tree = {
 		cost = 5
 		
 		available = {
-			has_war = no
+			NOT = {
+				OR = {
+					has_war_with = PRU
+					has_war_with = BYZ
+				}
+			}
 			RUS_controls_belorussia = yes
 		}
 
@@ -995,8 +1010,12 @@ focus_tree = {
 		cost = 5
 		
 		available = {
-			has_war = no
-			
+			NOT = {
+				OR = {
+					has_war_with = PRU
+					has_war_with = BYZ
+				}
+			}
 		}
 
 		relative_position_id = RUS_develop_west_russia
@@ -1021,7 +1040,12 @@ focus_tree = {
 		cost = 5
 		
 		available = {
-			has_war = no
+			NOT = {
+				OR = {
+					has_war_with = PRU
+					has_war_with = BYZ
+				}
+			}
 			RUS_solve_polish_problem = yes
 		}
 
@@ -1051,7 +1075,12 @@ focus_tree = {
 		cost = 5
 		
 		available = {
-			has_war = no
+			NOT = {
+				OR = {
+					has_war_with = PRU
+					has_war_with = BYZ
+				}
+			}
 		}
 
 		relative_position_id = RUS_second_branch_of_industrialisation
@@ -1076,7 +1105,12 @@ focus_tree = {
 		cost = 5
 		
 		available = {
-			has_war = no
+			NOT = {
+				OR = {
+					has_war_with = PRU
+					has_war_with = BYZ
+				}
+			}
 		}
 
 		relative_position_id = RUS_develop_central_russia
@@ -1101,7 +1135,12 @@ focus_tree = {
 		cost = 5
 		
 		available = {
-			has_war = no
+			NOT = {
+				OR = {
+					has_war_with = PRU
+					has_war_with = BYZ
+				}
+			}
 		}
 
 		relative_position_id = RUS_develop_central_russia
@@ -1127,7 +1166,12 @@ focus_tree = {
 		cost = 5
 		
 		available = {
-			has_war = no
+			NOT = {
+				OR = {
+					has_war_with = PRU
+					has_war_with = BYZ
+				}
+			}
 			RUS_central_asia_is_owned_by_russia = yes
 		}
 
@@ -1156,7 +1200,12 @@ focus_tree = {
 		cost = 5
 		
 		available = {
-			has_war = no
+			NOT = {
+				OR = {
+					has_war_with = PRU
+					has_war_with = BYZ
+				}
+			}
 		}
 
 		relative_position_id = RUS_second_branch_of_industrialisation
@@ -1181,7 +1230,12 @@ focus_tree = {
 		cost = 5
 		
 		available = {
-			has_war = no
+			NOT = {
+				OR = {
+					has_war_with = PRU
+					has_war_with = BYZ
+				}
+			}
 		}
 
 		relative_position_id = RUS_develop_far_east_russia
@@ -1206,7 +1260,12 @@ focus_tree = {
 		cost = 5
 		
 		available = {
-			has_war = no
+			NOT = {
+				OR = {
+					has_war_with = PRU
+					has_war_with = BYZ
+				}
+			}
 		}
 
 		relative_position_id = RUS_develop_far_east_russia
@@ -1231,7 +1290,12 @@ focus_tree = {
 		cost = 5
 		
 		available = {
-			has_war = no
+			NOT = {
+				OR = {
+					has_war_with = PRU
+					has_war_with = BYZ
+				}
+			}
 		}
 
 		relative_position_id = RUS_develop_far_east_russia
@@ -7223,6 +7287,10 @@ focus_tree = {
 		y = 1
 		cost = 5
 		
+		allow_branch = {
+			always = no # Ломает механику
+		}
+		
 		available = {
 			controls_finland_region = yes
 			has_country_flag = RUS_unlock_fight_witch_finland_separatism
@@ -7271,6 +7339,7 @@ focus_tree = {
 					clr_state_flag = RUS_low_finland_separatism_2 
 					set_state_flag = RUS_end_fight_with_finland_separatism 
 					remove_dynamic_modifier = { modifier = FIN_separatism_dynamic_modifier_2 }
+					log = "[GetDateText]: [Root.GetName]: swap_flag RUS_low_finland_separatism_2 to RUS_end_fight_with_finland_separatism"
 				}			
 				every_state = {
 					limit = {
@@ -7284,6 +7353,7 @@ focus_tree = {
 					clr_state_flag = RUS_low_finland_separatism_1 
 					remove_dynamic_modifier = { modifier = FIN_separatism_dynamic_modifier_1 } 
 					add_dynamic_modifier = { modifier = FIN_separatism_dynamic_modifier_2 } 
+					log = "[GetDateText]: [Root.GetName]: swap_flag RUS_low_finland_separatism_1 to RUS_low_finland_separatism_2"
 				}
 				every_state = {
 					limit = {
@@ -7291,10 +7361,21 @@ focus_tree = {
 						has_dynamic_modifier = {
 							modifier = FIN_separatism_dynamic_modifier
 						} 
+						NOT = {
+							OR = {
+								has_dynamic_modifier = {
+									modifier = FIN_separatism_dynamic_modifier_1
+								} 
+								has_dynamic_modifier = {
+									modifier = FIN_separatism_dynamic_modifier_2
+								} 
+							}
+						}
 					}
 					set_state_flag = RUS_low_finland_separatism_1 
 					remove_dynamic_modifier = { modifier = FIN_separatism_dynamic_modifier } 
 					add_dynamic_modifier = { modifier = FIN_separatism_dynamic_modifier_1 } 
+					log = "[GetDateText]: [Root.GetName]: set_flag RUS_low_finland_separatism_1"
 				}
 			}
 		}
@@ -7421,7 +7502,7 @@ focus_tree = {
 		id = RUS_the_giant_has_awakened #гигант пробудился
 		icon = GFX_focus_rus_tha_gigant_has_awakening
 		
-		x = 20
+		x = 19
 		y = 1
 		cost = 5
 	
@@ -7965,6 +8046,7 @@ focus_tree = {
 		
 		available = {
 			has_war = no
+			NOT = { has_global_flag = china_is_united_global_flag }
 		}
 		
 		bypass = {
@@ -8341,6 +8423,10 @@ focus_tree = {
 					has_war_with = BYZ
 				}
 			}
+			OR = {
+				date < 1854.1.1
+				date > 1856.1.1
+			}
 		}
 
 		relative_position_id = RUS_kromwlend_politick
@@ -8372,6 +8458,10 @@ focus_tree = {
 					has_war_with = BYZ
 				}
 			}
+			OR = {
+				date < 1854.1.1
+				date > 1856.1.1
+			}
 		}
 
 		relative_position_id = RUS_conquer_salishes
@@ -8401,6 +8491,10 @@ focus_tree = {
 					has_war_with = PRU
 					has_war_with = BYZ
 				}
+			}
+			OR = {
+				date < 1854.1.1
+				date > 1856.1.1
 			}
 		}
 
@@ -8784,7 +8878,7 @@ focus_tree = {
 		id = RUS_antigerman_politick
 		icon = GFX_focus_rus_anti_german_politick
 		
-		x = -6
+		x = -5
 		y = 1
 		cost = 5 
 		
@@ -8863,7 +8957,7 @@ focus_tree = {
 		id = RUS_antibuzantium_politick
 		icon = GFX_focus_rus_anti_byzantium_politick
 		
-		x = -4
+		x = -3
 		y = 1
 		cost = 5 
 		
@@ -8943,7 +9037,7 @@ focus_tree = {
 		id = RUS_antiaustrian_politick
 		icon = GFX_focus_rus_anti_austrian_politick
 		
-		x = -2
+		x = -1
 		y = 1
 		cost = 5 
 		
@@ -9063,6 +9157,10 @@ focus_tree = {
 		x = 0
 		y = 1
 		cost = 5 
+		
+		allow_branch = {
+			always = no # Ломает механику
+		}
 		
 		available = {
 			controls_finland_region = yes

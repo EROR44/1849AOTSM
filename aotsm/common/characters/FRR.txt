@@ -16,9 +16,17 @@ characters = {
 		}
 		advisor={
 			slot = political_advisor
-			idea_token = FRR_Mishel_Shevalie
+			idea_token = FRR_Mishel_Shevalie_token
 				allowed  = {
 					original_tag  = FRR
+				}
+				available = {
+					NOT = {
+						has_country_leader = {
+							character = FRR_Mishel_Shevalie
+							ruling_only = yes
+						}
+					}
 				}
 				traits  = {
 					economist  
@@ -68,12 +76,20 @@ characters = {
 		}
 		advisor={
 			slot = political_advisor
-			idea_token = Louis_Napoleon
+			idea_token = Louis_Napoleon_token
 			allowed = {
 				original_tag = FRR
 			}
 			available = {
-				NOT = { has_completed_focus = FRA_separate_army_from_goverment }
+				NOT = { 
+					OR = {
+						has_completed_focus = FRA_separate_army_from_goverment 
+						has_country_leader = {
+							character = FRR_Louis_Napoleon
+							ruling_only = yes
+						}
+					}
+				}
 			}
 			cost = 100.000
 			traits = {
