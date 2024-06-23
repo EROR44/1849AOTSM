@@ -1,5 +1,6 @@
 
 add_namespace = script_event
+add_namespace = scriptww_event
 
 country_event = {
 	id = script_event.1
@@ -6718,6 +6719,291 @@ country_event = { #province rename
 				id = 11401
 				name = 11401_province_other
 			}
+		}
+	}
+	
+}
+
+country_event = {
+	id = scriptww_event.1
+	title = scriptww_event.1.t
+	desc = scriptww_event.1.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+
+	trigger = {
+		tag = PRU
+		has_global_flag = firts_world_war
+		PRU = {
+			NOT = {
+				has_completed_focus = PRU_first_world_war
+			}
+			NOT = {
+				has_country_flag = pru_access_to_world_war_flag
+			}
+		}
+		PRU = {
+			OR = {
+				has_war_with = CBI
+				has_war_with = FRR
+				has_war_with = RUS
+				has_war_with = PRT
+			}
+		}
+	}
+	
+	mean_time_to_happen = {
+		days = 10
+	}
+	
+	hidden = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event scriptww_event.1"}
+
+	option = {
+		name = scriptww_event.1.a
+		PRU = {
+			complete_national_focus = PRU_first_world_war
+			set_country_flag = pru_access_to_world_war_flag
+		}
+	}
+	
+}
+
+country_event = {
+	id = scriptww_event.2
+	title = scriptww_event.2.t
+	desc = scriptww_event.2.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+
+	trigger = {
+		tag = BYZ
+		has_global_flag = firts_world_war
+		BYZ = {
+			NOT = {
+				has_completed_focus = BYZ_war_come_to_us
+			}
+			NOT = {
+				has_country_flag = byz_access_to_world_war_flag
+			}
+		}
+		BYZ = {
+			OR = {
+				has_war_with = CBI
+				has_war_with = FRR
+				has_war_with = RUS
+				has_war_with = PRT
+			}
+		}
+	}
+	
+	mean_time_to_happen = {
+		days = 10
+	}
+	
+	hidden = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event scriptww_event.2"}
+
+	option = {
+		name = scriptww_event.2.a
+		BYZ = {
+			complete_national_focus = BYZ_war_come_to_us
+			set_country_flag = byz_access_to_world_war_flag
+		}
+	}
+	
+}
+
+country_event = {
+	id = scriptww_event.3
+	title = scriptww_event.3.t
+	desc = scriptww_event.3.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+
+	trigger = {
+		tag = CBI
+		has_global_flag = firts_world_war
+		CBI = {
+			NOT = {
+				has_completed_focus = CBI_great_war
+			}
+			NOT = {
+				has_country_flag = cbi_access_to_world_war_flag
+			}
+		}
+		CBI = {
+			OR = {
+				has_war_with = BYZ
+				has_war_with = PRU
+			}
+		}
+	}
+	
+	mean_time_to_happen = {
+		days = 10
+	}
+	
+	hidden = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event scriptww_event.3"}
+
+	option = {
+		name = scriptww_event.3.a
+		CBI = {
+			complete_national_focus = CBI_great_war
+			set_country_flag = cbi_access_to_world_war_flag
+		}
+	}
+	
+}
+
+country_event = {
+	id = scriptww_event.4
+	title = scriptww_event.4.t
+	desc = scriptww_event.4.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+
+	trigger = {
+		tag = RUS
+		has_global_flag = firts_world_war
+		RUS = {
+			NOT = {
+				has_completed_focus = RUS_unexpected_prussian_invade
+				has_completed_focus = RUS_marh_to_our_enemies
+				has_completed_focus = RUS_war_becomes_to_russia
+			}
+			NOT = {
+				has_country_flag = rus_access_to_world_war_flag
+			}
+		}
+		RUS = {
+			OR = {
+				has_war_with = BYZ
+				has_war_with = PRU
+			}
+		}
+	}
+	
+	mean_time_to_happen = {
+		days = 10
+	}
+	
+	hidden = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event scriptww_event.4"}
+
+	option = {
+		name = scriptww_event.4.a
+		RUS = {
+			if = {
+				limit = {
+					has_global_flag = polish_uprising_is_started
+				}
+				RUS = { 
+					complete_national_focus = RUS_unexpected_prussian_invade		
+				}
+			}
+			if = {
+				limit = {
+					has_global_flag = pru_ignore_poland_uprising 
+					has_global_flag = wwi_tavrid_operation
+				}
+				RUS = {
+					complete_national_focus = RUS_war_becomes_to_russia
+				}
+			}	
+			if = { 
+				limit = {
+					OR = {
+						has_global_flag = wwi_russian_attack_germany
+						has_global_flag = wwi_russian_attack_byzantium
+						has_global_flag = wwi_russiansoc_attack_germany
+						has_global_flag = wwi_russiansoc_attack_byzantium
+					}
+				}
+				RUS = {
+					complete_national_focus = RUS_marh_to_our_enemies
+				}
+			}
+			set_country_flag = rus_access_to_world_war_flag
+		}
+	}
+	
+}
+
+country_event = {
+	id = scriptww_event.5
+	title = scriptww_event.5.t
+	desc = scriptww_event.5.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+
+	trigger = {
+		tag = FRR
+		has_global_flag = firts_world_war
+		FRR = {
+			NOT = {
+				has_country_flag = frr_access_to_world_war_flag
+			}
+		}
+		FRR = {
+			OR = {
+				has_war_with = BYZ
+				has_war_with = PRU
+			}
+		}
+	}
+	
+	mean_time_to_happen = {
+		days = 10
+	}
+	
+	hidden = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event scriptww_event.5"}
+
+	option = {
+		name = scriptww_event.5.a
+		FRR = {
+			set_country_flag = frr_access_to_world_war_flag
+		}
+	}
+	
+}
+
+country_event = {
+	id = scriptww_event.6
+	title = scriptww_event.6.t
+	desc = scriptww_event.6.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+
+	trigger = {
+		tag = PRT
+		has_global_flag = firts_world_war
+		PRT = {
+			NOT = {
+				has_country_flag = prt_access_to_world_war_flag
+			}
+		}
+		PRT = {
+			OR = {
+				has_war_with = BYZ
+				has_war_with = PRU
+			}
+		}
+	}
+	
+	mean_time_to_happen = {
+		days = 10
+	}
+	
+	hidden = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event scriptww_event.6"}
+
+	option = {
+		name = scriptww_event.6.a
+		PRT = {
+			set_country_flag = prt_access_to_world_war_flag
 		}
 	}
 	
