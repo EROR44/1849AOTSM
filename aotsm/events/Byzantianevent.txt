@@ -1685,6 +1685,9 @@ country_event = { #Zakharias VI is 18
 					traits = { politically_connected media_personality infantry_officer roman_prince_land }
 				}
 			}
+			BYZ = {
+				set_country_flag = byz_zakharias_is_mature
+			}
 		}
 	}
 	
@@ -7520,6 +7523,8 @@ country_event = { #Rest from Serbia
 	
 }
 
+#1-48 MAIN AND PRINCE IN BYZANTIUM
+
 country_event = { #Education of Princ
 	id = byz_zakharias.1
 	title = byz_zakharias.1.t
@@ -7699,6 +7704,17 @@ country_event = { #Talk with son
 				modifier = byz_prince_eduction
 			}
 		}
+		BYZ = {
+			set_country_flag = byz_send_heir_to_prussian
+		}
+		hidden_effect = {
+			PRU = {
+				country_event = {
+					id = byz_zakharias.49
+					days = 50
+				}
+			}
+		}
 	}
 	
 	option = { #Education in France
@@ -7712,9 +7728,22 @@ country_event = { #Talk with son
 				modifier = byz_prince_eduction
 			}
 		}
+		BYZ = {
+			set_country_flag = byz_send_heir_to_france
+		}
+		hidden_effect = {
+			FRR = {
+				country_event = {
+					id = byz_zakharias.99
+					days = 50
+				}
+			}
+		}
 	}
 	
 }
+
+#FALSE ROUT OF PRINCE
 
 country_event = { #False Love
 	id = byz_zakharias.6
@@ -7983,6 +8012,8 @@ country_event = { #Wedding of prince
 	
 }
 
+#TRUE ROUT OF PRINCE
+
 country_event = { #Second dialog with son
 	id = byz_zakharias.15
 	title = byz_zakharias.15.t
@@ -7997,9 +8028,222 @@ country_event = { #Second dialog with son
 		log = "[GetDateText]: [Root.GetName]: event byz_zakharias.15"
 	}
 
-	option = { #Hail to Imperial family
+	option = { #What is my decision
 		name = byz_zakharias.15.a
 		add_political_power = -25
+	}
+	
+}
+
+
+#49-99 PRINCE IN PRUSSIA EVENT
+
+country_event = { #Byzantium prince come to learning in Prussia
+	id = byz_zakharias.49
+	title = byz_zakharias.49.t
+	desc = byz_zakharias.49.d
+	picture = GFX_report_event_byz_education_in_prussia
+	
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event byz_zakharias.49"
+	}
+
+	option = { #Intersting
+		name = byz_zakharias.49.a
+		add_political_power = 1
+	}
+	
+}
+
+country_event = { #Letter from Prussia
+	id = byz_zakharias.50
+	title = byz_zakharias.50.t
+	desc = byz_zakharias.50.d
+	picture = GFX_report_event_byz_letter_1
+	
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event byz_zakharias.50"
+		hidden_effect = {
+			BYZ = {
+				country_event = {
+					id = byz_zakharias.51
+					days = 20
+				}
+			}
+			PRU = {
+				country_event = {
+					id = byz_zakharias.52
+					days = 2
+				}
+			}
+		}
+	}
+
+	option = { #Troubling news
+		name = byz_zakharias.50.a
+		add_political_power = -150
+		add_stability = -0.05
+		PRU = {
+			remove_opinion_modifier = {
+				target = BYZ
+				modifier = byz_prince_eduction
+			}
+		}
+	}
+	
+}
+
+country_event = { #Prince return from Prussia
+	id = byz_zakharias.51
+	title = byz_zakharias.51.t
+	desc = byz_zakharias.51.d
+	picture = GFX_report_event_byz_return_by_train
+	
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event byz_zakharias.51"
+	}
+
+	option = { #Hail to God
+		name = byz_zakharias.51.a
+		add_stability = 0.05
+	}
+	
+}
+
+country_event = { #Byzantium Prince left country
+	id = byz_zakharias.52
+	title = byz_zakharias.52.t
+	desc = byz_zakharias.52.d
+	picture = GFX_report_event_byz_polis_in_prussia
+	
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event byz_zakharias.52"
+	}
+
+	option = { #what a shame?
+		name = byz_zakharias.52.a
+	}
+	
+}
+
+#99-149 PRINCE IN FRANCE
+
+country_event = { #Byzantium prince come to learning in France
+	id = byz_zakharias.99
+	title = byz_zakharias.99.t
+	desc = byz_zakharias.99.d
+	picture = GFX_report_event_byz_education_in_france
+	
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event byz_zakharias.99"
+	}
+
+	option = { #Happy news
+		name = byz_zakharias.99.a
+		add_political_power = 1
+	}
+	
+}
+
+country_event = { #Letter from France
+	id = byz_zakharias.100
+	title = byz_zakharias.100.t
+	desc = byz_zakharias.100.d
+	picture = GFX_report_event_byz_letter_2
+	
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event byz_zakharias.100"
+		hidden_effect = {
+			BYZ = {
+				country_event = {
+					id = byz_zakharias.101
+					days = 40
+				}
+			}
+			FRR = {
+				country_event = {
+					id = byz_zakharias.102
+					days = 2
+				}
+			}
+		}
+	}
+
+	option = { #Bad news
+		name = byz_zakharias.101.a
+		add_political_power = -150
+		add_stability = -0.05
+		FRR = {
+			remove_opinion_modifier = {
+				target = BYZ
+				modifier = byz_prince_eduction
+			}
+		}
+	}
+	
+}
+
+country_event = { #Prince return from France
+	id = byz_zakharias.101
+	title = byz_zakharias.101.t
+	desc = byz_zakharias.101.d
+	picture = GFX_report_event_byz_return_by_ship
+	
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event byz_zakharias.101"
+	}
+
+	option = { #Hail to God
+		name = byz_zakharias.101.a
+		add_stability = 0.05
+	}
+	
+}
+
+country_event = { #Byzantium Prince left country
+	id = byz_zakharias.102
+	title = byz_zakharias.102.t
+	desc = byz_zakharias.102.d
+	picture = GFX_report_event_byz_polis_in_france
+	
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event byz_zakharias.102"
+	}
+
+	option = { #what a shame?
+		name = byz_zakharias.102.a
 	}
 	
 }
