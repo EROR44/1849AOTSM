@@ -6194,6 +6194,215 @@ country_event = {
 	
 }
 
+country_event = {
+	id = script_event.43
+	title = script_event.43.t
+	desc = script_event.43.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	mean_time_to_happen = {
+		days = 10
+	}
+	
+	trigger = {
+		tag = BYZ
+		BYZ = {
+			has_country_flag = byz_send_heir_to_prussian
+		}
+		NOT = {
+			BYZ = {
+				has_country_flag = byz_zakharias_end_education
+			}
+			BYZ = {
+				has_country_flag = byz_zakharias_is_mature
+			}
+		}
+		OR = {
+			AUS = {
+				OR = {
+					has_country_flag = victory_R_V_A_1
+					has_country_flag = victory_R_V_A_2
+					has_country_flag = victory_R_V_A_3
+				}
+			}
+			has_global_flag = pru_capitulation
+		}
+	}
+	
+	fire_only_once = yes
+	
+	hidden = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event script_event.43"}
+	
+	option = {
+		name = script_event.43.a
+		BYZ = {
+			clr_country_flag = byz_send_heir_to_prussian
+			set_country_flag = byz_heir_return
+		}
+		BYZ = {
+			country_event = {
+				id = byz_zakharias.50
+				days = 5
+			}
+		}
+	}
+	
+}
+
+country_event = {
+	id = script_event.44
+	title = script_event.44.t
+	desc = script_event.44.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	mean_time_to_happen = {
+		days = 5
+		modifier = {
+			factor = 0.5
+			FRR = {
+				is_in_faction_with = CBI
+			}
+		}
+		modifier = {
+			factor = 0.5
+			FRR = {
+				focus_progress = {
+					focus = FRA_support_cbi
+					progress > 0.1
+				}
+			}
+		}
+		modifier = {
+			factor = 0.1
+			FRR = {
+				has_war_with = PRU
+			}
+		}
+	}
+	
+	trigger = {
+		tag = BYZ
+		BYZ = {
+			has_country_flag = byz_send_heir_to_france
+		}
+		NOT = {
+			BYZ = {
+				has_country_flag = byz_zakharias_end_education
+			}
+			BYZ = {
+				has_country_flag = byz_zakharias_is_mature
+			}
+		}
+		OR = {
+			FRR = {
+				is_in_faction_with = CBI
+			}
+			FRR = {
+				focus_progress = {
+					focus = FRA_support_cbi
+					progress > 0.1
+				}
+			}
+		}
+	}
+	
+	fire_only_once = yes
+	
+	hidden = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event script_event.44"}
+	
+	option = {
+		name = script_event.44.a
+		BYZ = {
+			clr_country_flag = byz_send_heir_to_france
+			set_country_flag = byz_heir_return
+		}
+		BYZ = {
+			country_event = {
+				id = byz_zakharias.100
+				days = 5
+			}
+		}
+	}
+	
+}
+
+country_event = {
+	id = script_event.45
+	title = script_event.45.t
+	desc = script_event.45.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	is_triggered_only = yes
+
+	fire_only_once = yes
+	
+	hidden = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event script_event.45"
+		hidden_effect = {
+			BYZ = {
+				set_country_flag = byz_zakharias_end_education
+			}
+		}
+	}
+	
+	option = {
+		name = script_event.45.a
+		if = {
+			limit = {
+				BYZ = {
+					has_country_flag = byz_heir_return
+				}
+			}
+			BYZ = {	country_event = byz_zakharias.48 }
+		}
+		if = {
+			limit = {
+				BYZ = {
+					has_country_flag = byz_send_heir_to_prussian
+				}
+			}
+			BYZ = {	
+				country_event = {
+					id = byz_zakharias.98
+					days = 20
+				}
+			}
+			PRU = {
+				country_event = {
+					id = byz_zakharias.97
+					days = 5
+				}
+			}
+		}
+		if = {
+			limit = {
+				BYZ = {
+					has_country_flag = byz_send_heir_to_france
+				}
+			}
+			BYZ = {	
+				country_event = {
+					id = byz_zakharias.148
+					days = 20
+				}
+			}
+			PRU = {
+				country_event = {
+					id = byz_zakharias.147
+					days = 5
+				}
+			}
+		}
+	}
+	
+}
+
 
 country_event = { #state rename
 	id = script_event.9999
