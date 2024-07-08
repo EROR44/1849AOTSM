@@ -1,3 +1,295 @@
+#Victory flag 
+
+set_victory_in_world_war = {
+	if = {
+		limit = {
+			PRU = {
+				has_war = no
+				has_completed_focus = PRU_first_world_war
+			}
+			NOT = {
+				has_global_flag = pru_capitulation 	
+			}
+		}
+		PRU = {
+			set_country_flag = first_world_war_won
+		}
+	}
+	if = {
+		limit = {
+			BYZ = {
+				has_war = no
+				has_completed_focus = BYZ_war_come_to_us
+			}
+			NOT = {
+				has_global_flag = byz_capitulation 	
+			}
+		}
+		BYZ = {
+			set_country_flag = first_world_war_won
+		}
+	}
+	if = {
+		limit = {
+			CBI = {
+				has_war = no
+				has_completed_focus = CBI_great_war
+			}
+			NOT = {
+				has_global_flag = cbi_capitulation 	
+			}
+		}
+		CBI = {
+			set_country_flag = first_world_war_won
+		}
+	}
+	if = {
+		limit = {
+			RUS = {
+				has_war = no
+				OR = {
+					has_completed_focus = RUS_unexpected_prussian_invade
+					has_completed_focus = RUS_marh_to_our_enemies
+					has_completed_focus = RUS_war_becomes_to_russia
+				}
+			}
+			NOT = {
+				has_global_flag = russian_capitulation 	
+			}
+		}
+		RUS = {
+			set_country_flag = first_world_war_won
+		}
+	}
+	if = {
+		limit = {
+			FRR = {
+				has_war = no
+				has_country_flag = frr_access_to_world_war_flag
+			}
+			NOT = {
+				has_global_flag = france_capitulation 	
+			}
+		}
+		FRR = {
+			set_country_flag = first_world_war_won
+		}
+	}
+	if = {
+		limit = {
+			PRT = {
+				has_war = no
+				has_country_flag = prt_access_to_world_war_flag
+			}
+			NOT = {
+				has_global_flag = prt_capitulation 	
+			}
+		}
+		PRT = {
+			set_country_flag = first_world_war_won
+		}
+	}
+	if = {
+		limit = {
+			any_country = {
+				has_country_flag = first_world_war_won
+			}
+			NOT = {
+				has_global_flag = event_about_world_end_fire
+			}
+		}
+		set_global_flag = event_about_world_end_fire
+		if = {
+			limit = {
+				RUS = {
+					has_country_flag = first_world_war_won
+				}
+				NOT = {
+					CBI = {
+						has_country_flag = first_world_war_won
+					}
+				}
+				NOT = {
+					FRR = {
+						has_country_flag = first_world_war_won
+					}
+				}
+				NOT = {
+					PRT = {
+						has_country_flag = first_world_war_won
+					}
+				}
+			}
+			set_global_flag = rus_solo_win_ww
+		}
+		if = {
+			limit = {
+				NOT = {
+					RUS = {
+						has_country_flag = first_world_war_won
+					}
+				}
+				CBI = {
+					has_country_flag = first_world_war_won
+				}
+				NOT = {
+					FRR = {
+						has_country_flag = first_world_war_won
+					}
+				}
+				NOT = {
+					PRT = {
+						has_country_flag = first_world_war_won
+					}
+				}
+			}
+			set_global_flag = cbi_solo_win_ww
+		}
+		if = {
+			limit = {
+				NOT = {
+					RUS = {
+						has_country_flag = first_world_war_won
+					}
+				}
+				NOT = {
+					CBI = {
+						has_country_flag = first_world_war_won
+					}
+				}
+				FRR = {
+					has_country_flag = first_world_war_won
+				}
+				NOT = {
+					PRT = {
+						has_country_flag = first_world_war_won
+					}
+				}
+			}
+			set_global_flag = frr_solo_win_ww
+		}
+		if = {
+			limit = {
+				NOT = {
+					RUS = {
+						has_country_flag = first_world_war_won
+					}
+				}
+				NOT = {
+					CBI = {
+						has_country_flag = first_world_war_won
+					}
+				}
+				NOT = {
+					FRR = {
+						has_country_flag = first_world_war_won
+					}
+				}
+				PRT = {
+					has_country_flag = first_world_war_won
+				}
+			}
+			set_global_flag = prt_solo_win_ww
+		}
+		if = {
+			limit = {
+				OR = {
+					AND = {
+						RUS = {
+							has_country_flag = first_world_war_won
+						}
+						CBI = {
+							has_country_flag = first_world_war_won
+						}
+					}
+					AND = {
+						RUS = {
+							has_country_flag = first_world_war_won
+						}
+						FRR = {
+							has_country_flag = first_world_war_won
+						}
+					}
+					AND = {
+						RUS = {
+							has_country_flag = first_world_war_won
+						}
+						PRT = {
+							has_country_flag = first_world_war_won
+						}
+					}
+					AND = {
+						PRT = {
+							has_country_flag = first_world_war_won
+						}
+						CBI = {
+							has_country_flag = first_world_war_won
+						}
+					}
+					AND = {
+						PRT = {
+							has_country_flag = first_world_war_won
+						}
+						FRR = {
+							has_country_flag = first_world_war_won
+						}
+					}
+					AND = {
+						FRR = {
+							has_country_flag = first_world_war_won
+						}
+						CBI = {
+							has_country_flag = first_world_war_won
+						}
+					}
+				}
+			}
+			set_global_flag = lon_pac_win_ww
+		}
+		if = {
+			limit = {
+				NOT = {
+					BYZ = {
+						has_country_flag = first_world_war_won
+					}
+				}
+				PRU = {
+					has_country_flag = first_world_war_won
+				}
+			}
+			set_global_flag = pru_solo_win_ww
+		}
+		if = {
+			limit = {
+				BYZ = {
+					has_country_flag = first_world_war_won
+				}
+				NOT = {
+					PRU = {
+						has_country_flag = first_world_war_won
+					}
+				}
+			}
+			set_global_flag = byz_solo_win_ww
+		}
+		if = {
+			limit = {
+				BYZ = {
+					has_country_flag = first_world_war_won
+				}
+				PRU = {
+					has_country_flag = first_world_war_won
+				}
+			}
+			set_global_flag = kon_pac_win_ww
+		}
+		news_event = {
+			id = news.297
+			days = 5
+		}
+	}
+}
+
 prussian_capitulation_all = {
 	#RUSSIAN#
 	if = {
@@ -5254,297 +5546,4 @@ gw_create_poland_effect = { #выделение Польши при проебе
 			}
 		}
 	}
-}
-
-#Victory flag 
-
-set_victory_in_world_war = {
-	if = {
-		limit = {
-			PRU = {
-				has_war = no
-				has_completed_focus = PRU_first_world_war
-			}
-			NOT = {
-				has_global_flag = pru_capitulation 	
-			}
-		}
-		PRU = {
-			set_country_flag = first_world_war_won
-		}
-	}
-	if = {
-		limit = {
-			BYZ = {
-				has_war = no
-				has_completed_focus = BYZ_war_come_to_us
-			}
-			NOT = {
-				has_global_flag = byz_capitulation 	
-			}
-		}
-		BYZ = {
-			set_country_flag = first_world_war_won
-		}
-	}
-	if = {
-		limit = {
-			CBI = {
-				has_war = no
-				has_completed_focus = CBI_great_war
-			}
-			NOT = {
-				has_global_flag = cbi_capitulation 	
-			}
-		}
-		CBI = {
-			set_country_flag = first_world_war_won
-		}
-	}
-	if = {
-		limit = {
-			RUS = {
-				has_war = no
-				OR = {
-					has_completed_focus = RUS_unexpected_prussian_invade
-					has_completed_focus = RUS_marh_to_our_enemies
-					has_completed_focus = RUS_war_becomes_to_russia
-				}
-			}
-			NOT = {
-				has_global_flag = russian_capitulation 	
-			}
-		}
-		RUS = {
-			set_country_flag = first_world_war_won
-		}
-	}
-	if = {
-		limit = {
-			FRR = {
-				has_war = no
-				has_country_flag = frr_access_to_world_war_flag
-			}
-			NOT = {
-				has_global_flag = france_capitulation 	
-			}
-		}
-		FRR = {
-			set_country_flag = first_world_war_won
-		}
-	}
-	if = {
-		limit = {
-			PRT = {
-				has_war = no
-				has_country_flag = prt_access_to_world_war_flag
-			}
-			NOT = {
-				has_global_flag = prt_capitulation 	
-			}
-		}
-		PRT = {
-			set_country_flag = first_world_war_won
-		}
-	}
-	if = {
-		limit = {
-			any_country = {
-				has_country_flag = first_world_war_won
-			}
-			NOT = {
-				has_global_flag = event_about_world_end_fire
-			}
-		}
-		set_global_flag = event_about_world_end_fire
-		if = {
-			limit = {
-				RUS = {
-					has_country_flag = first_world_war_won
-				}
-				NOT = {
-					CBI = {
-						has_country_flag = first_world_war_won
-					}
-				}
-				NOT = {
-					FRR = {
-						has_country_flag = first_world_war_won
-					}
-				}
-				NOT = {
-					PRT = {
-						has_country_flag = first_world_war_won
-					}
-				}
-			}
-			set_global_flag = rus_solo_win_ww
-		}
-		if = {
-			limit = {
-				NOT = {
-					RUS = {
-						has_country_flag = first_world_war_won
-					}
-				}
-				CBI = {
-					has_country_flag = first_world_war_won
-				}
-				NOT = {
-					FRR = {
-						has_country_flag = first_world_war_won
-					}
-				}
-				NOT = {
-					PRT = {
-						has_country_flag = first_world_war_won
-					}
-				}
-			}
-			set_global_flag = cbi_solo_win_ww
-		}
-		if = {
-			limit = {
-				NOT = {
-					RUS = {
-						has_country_flag = first_world_war_won
-					}
-				}
-				NOT = {
-					CBI = {
-						has_country_flag = first_world_war_won
-					}
-				}
-				FRR = {
-					has_country_flag = first_world_war_won
-				}
-				NOT = {
-					PRT = {
-						has_country_flag = first_world_war_won
-					}
-				}
-			}
-			set_global_flag = frr_solo_win_ww
-		}
-		if = {
-			limit = {
-				NOT = {
-					RUS = {
-						has_country_flag = first_world_war_won
-					}
-				}
-				NOT = {
-					CBI = {
-						has_country_flag = first_world_war_won
-					}
-				}
-				NOT = {
-					FRR = {
-						has_country_flag = first_world_war_won
-					}
-				}
-				PRT = {
-					has_country_flag = first_world_war_won
-				}
-			}
-			set_global_flag = prt_solo_win_ww
-		}
-		if = {
-			limit = {
-				OR = {
-					AND = {
-						RUS = {
-							has_country_flag = first_world_war_won
-						}
-						CBI = {
-							has_country_flag = first_world_war_won
-						}
-					}
-					AND = {
-						RUS = {
-							has_country_flag = first_world_war_won
-						}
-						FRR = {
-							has_country_flag = first_world_war_won
-						}
-					}
-					AND = {
-						RUS = {
-							has_country_flag = first_world_war_won
-						}
-						PRT = {
-							has_country_flag = first_world_war_won
-						}
-					}
-					AND = {
-						PRT = {
-							has_country_flag = first_world_war_won
-						}
-						CBI = {
-							has_country_flag = first_world_war_won
-						}
-					}
-					AND = {
-						PRT = {
-							has_country_flag = first_world_war_won
-						}
-						FRR = {
-							has_country_flag = first_world_war_won
-						}
-					}
-					AND = {
-						FRR = {
-							has_country_flag = first_world_war_won
-						}
-						CBI = {
-							has_country_flag = first_world_war_won
-						}
-					}
-				}
-			}
-			set_global_flag = lon_pac_win_ww
-		}
-		if = {
-			limit = {
-				NOT = {
-					BYZ = {
-						has_country_flag = first_world_war_won
-					}
-				}
-				PRU = {
-					has_country_flag = first_world_war_won
-				}
-			}
-			set_global_flag = pru_solo_win_ww
-		}
-		if = {
-			limit = {
-				BYZ = {
-					has_country_flag = first_world_war_won
-				}
-				NOT = {
-					PRU = {
-						has_country_flag = first_world_war_won
-					}
-				}
-			}
-			set_global_flag = byz_solo_win_ww
-		}
-		if = {
-			limit = {
-				BYZ = {
-					has_country_flag = first_world_war_won
-				}
-				PRU = {
-					has_country_flag = first_world_war_won
-				}
-			}
-			set_global_flag = kon_pac_win_ww
-		}
-		news_event = {
-			id = news.297
-			days = 5
-		}
-	}
-
 }
