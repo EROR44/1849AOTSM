@@ -1,0 +1,81 @@
+##ANNEXATION AND OTHER SCRIPT IN LOCAL WARS BEFORE GREAT WAR
+#Аналог  scriptetpeacedeal.txt
+
+RUS_annex_kaz_ra = { #reactionist or authoritarian government
+	
+	if = {
+		limit = {
+			HIV = { is_in_faction_with = KAZ }
+			BUK = { is_in_faction_with = KAZ }
+		}					
+		KAZ = {
+			dismantle_faction = yes
+		}
+		RUS = {
+			white_peace = {
+				tag = KAZ
+				message = KAZ_and_ally_annexed_by_RUS
+			}
+			annex_country = {
+				target = KAZ
+				transfer_troops = no
+			}
+			annex_country = {
+				target = BUK
+				transfer_troops = no
+			}
+			annex_country = {
+				target = HIV
+				transfer_troops = no
+			}
+			clr_country_flag = RUS_invasion_in_kaz_flag
+			clr_country_flag = RUS_invasion_in_hiv_flag
+			clr_country_flag = RUS_invasion_in_buk_flag
+			set_country_flag = RUS_invasion_in_kaz_flag_end
+			set_country_flag = RUS_invasion_in_hiv_flag_end
+			set_country_flag = RUS_invasion_in_buk_flag_end
+		}
+	}
+	else_if = {
+		limit = {
+			has_global_flag = KAZ_tashent_agreement_fall
+		}
+					
+		RUS = {
+			white_peace = {
+				tag = KAZ
+				message = KAZ_conquered
+			}
+			annex_country = {
+				target = KAZ
+				transfer_troops = no
+			}
+			clr_country_flag = RUS_invasion_in_kaz_flag
+			set_country_flag = RUS_invasion_in_kaz_flag_end
+		}
+	}
+		
+	every_country = {
+		if = {
+			limit = {
+				is_in_faction_with = RUS
+				has_war_with = KAZ
+			}
+			white_peace = KAZ
+		}
+	}
+		
+	every_country = {
+		if = {
+			limit = {
+				is_in_faction_with = KAZ
+				has_war_with = RUS
+				#NOT = {
+				#	tag = HIV
+				#	tag = BUK
+				#}
+			}
+			white_peace = RUS
+		}
+	}
+}
