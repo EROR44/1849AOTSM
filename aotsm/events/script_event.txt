@@ -5557,28 +5557,49 @@ country_event = {
 	
 	hidden = yes
 	
-	immediate = {log = "[GetDateText]: [Root.GetName]: event script_event.30"}
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event script_event.30"
+		BYZ = {
+			country_event = {
+				id = script_event.31
+				days = 5
+			}
+		}
+	}
 	
 	option = {
 		name = script_event.30.a
 		BYZ = {
 			set_country_flag = start_of_fall_byz
 		}
-		BYZ = {
-			set_autonomy = {
-				target = CPT
-				autonomy_state = autonomy_free
-				end_wars = yes
-				end_civil_wars = yes
+		if = {
+			limit = {
+				CPT = {
+					OR = {
+						is_puppet_of = BYZ
+						is_subject_of = BYZ
+					}
+				}
 			}
-		}
-		CPT = {
-			transfer_state = 816
-		}
-		BYZ = {
-			country_event = {
-				id = script_event.31
-				days = 5
+			BYZ = {
+				set_autonomy = {
+					target = CPT
+					autonomy_state = autonomy_free
+					end_wars = yes
+					end_civil_wars = yes
+				}
+			}
+			CPT = {
+				transfer_state = 816
+			}
+			CPT = {
+				leave_faction = yes
+			}		
+			every_country = {
+				limit = {
+					has_war_with = CPT
+				}
+				white_peace = CPT
 			}
 		}
 	}
@@ -5594,26 +5615,47 @@ country_event = {
 	
 	hidden = yes
 	
-	immediate = {log = "[GetDateText]: [Root.GetName]: event script_event.31"}
-	
-	option = {
-		name = script_event.31.a
-		BYZ = {
-			set_country_flag = byz_save_country_by_sar
-			set_autonomy = {
-				target = SAR
-				autonomy_state = autonomy_free
-				end_wars = yes
-				end_civil_wars = yes
-			}
-		}
-		SAR = {
-			transfer_state = 116
-		}
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event script_event.31"
 		BYZ = {
 			country_event = {
 				id = script_event.32
 				days = 5
+			}
+		}
+	}
+	
+	option = {
+		name = script_event.31.a
+		if = {
+			limit = {
+				SAR = {
+					OR = {
+						is_puppet_of = BYZ
+						is_subject_of = BYZ
+					}
+				}
+			}
+			BYZ = {
+				set_country_flag = byz_save_country_by_sar
+				set_autonomy = {
+					target = SAR
+					autonomy_state = autonomy_free
+					end_wars = yes
+					end_civil_wars = yes
+				}
+			}
+			SAR = {
+				transfer_state = 116
+			}
+			SAR = {
+				leave_faction = yes
+			}		
+			every_country = {
+				limit = {
+					has_war_with = SAR
+				}
+				white_peace = SAR
 			}
 		}
 	}
@@ -5629,22 +5671,43 @@ country_event = {
 	
 	hidden = yes
 	
-	immediate = {log = "[GetDateText]: [Root.GetName]: event script_event.32"}
-	
-	option = {
-		name = script_event.31.a
-		BYZ = {
-			set_autonomy = {
-				target = KUR
-				autonomy_state = autonomy_free
-				end_wars = yes
-				end_civil_wars = yes
-			}
-		}
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event script_event.32"
 		BYZ = {
 			country_event = {
 				id = script_event.33
 				days = 5
+			}
+		}
+	}
+	
+	option = {
+		name = script_event.32.a
+		if = {
+			limit = {
+				KUR = {
+					OR = {
+						is_puppet_of = BYZ
+						is_subject_of = BYZ
+					}
+				}
+			}
+			BYZ = {
+				set_autonomy = {
+					target = KUR
+					autonomy_state = autonomy_free
+					end_wars = yes
+					end_civil_wars = yes
+				}
+			}
+			KUR = {
+				leave_faction = yes
+			}		
+			every_country = {
+				limit = {
+					has_war_with = KUR
+				}
+				white_peace = KUR
 			}
 		}
 	}
@@ -5660,22 +5723,43 @@ country_event = {
 	
 	hidden = yes
 	
-	immediate = {log = "[GetDateText]: [Root.GetName]: event script_event.33"}
-	
-	option = {
-		name = script_event.31.a
-		BYZ = {
-			set_autonomy = {
-				target = SYR
-				autonomy_state = autonomy_free
-				end_wars = yes
-				end_civil_wars = yes
-			}
-		}
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event script_event.33"
 		BYZ = {
 			country_event = {
 				id = script_event.34
 				days = 5
+			}
+		}
+	}
+	
+	option = {
+		name = script_event.31.a
+		if = {
+			limit = {
+				SYR = {
+					OR = {
+						is_puppet_of = BYZ
+						is_subject_of = BYZ
+					}
+				}
+			}
+			BYZ = {
+				set_autonomy = {
+					target = SYR
+					autonomy_state = autonomy_free
+					end_wars = yes
+					end_civil_wars = yes
+				}
+			}
+			SYR = {
+				leave_faction = yes
+			}		
+			every_country = {
+				limit = {
+					has_war_with = SYR
+				}
+				white_peace = SYR
 			}
 		}
 	}
