@@ -5557,28 +5557,49 @@ country_event = {
 	
 	hidden = yes
 	
-	immediate = {log = "[GetDateText]: [Root.GetName]: event script_event.30"}
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event script_event.30"
+		BYZ = {
+			country_event = {
+				id = script_event.31
+				days = 5
+			}
+		}
+	}
 	
 	option = {
 		name = script_event.30.a
 		BYZ = {
 			set_country_flag = start_of_fall_byz
 		}
-		BYZ = {
-			set_autonomy = {
-				target = CPT
-				autonomy_state = autonomy_free
-				end_wars = yes
-				end_civil_wars = yes
+		if = {
+			limit = {
+				CPT = {
+					OR = {
+						is_puppet_of = BYZ
+						is_subject_of = BYZ
+					}
+				}
 			}
-		}
-		CPT = {
-			transfer_state = 816
-		}
-		BYZ = {
-			country_event = {
-				id = script_event.31
-				days = 5
+			BYZ = {
+				set_autonomy = {
+					target = CPT
+					autonomy_state = autonomy_free
+					end_wars = yes
+					end_civil_wars = yes
+				}
+			}
+			CPT = {
+				transfer_state = 816
+			}
+			CPT = {
+				leave_faction = yes
+			}		
+			every_country = {
+				limit = {
+					has_war_with = CPT
+				}
+				white_peace = CPT
 			}
 		}
 	}
@@ -5594,26 +5615,47 @@ country_event = {
 	
 	hidden = yes
 	
-	immediate = {log = "[GetDateText]: [Root.GetName]: event script_event.31"}
-	
-	option = {
-		name = script_event.31.a
-		BYZ = {
-			set_country_flag = byz_save_country_by_sar
-			set_autonomy = {
-				target = SAR
-				autonomy_state = autonomy_free
-				end_wars = yes
-				end_civil_wars = yes
-			}
-		}
-		SAR = {
-			transfer_state = 116
-		}
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event script_event.31"
 		BYZ = {
 			country_event = {
 				id = script_event.32
 				days = 5
+			}
+		}
+	}
+	
+	option = {
+		name = script_event.31.a
+		if = {
+			limit = {
+				SAR = {
+					OR = {
+						is_puppet_of = BYZ
+						is_subject_of = BYZ
+					}
+				}
+			}
+			BYZ = {
+				set_country_flag = byz_save_country_by_sar
+				set_autonomy = {
+					target = SAR
+					autonomy_state = autonomy_free
+					end_wars = yes
+					end_civil_wars = yes
+				}
+			}
+			SAR = {
+				transfer_state = 116
+			}
+			SAR = {
+				leave_faction = yes
+			}		
+			every_country = {
+				limit = {
+					has_war_with = SAR
+				}
+				white_peace = SAR
 			}
 		}
 	}
@@ -5629,22 +5671,43 @@ country_event = {
 	
 	hidden = yes
 	
-	immediate = {log = "[GetDateText]: [Root.GetName]: event script_event.32"}
-	
-	option = {
-		name = script_event.31.a
-		BYZ = {
-			set_autonomy = {
-				target = KUR
-				autonomy_state = autonomy_free
-				end_wars = yes
-				end_civil_wars = yes
-			}
-		}
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event script_event.32"
 		BYZ = {
 			country_event = {
 				id = script_event.33
 				days = 5
+			}
+		}
+	}
+	
+	option = {
+		name = script_event.32.a
+		if = {
+			limit = {
+				KUR = {
+					OR = {
+						is_puppet_of = BYZ
+						is_subject_of = BYZ
+					}
+				}
+			}
+			BYZ = {
+				set_autonomy = {
+					target = KUR
+					autonomy_state = autonomy_free
+					end_wars = yes
+					end_civil_wars = yes
+				}
+			}
+			KUR = {
+				leave_faction = yes
+			}		
+			every_country = {
+				limit = {
+					has_war_with = KUR
+				}
+				white_peace = KUR
 			}
 		}
 	}
@@ -5660,22 +5723,43 @@ country_event = {
 	
 	hidden = yes
 	
-	immediate = {log = "[GetDateText]: [Root.GetName]: event script_event.33"}
-	
-	option = {
-		name = script_event.31.a
-		BYZ = {
-			set_autonomy = {
-				target = SYR
-				autonomy_state = autonomy_free
-				end_wars = yes
-				end_civil_wars = yes
-			}
-		}
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event script_event.33"
 		BYZ = {
 			country_event = {
 				id = script_event.34
 				days = 5
+			}
+		}
+	}
+	
+	option = {
+		name = script_event.31.a
+		if = {
+			limit = {
+				SYR = {
+					OR = {
+						is_puppet_of = BYZ
+						is_subject_of = BYZ
+					}
+				}
+			}
+			BYZ = {
+				set_autonomy = {
+					target = SYR
+					autonomy_state = autonomy_free
+					end_wars = yes
+					end_civil_wars = yes
+				}
+			}
+			SYR = {
+				leave_faction = yes
+			}		
+			every_country = {
+				limit = {
+					has_war_with = SYR
+				}
+				white_peace = SYR
 			}
 		}
 	}
@@ -6402,6 +6486,32 @@ country_event = {
 	}
 	
 }
+
+country_event = { #Blacksun Civil War
+	id = script_event.46
+	title = script_event.46.t
+	desc = script_event.46.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	is_triggered_only = yes
+
+	fire_only_once = yes
+	
+	hidden = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event script_event.46"
+	}
+	
+	option = {
+		name = script_event.46.a
+		PRU = {
+			pru_blacksun_civilwar = yes
+		}
+	}
+	
+}
+
 
 
 country_event = { #state rename
@@ -7214,6 +7324,93 @@ country_event = {
 		PRT = {
 			set_country_flag = prt_access_to_world_war_flag
 		}
+	}
+	
+}
+
+country_event = { #Set Victory in War
+	id = scriptww_event.100
+	title = scriptww_event.100.t
+	desc = scriptww_event.100.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+
+	trigger = {
+		has_global_flag = firts_world_war
+		OR = {
+			AND = {
+				PRU = {
+					has_war = no
+					has_completed_focus = PRU_first_world_war
+				}
+				NOT = {
+					has_global_flag = pru_capitulation 	
+				}
+			}
+			AND = {
+				BYZ = {
+					has_war = no
+					has_completed_focus = BYZ_war_come_to_us
+				}
+				NOT = {
+					has_global_flag = byz_capitulation 	
+				}
+			}
+			AND = {
+				CBI = {
+					has_war = no
+					has_completed_focus = CBI_great_war
+				}
+				NOT = {
+					has_global_flag = cbi_capitulation 	
+				}
+			}
+			AND = {
+				RUS = {
+					has_war = no
+					OR = {
+						has_completed_focus = RUS_unexpected_prussian_invade
+						has_completed_focus = RUS_marh_to_our_enemies
+						has_completed_focus = RUS_war_becomes_to_russia
+					}
+				}
+				NOT = {
+					has_global_flag = russian_capitulation 	
+				}
+			}
+			AND = {
+				FRR = {
+					has_war = no
+					has_country_flag = frr_access_to_world_war_flag
+				}
+				NOT = {
+					has_global_flag = france_capitulation 	
+				}
+			}
+			AND = {
+				PRT = {
+					has_war = no
+					has_country_flag = prt_access_to_world_war_flag
+				}
+				NOT = {
+					has_global_flag = prt_capitulation 	
+				}
+			}
+		}
+	}
+	
+	mean_time_to_happen = {
+		days = 5
+	}
+	
+	hidden = yes
+	
+	fire_only_once = yes
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event scriptww_event.100"}
+
+	option = {
+		name = scriptww_event.100.a
+		set_victory_in_world_war = yes
 	}
 	
 }
