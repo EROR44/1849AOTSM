@@ -9667,6 +9667,229 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: focus RUS_air_section"
 			air_experience = 25
+			custom_effect_tooltip = air_base_build_rus_tt
+			hidden_effect = {
+				set_country_flag = unlock_air_development_dec_flag
+				set_temp_variable = {
+					var = RUS.air_experience
+					value = 0
+				}
+				if = {
+					limit = {
+						RUS = {
+							has_tech = iw_basic_airframe
+						}
+					}
+					add_to_temp_variable = {
+						var = RUS.air_experience
+						value = 1
+					}
+				}
+				if = {
+					limit = {
+						RUS = {
+							has_tech = aircraft_construction
+						}
+					}
+					add_to_temp_variable = {
+						var = RUS.air_experience
+						value = 1
+					}
+				}
+				if = {
+					limit = {
+						RUS = {
+							has_tech = iw_small_airframe
+						}
+					}
+					add_to_temp_variable = {
+						var = RUS.air_experience
+						value = 1
+					}
+				}
+				if = {
+					limit = {
+						RUS = {
+							has_tech = iw_medium_airframe
+						}
+					}
+					add_to_temp_variable = {
+						var = RUS.air_experience
+						value = 1
+					}
+				}
+				if = {
+					limit = {
+						RUS = {
+							has_tech = iw_large_airframe
+						}
+					}
+					add_to_temp_variable = {
+						var = RUS.air_experience
+						value = 1
+					}
+				}
+				if = {
+					limit = {
+						RUS = {
+							has_tech = early_bombs
+						}
+					}
+					add_to_temp_variable = {
+						var = RUS.air_experience
+						value = 1
+					}
+				}
+				if = {
+					limit = {
+						RUS = {
+							has_tech = aa_lmg
+						}
+					}
+					add_to_temp_variable = {
+						var = RUS.air_experience
+						value = 1
+					}
+				}
+				if = {
+					limit = {
+						RUS = {
+							has_tech = engines_1
+						}
+					}
+					add_to_temp_variable = {
+						var = RUS.air_experience
+						value = 1
+					}
+				}
+				if = {
+					limit = {
+						NOT = {
+							RUS = {
+								has_tech = aircraft_construction
+							}
+						}
+					}
+					RUS = {
+						set_technology = {
+							aircraft_construction = 1
+						}
+					}
+				}
+				if = {
+					limit = {
+						NOT = {
+							RUS = {
+								has_tech = iw_basic_airframe
+							}
+						}
+					}
+					RUS = {
+						set_technology = {
+							iw_basic_airframe = 1
+						}
+					}
+				}
+				if = {
+					limit = {
+						NOT = {
+							RUS = {
+								has_tech = iw_small_airframe
+							}
+						}
+					}
+					RUS = {
+						set_technology = {
+							iw_small_airframe = 1
+						}
+					}
+				}
+				if = {
+					limit = {
+						NOT = {
+							RUS = {
+								has_tech = iw_medium_airframe
+							}
+						}
+					}
+					RUS = {
+						set_technology = {
+							iw_medium_airframe = 1
+						}
+					}
+				}
+				if = {
+					limit = {
+						NOT = {
+							RUS = {
+								has_tech = iw_large_airframe
+							}
+						}
+					}
+					RUS = {
+						set_technology = {
+							iw_large_airframe = 1
+						}
+					}
+				}
+				if = {
+					limit = {
+						NOT = {
+							RUS = {
+								has_tech = early_bombs
+							}
+						}
+					}
+					RUS = {
+						set_technology = {
+							early_bombs = 1
+						}
+					}
+				}
+				if = {
+					limit = {
+						NOT = {
+							RUS = {
+								has_tech = aa_lmg
+							}
+						}
+					}
+					RUS = {
+						set_technology = {
+							aa_lmg = 1
+						}
+					}
+				}
+				if = {
+					limit = {
+						NOT = {
+							RUS = {
+								has_tech = engines_1
+							}
+						}
+					}
+					RUS = {
+						set_technology = {
+							engines_1 = 1
+						}
+					}
+				}
+				set_temp_variable = {
+					var = RUS.air_experience_give
+					value = 5
+				}
+				if = {
+					limit = {
+						check_variable = {
+							RUS.air_experience > 0
+						}
+					}
+					multiply_temp_variable = { RUS.air_experience_give = RUS.air_experience }
+					RUS = {
+						air_experience = RUS.air_experience_give
+					}
+				}
+			}
 		}
 	}
 	
@@ -11298,6 +11521,7 @@ focus_tree = {
 		cost = 5
 		
 		available = {
+			is_in_faction = yes
 			has_global_flag = firts_world_war
 			custom_trigger_tooltip = {
 				tooltip = not_world_war_has_ended
@@ -11322,6 +11546,15 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: focus RUS_alliance_cooperation "
 			country_event = rus_great_war_event.4 
+			hidden_effect = {
+				every_country = {
+					limit = {
+						is_in_faction_with = RUS
+						has_war = yes
+					}
+					country_event = { id = rus_great_war_event.4 days = 2 }
+				}	
+			}
 		}
 	}
 	
@@ -12335,10 +12568,13 @@ focus_tree = {
 						OR = {
 							tag = PRU
 							tag = BYZ
+							tag = AUS
 							is_subject_of = PRU
 							is_subject_of = BYZ
+							is_subject_of = AUS
 							is_in_faction_with = PRU
 							is_in_faction_with = BYZ
+							is_in_faction_with = AUS
 						}
 					}
 				}
@@ -12392,10 +12628,13 @@ focus_tree = {
 						OR = {
 							tag = PRU
 							tag = BYZ
+							tag = AUS
 							is_subject_of = PRU
 							is_subject_of = BYZ
+							is_subject_of = AUS
 							is_in_faction_with = PRU
 							is_in_faction_with = BYZ
+							is_in_faction_with = AUS
 						}
 					}
 				}
@@ -12420,10 +12659,13 @@ focus_tree = {
 						OR = {
 							tag = PRU
 							tag = BYZ
+							tag = AUS
 							is_subject_of = PRU
 							is_subject_of = BYZ
+							is_subject_of = AUS
 							is_in_faction_with = PRU
 							is_in_faction_with = BYZ
+							is_in_faction_with = AUS
 						}
 					}
 				}
