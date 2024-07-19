@@ -8685,8 +8685,228 @@ country_event = {
 	option = {
 		name = russian_socialist_air_event.1.a	
 		air_experience = 10
+		custom_effect_tooltip = air_base_build_rus_tt
 		hidden_effect = {
-			
+			set_country_flag = unlock_air_development_dec_flag
+			set_temp_variable = {
+				var = RUS.air_experience
+				value = 0
+			}
+			if = {
+				limit = {
+					RUS = {
+						has_tech = iw_basic_airframe
+					}
+				}
+				add_to_temp_variable = {
+					var = RUS.air_experience
+					value = 1
+				}
+			}
+			if = {
+				limit = {
+					RUS = {
+						has_tech = aircraft_construction
+					}
+				}
+				add_to_temp_variable = {
+					var = RUS.air_experience
+					value = 1
+				}
+			}
+			if = {
+				limit = {
+					RUS = {
+						has_tech = iw_small_airframe
+					}
+				}
+				add_to_temp_variable = {
+					var = RUS.air_experience
+					value = 1
+				}
+			}
+			if = {
+				limit = {
+					RUS = {
+						has_tech = iw_medium_airframe
+					}
+				}
+				add_to_temp_variable = {
+					var = RUS.air_experience
+					value = 1
+				}
+			}
+			if = {
+				limit = {
+					RUS = {
+						has_tech = iw_large_airframe
+					}
+				}
+				add_to_temp_variable = {
+					var = RUS.air_experience
+					value = 1
+				}
+			}
+			if = {
+				limit = {
+					RUS = {
+						has_tech = early_bombs
+					}
+				}
+				add_to_temp_variable = {
+					var = RUS.air_experience
+					value = 1
+				}
+			}
+			if = {
+				limit = {
+					RUS = {
+						has_tech = aa_lmg
+					}
+				}
+				add_to_temp_variable = {
+					var = RUS.air_experience
+					value = 1
+				}
+			}
+			if = {
+				limit = {
+					RUS = {
+						has_tech = engines_1
+					}
+				}
+				add_to_temp_variable = {
+					var = RUS.air_experience
+					value = 1
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						RUS = {
+							has_tech = aircraft_construction
+						}
+					}
+				}
+				RUS = {
+					set_technology = {
+						aircraft_construction = 1
+					}
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						RUS = {
+							has_tech = iw_basic_airframe
+						}
+					}
+				}
+				RUS = {
+					set_technology = {
+						iw_basic_airframe = 1
+					}
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						RUS = {
+							has_tech = iw_small_airframe
+						}
+					}
+				}
+				RUS = {
+					set_technology = {
+						iw_small_airframe = 1
+					}
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						RUS = {
+							has_tech = iw_medium_airframe
+						}
+					}
+				}
+				RUS = {
+					set_technology = {
+						iw_medium_airframe = 1
+					}
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						RUS = {
+							has_tech = iw_large_airframe
+						}
+					}
+				}
+				RUS = {
+					set_technology = {
+						iw_large_airframe = 1
+					}
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						RUS = {
+							has_tech = early_bombs
+						}
+					}
+				}
+				RUS = {
+					set_technology = {
+						early_bombs = 1
+					}
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						RUS = {
+							has_tech = aa_lmg
+						}
+					}
+				}
+				RUS = {
+					set_technology = {
+						aa_lmg = 1
+					}
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						RUS = {
+							has_tech = engines_1
+						}
+					}
+				}
+				RUS = {
+					set_technology = {
+						engines_1 = 1
+					}
+				}
+			}
+			set_temp_variable = {
+				var = RUS.air_experience_give
+				value = 5
+			}
+			if = {
+				limit = {
+					check_variable = {
+						RUS.air_experience > 0
+					}
+				}
+				multiply_temp_variable = { RUS.air_experience_give = RUS.air_experience }
+				RUS = {
+					air_experience = RUS.air_experience_give
+				}
+			}
 		}
 	}	
 
@@ -13296,7 +13516,7 @@ country_event = { #Трудности военного времени
 	id = rus_great_war_event.4 
 	title = rus_great_war_event.4.t
 	desc = rus_great_war_event.4.d
-	picture = GFX_report_event_polands_deportation
+	picture = GFX_report_event_russian_soldiers
 	
 	fire_only_once = yes
 
@@ -13309,7 +13529,8 @@ country_event = { #Трудности военного времени
 	
 	option = {
 		name = rus_great_war_event.4.a	
-		add_ideas = RUS_gw_support_france
+		add_stability = 0.05
+		add_war_support = 0.05
 		hidden_effect = {
 			
 		}
@@ -13320,7 +13541,7 @@ country_event = { #Поддержка для друзей из Франции
 	id = rus_great_war_event.5 
 	title = rus_great_war_event.5.t
 	desc = rus_great_war_event.5.d
-	picture = GFX_report_event_polands_deportation
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
 	
 	fire_only_once = yes
 
@@ -13333,7 +13554,7 @@ country_event = { #Поддержка для друзей из Франции
 	
 	option = {
 		name = rus_great_war_event.5.a	
-		add_ideas = RUS_gw_support_cbi
+		add_ideas = RUS_gw_support_france
 		hidden_effect = {
 			
 		}
@@ -13344,7 +13565,7 @@ country_event = { #Поддержка для друзей из КБО
 	id = rus_great_war_event.6
 	title = rus_great_war_event.6.t
 	desc = rus_great_war_event.6.d
-	picture = GFX_report_event_polands_deportation
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
 	
 	fire_only_once = yes
 
@@ -13357,7 +13578,7 @@ country_event = { #Поддержка для друзей из КБО
 	
 	option = {
 		name = rus_great_war_event.6.a	
-		
+		add_ideas = RUS_gw_support_cbi
 		hidden_effect = {
 			
 		}
@@ -13368,7 +13589,7 @@ country_event = { #Кооперация действий в альянсе - и�
 	id = rus_great_war_event.7
 	title = rus_great_war_event.7.t
 	desc = rus_great_war_event.7.d
-	picture = GFX_report_event_polands_deportation
+	picture = GFX_report_event_russian_millitary_planning
 	
 	fire_only_once = yes
 
@@ -13392,7 +13613,7 @@ country_event = { #Кооперация действий в альянсе - д�
 	id = rus_great_war_event.8
 	title = rus_great_war_event.8.t
 	desc = rus_great_war_event.8.d
-	picture = GFX_report_event_polands_deportation
+	picture = GFX_report_event_russian_millitary_planning
 	
 	fire_only_once = yes
 
@@ -13416,7 +13637,7 @@ country_event = { #Ведение наступательной войны
 	id = rus_great_war_event.9
 	title = rus_great_war_event.9.t
 	desc = rus_great_war_event.9.d
-	picture = GFX_report_event_polands_deportation
+	picture = GFX_report_event_russian_millitary_planning
 	
 	fire_only_once = yes
 
@@ -13441,7 +13662,7 @@ country_event = { #Промышленность под угрозой
 	id = rus_great_war_event.10
 	title = rus_great_war_event.10.t
 	desc = rus_great_war_event.10.d
-	picture = GFX_report_event_polands_deportation
+	picture = GFX_report_event_russian_warehouse_2
 	
 	fire_only_once = yes
 
@@ -13465,7 +13686,7 @@ country_event = { #Состояние русской европейской пр
 	id = rus_great_war_event.11
 	title = rus_great_war_event.11.t
 	desc = rus_great_war_event.11.d
-	picture = GFX_report_event_polands_deportation
+	picture = GFX_report_event_russian_millitary_planning
 	
 	fire_only_once = yes
 
@@ -13478,7 +13699,8 @@ country_event = { #Состояние русской европейской пр
 	
 	option = {
 		name = rus_great_war_event.11.a	
-		
+		add_political_power = 50
+		add_stability = -0.02
 		hidden_effect = {
 			
 		}
@@ -13489,7 +13711,7 @@ country_event = { #Работа в 2 смены
 	id = rus_great_war_event.12
 	title = rus_great_war_event.12.t
 	desc = rus_great_war_event.12.d
-	picture = GFX_report_event_polands_deportation
+	picture = GFX_report_event_inside_factory
 	
 	fire_only_once = yes
 
@@ -13513,7 +13735,7 @@ country_event = { #Проект строительства новых завод
 	id = rus_great_war_event.13
 	title = rus_great_war_event.13.t
 	desc = rus_great_war_event.13.d
-	picture = GFX_report_event_polands_deportation
+	picture = GFX_report_event_russian_warehouse_2
 	
 	fire_only_once = yes
 
@@ -13540,7 +13762,7 @@ country_event = { #Новые заводы за уралом
 	id = rus_great_war_event.14
 	title = rus_great_war_event.14.t
 	desc = rus_great_war_event.14.d
-	picture = GFX_report_event_polands_deportation
+	picture = GFX_report_event_russian_warehouse
 	
 	fire_only_once = yes
 
