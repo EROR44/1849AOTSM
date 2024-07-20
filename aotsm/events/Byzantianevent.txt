@@ -7480,7 +7480,7 @@ country_event = { #Rest from Serbia
 
 #1-48 MAIN AND PRINCE IN BYZANTIUM
 
-country_event = { #Education of Princ
+country_event = { #Education of Prince #30 Days
 	id = byz_zakharias.1
 	title = byz_zakharias.1.t
 	desc = byz_zakharias.1.d
@@ -7510,7 +7510,7 @@ country_event = { #Education of Princ
 	
 }
 
-country_event = { #Family opinion
+country_event = { #Family opinion #37 Days
 	id = byz_zakharias.2
 	title = byz_zakharias.2.t
 	desc = byz_zakharias.2.d
@@ -7539,7 +7539,7 @@ country_event = { #Family opinion
 	
 }
 
-country_event = { #Social life of princ
+country_event = { #Social life of prince #69 Days
 	id = byz_zakharias.3
 	title = byz_zakharias.3.t
 	desc = byz_zakharias.3.d
@@ -7568,7 +7568,7 @@ country_event = { #Social life of princ
 	
 }
 
-country_event = { #Opinion about princ
+country_event = { #Opinion about prince #104 Days
 	id = byz_zakharias.4
 	title = byz_zakharias.4.t
 	desc = byz_zakharias.4.d
@@ -7619,7 +7619,7 @@ country_event = { #Opinion about princ
 	
 }
 
-country_event = { #Talk with son
+country_event = { #Talk with son #39 Days
 	id = byz_zakharias.5
 	title = byz_zakharias.5.t
 	desc = byz_zakharias.5.d
@@ -7969,11 +7969,11 @@ country_event = { #Wedding of prince
 
 #TRUE ROUT OF PRINCE
 
-country_event = { #Second dialog with son
+country_event = { #Second dialog with son #114 Days
 	id = byz_zakharias.15
 	title = byz_zakharias.15.t
 	desc = byz_zakharias.15.d
-	picture = GFX_
+	picture = GFX_report_event_byz_imperial_thron
 	
 	fire_only_once = yes
 	
@@ -7981,11 +7981,116 @@ country_event = { #Second dialog with son
 	
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event byz_zakharias.15"
+		hidden_effect = {
+			BYZ = {
+				country_event = {
+					id = byz_zakharias.16
+					days = 5
+				}
+			}
+		}
 	}
 
 	option = { #What is my decision
 		name = byz_zakharias.15.a
 		add_political_power = -25
+		effect_tooltip = {
+			BYZ = {
+				country_event = byz_zakharias.16
+			}
+		}
+	}
+	
+}
+
+country_event = { #Think of Zakharias #119 Days
+	id = byz_zakharias.16
+	title = byz_zakharias.16.t
+	desc = byz_zakharias.16.d
+	picture = GFX_report_event_byz_holy_palace
+	
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event byz_zakharias.16"
+		hidden_effect = {
+			BYZ = {
+				country_event = {
+					id = byz_zakharias.17
+					days = 121
+				}
+			}
+		}
+	}
+
+	option = { #It's Time to change
+		name = byz_zakharias.16.a
+		add_stability = 0.025
+		effect_tooltip = {
+			BYZ = {
+				country_event = byz_zakharias.17
+			}
+		}
+	}
+	
+}
+
+country_event = { #What to do #240 Days
+	id = byz_zakharias.17
+	title = byz_zakharias.17.t
+	desc = byz_zakharias.17.d
+	picture = GFX_event_byz_universlum
+	
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event byz_zakharias.17"
+		hidden_effect = {
+			#BYZ = {
+			#	country_event = {
+			#		id = byz_zakharias.18
+			#		days = 
+			#	}
+			#}
+		}
+	}
+
+	option = { #I will best Diplomat
+		name = byz_zakharias.17.a
+		ai_chance = {
+			base = 45
+		}
+		custom_effect_tooltip = byz_zakharias_diplomacy_learing_tt
+		BYZ = {
+			set_country_flag = byz_zakharias_diplomacy_learing
+		}
+	}
+	
+	option = { #I will best Military
+		name = byz_zakharias.17.b
+		ai_chance = {
+			base = 45
+		}
+		custom_effect_tooltip = byz_zakharias_military_learing_tt
+		BYZ = {
+			set_country_flag = byz_zakharias_military_learing
+		}
+	}
+	
+	option = { #I become next Zakharias The Great
+		name = byz_zakharias.17.c
+		ai_chance = {
+			base = 10
+		}
+		add_political_power = -50
+		custom_effect_tooltip = byz_zakaharias_learning_all_tt
+		BYZ = {
+			set_country_flag = byz_zakharias_try_all
+		}
 	}
 	
 }
