@@ -5,6 +5,7 @@ add_namespace = rusOrl #Орлов
 add_namespace = rusIgn #Игнатьев
 add_namespace = rusRomAN #Александр Павлович
 #add_namespace = rusPus #Пушкин
+add_namespace = rus_propaganda_and_reneim_event #
 add_namespace = russian_european_politic #
 add_namespace = political_confrontation #
 add_namespace = finland_quiestion_event #
@@ -763,6 +764,276 @@ country_event = { #
 			base = 20
 		}
 		remove_ideas = RUS_an_echo_of_serfdom
+	}
+	
+}
+
+#######################PROPAGANDA_AND_RENEIM_SECTION##########################
+#цепочка на пропаганду и ренейминг городов
+
+country_event = { # Дело государствунной важности
+	id = rus_propaganda_and_reneim_event.1
+	title = rus_propaganda_and_reneim_event.1.t
+	desc = rus_propaganda_and_reneim_event.1.d
+	picture = GFX_report_event_political_discussion
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event rus_propaganda_and_reneim_event.1"
+	}
+	
+	option = {
+		name = rus_propaganda_and_reneim_event.1.a	
+		ai_chance = {
+			base = 10
+			modifier = {
+				add = 30
+				has_country_leader = { 
+					name = RUS_Dmitry_Alekseevich_Milyutin 
+					ruling_only = yes 
+				} 
+				
+			}
+			modifier = {
+				add = -20
+				has_country_leader = { 
+					name = RUS_Konstantin_Nikolaevich 
+					ruling_only = yes 
+				} 
+				
+			}
+			modifier = {
+				add = -50
+				has_country_leader = { 
+					name = RUS_Mihail_Fedorovich_Orlov 
+					ruling_only = yes 
+				} 
+				
+			}
+		}
+		add_political_power = 25
+		add_stability = -0.01
+	}
+	
+	option = {
+		name = rus_propaganda_and_reneim_event.1.b	
+		ai_chance = {
+			base = 10
+			modifier = {
+				add = -5
+				has_country_leader = { 
+					name = RUS_Dmitry_Alekseevich_Milyutin 
+					ruling_only = yes 
+				} 
+				
+			}
+			modifier = {
+				add = 30
+				has_country_leader = { 
+					name = RUS_Konstantin_Nikolaevich 
+					ruling_only = yes 
+				} 
+				
+			}
+			modifier = {
+				add = 5
+				has_country_leader = { 
+					name = RUS_Mihail_Fedorovich_Orlov 
+					ruling_only = yes 
+				} 
+				
+			}
+		}
+		add_political_power = -25
+		hidden_effect = {
+			country_event = { id = rus_propaganda_and_reneim_event.3 days = 63 }
+		}
+	}
+	
+	option = {
+		name = rus_propaganda_and_reneim_event.1.c	
+		ai_chance = {
+			base = 10
+			modifier = {
+				add = -100
+				has_country_leader = { 
+					name = RUS_Dmitry_Alekseevich_Milyutin 
+					ruling_only = yes 
+				} 
+				
+			}
+			modifier = {
+				add = -100
+				has_country_leader = { 
+					name = RUS_Konstantin_Nikolaevich 
+					ruling_only = yes 
+				} 
+				
+			}
+			modifier = {
+				add = 50
+				has_country_leader = { 
+					name = RUS_Mihail_Fedorovich_Orlov 
+					ruling_only = yes 
+				} 
+				
+			}
+		}
+		add_political_power = -50
+		hidden_effect = {
+			country_event = { id = rus_propaganda_and_reneim_event.2 days = 21 }
+			country_event = { id = rus_propaganda_and_reneim_event.3 days = 63 }
+		}
+	}
+	
+}
+
+country_event = { # Переименование Екатеринодара
+	id = rus_propaganda_and_reneim_event.2
+	title = rus_propaganda_and_reneim_event.2.t
+	desc = rus_propaganda_and_reneim_event.2.d
+	picture = GFX_report_event_political_discussion
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event rus_propaganda_and_reneim_event.2"
+	}
+	
+	option = {
+		name = rus_propaganda_and_reneim_event.2.a	
+		ai_chance = {
+			base = 10
+		}
+	}
+	
+}
+
+country_event = { # Начало пропагандисткой кампании
+	id = rus_propaganda_and_reneim_event.3
+	title = rus_propaganda_and_reneim_event.3.t
+	desc = rus_propaganda_and_reneim_event.3.d
+	picture = GFX_report_event_political_discussion
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event rus_propaganda_and_reneim_event.3"
+		hidden_effect = {
+			country_event = { id = rus_propaganda_and_reneim_event.4 days = 365 }
+		}
+	}
+	
+	option = {
+		name = rus_propaganda_and_reneim_event.3.a	
+		ai_chance = {
+			base = 10
+		}
+		add_timed_idea = {
+			idea = RUS_propaganda_in_press
+			days = 1095
+		}
+	}
+	
+}
+
+country_event = { # Первые результаты пропагандисткой кампании
+	id = rus_propaganda_and_reneim_event.4
+	title = rus_propaganda_and_reneim_event.4.t
+	desc = rus_propaganda_and_reneim_event.4.d
+	picture = GFX_report_event_political_discussion
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event rus_propaganda_and_reneim_event.4"
+	}
+	
+	option = {
+		name = rus_propaganda_and_reneim_event.4.a	
+		ai_chance = {
+			base = 10
+		}
+		add_stability = 0.025
+		add_war_support = 0.025
+	}
+	
+}
+
+country_event = { # 
+	id = rus_propaganda_and_reneim_event.5
+	title = rus_propaganda_and_reneim_event.5.t
+	desc = rus_propaganda_and_reneim_event.5.d
+	picture = GFX_report_event_political_discussion
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event rus_propaganda_and_reneim_event.5"
+	}
+	
+	option = {
+		name = rus_propaganda_and_reneim_event.5.a	
+		ai_chance = {
+			base = 10
+		}
+	}
+	
+}
+
+country_event = { # 
+	id = rus_propaganda_and_reneim_event.6
+	title = rus_propaganda_and_reneim_event.6.t
+	desc = rus_propaganda_and_reneim_event.6.d
+	picture = GFX_report_event_political_discussion
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event rus_propaganda_and_reneim_event.6"
+	}
+	
+	option = {
+		name = rus_propaganda_and_reneim_event.6.a	
+		ai_chance = {
+			base = 10
+		}
+	}
+	
+}
+
+country_event = { # 
+	id = rus_propaganda_and_reneim_event.7
+	title = rus_propaganda_and_reneim_event.7.t
+	desc = rus_propaganda_and_reneim_event.7.d
+	picture = GFX_report_event_political_discussion
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event rus_propaganda_and_reneim_event.7"
+	}
+	
+	option = {
+		name = rus_propaganda_and_reneim_event.7.a	
+		ai_chance = {
+			base = 10
+		}
 	}
 	
 }
