@@ -3,13 +3,33 @@
 
 RUS_annex_kaz_ra = { #reactionist or authoritarian government
 	
+	every_country = {
+		if = {
+			limit = {
+				is_in_faction_with = RUS
+				has_war_with = KAZ
+			}
+			white_peace = KAZ
+		}
+	}
+		
+	every_country = {
+		if = {
+			limit = {
+				is_in_faction_with = KAZ
+				has_war_with = RUS
+				#NOT = {
+				#	tag = HIV
+				#	tag = BUK
+				#}
+			}
+			white_peace = RUS
+		}
+	}
+	
 	if = {
 		limit = {
-			HIV = { is_in_faction_with = KAZ }
-			BUK = { is_in_faction_with = KAZ }
-		}					
-		KAZ = {
-			dismantle_faction = yes
+			NOT = { has_global_flag = KAZ_tashent_agreement_fall }
 		}
 		RUS = {
 			white_peace = {
@@ -35,12 +55,16 @@ RUS_annex_kaz_ra = { #reactionist or authoritarian government
 			set_country_flag = RUS_invasion_in_hiv_flag_end
 			set_country_flag = RUS_invasion_in_buk_flag_end
 		}
+		
+		#KAZ = {
+		#	dismantle_faction = yes
+		#}
 	}
 	else_if = {
 		limit = {
 			has_global_flag = KAZ_tashent_agreement_fall
 		}
-					
+			
 		RUS = {
 			white_peace = {
 				tag = KAZ
@@ -52,30 +76,6 @@ RUS_annex_kaz_ra = { #reactionist or authoritarian government
 			}
 			clr_country_flag = RUS_invasion_in_kaz_flag
 			set_country_flag = RUS_invasion_in_kaz_flag_end
-		}
-	}
-		
-	every_country = {
-		if = {
-			limit = {
-				is_in_faction_with = RUS
-				has_war_with = KAZ
-			}
-			white_peace = KAZ
-		}
-	}
-		
-	every_country = {
-		if = {
-			limit = {
-				is_in_faction_with = KAZ
-				has_war_with = RUS
-				#NOT = {
-				#	tag = HIV
-				#	tag = BUK
-				#}
-			}
-			white_peace = RUS
 		}
 	}
 }
