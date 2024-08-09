@@ -291,6 +291,7 @@ set_victory_in_world_war = {
 		}
 		clr_global_flag = firts_world_war
 		set_global_flag = first_world_war_end
+		set_global_flag = peace_world_war_flag
 	}
 }
 
@@ -3152,27 +3153,26 @@ cbi_capitulation_all = {
 			transfer_state = 709
 			transfer_state = 710
 		}
-		BYZ = {
-			if = {
-				limit = {
-					CBI = {
-						owns_state = 681
-					}
-				}
-			}
-			ZUL = {
-				transfer_state = 681
-				add_state_core = 681
-			}
-			if = {
-				limit = {
+		if = {
+			limit = {
+				OR = {
 					SAB = {
 						OR = {
 							is_subject_of = CBI
 							is_puppet_of = CBI
 						}
 					}
+					AND = {
+						SAB = {
+							is_in_faction_with = CBI
+							has_war_with = BYZ
+							is_puppet = no
+							is_subject = no
+						}
+					}
 				}
+			}
+			BYZ = {
 				set_autonomy = {
 					target = SAB
 					autonomy_state = autonomy_aotsm_protectorat
@@ -3183,25 +3183,36 @@ cbi_capitulation_all = {
 					target_country = SAB
 					character = BYZ_Konstantinos_Mavromichalis
 				}
-				SAB = {
-					set_politics = { ruling_party = authoritarian elections_allowed = no }
-					set_popularities = {
-						democratic = 20
-						socialism = 3
-						reactionist = 21
-						authoritarian = 56
-					}
-					add_country_leader_role = {
-						character = BYZ_Konstantinos_Mavromichalis
-						promote_leader = yes
-						country_leader = {
-							ideology = unirtarism
-							expire = "1900.1.1.1"
-							traits = { roman_lord }
-						}
-					}
-					set_cosmetic_tag = SAB_BYZ
+			}
+			SAB = {
+				set_politics = { ruling_party = authoritarian elections_allowed = no }
+				set_popularities = {
+					democratic = 20
+					socialism = 3
+					reactionist = 21
+					authoritarian = 56
 				}
+				add_country_leader_role = {
+					character = BYZ_Konstantinos_Mavromichalis
+					promote_leader = yes
+					country_leader = {
+						ideology = unirtarism
+						expire = "1900.1.1.1"
+						traits = { roman_lord }
+					}
+				}
+				set_cosmetic_tag = SAB_BYZ
+			}
+		}
+		if = {
+			limit = {
+				CBI = {
+					owns_state = 681
+				}
+			}
+			ZUL = {
+				transfer_state = 681
+				add_state_core = 681
 			}
 		}
 		RIT = {
