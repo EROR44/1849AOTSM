@@ -3014,9 +3014,17 @@ on_actions = {
 			if = {
 				limit = {
 					tag = FRR
-					has_global_flag = firts_world_war
-					FRR = {
-						has_war_with = PRU
+					OR = {
+						FRR = {
+							has_war_with = PRU
+						}
+						FRR = {
+							has_war_with = BYZ
+						}
+					}
+					OR = {
+						has_global_flag = firts_world_war
+						has_global_flag = peace_world_war_flag
 					}
 				}
 				if = {
@@ -3956,12 +3964,15 @@ on_actions = {
 			if = {
 				limit = {
 					tag = CBI
-					has_global_flag = firts_world_war
 					CBI = {
 						has_war_with = PRU
 					}
 					NOT = {
 						has_global_flag = cbi_capitulation
+					}
+					OR = {
+						has_global_flag = firts_world_war
+						has_global_flag = peace_world_war_flag
 					}
 				}
 				cbi_capitulation_all = yes
@@ -3981,7 +3992,6 @@ on_actions = {
 			if = {
 				limit = {
 					tag = PRT
-					has_global_flag = firts_world_war
 					OR = {
 						PRT = {
 							has_war_with = PRU
@@ -3992,6 +4002,10 @@ on_actions = {
 					}
 					NOT = {
 						has_global_flag = prt_capitulation
+					}
+					OR = {
+						has_global_flag = firts_world_war
+						has_global_flag = peace_world_war_flag
 					}
 				}
 				prt_capitulation_all = yes
@@ -4011,7 +4025,6 @@ on_actions = {
 			if = {
 				limit = {
 					tag = RUS
-					has_global_flag = firts_world_war
 					OR = {
 						RUS = {
 							has_war_with = PRU
@@ -4022,6 +4035,10 @@ on_actions = {
 					}
 					NOT = {
 						has_global_flag = russian_capitulation
+					}
+					OR = {
+						has_global_flag = firts_world_war
+						has_global_flag = peace_world_war_flag
 					}
 				}
 				rus_capitulation_all = yes
@@ -5964,7 +5981,6 @@ on_actions = {
 			if = {
 				limit = {
 					tag = SCA
-					has_global_flag = firts_world_war
 					OR = {
 						SCA = {
 							has_war_with = RUS
@@ -5975,6 +5991,10 @@ on_actions = {
 					}
 					NOT = {
 						has_global_flag = sca_capitulation
+					}
+					OR = {
+						has_global_flag = firts_world_war
+						has_global_flag = peace_world_war_flag
 					}
 				}
 				scandinavia_capitulation_all = yes
@@ -5987,7 +6007,6 @@ on_actions = {
 			if = {
 				limit = {
 					tag = PRU
-					has_global_flag = firts_world_war
 					OR = {
 						PRU = {
 							has_war_with = RUS
@@ -6008,6 +6027,10 @@ on_actions = {
 					NOT = {
 						has_global_flag = blacksun_civilwar_going
 					}
+					OR = {
+						has_global_flag = firts_world_war
+						has_global_flag = peace_world_war_flag
+					}
 				}
 				prussian_capitulation_all = yes
 			}
@@ -6015,7 +6038,6 @@ on_actions = {
 			if = {
 				limit = {
 					tag = BYZ
-					has_global_flag = firts_world_war
 					OR = {
 						BYZ = {
 							has_war_with = RUS
@@ -6029,6 +6051,10 @@ on_actions = {
 					}
 					NOT = {
 						has_global_flag = byz_capitulation
+					}
+					OR = {
+						has_global_flag = firts_world_war
+						has_global_flag = peace_world_war_flag
 					}
 				}
 				if = {
@@ -7905,6 +7931,102 @@ on_actions = {
 					set_country_flag = lose_expansion_war
 				}
 			}
+			#PRM capitulation
+			if = {
+				limit = {
+					tag = PRM
+					PRM = {
+						has_country_flag = PRM_vs_SAR
+					}
+				}
+				SAR = {	
+					white_peace = {
+						tag = PRM
+						message = SAR_annex_PRM_peace_tt
+					}
+				}
+				PRM = {
+					clr_country_flag = PRM_vs_SAR
+				}
+				SAR = {
+					annex_country = {
+						target = PRM
+						transfer_troops = yes
+					}
+				}
+			}
+			#MOD capitulation
+			if = {
+				limit = {
+					tag = MOD
+					MOD = {
+						has_country_flag = MOD_vs_SAR
+					}
+				}
+				SAR = {	
+					white_peace = {
+						tag = MOD
+						message = SAR_annex_MOD_peace_tt
+					}
+				}
+				MOD = {
+					clr_country_flag = MOD_vs_SAR
+				}
+				SAR = {
+					annex_country = {
+						target = MOD
+						transfer_troops = yes
+					}
+				}
+			}
+			#TUS capitulation
+			if = {
+				limit = {
+					tag = TUS
+					TUS = {
+						has_country_flag = TUS_vs_SAR
+					}
+				}
+				SAR = {	
+					white_peace = {
+						tag = TUS
+						message = SAR_annex_TUS_peace_tt
+					}
+				}
+				TUS = {
+					clr_country_flag = TUS_vs_SAR
+				}
+				SAR = {
+					annex_country = {
+						target = TUS
+						transfer_troops = yes
+					}
+				}
+			}
+			#SYC capitulation
+			if = {
+				limit = {
+					tag = SYC
+					SYC = {
+						has_country_flag = SYC_vs_SAR
+					}
+				}
+				SAR = {	
+					white_peace = {
+						tag = SYC
+						message = SAR_annex_SYC_peace_tt
+					}
+				}
+				SYC = {
+					clr_country_flag = SYC_vs_SAR
+				}
+				SAR = {
+					annex_country = {
+						target = SYC
+						transfer_troops = yes
+					}
+				}
+			}
 		}
 	}
 	on_state_control_changed = {
@@ -9687,7 +9809,7 @@ on_actions = {
 						has_war_with = AUS
 					}
 					AUS = {
-						surrender_progress > 0.249
+						surrender_progress > 0.199
 					}
 					OR = {
 						9 = {

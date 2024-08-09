@@ -291,6 +291,7 @@ set_victory_in_world_war = {
 		}
 		clr_global_flag = firts_world_war
 		set_global_flag = first_world_war_end
+		set_global_flag = peace_world_war_flag
 	}
 }
 
@@ -3155,17 +3156,6 @@ cbi_capitulation_all = {
 		BYZ = {
 			if = {
 				limit = {
-					CBI = {
-						owns_state = 681
-					}
-				}
-			}
-			ZUL = {
-				transfer_state = 681
-				add_state_core = 681
-			}
-			if = {
-				limit = {
 					SAB = {
 						OR = {
 							is_subject_of = CBI
@@ -3173,15 +3163,17 @@ cbi_capitulation_all = {
 						}
 					}
 				}
-				set_autonomy = {
-					target = SAB
-					autonomy_state = autonomy_aotsm_protectorat
-					end_wars = yes
-					end_civil_wars = yes
-				}
-				set_nationality = {
-					target_country = SAB
-					character = BYZ_Konstantinos_Mavromichalis
+				BYZ = {
+					set_autonomy = {
+						target = SAB
+						autonomy_state = autonomy_aotsm_protectorat
+						end_wars = yes
+						end_civil_wars = yes
+					}
+					set_nationality = {
+						target_country = SAB
+						character = BYZ_Konstantinos_Mavromichalis
+					}
 				}
 				SAB = {
 					set_politics = { ruling_party = authoritarian elections_allowed = no }
@@ -3201,6 +3193,17 @@ cbi_capitulation_all = {
 						}
 					}
 					set_cosmetic_tag = SAB_BYZ
+				}
+			}
+			if = {
+				limit = {
+					CBI = {
+						owns_state = 681
+					}
+				}
+				ZUL = {
+					transfer_state = 681
+					add_state_core = 681
 				}
 			}
 		}
