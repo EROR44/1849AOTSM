@@ -1632,7 +1632,7 @@ RUS_finland_separatism_cat = {
 		
 		icon = generic_civil_support
 		
-		days_mission_timeout = 90
+		days_mission_timeout = 120
 		days_re_enable = 30
 		
 		is_good = no
@@ -1647,6 +1647,7 @@ RUS_finland_separatism_cat = {
 			log = "[GetDateText]: [Root.GetName]: Decision timeout RUS_up_finland_separatism"
 			custom_effect_tooltip = RUS_up_finland_separatism_in_random_state_tt
 			hidden_effect = {
+				
 				random_state = {
 					limit = {
 						is_owned_and_controlled_by = RUS
@@ -1661,13 +1662,14 @@ RUS_finland_separatism_cat = {
 							}
 						}
 					}
+					set_state_flag = RUS_is_fin_separatism_up_state
 					if = {
 						limit = {
 							has_state_flag = RUS_end_fight_with_finland_separatism
 						}
 						clr_state_flag = RUS_end_fight_with_finland_separatism
 						set_state_flag = RUS_low_finland_separatism_2
-						add_dynamic_modifier = { modifier = FIN_separatism_dynamic_modifier_2 } 				
+						add_dynamic_modifier = { modifier = FIN_separatism_dynamic_modifier_2 } 		
 					}
 					else_if = {
 						limit = {
@@ -1678,7 +1680,7 @@ RUS_finland_separatism_cat = {
 						clr_state_flag = RUS_low_finland_separatism_2
 						set_state_flag = RUS_low_finland_separatism_1
 						remove_dynamic_modifier = { modifier = FIN_separatism_dynamic_modifier_2 }
-						add_dynamic_modifier = { modifier = FIN_separatism_dynamic_modifier_1 } 				
+						add_dynamic_modifier = { modifier = FIN_separatism_dynamic_modifier_1 } 	
 					}
 					else_if = {
 						limit = {
@@ -1688,8 +1690,54 @@ RUS_finland_separatism_cat = {
 						}
 						clr_state_flag = RUS_low_finland_separatism_1
 						remove_dynamic_modifier = { modifier = FIN_separatism_dynamic_modifier_1 }
-						add_dynamic_modifier = { modifier = FIN_separatism_dynamic_modifier } 				
+						add_dynamic_modifier = { modifier = FIN_separatism_dynamic_modifier } 	
 					}
+				}
+				if = {
+					limit = {
+						111 = {
+							has_state_flag = RUS_is_fin_separatism_up_state
+						}
+					}
+					RUS_add_1_point_separatism_level_111 = yes
+				}
+				else_if = {
+					limit = {
+						145 = {
+							has_state_flag = RUS_is_fin_separatism_up_state
+						}
+					}
+					RUS_add_1_point_separatism_level_145 = yes
+				}
+				else_if = {
+					limit = {
+						150 = {
+							has_state_flag = RUS_is_fin_separatism_up_state
+						}
+					}
+					RUS_add_1_point_separatism_level_150 = yes
+				}
+				else_if = {
+					limit = {
+						149 = {
+							has_state_flag = RUS_is_fin_separatism_up_state
+						}
+					}
+					RUS_add_1_point_separatism_level_149 = yes
+				}
+				else_if = {
+					limit = {
+						147 = {
+							has_state_flag = RUS_is_fin_separatism_up_state
+						}
+					}
+					RUS_add_1_point_separatism_level_147 = yes
+				}
+				random_state = {
+					limit = {
+						has_state_flag = RUS_is_fin_separatism_up_state
+					}
+					clr_state_flag = RUS_is_fin_separatism_up_state
 				}
 			}				
 		}
@@ -1699,7 +1747,7 @@ RUS_finland_separatism_cat = {
 	RUS_solve_finland_qiestion = {
 	
 		icon = eng_trade_unions_support
-					
+			
 		available = {
 			RUS_no_finland_separatism = yes
 		}
@@ -1733,7 +1781,7 @@ RUS_finland_separatism_cat = {
 	RUS_solve_finland_qiestion_soc = {
 	
 		icon = eng_trade_unions_support
-					
+			
 		available = {
 			RUS_no_finland_separatism = yes
 		}
@@ -2674,8 +2722,9 @@ rus_missions_cat = {
 rus_political_decisions_cat = {
 	
 	RUS_ally_gla = {
-		icon = usa_congress
-					
+	
+		icon = eng_trade_unions_support
+			
 		available = {
 			RUS = { 
 				has_completed_focus = RUS_in_search_of_allies 
@@ -2708,12 +2757,14 @@ rus_political_decisions_cat = {
 		}
 		
 		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision RUS_ally_gla"
 			GLA = { country_event = { id = rusPol.16 days = 4 } }
 		}
 	}
 	
 	RUS_ally_vlh = {
-		icon = usa_congress
+	
+		icon = eng_trade_unions_support
 					
 		available = {
 			RUS = { 
@@ -2748,13 +2799,15 @@ rus_political_decisions_cat = {
 		}
 		
 		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision RUS_ally_vlh"
 			VLH = { country_event = { id = rusPol.16 days = 4 } }
 		}
 	}
 	
 	RUS_ally_mol = {
-		icon = usa_congress
-					
+	
+		icon = eng_trade_unions_support
+			
 		available = {
 			RUS = { 
 				has_completed_focus = RUS_in_search_of_allies 
@@ -2788,13 +2841,15 @@ rus_political_decisions_cat = {
 		}
 		
 		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision RUS_ally_mol"
 			MOL = { country_event = { id = rusPol.16 days = 4 } }
 		}
 	}
 	
 	RUS_nationalise_kaz = {
-		icon = usa_congress
-					
+	
+		icon = generic_operation
+			
 		available = {
 			RUS = { 
 				OR = {
@@ -2808,6 +2863,7 @@ rus_political_decisions_cat = {
 			586 = { is_owned_by = RUS }
 			587 = { is_owned_by = RUS }
 			589 = { is_owned_by = RUS }
+			num_of_available_civilian_factories > 3
 		}
 		
 		allowed = { 
@@ -2829,23 +2885,25 @@ rus_political_decisions_cat = {
 			589 = { is_owned_by = RUS }
 		}
 	
-		cost = 30
-		days_remove = 90
+		cost = 15
+		days_remove = 120
 		fire_only_once = yes
 	
 		modifier = {
-			
+			political_power_gain = -0.1
+			civilian_factory_use = 3
 		}
 
 		ai_will_do = {
-			factor = 35
+			factor = 900
 		}
 		
 		complete_effect = {
-			
+			log = "[GetDateText]: [Root.GetName]: Decision start RUS_nationalise_kaz"
 		}
 
 		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision end RUS_nationalise_kaz"
 			add_state_core = 402
 			add_state_core = 404
 			add_state_core = 405
@@ -2856,12 +2914,14 @@ rus_political_decisions_cat = {
 	}
 	
 	RUS_nationalise_hiv = {
-		icon = usa_congress
-					
+	
+		icon = generic_operation
+			
 		available = {
 			RUS = { has_completed_focus = RUS_reorganise_central_asia }
 			584 = { is_owned_by = RUS }
 			585 = { is_owned_by = RUS }
+			num_of_available_civilian_factories > 2
 		}
 		
 		allowed = { 
@@ -2872,35 +2932,39 @@ rus_political_decisions_cat = {
 			RUS = { has_completed_focus = RUS_reorganise_central_asia }
 		}
 	
-		cost = 20
-		days_remove = 60
+		cost = 10
+		days_remove = 120
 		fire_only_once = yes
 	
 		modifier = {
-			
+			political_power_gain = -0.05
+			civilian_factory_use = 2
 		}
 
 		ai_will_do = {
-			factor = 35
+			factor = 500
 		}
 		
 		complete_effect = {
-			
+			log = "[GetDateText]: [Root.GetName]: Decision start RUS_nationalise_hiv"
 		}
 
 		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision end RUS_nationalise_kaz"
 			add_state_core = 584
 			add_state_core = 585
 		}
 	}
 	
 	RUS_nationalise_buk = {
-		icon = usa_congress
-					
+	
+		icon = generic_operation
+			
 		available = {
 			RUS = { has_completed_focus = RUS_reorganise_central_asia }
 			732 = { is_owned_by = RUS }
 			742 = { is_owned_by = RUS }
+			num_of_available_civilian_factories > 2
 		}
 		
 		allowed = { 
@@ -2911,34 +2975,38 @@ rus_political_decisions_cat = {
 			RUS = { has_completed_focus = RUS_reorganise_central_asia }
 		}
 	
-		cost = 20
-		days_remove = 60
+		cost = 10
+		days_remove = 120
 		fire_only_once = yes
 	
 		modifier = {
-			
+			political_power_gain = -0.05
+			civilian_factory_use = 2
 		}
 
 		ai_will_do = {
-			factor = 35
+			factor = 500
 		}
 		
 		complete_effect = {
-			
+			log = "[GetDateText]: [Root.GetName]: Decision start RUS_nationalise_buk"
 		}
 
 		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision end RUS_nationalise_buk"
 			add_state_core = 732
 			add_state_core = 742
 		}
 	}
 	
 	RUS_nationalise_primorie = {
-		icon = usa_congress
-					
+	
+		icon = generic_operation
+			
 		available = {
 			560 = { is_owned_by = RUS }
 			657 = { is_owned_by = RUS }
+			num_of_available_civilian_factories > 2
 		}
 		
 		allowed = { 
@@ -2951,12 +3019,13 @@ rus_political_decisions_cat = {
 			has_completed_focus = RUS_control_amur
 		}
 	
-		cost = 15
-		days_remove = 60
+		cost = 10
+		days_remove = 90
 		fire_only_once = yes
 	
 		modifier = {
-			
+			political_power_gain = -0.05
+			civilian_factory_use = 2
 		}
 
 		ai_will_do = {
@@ -2964,10 +3033,11 @@ rus_political_decisions_cat = {
 		}
 		
 		complete_effect = {
-			
+			log = "[GetDateText]: [Root.GetName]: Decision start RUS_nationalise_primorie"
 		}
 
 		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision end RUS_nationalise_primorie"
 			add_state_core = 560
 			add_state_core = 657
 			hidden_effect = {
@@ -2982,11 +3052,13 @@ rus_political_decisions_cat = {
 	}
 		
 	RUS_nationalise_vladivostok = {
-		icon = usa_congress
-					
+	
+		icon = generic_operation
+			
 		available = {
 			408 = { is_owned_by = RUS }
 			409 = { is_owned_by = RUS }
+			num_of_available_civilian_factories > 2
 		}
 		
 		allowed = { 
@@ -2999,23 +3071,25 @@ rus_political_decisions_cat = {
 			has_completed_focus = RUS_control_amur
 		}
 	
-		cost = 15
-		days_remove = 60
+		cost = 10
+		days_remove = 90
 		fire_only_once = yes
 	
 		modifier = {
-			
+			political_power_gain = -0.05
+			civilian_factory_use = 2
 		}
 
 		ai_will_do = {
-			factor = 35
+			factor = 500
 		}
 		
 		complete_effect = {
-			
+			log = "[GetDateText]: [Root.GetName]: Decision start RUS_nationalise_vladivostok"
 		}
 
 		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision end RUS_nationalise_vladivostok"
 			add_state_core = 408
 			add_state_core = 409
 			hidden_effect = {
@@ -3037,12 +3111,14 @@ rus_political_decisions_cat = {
 		}
 	}
 	
-	RUS_integrate_north_manchguria = {
-		icon = usa_congress
-					
+	RUS_integrate_north_manchguria = { #дублирует RUS_nationalise_primorie - мб переписать
+	
+		icon = generic_operation
+			
 		available = {
 			560 = { is_owned_by = RUS }
 			657 = { is_owned_by = RUS }
+			num_of_available_civilian_factories > 2
 		}
 		
 		allowed = { 
@@ -3056,7 +3132,7 @@ rus_political_decisions_cat = {
 		}
 	
 		cost = 5
-		days_remove = 30
+		days_remove = 90
 		fire_only_once = yes
 	
 		modifier = {
@@ -3064,14 +3140,20 @@ rus_political_decisions_cat = {
 		}
 
 		ai_will_do = {
-			factor = 35
+			factor = 400
+		}
+		
+		modifier = {
+			political_power_gain = -0.05
+			civilian_factory_use = 2
 		}
 		
 		complete_effect = {
-			
+			log = "[GetDateText]: [Root.GetName]: Decision start RUS_integrate_north_manchguria"
 		}
 
 		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision end RUS_integrate_north_manchguria"
 			custom_effect_tooltip = RUS_integrate_north_manchguria_tt
 			hidden_effect = {
 				560 = {
@@ -3105,10 +3187,12 @@ rus_political_decisions_cat = {
 	}
 	
 	RUS_nationalise_tuva = {
-		icon = usa_congress
-					
+	
+		icon = generic_operation
+			
 		available = {
 			329 = { is_owned_by = RUS }
+			num_of_available_civilian_factories > 1
 		}
 		
 		allowed = { 
@@ -3120,33 +3204,37 @@ rus_political_decisions_cat = {
 			has_completed_focus = RUS_claims_on_tannu_tuva
 		}
 	
-		cost = 15
-		days_remove = 60
+		cost = 10
+		days_remove = 90
 		fire_only_once = yes
 	
 		modifier = {
-			
+			political_power_gain = -0.025
+			civilian_factory_use = 1
 		}
 
 		ai_will_do = {
-			factor = 35
+			factor = 500
 		}
 		
 		complete_effect = {
-			
+			log = "[GetDateText]: [Root.GetName]: Decision start RUS_nationalise_tuva"
 		}
 
 		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision end RUS_nationalise_tuva"
 			add_state_core = 329
 		}
 	}
 	
 	RUS_nationalise_sakhalin = {
-		icon = usa_congress
-					
+	
+		icon = generic_operation
+			
 		available = {
 			537 = { is_owned_by = RUS }
 			655 = { is_owned_by = RUS }
+			num_of_available_civilian_factories > 2
 		}
 		
 		allowed = { 
@@ -3159,23 +3247,25 @@ rus_political_decisions_cat = {
 			has_completed_focus = RUS_claims_on_sahalin
 		}
 	
-		cost = 15
-		days_remove = 60
+		cost = 10
+		days_remove = 90
 		fire_only_once = yes
 	
 		modifier = {
-			
+			political_power_gain = -0.05
+			civilian_factory_use = 2
 		}
 
 		ai_will_do = {
-			factor = 35
+			factor = 500
 		}
 		
 		complete_effect = {
-			
+			log = "[GetDateText]: [Root.GetName]: Decision start RUS_nationalise_sakhalin"
 		}
 
 		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision end RUS_nationalise_sakhalin"
 			add_state_core = 537
 			add_state_core = 655
 			hidden_effect = {
@@ -3190,10 +3280,12 @@ rus_political_decisions_cat = {
 	}
 	
 	RUS_integrate_badahshan = {
-		icon = usa_congress
-					
+	
+		icon = generic_operation
+			
 		available = {
 			918 = { is_owned_by = RUS }		
+			num_of_available_civilian_factories > 1
 		}
 		
 		allowed = { 
@@ -3204,34 +3296,38 @@ rus_political_decisions_cat = {
 			918 = { is_owned_by = RUS }
 		}
 	
-		cost = 15
-		days_remove = 60
+		cost = 10
+		days_remove = 120
 		fire_only_once = yes
 	
 		modifier = {
-			
+			political_power_gain = -0.025
+			civilian_factory_use = 1
 		}
 
 		ai_will_do = {
-			factor = 35
+			factor = 400
 		}
 		
 		complete_effect = {
-			
+			log = "[GetDateText]: [Root.GetName]: Decision start RUS_integrate_badahshan"
 		}
 
 		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision end RUS_integrate_badahshan"
 			add_state_core = 918
 		}
 	}
 	
 	RUS_integrate_salish_lands = {
-		icon = usa_congress
-					
+	
+		icon = generic_operation
+			
 		available = {
 			386 = { is_owned_by = RUS }
 			473 = { is_owned_by = RUS }
 			813 = { is_owned_by = RUS }
+			num_of_available_civilian_factories > 2
 		}
 		
 		allowed = { 
@@ -3245,23 +3341,25 @@ rus_political_decisions_cat = {
 			has_completed_focus = RUS_organise_new_regions
 		}
 		
-		cost = 10
-		days_remove = 30
+		cost = 5
+		days_remove = 90
 		fire_only_once = yes
 	
 		modifier = {
-			
+			political_power_gain = -0.025
+			civilian_factory_use = 2
 		}
 
 		ai_will_do = {
-			factor = 35
+			factor = 100
 		}
 		
 		complete_effect = {
-			
+			log = "[GetDateText]: [Root.GetName]: Decision start RUS_integrate_salish_lands"
 		}
 
 		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision end RUS_integrate_salish_lands"
 			custom_effect_tooltip = RUS_integrate_salish_lands_tt
 			hidden_effect = {
 				RUS = {
@@ -3274,11 +3372,13 @@ rus_political_decisions_cat = {
 	}
 	
 	RUS_integrate_inuit_lands = {
-		icon = usa_congress
-					
+	
+		icon = generic_operation
+			
 		available = {
 			472 = { is_owned_by = RUS }
 			683 = { is_owned_by = RUS }
+			num_of_available_civilian_factories > 2
 		}
 		
 		allowed = { 
@@ -3291,23 +3391,25 @@ rus_political_decisions_cat = {
 			has_completed_focus = RUS_organise_new_regions
 		}
 		
-		cost = 10
-		days_remove = 30
+		cost = 5
+		days_remove = 90
 		fire_only_once = yes
 	
 		modifier = {
-			
+			political_power_gain = -0.025
+			civilian_factory_use = 2
 		}
 
 		ai_will_do = {
-			factor = 35
+			factor = 100
 		}
 		
 		complete_effect = {
-			
+			log = "[GetDateText]: [Root.GetName]: Decision start RUS_integrate_inuit_lands"
 		}
 
 		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision end RUS_integrate_inuit_lands"
 			custom_effect_tooltip = RUS_integrate_inuit_lands_tt
 			hidden_effect = {
 				RUS = {
@@ -3319,12 +3421,14 @@ rus_political_decisions_cat = {
 	}
 	
 	RUS_integrate_sks_lands = {
-		icon = usa_congress
-					
+	
+		icon = generic_operation
+			
 		available = {
 			388 = { is_owned_by = RUS }
 			469 = { is_owned_by = RUS }
 			470 = { is_owned_by = RUS }
+			num_of_available_civilian_factories > 2
 		}
 		
 		allowed = { 
@@ -3338,23 +3442,25 @@ rus_political_decisions_cat = {
 			has_completed_focus = RUS_organise_new_regions
 		}
 		
-		cost = 10
-		days_remove = 30
+		cost = 5
+		days_remove = 90
 		fire_only_once = yes
 	
 		modifier = {
-			
+			political_power_gain = -0.025
+			civilian_factory_use = 2
 		}
 
 		ai_will_do = {
-			factor = 35
+			factor = 100
 		}
 		
 		complete_effect = {
-			
+			log = "[GetDateText]: [Root.GetName]: Decision start RUS_integrate_sks_lands"
 		}
 
 		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision end RUS_integrate_sks_lands"
 			custom_effect_tooltip = RUS_integrate_sks_lands_tt
 			hidden_effect = {
 				RUS = {
@@ -3367,10 +3473,12 @@ rus_political_decisions_cat = {
 	}
 	
 	RUS_integrate_148 = {
-		icon = usa_congress
-					
+	
+		icon = generic_operation
+	
 		available = {
 			148 = { is_owned_by = RUS }
+			num_of_available_civilian_factories > 2
 		}
 		
 		allowed = { 
@@ -3382,23 +3490,25 @@ rus_political_decisions_cat = {
 			has_country_flag = RUS_unlock_148_integration
 		}
 		
-		cost = 10
-		days_remove = 30
+		cost = 5
+		days_remove = 60
 		fire_only_once = yes
 	
 		modifier = {
-			
+			political_power_gain = -0.025
+			civilian_factory_use = 2
 		}
 
 		ai_will_do = {
-			factor = 35
+			factor = 80
 		}
 		
 		complete_effect = {
-			
+			log = "[GetDateText]: [Root.GetName]: Decision start RUS_integrate_148"
 		}
 
 		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision end RUS_integrate_148"
 			custom_effect_tooltip = RUS_add_148_core
 			hidden_effect = {
 				RUS = {
@@ -3409,7 +3519,8 @@ rus_political_decisions_cat = {
 	}
 	
 	RUS_transfer_148_to_finland = {
-		icon = usa_congress
+	
+		icon = eng_trade_unions_support
 			
 		available = {
 			148 = { is_owned_by = RUS }
@@ -3438,14 +3549,15 @@ rus_political_decisions_cat = {
 		}
 
 		ai_will_do = {
-			factor = 135
+			factor = 900
 		}
 		
 		complete_effect = {
-			
+			log = "[GetDateText]: [Root.GetName]: Decision start RUS_transfer_148_to_finland"
 		}
 
 		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision end RUS_transfer_148_to_finland"
 			FIN = {
 				transfer_state = 148
 			}
@@ -3457,6 +3569,7 @@ rus_political_decisions_cat = {
 rus_war_time_decisions_cat = {
 
 	RUS_expand_military_production = {
+	
 		icon = usa_congress
 					
 		available = {
