@@ -1259,6 +1259,67 @@ RUS_other_great_war_ai_startegy = {
 	
 }
 
+RUS_prepare_for_war_with_sca ={
+
+	allowed = {
+		original_tag = RUS
+	}
+	enable = {
+		has_completed_focus = RUS_soc_intervention_in_scandinavy
+	}
+	abort_when_not_enabled = yes
+	
+	ai_strategy = { 
+		type = front_unit_request
+		country_trigger = {
+			tag = SCA
+		}
+		value = 80
+	}
+	
+}
+
+RUS_has_war_with_SCA = {
+
+	allowed = {
+		original_tag = RUS
+	}
+	enable = {
+		has_war_with = SCA
+	}
+	abort_when_not_enabled = yes
+	
+	ai_strategy = {
+		type = antagonize
+		id = SCA
+		value = 1000
+	}
+	
+	ai_strategy = {
+		type = conquer
+		id = "SCA"
+		value = 100
+	}
+	
+	ai_strategy = { 
+		type = front_unit_request
+		country_trigger = {
+			tag = SCA
+		}
+		value = 100
+	}
+	
+	ai_strategy = {
+        type = front_control
+        tag = "SCA"
+        priority = 10
+        ordertype = front # front or invasion
+        execution_type = balanced # one of careful balanced rush rush_weak (осторожно, сбалансированно, агрессивно, прорыв)
+        execute_order = yes # испольнять приказ или нет, если нет то просто будут стоять в обороне
+        manual_attack = yes # точечные атаки, если нет, то ИИ не будет совершать никаких отдельных атак, кроме батлплана (да да ИИ тоже умеет ручками)
+    }
+}
+
 RUS_ai_safe_equipment_for_war = {
 
 	allowed = {
@@ -1269,7 +1330,10 @@ RUS_ai_safe_equipment_for_war = {
 	}
 	
 	abort = {
-		has_war = yes
+		OR = {
+			has_war = yes
+			date > 1856.1.1
+		}
 	}
 	
 	ai_strategy = {
