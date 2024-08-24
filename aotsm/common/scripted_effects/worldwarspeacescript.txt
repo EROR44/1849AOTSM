@@ -291,6 +291,15 @@ set_victory_in_world_war = {
 		}
 		clr_global_flag = firts_world_war
 		set_global_flag = first_world_war_end
+		set_global_flag = peace_world_war_flag
+		
+		#LIE = {
+		#	country_event = {
+		#		id = script_event.??
+		#		days = 10
+		#	}
+		#}
+		
 	}
 }
 
@@ -3152,27 +3161,26 @@ cbi_capitulation_all = {
 			transfer_state = 709
 			transfer_state = 710
 		}
-		BYZ = {
-			if = {
-				limit = {
-					CBI = {
-						owns_state = 681
-					}
-				}
-			}
-			ZUL = {
-				transfer_state = 681
-				add_state_core = 681
-			}
-			if = {
-				limit = {
+		if = {
+			limit = {
+				OR = {
 					SAB = {
 						OR = {
 							is_subject_of = CBI
 							is_puppet_of = CBI
 						}
 					}
+					AND = {
+						SAB = {
+							is_in_faction_with = CBI
+							has_war_with = BYZ
+							is_puppet = no
+							is_subject = no
+						}
+					}
 				}
+			}
+			BYZ = {
 				set_autonomy = {
 					target = SAB
 					autonomy_state = autonomy_aotsm_protectorat
@@ -3183,25 +3191,36 @@ cbi_capitulation_all = {
 					target_country = SAB
 					character = BYZ_Konstantinos_Mavromichalis
 				}
-				SAB = {
-					set_politics = { ruling_party = authoritarian elections_allowed = no }
-					set_popularities = {
-						democratic = 20
-						socialism = 3
-						reactionist = 21
-						authoritarian = 56
-					}
-					add_country_leader_role = {
-						character = BYZ_Konstantinos_Mavromichalis
-						promote_leader = yes
-						country_leader = {
-							ideology = unirtarism
-							expire = "1900.1.1.1"
-							traits = { roman_lord }
-						}
-					}
-					set_cosmetic_tag = SAB_BYZ
+			}
+			SAB = {
+				set_politics = { ruling_party = authoritarian elections_allowed = no }
+				set_popularities = {
+					democratic = 20
+					socialism = 3
+					reactionist = 21
+					authoritarian = 56
 				}
+				add_country_leader_role = {
+					character = BYZ_Konstantinos_Mavromichalis
+					promote_leader = yes
+					country_leader = {
+						ideology = unirtarism
+						expire = "1900.1.1.1"
+						traits = { roman_lord }
+					}
+				}
+				set_cosmetic_tag = SAB_BYZ
+			}
+		}
+		if = {
+			limit = {
+				CBI = {
+					owns_state = 681
+				}
+			}
+			ZUL = {
+				transfer_state = 681
+				add_state_core = 681
 			}
 		}
 		RIT = {
@@ -4767,6 +4786,10 @@ rus_capitulation_from_ultimatum = { #Понять в чем разница ме�
 	
 	gw_create_poland_effect = yes
 	
+	RUS = {
+		load_focus_tree = empty_rus_tree
+	}
+	
 	if = {
 		limit = {
 			NOT = {
@@ -5382,9 +5405,75 @@ rus_capitulation_from_ultimatum = { #Понять в чем разница ме�
 			remove_state_core = 918
 		}
 	}
+	every_country = { 
+		if = {
+			limit = {
+				NOT = {
+					OR = {
+						tag = CBI
+						tag = PRT
+						tag = FRR
+						tag = GLA
+						tag = VLH #Или там тег Молдавии MLD?
+						is_puppet_of = CBI
+						is_puppet_of = PRT
+						is_puppet_of = FRR
+						is_subject_of = CBI
+						is_subject_of = PRT
+						is_subject_of = FRR
+					}
+				}
+				is_in_faction_with = RUS
+				has_war_with = PRU
+			}
+			white_peace = PRU
+		}
+	}
+	every_country = {
+		if = {
+			limit = {
+				NOT = {
+					OR = {
+						tag = CBI
+						tag = PRT
+						tag = FRR
+						tag = GLA
+						tag = VLH #Или там тег Молдавии MLD?
+						is_puppet_of = CBI
+						is_puppet_of = PRT
+						is_puppet_of = FRR
+						is_subject_of = CBI
+						is_subject_of = PRT
+						is_subject_of = FRR
+					}
+				}
+				is_in_faction_with = RUS
+				has_war_with = BYZ
+			}
+			white_peace = BYZ
+		}
+	}
+	every_country = {
+		if = {
+			limit = {
+				is_in_faction_with = BYZ
+				has_war_with = RUS
+			}
+			white_peace = RUS
+		}
+	}
+	every_country = {
+		if = {
+			limit = {
+				is_in_faction_with = PRU
+				has_war_with = RUS
+			}
+			white_peace = PRU
+		}
+	}
 }
 
-gw_create_poland_effect = { #выделение Польши при проебе Рашки в ВВ 
+gw_create_poland_effect = { #Creating Poland if Russian Capitulation
  
 	if = {
 		limit = {
@@ -5471,7 +5560,7 @@ gw_create_poland_effect = { #выделение Польши при проебе
 					remove_state_core = 853
 				}
 			}
-			if = { #на всякий случай - Краков - если он под Россией
+			if = { #If Russian own Krakow
 				limit = {
 					RUS = {
 						owns_state = 903
@@ -5482,19 +5571,24 @@ gw_create_poland_effect = { #выделение Польши при проебе
 					remove_state_core = 903
 				}
 			}
-			if = { #на всякий случай - Краков - если он существует
+			if = { #If Krakow exist(annex by Poland)
 				limit = {
 					country_exists = KRA
 				}
-				annex_country = {
-					target = KRA
-					transfer_troops = yes
+				PLH = {
+					annex_country = {
+						target = KRA
+						transfer_troops = yes
+					}
 				}
 			}
 			if = {
 				limit = {
 					PRU = {
 						is_faction_leader = yes
+					}
+					PLH = {
+						is_in_faction = no
 					}
 				}
 				PRU = {
@@ -5503,4 +5597,245 @@ gw_create_poland_effect = { #выделение Польши при проебе
 			}
 		}
 	}
+	
+	if = {
+		limit = {
+			country_exists = PLH
+		}
+		PLH = {
+			if = {
+				limit = {
+					RUS = {
+						owns_state = 10
+					}
+				}
+				transfer_state = 10
+				RUS = {
+					remove_state_core = 10
+				}
+			}
+			if = {
+				limit = {
+					RUS = {
+						owns_state = 87
+					}
+				}
+				transfer_state = 87
+				RUS = {
+					remove_state_core = 87
+				}
+			}
+			if = {
+				limit = {
+					RUS = {
+						owns_state = 90
+					}
+				}
+				transfer_state = 90
+				RUS = {
+						remove_state_core = 90
+				}
+			}
+			if = {
+				limit = {
+					RUS = {
+						owns_state = 92
+					}
+				}
+				transfer_state = 92
+				RUS = {
+					remove_state_core = 92
+				}
+			}
+			if = {
+				limit = {
+					RUS = {
+						owns_state = 97
+					}
+				}
+				transfer_state = 97
+				RUS = {
+					remove_state_core = 97
+				}
+			}
+			if = {
+				limit = {
+					RUS = {
+						owns_state = 98
+					}
+				}
+				transfer_state = 98
+				RUS = {
+					remove_state_core = 98
+				}
+			}
+			if = {
+				limit = {
+					RUS = {
+						owns_state = 853
+					}
+				}
+				transfer_state = 853
+				RUS = {
+					remove_state_core = 853
+				}
+			}
+			if = { #If Russian own Krakow
+				limit = {
+					RUS = {
+						owns_state = 903
+					}
+				}
+				transfer_state = 903
+				RUS = {
+					remove_state_core = 903
+				}
+			}
+			if = { #If Krakow exist(annex by Poland)
+				limit = {
+					country_exists = KRA
+				}
+				PLH = {
+					annex_country = {
+						target = KRA
+						transfer_troops = yes
+					}
+				}
+			}
+			if = {
+				limit = {
+					PRU = {
+						is_faction_leader = yes
+					}
+					PLH = {
+						is_in_faction = no
+					}
+				}
+				PRU = {
+					add_to_faction = PLH
+				}
+			}
+		}
+	}
+	
+	if = {
+		limit = {
+			country_exists = POL
+		}
+		POL = {
+			if = {
+				limit = {
+					RUS = {
+						owns_state = 10
+					}
+				}
+				transfer_state = 10
+				RUS = {
+					remove_state_core = 10
+				}
+			}
+			if = {
+				limit = {
+					RUS = {
+						owns_state = 87
+					}
+				}
+				transfer_state = 87
+				RUS = {
+					remove_state_core = 87
+				}
+			}
+			if = {
+				limit = {
+					RUS = {
+						owns_state = 90
+					}
+				}
+				transfer_state = 90
+				RUS = {
+						remove_state_core = 90
+				}
+			}
+			if = {
+				limit = {
+					RUS = {
+						owns_state = 92
+					}
+				}
+				transfer_state = 92
+				RUS = {
+					remove_state_core = 92
+				}
+			}
+			if = {
+				limit = {
+					RUS = {
+						owns_state = 97
+					}
+				}
+				transfer_state = 97
+				RUS = {
+					remove_state_core = 97
+				}
+			}
+			if = {
+				limit = {
+					RUS = {
+						owns_state = 98
+					}
+				}
+				transfer_state = 98
+				RUS = {
+					remove_state_core = 98
+				}
+			}
+			if = {
+				limit = {
+					RUS = {
+						owns_state = 853
+					}
+				}
+				transfer_state = 853
+				RUS = {
+					remove_state_core = 853
+				}
+			}
+			if = { #If Russian own Krakow
+				limit = {
+					RUS = {
+						owns_state = 903
+					}
+				}
+				transfer_state = 903
+				RUS = {
+					remove_state_core = 903
+				}
+			}
+			if = { #If Krakow exist(annex by Poland)
+				limit = {
+					country_exists = KRA
+				}
+				POL = {
+					annex_country = {
+						target = KRA
+						transfer_troops = yes
+					}
+				}
+			}
+			if = {
+				limit = {
+					PRU = {
+						is_faction_leader = yes
+					}
+					POL = {
+						is_in_faction = no
+					}
+				}
+				PRU = {
+					add_to_faction = POL
+				}
+			}
+		}
+	}
+	
 }

@@ -887,6 +887,8 @@ RUS_mio_society_of_mechanical_plants_bromley = {
 
 RUS_mio_kaluga_machine_building_plant = {
 
+	include = generic_motorized_mechanized_organization
+
 	icon = GFX_idea_rus_kaluga_machine_building_plant
 
 	allowed = {
@@ -903,18 +905,8 @@ RUS_mio_kaluga_machine_building_plant = {
 	
 	}
 	
-	tree_header_text = {
-		text = mio_header_mechanical_design
-		x = 1
-	}
-
-	tree_header_text = {
-		text = mio_header_armament_and_ammunition
-		x = 6
-	}
-	
 	initial_trait = { #Базовый эффект
-		name = RUS_mio_initial_trait_
+		name = RUS_mio_initial_trait_kaluga_machine_building_plant
 		
 		organization_modifier = {
 			military_industrial_organization_research_bonus = 0.05
@@ -927,21 +919,11 @@ RUS_mio_kaluga_machine_building_plant = {
 		}
 	}
 	
-	trait = {
-		token = RUS_mio_
-		name = RUS_mio_
-		icon = GFX_generic_mio_trait_icon_defense
-
-		position = { x=1 y=0 }
-		
-		equipment_bonus = {
-			
-		}
-	}
-	
 }
 
 RUS_mio_tula_arms_factory = {
+
+	include = generic_support_equipment_organization
 
 	icon = GFX_idea_rus_tula_rifle_factory
 
@@ -959,18 +941,8 @@ RUS_mio_tula_arms_factory = {
 		support_tech
 	}
 	
-	tree_header_text = {
-		text = mio_header_design_and_production
-		x = 3
-	}
-
-	tree_header_text = {
-		text = mio_header_anti_tank
-		x = 8
-	}
-	
 	initial_trait = { #Базовый эффект
-		name = RUS_mio_initial_trait_
+		name = RUS_mio_initial_trait_tula_arms_factory
 		
 		organization_modifier = {
 			military_industrial_organization_research_bonus = 0.05
@@ -983,26 +955,22 @@ RUS_mio_tula_arms_factory = {
 		}
 	}
 	
-	trait = {
-		token = RUS_mio_
-		name = RUS_mio_
-		icon = GFX_generic_mio_trait_icon_defense
-
-		position = { x=1 y=0 }
-		
-		equipment_bonus = {
-			
-		}
-	}
-	
 }
 
 RUS_mio_ohta_gunpowder_factory = {
+
+	include = generic_support_equipment_organization
 
 	icon = GFX_idea_RUS_ohta_gunpowder_factory
 
 	allowed = {
 		tag = RUS
+	}
+	
+	visible = {
+		RUS = {
+			has_country_flag = RUS_unlock_socialist_manufacturers_and_advisors
+		}
 	}
 	
 	equipment_type = {
@@ -1016,18 +984,8 @@ RUS_mio_ohta_gunpowder_factory = {
 		mio_cat_all_artillery_equipment
 	}
 	
-	tree_header_text = {
-		text = mio_header_design_and_production
-		x = 3
-	}
-
-	tree_header_text = {
-		text = mio_header_anti_tank
-		x = 8
-	}
-	
 	initial_trait = { #Базовый эффект
-		name = RUS_mio_initial_trait_
+		name = RUS_mio_initial_trait_ohta_gunpowder_factory
 		
 		organization_modifier = {
 			military_industrial_organization_research_bonus = 0.05
@@ -1041,15 +999,37 @@ RUS_mio_ohta_gunpowder_factory = {
 	}
 	
 	trait = {
-		token = RUS_mio_
-		name = RUS_mio_
-		icon = GFX_generic_mio_trait_icon_defense
-
-		position = { x=1 y=0 }
+		token = RUS_mio_trait_reinforced_shells
+		name = RUS_mio_trait_reinforced_shells
+		icon = GFX_generic_mio_trait_icon_ap_attack
 		
+		position = { x= 0 y=1 }
+		
+		relative_position_id = generic_mio_trait_private_tenders
+		
+		all_parents = { generic_mio_trait_private_tenders }
 		
 		equipment_bonus = {
-			
+			build_cost_ic = 0.05
+			ap_attack = 0.05
+			soft_attack = 0.05
+		}
+	}
+	
+	trait = {
+		token = RUS_mio_trait_optimized_production
+		name = RUS_mio_trait_optimized_production
+		icon = GFX_generic_mio_trait_icon_production_capacity
+		
+		position = { x= 0 y=1 }
+		
+		relative_position_id = RUS_mio_trait_reinforced_shells
+		
+		all_parents = { RUS_mio_trait_reinforced_shells }
+		
+		equipment_bonus = {
+			defense = -0.02
+			build_cost_ic = -0.03
 		}
 	}
 	
@@ -1057,10 +1037,18 @@ RUS_mio_ohta_gunpowder_factory = {
 
 RUS_mio_ijevsk_gun_factory = {
 
+	include = generic_infantry_equipment_organization
+
 	icon = GFX_idea_RUS_n_novgorod_rifle_factory
 
 	allowed = {
 		tag = RUS
+	}
+	
+	visible = {
+		RUS = {
+			has_country_flag = RUS_unlock_socialist_manufacturers_and_advisors
+		}
 	}
 	
 	equipment_type = {
@@ -1084,7 +1072,7 @@ RUS_mio_ijevsk_gun_factory = {
 	}
 	
 	initial_trait = { #Базовый эффект
-		name = RUS_mio_initial_trait_
+		name = RUS_mio_initial_trait_ijevsk_gun_factory
 		
 		organization_modifier = {
 			military_industrial_organization_research_bonus = 0.05
@@ -1095,18 +1083,6 @@ RUS_mio_ijevsk_gun_factory = {
 			reliability = -0.05	
 			soft_attack = 0.1
 			hard_attack = 0.1
-		}
-	}
-	
-	trait = {
-		token = RUS_mio_
-		name = RUS_mio_
-		icon = GFX_generic_mio_trait_icon_defense
-
-		position = { x=1 y=0 }
-		
-		equipment_bonus = {
-			
 		}
 	}
 	
@@ -1474,10 +1450,18 @@ RUS_mio_pd_yakovlev_fabric = {
 
 RUS_mio_volgograd_traktor_fabric = {
 
+	include = generic_medium_tank_organization
+
 	icon = GFX_idea_RUS_volgograd_traktor_factory
 
 	allowed = {
 		tag = RUS
+	}
+	
+	visible = {
+		RUS = {
+			has_country_flag = RUS_unlock_socialist_manufacturers_and_advisors
+		}
 	}
 	
 	equipment_type = { 
@@ -1491,19 +1475,9 @@ RUS_mio_volgograd_traktor_fabric = {
 		mio_cat_tech_medium_armor_and_modules 
 		motorized_equipment
 	}
-
-	tree_header_text = {
-		text = mio_header_tank_construction
-		x = 3
-	}
-
-	tree_header_text = {
-		text = mio_header_equipment_and_specialization
-		x = 7
-	}
 	
 	initial_trait = { #Базовый эффект
-		name = RUS_mio_initial_trait_
+		name = RUS_mio_initial_trait_volgograd_traktor_fabric
 		
 		organization_modifier = {
 			military_industrial_organization_research_bonus = 0.05
@@ -1516,18 +1490,6 @@ RUS_mio_volgograd_traktor_fabric = {
 		}
 	}
 	
-	trait = {
-		token = RUS_mio_
-		name = RUS_mio_
-		icon = GFX_generic_mio_trait_icon_defense
-
-		position = { x=1 y=0 }
-		
-		equipment_bonus = {
-			
-		}
-	}
-	
 }
 
 ############################################################################
@@ -1536,6 +1498,8 @@ RUS_mio_volgograd_traktor_fabric = {
 
 
 RUS_mio_anatra_factory = {
+
+	include = generic_light_aircraft_organization
 
 	icon = GFX_idea_rus_anatra
 
@@ -1553,21 +1517,11 @@ RUS_mio_anatra_factory = {
 	
 	tree_header_text = {
 		text = mio_header_fighter_aircraft
-		x = 1
-	}
-
-	tree_header_text = {
-		text = mio_header_bomber_aircraft
 		x = 4
-	}
-
-	tree_header_text = {
-		text = mio_header_naval_aircraft
-		x = 7
 	}
 	
 	initial_trait = { #Базовый эффект
-		name = RUS_mio_initial_trait_
+		name = RUS_mio_initial_trait_anatra_factory
 		
 		organization_modifier = {
 			military_industrial_organization_research_bonus = 0.05
@@ -1579,21 +1533,11 @@ RUS_mio_anatra_factory = {
 		}
 	}
 	
-	trait = {
-		token = RUS_mio_
-		name = RUS_mio_
-		icon = GFX_generic_mio_trait_icon_defense
-
-		position = { x=1 y=0 }
-		
-		equipment_bonus = {
-			
-		}
-	}
-	
 }
 
 RUS_mio_association_of_aeronauts_named_after_shetinin_ss = {
+
+	include = generic_medium_aircraft_organization
 
 	icon = GFX_idea_rus_tovarishestvo_shetinina
 
@@ -1610,23 +1554,8 @@ RUS_mio_association_of_aeronauts_named_after_shetinin_ss = {
 		air_equipment 
 	}
 	
-	tree_header_text = {
-		text = mio_header_fighter_aircraft
-		x = 1
-	}
-
-	tree_header_text = {
-		text = mio_header_bomber_aircraft
-		x = 4
-	}
-
-	tree_header_text = {
-		text = mio_header_naval_aircraft
-		x = 7
-	}
-	
 	initial_trait = { #Базовый эффект
-		name = RUS_mio_initial_trait_
+		name = RUS_mio_initial_trait_association_of_aeronauts_named_after_shetinin_ss
 		
 		organization_modifier = {
 			military_industrial_organization_research_bonus = 0.05
@@ -1638,21 +1567,11 @@ RUS_mio_association_of_aeronauts_named_after_shetinin_ss = {
 		}
 	}
 	
-	trait = {
-		token = RUS_mio_
-		name = RUS_mio_
-		icon = GFX_generic_mio_trait_icon_defense
-
-		position = { x=1 y=0 }
-		
-		equipment_bonus = {
-			
-		}
-	}
-	
 }
 
 RUS_mio_duks_factory = {
+
+	include = generic_heavy_aircraft_organization
 
 	icon = GFX_idea_rus_duks
 	
@@ -1669,23 +1588,8 @@ RUS_mio_duks_factory = {
 		air_equipment 
 	}
 	
-	tree_header_text = {
-		text = mio_header_fighter_aircraft
-		x = 1
-	}
-
-	tree_header_text = {
-		text = mio_header_bomber_aircraft
-		x = 4
-	}
-
-	tree_header_text = {
-		text = mio_header_naval_aircraft
-		x = 7
-	}
-	
 	initial_trait = { #Базовый эффект
-		name = RUS_mio_initial_trait_
+		name = RUS_mio_initial_trait_duks_factory 
 		
 		organization_modifier = {
 			military_industrial_organization_research_bonus = 0.05
@@ -1695,22 +1599,11 @@ RUS_mio_duks_factory = {
 			reliability = 0.2
 		}
 	}
-	
-	trait = {
-		token = RUS_mio_
-		name = RUS_mio_
-		icon = GFX_generic_mio_trait_icon_defense
-
-		position = { x=1 y=0 }
-		
-		equipment_bonus = {
-			
-		}
-	}
-	
 }
 
 RUS_mio_riga_aircraft_factoryy = {
+
+	include = generic_multi_role_aircraft_organization
 
 	icon = GFX_idea_rus_riga_aircraft_factory
 	
@@ -1728,23 +1621,8 @@ RUS_mio_riga_aircraft_factoryy = {
 		air_equipment 
 	}
 	
-	tree_header_text = {
-		text = mio_header_fighter_aircraft
-		x = 1
-	}
-
-	tree_header_text = {
-		text = mio_header_bomber_aircraft
-		x = 4
-	}
-
-	tree_header_text = {
-		text = mio_header_naval_aircraft
-		x = 7
-	}
-	
 	initial_trait = { #Базовый эффект
-		name = RUS_mio_initial_trait_
+		name = RUS_mio_initial_trait_riga_aircraft_factoryy
 		
 		organization_modifier = {
 			military_industrial_organization_research_bonus = 0.05
@@ -1755,18 +1633,6 @@ RUS_mio_riga_aircraft_factoryy = {
 		}
 	}
 	
-	trait = {
-		token = RUS_mio_
-		name = RUS_mio_
-		icon = GFX_generic_mio_trait_icon_defense
-
-		position = { x=1 y=0 }
-		
-		equipment_bonus = {
-			
-		}
-	}
-	
 }
 
 ############################################################################
@@ -1774,6 +1640,8 @@ RUS_mio_riga_aircraft_factoryy = {
 ############################################################################
 
 RUS_mio_admiralty_shipyards = {
+
+	include = generic_task_force_ship_organization
 
 	icon = GFX_idea_rus_admiralteyskiye_dockyards
 	
@@ -1809,7 +1677,7 @@ RUS_mio_admiralty_shipyards = {
 	}
 	
 	initial_trait = { #Базовый эффект
-		name = RUS_mio_initial_trait_
+		name = RUS_mio_initial_trait_admiralty_shipyards
 		
 		organization_modifier = {
 			military_industrial_organization_research_bonus = 0.05
@@ -1822,21 +1690,23 @@ RUS_mio_admiralty_shipyards = {
 		}
 	}
 	
-	trait = {
-		token = RUS_mio_
-		name = RUS_mio_
-		icon = GFX_generic_mio_trait_icon_defense
-
-		position = { x=1 y=0 }
-		
-		equipment_bonus = {
-			
-		}
-	}
+	#trait = {
+	#	token = RUS_mio_
+	#	name = RUS_mio_
+	#	icon = GFX_generic_mio_trait_icon_defense
+	#
+	#	position = { x=1 y=0 }
+	#	
+	#	equipment_bonus = {
+	#		
+	#	}
+	#}
 	
 }
 
 RUS_mio_sevastopol_navy_factory = {
+
+	include = generic_raider_ship_organization
 
 	icon = GFX_idea_rus_sevastopol_dockyard
 	
@@ -1872,7 +1742,7 @@ RUS_mio_sevastopol_navy_factory = {
 	}
 	
 	initial_trait = { #Базовый эффект
-		name = RUS_mio_initial_trait_
+		name = RUS_mio_initial_trait_sevastopol_navy_factory
 		
 		organization_modifier = {
 			military_industrial_organization_research_bonus = 0.05
@@ -1886,16 +1756,16 @@ RUS_mio_sevastopol_navy_factory = {
 		}
 	}
 	
-	trait = {
-		token = RUS_mio_
-		name = RUS_mio_
-		icon = GFX_generic_mio_trait_icon_defense
-
-		position = { x=1 y=0 }
-		
-		equipment_bonus = {
-			
-		}
-	}
+	#trait = {
+	#	token = RUS_mio_
+	#	name = RUS_mio_
+	#	icon = GFX_generic_mio_trait_icon_defense
+	#
+	#	position = { x=1 y=0 }
+	#	
+	#	equipment_bonus = {
+	#		
+	#	}
+	#}
 	
 }

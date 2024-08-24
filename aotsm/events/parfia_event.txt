@@ -1,0 +1,557 @@
+###################
+# Byzantian event #
+#  by Derkyster   #
+###################
+
+add_namespace = par_byz
+add_namespace = par_answer
+
+country_event = { #Byz ask about join Faction
+	id = par_byz.1
+	title = par_byz.1.t
+	desc = par_byz.1.d
+	picture = GFX_report_event_byz_ask_to_faction
+	
+	is_triggered_only = yes
+	
+	fire_only_once = no
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event par_byz.1"
+	}
+	
+	option = { #Accept
+		name = par_byz.1.a
+		ai_chance = {
+			base = 50
+			modifier = {
+				add = 25
+				has_country_flag = par_deneyed_faction_1
+			}
+			modifier = {
+				add = 25
+				has_country_flag = par_deneyed_faction_2
+			}
+		}
+		if = {
+			limit = {
+				BYZ = {
+					is_in_faction_with = PRU
+				}
+			}
+			PRU = {
+				add_to_faction = PAR
+			}
+		}
+		if = {
+			limit = {
+				BYZ = {
+					is_faction_leader = yes
+				}
+			}
+			BYZ = {
+				add_to_faction = PAR
+			}
+		}
+		BYZ = {
+			country_event = {
+				id = par_answer.1
+				hours = 17
+			}
+		}
+	}
+	
+	option = { #Denayed
+		name = par_byz.1.b
+		ai_chance = {
+			base = 50
+			modifier = {
+				add = -30
+				has_country_flag = par_deneyed_faction_1
+			}
+			modifier = {
+				add = -20
+				has_country_flag = par_deneyed_faction_2
+			}
+		}
+		if = {
+			limit = {
+				NOT = {
+					has_country_flag = par_deneyed_faction_1
+				}
+			}
+			set_country_flag = par_deneyed_faction_1
+		}
+		if = {
+			limit = {
+				has_country_flag = par_deneyed_faction_1
+			}
+			set_country_flag = par_deneyed_faction_2
+		}
+		BYZ = {
+			country_event = {
+				id = par_answer.2
+				hours = 17
+			}
+		}
+	}
+	
+}
+
+country_event = { #Byz ask about free trade
+	id = par_byz.2
+	title = par_byz.2.t
+	desc = par_byz.2.d
+	picture = GFX_report_event_byz_ask_for_free_trade
+	
+	is_triggered_only = yes
+	
+	fire_only_once = no
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event par_byz.2"
+	}
+	
+	option = { #Accept
+		name = par_byz.2.a
+		ai_chance = {
+			base = 50
+			modifier = {
+				add = 25
+				has_country_flag = par_deneyed_trade_1
+			}
+			modifier = {
+				add = 25
+				has_country_flag = par_deneyed_trade_2
+			}
+		}
+		if = {
+			limit = {
+				BYZ = {
+					is_in_faction_with = PRU
+				}
+			}
+			PRU = {
+				add_to_faction = PAR
+			}
+		}
+		if = {
+			limit = {
+				BYZ = {
+					is_faction_leader = yes
+				}
+			}
+			BYZ = {
+				add_to_faction = PAR
+			}
+		}
+		add_ideas = PAR_byz_free_trade
+		BYZ = {
+			country_event = {
+				id = par_answer.3
+				hours = 17
+			}
+		}
+		set_country_flag = par_free_trade_with_byz_flag
+	}
+	
+	option = { #Denayed
+		name = par_byz.2.b
+		ai_chance = {
+			base = 50
+			modifier = {
+				add = -30
+				has_country_flag = par_deneyed_trade_1
+			}
+			modifier = {
+				add = -20
+				has_country_flag = par_deneyed_trade_2
+			}
+		}
+		if = {
+			limit = {
+				NOT = {
+					has_country_flag = par_deneyed_trade_1
+				}
+			}
+			set_country_flag = par_deneyed_trade_1
+		}
+		if = {
+			limit = {
+				has_country_flag = par_deneyed_trade_1
+			}
+			set_country_flag = par_deneyed_trade_2
+		}
+		BYZ = {
+			country_event = {
+				id = par_answer.4
+				hours = 17
+			}
+		}
+	}
+	
+}
+
+country_event = { #Byz ask about free border
+	id = par_byz.3
+	title = par_byz.3.t
+	desc = par_byz.3.d
+	picture = GFX_report_event_byz_ask_for_free_border
+	
+	is_triggered_only = yes
+	
+	fire_only_once = no
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event par_byz.3"
+	}
+	
+	option = { #Accept
+		name = par_byz.3.a
+		ai_chance = {
+			base = 50
+			modifier = {
+				add = 25
+				has_country_flag = par_deneyed_border_1
+			}
+			modifier = {
+				add = 25
+				has_country_flag = par_deneyed_border_2
+			}
+		}
+		if = {
+			limit = {
+				BYZ = {
+					is_in_faction_with = PRU
+				}
+			}
+			PRU = {
+				add_to_faction = PAR
+			}
+		}
+		if = {
+			limit = {
+				BYZ = {
+					is_faction_leader = yes
+				}
+			}
+			BYZ = {
+				add_to_faction = PAR
+			}
+		}
+		add_ideas = PAR_byz_free_border
+		BYZ = {
+			country_event = {
+				id = par_answer.5
+				hours = 17
+			}
+		}
+		set_country_flag = par_free_border_with_byz_flag
+	}
+	
+	option = { #Denayed
+		name = par_byz.3.b
+		ai_chance = {
+			base = 50
+			modifier = {
+				add = -30
+				has_country_flag = par_deneyed_border_1
+			}
+			modifier = {
+				add = -20
+				has_country_flag = par_deneyed_border_2
+			}
+		}
+		if = {
+			limit = {
+				NOT = {
+					has_country_flag = par_deneyed_border_1
+				}
+			}
+			set_country_flag = par_deneyed_border_1
+		}
+		if = {
+			limit = {
+				has_country_flag = par_deneyed_border_1
+			}
+			set_country_flag = par_deneyed_border_2
+		}
+		BYZ = {
+			country_event = {
+				id = par_answer.6
+				hours = 17
+			}
+		}
+	}
+	
+}
+
+country_event = { #Byz ask to controll our military
+	id = par_byz.4
+	title = par_byz.4.t
+	desc = par_byz.4.d
+	picture = GFX_report_event_byz_ask_to_controll_your_army
+	
+	is_triggered_only = yes
+	
+	fire_only_once = no
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event par_byz.4"
+	}
+	
+	option = { #Accept
+		name = par_byz.4.a
+		ai_chance = {
+			base = 50
+			modifier = {
+				add = 25
+				has_country_flag = par_deneyed_millitary_1
+			}
+			modifier = {
+				add = 25
+				has_country_flag = par_deneyed_millitary_2
+			}
+		}
+		if = {
+			limit = {
+				BYZ = {
+					is_in_faction_with = PRU
+				}
+			}
+			PRU = {
+				add_to_faction = PAR
+			}
+		}
+		if = {
+			limit = {
+				BYZ = {
+					is_faction_leader = yes
+				}
+			}
+			BYZ = {
+				add_to_faction = PAR
+			}
+		}
+		add_ideas = PAR_byz_controll_military
+		BYZ = {
+			country_event = {
+				id = par_answer.7
+				hours = 17
+			}
+		}
+		set_country_flag = par_military_control_by_byz_flag
+	}
+	
+	option = { #Denayed
+		name = par_byz.4.b
+		ai_chance = {
+			base = 50
+			modifier = {
+				add = -30
+				has_country_flag = par_deneyed_millitary_1
+			}
+			modifier = {
+				add = -20
+				has_country_flag = par_deneyed_millitary_2
+			}
+		}
+		if = {
+			limit = {
+				NOT = {
+					has_country_flag = par_deneyed_millitary_1
+				}
+			}
+			set_country_flag = par_deneyed_millitary_1
+		}
+		if = {
+			limit = {
+				has_country_flag = par_deneyed_millitary_1
+			}
+			set_country_flag = par_deneyed_millitary_2
+		}
+		BYZ = {
+			country_event = {
+				id = par_answer.8
+				hours = 17
+			}
+		}
+	}
+	
+}
+
+country_event = { #They accept Faction
+	id = par_answer.1
+	title = par_answer.1.t
+	desc = par_answer.1.d
+	picture = GFX_report_event_byz_diplomacy_1
+	
+	is_triggered_only = yes
+	
+	fire_only_once = no
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event par_answer.1"
+	}
+	
+	option = { #Good news
+		name = par_answer.1.a
+		add_political_power = 50
+	}
+	
+}
+
+country_event = { #They denaed Faction
+	id = par_answer.2
+	title = par_answer.2.t
+	desc = par_answer.2.d
+	picture = GFX_report_event_byz_diplomacy_5
+	
+	is_triggered_only = yes
+	
+	fire_only_once = no
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event par_answer.2"
+	}
+	
+	option = { #Bad news
+		name = par_answer.2.a
+		custom_effect_tooltip = par_can_repeat_120_days_tt
+	}
+	
+}
+
+country_event = { #They accept Trade
+	id = par_answer.3
+	title = par_answer.3.t
+	desc = par_answer.3.d
+	picture = GFX_report_event_byz_diplomacy_2
+	
+	is_triggered_only = yes
+	
+	fire_only_once = no
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event par_answer.3"
+	}
+	
+	option = { #Good news
+		name = par_answer.3.a
+		PAR = {
+			add_offsite_building = { type = arms_factory level = -2 }
+			add_offsite_building = { type = industrial_complex level = -3 }
+		}
+		BYZ = {
+			add_offsite_building = { type = arms_factory level = 2 }
+			add_offsite_building = { type = industrial_complex level = 3 }
+		}
+	}
+	
+}
+
+country_event = { #They denaed Trade
+	id = par_answer.4
+	title = par_answer.4.t
+	desc = par_answer.4.d
+	picture = GFX_report_event_byz_diplomacy_6
+	
+	is_triggered_only = yes
+	
+	fire_only_once = no
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event par_answer.4"
+	}
+	
+	option = { #Bad news
+		name = par_answer.4.a
+		custom_effect_tooltip = par_can_repeat_120_days_tt
+	}
+	
+}
+
+country_event = { #They accept Border
+	id = par_answer.5
+	title = par_answer.5.t
+	desc = par_answer.5.d
+	picture = GFX_report_event_byz_diplomacy_3
+	
+	is_triggered_only = yes
+	
+	fire_only_once = no
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event par_answer.5"
+	}
+	
+	option = { #Good news
+		name = par_answer.5.a
+		add_political_power = 50
+	}
+	
+}
+
+country_event = { #They denaed Border
+	id = par_answer.6
+	title = par_answer.6.t
+	desc = par_answer.6.d
+	picture = GFX_report_event_byz_diplomacy_7
+	
+	is_triggered_only = yes
+	
+	fire_only_once = no
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event par_answer.6"
+	}
+	
+	option = { #Bad news
+		name = par_answer.6.a
+		custom_effect_tooltip = par_can_repeat_120_days_tt
+	}
+	
+}
+
+country_event = { #They accept Army
+	id = par_answer.7
+	title = par_answer.7.t
+	desc = par_answer.7.d
+	picture = GFX_report_event_byz_diplomacy_4
+	
+	is_triggered_only = yes
+	
+	fire_only_once = no
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event par_answer.7"
+	}
+	
+	option = { #Good news
+		name = par_answer.7.a
+		army_experience = 50
+		add_command_power = 50
+	}
+	
+}
+
+country_event = { #They denaed Army
+	id = par_answer.8
+	title = par_answer.8.t
+	desc = par_answer.8.d
+	picture = GFX_report_event_byz_diplomacy_8
+	
+	is_triggered_only = yes
+	
+	fire_only_once = no
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event par_answer.8"
+	}
+	
+	option = { #Bad news
+		name = par_answer.8.a
+		custom_effect_tooltip = par_can_repeat_120_days_tt
+	}
+	
+}

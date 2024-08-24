@@ -5926,3 +5926,110 @@ country_event = { #End of Russian Spirit
 		custom_effect_tooltip = post_smuta_idea_end_for_1825_days_tt
 	}
 }
+
+country_event = { #Serbian invasion
+	id = chain.28
+	title = chain.28.t
+	desc = chain.28.d
+	picture = GFX_report_event_serbian_army_1
+	
+	is_triggered_only = yes
+	
+	fire_only_once = no
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event chain.28"
+		hidden_effect = {
+			SER = {
+				declare_war_on = {
+					target = BUL
+					type = annex_everything
+				}
+			}
+			news_event = {
+				id = news.298
+				hours = 12
+			}
+			BUL = {
+				country_event = {
+					id = chain.29
+					days = 10
+				}
+			}
+			SER = {
+				country_event = {
+					id = chain.30
+					days = 10
+				}
+			}
+		}
+	}
+	
+	option = { #Let them come
+		name = chain.28.a
+		ai_chance = {
+			factor = 100
+		}
+		add_war_support = 0.05
+	}
+}
+
+country_event = { #Serbian lose(BUL)
+	id = chain.29
+	title = chain.29.t
+	desc = chain.29.d
+	picture = GFX_report_event_bulgarian_army_1
+	
+	is_triggered_only = yes
+	
+	fire_only_once = no
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event chain.29"
+		hidden_effect = {
+			SER = {
+				white_peace = {
+					tag = BUL
+					message = SER_lose_BUL
+				}
+			}
+			news_event = {
+				id = news.299
+				hours = 12
+			}
+		}
+	}
+	
+	option = { #They take that they recive
+		name = chain.29.a
+		ai_chance = {
+			factor = 100
+		}
+		add_war_support = 0.025
+		add_manpower = -1736
+	}
+}
+
+country_event = { #Serbian lose(SER)
+	id = chain.30
+	title = chain.30.t
+	desc = chain.30.d
+	picture = GFX_report_event_serbian_army_2
+	
+	is_triggered_only = yes
+	
+	fire_only_once = no
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event chain.30"
+	}
+	
+	option = { #What a shame
+		name = chain.30.a
+		ai_chance = {
+			factor = 100
+		}
+		add_war_support = -0.05
+		add_manpower = -9783
+	}
+}
