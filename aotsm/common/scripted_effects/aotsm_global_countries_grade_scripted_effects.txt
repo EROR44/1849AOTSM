@@ -348,14 +348,61 @@ calculate_prestige = {
 		add_to_variable = { country_industry_score = country_synthetic_refinery }
 		add_to_variable = { country_industry_score = country_leypoldit_complex }
 		add_to_variable = { country_industry_score = country_nuclear_reactors }
+		
+		if = { #градация по промышленному развитию
+			limit = {
+				has_idea = agrarian_country
+			}
+			multiply_variable = { country_industry_score = 0.2 }
+		}
+		else_if = {
+			limit = {
+				has_idea = manufactory_production
+			}
+			multiply_variable = { country_industry_score = 0.3 }
+		}
+		else_if = {
+			limit = {
+				has_idea = manufactory_production
+			}
+			multiply_variable = { country_industry_score = 0.4 }
+		}
+		else_if = {
+			limit = {
+				has_idea = backward_industry
+			}
+			multiply_variable = { country_industry_score = 0.5 }
+		}
+		else_if = {
+			limit = {
+				has_idea = medium_developed_industry
+			}
+			multiply_variable = { country_industry_score = 0.75 }
+		}
+		else_if = {
+			limit = {
+				has_idea = modern_industry
+			}
+			multiply_variable = { country_industry_score = 0.9 }
+		}
 
+		# Science
+		set_variable = { country_tech_num = num_researched_technologies  }
+		multiply_variable = { country_tech_num = 0.25 }
+		add_to_variable = { country_science_score = country_tech_num }
+		
 		# Army Land
-		set_variable = { country_land_army = num_armies  }
-		multiply_variable = { country_land_army = 0.25 }
+		set_variable = { country_land_army = num_battalions  }
+		multiply_variable = { country_land_army = 0.015 }
 		add_to_variable = { country_army_score = country_land_army }
 
+		# Army Air
+		set_variable = { country_air_army = num_deployed_planes }
+		multiply_variable = { country_air_army = 0.1 }
+		add_to_variable = { country_air_score = country_air_army }
+
 		# Army Navy
-		set_variable = { country_navy_score = num_divisions }
+		set_variable = { country_navy_score = num_ships }
 		multiply_variable = { country_navy_score = 0.15 }
 		add_to_variable = { country_navy_score = temp_navy_strength }
 		
@@ -380,7 +427,9 @@ calculate_prestige = {
 
 		add_to_variable = { country_prestige = country_base_prestige }
 		add_to_variable = { country_prestige = country_industry_score }
-		add_to_variable = { country_prestige = country_army_score }
+		add_to_variable = { country_prestige = country_science_score }
+		add_to_variable = { country_prestige = country_army_score }	
+		add_to_variable = { country_prestige = country_air_score }
 		add_to_variable = { country_prestige = country_navy_score }
 		add_to_variable = { country_prestige = country_size_score }
 		
