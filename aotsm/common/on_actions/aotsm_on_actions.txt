@@ -15,6 +15,20 @@ on_actions = {
 					calculate_maximum_divisions = yes
 				}
 			}
+			every_country = { #Global country grade list
+				set_variable = { old_array_num = global.country_grade_list_array^num }
+				clear_array = global.country_grade_list_array
+				every_country = {
+					if = {
+						limit = {
+							NOT = { is_in_array = { global.country_grade_list_array = THIS } }
+						}
+						add_to_array = { global.country_grade_list_array = THIS }
+					}
+				}
+                set_variable = { new_array_num = global.country_grade_list_array^num }
+                calculate_prestige = yes
+			}
 			every_country = {
 				limit = { #сюда надо добавлять теги проработанных государств
 					is_ai = no
