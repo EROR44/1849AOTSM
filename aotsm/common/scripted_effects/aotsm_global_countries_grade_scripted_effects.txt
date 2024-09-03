@@ -285,7 +285,7 @@ update_position = {
 
 		if = {
 			limit = {
-				check_variable = { THIS.prestige_position < 8 }
+				check_variable = { THIS.prestige_position < 7 }
 			}
 			add_to_array = { global.top_seven_prestige_array = THIS }
 			add_to_variable = { global.top_seven_total = country_prestige }
@@ -297,7 +297,7 @@ update_position = {
 calculate_prestige = {
 	every_country = {
 		set_variable = { country_prestige = 0 }
-		set_variable = { country_base_prestige = 150 }
+		set_variable = { country_base_prestige = 150 } 
 		set_variable = { country_industry_score = 0 }
 		set_variable = { country_army_score = 0 }
 		set_variable = { country_navy_score = 0 }
@@ -316,6 +316,7 @@ calculate_prestige = {
 		set_variable = { country_synthetic_refinery = total_constructed_synthetic_refinery }
 		set_variable = { country_leypoldit_complex = total_constructed_leypoldit_complex }
 		set_variable = { country_nuclear_reactors = total_constructed_nuclear_reactor }
+		set_variable = { country_nuclear_reactors = country_radar_stations }
 
 		clamp_variable = {
 			var = country_civ_factories
@@ -341,6 +342,10 @@ calculate_prestige = {
 			var = country_nuclear_reactors
 			min = 0
 		}
+		clamp_variable = {
+			var = country_radar_stations
+			min = 0
+		}
 
 		add_to_variable = { country_industry_score = country_civ_factories }
 		add_to_variable = { country_industry_score = country_mil_factories }
@@ -348,6 +353,7 @@ calculate_prestige = {
 		add_to_variable = { country_industry_score = country_synthetic_refinery }
 		add_to_variable = { country_industry_score = country_leypoldit_complex }
 		add_to_variable = { country_industry_score = country_nuclear_reactors }
+		add_to_variable = { country_industry_score = country_radar_stations }
 		
 		if = { #градация по промышленному развитию
 			limit = {
@@ -359,25 +365,25 @@ calculate_prestige = {
 			limit = {
 				has_idea = manufactory_production
 			}
-			multiply_variable = { country_industry_score = 0.3 }
+			multiply_variable = { country_industry_score = 0.4 }
 		}
 		else_if = {
 			limit = {
 				has_idea = manufactory_production
 			}
-			multiply_variable = { country_industry_score = 0.4 }
+			multiply_variable = { country_industry_score = 0.5 }
 		}
 		else_if = {
 			limit = {
 				has_idea = backward_industry
 			}
-			multiply_variable = { country_industry_score = 0.5 }
+			multiply_variable = { country_industry_score = 0.6 }
 		}
 		else_if = {
 			limit = {
 				has_idea = medium_developed_industry
 			}
-			multiply_variable = { country_industry_score = 0.75 }
+			multiply_variable = { country_industry_score = 0.8 }
 		}
 		else_if = {
 			limit = {
@@ -408,7 +414,7 @@ calculate_prestige = {
 		
 		# Size
 		set_variable = { country_own_size_score = num_owned_controlled_states }
-		multiply_variable = { country_own_size_score = 0.025 }
+		multiply_variable = { country_own_size_score = 0.03 }
 		add_to_variable = { country_size_score = country_own_size_score }
 
 		# Size for Subjetcs
@@ -424,6 +430,19 @@ calculate_prestige = {
 				add_to_variable = { PREV.country_size_score = temp_subject_size_score }
 			}
 		}
+		
+		# Espionage
+		set_variable = { country_cryptology_defense_level = cryptology_defense_level }
+		set_variable = { country_num_operative_slots = num_operative_slots }
+		set_variable = { country_agency_upgrade_number = agency_upgrade_number }
+		
+		set_variable = { country_espionage_level = 0 }
+		
+		add_to_variable = { country_espionage_level = country_cryptology_defense_level }
+		add_to_variable = { country_espionage_level = country_num_operative_slots }
+		add_to_variable = { country_espionage_level = country_agency_upgrade_number }
+		
+		multiply_variable = { country_espionage_level = 0.5 }
 
 		add_to_variable = { country_prestige = country_base_prestige }
 		add_to_variable = { country_prestige = country_industry_score }
@@ -432,6 +451,7 @@ calculate_prestige = {
 		add_to_variable = { country_prestige = country_air_score }
 		add_to_variable = { country_prestige = country_navy_score }
 		add_to_variable = { country_prestige = country_size_score }
+		add_to_variable = { country_prestige = country_espionage_level }
 		
 		if = { #градация престижа для стран по статусу 
 			limit = {
@@ -441,25 +461,25 @@ calculate_prestige = {
 					has_idea = little_country
 				}
 			}
-			multiply_variable = { country_prestige = 0.45 }
+			multiply_variable = { country_prestige = 0.75 }
 		}
 		else_if = {
 			limit = {
 				has_idea = medium_country
 			}
-			multiply_variable = { country_prestige = 0.7 }
+			multiply_variable = { country_prestige = 0.8 }
 		}
 		else_if = {
 			limit = {
 				has_idea = large_country
 			}
-			multiply_variable = { country_prestige = 0.8 }
+			multiply_variable = { country_prestige = 0.9 }
 		}
 		else_if = {
 			limit = {
 				has_idea = potential_world_power
 			}
-			multiply_variable = { country_prestige = 0.9 }
+			multiply_variable = { country_prestige = 0.95 }
 		}
 		
 		if = { #градация престижа по этапу вестернизации
@@ -468,7 +488,7 @@ calculate_prestige = {
 					ROOT.progress_of_westornisation_frame = 1
 				}
 			}
-			multiply_variable = { country_prestige = 0.25 }
+			multiply_variable = { country_prestige = 0.7 }
 		}
 		else_if = {
 			limit = {
@@ -476,7 +496,7 @@ calculate_prestige = {
 					ROOT.progress_of_westornisation_frame = 2
 				}
 			}
-			multiply_variable = { country_prestige = 0.5 }
+			multiply_variable = { country_prestige = 0.8 }
 		}
 		else_if = {
 			limit = {
@@ -484,7 +504,7 @@ calculate_prestige = {
 					ROOT.progress_of_westornisation_frame = 3
 				}
 			}
-			multiply_variable = { country_prestige = 0.75 }
+			multiply_variable = { country_prestige = 0.9 }
 		}
 	}
 }
