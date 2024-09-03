@@ -1,0 +1,133 @@
+defined_text = {
+    name = aotsm_country_position_loc
+    text = {
+        trigger = {
+            has_global_flag = sort_high_to_low
+            add_to_temp_variable = { i = 1}
+        }
+        localization_key = aotsm_country_position_localization_key_htl
+    }
+    text = {
+        trigger = {
+            has_global_flag = sort_low_to_high
+            set_temp_variable = { x = global.country_grade_list_array^num }
+            subtract_from_temp_variable = { x = i }
+        }
+        localization_key = aotsm_country_position_localization_key_lth
+    }
+}
+
+defined_text = {
+    name = aotsm_country_prestige_loc
+    text = {
+        trigger = {
+            always = yes
+            set_temp_variable = { temp_prestige = THIS.country_prestige }
+            round_temp_variable = temp_prestige
+        }
+        localization_key = aotsm_prestige_localization_key
+    }
+}
+
+defined_text = {
+    name = aotsm_country_power_rank_loc
+	
+    text = {
+        trigger = {
+			is_in_array = { global.top_seven_prestige_array = THIS }
+        }
+        localization_key = aotsm_country_grade_great_power_lk
+    }
+	
+    text = {
+        trigger = {
+            set_temp_variable = { temp_prestige = THIS.country_prestige }
+            subtract_from_temp_variable = { temp_prestige = 150 }
+            set_temp_variable = { temp_last_prestige = global.last_prestige }
+            subtract_from_temp_variable = { temp_last_prestige = 150 }
+            multiply_temp_variable = { temp_last_prestige = 0.49 }
+            check_variable = { temp_prestige > temp_last_prestige }
+        }
+        localization_key = aotsm_country_grade_major_power_lk
+    }
+	
+    text = {
+        trigger = {
+            set_temp_variable = { temp_prestige = THIS.country_prestige }
+            subtract_from_temp_variable = { temp_prestige = 150 }
+            set_temp_variable = { temp_last_prestige = global.last_prestige }
+            subtract_from_temp_variable = { temp_last_prestige = 150 }
+            multiply_temp_variable = { temp_last_prestige = 0.34 }
+            check_variable = { temp_prestige > temp_last_prestige }
+        }
+        localization_key = aotsm_country_grade_big_country_lk
+    }
+	
+    text = {
+        trigger = {
+            set_temp_variable = { temp_prestige = THIS.country_prestige }
+            subtract_from_temp_variable = { temp_prestige = 150 }
+            set_temp_variable = { temp_last_prestige = global.last_prestige }
+            subtract_from_temp_variable = { temp_last_prestige = 150 }
+            multiply_temp_variable = { temp_last_prestige = 0.14 }
+            check_variable = { temp_prestige > temp_last_prestige }
+        }
+        localization_key = aotsm_country_grade_regional_power_lk
+    }
+	
+    text = {
+        trigger = {
+            set_temp_variable = { temp_prestige = THIS.country_prestige }
+            subtract_from_temp_variable = { temp_prestige = 150 }
+            set_temp_variable = { temp_last_prestige = global.last_prestige }
+            subtract_from_temp_variable = { temp_last_prestige = 150 }
+            multiply_temp_variable = { temp_last_prestige = 0.06 }
+            check_variable = { temp_prestige > temp_last_prestige }
+        }
+        localization_key = aotsm_country_grade_minor_power_lk
+    }
+	
+    text = {
+        trigger = {
+            set_temp_variable = { temp_prestige = THIS.country_prestige }
+            subtract_from_temp_variable = { temp_prestige = 150 }
+            set_temp_variable = { temp_last_prestige = global.last_prestige }
+            subtract_from_temp_variable = { temp_last_prestige = 150 }
+            multiply_temp_variable = { temp_last_prestige = 0.01 }
+            check_variable = { temp_prestige > temp_last_prestige }
+        }
+        localization_key = aotsm_country_grade_small_state_lk
+    }
+	
+    text = {
+        trigger = {
+            set_temp_variable = { temp_prestige = THIS.country_prestige }
+            subtract_from_temp_variable = { temp_prestige = 150 }
+            set_temp_variable = { temp_last_prestige = global.last_prestige }
+            subtract_from_temp_variable = { temp_last_prestige = 150 }
+            multiply_temp_variable = { temp_last_prestige = 0.01 }
+            check_variable = { temp_prestige < temp_last_prestige }
+        }
+        localization_key = aotsm_country_grade_insignificant_power_lk
+    }
+}
+
+defined_text = {
+	name = GetSortArray
+	text = {
+		trigger = {
+			check_variable = { temp_array_sort = 4 }
+		}
+		localization_key = "global.country_grade_list_array"
+	}
+}
+
+defined_text = {
+	name = GetSortValue		
+	text = {
+		trigger = {
+			check_variable = { temp_value_sort = 2 }
+		}
+		localization_key = "country_prestige"
+	}
+}
