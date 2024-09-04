@@ -297,7 +297,7 @@ update_position = {
 calculate_prestige = {
 	every_country = {
 		set_variable = { country_prestige = 0 }
-		set_variable = { country_base_prestige = 200 } 
+		set_variable = { country_base_prestige = 150 } 
 		set_variable = { country_industry_score = 0 }
 		set_variable = { country_army_score = 0 }
 		set_variable = { country_navy_score = 0 }
@@ -402,10 +402,10 @@ calculate_prestige = {
 		multiply_variable = { country_land_army = 0.015 }
 		add_to_variable = { country_army_score = country_land_army }
 
-		# Army Air
-		set_variable = { country_air_army = num_deployed_planes }
-		multiply_variable = { country_air_army = 0.1 }
-		add_to_variable = { country_army_score = country_air_army }
+		# Army Air ##OFF - нет корректного параметра от которого можно считать
+		#set_variable = { country_air_army = num_deployed_planes }
+		#multiply_variable = { country_air_army = 0.1 }
+		#add_to_variable = { country_army_score = country_air_army }
 
 		# Army Navy
 		set_variable = { country_navy_army = num_ships }
@@ -449,43 +449,7 @@ calculate_prestige = {
 		#add_to_variable = { country_prestige = country_science_score }
 		add_to_variable = { country_prestige = country_army_score }	
 		add_to_variable = { country_prestige = country_size_score }
-		add_to_variable = { country_prestige = country_espionage_level }
-		
-		if = { #градация престижа для стран по статусу 
-			limit = {
-				OR = {
-					has_idea = colonial_autonomy
-					has_idea = average_colony
-					has_idea = small_colony
-					has_idea = colonial_area
-				}
-			}
-			multiply_variable = { country_prestige = 0.65 }
-		}
-		else_if = {
-			limit = {
-				has_idea = little_country
-			}
-			multiply_variable = { country_prestige = 0.75 }
-		}
-		else_if = {
-			limit = {
-				has_idea = medium_country
-			}
-			multiply_variable = { country_prestige = 0.8 }
-		}
-		else_if = {
-			limit = {
-				has_idea = large_country
-			}
-			multiply_variable = { country_prestige = 0.9 }
-		}
-		else_if = {
-			limit = {
-				has_idea = potential_world_power
-			}
-			multiply_variable = { country_prestige = 0.95 }
-		}
+		add_to_variable = { country_prestige = country_espionage_level }	
 		
 		if = { #градация престижа по этапу вестернизации
 			limit = {
@@ -493,15 +457,7 @@ calculate_prestige = {
 					ROOT.progress_of_westornisation_frame = 1
 				}
 			}
-			multiply_variable = { country_prestige = 0.7 }
-		}
-		else_if = {
-			limit = {
-				check_variable = {
-					ROOT.progress_of_westornisation_frame = 2
-				}
-			}
-			multiply_variable = { country_prestige = 0.8 }
+			subtract_from_variable = { country_prestige = 5 }
 		}
 		else_if = {
 			limit = {
@@ -509,7 +465,53 @@ calculate_prestige = {
 					ROOT.progress_of_westornisation_frame = 3
 				}
 			}
-			multiply_variable = { country_prestige = 0.9 }
+			add_to_variable = { country_prestige = 5 }
+		}
+		else_if = {
+			limit = {
+				check_variable = {
+					ROOT.progress_of_westornisation_frame = 4
+				}
+			}
+			add_to_variable = { country_prestige = 10 }
+		}
+		
+		if = { #градация престижа для стран по статусу 
+			limit = {
+				OR = {
+					is_puppet = yes
+					is_subject = yes
+					has_idea = colonial_autonomy
+					has_idea = average_colony
+					has_idea = small_colony
+					has_idea = colonial_area
+				}
+			}
+			multiply_variable = { country_prestige = 0.6 }
+		}
+		else_if = {
+			limit = {
+				has_idea = medium_country
+			}
+			add_to_variable = { country_prestige = 5 }
+		}
+		else_if = {
+			limit = {
+				has_idea = large_country
+			}
+			add_to_variable = { country_prestige = 10 }
+		}
+		else_if = {
+			limit = {
+				has_idea = potential_world_power
+			}
+			add_to_variable = { country_prestige = 15 }
+		}
+		else_if = {
+			limit = {
+				has_idea = world_power
+			}
+			add_to_variable = { country_prestige = 20 }
 		}
 	}
 }
