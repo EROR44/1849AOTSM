@@ -302,6 +302,7 @@ calculate_prestige = {
 		set_variable = { country_army_score = 0 }
 		set_variable = { country_navy_score = 0 }
 		set_variable = { country_size_score = 0 }
+		set_variable = { country_science_score = 0 }
 		set_variable = { country_own_size_score = 0 }
 		set_variable = { country_subject_size_score = 0 }
 	}
@@ -393,9 +394,13 @@ calculate_prestige = {
 		}
 
 		# Science
-		#set_variable = { country_tech_num = researched_techs  } #amount_research_slots/num_researched_technologies #Плодит престиж - добавляется при каждом открытии окошка
-		#multiply_variable = { country_tech_num = 0.25 }
-		#add_to_variable = { country_science_score = country_tech_num }
+		set_variable = { country_tech_num = num_researched_technologies  } 
+		set_variable = { country_research_slots_num = amount_research_slots  } 
+		
+		add_to_variable = { country_science_score = country_tech_num }
+		multiply_variable = { country_science_score = 0.35 }
+		add_to_variable = { country_science_score = amount_research_slots }
+		
 		
 		# Army Land
 		set_variable = { country_land_army = num_battalions  }
@@ -409,7 +414,7 @@ calculate_prestige = {
 
 		# Army Navy
 		set_variable = { country_navy_army = num_ships }
-		multiply_variable = { country_navy_army = 0.15 }
+		multiply_variable = { country_navy_army = 0.03 }
 		add_to_variable = { country_army_score = country_navy_army }
 		
 		# Size
@@ -446,10 +451,14 @@ calculate_prestige = {
 
 		add_to_variable = { country_prestige = country_base_prestige }
 		add_to_variable = { country_prestige = country_industry_score }
-		#add_to_variable = { country_prestige = country_science_score }
+		add_to_variable = { country_prestige = country_science_score }
 		add_to_variable = { country_prestige = country_army_score }	
 		add_to_variable = { country_prestige = country_size_score }
-		add_to_variable = { country_prestige = country_espionage_level }	
+		add_to_variable = { country_prestige = country_espionage_level }
+
+		set_variable = { country_westernisation_bonus = 0 }
+		set_variable = { country_country_status_bonus = 0 }
+		set_variable = { country_total_prestige_bonus = 0 }
 		
 		if = { #градация престижа по этапу вестернизации
 			limit = {
@@ -457,7 +466,8 @@ calculate_prestige = {
 					ROOT.progress_of_westornisation_frame = 1
 				}
 			}
-			subtract_from_variable = { country_prestige = 5 }
+			subtract_from_variable = { country_westernisation_bonus = 5 }
+			add_to_variable = { country_total_prestige_bonus = country_westernisation_bonus }
 		}
 		else_if = {
 			limit = {
@@ -465,7 +475,8 @@ calculate_prestige = {
 					ROOT.progress_of_westornisation_frame = 3
 				}
 			}
-			add_to_variable = { country_prestige = 5 }
+			add_to_variable = { country_westernisation_bonus = 1.25 }
+			add_to_variable = { country_total_prestige_bonus = country_westernisation_bonus }
 		}
 		else_if = {
 			limit = {
@@ -473,7 +484,8 @@ calculate_prestige = {
 					ROOT.progress_of_westornisation_frame = 4
 				}
 			}
-			add_to_variable = { country_prestige = 10 }
+			add_to_variable = { country_westernisation_bonus = 2.5 }
+			add_to_variable = { country_total_prestige_bonus = country_westernisation_bonus }
 		}
 		
 		if = { #градация престижа для стран по статусу 
@@ -487,31 +499,38 @@ calculate_prestige = {
 					has_idea = colonial_area
 				}
 			}
-			multiply_variable = { country_prestige = 0.6 }
+			multiply_variable = { country_prestige = 0.6 } #Мультипликацию не отразить конкретным параметром в скриптовой локе
 		}
 		else_if = {
 			limit = {
 				has_idea = medium_country
 			}
-			add_to_variable = { country_prestige = 5 }
+			add_to_variable = { country_country_status_bonus = 2.5 }
+			add_to_variable = { country_total_prestige_bonus = country_country_status_bonus }
 		}
 		else_if = {
 			limit = {
 				has_idea = large_country
 			}
-			add_to_variable = { country_prestige = 10 }
+			add_to_variable = { country_country_status_bonus = 5 }
+			add_to_variable = { country_total_prestige_bonus = country_country_status_bonus }
 		}
 		else_if = {
 			limit = {
 				has_idea = potential_world_power
 			}
-			add_to_variable = { country_prestige = 15 }
+			add_to_variable = { country_country_status_bonus = 7.5 }
+			add_to_variable = { country_total_prestige_bonus = country_country_status_bonus }
 		}
 		else_if = {
 			limit = {
 				has_idea = world_power
 			}
-			add_to_variable = { country_prestige = 20 }
+			add_to_variable = { country_country_status_bonus = 10 }
+			add_to_variable = { country_total_prestige_bonus = country_country_status_bonus }
 		}
+		
+		multiply_variable = { country_total_prestige_bonus = 0.75 }
+		add_to_variable = { country_prestige = country_total_prestige_bonus }
 	}
 }
