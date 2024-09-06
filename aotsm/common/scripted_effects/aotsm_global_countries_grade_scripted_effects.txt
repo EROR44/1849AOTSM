@@ -297,11 +297,12 @@ update_position = {
 calculate_prestige = {
 	every_country = {
 		set_variable = { country_prestige = 0 }
-		set_variable = { country_base_prestige = 200 } 
+		set_variable = { country_base_prestige = 150 } 
 		set_variable = { country_industry_score = 0 }
 		set_variable = { country_army_score = 0 }
 		set_variable = { country_navy_score = 0 }
 		set_variable = { country_size_score = 0 }
+		set_variable = { country_science_score = 0 }
 		set_variable = { country_own_size_score = 0 }
 		set_variable = { country_subject_size_score = 0 }
 	}
@@ -316,7 +317,7 @@ calculate_prestige = {
 		set_variable = { country_synthetic_refinery = total_constructed_synthetic_refinery }
 		set_variable = { country_leypoldit_complex = total_constructed_leypoldit_complex }
 		set_variable = { country_nuclear_reactors = total_constructed_nuclear_reactor }
-		set_variable = { country_nuclear_reactors = country_radar_stations }
+		set_variable = { country_radar_stations_num = country_radar_stations }
 
 		clamp_variable = {
 			var = country_civ_factories
@@ -343,7 +344,7 @@ calculate_prestige = {
 			min = 0
 		}
 		clamp_variable = {
-			var = country_radar_stations
+			var = country_radar_stations_num
 			min = 0
 		}
 
@@ -353,7 +354,7 @@ calculate_prestige = {
 		add_to_variable = { country_industry_score = country_synthetic_refinery }
 		add_to_variable = { country_industry_score = country_leypoldit_complex }
 		add_to_variable = { country_industry_score = country_nuclear_reactors }
-		add_to_variable = { country_industry_score = country_radar_stations }
+		add_to_variable = { country_industry_score = country_radar_stations_num }
 		
 		if = { #градация по промышленному развитию
 			limit = {
@@ -393,23 +394,27 @@ calculate_prestige = {
 		}
 
 		# Science
-		#set_variable = { country_tech_num = researched_techs  } #amount_research_slots/num_researched_technologies #Плодит престиж - добавляется при каждом открытии окошка
-		#multiply_variable = { country_tech_num = 0.25 }
-		#add_to_variable = { country_science_score = country_tech_num }
+		set_variable = { country_tech_num = num_researched_technologies  } 
+		set_variable = { country_research_slots_num = amount_research_slots  } 
+		
+		add_to_variable = { country_science_score = country_tech_num }
+		multiply_variable = { country_science_score = 0.35 }
+		add_to_variable = { country_science_score = amount_research_slots }
+		
 		
 		# Army Land
 		set_variable = { country_land_army = num_battalions  }
 		multiply_variable = { country_land_army = 0.015 }
 		add_to_variable = { country_army_score = country_land_army }
 
-		# Army Air
-		set_variable = { country_air_army = num_deployed_planes }
-		multiply_variable = { country_air_army = 0.1 }
-		add_to_variable = { country_army_score = country_air_army }
+		# Army Air ##OFF - нет корректного параметра от которого можно считать
+		#set_variable = { country_air_army = num_deployed_planes }
+		#multiply_variable = { country_air_army = 0.1 }
+		#add_to_variable = { country_army_score = country_air_army }
 
 		# Army Navy
 		set_variable = { country_navy_army = num_ships }
-		multiply_variable = { country_navy_army = 0.15 }
+		multiply_variable = { country_navy_army = 0.03 }
 		add_to_variable = { country_army_score = country_navy_army }
 		
 		# Size
@@ -446,44 +451,15 @@ calculate_prestige = {
 
 		add_to_variable = { country_prestige = country_base_prestige }
 		add_to_variable = { country_prestige = country_industry_score }
-		#add_to_variable = { country_prestige = country_science_score }
+		add_to_variable = { country_prestige = country_science_score }
 		add_to_variable = { country_prestige = country_army_score }	
 		add_to_variable = { country_prestige = country_size_score }
 		add_to_variable = { country_prestige = country_espionage_level }
-		
-		if = { #градация престижа для стран по статусу 
-			limit = {
-				OR = {
-					is_puppet = yes
-					is_subject = yes
-				}
-			}
-			multiply_variable = { country_prestige = 0.65 }
-		}
-		else_if = {
-			limit = {
-				has_idea = little_country
-			}
-			multiply_variable = { country_prestige = 0.75 }
-		}
-		else_if = {
-			limit = {
-				has_idea = medium_country
-			}
-			multiply_variable = { country_prestige = 0.8 }
-		}
-		else_if = {
-			limit = {
-				has_idea = large_country
-			}
-			multiply_variable = { country_prestige = 0.9 }
-		}
-		else_if = {
-			limit = {
-				has_idea = potential_world_power
-			}
-			multiply_variable = { country_prestige = 0.95 }
-		}
+
+		set_variable = { country_westernisation_bonus = 0 }
+		set_variable = { country_country_status_bonus = 0 }
+		set_variable = { country_total_prestige_bonus = 0 }
+		set_variable = { country_hidden_prestige_bonus = 0 }
 		
 		if = { #градация престижа по этапу вестернизации
 			limit = {
@@ -491,15 +467,8 @@ calculate_prestige = {
 					ROOT.progress_of_westornisation_frame = 1
 				}
 			}
-			multiply_variable = { country_prestige = 0.7 }
-		}
-		else_if = {
-			limit = {
-				check_variable = {
-					ROOT.progress_of_westornisation_frame = 2
-				}
-			}
-			multiply_variable = { country_prestige = 0.8 }
+			subtract_from_variable = { country_westernisation_bonus = 5 }
+			add_to_variable = { country_total_prestige_bonus = country_westernisation_bonus }
 		}
 		else_if = {
 			limit = {
@@ -507,7 +476,70 @@ calculate_prestige = {
 					ROOT.progress_of_westornisation_frame = 3
 				}
 			}
-			multiply_variable = { country_prestige = 0.9 }
+			add_to_variable = { country_westernisation_bonus = 1.25 }
+			add_to_variable = { country_total_prestige_bonus = country_westernisation_bonus }
+		}
+		else_if = {
+			limit = {
+				check_variable = {
+					ROOT.progress_of_westornisation_frame = 4
+				}
+			}
+			add_to_variable = { country_westernisation_bonus = 2.5 }
+			add_to_variable = { country_total_prestige_bonus = country_westernisation_bonus }
+		}
+		
+		if = { #градация престижа для стран по статусу 
+			limit = {
+				OR = {
+					is_puppet = yes
+					is_subject = yes
+					has_idea = colonial_autonomy
+					has_idea = average_colony
+					has_idea = small_colony
+					has_idea = colonial_area
+				}
+			}
+			multiply_variable = { country_prestige = 0.6 } #Мультипликацию не отразить конкретным параметром в скриптовой локе
+		}
+		else_if = {
+			limit = {
+				has_idea = medium_country
+			}
+			add_to_variable = { country_country_status_bonus = 2.5 }
+			add_to_variable = { country_total_prestige_bonus = country_country_status_bonus }
+		}
+		else_if = {
+			limit = {
+				has_idea = large_country
+			}
+			add_to_variable = { country_country_status_bonus = 5 }
+			add_to_variable = { country_total_prestige_bonus = country_country_status_bonus }
+		}
+		else_if = {
+			limit = {
+				has_idea = potential_world_power
+			}
+			add_to_variable = { country_country_status_bonus = 7.5 }
+			add_to_variable = { country_total_prestige_bonus = country_country_status_bonus }
+		}
+		else_if = {
+			limit = {
+				has_idea = world_power
+			}
+			add_to_variable = { country_country_status_bonus = 10 }
+			add_to_variable = { country_total_prestige_bonus = country_country_status_bonus }
+		}
+		
+		multiply_variable = { country_total_prestige_bonus = 0.75 }
+		add_to_variable = { country_prestige = country_total_prestige_bonus }
+		
+		if = { # скрытые бафы и дебафы для престижа
+			limit = {
+				tag = RUS
+			}
+			add_to_variable = { country_hidden_prestige_bonus = 15 }
+			subtract_from_variable = { country_prestige = country_hidden_prestige_bonus }
 		}
 	}
 }
