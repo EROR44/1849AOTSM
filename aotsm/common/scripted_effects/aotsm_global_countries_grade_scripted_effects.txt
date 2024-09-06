@@ -459,6 +459,7 @@ calculate_prestige = {
 		set_variable = { country_westernisation_bonus = 0 }
 		set_variable = { country_country_status_bonus = 0 }
 		set_variable = { country_total_prestige_bonus = 0 }
+		set_variable = { country_hidden_prestige_bonus = 0 }
 		
 		if = { #градация престижа по этапу вестернизации
 			limit = {
@@ -532,5 +533,13 @@ calculate_prestige = {
 		
 		multiply_variable = { country_total_prestige_bonus = 0.75 }
 		add_to_variable = { country_prestige = country_total_prestige_bonus }
+		
+		if = { # скрытые бафы и дебафы для престижа
+			limit = {
+				tag = RUS
+			}
+			add_to_variable = { country_hidden_prestige_bonus = 15 }
+			subtract_from_variable = { country_prestige = country_hidden_prestige_bonus }
+		}
 	}
 }
