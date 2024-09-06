@@ -1,0 +1,46 @@
+scripted_gui = {
+ 	aotsm_welcome_screen_common_story_button = { #открывает общий лор
+        window_name = "aotsm_welcome_screen_container"
+        parent_window_token = politics_tab
+        context_type = player_context
+
+        visible = {
+            always = yes
+        }
+
+        effects = {
+     		aotsm_welcome_screen_common_story_button_click = {
+                clr_global_flag = aotsm_check_country_lore_flag
+                set_global_flag = aotsm_check_common_lore_flag				
+            }
+        }
+
+        ai_enabled = {
+            always = no
+        }
+
+        ai_test_interval = 290  # The higher, the long it takes the ai to do actions
+        ai_test_variance = 0.5
+    } 
+
+	aotsm_welcome_screen = {
+		context_type = player_context
+		window_name = "aotsm_welcome_screen_container"
+
+		ai_enabled = {
+			always = no
+		}
+
+		visible = {
+			has_country_flag = aotsm_open_welcome_screen_flag
+		}
+
+		effects = {
+			options_button_click = {
+				clr_country_flag = aotsm_open_welcome_screen_flag
+				country_event = history.1     
+			}
+		}
+	}
+}
+
