@@ -310,14 +310,25 @@ calculate_prestige = {
 	every_country = {
 
 		# Industry
-		set_variable = { country_summ_factories = num_of_owned_factories }
+		# idk give a single fuck that this reveals numbers usually only shown if you use spies
+		set_variable = { country_civ_factories = num_of_civilian_factories }
+		set_variable = { country_mil_factories = num_of_military_factories }
+		set_variable = { country_naval_factories = num_of_naval_factories  }
 		set_variable = { country_synthetic_refinery = total_constructed_synthetic_refinery }
 		set_variable = { country_leypoldit_complex = total_constructed_leypoldit_complex }
 		set_variable = { country_nuclear_reactors = total_constructed_nuclear_reactor }
 		set_variable = { country_radar_stations_num = country_radar_stations }
 
 		clamp_variable = {
-			var = country_summ_factories
+			var = country_civ_factories
+			min = 0
+		}
+		clamp_variable = {
+			var = country_mil_factories
+			min = 0
+		}
+		clamp_variable = {
+			var = country_naval_factories
 			min = 0
 		}
 		clamp_variable = {
@@ -337,7 +348,9 @@ calculate_prestige = {
 			min = 0
 		}
 
-		add_to_variable = { country_industry_score = country_summ_factories }
+		add_to_variable = { country_industry_score = country_civ_factories }
+		add_to_variable = { country_industry_score = country_mil_factories }
+		add_to_variable = { country_industry_score = country_naval_factories }
 		add_to_variable = { country_industry_score = country_synthetic_refinery }
 		add_to_variable = { country_industry_score = country_leypoldit_complex }
 		add_to_variable = { country_industry_score = country_nuclear_reactors }
