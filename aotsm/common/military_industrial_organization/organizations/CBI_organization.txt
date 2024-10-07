@@ -1,17 +1,130 @@
 
+# MATERIEL MANUFACTURER
+ 
+CBI_state_small_arms_factory = { #пехотное оснащение
 
-########    ###    ##    ## ##    ##  ######  
-   ##      ## ##   ###   ## ##   ##  ##    ## 
-   ##     ##   ##  ####  ## ##  ##   ##       
-   ##    ##     ## ## ## ## #####     ######  
-   ##    ######### ##  #### ##  ##         ## 
-   ##    ##     ## ##   ### ##   ##  ##    ## 
-   ##    ##     ## ##    ## ##    ##  ######  
+	include = generic_infantry_equipment_organization
+	
+	icon = GFX_idea_generic_tank_manufacturer_1
+
+	allowed = {
+		tag = CBI
+	}
+
+	equipment_type = { infantry_equipment }
+	
+	research_categories = { infantry_weapons }
+
+	tree_header_text = {
+		text = mio_header_design_and_production
+		x = 3
+	}
+
+	tree_header_text = {
+		text = mio_header_anti_tank
+		x = 8
+	}
+	
+	initial_trait = {
+		name = generic_mio_initial_trait_infantry_manufacturer
+
+		organization_modifier = {
+			military_industrial_organization_research_bonus = 0.05
+		}
+
+		production_bonus = {
+			production_efficiency_cap_factor = 0.03
+		}
+
+		equipment_bonus = {
+			soft_attack = 0.03
+		}
+	}
+}	
+ 
+CBI_webley_and_scott = { #пехотное оснащение и доп оснащение
+
+	include = generic_support_equipment_organization
+	
+	icon = GFX_idea_generic_tank_manufacturer_1
+
+	allowed = {
+		tag = CBI
+	}
+
+	equipment_type = { infantry_equipment support_equipment }
+	research_categories = { infantry_weapons support_tech }
+
+	tree_header_text = {
+		text = mio_header_support
+		x = 1
+	}
+
+	tree_header_text = {
+		text = mio_header_weapons
+		x = 6.5
+	}
+
+	
+	initial_trait = {
+		name = generic_mio_initial_trait_support_equipment_manufacturer
+
+		organization_modifier = {
+			military_industrial_organization_research_bonus = 0.05
+		}
+	}
+
+}		
+ 
+CBI_wickers_limited = { #артилерия, птв, пво
+
+	include = generic_artillery_organization
+	
+	icon = GFX_idea_generic_tank_manufacturer_1
+
+	allowed = {
+		tag = CBI
+	}
+
+	equipment_type = {
+		artillery_equipment
+		anti_tank_equipment
+		anti_air_equipment
+	}
+
+	research_categories = {
+		mio_cat_all_artillery_equipment
+	}
+	
+	tree_header_text = {
+		text = mio_header_mechanical_design
+		x = 1
+	}
+
+	tree_header_text = {
+		text = mio_header_armament_and_ammunition
+		x = 6
+	}
+
+	initial_trait = {
+		name = generic_mio_initial_trait_artillery_manufacturer
+
+		organization_modifier = {
+			military_industrial_organization_research_bonus = 0.05
+		}
+		production_bonus = {
+			production_cost_factor = -0.03
+		}
+	}
+
+}	
 
 
+# TANK MANUFACTURER 
+CBI_william_foster_and_co_ltd = {
 
-# GENERIC TANK MANUFACTURER - 
-CBI_tank_organization = {
+	include = generic_tank_refurbishment_plant_organization
+	
 	icon = GFX_idea_generic_tank_manufacturer_1
 
 	allowed = {
@@ -22,15 +135,19 @@ CBI_tank_organization = {
 	research_categories = { mio_cat_tech_light_armor_and_modules  }
 
 	tree_header_text = {
-		text = mio_header_tank_construction
-		x = 3
+		text = mio_header_armor
+		x = 1
 	}
 
 	tree_header_text = {
-		text = mio_header_equipment_and_specialization
-		x = 7
+		text = mio_header_weapons
+		x = 5
 	}
 
+	tree_header_text = {
+		text = mio_header_trains
+		x = 8
+	}
 	
 	initial_trait = { #Базовый эффект
 		name = CBI_mio_initial_trait_standardized_production
@@ -41,72 +158,6 @@ CBI_tank_organization = {
 			build_cost_ic = -0.1
 		}
 	}
-	
-	trait = {
-		token = CBI_mio_add_armor
-		name = CBI_mio_optimized_production
-		icon = GFX_generic_mio_trait_icon_defense
-
-		position = { x=1 y=0 }
-		
-		mutually_exclusive = { CBI_mio_add_speed }
-		
-		equipment_bonus = {
-			defense = 0.03
-		}
-	}
-	
-	trait = {
-		token = CBI_mio_add_speed
-		name = CBI_mio_optimized_production
-		icon = GFX_generic_mio_trait_icon_maximum_speed
-
-		position = { x=4 y=0 }
-		
-		mutually_exclusive = { CBI_mio_add_armor }
-		
-		equipment_bonus = {
-			maximum_speed = 0.07
-		}
-	}	
-
-	trait = {
-		token = CBI_mio_optimized_production
-		name = CBI_mio_optimized_production
-		icon = GFX_generic_mio_trait_icon_reliability
-
-		position = { x=7 y=0 }
-		
-		production_bonus = {
-			production_efficiency_gain_factor = 0.05
-		}
-		
-		equipment_bonus = {	
-			build_cost_ic = -0.05
-		}
-	}
-		
-
-	trait = {
-		token = CBI_mio_standartized_components
-		name = CBI_mio_optimized_production
-		icon = GFX_generic_mio_trait_icon_build_cost_ic
-
-		position = { x=0 y=1 }
-		
-		relative_position_id = CBI_mio_optimized_production
-		
-		any_parent = { CBI_mio_optimized_production }
-		
-		production_bonus = {
-			production_efficiency_gain_factor = 0.05
-		}
-		
-		equipment_bonus = {	
-			build_cost_ic = -0.05
-		}
-	}
-	
 	
 }
 
