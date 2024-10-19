@@ -25,6 +25,29 @@ on_actions = {
 						}
 						add_to_array = { global.country_grade_list_array = THIS }
 					}
+					set_variable = { country_start_prestige = 150 } #подсчет индивидуального базового престижа
+					if = {
+						limit = {
+							tag = CBI
+						}
+						add_to_variable = { country_start_prestige = 5 }
+					}
+					else_if = {
+						limit = {
+							OR = {
+								tag = BYZ
+								tag = AZT
+								tag = QIN
+							}
+						}
+						add_to_variable = { country_start_prestige = 10 }
+					}
+					else_if = {
+						limit = {
+							tag = RUS
+						}
+						subtract_from_variable = { country_start_prestige = 15 }
+					}
 				}
                 set_variable = { new_array_num = global.country_grade_list_array^num }
                 calculate_prestige = yes
