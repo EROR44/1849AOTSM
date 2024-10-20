@@ -294,6 +294,34 @@ update_position = {
 	}
 }
 
+calculate_base_prestige = { #only on startup - подсчет индивидуального базового престижа
+	every_country = {
+		set_variable = { country_start_prestige = 150 } 
+		if = {
+			limit = {
+				tag = CBI
+			}
+		add_to_variable = { country_start_prestige = 5 }
+		}
+		else_if = {
+			limit = {
+				OR = {
+					tag = BYZ
+					tag = AZT
+					tag = QIN
+				}
+			}
+			add_to_variable = { country_start_prestige = 10 }
+		}
+		else_if = {
+			limit = {
+				tag = RUS
+			}
+			subtract_from_variable = { country_start_prestige = 15 }
+		}
+	}
+}
+
 calculate_prestige = {
 	every_country = {
 		set_variable = { country_prestige = 0 }
