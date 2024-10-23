@@ -27,20 +27,18 @@ on_actions = {
 					}
 				}
                 set_variable = { new_array_num = global.country_grade_list_array^num }
+				calculate_base_prestige = yes #подсчет индивидуального базового престижа
                 calculate_prestige = yes
 			}
 			every_country = {
-				limit = { #сюда надо добавлять теги проработанных государств
+				limit = { #сюда надо добавлять ID минорных фокусных древ
 					is_ai = no
-					NOT = {
-						OR = {
-							tag = RUS
-							tag = CBI
-							tag = PRU
-							tag = BYZ
-							tag = PRT
-						}
-					}
+					OR = {
+						has_focus_tree = generic_focus
+						has_focus_tree = minor_germany_south_focus
+						tag = SCA
+						tag = FRR# временно, до реворка стран
+					}	
 				}
 				country_event = aotsm_notification_event.3
 			}

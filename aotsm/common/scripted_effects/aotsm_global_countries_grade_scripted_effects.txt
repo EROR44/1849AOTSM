@@ -294,10 +294,38 @@ update_position = {
 	}
 }
 
+calculate_base_prestige = { #only on startup - подсчет индивидуального базового престижа
+	every_country = {
+		set_variable = { country_start_prestige = 150 } 
+		if = {
+			limit = {
+				tag = CBI
+			}
+		add_to_variable = { country_start_prestige = 5 }
+		}
+		else_if = {
+			limit = {
+				OR = {
+					tag = BYZ
+					tag = AZT
+					tag = QIN
+				}
+			}
+			add_to_variable = { country_start_prestige = 10 }
+		}
+		else_if = {
+			limit = {
+				tag = RUS
+			}
+			subtract_from_variable = { country_start_prestige = 15 }
+		}
+	}
+}
+
 calculate_prestige = {
 	every_country = {
 		set_variable = { country_prestige = 0 }
-		set_variable = { country_base_prestige = 150 } 
+		set_variable = { country_base_prestige = 0 } 
 		set_variable = { country_industry_score = 0 }
 		set_variable = { country_army_score = 0 }
 		set_variable = { country_navy_score = 0 }
@@ -308,6 +336,10 @@ calculate_prestige = {
 	}
 
 	every_country = {
+
+		#Base prestige
+
+		set_variable = { country_base_prestige = country_start_prestige } #подсасывает значение просчитываемое onstartup
 
 		# Industry
 		set_variable = { country_summ_factories = num_of_owned_factories }
@@ -521,12 +553,12 @@ calculate_prestige = {
 		multiply_variable = { country_total_prestige_bonus = 0.75 }
 		add_to_variable = { country_prestige = country_total_prestige_bonus }
 		
-		if = { # скрытые бафы и дебафы для престижа
-			limit = {
-				tag = RUS
-			}
-			add_to_variable = { country_hidden_prestige_bonus = 15 }
-			subtract_from_variable = { country_prestige = country_hidden_prestige_bonus }
-		}
+		#if = { # скрытые бафы и дебафы для престижа
+		#	limit = {
+		#		tag = RUS
+		#	}
+		#	add_to_variable = { country_hidden_prestige_bonus = 15 }
+		#	subtract_from_variable = { country_prestige = country_hidden_prestige_bonus }
+		#}
 	}
 }
