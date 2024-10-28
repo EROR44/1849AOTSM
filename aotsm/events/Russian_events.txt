@@ -716,15 +716,23 @@ country_event = { #
 #######################PROPAGANDA_AND_RENEIM_SECTION##########################
 #цепочка на пропаганду и ренейминг городов
 
-country_event = { # Дело государствунной важности
+country_event = { # Дело государствунной важности 
 	id = rus_propaganda_and_reneim_event.1
 	title = rus_propaganda_and_reneim_event.1.t
 	desc = rus_propaganda_and_reneim_event.1.d
 	picture = GFX_report_event_political_discussion
 	
-	is_triggered_only = yes
-	
 	fire_only_once = yes
+	
+	trigger = {
+		tag = RUS
+		RUS = { 
+			NOT = {
+				has_country_flag = RUS_decabrists_not_in_power
+			}
+		}
+		date > 1849.3.9 
+	}
 	
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event rus_propaganda_and_reneim_event.1"
