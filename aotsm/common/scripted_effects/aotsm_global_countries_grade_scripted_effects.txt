@@ -296,7 +296,78 @@ update_position = {
 
 calculate_base_prestige = { #only on startup - подсчет индивидуального базового престижа
 	every_country = {
-		set_variable = { country_start_prestige = 150 } 
+		if = {
+			limit = {
+				has_idea = backward_nation
+			}
+			set_variable = { country_start_prestige = 135 }
+		}
+		else_if = {
+			limit = {
+				has_idea = lagging_nation
+			}
+			set_variable = { country_start_prestige = 140 }
+		}
+		else_if = {
+			limit = {
+				has_idea = westernizing_nation
+			}
+			set_variable = { country_start_prestige = 145 }
+		}
+		else_if = {
+			limit = {
+				has_idea = westernisation_end
+			}
+			set_variable = { country_start_prestige = 150 }
+		}
+
+		if = {
+			limit = {
+				has_idea = world_power
+			}
+			add_to_variable = { country_start_prestige = 10 }
+		}
+		else_if = {
+			limit = {
+				has_idea = potential_world_power
+			}
+			add_to_variable = { country_start_prestige = 7.5 }
+		}
+		else_if = {
+			limit = {
+				has_idea = large_country
+			}
+			add_to_variable = { country_start_prestige = 5 }
+		}
+		else_if = {
+			limit = {
+				OR = {
+					has_idea = medium_country
+					has_idea = colonial_autonomy
+				}
+			}
+			add_to_variable = { country_start_prestige = 2.5 }
+		}
+		#little_country status dont add/substract priesige
+		else_if = {
+			limit = {
+				has_idea = average_colony
+			}
+			subtract_from_variable = { country_start_prestige = 2.5 }
+		}
+		else_if = {
+			limit = {
+				has_idea = small_colony
+			}
+			subtract_from_variable = { country_start_prestige = 5 }
+		}
+		else_if = {
+			limit = {
+				has_idea = colonial_area
+			}
+			subtract_from_variable = { country_start_prestige = 7.5 }
+		}
+		
 		if = {
 			limit = {
 				tag = CBI
@@ -474,91 +545,6 @@ calculate_prestige = {
 		add_to_variable = { country_prestige = country_army_score }	
 		add_to_variable = { country_prestige = country_size_score }
 		add_to_variable = { country_prestige = country_espionage_level }
-
-		set_variable = { country_westernisation_bonus = 0 }
-		set_variable = { country_country_status_bonus = 0 }
-		set_variable = { country_total_prestige_bonus = 0 }
-		set_variable = { country_hidden_prestige_bonus = 0 }
 		
-		if = { #градация престижа по этапу вестернизации
-			limit = {
-				check_variable = {
-					ROOT.progress_of_westornisation_frame = 1
-				}
-			}
-			subtract_from_variable = { country_westernisation_bonus = 5 }
-			add_to_variable = { country_total_prestige_bonus = country_westernisation_bonus }
-		}
-		else_if = {
-			limit = {
-				check_variable = {
-					ROOT.progress_of_westornisation_frame = 3
-				}
-			}
-			add_to_variable = { country_westernisation_bonus = 1.25 }
-			add_to_variable = { country_total_prestige_bonus = country_westernisation_bonus }
-		}
-		else_if = {
-			limit = {
-				check_variable = {
-					ROOT.progress_of_westornisation_frame = 4
-				}
-			}
-			add_to_variable = { country_westernisation_bonus = 2.5 }
-			add_to_variable = { country_total_prestige_bonus = country_westernisation_bonus }
-		}
-		
-		if = { #градация престижа для стран по статусу 
-			limit = {
-				OR = {
-					is_puppet = yes
-					is_subject = yes
-					has_idea = colonial_autonomy
-					has_idea = average_colony
-					has_idea = small_colony
-					has_idea = colonial_area
-				}
-			}
-			multiply_variable = { country_prestige = 0.6 } #Мультипликацию не отразить конкретным параметром в скриптовой локе
-		}
-		else_if = {
-			limit = {
-				has_idea = medium_country
-			}
-			add_to_variable = { country_country_status_bonus = 2.5 }
-			add_to_variable = { country_total_prestige_bonus = country_country_status_bonus }
-		}
-		else_if = {
-			limit = {
-				has_idea = large_country
-			}
-			add_to_variable = { country_country_status_bonus = 5 }
-			add_to_variable = { country_total_prestige_bonus = country_country_status_bonus }
-		}
-		else_if = {
-			limit = {
-				has_idea = potential_world_power
-			}
-			add_to_variable = { country_country_status_bonus = 7.5 }
-			add_to_variable = { country_total_prestige_bonus = country_country_status_bonus }
-		}
-		else_if = {
-			limit = {
-				has_idea = world_power
-			}
-			add_to_variable = { country_country_status_bonus = 10 }
-			add_to_variable = { country_total_prestige_bonus = country_country_status_bonus }
-		}
-		
-		multiply_variable = { country_total_prestige_bonus = 0.75 }
-		add_to_variable = { country_prestige = country_total_prestige_bonus }
-		
-		#if = { # скрытые бафы и дебафы для престижа
-		#	limit = {
-		#		tag = RUS
-		#	}
-		#	add_to_variable = { country_hidden_prestige_bonus = 15 }
-		#	subtract_from_variable = { country_prestige = country_hidden_prestige_bonus }
-		#}
 	}
 }
