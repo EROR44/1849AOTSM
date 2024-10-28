@@ -802,7 +802,7 @@ country_event = { # Дело государствунной важности
 		}
 		add_political_power = -25
 		hidden_effect = {
-			country_event = { id = rus_propaganda_and_reneim_event.3 days = 63 }
+			country_event = { id = rus_propaganda_and_reneim_event.2 days = 15 }
 		}
 	}
 	
@@ -837,14 +837,13 @@ country_event = { # Дело государствунной важности
 		}
 		add_political_power = -50
 		hidden_effect = {
-			country_event = { id = rus_propaganda_and_reneim_event.2 days = 21 }
-			country_event = { id = rus_propaganda_and_reneim_event.3 days = 63 }
+			country_event = { id = rus_propaganda_and_reneim_event.2 days = 15 } #вызывает цепочку пропаганды
+			country_event = { id = rus_propaganda_and_reneim_event.15 days = 7 } #вызывает цепочку ренейминга
 		}
 	}
 	
 }
-
-country_event = { # Переименование Екатеринодара
+country_event = { # Начало пропагандисткой кампании
 	id = rus_propaganda_and_reneim_event.2
 	title = rus_propaganda_and_reneim_event.2.t
 	desc = rus_propaganda_and_reneim_event.2.d
@@ -856,10 +855,462 @@ country_event = { # Переименование Екатеринодара
 	
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event rus_propaganda_and_reneim_event.2"
+		hidden_effect = {
+			country_event = { id = rus_propaganda_and_reneim_event.3 days = 40 }
+		}
 	}
 	
 	option = {
-		name = rus_propaganda_and_reneim_event.2.a # Volkonsk
+		name = rus_propaganda_and_reneim_event.2.a	
+		ai_chance = {
+			base = 10
+		}
+		add_timed_idea = {
+			idea = RUS_propaganda_in_press
+			days = 1095
+		}
+	}
+	
+}
+
+country_event = { # Первые результаты пропагандисткой кампании
+	id = rus_propaganda_and_reneim_event.3
+	title = rus_propaganda_and_reneim_event.3.t
+	desc = rus_propaganda_and_reneim_event.3.d
+	picture = GFX_report_event_political_discussion
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event rus_propaganda_and_reneim_event.3"
+		hidden_effect = {
+			country_event = { id = rus_propaganda_and_reneim_event.4 days = 140 }
+			country_event = { id = rus_propaganda_and_reneim_event.7 days = 20 }
+		}
+	}
+	
+	option = {
+		name = rus_propaganda_and_reneim_event.3.a	
+		ai_chance = {
+			base = 10
+		}
+		add_stability = 0.025
+		add_war_support = 0.025
+	}
+	
+}
+
+country_event = { # Результаты пропагандисткой кампании за предшествующий год - 1849
+	id = rus_propaganda_and_reneim_event.4
+	title = rus_propaganda_and_reneim_event.4.t
+	desc = rus_propaganda_and_reneim_event.4.d
+	picture = GFX_report_event_political_discussion
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event rus_propaganda_and_reneim_event.4"
+		hidden_effect = {
+			country_event = { id = rus_propaganda_and_reneim_event.5 days = 365 }	
+			country_event = { id = rus_propaganda_and_reneim_event.10 days = 90 }		
+			if = {
+				limit = {
+					has_government = authoritarian
+				}
+				add_popularity = {
+					ideology = authoritarian
+					popularity = 0.05
+				}
+			}
+			else_if = {
+				limit = {
+					has_government = reactionist
+				}
+				add_popularity = {
+					ideology = reactionist
+					popularity = 0.05
+				}
+			}
+			else_if = {
+				limit = {
+					has_government = democratic
+				}
+				add_popularity = {
+					ideology = democratic
+					popularity = 0.05
+				}
+			}
+		}
+	}
+	
+	option = {
+		name = rus_propaganda_and_reneim_event.4.a	
+		ai_chance = {
+			base = 10
+		}
+		custom_effect_tooltip = RUS_add_rulling_party_popularity
+		add_stability = 0.025	
+	}
+	
+}
+
+country_event = { # Результаты пропагандисткой кампании за предшествующий год - 1850
+	id = rus_propaganda_and_reneim_event.5
+	title = rus_propaganda_and_reneim_event.5.t
+	desc = rus_propaganda_and_reneim_event.5.d
+	picture = GFX_report_event_political_discussion
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event rus_propaganda_and_reneim_event.5"
+		hidden_effect = {
+			country_event = { id = rus_propaganda_and_reneim_event.6 days = 365 }	
+			country_event = { id = rus_propaganda_and_reneim_event.13 days = 90 }	
+			if = {
+				limit = {
+					has_government = authoritarian
+				}
+				add_popularity = {
+					ideology = authoritarian
+					popularity = 0.05
+				}
+			}
+			else_if = {
+				limit = {
+					has_government = reactionist
+				}
+				add_popularity = {
+					ideology = reactionist
+					popularity = 0.05
+				}
+			}
+			else_if = {
+				limit = {
+					has_government = democratic
+				}
+				add_popularity = {
+					ideology = democratic
+					popularity = 0.05
+				}
+			}
+		}
+	}
+	
+	option = {
+		name = rus_propaganda_and_reneim_event.5.a	
+		ai_chance = {
+			base = 10
+		}
+		custom_effect_tooltip = RUS_add_rulling_party_popularity
+		add_stability = 0.025
+	}
+	
+}
+
+country_event = { # Завершение пропагандисткой кампании
+	id = rus_propaganda_and_reneim_event.6
+	title = rus_propaganda_and_reneim_event.6.t
+	desc = rus_propaganda_and_reneim_event.6.d
+	picture = GFX_report_event_political_discussion
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event rus_propaganda_and_reneim_event.6"	
+		hidden_effect = {
+			if = {
+				limit = {
+					has_government = authoritarian
+				}
+				add_popularity = {
+					ideology = authoritarian
+					popularity = 0.025
+				}
+			}
+			else_if = {
+				limit = {
+					has_government = reactionist
+				}
+				add_popularity = {
+					ideology = reactionist
+					popularity = 0.025
+				}
+			}
+			else_if = {
+				limit = {
+					has_government = democratic
+				}
+				add_popularity = {
+					ideology = democratic
+					popularity = 0.025
+				}
+			}
+		}
+	}
+	
+	option = {
+		name = rus_propaganda_and_reneim_event.6.a	
+		ai_chance = {
+			base = 10
+		}
+		if = {
+			limit = {
+				RUS = {
+					has_idea = RUS_propaganda_in_press
+				}
+			}
+			remove_ideas = RUS_propaganda_in_press
+		}
+		custom_effect_tooltip = RUS_add_rulling_party_popularity
+		add_stability = 0.05
+		add_political_power = 50
+	}
+	
+}
+
+country_event = { # Отчет о ведении пропагандисткой деятельности в  Польской области
+	id = rus_propaganda_and_reneim_event.7
+	title = rus_propaganda_and_reneim_event.7.t
+	desc = rus_propaganda_and_reneim_event.7.d
+	picture = GFX_report_event_political_discussion
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event rus_propaganda_and_reneim_event.7"
+		hidden_effect = {
+			country_event = { id = rus_propaganda_and_reneim_event.8 days = 45 }
+		}
+	}
+	
+	option = {
+		name = rus_propaganda_and_reneim_event.7.a	
+		ai_chance = {
+			base = 10
+		}
+		add_stability = 0.01
+		add_war_support = 0.01
+	}
+	
+}
+
+country_event = { # Отчет о проведении пропагандисткой кампании в Финляндской области	
+	id = rus_propaganda_and_reneim_event.8
+	title = rus_propaganda_and_reneim_event.8.t
+	desc = rus_propaganda_and_reneim_event.8.d
+	picture = GFX_report_event_political_discussion
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event rus_propaganda_and_reneim_event.8"
+		hidden_effect = {
+			country_event = { id = rus_propaganda_and_reneim_event.9 days = 45 }
+		}
+	}
+	
+	option = {
+		name = rus_propaganda_and_reneim_event.8.a	
+		ai_chance = {
+			base = 10
+		}
+		add_stability = 0.01
+		add_war_support = 0.01
+	}
+	
+}
+
+country_event = { # Отчет о проведении пропагандисткой кампании в Прибалтике
+	id = rus_propaganda_and_reneim_event.9
+	title = rus_propaganda_and_reneim_event.9.t
+	desc = rus_propaganda_and_reneim_event.9.d
+	picture = GFX_report_event_political_discussion
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event rus_propaganda_and_reneim_event.9"
+	}
+	
+	option = {
+		name = rus_propaganda_and_reneim_event.9.a	
+		ai_chance = {
+			base = 10
+		}
+		add_stability = 0.01
+		add_war_support = 0.01
+	}
+	
+}
+
+country_event = { # Отчет о проведении кампании в Москве и Московской губернии
+	id = rus_propaganda_and_reneim_event.10
+	title = rus_propaganda_and_reneim_event.10.t
+	desc = rus_propaganda_and_reneim_event.10.d
+	picture = GFX_report_event_political_discussion
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event rus_propaganda_and_reneim_event.10"
+		hidden_effect = {
+			country_event = { id = rus_propaganda_and_reneim_event.11 days = 90 }
+		}
+	}
+	
+	option = {
+		name = rus_propaganda_and_reneim_event.10.a	
+		ai_chance = {
+			base = 10
+		}
+		add_stability = 0.01
+		add_war_support = 0.01
+	}
+	
+}
+
+country_event = { # Отчет о проведении пропагандистких мероприятий в Петрограде и окрестностях
+	id = rus_propaganda_and_reneim_event.11
+	title = rus_propaganda_and_reneim_event.11.t
+	desc = rus_propaganda_and_reneim_event.11.d
+	picture = GFX_report_event_political_discussion
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event rus_propaganda_and_reneim_event.11"
+		hidden_effect = {
+			country_event = { id = rus_propaganda_and_reneim_event.12 days = 90 }
+		}
+	}
+	
+	option = {
+		name = rus_propaganda_and_reneim_event.11.a	
+		ai_chance = {
+			base = 10
+		}
+		add_stability = 0.01
+		add_war_support = 0.01
+	}
+	
+}
+
+country_event = { # Отчет о проведении пропагандистских мероприятий на Кубани
+	id = rus_propaganda_and_reneim_event.12
+	title = rus_propaganda_and_reneim_event.12.t
+	desc = rus_propaganda_and_reneim_event.12.d
+	picture = GFX_report_event_political_discussion
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event rus_propaganda_and_reneim_event.12"
+	}
+	
+	option = {
+		name = rus_propaganda_and_reneim_event.12.a	
+		ai_chance = {
+			base = 10
+		}
+		add_stability = 0.01
+		add_war_support = 0.01
+	}
+	
+}
+
+country_event = { # Отчет о проведении пропагандистских мероприятий в центральной России
+	id = rus_propaganda_and_reneim_event.13
+	title = rus_propaganda_and_reneim_event.13.t
+	desc = rus_propaganda_and_reneim_event.13.d
+	picture = GFX_report_event_political_discussion
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event rus_propaganda_and_reneim_event.13"
+		hidden_effect = {
+			country_event = { id = rus_propaganda_and_reneim_event.14 days = 90 }
+		}
+	}
+	
+	option = {
+		name = rus_propaganda_and_reneim_event.13.a	
+		ai_chance = {
+			base = 10
+		}	
+		add_stability = 0.01
+		add_war_support = 0.01
+	}
+	
+}
+
+country_event = { # Отчет о проведении пропагандисткой кампании за Уралом
+	id = rus_propaganda_and_reneim_event.14
+	title = rus_propaganda_and_reneim_event.14.t
+	desc = rus_propaganda_and_reneim_event.14.d
+	picture = GFX_report_event_political_discussion
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event rus_propaganda_and_reneim_event.14"
+	}
+	
+	option = {
+		name = rus_propaganda_and_reneim_event.14.a	
+		ai_chance = {
+			base = 10
+		}
+		add_stability = 0.01
+		add_war_support = 0.01
+	}
+	
+}
+
+country_event = { # Переименование города Екатеринодар
+	id = rus_propaganda_and_reneim_event.15
+	title = rus_propaganda_and_reneim_event.15.t
+	desc = rus_propaganda_and_reneim_event.15.d
+	picture = GFX_report_event_political_discussion
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event rus_propaganda_and_reneim_event.15"
+		hidden_effect = {
+			country_event = { id = rus_propaganda_and_reneim_event.16 days = 15 }
+		}
+	}
+	
+	option = {
+		name = rus_propaganda_and_reneim_event.15.a	# Volkonsk
 		ai_chance = {
 			base = 10
 		}
@@ -876,10 +1327,12 @@ country_event = { # Переименование Екатеринодара
 				name = RUS_vp_3734_v
 			}
 		}
+		
 	}
 	
+	
 	option = {
-		name = rus_propaganda_and_reneim_event.2.b # Trubetskoy
+		name = rus_propaganda_and_reneim_event.15.b # Trubetskoy
 		ai_chance = {
 			base = 10
 		}
@@ -900,7 +1353,7 @@ country_event = { # Переименование Екатеринодара
 	}
 	
 	option = {
-		name = rus_propaganda_and_reneim_event.2.c # Kubansk
+		name = rus_propaganda_and_reneim_event.15.c # Kubansk
 		ai_chance = {
 			base = 10
 		}
@@ -920,7 +1373,7 @@ country_event = { # Переименование Екатеринодара
 	}
 	
 	option = {
-		name = rus_propaganda_and_reneim_event.2.e # Save old name
+		name = rus_propaganda_and_reneim_event.15.e # Save old name
 		ai_chance = {
 			base = 10
 		}
@@ -930,10 +1383,10 @@ country_event = { # Переименование Екатеринодара
 	
 }
 
-country_event = { # Начало пропагандисткой кампании
-	id = rus_propaganda_and_reneim_event.3
-	title = rus_propaganda_and_reneim_event.3.t
-	desc = rus_propaganda_and_reneim_event.3.d
+country_event = { # Переименование города Каинск
+	id = rus_propaganda_and_reneim_event.16
+	title = rus_propaganda_and_reneim_event.16.t
+	desc = rus_propaganda_and_reneim_event.16.d
 	picture = GFX_report_event_political_discussion
 	
 	is_triggered_only = yes
@@ -941,29 +1394,26 @@ country_event = { # Начало пропагандисткой кампании
 	fire_only_once = yes
 	
 	immediate = {
-		log = "[GetDateText]: [Root.GetName]: event rus_propaganda_and_reneim_event.3"
+		log = "[GetDateText]: [Root.GetName]: event rus_propaganda_and_reneim_event.16"
 		hidden_effect = {
-			country_event = { id = rus_propaganda_and_reneim_event.4 days = 365 }
+			country_event = { id = rus_propaganda_and_reneim_event.17 days = 10 }
 		}
 	}
 	
 	option = {
-		name = rus_propaganda_and_reneim_event.3.a	
+		name = rus_propaganda_and_reneim_event.16.a	
 		ai_chance = {
 			base = 10
 		}
-		add_timed_idea = {
-			idea = RUS_propaganda_in_press
-			days = 1095
-		}
+		
 	}
 	
 }
 
-country_event = { # Первые результаты пропагандисткой кампании
-	id = rus_propaganda_and_reneim_event.4
-	title = rus_propaganda_and_reneim_event.4.t
-	desc = rus_propaganda_and_reneim_event.4.d
+country_event = { # Переименование города Ярославль
+	id = rus_propaganda_and_reneim_event.17
+	title = rus_propaganda_and_reneim_event.17.t
+	desc = rus_propaganda_and_reneim_event.17.d
 	picture = GFX_report_event_political_discussion
 	
 	is_triggered_only = yes
@@ -971,24 +1421,26 @@ country_event = { # Первые результаты пропагандистк
 	fire_only_once = yes
 	
 	immediate = {
-		log = "[GetDateText]: [Root.GetName]: event rus_propaganda_and_reneim_event.4"
+		log = "[GetDateText]: [Root.GetName]: event rus_propaganda_and_reneim_event.17"
+		hidden_effect = {
+			country_event = { id = rus_propaganda_and_reneim_event.18 days = 10 }
+		}
 	}
 	
 	option = {
-		name = rus_propaganda_and_reneim_event.4.a	
+		name = rus_propaganda_and_reneim_event.17.a	
 		ai_chance = {
 			base = 10
 		}
-		add_stability = 0.025
-		add_war_support = 0.025
+		
 	}
 	
 }
 
-country_event = { # 
-	id = rus_propaganda_and_reneim_event.5
-	title = rus_propaganda_and_reneim_event.5.t
-	desc = rus_propaganda_and_reneim_event.5.d
+country_event = { # Переименование города Романов-на-Мурмане
+	id = rus_propaganda_and_reneim_event.18
+	title = rus_propaganda_and_reneim_event.18.t
+	desc = rus_propaganda_and_reneim_event.18.d
 	picture = GFX_report_event_political_discussion
 	
 	is_triggered_only = yes
@@ -996,22 +1448,26 @@ country_event = { #
 	fire_only_once = yes
 	
 	immediate = {
-		log = "[GetDateText]: [Root.GetName]: event rus_propaganda_and_reneim_event.5"
+		log = "[GetDateText]: [Root.GetName]: event rus_propaganda_and_reneim_event.18"
+		hidden_effect = {
+			country_event = { id = rus_propaganda_and_reneim_event.19 days = 20 }
+		}
 	}
 	
 	option = {
-		name = rus_propaganda_and_reneim_event.5.a	
+		name = rus_propaganda_and_reneim_event.18.a	
 		ai_chance = {
 			base = 10
 		}
+		
 	}
 	
 }
 
-country_event = { # 
-	id = rus_propaganda_and_reneim_event.6
-	title = rus_propaganda_and_reneim_event.6.t
-	desc = rus_propaganda_and_reneim_event.6.d
+country_event = { # Переименование города Екатеринослав 
+	id = rus_propaganda_and_reneim_event.19
+	title = rus_propaganda_and_reneim_event.19.t
+	desc = rus_propaganda_and_reneim_event.19.d
 	picture = GFX_report_event_political_discussion
 	
 	is_triggered_only = yes
@@ -1019,22 +1475,26 @@ country_event = { #
 	fire_only_once = yes
 	
 	immediate = {
-		log = "[GetDateText]: [Root.GetName]: event rus_propaganda_and_reneim_event.6"
+		log = "[GetDateText]: [Root.GetName]: event rus_propaganda_and_reneim_event.19"
+		hidden_effect = {
+			country_event = { id = rus_propaganda_and_reneim_event.20 days = 20 }
+		}
 	}
 	
 	option = {
-		name = rus_propaganda_and_reneim_event.6.a	
+		name = rus_propaganda_and_reneim_event.19.a	
 		ai_chance = {
 			base = 10
 		}
+		
 	}
 	
 }
 
-country_event = { # 
-	id = rus_propaganda_and_reneim_event.7
-	title = rus_propaganda_and_reneim_event.7.t
-	desc = rus_propaganda_and_reneim_event.7.d
+country_event = { # Переименование города Николаевск
+	id = rus_propaganda_and_reneim_event.20
+	title = rus_propaganda_and_reneim_event.20.t
+	desc = rus_propaganda_and_reneim_event.20.d
 	picture = GFX_report_event_political_discussion
 	
 	is_triggered_only = yes
@@ -1042,14 +1502,96 @@ country_event = { #
 	fire_only_once = yes
 	
 	immediate = {
-		log = "[GetDateText]: [Root.GetName]: event rus_propaganda_and_reneim_event.7"
+		log = "[GetDateText]: [Root.GetName]: event rus_propaganda_and_reneim_event.20"
+		hidden_effect = {
+			country_event = { id = rus_propaganda_and_reneim_event.21 days = 20 }
+		}
 	}
 	
 	option = {
-		name = rus_propaganda_and_reneim_event.7.a	
+		name = rus_propaganda_and_reneim_event.20.a	
 		ai_chance = {
 			base = 10
 		}
+		
+	}
+	
+}
+
+country_event = { # Переименование города Екатеринбург
+	id = rus_propaganda_and_reneim_event.21
+	title = rus_propaganda_and_reneim_event.21.t
+	desc = rus_propaganda_and_reneim_event.21.d
+	picture = GFX_report_event_political_discussion
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event rus_propaganda_and_reneim_event.21"
+		hidden_effect = {
+			country_event = { id = rus_propaganda_and_reneim_event.22 days = 20 }
+		}
+	}
+	
+	option = {
+		name = rus_propaganda_and_reneim_event.21.a	
+		ai_chance = {
+			base = 10
+		}
+		
+	}
+	
+}
+
+country_event = { # Переименование города Архангельск
+	id = rus_propaganda_and_reneim_event.22
+	title = rus_propaganda_and_reneim_event.22.t
+	desc = rus_propaganda_and_reneim_event.22.d
+	picture = GFX_report_event_political_discussion
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event rus_propaganda_and_reneim_event.22"
+		hidden_effect = {
+			country_event = { id = rus_propaganda_and_reneim_event.23 days = 20 }
+		}
+	}
+	
+	option = {
+		name = rus_propaganda_and_reneim_event.22.a	
+		ai_chance = {
+			base = 10
+		}
+		
+	}
+	
+}
+
+country_event = { # Переименование города Ново-Архангельск
+	id = rus_propaganda_and_reneim_event.23
+	title = rus_propaganda_and_reneim_event.23.t
+	desc = rus_propaganda_and_reneim_event.23.d
+	picture = GFX_report_event_political_discussion
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event rus_propaganda_and_reneim_event.23"
+	}
+	
+	option = {
+		name = rus_propaganda_and_reneim_event.23.a	
+		ai_chance = {
+			base = 10
+		}
+		
 	}
 	
 }
