@@ -5179,7 +5179,7 @@ country_event = {
 	id = russian_far_east_politic.18 #Отношения с Японией - ивент вопрос для России
 	title = russian_far_east_politic.18.t
 	desc = russian_far_east_politic.18.d
-	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	picture = GFX_report_event_russian_delegation
 	
 	is_triggered_only = yes
 	
@@ -5202,28 +5202,28 @@ country_event = {
 			if = {
 				limit = {
 					country_exists = JAP 
-					has_country_flag = JAPFULLJAP 
+					282 = { is_owned_and_controlled_by = JAP }
 				}
 				JAP = {
-					country_event = russian_far_east_politic.19
+					country_event = { id = russian_far_east_politic.19 days = 7 }
 				}
 			}
 			if = {
 				limit = {
 					country_exists = JAS
-					has_country_flag = JASFULLJAP  
+					282 = { is_owned_and_controlled_by = JAS }
 				}
 				JAS = {
-					country_event = russian_far_east_politic.19
+					country_event = { id = russian_far_east_politic.19 days = 7 }
 				}
 			}
 			if = {
 				limit = {
 					country_exists = TUK
-					has_country_flag = TUKFULLJAP  
+					282 = { is_owned_and_controlled_by = TUK }
 				}
 				TUK = {
-					country_event = russian_far_east_politic.19
+					country_event = { id = russian_far_east_politic.19 days = 7 }
 				}
 			}
 		}
@@ -5249,7 +5249,7 @@ country_event = {
 	id = russian_far_east_politic.19 #Отношения с Японией - ивент вопрос для Японии
 	title = russian_far_east_politic.19.t
 	desc = russian_far_east_politic.19.d
-	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	picture = GFX_report_event_russian_delegation
 	
 	is_triggered_only = yes
 	
@@ -5264,8 +5264,12 @@ country_event = {
 		ai_chance = {
 			base = 25
 		}
+		add_opinion_modifier = {
+			target = RUS
+			modifier = rus_increase_relations_with_jap
+		}
 		hidden_effect = {
-			RUS = { country_event = russian_far_east_politic.20 }
+			RUS = { country_event = { id = russian_far_east_politic.20 days = 7 } }
 		}
 	}
 	option = {
@@ -5274,7 +5278,7 @@ country_event = {
 			base = 15
 		}
 		hidden_effect = {
-			RUS = { country_event = russian_far_east_politic.21 }
+			RUS = { country_event = { id = russian_far_east_politic.21 days = 7 } }
 		}
 	}
 
@@ -5284,7 +5288,7 @@ country_event = {
 	id = russian_far_east_politic.20 #Отношения с Японией - согласие - Ответ для России
 	title = russian_far_east_politic.20.t
 	desc = russian_far_east_politic.20.d
-	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	picture = GFX_report_event_diplomaty_negotiations_with_jap
 	
 	is_triggered_only = yes
 	
@@ -5303,6 +5307,33 @@ country_event = {
 				factor = 0
 			}
 		}
+		if = {
+			limit = {
+				282 = { is_owned_and_controlled_by = JAP }
+			}		
+			add_opinion_modifier = {
+				target = JAP
+				modifier = rus_increase_relations_with_jap
+			}
+		}
+		else_if = {
+			limit = {
+				282 = { is_owned_and_controlled_by = JAS }
+			}		
+			add_opinion_modifier = {
+				target = JAS
+				modifier = rus_increase_relations_with_jap
+			}
+		}
+		else_if = {
+			limit = {
+				282 = { is_owned_and_controlled_by = TUK }
+			}		
+			add_opinion_modifier = {
+				target = TUK
+				modifier = rus_increase_relations_with_jap
+			}
+		}
 		hidden_effect = {
 			RUS = { set_country_flag = RUS_up_rus_jap_relations }
 		}
@@ -5314,7 +5345,7 @@ country_event = {
 	id = russian_far_east_politic.21 #Отношения с Японией - отказ - Ответ для России
 	title = russian_far_east_politic.21.t
 	desc = russian_far_east_politic.21.d
-	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	picture = GFX_report_event_russian_political_discourse
 	
 	is_triggered_only = yes
 	
