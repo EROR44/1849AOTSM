@@ -26,7 +26,33 @@ scripted_gui = {
 				every_country = {
 					if = {
 						limit = {
-							NOT = { is_in_array = { global.country_grade_list_array = THIS } }
+							NOT = { # Страны которых не должно быть в списке
+								AND = {
+									is_puppet = yes
+									is_subject = yes
+									OR = {
+										tag = BRI #CBI Blocks
+										tag = WAL
+										tag = SCO
+										tag = IRE
+										tag = TRK #BYZ I.P.
+										tag = ARM
+										tag = DAL
+										tag = FIN #IF RUS Autonomy
+                                        tag = MAN #QIN regions  
+                                        tag = MON
+                                        tag = SHN
+                                        tag = CHN
+                                        tag = SDZ
+                                        tag = SIC
+                                        tag = SDN
+                                        tag = SHA
+                                        tag = GNS
+                                        tag = YUN
+									}
+								}
+								is_in_array = { global.country_grade_list_array = THIS } 
+							}
 						}
 						add_to_array = { global.country_grade_list_array = THIS }
 					}
