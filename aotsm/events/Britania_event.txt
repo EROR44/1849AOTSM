@@ -7744,7 +7744,7 @@ country_event = { #Высадка под Бременом - ивент для Г
 	id = cbi_gw_political_event.11
 	title = cbi_gw_political_event.11.t
 	desc = cbi_gw_political_event.11.d
-	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	picture = GFX_report_event_blacksun_document
 	
 	fire_only_once = yes
 
@@ -7792,7 +7792,7 @@ country_event = { # Смотр британского флота
 	id = cbi_gw_political_event.13 
 	title = cbi_gw_political_event.13.t
 	desc = cbi_gw_political_event.13.d
-	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	picture = GFX_report_event_british_battleship_deck
 	
 	fire_only_once = yes
 
@@ -7805,9 +7805,45 @@ country_event = { # Смотр британского флота
 	
 	option = {
 		name = cbi_gw_political_event.13.a	
-		#тут должно даваться несколько кораблей
+		add_war_support = 0.025
+		custom_effect_tooltip = CBI_add_pelem_hoills_and_new_ships_tt
 		hidden_effect = {
-			
+			if = {#тут дается несколько кораблей
+				limit = {
+					has_dlc = "Man the Guns"
+				}
+				create_equipment_variant = {
+					name = "Pelem-Holls Class"
+					type = ship_hull_light_1
+					name_group = CBI_DD_HISTORICAL
+					parent_version = 0
+					modules = {
+						fixed_ship_battery_slot = ship_light_battery_3
+						fixed_ship_anti_air_slot = empty
+						fixed_ship_fire_control_system_slot = ship_fire_control_system_0
+						fixed_ship_radar_slot = ship_sonar_1
+						fixed_ship_engine_slot = light_ship_engine_3
+						fixed_ship_torpedo_slot = ship_torpedo_2
+						mid_1_custom_slot = ship_torpedo_2
+						rear_1_custom_slot = ship_depth_charge_2
+					}
+				}
+				load_oob = "СBI_pellem_holls_mtg"
+			}
+			else = {	
+				create_equipment_variant = {
+					name = "Pelem-Holls Class"
+					type = destroyer_1
+					parent_version = 0
+					upgrades = {
+						ship_torpedo_upgrade = 3
+						destroyer_engine_upgrade = 4
+						ship_ASW_upgrade = 4
+						ship_anti_air_upgrade = 3
+					}
+				}
+				load_oob = "СBI_pellem_holls_legacy"
+			}
 		}
 	}
 }
@@ -8232,7 +8268,7 @@ country_event = { #Сепаратный мир
 	}
 }
 
-country_event = { #
+country_event = { #Начало торговой блокады
 	id = cbi_gw_political_event.24
 	title = cbi_gw_political_event.24.t
 	desc = cbi_gw_political_event.24.d
@@ -8249,14 +8285,40 @@ country_event = { #
 	
 	option = {
 		name = cbi_gw_political_event.24.a	
-		
+		add_political_power = 200
+		if = {
+			limit = {
+				CBI = { has_war_with = PRU }
+			}
+			CBI = { send_embargo = PRU }
+			every_country = {
+				limit = {
+					is_in_faction_with = PRU
+					has_war_with = CBI
+				}
+				CBI = { send_embargo = PREV }
+			}
+		}
+		if = {
+			limit = {
+				CBI = { has_war_with = JAP }
+			}
+			CBI = { send_embargo = JAP }
+			every_country = {
+				limit = {
+					is_in_faction_with = JAP
+					has_war_with = CBI
+				}
+				CBI = { send_embargo = PREV }
+			}
+		}
 		hidden_effect = {
 			
 		}
 	}
 }
 
-country_event = { #
+country_event = { #Расширение санкции для Ромейцев
 	id = cbi_gw_political_event.25
 	title = cbi_gw_political_event.25.t
 	desc = cbi_gw_political_event.25.d
@@ -8273,14 +8335,19 @@ country_event = { #
 	
 	option = {
 		name = cbi_gw_political_event.25.a	
-		
+		BYZ = {
+			add_timed_idea = {
+				idea = CBI_gw_embargo_byz
+				days = 365
+			}
+		}
 		hidden_effect = {
 			
 		}
 	}
 }
 
-country_event = { #
+country_event = { #Расширение санкции для Ромейцев - ивент для Ромеи
 	id = cbi_gw_political_event.26
 	title = cbi_gw_political_event.26.t
 	desc = cbi_gw_political_event.26.d
@@ -8299,12 +8366,14 @@ country_event = { #
 		name = cbi_gw_political_event.26.a	
 		
 		hidden_effect = {
-			
+			BYZ = {
+				country_event = { id = cbi_gw_political_event.27 days = 3 }
+			}
 		}
 	}
 }
 
-country_event = { #
+country_event = { #Расширение санкции для японцев
 	id = cbi_gw_political_event.27
 	title = cbi_gw_political_event.27.t
 	desc = cbi_gw_political_event.27.d
@@ -8321,14 +8390,21 @@ country_event = { #
 	
 	option = {
 		name = cbi_gw_political_event.27.a	
-		
+		JAP = {
+			add_timed_idea = {
+				idea = CBI_gw_embargo_jap
+				days = 365
+			}
+		}
 		hidden_effect = {
-			
+			JAP = {
+				country_event = { id = cbi_gw_political_event.28 days = 3 }
+			}
 		}
 	}
 }
 
-country_event = { #
+country_event = { #Расширение санкции для японцев - Ивент для Японцев
 	id = cbi_gw_political_event.28
 	title = cbi_gw_political_event.28.t
 	desc = cbi_gw_political_event.28.d
