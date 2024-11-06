@@ -906,6 +906,74 @@ focus_tree = {
 			hidden_effect = {
 				log = "[GetDateText]: [Root.GetName]: complete focus BYZ_use_imperial_guard_in_intel"
 			}
+			add_ideas = BYZ_imperial_guard_intel_1
+		}
+	}
+	
+	focus = {
+		id = BYZ_use_imperial_guard_first_move
+		icon = GFX_
+		relative_position_id = BYZ_use_imperial_guard_in_intel
+		x = 0
+		y = 1
+		cost = 4.3
+		prerequisite = { focus = BYZ_use_imperial_guard_in_intel }
+		#mutually_exclusive = { }
+		ai_will_do = {
+			factor = 1000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			hidden_effect = {
+				log = "[GetDateText]: [Root.GetName]: complete focus BYZ_use_imperial_guard_first_move"
+			}
+			BYZ = {
+				country_event = {
+					id = byz.95
+					hours = 4
+				}
+			}
+		}
+	}
+	
+	focus = {
+		id = BYZ_use_imperial_guard_see_everething
+		icon = GFX_
+		relative_position_id = BYZ_use_imperial_guard_first_move
+		x = 0
+		y = 1
+		cost = 4.3
+		prerequisite = { focus = BYZ_use_imperial_guard_first_move }
+		#mutually_exclusive = { }
+		ai_will_do = {
+			factor = 1000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			hidden_effect = {
+				log = "[GetDateText]: [Root.GetName]: complete focus BYZ_use_imperial_guard_see_everething"
+			}
+			swap_ideas = {
+				remove_idea = BYZ_imperial_guard_intel_1
+				add_idea = BYZ_imperial_guard_intel_2
+			}
+			add_stability = 0.05
 		}
 	}
 	
@@ -931,7 +999,138 @@ focus_tree = {
 		
 		completion_reward = {
 			hidden_effect = {
-				log = "[GetDateText]: [Root.GetName]: complete focus BYZ_intel_agency_update"
+				log = "[GetDateText]: [Root.GetName]: complete focus BYZ_intel_agency_update"					
+			}
+			if = {
+				limit = {
+					has_done_agency_upgrade = upgrade_economy_civilian
+				}
+				add_political_power = 50
+				add_stability = 0.025
+			}
+			if = {
+				limit = {
+					NOT = {
+						has_done_agency_upgrade = upgrade_economy_civilian
+					}
+				}
+				upgrade_intelligence_agency = upgrade_economy_civilian
+			}
+			if = {
+				limit = {
+					has_done_agency_upgrade = upgrade_army_department
+				}
+				add_political_power = 50
+				add_stability = 0.025
+			}
+			if = {
+				limit = {
+					NOT = {
+						has_done_agency_upgrade = upgrade_army_department
+					}
+				}
+				upgrade_intelligence_agency = upgrade_army_department
+			}
+			if = {
+				limit = {
+					has_done_agency_upgrade = upgrade_naval_department
+				}
+				add_political_power = 50
+				add_stability = 0.025
+			}
+			if = {
+				limit = {
+					NOT = {
+						has_done_agency_upgrade = upgrade_naval_department
+					}
+				}
+				upgrade_intelligence_agency = upgrade_naval_department
+			}
+			if = {
+				limit = {
+					has_done_agency_upgrade = upgrade_airforce_department
+				}
+				add_political_power = 50
+				add_stability = 0.025
+			}
+			if = {
+				limit = {
+					NOT = {
+						has_done_agency_upgrade = upgrade_airforce_department
+					}
+				}
+				upgrade_intelligence_agency = upgrade_airforce_department
+			}
+		}
+	}
+	
+	focus = {
+		id = BYZ_intel_agency_final
+		icon = GFX_
+		relative_position_id = BYZ_intel_agency_update
+		x = 0
+		y = 2
+		cost = 4.3
+		prerequisite = { focus = BYZ_use_imperial_guard_see_everething focus = BYZ_use_imperial_guard_army_full_military_integration focus = BYZ_use_imperial_guard_army_observer_role }
+		prerequisite = { focus = BYZ_intel_agency_update }
+		ai_will_do = {
+			factor = 1000
+		}
+		
+		#cancel = { }
+		
+		#available = {  }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			hidden_effect = {
+				log = "[GetDateText]: [Root.GetName]: complete focus BYZ_intel_agency_final"
+			}
+			if = {
+				limit = {
+					has_idea = BYZ_imperial_guard_intel_2
+				}
+				swap_ideas = {
+					remove_idea = BYZ_imperial_guard_intel_2
+					add_idea = BYZ_imperial_guard_intel_3
+				}
+			}
+			if = {
+				limit = {
+					has_idea = BYZ_imperial_guard_army_full_1
+				}
+				swap_ideas = {
+					remove_idea = BYZ_imperial_guard_army_full_1
+					add_idea = BYZ_imperial_guard_army_full_2
+				}
+			}
+			if = {
+				limit = {
+					has_idea = BYZ_imperial_guard_army_observer_1
+				}
+				swap_ideas = {
+					remove_idea = BYZ_imperial_guard_army_observer_1
+					add_idea = BYZ_imperial_guard_army_observer_2
+				}
+			}	
+			if = {
+				limit = {
+					OR = {
+						NOT = {
+							has_idea = BYZ_imperial_guard_intel_2
+						}
+						NOT = {
+							has_idea = BYZ_imperial_guard_army_full_1
+						}
+						NOT = {
+							has_idea = BYZ_imperial_guard_army_observer_1
+						}
+					}
+				}
+				custom_effect_tooltip = byz_bonus_agency_via_take_focus
 			}
 		}
 	}
@@ -965,6 +1164,108 @@ focus_tree = {
 			hidden_effect = {
 				log = "[GetDateText]: [Root.GetName]: complete focus BYZ_use_imperial_guard_in_army"
 			}
+			add_ideas = BYZ_imperial_guard_army
+		}
+	}
+	
+	focus = {
+		id = BYZ_use_imperial_guard_army_report
+		icon = GFX_
+		relative_position_id = BYZ_use_imperial_guard_in_army
+		x = 0
+		y = 1
+		cost = 4.3
+		prerequisite = { focus = BYZ_use_imperial_guard_in_army }
+		#mutually_exclusive = { }
+		ai_will_do = {
+			factor = 1000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			hidden_effect = {
+				log = "[GetDateText]: [Root.GetName]: complete focus BYZ_use_imperial_guard_army_report"
+			}
+			BYZ = {
+				country_event = {
+					id = byz.96
+					hours = 4
+				}
+			}
+		}
+	}
+	
+	focus = {
+		id = BYZ_use_imperial_guard_army_full_military_integration
+		icon = GFX_
+		relative_position_id = BYZ_use_imperial_guard_army_report
+		x = -1
+		y = 1
+		cost = 4.3
+		prerequisite = { focus = BYZ_use_imperial_guard_army_report }
+		mutually_exclusive = { focus = BYZ_use_imperial_guard_army_observer_role }
+		ai_will_do = {
+			factor = 1000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			hidden_effect = {
+				log = "[GetDateText]: [Root.GetName]: complete focus BYZ_use_imperial_guard_army_full_military_integration"
+			}
+			swap_ideas = {
+				remove_idea = BYZ_imperial_guard_army
+				add_idea = BYZ_imperial_guard_army_full_1
+			}
+			army_experience = 25
+		}
+	}
+	
+	focus = {
+		id = BYZ_use_imperial_guard_army_observer_role
+		icon = GFX_
+		relative_position_id = BYZ_use_imperial_guard_army_report
+		x = 1
+		y = 1
+		cost = 4.3
+		prerequisite = { focus = BYZ_use_imperial_guard_army_report }
+		mutually_exclusive = { focus = BYZ_use_imperial_guard_army_full_military_integration  }
+		ai_will_do = {
+			factor = 1000
+		}
+		
+		#cancel = { }
+		
+		#available = { }
+		
+		#bypass = { }
+		
+		#search_filters = {  }
+		
+		completion_reward = {
+			hidden_effect = {
+				log = "[GetDateText]: [Root.GetName]: complete focus BYZ_use_imperial_guard_army_observer_role"
+			}
+			swap_ideas = {
+				remove_idea = BYZ_imperial_guard_army
+				add_idea = BYZ_imperial_guard_army_observer_1
+			}
+			army_experience = 10
+			add_stability = 0.025
 		}
 	}
 	
