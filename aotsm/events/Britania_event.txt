@@ -8452,6 +8452,9 @@ country_event = { # Военные действия в Индийском оке
 			days = 365
 		}
 		hidden_effect = {
+			set_variable = {
+				CBI_num_of_victory_on_sea = 0
+			}
 			if = {
 				limit = {
 					has_country_flag = CBI_gw_byz_priority
@@ -8519,6 +8522,10 @@ country_event = { # Сражение в Ла-Манше - победа Брит�
 		hidden_effect = {
 			BYZ = {
 				country_event = cbi_gw_political_event.32
+			}	
+			add_to_variable = {
+				var = CBI_num_of_victory_on_sea
+				value = 1
 			}
 		}
 	}
@@ -8672,8 +8679,20 @@ country_event = { # Битва у Кокосовых островов - побе
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event cbi_gw_political_event.36"
 		hidden_effect = {
-			JAP = {
-				country_event = cbi_gw_political_event.37
+			if = {
+				limit = {
+					282 = { is_owned_by = JAP }
+				}
+				JAP = { country_event = cbi_gw_political_event.37 }
+			}
+			else_if = {
+				limit = {
+					282 = { is_owned_by = JAS }
+				}
+				JAS = { country_event = cbi_gw_political_event.37 }
+			}
+			else_if = {
+				TUK = { country_event = cbi_gw_political_event.37 }
 			}
 		}
 	}
@@ -8687,7 +8706,10 @@ country_event = { # Битва у Кокосовых островов - побе
 			category = naval_doctrine
 		}
 		hidden_effect = {
-			
+			add_to_variable = {
+				var = CBI_num_of_victory_on_sea
+				value = 1
+			}
 		}
 	}
 }
@@ -8733,10 +8755,21 @@ country_event = { # Битва у Кокосовых островов - пора
 	
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event cbi_gw_political_event.38"
-		
 		hidden_effect = {
-			JAP = {
-				country_event = cbi_gw_political_event.39
+			if = {
+				limit = {
+					282 = { is_owned_by = JAP }
+				}
+				JAP = { country_event = cbi_gw_political_event.39 }
+			}
+			else_if = {
+				limit = {
+					282 = { is_owned_by = JAS }
+				}
+				JAS = { country_event = cbi_gw_political_event.39 }
+			}
+			else_if = {
+				TUK = { country_event = cbi_gw_political_event.39 }
 			}
 		}
 	}
@@ -8779,7 +8812,7 @@ country_event = { # Битва у Кокосовых островов - пора
 	}
 }
 
-country_event = { # 
+country_event = { # Отчет о ситуации на флоте 
 	id = cbi_gw_political_event.40
 	title = cbi_gw_political_event.40.t
 	desc = cbi_gw_political_event.40.d
@@ -8792,10 +8825,501 @@ country_event = { #
 	
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event cbi_gw_political_event.40"
+		hidden_effect = {
+			if = {
+				limit = {
+					has_country_flag = CBI_gw_byz_priority
+				}
+				country_event = { id = cbi_gw_political_event.41 days = 7 }
+			}
+			else_if = {
+				limit = {
+					has_country_flag = CBI_gw_jap_priority
+				}
+				country_event = { id = cbi_gw_political_event.46 days = 7 }
+			}
+		}
 	}
 	
 	option = {
 		name = cbi_gw_political_event.40.a	
+		if = {
+			limit = {
+				has_idea = CBI_gw_war_in_indian_ocean
+			}
+			swap_ideas = {
+				remove_idea = CBI_gw_war_in_indian_ocean
+				add_idea = CBI_gw_war_in_indian_ocean_2
+			}
+			modify_timed_idea = {
+				idea = CBI_gw_war_in_indian_ocean_2
+				days = 90
+			}
+		}
+		else_if = {
+			add_timed_idea = {
+				idea = CBI_gw_war_in_indian_ocean_2
+				days = 180
+			}
+		}
+		hidden_effect = {
+			
+		}
+	}
+}
+
+country_event = { # Битва у Гиблартара
+	id = cbi_gw_political_event.41
+	title = cbi_gw_political_event.41.t
+	desc = cbi_gw_political_event.41.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event cbi_gw_political_event.41"
+	}
+	
+	option = {
+		name = cbi_gw_political_event.41.a	
+		navy_experience = 10
+		hidden_effect = {
+			random_list = {
+				75 = {
+					CBI = {
+						country_event = { id = cbi_gw_political_event.42 days = 2 }
+					}
+				}
+				25 = {
+					CBI = {
+						country_event = { id = cbi_gw_political_event.44 days = 2 }
+					}
+				}
+			}
+		}
+	}
+}
+
+country_event = { # Победа в сражении у Гиблартара - ивент для Британии
+	id = cbi_gw_political_event.42
+	title = cbi_gw_political_event.42.t
+	desc = cbi_gw_political_event.42.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event cbi_gw_political_event.42"
+		hidden_effect = {
+			JAP = {
+				country_event = cbi_gw_political_event.43
+			}
+		}
+	}
+	
+	option = {
+		name = cbi_gw_political_event.42.a	
+		navy_experience = 15
+		add_doctrine_cost_reduction = {
+			cost_reduction = 0.25
+			uses = 1
+			category = naval_doctrine
+		}
+		hidden_effect = {
+			add_to_variable = {
+				var = CBI_num_of_victory_on_sea
+				value = 1
+			}
+		}
+	}
+}
+
+country_event = { # Поражение в сражении у Гиблартара - ивент для Ромеи
+	id = cbi_gw_political_event.43
+	title = cbi_gw_political_event.43.t
+	desc = cbi_gw_political_event.43.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event cbi_gw_political_event.43"
+	}
+	
+	option = {
+		name = cbi_gw_political_event.43.a	
+		add_war_support = -0.025
+		add_timed_idea = {
+			idea = CBI_gw_fail_in_battle_of_the_coconut_slands
+			days = 180
+		}
+		hidden_effect = {
+			
+		}
+	}
+}
+
+country_event = { # Поражение в сражении у Гиблартара - ивент для Британии
+	id = cbi_gw_political_event.44
+	title = cbi_gw_political_event.44.t
+	desc = cbi_gw_political_event.44.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event cbi_gw_political_event.44"
+		hidden_effect = {
+			JAP = {
+				country_event = cbi_gw_political_event.45
+			}
+		}
+	}
+	
+	option = {
+		name = cbi_gw_political_event.44.a	
+		add_war_support = -0.025
+		hidden_effect = {
+			
+		}
+	}
+}
+
+country_event = { # Победа в сражении у Гиблартара - ивент для Ромеи
+	id = cbi_gw_political_event.45
+	title = cbi_gw_political_event.45.t
+	desc = cbi_gw_political_event.45.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event cbi_gw_political_event.45"
+	}
+	
+	option = {
+		name = cbi_gw_political_event.45.a	
+		add_war_support = 0.025
+		add_doctrine_cost_reduction = {
+			cost_reduction = 0.25
+			uses = 1
+			category = naval_doctrine
+		}
+		hidden_effect = {
+			
+		}
+	}
+}
+
+country_event = { # Битва у Цейлона
+	id = cbi_gw_political_event.46
+	title = cbi_gw_political_event.46.t
+	desc = cbi_gw_political_event.46.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event cbi_gw_political_event.46"
+	}
+	
+	option = {
+		name = cbi_gw_political_event.46.a	
+		navy_experience = 10
+		hidden_effect = {
+			random_list = {
+				75 = {
+					CBI = {
+						country_event = { id = cbi_gw_political_event.47 days = 2 }
+					}
+				}
+				25 = {
+					CBI = {
+						country_event = { id = cbi_gw_political_event.49 days = 2 }
+					}
+				}
+			}
+		}
+	}
+}
+
+country_event = { # Победа в сражении у Цейлона - ивент для Британии
+	id = cbi_gw_political_event.47
+	title = cbi_gw_political_event.47.t
+	desc = cbi_gw_political_event.47.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event cbi_gw_political_event.47"
+		hidden_effect = {
+			if = {
+				limit = {
+					282 = { is_owned_by = JAP }
+				}
+				JAP = { country_event = cbi_gw_political_event.48 }
+			}
+			else_if = {
+				limit = {
+					282 = { is_owned_by = JAS }
+				}
+				JAS = { country_event = cbi_gw_political_event.48 }
+			}
+			else_if = {
+				TUK = { country_event = cbi_gw_political_event.48 }
+			}
+		}
+	}
+	
+	option = {
+		name = cbi_gw_political_event.47.a	
+		navy_experience = 15
+		add_doctrine_cost_reduction = {
+			cost_reduction = 0.25
+			uses = 1
+			category = naval_doctrine
+		}
+		hidden_effect = {	
+			add_to_variable = {
+				var = CBI_num_of_victory_on_sea
+				value = 1
+			}
+		}
+	}
+}
+
+country_event = { # Поражение в сражении у Цейлона - ивент для Японии
+	id = cbi_gw_political_event.48
+	title = cbi_gw_political_event.48.t
+	desc = cbi_gw_political_event.48.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event cbi_gw_political_event.48"
+		
+	}
+	
+	option = {
+		name = cbi_gw_political_event.48.a	
+		add_war_support = -0.025
+		add_timed_idea = {
+			idea = CBI_gw_fail_in_battle_of_ceylon
+			days = 180
+		}
+		hidden_effect = {
+			
+		}
+	}
+}
+
+country_event = { # Поражение в сражении у Цейлона - ивент для Британии
+	id = cbi_gw_political_event.49
+	title = cbi_gw_political_event.49.t
+	desc = cbi_gw_political_event.49.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event cbi_gw_political_event.49"
+		hidden_effect = {
+			if = {
+				limit = {
+					282 = { is_owned_by = JAP }
+				}
+				JAP = { country_event = cbi_gw_political_event.50 }
+			}
+			else_if = {
+				limit = {
+					282 = { is_owned_by = JAS }
+				}
+				JAS = { country_event = cbi_gw_political_event.50 }
+			}
+			else_if = {
+				TUK = { country_event = cbi_gw_political_event.50 }
+			}
+		}
+	}
+	
+	option = {
+		name = cbi_gw_political_event.49.a	
+		add_war_support = -0.025
+		hidden_effect = {
+			
+		}
+	}
+}
+
+country_event = { # Победа в сражении у Цейлона - ивент для Японии
+	id = cbi_gw_political_event.50
+	title = cbi_gw_political_event.50.t
+	desc = cbi_gw_political_event.50.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event cbi_gw_political_event.50"
+	}
+	
+	option = {
+		name = cbi_gw_political_event.50.a	
+		navy_experience = 15
+		add_doctrine_cost_reduction = {
+			cost_reduction = 0.25
+			uses = 1
+			category = naval_doctrine
+		}
+		hidden_effect = {
+			
+		}
+	}
+}
+
+country_event = { # 
+	id = cbi_gw_political_event.51
+	title = cbi_gw_political_event.51.t
+	desc = cbi_gw_political_event.51.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event cbi_gw_political_event.51"
+	}
+	
+	option = {
+		name = cbi_gw_political_event.51.a	
+		if = {
+			limit = {
+				check_variable = {
+					var = CBI_num_of_victory_on_sea
+					value = 2
+				}
+			}
+			add_ideas = CBI_gw_between_ocean_and_sky_only_britain
+			add_doctrine_cost_reduction = {
+				cost_reduction = 0.5
+				uses = 1
+				category = naval_doctrine
+			}
+			add_doctrine_cost_reduction = {
+				cost_reduction = 0.5
+				uses = 1
+				category = air_doctrine
+			}
+		}
+		else_if = {
+			limit = {
+				check_variable = {
+					var = CBI_num_of_victory_on_sea
+					value = 1
+				}
+			}
+			add_ideas = CBI_gw_between_ocean_and_sky_only_britain
+			add_doctrine_cost_reduction = {
+				cost_reduction = 0.25
+				uses = 1
+				category = naval_doctrine
+			}
+		}
+		else_if = {
+			add_ideas = CBI_gw_between_ocean_and_sky_only_britain_small
+		}
+		if = {
+			limit = {
+				has_idea = CBI_gw_war_in_indian_ocean_2
+			}
+			remove_ideas = CBI_gw_war_in_indian_ocean_2
+		}
+		hidden_effect = {
+			
+		}
+	}
+}
+
+country_event = { # 
+	id = cbi_gw_political_event.52
+	title = cbi_gw_political_event.52.t
+	desc = cbi_gw_political_event.52.d
+	picture = GFX_report_event_british_workers_on_factory
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event cbi_gw_political_event.52"
+	}
+	
+	option = {
+		name = cbi_gw_political_event.52.a	
+		add_stability = 0.05
+		add_war_support = 0.05
+		add_timed_idea ={
+			idea = CBI_gw_immediate_industrialization
+			days = 365
+		}
+		hidden_effect = {
+			
+		}
+	}
+}
+
+country_event = { # 
+	id = cbi_gw_political_event.53
+	title = cbi_gw_political_event.53.t
+	desc = cbi_gw_political_event.53.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event cbi_gw_political_event.53"
+	}
+	
+	option = {
+		name = cbi_gw_political_event.53.a	
 		
 		hidden_effect = {
 			

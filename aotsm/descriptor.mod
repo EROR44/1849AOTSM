@@ -1,4 +1,4 @@
-version="1.12.*"
+version="1.14.*"
 tags={
 	"Alternative History"
 	"Map"
@@ -83,5 +83,5 @@ replace_path="music/hoi3"
 replace_path="gfx/interface/equipmentdesigner"
 picture="thumbnail.png"
 name="Hearts of Iron: Age of the Steam Mashines"
-supported_version="1.12.*"
+supported_version="1.14.*"
 remote_file_id="2830590005"
