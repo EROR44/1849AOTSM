@@ -3273,6 +3273,20 @@ country_event = { #Economy of war
 		}
 		add_stability = 0.025
 		add_political_power = -50
+		if = {
+			limit = {
+				has_war = no
+			}
+			custom_effect_tooltip = byz_inform_about_mobisition_economy_no_war_tt
+		}
+		if = {
+			limit = {
+				has_war = yes
+			}
+			custom_effect_tooltip = byz_inform_about_mobisition_economy_war_tt
+			activate_mission = byz_mobilisation_economy_mission
+			set_country_flag = BYZ_start_mobilisation_economy_flag
+		}
 	}
 	
 }
@@ -3303,6 +3317,33 @@ country_event = { #Life time of War
 		}
 		add_war_support = 0.025
 		army_experience = 10
+	}
+	
+}
+
+country_event = { #From war to Normal
+	id = byz.99
+	title = byz.99.t
+	desc = byz.99.d
+	picture = GFX_
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event byz.99"
+	}
+	
+	option = { 
+		name = byz.99.a
+		ai_chance = {
+			base = 100
+		}
+		add_timed_idea = {
+			idea = BYZ_economy_restoration
+			years = 2
+		}
 	}
 	
 }
@@ -3344,6 +3385,32 @@ country_event = { #Colonia Conference
 	}
 	
 }
+
+country_event = { #Fall of the economy
+	id = byz.101
+	title = byz.101.t
+	desc = byz.101.d
+	picture = GFX_
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event byz.101"
+	}
+	
+	option = { 
+		name = byz.101.a
+		ai_chance = {
+			base = 100
+		}
+		add_stability = -0.10
+	}
+	
+}
+
+
 
 country_event = { #Reform senat
 	id = byz.1000
