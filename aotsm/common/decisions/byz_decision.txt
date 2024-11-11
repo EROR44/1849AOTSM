@@ -5783,3 +5783,378 @@ byz_diplomacy_with_parfia_categories = {
 	}
 
 }
+
+byz_great_war_categories = {
+
+	byz_close_great_war_economy_decision = {
+	
+		icon = close_aotsm
+	
+		allowed = {
+			
+		}
+
+		available = {
+		}
+
+		visible = {
+			NOT = {
+				has_country_flag = BYZ_close_gw_economy_decision_flag
+			}
+			has_completed_focus = BYZ_economy_of_war
+			has_global_flag = firts_world_war
+		}
+
+		fire_only_once = no
+
+		cost = 0
+		days_re_enable = 1
+
+		ai_will_do = {
+			base = 0
+		}
+		
+		complete_effect = {
+			set_country_flag = BYZ_close_gw_economy_decision_flag
+		}
+	
+	}
+	
+	byz_open_great_war_economy_decision = {
+	
+		icon = open_aotsm
+	
+		allowed = {
+			
+		}
+
+		available = {
+		}
+
+		visible = {
+			has_country_flag = BYZ_close_gw_economy_decision_flag
+			has_completed_focus = BYZ_economy_of_war
+			has_global_flag = firts_world_war
+		}
+
+		fire_only_once = no
+
+		cost = 0
+		days_re_enable = 1
+
+		ai_will_do = {
+			base = 0
+		}
+		
+		complete_effect = {
+			clr_country_flag = BYZ_close_gw_economy_decision_flag
+		}
+	
+	}
+	
+	byz_start_to_mobilisation_economy = {
+	
+		icon = generic_factory
+	
+		allowed = {
+			
+		}
+
+		available = {
+			has_war = yes
+			OR = {
+				has_war_with = FRR
+				has_war_with = CBI
+				has_war_with = RUS
+				has_war_with = PRU
+			}
+		}
+
+		visible = {
+			NOT = {
+				has_country_flag = BYZ_close_gw_economy_decision_flag
+			}
+			has_completed_focus = BYZ_economy_of_war
+			#has_global_flag = firts_world_war
+			NOT = {
+				has_country_flag = BYZ_start_mobilisation_economy_flag
+			}
+		}
+
+		fire_only_once = yes
+
+		cost = 0
+		days_re_enable = 1
+
+		ai_will_do = {
+			base = 100
+		}
+		
+		complete_effect = {
+			set_country_flag = BYZ_start_mobilisation_economy_flag
+			activate_mission = byz_mobilisation_economy_mission
+		}
+	
+	}
+	
+	byz_close_great_war_mobilisation_decision = {
+	
+		icon = close_aotsm
+	
+		allowed = {
+			
+		}
+
+		available = {
+		}
+
+		visible = {
+			NOT = {
+				has_country_flag = BYZ_close_gw_mobilisation_decision_flag
+			}
+			has_completed_focus = BYZ_lifetime_of_war
+			has_global_flag = firts_world_war
+		}
+
+		fire_only_once = no
+
+		cost = 0
+		days_re_enable = 1
+
+		ai_will_do = {
+			base = 0
+		}
+		
+		complete_effect = {
+			set_country_flag = BYZ_close_gw_mobilisation_decision_flag
+		}
+	
+	}
+	
+	byz_open_great_war_mobilisation_decision = {
+	
+		icon = open_aotsm
+	
+		allowed = {
+			
+		}
+
+		available = {
+		}
+
+		visible = {
+			has_country_flag = BYZ_close_gw_mobilisation_decision_flag
+			has_completed_focus = BYZ_lifetime_of_war
+			has_global_flag = firts_world_war
+		}
+
+		fire_only_once = no
+
+		cost = 0
+		days_re_enable = 1
+
+		ai_will_do = {
+			base = 0
+		}
+		
+		complete_effect = {
+			clr_country_flag = BYZ_close_gw_mobilisation_decision_flag
+		}
+	
+	}
+	
+	byz_mobilisation_economy_mission = {
+	
+		icon = gre_paying_ifc_debt
+	
+		activation = {
+			has_country_flag = BYZ_start_mobilisation_economy_flag
+			has_war = yes
+			OR = {
+				has_war_with = FRR
+				has_war_with = CBI
+				has_war_with = RUS
+				has_war_with = PRU
+			}
+			NOT = {
+				has_idea = BYZ_mobilisation_economy_7
+				has_idea = BYZ_fall_economy_1
+				has_idea = BYZ_fall_economy_2
+			}
+		}
+		
+		available = {
+			always = no
+		}
+		
+		cancel_trigger = {
+			NOT = {
+				has_war_with = PRU
+			}
+			NOT = {
+				has_war_with = FRR
+			}
+			NOT = {
+				has_war_with = RUS
+			}
+			NOT = {
+				has_war_with = CBI
+			}
+		}
+		
+		is_good = yes
+		
+		days_mission_timeout = 92
+		
+		selectable_mission = no
+		
+		timeout_effect = {
+			if = {
+				limit = {
+					has_idea = BYZ_mobilisation_economy_7
+				}
+				country_event = byz.101
+				activate_mission = byz_fall_economy_mission
+			}
+			if = {
+				limit = {
+					NOT = {
+						has_idea = BYZ_mobilisation_economy_7
+					}
+				}
+				if = {
+					limit = {
+						has_idea = BYZ_mobilisation_economy_6
+					}
+					swap_ideas = {
+						remove_idea = BYZ_mobilisation_economy_6
+						add_idea = BYZ_mobilisation_economy_7
+					}
+				}
+				if = {
+					limit = {
+						has_idea = BYZ_mobilisation_economy_5
+					}
+					swap_ideas = {
+						remove_idea = BYZ_mobilisation_economy_5
+						add_idea = BYZ_mobilisation_economy_6
+					}
+				}
+				if = {
+					limit = {
+						has_idea = BYZ_mobilisation_economy_4
+					}
+					swap_ideas = {
+						remove_idea = BYZ_mobilisation_economy_4
+						add_idea = BYZ_mobilisation_economy_5
+					}
+				}
+				if = {
+					limit = {
+						has_idea = BYZ_mobilisation_economy_3
+					}
+					swap_ideas = {
+						remove_idea = BYZ_mobilisation_economy_3
+						add_idea = BYZ_mobilisation_economy_4
+					}
+				}
+				if = {
+					limit = {
+						has_idea = BYZ_mobilisation_economy_2
+					}
+					swap_ideas = {
+						remove_idea = BYZ_mobilisation_economy_2
+						add_idea = BYZ_mobilisation_economy_3
+					}
+				}
+				if = {
+					limit = {
+						has_idea = BYZ_mobilisation_economy_1
+					}
+					swap_ideas = {
+						remove_idea = BYZ_mobilisation_economy_1
+						add_idea = BYZ_mobilisation_economy_2
+					}
+				}
+				if = {
+					limit = {
+						NOT = {
+							has_idea = BYZ_mobilisation_economy_1
+						}
+					}
+					add_ideas = BYZ_mobilisation_economy_1
+				}
+				activate_mission = byz_mobilisation_economy_mission
+			}
+		}
+	}
+	
+	byz_fall_economy_mission = {
+	
+		icon = gre_paying_ifc_debt
+	
+		activation = {
+			has_country_flag = BYZ_start_mobilisation_economy_flag
+			has_war = yes
+			OR = {
+				has_war_with = FRR
+				has_war_with = CBI
+				has_war_with = RUS
+				has_war_with = PRU
+			}
+			NOT = {
+				has_idea = BYZ_fall_economy_2
+			}
+		}
+		
+		available = {
+			always = no
+		}
+		
+		cancel_trigger = {
+			NOT = {
+				has_war_with = PRU
+			}
+			NOT = {
+				has_war_with = FRR
+			}
+			NOT = {
+				has_war_with = RUS
+			}
+			NOT = {
+				has_war_with = CBI
+			}
+		}
+		
+		is_good = yes
+		
+		days_mission_timeout = 184
+		
+		selectable_mission = no
+		
+		timeout_effect = {
+			if = {
+				limit = {
+					has_idea = BYZ_fall_economy_1
+				}
+				swap_ideas = {
+					remove_idea = BYZ_fall_economy_1
+					add_idea = BYZ_fall_economy_2
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						has_idea = BYZ_fall_economy_1
+					}
+				}
+				swap_ideas = {
+					remove_idea = BYZ_mobilisation_economy_7
+					add_idea = BYZ_fall_economy_1
+				}
+				activate_mission = byz_fall_economy_mission
+			}
+		}
+	}
+
+}
