@@ -6804,7 +6804,285 @@ country_event = { #BYZ TYPE OF ASSAULT
 	
 }
 
+######################################################################
+#######################RUSSIAN_SCRIPTED_EVENTS########################
+######################################################################
 
+#death_of_trubetskoy
+
+country_event = { # chose rus_trubetskoy_death_event 10 or 12
+	id = script_event.100
+	title = script_event.100.t
+	desc = script_event.100.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	is_triggered_only = yes
+
+	fire_only_once = yes
+	
+	hidden = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event script_event.100"
+		RUS = {
+			set_variable = {
+				RUS_td_count_of_pruffs = 0 #Количество улик
+			}
+		}
+	}
+	
+	option = {
+		name = script_event.100.a
+		if = {
+			limit = {
+				RUS = {
+					OR = {
+						has_country_flag = RUS_td_deal_against_pestel
+						has_country_flag = RUS_td_deal_against_muraviev
+					}	
+				}
+			}
+			country_event = rus_trubetskoy_death_event.10 #Театр
+		}
+		else_if = {
+			limit = {
+				RUS = {
+					has_country_flag = RUS_td_deal_against_laval
+				}
+			}
+			country_event = rus_trubetskoy_death_event.12 #Встреча с ромейским послом
+		}
+	}
+	
+}
+
+country_event = { # chose rus_trubetskoy_death_event 14 or 20
+	id = script_event.101
+	title = script_event.101.t
+	desc = script_event.101.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	is_triggered_only = yes
+
+	fire_only_once = yes
+	
+	hidden = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event script_event.101"
+	}
+	
+	option = {
+		name = script_event.101.a
+		if = {
+			limit = {
+				check_variable ={
+					RUS_td_count_of_pruffs = 1
+				}
+			}
+			RUS = {
+				country_event = rus_trubetskoy_death_event.14 # Странные личности
+			}
+		}
+		else_if = {
+			RUS = {
+				country_event = rus_trubetskoy_death_event.20 # Покушение на Рылеева
+			}
+		}
+		
+	}
+	
+}
+
+country_event = { # chose rus_trubetskoy_death_event 15 or 16
+	id = script_event.102
+	title = script_event.102.t
+	desc = script_event.102.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	is_triggered_only = yes
+
+	fire_only_once = yes
+	
+	hidden = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event script_event.102"
+	}
+	
+	option = {
+		name = script_event.102.a
+		if = {
+			limit = {
+				RUS = {
+					has_country_flag = RUS_dt_defence_muraviev
+				}
+			}
+			RUS = {
+				country_event = rus_trubetskoy_death_event.15 # Покушение на Муравьева предотвращено
+			}
+		}
+		else_if = {
+			limit = {
+				RUS = {
+					has_country_flag = RUS_dt_not_defence_muraviev
+				}
+			}
+			RUS = {
+				country_event = rus_trubetskoy_death_event.16 # Покушение на Муравьева-Апостола 
+			}
+		}
+	}
+	
+}
+
+country_event = { # chose rus_trubetskoy_death_event 25 or 26
+	id = script_event.103
+	title = script_event.103.t
+	desc = script_event.103.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	is_triggered_only = yes
+
+	fire_only_once = yes
+	
+	hidden = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event script_event.103"
+	}
+	
+	option = {
+		name = script_event.103.a
+		if = {
+			limit = {
+				RUS = {
+					has_country_flag = RUS_td_defence_pushin
+				}
+			}
+			RUS = {
+				country_event = rus_trubetskoy_death_event.25 # Покушение на Пущена было предотвращено
+			}
+		}
+		else_if = {
+			limit = {
+				RUS = {
+					has_country_flag = RUS_td_not_defence_pushin 
+				}
+			}
+			RUS = {
+				country_event = rus_trubetskoy_death_event.26 # Покушение на Пущина
+			}
+		}
+	}
+	
+}
+
+country_event = { # chose rus_trubetskoy_death_event 30 or 35 or 38	
+	id = script_event.104
+	title = script_event.104.t
+	desc = script_event.104.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	is_triggered_only = yes
+
+	fire_only_once = yes
+	
+	hidden = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event script_event.104"
+	}
+	
+	option = {
+		name = script_event.104.a
+		if = {
+			limit = {
+				RUS = {
+					has_country_flag = RUS_td_good_end
+				}
+			}
+			RUS = {
+				country_event = rus_trubetskoy_death_event.30 # Выйти на след волка
+			}
+		}
+		else_if = {
+			limit = {
+				RUS = {
+					has_country_flag = RUS_td_neutral_end 
+				}
+			}
+			RUS = {
+				country_event = rus_trubetskoy_death_event.35 # Обыск в квартире Пестеля
+			}
+		}
+		else_if = {
+			limit = {
+				RUS = {
+					has_country_flag = RUS_td_bad_end 
+				}
+			}
+			RUS = {
+				country_event = rus_trubetskoy_death_event.38 # РЧЛ выносит обвинение
+			}
+		}
+	}
+	
+}
+
+country_event = { # chose rus_trubetskoy_death_event 39 or 44 or 50	
+	id = script_event.105
+	title = script_event.105.t
+	desc = script_event.105.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	is_triggered_only = yes
+
+	fire_only_once = yes
+	
+	hidden = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event script_event.105"
+	}
+	
+	option = {
+		name = script_event.105.a
+		if = {
+			limit = {
+				RUS = {
+					has_country_flag = RUS_td_blame_germans_flag
+				}
+			}
+			RUS = {
+				country_event = rus_trubetskoy_death_event.39 # Виноваты Германцы
+			}
+		}
+		else_if = {
+			limit = {
+				RUS = {
+					has_country_flag = RUS_td_blame_socialists_flag 
+				}
+			}
+			RUS = {
+				country_event = rus_trubetskoy_death_event.44 # Виноваты социалисты
+			}
+		}
+		else_if = {
+			limit = {
+				RUS = {
+					has_country_flag = RUS_td_blame_romeans_flag 
+				}
+			}
+			RUS = {
+				country_event = rus_trubetskoy_death_event.50 # Виноваты Ромейцы
+			}
+		}
+	}
+	
+}
+
+######################################################################
 
 country_event = { #state rename
 	id = script_event.9999
