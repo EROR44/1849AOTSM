@@ -324,10 +324,19 @@ country_event = { #Visit Berlin
 	
 	is_triggered_only = yes
 	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event cbi_pru.1"
+	}
+	
 	option = {
 		name = cbi_pru.1.a
-		PRU = {
-			country_event = cbi_pru.2
+		custom_effect_tooltip = CBI_send_delegation_to_berlin_tt
+		hidden_effect = {
+			PRU = {
+				country_event = { id = cbi_pru.2 days = 5 }
+			}
 		}
 	}
 }
@@ -339,6 +348,12 @@ country_event = { #proposal
 	picture = GFX_report_event_aotsm_generic_signing_the_contract
 	
 	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event cbi_pru.2"
+	}
 	
 	option = { #Yes
 		name = cbi_pru.2.a
@@ -372,8 +387,16 @@ country_event = { #proposal
 				}
 			}
 		}
-		CBI = {
-			country_event = cbi_pru.3
+		add_political_power = 25
+		add_tech_bonus = {
+			bonus = 0.25
+			uses = 2
+			category = infantry_weapons
+		}
+		hidden_effect = {
+			CBI = {
+				country_event = { id = cbi_pru.3 days = 5 }
+			}
 		}
 	}
 	
@@ -409,8 +432,10 @@ country_event = { #proposal
 				}
 			}
 		}
-		CBI = {
-			country_event = cbi_pru.4
+		hidden_effect = {
+			CBI = {
+				country_event = { id = cbi_pru.4 days = 5 }
+			}
 		}
 	}
 }
@@ -423,26 +448,29 @@ country_event = { #They say yes
 	
 	is_triggered_only = yes
 	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event cbi_pru.3"
+	}
+	
 	option = { 
 		name = cbi_pru.3.a
-		PRU = {
-			add_tech_bonus = {
-				bonus = 0.75
-				uses = 2
-				category = infantry_weapons
-			}
+		add_political_power = -25
+		add_tech_bonus = {
+			bonus = 0.25
+			uses = 1
+			category = infantry_weapons
 		}
-		CBI = {
-			add_tech_bonus = {
-				bonus = 0.75
-				uses = 1
-				category = infantry_weapons
-			}
-		}
-		126 = {
-			add_resource = {
-				type = leypoldit
-				amount = 15
+		custom_effect_tooltip = CBI_add_2_leypoldit_complex_in_126_tt	
+		hidden_effect = {
+			126 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = leypoldit_complex
+					level = 2
+					instant_build = yes
+				}
 			}
 		}
 	}
@@ -456,6 +484,12 @@ country_event = { #They say no
 	
 	is_triggered_only = yes
 	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event cbi_pru.4"
+	}
+	
 	option = { 
 		name = cbi_pru.4.a
 	}
@@ -468,6 +502,12 @@ country_event = { #deal with CBI
 	picture = GFX_report_event_aotsm_generic_signing_the_contract
 	
 	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event cbi_pru.5"
+	}
 	
 	option = { 
 		name = cbi_pru.5.a
@@ -557,10 +597,16 @@ country_event = { #Visit Saint-Peterburg
 	
 	is_triggered_only = yes
 	
+	fire_only_once = yes
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event  cbi_rus.1"
+	}
+	
 	option = {
 		name = cbi_rus.1.a
 		RUS = {
-			country_event = cbi_rus.2
+			country_event = { id = cbi_rus.2 days = 5 }
 		}
 	}
 }
@@ -573,6 +619,12 @@ country_event = { #proposal
 	
 	is_triggered_only = yes
 	
+	fire_only_once = yes
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event  cbi_rus.2"
+	}
+
 	option = { #Yes
 		name = cbi_rus.2.a
 		ai_chance = {
@@ -605,8 +657,17 @@ country_event = { #proposal
 				}
 			}
 		}
-		CBI = {
-			country_event = cbi_rus.3
+		army_experience = 15
+		add_doctrine_cost_reduction = {
+			cost_reduction = 0.25
+			uses = 1
+			category = land_doctrine
+		}
+		give_military_access = CBI
+		hidden_effect = {
+			CBI = {
+				country_event = { id = cbi_rus.3 days = 5 }
+			}
 		}
 	}
 	
@@ -642,8 +703,10 @@ country_event = { #proposal
 				}
 			}
 		}
-		CBI = {
-			country_event = cbi_rus.4
+		hidden_effect = {
+			CBI = {
+				country_event = { id = cbi_rus.4 days = 5 }
+			}
 		}
 	}
 }
@@ -656,30 +719,21 @@ country_event = { #They say yes
 	
 	is_triggered_only = yes
 	
+	fire_only_once = yes
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event  cbi_rus.3"
+	}
+	
 	option = { 
-		name = cbi_rus.3.a
-		RUS = {
-			add_doctrine_cost_reduction = {
-				cost_reduction = 0.5
-				uses = 1
-				category = land_doctrine
-			}
+		name = cbi_rus.3.a	
+		army_experience = 15
+		add_doctrine_cost_reduction = {
+			cost_reduction = 0.25
+			uses = 1
+			category = land_doctrine
 		}
-		CBI = {
-			add_doctrine_cost_reduction = {
-				cost_reduction = 0.5
-				uses = 1
-				category = land_doctrine
-			}
-		}
-		RUS = {
-			give_military_access = CBI
-			army_experience = 15
-		}
-		CBI = {
-			give_military_access = RUS
-			army_experience = 15
-		}
+		give_military_access = RUS
 	}
 }
 
@@ -690,6 +744,12 @@ country_event = { #They say no
 	picture = GFX_report_event_ast_planning
 	
 	is_triggered_only = yes
+	
+	fire_only_once = yes
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event  cbi_rus.4"
+	}
 	
 	option = { 
 		name = cbi_rus.4.a
@@ -703,6 +763,12 @@ country_event = { #deal with CBI
 	picture = GFX_report_event_aotsm_generic_signing_the_contract
 	
 	is_triggered_only = yes
+	
+	fire_only_once = yes
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event  cbi_rus.5"
+	}
 	
 	option = { 
 		name = cbi_rus.5.a
@@ -802,6 +868,12 @@ country_event = { #Join London pack
 	
 	is_triggered_only = yes
 	
+	fire_only_once = yes
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event  cbi_rus.6"
+	}
+	
 	option = { 
 		name = cbi_rus.6.a
 		ai_chance = {
@@ -873,6 +945,8 @@ country_event = { #Кооперация с КБО - Ивент для Росси
 	picture = GFX_report_event_military_planning
 	
 	is_triggered_only = yes
+	
+	fire_only_once = yes
 	
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event cbi_rus.7"
@@ -3188,7 +3262,7 @@ country_event = { #Creating of South Africa
 country_event = { #Robey & Co was founded
 	id = cbi.22
 	title = cbi.22.t
-	desc = cbi.2.d
+	desc = cbi.22.d
 	picture = GFX_report_event_aotsm_generic_signing_the_contract
 	
 	is_triggered_only = yes
