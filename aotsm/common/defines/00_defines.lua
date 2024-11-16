@@ -2,9 +2,9 @@ NDefines = {
 
 NGame = {
 	START_DATE = "1849.1.1.12",
-	END_DATE = "1864.1.1.1",
+	END_DATE = "1900.1.1.1",
 	MAP_SCALE_PIXEL_TO_KM = 7.114,					-- Yes, we did the math
-	SAVE_VERSION = 22,								-- 1.14.0 (ToA)
+	SAVE_VERSION = 24,								-- 1.15.0 (unnamed)
 	CHECKSUM_SALT = "zwOdv5d9wm9uDSOT",				-- Data to modify generated checksum when game binaries have changed but not any content files.
 	LAG_DAYS_FOR_LOWER_SPEED = 10,					-- Days of client lag for decrease of gamespeed
 	LAG_DAYS_FOR_PAUSE = 25,						-- Days of client lag for pause of gamespeed.
