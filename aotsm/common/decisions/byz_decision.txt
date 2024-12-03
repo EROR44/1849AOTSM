@@ -5963,6 +5963,152 @@ byz_great_war_categories = {
 	
 	}
 	
+	byz_stop_automatic_conversion = {
+	
+		icon = close_aotsm
+	
+		allowed = {
+			
+		}
+
+		available = {
+		}
+
+		visible = {
+			NOT = {
+				has_country_flag = BYZ_stop_automatic_conversion_decision_flag
+			}
+			has_completed_focus = BYZ_start_automatic_converting
+			has_global_flag = firts_world_war
+		}
+
+		fire_only_once = no
+
+		cost = 0
+		days_re_enable = 1
+
+		ai_will_do = {
+			base = 0
+		}
+		
+		complete_effect = {
+			set_country_flag = BYZ_stop_automatic_conversion_decision_flag
+		}
+	
+	}
+	
+	byz_start_automatic_conversion = {
+	
+		icon = open_aotsm
+	
+		allowed = {
+			
+		}
+
+		available = {
+		}
+
+		visible = {
+			has_country_flag = BYZ_stop_automatic_conversion_decision_flag
+			has_completed_focus = BYZ_start_automatic_converting
+			has_global_flag = firts_world_war
+		}
+
+		fire_only_once = no
+
+		cost = 0
+		days_re_enable = 1
+
+		ai_will_do = {
+			base = 0
+		}
+		
+		complete_effect = {
+			clr_country_flag = BYZ_stop_automatic_conversion_decision_flag
+		}
+	
+	}
+	
+	byz_automatic_converting_mission = {
+	
+		icon = generic_merge_plant_materiel
+	
+		activation = {
+			has_completed_focus = BYZ_start_automatic_converting
+			has_war = yes
+			OR = {
+				has_war_with = FRR
+				has_war_with = CBI
+				has_war_with = RUS
+				has_war_with = PRU
+			}
+		}
+		
+		available = {
+			always = no
+		}
+		
+		cancel_trigger = {
+			NOT = {
+				has_war_with = PRU
+			}
+			NOT = {
+				has_war_with = FRR
+			}
+			NOT = {
+				has_war_with = RUS
+			}
+			NOT = {
+				has_war_with = CBI
+			}
+			NOT = {
+				has_global_flag = firts_world_war
+			}
+			has_war = no
+		}
+		
+		is_good = yes
+		
+		days_mission_timeout = 30
+		
+		selectable_mission = no
+		
+		timeout_effect = {
+			random_owned_controlled_state = {
+				limit = {
+					is_fully_controlled_by = ROOT
+					industrial_complex > 0
+				}
+				remove_building = {
+					type = industrial_complex
+					level = 1
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_owned_controlled_state = {
+				limit = {
+					is_fully_controlled_by = ROOT
+					industrial_complex > 0
+				}
+				remove_building = {
+					type = industrial_complex
+					level = 1
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+			activate_mission = byz_automatic_converting_mission
+		}
+	
+	}
+	
 	byz_mobilisation_economy_mission = {
 	
 		icon = gre_paying_ifc_debt
@@ -5999,6 +6145,9 @@ byz_great_war_categories = {
 			}
 			NOT = {
 				has_war_with = CBI
+			}
+			NOT = {
+				has_global_flag = firts_world_war
 			}
 		}
 		
@@ -6123,6 +6272,9 @@ byz_great_war_categories = {
 			}
 			NOT = {
 				has_war_with = CBI
+			}
+			NOT = {
+				has_global_flag = firts_world_war
 			}
 		}
 		
