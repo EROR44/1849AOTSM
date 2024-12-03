@@ -5040,8 +5040,24 @@ rus_capitulation_from_ultimatum = { #Понять в чем разница ме�
 				is_in_faction_with = PRU
 			}
 		}
-		RUS = {
-			remove_unit_leader  = 927
+		if = {
+			limit = {
+				RUS = { has_country_flag = RUS_grabbe_in_finland_flag }
+			}
+			FIN = {
+				set_nationality = {
+					target_country = EUK
+					character = RUS_Pavel_Hristoforovich_Grabbe
+				}
+			}
+		}
+		else = {
+			RUS = {
+				set_nationality = {
+					target_country = EUK
+					character = RUS_Pavel_Hristoforovich_Grabbe
+				}	
+			}
 		}
 		EUK = {
 			transfer_state = 221
@@ -5062,6 +5078,20 @@ rus_capitulation_from_ultimatum = { #Понять в чем разница ме�
 			}
 		}
 		EUK = {
+			add_country_leader_role = {
+				character = RUS_Pavel_Hristoforovich_Grabbe
+				promote_leader = yes
+				
+				country_leader = {
+					expire = "1900.1.1"
+					ideology = centrism
+					traits = { roman_kazak }
+				}
+			}
+			set_country_leader_portrait = {
+				ideology = authoritarian
+				portrait = GFX_portrait_euk_portrait_Paul_Graf_Grabbe
+			}
 			set_politics = { ruling_party = authoritarian elections_allowed = no }
 			set_popularities = {
 				democratic = 7
