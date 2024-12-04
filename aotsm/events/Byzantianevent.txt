@@ -3130,7 +3130,7 @@ country_event = { #War come to Us
 	id = byz.94
 	title = byz.94.t
 	desc = byz.94.d
-	picture = GFX_
+	picture = GFX_report_event_byz_war_come_to_us
 	
 	is_triggered_only = yes
 	
@@ -3325,7 +3325,7 @@ country_event = { #From war to Normal
 	id = byz.99
 	title = byz.99.t
 	desc = byz.99.d
-	picture = GFX_
+	picture = GFX_report_event_byz_from_war_to_normal
 	
 	is_triggered_only = yes
 	
@@ -3390,7 +3390,7 @@ country_event = { #Fall of the economy
 	id = byz.101
 	title = byz.101.t
 	desc = byz.101.d
-	picture = GFX_
+	picture = GFX_report_event_byz_fall_of_economy
 	
 	is_triggered_only = yes
 	
@@ -3406,6 +3406,216 @@ country_event = { #Fall of the economy
 			base = 100
 		}
 		add_stability = -0.10
+	}
+	
+}
+
+country_event = { #Constantinople Question
+	id = byz.102
+	title = byz.102.t
+	desc = byz.102.d
+	picture = GFX_report_event_byz_constantinople_question
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event byz.102"
+	}
+	
+	option = { 
+		name = byz.102.a
+		ai_chance = {
+			base = 20
+		}
+		add_war_support = 0.05
+		add_stability = -0.15
+		797 = {
+			remove_dynamic_modifier = { modifier = BYZ_constantinopolis_area_modifier }
+		}
+		custom_effect_tooltip = byz_lose_some_industrial_tt
+	}
+	
+	option = { 
+		name = byz.102.b
+		ai_chance = {
+			base = 80
+		}
+		add_war_support = -0.15
+		every_country = {
+			limit = {
+				NOT = {
+					tag = RIC
+				}
+				OR = {
+					is_puppet_of = BYZ
+					is_subject_of = BYZ
+				}
+			}
+			add_opinion_modifier = {
+				target = BYZ
+				modifier = byz_ignore_manpower_problem
+			}
+		}
+	}
+	
+}
+
+#CHINA SAVE ASIA TRADE
+
+country_event = { #Mained Chine
+	id = byz.103
+	title = byz.103.t
+	desc = byz.103.d
+	picture = GFX_
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event byz.103"
+	}
+	
+	option = { #Romea save us
+		name = byz.103.a
+		ai_chance = {
+			base = 25
+			modifier = {
+				add = -25
+				QIN = {
+					has_opinion = {
+						target = QIN
+						value < 0
+					}
+				}
+			}
+			modifier = {
+				add = 50
+				QIN = {
+					has_opinion = {
+						target = QIN
+						value > 50
+					}
+				}
+			}
+		}
+	}
+	
+	option = { #We don't need help
+		name = byz.103.b
+		ai_chance = {
+			base = 75
+			modifier = {
+				add = -50
+				QIN = {
+					has_opinion = {
+						target = QIN
+						value > 50
+					}
+				}
+			}
+		}
+	}
+	
+}
+
+country_event = { #Millitary help from Byzantium
+	id = byz.104
+	title = byz.104.t
+	desc = byz.104.d
+	picture = GFX_
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event byz.104"
+	}
+	
+	option = { #Romea save us
+		name = byz.104.a
+		ai_chance = {
+			base = 25
+			modifier = {
+				add = -25
+				QIN = {
+					has_opinion = {
+						target = QIN
+						value < 0
+					}
+				}
+			}
+			modifier = {
+				add = 50
+				QIN = {
+					has_opinion = {
+						target = QIN
+						value > 50
+					}
+				}
+			}
+		}
+	}
+	
+	option = { #We don't need help
+		name = byz.104.b
+		ai_chance = {
+			base = 75
+			modifier = {
+				add = -50
+				QIN = {
+					has_opinion = {
+						target = QIN
+						value > 50
+					}
+				}
+			}
+		}
+	}
+	
+}
+
+country_event = { #Repair Jade Rode
+	id = byz.105
+	title = byz.105.t
+	desc = byz.105.d
+	picture = GFX_
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event byz.105"
+	}
+	
+	option = { 
+		name = byz.105.a
+		ai_chance = {
+			base = 33
+		}
+		add_stability = 0.10
+		add_political_power = 250
+		QIN = {
+			add_stability = 0.10
+			add_political_power = 250
+		}
+	}
+	
+	option = { 
+		name = byz.105.b
+		ai_chance = {
+			base = 34
+		}
+		army_experience = 50
+		navy_experience = 25
+		QIN = {
+			army_experience = 50
+			navy_experience = 25
+		}
 	}
 	
 }
