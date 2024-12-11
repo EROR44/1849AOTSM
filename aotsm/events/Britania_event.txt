@@ -610,6 +610,27 @@ country_event = { #end CBI PRU leypoldit agreement
 	option = { 
 		name = cbi_pru.6.a
 		custom_effect_tooltip = CBI_remove_leypoldit_factory_in_london
+		hidden_effect = {
+			if = {
+				limit = {
+					CBI = {
+						NOT = {
+							has_tech = laboratory_leypoldit_development
+						}
+					}
+				}
+				every_state = {
+					limit = {
+						has_state_flag = CBI_german_specialist_building_add
+						is_owned_by = CBI
+					}
+					remove_building = {
+						type = leypoldit_complex
+						level = 1
+					}
+				}
+			}
+		}
 	}
 }
 
@@ -826,7 +847,7 @@ country_event = { #deal with CBI
 				RUS = {
 					has_opinion = {
 						target = CBI
-						value > 99
+						value > 95
 					}
 				}
 			}
@@ -837,13 +858,9 @@ country_event = { #deal with CBI
 				}
 			}
 		}
+		add_political_power = 150
 		CBI = {
 			add_political_power = 150
-		}
-		RUS = {
-			add_political_power = 150
-		}
-		CBI = {
 			set_country_flag = cbi_dialog_with_rus_accept
 		}
 	}
