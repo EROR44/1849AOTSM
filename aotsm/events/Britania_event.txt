@@ -593,6 +593,47 @@ country_event = { #deal with CBI
 	}
 }
 
+country_event = { #end CBI PRU leypoldit agreement
+	id = cbi_pru.6
+	title = cbi_pru.6.t
+	desc = cbi_pru.6.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event cbi_pru.6"
+	}
+	
+	option = { 
+		name = cbi_pru.6.a
+		custom_effect_tooltip = CBI_remove_leypoldit_factory_in_london
+		hidden_effect = {
+			if = {
+				limit = {
+					CBI = {
+						NOT = {
+							has_tech = laboratory_leypoldit_development
+						}
+					}
+				}
+				every_state = {
+					limit = {
+						has_state_flag = CBI_german_specialist_building_add
+						is_owned_by = CBI
+					}
+					remove_building = {
+						type = leypoldit_complex
+						level = 1
+					}
+				}
+			}
+		}
+	}
+}
+
 #### RUSSIAN ####
 
 country_event = { #Visit Saint-Peterburg
@@ -607,13 +648,16 @@ country_event = { #Visit Saint-Peterburg
 
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event  cbi_rus.1"
+		hidden_effect = {
+			RUS = {
+				country_event = { id = cbi_rus.2 days = 7 }
+			}
+		}
 	}
 	
 	option = {
 		name = cbi_rus.1.a
-		RUS = {
-			country_event = { id = cbi_rus.2 days = 5 }
-		}
+		custom_effect_tooltip = CBI_uilyam_lem_go_to_petrograd_tt
 	}
 }
 
@@ -803,7 +847,7 @@ country_event = { #deal with CBI
 				RUS = {
 					has_opinion = {
 						target = CBI
-						value > 99
+						value > 95
 					}
 				}
 			}
@@ -814,13 +858,9 @@ country_event = { #deal with CBI
 				}
 			}
 		}
+		add_political_power = 150
 		CBI = {
 			add_political_power = 150
-		}
-		RUS = {
-			add_political_power = 150
-		}
-		CBI = {
 			set_country_flag = cbi_dialog_with_rus_accept
 		}
 	}
@@ -8283,6 +8323,7 @@ country_event = { #Сепаратный мир
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event cbi_gw_political_event.23"
 		hidden_effect = { #тут надо будет доработать 
+			cbi_capitulation_all = yes
 			if = {
 				limit = {
 					CBI = {
@@ -8334,8 +8375,7 @@ country_event = { #Сепаратный мир
 					}
 				}
 				white_peace = CBI
-			}
-
+			}		 
 		}
 	}
 	

@@ -6804,6 +6804,53 @@ country_event = { #BYZ TYPE OF ASSAULT
 	
 }
 
+country_event = { #Unname Solder Event
+	id = script_event.52
+	title = script_event.52.t
+	desc = script_event.52.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	trigger = {
+		tag = BYZ
+		has_global_flag = firts_world_war
+		BYZ = {
+			has_war_with = RUS
+		}
+		OR = {
+			202 = {
+				is_controlled_by = BYZ
+			}
+			AND = {
+				BYZ = {
+					is_in_faction_with = PRU
+				}
+				OR = {
+					202 = {
+						is_controlled_by = PRU
+					}
+					202 = {
+						is_controlled_by = UKR
+					}
+				}
+			}
+		}
+	}
+		
+	fire_only_once = yes
+	
+	hidden = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event script_event.52"
+	}
+	
+	option = {
+		name = script_event.52.a
+		BYZ = { country_event = byz.93 }
+	}
+	
+}
+
 ######################################################################
 #######################RUSSIAN_SCRIPTED_EVENTS########################
 ######################################################################
@@ -7083,6 +7130,50 @@ country_event = { # chose rus_trubetskoy_death_event 39 or 44 or 50
 }
 
 ######################################################################
+
+country_event = { # remove leypoldit agreement in case war with PRU
+	id = script_event.201
+	title = script_event.201.t
+	desc = script_event.201.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	trigger = {
+		tag = CBI
+		CBI = {
+			has_idea = CBI_cbi_german_british_agreement_about_leypoldit
+			has_war_with = PRU
+		}
+	}
+
+	fire_only_once = yes
+	
+	hidden = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event script_event.201"
+		hidden_effect = {
+			CBI = {
+				remove_ideas = CBI_cbi_german_british_agreement_about_leypoldit
+				126 = {
+					remove_building = {
+						type = leypoldit_complex
+						level = 2
+					}
+				}
+				country_event = cbi_pru.6
+			}
+			PRU = {
+				remove_ideas = CBI_pru_german_british_agreement_about_leypoldit
+			}
+		}
+	}
+	
+	option = {
+		name = script_event.201.a
+	
+	}
+	
+}
 
 country_event = { #state rename
 	id = script_event.9999
