@@ -3748,7 +3748,12 @@ pru_diplomat_missia = {
 			}
 			NOT = {
 				country_exists = UKR
+			}
+			NOT = {
 				country_exists = WUK
+				WUK = {
+					owns_state = 202
+				}
 			}
 		}
 
@@ -9924,6 +9929,77 @@ PRU_kep_decision_cat = {
 			}
 		}
 		
+	}
+
+}
+
+PRU_post_war_decision_categories = {
+
+	pru_give_back_galicia = {
+	
+		icon = SWI_consolidate_council_power
+	
+		activation = {
+			PRU = {
+				owns_state = 88
+			}
+			NOT = {
+				PRU = {
+					has_war_with = RUS
+				}
+			}
+			OR = {
+				country_exists = PLH
+				country_exists = POL
+			}
+			NOT = {
+				PRU = {
+					has_country_flag = PRU_chose_to_integrat_poland
+				}
+			}
+		}
+		
+		available = {
+			always = no
+		}
+		
+		cancel_trigger = {
+			NOT = {
+				PRU = {
+					owns_state = 88
+				}
+			}
+		}
+		
+		is_good = no
+		
+		days_mission_timeout = 10
+		
+		selectable_mission = no
+		
+		timeout_effect = {
+			if = {
+				limit = {
+					country_exists = POL
+				}
+				POL = {
+					transfer_state = 88
+					add_state_core = 88
+				}
+			}
+			if = {
+				limit = {
+					country_exists = PLH
+					NOT = {
+						country_exists = POL
+					}
+				}
+				PLH = {
+					transfer_state = 88
+					add_state_core = 88
+				}
+			}
+		}
 	}
 
 }
