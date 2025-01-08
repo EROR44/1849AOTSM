@@ -5931,6 +5931,164 @@ byz_great_war_categories = {
 	
 	}
 	
+	byz_low_man_mobilisation = {
+	
+		icon = generic_reorganize_irregulars
+	
+		allowed = {
+			
+		}
+
+		available = {
+			any_state = {
+				state_population > 99999
+				is_fully_controlled_by = ROOT
+				is_core_of = ROOT
+			}
+		}
+
+		visible = {
+			has_completed_focus = BYZ_lifetime_of_war
+			has_global_flag = firts_world_war
+			NOT = {
+				has_country_flag = BYZ_close_gw_mobilisation_decision_flag
+			}
+		}
+
+		fire_only_once = no
+
+		cost = 0
+		days_re_enable = 50
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				has_manpower < 250000
+				add = 50
+			}
+		}
+		
+		complete_effect = {
+			BYZ = {
+				random_owned_controlled_state = {
+					add_manpower = -5000
+				}
+			}
+			add_manpower = 5000
+		}
+	
+	}
+	
+	byz_normal_man_mobilisation = {
+	
+		icon = generic_reorganize_irregulars
+	
+		allowed = {
+			
+		}
+
+		available = {
+			any_state = {
+				state_population > 99999
+				is_fully_controlled_by = ROOT
+				is_core_of = ROOT
+			}
+		}
+
+		visible = {
+			has_completed_focus = BYZ_lifetime_of_war
+			has_global_flag = firts_world_war
+			NOT = {
+				has_country_flag = BYZ_close_gw_mobilisation_decision_flag
+			}
+		}
+
+		fire_only_once = no
+
+		cost = 25
+		days_re_enable = 50
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				has_manpower < 250000
+				add = 10
+			}
+			modifier = {
+				has_manpower < 125000
+				add = 40
+			}
+		}
+		
+		complete_effect = {
+			BYZ = {
+				random_owned_controlled_state = {
+					add_manpower = -12500
+				}
+			}
+			add_manpower = 12500
+			add_war_support = -0.01
+		}
+	
+	}
+	
+	byz_max_man_mobilisation = {
+	
+		icon = generic_reorganize_irregulars
+	
+		allowed = {
+			
+		}
+
+		available = {
+			any_state = {
+				state_population > 149999
+				is_fully_controlled_by = ROOT
+				is_core_of = ROOT
+			}
+		}
+
+		visible = {
+			has_completed_focus = BYZ_lifetime_of_war
+			has_global_flag = firts_world_war
+			NOT = {
+				has_country_flag = BYZ_close_gw_mobilisation_decision_flag
+			}
+		}
+
+		fire_only_once = no
+
+		cost = 50
+		days_re_enable = 50
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				has_manpower < 250000
+				add = 10
+			}
+			modifier = {
+				has_manpower < 125000
+				add = 10
+			}
+			modifier = {
+				has_manpower < 50000
+				add = 30
+			}
+		}
+		
+		complete_effect = {
+			BYZ = {
+				random_owned_controlled_state = {
+					add_manpower = -30000
+				}
+			}
+			add_manpower = 30000
+			add_war_support = -0.025
+		}
+	
+	}
+	
 	byz_open_great_war_mobilisation_decision = {
 	
 		icon = open_aotsm
@@ -5959,6 +6117,2332 @@ byz_great_war_categories = {
 		
 		complete_effect = {
 			clr_country_flag = BYZ_close_gw_mobilisation_decision_flag
+		}
+	
+	}
+	
+	byz_close_great_war_partisan_decision = {
+	
+		icon = close_aotsm
+	
+		allowed = {
+			
+		}
+
+		available = {
+		}
+
+		visible = {
+			NOT = {
+				has_country_flag = BYZ_close_gw_partisan_decision_flag
+			}
+			has_completed_focus = BYZ_training_partisan
+			has_global_flag = firts_world_war
+			has_idea = BYZ_trained_partisan
+		}
+
+		fire_only_once = no
+
+		cost = 0
+		days_re_enable = 1
+
+		ai_will_do = {
+			base = 0
+		}
+		
+		complete_effect = {
+			set_country_flag = BYZ_close_gw_partisan_decision_flag
+		}
+	
+	}
+	
+	byz_rise_partisan_in_77_state = {
+	
+		icon = POL_organize_strike_two
+	
+		allowed = {
+			
+		}
+
+		available = {
+			77 = {
+				is_controlled_by_enemy = yes
+			}
+		}
+
+		visible = {
+			NOT = {
+				has_country_flag = BYZ_close_gw_partisan_decision_flag
+			}
+			has_completed_focus = BYZ_training_partisan
+			has_global_flag = firts_world_war
+			has_idea = BYZ_trained_partisan
+		}
+
+		fire_only_once = yes
+		
+		highlight_states = {
+			highlight_state_targets = {
+				state = 77
+			}
+			highlight_color_while_active = 3
+			highlight_color_before_active = 2
+		}
+
+		cost = 25
+		days_re_enable = 100
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				has_political_power > 100
+				add = 5
+			}
+		}
+		
+		complete_effect = {
+			custom_effect_tooltip = byz_recrute_some_partisan_tt
+			hidden_effect = {
+				if = {
+					limit = {
+						BYZ = {
+							NOT = {
+								has_country_flag = byz_partisan_oob_load
+							}
+						}
+					}
+					BYZ = {
+						set_country_flag = byz_partisan_oob_load
+						load_oob = BYZ_partisan_division
+					}
+				}
+				BYZ = {
+					load_oob = BYZ_partisan_77
+				}
+			}
+		}
+	
+	}
+	
+	byz_rise_partisan_in_211_state = {
+	
+		icon = POL_organize_strike_two
+	
+		allowed = {
+			
+		}
+
+		available = {
+			211 = {
+				is_controlled_by_enemy = yes
+			}
+		}
+
+		visible = {
+			NOT = {
+				has_country_flag = BYZ_close_gw_partisan_decision_flag
+			}
+			has_completed_focus = BYZ_training_partisan
+			has_global_flag = firts_world_war
+			has_idea = BYZ_trained_partisan
+		}
+
+		fire_only_once = yes
+		
+		highlight_states = {
+			highlight_state_targets = {
+				state = 211
+			}
+			highlight_color_while_active = 3
+			highlight_color_before_active = 2
+		}
+
+		cost = 25
+		days_re_enable = 100
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				has_political_power > 100
+				add = 5
+			}
+		}
+		
+		complete_effect = {
+			custom_effect_tooltip = byz_recrute_some_partisan_tt
+			hidden_effect = {
+				if = {
+					limit = {
+						BYZ = {
+							NOT = {
+								has_country_flag = byz_partisan_oob_load
+							}
+						}
+					}
+					BYZ = {
+						set_country_flag = byz_partisan_oob_load
+						load_oob = BYZ_partisan_division
+					}
+				}
+				BYZ = {
+					load_oob = BYZ_partisan_211
+				}
+			}
+		}
+	
+	}
+	
+	byz_rise_partisan_in_801_state = {
+	
+		icon = POL_organize_strike_two
+	
+		allowed = {
+			
+		}
+
+		available = {
+			801 = {
+				is_controlled_by_enemy = yes
+			}
+		}
+
+		visible = {
+			NOT = {
+				has_country_flag = BYZ_close_gw_partisan_decision_flag
+			}
+			has_completed_focus = BYZ_training_partisan
+			has_global_flag = firts_world_war
+			has_idea = BYZ_trained_partisan
+		}
+
+		fire_only_once = yes
+		
+		highlight_states = {
+			highlight_state_targets = {
+				state = 801
+			}
+			highlight_color_while_active = 3
+			highlight_color_before_active = 2
+		}
+
+		cost = 25
+		days_re_enable = 100
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				has_political_power > 100
+				add = 5
+			}
+		}
+		
+		complete_effect = {
+			custom_effect_tooltip = byz_recrute_some_partisan_tt
+			hidden_effect = {
+				if = {
+					limit = {
+						BYZ = {
+							NOT = {
+								has_country_flag = byz_partisan_oob_load
+							}
+						}
+					}
+					BYZ = {
+						set_country_flag = byz_partisan_oob_load
+						load_oob = BYZ_partisan_division
+					}
+				}
+				BYZ = {
+					load_oob = BYZ_partisan_801
+				}
+			}
+		}
+	
+	}
+	
+	byz_rise_partisan_in_229_state = {
+	
+		icon = POL_organize_strike_two
+	
+		allowed = {
+			
+		}
+
+		available = {
+			229 = {
+				is_controlled_by_enemy = yes
+			}
+		}
+
+		visible = {
+			NOT = {
+				has_country_flag = BYZ_close_gw_partisan_decision_flag
+			}
+			has_completed_focus = BYZ_training_partisan
+			has_global_flag = firts_world_war
+			has_idea = BYZ_trained_partisan
+		}
+
+		fire_only_once = yes
+		
+		highlight_states = {
+			highlight_state_targets = {
+				state = 229
+			}
+			highlight_color_while_active = 3
+			highlight_color_before_active = 2
+		}
+
+		cost = 25
+		days_re_enable = 100
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				has_political_power > 100
+				add = 5
+			}
+		}
+		
+		complete_effect = {
+			custom_effect_tooltip = byz_recrute_some_partisan_tt
+			hidden_effect = {
+				if = {
+					limit = {
+						BYZ = {
+							NOT = {
+								has_country_flag = byz_partisan_oob_load
+							}
+						}
+					}
+					BYZ = {
+						set_country_flag = byz_partisan_oob_load
+						load_oob = BYZ_partisan_division
+					}
+				}
+				BYZ = {
+					load_oob = BYZ_partisan_229
+				}
+			}
+		}
+	
+	}
+	
+	byz_rise_partisan_in_230_state = {
+	
+		icon = POL_organize_strike_two
+	
+		allowed = {
+			
+		}
+
+		available = {
+			230 = {
+				is_controlled_by_enemy = yes
+			}
+		}
+
+		visible = {
+			NOT = {
+				has_country_flag = BYZ_close_gw_partisan_decision_flag
+			}
+			has_completed_focus = BYZ_training_partisan
+			has_global_flag = firts_world_war
+			has_idea = BYZ_trained_partisan
+		}
+
+		fire_only_once = yes
+		
+		highlight_states = {
+			highlight_state_targets = {
+				state = 230
+			}
+			highlight_color_while_active = 3
+			highlight_color_before_active = 2
+		}
+
+		cost = 25
+		days_re_enable = 100
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				has_political_power > 100
+				add = 5
+			}
+		}
+		
+		complete_effect = {
+			custom_effect_tooltip = byz_recrute_some_partisan_tt
+			hidden_effect = {
+				if = {
+					limit = {
+						BYZ = {
+							NOT = {
+								has_country_flag = byz_partisan_oob_load
+							}
+						}
+					}
+					BYZ = {
+						set_country_flag = byz_partisan_oob_load
+						load_oob = BYZ_partisan_division
+					}
+				}
+				BYZ = {
+					load_oob = BYZ_partisan_230
+				}
+			}
+		}
+	
+	}
+	
+	byz_rise_partisan_in_231_state = {
+	
+		icon = POL_organize_strike_two
+	
+		allowed = {
+			
+		}
+
+		available = {
+			231 = {
+				is_controlled_by_enemy = yes
+			}
+		}
+
+		visible = {
+			NOT = {
+				has_country_flag = BYZ_close_gw_partisan_decision_flag
+			}
+			has_completed_focus = BYZ_training_partisan
+			has_global_flag = firts_world_war
+			has_idea = BYZ_trained_partisan
+		}
+
+		fire_only_once = yes
+		
+		highlight_states = {
+			highlight_state_targets = {
+				state = 231
+			}
+			highlight_color_while_active = 3
+			highlight_color_before_active = 2
+		}
+
+		cost = 25
+		days_re_enable = 100
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				has_political_power > 100
+				add = 5
+			}
+		}
+		
+		complete_effect = {
+			custom_effect_tooltip = byz_recrute_some_partisan_tt
+			hidden_effect = {
+				if = {
+					limit = {
+						BYZ = {
+							NOT = {
+								has_country_flag = byz_partisan_oob_load
+							}
+						}
+					}
+					BYZ = {
+						set_country_flag = byz_partisan_oob_load
+						load_oob = BYZ_partisan_division
+					}
+				}
+				BYZ = {
+					load_oob = BYZ_partisan_231
+				}
+			}
+		}
+	
+	}
+	
+	byz_rise_partisan_in_932_state = {
+	
+		icon = POL_organize_strike_two
+	
+		allowed = {
+			
+		}
+
+		available = {
+			932 = {
+				is_controlled_by_enemy = yes
+			}
+		}
+
+		visible = {
+			NOT = {
+				has_country_flag = BYZ_close_gw_partisan_decision_flag
+			}
+			has_completed_focus = BYZ_training_partisan
+			has_global_flag = firts_world_war
+			has_idea = BYZ_trained_partisan
+		}
+
+		fire_only_once = yes
+		
+		highlight_states = {
+			highlight_state_targets = {
+				state = 932
+			}
+			highlight_color_while_active = 3
+			highlight_color_before_active = 2
+		}
+
+		cost = 25
+		days_re_enable = 100
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				has_political_power > 100
+				add = 5
+			}
+		}
+		
+		complete_effect = {
+			custom_effect_tooltip = byz_recrute_some_partisan_tt
+			hidden_effect = {
+				if = {
+					limit = {
+						BYZ = {
+							NOT = {
+								has_country_flag = byz_partisan_oob_load
+							}
+						}
+					}
+					BYZ = {
+						set_country_flag = byz_partisan_oob_load
+						load_oob = BYZ_partisan_division
+					}
+				}
+				BYZ = {
+					load_oob = BYZ_partisan_932
+				}
+			}
+		}
+	
+	}
+	
+	byz_rise_resisten_in_48_state = {
+	
+		icon = CHL_mapuche_reorganize_the_bolivian_government
+	
+		allowed = {
+			
+		}
+
+		available = {
+			48 = {
+				is_controlled_by_enemy = yes
+			}
+		}
+
+		visible = {
+			NOT = {
+				has_country_flag = BYZ_close_gw_partisan_decision_flag
+			}
+			has_completed_focus = BYZ_training_partisan
+			has_global_flag = firts_world_war
+			has_idea = BYZ_trained_partisan
+		}
+
+		fire_only_once = no
+		
+		highlight_states = {
+			highlight_state_targets = {
+				state = 48
+			}
+			highlight_color_while_active = 3
+			highlight_color_before_active = 2
+		}
+
+		cost = 5
+		days_re_enable = 50
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				has_political_power > 100
+				add = 5
+			}
+		}
+		
+		complete_effect = {
+			48 = {
+				add_resistance = 15
+				add_compliance = -5
+			}
+		}
+	
+	}
+	
+	byz_rise_resisten_in_77_state = {
+	
+		icon = CHL_mapuche_reorganize_the_bolivian_government
+	
+		allowed = {
+			
+		}
+
+		available = {
+			77 = {
+				is_controlled_by_enemy = yes
+			}
+		}
+
+		visible = {
+			NOT = {
+				has_country_flag = BYZ_close_gw_partisan_decision_flag
+			}
+			has_completed_focus = BYZ_training_partisan
+			has_global_flag = firts_world_war
+			has_idea = BYZ_trained_partisan
+		}
+
+		fire_only_once = no
+		
+		highlight_states = {
+			highlight_state_targets = {
+				state = 77
+			}
+			highlight_color_while_active = 3
+			highlight_color_before_active = 2
+		}
+
+		cost = 5
+		days_re_enable = 50
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				has_political_power > 100
+				add = 5
+			}
+		}
+		
+		complete_effect = {
+			77 = {
+				add_resistance = 15
+				add_compliance = -5
+			}
+		}
+	
+	}
+	
+	byz_rise_resisten_in_106_state = {
+	
+		icon = CHL_mapuche_reorganize_the_bolivian_government
+	
+		allowed = {
+			
+		}
+
+		available = {
+			106 = {
+				is_controlled_by_enemy = yes
+			}
+		}
+
+		visible = {
+			NOT = {
+				has_country_flag = BYZ_close_gw_partisan_decision_flag
+			}
+			has_completed_focus = BYZ_training_partisan
+			has_global_flag = firts_world_war
+			has_idea = BYZ_trained_partisan
+		}
+
+		fire_only_once = no
+		
+		highlight_states = {
+			highlight_state_targets = {
+				state = 106
+			}
+			highlight_color_while_active = 3
+			highlight_color_before_active = 2
+		}
+
+		cost = 5
+		days_re_enable = 50
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				has_political_power > 100
+				add = 5
+			}
+		}
+		
+		complete_effect = {
+			106 = {
+				add_resistance = 15
+				add_compliance = -5
+			}
+		}
+	
+	}
+	
+	byz_rise_resisten_in_211_state = {
+	
+		icon = CHL_mapuche_reorganize_the_bolivian_government
+	
+		allowed = {
+			
+		}
+
+		available = {
+			211 = {
+				is_controlled_by_enemy = yes
+			}
+		}
+
+		visible = {
+			NOT = {
+				has_country_flag = BYZ_close_gw_partisan_decision_flag
+			}
+			has_completed_focus = BYZ_training_partisan
+			has_global_flag = firts_world_war
+			has_idea = BYZ_trained_partisan
+		}
+
+		fire_only_once = no
+		
+		highlight_states = {
+			highlight_state_targets = {
+				state = 211
+			}
+			highlight_color_while_active = 3
+			highlight_color_before_active = 2
+		}
+
+		cost = 5
+		days_re_enable = 50
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				has_political_power > 100
+				add = 5
+			}
+		}
+		
+		complete_effect = {
+			211 = {
+				add_resistance = 15
+				add_compliance = -5
+			}
+		}
+	
+	}
+	
+	byz_rise_resisten_in_212_state = {
+	
+		icon = CHL_mapuche_reorganize_the_bolivian_government
+	
+		allowed = {
+			
+		}
+
+		available = {
+			212 = {
+				is_controlled_by_enemy = yes
+			}
+		}
+
+		visible = {
+			NOT = {
+				has_country_flag = BYZ_close_gw_partisan_decision_flag
+			}
+			has_completed_focus = BYZ_training_partisan
+			has_global_flag = firts_world_war
+			has_idea = BYZ_trained_partisan
+		}
+
+		fire_only_once = no
+		
+		highlight_states = {
+			highlight_state_targets = {
+				state = 212
+			}
+			highlight_color_while_active = 3
+			highlight_color_before_active = 2
+		}
+
+		cost = 5
+		days_re_enable = 50
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				has_political_power > 100
+				add = 5
+			}
+		}
+		
+		complete_effect = {
+			212 = {
+				add_resistance = 15
+				add_compliance = -5
+			}
+		}
+	
+	}
+	
+	byz_rise_resisten_in_801_state = {
+	
+		icon = CHL_mapuche_reorganize_the_bolivian_government
+	
+		allowed = {
+			
+		}
+
+		available = {
+			801 = {
+				is_controlled_by_enemy = yes
+			}
+		}
+
+		visible = {
+			NOT = {
+				has_country_flag = BYZ_close_gw_partisan_decision_flag
+			}
+			has_completed_focus = BYZ_training_partisan
+			has_global_flag = firts_world_war
+			has_idea = BYZ_trained_partisan
+		}
+
+		fire_only_once = no
+		
+		highlight_states = {
+			highlight_state_targets = {
+				state = 801
+			}
+			highlight_color_while_active = 3
+			highlight_color_before_active = 2
+		}
+
+		cost = 5
+		days_re_enable = 50
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				has_political_power > 100
+				add = 5
+			}
+		}
+		
+		complete_effect = {
+			801 = {
+				add_resistance = 15
+				add_compliance = -5
+			}
+		}
+	
+	}
+	
+	byz_rise_resisten_in_803_state = {
+	
+		icon = CHL_mapuche_reorganize_the_bolivian_government
+	
+		allowed = {
+			
+		}
+
+		available = {
+			803 = {
+				is_controlled_by_enemy = yes
+			}
+		}
+
+		visible = {
+			NOT = {
+				has_country_flag = BYZ_close_gw_partisan_decision_flag
+			}
+			has_completed_focus = BYZ_training_partisan
+			has_global_flag = firts_world_war
+			has_idea = BYZ_trained_partisan
+		}
+
+		fire_only_once = no
+		
+		highlight_states = {
+			highlight_state_targets = {
+				state = 803
+			}
+			highlight_color_while_active = 3
+			highlight_color_before_active = 2
+		}
+
+		cost = 5
+		days_re_enable = 50
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				has_political_power > 100
+				add = 5
+			}
+		}
+		
+		complete_effect = {
+			803 = {
+				add_resistance = 15
+				add_compliance = -5
+			}
+		}
+	
+	}
+	
+	byz_rise_resisten_in_184_state = {
+	
+		icon = CHL_mapuche_reorganize_the_bolivian_government
+	
+		allowed = {
+			
+		}
+
+		available = {
+			184 = {
+				is_controlled_by_enemy = yes
+			}
+		}
+
+		visible = {
+			NOT = {
+				has_country_flag = BYZ_close_gw_partisan_decision_flag
+			}
+			has_completed_focus = BYZ_training_partisan
+			has_global_flag = firts_world_war
+			has_idea = BYZ_trained_partisan
+		}
+
+		fire_only_once = no
+		
+		highlight_states = {
+			highlight_state_targets = {
+				state = 184
+			}
+			highlight_color_while_active = 3
+			highlight_color_before_active = 2
+		}
+
+		cost = 5
+		days_re_enable = 50
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				has_political_power > 100
+				add = 5
+			}
+		}
+		
+		complete_effect = {
+			184 = {
+				add_resistance = 15
+				add_compliance = -5
+			}
+		}
+	
+	}
+	
+	byz_rise_resisten_in_341_state = {
+	
+		icon = CHL_mapuche_reorganize_the_bolivian_government
+	
+		allowed = {
+			
+		}
+
+		available = {
+			341 = {
+				is_controlled_by_enemy = yes
+			}
+		}
+
+		visible = {
+			NOT = {
+				has_country_flag = BYZ_close_gw_partisan_decision_flag
+			}
+			has_completed_focus = BYZ_training_partisan
+			has_global_flag = firts_world_war
+			has_idea = BYZ_trained_partisan
+		}
+
+		fire_only_once = no
+		
+		highlight_states = {
+			highlight_state_targets = {
+				state = 341
+			}
+			highlight_color_while_active = 3
+			highlight_color_before_active = 2
+		}
+
+		cost = 5
+		days_re_enable = 50
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				has_political_power > 100
+				add = 5
+			}
+		}
+		
+		complete_effect = {
+			341 = {
+				add_resistance = 15
+				add_compliance = -5
+			}
+		}
+	
+	}
+	
+	byz_rise_resisten_in_731_state = {
+	
+		icon = CHL_mapuche_reorganize_the_bolivian_government
+	
+		allowed = {
+			
+		}
+
+		available = {
+			731 = {
+				is_controlled_by_enemy = yes
+			}
+		}
+
+		visible = {
+			NOT = {
+				has_country_flag = BYZ_close_gw_partisan_decision_flag
+			}
+			has_completed_focus = BYZ_training_partisan
+			has_global_flag = firts_world_war
+			has_idea = BYZ_trained_partisan
+		}
+
+		fire_only_once = no
+		
+		highlight_states = {
+			highlight_state_targets = {
+				state = 731
+			}
+			highlight_color_while_active = 3
+			highlight_color_before_active = 2
+		}
+
+		cost = 5
+		days_re_enable = 50
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				has_political_power > 100
+				add = 5
+			}
+		}
+		
+		complete_effect = {
+			731 = {
+				add_resistance = 15
+				add_compliance = -5
+			}
+		}
+	
+	}
+	
+	byz_rise_resisten_in_229_state = {
+	
+		icon = CHL_mapuche_reorganize_the_bolivian_government
+	
+		allowed = {
+			
+		}
+
+		available = {
+			229 = {
+				is_controlled_by_enemy = yes
+			}
+		}
+
+		visible = {
+			NOT = {
+				has_country_flag = BYZ_close_gw_partisan_decision_flag
+			}
+			has_completed_focus = BYZ_training_partisan
+			has_global_flag = firts_world_war
+			has_idea = BYZ_trained_partisan
+		}
+
+		fire_only_once = no
+		
+		highlight_states = {
+			highlight_state_targets = {
+				state = 229
+			}
+			highlight_color_while_active = 3
+			highlight_color_before_active = 2
+		}
+
+		cost = 5
+		days_re_enable = 50
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				has_political_power > 100
+				add = 5
+			}
+		}
+		
+		complete_effect = {
+			229 = {
+				add_resistance = 15
+				add_compliance = -5
+			}
+		}
+	
+	}
+	
+	byz_rise_resisten_in_230_state = {
+	
+		icon = CHL_mapuche_reorganize_the_bolivian_government
+	
+		allowed = {
+			
+		}
+
+		available = {
+			230 = {
+				is_controlled_by_enemy = yes
+			}
+		}
+
+		visible = {
+			NOT = {
+				has_country_flag = BYZ_close_gw_partisan_decision_flag
+			}
+			has_completed_focus = BYZ_training_partisan
+			has_global_flag = firts_world_war
+			has_idea = BYZ_trained_partisan
+		}
+
+		fire_only_once = no
+		
+		highlight_states = {
+			highlight_state_targets = {
+				state = 230
+			}
+			highlight_color_while_active = 3
+			highlight_color_before_active = 2
+		}
+
+		cost = 5
+		days_re_enable = 50
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				has_political_power > 100
+				add = 5
+			}
+		}
+		
+		complete_effect = {
+			230 = {
+				add_resistance = 15
+				add_compliance = -5
+			}
+		}
+	
+	}
+	
+	byz_rise_resisten_in_231_state = {
+	
+		icon = CHL_mapuche_reorganize_the_bolivian_government
+	
+		allowed = {
+			
+		}
+
+		available = {
+			231 = {
+				is_controlled_by_enemy = yes
+			}
+		}
+
+		visible = {
+			NOT = {
+				has_country_flag = BYZ_close_gw_partisan_decision_flag
+			}
+			has_completed_focus = BYZ_training_partisan
+			has_global_flag = firts_world_war
+			has_idea = BYZ_trained_partisan
+		}
+
+		fire_only_once = no
+		
+		highlight_states = {
+			highlight_state_targets = {
+				state = 231
+			}
+			highlight_color_while_active = 3
+			highlight_color_before_active = 2
+		}
+
+		cost = 5
+		days_re_enable = 50
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				has_political_power > 100
+				add = 5
+			}
+		}
+		
+		complete_effect = {
+			231 = {
+				add_resistance = 15
+				add_compliance = -5
+			}
+		}
+	
+	}
+	
+	byz_rise_resisten_in_232_state = {
+	
+		icon = CHL_mapuche_reorganize_the_bolivian_government
+	
+		allowed = {
+			
+		}
+
+		available = {
+			232 = {
+				is_controlled_by_enemy = yes
+			}
+		}
+
+		visible = {
+			NOT = {
+				has_country_flag = BYZ_close_gw_partisan_decision_flag
+			}
+			has_completed_focus = BYZ_training_partisan
+			has_global_flag = firts_world_war
+			has_idea = BYZ_trained_partisan
+		}
+
+		fire_only_once = no
+		
+		highlight_states = {
+			highlight_state_targets = {
+				state = 232
+			}
+			highlight_color_while_active = 3
+			highlight_color_before_active = 2
+		}
+
+		cost = 5
+		days_re_enable = 50
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				has_political_power > 100
+				add = 5
+			}
+		}
+		
+		complete_effect = {
+			232 = {
+				add_resistance = 15
+				add_compliance = -5
+			}
+		}
+	
+	}
+	
+	byz_rise_resisten_in_233_state = {
+	
+		icon = CHL_mapuche_reorganize_the_bolivian_government
+	
+		allowed = {
+			
+		}
+
+		available = {
+			233 = {
+				is_controlled_by_enemy = yes
+			}
+		}
+
+		visible = {
+			NOT = {
+				has_country_flag = BYZ_close_gw_partisan_decision_flag
+			}
+			has_completed_focus = BYZ_training_partisan
+			has_global_flag = firts_world_war
+			has_idea = BYZ_trained_partisan
+		}
+
+		fire_only_once = no
+		
+		highlight_states = {
+			highlight_state_targets = {
+				state = 233
+			}
+			highlight_color_while_active = 3
+			highlight_color_before_active = 2
+		}
+
+		cost = 5
+		days_re_enable = 50
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				has_political_power > 100
+				add = 5
+			}
+		}
+		
+		complete_effect = {
+			233 = {
+				add_resistance = 15
+				add_compliance = -5
+			}
+		}
+	
+	}
+	
+	byz_rise_resisten_in_354_state = {
+	
+		icon = CHL_mapuche_reorganize_the_bolivian_government
+	
+		allowed = {
+			
+		}
+
+		available = {
+			354 = {
+				is_controlled_by_enemy = yes
+			}
+		}
+
+		visible = {
+			NOT = {
+				has_country_flag = BYZ_close_gw_partisan_decision_flag
+			}
+			has_completed_focus = BYZ_training_partisan
+			has_global_flag = firts_world_war
+			has_idea = BYZ_trained_partisan
+		}
+
+		fire_only_once = no
+		
+		highlight_states = {
+			highlight_state_targets = {
+				state = 354
+			}
+			highlight_color_while_active = 3
+			highlight_color_before_active = 2
+		}
+
+		cost = 5
+		days_re_enable = 50
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				has_political_power > 100
+				add = 5
+			}
+		}
+		
+		complete_effect = {
+			354 = {
+				add_resistance = 15
+				add_compliance = -5
+			}
+		}
+	
+	}
+	
+	byz_rise_resisten_in_800_state = {
+	
+		icon = CHL_mapuche_reorganize_the_bolivian_government
+	
+		allowed = {
+			
+		}
+
+		available = {
+			800 = {
+				is_controlled_by_enemy = yes
+			}
+		}
+
+		visible = {
+			NOT = {
+				has_country_flag = BYZ_close_gw_partisan_decision_flag
+			}
+			has_completed_focus = BYZ_training_partisan
+			has_global_flag = firts_world_war
+			has_idea = BYZ_trained_partisan
+		}
+
+		fire_only_once = no
+		
+		highlight_states = {
+			highlight_state_targets = {
+				state = 800
+			}
+			highlight_color_while_active = 3
+			highlight_color_before_active = 2
+		}
+
+		cost = 5
+		days_re_enable = 50
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				has_political_power > 100
+				add = 5
+			}
+		}
+		
+		complete_effect = {
+			800 = {
+				add_resistance = 15
+				add_compliance = -5
+			}
+		}
+	
+	}
+	
+	byz_rise_resisten_in_926_state = {
+	
+		icon = CHL_mapuche_reorganize_the_bolivian_government
+	
+		allowed = {
+			
+		}
+
+		available = {
+			926 = {
+				is_controlled_by_enemy = yes
+			}
+		}
+
+		visible = {
+			NOT = {
+				has_country_flag = BYZ_close_gw_partisan_decision_flag
+			}
+			has_completed_focus = BYZ_training_partisan
+			has_global_flag = firts_world_war
+			has_idea = BYZ_trained_partisan
+		}
+
+		fire_only_once = no
+		
+		highlight_states = {
+			highlight_state_targets = {
+				state = 926
+			}
+			highlight_color_while_active = 3
+			highlight_color_before_active = 2
+		}
+
+		cost = 5
+		days_re_enable = 50
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				has_political_power > 100
+				add = 5
+			}
+		}
+		
+		complete_effect = {
+			926 = {
+				add_resistance = 15
+				add_compliance = -5
+			}
+		}
+	
+	}
+	
+	byz_rise_resisten_in_927_state = {
+	
+		icon = CHL_mapuche_reorganize_the_bolivian_government
+	
+		allowed = {
+			
+		}
+
+		available = {
+			927 = {
+				is_controlled_by_enemy = yes
+			}
+		}
+
+		visible = {
+			NOT = {
+				has_country_flag = BYZ_close_gw_partisan_decision_flag
+			}
+			has_completed_focus = BYZ_training_partisan
+			has_global_flag = firts_world_war
+			has_idea = BYZ_trained_partisan
+		}
+
+		fire_only_once = no
+		
+		highlight_states = {
+			highlight_state_targets = {
+				state = 927
+			}
+			highlight_color_while_active = 3
+			highlight_color_before_active = 2
+		}
+
+		cost = 5
+		days_re_enable = 50
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				has_political_power > 100
+				add = 5
+			}
+		}
+		
+		complete_effect = {
+			927 = {
+				add_resistance = 15
+				add_compliance = -5
+			}
+		}
+	
+	}
+	
+	byz_rise_resisten_in_928_state = {
+	
+		icon = CHL_mapuche_reorganize_the_bolivian_government
+	
+		allowed = {
+			
+		}
+
+		available = {
+			928 = {
+				is_controlled_by_enemy = yes
+			}
+		}
+
+		visible = {
+			NOT = {
+				has_country_flag = BYZ_close_gw_partisan_decision_flag
+			}
+			has_completed_focus = BYZ_training_partisan
+			has_global_flag = firts_world_war
+			has_idea = BYZ_trained_partisan
+		}
+
+		fire_only_once = no
+		
+		highlight_states = {
+			highlight_state_targets = {
+				state = 928
+			}
+			highlight_color_while_active = 3
+			highlight_color_before_active = 2
+		}
+
+		cost = 5
+		days_re_enable = 50
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				has_political_power > 100
+				add = 5
+			}
+		}
+		
+		complete_effect = {
+			928 = {
+				add_resistance = 15
+				add_compliance = -5
+			}
+		}
+	
+	}
+	
+	byz_rise_resisten_in_929_state = {
+	
+		icon = CHL_mapuche_reorganize_the_bolivian_government
+	
+		allowed = {
+			
+		}
+
+		available = {
+			929 = {
+				is_controlled_by_enemy = yes
+			}
+		}
+
+		visible = {
+			NOT = {
+				has_country_flag = BYZ_close_gw_partisan_decision_flag
+			}
+			has_completed_focus = BYZ_training_partisan
+			has_global_flag = firts_world_war
+			has_idea = BYZ_trained_partisan
+		}
+
+		fire_only_once = no
+		
+		highlight_states = {
+			highlight_state_targets = {
+				state = 929
+			}
+			highlight_color_while_active = 3
+			highlight_color_before_active = 2
+		}
+
+		cost = 5
+		days_re_enable = 50
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				has_political_power > 100
+				add = 5
+			}
+		}
+		
+		complete_effect = {
+			929 = {
+				add_resistance = 15
+				add_compliance = -5
+			}
+		}
+	
+	}
+	
+	byz_rise_resisten_in_930_state = {
+	
+		icon = CHL_mapuche_reorganize_the_bolivian_government
+	
+		allowed = {
+			
+		}
+
+		available = {
+			930 = {
+				is_controlled_by_enemy = yes
+			}
+		}
+
+		visible = {
+			NOT = {
+				has_country_flag = BYZ_close_gw_partisan_decision_flag
+			}
+			has_completed_focus = BYZ_training_partisan
+			has_global_flag = firts_world_war
+			has_idea = BYZ_trained_partisan
+		}
+
+		fire_only_once = no
+		
+		highlight_states = {
+			highlight_state_targets = {
+				state = 930
+			}
+			highlight_color_while_active = 3
+			highlight_color_before_active = 2
+		}
+
+		cost = 5
+		days_re_enable = 50
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				has_political_power > 100
+				add = 5
+			}
+		}
+		
+		complete_effect = {
+			930 = {
+				add_resistance = 15
+				add_compliance = -5
+			}
+		}
+	
+	}
+	
+	byz_rise_resisten_in_931_state = {
+	
+		icon = CHL_mapuche_reorganize_the_bolivian_government
+	
+		allowed = {
+			
+		}
+
+		available = {
+			931 = {
+				is_controlled_by_enemy = yes
+			}
+		}
+
+		visible = {
+			NOT = {
+				has_country_flag = BYZ_close_gw_partisan_decision_flag
+			}
+			has_completed_focus = BYZ_training_partisan
+			has_global_flag = firts_world_war
+			has_idea = BYZ_trained_partisan
+		}
+
+		fire_only_once = no
+		
+		highlight_states = {
+			highlight_state_targets = {
+				state = 931
+			}
+			highlight_color_while_active = 3
+			highlight_color_before_active = 2
+		}
+
+		cost = 5
+		days_re_enable = 50
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				has_political_power > 100
+				add = 5
+			}
+		}
+		
+		complete_effect = {
+			931 = {
+				add_resistance = 15
+				add_compliance = -5
+			}
+		}
+	
+	}
+	
+	byz_rise_resisten_in_932_state = {
+	
+		icon = CHL_mapuche_reorganize_the_bolivian_government
+	
+		allowed = {
+			
+		}
+
+		available = {
+			932 = {
+				is_controlled_by_enemy = yes
+			}
+		}
+
+		visible = {
+			NOT = {
+				has_country_flag = BYZ_close_gw_partisan_decision_flag
+			}
+			has_completed_focus = BYZ_training_partisan
+			has_global_flag = firts_world_war
+			has_idea = BYZ_trained_partisan
+		}
+
+		fire_only_once = no
+		
+		highlight_states = {
+			highlight_state_targets = {
+				state = 932
+			}
+			highlight_color_while_active = 3
+			highlight_color_before_active = 2
+		}
+
+		cost = 5
+		days_re_enable = 50
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				has_political_power > 100
+				add = 5
+			}
+		}
+		
+		complete_effect = {
+			932 = {
+				add_resistance = 15
+				add_compliance = -5
+			}
+		}
+	
+	}
+	
+	byz_rise_resisten_in_933_state = {
+	
+		icon = CHL_mapuche_reorganize_the_bolivian_government
+	
+		allowed = {
+			
+		}
+
+		available = {
+			933 = {
+				is_controlled_by_enemy = yes
+			}
+		}
+
+		visible = {
+			NOT = {
+				has_country_flag = BYZ_close_gw_partisan_decision_flag
+			}
+			has_completed_focus = BYZ_training_partisan
+			has_global_flag = firts_world_war
+			has_idea = BYZ_trained_partisan
+		}
+
+		fire_only_once = no
+		
+		highlight_states = {
+			highlight_state_targets = {
+				state = 933
+			}
+			highlight_color_while_active = 3
+			highlight_color_before_active = 2
+		}
+
+		cost = 5
+		days_re_enable = 50
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				has_political_power > 100
+				add = 5
+			}
+		}
+		
+		complete_effect = {
+			933 = {
+				add_resistance = 15
+				add_compliance = -5
+			}
+		}
+	
+	}
+	
+	byz_rise_resisten_in_934_state = {
+	
+		icon = CHL_mapuche_reorganize_the_bolivian_government
+	
+		allowed = {
+			
+		}
+
+		available = {
+			934 = {
+				is_controlled_by_enemy = yes
+			}
+		}
+
+		visible = {
+			NOT = {
+				has_country_flag = BYZ_close_gw_partisan_decision_flag
+			}
+			has_completed_focus = BYZ_training_partisan
+			has_global_flag = firts_world_war
+			has_idea = BYZ_trained_partisan
+		}
+
+		fire_only_once = no
+		
+		highlight_states = {
+			highlight_state_targets = {
+				state = 934
+			}
+			highlight_color_while_active = 3
+			highlight_color_before_active = 2
+		}
+
+		cost = 5
+		days_re_enable = 50
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				has_political_power > 100
+				add = 5
+			}
+		}
+		
+		complete_effect = {
+			934 = {
+				add_resistance = 15
+				add_compliance = -5
+			}
+		}
+	
+	}
+	
+	byz_rise_resisten_in_935_state = {
+	
+		icon = CHL_mapuche_reorganize_the_bolivian_government
+	
+		allowed = {
+			
+		}
+
+		available = {
+			935 = {
+				is_controlled_by_enemy = yes
+			}
+		}
+
+		visible = {
+			NOT = {
+				has_country_flag = BYZ_close_gw_partisan_decision_flag
+			}
+			has_completed_focus = BYZ_training_partisan
+			has_global_flag = firts_world_war
+			has_idea = BYZ_trained_partisan
+		}
+
+		fire_only_once = no
+		
+		highlight_states = {
+			highlight_state_targets = {
+				state = 935
+			}
+			highlight_color_while_active = 3
+			highlight_color_before_active = 2
+		}
+
+		cost = 5
+		days_re_enable = 50
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				has_political_power > 100
+				add = 5
+			}
+		}
+		
+		complete_effect = {
+			935 = {
+				add_resistance = 15
+				add_compliance = -5
+			}
+		}
+	
+	}
+	
+	byz_rise_resisten_in_936_state = {
+	
+		icon = CHL_mapuche_reorganize_the_bolivian_government
+	
+		allowed = {
+			
+		}
+
+		available = {
+			936 = {
+				is_controlled_by_enemy = yes
+			}
+		}
+
+		visible = {
+			NOT = {
+				has_country_flag = BYZ_close_gw_partisan_decision_flag
+			}
+			has_completed_focus = BYZ_training_partisan
+			has_global_flag = firts_world_war
+			has_idea = BYZ_trained_partisan
+		}
+
+		fire_only_once = no
+		
+		highlight_states = {
+			highlight_state_targets = {
+				state = 936
+			}
+			highlight_color_while_active = 3
+			highlight_color_before_active = 2
+		}
+
+		cost = 5
+		days_re_enable = 50
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				has_political_power > 100
+				add = 5
+			}
+		}
+		
+		complete_effect = {
+			936 = {
+				add_resistance = 15
+				add_compliance = -5
+			}
+		}
+	
+	}
+	
+	byz_rise_resisten_in_937_state = {
+	
+		icon = CHL_mapuche_reorganize_the_bolivian_government
+	
+		allowed = {
+			
+		}
+
+		available = {
+			937 = {
+				is_controlled_by_enemy = yes
+			}
+		}
+
+		visible = {
+			NOT = {
+				has_country_flag = BYZ_close_gw_partisan_decision_flag
+			}
+			has_completed_focus = BYZ_training_partisan
+			has_global_flag = firts_world_war
+			has_idea = BYZ_trained_partisan
+		}
+
+		fire_only_once = no
+		
+		highlight_states = {
+			highlight_state_targets = {
+				state = 937
+			}
+			highlight_color_while_active = 3
+			highlight_color_before_active = 2
+		}
+
+		cost = 5
+		days_re_enable = 50
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				has_political_power > 100
+				add = 5
+			}
+		}
+		
+		complete_effect = {
+			937 = {
+				add_resistance = 15
+				add_compliance = -5
+			}
+		}
+	
+	}
+	
+	byz_rise_resisten_in_938_state = {
+	
+		icon = CHL_mapuche_reorganize_the_bolivian_government
+	
+		allowed = {
+			
+		}
+
+		available = {
+			938 = {
+				is_controlled_by_enemy = yes
+			}
+		}
+
+		visible = {
+			NOT = {
+				has_country_flag = BYZ_close_gw_partisan_decision_flag
+			}
+			has_completed_focus = BYZ_training_partisan
+			has_global_flag = firts_world_war
+			has_idea = BYZ_trained_partisan
+		}
+
+		fire_only_once = no
+		
+		highlight_states = {
+			highlight_state_targets = {
+				state = 938
+			}
+			highlight_color_while_active = 3
+			highlight_color_before_active = 2
+		}
+
+		cost = 5
+		days_re_enable = 50
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				has_political_power > 100
+				add = 5
+			}
+		}
+		
+		complete_effect = {
+			938 = {
+				add_resistance = 15
+				add_compliance = -5
+			}
+		}
+	
+	}
+	
+	byz_rise_resisten_in_943_state = {
+	
+		icon = CHL_mapuche_reorganize_the_bolivian_government
+	
+		allowed = {
+			
+		}
+
+		available = {
+			943 = {
+				is_controlled_by_enemy = yes
+			}
+		}
+
+		visible = {
+			NOT = {
+				has_country_flag = BYZ_close_gw_partisan_decision_flag
+			}
+			has_completed_focus = BYZ_training_partisan
+			has_global_flag = firts_world_war
+			has_idea = BYZ_trained_partisan
+		}
+
+		fire_only_once = no
+		
+		highlight_states = {
+			highlight_state_targets = {
+				state = 943
+			}
+			highlight_color_while_active = 3
+			highlight_color_before_active = 2
+		}
+
+		cost = 5
+		days_re_enable = 50
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				has_political_power > 100
+				add = 5
+			}
+		}
+		
+		complete_effect = {
+			943 = {
+				add_resistance = 15
+				add_compliance = -5
+			}
+		}
+	
+	}
+	
+	byz_open_great_war_partisan_decision = {
+	
+		icon = open_aotsm
+	
+		allowed = {
+			
+		}
+
+		available = {
+		}
+
+		visible = {
+			has_country_flag = BYZ_close_gw_partisan_decision_flag
+			has_completed_focus = BYZ_training_partisan
+			has_global_flag = firts_world_war
+			has_idea = BYZ_trained_partisan
+		}
+
+		fire_only_once = no
+
+		cost = 0
+		days_re_enable = 1
+
+		ai_will_do = {
+			base = 0
+		}
+		
+		complete_effect = {
+			clr_country_flag = BYZ_close_gw_partisan_decision_flag
+		}
+	
+	}
+	
+	byz_use_support_to_long_march = {
+	
+		icon = generic_speech
+	
+		allowed = {
+			
+		}
+
+		available = {
+		}
+
+		visible = {
+			has_completed_focus = BYZ_restart_roman_march
+			has_global_flag = firts_world_war
+			has_idea = BYZ_roman_march_idea
+			NOT = {
+				check_variable = {
+					BYZ.BYZ_use_ws_to_long_march > 1
+				}
+			}
+		}
+
+		fire_only_once = no
+
+		cost = 100
+		days_re_enable = 50
+
+		ai_will_do = {
+			base = 10
+		}
+		
+		complete_effect = {
+			add_war_support = -0.05
+			modify_timed_idea = {
+				idea = BYZ_roman_march_idea
+				days = 60
+			}
+			custom_effect_tooltip = byz_may_use_decision_only_twice_tt
+			hidden_effect = {
+				add_to_variable = {
+					var = BYZ.BYZ_use_ws_to_long_march
+					value = 1
+				}
+			}
+		}
+	
+	}
+	
+	byz_use_political_power_to_long_march = {
+	
+		icon = hol_draw_up_staff_plans
+	
+		allowed = {
+			
+		}
+
+		available = {
+		}
+
+		visible = {
+			has_completed_focus = BYZ_restart_roman_march
+			has_global_flag = firts_world_war
+			has_idea = BYZ_roman_march_idea
+			NOT = {
+				check_variable = {
+					BYZ.BYZ_use_pp_to_long_march > 4
+				}
+			}
+		}
+
+		fire_only_once = no
+
+		cost = 50
+		days_re_enable = 15
+
+		ai_will_do = {
+			base = 10
+		}
+		
+		complete_effect = {
+			modify_timed_idea = {
+				idea = BYZ_roman_march_idea
+				days = 20
+			}
+			custom_effect_tooltip = byz_may_use_decision_only_five_times_tt
+			hidden_effect = {
+				add_to_variable = {
+					var = BYZ.BYZ_use_pp_to_long_march
+					value = 1
+				}
+			}
+		}
+	
+	}
+	
+	byz_restrat_roman_era_of_conquest = {
+	
+		icon = hol_draw_up_staff_plans
+	
+		allowed = {
+			
+		}
+
+		available = {
+		}
+
+		visible = {
+			has_completed_focus = BYZ_new_age_of_roman_conquest
+			has_global_flag = firts_world_war
+			has_war = yes
+			NOT = {
+				has_idea = BYZ_roman_new_march
+			}
+		}
+
+		fire_only_once = no
+
+		cost = BYZ.BYZ_cost_of_roman_conquest
+		days_re_enable = 100
+
+		ai_will_do = {
+			base = 10
+		}
+		
+		complete_effect = {
+			add_timed_idea = {
+				idea = BYZ_roman_new_march
+				days = 50
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = BYZ.BYZ_cost_of_roman_conquest
+					value = 150
+				}
+			}
 		}
 	
 	}
