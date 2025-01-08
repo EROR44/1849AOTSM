@@ -1416,6 +1416,14 @@ country_event = { #Taurida Operation
 	
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event byz.50"
+		hidden_effect = {
+			BYZ = {
+				country_event = {
+					id = byz.110
+					days = 533
+				}
+			}
+		}
 	}
 	
 	option = { #Real
@@ -3026,6 +3034,14 @@ country_event = { #Second military meeting
 	
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event byz.90"
+		hidden_effect = {
+			BYZ = {
+				country_event = {
+					id = byz.50
+					days = 40
+				}
+			}
+		}
 	}
 	
 	option = { 
@@ -3519,6 +3535,11 @@ country_event = { #Mained Chine
 				days = 4
 			}
 		}
+		hidden_effect = {
+			BYZ = {
+				set_country_flag = byz_chi_accept_help
+			}
+		}
 	}
 	
 	option = { #We don't need help
@@ -3662,6 +3683,361 @@ country_event = { #Repair Jade Rode
 }
 
 #JAPAN SAVE ASIAN TRADE
+
+country_event = { #Mained Japan
+	id = byz.106
+	title = byz.106.t
+	desc = byz.106.d
+	picture = GFX_report_event_ship_4
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event byz.106"
+	}
+	
+	option = { #We need old Asia hegemon
+		name = byz.106.a
+		ai_chance = {
+			base = 25
+			modifier = {
+				add = -25
+				country_exists = JAP
+				JAP = {
+					has_opinion = {
+						target = BYZ
+						value < 0
+					}
+				}
+			}
+			modifier = {
+				add = 50
+				country_exists = JAP
+				JAP = {
+					has_opinion = {
+						target = BYZ
+						value > 50
+					}
+				}
+			}
+			modifier = {
+				add = -25
+				country_exists = JAS
+				JAS = {
+					has_opinion = {
+						target = BYZ
+						value < 0
+					}
+				}
+			}
+			modifier = {
+				add = 25
+				country_exists = JAS
+				JAS = {
+					has_opinion = {
+						target = BYZ
+						value > 50
+					}
+				}
+			}
+			modifier = {
+				add = -25
+				country_exists = TUK
+				TUK = {
+					has_opinion = {
+						target = BYZ
+						value < 0
+					}
+				}
+			}
+			modifier = {
+				add = 50
+				country_exists = TUK
+				TUK = {
+					has_opinion = {
+						target = BYZ
+						value > 50
+					}
+				}
+			}
+		}
+		add_opinion_modifier = {
+			target = BYZ
+			modifier = byz_new_trade_partnership
+		}
+		QIN = {
+			add_opinion_modifier = {
+				target = BYZ
+				modifier = byz_betrayed_us
+			}
+		}
+		BYZ = {
+			country_event = {
+				id = byz_anwser.9
+				days = 5
+			}
+		}
+		hidden_effect = {
+			BYZ = {
+				set_country_flag = byz_jap_accept_help
+			}
+		}
+	}
+	
+	option = { #We can do it alone
+		name = byz.106.b
+		ai_chance = {
+			base = 75
+			modifier = {
+				add = -50
+				country_exists = JAP
+				JAP = {
+					has_opinion = {
+						target = BYZ
+						value > 50
+					}
+				}
+			}
+			modifier = {
+				add = -25
+				country_exists = JAS
+				JAS = {
+					has_opinion = {
+						target = BYZ
+						value > 50
+					}
+				}
+			}
+			modifier = {
+				add = -50
+				country_exists = TUK
+				TUK = {
+					has_opinion = {
+						target = BYZ
+						value > 50
+					}
+				}
+			}
+		}
+		add_opinion_modifier = {
+			target = BYZ
+			modifier = byz_new_trade_partnership
+		}
+		BYZ = {
+			country_event = {
+				id = byz_anwser.10
+				days = 5
+			}
+		}
+	}
+	
+}
+
+country_event = { #Admit Japan naval domination
+	id = byz.107
+	title = byz.107.t
+	desc = byz.107.d
+	picture = GFX_report_event_jap_fleet_1
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event byz.107"
+	}
+	
+	option = { #Good news
+		name = byz.107.a
+		ai_chance = {
+			base = 100
+		}
+		add_ideas = BYZ_japan_naval_domination_jap
+		navy_experience = 50
+	}
+	
+}
+
+country_event = { #New trade rout with Japan
+	id = byz.108
+	title = byz.108.t
+	desc = byz.108.d
+	picture = GFX_report_event_byz_trade_goods
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event byz.108"
+	}
+	
+	option = { #We a leader
+		name = byz.108.a
+		ai_chance = {
+			base = 50
+			modifier = {
+				add = 25
+				country_exists = JAP
+				JAP = {
+					has_opinion = {
+						target = BYZ
+						value < 0
+					}
+				}
+			}
+			modifier = {
+				add = -25
+				country_exists = JAP
+				JAP = {
+					has_opinion = {
+						target = BYZ
+						value > 50
+					}
+				}
+			}
+			modifier = {
+				add = 100
+				country_exists = JAS
+				JAS = {
+					has_opinion = {
+						target = BYZ
+						value < 0
+					}
+				}
+			}
+			modifier = {
+				add = -10
+				country_exists = JAS
+				JAS = {
+					has_opinion = {
+						target = BYZ
+						value > 50
+					}
+				}
+			}
+			modifier = {
+				add = 25
+				country_exists = TUK
+				TUK = {
+					has_opinion = {
+						target = BYZ
+						value < 0
+					}
+				}
+			}
+			modifier = {
+				add = -35
+				country_exists = TUK
+				TUK = {
+					has_opinion = {
+						target = BYZ
+						value > 50
+					}
+				}
+			}
+		}
+		add_political_power = 250
+		add_ideas = BYZ_trade_with_europ_jap
+		BYZ = {
+			country_event = {
+				id = byz_anwser.11
+				days = 5
+			}
+		}
+	}
+	
+	option = { #We are partner
+		name = byz.108.b
+		ai_chance = {
+			base = 50
+			modifier = {
+				add = 25
+				country_exists = JAP
+				JAP = {
+					has_opinion = {
+						target = BYZ
+						value > 50
+					}
+				}
+			}
+			modifier = {
+				add = 10
+				country_exists = JAS
+				JAS = {
+					has_opinion = {
+						target = BYZ
+						value > 50
+					}
+				}
+			}
+			modifier = {
+				add = 35
+				country_exists = TUK
+				TUK = {
+					has_opinion = {
+						target = BYZ
+						value > 50
+					}
+				}
+			}
+		}
+		add_ideas = BYZ_trade_with_europ_jap
+		BYZ = {
+			country_event = {
+				id = byz_anwser.12
+				days = 5
+			}
+		}
+	}
+	
+}
+
+country_event = { #New trade rout with Japan
+	id = byz.109
+	title = byz.109.t
+	desc = byz.109.d
+	picture = GFX_report_event_byz_partisan
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event byz.109"
+	}
+	
+	option = { #Super
+		name = byz.109.a
+		add_ideas = BYZ_trained_partisan
+		custom_effect_tooltip = byz_access_to_partisan_decision_tt
+	}
+}
+
+country_event = { #Tavrida Plan is ready
+	id = byz.110
+	title = byz.110.t
+	desc = byz.110.d
+	picture = GFX_report_event_byz_battleships
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event byz.110"
+	}
+	
+	option = { #Super
+		name = byz.110.a
+		army_experience = 25
+		add_command_power = 50
+		custom_effect_tooltip = byz_tavrida_plan_is_ready_tt
+		set_country_flag = byz_ready_to_tavrida
+	}
+}
 
 
 
@@ -11539,6 +11915,146 @@ country_event = { #Chine 105 option 2
 				producer = BYZ
 			}
 		}
+		hidden_effect = {
+		}
+	}
+	
+}
+
+country_event = { #Japan say yes 106
+	id = byz_anwser.9
+	title = byz_anwser.9.t
+	desc = byz_anwser.9.d
+	picture = GFX_report_event_jap_dimplomacy_1
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event byz_anwser.9"
+	}
+	
+	option = { #
+		name = byz_anwser.9.a
+		ai_chance = {
+			base = 100
+		}
+		282 = {
+			owner = {
+				BYZ = {
+					add_opinion_modifier = {
+						target = PREV
+						modifier = byz_new_trade_partnership
+					}
+				}
+			}
+		}
+		hidden_effect = {
+		}
+	}
+	
+}
+
+country_event = { #Japan say no 106
+	id = byz_anwser.10
+	title = byz_anwser.10.t
+	desc = byz_anwser.10.d
+	picture = GFX_report_event_jap_dimplomacy_2
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event byz_anwser.10"
+	}
+	
+	option = { #
+		name = byz_anwser.10.a
+		ai_chance = {
+			base = 100
+		}
+		282 = {
+			owner = {
+				BYZ = {
+					add_opinion_modifier = {
+						target = PREV
+						modifier = byz_refusal_of_diplomacy
+					}
+				}
+			}
+		}
+		hidden_effect = {
+			BYZ = {
+				set_country_flag = byz_jap_say_no
+			}
+			if = {
+				limit = {
+					BYZ = {
+						NOT = {
+							has_country_flag = byz_chi_say_no
+						}
+					}
+				}
+				BYZ = {
+					uncomplete_national_focus = {
+						focus = BYZ_main_asian_partner_japan
+						refund_political_power = no
+					}
+				}
+			}
+		}
+	}
+	
+}
+
+country_event = { #Japan option dominate 108
+	id = byz_anwser.11
+	title = byz_anwser.11.t
+	desc = byz_anwser.11.d
+	picture = GFX_report_event_jap_military_1
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event byz_anwser.11"
+	}
+	
+	option = { #
+		name = byz_anwser.11.a
+		ai_chance = {
+			base = 100
+		}
+		add_ideas = BYZ_trade_with_asia_minimum_byz
+		hidden_effect = {
+		}
+	}
+	
+}
+
+country_event = { #Japan option partnership 108
+	id = byz_anwser.12
+	title = byz_anwser.12.t
+	desc = byz_anwser.12.d
+	picture = GFX_report_event_jap_emperor_speach
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event byz_anwser.12"
+	}
+	
+	option = { #
+		name = byz_anwser.12.a
+		ai_chance = {
+			base = 100
+		}
+		add_ideas = BYZ_trade_with_asia_normal_byz
 		hidden_effect = {
 		}
 	}
