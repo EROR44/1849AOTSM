@@ -1122,6 +1122,7 @@ battle_for_crimea_categories = {
 	battle_for_crimea_decision = {
 	
 		activation = {
+			always = no
 			has_global_flag = start_of_crimea_operation
 		}
 		
@@ -1129,6 +1130,67 @@ battle_for_crimea_categories = {
 			custom_trigger_tooltip = {
 				tooltip = BYZ_what_to_do_for_win_crimea_tt	
 				always = no
+			}
+			custom_trigger_tooltip = {
+				tooltip = BYZ_trigger_control_tavrida_mission_tt
+				OR = {
+					BCH = {
+						has_country_flag = bch_control_tavrida_fail
+					}
+					BCH = {
+						has_country_flag = bch_control_tavrida_succes
+					}
+				}
+			}
+			custom_trigger_tooltip = {
+				tooltip = BYZ_trigger_destroed_russian_port_mission_tt
+				OR = {
+					BCH = {
+						has_country_flag = bch_destroed_russian_port_fail
+					}
+					BCH = {
+						has_country_flag = bch_destroed_russian_port_succes
+					}
+				}
+			}
+			custom_trigger_tooltip = {
+				tooltip = BYZ_trigger_control_south_tavrida_mission_tt
+				OR = {
+					BCH = {
+						has_country_flag = bch_control_south_tavrida_fail
+					}
+					BCH = {
+						has_country_flag = bch_control_south_tavrida_succes
+					}
+				}
+			}
+			custom_trigger_tooltip = {
+				tooltip = BYZ_trigger_control_north_tavrida_mission_tt
+				OR = {
+					BCH = {
+						has_country_flag = bch_control_north_tavrida_fail
+					}
+					BCH = {
+						has_country_flag = bch_control_north_tavrida_succes
+					}
+				}
+			}
+			custom_trigger_tooltip = {
+				tooltip = BYZ_trigger_control_last_black_sea_port_mission_tt
+				OR = {
+					BCH = {
+						has_country_flag = bch_control_last_black_sea_port_fail
+					}
+					BCH = {
+						has_country_flag = bch_control_last_black_sea_port_succes
+					}
+				}
+			}
+			custom_trigger_tooltip = {
+				tooltip = BYZ_tavrida_score_greater_0_tt
+				check_variable = {
+					BYZ.BYZ_tavrida_score > 0
+				}
 			}
 		}
 		
@@ -1140,13 +1202,13 @@ battle_for_crimea_categories = {
 			has_global_flag = start_of_crimea_operation
 		}
 		
-		icon = generic_ignite_civil_war
+		icon = generic_operation
 		
 		ai_will_do = {
 			factor = 100
 		}
 		
-		days_mission_timeout = 45
+		days_mission_timeout = 180
 		
 		timeout_effect = {
 			custom_effect_tooltip = BYZ_what_to_do_for_lose_crimea_time_tt
@@ -1160,6 +1222,12 @@ battle_for_crimea_categories = {
 				}
 				BYZ = {
 					remove_mission = battle_for_crimea_decision
+					remove_mission = byz_contorl_on_tavrida
+					remove_mission = byz_destroed_russian_port
+					remove_mission = byz_control_south_tavrida
+					remove_mission = byz_control_north_tavrida
+					remove_mission = byz_control_last_black_sea_port
+					complete_national_focus = BYZ_tavrid_operation_mission_to_fail
 				}
 				RUS = {
 					remove_mission = battle_for_crimea_decision_none
@@ -1168,19 +1236,62 @@ battle_for_crimea_categories = {
 					remove_mission = battle_for_crimea_decision_none
 				}
 				clr_global_flag = start_of_crimea_operation
-				news_event = news.182
+				news_event = {
+					id = news.182
+					hours = 8
+				}
 			}
 		}
 		
 		cancel_trigger = {
 			custom_trigger_tooltip = {
 				tooltip = BYZ_trigger_what_to_do_for_win_crimea_tt
-				OR = {
-					BCH = {
-						has_full_control_of_state = 137
+				AND = {
+					OR = {
+						BCH = {
+							has_country_flag = bch_control_tavrida_fail
+						}
+						BCH = {
+							has_country_flag = bch_control_tavrida_succes
+						}
 					}
-					BYZ = {
-						has_full_control_of_state = 137
+					OR = {
+						BCH = {
+							has_country_flag = bch_destroed_russian_port_fail
+						}
+						BCH = {
+							has_country_flag = bch_destroed_russian_port_succes
+						}
+					}
+					OR = {
+						BCH = {
+							has_country_flag = bch_control_south_tavrida_fail
+						}
+						BCH = {
+							has_country_flag = bch_control_south_tavrida_succes
+						}
+					}
+					OR = {
+						BCH = {
+							has_country_flag = bch_control_north_tavrida_fail
+						}
+						BCH = {
+							has_country_flag = bch_control_north_tavrida_succes
+						}
+					}
+					OR = {
+						BCH = {
+							has_country_flag = bch_control_last_black_sea_port_fail
+						}
+						BCH = {
+							has_country_flag = bch_control_last_black_sea_port_succes
+						}
+					}
+					custom_trigger_tooltip = {
+						tooltip = BYZ_tavrida_score_greater_0_tt
+						check_variable = {
+							BYZ.BYZ_tavrida_score > 0
+						}
 					}
 				}
 			}
@@ -1215,6 +1326,12 @@ battle_for_crimea_categories = {
 				}
 				BYZ = {
 					remove_mission = battle_for_crimea_decision
+					remove_mission = byz_contorl_on_tavrida
+					remove_mission = byz_destroed_russian_port
+					remove_mission = byz_control_south_tavrida
+					remove_mission = byz_control_north_tavrida
+					remove_mission = byz_control_last_black_sea_port
+					complete_national_focus = BYZ_tavrid_operation_mission_to_complet
 				}
 				RUS = {
 					remove_mission = battle_for_crimea_decision_none
@@ -1223,7 +1340,431 @@ battle_for_crimea_categories = {
 					remove_mission = battle_for_crimea_decision_none
 				}
 				clr_global_flag = start_of_crimea_operation
-				news_event = news.183
+				news_event = {
+					id = news.183
+					hours = 8
+				}
+			}
+		}
+	
+	}
+	
+	byz_contorl_on_tavrida = {
+	
+		activation = {
+			always = no
+			has_global_flag = start_of_crimea_operation
+			tag = BYZ
+			NOT = {
+				BCH = {
+					has_country_flag = bch_control_tavrida_fail
+				}
+				BCH = {
+					has_country_flag = bch_control_tavrida_succes
+				}
+			}
+		}
+		
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = BYZ_what_to_control_tavrida_tt	
+				always = no
+			}
+		}
+		
+		visible = {
+			tag = BYZ
+			BYZ = {
+				has_war_with = RUS
+			}
+			has_global_flag = start_of_crimea_operation
+		}
+		
+		icon = generic_confiscation
+		
+		ai_will_do = {
+			factor = 100
+		}
+		
+		days_mission_timeout = 60
+		
+		timeout_effect = {
+			custom_effect_tooltip = BYZ_what_to_do_for_lose_control_tavrida_time_tt
+			hidden_effect = {
+				BCH = {
+					set_country_flag = bch_control_tavrida_fail
+					add_stability = -0.05
+					add_war_support = -0.10
+				}
+				add_to_variable = {
+					var = BYZ.BYZ_tavrida_score
+					value = -1
+				}
+			}
+		}
+		
+		cancel_trigger = {
+			custom_trigger_tooltip = {
+				tooltip = BYZ_trigger_what_to_do_for_control_tavrida_tt
+				137 = {
+					full_controls_or_subject_of = yes
+				}
+			}
+		}
+		
+		cancel_effect = {
+			custom_effect_tooltip = BYZ_what_to_do_for_control_tavrida_effect_tt
+			hidden_effect = {
+				BCH = {
+					set_country_flag = bch_control_tavrida_succes
+				}
+				add_to_variable = {
+					var = BYZ.BYZ_tavrida_score
+					value = 1
+				}
+			}
+		}
+	
+	}
+	
+	byz_destroed_russian_port = {
+	
+		activation = {
+			always = no
+			has_global_flag = start_of_crimea_operation
+			tag = BYZ
+			NOT = {
+				BCH = {
+					has_country_flag = bch_destroed_russian_port_fail
+				}
+				BCH = {
+					has_country_flag = bch_destroed_russian_port_succes
+				}
+			}
+		}
+		
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = BYZ_what_to_destroed_russian_port_tt	
+				always = no
+			}
+		}
+		
+		visible = {
+			tag = BYZ
+			BYZ = {
+				has_war_with = RUS
+			}
+			has_global_flag = start_of_crimea_operation
+		}
+		
+		icon = generic_ignite_civil_war
+		
+		ai_will_do = {
+			factor = 100
+		}
+		
+		days_mission_timeout = 60
+		
+		timeout_effect = {
+			custom_effect_tooltip = BYZ_what_to_do_for_lose_destroed_russian_port_time_tt
+			hidden_effect = {
+				BCH = {
+					set_country_flag = bch_destroed_russian_port_fail
+					add_stability = -0.05
+					add_war_support = -0.10
+				}
+				add_to_variable = {
+					var = BYZ.BYZ_tavrida_score
+					value = -1
+				}
+			}
+		}
+		
+		cancel_trigger = {
+			custom_trigger_tooltip = {
+				tooltip = BYZ_trigger_what_to_do_for_destroed_russian_port_tt
+				BYZ = {
+					has_completed_focus = BYZ_tavrid_operation_attack_on_port
+				}
+			}
+		}
+		
+		cancel_effect = {
+			custom_effect_tooltip = BYZ_what_to_do_for_destroed_russian_port_effect_tt
+			hidden_effect = {
+				BCH = {
+					set_country_flag = bch_destroed_russian_port_succes
+				}
+				add_to_variable = {
+					var = BYZ.BYZ_tavrida_score
+					value = 1
+				}
+			}
+		}
+	
+	}
+	
+	byz_control_south_tavrida = {
+	
+		activation = {
+			always = no
+			has_global_flag = start_of_crimea_operation
+			tag = BYZ
+			NOT = {
+				BCH = {
+					has_country_flag = bch_control_south_tavrida_fail
+				}
+				BCH = {
+					has_country_flag = bch_control_south_tavrida_succes
+				}
+			}
+		}
+		
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = BYZ_what_to_control_south_tavrida_tt	
+				always = no
+			}
+		}
+		
+		visible = {
+			tag = BYZ
+			BYZ = {
+				has_war_with = RUS
+			}
+			has_global_flag = start_of_crimea_operation
+		}
+		
+		icon = generic_civil_support
+		
+		ai_will_do = {
+			factor = 100
+		}
+		
+		days_mission_timeout = 90
+		
+		timeout_effect = {
+			custom_effect_tooltip = BYZ_what_to_do_for_lose_control_south_tavrida_time_tt
+			hidden_effect = {
+				BCH = {
+					set_country_flag = bch_control_south_tavrida_fail
+					add_stability = -0.05
+					add_war_support = -0.10
+				}
+				add_to_variable = {
+					var = BYZ.BYZ_tavrida_score
+					value = -1
+				}
+			}
+		}
+		
+		cancel_trigger = {
+			custom_trigger_tooltip = {
+				tooltip = BYZ_trigger_what_to_do_for_control_south_tavrida_tt
+				OR = {
+					196 = {
+						full_controls_or_subject_of = yes
+					}
+				}
+				OR = {
+					200 = {
+						full_controls_or_subject_of = yes
+					}
+				}
+				OR = {
+					227 = {
+						full_controls_or_subject_of = yes
+					}
+				}
+			}
+		}
+		
+		cancel_effect = {
+			custom_effect_tooltip = BYZ_what_to_do_for_control_south_tavrida_effect_tt
+			hidden_effect = {
+				BCH = {
+					set_country_flag = bch_control_south_tavrida_succes
+				}
+				add_to_variable = {
+					var = BYZ.BYZ_tavrida_score
+					value = 1
+				}
+			}
+		}
+	
+	}
+	
+	byz_control_north_tavrida = {
+	
+		activation = {
+			always = no
+			has_global_flag = start_of_crimea_operation
+			tag = BYZ
+			NOT = {
+				BCH = {
+					has_country_flag = bch_control_north_tavrida_fail
+				}
+				BCH = {
+					has_country_flag = bch_control_north_tavrida_succes
+				}
+			}
+		}
+		
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = BYZ_what_to_control_north_tavrida_tt	
+				always = no
+			}
+		}
+		
+		visible = {
+			tag = BYZ
+			BYZ = {
+				has_war_with = RUS
+			}
+			has_global_flag = start_of_crimea_operation
+		}
+		
+		icon = SWI_consolidate_council_power
+		
+		ai_will_do = {
+			factor = 100
+		}
+		
+		days_mission_timeout = 120
+		
+		timeout_effect = {
+			custom_effect_tooltip = BYZ_what_to_do_for_lose_control_north_tavrida_time_tt
+			hidden_effect = {
+				BCH = {
+					set_country_flag = bch_control_north_tavrida_fail
+					add_stability = -0.05
+					add_war_support = -0.10
+				}
+				add_to_variable = {
+					var = BYZ.BYZ_tavrida_score
+					value = -1
+				}
+			}
+		}
+		
+		cancel_trigger = {
+			custom_trigger_tooltip = {
+				tooltip = BYZ_trigger_what_to_do_for_control_north_tavrida_tt
+				OR = {
+					196 = {
+						full_controls_or_subject_of = yes
+					}
+				}
+				OR = {
+					200 = {
+						full_controls_or_subject_of = yes
+					}
+				}
+				OR = {
+					227 = {
+						full_controls_or_subject_of = yes
+					}
+				}
+			}
+		}
+		
+		cancel_effect = {
+			custom_effect_tooltip = BYZ_what_to_do_for_control_north_tavrida_effect_tt
+			hidden_effect = {
+				BCH = {
+					set_country_flag = bch_control_north_tavrida_succes
+				}
+				add_to_variable = {
+					var = BYZ.BYZ_tavrida_score
+					value = 1
+				}
+			}
+		}
+	
+	}
+	
+	byz_control_last_black_sea_port = {
+	
+		activation = {
+			always = no
+			has_global_flag = start_of_crimea_operation
+			tag = BYZ
+			NOT = {
+				BCH = {
+					has_country_flag = bch_control_last_black_sea_port_fail
+				}
+				BCH = {
+					has_country_flag = bch_control_last_black_sea_port_succes
+				}
+			}
+		}
+		
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = BYZ_what_to_control_last_black_sea_port_tt	
+				always = no
+			}
+		}
+		
+		visible = {
+			tag = BYZ
+			BYZ = {
+				has_war_with = RUS
+			}
+			has_global_flag = start_of_crimea_operation
+		}
+		
+		icon = SWE_set_navy_budget
+		
+		ai_will_do = {
+			factor = 100
+		}
+		
+		days_mission_timeout = 150
+		
+		timeout_effect = {
+			custom_effect_tooltip = BYZ_what_to_do_for_lose_control_last_black_sea_port_time_tt
+			hidden_effect = {
+				BCH = {
+					set_country_flag = bch_control_last_black_sea_port_fail
+					add_stability = -0.05
+					add_war_support = -0.10
+				}
+				add_to_variable = {
+					var = BYZ.BYZ_tavrida_score
+					value = -1
+				}
+			}
+		}
+		
+		cancel_trigger = {
+			custom_trigger_tooltip = {
+				tooltip = BYZ_trigger_what_to_do_for_control_last_black_sea_port_tt
+				OR = {
+					192 = {
+						full_controls_or_subject_of = yes
+					}
+				}
+				OR = {
+					197 = {
+						full_controls_or_subject_of = yes
+					}
+				}
+			}
+		}
+		
+		cancel_effect = {
+			custom_effect_tooltip = BYZ_what_to_do_for_control_last_black_sea_port_effect_tt
+			hidden_effect = {
+				BCH = {
+					set_country_flag = bch_control_last_black_sea_port_succes
+				}
+				add_to_variable = {
+					var = BYZ.BYZ_tavrida_score
+					value = 1
+				}
 			}
 		}
 	
@@ -1232,7 +1773,11 @@ battle_for_crimea_categories = {
 	battle_for_crimea_decision_none = {
 	
 		activation = {
+			always = no
 			has_global_flag = start_of_crimea_operation
+			NOT = {
+				tag = BYZ
+			}
 		}
 		
 		available = {
@@ -1243,6 +1788,9 @@ battle_for_crimea_categories = {
 		}
 		
 		visible = {
+			NOT = {
+				tag = BYZ
+			}
 			OR = {
 				tag = RUS
 				tag = BCH
@@ -1259,7 +1807,7 @@ battle_for_crimea_categories = {
 			factor = 100
 		}
 		
-		days_mission_timeout = 45
+		days_mission_timeout = 180
 		
 		timeout_effect = {
 			custom_effect_tooltip = BYZ_what_to_do_for_lose_crimea_time_tt
