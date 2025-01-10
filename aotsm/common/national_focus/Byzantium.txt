@@ -2628,12 +2628,21 @@ focus_tree = {
 		cost = 4.3
 		prerequisite = { focus = BYZ_tavrid_operation_focus }
 		ai_will_do = {
-			factor = 1000
+			factor = 25000
 		}
 		
 		#cancel = { }
 		
-		#available = {  }
+		available = { 
+			custom_trigger_tooltip = {
+				tooltip = focus_acces_in_world_war_tt
+				has_global_flag = firts_world_war
+			}
+			ships_in_area = {
+				area = 30
+				size > 119
+			}
+		}
 		
 		#bypass = { }
 		
@@ -2642,6 +2651,10 @@ focus_tree = {
 		completion_reward = {
 			hidden_effect = {
 				log = "[GetDateText]: [Root.GetName]: complete focus BYZ_tavrid_operation_attack_on_port"
+			}
+			country_event = {
+				id = byz.111
+				hours = 4
 			}
 		}
 	}
@@ -2660,7 +2673,12 @@ focus_tree = {
 		
 		#cancel = { }
 		
-		#available = {  }
+		available = { 
+			custom_trigger_tooltip = {
+				tooltip = focus_via_event_or_other_focus_tt
+				always = no
+			}
+		}
 		
 		#bypass = { }
 		
@@ -2670,6 +2688,8 @@ focus_tree = {
 			hidden_effect = {
 				log = "[GetDateText]: [Root.GetName]: complete focus BYZ_tavrid_operation_mission_to_achived"
 			}
+			add_political_power = 50
+			custom_effect_tooltip = byz_access_to_tavrida_mission_tt
 		}
 	}
 	
@@ -2687,7 +2707,12 @@ focus_tree = {
 		
 		#cancel = { }
 		
-		#available = {  }
+		available = { 
+			custom_trigger_tooltip = {
+				tooltip = focus_via_event_or_other_focus_tt
+				always = no
+			}
+		}
 		
 		#bypass = { }
 		
@@ -2698,6 +2723,12 @@ focus_tree = {
 		completion_reward = {
 			hidden_effect = {
 				log = "[GetDateText]: [Root.GetName]: complete focus BYZ_tavrid_operation_mission_to_fail"
+			}
+			add_war_support = -0.05
+			add_ideas = BYZ_tavrida_scar_byz
+			RUS = {
+				add_war_support = 0.10
+				add_stability = 0.05
 			}
 		}
 	}
@@ -2716,7 +2747,12 @@ focus_tree = {
 		
 		#cancel = { }
 		
-		#available = {  }
+		available = { 
+			custom_trigger_tooltip = {
+				tooltip = focus_via_event_or_other_focus_tt
+				always = no
+			}
+		}
 		
 		#bypass = { }
 		
@@ -2727,6 +2763,18 @@ focus_tree = {
 		completion_reward = {
 			hidden_effect = {
 				log = "[GetDateText]: [Root.GetName]: complete focus BYZ_tavrid_operation_mission_to_complet"
+			}
+			add_war_support = 0.10
+			BCH = {
+				add_stability = 0.10
+				add_war_support = 0.25
+			}
+			RUS = {
+				add_war_support = -0.05
+				add_timed_idea = {
+					idea = BYZ_tavrida_scar_rus
+					days = 90
+				}
 			}
 		}
 	}
@@ -2746,7 +2794,12 @@ focus_tree = {
 		
 		#cancel = { }
 		
-		#available = {  }
+		available = { 
+			custom_trigger_tooltip = {
+				tooltip = focus_acces_in_world_war_tt
+				has_global_flag = firts_world_war
+			}
+		}
 		
 		#bypass = { }
 		
@@ -2757,6 +2810,55 @@ focus_tree = {
 		completion_reward = {
 			hidden_effect = {
 				log = "[GetDateText]: [Root.GetName]: complete focus BYZ_tavrid_operation_final"
+			}
+			if = {
+				limit = {
+					NOT = {
+						has_completed_focus = BYZ_tavrid_operation_mission_to_complet
+						has_completed_focus = BYZ_tavrid_operation_mission_to_fail
+					}
+				}
+				custom_effect_tooltip = byz_tavrida_operation_final_focus_tt
+			}
+			if = {
+				limit = {
+					has_completed_focus = BYZ_tavrid_operation_mission_to_complet
+				}
+				add_political_power = 125
+				add_ideas = BYZ_tavrida_triumph_byz
+				RUS = {
+					if = {
+						limit = {
+							has_idea = BYZ_tavrida_scar_rus
+						}
+						modify_timed_idea = {
+							idea = BYZ_tavrida_scar_rus
+							days = 60
+						}
+					}
+					if = {
+						limit = {
+							NOT = {
+								has_idea = BYZ_tavrida_scar_rus
+							}
+						}
+						add_timed_idea = {
+							idea = BYZ_tavrida_scar_rus
+							days = 60
+						}
+					}
+				}
+			}
+			if = {
+				limit = {
+					has_completed_focus = BYZ_tavrid_operation_mission_to_fail
+				}
+				add_war_support = 0.05
+				remove_ideas = BYZ_tavrida_scar_byz
+				add_timed_idea = {
+					idea = BYZ_tavrida_scar_byz
+					days = 180
+				}
 			}
 		}
 	}
@@ -2816,10 +2918,9 @@ focus_tree = {
 		
 		available = { 
 			custom_trigger_tooltip = {
-				tooltip = focus_acces_in_world_war_tt
-				has_global_flag = firts_world_war
+				tooltip = focus_via_event_or_other_focus_tt
+				always = no
 			}
-			has_war_with = RUS
 		}
 		
 		#bypass = { }
@@ -2832,7 +2933,9 @@ focus_tree = {
 			hidden_effect = {
 				log = "[GetDateText]: [Root.GetName]: complete focus BYZ_anti_russian_war"
 			}
-			custom_effect_tooltip = byz_open_decision_antirus_tt
+			add_war_support = 0.05
+			add_command_power = 25
+			custom_effect_tooltip = byz_focus_fight_with_gigant_tt
 		}
 	}
 	
@@ -3796,8 +3899,8 @@ focus_tree = {
 		
 		available = {
 			custom_trigger_tooltip = {
-				tooltip = focus_via_event_or_other_focus_tt
-				always = no
+				tooltip = focus_acces_in_world_war_tt
+				has_global_flag = firts_world_war
 			}
 		}
 		
@@ -3835,8 +3938,8 @@ focus_tree = {
 		
 		available = {
 			custom_trigger_tooltip = {
-				tooltip = focus_via_event_or_other_focus_tt
-				always = no
+				tooltip = focus_acces_in_world_war_tt
+				has_global_flag = firts_world_war
 			}
 		}
 		
@@ -3885,8 +3988,8 @@ focus_tree = {
 		
 		available = {
 			custom_trigger_tooltip = {
-				tooltip = focus_via_event_or_other_focus_tt
-				always = no
+				tooltip = focus_acces_in_world_war_tt
+				has_global_flag = firts_world_war
 			}
 		}
 		
@@ -3932,8 +4035,8 @@ focus_tree = {
 		
 		available = {
 			custom_trigger_tooltip = {
-				tooltip = focus_via_event_or_other_focus_tt
-				always = no
+				tooltip = focus_acces_in_world_war_tt
+				has_global_flag = firts_world_war
 			}
 		}
 		
@@ -3988,6 +4091,7 @@ focus_tree = {
 			hidden_effect = {
 				log = "[GetDateText]: [Root.GetName]: complete focus BYZ_defensive_plan"
 			}
+			add_ideas = BYZ_defensive_plan_idea_1
 		}
 	}
 	
@@ -4022,6 +4126,7 @@ focus_tree = {
 			hidden_effect = {
 				log = "[GetDateText]: [Root.GetName]: complete focus BYZ_aggresive_plan"
 			}
+			add_ideas = BYZ_aggresive_plan_idea_1
 		}
 	}
 	
@@ -4056,6 +4161,10 @@ focus_tree = {
 			hidden_effect = {
 				log = "[GetDateText]: [Root.GetName]: complete focus BYZ_grand_victori_plan"
 			}
+			country_event = {
+				id = byz.113
+				hours = 7
+			}
 		}
 	}
 	
@@ -4089,6 +4198,10 @@ focus_tree = {
 		completion_reward = {
 			hidden_effect = {
 				log = "[GetDateText]: [Root.GetName]: complete focus BYZ_military_prioritet"
+			}
+			country_event = {
+				id = byz.114
+				hours = 2
 			}
 		}
 	}
@@ -4125,6 +4238,9 @@ focus_tree = {
 			hidden_effect = {
 				log = "[GetDateText]: [Root.GetName]: complete focus BYZ_revorse_strategic"
 			}
+			add_war_support = 0.05
+			army_experience = 25
+			custom_effect_tooltip = byz_access_to_revorse_strategic_decision_tt
 		}
 	}
 	
@@ -4159,6 +4275,11 @@ focus_tree = {
 			hidden_effect = {
 				log = "[GetDateText]: [Root.GetName]: complete focus BYZ_focus_on_attack"
 			}
+			swap_ideas = {
+				remove_idea = BYZ_aggresive_plan_idea_1
+				add_idea = BYZ_aggresive_plan_idea_2
+			}
+			add_command_power = 50
 		}
 	}
 	
@@ -4193,6 +4314,11 @@ focus_tree = {
 			hidden_effect = {
 				log = "[GetDateText]: [Root.GetName]: complete focus BYZ_no_step_back"
 			}
+			swap_ideas = {
+				remove_idea = BYZ_aggresive_plan_idea_2
+				add_idea = BYZ_aggresive_plan_idea_3
+			}
+			add_command_power = 50
 		}
 	}
 	
@@ -4227,6 +4353,11 @@ focus_tree = {
 			hidden_effect = {
 				log = "[GetDateText]: [Root.GetName]: complete focus BYZ_use_stategion_of_roman_forte"
 			}
+			swap_ideas = {
+				remove_idea = BYZ_defensive_plan_idea_1
+				add_idea = BYZ_defensive_plan_idea_2
+			}
+			custom_effect_tooltip = byz_access_to_fortification_decision_tt
 		}
 	}
 	
@@ -4260,6 +4391,10 @@ focus_tree = {
 		completion_reward = {
 			hidden_effect = {
 				log = "[GetDateText]: [Root.GetName]: complete focus BYZ_together_for_victory"
+			}
+			swap_ideas = {
+				remove_idea = BYZ_defensive_plan_idea_2
+				add_idea = BYZ_defensive_plan_idea_3
 			}
 		}
 	}
