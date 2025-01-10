@@ -5875,7 +5875,7 @@ byz_great_war_categories = {
 				has_country_flag = BYZ_close_gw_economy_decision_flag
 			}
 			has_completed_focus = BYZ_economy_of_war
-			#has_global_flag = firts_world_war
+			has_global_flag = firts_world_war
 			NOT = {
 				has_country_flag = BYZ_start_mobilisation_economy_flag
 			}
@@ -8308,6 +8308,850 @@ byz_great_war_categories = {
 	
 	}
 	
+	byz_change_strategic = {
+	
+		icon = hol_draw_up_staff_plans
+	
+		allowed = {
+			
+		}
+
+		available = {
+		
+		}
+
+		visible = {
+			has_completed_focus = BYZ_revorse_strategic
+			has_global_flag = firts_world_war
+			OR = {
+				has_idea = BYZ_aggresive_plan_idea_3
+				has_idea = BYZ_defensive_plan_idea_3
+			}
+		}
+
+		fire_only_once = yes
+
+		cost = 50
+		days_re_enable = 100
+
+		ai_will_do = {
+			base = 0
+		}
+		
+		complete_effect = {
+			if = {
+				limit = {
+					has_idea = BYZ_aggresive_plan_idea_3
+				}
+				swap_ideas = {
+					remove_idea = BYZ_aggresive_plan_idea_3
+					add_idea = BYZ_defensive_plan_idea_reverse
+				}
+			}
+			if = {
+				limit = {
+					has_idea = BYZ_defensive_plan_idea_3
+				}
+				swap_ideas = {
+					remove_idea = BYZ_defensive_plan_idea_3
+					add_idea = BYZ_aggresive_plan_idea_reverse
+				}
+			}
+			custom_effect_tooltip = byz_this_decision_can_use_only_once_tt
+		}
+	
+	}
+	
+	byz_first_east_fortification_plan = {
+	
+		icon = generic_mountain_fortification
+	
+		allowed = {
+			
+		}
+
+		available = {
+			num_of_civilian_factories_available_for_projects > 9
+			custom_trigger_tooltip = {
+				tooltip = byz_control_target_state_tt
+				48 = {
+					full_controls_or_subject_of = yes
+				}
+				77 = {
+					full_controls_or_subject_of = yes
+				}
+				106 = {
+					full_controls_or_subject_of = yes
+				}
+				185 = {
+					full_controls_or_subject_of = yes
+				}
+				731 = {
+					full_controls_or_subject_of = yes
+				}
+				801 = {
+					full_controls_or_subject_of = yes
+				}
+				803 = {
+					full_controls_or_subject_of = yes
+				}
+			}
+		}
+
+		visible = {
+			has_completed_focus = BYZ_use_stategion_of_roman_forte
+			has_global_flag = firts_world_war
+		}
+		
+		modifier = {
+			civilian_factory_use = 10
+		}
+		
+		cancel_trigger = {
+			NOT = {
+				custom_trigger_tooltip = {
+					tooltip = byz_control_target_state_tt
+					48 = {
+						full_controls_or_subject_of = yes
+					}
+					77 = {
+						full_controls_or_subject_of = yes
+					}
+					106 = {
+						full_controls_or_subject_of = yes
+					}
+					185 = {
+						full_controls_or_subject_of = yes
+					}
+					731 = {
+						full_controls_or_subject_of = yes
+					}
+					801 = {
+						full_controls_or_subject_of = yes
+					}
+					803 = {
+						full_controls_or_subject_of = yes
+					}
+				}
+				
+			}
+		}
+
+		fire_only_once = yes
+		
+		highlight_states = {
+			highlight_provinces = { 657 793 833 867 965 966 3796 3844 9610 9612 9614 9635 9837 11754 11832 11856 11857 11868 }
+			highlight_color_while_active = 3
+			highlight_color_before_active = 2
+		}
+
+		cost = 50
+		
+		days_re_enable = 100
+		
+		days_remove = 120
+		
+		ai_will_do = {
+			base = 5
+		}
+		
+		complete_effect = {
+		
+		}
+		
+		remove_effect = {
+			custom_effect_tooltip = byz_build_fort_2_in_this_province_tt
+			hidden_effect = {
+				48 = {
+					add_building_construction = {
+						type = bunker
+						level = 2
+						instant_build = yes
+						province = 793
+					}
+					add_building_construction = {
+						type = bunker
+						level = 2
+						instant_build = yes
+						province = 965
+					}
+					add_building_construction = {
+						type = bunker
+						level = 2
+						instant_build = yes
+						province = 11754
+					}
+				}
+				77 = {
+					add_building_construction = {
+						type = bunker
+						level = 2
+						instant_build = yes
+						province = 657
+					}
+					add_building_construction = {
+						type = bunker
+						level = 2
+						instant_build = yes
+						province = 9614
+					}
+				}
+				106 = {
+					add_building_construction = {
+						type = bunker
+						level = 2
+						instant_build = yes
+						province = 833
+					}
+					add_building_construction = {
+						type = bunker
+						level = 2
+						instant_build = yes
+						province = 867
+					}
+					add_building_construction = {
+						type = bunker
+						level = 2
+						instant_build = yes
+						province = 11856
+					}
+				}
+				185 = {
+					add_building_construction = {
+						type = bunker
+						level = 2
+						instant_build = yes
+						province = 9837
+					}
+				}
+				731 = {
+					add_building_construction = {
+						type = bunker
+						level = 2
+						instant_build = yes
+						province = 966
+					}
+					add_building_construction = {
+						type = bunker
+						level = 2
+						instant_build = yes
+						province = 3844
+					}
+				}
+				801 = {
+					add_building_construction = {
+						type = bunker
+						level = 2
+						instant_build = yes
+						province = 3796
+					}
+					add_building_construction = {
+						type = bunker
+						level = 2
+						instant_build = yes
+						province = 9610
+					}
+					add_building_construction = {
+						type = bunker
+						level = 2
+						instant_build = yes
+						province = 9612
+					}
+				}
+				803 = {
+					add_building_construction = {
+						type = bunker
+						level = 2
+						instant_build = yes
+						province = 11832
+					}
+					add_building_construction = {
+						type = bunker
+						level = 2
+						instant_build = yes
+						province = 11857
+					}
+					add_building_construction = {
+						type = bunker
+						level = 2
+						instant_build = yes
+						province = 11868
+					}
+				}
+			}
+		}
+		
+		cancel_effect = {
+		
+		}
+	
+	}
+	
+	byz_second_east_fortification_plan = {
+	
+		icon = generic_mountain_fortification
+	
+		allowed = {
+			
+		}
+
+		available = {
+			num_of_civilian_factories_available_for_projects > 9
+			custom_trigger_tooltip = {
+				tooltip = byz_control_target_state_tt
+				211 = {
+					full_controls_or_subject_of = yes
+				}
+				341 = {
+					full_controls_or_subject_of = yes
+				}
+			}
+		}
+
+		visible = {
+			has_completed_focus = BYZ_use_stategion_of_roman_forte
+			has_global_flag = firts_world_war
+		}
+		
+		modifier = {
+			civilian_factory_use = 10
+		}
+
+		fire_only_once = yes
+		
+		highlight_states = {
+			highlight_provinces = { 3893 9902 11842 13316 }
+			highlight_color_while_active = 3
+			highlight_color_before_active = 2
+		}
+
+		cost = 50
+		
+		days_re_enable = 100
+		
+		days_remove = 60
+		
+		ai_will_do = {
+			base = 5
+		}
+		
+		cancel_trigger = {
+			NOT = {
+				custom_trigger_tooltip = {
+					tooltip = byz_control_target_state_tt
+					211 = {
+						full_controls_or_subject_of = yes
+					}
+					341 = {
+						full_controls_or_subject_of = yes
+					}
+				}
+			}
+		}
+		
+		complete_effect = {
+		
+		}
+		
+		remove_effect = {
+			custom_effect_tooltip = byz_build_fort_4_in_this_province_tt
+			hidden_effect = {
+				211 = {
+					add_building_construction = {
+						type = bunker
+						level = 4
+						instant_build = yes
+						province = 9902
+					}
+				}
+				341 = {
+					add_building_construction = {
+						type = bunker
+						level = 4
+						instant_build = yes
+						province = 3893
+					}
+					add_building_construction = {
+						type = bunker
+						level = 4
+						instant_build = yes
+						province = 11842
+					}
+					add_building_construction = {
+						type = bunker
+						level = 4
+						instant_build = yes
+						province = 13316
+					}
+				}
+			}
+		}
+		
+		cancel_effect = {
+		
+		}
+	
+	}
+	
+	byz_first_west_fortification_plan = {
+	
+		icon = generic_mountain_fortification
+	
+		allowed = {
+			
+		}
+
+		available = {
+			num_of_civilian_factories_available_for_projects > 9
+			custom_trigger_tooltip = {
+				tooltip = byz_control_target_state_tt
+				232 = {
+					full_controls_or_subject_of = yes
+				}
+				233 = {
+					full_controls_or_subject_of = yes
+				}
+				926 = {
+					full_controls_or_subject_of = yes
+				}
+				928 = {
+					full_controls_or_subject_of = yes
+				}
+				931 = {
+					full_controls_or_subject_of = yes
+				}
+				938 = {
+					full_controls_or_subject_of = yes
+				}
+			}
+		}
+
+		visible = {
+			has_completed_focus = BYZ_use_stategion_of_roman_forte
+			has_global_flag = firts_world_war
+		}
+		
+		modifier = {
+			civilian_factory_use = 10
+		}
+		
+		cancel_trigger = {
+			NOT = {
+				custom_trigger_tooltip = {
+					tooltip = byz_control_target_state_tt
+					232 = {
+						full_controls_or_subject_of = yes
+					}
+					233 = {
+						full_controls_or_subject_of = yes
+					}
+					926 = {
+						full_controls_or_subject_of = yes
+					}
+					928 = {
+						full_controls_or_subject_of = yes
+					}
+					931 = {
+						full_controls_or_subject_of = yes
+					}
+					938 = {
+						full_controls_or_subject_of = yes
+					}
+				}
+				
+			}
+		}
+
+		fire_only_once = yes
+		
+		highlight_states = {
+			highlight_provinces = { 3667 4458 4545 6436 9632 9663 11609 11664 }
+			highlight_color_while_active = 3
+			highlight_color_before_active = 2
+		}
+
+		cost = 50
+		
+		days_re_enable = 100
+		
+		days_remove = 100
+		
+		ai_will_do = {
+			base = 5
+		}
+		
+		complete_effect = {
+		
+		}
+		
+		remove_effect = {
+			custom_effect_tooltip = byz_build_fort_4_in_this_province_tt
+			hidden_effect = {
+				232 = {
+					add_building_construction = {
+						type = bunker
+						level = 4
+						instant_build = yes
+						province = 3667
+					}
+				}
+				233 = {
+					add_building_construction = {
+						type = bunker
+						level = 4
+						instant_build = yes
+						province = 11664
+					}
+				}
+				926 = {
+					add_building_construction = {
+						type = bunker
+						level = 4
+						instant_build = yes
+						province = 9663
+					}
+				}
+				928 = {
+					add_building_construction = {
+						type = bunker
+						level = 4
+						instant_build = yes
+						province = 9632
+					}
+					add_building_construction = {
+						type = bunker
+						level = 4
+						instant_build = yes
+						province = 11609
+					}
+				}
+				931 = {
+					add_building_construction = {
+						type = bunker
+						level = 4
+						instant_build = yes
+						province = 6436
+					}
+				}
+				938 = {
+					add_building_construction = {
+						type = bunker
+						level = 4
+						instant_build = yes
+						province = 4458
+					}
+					add_building_construction = {
+						type = bunker
+						level = 4
+						instant_build = yes
+						province = 4545
+					}
+				}
+			}
+		}
+		
+		cancel_effect = {
+		
+		}
+	
+	}
+	
+	byz_second_west_fortification_plan = {
+	
+		icon = generic_mountain_fortification
+	
+		allowed = {
+			
+		}
+
+		available = {
+			num_of_civilian_factories_available_for_projects > 9
+			custom_trigger_tooltip = {
+				tooltip = byz_control_target_state_tt
+				354 = {
+					full_controls_or_subject_of = yes
+				}
+				800 = {
+					full_controls_or_subject_of = yes
+				}
+				943 = {
+					full_controls_or_subject_of = yes
+				}
+			}
+		}
+
+		visible = {
+			has_completed_focus = BYZ_use_stategion_of_roman_forte
+			has_global_flag = firts_world_war
+		}
+		
+		modifier = {
+			civilian_factory_use = 10
+		}
+		
+		cancel_trigger = {
+			NOT = {
+				custom_trigger_tooltip = {
+					tooltip = byz_control_target_state_tt
+					354 = {
+						full_controls_or_subject_of = yes
+					}
+					800 = {
+						full_controls_or_subject_of = yes
+					}
+					943 = {
+						full_controls_or_subject_of = yes
+					}
+				}
+				
+			}
+		}
+
+		fire_only_once = yes
+		
+		highlight_states = {
+			highlight_provinces = { 652 1636 3714 4583 9886 11753 11853 12376 }
+			highlight_color_while_active = 3
+			highlight_color_before_active = 2
+		}
+
+		cost = 50
+		
+		days_re_enable = 100
+		
+		days_remove = 160
+		
+		ai_will_do = {
+			base = 5
+		}
+		
+		complete_effect = {
+		
+		}
+		
+		remove_effect = {
+			custom_effect_tooltip = byz_build_fort_3_in_this_province_tt
+			hidden_effect = {
+				354 = {
+					add_building_construction = {
+						type = bunker
+						level = 3
+						instant_build = yes
+						province = 3714
+					}
+					add_building_construction = {
+						type = bunker
+						level = 3
+						instant_build = yes
+						province = 9886
+					}
+					add_building_construction = {
+						type = bunker
+						level = 3
+						instant_build = yes
+						province = 11753
+					}
+				}
+				800 = {
+					add_building_construction = {
+						type = bunker
+						level = 3
+						instant_build = yes
+						province = 652
+					}
+					add_building_construction = {
+						type = bunker
+						level = 3
+						instant_build = yes
+						province = 1636
+					}
+					add_building_construction = {
+						type = bunker
+						level = 3
+						instant_build = yes
+						province = 4583
+					}
+					add_building_construction = {
+						type = bunker
+						level = 3
+						instant_build = yes
+						province = 12376
+					}
+				}
+				943 = {
+					add_building_construction = {
+						type = bunker
+						level = 3
+						instant_build = yes
+						province = 11853
+					}
+				}
+			}
+		}
+		
+		cancel_effect = {
+		
+		}
+	
+	}
+	
+	byz_third_west_fortification_plan = {
+	
+		icon = generic_mountain_fortification
+	
+		allowed = {
+			
+		}
+
+		available = {
+			num_of_civilian_factories_available_for_projects > 9
+			custom_trigger_tooltip = {
+				tooltip = byz_control_target_state_tt
+				344 = {
+					full_controls_or_subject_of = yes
+				}
+				349 = {
+					full_controls_or_subject_of = yes
+				}
+				355 = {
+					full_controls_or_subject_of = yes
+				}
+			}
+		}
+
+		visible = {
+			has_completed_focus = BYZ_use_stategion_of_roman_forte
+			has_global_flag = firts_world_war
+		}
+		
+		modifier = {
+			civilian_factory_use = 10
+		}
+		
+		cancel_trigger = {
+			NOT = {
+				custom_trigger_tooltip = {
+					tooltip = byz_control_target_state_tt
+					344 = {
+						full_controls_or_subject_of = yes
+					}
+					349 = {
+						full_controls_or_subject_of = yes
+					}
+					355 = {
+						full_controls_or_subject_of = yes
+					}
+				}
+				
+			}
+		}
+
+		fire_only_once = yes
+		
+		highlight_states = {
+			highlight_provinces = { 806 3889 3935 6919 6950 6965 7620 9893 9912 9915 11881 }
+			highlight_color_while_active = 3
+			highlight_color_before_active = 2
+		}
+
+		cost = 50
+		
+		days_re_enable = 100
+		
+		days_remove = 120
+		
+		ai_will_do = {
+			base = 5
+		}
+		
+		complete_effect = {
+		
+		}
+		
+		remove_effect = {
+			custom_effect_tooltip = byz_build_fort_4_in_this_province_tt
+			hidden_effect = {
+				344 = {
+					add_building_construction = {
+						type = bunker
+						level = 4
+						instant_build = yes
+						province = 806
+					}
+					add_building_construction = {
+						type = bunker
+						level = 4
+						instant_build = yes
+						province = 3889
+					}
+					add_building_construction = {
+						type = bunker
+						level = 4
+						instant_build = yes
+						province = 7620
+					}
+					add_building_construction = {
+						type = bunker
+						level = 4
+						instant_build = yes
+						province = 9893
+					}
+					add_building_construction = {
+						type = bunker
+						level = 4
+						instant_build = yes
+						province = 9912
+					}
+				}
+				349 = {
+					add_building_construction = {
+						type = bunker
+						level = 4
+						instant_build = yes
+						province = 6919
+					}
+					add_building_construction = {
+						type = bunker
+						level = 4
+						instant_build = yes
+						province = 6950
+					}
+					add_building_construction = {
+						type = bunker
+						level = 4
+						instant_build = yes
+						province = 6965
+					}
+				}
+				355 = {
+					add_building_construction = {
+						type = bunker
+						level = 4
+						instant_build = yes
+						province = 3935
+					}
+					add_building_construction = {
+						type = bunker
+						level = 4
+						instant_build = yes
+						province = 9915
+					}
+					add_building_construction = {
+						type = bunker
+						level = 4
+						instant_build = yes
+						province = 11881
+					}
+				}
+			}
+		}
+		
+		cancel_effect = {
+		
+		}
+	
+	}
+	
 	byz_use_support_to_long_march = {
 	
 		icon = generic_speech
@@ -8714,8 +9558,16 @@ byz_great_war_categories = {
 						NOT = {
 							has_idea = BYZ_mobilisation_economy_1
 						}
+						NOT = {
+							BYZ = {
+								has_country_flag = byz_economy_start_mobilisation_flag
+							}
+						}
 					}
 					add_ideas = BYZ_mobilisation_economy_1
+					hidden_effect = {
+						set_country_flag = byz_economy_start_mobilisation_flag
+					}
 				}
 				activate_mission = byz_mobilisation_economy_mission
 			}
@@ -8727,6 +9579,7 @@ byz_great_war_categories = {
 		icon = gre_paying_ifc_debt
 	
 		activation = {
+			always = no
 			has_country_flag = BYZ_start_mobilisation_economy_flag
 			has_war = yes
 			OR = {
@@ -8783,14 +9636,1055 @@ byz_great_war_categories = {
 					NOT = {
 						has_idea = BYZ_fall_economy_1
 					}
+					NOT = {
+						BYZ = {
+							has_country_flag = byz_fall_economy_began
+						}
+					}
 				}
 				swap_ideas = {
 					remove_idea = BYZ_mobilisation_economy_7
 					add_idea = BYZ_fall_economy_1
 				}
 				activate_mission = byz_fall_economy_mission
+				BYZ = {
+					set_country_flag = byz_fall_economy_began
+				}
 			}
 		}
+	}
+
+}
+
+byz_special_war_project_category = {
+
+	byz_bulgaria_war_missia = {
+	
+		icon = generic_ignite_civil_war
+		
+		allowed = {
+			always = no
+		}
+		
+		available = {
+			hidden_trigger = {
+				owns_state = 48
+				owns_state = 106
+				owns_state = 211
+				owns_state = 212
+				owns_state = 801
+				owns_state = 803
+			}
+		}
+		
+		visible = {
+			has_completed_focus = BYZ_bulgaria_war
+		}		
+	
+		ai_will_do = {
+			factor = 40
+			modifier = {
+				factor = 100
+				is_historical_focus_on = yes
+			}
+		}
+		
+		days_mission_timeout = 60
+		fire_only_once = yes
+		
+		complete_effect = {		
+			
+		}
+		
+		timeout_effect = {
+			add_war_support = -0.05
+			add_manpower = -25000
+			if = {
+				limit = {
+					BYZ = {
+						check_variable = {
+							byz_military_unrest > 2
+						}
+					}
+				}
+				custom_effect_tooltip = byz_military_leave_coalition
+				BYZ = {
+					clr_country_flag = byz_rulling_impgov
+					set_country_flag = byz_rulling_imp
+				}
+			}
+			if = {
+				limit = {
+					BYZ = {
+						has_country_flag = byz_rulling_impgov
+					}
+					BUL = {
+						has_idea = balkan_wars_1
+					}
+					NOT = {
+						BYZ = {
+							check_variable = {
+								byz_military_unrest > 2
+							}
+						}
+					}
+				}
+				BYZ = {
+					add_war_support = -0.05
+					add_to_variable = { byz_military_unrest = 1 }
+				}
+				custom_effect_tooltip = byz_military_may_leave_coalition
+			}
+			custom_effect_tooltip = byz_losses_hight
+			if = {
+				limit = {
+					BYZ = {
+						has_country_flag = byz_democratic_politic
+					}
+				}
+				custom_effect_tooltip = byz_general_more_angry
+			}
+			activate_mission = byz_bulgaria_war_missia
+			if = {
+				limit = {
+					BUL = {
+						has_idea = balkan_wars
+					}
+				}
+				BUL = {
+					swap_ideas = {
+						remove_idea = balkan_wars
+						add_idea = balkan_wars_1
+					}
+				}
+			}
+		}
+	}
+	
+	byz_albania_war_missia = {
+	
+		icon = generic_ignite_civil_war
+		
+		allowed = {
+			always = no
+		}
+		
+		available = {
+			hidden_trigger = {
+				owns_state = 44
+			}
+		}
+		
+		visible = {
+			has_completed_focus = BYZ_albania_war
+		}		
+				
+		ai_will_do = {
+			factor = 40
+			modifier = {
+				factor = 100
+				is_historical_focus_on = yes
+			}
+		}
+		
+		days_mission_timeout = 30
+		fire_only_once = yes
+		
+		complete_effect = {		
+			
+		}
+		
+		timeout_effect = {
+			add_war_support = -0.05
+			add_manpower = -25000
+			if = {
+				limit = {
+					BYZ = {
+						check_variable = {
+							byz_military_unrest > 2
+						}
+					}
+				}
+				custom_effect_tooltip = byz_military_leave_coalition
+				BYZ = {
+					clr_country_flag = byz_rulling_impgov
+					set_country_flag = byz_rulling_imp
+				}
+			}
+			if = {
+				limit = {
+					BYZ = {
+						has_country_flag = byz_rulling_impgov
+					}
+					ALB = {
+						has_idea = balkan_wars_1
+					}
+					NOT = {
+						BYZ = {
+							check_variable = {
+								byz_military_unrest > 2
+							}
+						}
+					}
+				}
+				BYZ = {
+					add_war_support = -0.05
+					add_to_variable = { byz_military_unrest = 1 }
+				}
+				custom_effect_tooltip = byz_military_may_leave_coalition
+			}
+			custom_effect_tooltip = byz_losses_hight
+			if = {
+				limit = {
+					BYZ = {
+						has_country_flag = byz_democratic_politic
+					}
+				}
+				custom_effect_tooltip = byz_general_more_angry
+			}
+			activate_mission = byz_albania_war_missia
+			if = {
+				limit = {
+					ALB = {
+						has_idea = balkan_wars
+					}
+				}
+				ALB = {
+					swap_ideas = {
+						remove_idea = balkan_wars
+						add_idea = balkan_wars_1
+					}
+				}
+			}
+		}
+	}
+	
+	byz_serbia_war_missia = {
+	
+		icon = generic_ignite_civil_war
+		
+		allowed = {
+			always = no
+		}
+		
+		available = {
+			hidden_trigger = {
+				owns_state = 105
+				owns_state = 107
+				owns_state = 108
+				owns_state = 802
+			}
+		}
+		
+		visible = {
+			has_completed_focus = BYZ_serbia_war
+		}		
+		
+		ai_will_do = {
+			factor = 40
+			modifier = {
+				factor = 100
+				is_historical_focus_on = yes
+			}
+		}
+		
+		days_mission_timeout = 45
+		fire_only_once = yes
+		
+		complete_effect = {		
+			
+		}
+		
+		timeout_effect = {
+			add_war_support = -0.05
+			add_manpower = -25000
+			if = {
+				limit = {
+					BYZ = {
+						check_variable = {
+							byz_military_unrest > 2
+						}
+					}
+				}
+				custom_effect_tooltip = byz_military_leave_coalition
+				BYZ = {
+					clr_country_flag = byz_rulling_impgov
+					set_country_flag = byz_rulling_imp
+				}
+			}
+			if = {
+				limit = {
+					BYZ = {
+						has_country_flag = byz_rulling_impgov
+					}
+					SER = {
+						has_idea = balkan_wars_1
+					}
+					NOT = {
+						BYZ = {
+							check_variable = {
+								byz_military_unrest > 2
+							}
+						}
+					}
+				}
+				BYZ = {
+					add_war_support = -0.05
+					add_to_variable = { byz_military_unrest = 1 }
+				}
+				custom_effect_tooltip = byz_military_may_leave_coalition
+			}
+			custom_effect_tooltip = byz_losses_hight
+			if = {
+				limit = {
+					BYZ = {
+						has_country_flag = byz_democratic_politic
+					}
+				}
+				custom_effect_tooltip = byz_general_more_angry
+			}
+			activate_mission = byz_serbia_war_missia
+			if = {
+				limit = {
+					SER = {
+						has_idea = balkan_wars
+					}
+				}
+				SER = {
+					swap_ideas = {
+						remove_idea = balkan_wars
+						add_idea = balkan_wars_1
+					}
+				}
+			}
+		}
+	}
+	
+	byz_bosnia_war_missia = {
+	
+		icon = generic_ignite_civil_war
+		
+		allowed = {
+			always = no
+		}
+		
+		available = {
+			hidden_trigger = {
+				OR = {
+					BYZ = {
+						owns_state = 104
+						owns_state = 804
+					}
+					DAL = {
+						owns_state = 104
+						owns_state = 804
+					}
+				}
+			}
+		}
+		
+		visible = {
+			has_completed_focus = BYZ_bosnia_war
+		}		
+	
+		ai_will_do = {
+			factor = 40
+			modifier = {
+				factor = 100
+				is_historical_focus_on = yes
+			}
+		}
+		
+		days_mission_timeout = 45
+		fire_only_once = yes
+		
+		complete_effect = {		
+			
+		}
+		
+		timeout_effect = {
+			add_war_support = -0.05
+			add_manpower = -25000
+			if = {
+				limit = {
+					BYZ = {
+						check_variable = {
+							byz_military_unrest > 2
+						}
+					}
+				}
+				custom_effect_tooltip = byz_military_leave_coalition
+				BYZ = {
+					clr_country_flag = byz_rulling_impgov
+					set_country_flag = byz_rulling_imp
+				}
+			}
+			if = {
+				limit = {
+					BYZ = {
+						has_country_flag = byz_rulling_impgov
+					}
+					BOS = {
+						has_idea = balkan_wars_1
+					}
+					NOT = {
+						BYZ = {
+							check_variable = {
+								byz_military_unrest > 2
+							}
+						}
+					}
+				}
+				BYZ = {
+					add_war_support = -0.05
+					add_to_variable = { byz_military_unrest = 1 }
+				}
+				custom_effect_tooltip = byz_military_may_leave_coalition
+			}
+			custom_effect_tooltip = byz_losses_hight
+			if = {
+				limit = {
+					BYZ = {
+						has_country_flag = byz_democratic_politic
+					}
+				}
+				custom_effect_tooltip = byz_general_more_angry
+			}
+			activate_mission = byz_bosnia_war_missia
+			if = {
+				limit = {
+					BOS = {
+						has_idea = balkan_wars
+					}
+				}
+				BOS = {
+					swap_ideas = {
+						remove_idea = balkan_wars
+						add_idea = balkan_wars_1
+					}
+				}
+			}
+		}
+	}
+	
+	byz_malta_war_missia = {
+	
+		icon = generic_ignite_civil_war
+		
+		allowed = {
+			always = no
+		}
+		
+		available = {
+			controls_state = 116 
+			SYC = {
+				surrender_progress > 0.20
+			}
+		}
+		
+		visible = {
+			has_country_flag = BYZ_malta_war
+			has_completed_focus = BYZ_malta_operation
+		}
+		
+		ai_will_do = {
+			factor = 40
+			modifier = {
+				factor = 100
+				is_historical_focus_on = yes
+			}
+		}
+		
+		days_mission_timeout = 105
+		fire_only_once = yes
+		
+		complete_effect = {
+			clr_country_flag = BYZ_malta_war
+			add_stability = 0.05
+			white_peace = {
+				tag = SYC
+				message = BYZ_win_SYC
+			}
+			SYC = { remove_state_core = 116 }
+			BYZ = { add_state_core = 116 }
+			hidden_effect = {
+				if = {
+					limit = {
+						SYC = {
+							has_war_with = PRU
+						}
+					}
+					PRU = {
+						white_peace = {
+							tag = SYC
+						}
+					}
+				}
+			}
+		}
+		
+		timeout_effect = {
+			clr_country_flag = BYZ_malta_war
+			add_stability = -0.05
+			white_peace = {
+				tag = SYC
+				message = BYZ_lose_SYC
+			}
+			SYC = { transfer_state = 116 }
+			hidden_effect = {
+				if = {
+					limit = {
+						SYC = {
+							has_war_with = PRU
+						}
+					}
+					PRU = {
+						white_peace = {
+							tag = SYC
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	byz_persia_civil_war = {
+	
+		icon = generic_ignite_civil_war
+		
+		allowed = {
+		}
+		
+		available = {
+		}
+		
+		visible = {
+			BYZ = {
+				has_completed_focus = BYZ_persian_direction
+			}
+		}
+		
+		ai_will_do = {
+			factor = 50
+			modifier = {
+				factor = 100
+				is_historical_focus_on = yes
+			}
+		}
+		
+		days_remove = 30
+		
+		fire_only_once = yes
+		
+		remove_effect = {
+			PER = {
+				country_event = {
+					id = byz.8
+					days = 5
+				}
+			}
+		}
+	}
+	
+	byz_attack_afganistan = {
+	
+		icon = generic_ignite_civil_war
+		
+		allowed = {
+		}
+		
+		available = {
+		}
+		
+		visible = {
+			date > 1851.4.30
+			NOT = {
+				country_exists = PER
+				country_exists = IRA
+			}
+			PAR = {
+				has_war = no
+			}
+		}
+		
+		ai_will_do = {
+			factor = 50
+			modifier = {
+				factor = 100
+				is_historical_focus_on = yes
+			}
+		}
+		
+		days_remove = 30
+		
+		fire_only_once = yes
+		
+		remove_effect = {
+			PAR = {
+				declare_war_on = {
+					target = AFG
+					type = annex_everything
+				}
+			}
+			RIT = {
+				declare_war_on = {
+					target = AFG
+					type = annex_everything
+				}
+			}
+			if = {
+				limit = {
+					country_exists = PNJ
+				}
+				PNJ = {
+					declare_war_on = {
+						target = AFG
+						type = annex_everything
+					}
+				}
+			}
+			hidden_effect = {
+				PAR = {
+					add_ideas = afganistan_company
+				}
+				RIT = {
+					add_ideas = afganistan_company
+				}
+				if = {
+					limit = {
+						country_exists = PNJ
+					}
+					PNJ = {
+						add_ideas = afganistan_company
+					}
+				}
+				RIT = {
+					diplomatic_relation = {
+						country = PAR
+						relation = military_access
+						active = yes
+					}
+					diplomatic_relation = {
+						country = PNJ
+						relation = military_access
+						active = yes
+					}
+				}
+				PAR = {
+					diplomatic_relation = {
+						country = RIT
+						relation = military_access
+						active = yes
+					}
+					diplomatic_relation = {
+						country = PNJ
+						relation = military_access
+						active = yes
+					}
+				}
+				PNJ = {
+					diplomatic_relation = {
+						country = PAR
+						relation = military_access
+						active = yes
+					}
+					diplomatic_relation = {
+						country = RIT
+						relation = military_access
+						active = yes
+					}
+				}
+				set_global_flag = afganistan_company_global_flag
+			}
+		}
+		
+	}
+	
+	byz_intervation_in_afganistan = {
+	
+		icon = generic_ignite_civil_war
+		
+		allowed = {
+		}
+		
+		available = {
+		}
+		
+		visible = {
+			date > 1852.2.14
+			NOT = {
+				country_exists = PER
+				country_exists = IRA
+			}
+			RIT = {
+				has_war_with = AFG
+			}
+		}
+		
+		ai_will_do = {
+			factor = 50
+			modifier = {
+				factor = 100
+				is_historical_focus_on = yes
+			}
+		}
+		
+		days_remove = 10
+		
+		fire_only_once = yes
+		
+		war_with_on_remove = AFG
+		
+		remove_effect = {
+			add_to_war = {
+				targeted_alliance = RIT
+				enemy = AFG
+				hostility_reason = asked_to_join
+			}
+			news_event = news.150
+		}
+		
+	}
+	
+	byz_cremia_operation = {
+	
+		icon = generic_ignite_civil_war
+		
+		allowed = {
+		}
+		
+		available = {
+			RUS = {
+				controls_state = 137
+			}
+			custom_trigger_tooltip = {
+				tooltip = byz_ready_to_take_back_turida_tt
+				has_country_flag = byz_ready_to_tavrida
+			}
+			custom_trigger_tooltip = {
+				tooltip = byz_ready_equipment_war_ready_tt
+				OR = {
+					AND = {
+						has_war_with = RUS
+						BYZ = {
+							has_country_flag = byz_prepered_to_take_back_taurida
+						}
+						has_global_flag = firts_world_war
+						date > 1855.4.15
+					}
+					AND = {
+						NOT = {
+							has_war_with = RUS
+						}
+						BYZ = {
+							has_country_flag = byz_prepered_to_take_back_taurida
+						}
+						date > 1855.2.10
+					}
+				}
+			}
+		}
+		
+		cancel_trigger = {
+			OR = {
+				NOT = {
+					RUS = {
+						controls_state = 137
+					}
+				}
+				has_global_flag = byz_capitulation
+				has_global_flag = russian_capitulation
+			}
+		}
+		
+		visible = {
+			tag = BYZ
+			BYZ = {
+				has_country_flag = byz_prepered_to_take_back_taurida
+			}
+			NOT = {
+				has_global_flag = byz_capitulation
+			}
+		}
+		
+		ai_will_do = {
+			factor = 50
+			modifier = {
+				factor = 100
+				is_historical_focus_on = yes
+			}
+		}
+		
+		days_remove = 20
+		
+		fire_only_once = yes
+		
+		war_with_on_remove = RUS
+		war_with_on_complete = RUS
+		
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision start byz_cremia_operation"
+			hidden_effect = {
+				set_global_flag = BYZ_start_tavrida_operation #trigger for Russian effect
+				if = {
+					limit = {
+						NOT = {
+							has_global_flag = firts_world_war
+						}
+					}
+					RUS = {
+						country_event = {
+							id = byz.57
+							days = 3
+						}
+					}
+				}
+				BYZ = {
+					country_event = {
+						id = byz.84
+						days = 31
+						hours = 12
+					}
+				}
+			}
+		}
+		
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision end byz_cremia_operation"
+			if = {
+				limit = {
+					NOT = {
+						has_global_flag = firts_world_war
+					}
+				}
+				hidden_effect = {
+					set_global_flag = wwi_tavrid_operation
+					first_world_war_begin = yes
+				}
+				hidden_effect = {
+					if = {
+						limit = {
+							BYZ = {
+								has_idea = russian_history_enemy_2
+							}
+						}
+						BYZ = {
+							swap_ideas = {
+								remove_idea = russian_history_enemy_2
+								add_idea = russian_history_enemy_3
+							}
+						}
+					}
+					if = {
+						limit = {
+							BYZ = {
+								has_idea = russian_history_enemy_1
+							}
+						}
+						BYZ = {
+							swap_ideas = {
+								remove_idea = russian_history_enemy_1
+								add_idea = russian_history_enemy_2
+							}
+						}
+					}
+					news_event = {
+						id = news.277
+						days = 3
+					}
+					PRU = {
+						complete_national_focus = PRU_first_world_war
+					}
+					if = {
+						limit = {
+							PRU = {
+								has_country_flag = pru_wrangel_war_plan
+							}
+						}
+						PRU = {
+							country_event = ger_warplane.6
+						}
+						news_event = {
+							id = news.168
+							days = 2
+						}
+					}
+					if = {
+						limit = {
+							PRU = {
+								has_country_flag = pru_bismark_war_plan
+							}
+						}
+						PRU = {
+							country_event = ger_warplane.7
+						}
+						news_event = {
+							id = news.171
+							days = 3
+						}
+					}
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						BYZ = {
+							has_war_with = RUS
+						}
+					}
+				}
+				declare_war_on = {
+					target = RUS
+					type = annex_everything
+				}
+				if = {
+					limit = {
+						PRU = {
+							is_in_faction_with = BYZ
+						}
+						NOT = {
+							PRU = {
+								has_war_with = RUS
+							}
+						}
+					}
+					PRU = {
+						add_to_war = {
+							targeted_alliance = BYZ
+							enemy = RUS
+						}
+					}
+				}
+			}
+			BCH = {
+				add_state_core = 137
+				add_state_core = 196
+				add_state_core = 200
+				add_state_core = 218
+				add_state_core = 227
+				add_state_core = 234
+			}
+			137 = {
+				set_state_owner_to = BCH
+			}
+			hidden_effect = {
+				BYZ = {
+					set_autonomy = {
+						target = BCH
+						autonomy_state = autonomy_aotsm_province
+						end_wars = no
+						end_civil_wars = no
+					}
+				}
+				BCH = {
+					set_politics = { ruling_party = reactionist elections_allowed = no }
+					set_popularities = {
+						democratic = 3
+						socialism = 1
+						reactionist = 77
+						authoritarian = 19
+					}
+				}
+				BCH = {
+					add_to_war = {
+						targeted_alliance = BYZ
+						enemy = RUS
+					}
+				}
+				BCH = {
+					set_province_controller = 705
+					set_province_controller = 6704
+					set_province_controller = 9680
+				}
+				BCH = {
+					inherit_technology = BYZ
+				}
+				BCH = {
+					load_oob = BCH_attack_crimea
+				}
+				if = {
+					limit = {
+						BYZ = {
+							has_country_flag = Tyutchev_is_dead
+						}
+					}
+					BYZ = {
+						set_nationality = {
+							target_country = BCH
+							character = BYZ_Apollon_Paliadis
+						}
+					}
+					BCH = {
+						add_country_leader_role = {
+							character = BYZ_Apollon_Paliadis
+							promote_leader = yes
+							country_leader = {
+								ideology = paternalism
+								expire = "1880.1.1"
+								traits = { roman_lord }
+							}
+						}
+					}
+				}
+				if = {
+					limit = {
+						NOT = {
+							BYZ = {
+								has_country_flag = Tyutchev_is_dead
+							}
+						}
+					}
+					BYZ = {
+						set_nationality = {
+							target_country = BCH
+							character = BYZ_Konstantin_Tyutchev
+						}
+					}
+					BCH = {
+						add_country_leader_role = {
+							character = BYZ_Konstantin_Tyutchev
+							promote_leader = yes
+							country_leader = {
+								ideology = paternalism
+								expire = "1880.1.1"
+								traits = { roman_lord }
+							}
+						}
+					}
+				}
+				BCH = { add_ideas = not_surrender_idea }
+			}
+			set_global_flag = start_of_crimea_operation
+			news_event = {
+				id = news.181
+				hours = 10
+			}
+			hidden_effect = {
+				BYZ = {
+					activate_mission = battle_for_crimea_decision
+					activate_mission = byz_contorl_on_tavrida
+					activate_mission = byz_destroed_russian_port
+					activate_mission = byz_control_south_tavrida
+					activate_mission = byz_control_north_tavrida
+					activate_mission = byz_control_last_black_sea_port
+				}
+				RUS = {
+					activate_mission = battle_for_crimea_decision_none
+				}
+				BCH = {
+					activate_mission = battle_for_crimea_decision_none
+				}
+				BYZ = {
+					complete_national_focus = BYZ_tavrid_operation_focus
+					complete_national_focus = BYZ_tavrid_operation_mission_to_achived
+					set_variable = {
+						var = BYZ.BYZ_tavrida_score
+						value = 0
+					}
+				}
+			}
+		}
+		
 	}
 
 }
