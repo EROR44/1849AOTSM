@@ -2519,6 +2519,14 @@ pru_leypoldit_bomb = {
 			PRU = {
 				set_country_flag = pru_bomb_complete
 			}
+			hidden_effect = {
+				PRU = {
+					country_event = {
+						id = war_pru_leupoldit_strike.1
+						days = 730
+					}
+				}
+			}
 		}
 	}
 	
@@ -2531,9 +2539,8 @@ pru_leypoldit_bomb = {
 		}
 
 		available = {
-			num_planes_stationed_in_regions = {
-				value > 500
-				regions = { 1 }
+			PRU = {
+				has_country_flag = pru_ready_to_strike
 			}
 		}
 
@@ -2544,228 +2551,78 @@ pru_leypoldit_bomb = {
 			}
 			date > 1856.1.17
 			has_country_flag = pru_bomb_complete
-			is_ai = no
 		}
 
 		fire_only_once = yes
 
 		cost = 0
-		days_remove = 12
+		days_remove = 20
 
 		ai_will_do = {
 			factor = 100
 		}
 		
-		remove_effect = { 
-			launch_nuke = {
-				province = 6103
-				state = 126
-				use_nuke = yes
-			}
-			launch_nuke = {
-				province = 6384
-				state = 132
-				use_nuke = yes
-			}
-			126 = {
-				add_manpower = -2098732
-				add_victory_points = {
-					province = 6103
-					value = -5
-				}
-			}
-			132 = {
-				add_manpower = -632911
-				add_victory_points = {
-					province = 6384
-					value = -5
-				}
-			}
-			news_event = {
-				id = news.23
-				hours = 13
-			}
-			if = {
-				limit = {
-					NOT = {
-						has_global_flag = cbi_capitulation
-					}
-				}
-				CBI = {
-					country_event = {
-						id = ger.11
-						days = 14
-					}
-				}
-			}
-			hidden_effect = {
-				set_global_flag = leypoldit_bombing
-			}
-		}
-	}
-	
-	bomb_nuke_CBI_ai_cbi_ai = { 
-		
-		icon = generic_ignite_civil_war
-
-		allowed = {
-			
-		}
-
-		available = {
-			CBI = {
-				is_ai = yes
-			}
-		}
-
-		visible = {
-			original_tag = PRU
+		complete_effect = {
 			PRU = {
-				has_war_with = CBI
-			}
-			date > 1856.1.17
-			has_country_flag = pru_bomb_complete
-			is_ai = yes
-		}
-
-		fire_only_once = yes
-
-		cost = 0
-		days_remove = 12
-
-		ai_will_do = {
-			factor = 100
-		}
-		
-		remove_effect = { 
-			launch_nuke = {
-				province = 6103
-				state = 126
-				use_nuke = yes
-			}
-			launch_nuke = {
-				province = 6384
-				state = 132
-				use_nuke = yes
-			}
-			126 = {
-				add_manpower = -2098732
-				add_victory_points = {
-					province = 6103
-					value = -5
-				}
-			}
-			132 = {
-				add_manpower = -632911
-				add_victory_points = {
-					province = 6384
-					value = -5
-				}
-			}
-			news_event = {
-				id = news.23
-				hours = 13
-			}
-			if = {
-				limit = {
-					NOT = {
-						has_global_flag = cbi_capitulation
-					}
-				}
-				CBI = {
-					country_event = {
-						id = ger.11
-						days = 14
-					}
+				country_event = {
+					id = war_pru_leupoldit_strike.2
+					hours = 2
 				}
 			}
 			hidden_effect = {
-				set_global_flag = leypoldit_bombing
+				CBI = {
+					country_event = {
+						id = war_pru_leupoldit_strike.3
+						hours = 7
+					}
+				}
 			}
 		}
-	}
-	
-	bomb_nuke_CBI_ai_cbi_human = { 
 		
-		icon = generic_ignite_civil_war
-
-		allowed = {
-			
-		}
-
-		available = {
-			CBI = {
-				is_ai = no
-			}
-			num_planes_stationed_in_regions = {
-				value > 1250
-				regions = { 1 }
-			}
-		}
-
-		visible = {
-			original_tag = PRU
+		cancel_trigger = {
 			PRU = {
-				has_war_with = CBI
+				has_country_flag = pru_cbi_succes_defend
 			}
-			date > 1856.1.17
-			has_country_flag = pru_bomb_complete
-			is_ai = yes
-		}
-
-		fire_only_once = yes
-
-		cost = 0
-		days_remove = 12
-
-		ai_will_do = {
-			factor = 100
 		}
 		
-		remove_effect = { 
-			launch_nuke = {
-				province = 6103
-				state = 126
-				use_nuke = yes
-			}
-			launch_nuke = {
-				province = 6384
-				state = 132
-				use_nuke = yes
-			}
-			126 = {
-				add_manpower = -2098732
-				add_victory_points = {
-					province = 6103
-					value = -5
-				}
-			}
-			132 = {
-				add_manpower = -632911
-				add_victory_points = {
-					province = 6384
-					value = -5
-				}
-			}
-			news_event = {
-				id = news.23
-				hours = 13
-			}
-			if = {
-				limit = {
-					NOT = {
-						has_global_flag = cbi_capitulation
+		cancel_effect = {
+		
+		}
+		
+		remove_effect = {
+			random_list = {
+				90 = {
+					CBI = {
+						country_event = {
+							id = war_pru_leupoldit_strike.8
+							hours = 1
+						}
+					}
+					hidden_effect = {
+						PRU = {
+							country_event = {
+								id = war_pru_leupoldit_strike.7
+								hours = 1
+							}
+						}
 					}
 				}
-				CBI = {
-					country_event = {
-						id = ger.11
-						days = 14
+				10 = {
+					PRU = {
+						country_event = {
+							id = war_pru_leupoldit_strike.9
+							hours = 1
+						}
+					}
+					hidden_effect = {
+						CBI = {
+							country_event = {
+								id = war_pru_leupoldit_strike.10
+								hours = 1
+							}
+						}
 					}
 				}
-			}
-			hidden_effect = {
-				set_global_flag = leypoldit_bombing
 			}
 		}
 	}
