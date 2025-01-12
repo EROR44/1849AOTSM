@@ -58,13 +58,13 @@ RUS_unit_production = {
 	ai_strategy = {
 		type = role_ratio
 		id = infantry
-		value = 50
+		value = 200
 	}
 
 	ai_strategy = {
 		type = unit_ratio
 		id = fighter
-		value = 20
+		value = 25
 	}
 
 	ai_strategy = {
@@ -82,7 +82,7 @@ RUS_unit_production = {
 	ai_strategy = {
 		type = unit_ratio
 		id = strategic_bomber
-		value = 15
+		value = 0
 	}
 
 	ai_strategy = {
@@ -142,31 +142,31 @@ RUS_unit_production = {
 	ai_strategy = {
 		type = equipment_production_factor
 		id = strategic_bomber
-		value = 8
+		value = -10
 	}
 
 	ai_strategy = {
 		type = equipment_production_factor
 		id = infantry
-		value = 60
+		value = 200
 	}
 
 	ai_strategy = {
 		type = equipment_production_factor
 		id = anti_tank
-		value = 15
+		value = 50
 	}
 
 	ai_strategy = {
 		type = equipment_production_factor
 		id = anti_air
-		value = 12
+		value = 25
 	}
 
 	ai_strategy = {
 		type = equipment_production_factor
 		id = artillery
-		value = 50
+		value = 100
 	}
 
 	ai_strategy = {
@@ -900,7 +900,7 @@ RUS_build_more_divisions = {
 
 	ai_strategy = {   
 		type = force_build_armies 
-		value = 200 
+		value = 300 
 	}
 }
 
@@ -916,13 +916,13 @@ RUS_civilian_buildup = {
 	ai_strategy = {
 		type = building_target
 		id = industrial_complex
-		value = 600
+		value = 1200
 	}
 	
 	ai_strategy = {
 		type = building_target
 		id = arms_factory
-		value = -300
+		value = -800
 	}
 }
 
@@ -938,33 +938,33 @@ RUS_millitary_buildup = {
 	ai_strategy = {
 		type = building_target
 		id = arms_factory
-		value = 600
+		value = 1200
 	}
 	
 	ai_strategy = {
 		type = building_target
 		id = industrial_complex
-		value = -300
+		value = -800
 	}
 }
 
-RUS_shift_production = {
-	allowed = {
-		original_tag = RUS
-	}
-	enable = {
-		has_equipment = { infantry_equipment > 6000 }
-	}
-	abort = {
-		has_equipment = { infantry_equipment < 6000 }	
-	}
-
-	ai_strategy = {
-		type = equipment_production_factor
-		id = infantry
-		value = -25
-	}
-}
+#RUS_shift_production = {
+#	allowed = {
+#		original_tag = RUS
+#	}
+#	enable = {
+#		has_equipment = { infantry_equipment > 6000 }
+#	}
+#	abort = {
+#		has_equipment = { infantry_equipment < 6000 }	
+#	}
+#
+#	ai_strategy = {
+#		type = equipment_production_factor
+#		id = infantry
+#		value = -25
+#	}
+#}
 
 RUS_ally_tashkent = {
 	allowed = {
@@ -1025,12 +1025,53 @@ RUS_less_naval_focus = {
 	}
 }
 
-RUS_war_witch_germany = {
+RUS_war_witch_germany_when_pru_has_manpower = {
 	allowed = {
 		original_tag = RUS
 	}
 	enable = {
 		has_war_with = PRU
+		PRU = {
+			has_manpower > 100000
+		}
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = antagonize
+		id = PRU
+		value = 1000
+	}
+	
+	ai_strategy = { 
+		type = front_unit_request
+		country_trigger = {
+			tag = PRU
+		}
+		value = 1000
+	}
+	
+	ai_strategy = {
+        type = front_control
+        tag = "PRU"
+        priority = 10 
+        ordertype = front # front or invasion
+        execution_type = careful # one of careful balanced rush rush_weak (осторожно, сбалансированно, агрессивно, прорыв)
+        execute_order = no # испольнять приказ или нет, если нет то просто будут стоять в обороне
+        manual_attack = yes # точечные атаки, если нет, то ИИ не будет совершать никаких отдельных атак, кроме батлплана (да да ИИ тоже умеет ручками)
+    }
+	
+}
+
+RUS_war_witch_germany_when_pru_no_manpower = {
+	allowed = {
+		original_tag = RUS
+	}
+	enable = {
+		has_war_with = PRU
+		PRU = {
+			has_manpower < 100000
+		}
 	}
 	abort_when_not_enabled = yes
 
