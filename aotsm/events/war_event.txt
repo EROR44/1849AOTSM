@@ -4,6 +4,7 @@ add_namespace = war_russian
 add_namespace = war_prussian
 add_namespace = war_russian_czapski
 add_namespace = war_russian_monarchist
+add_namespace = war_pru_leupoldit_strike
 
 country_event = { #Anti-Hungarian coalition want help
 	id = war_event.1
@@ -1883,6 +1884,404 @@ country_event = { #Monarchist ask weapon
 				}
 			}
 		}
+	}
+	
+}
+
+#war_pru_leupoldit_strike
+
+country_event = { #Ready to strike
+	id = war_pru_leupoldit_strike.1
+	title = war_pru_leupoldit_strike.1.t
+	desc = war_pru_leupoldit_strike.1.d
+	picture = GFX_report_event_pru_bombs
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event war_pru_leupoldit_strike.1"
+	}
+	
+	option = { #Good news
+		name = war_pru_leupoldit_strike.1.a
+		ai_chance = {
+			base = 100
+		}
+		air_experience = 25
+		PRU = {
+			set_country_flag = pru_ready_to_strike
+		}
+	}
+	
+}
+
+country_event = { #Time to start
+	id = war_pru_leupoldit_strike.2
+	title = war_pru_leupoldit_strike.2.t
+	desc = war_pru_leupoldit_strike.2.d
+	picture = GFX_report_event_pru_aircraft
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event war_pru_leupoldit_strike.2"
+	}
+	
+	option = { #We can't wait
+		name = war_pru_leupoldit_strike.2.a
+		ai_chance = {
+			base = 100
+		}
+		custom_effect_tooltip = pru_begining_leupoldite_strike_tt
+	}
+	
+}
+
+country_event = { #British info to defends
+	id = war_pru_leupoldit_strike.3
+	title = war_pru_leupoldit_strike.3.t
+	desc = war_pru_leupoldit_strike.3.d
+	picture = GFX_report_event_cbi_aircrafts
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event war_pru_leupoldit_strike.3"
+		hidden_effect = {
+			CBI = {
+				country_event = {
+					id = script_event.53
+					days = 10
+				}
+			}
+		}
+	}
+	
+	option = { #Use fighter
+		name = war_pru_leupoldit_strike.3.a
+		ai_chance = {
+			base = 90
+		}
+		trigger = {
+			num_planes_stationed_in_regions = {
+				value > 499
+				regions = { 1 2 }
+			}
+			num_planes_stationed_in_regions = {
+				value < 1001
+				regions = { 1 2 }
+			}
+		}
+		air_experience = 10
+		CBI = {
+			set_country_flag = cbi_use_1000_airplane
+		}
+	}
+	
+	option = { #Use fighter 2
+		name = war_pru_leupoldit_strike.3.b
+		ai_chance = {
+			base = 90
+		}
+		trigger = {
+			num_planes_stationed_in_regions = {
+				value > 1000
+				regions = { 1 2 }
+			}
+			num_planes_stationed_in_regions = {
+				value < 2001
+				regions = { 1 2 }
+			}
+		}
+		air_experience = 15
+		CBI = {
+			set_country_flag = cbi_use_2000_airplane
+		}
+	}
+	
+	option = { #Use fighter 3
+		name = war_pru_leupoldit_strike.3.c
+		ai_chance = {
+			base = 90
+		}
+		trigger = {
+			num_planes_stationed_in_regions = {
+				value > 2000
+				regions = { 1 2 }
+			}
+			num_planes_stationed_in_regions = {
+				value < 3501
+				regions = { 1 2 }
+			}
+		}
+		air_experience = 20
+		CBI = {
+			set_country_flag = cbi_use_3500_airplane
+		}
+	}
+	
+	option = { #Use fighter 4
+		name = war_pru_leupoldit_strike.3.f
+		ai_chance = {
+			base = 90
+		}
+		trigger = {
+			num_planes_stationed_in_regions = {
+				value > 3500
+				regions = { 1 2 }
+			}
+		}
+		air_experience = 30
+		CBI = {
+			set_country_flag = cbi_use_more_3500_airplane
+		}
+	}
+	
+	option = { #We can't do anything
+		name = war_pru_leupoldit_strike.3.g
+		ai_chance = {
+			base = 10
+		}
+		add_political_power = -250
+		add_stability = -0.05
+		add_war_support = -0.05
+	}
+	
+}
+
+country_event = { #British defends force fail
+	id = war_pru_leupoldit_strike.4
+	title = war_pru_leupoldit_strike.4.t
+	desc = war_pru_leupoldit_strike.4.d
+	picture = GFX_report_event_aircraft_crash
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event war_pru_leupoldit_strike.4"
+		hidden_effect = {
+			
+		}
+	}
+	
+	option = { #Today we crying
+		name = war_pru_leupoldit_strike.4.a
+		ai_chance = {
+			base = 10
+		}
+		add_war_support = -0.05
+	}
+	
+}
+
+country_event = { #British defends force succes (CBI)
+	id = war_pru_leupoldit_strike.5
+	title = war_pru_leupoldit_strike.5.t
+	desc = war_pru_leupoldit_strike.5.d
+	picture = GFX_report_event_aircraft_crashing
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event war_pru_leupoldit_strike.5"
+		hidden_effect = {
+			
+		}
+	}
+	
+	option = { #We are saved
+		name = war_pru_leupoldit_strike.5.a
+		ai_chance = {
+			base = 10
+		}
+		add_war_support = 0.15
+		add_stability = 0.10
+		air_experience = 50
+	}
+	
+}
+
+country_event = { #British defends force succes (PRU)
+	id = war_pru_leupoldit_strike.6
+	title = war_pru_leupoldit_strike.6.t
+	desc = war_pru_leupoldit_strike.6.d
+	picture = GFX_report_event_lamansh_viev
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event war_pru_leupoldit_strike.6"
+		hidden_effect = {
+			PRU = {
+				set_country_flag = pru_cbi_succes_defend
+			}
+		}
+	}
+	
+	option = { #How this is possible?
+		name = war_pru_leupoldit_strike.6.a
+		ai_chance = {
+			base = 10
+		}
+		add_war_support = -0.125
+		add_stability = -0.075
+	}
+	
+}
+
+country_event = { #Succesfull Bombing (PRU)
+	id = war_pru_leupoldit_strike.7
+	title = war_pru_leupoldit_strike.7.t
+	desc = war_pru_leupoldit_strike.7.d
+	picture = GFX_report_event_leupoldit_strike_1
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event war_pru_leupoldit_strike.7"
+		hidden_effect = {
+			
+		}
+	}
+	
+	option = { #Triumf of German Mind
+		name = war_pru_leupoldit_strike.7.a
+		ai_chance = {
+			base = 50
+		}
+		add_war_support = 0.05
+	}
+	
+}
+
+country_event = { #Succesfull Bombing (CBI)
+	id = war_pru_leupoldit_strike.8
+	title = war_pru_leupoldit_strike.8.t
+	desc = war_pru_leupoldit_strike.8.d
+	picture = GFX_report_event_leupoldit_strike_2
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event war_pru_leupoldit_strike.8"
+		hidden_effect = {
+			launch_nuke = {
+				province = 6103
+				state = 126
+				use_nuke = yes
+			}
+			launch_nuke = {
+				province = 6384
+				state = 132
+				use_nuke = yes
+			}
+			126 = {
+				add_manpower = -2098732
+				add_victory_points = {
+					province = 6103
+					value = -5
+				}
+			}
+			132 = {
+				add_manpower = -632911
+				add_victory_points = {
+					province = 6384
+					value = -5
+				}
+			}
+			news_event = {
+				id = news.23
+				hours = 13
+			}
+			if = {
+				limit = {
+					NOT = {
+						has_global_flag = cbi_capitulation
+					}
+				}
+				CBI = {
+					country_event = {
+						id = ger.11
+						days = 14
+					}
+				}
+			}
+			set_global_flag = leypoldit_bombing
+		}
+	}
+	
+	option = { #Todays God leave us
+		name = war_pru_leupoldit_strike.8.a
+		ai_chance = {
+			base = 10
+		}
+		add_stability = -0.50
+		add_war_support = -1
+	}
+	
+}
+
+country_event = { #Fail Bombing (PRU)
+	id = war_pru_leupoldit_strike.9
+	title = war_pru_leupoldit_strike.9.t
+	desc = war_pru_leupoldit_strike.9.d
+	picture = GFX_report_event_radio
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event war_pru_leupoldit_strike.9"
+	}
+	
+	option = { #We can't do it again
+		name = war_pru_leupoldit_strike.9.a
+		ai_chance = {
+			base = 10
+		}
+		add_war_support = -0.125
+		add_stability = -0.075
+	}
+	
+}
+
+country_event = { #Fail Bombing (CBI)
+	id = war_pru_leupoldit_strike.10
+	title = war_pru_leupoldit_strike.10.t
+	desc = war_pru_leupoldit_strike.10.d
+	picture = GFX_report_event_london
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event war_pru_leupoldit_strike.10"
+	}
+	
+	option = { #God save us
+		name = war_pru_leupoldit_strike.10.a
+		ai_chance = {
+			base = 10
+		}
+		add_war_support = 0.25
 	}
 	
 }
