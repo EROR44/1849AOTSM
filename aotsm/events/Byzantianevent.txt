@@ -2049,6 +2049,7 @@ country_event = { #Regent of Byzantium
 					ideology = authoritarian
 					desc = POLITICS_CONSTANTIN_ZAHAREAS_REGENT_DESC
 				}
+				set_country_flag = byz_constantine_is_regent
 			}
 		}
 	}
@@ -2082,6 +2083,7 @@ country_event = { #Regent of Byzantium
 					ideology = authoritarian
 					desc = POLITICS_EKATERINA_DESC
 				}
+				set_country_flag = byz_ekaterina_is_regent
 			}
 		}
 	}
@@ -2107,181 +2109,7 @@ country_event = { #Regent of Byzantium
 					ideology = authoritarian
 					desc = POLITICS_JULIUS_ROMANUS_DESC
 				}
-			}
-		}
-	}
-	
-}
-
-country_event = { #Zakharias VI is 18
-	id = byz.64
-	title = byz.64.t
-	desc = {
-		text = byz.64.dnr
-		trigger = {
-			NOT = {
-				BYZ = {
-					has_country_flag = byzantium_regency
-				}
-			}
-		}
-	}
-	desc = {
-		text = byz.64.dr
-		trigger = {
-			BYZ = {
-				has_country_flag = byzantium_regency
-			}
-		}
-	}
-	picture = GFX_report_zakaharias_grow_up
-	
-	is_triggered_only = yes
-	
-	fire_only_once = yes
-	
-	immediate = {
-		log = "[GetDateText]: [Root.GetName]: event byz.64"
-		hidden_effect = {
-			if = {
-				limit = {
-					BYZ = {
-						has_country_flag = byzantium_regency
-					}
-				}
-				BYZ = {
-					set_country_flag = byzantium_regency_over
-				}
-			}
-			BYZ = {
-				add_corps_commander_role = {
-					Character = BYZ_Octavian_II_Zakharias_corps
-					skill = 3
-					attack_skill = 3
-					defense_skill = 3
-					planning_skill = 2
-					logistics_skill = 2
-					traits = { politically_connected media_personality infantry_officer roman_prince_land }
-				}
-			}
-			BYZ = {
-				set_country_flag = byz_zakharias_is_mature
-			}
-		}
-	}
-	
-	option = { #Octavian mature
-		name = byz.64.a
-		trigger = {
-			NOT = {
-				BYZ = {
-					has_country_flag = byzantium_regency
-				}
-			}
-		}
-		ai_chance = {
-			base = 50
-		}
-		custom_effect_tooltip = byz_zakharias_vi_complete_education_tt
-		hidden_effect = {
-			BYZ = {
-				set_character_name = {
-					character = BYZ_Octavian_II_Zakharias_corps
-					name = BYZ_Octavian_II_Zakharias_corps_non_vi
-				}
-			}
-		}
-	}
-	
-	option = { #Hail to New Empire
-		name = byz.64.b
-		trigger = {
-			BYZ = {
-				has_country_flag = byzantium_regency
-			}
-		}
-		ai_chance = {
-			base = 50
-		}
-		custom_effect_tooltip = byz_regency_end_tt
-		hidden_effect = {
-			BYZ = {
-				promote_character = {
-					character = BYZ_Octavian_II_Zakharias
-					ideology = imperial_system_sub
-				}
-				set_country_leader_portrait = {
-					ideology = authoritarian
-					portrait = GFX_byz_Octavian_II_Zakharias_18
-				}
-				set_country_leader_description = {
-					ideology = authoritarian
-					desc = POLITICS_OCTAVIAN_II_ZAKHARIAS_18_DESC
-				}
-				BYZ_Octavian_II_Zakharias = {
-					add_trait = {
-						ideology = imperial_system_sub
-						trait = byz_empire
-					}
-					remove_trait = {
-						ideology = imperial_system_sub
-						trait = young_emperor
-					}
-				}
-				set_country_leader_portrait = {
-					ideology = democratic
-					portrait = GFX_byz_Octavian_II_Zakharias_18
-				}
-				set_country_leader_description = {
-					ideology = democratic
-					desc = POLITICS_OCTAVIAN_II_ZAKHARIAS_18_DESC
-				}
-				BYZ_Octavian_II_Zakharias_dem = {
-					add_trait = {
-						ideology = senator_monarchy_sub
-						trait = byz_empire
-					}
-					remove_trait = {
-						ideology = senator_monarchy_sub
-						trait = young_emperor
-					}
-				}
-				set_country_leader_portrait = {
-					ideology = socialism
-					portrait = GFX_byz_Octavian_II_Zakharias_18
-				}
-				set_country_leader_description = {
-					ideology = socialism
-					desc = POLITICS_OCTAVIAN_II_ZAKHARIAS_18_DESC
-				}
-				BYZ_Octavian_II_Zakharias_soc = {
-					add_trait = {
-						ideology = social_monarchism
-						trait = byz_empire
-					}
-					remove_trait = {
-						ideology = social_monarchism
-						trait = young_emperor
-					}
-				}
-				set_country_leader_portrait = {
-					ideology = reactionist
-					portrait = GFX_byz_Octavian_II_Zakharias_18
-				}
-				set_country_leader_description = {
-					ideology = reactionist
-					desc = POLITICS_OCTAVIAN_II_ZAKHARIAS_18_DESC
-				}
-				BYZ_Octavian_II_Zakharias_rea = {
-					add_trait = {
-						ideology = military_monarchism_sub
-						trait = byz_empire
-					}
-					remove_trait = {
-						ideology = military_monarchism_sub
-						trait = young_emperor
-					}
-				}
+				set_country_flag = byz_julius_is_regent
 			}
 		}
 	}
@@ -4575,7 +4403,431 @@ country_event = { #Fight with Gigant
 	
 }
 
+country_event = { #Mother Letter
+	id = byz.116
+	title = byz.116.t
+	desc = byz.116.d
+	picture = GFX_report_event_byz_letter
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event byz.116"
+	}
+	
+	option = { #
+		name = byz.116.a
+		ai_chance = {
+			base = 100
+		}
+		add_stability = 0.05
+		custom_effect_tooltip = byz_prince_become_more_liberal_tt
+	}
+	
+}
 
+country_event = { #Constantine Words
+	id = byz.117
+	title = byz.117.t
+	desc = byz.117.d
+	picture = GFX_report_event_byz_roman_gedonism
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event byz.117"
+	}
+	
+	option = { #
+		name = byz.117.a
+		ai_chance = {
+			base = 100
+		}
+		add_stability = -0.05
+		custom_effect_tooltip = byz_prince_become_more_authoritarian_tt
+	}
+	
+}
+
+country_event = { #Instuction from Julius
+	id = byz.118
+	title = byz.118.t
+	desc = byz.118.d
+	picture = GFX_report_event_byz_solder_1
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event byz.118"
+	}
+	
+	option = { #
+		name = byz.118.a
+		ai_chance = {
+			base = 100
+		}
+		add_political_power = 75
+		custom_effect_tooltip = byz_prince_become_more_ambition_tt
+	}
+	
+}
+
+country_event = { #18 Year Prince
+	id = byz.119
+	title = byz.119.t
+	desc = byz.119.d
+	picture = GFX_report_zakaharias_grow_up
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event byz.119"
+		hidden_effect = {
+			BYZ = {
+				add_corps_commander_role = {
+					Character = BYZ_Octavian_II_Zakharias_corps
+					skill = 3
+					attack_skill = 3
+					defense_skill = 3
+					planning_skill = 2
+					logistics_skill = 2
+					traits = { politically_connected media_personality infantry_officer roman_prince_land }
+				}
+			}
+			BYZ = {
+				set_country_flag = byz_zakharias_is_mature
+			}
+		}
+	}
+	
+	option = { #
+		name = byz.119.a
+		ai_chance = {
+			base = 100
+		}
+		custom_effect_tooltip = byz_zakharias_vi_complete_education_tt
+		hidden_effect = {
+			BYZ = {
+				set_character_name = {
+					character = BYZ_Octavian_II_Zakharias_corps
+					name = BYZ_Octavian_II_Zakharias_corps_non_vi
+				}
+			}
+		}
+	}
+	
+}
+
+country_event = { #End of Regency by any education
+	id = byz.120
+	title = byz.120.t
+	desc = byz.120.d
+	picture = GFX_report_event_byz_coronation_1
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event byz.120"
+		hidden_effect = {
+			BYZ = {
+				set_country_flag = byzantium_regency_over
+				clr_country_flag = byzantium_regency
+			}
+			BYZ = {
+				add_corps_commander_role = {
+					Character = BYZ_Octavian_II_Zakharias_corps
+					skill = 3
+					attack_skill = 3
+					defense_skill = 3
+					planning_skill = 2
+					logistics_skill = 2
+					traits = { politically_connected media_personality infantry_officer roman_prince_land }
+				}
+			}
+			BYZ = {
+				set_country_flag = byz_zakharias_is_mature
+			}
+		}
+	}
+	
+	option = { #
+		name = byz.120.a
+		ai_chance = {
+			base = 100
+		}
+		custom_effect_tooltip = byz_regency_end_tt
+		hidden_effect = {
+			byz_set_prince_ruller = yes
+		}
+	}
+	
+}
+
+country_event = { #End of Regency by fail great way
+	id = byz.121
+	title = byz.121.t
+	desc = byz.121.d
+	picture = GFX_report_event_byz_coronation_2
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event byz.121"
+		hidden_effect = {
+			BYZ = {
+				set_country_flag = byzantium_regency_over
+				clr_country_flag = byzantium_regency
+			}
+			BYZ = {
+				add_corps_commander_role = {
+					Character = BYZ_Octavian_II_Zakharias_corps
+					skill = 3
+					attack_skill = 3
+					defense_skill = 3
+					planning_skill = 2
+					logistics_skill = 2
+					traits = { politically_connected media_personality infantry_officer roman_prince_land }
+				}
+			}
+			BYZ = {
+				set_country_flag = byz_zakharias_is_mature
+			}
+		}
+	}
+	
+	option = { #Only Father Way
+		name = byz.121.a
+		ai_chance = {
+			base = 100
+		}
+		custom_effect_tooltip = byz_select_father_reform_tt
+		custom_effect_tooltip = byz_regency_end_tt
+		hidden_effect = {
+			byz_set_prince_ruller = yes
+		}
+	}
+	
+}
+
+country_event = { #End of Regency by Diplomacy learning
+	id = byz.122
+	title = byz.122.t
+	desc = byz.122.d
+	picture = GFX_report_event_byz_coronation_diplomacy
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event byz.122"
+		hidden_effect = {
+			BYZ = {
+				set_country_flag = byzantium_regency_over
+				clr_country_flag = byzantium_regency
+			}
+			BYZ = {
+				add_corps_commander_role = {
+					Character = BYZ_Octavian_II_Zakharias_corps
+					skill = 3
+					attack_skill = 3
+					defense_skill = 3
+					planning_skill = 2
+					logistics_skill = 2
+					traits = { politically_connected media_personality infantry_officer roman_prince_land }
+				}
+			}
+			BYZ = {
+				set_country_flag = byz_zakharias_is_mature
+			}
+		}
+	}
+	
+	option = { #Together with Belisarian
+		name = byz.122.a
+		ai_chance = {
+			base = 60
+		}
+		custom_effect_tooltip = byz_select_democrasy_reform_tt
+		custom_effect_tooltip = byz_regency_diplo_end_tt
+		hidden_effect = {
+			byz_set_prince_ruller = yes
+			BYZ = {
+				set_country_flag = byz_liberal_reform_focus_unlock_flag
+				mark_focus_tree_layout_dirty = yes
+			}
+		}
+	}
+	
+	option = { #I shall continue Father way
+		name = byz.122.b
+		ai_chance = {
+			base = 40
+		}
+		custom_effect_tooltip = byz_select_father_reform_tt
+		custom_effect_tooltip = byz_regency_diplo_end_tt
+		hidden_effect = {
+			byz_set_prince_ruller = yes
+		}
+	}
+	
+}
+
+country_event = { #End of Regency by Military learning
+	id = byz.123
+	title = byz.123.t
+	desc = byz.123.d
+	picture = GFX_report_event_byz_coronation_military
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event byz.123"
+		hidden_effect = {
+			BYZ = {
+				set_country_flag = byzantium_regency_over
+				clr_country_flag = byzantium_regency
+			}
+			BYZ = {
+				add_corps_commander_role = {
+					Character = BYZ_Octavian_II_Zakharias_corps
+					skill = 3
+					attack_skill = 5
+					defense_skill = 4
+					planning_skill = 2
+					logistics_skill = 4
+					traits = { politically_connected media_personality brilliant_strategist infantry_officer roman_prince_land }
+				}
+			}
+			BYZ = {
+				set_country_flag = byz_zakharias_is_mature
+			}
+		}
+	}
+	
+	option = { #Democracy is dead
+		name = byz.123.a
+		ai_chance = {
+			base = 80
+		}
+		custom_effect_tooltip = byz_select_military_reform_tt
+		custom_effect_tooltip = byz_regency_military_end_tt
+		hidden_effect = {
+			byz_set_prince_ruller = yes
+			BYZ = {
+				set_country_flag = byz_none_reform_focus_unlock_flag
+				mark_focus_tree_layout_dirty = yes
+			}
+		}
+	}
+	
+	option = { #I shall continue Father way
+		name = byz.123.b
+		ai_chance = {
+			base = 20
+		}
+		custom_effect_tooltip = byz_select_father_reform_tt
+		custom_effect_tooltip = byz_regency_military_end_tt
+		hidden_effect = {
+			byz_set_prince_ruller = yes
+		}
+	}
+	
+}
+
+country_event = { #End of Regency by Great learning
+	id = byz.124
+	title = byz.124.t
+	desc = byz.124.d
+	picture = GFX_report_event_byz_coronation_great
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event byz.124"
+		hidden_effect = {
+			BYZ = {
+				set_country_flag = byzantium_regency_over
+				clr_country_flag = byzantium_regency
+			}
+			BYZ = {
+				add_corps_commander_role = {
+					Character = BYZ_Octavian_II_Zakharias_corps
+					skill = 3
+					attack_skill = 3
+					defense_skill = 3
+					planning_skill = 2
+					logistics_skill = 2
+					traits = { politically_connected media_personality brilliant_strategist infantry_officer roman_prince_land }
+				}
+			}
+			BYZ = {
+				set_country_flag = byz_zakharias_is_mature
+			}
+		}
+	}
+	
+	option = { #Lets build future together
+		name = byz.124.a
+		ai_chance = {
+			base = 70
+		}
+		custom_effect_tooltip = byz_select_democrasy_reform_tt
+		custom_effect_tooltip = byz_regency_end_tt
+		hidden_effect = {
+			byz_set_prince_ruller = yes
+			BYZ = {
+				set_country_flag = byz_liberal_reform_focus_unlock_flag
+				mark_focus_tree_layout_dirty = yes
+			}
+		}
+	}
+	
+	option = { #I shall continue Father way
+		name = byz.124.b
+		ai_chance = {
+			base = 20
+		}
+		custom_effect_tooltip = byz_select_father_reform_tt
+		custom_effect_tooltip = byz_regency_great_end_tt
+		hidden_effect = {
+			byz_set_prince_ruller = yes
+		}
+	}
+	
+	option = { #Only war is my way
+		name = byz.124.c
+		ai_chance = {
+			base = 10
+		}
+		custom_effect_tooltip = byz_select_military_reform_tt
+		custom_effect_tooltip = byz_regency_great_end_tt
+		hidden_effect = {
+			byz_set_prince_ruller = yes
+			BYZ = {
+				set_country_flag = byz_none_reform_focus_unlock_flag
+				mark_focus_tree_layout_dirty = yes
+			}
+		}
+	}
+	
+}
 
 country_event = { #Reform senat
 	id = byz.1000
@@ -9940,23 +10192,12 @@ country_event = { #Small but Great #356 Days
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event byz_zakharias.198"
 		hidden_effect = {
-			random_list = {
-				#50 = {
-				#	BYZ = {
-				#		country_event = {
-				#			id = byz_zakharias.200
-				#			days = 
-				#		}
-				#	}
-				#}
-				#50 = {
-				#	BYZ = {
-				#		country_event = {
-				#			id = byz_zakharias.201
-				#			days = 
-				#		}
-				#	}
-				#}
+			BYZ = {
+				set_country_flag = byz_first_prince_education_event
+				country_event = {
+					id = script_event.56
+					days = 120
+				}
 			}
 		}
 	}
@@ -9988,25 +10229,14 @@ country_event = { #Fear of greetest #356 Days
 	is_triggered_only = yes
 	
 	immediate = {
-		log = "[GetDateText]: [Root.GetName]: event byz_zakharias.198"
+		log = "[GetDateText]: [Root.GetName]: event byz_zakharias.199"
 		hidden_effect = {
-			random_list = {
-				#50 = {
-				#	BYZ = {
-				#		country_event = {
-				#			id = byz_zakharias.200
-				#			days = 
-				#		}
-				#	}
-				#}
-				#50 = {
-				#	BYZ = {
-				#		country_event = {
-				#			id = byz_zakharias.201
-				#			days = 
-				#		}
-				#	}
-				#}
+			BYZ = {
+				set_country_flag = byz_first_prince_education_event
+				country_event = {
+					id = script_event.56
+					days = 120
+				}
 			}
 		}
 	}
@@ -10063,6 +10293,82 @@ country_event = { #Learning of Diplomacy #466 Days
 	
 }
 
+country_event = { #Small but Great #476 Days
+	id = byz_zakharias.200
+	title = byz_zakharias.200.t
+	desc = byz_zakharias.200.d
+	picture = GFX_
+	
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event byz_zakharias.200"
+		hidden_effect = {
+			BYZ = {
+				country_event = {
+					id = byz_zakharias.20
+					days = 78
+				}
+			}
+		}
+	}
+
+	option = { #I find friend
+		name = byz_zakharias.200.a
+		ai_chance = {
+			base = 100
+		}
+		custom_effect_tooltip = byz_prince_eduction_is_easy_tt
+		hidden_effect = {
+			add_to_variable = {
+				var = BYZ.byz_prince_education_easy_var
+				value = 1
+			}
+		}
+	}
+	
+}
+
+country_event = { #Fear of greetest #476 Days
+	id = byz_zakharias.201
+	title = byz_zakharias.201.t
+	desc = byz_zakharias.201.d
+	picture = GFX_
+	
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event byz_zakharias.201"
+		hidden_effect = {
+			BYZ = {
+				country_event = {
+					id = byz_zakharias.20
+					days = 78
+				}
+			}
+		}
+	}
+
+	option = { #This is normal
+		name = byz_zakharias.201.a
+		ai_chance = {
+			base = 100
+		}
+		custom_effect_tooltip = byz_prince_eduction_is_hard_tt
+		hidden_effect = {
+			add_to_variable = {
+				var = BYZ.byz_prince_education_hard_var
+				value = 1
+			}
+		}
+	}
+	
+}
+
 country_event = { #Diciplin Lesson #484 Days
 	id = byz_zakharias.32
 	title = byz_zakharias.32.t
@@ -10097,7 +10403,7 @@ country_event = { #Diciplin Lesson #484 Days
 	
 }
 
-country_event = { #First meeting prince with Aleksandra Aleksandrovna Romanova #533 #568  Days 
+country_event = { #First meeting prince with Aleksandra Aleksandrovna Romanova #533 #560 #568  Days 
 	id = byz_zakharias.20
 	title = byz_zakharias.20.t
 	desc = byz_zakharias.20.d
@@ -10163,6 +10469,84 @@ country_event = { #Prince learn about power of word #679 Days
 	
 }
 
+country_event = { #Small but Great #706 Days
+	id = byz_zakharias.202
+	title = byz_zakharias.202.t
+	desc = byz_zakharias.202.d
+	picture = GFX_
+	
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event byz_zakharias.202"
+		hidden_effect = {
+			BYZ = {
+				set_country_flag = byz_second_prince_education_event
+				country_event = {
+					id = script_event.56
+					days = 120
+				}
+			}
+		}
+	}
+
+	option = { #I find friend
+		name = byz_zakharias.202.a
+		ai_chance = {
+			base = 100
+		}
+		custom_effect_tooltip = byz_prince_eduction_is_easy_tt
+		hidden_effect = {
+			add_to_variable = {
+				var = BYZ.byz_prince_education_easy_var
+				value = 1
+			}
+		}
+	}
+	
+}
+
+country_event = { #Fear of greetest #706 Days
+	id = byz_zakharias.203
+	title = byz_zakharias.203.t
+	desc = byz_zakharias.203.d
+	picture = GFX_
+	
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event byz_zakharias.203"
+		hidden_effect = {
+			BYZ = {
+				set_country_flag = byz_second_prince_education_event
+				country_event = {
+					id = script_event.56
+					days = 120
+				}
+			}
+		}
+	}
+
+	option = { #This is normal
+		name = byz_zakharias.203.a
+		ai_chance = {
+			base = 100
+		}
+		custom_effect_tooltip = byz_prince_eduction_is_hard_tt
+		hidden_effect = {
+			add_to_variable = {
+				var = BYZ.byz_prince_education_hard_var
+				value = 1
+			}
+		}
+	}
+	
+}
+
 country_event = { #First March of Prince #714 Days
 	id = byz_zakharias.33
 	title = byz_zakharias.33.t
@@ -10197,39 +10581,6 @@ country_event = { #First March of Prince #714 Days
 }
 
 #14 year old
-
-country_event = { #Last talk with Belisarian in school #864 Days
-	id = byz_zakharias.22
-	title = byz_zakharias.22.t
-	desc = byz_zakharias.22.d
-	picture = GFX_report_event_byz_epmty_class
-	
-	fire_only_once = yes
-	
-	is_triggered_only = yes
-	
-	immediate = {
-		log = "[GetDateText]: [Root.GetName]: event byz_zakharias.22"
-		hidden_effect = {
-			BYZ = {
-				country_event = {
-					id = byz_zakharias.23
-					days = 83
-				}
-			}
-		}
-	}
-
-	option = { #This is how friend blossoms
-		name = byz_zakharias.22.a
-		ai_chance = {
-			base = 100
-		}
-		add_political_power = 50
-		custom_effect_tooltip = byz_belisarian_may_help_with_reform_tt
-	}
-	
-}
 
 country_event = { #Prince platoon #814 Days
 	id = byz_zakharias.34
@@ -10266,7 +10617,116 @@ country_event = { #Prince platoon #814 Days
 	
 }
 
-country_event = { #Second summer with Aleksandara Aleksandrovna Romanova #947 #942 Days
+country_event = { #Small but Great #826 Days
+	id = byz_zakharias.204
+	title = byz_zakharias.204.t
+	desc = byz_zakharias.204.d
+	picture = GFX_
+	
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event byz_zakharias.204"
+		hidden_effect = {
+			BYZ = {
+				country_event = {
+					id = byz_zakharias.23
+					days = 119
+				}
+			}
+		}
+	}
+
+	option = { #I find friend
+		name = byz_zakharias.204.a
+		ai_chance = {
+			base = 100
+		}
+		custom_effect_tooltip = byz_prince_eduction_is_easy_tt
+		hidden_effect = {
+			add_to_variable = {
+				var = BYZ.byz_prince_education_easy_var
+				value = 1
+			}
+		}
+	}
+	
+}
+
+country_event = { #Fear of greetest #826 Days
+	id = byz_zakharias.205
+	title = byz_zakharias.205.t
+	desc = byz_zakharias.205.d
+	picture = GFX_
+	
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event byz_zakharias.205"
+		hidden_effect = {
+			BYZ = {
+				country_event = {
+					id = byz_zakharias.23
+					days = 119
+				}
+			}
+		}
+	}
+
+	option = { #This is normal
+		name = byz_zakharias.205.a
+		ai_chance = {
+			base = 100
+		}
+		custom_effect_tooltip = byz_prince_eduction_is_hard_tt
+		hidden_effect = {
+			add_to_variable = {
+				var = BYZ.byz_prince_education_hard_var
+				value = 1
+			}
+		}
+	}
+	
+}
+
+country_event = { #Last talk with Belisarian in school #864 Days
+	id = byz_zakharias.22
+	title = byz_zakharias.22.t
+	desc = byz_zakharias.22.d
+	picture = GFX_report_event_byz_epmty_class
+	
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event byz_zakharias.22"
+		hidden_effect = {
+			BYZ = {
+				country_event = {
+					id = byz_zakharias.23
+					days = 83
+				}
+			}
+		}
+	}
+
+	option = { #This is how friend blossoms
+		name = byz_zakharias.22.a
+		ai_chance = {
+			base = 100
+		}
+		add_political_power = 50
+		custom_effect_tooltip = byz_belisarian_may_help_with_reform_tt
+	}
+	
+}
+
+country_event = { #Second summer with Aleksandara Aleksandrovna Romanova #947 #942 #945 Days
 	id = byz_zakharias.23
 	title = byz_zakharias.23.t
 	desc = byz_zakharias.23.d
@@ -10327,6 +10787,84 @@ country_event = { #Lonely night #1083 Days
 		}
 		add_stability = -0.05
 		custom_effect_tooltip = byz_prince_become_more_liberal_tt
+	}
+	
+}
+
+country_event = { #Small but Great #1081 Days
+	id = byz_zakharias.206
+	title = byz_zakharias.206.t
+	desc = byz_zakharias.206.d
+	picture = GFX_
+	
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event byz_zakharias.206"
+		hidden_effect = {
+			BYZ = {
+				set_country_flag = byz_third_prince_education_event
+				country_event = {
+					id = script_event.56
+					days = 72
+				}
+			}
+		}
+	}
+
+	option = { #I find friend
+		name = byz_zakharias.206.a
+		ai_chance = {
+			base = 100
+		}
+		custom_effect_tooltip = byz_prince_eduction_is_easy_tt
+		hidden_effect = {
+			add_to_variable = {
+				var = BYZ.byz_prince_education_easy_var
+				value = 1
+			}
+		}
+	}
+	
+}
+
+country_event = { #Fear of greetest #1081 Days
+	id = byz_zakharias.207
+	title = byz_zakharias.207.t
+	desc = byz_zakharias.207.d
+	picture = GFX_
+	
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event byz_zakharias.207"
+		hidden_effect = {
+			BYZ = {
+				set_country_flag = byz_third_prince_education_event
+				country_event = {
+					id = script_event.56
+					days = 72
+				}
+			}
+		}
+	}
+
+	option = { #This is normal
+		name = byz_zakharias.207.a
+		ai_chance = {
+			base = 100
+		}
+		custom_effect_tooltip = byz_prince_eduction_is_hard_tt
+		hidden_effect = {
+			add_to_variable = {
+				var = BYZ.byz_prince_education_hard_var
+				value = 1
+			}
+		}
 	}
 	
 }
@@ -10436,7 +10974,83 @@ country_event = { #First medal #1148 Days
 	
 }
 
-country_event = { #Romanova promis #1290 #1306 Days
+country_event = { #Small but Great #1153 Days
+	id = byz_zakharias.208
+	title = byz_zakharias.208.t
+	desc = byz_zakharias.208.d
+	picture = GFX_
+	
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event byz_zakharias.208"
+		hidden_effect = {
+			BYZ = {
+				country_event = {
+					id = byz_zakharias.26
+					days = 147
+				}
+			}
+		}
+	}
+
+	option = { #I find friend
+		name = byz_zakharias.208.a
+		ai_chance = {
+			base = 100
+		}
+		custom_effect_tooltip = byz_prince_eduction_is_easy_tt
+		hidden_effect = {
+			add_to_variable = {
+				var = BYZ.byz_prince_education_easy_var
+				value = 1
+			}
+		}
+	}
+	
+}
+
+country_event = { #Fear of greetest #1153 Days
+	id = byz_zakharias.209
+	title = byz_zakharias.209.t
+	desc = byz_zakharias.209.d
+	picture = GFX_
+	
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event byz_zakharias.209"
+		hidden_effect = {
+			BYZ = {
+				country_event = {
+					id = byz_zakharias.26
+					days = 147
+				}
+			}
+		}
+	}
+
+	option = { #This is normal
+		name = byz_zakharias.209.a
+		ai_chance = {
+			base = 100
+		}
+		custom_effect_tooltip = byz_prince_eduction_is_hard_tt
+		hidden_effect = {
+			add_to_variable = {
+				var = BYZ.byz_prince_education_hard_var
+				value = 1
+			}
+		}
+	}
+	
+}
+
+country_event = { #Romanova promis #1290 #1306 #1300 Days
 	id = byz_zakharias.26
 	title = byz_zakharias.26.t
 	desc = byz_zakharias.26.d
@@ -10507,6 +11121,84 @@ country_event = { #Were to practice #1373 Days
 		}
 		add_war_support = 0.025
 		custom_effect_tooltip = byz_prince_work_in_imperial_palace_tt
+	}
+	
+}
+
+country_event = { #Small but Great #1383 Days
+	id = byz_zakharias.210
+	title = byz_zakharias.210.t
+	desc = byz_zakharias.210.d
+	picture = GFX_
+	
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event byz_zakharias.210"
+		hidden_effect = {
+			BYZ = {
+				set_country_flag = byz_fourth_prince_education_event
+				country_event = {
+					id = script_event.56
+					days = 257
+				}
+			}
+		}
+	}
+
+	option = { #I find friend
+		name = byz_zakharias.210.a
+		ai_chance = {
+			base = 100
+		}
+		custom_effect_tooltip = byz_prince_eduction_is_easy_tt
+		hidden_effect = {
+			add_to_variable = {
+				var = BYZ.byz_prince_education_easy_var
+				value = 1
+			}
+		}
+	}
+	
+}
+
+country_event = { #Fear of greetest #1383 Days
+	id = byz_zakharias.211
+	title = byz_zakharias.211.t
+	desc = byz_zakharias.211.d
+	picture = GFX_
+	
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event byz_zakharias.211"
+		hidden_effect = {
+			BYZ = {
+				set_country_flag = byz_fourth_prince_education_event
+				country_event = {
+					id = script_event.56
+					days = 257
+				}
+			}
+		}
+	}
+
+	option = { #This is normal
+		name = byz_zakharias.211.a
+		ai_chance = {
+			base = 100
+		}
+		custom_effect_tooltip = byz_prince_eduction_is_hard_tt
+		hidden_effect = {
+			add_to_variable = {
+				var = BYZ.byz_prince_education_hard_var
+				value = 1
+			}
+		}
 	}
 	
 }
@@ -10597,6 +11289,84 @@ country_event = { #End of learning #1610 Days
 	
 }
 
+country_event = { #Small but Great #1640 Days
+	id = byz_zakharias.212
+	title = byz_zakharias.212.t
+	desc = byz_zakharias.212.d
+	picture = GFX_
+	
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event byz_zakharias.212"
+		hidden_effect = {
+			BYZ = {
+				set_country_flag = byz_fifth_prince_education_event
+				country_event = {
+					id = script_event.56
+					days = 17
+				}
+			}
+		}
+	}
+
+	option = { #I find friend
+		name = byz_zakharias.212.a
+		ai_chance = {
+			base = 100
+		}
+		custom_effect_tooltip = byz_prince_eduction_is_easy_tt
+		hidden_effect = {
+			add_to_variable = {
+				var = BYZ.byz_prince_education_easy_var
+				value = 1
+			}
+		}
+	}
+	
+}
+
+country_event = { #Fear of greetest #1640 Days
+	id = byz_zakharias.213
+	title = byz_zakharias.213.t
+	desc = byz_zakharias.213.d
+	picture = GFX_
+	
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event byz_zakharias.213"
+		hidden_effect = {
+			BYZ = {
+				set_country_flag = byz_fifth_prince_education_event
+				country_event = {
+					id = script_event.56
+					days = 17
+				}
+			}
+		}
+	}
+
+	option = { #This is normal
+		name = byz_zakharias.213.a
+		ai_chance = {
+			base = 100
+		}
+		custom_effect_tooltip = byz_prince_eduction_is_hard_tt
+		hidden_effect = {
+			add_to_variable = {
+				var = BYZ.byz_prince_education_hard_var
+				value = 1
+			}
+		}
+	}
+	
+}
+
 country_event = { #graduation ball #1656 Days
 	id = byz_zakharias.29
 	title = byz_zakharias.29.t
@@ -10668,6 +11438,84 @@ country_event = { #End of military lerning #1656 Days
 	
 }
 
+country_event = { #Small but Great #1657 Days
+	id = byz_zakharias.214
+	title = byz_zakharias.214.t
+	desc = byz_zakharias.214.d
+	picture = GFX_
+	
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event byz_zakharias.214"
+		hidden_effect = {
+			BYZ = {
+				set_country_flag = byz_last_prince_education_event
+				country_event = {
+					id = script_event.56
+					days = 10
+				}
+			}
+		}
+	}
+
+	option = { #I find friend
+		name = byz_zakharias.214.a
+		ai_chance = {
+			base = 100
+		}
+		custom_effect_tooltip = byz_prince_eduction_is_easy_tt
+		hidden_effect = {
+			add_to_variable = {
+				var = BYZ.byz_prince_education_easy_var
+				value = 1
+			}
+		}
+	}
+	
+}
+
+country_event = { #Fear of greetest #1657 Days
+	id = byz_zakharias.215
+	title = byz_zakharias.215.t
+	desc = byz_zakharias.215.d
+	picture = GFX_
+	
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event byz_zakharias.215"
+		hidden_effect = {
+			BYZ = {
+				set_country_flag = byz_last_prince_education_event
+				country_event = {
+					id = script_event.56
+					days = 10
+				}
+			}
+		}
+	}
+
+	option = { #This is normal
+		name = byz_zakharias.215.a
+		ai_chance = {
+			base = 100
+		}
+		custom_effect_tooltip = byz_prince_eduction_is_hard_tt
+		hidden_effect = {
+			add_to_variable = {
+				var = BYZ.byz_prince_education_hard_var
+				value = 1
+			}
+		}
+	}
+	
+}
+
 country_event = { #March of new Officer #1666 Days
 	id = byz_zakharias.39
 	title = byz_zakharias.39.t
@@ -10713,7 +11561,81 @@ country_event = { #March of new Officer #1666 Days
 	
 }
 
-country_event = { #Zakharias promis #1660 #1670 Days
+country_event = { #Small but Great #1667 Days
+	id = byz_zakharias.216
+	title = byz_zakharias.216.t
+	desc = byz_zakharias.216.d
+	picture = GFX_
+	
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event byz_zakharias.216"
+		hidden_effect = {
+			BYZ = {
+				country_event = {
+					id = byz_zakharias.30
+					days = 4
+				}
+			}
+		}
+	}
+
+	option = { #I find friend
+		name = byz_zakharias.216.a
+		ai_chance = {
+			base = 100
+		}
+		custom_effect_tooltip = byz_prince_eduction_is_easy_tt
+		hidden_effect = {
+			BYZ = {
+				set_country_flag = byz_zakharias_great_learing_end
+			}
+		}
+	}
+	
+}
+
+country_event = { #Fear of greetest #1667 Days
+	id = byz_zakharias.217
+	title = byz_zakharias.217.t
+	desc = byz_zakharias.217.d
+	picture = GFX_
+	
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event byz_zakharias.217"
+		hidden_effect = {
+			BYZ = {
+				country_event = {
+					id = byz_zakharias.30
+					days = 4
+				}
+			}
+		}
+	}
+
+	option = { #This is normal
+		name = byz_zakharias.217.a
+		ai_chance = {
+			base = 100
+		}
+		custom_effect_tooltip = byz_prince_eduction_is_hard_tt
+		hidden_effect = {
+			BYZ = {
+				set_country_flag = byz_zakharias_great_fail_learing_end
+			}
+		}
+	}
+	
+}
+
+country_event = { #Zakharias promis #1660 #1670 #1671 Days
 	id = byz_zakharias.30
 	title = byz_zakharias.30.t
 	desc = byz_zakharias.30.d
