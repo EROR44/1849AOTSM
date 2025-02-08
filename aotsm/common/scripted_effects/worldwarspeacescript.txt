@@ -4721,9 +4721,6 @@ rus_capitulation_all = {
 			}
 			white_peace = KAZ
 		}
-	}				
-	RUS = {
-		leave_faction = yes
 	}
 	every_country = {
 		limit = {
@@ -4795,7 +4792,7 @@ rus_capitulation_all = {
 			}
 		}
 	}
-	if = {
+	if = { #Бадахшан
 		limit = {
 			RUS = {
 				owns_state = 918
@@ -4810,7 +4807,21 @@ rus_capitulation_all = {
 		RUS = {
 			remove_state_core = 918
 		}
+	}		
+	if = { #дроп альянса
+		limit = {
+			RUS = { is_faction_leader = yes }
+		}
+		RUS = { dismantle_faction = yes }
 	}
+	else_if = {
+		limit = {
+			RUS = { is_in_faction = yes }
+		}
+		RUS = {
+			leave_faction = yes
+		}
+	}	
 }
 
 rus_capitulation_from_ultimatum = { #Понять в чем разница между обычной капитуляцией
@@ -5398,8 +5409,18 @@ rus_capitulation_from_ultimatum = { #Понять в чем разница ме�
 			remove_state_core = 722
 		}
 	}	
-	RUS = {
-		leave_faction = yes
+	if = { #заглушка на случай участия Казахстана в великой войне на стороне России
+		limit = {
+			KAZ = { 
+				is_in_faction_with = RUS
+			}
+		}
+		every_country = {
+			limit = {
+				has_war_with = KAZ
+			}
+			white_peace = KAZ
+		}
 	}		
 	every_country = {
 		limit = {
@@ -5531,7 +5552,21 @@ rus_capitulation_from_ultimatum = { #Понять в чем разница ме�
 			}
 			white_peace = PRU
 		}
+	}			
+	if = { #дроп альянса
+		limit = {
+			RUS = { is_faction_leader = yes }
+		}
+		RUS = { dismantle_faction = yes }
 	}
+	else_if = {
+		limit = {
+			RUS = { is_in_faction = yes }
+		}
+		RUS = {
+			leave_faction = yes
+		}
+	}	
 }
 
 gw_create_poland_effect = { #Creating Poland if Russian Capitulation
