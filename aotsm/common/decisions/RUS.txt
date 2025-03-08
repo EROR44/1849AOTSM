@@ -1603,25 +1603,13 @@ RUS_finland_separatism_cat = {
 		}
 		
 		available = {	
-			NOT = {
-				has_country_flag = RUS_finland_quiestion_solved
-			}	
+			#NOT = {
+			#	has_country_flag = RUS_finland_quiestion_solved
+			#}	
 			custom_trigger_tooltip = {
 				tooltip = none_trigger_tt	
-				has_country_flag = RUS_unlock_fight_witch_finland_separatism
-				any_state = {
-					is_owned_and_controlled_by = RUS
-					is_core_of = FIN
-					NOT = {
-						state = 146
-						state = 148
-						has_dynamic_modifier = {
-							modifier = FIN_separatism_dynamic_modifier
-						}
-					}
-				}
 				always = no
-			}			
+			}
 		}
 		
 		cancel_trigger = {
@@ -1639,10 +1627,13 @@ RUS_finland_separatism_cat = {
 		icon = generic_civil_support
 		
 		days_mission_timeout = 120
+
 		days_re_enable = 30
 		
 		is_good = no
-		
+
+		selectable_mission = no
+
 		fire_only_once = no
 
 		complete_effect = {
@@ -1661,21 +1652,26 @@ RUS_finland_separatism_cat = {
 						NOT = {
 							state = 146
 							state = 148
-						}
-						NOT = {
 							has_dynamic_modifier = {
 								modifier = FIN_separatism_dynamic_modifier
 							}
 						}
 					}
-					set_state_flag = RUS_is_fin_separatism_up_state
+					set_state_flag = RUS_is_separatism_up_state_flag
+					add_to_variable = { 
+						RUS_finland_separatism = 1
+					}
 					if = {
 						limit = {
-							has_state_flag = RUS_end_fight_with_finland_separatism
+							has_state_flag = RUS_fin_separatism_cleared_flag
 						}
-						clr_state_flag = RUS_end_fight_with_finland_separatism
-						set_state_flag = RUS_low_finland_separatism_2
-						add_dynamic_modifier = { modifier = FIN_separatism_dynamic_modifier_2 } 		
+						every_state ={	
+							limit = {
+								is_owned_by = RUS
+								has_state_flag = RUS_is_separatism_up_state_flag
+							}
+							add_dynamic_modifier = { modifier = FIN_separatism_dynamic_modifier_2 } 
+						}		
 					}
 					else_if = {
 						limit = {
@@ -1683,67 +1679,31 @@ RUS_finland_separatism_cat = {
 								modifier = FIN_separatism_dynamic_modifier_2
 							}
 						}
-						clr_state_flag = RUS_low_finland_separatism_2
-						set_state_flag = RUS_low_finland_separatism_1
-						remove_dynamic_modifier = { modifier = FIN_separatism_dynamic_modifier_2 }
-						add_dynamic_modifier = { modifier = FIN_separatism_dynamic_modifier_1 } 	
+						every_state ={	
+							limit = {
+								is_owned_by = RUS
+								has_state_flag = RUS_is_separatism_up_state_flag
+							}
+							remove_dynamic_modifier = { modifier = FIN_separatism_dynamic_modifier_2 }
+							add_dynamic_modifier = { modifier = FIN_separatism_dynamic_modifier_1 } 	
+						}
 					}
 					else_if = {
 						limit = {
 							has_dynamic_modifier = {
 								modifier = FIN_separatism_dynamic_modifier_1
 							}
-						}
-						clr_state_flag = RUS_low_finland_separatism_1
-						remove_dynamic_modifier = { modifier = FIN_separatism_dynamic_modifier_1 }
-						add_dynamic_modifier = { modifier = FIN_separatism_dynamic_modifier } 	
-					}
-				}
-				if = {
-					limit = {
-						111 = {
-							has_state_flag = RUS_is_fin_separatism_up_state
+						} 	
+						every_state ={	
+							limit = {
+								is_owned_by = RUS
+								has_state_flag = RUS_is_separatism_up_state_flag
+							}
+							remove_dynamic_modifier = { modifier = FIN_separatism_dynamic_modifier_1 }
+							add_dynamic_modifier = { modifier = FIN_separatism_dynamic_modifier } 	
 						}
 					}
-					RUS_add_1_point_separatism_level_111 = yes
-				}
-				else_if = {
-					limit = {
-						145 = {
-							has_state_flag = RUS_is_fin_separatism_up_state
-						}
-					}
-					RUS_add_1_point_separatism_level_145 = yes
-				}
-				else_if = {
-					limit = {
-						150 = {
-							has_state_flag = RUS_is_fin_separatism_up_state
-						}
-					}
-					RUS_add_1_point_separatism_level_150 = yes
-				}
-				else_if = {
-					limit = {
-						149 = {
-							has_state_flag = RUS_is_fin_separatism_up_state
-						}
-					}
-					RUS_add_1_point_separatism_level_149 = yes
-				}
-				else_if = {
-					limit = {
-						147 = {
-							has_state_flag = RUS_is_fin_separatism_up_state
-						}
-					}
-					RUS_add_1_point_separatism_level_147 = yes
-				}
-				random_state = {
-					limit = {
-						has_state_flag = RUS_is_fin_separatism_up_state
-					}
-					clr_state_flag = RUS_is_fin_separatism_up_state
+					clr_state_flag = RUS_is_separatism_up_state_flag
 				}
 			}				
 		}
@@ -1774,7 +1734,6 @@ RUS_finland_separatism_cat = {
 
 		ai_will_do = {
 			factor = 50
-			
 		}
 		
 		complete_effect = {
@@ -1792,6 +1751,357 @@ RUS_finland_separatism_cat = {
 		}
 	}
 	
+	RUS_test_add_separatism_111 = {
+	
+		icon = eng_trade_unions_support
+					
+		available = {
+			check_variable = {
+				111.RUS_finland_separatism < 3
+			}
+		}
+		
+		allowed = { 
+			
+		}
+		
+		visible = {
+			is_debug = yes
+		}
+		
+		fire_only_once = no
+	
+		modifier = {
+			
+		}
+
+		ai_will_do = {
+			factor = 0
+			
+		}
+		
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision RUS_test_add_separatism_111"
+			add_to_variable = { 111.RUS_finland_separatism = 1 }				
+		}
+	}
+	
+	RUS_test_add_separatism_145 = {
+	
+		icon = eng_trade_unions_support
+					
+		available = {
+			check_variable = {
+				145.RUS_finland_separatism < 3
+			}
+		}
+		
+		allowed = { 
+			
+		}
+		
+		visible = {
+			is_debug = yes
+		}
+		
+		fire_only_once = no
+	
+		modifier = {
+			
+		}
+
+		ai_will_do = {
+			factor = 0
+			
+		}
+		
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision RUS_test_add_separatism_145"
+			add_to_variable = { 145.RUS_finland_separatism = 1 }				
+		}
+	}
+	
+	RUS_test_add_separatism_147 = {
+	
+		icon = eng_trade_unions_support
+					
+		available = {
+			check_variable = {
+				147.RUS_finland_separatism < 3
+			}
+		}
+		
+		allowed = { 
+			
+		}
+		
+		visible = {
+			is_debug = yes
+		}
+		
+		fire_only_once = no
+	
+		modifier = {
+			
+		}
+
+		ai_will_do = {
+			factor = 0
+			
+		}
+		
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision RUS_test_add_separatism_147"
+			add_to_variable = { 147.RUS_finland_separatism = 1 }				
+		}
+	}
+	
+	RUS_test_add_separatism_149 = {
+	
+		icon = eng_trade_unions_support
+					
+		available = {
+			check_variable = {
+				149.RUS_finland_separatism < 3
+			}
+		}
+		
+		allowed = { 
+			
+		}
+		
+		visible = {
+			is_debug = yes
+		}
+		
+		fire_only_once = no
+	
+		modifier = {
+			
+		}
+
+		ai_will_do = {
+			factor = 0
+			
+		}
+		
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision RUS_test_add_separatism_149"
+			add_to_variable = { 149.RUS_finland_separatism = 1 }				
+		}
+	}
+	
+	RUS_test_add_separatism_150 = {
+	
+		icon = eng_trade_unions_support
+					
+		available = {
+			check_variable = {
+				150.RUS_finland_separatism < 3
+			}
+		}
+		
+		allowed = { 
+			
+		}
+		
+		visible = {
+			is_debug = yes
+		}
+		
+		fire_only_once = no
+	
+		modifier = {
+			
+		}
+
+		ai_will_do = {
+			factor = 0
+			
+		}
+		
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision RUS_test_add_separatism_150"
+			add_to_variable = { 150.RUS_finland_separatism = 1 }				
+		}
+	}
+	
+	RUS_test_remove_separatism_111 = {
+	
+		icon = eng_trade_unions_support
+					
+		available = {
+			check_variable = {
+				111.RUS_finland_separatism > 0
+			}
+		}
+		
+		allowed = { 
+			
+		}
+		
+		visible = {
+			is_debug = yes
+		}
+		
+		fire_only_once = no
+	
+		modifier = {
+			
+		}
+
+		ai_will_do = {
+			factor = 0
+			
+		}
+		
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision RUS_test_add_separatism_111"
+			subtract_from_variable = { 111.RUS_finland_separatism = 1 }				
+		}
+	}
+	
+	RUS_test_remove_separatism_145= {
+	
+		icon = eng_trade_unions_support
+					
+		available = {
+			check_variable = {
+				145.RUS_finland_separatism > 0
+			}
+		}
+		
+		allowed = { 
+			
+		}
+		
+		visible = {
+			is_debug = yes
+		}
+		
+		fire_only_once = no
+	
+		modifier = {
+			
+		}
+
+		ai_will_do = {
+			factor = 0
+			
+		}
+		
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision RUS_test_add_separatism_145"
+			subtract_from_variable = { 145.RUS_finland_separatism = 1 }				
+		}
+	}
+	
+	RUS_test_remove_separatism_147 = {
+	
+		icon = eng_trade_unions_support
+					
+		available = {
+			check_variable = {
+				147.RUS_finland_separatism > 0
+			}
+		}
+		
+		allowed = { 
+			
+		}
+		
+		visible = {
+			is_debug = yes
+		}
+		
+		fire_only_once = no
+	
+		modifier = {
+			
+		}
+
+		ai_will_do = {
+			factor = 0
+			
+		}
+		
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision RUS_test_add_separatism_147"
+			subtract_from_variable = { 147.RUS_finland_separatism = 1 }				
+		}
+	}
+	
+	RUS_test_remove_separatism_149 = {
+	
+		icon = eng_trade_unions_support
+					
+		available = {
+			check_variable = {
+				149.RUS_finland_separatism > 0
+			}
+		}
+		
+		allowed = { 
+			
+		}
+		
+		visible = {
+			is_debug = yes
+		}
+		
+		fire_only_once = no
+	
+		modifier = {
+			
+		}
+
+		ai_will_do = {
+			factor = 0
+			
+		}
+		
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision RUS_test_add_separatism_149"
+			subtract_from_variable = { 149.RUS_finland_separatism = 1 }				
+		}
+	}
+	
+	RUS_test_remove_separatism_150 = {
+	
+		icon = eng_trade_unions_support
+					
+		available = {
+			check_variable = {
+				150.RUS_finland_separatism > 0
+			}
+		}
+		
+		allowed = { 
+			
+		}
+		
+		visible = {
+			is_debug = yes
+		}
+		
+		fire_only_once = no
+	
+		modifier = {
+			
+		}
+
+		ai_will_do = {
+			factor = 0
+			
+		}
+		
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision RUS_test_add_separatism_150"
+			subtract_from_variable = { 150.RUS_finland_separatism = 1 }				
+		}
+	}
+	
+	
 	RUS_calm_uusima = {
 	
 		icon = eng_trade_unions_support
@@ -1800,6 +2110,10 @@ RUS_finland_separatism_cat = {
 			111 = {
 				is_owned_and_controlled_by = RUS
 			}
+			check_variable = {
+				111.RUS_finland_separatism > 0
+			}
+			#divisions_in_state = { state = 111 size > 1 }
 		}
 		
 		allowed = { 
@@ -1809,15 +2123,18 @@ RUS_finland_separatism_cat = {
 		visible = {
 			111 = {
 				is_owned_and_controlled_by = RUS
-				NOT = {
-					has_state_flag = RUS_end_fight_with_finland_separatism
-				}
 			}
 			check_variable = {
-				RUS_finland_separatism_111 > 0
+				111.RUS_finland_separatism > 0
 			}
 		}
-	
+
+		highlight_states = {
+			highlight_state_targets = {
+				state = 111
+			} 
+		}
+		
 		cost = 20
 		days_remove = 50
 		
@@ -1843,37 +2160,29 @@ RUS_finland_separatism_cat = {
 			hidden_effect = {
 				if = {
 					limit = {
-						111 = { 	
-							has_state_flag = RUS_low_finland_separatism_2
+						111 = { 
+							has_dynamic_modifier = {
+								modifier = FIN_separatism_dynamic_modifier_2
+							}
 						}
 					}
 					111 = { 
-						clr_state_flag = RUS_low_finland_separatism_2 
-						set_state_flag = RUS_end_fight_with_finland_separatism 
 						remove_dynamic_modifier = { 
-							modifier = FIN_separatism_dynamic_modifier_2 
+							modifier = FIN_separatism_dynamic_modifier_2 				
 						} 
-					}
-					if = {
-						limit = {
-							145 = { has_state_flag = RUS_end_fight_with_finland_separatism }
-							147 = { has_state_flag = RUS_end_fight_with_finland_separatism }
-							149 = { has_state_flag = RUS_end_fight_with_finland_separatism }
-							150 = { has_state_flag = RUS_end_fight_with_finland_separatism }
-						}
-						set_country_flag = RUS_end_fight_with_finland_separatism
+						set_state_flag = RUS_fin_separatism_cleared_flag
 					}
 					log = "[GetDateText]: [Root.GetName]: swap_flag RUS_low_finland_separatism_2 to RUS_end_fight_with_finland_separatism"
 				}
 				else_if = {
 					limit = {
 						111 = { 
-							has_state_flag = RUS_low_finland_separatism_1
+							has_dynamic_modifier = {
+								modifier = FIN_separatism_dynamic_modifier_1
+							}
 						}
 					}
 					111 = { 
-						set_state_flag = RUS_low_finland_separatism_2 
-						clr_state_flag = RUS_low_finland_separatism_1 
 						remove_dynamic_modifier = { 
 							modifier = FIN_separatism_dynamic_modifier_1 
 						} 
@@ -1885,18 +2194,13 @@ RUS_finland_separatism_cat = {
 				}
 				else_if = { 
 					limit = {
-						111 = {
-							NOT = {
-								OR = {
-									has_state_flag = RUS_low_finland_separatism_1
-									has_state_flag = RUS_low_finland_separatism_2
-									has_state_flag = RUS_end_fight_with_finland_separatism
-								}
+						111 = { 
+							has_dynamic_modifier = {
+								modifier = FIN_separatism_dynamic_modifier
 							}
 						}
 					}
 					111 = { 
-						set_state_flag = RUS_low_finland_separatism_1 
 						remove_dynamic_modifier = {
 							modifier = FIN_separatism_dynamic_modifier 
 						} 
@@ -1906,7 +2210,6 @@ RUS_finland_separatism_cat = {
 					}
 					log = "[GetDateText]: [Root.GetName]: set_flag RUS_low_finland_separatism_1"
 				}
-				
 			}
 		}
 	}
@@ -1919,6 +2222,10 @@ RUS_finland_separatism_cat = {
 			145 = {
 				is_owned_and_controlled_by = RUS
 			}
+			check_variable = {
+				145.RUS_finland_separatism > 0
+			}
+			#divisions_in_state = { state = 145 size > 1 }
 		}
 		
 		allowed = { 
@@ -1928,13 +2235,16 @@ RUS_finland_separatism_cat = {
 		visible = {
 			145 = {
 				is_owned_and_controlled_by = RUS
-				NOT = {
-					has_state_flag = RUS_end_fight_with_finland_separatism
-				}
 			}
 			check_variable = {
-				RUS_finland_separatism_145 > 0
+				145.RUS_finland_separatism > 0
 			}
+		}
+
+		highlight_states = {
+			highlight_state_targets = {
+				state = 145
+			} 
 		}
 	
 		cost = 20
@@ -1962,38 +2272,29 @@ RUS_finland_separatism_cat = {
 			hidden_effect = {
 				if = {
 					limit = {
-						145 = { 	
-							has_state_flag = RUS_low_finland_separatism_2
+						145 = { 
+							has_dynamic_modifier = {
+								modifier = FIN_separatism_dynamic_modifier_2
+							}
 						}
 					}
 					145 = { 
-						clr_state_flag = RUS_low_finland_separatism_2 
-						set_state_flag = RUS_end_fight_with_finland_separatism 
 						remove_dynamic_modifier = { 
 							modifier = FIN_separatism_dynamic_modifier_2 
 						} 
-					}
-					if = {
-						limit = {
-							111 = { has_state_flag = RUS_end_fight_with_finland_separatism }
-							145 = { has_state_flag = RUS_end_fight_with_finland_separatism }
-							147 = { has_state_flag = RUS_end_fight_with_finland_separatism }
-							149 = { has_state_flag = RUS_end_fight_with_finland_separatism }
-							150 = { has_state_flag = RUS_end_fight_with_finland_separatism }
-						}
-						set_country_flag = RUS_end_fight_with_finland_separatism
+						set_state_flag = RUS_fin_separatism_cleared_flag
 					}
 					log = "[GetDateText]: [Root.GetName]: swap_flag RUS_low_finland_separatism_2 to RUS_end_fight_with_finland_separatism"
 				}
 				else_if = {
 					limit = {
 						145 = { 
-							has_state_flag = RUS_low_finland_separatism_1
+							has_dynamic_modifier = {
+								modifier = FIN_separatism_dynamic_modifier_1
+							}
 						}
 					}
 					145 = { 
-						set_state_flag = RUS_low_finland_separatism_2 
-						clr_state_flag = RUS_low_finland_separatism_1 
 						remove_dynamic_modifier = { 
 							modifier = FIN_separatism_dynamic_modifier_1 
 						} 
@@ -2005,18 +2306,13 @@ RUS_finland_separatism_cat = {
 				}
 				else_if = { 
 					limit = {
-						145 = {
-							NOT = {
-								OR = {
-									has_state_flag = RUS_low_finland_separatism_1
-									has_state_flag = RUS_low_finland_separatism_2
-									has_state_flag = RUS_end_fight_with_finland_separatism
-								}
+						145 = { 
+							has_dynamic_modifier = {
+								modifier = FIN_separatism_dynamic_modifier
 							}
 						}
 					}
 					145 = { 
-						set_state_flag = RUS_low_finland_separatism_1 
 						remove_dynamic_modifier = {
 							modifier = FIN_separatism_dynamic_modifier 
 						} 
@@ -2026,7 +2322,6 @@ RUS_finland_separatism_cat = {
 					}
 					log = "[GetDateText]: [Root.GetName]: set_flag RUS_low_finland_separatism_1"
 				}
-				
 			}
 		}
 	}
@@ -2039,6 +2334,10 @@ RUS_finland_separatism_cat = {
 			150 = {
 				is_owned_and_controlled_by = RUS
 			}
+			check_variable = {
+				150.RUS_finland_separatism > 0
+			}
+			#divisions_in_state = { state = 150 size > 1 }
 		}
 		
 		allowed = { 
@@ -2048,13 +2347,16 @@ RUS_finland_separatism_cat = {
 		visible = {
 			150 = {
 				is_owned_and_controlled_by = RUS
-				NOT = {
-					has_state_flag = RUS_end_fight_with_finland_separatism
-				}
 			}			
 			check_variable = {
-				RUS_finland_separatism_150 > 0
+				150.RUS_finland_separatism > 0
 			}
+		}
+
+		highlight_states = {
+			highlight_state_targets = {
+				state = 150
+			} 
 		}
 	
 		cost = 20
@@ -2082,38 +2384,29 @@ RUS_finland_separatism_cat = {
 			hidden_effect = {
 				if = {
 					limit = {
-						145 = { 	
-							has_state_flag = RUS_low_finland_separatism_2
+						150 = { 
+							has_dynamic_modifier = {
+								modifier = FIN_separatism_dynamic_modifier_2
+							}						
 						}
 					}
 					150 = { 
-						clr_state_flag = RUS_low_finland_separatism_2 
-						set_state_flag = RUS_end_fight_with_finland_separatism 
 						remove_dynamic_modifier = { 
 							modifier = FIN_separatism_dynamic_modifier_2 
 						} 
-					}
-					if = {
-						limit = {
-							111 = { has_state_flag = RUS_end_fight_with_finland_separatism }
-							145 = { has_state_flag = RUS_end_fight_with_finland_separatism }
-							147 = { has_state_flag = RUS_end_fight_with_finland_separatism }
-							149 = { has_state_flag = RUS_end_fight_with_finland_separatism }
-							150 = { has_state_flag = RUS_end_fight_with_finland_separatism }
-						}
-						set_country_flag = RUS_end_fight_with_finland_separatism
+						set_state_flag = RUS_fin_separatism_cleared_flag
 					}
 					log = "[GetDateText]: [Root.GetName]: swap_flag RUS_low_finland_separatism_2 to RUS_end_fight_with_finland_separatism"
 				}
 				else_if = {
 					limit = {
 						150 = { 
-							has_state_flag = RUS_low_finland_separatism_1
+							has_dynamic_modifier = {
+								modifier = FIN_separatism_dynamic_modifier_1
+							}
 						}
 					}
 					150 = { 
-						set_state_flag = RUS_low_finland_separatism_2 
-						clr_state_flag = RUS_low_finland_separatism_1 
 						remove_dynamic_modifier = { 
 							modifier = FIN_separatism_dynamic_modifier_1 
 						} 
@@ -2125,18 +2418,13 @@ RUS_finland_separatism_cat = {
 				}
 				else_if = { 
 					limit = {
-						150 = {
-							NOT = {
-								OR = {
-									has_state_flag = RUS_low_finland_separatism_1
-									has_state_flag = RUS_low_finland_separatism_2
-									has_state_flag = RUS_end_fight_with_finland_separatism
-								}
+						150 = { 
+							has_dynamic_modifier = {
+								modifier = FIN_separatism_dynamic_modifier
 							}
 						}
 					}
 					150 = { 
-						set_state_flag = RUS_low_finland_separatism_1 
 						remove_dynamic_modifier = {
 							modifier = FIN_separatism_dynamic_modifier 
 						} 
@@ -2146,7 +2434,6 @@ RUS_finland_separatism_cat = {
 					}
 					log = "[GetDateText]: [Root.GetName]: set_flag RUS_low_finland_separatism_1"
 				}
-				
 			}
 		}
 	}
@@ -2159,6 +2446,10 @@ RUS_finland_separatism_cat = {
 			149 = {
 				is_owned_and_controlled_by = RUS
 			}
+			check_variable = {
+				149.RUS_finland_separatism > 0
+			}
+			#divisions_in_state = { state = 111 size > 1 }
 		}
 		
 		allowed = { 
@@ -2168,13 +2459,16 @@ RUS_finland_separatism_cat = {
 		visible = {
 			149 = {
 				is_owned_and_controlled_by = RUS
-				NOT = {
-					has_state_flag = RUS_end_fight_with_finland_separatism
-				}
 			}	
 			check_variable = {
-				RUS_finland_separatism_149 > 0
+				149.RUS_finland_separatism > 0
 			}
+		}
+
+		highlight_states = {
+			highlight_state_targets = {
+				state = 149
+			} 
 		}
 	
 		cost = 20
@@ -2202,38 +2496,29 @@ RUS_finland_separatism_cat = {
 			hidden_effect = {
 				if = {
 					limit = {
-						149 = { 	
-							has_state_flag = RUS_low_finland_separatism_2
+						149 = { 
+							has_dynamic_modifier = {
+								modifier = FIN_separatism_dynamic_modifier_2
+							}		
 						}
 					}
 					149 = { 
-						clr_state_flag = RUS_low_finland_separatism_2 
-						set_state_flag = RUS_end_fight_with_finland_separatism 
 						remove_dynamic_modifier = { 
 							modifier = FIN_separatism_dynamic_modifier_2 
 						} 
-					}
-					if = {
-						limit = {
-							111 = { has_state_flag = RUS_end_fight_with_finland_separatism }
-							145 = { has_state_flag = RUS_end_fight_with_finland_separatism }
-							147 = { has_state_flag = RUS_end_fight_with_finland_separatism }
-							149 = { has_state_flag = RUS_end_fight_with_finland_separatism }
-							150 = { has_state_flag = RUS_end_fight_with_finland_separatism }
-						}
-						set_country_flag = RUS_end_fight_with_finland_separatism
+						set_state_flag = RUS_fin_separatism_cleared_flag
 					}
 					log = "[GetDateText]: [Root.GetName]: swap_flag RUS_low_finland_separatism_2 to RUS_end_fight_with_finland_separatism"
 				}
 				else_if = {
 					limit = {
 						149 = { 
-							has_state_flag = RUS_low_finland_separatism_1
+							has_dynamic_modifier = {
+								modifier = FIN_separatism_dynamic_modifier_1
+							}
 						}
 					}
 					149 = { 
-						set_state_flag = RUS_low_finland_separatism_2 
-						clr_state_flag = RUS_low_finland_separatism_1 
 						remove_dynamic_modifier = { 
 							modifier = FIN_separatism_dynamic_modifier_1 
 						} 
@@ -2245,18 +2530,13 @@ RUS_finland_separatism_cat = {
 				}
 				else_if = { 
 					limit = {
-						149 = {
-							NOT = {
-								OR = {
-									has_state_flag = RUS_low_finland_separatism_1
-									has_state_flag = RUS_low_finland_separatism_2
-									has_state_flag = RUS_end_fight_with_finland_separatism
-								}
+						149 = { 
+							has_dynamic_modifier = {
+								modifier = FIN_separatism_dynamic_modifier
 							}
 						}
 					}
 					149 = { 
-						set_state_flag = RUS_low_finland_separatism_1 
 						remove_dynamic_modifier = {
 							modifier = FIN_separatism_dynamic_modifier 
 						} 
@@ -2266,7 +2546,6 @@ RUS_finland_separatism_cat = {
 					}
 					log = "[GetDateText]: [Root.GetName]: set_flag RUS_low_finland_separatism_1"
 				}
-				
 			}
 		}
 	}
@@ -2279,6 +2558,9 @@ RUS_finland_separatism_cat = {
 			147 = {
 				is_owned_and_controlled_by = RUS
 			}
+			check_variable = {
+				147.RUS_finland_separatism > 0
+			}
 		}
 		
 		allowed = { 
@@ -2288,13 +2570,18 @@ RUS_finland_separatism_cat = {
 		visible = {
 			147 = {
 				is_owned_and_controlled_by = RUS
-				NOT = {
-					has_state_flag = RUS_end_fight_with_finland_separatism
-				}
 			}			
 			check_variable = {
-				RUS_finland_separatism_147 > 0
+				147.RUS_finland_separatism > 0
 			}
+		}
+
+		
+
+		highlight_states = {
+			highlight_state_targets = {
+				state = 147
+			} 
 		}
 	
 		cost = 20
@@ -2322,38 +2609,29 @@ RUS_finland_separatism_cat = {
 			hidden_effect = {
 				if = {
 					limit = {
-						147 = { 	
-							has_state_flag = RUS_low_finland_separatism_2
+						147 = { 
+							has_dynamic_modifier = {
+								modifier = FIN_separatism_dynamic_modifier_2
+							}
 						}
 					}
 					147 = { 
-						clr_state_flag = RUS_low_finland_separatism_2 
-						set_state_flag = RUS_end_fight_with_finland_separatism 
 						remove_dynamic_modifier = { 
 							modifier = FIN_separatism_dynamic_modifier_2 
 						} 
-					}
-					if = {
-						limit = {
-							111 = { has_state_flag = RUS_end_fight_with_finland_separatism }
-							145 = { has_state_flag = RUS_end_fight_with_finland_separatism }
-							147 = { has_state_flag = RUS_end_fight_with_finland_separatism }
-							149 = { has_state_flag = RUS_end_fight_with_finland_separatism }
-							150 = { has_state_flag = RUS_end_fight_with_finland_separatism }
-						}
-						set_country_flag = RUS_end_fight_with_finland_separatism
+						set_state_flag = RUS_fin_separatism_cleared_flag
 					}
 					log = "[GetDateText]: [Root.GetName]: swap_flag RUS_low_finland_separatism_2 to RUS_end_fight_with_finland_separatism"
 				}
 				else_if = {
 					limit = {
 						147 = { 
-							has_state_flag = RUS_low_finland_separatism_1
+							has_dynamic_modifier = {
+								modifier = FIN_separatism_dynamic_modifier_1
+							}
 						}
 					}
 					147 = { 
-						set_state_flag = RUS_low_finland_separatism_2 
-						clr_state_flag = RUS_low_finland_separatism_1 
 						remove_dynamic_modifier = { 
 							modifier = FIN_separatism_dynamic_modifier_1 
 						} 
@@ -2365,18 +2643,13 @@ RUS_finland_separatism_cat = {
 				}
 				else_if = { 
 					limit = {
-						147 = {
-							NOT = {
-								OR = {
-									has_state_flag = RUS_low_finland_separatism_1
-									has_state_flag = RUS_low_finland_separatism_2
-									has_state_flag = RUS_end_fight_with_finland_separatism
-								}
+						147 = { 
+							has_dynamic_modifier = {
+								modifier = FIN_separatism_dynamic_modifier
 							}
 						}
 					}
 					147 = { 
-						set_state_flag = RUS_low_finland_separatism_1 
 						remove_dynamic_modifier = {
 							modifier = FIN_separatism_dynamic_modifier 
 						} 
@@ -2386,7 +2659,6 @@ RUS_finland_separatism_cat = {
 					}
 					log = "[GetDateText]: [Root.GetName]: set_flag RUS_low_finland_separatism_1"
 				}
-				
 			}
 		}
 	}
