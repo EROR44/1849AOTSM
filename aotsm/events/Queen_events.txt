@@ -1,4 +1,5 @@
 add_namespace = qin
+add_namespace = qin_script_event #Скриптовые ивенты
 add_namespace = qin_story_event #Ивенты справки
 add_namespace = qin_literary_event #Мифологические, литературные события
 add_namespace = qin_industry_event #События связанные с промышленностью
@@ -206,6 +207,36 @@ country_event = { #восстание тайпинов
 }
 
 #####################################################################################
+#################################SCRIPT_EVENT########################################
+#####################################################################################
+
+country_event = { #
+	id = qin_script_event.1
+	title = qin_script_event.1.t
+	desc = qin_script_event.1.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+
+	hidden =  yes
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event qin_script_event.1"
+		country_event = { id = qin_story_event.1 days = 7 } 
+		country_event = { id = qin_literary_event.1 days = 14 } 
+		country_event = { id = qin.1 days = 380 } 
+		country_event = { id = qin.2 days = 1170 } #ранее 811
+	}
+
+	option = {
+		name = qin_script_event.1.a
+		
+	}
+}
+
+#####################################################################################
 ###############################POLITICAL_EVENT#######################################
 #####################################################################################
 
@@ -308,6 +339,9 @@ country_event = { #
 	
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event qin_story_event.1"
+		hidden_effect = {
+			country_event = { id = qin_story_event.2 days = 15 }
+		}
 	}
 
 	option = {
@@ -332,6 +366,9 @@ country_event = { #
 	
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event qin_story_event.2"
+		hidden_effect = {
+			country_event = { id = qin_story_event.3 days = 15 }
+		}
 	}
 
 	option = {
@@ -357,6 +394,9 @@ country_event = { #
 	
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event qin_story_event.3"
+		hidden_effect = {
+			country_event = { id = qin_story_event.4 days = 15 }
+		}
 	}
 
 	option = {
@@ -381,6 +421,9 @@ country_event = { #
 	
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event qin_story_event.4"
+		#hidden_effect = {
+		#	country_event = { id = qin_story_event.5 days = 15 }
+		#}
 	}
 
 	option = {
