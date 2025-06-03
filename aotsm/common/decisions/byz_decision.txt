@@ -9658,6 +9658,471 @@ byz_great_war_categories = {
 
 byz_special_war_project_category = {
 
+	byz_bulgaria_war_antiafk = {
+	
+		icon = generic_confiscation
+		
+		allowed = {
+			always = no
+		}
+		
+		activation = {
+			BYZ = {
+				has_country_flag = byz_balkan_war_begin
+			}
+			NOT = {
+				BYZ = {
+					has_country_flag = byz_fail_start_bulgaria_war
+				}
+				BYZ = {
+					has_completed_focus = BYZ_bulgaria_war
+				}
+			}
+		}
+		
+		available = {
+			has_completed_focus = BYZ_bulgaria_war
+		}
+		
+		selectable_mission = no
+		
+		visible = {
+			BYZ = {
+				has_country_flag = byz_balkan_war_begin
+			}
+		}		
+	
+		ai_will_do = {
+			factor = 40
+			modifier = {
+				factor = 100
+				is_historical_focus_on = yes
+			}
+		}
+		
+		is_good = no
+		
+		days_mission_timeout = 80
+		fire_only_once = yes
+		
+		complete_effect = {		
+			
+		}
+		
+		timeout_effect = {
+			unlock_national_focus = BYZ_bulgaria_war
+			activate_mission = byz_bulgaria_war_missia
+			declare_war_on = {
+				target = BUL
+				type = annex_everything
+			}
+			add_war_support = -0.15
+			add_popularity = {
+				ideology = reactionist
+				popularity = -0.05
+			}
+			custom_effect_tooltip = byz_military_unrest_tt
+			hidden_effect = {
+				BYZ = { 
+					set_country_flag = BYZ_vs_BUL
+					set_country_flag = BYZ_rest_from_war
+					set_country_flag = byz_fail_start_bulgaria_war
+				}
+				BUL = { add_ideas = balkan_wars }
+				ALB = { add_ideas = balkan_wars }
+				SER = { add_ideas = balkan_wars }
+				BOS = { add_ideas = balkan_wars }
+				BUL = {
+					country_event = {
+						id = chain.28
+						days = 3
+					}
+				}
+				BYZ = {
+					if = {
+						limit = {
+							check_variable = { byz_generals_faction_support > 4 }
+						}
+						add_to_variable = { byz_generals_faction_support = -5 }
+						clamp_variable = {
+							var = byz_generals_faction_support
+							min = 0
+							max = 200
+						}
+						random_list = {
+							50 = {
+								add_to_variable = { byz_merchants_faction_support = 5 }
+								clamp_variable = {
+									var = byz_merchants_faction_support
+									min = 0
+									max = 200
+								}
+							}
+							50 = {
+								add_to_variable = { byz_democrats_faction_support = 5 }
+								clamp_variable = {
+									var = byz_democrats_faction_support
+									min = 0
+									max = 200
+								}
+							}
+						}
+						byz_coalition_calculation = yes
+					}
+					else = {
+						add_war_support = -0.05
+						add_popularity = {
+							ideology = reactionist
+							popularity = -0.05
+						}
+					}
+				}
+				log = "[GetDateText]: [Root.GetName]: complete mission byz_bulgaria_war_antiafk"
+			}
+		}
+	}
+	
+	byz_serbia_war_antiafk = {
+	
+		icon = generic_confiscation
+		
+		allowed = {
+			always = no
+		}
+		
+		activation = {
+			BYZ = {
+				has_country_flag = byz_balkan_war_begin
+			}
+			NOT = {
+				BYZ = {
+					has_country_flag = byz_fail_start_serbia_war
+				}
+				BYZ = {
+					has_completed_focus = BYZ_serbia_war
+				}
+			}
+		}
+		
+		available = {
+			has_completed_focus = BYZ_serbia_war
+		}
+		
+		selectable_mission = no
+		
+		visible = {
+			BYZ = {
+				has_country_flag = byz_balkan_war_begin
+			}
+		}		
+	
+		ai_will_do = {
+			factor = 40
+			modifier = {
+				factor = 100
+				is_historical_focus_on = yes
+			}
+		}
+		
+		is_good = no
+		
+		days_mission_timeout = 260
+		fire_only_once = yes
+		
+		complete_effect = {		
+			
+		}
+		
+		timeout_effect = {
+			unlock_national_focus = BYZ_serbia_war
+			activate_mission = byz_serbia_war_missia
+			declare_war_on = {
+				target = SER
+				type = annex_everything
+			}
+			add_war_support = -0.15
+			add_popularity = {
+				ideology = reactionist
+				popularity = -0.05
+			}
+			custom_effect_tooltip = byz_military_unrest_tt
+			hidden_effect = {
+				BYZ = { 
+					set_country_flag = BYZ_vs_SER
+					set_country_flag = BYZ_rest_from_war
+					set_country_flag = byz_fail_start_serbia_war
+				}
+				BYZ = {
+					if = {
+						limit = {
+							check_variable = { byz_generals_faction_support > 4 }
+						}
+						add_to_variable = { byz_generals_faction_support = -5 }
+						clamp_variable = {
+							var = byz_generals_faction_support
+							min = 0
+							max = 200
+						}
+						random_list = {
+							50 = {
+								add_to_variable = { byz_merchants_faction_support = 5 }
+								clamp_variable = {
+									var = byz_merchants_faction_support
+									min = 0
+									max = 200
+								}
+							}
+							50 = {
+								add_to_variable = { byz_democrats_faction_support = 5 }
+								clamp_variable = {
+									var = byz_democrats_faction_support
+									min = 0
+									max = 200
+								}
+							}
+						}
+						byz_coalition_calculation = yes
+					}
+					else = {
+						add_war_support = -0.05
+						add_popularity = {
+							ideology = reactionist
+							popularity = -0.05
+						}
+					}
+				}
+				log = "[GetDateText]: [Root.GetName]: complete mission byz_serbia_war_antiafk"
+			}
+		}
+	}
+	
+	byz_albania_war_antiafk = {
+	
+		icon = generic_confiscation
+		
+		allowed = {
+			always = no
+		}
+		
+		activation = {
+			BYZ = {
+				has_country_flag = byz_balkan_war_begin
+			}
+			NOT = {
+				BYZ = {
+					has_country_flag = byz_fail_start_albania_war
+				}
+				BYZ = {
+					has_completed_focus = BYZ_albania_war
+				}
+			}
+		}
+		
+		available = {
+			has_completed_focus = BYZ_albania_war
+		}
+		
+		selectable_mission = no
+		
+		visible = {
+			BYZ = {
+				has_country_flag = byz_balkan_war_begin
+			}
+		}		
+	
+		ai_will_do = {
+			factor = 40
+			modifier = {
+				factor = 100
+				is_historical_focus_on = yes
+			}
+		}
+		
+		is_good = no
+		
+		days_mission_timeout = 350
+		fire_only_once = yes
+		
+		complete_effect = {		
+			
+		}
+		
+		timeout_effect = {
+			unlock_national_focus = BYZ_albania_war
+			activate_mission = byz_albania_war_missia
+			declare_war_on = {
+				target = ALB
+				type = annex_everything
+			}
+			add_war_support = -0.15
+			add_popularity = {
+				ideology = reactionist
+				popularity = -0.05
+			}
+			custom_effect_tooltip = byz_military_unrest_tt
+			hidden_effect = {
+				BYZ = { 
+					set_country_flag = BYZ_vs_ALB
+					set_country_flag = BYZ_rest_from_war
+					set_country_flag = byz_fail_start_albania_war
+				}
+				BYZ = {
+					if = {
+						limit = {
+							check_variable = { byz_generals_faction_support > 4 }
+						}
+						add_to_variable = { byz_generals_faction_support = -5 }
+						clamp_variable = {
+							var = byz_generals_faction_support
+							min = 0
+							max = 200
+						}
+						random_list = {
+							50 = {
+								add_to_variable = { byz_merchants_faction_support = 5 }
+								clamp_variable = {
+									var = byz_merchants_faction_support
+									min = 0
+									max = 200
+								}
+							}
+							50 = {
+								add_to_variable = { byz_democrats_faction_support = 5 }
+								clamp_variable = {
+									var = byz_democrats_faction_support
+									min = 0
+									max = 200
+								}
+							}
+						}
+						byz_coalition_calculation = yes
+					}
+					else = {
+						add_war_support = -0.05
+						add_popularity = {
+							ideology = reactionist
+							popularity = -0.05
+						}
+					}
+				}
+				log = "[GetDateText]: [Root.GetName]: complete mission byz_albania_war_antiafk"
+			}
+		}
+	}
+	
+	byz_bosnia_war_antiafk = {
+	
+		icon = generic_confiscation
+		
+		allowed = {
+			always = no
+		}
+		
+		activation = {
+			BYZ = {
+				has_country_flag = byz_balkan_war_begin
+			}
+			NOT = {
+				BYZ = {
+					has_country_flag = byz_fail_start_bosnia_war
+				}
+				BYZ = {
+					has_completed_focus = BYZ_bosnia_war
+				}
+			}
+		}
+		
+		available = {
+			has_completed_focus = BYZ_bosnia_war
+		}
+		
+		selectable_mission = no
+		
+		visible = {
+			BYZ = {
+				has_country_flag = byz_balkan_war_begin
+			}
+		}		
+	
+		ai_will_do = {
+			factor = 40
+			modifier = {
+				factor = 100
+				is_historical_focus_on = yes
+			}
+		}
+		
+		is_good = no
+		
+		days_mission_timeout = 620
+		fire_only_once = yes
+		
+		complete_effect = {		
+			
+		}
+		
+		timeout_effect = {
+			unlock_national_focus = BYZ_bosnia_war
+			activate_mission = byz_bosnia_war_missia
+			declare_war_on = {
+				target = BOS
+				type = annex_everything
+			}
+			add_war_support = -0.15
+			add_popularity = {
+				ideology = reactionist
+				popularity = -0.05
+			}
+			custom_effect_tooltip = byz_military_unrest_tt
+			hidden_effect = {
+				BYZ = { 
+					set_country_flag = BYZ_vs_BOS
+					set_country_flag = byz_fail_start_bosnia_war
+				}
+				BYZ = {
+					if = {
+						limit = {
+							check_variable = { byz_generals_faction_support > 4 }
+						}
+						add_to_variable = { byz_generals_faction_support = -5 }
+						clamp_variable = {
+							var = byz_generals_faction_support
+							min = 0
+							max = 200
+						}
+						random_list = {
+							50 = {
+								add_to_variable = { byz_merchants_faction_support = 5 }
+								clamp_variable = {
+									var = byz_merchants_faction_support
+									min = 0
+									max = 200
+								}
+							}
+							50 = {
+								add_to_variable = { byz_democrats_faction_support = 5 }
+								clamp_variable = {
+									var = byz_democrats_faction_support
+									min = 0
+									max = 200
+								}
+							}
+						}
+						byz_coalition_calculation = yes
+					}
+					else = {
+						add_war_support = -0.05
+						add_popularity = {
+							ideology = reactionist
+							popularity = -0.05
+						}
+					}
+				}
+				log = "[GetDateText]: [Root.GetName]: complete mission byz_bosnia_war_antiafk"
+			}
+		}
+	}
+
 	byz_bulgaria_war_missia = {
 	
 		icon = generic_ignite_civil_war
