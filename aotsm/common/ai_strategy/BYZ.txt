@@ -807,17 +807,46 @@ bosnia_war_preparation = {
 }
 
 austria_war_preparation = {
+
 	allowed = {
 		original_tag = BYZ
 	}
+	
 	enable = {
-		focus_progress = {
-			focus = PRU_last_crusader_for_germany
-			progress > 0.01
-		}
-		NOT = {
-			has_completed_focus = PRU_last_crusader_for_germany
-			owns_state = 104
+		OR = {
+			AND = {
+				has_global_flag = first_german_congress_start
+				NOT = {
+					AUS = {
+						has_country_flag = victory_R_V_A_1
+					}
+					PRU = {
+						has_country_flag = victory_R_V_A_1
+					}
+				}
+			}
+			AND = {
+				has_global_flag = second_german_congress_start
+				NOT = {
+					AUS = {
+						has_country_flag = victory_R_V_A_2
+					}
+					PRU = {
+						has_country_flag = victory_R_V_A_2
+					}
+				}
+			}
+			AND = {
+				has_global_flag = third_german_congress_start
+				NOT = {
+					AUS = {
+						has_country_flag = victory_R_V_A_3
+					}
+					PRU = {
+						has_country_flag = victory_R_V_A_3
+					}
+				}
+			}
 		}
 		country_exists = AUS
 		NOT = {
@@ -827,20 +856,7 @@ austria_war_preparation = {
 		}
 	}
 
-	abort = {
-		OR = {
-			NOT = { country_exists = AUS }
-
-			AND = {
-				PRU = { has_completed_focus = PRU_last_crusader_for_germany }
-				BYZ = { has_war_with = AUS }
-			}
-			owns_state = 104
-		}
-		PRU = {
-			has_completed_focus = PRU_aus_win_3
-		}
-	}
+	abort_when_not_enabled = yes
 
 	ai_strategy = {
 		type = conquer
