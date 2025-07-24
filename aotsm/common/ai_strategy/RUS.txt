@@ -1461,6 +1461,40 @@ RUS_more_division_on_front = {
 	
 }
 
+RUS_prepare_for_great_war = {
+
+	allowed = {
+		tag = RUS
+	}
+	
+	enable = {
+		date > 1854.4.1
+		NOT = { 
+			has_war = yes
+		}
+	}
+	
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = prepare_for_war
+		id = PRU
+		value = 500
+	}
+	
+	ai_strategy = {
+		type = prepare_for_war
+		id = BYZ
+		value = 500
+	}
+	
+	ai_strategy = {
+		type = prepare_for_war
+		id = ARM
+		value = 500
+	}
+}
+
 RUS_more_divisions_on_front = {
 
 	allowed = {
@@ -1599,6 +1633,17 @@ RUS_historical_ai_attack_pru = {
 		}
 		value = 100
 	}
+
+	ai_strategy = {
+        type = front_control
+        tag = "PRU"
+		ratio = 0.50
+        priority = 10
+        ordertype = front # front or invasion
+        execution_type = balanced # one of careful balanced rush rush_weak (осторожно, сбалансированно, агрессивно, прорыв)
+        execute_order = yes # испольнять приказ или нет, если нет то просто будут стоять в обороне
+        manual_attack = yes # точечные атаки, если нет, то ИИ не будет совершать никаких отдельных атак, кроме батлплана (да да ИИ тоже умеет ручками)
+    }
 	
 }
 
@@ -1612,6 +1657,7 @@ RUS_historical_ai_attack_byz = {
 		RUS = {
 			has_war_with = BYZ
 		}
+		date < 1856.1.1
 	}
 	abort_when_not_enabled = yes
 
@@ -1634,5 +1680,79 @@ RUS_historical_ai_attack_byz = {
 		}
 		value = 100
 	}
+
+	ai_strategy = {
+        type = front_control
+        tag = "BYZ"
+		ratio = 0.50
+        priority = 10
+        ordertype = front # front or invasion
+        execution_type = careful # one of careful balanced rush rush_weak (осторожно, сбалансированно, агрессивно, прорыв)
+        execute_order = yes # испольнять приказ или нет, если нет то просто будут стоять в обороне
+        manual_attack = yes # точечные атаки, если нет, то ИИ не будет совершать никаких отдельных атак, кроме батлплана (да да ИИ тоже умеет ручками)
+    }
+
+	ai_strategy = {
+        type = front_control
+        tag = "ARM"
+		ratio = 0.50
+        priority = 10
+        ordertype = front # front or invasion
+        execution_type = careful # one of careful balanced rush rush_weak (осторожно, сбалансированно, агрессивно, прорыв)
+        execute_order = yes # испольнять приказ или нет, если нет то просто будут стоять в обороне
+        manual_attack = yes # точечные атаки, если нет, то ИИ не будет совершать никаких отдельных атак, кроме батлплана (да да ИИ тоже умеет ручками)
+    }
+	
+}
+
+RUS_historical_ai_late_war_with_byz = {
+
+	allowed = {
+		original_tag = RUS
+		is_historical_focus_on = yes
+	}
+	enable = {
+		RUS = {
+			has_war_with = BYZ
+		}
+		date > 1856.1.1
+	}
+	abort_when_not_enabled = yes
+	
+	ai_strategy = {
+		type = antagonize
+		id = "BYZ"
+		value = 100
+	}
+	
+	ai_strategy = { 
+		type = front_unit_request
+		country_trigger = {
+			tag = BYZ
+		}
+		value = 200
+	}
+
+	ai_strategy = {
+        type = front_control
+        tag = "BYZ"
+		ratio = 0.75
+        priority = 10
+        ordertype = front # front or invasion
+        execution_type = balanced # one of careful balanced rush rush_weak (осторожно, сбалансированно, агрессивно, прорыв)
+        execute_order = yes # испольнять приказ или нет, если нет то просто будут стоять в обороне
+        manual_attack = yes # точечные атаки, если нет, то ИИ не будет совершать никаких отдельных атак, кроме батлплана (да да ИИ тоже умеет ручками)
+    }
+
+	ai_strategy = {
+        type = front_control
+        tag = "ARM"
+		ratio = 0.75
+        priority = 10
+        ordertype = front # front or invasion
+        execution_type = balanced # one of careful balanced rush rush_weak (осторожно, сбалансированно, агрессивно, прорыв)
+        execute_order = yes # испольнять приказ или нет, если нет то просто будут стоять в обороне
+        manual_attack = yes # точечные атаки, если нет, то ИИ не будет совершать никаких отдельных атак, кроме батлплана (да да ИИ тоже умеет ручками)
+    }
 	
 }
