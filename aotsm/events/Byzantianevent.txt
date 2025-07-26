@@ -4925,6 +4925,40 @@ country_event = { #General speach
 	
 }
 
+country_event = { #Something is coming
+	id = byz.127
+	title = byz.127.t
+	desc = byz.127.d
+	picture = GFX_
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event byz.127"
+		hidden_effect = {
+			BYZ = {
+				transfer_state = 77
+			}
+			VLH = {
+				country_event = { id = chain.1 days = 7 }
+			}
+		}
+	}
+	
+	option = { #They can't revolt... can't they?
+		name = byz.127.a
+		ai_chance = {
+			base = 100
+		}
+		add_stability = -0.025
+		add_war_support = -0.025
+		
+	}
+	
+}
+
 country_event = { #Reform senat
 	id = byz.1000
 	title = byz.1000.t
@@ -13945,6 +13979,8 @@ country_event = { #Russian news about speach of Aleksander II
 	
 }
 
+#Balkan Revolt
+
 country_event = { #Saraevo Trouble
 	id = byz_burning_balkan.1
 	title = byz_burning_balkan.1.t
@@ -14049,6 +14085,14 @@ country_event = { #Saraevo Revolution
 	
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event byz_burning_balkan.3"
+		hidden_effect = {
+			979 = {
+				set_demilitarized_zone = yes
+			}
+			BYZ = {
+				set_country_flag = BYZ_saraevo_revolt_demobilizationzone
+			}
+		}
 	}
 	
 	option = { #Is only start
@@ -14056,10 +14100,14 @@ country_event = { #Saraevo Revolution
 		ai_chance = {
 			base = 100
 		}
-		979 = {
-			set_demilitarized_zone = yes
-		}
 		add_manpower = -1733
+		979 = {
+			add_manpower = -979
+		}
+		982 = {
+			add_manpower = -47
+		}
+		custom_effect_tooltip = BYZ_saraevo_demilitarized_tt
 		hidden_effect = {
 			BYZ = {
 				country_event = {
@@ -14083,6 +14131,14 @@ country_event = { #Bulgaria Revolt
 	
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event byz_burning_balkan.4"
+		hidden_effect = {
+			983 = {
+				set_demilitarized_zone = yes
+			}
+			BYZ = {
+				set_country_flag = BYZ_tarnove_revolt_demobilizationzone
+			}
+		}
 	}
 	
 	option = { #Rhomea is dying
@@ -14090,11 +14146,240 @@ country_event = { #Bulgaria Revolt
 		ai_chance = {
 			base = 100
 		}
-		801 = {
-			set_demilitarized_zone = yes
+		add_stability = -0.05
+		add_manpower = -3785
+		983 = {
+			add_manpower = -471
+		}
+		810 = {
+			add_manpower = -1275
+		}
+		custom_effect_tooltip = BYZ_tarnove_demilitarized_tt
+		hidden_effect = {
+			BYZ = {
+				country_event = {
+					id = byz_burning_balkan.5
+					days = 5
+				}
+			}
+		}
+	}
+}
+
+country_event = { #Slavian Revolt(Bosnia)
+	id = byz_burning_balkan.5
+	title = byz_burning_balkan.5.t
+	desc = byz_burning_balkan.5.d
+	picture = GFX_
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event byz_burning_balkan.5"
+		hidden_effect = {
+			BYZ = {
+				clr_country_flag = BYZ_saraevo_revolt_demobilizationzone
+			}
 		}
 		hidden_effect = {
-
+			BYZ = {
+				country_event = {
+					id = byz_burning_balkan.6
+					days = 3
+				}
+			}
+			979 = {
+				set_demilitarized_zone = no
+			}
+			SLV = {
+				transfer_state = 979
+				add_state_core = 104
+				add_state_core = 804
+				add_state_core = 979
+				add_state_core = 980
+				add_state_core = 981
+				add_state_core = 982
+			}
+			SLV = {
+				set_province_controller = 6983
+				set_province_controller = 11572
+				set_province_controller = 11741
+				set_province_controller = 982
+				set_province_controller = 9894
+				load_oob = SLV_1849
+				load_oob = SLV_bosnia
+				add_equipment_to_stockpile = {
+					type = infantry_equipment
+					amount = 9100
+					producer = SLV
+				}
+				add_equipment_to_stockpile = {
+					type = artillery_equipment
+					amount = 1200
+					producer = SLV
+				}
+				add_equipment_to_stockpile = {
+					type = support_equipment
+					amount = 3000
+					producer = SLV
+				}
+			}
+			SLV = {
+				add_offsite_building = { type = arms_factory level = 10 }
+			}
+			SLV = {
+				declare_war_on = {
+					target = BYZ
+					type = annex_everything
+				}
+			}
 		}
+	}
+	
+	option = { #Revolt begin
+		name = byz_burning_balkan.5.a
+		ai_chance = {
+			base = 100
+		}
+		add_stability = -0.05
+	}
+}
+
+country_event = { #Slavian Revolt(Serbia)
+	id = byz_burning_balkan.6
+	title = byz_burning_balkan.6.t
+	desc = byz_burning_balkan.6.d
+	picture = GFX_
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event byz_burning_balkan.6"
+		hidden_effect = {
+			BYZ = {
+				country_event = {
+					id = byz_burning_balkan.7
+					days = 1
+				}
+			}
+			SLV = {
+				add_state_core = 105
+				add_state_core = 107
+				add_state_core = 108
+				add_state_core = 802
+			}
+			SLV = {
+				set_province_controller = 11586
+				set_province_controller = 9809
+				set_province_controller = 9602
+				set_province_controller = 11583
+				set_province_controller = 6998
+				set_province_controller = 6940
+				load_oob = SLV_serbia
+				add_equipment_to_stockpile = {
+					type = infantry_equipment
+					amount = 15000
+					producer = SLV
+				}
+				add_equipment_to_stockpile = {
+					type = artillery_equipment
+					amount = 2000
+					producer = SLV
+				}
+				add_equipment_to_stockpile = {
+					type = support_equipment
+					amount = 4500
+					producer = SLV
+				}
+			}
+			SLV = {
+				add_offsite_building = { type = arms_factory level = 10 }
+			}
+		}
+	}
+	
+	option = { #Serbian rise
+		name = byz_burning_balkan.7.a
+		ai_chance = {
+			base = 100
+		}
+		add_stability = -0.1
+	}
+}
+
+country_event = { #Slavian Revolt(Bulgaria)
+	id = byz_burning_balkan.7
+	title = byz_burning_balkan.7.t
+	desc = byz_burning_balkan.7.d
+	picture = GFX_
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event byz_burning_balkan.7"
+		hidden_effect = {
+			BYZ = {
+				clr_country_flag = BYZ_tarnove_revolt_demobilizationzone
+			}
+			983 = {
+				set_demilitarized_zone = no
+			}
+			SLV = {
+				transfer_state = 983
+				add_state_core = 48
+				add_state_core = 77
+				add_state_core = 106
+				add_state_core = 211
+				add_state_core = 212
+				add_state_core = 801
+				add_state_core = 803
+			}
+			SLV = {
+				set_province_controller = 6842
+				set_province_controller = 9612
+				set_province_controller = 9769
+				set_province_controller = 6967
+				set_province_controller = 657
+				set_province_controller = 11597
+				set_province_controller = 3796
+				set_province_controller = 9771
+				set_province_controller = 949
+				set_province_controller = 11857
+				set_province_controller = 3882
+				load_oob = SLV_bulgaria
+				add_equipment_to_stockpile = {
+					type = infantry_equipment
+					amount = 7500
+					producer = SLV
+				}
+				add_equipment_to_stockpile = {
+					type = artillery_equipment
+					amount = 500
+					producer = SLV
+				}
+				add_equipment_to_stockpile = {
+					type = support_equipment
+					amount = 1000
+					producer = SLV
+				}
+			}
+			SLV = {
+				add_offsite_building = { type = arms_factory level = 10 }
+			}
+		}
+	}
+	
+	option = { #Bulgarian Rise
+		name = byz_burning_balkan.8.a
+		ai_chance = {
+			base = 100
+		}
+		add_political_power = -500
 	}
 }
