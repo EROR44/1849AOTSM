@@ -4929,7 +4929,7 @@ country_event = { #Something is coming
 	id = byz.127
 	title = byz.127.t
 	desc = byz.127.d
-	picture = GFX_
+	picture = GFX_report_event_byz_general_takes_dobruja
 	
 	is_triggered_only = yes
 	
@@ -14182,8 +14182,6 @@ country_event = { #Slavian Revolt(Bosnia)
 			BYZ = {
 				clr_country_flag = BYZ_saraevo_revolt_demobilizationzone
 			}
-		}
-		hidden_effect = {
 			BYZ = {
 				country_event = {
 					id = byz_burning_balkan.6
@@ -14234,6 +14232,7 @@ country_event = { #Slavian Revolt(Bosnia)
 					target = BYZ
 					type = annex_everything
 				}
+				create_faction = SLV_REVOLUTION_FRONT
 			}
 		}
 	}
@@ -14303,7 +14302,7 @@ country_event = { #Slavian Revolt(Serbia)
 	}
 	
 	option = { #Serbian rise
-		name = byz_burning_balkan.7.a
+		name = byz_burning_balkan.6.a
 		ai_chance = {
 			base = 100
 		}
@@ -14324,6 +14323,12 @@ country_event = { #Slavian Revolt(Bulgaria)
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event byz_burning_balkan.7"
 		hidden_effect = {
+			BYZ = {
+				country_event = {
+					id = script_event.60
+					days = 25
+				}
+			}
 			BYZ = {
 				clr_country_flag = BYZ_tarnove_revolt_demobilizationzone
 			}
@@ -14376,7 +14381,546 @@ country_event = { #Slavian Revolt(Bulgaria)
 	}
 	
 	option = { #Bulgarian Rise
+		name = byz_burning_balkan.7.a
+		ai_chance = {
+			base = 100
+		}
+		add_political_power = -500
+	}
+}
+
+country_event = { #Ghost of Bosnia Return
+	id = byz_burning_balkan.8
+	title = byz_burning_balkan.8.t
+	desc = byz_burning_balkan.8.d
+	picture = GFX_
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event byz_burning_balkan.8"
+		hidden_effect = {
+			BYZ = {
+				country_event = {
+					id = script_event.60
+					days = 10
+				}
+				country_event = {
+					id = byz_burning_balkan.17
+					days = 30
+					random_days = 20
+				}
+			}
+			SLV = {
+				add_ideas = SLV_rule_of_rhomean_slayer
+			}
+		}
+	}
+	
+	option = { #He can't be a live
 		name = byz_burning_balkan.8.a
+		ai_chance = {
+			base = 100
+		}
+		custom_effect_tooltip = BYZ_slv_voevoda_return_tt
+	}
+}
+
+country_event = { #Romanian intervation
+	id = byz_burning_balkan.9
+	title = byz_burning_balkan.9.t
+	desc = byz_burning_balkan.9.d
+	picture = GFX_
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event byz_burning_balkan.9"
+		hidden_effect = {
+			SLV = {
+				add_to_faction = VLH
+			}
+			VLH = {
+				add_to_war = {
+					targeted_alliance = SLV
+					enemy = BYZ
+					hostility_reason = asked_to_join
+				}
+			}
+		}
+	}
+	
+	option = { #How dare they
+		name = byz_burning_balkan.9.a
+		ai_chance = {
+			base = 100
+		}
+		add_political_power = -500
+	}
+}
+
+country_event = { #Ghost is dead
+	id = byz_burning_balkan.17
+	title = byz_burning_balkan.17.t
+	desc = byz_burning_balkan.17.d
+	picture = GFX_
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event byz_burning_balkan.17"
+		hidden_effect = {
+			BYZ = {
+				country_event = {
+					id = script_event.60
+					days = 10
+				}
+			}
+			SLV = {
+				swap_ideas = {
+					remove_idea = SLV_rule_of_rhomean_slayer
+					add_idea = SLV_end_of_unity_1
+				}
+			}
+		}
+	}
+	
+	option = { #Only gurdian can save us
+		name = byz_burning_balkan.17.a
+		ai_chance = {
+			base = 100
+		}
+		custom_effect_tooltip = BYZ_slv_voevoda_is_dead_tt
+	}
+}
+
+country_event = { #End of Unity
+	id = byz_burning_balkan.18
+	title = byz_burning_balkan.18.t
+	desc = byz_burning_balkan.18.d
+	picture = GFX_
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event byz_burning_balkan.18"
+		hidden_effect = {
+			BYZ = {
+				country_event = {
+					id = script_event.60
+					days = 15
+				}
+			}
+			SLV = {
+				swap_ideas = {
+					remove_idea = SLV_end_of_unity_1
+					add_idea = SLV_end_of_unity_2
+				}
+			}
+		}
+	}
+	
+	option = { #That can help us
+		name = byz_burning_balkan.18.a
+		ai_chance = {
+			base = 100
+		}
+		custom_effect_tooltip = BYZ_slv_end_of_unity_tt
+	}
+}
+
+country_event = { #Croatian cross border
+	id = byz_burning_balkan.19
+	title = byz_burning_balkan.19.t
+	desc = byz_burning_balkan.19.d
+	picture = GFX_
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event byz_burning_balkan.19"
+		hidden_effect = {
+			BYZ = {
+				country_event = {
+					id = script_event.60
+					days = 15
+				}
+			}
+			SLV = {
+				add_ideas = SLV_croatian_backstab
+				swap_ideas = {
+					remove_idea = SLV_end_of_unity_2
+					add_idea = SLV_end_of_unity_3
+				}
+			}
+		}
+	}
+	
+	option = { #God help us
+		name = byz_burning_balkan.19.a
+		ai_chance = {
+			base = 100
+		}
+		custom_effect_tooltip = BYZ_slv_croating_backstabe_slv_tt
+	}
+}
+
+country_event = { #They fights them self
+	id = byz_burning_balkan.20
+	title = byz_burning_balkan.20.t
+	desc = byz_burning_balkan.20.d
+	picture = GFX_
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event byz_burning_balkan.20"
+		hidden_effect = {
+			SLV = {
+				add_ideas = SLV_end_of_dream
+			}
+		}
+	}
+	
+	option = { #God help us
+		name = byz_burning_balkan.20.a
+		ai_chance = {
+			base = 100
+		}
+		custom_effect_tooltip = BYZ_slv_end_of_dream_tt
+	}
+}
+
+country_event = { #End of Revolt
+	id = byz_burning_balkan.21
+	title = byz_burning_balkan.21.t
+	desc = byz_burning_balkan.21.d
+	picture = GFX_
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event byz_burning_balkan.21"
+		hidden_effect = {
+			BYZ = {
+				country_event = {
+					id = byz_burning_balkan.22
+					days = 10
+				}
+			}
+		}
+	}
+	
+	option = { #But what we can do with it?
+		name = byz_burning_balkan.21.a
+		ai_chance = {
+			base = 100
+		}
+		add_political_power = -500
+	}
+}
+
+country_event = { #What to do with Balkan
+	id = byz_burning_balkan.22
+	title = byz_burning_balkan.22.t
+	desc = byz_burning_balkan.22.d
+	picture = GFX_
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event byz_burning_balkan.22"
+		hidden_effect = {
+			
+		}
+	}
+	
+	option = { #Blood for blood
+		name = byz_burning_balkan.22.a
+		ai_chance = {
+			base = 100
+		}
+		add_political_power = -500
+	}
+	
+	option = { #Execute only traitors
+		name = byz_burning_balkan.22.b
+		ai_chance = {
+			base = 100
+		}
+		add_political_power = -500
+	}
+	
+	option = { #If you're hit on one cheek, turn the other
+		name = byz_burning_balkan.22.c
+		ai_chance = {
+			base = 100
+		}
+		add_political_power = -500
+	}
+}
+
+country_event = { #Capitulation of Romania
+	id = byz_burning_balkan.23
+	title = byz_burning_balkan.23.t
+	desc = byz_burning_balkan.23.d
+	picture = GFX_
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event byz_burning_balkan.23"
+		hidden_effect = {
+			
+		}
+	}
+	
+	option = { #Diplomatic rule
+		name = byz_burning_balkan.23.a
+		ai_chance = {
+			base = 100
+		}
+		add_stability = 0.05
+		add_political_power = 50
+		BYZ = {
+			diplomatic_relation = {
+				country = VLH
+				relation = non_aggression_pact
+				active = yes
+			}
+		}
+		VLH = {
+			diplomatic_relation = {
+				country = BYZ
+				relation = non_aggression_pact
+				active = yes
+			}
+			diplomatic_relation = {
+				country = BYZ
+				relation = military_access
+				active = yes
+			}
+			diplomatic_relation = {
+				country = BYZ
+				relation = docking_rights
+				active = yes
+			}
+		}
+	}
+	
+	option = { #Ambitios rule
+		name = byz_burning_balkan.23.b
+		ai_chance = {
+			base = 100
+		}
+		add_political_power = 450
+		VLH = {
+			add_timed_idea = {
+				idea = VLH_dead_economy
+				days = 730
+			}
+		}
+	}
+	
+}
+
+#Random Event only ONCE
+
+country_event = { #Attack on base
+	id = byz_burning_balkan.10
+	title = byz_burning_balkan.10.t
+	desc = byz_burning_balkan.10.d
+	picture = GFX_
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event byz_burning_balkan.10"
+		hidden_effect = {
+			
+		}
+	}
+	
+	option = { #They survive?
+		name = byz_burning_balkan.10.a
+		ai_chance = {
+			base = 100
+		}
+		add_political_power = -500
+	}
+}
+
+country_event = { #More banner Rise
+	id = byz_burning_balkan.11
+	title = byz_burning_balkan.11.t
+	desc = byz_burning_balkan.11.d
+	picture = GFX_
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event byz_burning_balkan.11"
+		hidden_effect = {
+			
+		}
+	}
+	
+	option = { #Bad news
+		name = byz_burning_balkan.11.a
+		ai_chance = {
+			base = 100
+		}
+		add_political_power = -500
+	}
+}
+
+country_event = { #Burning of Rhomean Church
+	id = byz_burning_balkan.12
+	title = byz_burning_balkan.12.t
+	desc = byz_burning_balkan.12.d
+	picture = GFX_
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event byz_burning_balkan.12"
+		hidden_effect = {
+			
+		}
+	}
+	
+	option = { #Only devil can do that
+		name = byz_burning_balkan.12.a
+		ai_chance = {
+			base = 100
+		}
+		add_political_power = -500
+	}
+}
+
+country_event = { #Only Slavian land
+	id = byz_burning_balkan.13
+	title = byz_burning_balkan.13.t
+	desc = byz_burning_balkan.13.d
+	picture = GFX_
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event byz_burning_balkan.13"
+		hidden_effect = {
+			
+		}
+	}
+	
+	option = { #It's end of the days
+		name = byz_burning_balkan.13.a
+		ai_chance = {
+			base = 100
+		}
+		add_political_power = -500
+	}
+}
+
+#Random Event 
+
+country_event = { #Attack on arsenal
+	id = byz_burning_balkan.14
+	title = byz_burning_balkan.14.t
+	desc = byz_burning_balkan.14.d
+	picture = GFX_
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event byz_burning_balkan.14"
+		hidden_effect = {
+			
+		}
+	}
+	
+	option = { #Not good at all
+		name = byz_burning_balkan.14.a
+		ai_chance = {
+			base = 100
+		}
+		add_political_power = -500
+	}
+}
+
+country_event = { #Attack on baracks
+	id = byz_burning_balkan.15
+	title = byz_burning_balkan.15.t
+	desc = byz_burning_balkan.15.d
+	picture = GFX_
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event byz_burning_balkan.15"
+		hidden_effect = {
+			
+		}
+	}
+	
+	option = { #Not good at all
+		name = byz_burning_balkan.15.a
+		ai_chance = {
+			base = 100
+		}
+		add_political_power = -500
+	}
+}
+
+country_event = { #Slavian make terract
+	id = byz_burning_balkan.16
+	title = byz_burning_balkan.16.t
+	desc = byz_burning_balkan.16.d
+	picture = GFX_
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event byz_burning_balkan.16"
+		hidden_effect = {
+			
+		}
+	}
+	
+	option = { #Not good at all
+		name = byz_burning_balkan.16.a
 		ai_chance = {
 			base = 100
 		}
