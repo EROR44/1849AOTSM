@@ -1966,6 +1966,10 @@ austrian_capitulation_third_brotherwar = {
 					remove_state_core = 764
 				}
 			}
+			remove_ideas = HUN_revolution_power
+			add_ideas = HUN_red_economy
+			add_ideas = HUN_new_type_republic
+			add_ideas = HUN_peaseant_army
 		}
 	}
 	if = {
@@ -2989,3 +2993,136 @@ KEN_win_ZUL = {
 	}
 }
 #AFRICA WAR END
+#Balkan war
+
+HUN_capitulation_first_romanian_hungary_war = {
+	
+	VLH = {
+		white_peace = {
+			tag = HUN
+			message = Hungaria_lose
+		}
+	}
+	GLA = {
+		white_peace = {
+			tag = HUN
+		}
+	}
+	VLH = {
+		transfer_state = 76
+		transfer_state = 82
+		transfer_state = 83
+		transfer_state = 84
+	}
+	if = {
+		limit = {
+			GLA = {
+				has_country_flag = GLA_with_VLH
+			}
+		}
+		SLA = {
+			transfer_state = 70
+			transfer_state = 71
+			transfer_state = 73
+			transfer_state = 664
+		}
+		GLA = {
+			puppet = SLA
+		}
+		SLA = {
+			set_politics = { ruling_party = democratic elections_allowed = no }
+			set_popularities = {
+				democratic = 47
+				socialism = 23
+				reactionist = 14
+				authoritarian = 16
+			}
+			swap_ideas = {
+				remove_idea = monarchy
+				add_idea = republic
+			}
+			load_oob = SLA_force
+		}
+	}
+	BYZ = {
+		country_event = {
+			id = hun.2
+			days = 10
+		}
+	}
+	VLH = { clr_country_flag = VLH_war_with_HUN }
+	GLA = { leave_faction = yes }
+	VLH = { leave_faction = yes }
+	VLH = { give_guarantee = GLA }
+	GLA = { give_guarantee = VLH }
+	if = {
+		limit = {
+			RUS = {
+				has_country_flag = rus_send_volonter_to_vlh
+			}
+		}
+		set_variable_to_random = {
+			var = RUS.manpower_back_vlh
+			min = 42912
+			max = 59613
+		}
+		set_variable_to_random = {
+			var = RUS.weapon_back_vlh
+			min = 711
+			max = 981
+		}
+		VLH = {
+			delete_unit_template_and_units = {
+				division_template = "Russian Volunteers"
+				disband = no
+			}
+		}
+		RUS = {
+			country_event = {
+				id = war_event.4
+				days = 1
+			}
+		}
+	}
+	if = {
+		limit = {
+			RUS = {
+				has_country_flag = rus_send_volonter_to_gla
+			}
+		}
+		set_variable_to_random = {
+			var = RUS.manpower_back_gla
+			min = 42912
+			max = 59613
+		}
+		set_variable_to_random = {
+			var = RUS.weapon_back_gla
+			min = 711
+			max = 981
+		}
+		GLA = {
+			delete_unit_template_and_units = {
+				division_template = "Russian Volunteers"
+				disband = no
+			}
+		}
+		RUS = {
+			country_event = {
+				id = war_event.5
+				days = 1
+			}
+		}
+	}
+	HUN = {
+		country_event = {
+			id = hun.3
+			hours = 4
+		}
+	}
+	set_global_flag = hun_lose_to_coalition_global_flag
+	news_event = {
+		id = news.75
+		hours = 12
+	}
+
+}
