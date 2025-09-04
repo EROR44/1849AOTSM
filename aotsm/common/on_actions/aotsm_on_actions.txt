@@ -48,7 +48,11 @@ on_actions = {
 					welcome_screen_page = 0
 				}
 			}
-			
+			every_country = {
+                limit = { exists = yes }
+				set_literacy_points = yes
+			}
+
 			set_variable = { global.number_of_international_faction_members = 0 }
 			
 			set_variable = { var = leaver_number value = 0 }
@@ -511,6 +515,16 @@ on_actions = {
 #				}
 #				RUS = { remove_ideas = RUS_dependence_from_import }
 #			}
+		}
+	}
+	
+	on_monthly = {
+		effect = {
+			every_country = {
+				limit = { exists = yes }
+				set_variable = { ROOT.aotsm_literacy_processed = 0 }  # Сброс флага в начале месяца для всех стран
+				check_literacy_level = yes  
+			}
 		}
 	}
 	
