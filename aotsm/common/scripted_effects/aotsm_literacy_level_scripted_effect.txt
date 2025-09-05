@@ -1,25 +1,40 @@
 set_literacy_points = { #устанавливаем значение в on_startup
-   # every_country = {
+    #every_country = {
         #limit = { exists = yes }
         if = {
-            limit = { has_idea = illiterate }
-            set_variable = { var = ROOT.aotsm_literacy_level_points value = 0 }
+            limit = { has_idea = all_population_literate }
+            set_variable = { 
+                var = aotsm_literacy_level_points 
+                value = 100 
+            }
         }
         else_if = {
-            limit = { has_idea = low_literacy_level }
-            set_variable = { var = ROOT.aotsm_literacy_level_points value = 25 }
+            limit = { has_idea = high_literacy_level }
+            set_variable = { 
+                var = aotsm_literacy_level_points 
+                value = 75 
+            }
         }
         else_if = {
             limit = { has_idea = average_literacy_level }
-            set_variable = { var = ROOT.aotsm_literacy_level_points value = 50 }
+            set_variable = { 
+                var = aotsm_literacy_level_points 
+                value = 50 
+            }
          }
         else_if = {
-            limit = { has_idea = high_literacy_level }
-            set_variable = { var = ROOT.aotsm_literacy_level_points value = 75 }
+            limit = { has_idea = low_literacy_level }
+            set_variable = { 
+                var = aotsm_literacy_level_points 
+                value = 25 
+            }
         }
         else_if = {
-            limit = { has_idea = all_population_literate }
-            set_variable = { var = ROOT.aotsm_literacy_level_points value = 100 }
+            limit = { has_idea = illiterate }
+            set_variable = { 
+                var = aotsm_literacy_level_points
+                value = 0 
+            }
         }
     #}
 }
@@ -33,9 +48,9 @@ literacy_points_var_clamp = {  # Устанавливаем возможные �
 }
 
 add_literacy_points = {  # Увеличиваем переменную на 0.5
-    log = "[GetDateText]: [This.GetName] BEFORE ADD: [?aotsm_literacy_level_points]"
+    #log = "[GetDateText]: [This.GetName] BEFORE ADD: [?aotsm_literacy_level_points]"
     add_to_variable = { ROOT.aotsm_literacy_level_points = 0.5 }
-    log = "[GetDateText]: [This.GetName] AFTER ADD: [?aotsm_literacy_level_points]"
+    #log = "[GetDateText]: [This.GetName] AFTER ADD: [?aotsm_literacy_level_points]"
     force_update_dynamic_modifier = yes 
     literacy_points_var_clamp = yes
 }
@@ -64,25 +79,40 @@ remove_5_literacy_points = {  # Уменьшаем на 5
 check_literacy_level = {  # Чекаем уровень грамотности раз в месяц
     if = {
         limit = { NOT = { has_variable = ROOT.aotsm_literacy_level_points } }  # Инициализация для новых стран
-       if = {
+        if = {
             limit = { has_idea = illiterate }
-            set_variable = { var = ROOT.aotsm_literacy_level_points value = 0 }
+            set_variable = { 
+                var = ROOT.aotsm_literacy_level_points
+                value = 0 
+            }
         }
         else_if = {
             limit = { has_idea = low_literacy_level }
-            set_variable = { var = ROOT.aotsm_literacy_level_points value = 25 }
+            set_variable = { 
+                var = ROOT.aotsm_literacy_level_points 
+                value = 25 
+            }
         }
         else_if = {
             limit = { has_idea = average_literacy_level }
-            set_variable = { var = ROOT.aotsm_literacy_level_points value = 50 }
-        }
+            set_variable = { 
+                var = ROOT.aotsm_literacy_level_points 
+                value = 50 
+            }
+         }
         else_if = {
             limit = { has_idea = high_literacy_level }
-            set_variable = { var = ROOT.aotsm_literacy_level_points value = 75 }
+            set_variable = { 
+                var = ROOT.aotsm_literacy_level_points 
+                value = 75 
+            }
         }
         else_if = {
             limit = { has_idea = all_population_literate }
-            set_variable = { var = ROOT.aotsm_literacy_level_points value = 100 }
+            set_variable = { 
+                var = ROOT.aotsm_literacy_level_points 
+                value = 100 
+            }
         }
     }
     if = {
