@@ -1,0 +1,238 @@
+set_literacy_points = { #устанавливаем значение в on_startup
+    #every_country = {
+        #limit = { exists = yes }
+        if = {
+            limit = { has_idea = all_population_literate }
+            set_variable = { 
+                var = aotsm_literacy_level_points 
+                value = 100 
+            }
+        }
+        else_if = {
+            limit = { has_idea = high_literacy_level }
+            set_variable = { 
+                var = aotsm_literacy_level_points 
+                value = 75 
+            }
+        }
+        else_if = {
+            limit = { has_idea = average_literacy_level }
+            set_variable = { 
+                var = aotsm_literacy_level_points 
+                value = 50 
+            }
+         }
+        else_if = {
+            limit = { has_idea = low_literacy_level }
+            set_variable = { 
+                var = aotsm_literacy_level_points 
+                value = 25 
+            }
+        }
+        else_if = {
+            limit = { has_idea = illiterate }
+            set_variable = { 
+                var = aotsm_literacy_level_points
+                value = 0 
+            }
+        }
+    #}
+}
+
+literacy_points_var_clamp = {  # Устанавливаем возможные значения переменной
+    clamp_variable = {
+        var = ROOT.aotsm_literacy_level_points
+        min = 0
+        max = 100
+    }
+}
+
+add_literacy_points = {  # Увеличиваем переменную на 0.5
+    #log = "[GetDateText]: [This.GetName] BEFORE ADD: [?aotsm_literacy_level_points]"
+    add_to_variable = { ROOT.aotsm_literacy_level_points = 0.01 }
+    #log = "[GetDateText]: [This.GetName] AFTER ADD: [?aotsm_literacy_level_points]"
+    force_update_dynamic_modifier = yes 
+    literacy_points_var_clamp = yes
+}
+
+add_0_5_literacy_points = {  # Увеличиваем на 0.5
+    custom_effect_tooltip = aotsm_add_0_5_literacy_points_tt
+    add_to_variable = { ROOT.aotsm_literacy_level_points = 0.5 }
+    force_update_dynamic_modifier = yes
+    literacy_points_var_clamp = yes
+}
+
+remove_0_5_literacy_points = {  # Уменьшаем на 0.5
+    custom_effect_tooltip = aotsm_remove_0_5_literacy_points_tt
+    subtract_from_variable = { ROOT.aotsm_literacy_level_points = 0.5 }
+    force_update_dynamic_modifier = yes
+    literacy_points_var_clamp = yes
+}
+
+add_1_literacy_points = {  # Увеличиваем на 1
+    custom_effect_tooltip = aotsm_add_1_literacy_points_tt
+    add_to_variable = { ROOT.aotsm_literacy_level_points = 1 }
+    force_update_dynamic_modifier = yes
+    literacy_points_var_clamp = yes
+}
+
+remove_1_literacy_points = {  # Уменьшаем на 1
+    custom_effect_tooltip = aotsm_remove_3_literacy_points_tt
+    subtract_from_variable = { ROOT.aotsm_literacy_level_points = 1 }
+    force_update_dynamic_modifier = yes
+    literacy_points_var_clamp = yes
+}
+
+add_3_literacy_points = {  # Увеличиваем на 3
+    custom_effect_tooltip = aotsm_add_3_literacy_points_tt
+    add_to_variable = { ROOT.aotsm_literacy_level_points = 3 }
+    force_update_dynamic_modifier = yes
+    literacy_points_var_clamp = yes
+}
+
+remove_3_literacy_points = {  # Уменьшаем на 3
+    custom_effect_tooltip = aotsm_remove_5_literacy_points_tt
+    subtract_from_variable = { ROOT.aotsm_literacy_level_points = 3 }
+    force_update_dynamic_modifier = yes
+    literacy_points_var_clamp = yes
+}
+
+add_5_literacy_points = {  # Увеличиваем на 5
+    custom_effect_tooltip = aotsm_add_5_literacy_points_tt
+    add_to_variable = { ROOT.aotsm_literacy_level_points = 5 }
+    force_update_dynamic_modifier = yes
+    literacy_points_var_clamp = yes
+}
+
+remove_5_literacy_points = {  # Уменьшаем на 5
+    custom_effect_tooltip = aotsm_remove_5_literacy_points_tt
+    subtract_from_variable = { ROOT.aotsm_literacy_level_points = 5 }
+    force_update_dynamic_modifier = yes
+    literacy_points_var_clamp = yes
+}
+
+check_literacy_level = {  # Чекаем уровень грамотности раз в месяц
+    if = {
+        limit = { NOT = { has_variable = ROOT.aotsm_literacy_level_points } }  # Инициализация для новых стран
+        if = {
+            limit = { has_idea = illiterate }
+            set_variable = { 
+                var = ROOT.aotsm_literacy_level_points
+                value = 0 
+            }
+        }
+        else_if = {
+            limit = { has_idea = low_literacy_level }
+            set_variable = { 
+                var = ROOT.aotsm_literacy_level_points 
+                value = 25 
+            }
+        }
+        else_if = {
+            limit = { has_idea = average_literacy_level }
+            set_variable = { 
+                var = ROOT.aotsm_literacy_level_points 
+                value = 50 
+            }
+         }
+        else_if = {
+            limit = { has_idea = high_literacy_level }
+            set_variable = { 
+                var = ROOT.aotsm_literacy_level_points 
+                value = 75 
+            }
+        }
+        else_if = {
+            limit = { has_idea = all_population_literate }
+            set_variable = { 
+                var = ROOT.aotsm_literacy_level_points 
+                value = 100 
+            }
+        }
+    }
+    if = {
+        limit = { check_variable = { ROOT.aotsm_literacy_processed < 1 } }  # Флаг для предотвращения циклов/дублирования в тике
+        add_literacy_points = yes
+        set_variable = { ROOT.aotsm_literacy_processed = 1 }  # Устанавливаем флаг
+    }
+    if = {
+        limit = {
+            has_idea = high_literacy_level
+            check_variable = { ROOT.aotsm_literacy_level_points > 98 }
+        }
+        swap_ideas = {
+            remove_idea = high_literacy_level
+            add_idea = all_population_literate
+        }
+    }
+    else_if = {
+        limit = {
+            has_idea = average_literacy_level
+            check_variable = { ROOT.aotsm_literacy_level_points > 74 }
+        }
+        swap_ideas = {
+            remove_idea = average_literacy_level
+            add_idea = high_literacy_level
+        }
+    }
+    else_if = {
+        limit = {
+            has_idea = low_literacy_level
+            check_variable = { ROOT.aotsm_literacy_level_points > 49 }
+        }
+        swap_ideas = {
+            remove_idea = low_literacy_level
+            add_idea = average_literacy_level
+        }
+    }
+    else_if = {
+        limit = {
+            has_idea = illiterate
+            check_variable = { ROOT.aotsm_literacy_level_points > 24 }
+        }
+        swap_ideas = {
+            remove_idea = illiterate
+            add_idea = low_literacy_level
+        }
+    }
+    else_if = {
+        limit = {
+            has_idea = all_population_literate
+            check_variable = { ROOT.aotsm_literacy_level_points < 99 }
+        }
+        swap_ideas = {
+            remove_idea = all_population_literate
+            add_idea = high_literacy_level
+        }
+    }
+    else_if = {
+        limit = {
+            has_idea = high_literacy_level
+            check_variable = { ROOT.aotsm_literacy_level_points < 75 }
+        }
+        swap_ideas = {
+            remove_idea = high_literacy_level
+            add_idea = average_literacy_level
+        }
+    }
+    else_if = {
+        limit = {
+            has_idea = average_literacy_level
+            check_variable = { ROOT.aotsm_literacy_level_points < 50 }
+        }
+        swap_ideas = {
+            remove_idea = average_literacy_level
+            add_idea = low_literacy_level
+        }
+    }
+    else_if = {
+        limit = {
+            has_idea = low_literacy_level
+            check_variable = { ROOT.aotsm_literacy_level_points < 25 }
+        }
+        swap_ideas = {
+            remove_idea = low_literacy_level
+            add_idea = illiterate
+        }
+    }
+}
