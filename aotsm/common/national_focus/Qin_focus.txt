@@ -60,10 +60,9 @@ focus_tree = {
 	focus = {
 		id = QIN_question_of_industrialization
 	#	icon = GFX_
-	#	prerequisite = { focus = }
+
 		x = -18
 		y = 0
-	#	relative_position_id =
 
 		cost = 5
 
@@ -3749,7 +3748,7 @@ focus_tree = {
 	#	icon = GFX_
 		prerequisite = { focus = QIN_need_of_modern_navy }
 		x = -2
-		y = 1
+		y = 2
 		relative_position_id = QIN_need_of_modern_navy
 
 		cost = 5
@@ -3774,7 +3773,7 @@ focus_tree = {
 	#	icon = GFX_
 		prerequisite = { focus = QIN_need_of_modern_navy }
 		x = 0
-		y = 1
+		y = 2
 		relative_position_id = QIN_need_of_modern_navy
 
 		cost = 5
@@ -3799,7 +3798,7 @@ focus_tree = {
 	#	icon = GFX_
 		prerequisite = { focus = QIN_need_of_modern_navy }
 		x = 2
-		y = 1
+		y = 2
 		relative_position_id = QIN_need_of_modern_navy
 
 		cost = 5
@@ -4053,10 +4052,10 @@ focus_tree = {
 	}
 
 	focus = {
-		id = QIN_creat_light_aviation
+		id = QIN_research_of_european_decisions 
 	#	icon = GFX_
 		prerequisite = { focus = QIN_sky_conquest }
-		x = -2
+		x = 0
 		y = 1
 		relative_position_id = QIN_sky_conquest
 
@@ -4078,12 +4077,39 @@ focus_tree = {
 	}
 
 	focus = {
-		id = QIN_heavy_lift_priority
+		id = QIN_create_light_aviation
 	#	icon = GFX_
-		prerequisite = { focus = QIN_sky_conquest }
+		prerequisite = { focus = QIN_research_of_european_decisions }
+		x = -2
+		y = 2
+		relative_position_id = QIN_research_of_european_decisions
+		mutually_exclusive = { focus = QIN_design_of_large_aircraft }
+
+		cost = 5
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		available = {  }
+
+		bypass = {  }
+
+		cancel_if_invalid = yes
+
+		completion_reward = {
+
+		}
+	}
+
+	focus = {
+		id = QIN_design_of_large_aircraft
+	#	icon = GFX_
+		prerequisite = { focus = QIN_research_of_european_decisions }
 		x = 2
-		y = 1
-		relative_position_id = QIN_sky_conquest
+		y = 2
+		relative_position_id = QIN_research_of_european_decisions
+		mutually_exclusive = { focus = QIN_create_light_aviation }
 
 		cost = 5
 
@@ -4105,10 +4131,10 @@ focus_tree = {
 	focus = {
 		id = QIN_airfields_construction
 	#	icon = GFX_
-		prerequisite = { focus = QIN_sky_conquest }
+		prerequisite = { focus = QIN_research_of_european_decisions }
 		x = 0
 		y = 1
-		relative_position_id = QIN_sky_conquest
+		relative_position_id = QIN_research_of_european_decisions
 
 		cost = 5
 
@@ -4130,11 +4156,13 @@ focus_tree = {
 	focus = {
 		id = QIN_aviation_use_tactics
 	#	icon = GFX_
-		prerequisite = { focus = QIN_creat_light_aviation }
-		prerequisite = { focus = QIN_heavy_lift_priority }
+		prerequisite = { 
+			focus = QIN_create_light_aviation 
+			focus = QIN_design_of_large_aircraft 
+		}
 		prerequisite = { focus = QIN_airfields_construction }
 		x = 0
-		y = 1
+		y = 2
 		relative_position_id = QIN_airfields_construction
 
 		cost = 5
@@ -4143,7 +4171,12 @@ focus_tree = {
 			factor = 1
 		}
 
-		available = {  }
+		available = { 
+			OR = {
+				has_completed_focus = QIN_create_light_aviation
+				has_completed_focus = QIN_design_of_large_aircraft
+			}
+		}
 
 		bypass = {  }
 
@@ -4153,4 +4186,261 @@ focus_tree = {
 
 		}
 	}
+
+	focus = {
+		id = QIN_second_stage_of_conquering_the_sky
+	#	icon = GFX_
+
+		x = 0
+		y = 1
+		relative_position_id = QIN_aviation_use_tactics
+
+		cost = 5
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		available = { 
+			has_completed_focus = QIN_aviation_use_tactics
+		}
+
+		bypass = {  }
+
+		cancel_if_invalid = yes
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus QIN_second_stage_of_conquering_the_sky completed"
+		}
+	}
+
+	focus = {
+		id = QIN_research_in_light_aviation
+	#	icon = GFX_
+		prerequisite = { focus = QIN_second_stage_of_conquering_the_sky }
+		mutually_exclusive = { focus = QIN_research_in_heavy_aviation }
+		x = -2
+		y = 2
+		relative_position_id = QIN_second_stage_of_conquering_the_sky
+
+		cost = 5
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		available = { 
+
+		}
+
+		bypass = {  }
+
+		cancel_if_invalid = yes
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus QIN_research_in_light_aviation completed"
+		}
+	}
+
+	focus = {
+		id = QIN_developments_of_feng_yelun
+	#	icon = GFX_
+		prerequisite = { focus = QIN_second_stage_of_conquering_the_sky }
+		x = 0
+		y = 1
+		relative_position_id = QIN_second_stage_of_conquering_the_sky
+
+		cost = 5
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		available = { 
+
+		}
+
+		bypass = {  }
+
+		cancel_if_invalid = yes
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus QIN_developments_of_feng_yelun completed"
+		}
+	}
+
+	focus = {
+		id = QIN_research_in_heavy_aviation
+	#	icon = GFX_
+		prerequisite = { focus = QIN_second_stage_of_conquering_the_sky }
+		mutually_exclusive = { focus = QIN_research_in_light_aviation }
+		x = 2
+		y = 2
+		relative_position_id = QIN_second_stage_of_conquering_the_sky
+
+		cost = 5
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		available = { 
+
+		}
+
+		bypass = {  }
+
+		cancel_if_invalid = yes
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus QIN_research_in_heavy_aviation completed"
+		}
+	}
+
+	focus = {
+		id = QIN_purchase_of_light_aircraft_samples 
+	#	icon = GFX_
+		prerequisite = { focus = QIN_research_in_light_aviation }
+		x = -1
+		y = 1
+		relative_position_id = QIN_research_in_light_aviation
+
+		cost = 5
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		available = { 
+
+		}
+
+		bypass = {  }
+
+		cancel_if_invalid = yes
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus QIN_purchase_of_light_aircraft_samples completed"
+		}
+	}
+
+	focus = {
+		id = QIN_air_invite_foreign_specialists
+	#	icon = GFX_
+		prerequisite = { 
+			focus = QIN_research_in_light_aviation 
+			focus = QIN_research_in_heavy_aviation 
+		}
+		x = 1
+		y = 1
+		relative_position_id = QIN_research_in_light_aviation
+
+		cost = 5
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		available = { 
+
+		}
+
+		bypass = {  }
+
+		cancel_if_invalid = yes
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus QIN_air_invite_foreign_specialists completed"
+		}
+	}
+
+	focus = {
+		id = QIN_create_nankin_pilot_school
+	#	icon = GFX_
+		prerequisite = { 
+			focus = QIN_research_in_light_aviation 
+			focus = QIN_research_in_heavy_aviation 
+		}
+		x = -1
+		y = 1
+		relative_position_id = QIN_research_in_heavy_aviation
+
+		cost = 5
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		available = { 
+
+		}
+
+		bypass = {  }
+
+		cancel_if_invalid = yes
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus QIN_create_nankin_pilot_school completed"
+		}
+	}
+
+	focus = {
+		id = QIN_purchase_of_heavy_aircraft_samples
+	#	icon = GFX_
+		prerequisite = { focus = QIN_research_in_heavy_aviation }
+		x = 1
+		y = 1
+		relative_position_id = QIN_research_in_heavy_aviation
+
+		cost = 5
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		available = { 
+
+		}
+
+		bypass = {  }
+
+		cancel_if_invalid = yes
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus QIN_purchase_of_heavy_aircraft_samples completed"
+		}
+	}
+
+	focus = {
+		id = QIN_build_shengyan_industrial_zone
+	#	icon = GFX_
+		prerequisite = { focus = QIN_air_invite_foreign_specialists }
+		prerequisite = { focus = QIN_create_nankin_pilot_school }
+		prerequisite = { 
+			focus = QIN_purchase_of_light_aircraft_samples 
+			focus = QIN_purchase_of_heavy_aircraft_samples 
+		}
+		x = 1
+		y = 1
+		relative_position_id = QIN_air_invite_foreign_specialists
+
+		cost = 5
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		available = { 
+
+		}
+
+		bypass = {  }
+
+		cancel_if_invalid = yes
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus QIN_build_shengyan_industrial_zone completed"
+		}
+	}
+	
 }

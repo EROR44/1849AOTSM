@@ -47,10 +47,40 @@ literacy_points_var_clamp = {  # Устанавливаем возможные �
     }
 }
 
-add_literacy_points = {  # Увеличиваем переменную на 0.5
+add_literacy_points = {  # Увеличиваем переменную на 0.05
     #log = "[GetDateText]: [This.GetName] BEFORE ADD: [?aotsm_literacy_level_points]"
-    add_to_variable = { ROOT.aotsm_literacy_level_points = 0.01 }
+    #add_to_variable = { ROOT.aotsm_literacy_level_points = 0.01 }
     #log = "[GetDateText]: [This.GetName] AFTER ADD: [?aotsm_literacy_level_points]"
+    if = { #-75% к приросту уровня образованности
+        limit = { 
+            has_idea = no_compulsory_education
+        }
+        add_to_variable = { ROOT.aotsm_literacy_level_points = 0.0025 }
+    }
+    else_if = { #-50% к приросту уровня образованности
+        limit = {
+            OR = {
+                has_idea = compulsory_primary_education
+                has_idea = religious_education
+                has_idea = madrasanizam
+            }
+        }
+        add_to_variable = { ROOT.aotsm_literacy_level_points = 0.005 }
+    }
+    else_if = { #-25% к приросту уровня образованности
+        limit = {
+            OR = {
+                has_idea = compulsory_secondary_education
+                has_idea = elite_education
+                has_idea = professional_oriented_education
+                has_idea = keju_system
+            }
+        }
+        add_to_variable = { ROOT.aotsm_literacy_level_points = 0.0075 }
+    }
+    else_if = { #нормальный прирост уровня образованности
+        add_to_variable = { ROOT.aotsm_literacy_level_points = 0.01 }
+    }
     force_update_dynamic_modifier = yes 
     literacy_points_var_clamp = yes
 }
