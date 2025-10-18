@@ -519,3 +519,33 @@ QIN_remove_1_isuan_supporters_influemce = {
 	force_update_dynamic_modifier = yes
 	QIN_clamp_influence_vars = yes
 }
+
+QIN_check_who_is_new_emperror = {
+	if = {
+		limit = {
+			check_variable = { QIN_ichzu_supporters_influemce_num > QIN_isin_supporters_influemce_num }
+			check_variable = { QIN_ichzu_supporters_influemce_num > QIN_isuan_supporters_influemce_num }
+		}
+		retire_character = QIN_Aisin_Gioro_Mianning
+		promote_character = QIN_Aisin_Gioro_Ichu
+	}
+	else_if = {
+		limit = {
+			check_variable = { QIN_isin_supporters_influemce_num > QIN_ichzu_supporters_influemce_num }
+			check_variable = { QIN_isin_supporters_influemce_num > QIN_isuan_supporters_influemce_num }
+		}
+		retire_character = QIN_Aisin_Gioro_Mianning
+		promote_character = QIN_Aisin_Gioro_Isin
+	}
+	else_if = {
+		limit = {
+			check_variable = { QIN_isuan_supporters_influemce_num > QIN_ichzu_supporters_influemce_num }
+			check_variable = { QIN_isuan_supporters_influemce_num > QIN_isin_supporters_influemce_num }
+		}
+		retire_character = QIN_Aisin_Gioro_Mianning
+		promote_character = QIN_Aisin_Gioro_Isuan
+	}
+	else_if = {
+		log = "[GetDateText]: [Root.GetName]: effect QIN_check_who_is_new_emperror ERROR"
+	}
+}
