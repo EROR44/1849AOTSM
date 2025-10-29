@@ -4,6 +4,7 @@ add_namespace = qin_story_event #Ивенты справки
 add_namespace = qin_literary_event #Мифологические, литературные события
 add_namespace = qin_industry_event #События связанные с промышленностью
 add_namespace = qin_political_event #Политические события
+add_namespace = qin_navy_event #Cобытия связанные с флотом
 add_namespace = qin_taypin_chain_event #Cобытия связанные с Тайпинами
 
 country_event = { #cмерть императора даогуана
@@ -1566,6 +1567,876 @@ country_event = { #
 	
 	}
 }
+
+#####################################################################################
+####################################TAYPIN_CHAIN#####################################
+#####################################################################################
+
+country_event = { # 
+	id = qin_navy_event.1
+	title = qin_navy_event.1.t
+	desc = qin_navy_event.1.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event qin_navy_event.1"
+		hidden_effect = {
+			
+		}
+	}
+
+	option = {
+		name = qin_navy_event.1.a
+		trigger = {
+			
+		}	
+		navy_experience = 10
+	}
+}
+
+country_event = { # 
+	id = qin_navy_event.2
+	title = qin_navy_event.2.t
+	desc = qin_navy_event.2.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event qin_navy_event.2"
+		hidden_effect = {
+			BYZ = { country_event = { id = qin_navy_event.3 days = 5 } }
+		}
+	}
+
+	option = {
+		name = qin_navy_event.2.a
+		trigger = {
+			
+		}
+		
+	
+	}
+}
+
+country_event = { # 
+	id = qin_navy_event.3
+	title = qin_navy_event.3.t
+	desc = qin_navy_event.3.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event qin_navy_event.3"
+		hidden_effect = {
+			
+		}
+	}
+
+	option = { #согласиться
+		name = qin_navy_event.3.a
+		ai_chance = {
+			base = 50
+		}
+		QIN = { country_event = { id = qin_navy_event.5 days = 5 } }
+	}
+
+	option = { #отказаться
+		name = qin_navy_event.3.b
+		ai_chance = {
+			base = 5
+		}
+		QIN = { country_event = { id = qin_navy_event.4 days = 5 } }
+	}
+}
+
+country_event = { # Отказ
+	id = qin_navy_event.4
+	title = qin_navy_event.4.t
+	desc = qin_navy_event.4.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event qin_navy_event.4"
+		hidden_effect = {
+			add_to_variable = {
+				var = QIN_num_of_answers_navy_tech
+				value = 1
+			}
+		}
+	}
+
+	option = {
+		name = qin_navy_event.5.a
+		trigger = {
+			
+		}	
+		#тут должен быть модификатор на -10 мнения
+	}
+}
+
+country_event = { # 
+	id = qin_navy_event.5
+	title = qin_navy_event.5.t
+	desc = qin_navy_event.5.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event qin_navy_event.5"
+		hidden_effect = {
+			
+		}
+	}
+
+	option = {
+		name = qin_navy_event.5.a
+		trigger = {
+			
+		}
+		BYZ = { country_event = { id = qin_navy_event.6 days = 14 } }
+	}
+}
+
+country_event = { # 
+	id = qin_navy_event.6
+	title = qin_navy_event.6.t
+	desc = qin_navy_event.6.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event qin_navy_event.6"
+		hidden_effect = {
+			
+		}
+	}
+
+	option = {
+		name = qin_navy_event.6.a
+		ai_chance = {
+			base = 10
+		}
+		QIN = { country_event = { id = qin_navy_event.7 days = 5 } }
+	}
+
+	option = {
+		name = qin_navy_event.6.b
+		ai_chance = {
+			base = 10
+		}
+		QIN = { country_event = { id = qin_navy_event.8 days = 5 } }
+	}
+
+	option = {
+		name = qin_navy_event.6.c
+		ai_chance = {
+			base = 10
+		}
+		QIN = { country_event = { id = qin_navy_event.9 days = 5 } }
+	}
+}
+
+country_event = { # 
+	id = qin_navy_event.7
+	title = qin_navy_event.7.t
+	desc = qin_navy_event.7.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event qin_navy_event.7"
+		hidden_effect = {
+			add_to_variable = {
+				var = QIN_num_of_answers_navy_tech
+				value = 1
+			}
+		}
+	}
+
+	option = {
+		name = qin_navy_event.7.a
+		trigger = {
+			
+		}
+		
+	}
+}
+
+country_event = { # 
+	id = qin_navy_event.8
+	title = qin_navy_event.8.t
+	desc = qin_navy_event.8.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event qin_navy_event.8"
+		hidden_effect = {
+			add_to_variable = {
+				var = QIN_num_of_answers_navy_tech
+				value = 1
+			}
+		}
+	}
+
+	option = {
+		name = qin_navy_event.8.a
+		trigger = {
+			
+		}
+		
+	}
+}
+
+country_event = { # 
+	id = qin_navy_event.9
+	title = qin_navy_event.9.t
+	desc = qin_navy_event.9.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event qin_navy_event.9"
+		hidden_effect = {
+			add_to_variable = {
+				var = QIN_num_of_answers_navy_tech
+				value = 1
+			}
+		}
+	}
+
+	option = {
+		name = qin_navy_event.9.a
+		trigger = {
+			
+		}
+		
+	}
+}
+
+country_event = { # 
+	id = qin_navy_event.10
+	title = qin_navy_event.10.t
+	desc = qin_navy_event.10.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event qin_navy_event.10"
+		hidden_effect = {
+			BYZ = { country_event = { id = qin_navy_event.11 days = 5 } }
+		}
+	}
+
+	option = {
+		name = qin_navy_event.10.a
+		trigger = {
+			
+		}
+		
+	
+	}
+}
+
+country_event = { # 
+	id = qin_navy_event.11
+	title = qin_navy_event.11.t
+	desc = qin_navy_event.11.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event qin_navy_event.11"
+		hidden_effect = {
+			
+		}
+	}
+
+	option = { #согласиться
+		name = qin_navy_event.11.a
+		ai_chance = {
+			base = 50
+		}
+		QIN = { country_event = { id = qin_navy_event.13 days = 5 } }
+	}
+
+	option = { #отказаться
+		name = qin_navy_event.11.b
+		ai_chance = {
+			base = 5
+		}
+		QIN = { country_event =  { id = qin_navy_event.12 days = 5 } }
+	}
+}
+
+country_event = { # Отказ
+	id = qin_navy_event.12
+	title = qin_navy_event.12.t
+	desc = qin_navy_event.12.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event qin_navy_event.13"
+		hidden_effect = {
+			add_to_variable = {
+				var = QIN_num_of_answers_navy_tech
+				value = 1
+			}
+		}
+	}
+
+	option = {
+		name = qin_navy_event.12.a
+		trigger = {
+			
+		}	
+		#тут должен быть модификатор на -10 мнения
+	}
+}
+
+country_event = { # 
+	id = qin_navy_event.13
+	title = qin_navy_event.13.t
+	desc = qin_navy_event.13.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event qin_navy_event.13"
+		hidden_effect = {
+			
+		}
+	}
+
+	option = {
+		name = qin_navy_event.13.a
+		trigger = {
+			
+		}
+		BYZ = { country_event =  { id = qin_navy_event.14 days = 14 } }
+	}
+}
+
+country_event = { # 
+	id = qin_navy_event.14
+	title = qin_navy_event.14.t
+	desc = qin_navy_event.14.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event qin_navy_event.14"
+		hidden_effect = {
+			
+		}
+	}
+
+	option = {
+		name = qin_navy_event.14.a
+		ai_chance = {
+			base = 10
+		}
+		QIN = { country_event =  { id = qin_navy_event.15 days = 5 } }
+	}
+
+	option = {
+		name = qin_navy_event.14.b
+		ai_chance = {
+			base = 10
+		}
+		QIN = { country_event =  { id = qin_navy_event.16 days = 5 } }
+	}
+
+	option = {
+		name = qin_navy_event.14.c
+		ai_chance = {
+			base = 10
+		}
+		QIN = { country_event =  { id = qin_navy_event.17 days = 5 } }
+	}
+}
+
+country_event = { # 
+	id = qin_navy_event.15
+	title = qin_navy_event.15.t
+	desc = qin_navy_event.15.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event qin_navy_event.15"
+		hidden_effect = {
+			add_to_variable = {
+				var = QIN_num_of_answers_navy_tech
+				value = 1
+			}
+		}
+	}
+
+	option = {
+		name = qin_navy_event.15.a
+		trigger = {
+			
+		}
+		
+	}
+}
+
+country_event = { # 
+	id = qin_navy_event.16
+	title = qin_navy_event.16.t
+	desc = qin_navy_event.16.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event qin_navy_event.16"
+		hidden_effect = {
+			add_to_variable = {
+				var = QIN_num_of_answers_navy_tech
+				value = 1
+			}
+		}
+	}
+
+	option = {
+		name = qin_navy_event.16.a
+		trigger = {
+			
+		}
+		
+	}
+}
+
+country_event = { # 
+	id = qin_navy_event.17
+	title = qin_navy_event.17.t
+	desc = qin_navy_event.17.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event qin_navy_event.17"
+		hidden_effect = {
+			add_to_variable = {
+				var = QIN_num_of_answers_navy_tech
+				value = 1
+			}
+		}
+	}
+
+	option = {
+		name = qin_navy_event.17.a
+		trigger = {
+			
+		}
+		
+	}
+}
+
+country_event = { # 
+	id = qin_navy_event.18
+	title = qin_navy_event.18.t
+	desc = qin_navy_event.18.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event qin_navy_event.18"
+		hidden_effect = {
+			BYZ = { country_event = { id = qin_navy_event.19 days = 5 } }
+		}
+	}
+
+	option = {
+		name = qin_navy_event.18.a
+		trigger = {
+			
+		}
+		
+	
+	}
+}
+
+country_event = { # 
+	id = qin_navy_event.19
+	title = qin_navy_event.19.t
+	desc = qin_navy_event.19.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event qin_navy_event.19"
+		hidden_effect = {
+			
+		}
+	}
+
+	option = { #согласиться
+		name = qin_navy_event.19.a
+		ai_chance = {
+			base = 50
+		}
+		QIN = { country_event =  { id = qin_navy_event.21 days = 5 } }
+	}
+
+	option = { #отказаться
+		name = qin_navy_event.11.b
+		ai_chance = {
+			base = 5
+		}
+		QIN = { country_event =  { id = qin_navy_event. days = 5 } }
+	}
+}
+
+country_event = { # Отказ
+	id = qin_navy_event.20
+	title = qin_navy_event.20.t
+	desc = qin_navy_event.20.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event qin_navy_event.20"
+		hidden_effect = {
+			add_to_variable = {
+				var = QIN_num_of_answers_navy_tech
+				value = 1
+			}
+		}
+	}
+
+	option = {
+		name = qin_navy_event.20.a
+		trigger = {
+			
+		}	
+		#тут должен быть модификатор на -10 мнения
+	}
+}
+
+country_event = { # 
+	id = qin_navy_event.21
+	title = qin_navy_event.21.t
+	desc = qin_navy_event.21.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event qin_navy_event.21"
+		hidden_effect = {
+			
+		}
+	}
+
+	option = {
+		name = qin_navy_event.21.a
+		trigger = {
+			
+		}
+		BYZ = { country_event =  { id = qin_navy_event.22 days = 14 } }
+	}
+}
+
+country_event = { # 
+	id = qin_navy_event.22
+	title = qin_navy_event.22.t
+	desc = qin_navy_event.22.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event qin_navy_event.22"
+		hidden_effect = {
+			
+		}
+	}
+
+	option = {
+		name = qin_navy_event.22.a
+		ai_chance = {
+			base = 10
+		}
+		QIN = { country_event =  { id = qin_navy_event.23 days = 5 } }
+	}
+
+	option = {
+		name = qin_navy_event.22.b
+		ai_chance = {
+			base = 10
+		}
+		QIN = { country_event =  { id = qin_navy_event.24 days = 5 } }
+	}
+
+	option = {
+		name = qin_navy_event.22.c
+		ai_chance = {
+			base = 10
+		}
+		QIN = { country_event =  { id = qin_navy_event.25 days = 5 } }
+	}
+}
+
+country_event = { # 
+	id = qin_navy_event.23
+	title = qin_navy_event.23.t
+	desc = qin_navy_event.23.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event qin_navy_event.23"
+		hidden_effect = {
+			add_to_variable = {
+				var = QIN_num_of_answers_navy_tech
+				value = 1
+			}
+		}
+	}
+
+	option = {
+		name = qin_navy_event.23.a
+		trigger = {
+			
+		}
+		
+	}
+}
+
+country_event = { # 
+	id = qin_navy_event.24
+	title = qin_navy_event.24.t
+	desc = qin_navy_event.24.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event qin_navy_event.24"
+		hidden_effect = {
+			add_to_variable = {
+				var = QIN_num_of_answers_navy_tech
+				value = 1
+			}
+		}
+	}
+
+	option = {
+		name = qin_navy_event.24.a
+		trigger = {
+			
+		}
+		
+	}
+}
+
+country_event = { # 
+	id = qin_navy_event.25
+	title = qin_navy_event.25.t
+	desc = qin_navy_event.25.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event qin_navy_event.25"
+		hidden_effect = {
+			add_to_variable = {
+				var = QIN_num_of_answers_navy_tech
+				value = 1
+			}
+		}
+	}
+
+	option = {
+		name = qin_navy_event.25.a
+		trigger = {
+			
+		}
+		
+	}
+}
+
+country_event = { # 
+	id = qin_navy_event.26
+	title = qin_navy_event.26.t
+	desc = qin_navy_event.26.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event qin_navy_event.26"
+		hidden_effect = {
+
+		}
+	}
+
+	option = {
+		name = qin_navy_event.26.a
+		trigger = {
+			
+		}
+		
+	}
+}
+
+country_event = { # 
+	id = qin_navy_event.27
+	title = qin_navy_event.27.t
+	desc = qin_navy_event.27.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event qin_navy_event.27"
+		hidden_effect = {
+
+		}
+	}
+
+	option = {
+		name = qin_navy_event.27.a
+		trigger = {
+			
+		}
+		
+	}
+}
+
+country_event = { # 
+	id = qin_navy_event.28
+	title = qin_navy_event.28.t
+	desc = qin_navy_event.28.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event qin_navy_event.28"
+		hidden_effect = {
+
+		}
+	}
+
+	option = {
+		name = qin_navy_event.28.a
+		trigger = {
+			
+		}
+		navy_experience = 25
+	}
+}
+
+country_event = { # 
+	id = qin_navy_event.29
+	title = qin_navy_event.29.t
+	desc = qin_navy_event.29.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event qin_navy_event.29"
+		hidden_effect = {
+
+		}
+	}
+
+	option = {
+		name = qin_navy_event.29.a
+		trigger = {
+			
+		}
+		
+	}
+}
+
 
 #####################################################################################
 ####################################TAYPIN_CHAIN#####################################
