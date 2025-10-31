@@ -1,0 +1,90 @@
+#SCRIPTED_EFFECTS
+#ANNEXATION AND OTHER SCRIPT IN CONFLICTS IN ASIA
+
+####################################################
+##################CHINA_SCRIPTS#####################
+####################################################
+
+aotsm_start_taypin_uprising_step_1_effect = {
+    set_global_flag = taypin_uprising_started
+    TPN = {
+		inherit_technology = QIN
+        every_state = {
+            limit = {
+                is_core_of = QIN
+            }
+            add_core_of = TPN
+        }
+		transfer_state = 599
+        set_province_controller = 7137
+        set_province_controller = 10050
+        set_province_controller = 11941
+        set_province_controller = 4092
+		load_oob = "TPN_uprising_step_1"
+		declare_war_on = {
+			target = QIN
+			type = annex_everything
+		}
+	}
+	news_event = { id = news.145 hours = 24 }
+}
+
+aotsm_start_taypin_uprising_step_2_effect = {
+    TPN = {
+        transfer_state = 591
+        transfer_state = 593
+        transfer_state = 594
+        transfer_state = 602
+        transfer_state = 729
+        transfer_state = 977
+        load_oob = "TPN_uprising_step_2"
+    }
+}
+ 
+####################################################
+##################JAPAN_SCRIPTS#####################
+####################################################
+
+aotsm_start_jap_civil_war_step_1_effect = {
+    set_global_flag = JAP_civil_war_is_started   
+    TUK = {
+        inherit_technology = JAP
+        transfer_state = 282
+        transfer_state = 728
+        transfer_state = 745
+        transfer_state = 989
+        add_state_core = 282
+        add_state_core = 989
+    }
+    every_state = {
+        limit = {
+            is_core_of = JAP
+        }
+        add_core_of = JAS
+    }
+    every_state = {
+        limit = {
+            is_owned_by = JAP
+            has_dynamic_modifier = {
+                modifier = JP_state_shogun_land_modifier
+            }
+        }
+        transfer_state_to = JAS
+    }
+    JAS = {
+		inherit_technology = JAP
+		#load_oob = "TPN_uprising_step_1" #C
+        transfer_state = 555
+        transfer_state = 996
+		declare_war_on = {
+			target = JAP
+			type = annex_everything
+		}
+	}
+}
+
+aotsm_start_jap_civil_war_step_2_effect = {
+    TUK = {
+
+    }
+}
