@@ -1,18 +1,20 @@
 westornisation_decision_category = {
 
-	test_lagging_nation = { 
+	debug_up_westernisation = { 
 		
-		icon = generic_tank
+		icon = generic_decision
 
 		allowed = {
 			
 		}
 
 		available = {
+			is_debug = yes
+			is_ai = no
 		}
 
 		visible = {
-			
+			is_debug = yes
 		}
 
 		fire_only_once = no
@@ -24,29 +26,26 @@ westornisation_decision_category = {
 		}
 		
 		complete_effect = {
-			swap_ideas = {
-				remove_idea = backward_nation
-				add_idea = lagging_nation
-			}
-			set_variable = { ROOT.progress_of_westornisation_frame = 2 }
-			set_variable = { ROOT.westornisation_background_frame = 2 }
+			up_westernisation_period = yes
 		}
 	
 	}
-	
-	test_westernizing_nation = { 
+
+	debug_down_westernisation = { 
 		
-		icon = generic_tank
+		icon = generic_decision
 
 		allowed = {
 			
 		}
 
 		available = {
+			is_debug = yes
+			is_ai = no
 		}
 
 		visible = {
-			
+			is_debug = yes
 		}
 
 		fire_only_once = no
@@ -58,29 +57,26 @@ westornisation_decision_category = {
 		}
 		
 		complete_effect = {
-			swap_ideas = {
-				remove_idea = lagging_nation
-				add_idea = westernizing_nation
-			}
-			set_variable = { ROOT.progress_of_westornisation_frame = 3 }
-			set_variable = { ROOT.westornisation_background_frame = 3 }
+			down_westernisation_period = yes
 		}
 	
 	}
-	
-	test_westernisation_end = { 
+
+	debug_add_10_westernisation = { 
 		
-		icon = generic_tank
+		icon = generic_decision
 
 		allowed = {
 			
 		}
 
 		available = {
+			is_debug = yes
+			is_ai = no
 		}
 
 		visible = {
-			
+			is_debug = yes
 		}
 
 		fire_only_once = no
@@ -92,29 +88,26 @@ westornisation_decision_category = {
 		}
 		
 		complete_effect = {
-			swap_ideas = {
-				remove_idea = westernizing_nation
-				add_idea = westernisation_end
-			}
-			set_variable = { ROOT.progress_of_westornisation_frame = 4 }
-			set_variable = { ROOT.westornisation_background_frame = 4 }
+			add_10_point_westernisation = yes
 		}
 	
 	}
-	
-	test_westernisation_pointer_up = { 
+
+	debug_remove_10_westernisation = { 
 		
-		icon = generic_tank
+		icon = generic_decision
 
 		allowed = {
 			
 		}
 
 		available = {
+			is_debug = yes
+			is_ai = no
 		}
 
 		visible = {
-			
+			is_debug = yes
 		}
 
 		fire_only_once = no
@@ -126,33 +119,31 @@ westornisation_decision_category = {
 		}
 		
 		complete_effect = {
-			add_to_variable = {
-				var = ROOT.westernisation_progress_pointer
-				value = 10
-				tooltip = add_10_to_westernisation
-			}
-			clamp_temp_variable = {
-				var = ROOT.westernisation_progress_pointer
-				min = 0
-				max = 100
-			}
+			remove_10_point_westernisation = yes
 		}
 	
 	}
-	
-	test_westernisation_pointer_down = { 
+
+	swap_westernisation_step = { 
 		
-		icon = generic_tank
+		icon = generic_decision
 
 		allowed = {
 			
 		}
 
 		available = {
+			check_variable = {
+				var = ROOT.aotsm_westernisation_points_num
+				value = 100
+			}
 		}
 
 		visible = {
-			
+			check_variable = {
+				var = ROOT.aotsm_westernisation_points_num
+				value = 100
+			}
 		}
 
 		fire_only_once = no
@@ -160,20 +151,11 @@ westornisation_decision_category = {
 		cost = 0
 
 		ai_will_do = {
-			factor = 0
+			factor = 15
 		}
 		
 		complete_effect = {
-			add_to_variable = {
-				var = ROOT.westernisation_progress_pointer
-				value = -10
-				tooltip = remove_10_to_westernisation
-			}
-			clamp_temp_variable = {
-				var = ROOT.westernisation_progress_pointer
-				min = 0
-				max = 100
-			}
+			up_westernisation_period = yes
 		}
 	
 	}
