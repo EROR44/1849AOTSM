@@ -124,6 +124,40 @@ westornisation_decision_category = {
 	
 	}
 
+	set_100_percent_westernisation = { 
+		
+		icon = generic_decision
+
+		allowed = {
+			
+		}
+
+		available = {
+			is_debug = yes
+			is_ai = no
+		}
+
+		visible = {
+			is_debug = yes
+		}
+
+		fire_only_once = no
+
+		cost = 0
+
+		ai_will_do = {
+			factor = 0
+		}
+		
+		complete_effect = {
+			set_variable = {
+				var = ROOT.aotsm_westernisation_points_num
+				value = 100
+			}
+		}
+	
+	}
+
 	swap_westernisation_step = { 
 		
 		icon = generic_decision
@@ -158,6 +192,573 @@ westornisation_decision_category = {
 			up_westernisation_period = yes
 		}
 	
+	}
+
+	westernisation_progress_backward_nation_mission = {
+	
+		activation = {		
+			has_idea = backward_nation
+		}
+		
+		available = {	
+			custom_trigger_tooltip = {
+				tooltip = none_trigger_tt	
+				always = no
+			}
+		}
+		
+		cancel_trigger = {
+			NOT = {
+				has_idea = backward_nation
+			}
+		}
+		
+		visible = {
+			has_idea = backward_nation
+		}
+		
+		icon = generic_decision
+		
+		days_mission_timeout = 120
+
+		days_re_enable = 0
+		
+		is_good = yes
+
+		selectable_mission = no
+
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete westernisation_progress_backward_nation_mission"
+		}
+		
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout westernisation_progress_backward_nation_mission"
+			add_1_point_westernisation = yes			
+		}
+		
+	}
+
+	westernisation_progress_lagging_nation_mission = {
+	
+		activation = {		
+			has_idea = lagging_nation
+		}
+		
+		available = {	
+			custom_trigger_tooltip = {
+				tooltip = none_trigger_tt	
+				always = no
+			}
+		}
+		
+		cancel_trigger = {
+			NOT = {
+				has_idea = lagging_nation
+			}
+		}
+		
+		visible = {
+			has_idea = lagging_nation
+		}
+		
+		icon = generic_decision
+		
+		days_mission_timeout = 60
+
+		days_re_enable = 0
+		
+		is_good = yes
+
+		selectable_mission = no
+
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete westernisation_progress_lagging_nation_mission"
+		}
+		
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout westernisation_progress_lagging_nation_mission"
+			add_1_point_westernisation = yes			
+		}
+		
+	}
+
+	westernisation_progress_westernizing_nation_mission = {
+	
+		activation = {		
+			has_idea = westernizing_nation
+		}
+		
+		available = {	
+			custom_trigger_tooltip = {
+				tooltip = none_trigger_tt	
+				always = no
+			}
+		}
+		
+		cancel_trigger = {
+			NOT = {
+				has_idea = westernizing_nation
+			}
+		}
+		
+		visible = {
+			has_idea = westernizing_nation
+		}
+		
+		icon = generic_decision
+		
+		days_mission_timeout = 30
+
+		days_re_enable = 0
+		
+		is_good = yes
+
+		selectable_mission = no
+
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete westernisation_progress_westernizing_nation_mission"
+		}
+		
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout westernisation_progress_westernizing_nation_mission"
+			add_1_point_westernisation = yes			
+		}
+		
+	}
+
+	westernisation_progress_neighbor_bonus_mission = {
+	
+		activation = {
+			OR = {		
+				has_idea = westernizing_nation
+				has_idea = lagging_nation
+				has_idea = backward_nation
+			}
+			any_neighbor_country = {
+				OR = {		
+					has_idea = westernisation_end
+					has_idea = westernizing_nation
+					has_idea = lagging_nation
+				}
+			}
+		}
+		
+		available = {	
+			custom_trigger_tooltip = {
+				tooltip = none_trigger_tt	
+				always = no
+			}
+		}
+		
+		cancel_trigger = {
+			NOT = {
+				OR = {		
+					has_idea = westernizing_nation
+					has_idea = lagging_nation
+					has_idea = backward_nation
+				}
+			}
+			any_neighbor_country = {
+				OR = {		
+					has_idea = westernisation_end
+					has_idea = westernizing_nation
+					has_idea = lagging_nation
+				}
+			}
+		}
+		
+		visible = {
+			OR = {		
+				has_idea = westernizing_nation
+				has_idea = lagging_nation
+				has_idea = backward_nation
+			}
+			any_neighbor_country = {
+				OR = {		
+					has_idea = westernisation_end
+					has_idea = westernizing_nation
+					has_idea = lagging_nation
+				}
+			}
+		}
+		
+		icon = generic_decision
+		
+		days_mission_timeout = 30
+
+		days_re_enable = 0
+		
+		is_good = yes
+
+		selectable_mission = no
+
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete westernisation_progress_neighbor_bonus_mission"
+		}
+		
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout westernisation_progress_neighbor_bonus_mission"
+			add_1_point_westernisation = yes			
+		}
+		
+	}
+
+	westernisation_progress_bonus_from_protector_mission = {
+	
+		activation = {
+			OR = {		
+				has_idea = westernizing_nation
+				has_idea = lagging_nation
+				has_idea = backward_nation
+			}
+			has_country_flag = country_has_great_power_protector
+		}
+		
+		available = {	
+			custom_trigger_tooltip = {
+				tooltip = none_trigger_tt	
+				always = no
+			}
+		}
+		
+		cancel_trigger = {
+			NOT = {
+				OR = {		
+					has_idea = westernizing_nation
+					has_idea = lagging_nation
+					has_idea = backward_nation
+				}
+			}
+			has_country_flag = country_has_great_power_protector
+		}
+		
+		visible = {
+			OR = {		
+				has_idea = westernizing_nation
+				has_idea = lagging_nation
+				has_idea = backward_nation
+			}
+			has_country_flag = country_has_great_power_protector
+		}
+		
+		icon = generic_decision
+		
+		days_mission_timeout = 30
+
+		days_re_enable = 0
+		
+		is_good = yes
+
+		selectable_mission = no
+
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete westernisation_progress_bonus_from_protector_mission"
+		}
+		
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout westernisation_progress_bonus_from_protector_mission"
+			add_1_point_westernisation = yes			
+		}
+		
+	}
+
+	westerniation_carry_out_reforms = {
+	
+		icon = generic_decision
+	
+		available = {
+			OR = {		
+				has_idea = westernizing_nation
+				has_idea = lagging_nation
+				has_idea = backward_nation
+			}
+		}
+		
+		allowed = { 
+			
+		}
+		
+		visible = {
+			OR = {		
+				has_idea = westernizing_nation
+				has_idea = lagging_nation
+				has_idea = backward_nation
+			}
+		}
+		
+		cost = 50
+		days_remove = 365
+		fire_only_once = yes
+	
+		modifier = {
+			
+		}
+
+		ai_will_do = {
+			factor = 80
+		}
+		
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision start westerniation_carry_out_reforms"
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision end westerniation_carry_out_reforms"
+			add_1_5_10_westernisation_points = yes
+		}
+	}
+
+	westerniation_army_reform = {
+	
+		icon = generic_decision
+	
+		available = {
+			OR = {		
+				has_idea = westernizing_nation
+				has_idea = lagging_nation
+				has_idea = backward_nation
+			}
+			has_army_experience > 9
+			NOT = { has_country_flag = westernisation_impact_on_the_level_flag }
+		}
+		
+		allowed = { 
+			
+		}
+		
+		visible = {
+			OR = {		
+				has_idea = westernizing_nation
+				has_idea = lagging_nation
+				has_idea = backward_nation
+			}
+		}
+		
+		cost = 0
+		days_remove = 365
+		fire_only_once = yes
+	
+		modifier = {
+			
+		}
+
+		ai_will_do = {
+			factor = 80
+		}
+		
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision start westerniation_carry_out_reforms"
+			army_experience = -10
+			hidden_effect = {
+				set_country_flag = westernisation_impact_on_the_level_flag
+			}
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision end westerniation_carry_out_reforms"
+			add_1_5_10_westernisation_points = yes
+			hidden_effect = {
+				clr_country_flag = westernisation_impact_on_the_level_flag
+			}
+		}
+	}
+
+	westerniation_learn_neighbors_experiance = {
+	
+		icon = generic_decision
+	
+		available = {
+			OR = {		
+				has_idea = westernizing_nation
+				has_idea = lagging_nation
+				has_idea = backward_nation
+			}
+			any_neighbor_country = {
+				OR = {		
+					has_idea = westernisation_end
+					has_idea = westernizing_nation
+					has_idea = lagging_nation
+				}
+			}
+			NOT = { has_country_flag = westernisation_impact_on_the_level_flag }
+		}
+		
+		allowed = { 
+			
+		}
+		
+		visible = {
+			OR = {		
+				has_idea = westernizing_nation
+				has_idea = lagging_nation
+				has_idea = backward_nation
+			}
+			any_neighbor_country = {
+				OR = {		
+					has_idea = westernisation_end
+					has_idea = westernizing_nation
+					has_idea = lagging_nation
+				}
+			}
+		}
+		
+		cost = 0
+		days_remove = 365
+		fire_only_once = yes
+	
+		modifier = {
+			
+		}
+
+		ai_will_do = {
+			factor = 80
+		}
+		
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision start westerniation_learn_neighbors_experiance"
+			add_stability = -0.05
+			hidden_effect = {
+				set_country_flag = westernisation_impact_on_the_level_flag
+			}
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision end westerniation_learn_neighbors_experiance"
+			add_1_5_10_westernisation_points = yes
+			hidden_effect = {
+				clr_country_flag = westernisation_impact_on_the_level_flag
+			}
+		}
+	}
+
+	westerniation_develop_own_lands = {
+	
+		icon = generic_decision
+	
+		available = {	
+			has_idea = westernizing_nation
+			NOT = { has_country_flag = westernisation_impact_on_the_level_flag }
+		}
+		
+		allowed = { 
+			
+		}
+		
+		visible = {
+			has_idea = westernizing_nation
+		}
+		
+		cost = 0
+		days_remove = 365
+		fire_only_once = yes
+	
+		modifier = {
+			
+		}
+
+		ai_will_do = {
+			factor = 80
+		}
+		
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision start westerniation_learn_neighbors_experiance"
+			hidden_effect = {
+				set_country_flag = westernisation_impact_on_the_level_flag
+			}
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision end westerniation_learn_neighbors_experiance"
+			random_owned_controlled_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			add_5_point_westernisation = yes
+			hidden_effect = {
+				clr_country_flag = westernisation_impact_on_the_level_flag
+			}
+		}
+	}
+
+	westerniation_develop_own_indusry = {
+	
+		icon = generic_decision
+	
+		available = {	
+			has_idea = westernizing_nation
+			NOT = { has_country_flag = westernisation_impact_on_the_level_flag }
+		}
+		
+		allowed = { 
+			
+		}
+		
+		visible = {
+			has_idea = westernizing_nation
+		}
+		
+		cost = 0
+		days_remove = 365
+		fire_only_once = yes
+	
+		modifier = {
+			
+		}
+
+		ai_will_do = {
+			factor = 80
+		}
+		
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision start westerniation_learn_neighbors_experiance"
+			hidden_effect = {
+				set_country_flag = westernisation_impact_on_the_level_flag
+			}
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision end westerniation_learn_neighbors_experiance"
+			random_list = {
+				50 = {
+					random_owned_controlled_state = {
+						add_extra_state_shared_building_slots = 1
+						add_building_construction = {
+							type = arms_factory
+							level = 1
+							instant_build = yes
+						}
+					}
+				}
+				50 = {
+					random_owned_controlled_state = {
+						add_extra_state_shared_building_slots = 1
+						add_building_construction = {
+							type = industrial_complex
+							level = 1
+							instant_build = yes
+						}
+					}
+				}
+			}
+			add_5_point_westernisation = yes
+			hidden_effect = {
+				clr_country_flag = westernisation_impact_on_the_level_flag
+			}
+		}
 	}
 
 }
