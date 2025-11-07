@@ -16,40 +16,55 @@ country_event = {
 	}
 	
 	option = {
-		name = aotsm_westernisation_event.1.a #
+		name = aotsm_westernisation_event.1.a # 
+        trigger = { 
+            NOT = {
+                has_country_flag = aotsm_w_pru_refuse_to_protection
+            }
+        }
 		ai_chance = {
 			base = 5
 		}
 		
 		hidden_effect = {
 			PRU = {
-                country_event = aotsm_westernisation_event.4
+                country_event = { id = aotsm_westernisation_event.4 days = 14 }
             }
 		}
 	}
 	
 	option = {
 		name = aotsm_westernisation_event.1.b #
+        trigger = { 
+            NOT = {
+                has_country_flag = aotsm_w_frr_refuse_to_protection
+            }
+        }
 		ai_chance = {
 			base = 5
 		}
 		
 		hidden_effect = {
 			FRR = {
-                country_event = aotsm_westernisation_event.4
+                country_event = { id = aotsm_westernisation_event.4 days = 14 }
             }
 		}
 	}
 	
 	option = {
 		name = aotsm_westernisation_event.1.c #
+        trigger = { 
+            NOT = {
+                has_country_flag = aotsm_w_cbi_refuse_to_protection
+            }
+        }
 		ai_chance = {
 			base = 5
 		}
 		
 		hidden_effect = {
 			CBI = {
-                country_event = aotsm_westernisation_event.4
+                country_event = { id = aotsm_westernisation_event.4 days = 14 }
             }
 		}
 	}
@@ -83,32 +98,47 @@ country_event = {
 
 	option = {
 		name = aotsm_westernisation_event.2.a #
+        trigger = { 
+            NOT = {
+                has_country_flag = aotsm_w_aus_refuse_to_protection
+            }
+        }
 		ai_chance = {
 			base = 5
 		}
 		
 		hidden_effect = {
 			AUS = {
-                country_event = aotsm_westernisation_event.3
+                country_event = { id = aotsm_westernisation_event.4 days = 14 }
             }
 		}
 	}
 	
 	option = {
 		name = aotsm_westernisation_event.2.b #
+        trigger = { 
+            NOT = {
+                country_event = { id = aotsm_westernisation_event.4 days = 14 }
+            }
+        }
 		ai_chance = {
 			base = 5
 		}
 		
 		hidden_effect = {
 			BYZ = {
-                country_event = aotsm_westernisation_event.4
+                country_event = { id = aotsm_westernisation_event.4 days = 14 }
             }
 		}
 	}
 	
 	option = {
 		name = aotsm_westernisation_event.2.c #
+        trigger = { 
+            NOT = {
+                country_event = { id = aotsm_westernisation_event.4 days = 14 }
+            }
+        }
 		ai_chance = {
 			base = 5
 		}
@@ -151,7 +181,8 @@ country_event = {
 		ai_chance = {
 			base = 5
 		}
-		
+		add_stability = 0.025
+		add_war_support = 0.025
 		hidden_effect = {
 			
 		}
@@ -188,10 +219,10 @@ country_event = {
 	option = {
 		name = aotsm_westernisation_event.4.a # согласие
 		ai_chance = {
-			base = 5
+			base = 500
 		}
-		PREV = {
-            country_event = aotsm_westernisation_event.5
+		FROM = {
+            country_event = { id = aotsm_westernisation_event.5 days = 1 }
         }
 		hidden_effect = {
 			
@@ -203,7 +234,7 @@ country_event = {
 		ai_chance = {
 			base = 5
 		}
-		PREV = {
+		FROM = {
             country_event = aotsm_westernisation_event.6
         }
 		hidden_effect = {
@@ -232,7 +263,13 @@ country_event = {
 		ai_chance = {
 			base = 5
 		}
-
+        w_check_who_is_protector_power = yes
+        FROM = {
+            add_opinion_modifier = {
+				target = FROM
+				modifier = w_get_help_in_westernisation
+			}
+        }
 		hidden_effect = {
 			
 		}
@@ -259,7 +296,13 @@ country_event = {
 		ai_chance = {
 			base = 5
 		}
-
+        w_check_who_is_refuse_to_protection = yes
+        FROM = {
+            add_opinion_modifier = {
+				target = FROM
+				modifier = w_refused_in_help_in_westernisation
+			}
+        }
 		hidden_effect = {
 			
 		}
