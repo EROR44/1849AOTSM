@@ -541,6 +541,19 @@ on_actions = {
 		effect = {
 			set_variable = { ROOT.aotsm_literacy_processed = 0 }  # Сброс флага в начале месяца для всех стран
 			check_literacy_level = yes  
+			if = {
+				limit = {
+					OR = {
+						has_idea = backward_nation
+						has_idea = lagging_nation
+						has_idea = westernizing_nation
+					}
+					NOT = {
+						tag = QIN #Страна с кастомным процессом вестернизации
+					}
+				}
+				choose_random_westernisation_event_effect = yes	
+			}
 		}
 	}
 	
