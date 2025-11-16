@@ -52,6 +52,25 @@ on_actions = {
                	limit = { exists = yes }
 				set_literacy_points = yes
 			}
+			every_country = { #Блокировка редактирования дивизий
+				limit ={
+					is_country_with_blocked_division_editing = yes
+				}
+				country_lock_all_division_template = yes
+			}
+			every_country = {
+				limit = {
+					OR = {
+						has_idea = westernizing_nation
+						has_idea = lagging_nation
+						has_idea = backward_nation
+					}
+					NOT = {
+						tag = QIN
+					}
+				}
+				country_event = { id = aotsm_westernisation_event.1 days = 7 }
+			}
 
 			set_variable = { global.number_of_international_faction_members = 0 }
 			
@@ -522,6 +541,19 @@ on_actions = {
 		effect = {
 			set_variable = { ROOT.aotsm_literacy_processed = 0 }  # Сброс флага в начале месяца для всех стран
 			check_literacy_level = yes  
+			if = {
+				limit = {
+					OR = {
+						has_idea = backward_nation
+						has_idea = lagging_nation
+						has_idea = westernizing_nation
+					}
+					NOT = {
+						tag = QIN #Страна с кастомным процессом вестернизации
+					}
+				}
+				choose_random_westernisation_event_effect = yes	
+			}
 		}
 	}
 	

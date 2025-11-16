@@ -1,5 +1,15 @@
 scripted_gui = {
 
+	QIN_selection_of_the_successor_scripted_gui = {
+        context_type = decision_category
+		window_name = "QIN_selection_of_the_successor_gui_window"
+
+        effects = {
+     		
+        }
+
+	}
+
 	QIN_country_situation_scripted_gui = {
         context_type = decision_category
 		window_name = "QIN_country_situation_scripted_gui"
@@ -12,11 +22,13 @@ scripted_gui = {
                     }
                     ROOT = {
                         set_country_flag = QIN_visible_region_leaders_list_flag
+                        set_variable = { QIN_governor_list_page = 1 }
                     }
                 }
                 else_if = {
                     ROOT = {
                         clr_country_flag = QIN_visible_region_leaders_list_flag
+                        set_variable = { QIN_governor_list_page = 0 }
                     }
                }
             }
@@ -41,7 +53,14 @@ scripted_gui = {
      		close_button_click = {
                 ROOT = {
                     clr_country_flag = QIN_visible_region_leaders_list_flag
+                    set_variable = { QIN_governor_list_page = 0 }
                 }
+            }
+            open_governor_list_button_click = {
+                set_variable = { QIN_governor_list_page = 1 }
+            }
+            open_viceroys_list_button_click = {
+               set_variable = { QIN_governor_list_page = 2 }
             }
         }
 
@@ -50,10 +69,33 @@ scripted_gui = {
 
     }
 
-    QIN_banner_recruitment_mobilization_system_gui = {
-        context_type = decision_category
-        window_name = "QIN_banner_recruitment_mobilization_system_gui_container"
-    }
+    QIN_governor_list_page_content = {
+		context_type = player_context
+
+		window_name = "QIN_governor_list_page"
+		parent_window_name = "QIN_region_leaders_list"
+
+		visible = {
+			is_ai = no
+			check_variable = { 
+				QIN_governor_list_page = 1
+			}
+		}
+	}
+
+    QIN_viceroys_list_page_content = {
+		context_type = player_context
+
+		window_name = "QIN_viceroys_list_page"
+		parent_window_name = "QIN_region_leaders_list"
+
+		visible = {
+			is_ai = no
+			check_variable = { 
+				QIN_governor_list_page = 2 
+			}
+		}
+	}
 }
 
 
