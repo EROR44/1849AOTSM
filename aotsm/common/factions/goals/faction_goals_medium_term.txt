@@ -829,7 +829,7 @@ faction_goal_indifference_is_a_threat = {
 	}
 	visible = {
 		FROM = {
-			original_tag = SOV
+			original_tag = RUS
 		}
 	}
 	completed = {
@@ -868,7 +868,7 @@ faction_goal_undoing_brest_litowsk = {
 	}
 	visible = {
 		FROM = {
-			original_tag = SOV
+			original_tag = RUS
 		}
 	}
 	completed = {
@@ -912,7 +912,7 @@ faction_goal_undoing_brest_litowsk = {
 		base = 1
 		modifier = {
 			add = 9 # SOV should always prio this
-			original_tag = SOV
+			original_tag = RUS
 		}
 	}
 }  
@@ -2314,8 +2314,8 @@ faction_goal_control_baku_oil_fields = {
 	visible = {
 		FROM = {
 			NOT = {
-				original_tag = SOV
-				is_in_faction_with = SOV
+				original_tag = RUS
+				is_in_faction_with = RUS
 			}
 		}
 		any_collection_element = {
@@ -3531,145 +3531,7 @@ faction_goal_control_bahamas_bases = {
 	}
 }
 
-# Panama
-faction_goal_control_panama_canal = {
-	name = control_panama_canal_goal_name
-	description = control_panama_canal_goal_desc
-	category = medium_term
-	group = FOCUS_FILTER_NAVY_XP
-	allowed = {
-		
-	}
-	visible = {
-		FROM = {
-			NOT = {
-				original_tag = USA
-				is_in_faction_with = USA
-			}
-		}
-		OR = {
-			any_collection_element = {
-				collection = {
-					 input = game:scope
-					 operators = { faction_members controlled_states }
-					 name = FACTION_CONTROLLED_STATES # a custom loc string that will be displayed
-				}
-				distance_to = {
-					target = 685
-					value < 2000
-				}
-			}
-			AND = {
-				685 = { is_controlled_by = USA }
-				has_war_with = USA
-				any_collection_element = {
-					collection = {
-						 input = game:scope
-						 operators = { faction_members controlled_states }
-						 name = FACTION_CONTROLLED_STATES # a custom loc string that will be displayed
-					}
-					distance_to = {
-						target = 685
-						value < 6000
-					}
-				}
-			}
-		}
-	}
-	available = {
 
-	}
-	completed = {
-		685 = { is_controlled_by_ROOT_or_ally = yes }
-	}
-	complete_effect = {
-		add_faction_power_projection = 100
-		custom_effect_tooltip = generic_skip_one_line_tt
-		custom_effect_tooltip = TARGET_STATE_CONTROLLERS
-		every_faction_member = { 
-			visible_when_empty = yes
-			limit = {
-				controls_state = 685
-			}
-			add_faction_initiative = 1
-		}
-		685 = {
-			add_building_construction = {
-				type = anti_air_building
-				level = 1
-				instant_build = yes
-			}
-			add_building_construction = {
-				type = air_base
-				level = 1
-				instant_build = yes
-			}
-			add_building_construction = {
-				type = naval_base
-				level = 1
-				instant_build = yes
-				province = {
-					all_provinces = yes
-					limit_to_naval_base = yes
-				}
-			}
-			add_building_construction = {
-				type = coastal_bunker
-				level = 1
-				province = 7617
-				instant_build = yes
-			}
-			add_building_construction = {
-				type = bunker
-				level = 1
-				province = 7617
-				instant_build = yes
-			}
-		}
-	}
-	ai_will_do = {
-		base = 0
-		modifier = {
-			factor = 2 # Target of opportunity - already at war anyway
-			685 = {
-				owner = {
-					has_war_with = ROOT
-				}
-			}
-		}
-		modifier = {
-			add = 1 # If naval power seek to project it by expanding bases
-			has_navy_size = {
-				size > 5
-				type = capital_ship
-			}
-		}
-		modifier = {
-			add = 2 # If major naval power seek to control access
-			has_navy_size = {
-				size > 20
-				type = capital_ship
-			}
-		}
-		modifier = {
-			add = 1 # If at war with a north american power prioritize this
-			NOT = {
-				any_controlled_state = {
-					is_on_continent = north_america
-				}
-			}
-			any_enemy_country = {
-				capital_scope = {
-					is_on_continent = north_america
-				}
-			}
-		}
-		modifier = {
-			add = 10 # If USA
-			original_tag = USA
-		}
-	}
-}
 
 # Trinidad
 faction_goal_control_trinidad = {
@@ -4310,7 +4172,7 @@ faction_goal_control_narvik = {
 		modifier = {
 			add = 1 # If at war with USSR prioritize this
 			any_enemy_country = {
-				original_tag = SOV
+				original_tag = RUS
 			}
 		}
 	}
@@ -4542,7 +4404,7 @@ faction_goal_control_brittany_bases = {
 			add = 1 # If GER or SOV prioritize this
 			is_historical_focus_on = yes
 			OR = {
-				original_tag = SOV
+				original_tag = RUS
 				original_tag = GER
 			}
 		}
@@ -5165,12 +5027,12 @@ faction_goal_control_bosporus = {
 		modifier = {
 			add = 1 # If at war with SOV prioritize this
 			any_enemy_country = {
-				original_tag = SOV
+				original_tag = RUS
 			}
 		}
 		modifier = {
 			add = 1 # If SOV
-			original_tag = SOV
+			original_tag = RUS
 		}
 	}
 }
@@ -5289,12 +5151,12 @@ faction_goal_control_dardanelles = {
 		modifier = {
 			add = 1 # If at war with SOV prioritize this
 			any_enemy_country = {
-				original_tag = SOV
+				original_tag = RUS
 			}
 		}
 		modifier = {
 			add = 1 # If SOV
-			original_tag = SOV
+			original_tag = RUS
 		}
 	}
 }
