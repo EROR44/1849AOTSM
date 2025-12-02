@@ -48,16 +48,6 @@ faction_goal_resource_control = {
 					operators =  { faction_members }
 					name = FACTION
 			}
-			resource = oil
-			amount > 499
-			extracted = yes # (optional, default: no) checks extracted amount instead of country balance
-		}
-		has_resources_in_collection = {
-			collection = {
-					input = game:scope
-					operators =  { faction_members }
-					name = FACTION
-			}
 			resource = rubber
 			amount > 199
 			extracted = yes # (optional, default: no) checks extracted amount instead of country balance
@@ -90,6 +80,16 @@ faction_goal_resource_control = {
 			}
 			resource = tungsten
 			amount > 199
+			extracted = yes # (optional, default: no) checks extracted amount instead of country balance
+		}
+		has_resources_in_collection = {
+			collection = {
+					input = game:scope
+					operators =  { faction_members }
+					name = FACTION
+			}
+			resource = leypoldit
+			amount > 49
 			extracted = yes # (optional, default: no) checks extracted amount instead of country balance
 		}
 	
@@ -1052,7 +1052,7 @@ faction_goal_the_atomic_race = {
 ### Ideology based
 
 # Defeat of Communism 
-faction_goal_defeat_of_communism = {
+faction_goal_defeat_of_socialism = {
 	name = defeat_of_communism_goal_name
 	description = defeat_of_communism_goal_desc
 	group = FOCUS_FILTER_CONSOLIDATION
@@ -1103,8 +1103,8 @@ faction_goal_defeat_of_communism = {
 	}
 }
 
-# Defeat of Fascism 
-faction_goal_defeat_of_fascism = {
+# Defeat of Reactionist 
+faction_goal_defeat_of_reactionist = {
 	name = defeat_of_fascism_goal_name
 	description = defeat_of_fascism_goal_desc
 	category = long_term
@@ -1154,10 +1154,10 @@ faction_goal_defeat_of_fascism = {
 	}
 }
 
-# Defeat of Anti-fascists 
-faction_goal_defeat_of_anti_fascists = {
-	name = defeat_of_anti_fascists_goal_name
-	description = defeat_of_anti_fascists_goal_desc
+# Defeat of democratic 
+faction_goal_defeat_of_democratic = {
+	name = defeat_of_fascism_goal_name
+	description = defeat_of_fascism_goal_desc
 	category = long_term
 	group = FOCUS_FILTER_CONSOLIDATION
 	visible = {
@@ -1167,10 +1167,7 @@ faction_goal_defeat_of_anti_fascists = {
 				operators = {
 					faction_members
 					limit = {
-						OR = {
-							has_government = reactionist
-							has_government = democratic
-						}
+						has_government = democratic
 					}
 				}
 				name = FACTION
@@ -1184,8 +1181,8 @@ faction_goal_defeat_of_anti_fascists = {
 	completed = {
 		collection_size = {
 			input = {
-				input = collection:anti_fascist_controlled_states_my_continent
-				name = COLLECTION_STATES_MY_CONTINENT_CONTROLLED_DEMOCRATIC_COMMUNIST
+				input = collection:fascist_controlled_states_my_continent
+				name = COLLECTION_AMOUNT_OF_FASCIST_CONTROLLED_STATES_SAME_CONTINENT
 			}
 			value < 1
 		}
@@ -1200,29 +1197,20 @@ faction_goal_defeat_of_anti_fascists = {
 		custom_effect_tooltip = ALL_FACTION_MEMBERS
 		every_faction_member = {
 			add_popularity = {
-				ideology = reactionist
-				popularity = 0.2
+				ideology = democratic
+				popularity = -0.15
 			}
 			add_political_power = 100
-		}
-	}
-	ai_will_do = {
-		base = 0
-		modifier = { 
-			add = 1 # If war with communists you probably hate them
-			any_enemy_country = {
-				has_government = socialism
-			}
 		}
 	}
 }
 
-# Defeat of Anti-communists
-faction_goal_defeat_of_anti_communists = {
-	name = defeat_of_anti_communists_goal_name
-	description = defeat_of_anti_communists_goal_desc
-	group = FOCUS_FILTER_CONSOLIDATION
+# Defeat of authoritarian 
+faction_goal_defeat_of_authoritarian = {
+	name = defeat_of_fascism_goal_name
+	description = defeat_of_fascism_goal_desc
 	category = long_term
+	group = FOCUS_FILTER_CONSOLIDATION
 	visible = {
 		collection_size = {
 			input = {
@@ -1230,10 +1218,7 @@ faction_goal_defeat_of_anti_communists = {
 				operators = {
 					faction_members
 					limit = {
-						OR = {
-							has_government = reactionist
-							has_government = democratic
-						}
+						has_government = authoritarian
 					}
 				}
 				name = FACTION
@@ -1247,8 +1232,8 @@ faction_goal_defeat_of_anti_communists = {
 	completed = {
 		collection_size = {
 			input = {
-				input = collection:anti_communist_controlled_states_my_continent
-				name = COLLECTION_STATES_MY_CONTINENT_CONTROLLED_DEMOCRATIC_FASCIST
+				input = collection:fascist_controlled_states_my_continent
+				name = COLLECTION_AMOUNT_OF_FASCIST_CONTROLLED_STATES_SAME_CONTINENT
 			}
 			value < 1
 		}
@@ -1263,19 +1248,10 @@ faction_goal_defeat_of_anti_communists = {
 		custom_effect_tooltip = ALL_FACTION_MEMBERS
 		every_faction_member = {
 			add_popularity = {
-				ideology = socialism
-				popularity = 0.2
+				ideology = authoritarian
+				popularity = -0.15
 			}
 			add_political_power = 100
-		}
-	}
-	ai_will_do = {
-		base = 0
-		modifier = { 
-			add = 1 # If war with communists you probably hate them
-			any_enemy_country = {
-				has_government = socialism
-			}
 		}
 	}
 }
