@@ -271,7 +271,7 @@ faction_template_id = {
 
 ### List of faction-related effects
 - *create_faction* - creates a faction without a template (OBSOLETE)
-- *create_faction_from_template* - the new fancy way of creating factions
+- *create_faction_from_template_from_template_from_template* - the new fancy way of creating factions
 - *dismantle_faction* - dismantles faction
 - *set_faction_leader* - changes faction's leader
 - *set_faction_spymaster* - changes faction's spymaster
