@@ -12,7 +12,109 @@
 
 ######################################################################
 
+#LONDON PACT GOALS
 
+faction_goal_rule_prevent_a_major_war_in_europe = {
+	name = rule_prevent_a_major_war_in_europe
+	description = rule_prevent_a_major_war_in_europe_desc
+	category = long_term
+	group = FOCUS_FILTER_CONSOLIDATION
+
+	visible = { #Условие видимости
+		FROM = {
+			OR = {
+				original_tag = CBI
+				is_in_faction_with = CBI
+			}
+		}
+	}
+
+	available = { #условие доступности
+		FROM = {
+			OR = {
+				original_tag = CBI
+				is_in_faction_with = CBI
+			}
+		}
+	}
+
+	completed = { #тут прописаны условия выполнения
+		date > 1855.1.1
+		every_country = {
+			limit = {
+				OR = {
+					tag = RUS
+					tag = CBI
+					tag = FRR
+					is_in_faction_with = RUS
+					is_in_faction_with = CBI
+					is_in_faction_with = FRR
+				}
+			}
+			NOT = {
+				has_war_with = PRU 
+				has_war_with = BYZ 
+			}
+		}
+
+	}
+
+	complete_effect = { #тут прописано, что произойдет, когда цельвыполнено
+		add_faction_power_projection = 300
+		add_faction_initiative = 1
+		add_stability = 0.1
+	}
+
+	ai_will_do = {
+		base = 0
+		modifier = {
+			add = 5 #КБО крайне заинтересновано в мире
+			original_tag = CBI
+		}
+	}
+}
+
+faction_goal_rule_prevent_the_emergence_of_a_new_napoleon = {
+	name = rule_prevent_the_emergence_of_a_new_napoleon
+	description = rule_prevent_the_emergence_of_a_new_napoleon_desc
+	category = long_term
+	group = FOCUS_FILTER_CONSOLIDATION
+
+	visible = { #Условие видимости
+		FROM = {
+			OR = {
+				original_tag = CBI
+				is_in_faction_with = CBI
+			}
+		}
+	}
+
+	available = { #условие доступности
+		FROM = {
+			OR = {
+				original_tag = CBI
+				is_in_faction_with = CBI
+			}
+		}
+	}
+
+	completed = { #тут прописаны условия выполнения
+		always = no
+
+	}
+
+	complete_effect = { #тут прописано, что произойдет, когда цельвыполнено
+
+	}
+
+	ai_will_do = {
+		base = 0
+		modifier = {
+			add = 5 #КБО крайне заинтересновано в мире
+			original_tag = CBI
+		}
+	}
+}
 
 
 ##########################################################
