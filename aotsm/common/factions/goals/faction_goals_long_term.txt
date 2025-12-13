@@ -40,26 +40,36 @@ faction_goal_rule_prevent_a_major_war_in_europe = {
 
 	completed = { #тут прописаны условия выполнения
 		date > 1855.1.1
-		every_country = {
-			limit = {
-				OR = {
-					tag = RUS
-					tag = CBI
-					tag = FRR
-					is_in_faction_with = RUS
-					is_in_faction_with = CBI
-					is_in_faction_with = FRR
-				}
-			}
+		any_country_with_original_tag = {
+			original_tag_to_check = CBI
 			NOT = {
-				has_war_with = PRU 
-				has_war_with = BYZ 
+				OR = {
+					has_war_with = PRU
+					has_war_with = BYZ
+				} 
 			}
 		}
-
+		any_country_with_original_tag = {
+			original_tag_to_check = RUS
+			NOT = {
+				OR = {
+					has_war_with = PRU
+					has_war_with = BYZ
+				} 
+			}
+		}
+		any_country_with_original_tag = {
+			original_tag_to_check = FRR
+			NOT = {
+				OR = {
+					has_war_with = PRU
+					has_war_with = BYZ
+				} 
+			}
+		}
 	}
 
-	complete_effect = { #тут прописано, что произойдет, когда цельвыполнено
+	complete_effect = { #тут прописано, что произойдет, когда цель выполнена
 		add_faction_power_projection = 300
 		add_faction_initiative = 1
 		add_stability = 0.1
@@ -99,18 +109,24 @@ faction_goal_rule_prevent_the_emergence_of_a_new_napoleon = {
 	}
 
 	completed = { #тут прописаны условия выполнения
-		always = no
+		date > 1854.1.1
+		PRU = {
+			NOT = {
+				has_completed_focus = PRU_aus_win_2
+			}
+		}
 
 	}
 
 	complete_effect = { #тут прописано, что произойдет, когда цельвыполнено
-
+		add_faction_power_projection = 100
+		add_faction_initiative = 1
 	}
 
 	ai_will_do = {
 		base = 0
 		modifier = {
-			add = 5 #КБО крайне заинтересновано в мире
+			add = 5 #КБО крайне заинтересновано в отсутсвии гегемонов
 			original_tag = CBI
 		}
 	}
