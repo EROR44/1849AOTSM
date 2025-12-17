@@ -132,6 +132,258 @@ faction_goal_rule_prevent_the_emergence_of_a_new_napoleon = {
 	}
 }
 
+#KONTINENTAL_EUROPA_PACT
+
+faction_goal_rule_expand_alliance_influence_to_east = {
+	name = expand_alliance_influence_to_east
+	description = expand_alliance_influence_to_east_desc
+	category = long_term
+	group = FOCUS_FILTER_CONSOLIDATION
+
+	visible = { #Условие видимости
+		FROM = {
+			OR = {
+				original_tag = PRU
+				is_in_faction_with = PRU
+			}
+		}
+	}
+
+	available = { #условие доступности
+		FROM = {
+			OR = {
+				original_tag = PRU
+				is_in_faction_with = PRU
+			}
+		}
+	}
+
+	completed = { #тут прописаны условия выполнения
+		PRU = {
+			exists = yes
+			is_faction_leader = yes
+		}
+		BYZ = {
+			exists = yes
+			is_in_faction_with = PRU
+		}
+		WRT = {
+			exists = yes
+			is_in_faction_with = PRU
+		}
+		PLH = {
+			exists = yes
+			is_in_faction_with = PRU
+		}
+		OR = {
+			WUK = {
+				exists = yes
+				is_in_faction_with = PRU
+			}
+			UKR = {
+				exists = yes
+				is_in_faction_with = PRU
+			}
+		}
+
+	}
+
+	complete_effect = { #тут прописано, что произойдет, когда цельвыполнено
+		add_faction_power_projection = 300
+		every_collection_element = {
+			input = {
+				input = game:scope
+				operators = { 
+					faction_members 
+				}
+			}
+			add_faction_initiative = 1
+			add_war_support = 0.05
+			add_stability = 0.05
+			add_political_power = 100
+		}
+	}
+
+	ai_will_do = {
+		base = 0
+		modifier = {
+			add = 5 
+			original_tag = PRU
+		}
+	}
+}
+
+faction_goal_rule_expand_pact_influence_to_west = {
+	name = rule_expand_pact_influence_to_west
+	description = rule_expand_pact_influence_to_west_desc
+	category = long_term
+	group = FOCUS_FILTER_CONSOLIDATION
+
+	visible = { #Условие видимости
+		FROM = {
+			OR = {
+				original_tag = PRU
+				is_in_faction_with = PRU
+			}
+		}
+	}
+
+	available = { #условие доступности
+		FROM = {
+			OR = {
+				original_tag = PRU
+				is_in_faction_with = PRU
+			}
+		}
+	}
+
+	completed = { #тут прописаны условия выполнения
+		OR = {
+			AND = {
+				FRR = {
+					OR = {
+						exists = no
+						is_puppet_of = PRU			
+						is_subject_of = PRU			
+					}
+				}
+				BYZ = {
+					is_in_faction_with = PRU
+					
+				}
+				118 = { is_owned_and_controlled_by = BYZ }
+				869 = { is_owned_and_controlled_by = BYZ }
+				GAL = {
+					exists = yes
+					is_in_faction_with = PRU
+				}
+			}
+			FRR = { is_in_faction_with = PRU }
+		}
+		
+
+	}
+
+	complete_effect = { #тут прописано, что произойдет, когда цель выполнено
+		add_faction_power_projection = 300
+		every_collection_element = {
+			input = {
+				input = game:scope
+				operators = { 
+					faction_members 
+				}
+			}
+			add_faction_initiative = 1
+			add_war_support = 0.05
+			add_stability = 0.05
+			add_political_power = 100
+		}
+	}
+
+	ai_will_do = {
+		base = 0
+		modifier = {
+			add = 5 
+			original_tag = PRU
+		}
+	}
+}
+
+#BYZANTIUM GOALS
+
+faction_goal_rule_revival_of_rome_empire = {
+	name = rule_revival_of_rome_empire
+	description = rule_revival_of_rome_empire_desc
+	category = long_term
+	group = FOCUS_FILTER_CONSOLIDATION
+
+	visible = { #Условие видимости
+		FROM = {
+			OR = {
+				original_tag = BYZ
+				is_in_faction_with = BYZ
+			}
+		}
+	}
+
+	available = { #условие доступности
+		FROM = {
+			OR = {
+				original_tag = BYZ
+				is_in_faction_with = BYZ
+			}
+		}
+	}
+
+	completed = { #тут прописаны условия выполнения
+		all_hellenic_states_is_owned_and_controlled_by_ROOT_trigger = yes
+		all_bulgarian_states_is_owned_and_controlled_by_ROOT_trigger = yes
+		44 = { is_owned_and_controlled_by = BYZ }
+		OR = {
+			all_illyrian_states_is_owned_and_controlled_by_ROOT_trigger = yes
+			DAL = { 
+				OR = {
+					is_puppet_of = BYZ 
+					is_subject_of = BYZ
+				}
+			}
+		}
+		OR = {
+			all_itallian_states_is_owned_and_controlled_by_ROOT_trigger = yes
+			SAR = { 
+				OR = {
+					is_puppet_of = BYZ 
+					is_subject_of = BYZ
+				}
+			}
+		}
+		SYR = { 
+			OR = {
+				is_puppet_of = BYZ 
+				is_subject_of = BYZ
+			}
+		}
+		KUR = { 
+			OR = {
+				is_puppet_of = BYZ 
+				is_subject_of = BYZ
+			}
+		}
+		CPT = { 
+			OR = {
+				is_puppet_of = BYZ 
+				is_subject_of = BYZ
+			}
+		}
+		816 = { is_owned_and_controlled_by = BYZ }
+	}
+
+	complete_effect = { #тут прописано, что произойдет, когда цель выполнено
+		add_faction_power_projection = 200
+		every_collection_element = {
+			input = {
+				input = game:scope
+				operators = { 
+					faction_members 
+				}
+			}
+			add_faction_initiative = 1
+		}
+		BYZ = {
+			add_stability = 0.05
+			add_political_power = 100
+		}
+	}
+
+	ai_will_do = {
+		base = 0
+		modifier = {
+			add = 5 
+			original_tag = BYZ
+		}
+	}
+}
+
 
 ##########################################################
 
@@ -673,19 +925,20 @@ faction_goal_defeat_of_socialism = {
 	group = FOCUS_FILTER_CONSOLIDATION
 	category = long_term
 	visible = {
-		collection_size = {
-			input = {
-				input = game:scope
-				operators = {
-					faction_members
-					limit = {
-						has_government = socialism
-					}
-				}
-				name = FACTION
-			}
-			value < 1
-		}
+		#collection_size = {
+		#	input = {
+		#		input = game:scope
+		#		operators = {
+		#			faction_members
+		#			limit = {
+		#				has_government = socialism
+		#			}
+		#		}
+		#		name = FACTION
+		#	}
+		#	value < 1
+		#}
+		always = no
 	}
 	locked_goal = yes
 	available = {
@@ -725,19 +978,20 @@ faction_goal_defeat_of_reactionist = {
 	category = long_term
 	group = FOCUS_FILTER_CONSOLIDATION
 	visible = {
-		collection_size = {
-			input = {
-				input = game:scope
-				operators = {
-					faction_members
-					limit = {
-						has_government = reactionist
-					}
-				}
-				name = FACTION
-			}
-			value < 1
-		}
+		#collection_size = {
+		#	input = {
+		#		input = game:scope
+		#		operators = {
+		#			faction_members
+		#			limit = {
+		#				has_government = reactionist
+		#			}
+		#		}
+		#		name = FACTION
+		#	}
+		#	value < 1
+		#}
+		always = no
 	}
 	available = {
 
@@ -776,19 +1030,20 @@ faction_goal_defeat_of_democratic = {
 	category = long_term
 	group = FOCUS_FILTER_CONSOLIDATION
 	visible = {
-		collection_size = {
-			input = {
-				input = game:scope
-				operators = {
-					faction_members
-					limit = {
-						has_government = democratic
-					}
-				}
-				name = FACTION
-			}
-			value < 1
-		}
+		#collection_size = {
+		#	input = {
+		#		input = game:scope
+		#		operators = {
+		#			faction_members
+		#			limit = {
+		#				has_government = democratic
+		#			}
+		#		}
+		#		name = FACTION
+		#	}
+		#	value < 1
+		#}
+		always = no
 	}
 	available = {
 
