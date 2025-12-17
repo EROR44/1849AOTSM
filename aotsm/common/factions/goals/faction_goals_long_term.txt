@@ -132,6 +132,64 @@ faction_goal_rule_prevent_the_emergence_of_a_new_napoleon = {
 	}
 }
 
+#RUSSIAN_GOALS
+
+faction_goal_rule_strike_on_german_threat = {
+	name = rule_strike_on_german_threat
+	description = rule_strike_on_german_threat_desc
+	category = long_term
+	group = FOCUS_FILTER_CONSOLIDATION
+
+	visible = { #Условие видимости
+		FROM = {
+			OR = {
+				original_tag = RUS
+				is_in_faction_with = RUS
+			}
+		}
+	}
+
+	available = { #условие доступности
+		FROM = {
+			OR = {
+				original_tag = RUS
+				is_in_faction_with = RUS
+			}
+		}
+	}
+
+	completed = { #тут прописаны условия выполнения
+		world_war_end = yes
+		RUS = {
+			has_country_flag = first_world_war_won
+		}
+	}
+
+	complete_effect = { #тут прописано, что произойдет, когда цельвыполнено
+		add_faction_power_projection = 300
+		every_collection_element = {
+			input = {
+				input = game:scope
+				operators = { 
+					faction_members 
+				}
+			}
+			add_faction_initiative = 1
+			add_war_support = 0.1
+			add_stability = 0.1
+			add_political_power = 200
+		}
+	}
+
+	ai_will_do = {
+		base = 0
+		modifier = {
+			add = 5 
+			original_tag = RUS
+		}
+	}
+}
+
 #KONTINENTAL_EUROPA_PACT
 
 faction_goal_rule_expand_alliance_influence_to_east = {
