@@ -9344,6 +9344,14 @@ focus_tree = {
 		x = -2
 		y = 1
 		cost = 5 
+
+		ai_will_do = {
+			factor = 0
+			modifier = {
+				factor = 1500
+				has_doctrine = mass_assault
+			}
+		}
 		
 		available = {
 
@@ -9369,6 +9377,10 @@ focus_tree = {
 				uses = 2
 				category = land_doctrine
 			}
+			add_mastery = {
+				amount = 50
+				grand_doctrine = mass_assault
+			}
 			hidden_effect = {
 				set_country_flag = RUS_choose_mass_assault_doctrine_flag
 			}	
@@ -9384,7 +9396,11 @@ focus_tree = {
 		cost = 5 
 
 		ai_will_do = {
-			factor = 1500
+			factor = 0
+			modifier = {
+				factor = 1500
+				has_doctrine = superior_firepower
+			}
 		}
 		
 		available = {
@@ -9410,6 +9426,10 @@ focus_tree = {
 				cost_reduction = 0.5
 				uses = 2
 				category = land_doctrine
+			}
+			add_mastery = {
+				amount = 50
+				grand_doctrine = superior_firepower
 			}	
 			hidden_effect = {
 				set_country_flag = RUS_choose_superior_firepower_doctrine_flag
@@ -9424,6 +9444,14 @@ focus_tree = {
 		x = 2
 		y = 1
 		cost = 5 
+
+		ai_will_do = {
+			factor = 0
+			modifier = {
+				factor = 1500
+				has_doctrine = new_mobile_warfare
+			}
+		}
 		
 		available = {
 
@@ -9449,6 +9477,10 @@ focus_tree = {
 				uses = 2
 				category = land_doctrine
 			}
+			add_mastery = {
+				amount = 50
+				grand_doctrine = new_mobile_warfare
+			}	
 			hidden_effect = {
 				set_country_flag = RUS_choose_mobile_warfare_doctrine_flag
 			}
@@ -9536,6 +9568,10 @@ focus_tree = {
 				uses = 1
 				category = land_doctrine
 			}
+			add_mastery= {
+				amount = 50
+				grand_doctrine = mass_assault
+			}
 		}
 	}
 	
@@ -9582,6 +9618,10 @@ focus_tree = {
 				uses = 1
 				category = land_doctrine
 			}
+			add_mastery= {
+				amount = 50
+				grand_doctrine = superior_firepower
+			}
 		}
 	}
 	
@@ -9626,6 +9666,10 @@ focus_tree = {
 				uses = 1
 				category = land_doctrine
 			}
+			add_mastery= {
+				amount = 50
+				grand_doctrine = new_mobile_warfare
+			}
 		}
 	}
 	
@@ -9660,37 +9704,36 @@ focus_tree = {
 			log = "[GetDateText]: [Root.GetName]: focus RUS_end_army_modernisation"
 			army_experience = 25
 			add_ideas = RUS_russian_army
+			add_doctrine_cost_reduction = {
+				cost_reduction = 0.75
+				uses = 1
+				category = land_doctrine
+			}
 			if = {
 				limit = {
 					has_completed_focus = RUS_will_theory
 				}
-				add_doctrine_cost_reduction = {
-					name = land_doc_bonus
-					cost_reduction = 0.75
-					uses = 1
-					category = land_doctrine
+				add_mastery= {
+					amount = 100
+					grand_doctrine = mass_assault
 				}	
 			}
 			if = {
 				limit = {
 					has_completed_focus = RUS_artillery_priority
 				}
-				add_doctrine_cost_reduction = {
-					name = land_doc_bonus
-					cost_reduction = 0.75
-					uses = 1
-					category = land_doctrine
+				add_mastery= {
+					amount = 100
+					grand_doctrine = superior_firepower
 				}	
 			}
 			if = {
 				limit = {
 					has_completed_focus = RUS_focus_on_mechanisation
 				}
-				add_doctrine_cost_reduction = {
-					name = land_doc_bonus
-					cost_reduction = 0.75
-					uses = 1
-					category = land_doctrine
+				add_mastery= {
+					amount = 100
+					grand_doctrine = new_mobile_warfare
 				}	
 			}
 		}
@@ -10036,6 +10079,10 @@ focus_tree = {
 				uses = 1
 				category = air_doctrine
 			}
+			add_mastery = {
+				amount = 25
+				folder = air
+			}
 		}
 	}
 	
@@ -10075,6 +10122,12 @@ focus_tree = {
 				technology = heavy_fighter2
 				technology = heavy_fighter3
 			}
+			add_mastery_bonus = {
+				name = doctrine_mastery_bonus
+				bonus = 0.1
+				days = 365
+				grand_doctrine = new_battlefield_support
+			}
 		}
 	}
 	
@@ -10111,6 +10164,12 @@ focus_tree = {
 				technology = strategic_bomber3
 				category = tactical_bomber
 			}
+			add_mastery_bonus = {
+				name = doctrine_mastery_bonus
+				bonus = 0.1
+				days = 365
+				grand_doctrine = new_strategic_destruction
+			}
 		}
 	}
 	
@@ -10144,6 +10203,10 @@ focus_tree = {
 				cost_reduction = 0.5
 				uses = 1
 				category = air_doctrine
+			}
+			add_mastery = {
+				amount = 25
+				folder = air
 			}
 		}
 	}
@@ -10179,6 +10242,10 @@ focus_tree = {
 				cost_reduction = 0.5
 				uses = 1
 				category = air_doctrine
+			}
+			add_mastery = {
+				amount = 50
+				folder = air
 			}
 		}
 	}
@@ -10239,6 +10306,10 @@ focus_tree = {
 				cost_reduction =  0.75
 				uses = 1
 				category = naval_doctrine
+			}
+			add_mastery = {
+				amount = 50
+				folder = naval
 			}
 		}
 	}
@@ -10486,6 +10557,10 @@ focus_tree = {
 				cost_reduction = 0.5
 				uses = 2
 				category = naval_doctrine
+			}			
+			add_mastery = {
+				amount = 100
+				folder = naval
 			}
 		}
 	}
@@ -11559,6 +11634,12 @@ focus_tree = {
 					set_state_flag = RUS_is_mobilisated
 					add_manpower = -15000
 				}
+			}
+			add_mastery_bonus = {
+				name = doctrine_mastery_bonus
+				bonus = 0.10
+				days = 180
+				folder = land
 			}			
 		}
 	}
@@ -12195,6 +12276,10 @@ focus_tree = {
 				uses = 2
 				category = land_doctrine
 			}
+			add_mastery = {
+				amount = 100
+				folder = land
+			}
 		}
 	}
 	
@@ -12514,6 +12599,10 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: focus RUS_war_on_our_lands "
 			army_experience = 30
+			add_mastery = {
+				amount = 50
+				folder = land
+			}
 			add_ideas = RUS_gw_all_on_defence_of_the_motherland
 		}
 	}
