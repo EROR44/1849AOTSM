@@ -33,11 +33,16 @@ faction_manifest_kontinental_europa_pact = {
 	description = kontinental_europa_pact_manifest_goal_desc
 	is_manifest = yes
 	ratio_progress = {
-		total_amount = 1000 #не понял пока как проверку на общую промку альянса сделать
-		#completed_amount = collection:faction_total_factories 
-		completed_amount_collection = collection:world_uncapitulated_subject_and_puppet_countries
+		completed_amount_custom_tooltip = FACTION_RESOURCE_EXTRACTED_TOTAL_DESC
+		total_amount_custom_tooltip = GLOBAL_RESOURCE_EXTRACTED_TOTAL_DESC
 
-			
+		total_amount = global.global_resource_extracted_total # All the units in the world
+		completed_amount = faction_resource_extracted_total # resources controlled by Faction Members
+
+		range = { 
+			max = 0.30 # goal is to have at least 30% 
+		}
+	
 		scale = {
 			trade_opinion_factor = 0.20
 			industrial_capacity_dockyard = 0.1
