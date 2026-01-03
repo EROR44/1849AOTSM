@@ -1,4 +1,4 @@
-add_namespace = qin
+add_namespace = qin_event #общие ивенты
 add_namespace = qin_script_event #Скриптовые ивенты
 add_namespace = qin_story_event #Ивенты справки
 add_namespace = qin_literary_event #Мифологические, литературные события
@@ -6,208 +6,6 @@ add_namespace = qin_industry_event #События связанные с про�
 add_namespace = qin_political_event #Политические события
 add_namespace = qin_navy_event #Cобытия связанные с флотом
 add_namespace = qin_taypin_chain_event #Cобытия связанные с Тайпинами
-
-country_event = { #cмерть императора даогуана
-	id = qin.1
-	title = qin.1.t
-	desc = qin.1.d
-	picture = GFX_report_event_aotsm_generic_signing_the_contract
-	
-	fire_only_once = yes
-
-	is_triggered_only = yes
-	
-	immediate = {
-		log = "[GetDateText]: [Root.GetName]: event qin.1"
-	}
-
-	option = {
-		name = qin.1.a
-		trigger = {
-			
-		}
-		#retire_character = QIN_Aisin_Gioro_Mianning
-		#promote_character = QIN_Aisin_Gioro_Ichu
-		QIN_check_who_is_new_emperror = yes
-		hidden_effect = {
-			news_event = { id = news.40 }
-		}
-	
-	}
-}
-
-country_event = { #восстание тайпинов
-	id = qin.2
-	title = qin.2.t
-	desc = qin.2.d
-	picture = GFX_report_event_aotsm_generic_signing_the_contract
-	
-	fire_only_once = yes
-
-	is_triggered_only = yes
-	
-	immediate = {
-		log = "[GetDateText]: [Root.GetName]: event qin.2"
-	}
-
-	option = {
-		name = qin.2.a
-		trigger = {
-			
-		}
-		
-		hidden_effect = {
-			TPN = {
-				inherit_technology = QIN
-				set_global_flag = taypin_uprising_started
-				add_state_core = 325
-				add_state_core = 326
-				add_state_core = 524
-				add_state_core = 591
-				add_state_core = 592
-				add_state_core = 593
-				add_state_core = 594
-				add_state_core = 595
-				add_state_core = 596
-				add_state_core = 597
-				add_state_core = 598
-				add_state_core = 599
-				add_state_core = 600
-				add_state_core = 602
-				add_state_core = 603
-				add_state_core = 605
-				add_state_core = 606
-				add_state_core = 607
-				add_state_core = 613
-				add_state_core = 614
-				add_state_core = 620
-				add_state_core = 728
-				add_state_core = 729
-				add_state_core = 743
-				add_state_core = 744
-				add_state_core = 747
-				add_state_core = 748
-				add_state_core = 749
-				add_state_core = 750
-				add_state_core = 751
-				add_state_core = 752
-				add_state_core = 753
-				transfer_state = 591
-				transfer_state = 592
-				transfer_state = 593
-				transfer_state = 596
-				transfer_state = 600
-				transfer_state = 602
-				transfer_state = 606 	
-				transfer_state = 748
-				transfer_state = 749
-				load_oob = "TPN_uprising"
-				declare_war_on = {
-					target = QIN
-					type = annex_everything
-				}
-			}
-			QIN = { 
-				set_country_flag = QIN_war_with_taypin
-				swap_ideas = {
-					remove_idea = QIN_peoples_riots
-					add_idea = QIN_tpn_uprising
-				}
-				swap_ideas = { #временная мера
-					remove_idea = large_country
-					add_idea = potential_world_power
-				}
-			}
-			every_country = {
-				limit = {
-					is_puppet_of = QIN
-				}	
-				set_country_flag = QIN_war_with_taypin 
-			}
-			news_event = { id = news.145 hours = 24 }
-		}
-	
-	}
-	option = {
-		name = qin.2.b
-		trigger = {
-			
-		}
-		
-		TPN = { change_tag_from = ROOT }
-		
-		hidden_effect = {
-			TPN = {
-				inherit_technology = QIN
-				set_global_flag = taypin_uprising_started
-				add_state_core = 325
-				add_state_core = 326
-				add_state_core = 524
-				add_state_core = 591
-				add_state_core = 592
-				add_state_core = 593
-				add_state_core = 594
-				add_state_core = 595
-				add_state_core = 596
-				add_state_core = 597
-				add_state_core = 598
-				add_state_core = 599
-				add_state_core = 600
-				add_state_core = 602
-				add_state_core = 603
-				add_state_core = 605
-				add_state_core = 606
-				add_state_core = 607
-				add_state_core = 613
-				add_state_core = 614
-				add_state_core = 620
-				add_state_core = 728
-				add_state_core = 729
-				add_state_core = 743
-				add_state_core = 744
-				add_state_core = 747
-				add_state_core = 748
-				add_state_core = 749
-				add_state_core = 750
-				add_state_core = 751
-				add_state_core = 752
-				add_state_core = 753
-				transfer_state = 591
-				transfer_state = 592
-				transfer_state = 593
-				transfer_state = 596
-				transfer_state = 600
-				transfer_state = 602
-				transfer_state = 606 	
-				transfer_state = 748
-				transfer_state = 749
-				load_oob = "TPN_uprising"
-				declare_war_on = {
-					target = QIN
-					type = annex_everything
-				}
-			}
-			QIN = { 
-				set_country_flag = QIN_war_with_taypin
-				swap_ideas = {
-					remove_idea = QIN_peoples_riots
-					add_idea = QIN_tpn_uprising
-				}
-				swap_ideas = { #временная мера
-					remove_idea = large_country
-					add_idea = potential_world_power
-				}
-			}
-			every_country = {
-				limit = {
-					is_puppet_of = QIN
-				}	
-				set_country_flag = QIN_war_with_taypin 
-			}
-			news_event = { id = news.145 hours = 24 }
-		}
-	}
-}
 
 #####################################################################################
 #################################SCRIPT_EVENT########################################
@@ -230,8 +28,7 @@ country_event = { #
 		country_event = { id = qin_story_event.1 days = 7 } 
 		country_event = { id = qin_literary_event.1 days = 14 } 
 		country_event = { id = qin_taypin_chain_event.1 days = 21 } 
-		country_event = { id = qin.1 days = 380 } 
-		country_event = { id = qin.2 days = 1170 } #ранее 811
+		country_event = { id = qin_political_event.21 days = 420 } #25 февраля 1850
 	}
 
 	option = {
@@ -316,10 +113,554 @@ country_event = { #
 	
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event qin_political_event.3"
+		hidden_effect = {
+			country_event = { id = qin_political_event.4 days = 35 } #ветка Ичжу
+			country_event = { id = qin_political_event.9 days = 25 } #ветка Исиня
+			country_event = { id = qin_political_event.14 days = 45 } #ветка Исюаня
+		}
 	}
 
 	option = {
 		name = qin_political_event.3.a
+		trigger = {
+			
+		}
+
+	}
+
+}
+
+country_event = {  #ветка Ичжу
+	id = qin_political_event.4
+	title = qin_political_event.4.t
+	desc = qin_political_event.4.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event qin_political_event.4"
+		hidden_effect = {
+			country_event = { id = qin_political_event.5 days = 40 }
+		}
+	}
+
+	option = {
+		name = qin_political_event.4.a
+		trigger = {
+			
+		}
+
+	}
+
+}
+
+country_event = { #
+	id = qin_political_event.5
+	title = qin_political_event.5.t
+	desc = qin_political_event.5.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event qin_political_event.5"
+		hidden_effect = {
+			country_event = { id = qin_political_event.6 days = 25 }
+		}
+	}
+
+	option = {
+		name = qin_political_event.5.a
+		trigger = {
+			
+		}
+
+	}
+
+}
+
+country_event = { #
+	id = qin_political_event.6
+	title = qin_political_event.6.t
+	desc = qin_political_event.6.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event qin_political_event.6"
+		hidden_effect = {
+			country_event = { id = qin_political_event.7 days = 15 }
+		}
+	}
+
+	option = {
+		name = qin_political_event.6.a
+		trigger = {
+			
+		}
+
+	}
+
+}
+
+country_event = { #
+	id = qin_political_event.7
+	title = qin_political_event.7.t
+	desc = qin_political_event.7.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event qin_political_event.7"
+		hidden_effect = {
+			country_event = { id = qin_political_event.8 days = 25 }
+		}
+	}
+
+	option = {
+		name = qin_political_event.7.a
+		trigger = {
+			
+		}
+
+	}
+
+}
+
+country_event = { #
+	id = qin_political_event.8
+	title = qin_political_event.8.t
+	desc = qin_political_event.8.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event qin_political_event.8"
+	}
+
+	option = {
+		name = qin_political_event.8.a
+		trigger = {
+			
+		}
+
+	}
+
+}
+
+country_event = { #ветка Исиня
+	id = qin_political_event.9 
+	title = qin_political_event.9.t
+	desc = qin_political_event.9.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event qin_political_event.9"
+		hidden_effect = {
+			country_event = { id = qin_political_event.10 days = 25 }
+		}
+	}
+
+	option = {
+		name = qin_political_event.9.a
+		trigger = {
+			
+		}
+
+	}
+
+}
+
+country_event = { #
+	id = qin_political_event.10
+	title = qin_political_event.10.t
+	desc = qin_political_event.10.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event qin_political_event.10"
+		hidden_effect = {
+			country_event = { id = qin_political_event.11 days = 40 }
+		}
+	}
+
+	option = {
+		name = qin_political_event.10.a
+		trigger = {
+			
+		}
+
+	}
+
+}
+
+country_event = { #
+	id = qin_political_event.11
+	title = qin_political_event.11.t
+	desc = qin_political_event.11.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event qin_political_event.11"
+		hidden_effect = {
+			country_event = { id = qin_political_event.12 days = 25 }
+		}
+	}
+
+	option = {
+		name = qin_political_event.11.a
+		trigger = {
+			
+		}
+
+	}
+
+}
+
+country_event = { #
+	id = qin_political_event.12
+	title = qin_political_event.12.t
+	desc = qin_political_event.12.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event qin_political_event.12"
+		hidden_effect = {
+			country_event = { id = qin_political_event.12 days = 20 }
+		}
+	}
+
+	option = {
+		name = qin_political_event.12.a
+		trigger = {
+			
+		}
+
+	}
+
+}
+
+country_event = { #
+	id = qin_political_event.13
+	title = qin_political_event.13.t
+	desc = qin_political_event.13.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event qin_political_event.13"
+	}
+
+	option = {
+		name = qin_political_event.13.a
+		trigger = {
+			
+		}
+
+	}
+
+}
+
+country_event = { #ветка Исюаня
+	id = qin_political_event.14 
+	title = qin_political_event.14.t
+	desc = qin_political_event.14.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event qin_political_event.14"
+		hidden_effect = {
+			country_event = { id = qin_political_event.15 days = 15 }
+		}
+	}
+
+	option = {
+		name = qin_political_event.14.a
+		trigger = {
+			
+		}
+
+	}
+
+}
+
+country_event = { #
+	id = qin_political_event.15
+	title = qin_political_event.15.t
+	desc = qin_political_event.15.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event qin_political_event.15"
+		hidden_effect = {
+			country_event = { id = qin_political_event.16 days = 45 }
+		}
+	}
+
+	option = {
+		name = qin_political_event.15.a
+		trigger = {
+			
+		}
+
+	}
+
+}
+
+country_event = { #
+	id = qin_political_event.16
+	title = qin_political_event.16.t
+	desc = qin_political_event.16.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event qin_political_event.16"
+		hidden_effect = {
+			country_event = { id = qin_political_event.17 days = 25 }
+		}
+	}
+
+	option = {
+		name = qin_political_event.16.a
+		trigger = {
+			
+		}
+
+	}
+
+}
+
+country_event = { #
+	id = qin_political_event.17
+	title = qin_political_event.17.t
+	desc = qin_political_event.17.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event qin_political_event.17"
+		hidden_effect = {
+			country_event = { id = qin_political_event.18 days = 15 }
+		}
+	}
+
+	option = {
+		name = qin_political_event.17.a
+		trigger = {
+			
+		}
+
+	}
+
+}
+
+country_event = { #
+	id = qin_political_event.18
+	title = qin_political_event.18.t
+	desc = qin_political_event.18.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event qin_political_event.18"
+	}
+
+	option = {
+		name = qin_political_event.18.a
+		trigger = {
+			
+		}
+
+	}
+
+}
+
+country_event = { # время выбрать наследника
+	id = qin_political_event.19
+	title = qin_political_event.19.t
+	desc = qin_political_event.19.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event qin_political_event.19"
+	}
+
+	option = {
+		name = qin_political_event.19.a #Ичжу
+		trigger = {
+			
+		}
+
+	}
+
+	option = {
+		name = qin_political_event.19.b #Исинь
+		trigger = {
+			
+		}
+
+	}
+
+	option = {
+		name = qin_political_event.19.c #Исюань
+		trigger = {
+			
+		}
+
+	}
+
+}
+
+country_event = { # Смерть императора Даогуана
+	id = qin_political_event.20
+	title = qin_political_event.20.t
+	desc = qin_political_event.20.d
+	picture = GFX_report_event_qin_death_of_daoguan
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event qin_political_event.20"
+		
+	}
+
+	option = {
+		name = qin_political_event.20.a
+		trigger = {
+			
+		}
+		add_stability = -0.05
+		custom_effect_tooltip = QIN_set_new_emperror_tt
+		hidden_effect = {
+			QIN_check_who_is_new_emperror = yes
+			news_event = { id = news.40 days = 1 } 
+		}
+
+	}
+
+}
+
+country_event = { # Прощание с императором
+	id = qin_political_event.21
+	title = qin_political_event.21.t
+	desc = qin_political_event.21.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event qin_political_event.21"
+	}
+
+	option = {
+		name = qin_political_event.21.a
+		trigger = {
+			
+		}
+
+	}
+
+}
+
+country_event = { # Похоронная процессия
+	id = qin_political_event.22
+	title = qin_political_event.22.t
+	desc = qin_political_event.22.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event qin_political_event.22"
+	}
+
+	option = {
+		name = qin_political_event.22.a
+		trigger = {
+			
+		}
+
+	}
+
+}
+
+country_event = { #
+	id = qin_political_event.23
+	title = qin_political_event.23.t
+	desc = qin_political_event.23.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event qin_political_event.23"
+	}
+
+	option = {
+		name = qin_political_event.22.a
 		trigger = {
 			
 		}
@@ -386,7 +727,6 @@ country_event = { #
 	}
 }
 
-
 country_event = { #
 	id = qin_story_event.3
 	title = qin_story_event.3.t
@@ -412,7 +752,6 @@ country_event = { #
 
 	}
 }
-
 
 country_event = { #
 	id = qin_story_event.4
@@ -441,7 +780,6 @@ country_event = { #
 	}
 }
 
-
 country_event = { #
 	id = qin_story_event.5
 	title = qin_story_event.5.t
@@ -466,7 +804,6 @@ country_event = { #
 	}
 }
 
-
 country_event = { #
 	id = qin_story_event.6
 	title = qin_story_event.6.t
@@ -490,7 +827,6 @@ country_event = { #
 	
 	}
 }
-
 
 #####################################################################################
 #################################LITRERARY_EVENT#####################################
@@ -1564,6 +1900,33 @@ country_event = { #
 			
 		}
 		
+	
+	}
+}
+
+#####################################################################################
+####################################COMMON_EVENTS######################################
+#####################################################################################
+
+country_event = { #
+	id = qin_event.1
+	title = qin_event.1.t
+	desc = qin_event.1.d
+	picture = GFX_report_event_qin_death_of_daoguan
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event qin_event.1"
+	}
+
+	option = {
+		name = qin_event.1.a
+		trigger = {
+			
+		}
 	
 	}
 }
