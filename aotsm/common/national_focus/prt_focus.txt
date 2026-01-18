@@ -2014,7 +2014,7 @@ focus_tree = {
 			log = "[GetDateText]: [Root.GetName]: Focus PRT_The_New_Empire"			
 
             add_war_support = 0.10
-			create_faction = Portuguese_Great_Empire
+			create_faction_from_template = faction_template_portuguese_great_empire
 			swap_ideas = {
 				remove_idea = large_country
 				add_idea = potential_world_power
@@ -2551,7 +2551,7 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus PRT_The_Socialist_Pact"			
 
-			create_faction = The_Socialist_Pact
+			create_faction_from_template = faction_template_the_socialist_pact
 			ARA = {
 				country_event = { id = prt_event.18 days = 1 }			
 			}
@@ -3845,7 +3845,11 @@ focus_tree = {
 				name = land_doc_bonus
 				cost_reduction = 0.75
 				uses = 1
-				category = cat_superior_firepower
+				category = land_doctrine
+			}
+			add_mastery= {
+				amount = 50
+				grand_doctrine = superior_firepower
 			}
 		}
 	}
@@ -3880,7 +3884,11 @@ focus_tree = {
 				name = land_doc_bonus
 				cost_reduction = 0.75
 				uses = 1
-				category = 	cat_grand_battle_plan
+				category = land_doctrine
+			}
+			add_mastery= {
+				amount = 50
+				grand_doctrine = grand_battleplan
 			}
 		}
 	}
@@ -3895,8 +3903,8 @@ focus_tree = {
 			factor = 5
 		}
 		prerequisite = {
-		focus = PRT_The_doctrine_of_firepower_superiority
-		focus = PRT_The_doctrine_of_large_scale_planning
+			focus = PRT_The_doctrine_of_firepower_superiority
+			focus = PRT_The_doctrine_of_large_scale_planning
 		}
 		available = {
 		
@@ -3913,7 +3921,22 @@ focus_tree = {
 				name = land_doc_bonus
 				cost_reduction = 0.50
 				uses = 1
-				category = support_tech
+				category = land_doctrine
+			}
+			if = {
+				limit = {
+					has_completed_focus = PRT_The_doctrine_of_firepower_superiority
+				}
+				add_mastery = {
+					amount = 50
+					grand_doctrine = superior_firepower
+				}
+			}
+			else_if = {	
+				add_mastery = {
+					amount = 50
+					grand_doctrine = grand_battleplan
+				}
 			}
 		}
 	}
@@ -4170,10 +4193,14 @@ focus_tree = {
 			log = "[GetDateText]: [Root.GetName]: Focus PRT_Fleet_Impact_Doctrine"			
 
 			add_doctrine_cost_reduction = {
-				name = land_doc_bonus
+				name = navy_doc_bonus
 				cost_reduction = 0.75
 				uses = 1
-				category = 	cat_fleet_in_being
+				category = naval
+			}
+			add_mastery= {
+				amount = 50
+				folder = naval
 			}
 		}
 	}
@@ -4237,10 +4264,14 @@ focus_tree = {
 			log = "[GetDateText]: [Root.GetName]: Focus PRT_The_doctrine_of_the_obstruction_of_sea_routes"			
 
 			add_doctrine_cost_reduction = {
-				name = land_doc_bonus
+				name = navy_doc_bonus
 				cost_reduction = 0.75
 				uses = 1
-				category = 	cat_trade_interdiction
+				category = naval
+			}
+			add_mastery= {
+				amount = 50
+				folder = naval
 			}
 		}
 	}
@@ -4585,10 +4616,14 @@ focus_tree = {
 			log = "[GetDateText]: [Root.GetName]: Focus PRT_Air_combat_support_doctrine"			
 
 			add_doctrine_cost_reduction = {
-				name = land_doc_bonus
-				cost_reduction = 0.75
+				name = air_doc_bonus
+				cost_reduction = 0.5
 				uses = 1
-				category = 	cat_battlefield_support
+				category = air_doctrine
+			}
+			add_mastery= {
+				amount = 25
+				folder = air
 			}
 		}
 	} 
@@ -4655,10 +4690,14 @@ focus_tree = {
 			log = "[GetDateText]: [Root.GetName]: Focus PRT_The_Doctrine_of_Strategic_Destruction"			
 
 			add_doctrine_cost_reduction = {
-				name = land_doc_bonus
+				name = air_doc_bonus
 				cost_reduction = 0.75
 				uses = 1
-				category = 	cat_strategic_destruction
+				category = air_doctrine
+			}
+			add_mastery= {
+				amount = 25
+				folder = air
 			}
 		}
 	}
@@ -5353,7 +5392,11 @@ focus_tree = {
 				name = land_doc_bonus
 				cost_reduction = 0.50
 				uses = 2
-				category = 	cat_grand_battle_plan
+				category = land_doctrine
+			}
+			add_mastery= {
+				amount = 50
+				folder = land
 			}
 			random_owned_controlled_state = {
 				prioritize = { 123 }
@@ -5394,10 +5437,14 @@ focus_tree = {
 			log = "[GetDateText]: [Root.GetName]: Focus PRT_CBI_World_Merchant_Fleet"			
 
 			add_doctrine_cost_reduction = {
-				name = land_doc_bonus
+				name = navy_doc_bonus
 				cost_reduction = 0.50
 				uses = 2
-				category = 	cat_trade_interdiction
+				category = naval
+			}
+			add_mastery= {
+				amount = 50
+				folder = naval
 			}
 			random_owned_controlled_state = {
 				prioritize = { 125 }
