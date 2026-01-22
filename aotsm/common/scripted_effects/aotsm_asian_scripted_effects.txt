@@ -64,156 +64,6 @@ aotsm_cw_return_control_on_puppets_effect = { #only for use in effects
     }
 }
 
-aotsm_japan_cw_jap_annex_jas_effect = {
-    JAP = {
-        white_peace = JAS    
-    }  
-    every_state = {
-        limit = {
-            has_state_flag = JAP_cw_segun_state_flag
-        }
-        transfer_state_to = JAP
-        clr_state_flag = JAP_cw_segun_state_flag
-    } 
-    if = { #JAP - win in civil war
-        limit = {
-            JAP = {
-                has_country_flag = JAP_is_winner_in_civil_war_flag
-            }
-        }    
-        JAP = {
-            aotsm_cw_return_control_on_puppets_effect = yes
-        }  
-        #news_event = { id = news.## days = 1 } 
-        clr_global_flag = JAP_civil_war_is_started
-    }
-}
-
-aotsm_japan_cw_jap_annex_tuk_effect = {
-    JAP = {
-        white_peace = TUK    
-    }  
-    every_state = {
-        limit = {
-            has_state_flag = JAP_cw_torihiki_state_flag
-        }
-        transfer_state_to = JAP
-        clr_state_flag = JAP_cw_torihiki_state_flag
-    } 
-    if = { #JAP - win in civil war
-        limit = {
-            JAP = {
-                has_country_flag = JAP_is_winner_in_civil_war_flag
-            }
-        }    
-        JAP = {
-            aotsm_cw_return_control_on_puppets_effect = yes
-        }   
-        #news_event = { id = news.## days = 1 }
-        clr_global_flag = JAP_civil_war_is_started
-    }
-}
-
-aotsm_japan_cw_jas_annex_jap_effect = {
-    JAS = {
-        white_peace = JAP  
-    }  
-    every_state = {
-        limit = {
-            has_state_flag = JAP_cw_imperator_state_flag
-        }
-        transfer_state_to = JAS
-        clr_state_flag = JAP_cw_imperator_state_flag
-    } 
-    if = { #JAP - win in civil war
-        limit = {
-            JAS = {
-                has_country_flag = JAP_is_winner_in_civil_war_flag
-            }
-        }    
-        JAS = {
-            aotsm_cw_return_control_on_puppets_effect = yes
-        }  
-        #news_event = { id = news.## days = 1 } 
-        clr_global_flag = JAP_civil_war_is_started
-    }
-}
-
-aotsm_japan_cw_jas_annex_tuk_effect = {
-    JAS = {
-        white_peace = TUK    
-    }  
-    every_state = {
-        limit = {
-            has_state_flag = JAP_cw_torihiki_state_flag
-        }
-        transfer_state_to = JAS
-        clr_state_flag = JAP_cw_torihiki_state_flag
-    } 
-    if = { #JAP - win in civil war
-        limit = {
-            JAS = {
-                has_country_flag = JAP_is_winner_in_civil_war_flag
-            }
-        }    
-        JAS = {
-            aotsm_cw_return_control_on_puppets_effect = yes
-        } 
-        #news_event = { id = news.## days = 1 }  
-        clr_global_flag = JAP_civil_war_is_started
-    }
-}
-
-aotsm_japan_cw_tuk_annex_jap_effect = {
-    TUK = {
-        white_peace = JAP  
-    }  
-    every_state = {
-        limit = {
-            has_state_flag = JAP_cw_imperator_state_flag
-        }
-        transfer_state_to = TUK
-        clr_state_flag = JAP_cw_imperator_state_flag
-    } 
-    if = { #JAP - win in civil war
-        limit = {
-            TUK = {
-                has_country_flag = JAP_is_winner_in_civil_war_flag
-            }
-        }    
-        TUK = {
-            aotsm_cw_return_control_on_puppets_effect = yes
-        } 
-        #news_event = { id = news.## days = 1 }  
-        clr_global_flag = JAP_civil_war_is_started
-    }
-}
-
-aotsm_japan_cw_tuk_annex_jas_effect = {
-    TUK = {
-        white_peace = JAS    
-    }  
-    every_state = {
-        limit = {
-            has_state_flag = JAP_cw_segun_state_flag
-        }
-        transfer_state_to = TUK
-        clr_state_flag = JAP_cw_segun_state_flag
-    } 
-    if = { #JAP - win in civil war
-        limit = {
-            TUK = {
-                has_country_flag = JAP_is_winner_in_civil_war_flag
-            }
-        }    
-        TUK = {
-            aotsm_cw_return_control_on_puppets_effect = yes
-        }   
-        #news_event = { id = news.## days = 1 }
-        clr_global_flag = JAP_civil_war_is_started
-    }
-}
-
 aotsm_start_jap_civil_war_effect = {
     JAP = {  
 		set_autonomy = {
@@ -240,6 +90,7 @@ aotsm_start_jap_civil_war_effect = {
         transfer_state = 989
         add_state_core = 282
         add_state_core = 989
+        calculate_maximum_divisions = yes
     }
     every_state = {
         limit = {
@@ -265,26 +116,11 @@ aotsm_start_jap_civil_war_effect = {
 			target = JAP
 			type = annex_everything
 		}
+        calculate_maximum_divisions = yes
 	}
-    aotsm_se_JAP_start_civil_war_effect = yes 
-    every_state = {
-        limit = {
-            is_owned_by = JAP
-        }
-        set_state_flag = JAP_cw_imperator_state_flag
-    }
-    every_state = {
-        limit = {
-            is_owned_by = JAS
-        }
-        set_state_flag = JAP_cw_segun_state_flag
-    }
-    every_state = {
-        limit = {
-            is_owned_by = TUK
-        }
-        set_state_flag = JAP_cw_torihiki_state_flag
-    }
+    aotsm_se_JAP_start_civil_war_effect = yes #суперивент/ивент о начале гражданской войны в Японии
+    calculate_prestige = yes
+
     set_global_flag = JAP_civil_war_is_started      
 }
 
@@ -315,4 +151,248 @@ aotsm_add_to_jap_civil_war_kanto_effect = {
     }
     #news_event = { id = news.## days = 1 } #Новость о том, что Торихики вступает в гражданскую войну
 }
+
+aotsm_end_japan_civil_war_effect = {
+    if = { 
+        limit = {
+            JAP = {
+                has_country_flag = JAP_is_winner_in_civil_war_flag
+            }
+        }
+        JAP = {
+            aotsm_cw_return_control_on_puppets_effect = yes
+        }  
+        #news_event = { id = news.## days = 1 } 
+        clr_global_flag = JAP_civil_war_is_started
+        set_global_flag = JAP_emperror_win_in_jap_civil_war
+    }
+    else_if = { 
+        limit = {
+            JAS = {
+                has_country_flag = JAP_is_winner_in_civil_war_flag
+            }
+        }
+        every_character = { #пересаживаем персонажей на Японию
+			limit = {
+				has_nationality = JAS
+			}
+			set_nationality = JAP
+		}
+        JAP = { change_tag_from = JAS }	
+        JAP = {
+            retire_country_leader = yes
+            add_country_leader_role = {
+				character = JAS_Esinobu_Tokugava
+				promote_leader = yes
+					
+                country_leader = {
+                    desc = "POLITICS_TOKUGAWA_YOSHINOBU_DESC"
+                    ideology = bushido_sub
+                    traits = { shogun wind_of_tradition }
+                    expire = "1900.1.1.1"
+                }
+			}
+            aotsm_cw_return_control_on_puppets_effect = yes
+        }  
+        #news_event = { id = news.## days = 1 } 
+        clr_global_flag = JAP_civil_war_is_started
+        set_global_flag = JAP_segun_win_in_jap_civil_war
+    }
+    else_if = { 
+        limit = {
+            TUK = {
+                has_country_flag = JAP_is_winner_in_civil_war_flag
+            }
+        }
+        every_character = { #пересаживаем персонажей на Японию
+			limit = {
+				has_nationality = TUK
+			}
+			set_nationality = JAP
+		}
+        JAP = { change_tag_from = TUK }
+        JAP = {
+            retire_country_leader = yes
+            add_country_leader_role = {
+				character = TUK_Imamura_Choga
+				promote_leader = yes
+					
+                country_leader = {
+                    desc = "POLITICS_IMAMURA_CHOGA_DESC"
+                    ideology = conservatism
+                    traits = {  }
+                    expire = "1900.1.1.1"
+                }
+			}      
+            aotsm_cw_return_control_on_puppets_effect = yes
+        }  
+        #news_event = { id = news.## days = 1 } 
+        clr_global_flag = JAP_civil_war_is_started
+        set_global_flag = JAP_torihiki_win_in_jap_civil_war
+    }
+    if = {
+        limit = {
+            JAS = { 
+                exists = yes
+            }
+        }
+        JAP = {
+            annex_country = {
+                target = JAS
+                transfer_troops = no
+            }
+        }
+    }
+    if = {
+        limit = {
+            TUK = { 
+                exists = yes
+            }
+        }
+        JAP = {
+            annex_country = {
+                target = TUK
+                transfer_troops = no
+            }
+        }
+    }
+    JAP ={ 
+        country_status_increase = yes 
+    }
+}
+
+aotsm_japan_cw_jap_annex_jas_effect = {
+    JAP = {
+        white_peace = JAS    
+    }
+    if = {
+        limit = { #JAP - win in civil war
+            JAP = {
+                has_country_flag = JAP_is_winner_in_civil_war_flag
+            }
+        }
+        aotsm_end_japan_civil_war_effect = yes        
+    }  
+    else = {
+        JAP = {
+            annex_country = {
+                target = JAS
+                transfer_troops = no
+            }
+        }
+    }
+}
+
+aotsm_japan_cw_jap_annex_tuk_effect = {
+    JAP = {
+        white_peace = TUK    
+    }
+    if = {
+        limit = { #JAP - win in civil war
+            JAP = {
+                has_country_flag = JAP_is_winner_in_civil_war_flag
+            }
+        }
+        aotsm_end_japan_civil_war_effect = yes        
+    }  
+    else = {
+        JAP = {
+            annex_country = {
+                target = TUK
+                transfer_troops = no
+            }
+        }
+    }
+}
+
+aotsm_japan_cw_jas_annex_jap_effect = {
+    JAS = {
+        white_peace = JAP  
+    } 
+    if = {
+        limit = { #JAS - win in civil war
+            JAS = {
+                has_country_flag = JAP_is_winner_in_civil_war_flag
+            }
+        }
+        aotsm_end_japan_civil_war_effect = yes        
+    }  
+    else = {
+        JAS = {
+            annex_country = {
+                target = JAP
+                transfer_troops = no
+            }
+        }
+    }
+}
+
+
+aotsm_japan_cw_jas_annex_tuk_effect = {
+    JAS = {
+        white_peace = TUK    
+    }  
+    if = {
+        limit = { #JAS - win in civil war
+            JAS = {
+                has_country_flag = JAP_is_winner_in_civil_war_flag
+            }
+        }
+        aotsm_end_japan_civil_war_effect = yes        
+    }  
+    else = {
+        JAS = {
+            annex_country = {
+                target = TUK
+                transfer_troops = no
+            }
+        }
+    }
+}
+
+aotsm_japan_cw_tuk_annex_jap_effect = {
+    TUK = {
+        white_peace = JAP  
+    }    
+    if = {
+        limit = { #TUK - win in civil war
+            TUK = {
+                has_country_flag = JAP_is_winner_in_civil_war_flag
+            }
+        }
+        aotsm_end_japan_civil_war_effect = yes        
+    }  
+    else = {
+        TUK = {
+            annex_country = {
+                target = JAP
+                transfer_troops = no
+            }
+        }
+    }
+}
+
+aotsm_japan_cw_tuk_annex_jas_effect = {
+    TUK = {
+        white_peace = JAS    
+    }      
+    if = {
+        limit = { #TUK - win in civil war
+            TUK = {
+                has_country_flag = JAP_is_winner_in_civil_war_flag
+            }
+        }
+        aotsm_end_japan_civil_war_effect = yes        
+    }  
+    else = {
+        TUK = {
+            annex_country = {
+                target = JAS
+                transfer_troops = no
+            }
+        }
+    }
+}
+
+
 
