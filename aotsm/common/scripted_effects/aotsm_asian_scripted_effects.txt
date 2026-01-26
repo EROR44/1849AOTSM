@@ -64,6 +64,29 @@ aotsm_cw_return_control_on_puppets_effect = { #only for use in effects
     }
 }
 
+aotsm_jap_cw_transfer_units_to_fractions_effect = { #on civil war start
+    JAP = {
+		every_unit_leader = {
+			limit = {
+                OR = {
+				    has_trait = JAP_segun_fraction_officer_trait
+				    has_trait = JAP_segun_fraction_navy_officer_trait
+                }
+			}
+		    set_nationality = JAS
+		}
+        every_unit_leader = {
+			limit = {
+				OR = {
+				    has_trait = JAP_torihiki_fraction_officer_trait
+				    has_trait = JAP_torihiki_fraction_navy_officer_trait
+                }
+			}
+		    set_nationality = TUK
+		}
+	}
+}
+
 aotsm_start_jap_civil_war_effect = {
     JAP = {  
 		set_autonomy = {
@@ -119,6 +142,7 @@ aotsm_start_jap_civil_war_effect = {
 		}
         calculate_maximum_divisions = yes
 	}
+    aotsm_jap_cw_transfer_units_to_fractions_effect = yes
     aotsm_se_JAP_start_civil_war_effect = yes #суперивент/ивент о начале гражданской войны в Японии
     calculate_prestige = yes
 
@@ -158,12 +182,30 @@ aotsm_transfer_all_segunate_characters_to_jap_effect = {
 		target_country = JAP
 		character = JAS_Esinobu_Tokugava
 	}
+    every_unit_leader = {
+		limit = {
+            OR = {
+			    has_trait = JAP_segun_fraction_officer_trait
+			    has_trait = JAP_segun_fraction_navy_officer_trait
+            }
+		}
+		set_nationality = JAP
+	}
 }
 
 aotsm_transfer_all_torihiki_characters_to_jap_effect = {
     set_nationality = {
 		target_country = JAP
 		character = TUK_Imamura_Choga
+	}
+    every_unit_leader = {
+		limit = {
+            OR = {
+			    has_trait = JAP_torihiki_fraction_officer_trait
+			    has_trait = JAP_torihiki_fraction_navy_officer_trait
+            }
+		}
+		set_nationality = JAP
 	}
 }
 
