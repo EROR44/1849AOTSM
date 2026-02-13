@@ -1,0 +1,206 @@
+#All Apache events is here
+
+add_namespace = apache_script_event
+add_namespace = apache_event
+
+#######################################################################
+############################SCRIPT_EVENTS##############################
+#######################################################################
+
+country_event = { #
+	id = apache_script_event.1  
+	title = apache_script_event.1.t
+	desc = apache_script_event.1.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+
+    hidden = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event apache_script_event.1"
+        country_event = { id = apache_script_event.2 days = 95 }
+        country_event = { id = apache_script_event.3 days = 125 }
+        country_event = { id = apache_script_event.4 days = 155 }
+	}
+	
+	option = {
+		name = apache_script_event.1.a	#
+
+	}	
+}
+
+country_event = { # border war with OPA
+	id = apache_script_event.2  
+	title = apache_script_event.2.t
+	desc = apache_script_event.2.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event apache_script_event.2"
+	}
+	
+	option = {
+		name = apache_script_event.2.a	#
+		ai_chance = {
+			base = 20
+		}
+        start_border_war = {
+			change_state_after_war = no
+			attacker = {
+				state = 1015
+				num_provinces = 1
+				on_win = apache_event.1
+				on_lose = apache_event.2
+			}
+						
+			defender = {
+				state = 1018
+				num_provinces = 1
+				on_win = apache_event.2
+				on_lose = apache_event.1
+			}
+		}
+	}	
+}
+
+country_event = { # border war with SON
+	id = apache_script_event.3  
+	title = apache_script_event.3.t
+	desc = apache_script_event.3.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event apache_script_event.3"
+	}
+	
+	option = {
+		name = apache_script_event.3.a	#
+		ai_chance = {
+			base = 20
+		}
+        start_border_war = {
+			change_state_after_war = no
+			attacker = {
+				state = 1015
+				num_provinces = 1
+				on_win = apache_event.1
+				on_lose = apache_event.2
+			}
+						
+			defender = {
+				state = 483
+				num_provinces = 1
+				on_win = apache_event.1
+				on_lose = apache_event.2
+			}
+		}
+	}	
+}
+
+country_event = { # border war with KNC
+	id = apache_script_event.4  
+	title = apache_script_event.4.t
+	desc = apache_script_event.4.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event apache_script_event.3"
+	}
+	
+	option = {
+		name = apache_script_event.4.a	#
+		ai_chance = {
+			base = 20
+		}
+        start_border_war = {
+			change_state_after_war = no
+			attacker = {
+				state = 1015
+				num_provinces = 1
+				on_win = apache_event.1
+				on_lose = apache_event.2
+			}
+						
+			defender = {
+				state = 1019
+				num_provinces = 1
+				on_win = apache_event.1
+				on_lose = apache_event.2
+			}
+		}
+	}	
+}
+
+#######################################################################
+############################COMMON_EVENTS##############################
+#######################################################################
+
+country_event = { # Victory in border war
+	id = apache_event.1  
+	title = apache_event.1.t
+	desc = apache_event.1.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event apache_event.1"
+	}
+	
+	option = {
+		name = apache_event.1.a	#
+		ai_chance = {
+			base = 20
+		}
+        add_stability = 0.01
+        army_experience = 10
+        add_doctrine_cost_reduction = {
+			name = land_doc_bonus
+			cost_reduction = 0.25
+			uses = 1
+			category = land_doctrine
+		}
+	}	
+}
+
+country_event = { # Defeate in border war
+	id = apache_event.2  
+	title = apache_event.2.t
+	desc = apache_event.2.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event apache_event.2"
+	}
+	
+	option = {
+		name = apache_event.2.a	#
+		ai_chance = {
+			base = 20
+		}      
+        add_stability = -0.01
+        army_experience = 10
+	}	
+}
+
