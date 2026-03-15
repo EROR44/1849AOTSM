@@ -235,6 +235,58 @@ on_actions = {
 				add_threat = 1
 			}
 
+			#SECOND NEPAL-TIBET WAR
+			if = { #TIB won NPA in war
+				limit = {
+					has_global_flag = NPA_start_second_nepalo_tibet_war
+                    TIB = { has_war_with = NPA }
+					323 = {
+						controller = {
+							OR = {
+								tag = TIB
+								is_subject_of = TIB
+								is_in_faction_with = TIB
+							}
+						}
+					}
+				}
+				clr_global_flag = NPA_start_second_nepalo_tibet_war
+				NPA = {
+					white_peace = TIB
+				}	
+				news_event { id = news.306 days = 3 }
+				add_threat = 2
+			}
+			if = { #NPA won TIB in war
+				limit = {
+					has_global_flag = NPA_start_second_nepalo_tibet_war
+                    TIB = { has_war_with = NPA }
+					999 = {
+						controller = {
+							OR = {
+								tag = NPA
+								is_subject_of = NPA
+								is_in_faction_with = NPA
+							}
+						}
+					}
+				}
+				clr_global_flag = NPA_start_second_nepalo_tibet_war
+				NPA = {
+					white_peace = TIB
+					transfer_state = 1000
+					remove_state_claim = 1000
+					add_state_core = 1000
+				}	
+				TIB = {
+					remove_state_core = 1000
+					add_state_claim = 1000
+				}	
+				news_event { id = news.305 days = 3 }
+				add_threat = 2
+			}
+
+			#
         }
     }
 }
