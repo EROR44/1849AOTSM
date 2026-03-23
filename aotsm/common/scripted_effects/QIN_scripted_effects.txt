@@ -551,3 +551,80 @@ QIN_check_who_is_new_emperror = {
 		}
 	}
 }
+
+aotsm_qin_check_state_modifier_status = {
+	 	every_owned_state = {
+            limit = {
+                aotsm_is_controlled_by_chinesse_country = yes
+                has_dynamic_modifier = {
+					modifier = QIN_undeveloped_region_state_modifier
+				}
+                infrastructure > 1
+		        aotsm_qin_total_factories_in_state_gt_0 = yes
+            }
+            remove_dynamic_modifier = { 
+                modifier = QIN_undeveloped_region_state_modifier 
+            }
+            add_dynamic_modifier = { 
+                modifier = QIN_agricultural_region_state_modifier 
+            } 
+        }
+        every_owned_state = {
+            limit = {
+                aotsm_is_controlled_by_chinesse_country = yes
+                has_dynamic_modifier = {
+					modifier = QIN_agricultural_region_state_modifier
+				}
+                infrastructure > 3
+		       	aotsm_qin_total_factories_in_state_gt_1 = yes
+            }
+            remove_dynamic_modifier = { 
+                modifier = QIN_agricultural_region_state_modifier 
+            }
+            add_dynamic_modifier = { 
+                modifier = QIN_industrial_region_1_state_modifier 
+            } 
+        }
+        every_owned_state = {
+            limit = {
+                aotsm_is_controlled_by_chinesse_country = yes
+                has_dynamic_modifier = {
+					modifier = QIN_industrial_region_1_state_modifier
+				}
+                infrastructure > 4
+		        aotsm_qin_total_factories_in_state_gt_3 = yes
+            }
+            remove_dynamic_modifier = { 
+                modifier = QIN_industrial_region_1_state_modifier 
+            }
+            add_dynamic_modifier = { 
+                modifier = QIN_industrial_region_2_state_modifier 
+            } 
+        }
+        every_owned_state = {
+            limit = {
+                aotsm_is_controlled_by_chinesse_country = yes
+                NOT = { 
+                    OR = {
+                        has_dynamic_modifier = {
+                            modifier = QIN_undeveloped_region_state_modifier
+                        }
+                        has_dynamic_modifier = {
+                            modifier = QIN_agricultural_region_state_modifier
+                        }
+                        has_dynamic_modifier = {
+                            modifier = QIN_industrial_region_1_state_modifier
+                        }
+                        has_dynamic_modifier = {
+                            modifier = QIN_industrial_region_2_state_modifier
+                        }
+                    }
+                }
+                infrastructure > 2
+		        aotsm_qin_total_factories_in_state_gt_2 = yes
+            }
+            add_dynamic_modifier = { 
+                modifier = QIN_industrial_region_1_state_modifier 
+            }
+        }
+}

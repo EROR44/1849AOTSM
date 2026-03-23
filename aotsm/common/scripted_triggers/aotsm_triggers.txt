@@ -1604,3 +1604,105 @@ all_illyrian_states_is_owned_and_controlled_by_ROOT_trigger = {
 		}
 	}
 }
+
+aotsm_is_controlled_by_chinesse_country = {
+	custom_trigger_tooltip = {
+		tooltip = is_country_with_blocked_division_editing_tt
+		OR = {
+			is_owned_by = QIN
+			is_owned_by = TPN
+			is_owned_by = MAN 
+			is_owned_by = MON 
+			is_owned_by = CHN
+			is_owned_by = YUN
+			is_owned_by = GNS
+			is_owned_by = TIB
+			is_owned_by = SHA
+			is_owned_by = SIC
+			is_owned_by = SHN
+			is_owned_by = CND
+			is_owned_by = SDZ
+			is_owned_by = MIN
+			is_owned_by = LNJ
+			is_owned_by = HEN 
+			is_owned_by = SHG
+			is_owned_by = INM
+		}
+	} 
+}
+
+# Сумма > 0 (≥ 1 фабрика любого типа)
+aotsm_qin_total_factories_in_state_gt_0 = {
+    OR = {
+        num_of_civilian_factories > 0
+        num_of_military_factories > 0
+        num_of_naval_factories > 0
+    }
+}
+
+# Сумма > 1 (≥ 2 фабрики)
+aotsm_qin_total_factories_in_state_gt_1 = {
+    OR = {
+        # Один тип ≥ 2 → > 1
+        num_of_civilian_factories > 1
+        num_of_military_factories > 1
+        num_of_naval_factories > 1
+        
+        # Два типа: 1+1 → > 0 в каждой
+        AND = {
+            num_of_civilian_factories > 0
+            num_of_military_factories > 0
+        }
+        AND = {
+            num_of_civilian_factories > 0
+            num_of_naval_factories > 0
+        }
+        AND = {
+            num_of_military_factories > 0
+            num_of_naval_factories > 0
+        }
+    }
+}
+
+# Сумма > 2 (≥ 3 фабрики)
+aotsm_qin_total_factories_in_state_gt_2 = {
+    OR = {
+        # Один тип ≥ 3 → > 2
+        num_of_civilian_factories > 2
+        num_of_military_factories > 2
+        num_of_naval_factories > 2
+        
+        # Два типа: все комбинации ≥ 3
+        AND = {
+            num_of_civilian_factories > 0
+            num_of_military_factories > 1
+        }
+        AND = {
+            num_of_civilian_factories > 1
+            num_of_military_factories > 0
+        }
+        AND = {
+            num_of_civilian_factories > 0
+            num_of_naval_factories > 1
+        }
+        AND = {
+            num_of_civilian_factories > 1
+            num_of_naval_factories > 0
+        }
+        AND = {
+            num_of_military_factories > 0
+            num_of_naval_factories > 1
+        }
+        AND = {
+            num_of_military_factories > 1
+            num_of_naval_factories > 0
+        }
+        
+        # Три типа: 1+1+1
+        AND = {
+            num_of_civilian_factories > 0
+            num_of_military_factories > 0
+            num_of_naval_factories > 0
+        }
+    }
+}
