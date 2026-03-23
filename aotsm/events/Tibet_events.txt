@@ -1,0 +1,111 @@
+add_namespace = tib_script_event #Скриптовые ивенты
+add_namespace = tib_event #общие ивенты
+add_namespace = tib_political_event #Политические события
+
+#####################################################################################
+#################################SCRIPT_EVENT########################################
+#####################################################################################
+
+country_event = { #
+	id = tib_script_event.1
+	title = tib_script_event.1.t
+	desc = tib_script_event.1.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+
+	hidden =  yes
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event tib_script_event.1"
+		country_event = { id = tib_political_event.1 days = 2553 } #смена далай ламы - 31 января 1856
+		country_event = { id = tib_event.1 days = 2281 } #Начало 2 непалотибетской войны март 1855
+
+	}
+
+	option = {
+		name = tib_script_event.1.a
+		
+	}
+}
+
+#####################################################################################
+###############################POLITICAL_EVENT#######################################
+#####################################################################################
+
+country_event = { #
+	id = tib_political_event.1
+	title = tib_political_event.1.t
+	desc = tib_political_event.1.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event tib_political_event.1"
+		hidden_effect = {
+			retire_country_leader = yes
+            add_country_leader_role = {
+                character = TIB_Trinley_Giaco
+                promote_leader = yes
+                    
+                country_leader = {
+                    desc = "POLITICS_TRINLEY_GIACO_DESC"
+                    ideology = theocracy_sub
+                    traits = {  }
+                    expire = "1900.1.1.1"
+                }
+            }
+            news_event = { id = news.303 days = 3 }
+		}
+	}
+
+	option = {
+		name = tib_political_event.1.a
+		trigger = {
+			
+		}
+       
+	}
+}
+
+
+#####################################################################################
+###############################TIBET_EVENT#######################################
+#####################################################################################
+
+country_event = { #
+	id = tib_event.1
+	title = tib_event.1.t
+	desc = tib_event.1.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event tib_event.1"
+		hidden_effect = {
+            set_global_flag = NPA_start_second_nepalo_tibet_war
+		}
+	}
+
+	option = {
+		name = tib_event.1.a
+		trigger = {
+			
+		}
+        NPA = {
+            declare_war_on = {
+				target = TIB
+				type = annex_everything
+			}
+        }
+        news_event = { id = news.304 days = 3 }
+	}
+}
