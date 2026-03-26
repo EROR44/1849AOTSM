@@ -84,6 +84,15 @@ set_research_slots = 2
 set_stability = 0.6
 set_war_support = 0.5
 set_oob = "AZT_1849"
+
+if = {
+	limit = { has_dlc = "Man the Guns" }
+		set_naval_oob = "AZT_1849_naval_mtg"
+	else = {
+		set_naval_oob = "AZT_1849_naval_legacy"
+	}
+}
+
 set_politics = {
 	ruling_party = reactionist
 	last_election = "1849.1.1"
@@ -129,3 +138,76 @@ set_power_balance = {
 }
 
 set_variable = { aotsm_westernisation_points_num = 39 }
+
+
+###################
+#EQUIPMENT_VARIANT#
+###################
+
+#fleet
+
+if = {
+	limit = {
+		NOT = {
+			has_dlc = "Man the Guns"
+		}
+	}
+
+	create_equipment_variant = {
+		name = "Huixtocihuatl Class"
+		type = destroyer_1
+	}
+
+#	create_equipment_variant = { 
+#		name = "Chalchiuhtlicue Class"
+#		type = light_cruiser_1
+#	}
+
+	create_equipment_variant = {
+		name = "Tonatiuh Class"
+		type = destroyer_1
+		upgrades = {
+			destroyer_engine_upgrade = 1
+		}
+	}
+}
+
+if = {
+	limit = { has_dlc = "Man the Guns" }
+
+	create_equipment_variant = {
+		name = "Huixtocihuatl Class"
+		type = ship_hull_light_1
+		parent_version = 0
+		modules = {
+			fixed_ship_engine_slot = light_ship_engine_1
+			fixed_ship_battery_slot = ship_light_battery_2
+			mid_1_custom_slot = ship_mine_layer_1
+		}
+		obsolete = yes
+	}
+
+	create_equipment_variant = {
+		name = "Tonatiuh Class"
+		type = ship_hull_light_1
+		parent_version = 0
+		modules = {
+			fixed_ship_engine_slot = light_ship_engine_2
+			fixed_ship_battery_slot = ship_light_battery_2
+			rear_1_custom_slot = ship_mine_layer_1
+			fixed_ship_torpedo_slot = ship_torpedo_1
+		}
+	}
+
+#	create_equipment_variant = { # unavailable at 1849
+#		name = "Xiuhcoatl Class"
+#		type = ship_hull_cruiser_coastal_defense_ship
+#		parent_version = 0
+#		visible = no
+#		modules = {
+#			fixed_ship_battery_slot = ship_light_medium_battery_1
+#			rear_1_custom_slot = ship_medium_battery_1
+#		}
+#	}
+}
+
