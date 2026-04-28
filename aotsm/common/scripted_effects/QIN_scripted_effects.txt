@@ -770,6 +770,39 @@ QIN_clamp_state_stability_vars = {
 		max = 4
 	}
 
+	clamp_variable = {
+		var = QIN_tibet_state_stability
+		min = 0
+		max = 4
+	}
+
+}
+
+QIN_clamp_num_of_state_frame_vars = {
+
+	clamp_variable = {
+		var = QIN_outer_mongolia_frame_num 
+		min = 0
+		max = 1
+	}
+
+	clamp_variable = {
+		var = QIN_sindzyan_frame_num 
+		min = 0
+		max = 1
+	}
+
+	clamp_variable = {
+		var = QIN_dongsansheng_frame_num 
+		min = 0
+		max = 1
+	}
+
+	clamp_variable = {
+		var = QIN_minzhe_governor_num 
+		min = 0
+		max = 1
+	}
 }
 
 #ZCHILI 
@@ -2669,79 +2702,145 @@ QIN_remove_1_from_dongsansheng_state_stability = {
 	QIN_clamp_state_stability_vars = yes
 }
 
-aotsm_qin_check_state_modifier_status = {
-	 	every_owned_state = {
-            limit = {
-                aotsm_is_controlled_by_chinesse_country = yes
-                has_dynamic_modifier = {
-					modifier = QIN_undeveloped_region_state_modifier
-				}
-                infrastructure > 1
-		        aotsm_qin_total_factories_in_state_gt_0 = yes
-            }
-            remove_dynamic_modifier = { 
-                modifier = QIN_undeveloped_region_state_modifier 
-            }
-            add_dynamic_modifier = { 
-                modifier = QIN_agricultural_region_state_modifier 
-            } 
-        }
-        every_owned_state = {
-            limit = {
-                aotsm_is_controlled_by_chinesse_country = yes
-                has_dynamic_modifier = {
-					modifier = QIN_agricultural_region_state_modifier
-				}
-                infrastructure > 3
-		       	aotsm_qin_total_factories_in_state_gt_1 = yes
-            }
-            remove_dynamic_modifier = { 
-                modifier = QIN_agricultural_region_state_modifier 
-            }
-            add_dynamic_modifier = { 
-                modifier = QIN_industrial_region_1_state_modifier 
-            } 
-        }
-        every_owned_state = {
-            limit = {
-                aotsm_is_controlled_by_chinesse_country = yes
-                has_dynamic_modifier = {
-					modifier = QIN_industrial_region_1_state_modifier
-				}
-                infrastructure > 4
-		        aotsm_qin_total_factories_in_state_gt_2 = yes
-            }
-            remove_dynamic_modifier = { 
-                modifier = QIN_industrial_region_1_state_modifier 
-            }
-            add_dynamic_modifier = { 
-                modifier = QIN_industrial_region_2_state_modifier 
-            } 
-        }
-        every_owned_state = {
-            limit = {
-                aotsm_is_controlled_by_chinesse_country = yes
-                NOT = { 
-                    OR = {
-                        has_dynamic_modifier = {
-                            modifier = QIN_undeveloped_region_state_modifier
-                        }
-                        has_dynamic_modifier = {
-                            modifier = QIN_agricultural_region_state_modifier
-                        }
-                        has_dynamic_modifier = {
-                            modifier = QIN_industrial_region_1_state_modifier
-                        }
-                        has_dynamic_modifier = {
-                            modifier = QIN_industrial_region_2_state_modifier
-                        }
-                    }
-                }
-                infrastructure > 2
-		        aotsm_qin_total_factories_in_state_gt_2 = yes
-            }
-            add_dynamic_modifier = { 
-                modifier = QIN_industrial_region_1_state_modifier 
-            }
-        }
+# TIBET STATE STABILITY EFFECTS
+
+QIN_add_1_to_tibet_state_stability = {
+	custom_effect_tooltip = QIN_add_1_to_tibet_state_stability_tt
+	add_to_variable = { var = QIN_tibet_state_stability value = 1 }
+	force_update_dynamic_modifier = yes
+	QIN_clamp_state_stability_vars = yes
+}
+
+QIN_remove_1_from_tibet_state_stability = {
+	custom_effect_tooltip = QIN_remove_1_from_tibet_state_stability_tt
+	subtract_from_variable = { var = QIN_tibet_state_stability value = 1 }
+	force_update_dynamic_modifier = yes
+	QIN_clamp_state_stability_vars = yes
+}
+
+# CHOOSE STATE FRAME EFFECTS
+
+QIN_set_outer_mongolia_frmane_1_effect = {
+	custom_effect_tooltip = QIN_set_outer_mongolia_frmane_1_effect_tt
+	set_variable = { 
+		var = QIN_outer_mongolia_frame_num  
+		value = 0 
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_num_of_state_frame_vars = yes
+}
+
+QIN_set_outer_mongolia_frmane_2_effect = {
+	custom_effect_tooltip = QIN_set_outer_mongolia_frmane_2_effect_tt
+	set_variable = { 
+		var = QIN_outer_mongolia_frame_num   
+		value = 1 
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_num_of_state_frame_vars = yes
+}
+
+QIN_set_sindzyan_frmane_1_effect = {
+	custom_effect_tooltip = QIN_set_sindzyan_frmane_1_effect_tt
+	set_variable = { 
+		var = QIN_sindzyan_frame_num   
+		value = 0 
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_num_of_state_frame_vars = yes
+}
+
+QIN_set_sindzyan_frmane_2_effect = {
+	custom_effect_tooltip = QIN_set_sindzyan_frmane_2_effect_tt
+	set_variable = { 
+		var = QIN_sindzyan_frame_num    
+		value = 1 
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_num_of_state_frame_vars = yes
+}
+
+QIN_set_dongsansheng_frmane_1_effect = {
+	custom_effect_tooltip = QIN_set_dongsansheng_frmane_1_effect_tt
+	set_variable = { 
+		var = QIN_dongsansheng_frame_num    
+		value = 0 
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_num_of_state_frame_vars = yes
+}
+
+QIN_set_dongsansheng_frmane_2_effect = {
+	custom_effect_tooltip = QIN_set_dongsansheng_frmane_2_effect_tt
+	set_variable = { 
+		var = QIN_dongsansheng_frame_num     
+		value = 1 
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_num_of_state_frame_vars = yes
+}
+
+QIN_set_minzhe_frmane_1_effect = {
+	custom_effect_tooltip = QIN_set_minzhe_frmane_1_effect_tt
+	set_variable = { 
+		var = QIN_minzhe_frame_num    
+		value = 0
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_num_of_state_frame_vars = yes
+}
+
+QIN_set_minzhe_frmane_2_effect = {
+	custom_effect_tooltip = QIN_set_minzhe_frmane_2_effect_tt
+	set_variable = { 
+		var = QIN_minzhe_frame_num     
+		value = 1 
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_num_of_state_frame_vars = yes
+}
+
+#STATE ARRAYS
+
+QIN_check_owned_states_array_effect = {
+	clear_array = QIN.aotsm_owned_states_array
+
+	every_state = {
+		limit = {
+			is_owned_and_controlled_by = QIN
+		}
+		add_to_array = {
+			array = QIN.aotsm_owned_states_array
+			value = THIS #THIS означает текущий стейт
+		}
+	}
+}
+
+#SWAP STATE MODIFIER EFFECTS
+
+QIN_swap_undeveloped_region_to_agricultural_region_effect = {
+	remove_dynamic_modifier = { 
+        modifier = QIN_undeveloped_region_state_modifier 
+    }
+    add_dynamic_modifier = { 
+        modifier = QIN_agricultural_region_state_modifier 
+    } 
+}
+
+QIN_swap_agricultural_region_to_industrial_region_1_effect = {
+	remove_dynamic_modifier = { 
+        modifier = QIN_agricultural_region_state_modifier 
+    }
+    add_dynamic_modifier = { 
+        modifier =  QIN_industrial_region_1_state_modifier
+    } 
+}
+
+QIN_swap_aindustrial_region_1_to_industrial_region_2_effect = {
+	remove_dynamic_modifier = { 
+        modifier = QIN_industrial_region_1_state_modifier 
+    }
+    add_dynamic_modifier = { 
+        modifier =  QIN_industrial_region_2_state_modifier
+    } 
 }
