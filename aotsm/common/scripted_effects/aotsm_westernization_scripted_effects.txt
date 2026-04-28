@@ -1,0 +1,691 @@
+##WESTERNIZATION_SCRIPTS
+
+clamp_westernisation_vars = {
+    clamp_variable = {
+		var = ROOT.aotsm_westernisation_points_num
+		min = 0
+		max = 100
+	}
+}
+
+up_westernisation_period = {
+    if = {
+        limit = {
+            has_idea = backward_nation
+        }
+        swap_ideas = {
+            remove_idea = backward_nation
+            add_idea = lagging_nation
+        }
+        set_variable = { ROOT.progress_of_westornisation_frame = 2 }
+		set_variable = { ROOT.westornisation_background_frame = 2 }
+    }
+    else_if = {
+        limit = {
+            has_idea = lagging_nation
+        }
+        swap_ideas = {
+            remove_idea = lagging_nation
+            add_idea = westernizing_nation
+        }
+        set_variable = { ROOT.progress_of_westornisation_frame = 3 }
+		set_variable = { ROOT.westornisation_background_frame = 3 }
+    }
+    else_if = {
+        limit = {
+            has_idea = westernizing_nation
+        }
+        swap_ideas = {
+            remove_idea = westernizing_nation
+            add_idea = westernisation_end
+        }
+        set_variable = { ROOT.progress_of_westornisation_frame = 4 }
+		set_variable = { ROOT.westornisation_background_frame = 4 }
+    }
+    set_variable = {
+        var = ROOT.aotsm_westernisation_points_num
+        value = 0
+    }
+}
+
+down_westernisation_period = {
+    if = {
+        limit = {
+            has_idea = westernisation_end
+        }
+        swap_ideas = {
+            remove_idea = westernisation_end
+            add_idea = westernizing_nation
+        }
+        set_variable = { ROOT.progress_of_westornisation_frame = 3 }
+		set_variable = { ROOT.westornisation_background_frame = 3 }
+    }
+    else_if = {
+        limit = {
+            has_idea = westernizing_nation
+        }
+        swap_ideas = {
+            remove_idea = westernizing_nation
+            add_idea = lagging_nation
+        }
+        set_variable = { ROOT.progress_of_westornisation_frame = 2 }
+		set_variable = { ROOT.westornisation_background_frame = 2 }
+    }
+    else_if = {
+        limit = {
+            has_idea = lagging_nation
+        }
+        swap_ideas = {
+            remove_idea = lagging_nation
+            add_idea = backward_nation
+        }
+        set_variable = { ROOT.progress_of_westornisation_frame = 1 }
+		set_variable = { ROOT.westornisation_background_frame = 1 }
+    }
+    set_variable = {
+        var = ROOT.aotsm_westernisation_points_num
+        value = 51
+    }
+}
+
+add_15_point_westernisation = {
+    custom_effect_tooltip = add_15_point_westernisation_tt
+    add_to_variable = { ROOT.aotsm_westernisation_points_num = 15 }
+    force_update_dynamic_modifier = yes
+    clamp_westernisation_vars = yes
+}
+
+add_10_point_westernisation = {
+    custom_effect_tooltip = add_10_point_westernisation_tt
+    add_to_variable = { ROOT.aotsm_westernisation_points_num = 10 }
+    force_update_dynamic_modifier = yes
+    clamp_westernisation_vars = yes
+}
+
+add_5_point_westernisation = {
+    custom_effect_tooltip = add_5_point_westernisation_tt
+    add_to_variable = { ROOT.aotsm_westernisation_points_num = 5 }
+    force_update_dynamic_modifier = yes
+    clamp_westernisation_vars = yes
+}
+
+add_3_point_westernisation = {
+    custom_effect_tooltip = add_3_point_westernisation_tt
+    add_to_variable = { ROOT.aotsm_westernisation_points_num = 3 }
+    force_update_dynamic_modifier = yes
+    clamp_westernisation_vars = yes
+}
+
+add_2_point_westernisation = {
+    custom_effect_tooltip = add_2_point_westernisation_tt
+    add_to_variable = { ROOT.aotsm_westernisation_points_num = 2 }
+    force_update_dynamic_modifier = yes
+    clamp_westernisation_vars = yes
+}
+
+add_1_point_westernisation = {
+    custom_effect_tooltip = add_1_point_westernisation_tt
+    add_to_variable = { ROOT.aotsm_westernisation_points_num = 1 }
+    force_update_dynamic_modifier = yes
+    clamp_westernisation_vars = yes
+}
+
+remove_15_point_westernisation = {
+    custom_effect_tooltip = remove_15_point_westernisation_tt
+    subtract_from_variable = { ROOT.aotsm_westernisation_points_num = 15 }
+    force_update_dynamic_modifier = yes
+    clamp_westernisation_vars = yes
+}
+
+remove_10_point_westernisation = {
+    custom_effect_tooltip = remove_10_point_westernisation_tt
+    subtract_from_variable = { ROOT.aotsm_westernisation_points_num = 10 }
+    force_update_dynamic_modifier = yes
+    clamp_westernisation_vars = yes
+}
+
+remove_5_point_westernisation = {
+    custom_effect_tooltip = remove_5_point_westernisation_tt
+    subtract_from_variable = { ROOT.aotsm_westernisation_points_num = 5 }
+    force_update_dynamic_modifier = yes
+    clamp_westernisation_vars = yes
+}
+
+remove_3_point_westernisation = {
+    custom_effect_tooltip = remove_3_point_westernisation_tt
+    subtract_from_variable = { ROOT.aotsm_westernisation_points_num = 3 }
+    force_update_dynamic_modifier = yes
+    clamp_westernisation_vars = yes
+}
+
+remove_1_point_westernisation = {
+    custom_effect_tooltip = remove_1_point_westernisation_tt
+    subtract_from_variable = { ROOT.aotsm_westernisation_points_num = 1 }
+    force_update_dynamic_modifier = yes
+    clamp_westernisation_vars = yes
+}
+
+add_1_5_10_westernisation_points = {
+    if = {
+		limit ={
+			has_idea = backward_nation
+		}
+		add_1_point_westernisation = yes
+	}
+	else_if = {
+		limit ={
+			has_idea = lagging_nation
+		}
+		add_5_point_westernisation = yes
+	}
+	else_if = {
+		limit ={
+			has_idea = westernizing_nation
+		}
+		add_10_point_westernisation = yes
+	}
+}
+
+add_2_5_10_westernisation_points = {
+    if = {
+		limit ={
+			has_idea = backward_nation
+		}
+		add_2_point_westernisation = yes
+	}
+	else_if = {
+		limit ={
+			has_idea = lagging_nation
+		}
+		add_5_point_westernisation = yes
+	}
+	else_if = {
+		limit ={
+			has_idea = westernizing_nation
+		}
+		add_10_point_westernisation = yes
+	}
+}
+
+w_check_who_is_protector_power = {
+    if = {
+        limit = {
+            FROM = {
+                tag = PRU
+            }
+        }
+        add_1_point_westernisation = yes
+        set_country_flag = aotsm_w_country_has_pru_protection
+    }
+    else_if = {
+        limit = {
+            FROM = {
+                tag = FRR
+            }
+        }
+        add_1_point_westernisation = yes
+        set_country_flag = aotsm_w_country_has_frr_protection
+    }
+    else_if = {
+        limit = {
+            FROM = {
+                tag = CBI
+            }
+        }
+        add_1_point_westernisation = yes
+        set_country_flag = aotsm_w_country_has_cbi_protection
+    }
+    else_if = {
+        limit = {
+            FROM = {
+                tag = AUS
+            }
+        }
+        add_1_point_westernisation = yes
+        set_country_flag = aotsm_w_country_has_aus_protection
+    }
+    else_if = {
+        limit = {
+            FROM = {
+                    tag = BYZ
+            }
+        }
+        add_1_point_westernisation = yes
+        set_country_flag = aotsm_w_country_has_byz_protection
+    }
+    else_if = {
+        limit = {
+            FROM = {
+                tag = RUS
+            }
+        }
+        add_1_point_westernisation = yes
+        set_country_flag = aotsm_w_country_has_rus_protection
+    }
+}
+
+w_check_who_is_refuse_to_protection = {
+    if = {
+        limit = {
+            FROM = {
+                tag = PRU
+            }
+        }
+        set_country_flag = aotsm_w_pru_refuse_to_protection
+    }
+    else_if = {
+        limit = {
+            FROM = {
+                tag = FRR
+            }
+        }
+        set_country_flag = aotsm_w_frr_refuse_to_protection
+    }
+    else_if = {
+        limit = {
+            FROM = {
+                tag = CBI
+            }
+        }
+        set_country_flag = aotsm_w_cbi_refuse_to_protection
+    }
+    else_if = {
+        limit = {
+            FROM = {
+                tag = AUS
+            }
+        }
+        set_country_flag = aotsm_w_aus_refuse_to_protection
+    }
+    else_if = {
+        limit = {
+            FROM = {
+                tag = BYZ
+            }
+        }
+        set_country_flag = aotsm_w_byz_refuse_to_protection
+    }
+    else_if = {
+        limit = {
+            FROM = {
+                tag = RUS
+            }
+        }
+        set_country_flag = aotsm_w_rus_refuse_to_protection
+    }
+}
+
+w_add_25_pp_protector_country = {
+    if = {
+		limit = {
+			has_country_flag = aotsm_w_country_has_pru_protection
+		}
+		PRU = {
+			country_event = { id = aotsm_westernisation_event.7 days = 7 }
+		}
+	}
+	else_if = {
+		limit = {
+			has_country_flag = aotsm_w_country_has_frr_protection
+		}
+		FRR = {
+			country_event = { id = aotsm_westernisation_event.7 days = 7 }
+		}
+	}
+	else_if = {
+		limit = {
+			has_country_flag = aotsm_w_country_has_cbi_protection
+		}
+		CBI = {
+			country_event = { id = aotsm_westernisation_event.7 days = 7 }
+		}
+	}
+	else_if = {
+		limit = {
+				has_country_flag = aotsm_w_country_has_aus_protection
+		}
+		AUS = {
+			country_event = { id = aotsm_westernisation_event.7 days = 7 }
+		}
+	}
+	else_if = {
+		limit = {
+			has_country_flag = aotsm_w_country_has_byz_protection
+		}
+		BYZ = {
+			country_event = { id = aotsm_westernisation_event.7 days = 7 }
+		}
+	}
+	else_if = {
+		limit = {
+			has_country_flag = aotsm_w_country_has_rus_protection
+		}
+		RUS = {
+			country_event = { id = aotsm_westernisation_event.7 days = 7 }
+		}
+	}
+}
+
+w_get_manpower_to_country_protector = {
+    custom_effect_tooltip = w_get_manpower_to_country_protector_tt
+    if = {
+		limit = {
+			has_country_flag = aotsm_w_country_has_pru_protection
+		}
+        ROOT = {
+            add_manpower = -2500
+        }
+		PRU = {
+			country_event = { id = aotsm_westernisation_event.8 days = 7 }
+		}
+	}
+	else_if = {
+		limit = {
+			has_country_flag = aotsm_w_country_has_frr_protection
+		}
+        ROOT = {
+            add_manpower = -2500
+        }
+		FRR = {
+			country_event = { id = aotsm_westernisation_event.8 days = 7 }
+		}
+	}
+	else_if = {
+		limit = {
+			has_country_flag = aotsm_w_country_has_cbi_protection
+		}
+        ROOT = {
+            add_manpower = -2500
+        }
+		CBI = {
+			country_event = { id = aotsm_westernisation_event.8 days = 7 }
+		}
+	}
+	else_if = {
+		limit = {
+				has_country_flag = aotsm_w_country_has_aus_protection
+		}
+        ROOT = {
+            add_manpower = -2500
+        }
+		AUS = {
+			country_event = { id = aotsm_westernisation_event.8 days = 7 }
+		}
+	}
+	else_if = {
+		limit = {
+			has_country_flag = aotsm_w_country_has_byz_protection
+		}
+        ROOT = {
+            add_manpower = -2500
+        }
+		BYZ = {
+			country_event = { id = aotsm_westernisation_event.8 days = 7 }
+		}
+	}
+	else_if = {
+		limit = {
+			has_country_flag = aotsm_w_country_has_rus_protection
+		}
+        ROOT = {
+            add_manpower = -2500
+        }
+		RUS = {
+			country_event = { id = aotsm_westernisation_event.8 days = 7 }
+		}
+	}
+}
+
+w_add_ideology_of_country_protector_popularity = {
+    if = {
+		limit = {
+            OR = {
+                AND = {
+                    has_country_flag = aotsm_w_country_has_pru_protection
+                    PRU = { has_government = authoritarian }
+                }
+                AND = {
+                    has_country_flag = aotsm_w_country_has_frr_protection
+                    FRR = { has_government = authoritarian }
+                }
+                AND = {
+                    has_country_flag = aotsm_w_country_has_cbi_protection
+                    CBI = { has_government = authoritarian }
+                }
+                AND = {
+                    has_country_flag = aotsm_w_country_has_aus_protection
+                    AUS = { has_government = authoritarian }
+                }
+                AND = {
+                    has_country_flag = aotsm_w_country_has_byz_protection
+                    BYZ = { has_government = authoritarian }
+                }
+                AND = {
+                    has_country_flag = aotsm_w_country_has_rus_protection
+                    RUS = { has_government = authoritarian }
+                }
+            }
+		}
+        ROOT = {
+            add_popularity = {
+				ideology = authoritarian
+				popularity = 0.025
+			}
+        }
+	}
+	else_if = {
+		limit = {
+            OR = {
+                AND = {
+                    has_country_flag = aotsm_w_country_has_pru_protection
+                    PRU = { has_government = reactionist }
+                }
+                AND = {
+                    has_country_flag = aotsm_w_country_has_frr_protection
+                    FRR = { has_government = reactionist }
+                }
+                AND = {
+                    has_country_flag = aotsm_w_country_has_cbi_protection
+                    CBI = { has_government = reactionist }
+                }
+                AND = {
+                    has_country_flag = aotsm_w_country_has_aus_protection
+                    AUS = { has_government = reactionist }
+                }
+                AND = {
+                    has_country_flag = aotsm_w_country_has_byz_protection
+                    BYZ = { has_government = reactionist }
+                }
+                AND = {
+                    has_country_flag = aotsm_w_country_has_rus_protection
+                    RUS = { has_government = reactionist }
+                }
+            }
+		}
+        ROOT = {
+            add_popularity = {
+				ideology = reactionist
+				popularity = 0.025
+			}
+        }
+	}
+	else_if = {
+		limit = {
+            OR = {
+                AND = {
+                    has_country_flag = aotsm_w_country_has_pru_protection
+                    PRU = { has_government = socialism }
+                }
+                AND = {
+                    has_country_flag = aotsm_w_country_has_frr_protection
+                    FRR = { has_government = socialism }
+                }
+                AND = {
+                    has_country_flag = aotsm_w_country_has_cbi_protection
+                    CBI = { has_government = socialism }
+                }
+                AND = {
+                    has_country_flag = aotsm_w_country_has_aus_protection
+                    AUS = { has_government = socialism }
+                }
+                AND = {
+                    has_country_flag = aotsm_w_country_has_byz_protection
+                    BYZ = { has_government = socialism }
+                }
+                AND = {
+                    has_country_flag = aotsm_w_country_has_rus_protection
+                    RUS = { has_government = socialism }
+                }
+            }
+		}
+        ROOT = {
+            add_popularity = {
+				ideology = socialism
+				popularity = 0.025
+			}
+        }
+	}
+	else_if = {
+		limit = {
+            OR = {
+                AND = {
+                    has_country_flag = aotsm_w_country_has_pru_protection
+                    PRU = { has_government = democratic }
+                }
+                AND = {
+                    has_country_flag = aotsm_w_country_has_frr_protection
+                    FRR = { has_government = democratic }
+                }
+                AND = {
+                    has_country_flag = aotsm_w_country_has_cbi_protection
+                    CBI = { has_government = democratic }
+                }
+                AND = {
+                    has_country_flag = aotsm_w_country_has_aus_protection
+                    AUS = { has_government = democratic }
+                }
+                AND = {
+                    has_country_flag = aotsm_w_country_has_byz_protection
+                    BYZ = { has_government = democratic }
+                }
+                AND = {
+                    has_country_flag = aotsm_w_country_has_rus_protection
+                    RUS = { has_government = democratic }
+                }
+            }
+		}
+        ROOT = {
+            add_popularity = {
+				ideology = democratic
+				popularity = 0.025
+			}
+        }
+	}
+}
+
+choose_random_westernisation_event_effect = {
+    random_list = {
+		50 = {
+			modifier = {
+				factor = 0
+				check_variable = {
+					w_last_event_num = 1
+				}
+			}
+			ROOT = { country_event = { id = aotsm_westernisation_event.9 days = 7 } }
+		}
+		50 = {
+			modifier = {
+				factor = 0
+				check_variable = {
+					w_last_event_num = 2
+				}
+			}
+			ROOT = { country_event = { id = aotsm_westernisation_event.10 days = 7 } }
+		}
+		50 = {
+			modifier = {
+				factor = 0
+				check_variable = {
+					w_last_event_num = 3
+				}
+			}
+			ROOT = { country_event = { id = aotsm_westernisation_event.11 days = 7 } }
+		}
+		50 = {
+			modifier = {
+				factor = 0
+				check_variable = {
+					w_last_event_num = 3
+				}
+			}
+			ROOT = { country_event = { id = aotsm_westernisation_event.12 days = 7 } }
+		}
+		50 = {
+			modifier = {
+			    factor = 0
+				check_variable = {
+					w_last_event_num = 5
+				}
+			}
+			ROOT = { country_event = { id = aotsm_westernisation_event.13 days = 7 } }
+		}
+		50 = {
+			modifier = {
+				factor = 0
+				check_variable = {
+					w_last_event_num = 6
+				}
+			}
+			ROOT = { country_event = { id = aotsm_westernisation_event.14 days = 7 } }
+		}
+		50 = {
+			modifier = {
+				factor = 0
+				NOT = {
+					has_idea = westernizing_nation
+				}
+			}
+			modifier = {
+				factor = 0
+				check_variable = {
+					w_last_event_num = 7
+				}
+			}
+			ROOT = { country_event = { id = aotsm_westernisation_event.15 days = 7 } }
+		}
+		50 = {
+	    	modifier = {
+				factor = 0
+				NOT = {
+					has_idea = westernizing_nation
+				}
+			}
+			modifier = {
+				factor = 0
+			    check_variable = {
+					w_last_event_num = 8
+				}
+			}
+			ROOT = { country_event = { id = aotsm_westernisation_event.16 days = 7 } }
+		}
+		25 = {
+			modifier = {
+			    factor = 0
+				NOT = {
+	    			has_idea = westernizing_nation
+				}
+			}
+			modifier = {
+				factor = 0
+				check_variable = {
+					w_last_event_num = 9
+				}
+            }
+            ROOT = { country_event = { id = aotsm_westernisation_event.17 days = 7 } }
+	    }
+		50 = {
+			#Ничего не произойдет
+	    }
+    }
+}

@@ -5,9 +5,9 @@ add_namespace = hun_answer #Answer to Hungary
 
 country_event = {
 	id = hun.1
-	title = hun_.1.t
+	title = hun.1.t
 	desc = hun.1.d
-	picture = GFX_report_event_aotsm_generic_signing_the_contract	
+	picture = GFX_report_event_byz_banat_question	
 	is_triggered_only = yes
 	
 	fire_only_once = no
@@ -50,11 +50,258 @@ country_event = {
 	
 }
 
+country_event = { #annex Banat
+	id = hun.2
+	title = hun.2.t
+	desc = hun.2.d
+	picture = GFX_report_event_byz_banat
+	is_triggered_only = yes
+	
+	fire_only_once = no
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event hun.2"}
+	
+	option = {
+		name = hun.2.a	
+		ai_chance = {
+			base = 75
+			modifier = {
+				factor = 1
+				is_historical_focus_on = yes
+			}
+		}
+		45 = {
+			set_demilitarized_zone = no
+		}
+		764 = {
+			set_demilitarized_zone = no
+		}
+		BNT = {
+			add_state_core = 45
+			transfer_state = 45
+			add_state_core = 82
+			add_state_core = 764
+			transfer_state = 764
+		}
+		BYZ = {
+			puppet = BNT
+		}
+		BNT = {
+			set_politics = { ruling_party = authoritarian elections_allowed = no }
+			set_popularities = {
+				democratic = 23
+				socialism = 17
+				reactionist = 23
+				authoritarian = 37
+			}
+			load_oob = BNT_force
+		}
+		add_opinion_modifier = {
+			target = HUN
+			modifier = hun_byz_annex_banat
+		}
+		HUN = {
+			country_event = {
+				id = hun_answer.7
+				hours = 5
+			}
+		}
+	}
+	
+	option = {
+		name = hun.2.b
+		ai_chance = {
+			base = 25
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+			}
+		}
+		add_political_power = 50
+	}
+	
+}
+
+country_event = { #Counterrevolt of Black hand
+	id = hun.3
+	title = hun.3.t
+	desc = hun.3.d
+	picture = GFX_report_event_hun_return_of_black_hand
+	is_triggered_only = yes
+	
+	fire_only_once = no
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event hun.3"
+		hidden_effect = {
+			HUN = {
+				set_politics = { ruling_party = authoritarian elections_allowed = no }
+				set_popularities = {
+					democratic = 23
+					socialism = 7
+					reactionist = 26
+					authoritarian = 44
+				}
+				swap_ideas = {
+					remove_idea = republic
+					add_idea = monarchy
+				}
+				country_event = {
+					id = hun.4
+					days = 15
+				}
+			}
+			45 = {
+				set_demilitarized_zone = yes
+			}
+			764 = {
+				set_demilitarized_zone = yes
+			}
+		}
+	}
+	
+	option = {
+		name = hun.3.a	
+		ai_chance = {
+			base = 75
+			modifier = {
+				factor = 1
+				is_historical_focus_on = yes
+			}
+		}
+		add_stability = -0.05
+		swap_ideas = {
+			remove_idea = HUN_new_type_republic
+			add_idea = HUN_ruling_of_black_hand
+		}
+		swap_ideas = {
+			remove_idea = HUN_red_economy
+			add_idea = HUN_restructuring_economy
+		}
+		swap_ideas = {
+			remove_idea = HUN_peaseant_army
+			add_idea = HUN_black_army
+		}
+		effect_tooltip = {
+			45 = {
+				set_demilitarized_zone = yes
+			}
+			764 = {
+				set_demilitarized_zone = yes
+			}
+		}
+		custom_effect_tooltip = HUN_black_hand_rule_tt
+	}
+	
+}
+
+country_event = { #Faction or not?
+	id = hun.4
+	title = hun.4.t
+	desc = hun.4.d
+	picture = GFX_report_event_hun_search_for_allies
+	is_triggered_only = yes
+	
+	fire_only_once = no
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event hun.4"
+	}
+	
+	option = { #Ask German
+		name = hun.4.a
+		trigger = {
+			PRU = {
+				is_faction_leader = yes
+				is_in_faction_with = BYZ
+			}
+		}
+		ai_chance = {
+			base = 95
+			modifier = {
+				factor = 1
+				is_historical_focus_on = yes
+			}
+		}
+		PRU = {
+			country_event = {
+				id = hun.5
+				days = 3
+			}
+		}
+	}
+	
+	option = { #We can solo
+		name = hun.4.b	
+		ai_chance = {
+			base = 5
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+			}
+		}
+	}
+	
+}
+
+country_event = { #Hungary ask join in faction
+	id = hun.5
+	title = hun.5.t
+	desc = hun.5.d
+	picture = GFX_report_event_pru_allies_hun
+	is_triggered_only = yes
+	
+	fire_only_once = no
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event hun.5"
+	}
+	
+	option = { #They can
+		name = hun.5.a
+		ai_chance = {
+			base = 95
+			modifier = {
+				factor = 1
+				is_historical_focus_on = yes
+			}
+		}
+		HUN = {
+			country_event = {
+				id = hun_answer.8
+				hours = 5
+			}
+		}
+	}
+	
+	option = { #Not today
+		name = hun.5.b	
+		ai_chance = {
+			base = 5
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+			}
+		}
+		add_opinion_modifier = {
+			target = HUN
+			modifier = hun_pru_say_no
+		}
+		HUN = {
+			country_event = {
+				id = hun_answer.9
+				hours = 5
+			}
+		}
+	}
+	
+}
+
 country_event = {
 	id = hun_war.1
 	title = hun_war.1.t
 	desc = hun_war.1.d
-	picture = GFX_report_event_russian_czapist_raid
+	picture = GFX_report_event_hun_ask_help_in_war
 	is_triggered_only = yes
 	
 	fire_only_once = no
@@ -167,7 +414,7 @@ country_event = { #PRU say yes
 	id = hun_answer.1
 	title = hun_answer.1.t
 	desc = hun_answer.1.d
-	picture = GFX_report_event_aotsm_generic_signing_the_contract	
+	picture = GFX_report_event_hun_pru_help	
 	is_triggered_only = yes
 	
 	fire_only_once = no
@@ -185,7 +432,7 @@ country_event = { #PRU say no
 	id = hun_answer.2
 	title = hun_answer.2.t
 	desc = hun_answer.2.d
-	picture = GFX_report_event_aotsm_generic_signing_the_contract	
+	picture = GFX_report_event_hun_pru_not_help	
 	is_triggered_only = yes
 	
 	fire_only_once = no
@@ -208,7 +455,7 @@ country_event = { #BYZ say yes
 	id = hun_answer.3
 	title = hun_answer.3.t
 	desc = hun_answer.3.d
-	picture = GFX_report_event_aotsm_generic_signing_the_contract	
+	picture = GFX_report_event_hun_byz_help	
 	is_triggered_only = yes
 	
 	fire_only_once = no
@@ -226,7 +473,7 @@ country_event = { #BYZ say no
 	id = hun_answer.4
 	title = hun_answer.4.t
 	desc = hun_answer.4.d
-	picture = GFX_report_event_aotsm_generic_signing_the_contract	
+	picture = GFX_report_event_hun_byz_not_help	
 	is_triggered_only = yes
 	
 	fire_only_once = no
@@ -249,51 +496,67 @@ country_event = { #BYZ say yes to banat
 	id = hun_answer.5
 	title = hun_answer.5.t
 	desc = hun_answer.5.d
-	picture = GFX_report_event_aotsm_generic_signing_the_contract	
+	picture = GFX_report_event_hun_banat_return	
 	is_triggered_only = yes
 	
 	fire_only_once = no
 	
-	immediate = {log = "[GetDateText]: [Root.GetName]: event hun_answer.5"}
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event hun_answer.5"
+		hidden_effect = {
+			HUN = {
+				transfer_state = 45
+				add_state_core = 45
+				transfer_state = 764
+				add_state_core = 764
+			}
+			BNT = {
+				remove_state_core = 45
+				remove_state_core = 82
+				remove_state_core = 764
+			}
+			hidden_effect = {
+				BYZ = {
+					set_nationality = {
+						target_country = HUN
+						character = BYZ_Constantin_Zahareas
+					}
+					set_autonomy = {
+						target = HUN
+						autonomy_state = autonomy_aotsm_personal_union
+						end_wars = no
+						end_civil_wars = no
+					}
+				}
+				HUN = {
+					promote_character = {
+						character = BYZ_Constantin_Zahareas
+						ideology = constitutional_monarchy_sub
+					}
+					set_politics = {
+						ruling_party = authoritarian
+					}
+					hidden_effect = {
+						set_popularities = {
+							democratic = 13
+							socialism = 7
+							reactionist = 26
+							authoritarian = 54
+						}
+					}
+					remove_ideas = HUN_ruling_of_black_hand
+					add_ideas = HUN_ruling_from_byz
+				}
+			}
+		}
+	}
 	
 	option = {
 		name = hun_answer.5.a	
-		HUN = {
-			transfer_state = 45
-			add_state_core = 45
-			transfer_state = 764
-			add_state_core = 764
-		}
-		hidden_effect = {
-			BYZ = {
-				set_nationality = {
-					target_country = HUN
-					character = BYZ_Constantin_Zahareas
-				}
-				set_autonomy = {
-					target = HUN
-					autonomy_state = autonomy_aotsm_personal_union
-					end_wars = no
-					end_civil_wars = no
-				}
-			}
-			HUN = {
-				promote_character = {
-					character = BYZ_Constantin_Zahareas
-					ideology = constitutional_monarchy_sub
-				}
-				set_politics = {
-					ruling_party = authoritarian
-				}
-				hidden_effect = {
-					set_popularities = {
-						democratic = 13
-						socialism = 7
-						reactionist = 26
-						authoritarian = 54
-					}
-				}
-			}
+		add_stability = 0.05
+		remove_opinion_modifier = {
+			target = BYZ
+			modifier = hun_hun_annex_banat
 		}
 	}
 	
@@ -303,7 +566,7 @@ country_event = { #BYZ say no to banat
 	id = hun_answer.6
 	title = hun_answer.6.t
 	desc = hun_answer.6.d
-	picture = GFX_report_event_aotsm_generic_signing_the_contract	
+	picture = GFX_report_event_hun_banat_not_return	
 	is_triggered_only = yes
 	
 	fire_only_once = no
@@ -315,6 +578,82 @@ country_event = { #BYZ say no to banat
 		HUN = {
 			set_country_flag = HUN_not_in_purple_dawn_flag
 		}
+		HUN = {
+			add_state_claim = 45
+			add_state_claim = 764
+		}
+	}
+	
+}
+
+country_event = { #BYZ annex Banat
+	id = hun_answer.7
+	title = hun_answer.7.t
+	desc = hun_answer.7.d
+	picture = GFX_report_event_hun_banat_annex
+	is_triggered_only = yes
+	
+	fire_only_once = no
+	
+	immediate = {log = "[GetDateText]: [Root.GetName]: event hun_answer.7"}
+	
+	option = {
+		name = hun_answer.7.a	
+		add_opinion_modifier = {
+			target = BYZ
+			modifier = hun_hun_annex_banat
+		}
+	}
+	
+}
+
+country_event = { #They add us to faction
+	id = hun_answer.8
+	title = hun_answer.8.t
+	desc = hun_answer.8.d
+	picture = GFX_report_event_hun_join_kontinental_europa_pact
+	is_triggered_only = yes
+	
+	fire_only_once = no
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event hun_answer.8"
+		hidden_effect = {
+			PRU = { add_to_faction = HUN }
+			news_event = {
+				id = news.301
+				hours = 8
+			}
+		}
+	}
+	
+	option = {
+		name = hun_answer.8.a	
+		add_stability = 0.05
+	}
+	
+}
+
+country_event = { #They say no to join
+	id = hun_answer.9
+	title = hun_answer.9.t
+	desc = hun_answer.9.d
+	picture = GFX_report_event_hun_solo
+	is_triggered_only = yes
+	
+	fire_only_once = no
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event hun_answer.9"
+	}
+	
+	option = {
+		name = hun_answer.9.a	
+		add_opinion_modifier = {
+			target = PRU
+			modifier = hun_hun_say_no
+		}
+		add_ideas = HUN_cornered_beast
 	}
 	
 }

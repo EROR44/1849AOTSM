@@ -1,0 +1,1270 @@
+scripted_gui = {
+
+	QIN_selection_of_the_successor_scripted_gui = {
+        context_type = decision_category
+		window_name = "QIN_selection_of_the_successor_gui_window"
+
+        effects = {
+     		
+        }
+
+	}
+
+	QIN_country_situation_scripted_gui = {
+        context_type = decision_category
+		window_name = "QIN_country_situation_scripted_gui"
+
+        effects = {
+     		QIN_open_region_leaders_list_button_click = {
+                if = {
+                    limit = {
+                        ROOT = { NOT = { has_country_flag = QIN_visible_region_leaders_list_flag } }
+                    }
+                    ROOT = {
+                        set_country_flag = QIN_visible_region_leaders_list_flag
+                        set_variable = { QIN_governor_list_page = 1 }
+                    }
+                }
+                else_if = {
+                    ROOT = {
+                        clr_country_flag = QIN_visible_region_leaders_list_flag
+                        set_variable = { QIN_governor_list_page = 0 }
+                    }
+               }
+            }
+        }
+
+	}
+
+    QIN_region_leaders_list = {
+		context_type = player_context
+        parent_window_token = top_bar
+		window_name = "QIN_region_leaders_list"
+
+		visible = {
+			ROOT = { has_country_flag = QIN_visible_region_leaders_list_flag }
+		}
+
+        ai_enabled = {
+            always = no
+        }
+
+        effects = {
+     		close_button_click = {
+                ROOT = {
+                    clr_country_flag = QIN_visible_region_leaders_list_flag
+                    set_variable = { QIN_governor_list_page = 0 }
+                }
+            }
+            open_governor_list_button_click = {
+                set_variable = { QIN_governor_list_page = 1 }
+            }
+            open_viceroys_list_button_click = {
+               set_variable = { QIN_governor_list_page = 2 }
+            }
+        }
+
+		triggers = {
+			#SYNDZYAN
+			QIN_syndzyan_map_frame_1_green_visible = {
+				check_variable = { 
+					QIN_sindzyan_state_stability = 0 
+				} 
+			}
+			QIN_syndzyan_map_frame_1_grey_visible = {
+				check_variable = { 
+					QIN_sindzyan_state_stability = 1
+				} 
+			}
+			QIN_syndzyan_map_frame_1_yellow_visible = {
+				check_variable = { 
+					QIN_sindzyan_state_stability = 2 
+				} 
+			}
+			QIN_syndzyan_map_frame_1_orange_visible = {
+				check_variable = { 
+					QIN_sindzyan_state_stability = 3 
+				} 
+			}
+			QIN_syndzyan_map_frame_1_red_visible = {
+				check_variable = { 
+					QIN_sindzyan_state_stability = 4 
+				} 
+			}
+
+			#HUGUANG
+			QIN_huguang_map_frame_1_green_visible = {
+				check_variable = { 
+					QIN_huguang_state_stability = 0 
+				} 
+			}
+			QIN_huguang_map_frame_1_grey_visible = {
+				check_variable = { 
+					QIN_huguang_state_stability = 1 
+				} 
+			}
+			QIN_huguang_map_frame_1_yellow_visible = {
+				check_variable = { 
+					QIN_huguang_state_stability = 2 
+				} 
+			}
+			QIN_huguang_map_frame_1_orange_visible = {
+				check_variable = { 
+					QIN_huguang_state_stability = 3 
+				} 
+			}
+			QIN_huguang_map_frame_1_red_visible = {
+				check_variable = { 
+					QIN_huguang_state_stability = 4 
+				} 
+			}
+
+			#LIANGUANG
+			QIN_lianguang_map_frame_1_green_visible = {
+				check_variable = { 
+					QIN_liangjiang_state_stability = 0 
+				} 
+			}
+			QIN_lianguang_map_frame_1_grey_visible = {
+				check_variable = { 
+					QIN_liangjiang_state_stability = 1 
+				} 
+			}
+			QIN_lianguang_map_frame_1_yellow_visible = {
+				check_variable = { 
+					QIN_liangjiang_state_stability = 2 
+				} 
+			}
+			QIN_lianguang_map_frame_1_orange_visible = {
+				check_variable = { 
+					QIN_liangjiang_state_stability = 3 
+				} 
+			}
+			QIN_lianguang_map_frame_1_red_visible = {
+				check_variable = { 
+					QIN_liangjiang_state_stability = 4 
+				} 
+			}
+
+			#ZHILI
+			QIN_zhili_map_frame_1_green_visible = {
+				check_variable = { 
+					QIN_chzili_state_stability = 0 
+				} 
+			}
+			QIN_zhili_map_frame_1_grey_visible = {
+				check_variable = { 
+					QIN_chzili_state_stability = 1 
+				} 
+			}
+			QIN_zhili_map_frame_1_yellow_visible = {
+				check_variable = { 
+					QIN_chzili_state_stability = 2 
+				} 
+			}
+			QIN_zhili_map_frame_1_orange_visible = {
+				check_variable = { 
+					QIN_chzili_state_stability = 3 
+				} 
+			}
+			QIN_zhili_map_frame_1_red_visible = {
+				check_variable = { 
+					QIN_chzili_state_stability = 4 
+				} 
+			}
+
+			#SHANSI
+			QIN_shansi_map_frame_1_green_visible = {
+				check_variable = { 
+					QIN_shaanxi_state_stability = 0 
+				} 
+			}
+			QIN_shansi_map_frame_1_grey_visible = {
+				check_variable = { 
+					QIN_shaanxi_state_stability = 1 
+				} 
+			}
+			QIN_shansi_map_frame_1_yellow_visible = {
+				check_variable = { 
+					QIN_shaanxi_state_stability = 2 
+				} 
+			}
+			QIN_shansi_map_frame_1_orange_visible = {
+				check_variable = { 
+					QIN_shaanxi_state_stability = 3 
+				} 
+			}
+			QIN_shansi_map_frame_1_red_visible = {
+				check_variable = { 
+					QIN_shaanxi_state_stability = 4 
+				} 
+			}
+
+			#SHAANGAN
+			QIN_shaangan_map_frame_1_green_visible = {
+				check_variable = { 
+					QIN_shaanxi_state_stability = 0 
+				} 
+			}
+			QIN_shaangan_map_frame_1_grey_visible = {
+				check_variable = { 
+					QIN_shaanxi_state_stability = 1 
+				} 
+			}
+			QIN_shaangan_map_frame_1_yellow_visible = {
+				check_variable = { 
+					QIN_shaanxi_state_stability = 2 
+				} 
+			}
+			QIN_shaangan_map_frame_1_orange_visible = {
+				check_variable = { 
+					QIN_shaanxi_state_stability = 3 
+				} 
+			}
+			QIN_shaangan_map_frame_1_red_visible = {
+				check_variable = { 
+					QIN_shaanxi_state_stability = 4 
+				} 
+			}
+
+			#QINGHAI
+			QIN_qinghai_map_frame_1_green_visible = {
+				check_variable = { 
+					QIN_qinghai_state_stability = 0 
+				} 
+			}
+			QIN_qinghai_map_frame_1_grey_visible = {
+				check_variable = { 
+					QIN_qinghai_state_stability = 1 
+				} 
+			}
+			QIN_qinghai_map_frame_1_yellow_visible = {
+				check_variable = { 
+					QIN_qinghai_state_stability = 2 
+				} 
+			}
+			QIN_qinghai_map_frame_1_orange_visible = {
+				check_variable = { 
+					QIN_qinghai_state_stability = 3 
+				} 
+			}
+			QIN_qinghai_map_frame_1_red_visible = {
+				check_variable = { 
+					QIN_qinghai_state_stability = 4 
+				} 
+			}
+
+			#SICHUAN
+			QIN_sichuan_map_frame_1_green_visible = {
+				check_variable = { 
+					QIN_sichuan_state_stability = 0 
+				} 
+			}
+			QIN_sichuan_map_frame_1_grey_visible = {
+				check_variable = { 
+					QIN_sichuan_state_stability = 1 
+				} 
+			}
+			QIN_sichuan_map_frame_1_yellow_visible = {
+				check_variable = { 
+					QIN_sichuan_state_stability = 2 
+				} 
+			}
+			QIN_sichuan_map_frame_1_orange_visible = {
+				check_variable = { 
+					QIN_sichuan_state_stability = 3 
+				} 
+			}
+			QIN_sichuan_map_frame_1_red_visible = {
+				check_variable = { 
+					QIN_sichuan_state_stability = 4 
+				} 
+			}
+
+			#HENAN
+			QIN_henan_map_frame_1_green_visible = {
+				check_variable = { 
+					QIN_henan_state_stability = 0 
+				} 
+			}
+			QIN_henan_map_frame_1_grey_visible = {
+				check_variable = { 
+					QIN_henan_state_stability = 1 
+				} 
+			}
+			QIN_henan_map_frame_1_yellow_visible = {
+				check_variable = { 
+					QIN_henan_state_stability = 2 
+				} 
+			}
+			QIN_henan_map_frame_1_orange_visible = {
+				check_variable = { 
+					QIN_henan_state_stability = 3 
+				} 
+			}
+			QIN_henan_map_frame_1_red_visible = {
+				check_variable = { 
+					QIN_henan_state_stability = 4 
+				} 
+			}
+
+			#SHANDUN
+			QIN_shandun_map_frame_1_green_visible = {
+				check_variable = { 
+					QIN_shandong_state_stability = 0 
+				} 
+			}
+			QIN_shandun_map_frame_1_grey_visible = {
+				check_variable = { 
+					QIN_shandong_state_stability = 1 
+				} 
+			}
+			QIN_shandun_map_frame_1_yellow_visible = {
+				check_variable = { 
+					QIN_shandong_state_stability = 2 
+				} 
+			}
+			QIN_shandun_map_frame_1_orange_visible = {
+				check_variable = { 
+					QIN_shandong_state_stability = 3 
+				} 
+			}
+			QIN_shandun_map_frame_1_red_visible = {
+				check_variable = { 
+					QIN_shandong_state_stability = 4 
+				} 
+			}
+
+			#YUNGUI
+			QIN_yungui_map_frame_1_green_visible = {
+				check_variable = { 
+					QIN_yungui_state_stability = 0 
+				} 
+			}
+			QIN_yungui_map_frame_1_grey_visible = {
+				check_variable = { 
+					QIN_yungui_state_stability = 1 
+				} 
+			}
+			QIN_yungui_map_frame_1_yellow_visible = {
+				check_variable = { 
+					QIN_yungui_state_stability = 2 
+				} 
+			}
+			QIN_yungui_map_frame_1_orange_visible = {
+				check_variable = { 
+					QIN_yungui_state_stability = 3 
+				} 
+			}
+			QIN_yungui_map_frame_1_red_visible = {
+				check_variable = { 
+					QIN_yungui_state_stability = 4 
+				} 
+			}
+
+			#LIANGGUANG
+			QIN_liangguang_map_frame_1_green_visible = {
+				check_variable = { 
+					QIN_liangguang_state_stability = 0 
+				} 
+			}
+			QIN_liangguang_map_frame_1_grey_visible = {
+				check_variable = { 
+					QIN_liangguang_state_stability = 1 
+				} 
+			}
+			QIN_liangguang_map_frame_1_yellow_visible = {
+				check_variable = { 
+					QIN_liangguang_state_stability = 2 
+				} 
+			}
+			QIN_liangguang_map_frame_1_orange_visible = {
+				check_variable = { 
+					QIN_liangguang_state_stability = 3 
+				} 
+			}
+			QIN_liangguang_map_frame_1_red_visible = {
+				check_variable = { 
+					QIN_liangguang_state_stability = 4 
+				} 
+			}
+
+			#MINJE
+			QIN_minje_map_frame_1_green_visible = {
+				check_variable = { 
+					QIN_minzhe_state_stability = 0 
+				} 
+			}
+			QIN_minje_map_frame_1_grey_visible = {
+				check_variable = { 
+					QIN_minzhe_state_stability = 1 
+				} 
+			}
+			QIN_minje_map_frame_1_yellow_visible = {
+				check_variable = { 
+					QIN_minzhe_state_stability = 2 
+				} 
+			}
+			QIN_minje_map_frame_1_orange_visible = {
+				check_variable = { 
+					QIN_minzhe_state_stability = 3 
+				} 
+			}
+			QIN_minje_map_frame_1_red_visible = {
+				check_variable = { 
+					QIN_minzhe_state_stability = 4 
+				} 
+			}
+
+			#MANCHGURIA (Dongsansheng)
+			QIN_manchguria_map_frame_1_green_visible = {
+				check_variable = { 
+					QIN_dongsansheng_state_stability = 0 
+				} 
+			}
+			QIN_manchguria_map_frame_1_grey_visible = {
+				check_variable = { 
+					QIN_dongsansheng_state_stability = 1 
+				} 
+			}
+			QIN_manchguria_map_frame_1_yellow_visible = {
+				check_variable = { 
+					QIN_dongsansheng_state_stability = 2 
+				} 
+			}
+			QIN_manchguria_map_frame_1_orange_visible = {
+				check_variable = { 
+					QIN_dongsansheng_state_stability = 3 
+				} 
+			}
+			QIN_manchguria_map_frame_1_red_visible = {
+				check_variable = { 
+					QIN_dongsansheng_state_stability = 4 
+				} 
+			}
+
+			#INNER_MONGOLIA
+			QIN_inner_mongolia_map_frame_1_green_visible = {
+				check_variable = { 
+					QIN_suiyuan_state_stability = 0 
+				} 
+			}
+			QIN_inner_mongolia_map_frame_1_grey_visible = {
+				check_variable = { 
+					QIN_suiyuan_state_stability = 1 
+				} 
+			}
+			QIN_inner_mongolia_map_frame_1_yellow_visible = {
+				check_variable = { 
+					QIN_suiyuan_state_stability = 2 
+				} 
+			}
+			QIN_inner_mongolia_map_frame_1_orange_visible = {
+				check_variable = { 
+					QIN_suiyuan_state_stability = 3 
+				} 
+			}
+			QIN_inner_mongolia_map_frame_1_red_visible = {
+				check_variable = { 
+					QIN_suiyuan_state_stability = 4 
+				} 
+			}
+
+			#HEILONGJIANG
+			#QIN_heilongjiang_map_frame_1_green_visible = {
+			#	check_variable = { 
+			#		QIN_heilongjiang_state_stability = 0 
+			#	} 
+			#}
+			#QIN_heilongjiang_map_frame_1_grey_visible = {
+			#	check_variable = { 
+			#		QIN_heilongjiang_state_stability = 1 
+			#	} 
+			#}
+			#QIN_heilongjiang_map_frame_1_yellow_visible = {
+			#	check_variable = { 
+			#		QIN_heilongjiang_state_stability = 2 
+			#	} 
+			#}
+			#QIN_heilongjiang_map_frame_1_orange_visible = {
+			#	check_variable = { 
+			#		QIN_heilongjiang_state_stability = 3 
+			#	} 
+			#}
+			#QIN_heilongjiang_map_frame_1_red_visible = {
+			#	check_variable = { 
+			#		QIN_heilongjiang_state_stability = 4 
+			#	} 
+			#}
+
+			#JILIN
+		#	QIN_jilin_map_frame_1_green_visible = {
+		#		check_variable = { 
+		#			QIN_jilin_state_stability = 0 
+		#		} 
+		#	}
+		#	QIN_jilin_map_frame_1_grey_visible = {
+		#		check_variable = { 
+		#			QIN_jilin_state_stability = 1 
+		#		} 
+		#	}
+		#	QIN_jilin_map_frame_1_yellow_visible = {
+		#		check_variable = { 
+		#			QIN_jilin_state_stability = 2 
+		#		} 
+		#	}
+		#	QIN_jilin_map_frame_1_orange_visible = {
+		#		check_variable = { 
+		#			QIN_jilin_state_stability = 3 
+		#		} 
+		#	}
+		#	QIN_jilin_map_frame_1_red_visible = {
+		#		check_variable = { 
+		#			QIN_jilin_state_stability = 4 
+		#		} 
+		#	}
+
+			#SHENGJING
+		#	QIN_shengjing_map_frame_1_green_visible = {
+		#		check_variable = { 
+		#			QIN_shengjing_state_stability = 0 
+		#		} 
+		#	}
+		#	QIN_shengjing_map_frame_1_grey_visible = {
+		#		check_variable = { 
+		#			QIN_shengjing_state_stability = 1 
+		#		} 
+		#	}
+		#	QIN_shengjing_map_frame_1_yellow_visible = {
+		#		check_variable = { 
+		#			QIN_shengjing_state_stability = 2 
+		#		} 
+		#	}
+		#	QIN_shengjing_map_frame_1_orange_visible = {
+		#		check_variable = { 
+		#			QIN_shengjing_state_stability = 3 
+		#		} 
+		#	}
+		#	QIN_shengjing_map_frame_1_red_visible = {
+		#		check_variable = { 
+		#			QIN_shengjing_state_stability = 4 
+		#		} 
+		#	}
+
+			#ULIASTAI
+			QIN_uliastai_map_frame_1_green_visible = {
+				check_variable = { 
+					QIN_uliastai_state_stability = 0 
+				} 
+			}
+			QIN_uliastai_map_frame_1_grey_visible = {
+				check_variable = { 
+					QIN_uliastai_state_stability = 1 
+				} 
+			}
+			QIN_uliastai_map_frame_1_yellow_visible = {
+				check_variable = { 
+					QIN_uliastai_state_stability = 2 
+				} 
+			}
+			QIN_uliastai_map_frame_1_orange_visible = {
+				check_variable = { 
+					QIN_uliastai_state_stability = 3 
+				} 
+			}
+			QIN_uliastai_map_frame_1_red_visible = {
+				check_variable = { 
+					QIN_uliastai_state_stability = 4 
+				} 
+			}
+		}
+
+        ai_test_interval = 290  # The higher, the long it takes the ai to do actions
+        ai_test_variance = 0.5
+
+    }
+
+    QIN_governor_list_page_content = {
+		context_type = player_context
+		parent_window_name = "QIN_region_leaders_list" #разобраться почему его не видит
+		window_name = "QIN_governor_list_page"
+		
+
+		visible = {
+			is_ai = no
+			check_variable = { 
+				QIN_governor_list_page = 1
+			}
+		}
+
+        triggers = {
+            # SHENGJING GUVERNORS PORTRAITS
+			QIN_shengjing_governor_portrait_1_visible = {
+				QIN = { 
+                    check_variable = { QIN_shengjing_governor_num = 0 } 
+                }
+			}
+			QIN_shengjing_governor_portrait_2_visible = {
+				QIN = { 
+                    check_variable = { QIN_shengjing_governor_num = 1 } 
+                }
+			}
+			QIN_shengjing_governor_portrait_3_visible = {
+				QIN = { 
+                    check_variable = { QIN_shengjing_governor_num = 2 } 
+                }
+			}
+			QIN_shengjing_governor_portrait_4_visible = {
+				QIN = { 
+                    check_variable = { QIN_shengjing_governor_num = 3 } 
+                }
+			}
+			QIN_shengjing_governor_portrait_5_visible = {
+				QIN = { 
+                    check_variable = { QIN_shengjing_governor_num = 4 } 
+                }
+			}
+
+			# JILIN GUVERNORS PORTRAITS
+			QIN_jilin_governor_portrait_1_visible = {
+				QIN = { 
+                    check_variable = { QIN_jilin_governor_num = 0 } 
+                }
+			}
+			QIN_jilin_governor_portrait_2_visible = {
+				QIN = { 
+                    check_variable = { QIN_jilin_governor_num = 1 } 
+                }
+			}
+			QIN_jilin_governor_portrait_3_visible = {
+				QIN = { 
+                    check_variable = { QIN_jilin_governor_num = 2 } 
+                }
+			}
+			QIN_jilin_governor_portrait_4_visible = {
+				QIN = { 
+                    check_variable = { QIN_jilin_governor_num = 3 } 
+                }
+			}
+			QIN_jilin_governor_portrait_5_visible = {
+				QIN = { 
+                    check_variable = { QIN_jilin_governor_num = 4 } 
+                }
+			}
+
+			# HEILONGJIANG GUVERNORS PORTRAITS
+			QIN_heilongjiang_governor_portrait_1_visible = {
+				QIN = { 
+                    check_variable = { QIN_heilongjiang_governor_num = 0 } 
+                }
+			}
+			QIN_heilongjiang_governor_portrait_2_visible = {
+				QIN = { 
+                    check_variable = { QIN_heilongjiang_governor_num = 1 } 
+                }
+			}
+			QIN_heilongjiang_governor_portrait_3_visible = {
+				QIN = { 
+                    check_variable = { QIN_heilongjiang_governor_num = 2 } 
+                }
+			}
+			QIN_heilongjiang_governor_portrait_4_visible = {
+				QIN = { 
+                    check_variable = { QIN_heilongjiang_governor_num = 3 } 
+                }
+			}
+
+			# SHAANXI GUVERNORS PORTRAITS
+			QIN_shaanxi_governor_portrait_1_visible = {
+				QIN = { 
+                    check_variable = { QIN_shaanxi_governor_num = 0 } 
+                }
+			}
+			QIN_shaanxi_governor_portrait_2_visible = {
+				QIN = { 
+                    check_variable = { QIN_shaanxi_governor_num = 1 } 
+                }
+			}
+			QIN_shaanxi_governor_portrait_3_visible = {
+				QIN = { 
+                    check_variable = { QIN_shaanxi_governor_num = 2 } 
+                }
+			}
+			QIN_shaanxi_governor_portrait_4_visible = {
+				QIN = { 
+                    check_variable = { QIN_shaanxi_governor_num = 3 } 
+                }
+			}
+			QIN_shaanxi_governor_portrait_5_visible = {
+				QIN = { 
+                    check_variable = { QIN_shaanxi_governor_num = 4 } 
+                }
+			}
+			QIN_shaanxi_governor_portrait_6_visible = {
+				QIN = { 
+                    check_variable = { QIN_shaanxi_governor_num = 5 } 
+                }
+			}
+			QIN_shaanxi_governor_portrait_7_visible = {
+				QIN = { 
+                    check_variable = { QIN_shaanxi_governor_num = 6 } 
+                }
+			}
+			QIN_shaanxi_governor_portrait_8_visible = {
+				QIN = { 
+                    check_variable = { QIN_shaanxi_governor_num = 7 } 
+                }
+			}
+			QIN_shaanxi_governor_portrait_9_visible = {
+				QIN = { 
+                    check_variable = { QIN_shaanxi_governor_num = 8 } 
+                }
+			}
+
+			# HENAN GUVERNORS PORTRAITS
+			QIN_henan_governor_portrait_1_visible = {
+				QIN = { 
+                    check_variable = { QIN_henan_governor_num = 0 } 
+                }
+			}
+			QIN_henan_governor_portrait_2_visible = {
+				QIN = { 
+                    check_variable = { QIN_henan_governor_num = 1 } 
+                }
+			}
+			QIN_henan_governor_portrait_3_visible = {
+				QIN = { 
+                    check_variable = { QIN_henan_governor_num = 2 } 
+                }
+			}
+			QIN_henan_governor_portrait_4_visible = {
+				QIN = { 
+                    check_variable = { QIN_henan_governor_num = 3 } 
+                }
+			}
+			QIN_henan_governor_portrait_5_visible = {
+				QIN = { 
+                    check_variable = { QIN_henan_governor_num = 4 } 
+                }
+			}
+			QIN_henan_governor_portrait_6_visible = {
+				QIN = { 
+                    check_variable = { QIN_henan_governor_num = 5 } 
+                }
+			}
+			QIN_henan_governor_portrait_7_visible = {
+				QIN = { 
+                    check_variable = { QIN_henan_governor_num = 6 } 
+                }
+			}
+			QIN_henan_governor_portrait_8_visible = {
+				QIN = { 
+                    check_variable = { QIN_henan_governor_num = 7 } 
+                }
+			}
+			QIN_henan_governor_portrait_9_visible = {
+				QIN = { 
+                    check_variable = { QIN_henan_governor_num = 8 } 
+                }
+			}
+			QIN_henan_governor_portrait_10_visible = {
+				QIN = { 
+                    check_variable = { QIN_henan_governor_num = 9 } 
+                }
+			}
+			QIN_henan_governor_portrait_11_visible = {
+				QIN = { 
+                    check_variable = { QIN_henan_governor_num = 10 } 
+                }
+			}
+			QIN_henan_governor_portrait_12_visible = {
+				QIN = { 
+                    check_variable = { QIN_henan_governor_num = 11 } 
+                }
+			}
+
+			# SHANDONG GUVERNORS PORTRAITS
+			QIN_shandong_governor_portrait_1_visible = {
+				QIN = { 
+                    check_variable = { QIN_shandong_governor_num = 0 } 
+                }
+			}
+			QIN_shandong_governor_portrait_2_visible = {
+				QIN = { 
+                    check_variable = { QIN_shandong_governor_num = 1 } 
+                }
+			}
+			QIN_shandong_governor_portrait_3_visible = {
+				QIN = { 
+                    check_variable = { QIN_shandong_governor_num = 2 } 
+                }
+			}
+			QIN_shandong_governor_portrait_4_visible = {
+				QIN = { 
+                    check_variable = { QIN_shandong_governor_num = 3 } 
+                }
+			}
+			QIN_shandong_governor_portrait_5_visible = {
+				QIN = { 
+                    check_variable = { QIN_shandong_governor_num = 4 } 
+                }
+			}
+			QIN_shandong_governor_portrait_6_visible = {
+				QIN = { 
+                    check_variable = { QIN_shandong_governor_num = 5 } 
+                }
+			}
+			QIN_shandong_governor_portrait_7_visible = {
+				QIN = { 
+                    check_variable = { QIN_shandong_governor_num = 6 } 
+                }
+			}
+
+			# XINING GUVERNORS PORTRAITS
+			QIN_xining_governor_portrait_1_visible = {
+				QIN = { 
+                    check_variable = { QIN_xining_governor_num = 0 } 
+                }
+			}
+			QIN_xining_governor_portrait_2_visible = {
+				QIN = { 
+                    check_variable = { QIN_xining_governor_num = 1 } 
+                }
+			}
+			QIN_xining_governor_portrait_3_visible = {
+				QIN = { 
+                    check_variable = { QIN_xining_governor_num = 2 } 
+                }
+			}
+			QIN_xining_governor_portrait_4_visible = {
+				QIN = { 
+                    check_variable = { QIN_xining_governor_num = 3 } 
+                }
+			}
+			QIN_xining_governor_portrait_5_visible = {
+				QIN = { 
+                    check_variable = { QIN_xining_governor_num = 4 } 
+                }
+			}
+			QIN_xining_governor_portrait_6_visible = {
+				QIN = { 
+                    check_variable = { QIN_xining_governor_num = 5 } 
+                }
+			}
+			QIN_xining_governor_portrait_7_visible = {
+				QIN = { 
+                    check_variable = { QIN_xining_governor_num = 6 } 
+                }
+			}
+
+			# SUIYUAN GUVERNORS PORTRAITS
+			QIN_suiyuan_governor_portrait_1_visible = {
+				QIN = { 
+                    check_variable = { QIN_suiyuan_governor_num = 0 } 
+                }
+			}
+			QIN_suiyuan_governor_portrait_2_visible = {
+				QIN = { 
+                    check_variable = { QIN_suiyuan_governor_num = 1 } 
+                }
+			}
+			QIN_suiyuan_governor_portrait_3_visible = {
+				QIN = { 
+                    check_variable = { QIN_suiyuan_governor_num = 2 } 
+                }
+			}
+			QIN_suiyuan_governor_portrait_4_visible = {
+				QIN = { 
+                    check_variable = { QIN_suiyuan_governor_num = 3 } 
+                }
+			}
+			QIN_suiyuan_governor_portrait_5_visible = {
+				QIN = { 
+                    check_variable = { QIN_suiyuan_governor_num = 4 } 
+                }
+			}
+			QIN_suiyuan_governor_portrait_6_visible = {
+				QIN = { 
+                    check_variable = { QIN_suiyuan_governor_num = 5 } 
+                }
+			}
+			QIN_suiyuan_governor_portrait_7_visible = {
+				QIN = { 
+                    check_variable = { QIN_suiyuan_governor_num = 6 } 
+                }
+			}
+
+			# ULIASTAI GUVERNORS PORTRAITS
+			QIN_uliastai_governor_portrait_1_visible = {
+				QIN = { 
+                    check_variable = { QIN_uliastai_governor_num = 0 } 
+                }
+			}
+			QIN_uliastai_governor_portrait_2_visible = {
+				QIN = { 
+                    check_variable = { QIN_uliastai_governor_num = 1 } 
+                }
+			}
+			QIN_uliastai_governor_portrait_3_visible = {
+				QIN = { 
+                    check_variable = { QIN_uliastai_governor_num = 2 } 
+                }
+			}
+			QIN_uliastai_governor_portrait_4_visible = {
+				QIN = { 
+                    check_variable = { QIN_uliastai_governor_num = 3 } 
+                }
+			}
+			QIN_uliastai_governor_portrait_5_visible = {
+				QIN = { 
+                    check_variable = { QIN_uliastai_governor_num = 4 } 
+                }
+			}
+			QIN_uliastai_governor_portrait_6_visible = {
+				QIN = { 
+                    check_variable = { QIN_uliastai_governor_num = 5 } 
+                }
+			}
+        }
+	}
+
+    QIN_viceroys_list_page_content = {
+		context_type = player_context
+
+		window_name = "QIN_viceroys_list_page"
+		parent_window_name = "QIN_region_leaders_list"
+
+		visible = {
+			is_ai = no
+			check_variable = { 
+				QIN_governor_list_page = 2 
+			}
+		}
+
+        triggers = {
+            #CHZILI_GUVERNORS_PORTRAITS
+			QIN_chzili_governor_portrait_1_visible = {
+				QIN = { 
+                    check_variable = { QIN_chzili_governor_num = 0 } 
+                }
+			}
+			QIN_chzili_governor_portrait_2_visible = {
+				QIN = { 
+                    check_variable = { QIN_chzili_governor_num = 1 } 
+                }
+			}
+			QIN_chzili_governor_portrait_3_visible = {
+				QIN = { 
+                    check_variable = { QIN_chzili_governor_num = 2 } 
+                }
+			}
+			QIN_chzili_governor_portrait_4_visible = {
+				QIN = { 
+                    check_variable = { QIN_chzili_governor_num = 3 } 
+                }
+			}
+			QIN_chzili_governor_portrait_5_visible = {
+				QIN = { 
+                    check_variable = { QIN_chzili_governor_num = 4 } 
+                }
+			}
+			QIN_chzili_governor_portrait_6_visible = {
+				QIN = { 
+                    check_variable = { QIN_chzili_governor_num = 5 } 
+                }
+			}
+        }
+        #LIANGJIANG GUVERNORS PORTRAITS
+        triggers = {
+			QIN_liangjiang_governor_portrait_1_visible = {
+				QIN = { 
+                    check_variable = { QIN_liangjiang_governor_num = 0 } 
+                }
+			}
+			QIN_liangjiang_governor_portrait_2_visible = {
+				QIN = { 
+                    check_variable = { QIN_liangjiang_governor_num = 1 } 
+                }
+			}
+			QIN_liangjiang_governor_portrait_3_visible = {
+				QIN = { 
+                    check_variable = { QIN_liangjiang_governor_num = 2 } 
+                }
+			}
+			QIN_liangjiang_governor_portrait_4_visible = {
+				QIN = { 
+                    check_variable = { QIN_liangjiang_governor_num = 3 } 
+                }
+			}
+			QIN_liangjiang_governor_portrait_5_visible = {
+				QIN = { 
+                    check_variable = { QIN_liangjiang_governor_num = 4 } 
+                }
+			}
+        }
+        #SHAAN-GAN GUVERNORS PORTRAITS
+        triggers = {
+			QIN_shengan_governor_portrait_1_visible = {
+				QIN = { 
+                    check_variable = { QIN_shengan_governor_num = 0 } 
+                }
+			}
+			QIN_shengan_governor_portrait_2_visible = {
+				QIN = { 
+                    check_variable = { QIN_shengan_governor_num = 1 } 
+                }
+			}
+			QIN_shengan_governor_portrait_3_visible = {
+				QIN = { 
+                    check_variable = { QIN_shengan_governor_num = 2 } 
+                }
+			}
+			QIN_shengan_governor_portrait_4_visible = {
+				QIN = { 
+                    check_variable = { QIN_shengan_governor_num = 3 } 
+                }
+			}
+			QIN_shengan_governor_portrait_5_visible = {
+				QIN = { 
+                    check_variable = { QIN_shengan_governor_num = 4 } 
+                }
+			}
+			QIN_shengan_governor_portrait_6_visible = {
+				QIN = { 
+                    check_variable = { QIN_shengan_governor_num = 5 } 
+                }
+			}
+			QIN_shengan_governor_portrait_7_visible = {
+				QIN = { 
+                    check_variable = { QIN_shengan_governor_num = 6 } 
+                }
+			}
+        }
+        #MINZHE GUVERNORS PORTRAITS
+        triggers = {
+			QIN_minzhe_governor_portrait_1_visible = {
+				QIN = { 
+                    check_variable = { QIN_minzhe_governor_num = 0 } 
+                }
+			}
+			QIN_minzhe_governor_portrait_2_visible = {
+				QIN = { 
+                    check_variable = { QIN_minzhe_governor_num = 1 } 
+                }
+			}
+			QIN_minzhe_governor_portrait_3_visible = {
+				QIN = { 
+                    check_variable = { QIN_minzhe_governor_num = 2 } 
+                }
+			}
+			QIN_minzhe_governor_portrait_4_visible = {
+				QIN = { 
+                    check_variable = { QIN_minzhe_governor_num = 3 } 
+                }
+			}
+			QIN_minzhe_governor_portrait_5_visible = {
+				QIN = { 
+                    check_variable = { QIN_minzhe_governor_num = 4 } 
+                }
+			}
+			QIN_minzhe_governor_portrait_6_visible = {
+				QIN = { 
+                    check_variable = { QIN_minzhe_governor_num = 5 } 
+                }
+			}
+			QIN_minzhe_governor_portrait_7_visible = {
+				QIN = { 
+                    check_variable = { QIN_minzhe_governor_num = 6 } 
+                }
+			}
+        } 
+        #HUGUANG GUVERNORS PORTRAITS
+        triggers = {
+			QIN_huguang_governor_portrait_1_visible = {
+				QIN = { 
+                    check_variable = { QIN_huguang_governor_num = 0 } 
+                }
+			}
+			QIN_huguang_governor_portrait_2_visible = {
+				QIN = { 
+                    check_variable = { QIN_huguang_governor_num = 1 } 
+                }
+			}
+			QIN_huguang_governor_portrait_3_visible = {
+				QIN = { 
+                    check_variable = { QIN_huguang_governor_num = 2 } 
+                }
+			}
+			QIN_huguang_governor_portrait_4_visible = {
+				QIN = { 
+                    check_variable = { QIN_huguang_governor_num = 3 } 
+                }
+			}
+			QIN_huguang_governor_portrait_5_visible = {
+				QIN = { 
+                    check_variable = { QIN_huguang_governor_num = 4 } 
+                }
+			}
+			QIN_huguang_governor_portrait_6_visible = {
+				QIN = { 
+                    check_variable = { QIN_huguang_governor_num = 5 } 
+                }
+			}
+			QIN_huguang_governor_portrait_7_visible = {
+				QIN = { 
+                    check_variable = { QIN_huguang_governor_num = 6 } 
+                }
+			}
+			QIN_huguang_governor_portrait_87_visible = {
+				QIN = { 
+                    check_variable = { QIN_huguang_governor_num = 7 } 
+                }
+			}
+        }
+        #LIANGGUANG GUVERNORS PORTRAITS
+        triggers = {
+			QIN_liangguang_governor_portrait_1_visible = {
+				QIN = { 
+                    check_variable = { QIN_liangguang_governor_num = 0 } 
+                }
+			}
+			QIN_liangguang_governor_portrait_2_visible = {
+				QIN = { 
+                    check_variable = { QIN_liangguang_governor_num = 1 } 
+                }
+			}
+			QIN_liangguang_governor_portrait_3_visible = {
+				QIN = { 
+                    check_variable = { QIN_liangguang_governor_num = 2 } 
+                }
+			}
+			QIN_liangguang_governor_portrait_4_visible = {
+				QIN = { 
+                    check_variable = { QIN_liangguang_governor_num = 3 } 
+                }
+			}
+			QIN_liangguang_governor_portrait_5_visible = {
+				QIN = { 
+                    check_variable = { QIN_liangguang_governor_num = 4 } 
+                }
+			}
+			QIN_liangguang_governor_portrait_6_visible = {
+				QIN = { 
+                    check_variable = { QIN_liangguang_governor_num = 5 } 
+                }
+			}
+			QIN_liangguang_governor_portrait_7_visible = {
+				QIN = { 
+                    check_variable = { QIN_liangguang_governor_num = 6 } 
+                }
+			}
+        }
+        #YUNGUI GUVERNORS PORTRAITS
+        triggers = {
+			QIN_yungui_governor_portrait_1_visible = {
+				QIN = { 
+                    check_variable = { QIN_yungui_governor_num = 0 } 
+                }
+			}
+			QIN_yungui_governor_portrait_2_visible = {
+				QIN = { 
+                    check_variable = { QIN_yungui_governor_num = 1 } 
+                }
+			}
+			QIN_yungui_governor_portrait_3_visible = {
+				QIN = { 
+                    check_variable = { QIN_yungui_governor_num = 2 } 
+                }
+			}
+			QIN_yungui_governor_portrait_4_visible = {
+				QIN = { 
+                    check_variable = { QIN_yungui_governor_num = 3 } 
+                }
+			}
+        	QIN_yungui_governor_portrait_5_visible = {
+				QIN = { 
+                    check_variable = { QIN_yungui_governor_num = 4 } 
+                }
+			}
+			QIN_yungui_governor_portrait_6_visible = {
+				QIN = { 
+                    check_variable = { QIN_yungui_governor_num = 5 } 
+                }
+			}
+			QIN_yungui_governor_portrait_7_visible = {
+				QIN = { 
+                    check_variable = { QIN_yungui_governor_num = 6 } 
+                }
+			}
+			QIN_yungui_governor_portrait_8_visible = {
+				QIN = { 
+                    check_variable = { QIN_yungui_governor_num = 7 } 
+                }
+			}
+        }
+        #SICHUAN GUVERNORS PORTRAITS
+        triggers = {
+			QIN_sichuan_governor_portrait_1_visible = {
+				QIN = { 
+                    check_variable = { QIN_sichuan_governor_num = 0 } 
+                }
+			}
+			QIN_sichuan_governor_portrait_2_visible = {
+				QIN = { 
+                    check_variable = { QIN_sichuan_governor_num = 1 } 
+                }
+			}
+			QIN_sichuan_governor_portrait_3_visible = {
+				QIN = { 
+                    check_variable = { QIN_sichuan_governor_num = 2 } 
+                }
+			}
+			QIN_sichuan_governor_portrait_4_visible = {
+				QIN = { 
+                    check_variable = { QIN_sichuan_governor_num = 3 } 
+                }
+			}
+			QIN_sichuan_governor_portrait_5_visible = {
+				QIN = { 
+                    check_variable = { QIN_sichuan_governor_num = 4 } 
+                }
+			}
+			QIN_sichuan_governor_portrait_6_visible = {
+				QIN = { 
+                    check_variable = { QIN_sichuan_governor_num = 5 } 
+                }
+			}
+			QIN_sichuan_governor_portrait_7_visible = {
+				QIN = { 
+                    check_variable = { QIN_sichuan_governor_num = 6 } 
+                }
+			}
+			QIN_sichuan_governor_portrait_8_visible = {
+				QIN = { 
+                    check_variable = { QIN_sichuan_governor_num = 7 } 
+                }
+			}
+            QIN_sichuan_governor_portrait_9_visible = {
+			    QIN = { 
+                    check_variable = { QIN_sichuan_governor_num = 8 } 
+                }
+			}
+			QIN_sichuan_governor_portrait_10_visible = {
+				QIN = { 
+                    check_variable = { QIN_sichuan_governor_num = 9 } 
+                }
+			}
+        }
+        #DONGSANSHENG GUVERNORS PORTRAITS - Не составлен список - смотри список Генерал Шендзин
+        triggers = {
+			QIN_dongsansheng_governor_portrait_1_visible = {
+				QIN = { 
+                    check_variable = { QIN_dongsansheng_governor_num = 0 } 
+                }
+			}
+	    }
+		
+    }
+}
+
+

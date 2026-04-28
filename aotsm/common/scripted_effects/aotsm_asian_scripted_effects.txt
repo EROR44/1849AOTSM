@@ -1,0 +1,314 @@
+#SCRIPTED_EFFECTS
+#ANNEXATION AND OTHER SCRIPT IN CONFLICTS IN ASIA
+
+####################################################
+##################CHINA_SCRIPTS#####################
+####################################################
+
+aotsm_start_taypin_uprising_step_1_effect = {
+    set_global_flag = taypin_uprising_started
+    TPN = {
+		inherit_technology = QIN
+        every_state = {
+            limit = {
+                is_core_of = QIN
+            }
+            add_core_of = TPN
+        }
+		transfer_state = 599
+        set_province_controller = 7137
+        set_province_controller = 10050
+        set_province_controller = 11941
+        set_province_controller = 4092
+		load_oob = "TPN_uprising_step_1"
+		declare_war_on = {
+			target = QIN
+			type = annex_everything
+		}
+	}
+	news_event = { id = news.145 hours = 24 }
+}
+
+aotsm_start_taypin_uprising_step_2_effect = {
+    TPN = {
+        transfer_state = 591
+        transfer_state = 593
+        transfer_state = 594
+        transfer_state = 602
+        transfer_state = 729
+        transfer_state = 977
+        load_oob = "TPN_uprising_step_2"
+    }
+}
+ 
+####################################################
+##################JAPAN_SCRIPTS#####################
+####################################################
+
+aotsm_cw_return_control_on_puppets_effect = { #only for use in effects
+    set_autonomy = {
+        target = NIS
+        autonomous_state = autonomy_aotsm_trade_company
+    }
+
+    set_autonomy = {
+        target = SKH
+        autonomous_state = autonomy_colony 
+        freedom_level = 0.25
+    }
+
+    set_autonomy = {
+        target = RUK
+        autonomous_state = autonomy_aotsm_personal_union 
+        freedom_level = 0.25
+    }
+}
+
+aotsm_jap_cw_transfer_units_to_fractions_effect = { #on civil war start
+    JAP = {
+		every_unit_leader = {
+			limit = {
+                OR = {
+				    has_trait = JAP_segun_fraction_officer_trait
+				    has_trait = JAP_segun_fraction_navy_officer_trait
+                }
+			}
+		    set_nationality = JAS
+		}
+        every_unit_leader = {
+			limit = {
+				OR = {
+				    has_trait = JAP_torihiki_fraction_officer_trait
+				    has_trait = JAP_torihiki_fraction_navy_officer_trait
+                }
+			}
+		    set_nationality = TUK
+		}
+	}
+}
+
+aotsm_start_jap_civil_war_effect = {
+    JAP = { 
+        swap_ideas = {
+			remove_idea = JP_shogunate_trouble
+			add_idea = JAP_jap_civil_war
+		}
+		set_autonomy = {
+			target = RUK
+			autonomy_state = autonomy_free
+		}
+        set_autonomy = {
+			target = SKH
+			autonomy_state = autonomy_free
+		}
+        set_autonomy = {
+			target = NIS
+			autonomy_state = autonomy_free
+		}    
+        remove_from_faction = RUK
+        remove_from_faction = SKH
+        remove_from_faction = NIS
+    }
+    TUK = {      
+        transfer_state = 282
+        transfer_state = 728
+        transfer_state = 745
+        transfer_state = 989
+        add_state_core = 282
+        add_state_core = 989
+        inherit_technology = JAP
+        #load_oob = "TUK_civil_war_army" 
+        calculate_maximum_divisions = yes
+    }
+    every_state = {
+        limit = {
+            is_core_of = JAP
+        }
+        add_core_of = JAS
+    }
+    every_state = {
+        limit = {
+            is_owned_by = JAP
+            has_dynamic_modifier = {
+                modifier = JP_state_shogun_land_modifier
+            }
+        }
+        transfer_state_to = JAS
+    }
+    JAS = {
+        transfer_state = 555
+        transfer_state = 996
+        load_oob = "JAS_civil_war_army" 
+        inherit_technology = JAP
+		declare_war_on = {
+			target = JAP
+			type = annex_everything
+		}
+        calculate_maximum_divisions = yes
+	}
+    aotsm_jap_cw_transfer_units_to_fractions_effect = yes
+    aotsm_se_JAP_start_civil_war_effect = yes #суперивент/ивент о начале гражданской войны в Японии
+    calculate_prestige = yes
+
+    set_global_flag = JAP_civil_war_is_started      
+}
+
+aotsm_add_to_jap_civil_war_kanto_effect = {
+    TUK = {
+        if = { 
+            limit = {
+                JAP = {
+                    exists = yes
+                }
+            }
+            declare_war_on = {
+                target = JAP
+                type = annex_everything
+		    }
+        }
+        if = { 
+            limit = {
+                JAS = {
+                    exists = yes
+                }
+            }
+            declare_war_on = {
+                target = JAS
+                type = annex_everything
+		    }
+        }
+    }
+    #news_event = { id = news.## days = 1 } #Новость о том, что Торихики вступает в гражданскую войну
+}
+
+aotsm_transfer_all_segunate_characters_to_jap_effect = {
+    set_nationality = {
+		target_country = JAP
+		character = JAS_Esinobu_Tokugava
+	}
+    every_unit_leader = {
+		limit = {
+            OR = {
+			    has_trait = JAP_segun_fraction_officer_trait
+			    has_trait = JAP_segun_fraction_navy_officer_trait
+            }
+		}
+		set_nationality = JAP
+	}
+}
+
+aotsm_transfer_all_torihiki_characters_to_jap_effect = {
+    set_nationality = {
+		target_country = JAP
+		character = TUK_Imamura_Choga
+	}
+    every_unit_leader = {
+		limit = {
+            OR = {
+			    has_trait = JAP_torihiki_fraction_officer_trait
+			    has_trait = JAP_torihiki_fraction_navy_officer_trait
+            }
+		}
+		set_nationality = JAP
+	}
+}
+
+aotsm_end_japan_civil_war_effect = {
+    if = { 
+        limit = {
+            JAP = {
+                has_country_flag = JAP_is_winner_in_civil_war_flag
+            }
+        }
+        JAP = {
+            aotsm_cw_return_control_on_puppets_effect = yes
+        }  
+        #news_event = { id = news.## days = 1 } 
+        clr_global_flag = JAP_civil_war_is_started
+        set_global_flag = JAP_emperror_win_in_jap_civil_war
+    }
+    else_if = { 
+        limit = {
+            JAS = {
+                has_country_flag = JAP_is_winner_in_civil_war_flag
+            }
+        }
+        aotsm_transfer_all_segunate_characters_to_jap_effect = yes
+        JAP = { change_tag_from = JAS }	
+        JAP = {
+            retire_country_leader = yes
+            add_country_leader_role = {
+				character = JAS_Esinobu_Tokugava
+				promote_leader = yes
+					
+               country_leader = {
+                    desc = "POLITICS_TOKUGAWA_YOSHINOBU_DESC"
+                    ideology = bushido_sub
+                    traits = { shogun wind_of_tradition }
+                    expire = "1900.1.1.1"
+                }
+			}
+            aotsm_cw_return_control_on_puppets_effect = yes
+        }  
+        #news_event = { id = news.## days = 1 } 
+        clr_global_flag = JAP_civil_war_is_started
+        set_global_flag = JAP_segun_win_in_jap_civil_war
+    }
+    else_if = { 
+        limit = {
+            TUK = {
+                has_country_flag = JAP_is_winner_in_civil_war_flag
+            }
+        }
+        aotsm_transfer_all_torihiki_characters_to_jap_effect = yes
+        JAP = { change_tag_from = TUK }
+        JAP = {
+            retire_country_leader = yes
+            add_country_leader_role = {
+				character = TUK_Imamura_Choga
+				promote_leader = yes
+					
+                country_leader = {
+                    desc = "POLITICS_IMAMURA_CHOGA_DESC"
+                    ideology = conservatism
+                    traits = {  }
+                    expire = "1900.1.1.1"
+                }
+			}      
+            aotsm_cw_return_control_on_puppets_effect = yes
+        }  
+        #news_event = { id = news.## days = 1 } 
+        clr_global_flag = JAP_civil_war_is_started
+        set_global_flag = JAP_torihiki_win_in_jap_civil_war
+    }
+    if = {
+        limit = {
+            JAS = { 
+                exists = yes
+            }
+        }
+        JAP = {
+            annex_country = {
+                target = JAS
+                transfer_troops = no
+            }
+        }
+    }
+    if = {
+        limit = {
+            TUK = { 
+                exists = yes
+            }
+        }
+        JAP = {
+            annex_country = {
+                target = TUK
+                transfer_troops = no
+            }
+        }
+    }
+    JAP ={ 
+        country_status_increase = yes 
+    }
+}
+

@@ -1,0 +1,292 @@
+#Scripted Peace in wars is here
+
+on_actions = {
+
+    on_capitulation = {
+
+        effect = {
+
+            #
+
+        }
+    }
+
+    on_state_control_changed = {
+
+        effect = {
+
+            #JAPAN_CIVIL_WAR
+            if = { #JAP annex JAS
+				limit = {
+					has_global_flag = JAP_civil_war_is_started
+                    JAP = { has_war_with = JAS }
+					990 = {
+						controller = {
+							OR = {
+								tag = JAP
+								is_subject_of = JAP
+								is_in_faction_with = JAP
+							}
+						}
+					}
+				}
+                if = { 
+                    limit = {
+                        TUK = { exists = no }
+                    }	
+                    JAP = {
+                        set_country_flag = JAP_is_winner_in_civil_war_flag
+                    }
+					aotsm_end_japan_civil_war_effect = yes	
+                }		
+				else = {
+					JAP = {
+						annex_country = {
+							target = JAS
+							transfer_troops = no
+						}
+					}
+				}			
+				add_threat = 1
+			}
+            if = { #JAP annex TUK
+				limit = {
+					has_global_flag = JAP_civil_war_is_started
+                    JAP = { has_war_with = TUK }
+					282 = {
+						controller = {
+							OR = {
+								tag = JAP
+								is_subject_of = JAP
+								is_in_faction_with = JAP
+							}
+						}
+					}
+				}
+                if = { 
+                    limit = {
+                        JAS = { exists = no }
+                    }	
+                    JAP = {
+                        set_country_flag = JAP_is_winner_in_civil_war_flag
+                    }
+					aotsm_end_japan_civil_war_effect = yes	
+                }		
+				else = {
+					JAP = {
+						annex_country = {
+							target = TUK
+							transfer_troops = no
+						}
+					}
+				}	
+				add_threat = 1
+			}
+
+            if = { #JAS annex JAP
+				limit = {
+					has_global_flag = JAP_civil_war_is_started
+                    JAS = { has_war_with = JAP }
+					531 = {
+						controller = {
+							OR = {
+								tag = JAS
+								is_subject_of = JAS
+								is_in_faction_with = JAS
+							}
+						}
+					}
+					984 = {
+						controller = {
+							OR = {
+								tag = JAS
+								is_subject_of = JAS
+								is_in_faction_with = JAS
+							}
+						}
+					}
+					528 = {
+						controller = {
+							OR = {
+								tag = JAS
+								is_subject_of = JAS
+								is_in_faction_with = JAS
+							}
+						}
+					}
+				}
+                if = { 
+                    limit = {
+                        TUK = { exists = no }
+                    }	
+                    JAS = {
+                        set_country_flag = JAP_is_winner_in_civil_war_flag
+                    }	
+					aotsm_end_japan_civil_war_effect = yes
+                }
+				else = {
+					JAS = {
+						annex_country = {
+							target = JAP
+							transfer_troops = no
+						}
+					}
+				}	
+				add_threat = 1
+			}
+            if = { #JAS annex TUK
+				limit = {
+					has_global_flag = JAP_civil_war_is_started
+                    JAS = { has_war_with = TUK }
+					282 = {
+						controller = {
+							OR = {
+								tag = JAS
+								is_subject_of = JAS
+								is_in_faction_with = JAS
+							}
+						}
+					}
+				}
+                if = { 
+                    limit = {
+                        JAP = { exists = no }
+                    }	
+                    JAS = {
+                        set_country_flag = JAP_is_winner_in_civil_war_flag
+                    }
+					aotsm_end_japan_civil_war_effect = yes	
+                }		
+				else = {
+					JAS = {
+						annex_country = {
+							target = TUK
+							transfer_troops = no
+						}
+					}
+				}		
+				add_threat = 1
+			}
+
+            if = { #TUK annex JAP
+				limit = {
+					has_global_flag = JAP_civil_war_is_started
+                    TUK = { has_war_with = JAP }
+					531 = {
+						controller = {
+							OR = {
+								tag = TUK
+								is_subject_of = TUK
+								is_in_faction_with = TUK
+							}
+						}
+					}
+				}
+                if = { 
+                    limit = {
+                        JAS = { exists = no }
+                    }	
+                    TUK = {
+                        set_country_flag = JAP_is_winner_in_civil_war_flag
+                    }
+					aotsm_end_japan_civil_war_effect = yes	
+                }		
+				else = {
+					TUK = {
+						annex_country = {
+							target = JAP
+							transfer_troops = no
+						}
+					}
+				}			
+				add_threat = 1
+			}
+            if = { #TUK annex JAS
+				limit = {
+					has_global_flag = JAP_civil_war_is_started
+                    TUK = { has_war_with = JAS }
+					990 = {
+						controller = {
+							OR = {
+								tag = TUK
+								is_subject_of = TUK
+								is_in_faction_with = TUK
+							}
+						}
+					}
+				}
+                if = { 
+                    limit = {
+                        JAP = { exists = no }
+                    }	
+                    TUK = {
+                        set_country_flag = JAP_is_winner_in_civil_war_flag
+                    }	
+					aotsm_end_japan_civil_war_effect = yes
+                }		
+				else = {
+					TUK = {
+						annex_country = {
+							target = JAS
+							transfer_troops = no
+						}
+					}
+				}		
+				add_threat = 1
+			}
+
+			#SECOND NEPAL-TIBET WAR
+			if = { #TIB won NPA in war
+				limit = {
+					has_global_flag = NPA_start_second_nepalo_tibet_war
+                    TIB = { has_war_with = NPA }
+					323 = {
+						controller = {
+							OR = {
+								tag = TIB
+								is_subject_of = TIB
+								is_in_faction_with = TIB
+							}
+						}
+					}
+				}
+				clr_global_flag = NPA_start_second_nepalo_tibet_war
+				NPA = {
+					white_peace = TIB
+				}	
+				country_event = { id = news.306 days = 3 }
+				add_threat = 2
+			}
+			if = { #NPA won TIB in war
+				limit = {
+					has_global_flag = NPA_start_second_nepalo_tibet_war
+                    TIB = { has_war_with = NPA }
+					999 = {
+						controller = {
+							OR = {
+								tag = NPA
+								is_subject_of = NPA
+								is_in_faction_with = NPA
+							}
+						}
+					}
+				}
+				clr_global_flag = NPA_start_second_nepalo_tibet_war
+				NPA = {
+					white_peace = TIB
+					transfer_state = 1000
+					remove_state_claim = 1000
+					add_state_core = 1000
+				}	
+				TIB = {
+					remove_state_core = 1000
+					add_state_claim = 1000
+				}	
+				country_event = { id = news.305 days = 3 }
+				add_threat = 2
+			}
+
+			#
+        }
+    }
+}
