@@ -24,6 +24,7 @@ is_country_with_blocked_division_editing = {
 	custom_trigger_tooltip = {
 		tooltip = is_country_with_blocked_division_editing_tt
 		OR = {
+			tag = AZT
 			tag = QIN
 			tag = TPN
 			tag = MAN 
@@ -1634,33 +1635,33 @@ aotsm_is_controlled_by_chinesse_country = {
 
 # Сумма > 0 (≥ 1 фабрика любого типа)
 aotsm_qin_total_factories_in_state_gt_0 = {
-    OR = {
-        num_of_civilian_factories > 0
-        num_of_military_factories > 0
-        num_of_naval_factories > 0
-    }
+   	OR = {
+		arms_factory > 0
+		industrial_complex > 0
+		dockyard > 0
+	}
 }
 
 # Сумма > 1 (≥ 2 фабрики)
 aotsm_qin_total_factories_in_state_gt_1 = {
     OR = {
         # Один тип ≥ 2 → > 1
-        num_of_civilian_factories > 1
-        num_of_military_factories > 1
-        num_of_naval_factories > 1
+		arms_factory > 1
+		industrial_complex > 1
+		dockyard > 1
         
         # Два типа: 1+1 → > 0 в каждой
         AND = {
-            num_of_civilian_factories > 0
-            num_of_military_factories > 0
+            arms_factory > 0
+			industrial_complex > 0
         }
         AND = {
-            num_of_civilian_factories > 0
-            num_of_naval_factories > 0
+            industrial_complex > 0
+			dockyard > 0
         }
         AND = {
-            num_of_military_factories > 0
-            num_of_naval_factories > 0
+            arms_factory > 0
+            dockyard > 0
         }
     }
 }
@@ -1669,41 +1670,41 @@ aotsm_qin_total_factories_in_state_gt_1 = {
 aotsm_qin_total_factories_in_state_gt_2 = {
     OR = {
         # Один тип ≥ 3 → > 2
-        num_of_civilian_factories > 2
-        num_of_military_factories > 2
-        num_of_naval_factories > 2
+        industrial_complex > 2
+        arms_factory > 2
+        dockyard > 2
         
         # Два типа: все комбинации ≥ 3
         AND = {
-            num_of_civilian_factories > 0
-            num_of_military_factories > 1
+            industrial_complex > 0
+            arms_factory > 1
         }
         AND = {
-            num_of_civilian_factories > 1
-            num_of_military_factories > 0
+            industrial_complex > 1
+            arms_factory > 0
         }
         AND = {
-            num_of_civilian_factories > 0
-            num_of_naval_factories > 1
+            industrial_complex > 0
+            dockyard > 1
         }
         AND = {
-            num_of_civilian_factories > 1
-            num_of_naval_factories > 0
+            industrial_complex > 1
+            dockyard > 0
         }
         AND = {
-            num_of_military_factories > 0
-            num_of_naval_factories > 1
+            arms_factory > 0
+            dockyard > 1
         }
         AND = {
-            num_of_military_factories > 1
-            num_of_naval_factories > 0
+            arms_factory > 1
+            dockyard > 0
         }
         
         # Три типа: 1+1+1
         AND = {
-            num_of_civilian_factories > 0
-            num_of_military_factories > 0
-            num_of_naval_factories > 0
+            industrial_complex > 0
+            arms_factory > 0
+            dockyard > 0
         }
     }
 }

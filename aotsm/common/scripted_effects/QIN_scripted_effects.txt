@@ -552,79 +552,2295 @@ QIN_check_who_is_new_emperror = {
 	}
 }
 
-aotsm_qin_check_state_modifier_status = {
-	 	every_owned_state = {
-            limit = {
-                aotsm_is_controlled_by_chinesse_country = yes
-                has_dynamic_modifier = {
-					modifier = QIN_undeveloped_region_state_modifier
-				}
-                infrastructure > 1
-		        aotsm_qin_total_factories_in_state_gt_0 = yes
-            }
-            remove_dynamic_modifier = { 
-                modifier = QIN_undeveloped_region_state_modifier 
-            }
-            add_dynamic_modifier = { 
-                modifier = QIN_agricultural_region_state_modifier 
-            } 
-        }
-        every_owned_state = {
-            limit = {
-                aotsm_is_controlled_by_chinesse_country = yes
-                has_dynamic_modifier = {
-					modifier = QIN_agricultural_region_state_modifier
-				}
-                infrastructure > 3
-		       	aotsm_qin_total_factories_in_state_gt_1 = yes
-            }
-            remove_dynamic_modifier = { 
-                modifier = QIN_agricultural_region_state_modifier 
-            }
-            add_dynamic_modifier = { 
-                modifier = QIN_industrial_region_1_state_modifier 
-            } 
-        }
-        every_owned_state = {
-            limit = {
-                aotsm_is_controlled_by_chinesse_country = yes
-                has_dynamic_modifier = {
-					modifier = QIN_industrial_region_1_state_modifier
-				}
-                infrastructure > 4
-		        aotsm_qin_total_factories_in_state_gt_3 = yes
-            }
-            remove_dynamic_modifier = { 
-                modifier = QIN_industrial_region_1_state_modifier 
-            }
-            add_dynamic_modifier = { 
-                modifier = QIN_industrial_region_2_state_modifier 
-            } 
-        }
-        every_owned_state = {
-            limit = {
-                aotsm_is_controlled_by_chinesse_country = yes
-                NOT = { 
-                    OR = {
-                        has_dynamic_modifier = {
-                            modifier = QIN_undeveloped_region_state_modifier
-                        }
-                        has_dynamic_modifier = {
-                            modifier = QIN_agricultural_region_state_modifier
-                        }
-                        has_dynamic_modifier = {
-                            modifier = QIN_industrial_region_1_state_modifier
-                        }
-                        has_dynamic_modifier = {
-                            modifier = QIN_industrial_region_2_state_modifier
-                        }
-                    }
-                }
-                infrastructure > 2
-		        aotsm_qin_total_factories_in_state_gt_2 = yes
-            }
-            add_dynamic_modifier = { 
-                modifier = QIN_industrial_region_1_state_modifier 
-            }
-        }
+#VICEROYS/GOVERNORS GUI EFFECTS
+
+QIN_clamp_governors_num_vars = { #Проверь значение max в соответсвии с количеством лидеров провинций
+	clamp_variable = {
+		var = QIN_shengan_governor_num  
+		min = 0
+		max = 6
+	}
+	clamp_variable = {
+		var = QIN_minzhe_governor_num  
+		min = 0
+		max = 5
+	}
+	clamp_variable = {
+		var = QIN_huguang_governor_num  
+		min = 0
+		max = 6
+	}
+	clamp_variable = {
+		var = QIN_liangjiang_governor_num   
+		min = 0
+		max = 7
+	}
+	clamp_variable = {
+		var = QIN_sichuan_governor_num    
+		min = 0
+		max = 9
+	}
+	clamp_variable = {
+		var = QIN_chzili_governor_num   
+		min = 0
+		max = 7
+	}
+	clamp_variable = {
+		var = QIN_liangguang_governor_num   
+		min = 0
+		max = 5
+	}
+	clamp_variable = {
+		var = QIN_heilongjiang_governor_num    
+		min = 0
+		max = 3
+	}
+	clamp_variable = {
+		var = QIN_jilin_governor_num   
+		min = 0
+		max = 4
+	}
+	clamp_variable = {
+		var = QIN_shengjing_governor_num   
+		min = 0
+		max = 4
+	}
+	clamp_variable = {
+		var = QIN_shandong_governor_num   
+		min = 0
+		max = 6
+	}
+	clamp_variable = {
+		var = QIN_henan_governor_num   
+		min = 0
+		max = 11
+	}
+	clamp_variable = {
+		var = QIN_shaanxi_governor_num   
+		min = 0
+		max = 8
+	}
+	clamp_variable = {
+		var = QIN_qinghai_governor_num   
+		min = 0
+		max = 6
+	}
+	clamp_variable = {
+		var = QIN_suiyuan_governor_num   
+		min = 0
+		max = 6
+	}
+	clamp_variable = {
+		var = QIN_uliastai_governor_num   
+		min = 0
+		max = 5
+	}
+	clamp_variable = { #нет списка - изменить значение на корректное
+		var = QIN_dongsansheng_guvernor_num  
+		min = 0
+		max = 1
+	}
+}
+
+QIN_clamp_state_stability_vars = {
+
+	clamp_variable = {
+		var = QIN_chzili_state_stability
+		min = 0
+		max = 4
+	}
+
+	clamp_variable = {
+		var = QIN_liangjiang_state_stability
+		min = 0
+		max = 4
+	}
+
+	clamp_variable = {
+		var = QIN_minzhe_state_stability
+		min = 0
+		max = 4
+	}
+
+	clamp_variable = {
+		var = QIN_huguang_state_stability
+		min = 0
+		max = 4
+	}
+
+	clamp_variable = {
+		var = QIN_sichuan_state_stability
+		min = 0
+		max = 4
+	}
+
+	clamp_variable = {
+		var = QIN_yungui_state_stability
+		min = 0
+		max = 4
+	}
+
+	clamp_variable = {
+		var = QIN_liangguang_state_stability
+		min = 0
+		max = 4
+	}
+
+	clamp_variable = {
+		var = QIN_shengan_state_stability
+		min = 0
+		max = 4
+	}
+
+	clamp_variable = {
+		var = QIN_heilongjiang_state_stability
+		min = 0
+		max = 4
+	}
+
+	clamp_variable = {
+		var = QIN_jilin_state_stability
+		min = 0
+		max = 4
+	}
+
+	clamp_variable = {
+		var = QIN_shengjing_state_stability
+		min = 0
+		max = 4
+	}
+
+	clamp_variable = {
+		var = QIN_shandong_state_stability
+		min = 0
+		max = 4
+	}
+
+	clamp_variable = {
+		var = QIN_henan_state_stability
+		min = 0
+		max = 4
+	}
+
+	clamp_variable = {
+		var = QIN_shaanxi_state_stability
+		min = 0
+		max = 4
+	}
+
+	clamp_variable = {
+		var = QIN_qinghai_state_stability
+		min = 0
+		max = 4
+	}
+
+	clamp_variable = {
+		var = QIN_suiyuan_state_stability
+		min = 0
+		max = 4
+	}
+
+	clamp_variable = {
+		var = QIN_uliastai_state_stability
+		min = 0
+		max = 4
+	}
+
+	clamp_variable = {
+		var = QIN_dongsansheng_state_stability
+		min = 0
+		max = 4
+	}
+
+	clamp_variable = {
+		var = QIN_sindzyan_state_stability
+		min = 0
+		max = 4
+	}
+
+	clamp_variable = {
+		var = QIN_north_sindzyan_state_stability
+		min = 0
+		max = 4
+	}
+
+	clamp_variable = {
+		var = QIN_south_sindzyan_state_stability
+		min = 0
+		max = 4
+	}
+
+	clamp_variable = {
+		var = QIN_tibet_state_stability
+		min = 0
+		max = 4
+	}
+
+}
+
+QIN_clamp_num_of_state_frame_vars = {
+
+	clamp_variable = {
+		var = QIN_outer_mongolia_frame_num 
+		min = 0
+		max = 1
+	}
+
+	clamp_variable = {
+		var = QIN_sindzyan_frame_num 
+		min = 0
+		max = 1
+	}
+
+	clamp_variable = {
+		var = QIN_dongsansheng_frame_num 
+		min = 0
+		max = 1
+	}
+
+	clamp_variable = {
+		var = QIN_minzhe_governor_num 
+		min = 0
+		max = 1
+	}
+}
+
+#ZCHILI 
+
+QIN_add_1_to_chzili_guvernor_num = { #need for tests
+	custom_effect_tooltip = QIN_add_1_to_chzili_guvernor_num_tt
+	add_to_variable = {
+		var = QIN_chzili_governor_num
+		value = 1
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_remove_1_at_chzili_guvernor_num = { #need for tests
+	custom_effect_tooltip = QIN_remove_1_at_chzili_guvernor_num_tt
+	subtract_from_variable = {
+		var = QIN_chzili_governor_num
+		value = 1
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_chzili_guvernor_num_1 = {
+	custom_effect_tooltip = QIN_set_chzili_guvernor_num_1_tt
+	set_variable = {
+		var = QIN_chzili_governor_num
+		value = 0
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_chzili_guvernor_num_2 = {
+	custom_effect_tooltip = QIN_set_chzili_guvernor_num_2_tt
+	set_variable = {
+		var = QIN_chzili_governor_num
+		value = 1
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_chzili_guvernor_num_3 = {
+	custom_effect_tooltip = QIN_set_chzili_guvernor_num_3_tt
+	set_variable = {
+		var = QIN_chzili_governor_num
+		value = 2
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_chzili_guvernor_num_4 = {
+	custom_effect_tooltip = QIN_set_chzili_guvernor_num_4_tt
+	set_variable = {
+		var = QIN_chzili_governor_num
+		value = 3
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_chzili_guvernor_num_5 = {
+	custom_effect_tooltip = QIN_set_chzili_guvernor_num_5_tt
+	set_variable = {
+		var = QIN_chzili_governor_num
+		value = 4
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_chzili_guvernor_num_6 = {
+	custom_effect_tooltip = QIN_set_chzili_guvernor_num_6_tt
+	set_variable = {
+		var = QIN_chzili_governor_num
+		value = 5
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+#LIANGJIANG 
+
+QIN_add_1_to_lianggiang_guvernor_num = { #need for tests
+	custom_effect_tooltip = QIN_add_1_to_lianggiang_guvernor_num_tt
+	add_to_variable = {
+		var = QIN_lianggiang_governor_num
+		value = 1
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_remove_1_at_lianggiang_guvernor_num = { #need for tests
+	custom_effect_tooltip = QIN_remove_1_at_lianggiang_guvernor_num_tt
+	subtract_from_variable = {
+		var = QIN_lianggiang_governor_num
+		value = 1
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_lianggiang_guvernor_num_1 = {
+	custom_effect_tooltip = QIN_set_lianggiang_guvernor_num_1_tt
+	set_variable = {
+		var = QIN_lianggiang_governor_num
+		value = 0
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_lianggiang_guvernor_num_2 = {
+	custom_effect_tooltip = QIN_set_lianggiang_guvernor_num_2_tt
+	set_variable = {
+		var = QIN_lianggiang_governor_num
+		value = 1
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_lianggiang_guvernor_num_3 = {
+	custom_effect_tooltip = QIN_set_lianggiang_guvernor_num_3_tt
+	set_variable = {
+		var = QIN_lianggiang_governor_num
+		value = 2
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_lianggiang_guvernor_num_4 = {
+	custom_effect_tooltip = QIN_set_lianggiang_guvernor_num_4_tt
+	set_variable = {
+		var = QIN_lianggiang_governor_num
+		value = 3
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_lianggiang_guvernor_num_5 = {
+	custom_effect_tooltip = QIN_set_lianggiang_guvernor_num_5_tt
+	set_variable = {
+		var = QIN_lianggiang_governor_num
+		value = 4
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+# MINZHE 
+
+QIN_add_1_to_minzhe_guvernor_num = {
+	custom_effect_tooltip = QIN_add_1_to_minzhe_guvernor_num_tt
+	add_to_variable = {
+		var = QIN_minzhe_governor_num
+		value = 1
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_remove_1_at_minzhe_guvernor_num = {
+	custom_effect_tooltip = QIN_remove_1_at_minzhe_guvernor_num_tt
+	subtract_from_variable = {
+		var = QIN_minzhe_governor_num
+		value = 1
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_minzhe_guvernor_num_1 = {
+	custom_effect_tooltip = QIN_set_minzhe_guvernor_num_1_tt
+	set_variable = {
+		var = QIN_minzhe_governor_num
+		value = 0
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_minzhe_guvernor_num_2 = {
+	custom_effect_tooltip = QIN_set_minzhe_guvernor_num_2_tt
+	set_variable = {
+		var = QIN_minzhe_governor_num
+		value = 1
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_minzhe_guvernor_num_3 = {
+	custom_effect_tooltip = QIN_set_minzhe_guvernor_num_3_tt
+	set_variable = {
+		var = QIN_minzhe_governor_num
+		value = 2
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_minzhe_guvernor_num_4 = {
+	custom_effect_tooltip = QIN_set_minzhe_guvernor_num_4_tt
+	set_variable = {
+		var = QIN_minzhe_governor_num
+		value = 3
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_minzhe_guvernor_num_5 = {
+	custom_effect_tooltip = QIN_set_minzhe_guvernor_num_5_tt
+	set_variable = {
+		var = QIN_minzhe_governor_num
+		value = 4
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_minzhe_guvernor_num_6 = {
+	custom_effect_tooltip = QIN_set_minzhe_guvernor_num_6_tt
+	set_variable = {
+		var = QIN_minzhe_governor_num
+		value = 5
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+# HUGUANG 
+
+QIN_add_1_to_huguang_guvernor_num = {
+	custom_effect_tooltip = QIN_add_1_to_huguang_guvernor_num_tt
+	add_to_variable = {
+		var = QIN_huguang_governor_num
+		value = 1
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_remove_1_at_huguang_guvernor_num = {
+	custom_effect_tooltip = QIN_remove_1_at_huguang_guvernor_num_tt
+	subtract_from_variable = {
+		var = QIN_huguang_governor_num
+		value = 1
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_huguang_guvernor_num_1 = {
+	custom_effect_tooltip = QIN_set_huguang_guvernor_num_1_tt
+	set_variable = {
+		var = QIN_huguang_governor_num
+		value = 0
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_huguang_guvernor_num_2 = {
+	custom_effect_tooltip = QIN_set_huguang_guvernor_num_2_tt
+	set_variable = {
+		var = QIN_huguang_governor_num
+		value = 1
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_huguang_guvernor_num_3 = {
+	custom_effect_tooltip = QIN_set_huguang_guvernor_num_3_tt
+	set_variable = {
+		var = QIN_huguang_governor_num
+		value = 2
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_huguang_guvernor_num_4 = {
+	custom_effect_tooltip = QIN_set_huguang_guvernor_num_4_tt
+	set_variable = {
+		var = QIN_huguang_governor_num
+		value = 3
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_huguang_guvernor_num_5 = {
+	custom_effect_tooltip = QIN_set_huguang_guvernor_num_5_tt
+	set_variable = {
+		var = QIN_huguang_governor_num
+		value = 4
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_huguang_guvernor_num_6 = {
+	custom_effect_tooltip = QIN_set_huguang_guvernor_num_6_tt
+	set_variable = {
+		var = QIN_huguang_governor_num
+		value = 5
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_huguang_guvernor_num_7 = {
+	custom_effect_tooltip = QIN_set_huguang_guvernor_num_7_tt
+	set_variable = {
+		var = QIN_huguang_governor_num
+		value = 6
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_huguang_guvernor_num_8 = {
+	custom_effect_tooltip = QIN_set_huguang_guvernor_num_8_tt
+	set_variable = {
+		var = QIN_huguang_governor_num
+		value = 7
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+# SHAAN-GAN 
+
+QIN_add_1_to_shengan_guvernor_num = {
+	custom_effect_tooltip = QIN_add_1_to_shengan_guvernor_num_tt
+	add_to_variable = {
+		var = QIN_shengan_governor_num
+		value = 1
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_remove_1_at_shengan_guvernor_num = {
+	custom_effect_tooltip = QIN_remove_1_at_shengan_guvernor_num_tt
+	subtract_from_variable = {
+		var = QIN_shengan_governor_num
+		value = 1
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_shengan_guvernor_num_1 = {
+	custom_effect_tooltip = QIN_set_shengan_guvernor_num_1_tt
+	set_variable = {
+		var = QIN_shengan_governor_num
+		value = 0
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_shengan_guvernor_num_2 = {
+	custom_effect_tooltip = QIN_set_shengan_guvernor_num_2_tt
+	set_variable = {
+		var = QIN_shengan_governor_num
+		value = 1
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_shengan_guvernor_num_3 = {
+	custom_effect_tooltip = QIN_set_shengan_guvernor_num_3_tt
+	set_variable = {
+		var = QIN_shengan_governor_num
+		value = 2
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_shengan_guvernor_num_4 = {
+	custom_effect_tooltip = QIN_set_shengan_guvernor_num_4_tt
+	set_variable = {
+		var = QIN_shengan_governor_num
+		value = 3
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_shengan_guvernor_num_5 = {
+	custom_effect_tooltip = QIN_set_shengan_guvernor_num_5_tt
+	set_variable = {
+		var = QIN_shengan_governor_num
+		value = 4
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_shengan_guvernor_num_6 = {
+	custom_effect_tooltip = QIN_set_shengan_guvernor_num_6_tt
+	set_variable = {
+		var = QIN_shengan_governor_num
+		value = 5
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+
+QIN_set_shengan_guvernor_num_7 = {
+	custom_effect_tooltip = QIN_set_shengan_guvernor_num_7_tt
+	set_variable = {
+		var = QIN_shengan_governor_num
+		value = 6
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+# LIANGGUANG 
+
+QIN_add_1_to_liangguang_guvernor_num = {
+	custom_effect_tooltip = QIN_add_1_to_liangguang_guvernor_num_tt
+	add_to_variable = {
+		var = QIN_liangguang_governor_num
+		value = 1
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_remove_1_at_liangguang_guvernor_num = {
+	custom_effect_tooltip = QIN_remove_1_at_liangguang_guvernor_num_tt
+	subtract_from_variable = {
+		var = QIN_liangguang_governor_num
+		value = 1
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_liangguang_guvernor_num_1 = {
+	custom_effect_tooltip = QIN_set_liangguang_guvernor_num_1_tt
+	set_variable = {
+		var = QIN_liangguang_governor_num
+		value = 0
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_liangguang_guvernor_num_2 = {
+	custom_effect_tooltip = QIN_set_liangguang_guvernor_num_2_tt
+	set_variable = {
+		var = QIN_liangguang_governor_num
+		value = 1
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_liangguang_guvernor_num_3 = {
+	custom_effect_tooltip = QIN_set_liangguang_guvernor_num_3_tt
+	set_variable = {
+		var = QIN_liangguang_governor_num
+		value = 2
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_liangguang_guvernor_num_4 = {
+	custom_effect_tooltip = QIN_set_liangguang_guvernor_num_4_tt
+	set_variable = {
+		var = QIN_liangguang_governor_num
+		value = 3
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_liangguang_guvernor_num_5 = {
+	custom_effect_tooltip = QIN_set_liangguang_guvernor_num_5_tt
+	set_variable = {
+		var = QIN_liangguang_governor_num
+		value = 4
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_liangguang_guvernor_num_6 = {
+	custom_effect_tooltip = QIN_set_liangguang_guvernor_num_6_tt
+	set_variable = {
+		var = QIN_liangguang_governor_num
+		value = 5
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_liangguang_guvernor_num_7 = {
+	custom_effect_tooltip = QIN_set_liangguang_guvernor_num_7_tt
+	set_variable = {
+		var = QIN_liangguang_governor_num
+		value = 6
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+#YUNGUY
+
+QIN_add_1_to_yungui_guvernor_num = { #need for tests
+	custom_effect_tooltip = QIN_add_1_to_yungui_guvernor_num_tt
+	add_to_variable = {
+		var = QIN_yungui_governor_num
+		value = 1
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_remove_1_at_yungui_guvernor_num = { #need for tests
+	custom_effect_tooltip = QIN_remove_1_at_yungui_guvernor_num_tt
+	subtract_from_variable = {
+		var = QIN_yungui_governor_num
+		value = 1
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_yungui_guvernor_num_1 = {
+	custom_effect_tooltip = QIN_set_yungui_guvernor_num_1_tt
+	set_variable = {
+		var = QIN_yungui_governor_num
+		value = 0
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_yungui_guvernor_num_2 = {
+	custom_effect_tooltip = QIN_set_yungui_guvernor_num_2_tt
+	set_variable = {
+		var = QIN_yungui_governor_num
+		value = 1
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_yungui_guvernor_num_3 = {
+	custom_effect_tooltip = QIN_set_yungui_guvernor_num_3_tt
+	set_variable = {
+		var = QIN_yungui_governor_num
+		value = 2
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_yungui_guvernor_num_4 = {
+	custom_effect_tooltip = QIN_set_yungui_guvernor_num_4_tt
+	set_variable = {
+		var = QIN_yungui_governor_num
+		value = 3
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_yungui_guvernor_num_5 = {
+	custom_effect_tooltip = QIN_set_yungui_guvernor_num_5_tt
+	set_variable = {
+		var = QIN_yungui_governor_num
+		value = 4
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_yungui_guvernor_num_6 = {
+	custom_effect_tooltip = QIN_set_yungui_guvernor_num_6_tt
+	set_variable = {
+		var = QIN_yungui_governor_num
+		value = 5
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_yungui_guvernor_num_7 = {
+	custom_effect_tooltip = QIN_set_yungui_guvernor_num_7_tt
+	set_variable = {
+		var = QIN_yungui_governor_num
+		value = 6
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_yungui_guvernor_num_8 = {
+	custom_effect_tooltip = QIN_set_yungui_guvernor_num_8_tt
+	set_variable = {
+		var = QIN_yungui_governor_num
+		value = 7
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+# SICHUAN 
+
+QIN_add_1_to_sichuan_guvernor_num = {
+	custom_effect_tooltip = QIN_add_1_to_sichuan_guvernor_num_tt
+	add_to_variable = {
+		var = QIN_sichuan_governor_num
+		value = 1
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_remove_1_at_sichuan_guvernor_num = {
+	custom_effect_tooltip = QIN_remove_1_at_sichuan_guvernor_num_tt
+	subtract_from_variable = {
+		var = QIN_sichuan_governor_num
+		value = 1
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_sichuan_guvernor_num_1 = {
+	custom_effect_tooltip = QIN_set_sichuan_guvernor_num_1_tt
+	set_variable = {
+		var = QIN_sichuan_governor_num
+		value = 0
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_sichuan_guvernor_num_2 = {
+	custom_effect_tooltip = QIN_set_sichuan_guvernor_num_2_tt
+	set_variable = {
+		var = QIN_sichuan_governor_num
+		value = 1
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_sichuan_guvernor_num_3 = {
+	custom_effect_tooltip = QIN_set_sichuan_guvernor_num_3_tt
+	set_variable = {
+		var = QIN_sichuan_governor_num
+		value = 2
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_sichuan_guvernor_num_4 = {
+	custom_effect_tooltip = QIN_set_sichuan_guvernor_num_4_tt
+	set_variable = {
+		var = QIN_sichuan_governor_num
+		value = 3
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_sichuan_guvernor_num_5 = {
+	custom_effect_tooltip = QIN_set_sichuan_guvernor_num_5_tt
+	set_variable = {
+		var = QIN_sichuan_governor_num
+		value = 4
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_sichuan_guvernor_num_6 = {
+	custom_effect_tooltip = QIN_set_sichuan_guvernor_num_6_tt
+	set_variable = {
+		var = QIN_sichuan_governor_num
+		value = 5
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_sichuan_guvernor_num_7 = {
+	custom_effect_tooltip = QIN_set_sichuan_guvernor_num_7_tt
+	set_variable = {
+		var = QIN_sichuan_governor_num
+		value = 6
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_sichuan_guvernor_num_8 = {
+	custom_effect_tooltip = QIN_set_sichuan_guvernor_num_8_tt
+	set_variable = {
+		var = QIN_sichuan_governor_num
+		value = 7
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_sichuan_guvernor_num_9 = {
+	custom_effect_tooltip = QIN_set_sichuan_guvernor_num_9_tt
+	set_variable = {
+		var = QIN_sichuan_governor_num
+		value = 8
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_sichuan_guvernor_num_10 = {
+	custom_effect_tooltip = QIN_set_sichuan_guvernor_num_10_tt
+	set_variable = {
+		var = QIN_sichuan_governor_num
+		value = 9
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+# SHENGJING 
+
+QIN_add_1_to_shengjing_guvernor_num = {
+	custom_effect_tooltip = QIN_add_1_to_shengjing_guvernor_num_tt
+	add_to_variable = {
+		var = QIN_shengjing_governor_num
+		value = 1
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_remove_1_at_shengjing_guvernor_num = {
+	custom_effect_tooltip = QIN_remove_1_at_shengjing_guvernor_num_tt
+	subtract_from_variable = {
+		var = QIN_shengjing_governor_num
+		value = 1
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_shengjing_guvernor_num_1 = {
+	custom_effect_tooltip = QIN_set_shengjing_guvernor_num_1_tt
+	set_variable = {
+		var = QIN_shengjing_governor_num
+		value = 0
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_shengjing_guvernor_num_2 = {
+	custom_effect_tooltip = QIN_set_shengjing_guvernor_num_2_tt
+	set_variable = {
+		var = QIN_shengjing_governor_num
+		value = 1
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_shengjing_guvernor_num_3 = {
+	custom_effect_tooltip = QIN_set_shengjing_guvernor_num_3_tt
+	set_variable = {
+		var = QIN_shengjing_governor_num
+		value = 2
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_shengjing_guvernor_num_4 = {
+	custom_effect_tooltip = QIN_set_shengjing_guvernor_num_4_tt
+	set_variable = {
+		var = QIN_shengjing_governor_num
+		value = 3
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_shengjing_guvernor_num_5 = {
+	custom_effect_tooltip = QIN_set_shengjing_guvernor_num_5_tt
+	set_variable = {
+		var = QIN_shengjing_governor_num
+		value = 4
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+# JILIN 
+
+QIN_add_1_to_jilin_guvernor_num = {
+	custom_effect_tooltip = QIN_add_1_to_jilin_guvernor_num_tt
+	add_to_variable = {
+		var = QIN_jilin_governor_num
+		value = 1
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_remove_1_at_jilin_guvernor_num = {
+	custom_effect_tooltip = QIN_remove_1_at_jilin_guvernor_num_tt
+	subtract_from_variable = {
+		var = QIN_jilin_governor_num
+		value = 1
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_jilin_guvernor_num_1 = {
+	custom_effect_tooltip = QIN_set_jilin_guvernor_num_1_tt
+	set_variable = {
+		var = QIN_jilin_governor_num
+		value = 0
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_jilin_guvernor_num_2 = {
+	custom_effect_tooltip = QIN_set_jilin_guvernor_num_2_tt
+	set_variable = {
+		var = QIN_jilin_governor_num
+		value = 1
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_jilin_guvernor_num_3 = {
+	custom_effect_tooltip = QIN_set_jilin_guvernor_num_3_tt
+	set_variable = {
+		var = QIN_jilin_governor_num
+		value = 2
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_jilin_guvernor_num_4 = {
+	custom_effect_tooltip = QIN_set_jilin_guvernor_num_4_tt
+	set_variable = {
+		var = QIN_jilin_governor_num
+		value = 3
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_jilin_guvernor_num_5 = {
+	custom_effect_tooltip = QIN_set_jilin_guvernor_num_5_tt
+	set_variable = {
+		var = QIN_jilin_governor_num
+		value = 4
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+# HEILONGJIANG 
+
+QIN_add_1_to_heilongjiang_guvernor_num = {
+	custom_effect_tooltip = QIN_add_1_to_heilongjiang_guvernor_num_tt
+	add_to_variable = {
+		var = QIN_heilongjiang_governor_num
+		value = 1
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_remove_1_at_heilongjiang_guvernor_num = {
+	custom_effect_tooltip = QIN_remove_1_at_heilongjiang_guvernor_num_tt
+	subtract_from_variable = {
+		var = QIN_heilongjiang_governor_num
+		value = 1
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_heilongjiang_guvernor_num_1 = {
+	custom_effect_tooltip = QIN_set_heilongjiang_guvernor_num_1_tt
+	set_variable = {
+		var = QIN_heilongjiang_governor_num
+		value = 0
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_heilongjiang_guvernor_num_2 = {
+	custom_effect_tooltip = QIN_set_heilongjiang_guvernor_num_2_tt
+	set_variable = {
+		var = QIN_heilongjiang_governor_num
+		value = 1
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_heilongjiang_guvernor_num_3 = {
+	custom_effect_tooltip = QIN_set_heilongjiang_guvernor_num_3_tt
+	set_variable = {
+		var = QIN_heilongjiang_governor_num
+		value = 2
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_heilongjiang_guvernor_num_4 = {
+	custom_effect_tooltip = QIN_set_heilongjiang_guvernor_num_4_tt
+	set_variable = {
+		var = QIN_heilongjiang_governor_num
+		value = 3
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+# SHAANXI 
+
+QIN_add_1_to_shaanxi_guvernor_num = {
+	custom_effect_tooltip = QIN_add_1_to_shaanxi_guvernor_num_tt
+	add_to_variable = {
+		var = QIN_shaanxi_governor_num
+		value = 1
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_remove_1_at_shaanxi_guvernor_num = {
+	custom_effect_tooltip = QIN_remove_1_at_shaanxi_guvernor_num_tt
+	subtract_from_variable = {
+		var = QIN_shaanxi_governor_num
+		value = 1
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_shaanxi_guvernor_num_1 = {
+	custom_effect_tooltip = QIN_set_shaanxi_guvernor_num_1_tt
+	set_variable = {
+		var = QIN_shaanxi_governor_num
+		value = 0
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_shaanxi_guvernor_num_2 = {
+	custom_effect_tooltip = QIN_set_shaanxi_guvernor_num_2_tt
+	set_variable = {
+		var = QIN_shaanxi_governor_num
+		value = 1
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_shaanxi_guvernor_num_3 = {
+	custom_effect_tooltip = QIN_set_shaanxi_guvernor_num_3_tt
+	set_variable = {
+		var = QIN_shaanxi_governor_num
+		value = 2
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_shaanxi_guvernor_num_4 = {
+	custom_effect_tooltip = QIN_set_shaanxi_guvernor_num_4_tt
+	set_variable = {
+		var = QIN_shaanxi_governor_num
+		value = 3
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_shaanxi_guvernor_num_5 = {
+	custom_effect_tooltip = QIN_set_shaanxi_guvernor_num_5_tt
+	set_variable = {
+		var = QIN_shaanxi_governor_num
+		value = 4
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_shaanxi_guvernor_num_6 = {
+	custom_effect_tooltip = QIN_set_shaanxi_guvernor_num_6_tt
+	set_variable = {
+		var = QIN_shaanxi_governor_num
+		value = 5
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_shaanxi_guvernor_num_7 = {
+	custom_effect_tooltip = QIN_set_shaanxi_guvernor_num_7_tt
+	set_variable = {
+		var = QIN_shaanxi_governor_num
+		value = 6
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_shaanxi_guvernor_num_8 = {
+	custom_effect_tooltip = QIN_set_shaanxi_guvernor_num_8_tt
+	set_variable = {
+		var = QIN_shaanxi_governor_num
+		value = 7
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_shaanxi_guvernor_num_9 = {
+	custom_effect_tooltip = QIN_set_shaanxi_guvernor_num_9_tt
+	set_variable = {
+		var = QIN_shaanxi_governor_num
+		value = 8
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+# HENAN 
+
+QIN_add_1_to_henan_guvernor_num = {
+	custom_effect_tooltip = QIN_add_1_to_henan_guvernor_num_tt
+	add_to_variable = {
+		var = QIN_henan_governor_num
+		value = 1
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_remove_1_at_henan_guvernor_num = {
+	custom_effect_tooltip = QIN_remove_1_at_henan_guvernor_num_tt
+	subtract_from_variable = {
+		var = QIN_henan_governor_num
+		value = 1
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_henan_guvernor_num_1 = {
+	custom_effect_tooltip = QIN_set_henan_guvernor_num_1_tt
+	set_variable = {
+		var = QIN_henan_governor_num
+		value = 0
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_henan_guvernor_num_2 = {
+	custom_effect_tooltip = QIN_set_henan_guvernor_num_2_tt
+	set_variable = {
+		var = QIN_henan_governor_num
+		value = 1
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_henan_guvernor_num_3 = {
+	custom_effect_tooltip = QIN_set_henan_guvernor_num_3_tt
+	set_variable = {
+		var = QIN_henan_governor_num
+		value = 2
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_henan_guvernor_num_4 = {
+	custom_effect_tooltip = QIN_set_henan_guvernor_num_4_tt
+	set_variable = {
+		var = QIN_henan_governor_num
+		value = 3
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_henan_guvernor_num_5 = {
+	custom_effect_tooltip = QIN_set_henan_guvernor_num_5_tt
+	set_variable = {
+		var = QIN_henan_governor_num
+		value = 4
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_henan_guvernor_num_6 = {
+	custom_effect_tooltip = QIN_set_henan_guvernor_num_6_tt
+	set_variable = {
+		var = QIN_henan_governor_num
+		value = 5
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_henan_guvernor_num_7 = {
+	custom_effect_tooltip = QIN_set_henan_guvernor_num_7_tt
+	set_variable = {
+		var = QIN_henan_governor_num
+		value = 6
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_henan_guvernor_num_8 = {
+	custom_effect_tooltip = QIN_set_henan_guvernor_num_8_tt
+	set_variable = {
+		var = QIN_henan_governor_num
+		value = 7
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_henan_guvernor_num_9 = {
+	custom_effect_tooltip = QIN_set_henan_guvernor_num_9_tt
+	set_variable = {
+		var = QIN_henan_governor_num
+		value = 8
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_henan_guvernor_num_10 = {
+	custom_effect_tooltip = QIN_set_henan_guvernor_num_10_tt
+	set_variable = {
+		var = QIN_henan_governor_num
+		value = 9
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_henan_guvernor_num_11 = {
+	custom_effect_tooltip = QIN_set_henan_guvernor_num_11_tt
+	set_variable = {
+		var = QIN_henan_governor_num
+		value = 10
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_henan_guvernor_num_12 = {
+	custom_effect_tooltip = QIN_set_henan_guvernor_num_12_tt
+	set_variable = {
+		var = QIN_henan_governor_num
+		value = 11
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+# SHANDONG 
+
+QIN_add_1_to_shandong_guvernor_num = {
+	custom_effect_tooltip = QIN_add_1_to_shandong_guvernor_num_tt
+	add_to_variable = {
+		var = QIN_shandong_governor_num
+		value = 1
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_remove_1_at_shandong_guvernor_num = {
+	custom_effect_tooltip = QIN_remove_1_at_shandong_guvernor_num_tt
+	subtract_from_variable = {
+		var = QIN_shandong_governor_num
+		value = 1
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_shandong_guvernor_num_1 = {
+	custom_effect_tooltip = QIN_set_shandong_guvernor_num_1_tt
+	set_variable = {
+		var = QIN_shandong_governor_num
+		value = 0
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_shandong_guvernor_num_2 = {
+	custom_effect_tooltip = QIN_set_shandong_guvernor_num_2_tt
+	set_variable = {
+		var = QIN_shandong_governor_num
+		value = 1
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_shandong_guvernor_num_3 = {
+	custom_effect_tooltip = QIN_set_shandong_guvernor_num_3_tt
+	set_variable = {
+		var = QIN_shandong_governor_num
+		value = 2
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_shandong_guvernor_num_4 = {
+	custom_effect_tooltip = QIN_set_shandong_guvernor_num_4_tt
+	set_variable = {
+		var = QIN_shandong_governor_num
+		value = 3
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_shandong_guvernor_num_5 = {
+	custom_effect_tooltip = QIN_set_shandong_guvernor_num_5_tt
+	set_variable = {
+		var = QIN_shandong_governor_num
+		value = 4
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_shandong_guvernor_num_6 = {
+	custom_effect_tooltip = QIN_set_shandong_guvernor_num_6_tt
+	set_variable = {
+		var = QIN_shandong_governor_num
+		value = 5
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_shandong_guvernor_num_7 = {
+	custom_effect_tooltip = QIN_set_shandong_guvernor_num_7_tt
+	set_variable = {
+		var = QIN_shandong_governor_num
+		value = 6
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+# QINGHAI 
+
+QIN_add_1_to_qinghai_guvernor_num = {
+	custom_effect_tooltip = QIN_add_1_to_qinghai_guvernor_num_tt
+	add_to_variable = {
+		var = QIN_qinghai_governor_num
+		value = 1
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_remove_1_at_qinghai_guvernor_num = {
+	custom_effect_tooltip = QIN_remove_1_at_qinghai_guvernor_num_tt
+	subtract_from_variable = {
+		var = QIN_qinghai_governor_num
+		value = 1
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_qinghai_guvernor_num_1 = {
+	custom_effect_tooltip = QIN_set_qinghai_guvernor_num_1_tt
+	set_variable = {
+		var = QIN_qinghai_governor_num
+		value = 0
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_qinghai_guvernor_num_2 = {
+	custom_effect_tooltip = QIN_set_qinghai_guvernor_num_2_tt
+	set_variable = {
+		var = QIN_qinghai_governor_num
+		value = 1
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_qinghai_guvernor_num_3 = {
+	custom_effect_tooltip = QIN_set_qinghai_guvernor_num_3_tt
+	set_variable = {
+		var = QIN_qinghai_governor_num
+		value = 2
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_qinghai_guvernor_num_4 = {
+	custom_effect_tooltip = QIN_set_qinghai_guvernor_num_4_tt
+	set_variable = {
+		var = QIN_qinghai_governor_num
+		value = 3
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_qinghai_guvernor_num_5 = {
+	custom_effect_tooltip = QIN_set_qinghai_guvernor_num_5_tt
+	set_variable = {
+		var = QIN_qinghai_governor_num
+		value = 4
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_qinghai_guvernor_num_6 = {
+	custom_effect_tooltip = QIN_set_qinghai_guvernor_num_6_tt
+	set_variable = {
+		var = QIN_qinghai_governor_num
+		value = 5
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_qinghai_guvernor_num_7 = {
+	custom_effect_tooltip = QIN_set_qinghai_guvernor_num_7_tt
+	set_variable = {
+		var = QIN_qinghai_governor_num
+		value = 6
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+# SUIYUAN 
+
+QIN_add_1_to_suiyuan_guvernor_num = {
+	custom_effect_tooltip = QIN_add_1_to_suiyuan_guvernor_num_tt
+	add_to_variable = {
+		var = QIN_suiyuan_governor_num
+		value = 1
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_remove_1_at_suiyuan_guvernor_num = {
+	custom_effect_tooltip = QIN_remove_1_at_suiyuan_guvernor_num_tt
+	subtract_from_variable = {
+		var = QIN_suiyuan_governor_num
+		value = 1
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_suiyuan_guvernor_num_1 = {
+	custom_effect_tooltip = QIN_set_suiyuan_guvernor_num_1_tt
+	set_variable = {
+		var = QIN_suiyuan_governor_num
+		value = 0
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_suiyuan_guvernor_num_2 = {
+	custom_effect_tooltip = QIN_set_suiyuan_guvernor_num_2_tt
+	set_variable = {
+		var = QIN_suiyuan_governor_num
+		value = 1
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_suiyuan_guvernor_num_3 = {
+	custom_effect_tooltip = QIN_set_suiyuan_guvernor_num_3_tt
+	set_variable = {
+		var = QIN_suiyuan_governor_num
+		value = 2
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_suiyuan_guvernor_num_4 = {
+	custom_effect_tooltip = QIN_set_suiyuan_guvernor_num_4_tt
+	set_variable = {
+		var = QIN_suiyuan_governor_num
+		value = 3
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_suiyuan_guvernor_num_5 = {
+	custom_effect_tooltip = QIN_set_suiyuan_guvernor_num_5_tt
+	set_variable = {
+		var = QIN_suiyuan_governor_num
+		value = 4
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_suiyuan_guvernor_num_6 = {
+	custom_effect_tooltip = QIN_set_suiyuan_guvernor_num_6_tt
+	set_variable = {
+		var = QIN_suiyuan_governor_num
+		value = 5
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_suiyuan_guvernor_num_7 = {
+	custom_effect_tooltip = QIN_set_suiyuan_guvernor_num_7_tt
+	set_variable = {
+		var = QIN_suiyuan_governor_num
+		value = 6
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+# ULI ASTAI 
+
+QIN_add_1_to_uliastai_guvernor_num = {
+	custom_effect_tooltip = QIN_add_1_to_uliastai_guvernor_num_tt
+	add_to_variable = {
+		var = QIN_uliastai_governor_num
+		value = 1
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_remove_1_at_uliastai_guvernor_num = {
+	custom_effect_tooltip = QIN_remove_1_at_uliastai_guvernor_num_tt
+	subtract_from_variable = {
+		var = QIN_uliastai_governor_num
+		value = 1
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_uliastai_guvernor_num_1 = {
+	custom_effect_tooltip = QIN_set_uliastai_guvernor_num_1_tt
+	set_variable = {
+		var = QIN_uliastai_governor_num
+		value = 0
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_uliastai_guvernor_num_2 = {
+	custom_effect_tooltip = QIN_set_uliastai_guvernor_num_2_tt
+	set_variable = {
+		var = QIN_uliastai_governor_num
+		value = 1
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_uliastai_guvernor_num_3 = {
+	custom_effect_tooltip = QIN_set_uliastai_guvernor_num_3_tt
+	set_variable = {
+		var = QIN_uliastai_governor_num
+		value = 2
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_uliastai_guvernor_num_4 = {
+	custom_effect_tooltip = QIN_set_uliastai_guvernor_num_4_tt
+	set_variable = {
+		var = QIN_uliastai_governor_num
+		value = 3
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_uliastai_guvernor_num_5 = {
+	custom_effect_tooltip = QIN_set_uliastai_guvernor_num_5_tt
+	set_variable = {
+		var = QIN_uliastai_governor_num
+		value = 4
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_uliastai_guvernor_num_6 = {
+	custom_effect_tooltip = QIN_set_uliastai_guvernor_num_6_tt
+	set_variable = {
+		var = QIN_uliastai_governor_num
+		value = 5
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+# DONGSANSHENG 
+
+QIN_add_1_to_dongsansheng_guvernor_num = {
+	custom_effect_tooltip = QIN_add_1_to_dongsansheng_guvernor_num_tt
+	add_to_variable = {
+		var = QIN_dongsansheng_governor_num
+		value = 1
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_remove_1_at_dongsansheng_guvernor_num = {
+	custom_effect_tooltip = QIN_remove_1_at_dongsansheng_guvernor_num_tt
+	subtract_from_variable = {
+		var = QIN_dongsansheng_governor_num
+		value = 1
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_dongsansheng_guvernor_num_1 = {
+	custom_effect_tooltip = QIN_set_dongsansheng_guvernor_num_1_tt
+	set_variable = {
+		var = QIN_dongsansheng_governor_num
+		value = 0
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+QIN_set_dongsansheng_guvernor_num_2 = {
+	custom_effect_tooltip = QIN_set_dongsansheng_guvernor_num_2_tt
+	set_variable = {
+		var = QIN_dongsansheng_governor_num
+		value = 1
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_governors_num_vars = yes
+}
+
+##STATE STABILITY
+
+# CHZILI STATE STABILITY EFFECTS
+
+QIN_add_1_to_chzili_state_stability = {
+	custom_effect_tooltip = QIN_add_1_to_chzili_state_stability_tt
+	add_to_variable = { var = QIN_chzili_state_stability value = 1 }
+	force_update_dynamic_modifier = yes
+	QIN_clamp_state_stability_vars = yes
+}
+
+QIN_remove_1_from_chzili_state_stability = {
+	custom_effect_tooltip = QIN_remove_1_from_chzili_state_stability_tt
+	subtract_from_variable = { var = QIN_chzili_state_stability value = 1 }
+	force_update_dynamic_modifier = yes
+	QIN_clamp_state_stability_vars = yes
+}
+
+# LIANGJIANG STATE STABILITY EFFECTS
+
+QIN_add_1_to_liangjiang_state_stability = {
+	custom_effect_tooltip = QIN_add_1_to_liangjiang_state_stability_tt
+	add_to_variable = { var = QIN_liangjiang_state_stability value = 1 }
+	force_update_dynamic_modifier = yes
+	QIN_clamp_state_stability_vars = yes
+}
+
+QIN_remove_1_from_liangjiang_state_stability = {
+	custom_effect_tooltip = QIN_remove_1_from_liangjiang_state_stability_tt
+	subtract_from_variable = { var = QIN_liangjiang_state_stability value = 1 }
+	force_update_dynamic_modifier = yes
+	QIN_clamp_state_stability_vars = yes
+}
+
+# MINZHE STATE STABILITY EFFECTS
+
+QIN_add_1_to_minzhe_state_stability = {
+	custom_effect_tooltip = QIN_add_1_to_minzhe_state_stability_tt
+	add_to_variable = { var = QIN_minzhe_state_stability value = 1 }
+	force_update_dynamic_modifier = yes
+	QIN_clamp_state_stability_vars = yes
+}
+
+QIN_remove_1_from_minzhe_state_stability = {
+	custom_effect_tooltip = QIN_remove_1_from_minzhe_state_stability_tt
+	subtract_from_variable = { var = QIN_minzhe_state_stability value = 1 }
+	force_update_dynamic_modifier = yes
+	QIN_clamp_state_stability_vars = yes
+}
+
+# HUGUANG STATE STABILITY EFFECTS
+
+QIN_add_1_to_huguang_state_stability = {
+	custom_effect_tooltip = QIN_add_1_to_huguang_state_stability_tt
+	add_to_variable = { var = QIN_huguang_state_stability value = 1 }
+	force_update_dynamic_modifier = yes
+	QIN_clamp_state_stability_vars = yes
+}
+
+QIN_remove_1_from_huguang_state_stability = {
+	custom_effect_tooltip = QIN_remove_1_from_huguang_state_stability_tt
+	subtract_from_variable = { var = QIN_huguang_state_stability value = 1 }
+	force_update_dynamic_modifier = yes
+	QIN_clamp_state_stability_vars = yes
+}
+
+# SHENGAN STATE STABILITY EFFECTS
+
+QIN_add_1_to_shengan_state_stability = {
+	custom_effect_tooltip = QIN_add_1_to_shengan_state_stability_tt
+	add_to_variable = { var = QIN_shengan_state_stability value = 1 }
+	force_update_dynamic_modifier = yes
+	QIN_clamp_state_stability_vars = yes
+}
+
+QIN_remove_1_from_shengan_state_stability = {
+	custom_effect_tooltip = QIN_remove_1_from_shengan_state_stability_tt
+	subtract_from_variable = { var = QIN_shengan_state_stability value = 1 }
+	force_update_dynamic_modifier = yes
+	QIN_clamp_state_stability_vars = yes
+}
+
+# SICHUAN STATE STABILITY EFFECTS
+
+QIN_add_1_to_sichuan_state_stability = {
+	custom_effect_tooltip = QIN_add_1_to_sichuan_state_stability_tt
+	add_to_variable = { var = QIN_sichuan_state_stability value = 1 }
+	force_update_dynamic_modifier = yes
+	QIN_clamp_state_stability_vars = yes
+}
+
+QIN_remove_1_from_sichuan_state_stability = {
+	custom_effect_tooltip = QIN_remove_1_from_sichuan_state_stability_tt
+	subtract_from_variable = { var = QIN_sichuan_state_stability value = 1 }
+	force_update_dynamic_modifier = yes
+	QIN_clamp_state_stability_vars = yes
+}
+
+# YUNGUI STATE STABILITY EFFECTS
+
+QIN_add_1_to_yungui_state_stability = {
+	custom_effect_tooltip = QIN_add_1_to_yungui_state_stability_tt
+	add_to_variable = { var = QIN_yungui_state_stability value = 1 }
+	force_update_dynamic_modifier = yes
+	QIN_clamp_state_stability_vars = yes
+}
+
+QIN_remove_1_from_yungui_state_stability = {
+	custom_effect_tooltip = QIN_remove_1_from_yungui_state_stability_tt
+	subtract_from_variable = { var = QIN_yungui_state_stability value = 1 }
+	force_update_dynamic_modifier = yes
+	QIN_clamp_state_stability_vars = yes
+}
+
+# LIANGGUANG STATE STABILITY EFFECTS
+
+QIN_add_1_to_liangguang_state_stability = {
+	custom_effect_tooltip = QIN_add_1_to_liangguang_state_stability_tt
+	add_to_variable = { var = QIN_liangguang_state_stability value = 1 }
+	force_update_dynamic_modifier = yes
+	QIN_clamp_state_stability_vars = yes
+}
+
+QIN_remove_1_from_liangguang_state_stability = {
+	custom_effect_tooltip = QIN_remove_1_from_liangguang_state_stability_tt
+	subtract_from_variable = { var = QIN_liangguang_state_stability value = 1 }
+	force_update_dynamic_modifier = yes
+	QIN_clamp_state_stability_vars = yes
+}
+
+# HEILONGJIANG STATE STABILITY EFFECTS
+
+QIN_add_1_to_heilongjiang_state_stability = {
+	custom_effect_tooltip = QIN_add_1_to_heilongjiang_state_stability_tt
+	add_to_variable = { var = QIN_heilongjiang_state_stability value = 1 }
+	force_update_dynamic_modifier = yes
+	QIN_clamp_state_stability_vars = yes
+}
+
+QIN_remove_1_from_heilongjiang_state_stability = {
+	custom_effect_tooltip = QIN_remove_1_from_heilongjiang_state_stability_tt
+	subtract_from_variable = { var = QIN_heilongjiang_state_stability value = 1 }
+	force_update_dynamic_modifier = yes
+	QIN_clamp_state_stability_vars = yes
+}
+
+# JILIN STATE STABILITY EFFECTS
+
+QIN_add_1_to_jilin_state_stability = {
+	custom_effect_tooltip = QIN_add_1_to_jilin_state_stability_tt
+	add_to_variable = { var = QIN_jilin_state_stability value = 1 }
+	force_update_dynamic_modifier = yes
+	QIN_clamp_state_stability_vars = yes
+}
+
+QIN_remove_1_from_jilin_state_stability = {
+	custom_effect_tooltip = QIN_remove_1_from_jilin_state_stability_tt
+	subtract_from_variable = { var = QIN_jilin_state_stability value = 1 }
+	force_update_dynamic_modifier = yes
+	QIN_clamp_state_stability_vars = yes
+}
+
+# SHENGJING STATE STABILITY EFFECTS
+
+QIN_add_1_to_shengjing_state_stability = {
+	custom_effect_tooltip = QIN_add_1_to_shengjing_state_stability_tt
+	add_to_variable = { var = QIN_shengjing_state_stability value = 1 }
+	force_update_dynamic_modifier = yes
+	QIN_clamp_state_stability_vars = yes
+}
+
+QIN_remove_1_from_shengjing_state_stability = {
+	custom_effect_tooltip = QIN_remove_1_from_shengjing_state_stability_tt
+	subtract_from_variable = { var = QIN_shengjing_state_stability value = 1 }
+	force_update_dynamic_modifier = yes
+	QIN_clamp_state_stability_vars = yes
+}
+
+# SHANDONG STATE STABILITY EFFECTS
+
+QIN_add_1_to_shandong_state_stability = {
+	custom_effect_tooltip = QIN_add_1_to_shandong_state_stability_tt
+	add_to_variable = { var = QIN_shandong_state_stability value = 1 }
+	force_update_dynamic_modifier = yes
+	QIN_clamp_state_stability_vars = yes
+}
+
+QIN_remove_1_from_shandong_state_stability = {
+	custom_effect_tooltip = QIN_remove_1_from_shandong_state_stability_tt
+	subtract_from_variable = { var = QIN_shandong_state_stability value = 1 }
+	force_update_dynamic_modifier = yes
+	QIN_clamp_state_stability_vars = yes
+}
+
+# HENAN STATE STABILITY EFFECTS
+
+QIN_add_1_to_henan_state_stability = {
+	custom_effect_tooltip = QIN_add_1_to_henan_state_stability_tt
+	add_to_variable = { var = QIN_henan_state_stability value = 1 }
+	force_update_dynamic_modifier = yes
+	QIN_clamp_state_stability_vars = yes
+}
+
+QIN_remove_1_from_henan_state_stability = {
+	custom_effect_tooltip = QIN_remove_1_from_henan_state_stability_tt
+	subtract_from_variable = { var = QIN_henan_state_stability value = 1 }
+	force_update_dynamic_modifier = yes
+	QIN_clamp_state_stability_vars = yes
+}
+
+# SHAANXI STATE STABILITY EFFECTS
+
+QIN_add_1_to_shaanxi_state_stability = {
+	custom_effect_tooltip = QIN_add_1_to_shaanxi_state_stability_tt
+	add_to_variable = { var = QIN_shaanxi_state_stability value = 1 }
+	force_update_dynamic_modifier = yes
+	QIN_clamp_state_stability_vars = yes
+}
+
+QIN_remove_1_from_shaanxi_state_stability = {
+	custom_effect_tooltip = QIN_remove_1_from_shaanxi_state_stability_tt
+	subtract_from_variable = { var = QIN_shaanxi_state_stability value = 1 }
+	force_update_dynamic_modifier = yes
+	QIN_clamp_state_stability_vars = yes
+}
+
+# QINGHAI STATE STABILITY EFFECTS
+
+QIN_add_1_to_qinghai_state_stability = {
+	custom_effect_tooltip = QIN_add_1_to_qinghai_state_stability_tt
+	add_to_variable = { var = QIN_qinghai_state_stability value = 1 }
+	force_update_dynamic_modifier = yes
+	QIN_clamp_state_stability_vars = yes
+}
+
+QIN_remove_1_from_qinghai_state_stability = {
+	custom_effect_tooltip = QIN_remove_1_from_qinghai_state_stability_tt
+	subtract_from_variable = { var = QIN_qinghai_state_stability value = 1 }
+	force_update_dynamic_modifier = yes
+	QIN_clamp_state_stability_vars = yes
+}
+
+# SUIYUAN STATE STABILITY EFFECTS
+
+QIN_add_1_to_suiyuan_state_stability = {
+	custom_effect_tooltip = QIN_add_1_to_suiyuan_state_stability_tt
+	add_to_variable = { var = QIN_suiyuan_state_stability value = 1 }
+	force_update_dynamic_modifier = yes
+	QIN_clamp_state_stability_vars = yes
+}
+
+QIN_remove_1_from_suiyuan_state_stability = {
+	custom_effect_tooltip = QIN_remove_1_from_suiyuan_state_stability_tt
+	subtract_from_variable = { var = QIN_suiyuan_state_stability value = 1 }
+	force_update_dynamic_modifier = yes
+	QIN_clamp_state_stability_vars = yes
+}
+
+# ULIASTAI STATE STABILITY EFFECTS
+
+QIN_add_1_to_uliastai_state_stability = {
+	custom_effect_tooltip = QIN_add_1_to_uliastai_state_stability_tt
+	add_to_variable = { var = QIN_uliastai_state_stability value = 1 }
+	force_update_dynamic_modifier = yes
+	QIN_clamp_state_stability_vars = yes
+}
+
+QIN_remove_1_from_uliastai_state_stability = {
+	custom_effect_tooltip = QIN_remove_1_from_uliastai_state_stability_tt
+	subtract_from_variable = { var = QIN_uliastai_state_stability value = 1 }
+	force_update_dynamic_modifier = yes
+	QIN_clamp_state_stability_vars = yes
+}
+
+# DONGSANSHENG STATE STABILITY EFFECTS
+
+QIN_add_1_to_dongsansheng_state_stability = {
+	custom_effect_tooltip = QIN_add_1_to_dongsansheng_state_stability_tt
+	add_to_variable = { var = QIN_dongsansheng_state_stability value = 1 }
+	force_update_dynamic_modifier = yes
+	QIN_clamp_state_stability_vars = yes
+}
+
+QIN_remove_1_from_dongsansheng_state_stability = {
+	custom_effect_tooltip = QIN_remove_1_from_dongsansheng_state_stability_tt
+	subtract_from_variable = { var = QIN_dongsansheng_state_stability value = 1 }
+	force_update_dynamic_modifier = yes
+	QIN_clamp_state_stability_vars = yes
+}
+
+# TIBET STATE STABILITY EFFECTS
+
+QIN_add_1_to_tibet_state_stability = {
+	custom_effect_tooltip = QIN_add_1_to_tibet_state_stability_tt
+	add_to_variable = { var = QIN_tibet_state_stability value = 1 }
+	force_update_dynamic_modifier = yes
+	QIN_clamp_state_stability_vars = yes
+}
+
+QIN_remove_1_from_tibet_state_stability = {
+	custom_effect_tooltip = QIN_remove_1_from_tibet_state_stability_tt
+	subtract_from_variable = { var = QIN_tibet_state_stability value = 1 }
+	force_update_dynamic_modifier = yes
+	QIN_clamp_state_stability_vars = yes
+}
+
+# CHOOSE STATE FRAME EFFECTS
+
+QIN_set_outer_mongolia_frmane_1_effect = {
+	custom_effect_tooltip = QIN_set_outer_mongolia_frmane_1_effect_tt
+	set_variable = { 
+		var = QIN_outer_mongolia_frame_num  
+		value = 0 
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_num_of_state_frame_vars = yes
+}
+
+QIN_set_outer_mongolia_frmane_2_effect = {
+	custom_effect_tooltip = QIN_set_outer_mongolia_frmane_2_effect_tt
+	set_variable = { 
+		var = QIN_outer_mongolia_frame_num   
+		value = 1 
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_num_of_state_frame_vars = yes
+}
+
+QIN_set_sindzyan_frmane_1_effect = {
+	custom_effect_tooltip = QIN_set_sindzyan_frmane_1_effect_tt
+	set_variable = { 
+		var = QIN_sindzyan_frame_num   
+		value = 0 
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_num_of_state_frame_vars = yes
+}
+
+QIN_set_sindzyan_frmane_2_effect = {
+	custom_effect_tooltip = QIN_set_sindzyan_frmane_2_effect_tt
+	set_variable = { 
+		var = QIN_sindzyan_frame_num    
+		value = 1 
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_num_of_state_frame_vars = yes
+}
+
+QIN_set_dongsansheng_frmane_1_effect = {
+	custom_effect_tooltip = QIN_set_dongsansheng_frmane_1_effect_tt
+	set_variable = { 
+		var = QIN_dongsansheng_frame_num    
+		value = 0 
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_num_of_state_frame_vars = yes
+}
+
+QIN_set_dongsansheng_frmane_2_effect = {
+	custom_effect_tooltip = QIN_set_dongsansheng_frmane_2_effect_tt
+	set_variable = { 
+		var = QIN_dongsansheng_frame_num     
+		value = 1 
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_num_of_state_frame_vars = yes
+}
+
+QIN_set_minzhe_frmane_1_effect = {
+	custom_effect_tooltip = QIN_set_minzhe_frmane_1_effect_tt
+	set_variable = { 
+		var = QIN_minzhe_frame_num    
+		value = 0
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_num_of_state_frame_vars = yes
+}
+
+QIN_set_minzhe_frmane_2_effect = {
+	custom_effect_tooltip = QIN_set_minzhe_frmane_2_effect_tt
+	set_variable = { 
+		var = QIN_minzhe_frame_num     
+		value = 1 
+	}
+	force_update_dynamic_modifier = yes
+	QIN_clamp_num_of_state_frame_vars = yes
+}
+
+#STATE ARRAYS
+
+QIN_check_owned_states_array_effect = {
+	clear_array = QIN.aotsm_owned_states_array
+
+	every_state = {
+		limit = {
+			is_owned_and_controlled_by = QIN
+		}
+		add_to_array = {
+			array = QIN.aotsm_owned_states_array
+			value = THIS #THIS означает текущий стейт
+		}
+	}
+}
+
+#SWAP STATE MODIFIER EFFECTS
+
+QIN_swap_undeveloped_region_to_agricultural_region_effect = {
+	remove_dynamic_modifier = { 
+        modifier = QIN_undeveloped_region_state_modifier 
+    }
+    add_dynamic_modifier = { 
+        modifier = QIN_agricultural_region_state_modifier 
+    } 
+}
+
+QIN_swap_agricultural_region_to_industrial_region_1_effect = {
+	remove_dynamic_modifier = { 
+        modifier = QIN_agricultural_region_state_modifier 
+    }
+    add_dynamic_modifier = { 
+        modifier =  QIN_industrial_region_1_state_modifier
+    } 
+}
+
+QIN_swap_aindustrial_region_1_to_industrial_region_2_effect = {
+	remove_dynamic_modifier = { 
+        modifier = QIN_industrial_region_1_state_modifier 
+    }
+    add_dynamic_modifier = { 
+        modifier =  QIN_industrial_region_2_state_modifier
+    } 
 }
