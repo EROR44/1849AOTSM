@@ -1,46 +1,75 @@
 add_namespace = azt_random_events
+add_namespace = azt_random_cholera_events
+
+
+
+
+#######################
+###  RANDOM EVENTS  ### 
+#######################
 
 country_event = { # Acamapichtli Ship
 	id = azt_random_events.1
 	title = azt_random_events.1.t
 	desc = azt_random_events.1.d
-	picture = GFX_Acamapichtli_ship
+	picture = GFX_acamapichtli_ship
 	
 	is_triggered_only = yes
+
+	immediate = { log = "[GetDateText]: [Root.GetName]: event: azt_random_events.1" }
 	
 	fire_only_once = yes
 	
-	option = {#army
+	option = {
 		name = azt_random_events.1.a
 		remove_ideas = AZT_mothballed_ship
 		custom_effect_tooltip = AZT_Acamapichtli_ship_tt
 			hidden_effect = {
-				create_equipment_variant = {
-				name = "Xiuhcoatl Class"
-				type = ship_hull_cruiser_coastal_defense_ship
-				parent_version = 0
-				name_group = AZT_MINELAYERS_HISTORICAL_group
-				allow_without_tech = yes
-				modules = {
-					fixed_ship_battery_slot = ship_light_medium_battery_1
-					rear_1_custom_slot = ship_medium_battery_1
-					fixed_ship_fire_control_system_slot = ship_fire_control_system_0
-					fixed_ship_secondaries_slot = ship_secondaries_1
-					fixed_ship_armor_slot = ship_armor_cruiser_1
-				}
-			}
-
-			add_equipment_production = {
-					equipment = {
-						type = ship_hull_cruiser_coastal_defense_ship
-						creator = "AZT" 
+					create_equipment_variant = {
+						name = "Xiuhcoatl Class"
+						type = ship_hull_cruiser_1
+						parent_version = 0
+						name_group = AZT_MINELAYERS_HISTORICAL_group
+						allow_without_tech = yes
+					modules = {
+						fixed_ship_battery_slot = ship_medium_battery_1
+						mid_1_custom_slot = ship_mine_layer_1
+						mid_2_custom_slot = ship_mine_layer_1
+						fixed_ship_fire_control_system_slot = ship_fire_control_system_0
+						fixed_ship_secondaries_slot = ship_secondaries_1
+						fixed_ship_armor_slot = ship_armor_cruiser_2
+						}
 					}
-					name = "Acamapichtli" 
-					requested_factories = 1
-					progress = 0.88
-					amount = 1
-					industrial_manufacturer = mio:AZT_manahuiaacalli_tequihuac
+					add_equipment_production = {
+							equipment = {
+							type = ship_hull_cruiser_1
+							creator = "AZT" 
+							}
+						name = "Acamapichtli" 
+						requested_factories = 1
+						progress = 0.5
+						amount = 1
+						industrial_manufacturer = mio:AZT_manahuiaacalli_tequihuac
+					}
 			}
-		}
+	}
+}
+
+country_event = { 
+	id = azt_random_cholera_events.1
+	title = azt_random_cholera_events.1.t
+	desc = azt_random_cholera_events.1.d
+	picture = GFX_azt_random_cholera_events.1
+	
+	is_triggered_only = yes
+
+	immediate = { log = "[GetDateText]: [Root.GetName]: event: azt_random_cholera_events.1" }
+	
+	fire_only_once = yes
+	
+	option = {
+		name = azt_random_events.1.
+		add_political_power = -25
+		add_timed_idea = { idea = AZT_random_cholera_events_1_idea#доделать days = 60 }
 	}
 }

@@ -1,19 +1,19 @@
-### search_filters = {FOCUS_FILTER_POLITICAL}
-### search_filters = {FOCUS_FILTER_RESEARCH}
-### search_filters = {FOCUS_FILTER_INDUSTRY}
-### search_filters = {FOCUS_FILTER_STABILITY}
-### search_filters = {FOCUS_FILTER_WAR_SUPPORT}
-### search_filters = {FOCUS_FILTER_MANPOWER}
-### search_filters = {FOCUS_FILTER_ANNEXATION}
+search_filters = {FOCUS_FILTER_POLITICAL}
+search_filters = {FOCUS_FILTER_WESTERNISATION}
+search_filters = {FOCUS_FILTER_RESEARCH}
+search_filters = {FOCUS_FILTER_INDUSTRY}
+search_filters = {FOCUS_FILTER_STABILITY}
+search_filters = {FOCUS_FILTER_WAR_SUPPORT}
+search_filters = {FOCUS_FILTER_ARMY}
 
 focus_tree = {
-	id = aztec_focus_tree
+	id = aztec_main_focus_tree
 	
 	country = {
 		factor = 0
 		
 		modifier = {
-			add = 0 #1000
+			add = 100
 			tag = AZT
 		}
 	}
@@ -21,145 +21,189 @@ focus_tree = {
 	default = no
 	reset_on_civilwar = no
 	
-	continuous_focus_position = { x = 100 y = 1100 }
+	continuous_focus_position = { x = 1000 y = 1200 }
 	
 	default = no
 	reset_on_civilwar = no
 	
 	initial_show_position = {
-		focus = AZT_speech_of_the_emperror
+		focus = AZT_a_new_year_in_the_life_of_the_empire
 	}
-
-#	focus = {
-#		id = AZT_
-#		icon = GFX_
-#		prerequisite = { focus = }
-#		mutually_exclusive = { focus =  }
-#		x = -3
-#		y = 0
-#		relative_position_id =
-#
-#		cost = 7
-#
-#		ai_will_do = {
-#			factor = 1
-#		}
-#
-#		available = {
-#
-#		}
-#		
-#		bypass = {
-#
-#		}
-#
-#		cancel_if_invalid = yes
-#		continue_if_invalid = no
-#		available_if_capitulated = no
-#
-#		complete_tooltip = {
-#
-#		}
-#
-#		completion_reward = {
-#			log = "[GetDateText]: [Root.GetName]: focus AZT_"
-#
-#			custom_effect_tooltip =
-#		}
-#	}
-
-###############################################################################
-########################MAIN_POLITICAL_WAY#####################################
-###############################################################################
+#########################
+###   START FOCUSES   ###
+#########################
 
 	focus = {
-		id = AZT_speech_of_the_emperror
-		icon = GFX_focus_generic_diplomatic_treaty
+		id = AZT_a_new_year_in_the_life_of_the_empire
+		icon = GFX_focus_AZT_a_new_year_in_the_life_of_the_empire
 		
-		x = 15
+		x = 25
 		y = 0
-		cost = 5
-		
-		available = {
-		
-		}
-		
-		available_if_capitulated = yes
-		
-		search_filters = {  }
+		cost = 2
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
 
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: focus AZT_speech_of_the_emperror "
-
-			hidden_effect = {
-				
-			}
-		}
+		completion_reward = { #WIP
+			log = "[GetDateText]: [Root.GetName]: focus AZT_a_new_year_in_the_life_of_the_empire"
+#			AZT = { country_event  }
+		}	
 	}
 	
 	focus = {
-		id = AZT_continue_modernisarion
-		icon = GFX_focus_generic_diplomatic_treaty
+		id = AZT_preparation_country
+		icon = GFX_focus_AZT_preparation_country
 		
 		x = 0
 		y = 1
-		cost = 5
+		cost = 2
 		
-		relative_position_id = AZT_speech_of_the_emperror
+		relative_position_id = AZT_a_new_year_in_the_life_of_the_empire
 		
-		prerequisite = { focus = AZT_speech_of_the_emperror }
+		prerequisite = { focus = AZT_a_new_year_in_the_life_of_the_empire }
 		
-		available = {
-		
-		}
-		
-		available_if_capitulated = yes
-		
-		search_filters = {  }
+		search_filters = { FOCUS_FILTER_STABILITY FOCUS_FILTER_POLITICAL }
 
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: focus AZT_continue_modernisarion "
-
-			hidden_effect = {
-				
-			}
+		completion_reward = { #WIP
+			log = "[GetDateText]: [Root.GetName]: focus AZT_preparation_country"
+#			AZT = { country_event =  }
 		}
 	}
 	
 	focus = {
-		id = AZT_economic_of_the_empire
-		icon = GFX_focus_generic_diplomatic_treaty
+		id = AZT_new_cocolitztli
+		icon = GFX_focus_AZT_new_cocoliztli
 		
-		x = -5
+		x = -2
 		y = 1
-		cost = 5
+		cost = 2
 		
-		relative_position_id = AZT_continue_modernisarion
+		relative_position_id = AZT_preparation_country
 		
-		prerequisite = { focus = AZT_continue_modernisarion }
+		prerequisite = { focus = AZT_preparation_country }
 		
-		available = {
-		
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
+
+		completion_reward = { #WIP
+			log = "[GetDateText]: [Root.GetName]: focus AZT_new_cocolitztli"
+#			AZT = { country_event =  }
+			custom_effect_tooltip = AZT_new_cocolitztli_focus_tt
+			set_country_flag = AZT_cholera_gui_visible_flag
 		}
+	}
+
+	focus = {
+		id = AZT_throughout_the_empire
+		icon = GFX_focus_AZT_throughout_the_empire
 		
-		available_if_capitulated = yes
+		x = 0
+		y = 1
+		cost = 2
 		
-		search_filters = {  }
+		relative_position_id = AZT_preparation_country
+		
+		prerequisite = { focus = AZT_preparation_country }
+		
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
+
+		completion_reward = { #WIP
+			log = "[GetDateText]: [Root.GetName]: focus AZT_throughout_the_empire"
+#			AZT = { # starts a chain of events for the emperor's trip
+#				country_event = 
+#			}
+		}
+	}
+
+	focus = {
+		id = AZT_inspect_the_army
+		icon = GFX_focus_AZT_Inspect_the_army
+		
+		x = 2
+		y = 1
+		cost = 2
+		
+		relative_position_id = AZT_preparation_country
+		
+		prerequisite = { focus = AZT_preparation_country }
+		
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY FOCUS_FILTER_ARMY }
 
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: focus AZT_economic_of_the_empire "
+			log = "[GetDateText]: [Root.GetName]: focus AZT_inspect_the_army"
+			country_lock_all_division_template = no
+		}
+	}
 
-			hidden_effect = {
-				
+	focus = {
+		id = AZT_the_divine_gift_of_the_imperial_family
+		icon = GFX_focus_AZT_the_divine_gift_of_the_imperial_family
+		
+		x = 0
+		y = 1
+		cost = 2
+		
+		relative_position_id = AZT_throughout_the_empire
+		
+		prerequisite = { focus = AZT_new_cocolitztli }
+		prerequisite = { focus = AZT_throughout_the_empire }
+		prerequisite = { focus = AZT_inspect_the_army }
+		
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
+
+		completion_reward = { #WIP
+			log = "[GetDateText]: [Root.GetName]: focus AZT_the_divine_gift_of_the_imperial_family"
+			add_political_power = 100
+			add_popularity = {
+				ideology = reactionist
+				popularity = 0.05
 			}
 		}
 	}
 
+	focus = {
+		id = AZT_the_austrian_monopoly
+		icon = GFX_focus_AZT_the_austrian_monopoly
+		
+		x = 0
+		y = 1
+		cost = 2
+		
+		relative_position_id = AZT_the_divine_gift_of_the_imperial_family
+		
+		prerequisite = { focus = AZT_the_divine_gift_of_the_imperial_family }
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
 
-###############################################################################
-########################1842_YEAR_EPIDEMY_SECTION##############################
-###############################################################################
+		completion_reward = { #WIP
+			log = "[GetDateText]: [Root.GetName]: focus AZT_the_austrian_monopoly"
+#			AZT = { country_event =  }
+		}
+	}
 
+	focus = {
+		id = AZT_introduction_of_duties_on_steel_exports
+		icon = GFX_focus_AZT_introduction_of_duties_on_steel_exports
+		
+		x = 0
+		y = 3
+		cost = 2
+		
+		relative_position_id = AZT_the_austrian_monopoly
+		
+		prerequisite = { focus = AZT_the_austrian_monopoly }
+		
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = { #WIP
+			log = "[GetDateText]: [Root.GetName]: focus AZT_introduction_of_duties_on_steel_exports"
+			add_timed_idea = {
+				idea = AZT_revenue_from_duties_timed_idea
+				days = 180
+			}
+		}
+	}
+	
+##############################
+###   MAIN POLITICAL WAY   ###
+##############################
 	focus = {
 		id = AZT_consequences_of_the_epidemic_of_1842
 		icon = GFX_focus_generic_diplomatic_treaty
@@ -174,6 +218,10 @@ focus_tree = {
 		
 		}
 		
+		allow_branch = {
+        	has_country_flag = AZT_main_politic_way_focuses_visible
+    	}
+
 		available_if_capitulated = yes
 		
 		search_filters = {  }

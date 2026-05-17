@@ -21,6 +21,38 @@ AZT_Tlekaaltepetl_organisation = { # онли пехотка
 	equipment_type = { infantry_equipment }
 	
 	research_categories = { infantry_weapons }
+
+	add_trait = {
+		token = AZT_mio_trait_research_and_development_department
+		name = generic_mio_trait_plant_tech_exchange
+		icon = GFX_generic_mio_department_icon_facilities
+		
+		position = { x = 2 y = 0 }
+
+		organization_modifier = {
+			military_industrial_organization_research_bonus = 0.15
+		}
+
+		production_bonus = { production_efficiency_gain_factor = -0.03 }
+	}
+
+	add_trait = {
+		token = AZT_mio_trait_export_models
+		name = AZT_mio_trait_export_models
+		icon = GFX_generic_mio_department_icon_facilities
+		special_trait_background = yes
+
+		position = { x=-1 y=1 }  
+		relative_position_id = generic_mio_trait_drum_pattern_sights
+		production_bonus = {
+			production_efficiency_cap_factor = 0.03
+			production_cost_factor = -0.03
+		}
+		
+		ai_will_do = {
+			base = 10000
+		}
+	}
 }
 
 AZT_tlahhuiz_ihuan_cuayotl_organisation = { # пехотка и доп оснащение
@@ -43,6 +75,30 @@ AZT_tlahhuiz_ihuan_cuayotl_organisation = { # пехотка и доп осна�
     visible = {
         #WIP
     }
+
+	initial_trait = {
+		soft_attack = 0.05
+		reliability = 0.05
+		defense = 0.03
+		breakthrough = 0.05
+	}
+
+	add_trait = {
+		token = AZT_mio_trait_tests_in_the_combat_zone
+		name = AZT_mio_trait_tests_in_the_combat_zone
+		icon = GFX_generic_mio_department_icon_facilities
+		special_trait_background = yes
+
+		position = { x= 2 y= 0 }  
+		production_bonus = {
+			soft_attack = 0.05
+			reliability = 0.05
+		}
+		
+		ai_will_do = {
+			base = 10000
+		}
+	}
 }
 
 AZT_artillerie_francaise_organisation = {
@@ -67,7 +123,88 @@ AZT_artillerie_francaise_organisation = {
 		anti_tank_equipment
 		anti_air_equipment
 	}
+
+	initial_trait = {
+		name = AZT_mio_initial_trait_artillerie_francaise_organisation
+		equipment_bonus = { soft_attack = 0.05 production_efficiency_gain_factor = 0.10 }
+	}
+
+	add_trait = {
+		token = AZT_artillery_deployment_program
+		name = AZT_artillery_deployment_program
+		icon = GFX_generic_mio_department_icon_facilities
+		special_trait_background = yes
+
+		position = { x = 2  y = 0 }  
+		production_bonus = {
+			production_efficiency_cap_factor = 0.05
+			production_capacity_factor = 0.05
+		}
+		
+		ai_will_do = {
+			base = 10000
+		}
+	}
+
+	add_trait = {
+		token = AZT_high_explosive_fragmentation_shells
+		name = AZT_high_explosive_fragmentation_shells
+		icon = GFX_generic_mio_department_icon_facilities
+		special_trait_background = yes
+
+		available = {
+			FROM = {
+				has_tech = artillery3
+			}
+		}
+
+		limit_to_equipment_type = { 
+			artillery_equipment
+		}
+
+		position = { x = 2 y = 0 }  
+		production_bonus = {
+			soft_attack = 0.05
+			breakthrough = 0.05
+			defense = 0.05
+		}
+		
+		ai_will_do = {
+			base = 10000
+		}
+	}
+
+	add_trait = { 
+		token = AZT_mio_trait_dual_recoil_mechanism
+		name = AZT_mio_trait_dual_recoil_mechanism
+		icon = GFX_generic_mio_department_icon_artillery
+		special_trait_background = yes
+
+		position = { x = 1 y = 1 }
+		relative_position_id = generic_mio_trait_advanced_barrel_forging
+
+		all_parents = {
+			generic_mio_trait_advanced_barrel_forging
+			generic_mio_trait_big_guns
+		}
+
+		available = {
+			FROM = {
+				has_tech = artillery3
+			}
+		}
+
+		limit_to_equipment_type = { 
+			artillery_equipment
+		}
+
+		equipment_bonus = {
+			soft_attack = 0.08
+			build_cost_ic = 0.05
+		}
+	}
 }
+
 
 AZT_Yaotlequiquiztli_tequihuac_organisation = {
     include = generic_artillery_organization
@@ -82,6 +219,41 @@ AZT_Yaotlequiquiztli_tequihuac_organisation = {
 		artillery_equipment
 		anti_tank_equipment
 		anti_air_equipment
+	}
+
+	add_trait = { 
+		token = AZT_mio_trait_dual_recoil_mechanism
+		name = AZT_mio_trait_dual_recoil_mechanism
+		icon = GFX_generic_mio_department_icon_artillery
+		special_trait_background = yes
+
+		position = { x = 1 y = 1 }
+		relative_position_id = generic_mio_trait_advanced_barrel_forging
+
+		all_parents = {
+			generic_mio_trait_advanced_barrel_forging
+			generic_mio_trait_big_guns
+		}
+
+		available = {
+			FROM = {
+				has_tech = artillery3
+			}
+		}
+
+		limit_to_equipment_type = { 
+			artillery_equipment
+		}
+
+		equipment_bonus = {
+			soft_attack = 0.08
+			build_cost_ic = 0.05
+		}
+	}
+
+	initial_trait = {
+		name = AZT_initial_trait_Yaotlequiquiztli_tequihuac_organisation
+		equipment_bonus = {  }
 	}
 }
 
@@ -125,7 +297,7 @@ AZT_tepoztepochtli_tequihuac_organisation = {
 AZT_manahuiaacalli_tequihuac = {
     include = generic_escort_ship_organization
 	
-	icon = GFX_idea_CBI_state_navy_dockyard_n
+	icon = GFX_idea_AZT_manahuiaacalli_tequihuac
 
 	allowed = {
 		tag = AZT
