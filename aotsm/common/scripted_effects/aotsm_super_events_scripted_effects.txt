@@ -24,7 +24,10 @@ aotsm_se_PRU_form_north_german_union_effect = {
 			}
 			play_song = "AOTSM_UNITE_NORTH_GERMAN_UNION"
 		}
-    }  
+    } 
+    #else_if = { #Не нашел news_event id
+    #     news_event = { id = news.### days = 1 }
+    #} 
 }
 
 aotsm_se_PRU_form_german_empire_effect = {
@@ -40,7 +43,10 @@ aotsm_se_PRU_form_german_empire_effect = {
 			}
 			play_song = "AOTSM_UNITE_GERMAN_EMPIRE"
 		}
-    }  
+    }   
+    else_if = {
+        news_event = { id = news.5 days = 1 }
+    } 
 }
 
 aotsm_se_SAR_unite_italia_effect = {
@@ -56,7 +62,10 @@ aotsm_se_SAR_unite_italia_effect = {
 			}
 			play_song = "AOTSM_UNITE_ITALIA"
 		}
-    }  
+    }
+    #else_if = { #Не нашел news_event id
+    #     news_event = { id = news.### days = 1 }
+    #}     
 }
 
 aotsm_se_CBI_chartist_uprising_effect = {
@@ -66,13 +75,16 @@ aotsm_se_CBI_chartist_uprising_effect = {
         }
         set_global_flag = aotsm_se_visible_flag
         set_global_flag = aotsm_se_CBI_chartist_uprising_flag
-        #if = {
-		#	limit = {
-		#		NOT = { has_global_flag = aotsm_se_misic_locked }
-		#	}
-		#	play_song = "AOTSM_CHARTISTS_UPRISING"
-		#}
+        if = {
+			limit = {
+				NOT = { has_global_flag = aotsm_se_misic_locked }
+			}
+			play_song = "AOTSM_CHARTISTS_UPRISING"
+		}
     }  
+    else_if = {
+        news_event = { id = news.102 days = 1 }
+    }   
 }
 
 aotsm_se_BYZ_mladoturkish_uprising_effect = {
@@ -88,7 +100,10 @@ aotsm_se_BYZ_mladoturkish_uprising_effect = {
 			}
 			play_song = "AOTSM_MLADOTURKISH_UPRISING"
 		}
-    }  
+    }
+    #else_if = { #Не нашел news_event id
+    #     news_event = { id = news.### days = 1 }
+    #}   
 }
 
 aotsm_se_BYZ_death_of_emperror_effect = {
@@ -104,7 +119,10 @@ aotsm_se_BYZ_death_of_emperror_effect = {
 			}
 			play_song = "AOTSM_DEATH_OF_EMPERROR"
 		}
-    }  
+    } 
+    else_if = {
+        news_event = { id = news.289 days = 1 }
+    }   
 }
 
 aotsm_se_PRU_civil_war_in_germany_effect = {
@@ -120,7 +138,10 @@ aotsm_se_PRU_civil_war_in_germany_effect = {
 			}
 			play_song = "AOTSM_GERMAN_CIVIL_WAR"
 		}
-    }  
+    }
+    #else_if = { #Не нашел news_event id
+    #     news_event = { id = news.### days = 1 }
+    #} 
 }
 
 aotsm_se_RUS_second_smuta_effect = {
@@ -136,7 +157,10 @@ aotsm_se_RUS_second_smuta_effect = {
 			}
 			play_song = "AOTSM_SMUTA"
 		}
-    }  
+    } 
+    else_if = {
+        news_event = { id = news.220 days = 1 }
+    }   
 }
 
 aotsm_se_great_war_start_with_poland_uprising_effect = {
@@ -152,6 +176,9 @@ aotsm_se_great_war_start_with_poland_uprising_effect = {
 			}
 			play_song = "AOTSM_FIRST_WORLD_WAR"
 		}
+    } 
+    else_if = {
+        news_event = { id = news.277 days = 1 }
     }  
 }
 
@@ -169,6 +196,9 @@ aotsm_se_great_war_start_with_tavrida_operation_effect = {
 			play_song = "AOTSM_FIRST_WORLD_WAR"
 		}
     }  
+    else_if = {
+        news_event = { id = news.271 days = 1 }
+    }   
 }
 
 aotsm_se_russia_start_great_war_effect = {
@@ -185,6 +215,9 @@ aotsm_se_russia_start_great_war_effect = {
 			play_song = "AOTSM_FIRST_WORLD_WAR"
 		}
     }  
+    #else_if = { #Не нашел news_event id
+    #     news_event = { id = news.### days = 1 }
+    #} 
 }
 
 aotsm_se_russia_start_great_war_with_byz_effect = {
@@ -200,7 +233,10 @@ aotsm_se_russia_start_great_war_with_byz_effect = {
 			}
 			play_song = "AOTSM_FIRST_WORLD_WAR"
 		}
-    }  
+    }
+    #else_if = { #Не нашел news_event id
+    #     news_event = { id = news.### days = 1 }
+    #} 
 }
 
 aotsm_se_JAP_start_civil_war_effect = {
@@ -214,10 +250,86 @@ aotsm_se_JAP_start_civil_war_effect = {
 			limit = {
 				NOT = { has_global_flag = aotsm_se_misic_locked }
 			}
-			#play_song = "AOTSM_JAPAN_CIVIL_WAR"
+			play_song = "AOTSM_JAPAN_CIVIL_WAR"
 		}
     } 
     else_if = {
         news_event = { id = news.27 days = 1 }
+    } 
+}
+
+aotsm_se_QIN_death_of_daoguan_effect = {
+    if = {
+        limit = { #проверка заблоканы суперивенты или нет
+            NOT = { has_global_flag = aotsm_se_locked_flag }
+        }
+        set_global_flag = aotsm_se_visible_flag
+        set_global_flag = aotsm_se_death_of_daoguan_flag
+		if = {
+			limit = {
+				NOT = { has_global_flag = aotsm_se_misic_locked }
+			}
+			play_song = "AOTSM_DAOGUAN_DEATH"
+		}
+    } 
+    else_if = {
+        news_event = { id = news.40 days = 1 }
+    } 
+}
+
+aotsm_se_QIN_start_of_taypin_uprising_effect = {
+    if = {
+        limit = { #проверка заблоканы суперивенты или нет
+            NOT = { has_global_flag = aotsm_se_locked_flag }
+        }
+        set_global_flag = aotsm_se_visible_flag
+        set_global_flag = aotsm_se_start_of_taypin_uprising_flag
+		if = {
+			limit = {
+				NOT = { has_global_flag = aotsm_se_misic_locked }
+			}
+			play_song = "AOTSM_START_TAYPIN_UPRISING"
+		}
+    } 
+    #else_if = {
+    #    news_event = { id = news.### days = 1 }
+    #} 
+}
+
+aotsm_se_TIB_nepal_tibetan_war_effect = {
+    if = {
+        limit = { #проверка заблоканы суперивенты или нет
+            NOT = { has_global_flag = aotsm_se_locked_flag }
+        }
+        set_global_flag = aotsm_se_visible_flag
+        set_global_flag = aotsm_se_nepal_tibetan_war_flag
+		if = {
+			limit = {
+				NOT = { has_global_flag = aotsm_se_misic_locked }
+			}
+			play_song = "AOTSM_START_2_NEPAL_TIBATAN_WAR"
+		}
+    } 
+    else_if = {
+        news_event = { id = news.304 days = 1 }
+    } 
+}
+
+aotsm_se_first_leypoldit_bombing_effect = {
+    if = {
+        limit = { #проверка заблоканы суперивенты или нет
+            NOT = { has_global_flag = aotsm_se_locked_flag }
+        }
+        set_global_flag = aotsm_se_visible_flag
+        set_global_flag = aotsm_se_first_leypoldit_bombing_flag
+		if = {
+			limit = {
+				NOT = { has_global_flag = aotsm_se_misic_locked }
+			}
+			play_song = "AOTSM_FIRST_LEYPOLDIT_STRIKE"
+		}
+    } 
+    else_if = {
+        news_event = { id = news.23 days = 1 }
     } 
 }
