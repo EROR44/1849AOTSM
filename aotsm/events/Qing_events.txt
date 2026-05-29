@@ -4,6 +4,7 @@ add_namespace = qin_story_event #Ивенты справки
 add_namespace = qin_literary_event #Мифологические, литературные события
 add_namespace = qin_industry_event #События связанные с промышленностью
 add_namespace = qin_political_event #Политические события
+add_namespace = qin_army_event #Cобытия связанные с армией
 add_namespace = qin_navy_event #Cобытия связанные с флотом
 add_namespace = qin_great_embassy_event #Cобытия связанные с великим посольством Цин
 add_namespace = qin_taypin_chain_event #Cобытия связанные с Тайпинами
@@ -31,8 +32,24 @@ country_event = { #
 		country_event = { id = qin_literary_event.1 days = 14 } 
 		country_event = { id = qin_taypin_chain_event.1 days = 21 } 
 		country_event = { id = qin_script_event.2 days = 420 } #25 февраля 1850
-		country_event = { id = qin_viceroys_and_guvernors_chain_event.1 days = 1459  } #Чжили
-		country_event = { id = qin_viceroys_and_guvernors_chain_event.6 days = 115 } #Лянцзян
+		#Цепочки назначений вице-королей и губернаторов регионов
+		country_event = { id = qin_viceroys_and_guvernors_chain_event.1 days = 1724  } #Чжили
+		country_event = { id = qin_viceroys_and_guvernors_chain_event.6 days = 114 } #Лянцзян
+		country_event = { id = qin_viceroys_and_guvernors_chain_event.11 days = 2016 } #Миньчже
+		country_event = { id = qin_viceroys_and_guvernors_chain_event.18 days = 298 } #Хугуан
+		country_event = { id = qin_viceroys_and_guvernors_chain_event.25 days = 679 } #Шаан-Ган
+		country_event = { id = qin_viceroys_and_guvernors_chain_event.32 days = 1938 } #Лянгуан
+		country_event = { id = qin_viceroys_and_guvernors_chain_event.38 days = 460 } #Юнь-Гуй
+		country_event = { id = qin_viceroys_and_guvernors_chain_event.45 days = 1031 } #Сычуань
+		country_event = { id = qin_viceroys_and_guvernors_chain_event.54 days = 539 } #Шендзин
+		country_event = { id = qin_viceroys_and_guvernors_chain_event.58 days = 1274 } #Цзилинь
+		country_event = { id = qin_viceroys_and_guvernors_chain_event.62 days = 1869 } #Хейлунцзян
+		country_event = { id = qin_viceroys_and_guvernors_chain_event.65 days = 1529 } #Шенси
+		country_event = { id = qin_viceroys_and_guvernors_chain_event.73 days = 164 } #Хенань
+		country_event = { id = qin_viceroys_and_guvernors_chain_event.84 days = 239 } #Шаньдун
+		country_event = { id = qin_viceroys_and_guvernors_chain_event.91 days = 1109 } #Наместник по делам Синин
+		country_event = { id = qin_viceroys_and_guvernors_chain_event.97 days = 1529 } #Суйюань
+		country_event = { id = qin_viceroys_and_guvernors_chain_event.103 days = 34 } #Улясутай 
 	}
 
 	option = {
@@ -631,7 +648,7 @@ country_event = { # Смерть императора Даогуана
 		country_event = qin_political_event.21 
 		hidden_effect = {
 			QIN_check_who_is_new_emperror = yes
-			news_event = { id = news.40 days = 1 } 
+			aotsm_se_QIN_death_of_daoguan_effect = yes
 		}
 
 	}
@@ -2184,6 +2201,879 @@ country_event = { #
 			
 		}
 	
+	}
+}
+
+#####################################################################################
+####################################ARMY_EVENTS######################################
+#####################################################################################
+
+country_event = { #
+	id = qin_army_event.1
+	title = qin_army_event.1.t
+	desc = qin_army_event.1.d
+	picture = GFX_report_event_generic_sign_treaty
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event qin_army_event.1"
+		hidden_effect = {
+			QIN_up_backward_army_idea_effect = yes
+		}
+	}
+
+	option = { #
+		name = qin_army_event.1.a
+		ai_chance = {
+			base = 20
+		}
+		custom_effect_tooltip = QIN_choose_all_army_modernisation_tt
+		hidden_effect = {
+			set_country_flag = QIN_all_army_modernisation_flag
+		}
+	}
+
+	option = { #
+		name = qin_army_event.1.a
+		ai_chance = {
+			base = 30
+		}
+		custom_effect_tooltip = QIN_choose_green_standart_army_modernisation_tt
+		hidden_effect = {
+			set_country_flag = QIN_green_standart_army_modernisation_flag
+		}
+	}
+}
+
+country_event = { #
+	id = qin_army_event.2
+	title = qin_army_event.2.t
+	desc = qin_army_event.2.d
+	picture = GFX_report_event_generic_sign_treaty
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event qin_army_event.2"
+	}
+
+	option = {
+		name = qin_army_event.2.a
+		add_stability = -0.025
+		add_ideas = QIN_eight_banner_army_modernization
+	}
+}
+
+country_event = { #
+	id = qin_army_event.3
+	title = qin_army_event.3.t
+	desc = qin_army_event.3.d
+	picture = GFX_report_event_generic_sign_treaty
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event qin_army_event.3"
+	}
+
+	option = {
+		name = qin_army_event.3.a
+		add_stability = -0.025
+		add_command_power = 25
+		army_experience = 50
+	}
+}
+
+country_event = { #
+	id = qin_army_event.4
+	title = qin_army_event.4.t
+	desc = qin_army_event.4.d
+	picture = GFX_report_event_generic_sign_treaty
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event qin_army_event.4"
+	}
+
+	option = {
+		name = qin_army_event.4.a
+		add_doctrine_cost_reduction = {
+			cost_reduction = 0.5
+			uses = 1
+			category = land_doctrine
+		}
+		QIN_up_backward_army_idea_effect = yes
+	}
+}
+
+country_event = { #
+	id = qin_army_event.5
+	title = qin_army_event.5.t
+	desc = qin_army_event.5.d
+	picture = GFX_report_event_generic_sign_treaty
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event qin_army_event.5"
+	}
+
+	option = {
+		name = qin_army_event.5.a
+		add_stability = -0.025
+		add_ideas = QIN_green_standard_modernization
+	}
+}
+
+country_event = { #
+	id = qin_army_event.6
+	title = qin_army_event.6.t
+	desc = qin_army_event.6.d
+	picture = GFX_report_event_generic_sign_treaty
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event qin_army_event.6"
+	}
+
+	option = {
+		name = qin_army_event.6.a
+		trigger = {
+			# условия
+		}
+	}
+}
+
+country_event = { #
+	id = qin_army_event.7
+	title = qin_army_event.7.t
+	desc = qin_army_event.7.d
+	picture = GFX_report_event_generic_sign_treaty
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event qin_army_event.7"
+	}
+
+	option = {
+		name = qin_army_event.7.a
+		QIN_up_backward_army_idea_effect = yes
+	}
+}
+
+country_event = { #
+	id = qin_army_event.8
+	title = qin_army_event.8.t
+	desc = qin_army_event.8.d
+	picture = GFX_report_event_generic_sign_treaty
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event qin_army_event.8"
+	}
+
+	option = {
+		name = qin_army_event.8.a
+		QIN_up_backward_army_idea_effect = yes
+	}
+}
+
+country_event = { #
+	id = qin_army_event.9
+	title = qin_army_event.9.t
+	desc = qin_army_event.9.d
+	picture = GFX_report_event_generic_sign_treaty
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event qin_army_event.9"
+	}
+
+	option = {
+		name = qin_army_event.9.a
+		trigger = {
+			# условия
+		}
+	}
+}
+
+country_event = { #
+	id = qin_army_event.10
+	title = qin_army_event.10.t
+	desc = qin_army_event.10.d
+	picture = GFX_report_event_generic_sign_treaty
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event qin_army_event.10"
+	}
+
+	option = {
+		name = qin_army_event.10.a
+		QIN_up_backward_army_idea_effect = yes
+	}
+}
+
+country_event = { #
+	id = qin_army_event.11
+	title = qin_army_event.11.t
+	desc = qin_army_event.11.d
+	picture = GFX_report_event_generic_sign_treaty
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event qin_army_event.11"
+	}
+
+	option = {
+		name = qin_army_event.11.a
+		trigger = {
+			# условия
+		}
+	}
+}
+
+country_event = { #
+	id = qin_army_event.12
+	title = qin_army_event.12.t
+	desc = qin_army_event.12.d
+	picture = GFX_report_event_generic_sign_treaty
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event qin_army_event.12"
+	}
+
+	option = {
+		name = qin_army_event.12.a
+		trigger = {
+			# условия
+		}
+	}
+}
+
+country_event = { #
+	id = qin_army_event.13
+	title = qin_army_event.13.t
+	desc = qin_army_event.13.d
+	picture = GFX_report_event_generic_sign_treaty
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event qin_army_event.13"
+		hidden_effect = {
+			QIN_up_backward_army_idea_effect = yes
+		}
+	}
+
+	option = {
+		name = qin_army_event.13.a
+		trigger = {
+			# условия
+		}
+	}
+}
+
+country_event = { #
+	id = qin_army_event.14
+	title = qin_army_event.14.t
+	desc = qin_army_event.14.d
+	picture = GFX_report_event_generic_sign_treaty
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event qin_army_event.14"
+	}
+
+	option = {
+		name = qin_army_event.14.a
+		army_experience = 25
+		QIN_up_backward_army_idea_effect = yes
+	}
+}
+
+country_event = { #
+	id = qin_army_event.15
+	title = qin_army_event.15.t
+	desc = qin_army_event.15.d
+	picture = GFX_report_event_generic_sign_treaty
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event qin_army_event.15"
+	}
+
+	option = {
+		name = qin_army_event.15.a
+		add_ideas = QIN_brigade_battalion_army_structure
+		QIN_up_backward_army_idea_effect = yes
+	}
+}
+
+country_event = { #
+	id = qin_army_event.16
+	title = qin_army_event.16.t
+	desc = qin_army_event.16.d
+	picture = GFX_report_event_generic_sign_treaty
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event qin_army_event.16"
+	}
+
+	option = {
+		name = qin_army_event.16.a
+		add_ideas = QIN_division_regiment_army_structure
+		QIN_up_backward_army_idea_effect = yes
+	}
+}
+
+country_event = { #
+	id = qin_army_event.17
+	title = qin_army_event.17.t
+	desc = qin_army_event.17.d
+	picture = GFX_report_event_generic_sign_treaty
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event qin_army_event.17"
+	}
+
+	option = {
+		name = qin_army_event.17.a
+		add_ideas = QIN_zeng_guofan_tactics
+		army_experience = 50
+		add_doctrine_cost_reduction = {
+			cost_reduction = 0.5
+			uses = 1
+			category = land_doctrine
+		}
+		add_mastery = {
+			amount = 50
+			folder = land	
+		}
+	}
+}
+
+country_event = { #
+	id = qin_army_event.18
+	title = qin_army_event.18.t
+	desc = qin_army_event.18.d
+	picture = GFX_report_event_generic_sign_treaty
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event qin_army_event.18"
+	}
+
+	option = {
+		name = qin_army_event.18.a
+		add_equipment_to_stockpile = {
+			type = infantry_equipment
+			amount = 2500
+			producer = BYZ
+		}
+		add_equipment_to_stockpile = {
+			type = support_equipment
+			amount = 500
+			producer = BYZ
+		}
+		add_ideas = QIN_li_hongzhang_tactics
+		add_doctrine_cost_reduction = {
+			cost_reduction = 0.5
+			uses = 1
+			category = land_doctrine
+		}
+		add_mastery = {
+			amount = 50
+			folder = land	
+		}
+	}
+}
+
+country_event = { #
+	id = qin_army_event.19
+	title = qin_army_event.19.t
+	desc = qin_army_event.19.d
+	picture = GFX_report_event_generic_sign_treaty
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event qin_army_event.19"
+	}
+
+	option = {
+		name = qin_army_event.19.a
+		custom_effect_tooltip = QIN_unlock_regular_province_recruiting_decisions_tt
+		QIN_add_15k_manpower_effect = yes
+		hidden_effect = {
+			set_country_flag = QIN_unlock_regular_province_recruiting_decisions_flag
+		}
+	}
+}
+
+country_event = { #
+	id = qin_army_event.20
+	title = qin_army_event.20.t
+	desc = qin_army_event.20.d
+	picture = GFX_report_event_generic_sign_treaty
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event qin_army_event.20"
+	}
+
+	option = {
+		name = qin_army_event.20.a
+		trigger = {
+			# условия
+		}
+	}
+}
+
+country_event = { #
+	id = qin_army_event.21
+	title = qin_army_event.21.t
+	desc = qin_army_event.21.d
+	picture = GFX_report_event_generic_sign_treaty
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event qin_army_event.21"
+	}
+
+	option = {
+		name = qin_army_event.21.a
+		custom_effect_tooltip = QIN_unlock_build_arsenals_decisions_tt
+		add_war_support = 0.025
+		hidden_effect = {
+			set_country_flag = QIN_unlock_build_arsenals_decisions_flag
+		}
+	}
+}
+
+country_event = { #
+	id = qin_army_event.22
+	title = qin_army_event.22.t
+	desc = qin_army_event.22.d
+	picture = GFX_report_event_generic_sign_treaty
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event qin_army_event.22"
+	}
+
+	option = {
+		name = qin_army_event.22.a
+		QIN_up_backward_army_idea_effect = yes
+		QIN_drop_banner_army_modernisation_ideas_effect = yes
+	}
+}
+
+country_event = { #
+	id = qin_army_event.23
+	title = qin_army_event.23.t
+	desc = qin_army_event.23.d
+	picture = GFX_report_event_generic_sign_treaty
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event qin_army_event.23"
+	}
+
+	option = {
+		name = qin_army_event.23.a
+		custom_effect_tooltip = QIN_choose_mass_army_strategy_tt
+		add_doctrine_cost_reduction = {
+			cost_reduction = 0.5
+			uses = 1
+			category = land_doctrine
+		}
+		add_mastery_bonus = {
+			name = doctrine_mastery_bonus
+			bonus = 0.1
+			days = 180
+			grand_doctrine = mass_assault
+		}
+		army_experience = 25
+		hidden_effect = {
+			complete_national_focus = QIN_mass_focus
+		}
+	}
+
+	option = {
+		name = qin_army_event.23.a
+		custom_effect_tooltip = QIN_choose_iron_wind_strategy_tt
+		add_doctrine_cost_reduction = {
+			cost_reduction = 0.5
+			uses = 1
+			category = land_doctrine
+		}
+		add_mastery_bonus = {
+			name = doctrine_mastery_bonus
+			bonus = 0.1
+			days = 180
+			grand_doctrine = superior_firepower
+		}
+		army_experience = 25
+		hidden_effect = {
+			complete_national_focus = QIN_mass_focus
+		}
+	}
+
+	option = {
+		name = qin_army_event.23.a
+		custom_effect_tooltip = QIN_choose_chinesse_legions_strategy_tt
+		add_doctrine_cost_reduction = {
+			cost_reduction = 0.5
+			uses = 1
+			category = land_doctrine
+		}
+		add_mastery_bonus = {
+			name = doctrine_mastery_bonus
+			bonus = 0.1
+			days = 180
+			grand_doctrine = grand_battleplan
+		}
+		army_experience = 25
+		hidden_effect = {
+			complete_national_focus = QIN_mass_focus
+		}
+	}
+}
+
+country_event = { #
+	id = qin_army_event.24
+	title = qin_army_event.24.t
+	desc = qin_army_event.24.d
+	picture = GFX_report_event_generic_sign_treaty
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event qin_army_event.24"
+	}
+
+	option = {
+		name = qin_army_event.24.a
+		trigger = {
+			# условия
+		}
+	}
+}
+
+country_event = { #
+	id = qin_army_event.25
+	title = qin_army_event.25.t
+	desc = qin_army_event.25.d
+	picture = GFX_report_event_generic_sign_treaty
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event qin_army_event.25"
+	}
+
+	option = {
+		name = qin_army_event.25.a
+		trigger = {
+			# условия
+		}
+	}
+}
+
+country_event = { #
+	id = qin_army_event.26
+	title = qin_army_event.26.t
+	desc = qin_army_event.26.d
+	picture = GFX_report_event_generic_sign_treaty
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event qin_army_event.26"
+	}
+
+	option = {
+		name = qin_army_event.26.a
+		trigger = {
+			# условия
+		}
+	}
+}
+
+country_event = { #
+	id = qin_army_event.27
+	title = qin_army_event.27.t
+	desc = qin_army_event.27.d
+	picture = GFX_report_event_generic_sign_treaty
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event qin_army_event.27"
+	}
+
+	option = {
+		name = qin_army_event.27.a
+		trigger = {
+			# условия
+		}
+	}
+}
+
+country_event = { #
+	id = qin_army_event.28
+	title = qin_army_event.28.t
+	desc = qin_army_event.28.d
+	picture = GFX_report_event_generic_sign_treaty
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event qin_army_event.28"
+	}
+
+	option = {
+		name = qin_army_event.28.a
+		trigger = {
+			# условия
+		}
+	}
+}
+
+country_event = { #
+	id = qin_army_event.29
+	title = qin_army_event.29.t
+	desc = qin_army_event.29.d
+	picture = GFX_report_event_generic_sign_treaty
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event qin_army_event.29"
+	}
+
+	option = {
+		name = qin_army_event.29.a
+		trigger = {
+			# условия
+		}
+	}
+}
+
+country_event = { #
+	id = qin_army_event.30
+	title = qin_army_event.30.t
+	desc = qin_army_event.30.d
+	picture = GFX_report_event_generic_sign_treaty
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event qin_army_event.30"
+	}
+
+	option = {
+		name = qin_army_event.30.a
+		trigger = {
+			# условия
+		}
+	}
+}
+
+country_event = { #
+	id = qin_army_event.31
+	title = qin_army_event.31.t
+	desc = qin_army_event.31.d
+	picture = GFX_report_event_generic_sign_treaty
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event qin_army_event.31"
+	}
+
+	option = {
+		name = qin_army_event.31.a
+		trigger = {
+			# условия
+		}
+	}
+}
+
+country_event = { #
+	id = qin_army_event.32
+	title = qin_army_event.32.t
+	desc = qin_army_event.32.d
+	picture = GFX_report_event_generic_sign_treaty
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event qin_army_event.32"
+	}
+
+	option = {
+		name = qin_army_event.32.a
+		trigger = {
+			# условия
+		}
+	}
+}
+
+country_event = { #
+	id = qin_army_event.33
+	title = qin_army_event.33.t
+	desc = qin_army_event.33.d
+	picture = GFX_report_event_generic_sign_treaty
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event qin_army_event.33"
+	}
+
+	option = {
+		name = qin_army_event.33.a
+		trigger = {
+			# условия
+		}
+	}
+}
+
+country_event = { #
+	id = qin_army_event.34
+	title = qin_army_event.34.t
+	desc = qin_army_event.34.d
+	picture = GFX_report_event_generic_sign_treaty
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event qin_army_event.34"
+	}
+
+	option = {
+		name = qin_army_event.34.a
+		trigger = {
+			# условия
+		}
+	}
+}
+
+country_event = { #
+	id = qin_army_event.35
+	title = qin_army_event.35.t
+	desc = qin_army_event.35.d
+	picture = GFX_report_event_generic_sign_treaty
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event qin_army_event.35"
+	}
+
+	option = {
+		name = qin_army_event.35.a
+		trigger = {
+			# условия
+		}
+	}
+}
+
+country_event = { #
+	id = qin_army_event.36
+	title = qin_army_event.36.t
+	desc = qin_army_event.36.d
+	picture = GFX_report_event_generic_sign_treaty
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event qin_army_event.36"
+	}
+
+	option = {
+		name = qin_army_event.36.a
+		trigger = {
+			# условия
+		}
+	}
+}
+
+country_event = { #
+	id = qin_army_event.37
+	title = qin_army_event.37.t
+	desc = qin_army_event.37.d
+	picture = GFX_report_event_generic_sign_treaty
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event qin_army_event.37"
+	}
+
+	option = {
+		name = qin_army_event.37.a
+		QIN_check_idea_army_of_the_celestial_empire_num_effect = yes
 	}
 }
 
@@ -6070,7 +6960,7 @@ country_event = { # Чжили - Гуйлян
 	id = qin_viceroys_and_guvernors_chain_event.1
 	title = qin_viceroys_and_guvernors_chain_event.1.t
 	desc = qin_viceroys_and_guvernors_chain_event.1.d
-	picture = GFX_report_event_generic_sign_treaty
+	picture = GFX_report_event_qing_print
 
 	fire_only_once = yes
 	is_triggered_only = yes
@@ -6078,7 +6968,7 @@ country_event = { # Чжили - Гуйлян
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event qin_viceroys_and_guvernors_chain_event.1"
 		hidden_effect = {
-			country_event = { id = qin_viceroys_and_guvernors_chain_event.2 days = 1202 }
+			country_event = { id = qin_viceroys_and_guvernors_chain_event.2 days = 1185 }
 		}
 	}
 
@@ -6093,7 +6983,7 @@ country_event = { # Чжили - Тань Тинсян
 	id = qin_viceroys_and_guvernors_chain_event.2
 	title = qin_viceroys_and_guvernors_chain_event.2.t
 	desc = qin_viceroys_and_guvernors_chain_event.2.d
-	picture = GFX_report_event_generic_sign_treaty
+	picture = GFX_report_event_qing_print
 
 	fire_only_once = yes
 	is_triggered_only = yes
@@ -6101,7 +6991,7 @@ country_event = { # Чжили - Тань Тинсян
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event qin_viceroys_and_guvernors_chain_event.2"
 		hidden_effect = {
-			country_event = { id = qin_viceroys_and_guvernors_chain_event.3 days = 207 }
+			country_event = { id = qin_viceroys_and_guvernors_chain_event.3 days = 555 }
 		}
 	}
 
@@ -6116,7 +7006,7 @@ country_event = { # Чжили - Цинци
 	id = qin_viceroys_and_guvernors_chain_event.3
 	title = qin_viceroys_and_guvernors_chain_event.3.t
 	desc = qin_viceroys_and_guvernors_chain_event.3.d
-	picture = GFX_report_event_generic_sign_treaty
+	picture = GFX_report_event_qing_print
 
 	fire_only_once = yes
 	is_triggered_only = yes
@@ -6124,7 +7014,7 @@ country_event = { # Чжили - Цинци
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event qin_viceroys_and_guvernors_chain_event.3"
 		hidden_effect = {
-			country_event = { id = qin_viceroys_and_guvernors_chain_event.4 days = 158 }
+			country_event = { id = qin_viceroys_and_guvernors_chain_event.4 days = 240 }
 		}
 	}
 
@@ -6139,7 +7029,7 @@ country_event = { # Чжили - Хэнфу
 	id = qin_viceroys_and_guvernors_chain_event.4
 	title = qin_viceroys_and_guvernors_chain_event.4.t
 	desc = qin_viceroys_and_guvernors_chain_event.4.d
-	picture = GFX_report_event_generic_sign_treaty
+	picture = GFX_report_event_qing_print
 
 	fire_only_once = yes
 	is_triggered_only = yes
@@ -6147,7 +7037,7 @@ country_event = { # Чжили - Хэнфу
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event qin_viceroys_and_guvernors_chain_event.4"
 		hidden_effect = {
-			country_event = { id = qin_viceroys_and_guvernors_chain_event.5 days = 703 }
+			country_event = { id = qin_viceroys_and_guvernors_chain_event.5 days = 705 }
 		}
 	}
 
@@ -6162,7 +7052,7 @@ country_event = { # Чжили - Лю Чанъю
 	id = qin_viceroys_and_guvernors_chain_event.5
 	title = qin_viceroys_and_guvernors_chain_event.5.t
 	desc = qin_viceroys_and_guvernors_chain_event.5.d
-	picture = GFX_report_event_generic_sign_treaty
+	picture = GFX_report_event_qing_print
 
 	fire_only_once = yes
 	is_triggered_only = yes
@@ -6182,7 +7072,7 @@ country_event = { # Лянцзян - Ли Цзяньин
 	id = qin_viceroys_and_guvernors_chain_event.6
 	title = qin_viceroys_and_guvernors_chain_event.6.t
 	desc = qin_viceroys_and_guvernors_chain_event.6.d
-	picture = GFX_report_event_generic_sign_treaty
+	picture = GFX_report_event_qing_print
 
 	fire_only_once = yes
 	is_triggered_only = yes
@@ -6190,7 +7080,7 @@ country_event = { # Лянцзян - Ли Цзяньин
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event qin_viceroys_and_guvernors_chain_event.6"		
 		hidden_effect = {
-			country_event = { id = qin_viceroys_and_guvernors_chain_event.7 days = 703 }
+			country_event = { id = qin_viceroys_and_guvernors_chain_event.7 days = 1410 }
 		}
 	}
 
@@ -6205,13 +7095,16 @@ country_event = { # Лянцзян - Сянхоу
 	id = qin_viceroys_and_guvernors_chain_event.7
 	title = qin_viceroys_and_guvernors_chain_event.7.t
 	desc = qin_viceroys_and_guvernors_chain_event.7.d
-	picture = GFX_report_event_generic_sign_treaty
+	picture = GFX_report_event_qing_print
 
 	fire_only_once = yes
 	is_triggered_only = yes
 
 	immediate = {
-		log = "[GetDateText]: [Root.GetName]: event qin_viceroys_and_guvernors_chain_event.7"
+		log = "[GetDateText]: [Root.GetName]: event qin_viceroys_and_guvernors_chain_event.7"		
+		hidden_effect = {
+			country_event = { id = qin_viceroys_and_guvernors_chain_event.8 days = 14 }
+		}
 	}
 
 	option = {
@@ -6225,13 +7118,16 @@ country_event = { # Лянцзян - Илян
 	id = qin_viceroys_and_guvernors_chain_event.8
 	title = qin_viceroys_and_guvernors_chain_event.8.t
 	desc = qin_viceroys_and_guvernors_chain_event.8.d
-	picture = GFX_report_event_generic_sign_treaty
+	picture = GFX_report_event_qing_print
 
 	fire_only_once = yes
 	is_triggered_only = yes
 
 	immediate = {
-		log = "[GetDateText]: [Root.GetName]: event qin_viceroys_and_guvernors_chain_event.8"
+		log = "[GetDateText]: [Root.GetName]: event qin_viceroys_and_guvernors_chain_event.8"		
+		hidden_effect = {
+			country_event = { id = qin_viceroys_and_guvernors_chain_event.9 days = 1485 }
+		}
 	}
 
 	option = {
@@ -6245,13 +7141,16 @@ country_event = { # Лянцзян - Хэ Гуйцин
 	id = qin_viceroys_and_guvernors_chain_event.9
 	title = qin_viceroys_and_guvernors_chain_event.9.t
 	desc = qin_viceroys_and_guvernors_chain_event.9.d
-	picture = GFX_report_event_generic_sign_treaty
+	picture = GFX_report_event_qing_print
 
 	fire_only_once = yes
 	is_triggered_only = yes
 
 	immediate = {
-		log = "[GetDateText]: [Root.GetName]: event qin_viceroys_and_guvernors_chain_event.9"
+		log = "[GetDateText]: [Root.GetName]: event qin_viceroys_and_guvernors_chain_event.9"		
+		hidden_effect = {
+			country_event = { id = qin_viceroys_and_guvernors_chain_event.10 days = 1125 }
+		}
 	}
 
 	option = {
@@ -6265,7 +7164,7 @@ country_event = { # Лянцзян - Сюй Юрэн
 	id = qin_viceroys_and_guvernors_chain_event.10
 	title = qin_viceroys_and_guvernors_chain_event.10.t
 	desc = qin_viceroys_and_guvernors_chain_event.10.d
-	picture = GFX_report_event_generic_sign_treaty
+	picture = GFX_report_event_qing_print
 
 	fire_only_once = yes
 	is_triggered_only = yes
@@ -6285,13 +7184,16 @@ country_event = { # Миньчжэ - Ютай
 	id = qin_viceroys_and_guvernors_chain_event.11
 	title = qin_viceroys_and_guvernors_chain_event.11.t
 	desc = qin_viceroys_and_guvernors_chain_event.11.d
-	picture = GFX_report_event_generic_sign_treaty
+	picture = GFX_report_event_qing_print
 
 	fire_only_once = yes
 	is_triggered_only = yes
 
 	immediate = {
-		log = "[GetDateText]: [Root.GetName]: event qin_viceroys_and_guvernors_chain_event.11"
+		log = "[GetDateText]: [Root.GetName]: event qin_viceroys_and_guvernors_chain_event.11"		
+		hidden_effect = {
+			country_event = { id = qin_viceroys_and_guvernors_chain_event.12 days = 734 }
+		}
 	}
 
 	option = {
@@ -6305,13 +7207,16 @@ country_event = { # Миньчжэ - Цзи Чжичан
 	id = qin_viceroys_and_guvernors_chain_event.12
 	title = qin_viceroys_and_guvernors_chain_event.12.t
 	desc = qin_viceroys_and_guvernors_chain_event.12.d
-	picture = GFX_report_event_generic_sign_treaty
+	picture = GFX_report_event_qing_print
 
 	fire_only_once = yes
 	is_triggered_only = yes
 
 	immediate = {
-		log = "[GetDateText]: [Root.GetName]: event qin_viceroys_and_guvernors_chain_event.12"
+		log = "[GetDateText]: [Root.GetName]: event qin_viceroys_and_guvernors_chain_event.12"	
+		hidden_effect = {
+			country_event = { id = qin_viceroys_and_guvernors_chain_event.13 days = 868 }
+		}
 	}
 
 	option = {
@@ -6325,13 +7230,16 @@ country_event = { # Миньчжэ - Ву Веньен
 	id = qin_viceroys_and_guvernors_chain_event.13
 	title = qin_viceroys_and_guvernors_chain_event.13.t
 	desc = qin_viceroys_and_guvernors_chain_event.13.d
-	picture = GFX_report_event_generic_sign_treaty
+	picture = GFX_report_event_qing_print
 
 	fire_only_once = yes
 	is_triggered_only = yes
 
 	immediate = {
-		log = "[GetDateText]: [Root.GetName]: event qin_viceroys_and_guvernors_chain_event.13"
+		log = "[GetDateText]: [Root.GetName]: event qin_viceroys_and_guvernors_chain_event.13"	
+		hidden_effect = {
+			country_event = { id = qin_viceroys_and_guvernors_chain_event.13 days = 1554 }
+		}
 	}
 
 	option = {
@@ -6345,13 +7253,16 @@ country_event = { # Миньчжэ - Хуэйчен
 	id = qin_viceroys_and_guvernors_chain_event.14
 	title = qin_viceroys_and_guvernors_chain_event.14.t
 	desc = qin_viceroys_and_guvernors_chain_event.14.d
-	picture = GFX_report_event_generic_sign_treaty
+	picture = GFX_report_event_qing_print
 
 	fire_only_once = yes
 	is_triggered_only = yes
 
 	immediate = {
-		log = "[GetDateText]: [Root.GetName]: event qin_viceroys_and_guvernors_chain_event.14"
+		log = "[GetDateText]: [Root.GetName]: event qin_viceroys_and_guvernors_chain_event.14"	
+		hidden_effect = {
+			country_event = { id = qin_viceroys_and_guvernors_chain_event.15 days = 1494 }
+		}
 	}
 
 	option = {
@@ -6365,13 +7276,16 @@ country_event = { # Миньчжэ - Ван Иде
 	id = qin_viceroys_and_guvernors_chain_event.15
 	title = qin_viceroys_and_guvernors_chain_event.15.t
 	desc = qin_viceroys_and_guvernors_chain_event.15.d
-	picture = GFX_report_event_generic_sign_treaty
+	picture = GFX_report_event_qing_print
 
 	fire_only_once = yes
 	is_triggered_only = yes
 
 	immediate = {
-		log = "[GetDateText]: [Root.GetName]: event qin_viceroys_and_guvernors_chain_event.15"
+		log = "[GetDateText]: [Root.GetName]: event qin_viceroys_and_guvernors_chain_event.15"	
+		hidden_effect = {
+			country_event = { id = qin_viceroys_and_guvernors_chain_event.16 days = 1828 }
+		}
 	}
 
 	option = {
@@ -6385,7 +7299,7 @@ country_event = { # Миньчжэ - Циндуань
 	id = qin_viceroys_and_guvernors_chain_event.16
 	title = qin_viceroys_and_guvernors_chain_event.16.t
 	desc = qin_viceroys_and_guvernors_chain_event.16.d
-	picture = GFX_report_event_generic_sign_treaty
+	picture = GFX_report_event_qing_print
 
 	fire_only_once = yes
 	is_triggered_only = yes
@@ -6405,7 +7319,7 @@ country_event = { # Миньчжэ - Циндуань
 #	id = qin_viceroys_and_guvernors_chain_event.17
 #	title = qin_viceroys_and_guvernors_chain_event.17.t
 #	desc = qin_viceroys_and_guvernors_chain_event.17.d
-#	picture = GFX_report_event_generic_sign_treaty
+#	picture = GFX_report_event_qing_print
 #
 #	fire_only_once = yes
 #	is_triggered_only = yes
@@ -6424,13 +7338,16 @@ country_event = { # Хугуан - Чен Цзыцай
 	id = qin_viceroys_and_guvernors_chain_event.18
 	title = qin_viceroys_and_guvernors_chain_event.18.t
 	desc = qin_viceroys_and_guvernors_chain_event.18.d
-	picture = GFX_report_event_generic_sign_treaty
+	picture = GFX_report_event_qing_print
 
 	fire_only_once = yes
 	is_triggered_only = yes
 
 	immediate = {
-		log = "[GetDateText]: [Root.GetName]: event qin_viceroys_and_guvernors_chain_event.18"
+		log = "[GetDateText]: [Root.GetName]: event qin_viceroys_and_guvernors_chain_event.18"	
+		hidden_effect = {
+			country_event = { id = qin_viceroys_and_guvernors_chain_event.19 days = 121 }
+		}
 	}
 
 	option = {
@@ -6444,13 +7361,16 @@ country_event = { # Хугуан - Суй Гуанцзинь
 	id = qin_viceroys_and_guvernors_chain_event.19
 	title = qin_viceroys_and_guvernors_chain_event.19.t
 	desc = qin_viceroys_and_guvernors_chain_event.19.d
-	picture = GFX_report_event_generic_sign_treaty
+	picture = GFX_report_event_qing_print
 
 	fire_only_once = yes
 	is_triggered_only = yes
 
 	immediate = {
-		log = "[GetDateText]: [Root.GetName]: event qin_viceroys_and_guvernors_chain_event.19"
+		log = "[GetDateText]: [Root.GetName]: event qin_viceroys_and_guvernors_chain_event.19"	
+		hidden_effect = {
+			country_event = { id = qin_viceroys_and_guvernors_chain_event.20 days = 210 }
+		}
 	}
 
 	option = {
@@ -6464,13 +7384,16 @@ country_event = { # Хугуан - Чжан Лянцзи
 	id = qin_viceroys_and_guvernors_chain_event.20
 	title = qin_viceroys_and_guvernors_chain_event.20.t
 	desc = qin_viceroys_and_guvernors_chain_event.20.d
-	picture = GFX_report_event_generic_sign_treaty
+	picture = GFX_report_event_qing_print
 
 	fire_only_once = yes
 	is_triggered_only = yes
 
 	immediate = {
-		log = "[GetDateText]: [Root.GetName]: event qin_viceroys_and_guvernors_chain_event.20"
+		log = "[GetDateText]: [Root.GetName]: event qin_viceroys_and_guvernors_chain_event.20"	
+		hidden_effect = {
+			country_event = { id = qin_viceroys_and_guvernors_chain_event.21 days = 150 }
+		}
 	}
 
 	option = {
@@ -6484,13 +7407,16 @@ country_event = { # Хугуан - Ву Веньен
 	id = qin_viceroys_and_guvernors_chain_event.21
 	title = qin_viceroys_and_guvernors_chain_event.21.t
 	desc = qin_viceroys_and_guvernors_chain_event.21.d
-	picture = GFX_report_event_generic_sign_treaty
+	picture = GFX_report_event_qing_print
 
 	fire_only_once = yes
 	is_triggered_only = yes
 
 	immediate = {
-		log = "[GetDateText]: [Root.GetName]: event qin_viceroys_and_guvernors_chain_event.21"
+		log = "[GetDateText]: [Root.GetName]: event qin_viceroys_and_guvernors_chain_event.21"	
+		hidden_effect = {
+			country_event = { id = qin_viceroys_and_guvernors_chain_event.22 days = 150 }
+		}
 	}
 
 	option = {
@@ -6504,13 +7430,16 @@ country_event = { # Хугуан - Тай Чанг
 	id = qin_viceroys_and_guvernors_chain_event.22
 	title = qin_viceroys_and_guvernors_chain_event.22.t
 	desc = qin_viceroys_and_guvernors_chain_event.22.d
-	picture = GFX_report_event_generic_sign_treaty
+	picture = GFX_report_event_qing_print
 
 	fire_only_once = yes
 	is_triggered_only = yes
 
 	immediate = {
-		log = "[GetDateText]: [Root.GetName]: event qin_viceroys_and_guvernors_chain_event.22"
+		log = "[GetDateText]: [Root.GetName]: event qin_viceroys_and_guvernors_chain_event.22"	
+		hidden_effect = {
+			country_event = { id = qin_viceroys_and_guvernors_chain_event.23 days = 330 }
+		}
 	}
 
 	option = {
@@ -6524,13 +7453,16 @@ country_event = { # Хугуан - Ян Пей
 	id = qin_viceroys_and_guvernors_chain_event.23
 	title = qin_viceroys_and_guvernors_chain_event.23.t
 	desc = qin_viceroys_and_guvernors_chain_event.23.d
-	picture = GFX_report_event_generic_sign_treaty
+	picture = GFX_report_event_qing_print
 
 	fire_only_once = yes
 	is_triggered_only = yes
 
 	immediate = {
-		log = "[GetDateText]: [Root.GetName]: event qin_viceroys_and_guvernors_chain_event.23"
+		log = "[GetDateText]: [Root.GetName]: event qin_viceroys_and_guvernors_chain_event.23"	
+		hidden_effect = {
+			country_event = { id = qin_viceroys_and_guvernors_chain_event.24 days = 3810 }
+		}
 	}
 
 	option = {
@@ -6544,7 +7476,7 @@ country_event = { # Хугуан - Гуань Вень
 	id = qin_viceroys_and_guvernors_chain_event.24
 	title = qin_viceroys_and_guvernors_chain_event.24.t
 	desc = qin_viceroys_and_guvernors_chain_event.24.d
-	picture = GFX_report_event_generic_sign_treaty
+	picture = GFX_report_event_qing_print
 
 	fire_only_once = yes
 	is_triggered_only = yes
@@ -6564,13 +7496,16 @@ country_event = { # Шаан-Ган - Ци Шань
 	id = qin_viceroys_and_guvernors_chain_event.25
 	title = qin_viceroys_and_guvernors_chain_event.25.t
 	desc = qin_viceroys_and_guvernors_chain_event.25.d
-	picture = GFX_report_event_generic_sign_treaty
+	picture = GFX_report_event_qing_print
 
 	fire_only_once = yes
 	is_triggered_only = yes
 
 	immediate = {
-		log = "[GetDateText]: [Root.GetName]: event qin_viceroys_and_guvernors_chain_event.25"
+		log = "[GetDateText]: [Root.GetName]: event qin_viceroys_and_guvernors_chain_event.25"	
+		hidden_effect = {
+			country_event = { id = qin_viceroys_and_guvernors_chain_event.26 days = 69 }
+		}
 	}
 
 	option = {
@@ -6584,13 +7519,16 @@ country_event = { #  Шаан-Ган - Ютай
 	id = qin_viceroys_and_guvernors_chain_event.26
 	title = qin_viceroys_and_guvernors_chain_event.26.t
 	desc = qin_viceroys_and_guvernors_chain_event.26.d
-	picture = GFX_report_event_generic_sign_treaty
+	picture = GFX_report_event_qing_print
 
 	fire_only_once = yes
 	is_triggered_only = yes
 
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event qin_viceroys_and_guvernors_chain_event.26"
+		hidden_effect = {
+			country_event = { id = qin_viceroys_and_guvernors_chain_event.27 days = 661 }
+		}
 	}
 
 	option = {
@@ -6604,13 +7542,16 @@ country_event = { # Шаан-Ган - Шу Синга
 	id = qin_viceroys_and_guvernors_chain_event.27
 	title = qin_viceroys_and_guvernors_chain_event.27.t
 	desc = qin_viceroys_and_guvernors_chain_event.27.d
-	picture = GFX_report_event_generic_sign_treaty
+	picture = GFX_report_event_qing_print
 
 	fire_only_once = yes
 	is_triggered_only = yes
 
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event qin_viceroys_and_guvernors_chain_event.27"
+		hidden_effect = {
+			country_event = { id = qin_viceroys_and_guvernors_chain_event.28 days = 1181 }
+		}
 	}
 
 	option = {
@@ -6624,13 +7565,16 @@ country_event = { # Шаан-Ган - И Тан
 	id = qin_viceroys_and_guvernors_chain_event.28
 	title = qin_viceroys_and_guvernors_chain_event.28.t
 	desc = qin_viceroys_and_guvernors_chain_event.28.d
-	picture = GFX_report_event_generic_sign_treaty
+	picture = GFX_report_event_qing_print
 
 	fire_only_once = yes
 	is_triggered_only = yes
 
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event qin_viceroys_and_guvernors_chain_event.28"
+		hidden_effect = {
+			country_event = { id = qin_viceroys_and_guvernors_chain_event.29 days = 1915 }
+		}
 	}
 
 	option = {
@@ -6644,13 +7588,16 @@ country_event = { # Шаан-Ган - Ле Бин
 	id = qin_viceroys_and_guvernors_chain_event.29
 	title = qin_viceroys_and_guvernors_chain_event.29.t
 	desc = qin_viceroys_and_guvernors_chain_event.29.d
-	picture = GFX_report_event_generic_sign_treaty
+	picture = GFX_report_event_qing_print
 
 	fire_only_once = yes
 	is_triggered_only = yes
 
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event qin_viceroys_and_guvernors_chain_event.29"
+		hidden_effect = {
+			country_event = { id = qin_viceroys_and_guvernors_chain_event.30 days = 1905 }
+		}
 	}
 
 	option = {
@@ -6664,7 +7611,7 @@ country_event = { # Шаан-Ган - Линь Куй
 	id = qin_viceroys_and_guvernors_chain_event.30
 	title = qin_viceroys_and_guvernors_chain_event.30.t
 	desc = qin_viceroys_and_guvernors_chain_event.30.d
-	picture = GFX_report_event_generic_sign_treaty
+	picture = GFX_report_event_qing_print
 
 	fire_only_once = yes
 	is_triggered_only = yes
@@ -6684,7 +7631,7 @@ country_event = { # Шаан-Ган - Линь Куй
 #	id = qin_viceroys_and_guvernors_chain_event.31
 #	title = qin_viceroys_and_guvernors_chain_event.31.t
 #	desc = qin_viceroys_and_guvernors_chain_event.31.d
-#	picture = GFX_report_event_generic_sign_treaty
+#	picture = GFX_report_event_qing_print
 #
 #	fire_only_once = yes
 #	is_triggered_only = yes
@@ -6702,13 +7649,16 @@ country_event = { # Лянгуан - Е Минчэнь
 	id = qin_viceroys_and_guvernors_chain_event.32
 	title = qin_viceroys_and_guvernors_chain_event.32.t
 	desc = qin_viceroys_and_guvernors_chain_event.32.d
-	picture = GFX_report_event_generic_sign_treaty
+	picture = GFX_report_event_qing_print
 
 	fire_only_once = yes
 	is_triggered_only = yes
 
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event qin_viceroys_and_guvernors_chain_event.32"
+		hidden_effect = {
+			country_event = { id = qin_viceroys_and_guvernors_chain_event.33 days = 458 }
+		}
 	}
 
 	option = {
@@ -6722,13 +7672,16 @@ country_event = { # Лянгуан - Хуан Цзуньхань
 	id = qin_viceroys_and_guvernors_chain_event.33
 	title = qin_viceroys_and_guvernors_chain_event.33.t
 	desc = qin_viceroys_and_guvernors_chain_event.33.d
-	picture = GFX_report_event_generic_sign_treaty
+	picture = GFX_report_event_qing_print
 
 	fire_only_once = yes
 	is_triggered_only = yes
 
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event qin_viceroys_and_guvernors_chain_event.33"
+		hidden_effect = {
+			country_event = { id = qin_viceroys_and_guvernors_chain_event.34 days = 153 }
+		}
 	}
 
 	option = {
@@ -6742,13 +7695,16 @@ country_event = { # Лянгуан - Ван Цинъюнь
 	id = qin_viceroys_and_guvernors_chain_event.34
 	title = qin_viceroys_and_guvernors_chain_event.34.t
 	desc = qin_viceroys_and_guvernors_chain_event.34.d
-	picture = GFX_report_event_generic_sign_treaty
+	picture = GFX_report_event_qing_print
 
 	fire_only_once = yes
 	is_triggered_only = yes
 
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event qin_viceroys_and_guvernors_chain_event.34"
+		hidden_effect = {
+			country_event = { id = qin_viceroys_and_guvernors_chain_event.35 days = 1090 }
+		}
 	}
 
 	option = {
@@ -6762,13 +7718,16 @@ country_event = { # Лянгуан - Ло Сого (Чунгуан)
 	id = qin_viceroys_and_guvernors_chain_event.35
 	title = qin_viceroys_and_guvernors_chain_event.35.t
 	desc = qin_viceroys_and_guvernors_chain_event.35.d
-	picture = GFX_report_event_generic_sign_treaty
+	picture = GFX_report_event_qing_print
 
 	fire_only_once = yes
 	is_triggered_only = yes
 
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event qin_viceroys_and_guvernors_chain_event.35"
+		hidden_effect = {
+			country_event = { id = qin_viceroys_and_guvernors_chain_event.36 days = 117 }
+		}
 	}
 
 	option = {
@@ -6782,13 +7741,16 @@ country_event = { # Лянгуан - Лю Чанъю
 	id = qin_viceroys_and_guvernors_chain_event.36
 	title = qin_viceroys_and_guvernors_chain_event.36.t
 	desc = qin_viceroys_and_guvernors_chain_event.36.d
-	picture = GFX_report_event_generic_sign_treaty
+	picture = GFX_report_event_qing_print
 
 	fire_only_once = yes
 	is_triggered_only = yes
 
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event qin_viceroys_and_guvernors_chain_event.36"
+		hidden_effect = {
+			country_event = { id = qin_viceroys_and_guvernors_chain_event.37 days = 743 }
+		}
 	}
 
 	option = {
@@ -6802,7 +7764,7 @@ country_event = { # Лянгуан - Мао Хунбинь
 	id = qin_viceroys_and_guvernors_chain_event.37
 	title = qin_viceroys_and_guvernors_chain_event.37.t
 	desc = qin_viceroys_and_guvernors_chain_event.37.d
-	picture = GFX_report_event_generic_sign_treaty
+	picture = GFX_report_event_qing_print
 
 	fire_only_once = yes
 	is_triggered_only = yes
@@ -6822,13 +7784,16 @@ country_event = { # Юнь-Гуй - Чен Цзыкай
 	id = qin_viceroys_and_guvernors_chain_event.38
 	title = qin_viceroys_and_guvernors_chain_event.38.t
 	desc = qin_viceroys_and_guvernors_chain_event.38.d
-	picture = GFX_report_event_generic_sign_treaty
+	picture = GFX_report_event_qing_print
 
 	fire_only_once = yes
 	is_triggered_only = yes
 
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event qin_viceroys_and_guvernors_chain_event.38"
+		hidden_effect = {
+			country_event = { id = qin_viceroys_and_guvernors_chain_event.39 days = 695 }
+		}
 	}
 
 	option = {
@@ -6842,13 +7807,16 @@ country_event = { # Юнь-Гуй - Ву Веньен
 	id = qin_viceroys_and_guvernors_chain_event.39
 	title = qin_viceroys_and_guvernors_chain_event.39.t
 	desc = qin_viceroys_and_guvernors_chain_event.39.d
-	picture = GFX_report_event_generic_sign_treaty
+	picture = GFX_report_event_qing_print
 
 	fire_only_once = yes
 	is_triggered_only = yes
 
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event qin_viceroys_and_guvernors_chain_event.39"
+		hidden_effect = {
+			country_event = { id = qin_viceroys_and_guvernors_chain_event.40 days = 405 }
+		}
 	}
 
 	option = {
@@ -6862,13 +7830,16 @@ country_event = { # Юнь-Гуй - Ло Хуандянь
 	id = qin_viceroys_and_guvernors_chain_event.40
 	title = qin_viceroys_and_guvernors_chain_event.40.t
 	desc = qin_viceroys_and_guvernors_chain_event.40.d
-	picture = GFX_report_event_generic_sign_treaty
+	picture = GFX_report_event_qing_print
 
 	fire_only_once = yes
 	is_triggered_only = yes
 
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event qin_viceroys_and_guvernors_chain_event.40"
+		hidden_effect = {
+			country_event = { id = qin_viceroys_and_guvernors_chain_event.41 days = 1790 }
+		}
 	}
 
 	option = {
@@ -6882,13 +7853,16 @@ country_event = { # Юнь-Гуй - Хенчунь
 	id = qin_viceroys_and_guvernors_chain_event.41
 	title = qin_viceroys_and_guvernors_chain_event.41.t
 	desc = qin_viceroys_and_guvernors_chain_event.41.d
-	picture = GFX_report_event_generic_sign_treaty
+	picture = GFX_report_event_qing_print
 
 	fire_only_once = yes
 	is_triggered_only = yes
 
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event qin_viceroys_and_guvernors_chain_event.41"
+		hidden_effect = {
+			country_event = { id = qin_viceroys_and_guvernors_chain_event.42 days = 673 }
+		}
 	}
 
 	option = {
@@ -6902,13 +7876,16 @@ country_event = { # Юнь-Гуй - У Чжэньчэн
 	id = qin_viceroys_and_guvernors_chain_event.42
 	title = qin_viceroys_and_guvernors_chain_event.42.t
 	desc = qin_viceroys_and_guvernors_chain_event.42.d
-	picture = GFX_report_event_generic_sign_treaty
+	picture = GFX_report_event_qing_print
 
 	fire_only_once = yes
 	is_triggered_only = yes
 
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event qin_viceroys_and_guvernors_chain_event.42"
+		hidden_effect = {
+			country_event = { id = qin_viceroys_and_guvernors_chain_event.43 days = 281 }
+		}
 	}
 
 	option = {
@@ -6922,13 +7899,16 @@ country_event = { # Юнь-Гуй - Лю Юаньхао
 	id = qin_viceroys_and_guvernors_chain_event.43
 	title = qin_viceroys_and_guvernors_chain_event.43.t
 	desc = qin_viceroys_and_guvernors_chain_event.43.d
-	picture = GFX_report_event_generic_sign_treaty
+	picture = GFX_report_event_qing_print
 
 	fire_only_once = yes
 	is_triggered_only = yes
 
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event qin_viceroys_and_guvernors_chain_event.43"
+		hidden_effect = {
+			country_event = { id = qin_viceroys_and_guvernors_chain_event.44 days = 2017 }
+		}
 	}
 
 	option = {
@@ -6942,7 +7922,7 @@ country_event = { # Юнь-Гуй - Ло Сого (Чунгуан)
 	id = qin_viceroys_and_guvernors_chain_event.44
 	title = qin_viceroys_and_guvernors_chain_event.44.t
 	desc = qin_viceroys_and_guvernors_chain_event.44.d
-	picture = GFX_report_event_generic_sign_treaty
+	picture = GFX_report_event_qing_print
 
 	fire_only_once = yes
 	is_triggered_only = yes
@@ -6962,13 +7942,16 @@ country_event = { # Сычуань - Сюй Цзечунь
 	id = qin_viceroys_and_guvernors_chain_event.45
 	title = qin_viceroys_and_guvernors_chain_event.45.t
 	desc = qin_viceroys_and_guvernors_chain_event.45.d
-	picture = GFX_report_event_generic_sign_treaty
+	picture = GFX_report_event_qing_print
 
 	fire_only_once = yes
 	is_triggered_only = yes
 
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event qin_viceroys_and_guvernors_chain_event.45"
+		hidden_effect = {
+			country_event = { id = qin_viceroys_and_guvernors_chain_event.46 days = 127 }
+		}
 	}
 
 	option = {
@@ -6982,13 +7965,16 @@ country_event = { # Сычуань - Юй Чен
 	id = qin_viceroys_and_guvernors_chain_event.46
 	title = qin_viceroys_and_guvernors_chain_event.46.t
 	desc = qin_viceroys_and_guvernors_chain_event.46.d
-	picture = GFX_report_event_generic_sign_treaty
+	picture = GFX_report_event_qing_print
 
 	fire_only_once = yes
 	is_triggered_only = yes
 
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event qin_viceroys_and_guvernors_chain_event.46"
+		hidden_effect = {
+			country_event = { id = qin_viceroys_and_guvernors_chain_event.47 days = 235 }
+		}
 	}
 
 	option = {
@@ -7002,13 +7988,16 @@ country_event = { # Сычуань - Хуэйчен
 	id = qin_viceroys_and_guvernors_chain_event.47
 	title = qin_viceroys_and_guvernors_chain_event.47.t
 	desc = qin_viceroys_and_guvernors_chain_event.47.d
-	picture = GFX_report_event_generic_sign_treaty
+	picture = GFX_report_event_qing_print
 
 	fire_only_once = yes
 	is_triggered_only = yes
 
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event qin_viceroys_and_guvernors_chain_event.47"
+		hidden_effect = {
+			country_event = { id = qin_viceroys_and_guvernors_chain_event.48 days = 1073 }
+		}
 	}
 
 	option = {
@@ -7022,13 +8011,16 @@ country_event = { # Сычуань - Хуан Цзуньхань
 	id = qin_viceroys_and_guvernors_chain_event.48
 	title = qin_viceroys_and_guvernors_chain_event.48.t
 	desc = qin_viceroys_and_guvernors_chain_event.48.d
-	picture = GFX_report_event_generic_sign_treaty
+	picture = GFX_report_event_qing_print
 
 	fire_only_once = yes
 	is_triggered_only = yes
 
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event qin_viceroys_and_guvernors_chain_event.48"
+		hidden_effect = {
+			country_event = { id = qin_viceroys_and_guvernors_chain_event.49 days = 343 }
+		}
 	}
 
 	option = {
@@ -7038,17 +8030,20 @@ country_event = { # Сычуань - Хуан Цзуньхань
 	}
 }
 
-country_event = { # Сычуань - У  Чженьюй
+country_event = { # Сычуань - У Чженьюй
 	id = qin_viceroys_and_guvernors_chain_event.49
 	title = qin_viceroys_and_guvernors_chain_event.49.t
 	desc = qin_viceroys_and_guvernors_chain_event.49.d
-	picture = GFX_report_event_generic_sign_treaty
+	picture = GFX_report_event_qing_print
 
 	fire_only_once = yes
 	is_triggered_only = yes
 
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event qin_viceroys_and_guvernors_chain_event.49"
+		hidden_effect = {
+			country_event = { id = qin_viceroys_and_guvernors_chain_event.50 days = 619 }
+		}
 	}
 
 	option = {
@@ -7062,13 +8057,16 @@ country_event = { # Сычуань - Ван Цинъюнь
 	id = qin_viceroys_and_guvernors_chain_event.50
 	title = qin_viceroys_and_guvernors_chain_event.50.t
 	desc = qin_viceroys_and_guvernors_chain_event.50.d
-	picture = GFX_report_event_generic_sign_treaty
+	picture = GFX_report_event_qing_print
 
 	fire_only_once = yes
 	is_triggered_only = yes
 
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event qin_viceroys_and_guvernors_chain_event.50"
+		hidden_effect = {
+			country_event = { id = qin_viceroys_and_guvernors_chain_event.51 days = 175 }
+		}
 	}
 
 	option = {
@@ -7082,13 +8080,16 @@ country_event = { # Сычуань - Хуан Цзуньхань
 	id = qin_viceroys_and_guvernors_chain_event.51
 	title = qin_viceroys_and_guvernors_chain_event.51.t
 	desc = qin_viceroys_and_guvernors_chain_event.51.d
-	picture = GFX_report_event_generic_sign_treaty
+	picture = GFX_report_event_qing_print
 
 	fire_only_once = yes
 	is_triggered_only = yes
 
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event qin_viceroys_and_guvernors_chain_event.51"
+		hidden_effect = {
+			country_event = { id = qin_viceroys_and_guvernors_chain_event.52 days = 45 }
+		}
 	}
 
 	option = {
@@ -7102,13 +8103,16 @@ country_event = { # Сычуань - Цзэн Ванъянь
 	id = qin_viceroys_and_guvernors_chain_event.52
 	title = qin_viceroys_and_guvernors_chain_event.52.t
 	desc = qin_viceroys_and_guvernors_chain_event.52.d
-	picture = GFX_report_event_generic_sign_treaty
+	picture = GFX_report_event_qing_print
 
 	fire_only_once = yes
 	is_triggered_only = yes
 
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event qin_viceroys_and_guvernors_chain_event.52"
+		hidden_effect = {
+			country_event = { id = qin_viceroys_and_guvernors_chain_event.53 days = 2908 }
+		}
 	}
 
 	option = {
@@ -7122,7 +8126,7 @@ country_event = { # Сычуань - Ло Бинчжан
 	id = qin_viceroys_and_guvernors_chain_event.53
 	title = qin_viceroys_and_guvernors_chain_event.53.t
 	desc = qin_viceroys_and_guvernors_chain_event.53.d
-	picture = GFX_report_event_generic_sign_treaty
+	picture = GFX_report_event_qing_print
 
 	fire_only_once = yes
 	is_triggered_only = yes
@@ -7142,13 +8146,16 @@ country_event = { # Шендзин - Ицзин
 	id = qin_viceroys_and_guvernors_chain_event.54
 	title = qin_viceroys_and_guvernors_chain_event.54.t
 	desc = qin_viceroys_and_guvernors_chain_event.54.d
-	picture = GFX_report_event_generic_sign_treaty
+	picture = GFX_report_event_qing_print
 
 	fire_only_once = yes
 	is_triggered_only = yes
 
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event qin_viceroys_and_guvernors_chain_event.54"
+		hidden_effect = {
+			country_event = { id = qin_viceroys_and_guvernors_chain_event.55 days = 720 }
+		}
 	}
 
 	option = {
@@ -7162,13 +8169,16 @@ country_event = { # Шендзин - Чаншоу
 	id = qin_viceroys_and_guvernors_chain_event.55
 	title = qin_viceroys_and_guvernors_chain_event.55.t
 	desc = qin_viceroys_and_guvernors_chain_event.55.d
-	picture = GFX_report_event_generic_sign_treaty
+	picture = GFX_report_event_qing_print
 
 	fire_only_once = yes
 	is_triggered_only = yes
 
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event qin_viceroys_and_guvernors_chain_event.55"
+		hidden_effect = {
+			country_event = { id = qin_viceroys_and_guvernors_chain_event.56 days = 720 }
+		}
 	}
 
 	option = {
@@ -7182,13 +8192,16 @@ country_event = { # Шендзин - Цин Ци
 	id = qin_viceroys_and_guvernors_chain_event.56
 	title = qin_viceroys_and_guvernors_chain_event.56.t
 	desc = qin_viceroys_and_guvernors_chain_event.56.d
-	picture = GFX_report_event_generic_sign_treaty
+	picture = GFX_report_event_qing_print
 
 	fire_only_once = yes
 	is_triggered_only = yes
 
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event qin_viceroys_and_guvernors_chain_event.56"
+		hidden_effect = {
+			country_event = { id = qin_viceroys_and_guvernors_chain_event.57 days = 1080 }
+		}
 	}
 
 	option = {
@@ -7202,7 +8215,7 @@ country_event = { # Шендзин - Минхуэй
 	id = qin_viceroys_and_guvernors_chain_event.57
 	title = qin_viceroys_and_guvernors_chain_event.57.t
 	desc = qin_viceroys_and_guvernors_chain_event.57.d
-	picture = GFX_report_event_generic_sign_treaty
+	picture = GFX_report_event_qing_print
 
 	fire_only_once = yes
 	is_triggered_only = yes
@@ -7222,13 +8235,16 @@ country_event = { # Цзилинь - Тэбуцин
 	id = qin_viceroys_and_guvernors_chain_event.58
 	title = qin_viceroys_and_guvernors_chain_event.58.t
 	desc = qin_viceroys_and_guvernors_chain_event.58.d
-	picture = GFX_report_event_generic_sign_treaty
+	picture = GFX_report_event_qing_print
 
 	fire_only_once = yes
 	is_triggered_only = yes
 
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event qin_viceroys_and_guvernors_chain_event.58"
+		hidden_effect = {
+			country_event = { id = qin_viceroys_and_guvernors_chain_event.59 days = 795 }
+		}
 	}
 
 	option = {
@@ -7242,13 +8258,16 @@ country_event = { # Цзилинь - Цишань
 	id = qin_viceroys_and_guvernors_chain_event.59
 	title = qin_viceroys_and_guvernors_chain_event.59.t
 	desc = qin_viceroys_and_guvernors_chain_event.59.d
-	picture = GFX_report_event_generic_sign_treaty
+	picture = GFX_report_event_qing_print
 
 	fire_only_once = yes
 	is_triggered_only = yes
 
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event qin_viceroys_and_guvernors_chain_event.59"
+		hidden_effect = {
+			country_event = { id = qin_viceroys_and_guvernors_chain_event.60 days = 600 }
+		}
 	}
 
 	option = {
@@ -7262,13 +8281,16 @@ country_event = { # Цзилинь - Цзинчунь
 	id = qin_viceroys_and_guvernors_chain_event.60
 	title = qin_viceroys_and_guvernors_chain_event.60.t
 	desc = qin_viceroys_and_guvernors_chain_event.60.d
-	picture = GFX_report_event_generic_sign_treaty
+	picture = GFX_report_event_qing_print
 
 	fire_only_once = yes
 	is_triggered_only = yes
 
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event qin_viceroys_and_guvernors_chain_event.60"
+		hidden_effect = {
+			country_event = { id = qin_viceroys_and_guvernors_chain_event.61 days = 1245 }
+		}
 	}
 
 	option = {
@@ -7282,7 +8304,7 @@ country_event = { # Цзилинь - Ишань
 	id = qin_viceroys_and_guvernors_chain_event.61
 	title = qin_viceroys_and_guvernors_chain_event.61.t
 	desc = qin_viceroys_and_guvernors_chain_event.61.d
-	picture = GFX_report_event_generic_sign_treaty
+	picture = GFX_report_event_qing_print
 
 	fire_only_once = yes
 	is_triggered_only = yes
@@ -7302,13 +8324,16 @@ country_event = { # Хейлунцзян - Цзилэту
 	id = qin_viceroys_and_guvernors_chain_event.62
 	title = qin_viceroys_and_guvernors_chain_event.62.t
 	desc = qin_viceroys_and_guvernors_chain_event.62.d
-	picture = GFX_report_event_generic_sign_treaty
+	picture = GFX_report_event_qing_print
 
 	fire_only_once = yes
 	is_triggered_only = yes
 
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event qin_viceroys_and_guvernors_chain_event.62"
+		hidden_effect = {
+			country_event = { id = qin_viceroys_and_guvernors_chain_event.63 days = 665 }
+		}
 	}
 
 	option = {
@@ -7322,13 +8347,16 @@ country_event = { # Хейлунцзян - Ишань
 	id = qin_viceroys_and_guvernors_chain_event.63
 	title = qin_viceroys_and_guvernors_chain_event.63.t
 	desc = qin_viceroys_and_guvernors_chain_event.63.d
-	picture = GFX_report_event_generic_sign_treaty
+	picture = GFX_report_event_qing_print
 
 	fire_only_once = yes
 	is_triggered_only = yes
 
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event qin_viceroys_and_guvernors_chain_event.63"
+		hidden_effect = {
+			country_event = { id = qin_viceroys_and_guvernors_chain_event.64 days = 1315 }
+		}
 	}
 
 	option = {
@@ -7342,7 +8370,7 @@ country_event = { # Хейлунцзян - Тэпуцинь
 	id = qin_viceroys_and_guvernors_chain_event.64
 	title = qin_viceroys_and_guvernors_chain_event.64.t
 	desc = qin_viceroys_and_guvernors_chain_event.64.d
-	picture = GFX_report_event_generic_sign_treaty
+	picture = GFX_report_event_qing_print
 
 	fire_only_once = yes
 	is_triggered_only = yes
@@ -7362,13 +8390,16 @@ country_event = { # Шенси - Ван Цинъюнь
 	id = qin_viceroys_and_guvernors_chain_event.65
 	title = qin_viceroys_and_guvernors_chain_event.65.t
 	desc = qin_viceroys_and_guvernors_chain_event.65.d
-	picture = GFX_report_event_generic_sign_treaty
+	picture = GFX_report_event_qing_print
 
 	fire_only_once = yes
 	is_triggered_only = yes
 
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event qin_viceroys_and_guvernors_chain_event.65"
+		hidden_effect = {
+			country_event = { id = qin_viceroys_and_guvernors_chain_event.66 days = 435 }
+		}
 	}
 
 	option = {
@@ -7382,13 +8413,16 @@ country_event = { # Шенси - У Чжэньчэн
 	id = qin_viceroys_and_guvernors_chain_event.66
 	title = qin_viceroys_and_guvernors_chain_event.66.t
 	desc = qin_viceroys_and_guvernors_chain_event.66.d
-	picture = GFX_report_event_generic_sign_treaty
+	picture = GFX_report_event_qing_print
 
 	fire_only_once = yes
 	is_triggered_only = yes
 
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event qin_viceroys_and_guvernors_chain_event.66"
+		hidden_effect = {
+			country_event = { id = qin_viceroys_and_guvernors_chain_event.67 days = 795 }
+		}
 	}
 
 	option = {
@@ -7402,13 +8436,16 @@ country_event = { # Шенси - Тань Тинъи
 	id = qin_viceroys_and_guvernors_chain_event.67
 	title = qin_viceroys_and_guvernors_chain_event.67.t
 	desc = qin_viceroys_and_guvernors_chain_event.67.d
-	picture = GFX_report_event_generic_sign_treaty
+	picture = GFX_report_event_qing_print
 
 	fire_only_once = yes
 	is_triggered_only = yes
 
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event qin_viceroys_and_guvernors_chain_event.67"
+		hidden_effect = {
+			country_event = { id = qin_viceroys_and_guvernors_chain_event.68 days = 45 }
+		}
 	}
 
 	option = {
@@ -7422,13 +8459,16 @@ country_event = { # Шенси - Цзэн Ванъянь
 	id = qin_viceroys_and_guvernors_chain_event.68
 	title = qin_viceroys_and_guvernors_chain_event.68.t
 	desc = qin_viceroys_and_guvernors_chain_event.68.d
-	picture = GFX_report_event_generic_sign_treaty
+	picture = GFX_report_event_qing_print
 
 	fire_only_once = yes
 	is_triggered_only = yes
 
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event qin_viceroys_and_guvernors_chain_event.68"
+		hidden_effect = {
+			country_event = { id = qin_viceroys_and_guvernors_chain_event.69 days = 885 }
+		}
 	}
 
 	option = {
@@ -7442,13 +8482,16 @@ country_event = { # Шенси - Тань Тинъи
 	id = qin_viceroys_and_guvernors_chain_event.69
 	title = qin_viceroys_and_guvernors_chain_event.69.t
 	desc = qin_viceroys_and_guvernors_chain_event.69.d
-	picture = GFX_report_event_generic_sign_treaty
+	picture = GFX_report_event_qing_print
 
 	fire_only_once = yes
 	is_triggered_only = yes
 
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event qin_viceroys_and_guvernors_chain_event.69"
+		hidden_effect = {
+			country_event = { id = qin_viceroys_and_guvernors_chain_event.70 days = 795 }
+		}
 	}
 
 	option = {
@@ -7462,13 +8505,16 @@ country_event = { # Шенси - Дэн Эрхэн
 	id = qin_viceroys_and_guvernors_chain_event.70
 	title = qin_viceroys_and_guvernors_chain_event.70.t
 	desc = qin_viceroys_and_guvernors_chain_event.70.d
-	picture = GFX_report_event_generic_sign_treaty
+	picture = GFX_report_event_qing_print
 
 	fire_only_once = yes
 	is_triggered_only = yes
 
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event qin_viceroys_and_guvernors_chain_event.70"
+		hidden_effect = {
+			country_event = { id = qin_viceroys_and_guvernors_chain_event.71 days = 105 }
+		}
 	}
 
 	option = {
@@ -7482,13 +8528,16 @@ country_event = { # Шенси - Хуан Жун
 	id = qin_viceroys_and_guvernors_chain_event.71
 	title = qin_viceroys_and_guvernors_chain_event.71.t
 	desc = qin_viceroys_and_guvernors_chain_event.71.d
-	picture = GFX_report_event_generic_sign_treaty
+	picture = GFX_report_event_qing_print
 
 	fire_only_once = yes
 	is_triggered_only = yes
 
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event qin_viceroys_and_guvernors_chain_event.71"
+		hidden_effect = {
+			country_event = { id = qin_viceroys_and_guvernors_chain_event.72 days = 465 }
+		}
 	}
 
 	option = {
@@ -7502,7 +8551,7 @@ country_event = { # Шенси - Лю Жун
 	id = qin_viceroys_and_guvernors_chain_event.72
 	title = qin_viceroys_and_guvernors_chain_event.72.t
 	desc = qin_viceroys_and_guvernors_chain_event.72.d
-	picture = GFX_report_event_generic_sign_treaty
+	picture = GFX_report_event_qing_print
 
 	fire_only_once = yes
 	is_triggered_only = yes
@@ -7522,13 +8571,16 @@ country_event = { # Хенань - Цзи Чжичан
 	id = qin_viceroys_and_guvernors_chain_event.73
 	title = qin_viceroys_and_guvernors_chain_event.73.t
 	desc = qin_viceroys_and_guvernors_chain_event.73.d
-	picture = GFX_report_event_generic_sign_treaty
+	picture = GFX_report_event_qing_print
 
 	fire_only_once = yes
 	is_triggered_only = yes
 
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event qin_viceroys_and_guvernors_chain_event.73"
+		hidden_effect = {
+			country_event = { id = qin_viceroys_and_guvernors_chain_event.74 days = 75 }
+		}
 	}
 
 	option = {
@@ -7542,13 +8594,16 @@ country_event = { # Хенань - Гун Юй
 	id = qin_viceroys_and_guvernors_chain_event.74
 	title = qin_viceroys_and_guvernors_chain_event.74.t
 	desc = qin_viceroys_and_guvernors_chain_event.74.d
-	picture = GFX_report_event_generic_sign_treaty
+	picture = GFX_report_event_qing_print
 
 	fire_only_once = yes
 	is_triggered_only = yes
 
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event qin_viceroys_and_guvernors_chain_event.74"
+		hidden_effect = {
+			country_event = { id = qin_viceroys_and_guvernors_chain_event.75 days = 75 }
+		}
 	}
 
 	option = {
@@ -7562,13 +8617,16 @@ country_event = { # Хенань - Чжао Насуту
 	id = qin_viceroys_and_guvernors_chain_event.75
 	title = qin_viceroys_and_guvernors_chain_event.75.t
 	desc = qin_viceroys_and_guvernors_chain_event.75.d
-	picture = GFX_report_event_generic_sign_treaty
+	picture = GFX_report_event_qing_print
 
 	fire_only_once = yes
 	is_triggered_only = yes
 
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event qin_viceroys_and_guvernors_chain_event.75"
+		hidden_effect = {
+			country_event = { id = qin_viceroys_and_guvernors_chain_event.76 days = 825 }
+		}
 	}
 
 	option = {
@@ -7582,13 +8640,16 @@ country_event = { # Хенань - Чан Дачунь
 	id = qin_viceroys_and_guvernors_chain_event.76
 	title = qin_viceroys_and_guvernors_chain_event.76.t
 	desc = qin_viceroys_and_guvernors_chain_event.76.d
-	picture = GFX_report_event_generic_sign_treaty
+	picture = GFX_report_event_qing_print
 
 	fire_only_once = yes
 	is_triggered_only = yes
 
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event qin_viceroys_and_guvernors_chain_event.76"
+		hidden_effect = {
+			country_event = { id = qin_viceroys_and_guvernors_chain_event.77 days = 135 }
+		}
 	}
 
 	option = {
@@ -7602,13 +8663,16 @@ country_event = { # Хенань - И Тан
 	id = qin_viceroys_and_guvernors_chain_event.77
 	title = qin_viceroys_and_guvernors_chain_event.77.t
 	desc = qin_viceroys_and_guvernors_chain_event.77.d
-	picture = GFX_report_event_generic_sign_treaty
+	picture = GFX_report_event_qing_print
 
 	fire_only_once = yes
 	is_triggered_only = yes
 
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event qin_viceroys_and_guvernors_chain_event.77"
+		hidden_effect = {
+			country_event = { id = qin_viceroys_and_guvernors_chain_event.78 days = 165 }
+		}
 	}
 
 	option = {
@@ -7622,13 +8686,16 @@ country_event = { # Хенань - Ха Фэнь
 	id = qin_viceroys_and_guvernors_chain_event.78
 	title = qin_viceroys_and_guvernors_chain_event.78.t
 	desc = qin_viceroys_and_guvernors_chain_event.78.d
-	picture = GFX_report_event_generic_sign_treaty
+	picture = GFX_report_event_qing_print
 
 	fire_only_once = yes
 	is_triggered_only = yes
 
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event qin_viceroys_and_guvernors_chain_event.78"
+		hidden_effect = {
+			country_event = { id = qin_viceroys_and_guvernors_chain_event.79 days = 135 }
+		}
 	}
 
 	option = {
@@ -7642,13 +8709,16 @@ country_event = { # Хенань - Хэнчунь
 	id = qin_viceroys_and_guvernors_chain_event.79
 	title = qin_viceroys_and_guvernors_chain_event.79.t
 	desc = qin_viceroys_and_guvernors_chain_event.79.d
-	picture = GFX_report_event_generic_sign_treaty
+	picture = GFX_report_event_qing_print
 
 	fire_only_once = yes
 	is_triggered_only = yes
 
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event qin_viceroys_and_guvernors_chain_event.79"
+		hidden_effect = {
+			country_event = { id = qin_viceroys_and_guvernors_chain_event.80 days = 465 }
+		}
 	}
 
 	option = {
@@ -7662,13 +8732,16 @@ country_event = { # Хенань - Ван Цинъюнь
 	id = qin_viceroys_and_guvernors_chain_event.80
 	title = qin_viceroys_and_guvernors_chain_event.80.t
 	desc = qin_viceroys_and_guvernors_chain_event.80.d
-	picture = GFX_report_event_generic_sign_treaty
+	picture = GFX_report_event_qing_print
 
 	fire_only_once = yes
 	is_triggered_only = yes
 
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event qin_viceroys_and_guvernors_chain_event.80"
+		hidden_effect = {
+			country_event = { id = qin_viceroys_and_guvernors_chain_event.81 days = 915 }
+		}
 	}
 
 	option = {
@@ -7682,13 +8755,16 @@ country_event = { # Хенань - Хэнфу
 	id = qin_viceroys_and_guvernors_chain_event.81
 	title = qin_viceroys_and_guvernors_chain_event.81.t
 	desc = qin_viceroys_and_guvernors_chain_event.81.d
-	picture = GFX_report_event_generic_sign_treaty
+	picture = GFX_report_event_qing_print
 
 	fire_only_once = yes
 	is_triggered_only = yes
 
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event qin_viceroys_and_guvernors_chain_event.81"
+		hidden_effect = {
+			country_event = { id = qin_viceroys_and_guvernors_chain_event.82 days = 600 }
+		}
 	}
 
 	option = {
@@ -7702,13 +8778,16 @@ country_event = { # Хенань - Ин Гуй
 	id = qin_viceroys_and_guvernors_chain_event.82
 	title = qin_viceroys_and_guvernors_chain_event.82.t
 	desc = qin_viceroys_and_guvernors_chain_event.82.d
-	picture = GFX_report_event_generic_sign_treaty
+	picture = GFX_report_event_qing_print
 
 	fire_only_once = yes
 	is_triggered_only = yes
 
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event qin_viceroys_and_guvernors_chain_event.82"
+		hidden_effect = {
+			country_event = { id = qin_viceroys_and_guvernors_chain_event.83 days = 1605 }
+		}
 	}
 
 	option = {
@@ -7722,7 +8801,7 @@ country_event = { # Хенань - Шэнь Гуйфэнь
 	id = qin_viceroys_and_guvernors_chain_event.83
 	title = qin_viceroys_and_guvernors_chain_event.83.t
 	desc = qin_viceroys_and_guvernors_chain_event.83.d
-	picture = GFX_report_event_generic_sign_treaty
+	picture = GFX_report_event_qing_print
 
 	fire_only_once = yes
 	is_triggered_only = yes
@@ -7742,13 +8821,16 @@ country_event = { # Шаньдун - Чен Цинкай
 	id = qin_viceroys_and_guvernors_chain_event.84
 	title = qin_viceroys_and_guvernors_chain_event.84.t
 	desc = qin_viceroys_and_guvernors_chain_event.84.d
-	picture = GFX_report_event_generic_sign_treaty
+	picture = GFX_report_event_qing_print
 
 	fire_only_once = yes
 	is_triggered_only = yes
 
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event qin_viceroys_and_guvernors_chain_event.84"
+		hidden_effect = {
+			country_event = { id = qin_viceroys_and_guvernors_chain_event.85 days = 885 }
+		}
 	}
 
 	option = {
@@ -7762,13 +8844,16 @@ country_event = { # Шаньдун - Ли Вей
 	id = qin_viceroys_and_guvernors_chain_event.85
 	title = qin_viceroys_and_guvernors_chain_event.85.t
 	desc = qin_viceroys_and_guvernors_chain_event.85.d
-	picture = GFX_report_event_generic_sign_treaty
+	picture = GFX_report_event_qing_print
 
 	fire_only_once = yes
 	is_triggered_only = yes
 
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event qin_viceroys_and_guvernors_chain_event.85"
+		hidden_effect = {
+			country_event = { id = qin_viceroys_and_guvernors_chain_event.86 days = 535 }
+		}
 	}
 
 	option = {
@@ -7782,13 +8867,16 @@ country_event = { # Шаньдун - Чжан Лянцзи
 	id = qin_viceroys_and_guvernors_chain_event.86
 	title = qin_viceroys_and_guvernors_chain_event.86.t
 	desc = qin_viceroys_and_guvernors_chain_event.86.d
-	picture = GFX_report_event_generic_sign_treaty
+	picture = GFX_report_event_qing_print
 
 	fire_only_once = yes
 	is_triggered_only = yes
 
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event qin_viceroys_and_guvernors_chain_event.86"
+		hidden_effect = {
+			country_event = { id = qin_viceroys_and_guvernors_chain_event.87 days = 220 }
+		}
 	}
 
 	option = {
@@ -7802,13 +8890,16 @@ country_event = { # Шаньдун - Чонген
 	id = qin_viceroys_and_guvernors_chain_event.87
 	title = qin_viceroys_and_guvernors_chain_event.87.t
 	desc = qin_viceroys_and_guvernors_chain_event.87.d
-	picture = GFX_report_event_generic_sign_treaty
+	picture = GFX_report_event_qing_print
 
 	fire_only_once = yes
 	is_triggered_only = yes
 
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event qin_viceroys_and_guvernors_chain_event.87"
+		hidden_effect = {
+			country_event = { id = qin_viceroys_and_guvernors_chain_event.87 days = 1935 }
+		}
 	}
 
 	option = {
@@ -7822,13 +8913,16 @@ country_event = { # Шаньдун - Вень Юй
 	id = qin_viceroys_and_guvernors_chain_event.88
 	title = qin_viceroys_and_guvernors_chain_event.88.t
 	desc = qin_viceroys_and_guvernors_chain_event.88.d
-	picture = GFX_report_event_generic_sign_treaty
+	picture = GFX_report_event_qing_print
 
 	fire_only_once = yes
 	is_triggered_only = yes
 
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event qin_viceroys_and_guvernors_chain_event.88"
+		hidden_effect = {
+			country_event = { id = qin_viceroys_and_guvernors_chain_event.88 days = 510 }
+		}
 	}
 
 	option = {
@@ -7842,13 +8936,16 @@ country_event = { # Шаньдун - Тань Тинъи
 	id = qin_viceroys_and_guvernors_chain_event.89
 	title = qin_viceroys_and_guvernors_chain_event.89.t
 	desc = qin_viceroys_and_guvernors_chain_event.89.d
-	picture = GFX_report_event_generic_sign_treaty
+	picture = GFX_report_event_qing_print
 
 	fire_only_once = yes
 	is_triggered_only = yes
 
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event qin_viceroys_and_guvernors_chain_event.89"
+		hidden_effect = {
+			country_event = { id = qin_viceroys_and_guvernors_chain_event.90 days = 535 }
+		}
 	}
 
 	option = {
@@ -7862,7 +8959,7 @@ country_event = { # Шаньдун - Тань Тинъи
 #	id = qin_viceroys_and_guvernors_chain_event.90
 #	title = qin_viceroys_and_guvernors_chain_event.90.t
 #	desc = qin_viceroys_and_guvernors_chain_event.90.d
-#	picture = GFX_report_event_generic_sign_treaty
+#	picture = GFX_report_event_qing_print
 #
 #	fire_only_once = yes
 #	is_triggered_only = yes
@@ -7883,13 +8980,16 @@ country_event = { # Наместник по делам Синин - Ву Бин�
 	id = qin_viceroys_and_guvernors_chain_event.91
 	title = qin_viceroys_and_guvernors_chain_event.91.t
 	desc = qin_viceroys_and_guvernors_chain_event.91.d
-	picture = GFX_report_event_generic_sign_treaty
+	picture = GFX_report_event_qing_print
 
 	fire_only_once = yes
 	is_triggered_only = yes
 
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event qin_viceroys_and_guvernors_chain_event.91"
+		hidden_effect = {
+			country_event = { id = qin_viceroys_and_guvernors_chain_event.92 days = 825 }
+		}
 	}
 
 	option = {
@@ -7903,13 +9003,16 @@ country_event = { # Наместник по делам Синин - Дунчун
 	id = qin_viceroys_and_guvernors_chain_event.92
 	title = qin_viceroys_and_guvernors_chain_event.92.t
 	desc = qin_viceroys_and_guvernors_chain_event.92.d
-	picture = GFX_report_event_generic_sign_treaty
+	picture = GFX_report_event_qing_print
 
 	fire_only_once = yes
 	is_triggered_only = yes
 
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event qin_viceroys_and_guvernors_chain_event.92"
+		hidden_effect = {
+			country_event = { id = qin_viceroys_and_guvernors_chain_event.93 days = 855 }
+		}
 	}
 
 	option = {
@@ -7923,13 +9026,16 @@ country_event = { # Наместник по делам Синин - Тугабу
 	id = qin_viceroys_and_guvernors_chain_event.93
 	title = qin_viceroys_and_guvernors_chain_event.93.t
 	desc = qin_viceroys_and_guvernors_chain_event.93.d
-	picture = GFX_report_event_generic_sign_treaty
+	picture = GFX_report_event_qing_print
 
 	fire_only_once = yes
 	is_triggered_only = yes
 
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event qin_viceroys_and_guvernors_chain_event.93"
+		hidden_effect = {
+			country_event = { id = qin_viceroys_and_guvernors_chain_event.94 days = 795 }
+		}
 	}
 
 	option = {
@@ -7943,13 +9049,16 @@ country_event = { # Наместник по делам Синин - Фуцзи �
 	id = qin_viceroys_and_guvernors_chain_event.94
 	title = qin_viceroys_and_guvernors_chain_event.94.t
 	desc = qin_viceroys_and_guvernors_chain_event.94.d
-	picture = GFX_report_event_generic_sign_treaty
+	picture = GFX_report_event_qing_print
 
 	fire_only_once = yes
 	is_triggered_only = yes
 
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event qin_viceroys_and_guvernors_chain_event.94"
+		hidden_effect = {
+			country_event = { id = qin_viceroys_and_guvernors_chain_event.95 days = 465 }
+		}
 	}
 
 	option = {
@@ -7963,13 +9072,16 @@ country_event = { # Наместник по делам Синин - Вэнь Ц�
 	id = qin_viceroys_and_guvernors_chain_event.95
 	title = qin_viceroys_and_guvernors_chain_event.95.t
 	desc = qin_viceroys_and_guvernors_chain_event.95.d
-	picture = GFX_report_event_generic_sign_treaty
+	picture = GFX_report_event_qing_print
 
 	fire_only_once = yes
 	is_triggered_only = yes
 
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event qin_viceroys_and_guvernors_chain_event.95"
+		hidden_effect = {
+			country_event = { id = qin_viceroys_and_guvernors_chain_event.96 days = 205 }
+		}
 	}
 
 	option = {
@@ -7983,7 +9095,7 @@ country_event = { # Наместник по делам Синин - Дохуэй
 	id = qin_viceroys_and_guvernors_chain_event.96
 	title = qin_viceroys_and_guvernors_chain_event.96.t
 	desc = qin_viceroys_and_guvernors_chain_event.96.d
-	picture = GFX_report_event_generic_sign_treaty
+	picture = GFX_report_event_qing_print
 
 	fire_only_once = yes
 	is_triggered_only = yes
@@ -8003,13 +9115,16 @@ country_event = { # Суйюань - Цзюэ Ло Лебинь
 	id = qin_viceroys_and_guvernors_chain_event.97
 	title = qin_viceroys_and_guvernors_chain_event.97.t
 	desc = qin_viceroys_and_guvernors_chain_event.97.d
-	picture = GFX_report_event_generic_sign_treaty
+	picture = GFX_report_event_qing_print
 
 	fire_only_once = yes
 	is_triggered_only = yes
 
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event qin_viceroys_and_guvernors_chain_event.97"
+		hidden_effect = {
+			country_event = { id = qin_viceroys_and_guvernors_chain_event.98 days = 165 }
+		}
 	}
 
 	option = {
@@ -8023,13 +9138,16 @@ country_event = { # Суйюань - Юньци Вей Шаньлу
 	id = qin_viceroys_and_guvernors_chain_event.98
 	title = qin_viceroys_and_guvernors_chain_event.98.t
 	desc = qin_viceroys_and_guvernors_chain_event.98.d
-	picture = GFX_report_event_generic_sign_treaty
+	picture = GFX_report_event_qing_print
 
 	fire_only_once = yes
 	is_triggered_only = yes
 
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event qin_viceroys_and_guvernors_chain_event.98"
+		hidden_effect = {
+			country_event = { id = qin_viceroys_and_guvernors_chain_event.99 days = 495 }
+		}
 	}
 
 	option = {
@@ -8043,13 +9161,16 @@ country_event = { # Суйюань - Хуашаньтай
 	id = qin_viceroys_and_guvernors_chain_event.99
 	title = qin_viceroys_and_guvernors_chain_event.99.t
 	desc = qin_viceroys_and_guvernors_chain_event.99.d
-	picture = GFX_report_event_generic_sign_treaty
+	picture = GFX_report_event_qing_print
 
 	fire_only_once = yes
 	is_triggered_only = yes
 
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event qin_viceroys_and_guvernors_chain_event.99"
+		hidden_effect = {
+			country_event = { id = qin_viceroys_and_guvernors_chain_event.100 days = 85 }
+		}
 	}
 
 	option = {
@@ -8063,13 +9184,16 @@ country_event = { # Суйюань - Цинру
 	id = qin_viceroys_and_guvernors_chain_event.100
 	title = qin_viceroys_and_guvernors_chain_event.100.t
 	desc = qin_viceroys_and_guvernors_chain_event.100.d
-	picture = GFX_report_event_generic_sign_treaty
+	picture = GFX_report_event_qing_print
 
 	fire_only_once = yes
 	is_triggered_only = yes
 
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event qin_viceroys_and_guvernors_chain_event.100"
+		hidden_effect = {
+			country_event = { id = qin_viceroys_and_guvernors_chain_event.101 days = 285 }
+		}
 	}
 
 	option = {
@@ -8083,13 +9207,16 @@ country_event = { # Суйюань - Чен Кай
 	id = qin_viceroys_and_guvernors_chain_event.101
 	title = qin_viceroys_and_guvernors_chain_event.101.t
 	desc = qin_viceroys_and_guvernors_chain_event.101.d
-	picture = GFX_report_event_generic_sign_treaty
+	picture = GFX_report_event_qing_print
 
 	fire_only_once = yes
 	is_triggered_only = yes
 
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event qin_viceroys_and_guvernors_chain_event.101"
+		hidden_effect = {
+			country_event = { id = qin_viceroys_and_guvernors_chain_event.102 days = 2055 }
+		}
 	}
 
 	option = {
@@ -8103,7 +9230,7 @@ country_event = { # Суйюань - Засак Гушан Бей Зи Деле�
 	id = qin_viceroys_and_guvernors_chain_event.102
 	title = qin_viceroys_and_guvernors_chain_event.102.t
 	desc = qin_viceroys_and_guvernors_chain_event.102.d
-	picture = GFX_report_event_generic_sign_treaty
+	picture = GFX_report_event_qing_print
 
 	fire_only_once = yes
 	is_triggered_only = yes
@@ -8123,13 +9250,16 @@ country_event = { # Улясутай - Йи Гэ
 	id = qin_viceroys_and_guvernors_chain_event.103
 	title = qin_viceroys_and_guvernors_chain_event.103.t
 	desc = qin_viceroys_and_guvernors_chain_event.103.d
-	picture = GFX_report_event_generic_sign_treaty
+	picture = GFX_report_event_qing_print
 
 	fire_only_once = yes
 	is_triggered_only = yes
 
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event qin_viceroys_and_guvernors_chain_event.103"
+		hidden_effect = {
+			country_event = { id = qin_viceroys_and_guvernors_chain_event.104 days = 1275 }
+		}
 	}
 
 	option = {
@@ -8143,13 +9273,16 @@ country_event = { # Улясутай - Залафентай
 	id = qin_viceroys_and_guvernors_chain_event.104
 	title = qin_viceroys_and_guvernors_chain_event.104.t
 	desc = qin_viceroys_and_guvernors_chain_event.104.d
-	picture = GFX_report_event_generic_sign_treaty
+	picture = GFX_report_event_qing_print
 
 	fire_only_once = yes
 	is_triggered_only = yes
 
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event qin_viceroys_and_guvernors_chain_event.104"
+		hidden_effect = {
+			country_event = { id = qin_viceroys_and_guvernors_chain_event.105 days = 840 }
+		}
 	}
 
 	option = {
@@ -8163,13 +9296,16 @@ country_event = { # Улясутай - Исин
 	id = qin_viceroys_and_guvernors_chain_event.105
 	title = qin_viceroys_and_guvernors_chain_event.105.t
 	desc = qin_viceroys_and_guvernors_chain_event.105.d
-	picture = GFX_report_event_generic_sign_treaty
+	picture = GFX_report_event_qing_print
 
 	fire_only_once = yes
 	is_triggered_only = yes
 
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event qin_viceroys_and_guvernors_chain_event.105"
+		hidden_effect = {
+			country_event = { id = qin_viceroys_and_guvernors_chain_event.106 days = 405 }
+		}
 	}
 
 	option = {
@@ -8183,13 +9319,16 @@ country_event = { # Улясутай - Цинру
 	id = qin_viceroys_and_guvernors_chain_event.106
 	title = qin_viceroys_and_guvernors_chain_event.106.t
 	desc = qin_viceroys_and_guvernors_chain_event.106.d
-	picture = GFX_report_event_generic_sign_treaty
+	picture = GFX_report_event_qing_print
 
 	fire_only_once = yes
 	is_triggered_only = yes
 
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event qin_viceroys_and_guvernors_chain_event.106"
+		hidden_effect = {
+			country_event = { id = qin_viceroys_and_guvernors_chain_event.107 days = 1395 }
+		}
 	}
 
 	option = {
@@ -8203,7 +9342,7 @@ country_event = { # Улясутай - Миньи
 	id = qin_viceroys_and_guvernors_chain_event.107
 	title = qin_viceroys_and_guvernors_chain_event.107.t
 	desc = qin_viceroys_and_guvernors_chain_event.107.d
-	picture = GFX_report_event_generic_sign_treaty
+	picture = GFX_report_event_qing_print
 
 	fire_only_once = yes
 	is_triggered_only = yes
@@ -8223,7 +9362,7 @@ country_event = { #
 	id = qin_viceroys_and_guvernors_chain_event.108
 	title = qin_viceroys_and_guvernors_chain_event.108.t
 	desc = qin_viceroys_and_guvernors_chain_event.108.d
-	picture = GFX_report_event_generic_sign_treaty
+	picture = GFX_report_event_qing_print
 
 	fire_only_once = yes
 	is_triggered_only = yes
@@ -8244,7 +9383,7 @@ country_event = { #
 	id = qin_viceroys_and_guvernors_chain_event.109
 	title = qin_viceroys_and_guvernors_chain_event.109.t
 	desc = qin_viceroys_and_guvernors_chain_event.109.d
-	picture = GFX_report_event_generic_sign_treaty
+	picture = GFX_report_event_qing_print
 
 	fire_only_once = yes
 	is_triggered_only = yes
@@ -8265,7 +9404,7 @@ country_event = { #
 	id = qin_viceroys_and_guvernors_chain_event.110
 	title = qin_viceroys_and_guvernors_chain_event.110.t
 	desc = qin_viceroys_and_guvernors_chain_event.110.d
-	picture = GFX_report_event_generic_sign_treaty
+	picture = GFX_report_event_qing_print
 
 	fire_only_once = yes
 	is_triggered_only = yes
