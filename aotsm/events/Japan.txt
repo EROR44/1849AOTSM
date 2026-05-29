@@ -998,13 +998,16 @@ country_event = { #
 
 	option = {
 		name = jap_gw_emperror_event.2.a
-		trigger = {
-			# условия
-		}
+		set_country_flag = JAP_imp_turn_to_rome_flag
+	}
+
+	option = {
+		name = jap_gw_emperror_event.2.b
+		set_country_flag = JAP_imp_turn_to_cbo_flag
 	}
 }
 
-country_event = { #
+country_event = { # Turn to Romea
 	id = jap_gw_emperror_event.3
 	title = jap_gw_emperror_event.3.t
 	desc = jap_gw_emperror_event.3.d
@@ -1017,10 +1020,21 @@ country_event = { #
 		log = "[GetDateText]: [Root.GetName]: event jap_gw_emperror_event.3"
 	}
 
-	option = {
+	option = { # Yes
 		name = jap_gw_emperror_event.3.a
-		trigger = {
-			# условия
+		JAP = {
+			country_event = {
+				id = jap_gw_emperror_event.7
+			}
+		}
+	}
+
+	option = { # No
+		name = jap_gw_emperror_event.3.b
+		JAP = {
+			country_event = {
+				id = jap_gw_emperror_event.8
+			}
 		}
 	}
 }
@@ -1061,13 +1075,14 @@ country_event = { #
 
 	option = {
 		name = jap_gw_emperror_event.5.a
-		trigger = {
-			# условия
+		uncomplete_national_focus = {
+			focus = JAP_imp_turn_to_cbo
+			uncomplete_children = yes
 		}
 	}
 }
 
-country_event = { #
+country_event = { # Turn to CBI
 	id = jap_gw_emperror_event.6
 	title = jap_gw_emperror_event.6.t
 	desc = jap_gw_emperror_event.6.d
@@ -1080,10 +1095,21 @@ country_event = { #
 		log = "[GetDateText]: [Root.GetName]: event jap_gw_emperror_event.6"
 	}
 
-	option = {
+	option = { # Yes
 		name = jap_gw_emperror_event.6.a
-		trigger = {
-			# условия
+		JAP = {
+			country_event = {
+				id = jap_gw_emperror_event.4
+			}
+		}
+	}
+
+	option = { # No
+		name = jap_gw_emperror_event.6.b
+		JAP = {
+			country_event = {
+				id = jap_gw_emperror_event.5
+			}
 		}
 	}
 }
@@ -1124,8 +1150,9 @@ country_event = { #
 
 	option = {
 		name = jap_gw_emperror_event.8.a
-		trigger = {
-			# условия
+		uncomplete_national_focus = {
+			focus = JAP_imp_turn_to_rome
+			uncomplete_children = yes
 		}
 	}
 }
@@ -1187,9 +1214,11 @@ country_event = { #
 
 	option = {
 		name = jap_gw_emperror_event.11.a
-		trigger = {
-			# условия
+		add_offsite_building = {
+			type = arms_factory
+			level = 2
 		}
+		add_ideas = JAP_imp_guarantee_foreign_traders_idea
 	}
 }
 
@@ -1229,9 +1258,6 @@ country_event = { #
 
 	option = {
 		name = jap_gw_emperror_event.13.a
-		trigger = {
-			# условия
-		}
 		mobilisation_increase = yes
 	}
 }
@@ -1251,9 +1277,8 @@ country_event = { #
 
 	option = {
 		name = jap_gw_emperror_event.14.a
-		trigger = {
-			# условия
-		}
+		add_stability = 0.125
+		add_war_support = 0.125
 	}
 }
 
@@ -1272,8 +1297,9 @@ country_event = { #
 
 	option = {
 		name = jap_gw_emperror_event.15.a
-		trigger = {
-			# условия
+		swap_ideas = {
+			remove_idea = civilian_economy
+			add_idea = tot_economic_mobilisation
 		}
 	}
 }
@@ -1293,8 +1319,9 @@ country_event = { #
 
 	option = {
 		name = jap_gw_emperror_event.16.a
-		trigger = {
-			# условия
+		swap_ideas = {
+			remove_idea = civilian_economy
+			add_idea = partial_economic_mobilisation
 		}
 	}
 }
@@ -1320,7 +1347,7 @@ country_event = { #
 	}
 }
 
-country_event = { #
+country_event = {
 	id = jap_gw_emperror_event.18
 	title = jap_gw_emperror_event.18.t
 	desc = jap_gw_emperror_event.18.d
@@ -1340,13 +1367,10 @@ country_event = { #
 
 	option = {
 		name = jap_gw_emperror_event.18.a
-		trigger = {
-			# условия
-		}
 	}
 }
 
-country_event = { #
+country_event = {
 	id = jap_gw_emperror_event.19
 	title = jap_gw_emperror_event.19.t
 	desc = jap_gw_emperror_event.19.d
@@ -1361,8 +1385,17 @@ country_event = { #
 
 	option = { #Cогласие
 		name = jap_gw_emperror_event.19.a
-		trigger = {
-			# условия
+		ai_chance = {
+			base = 85
+			modifier = {
+				factor = 0
+				TUK = {
+					OR = {
+						has_completed_focus = JAP_tuk_masahiro_abe
+						has_completed_focus = JAP_tuk_morisada_isihara
+					}
+				}
+			}
 		}
 		JAP = { 
 			country_event = { id = jap_gw_emperror_event.20 days = 3 }
@@ -1371,8 +1404,8 @@ country_event = { #
 
 	option = { #Отказ
 		name = jap_gw_emperror_event.19.b
-		trigger = {
-			# условия
+		ai_chance = {
+			base = 15
 		}
 		JAP = { 
 			country_event = { id = jap_gw_emperror_event.21 days = 3 }
@@ -1395,9 +1428,6 @@ country_event = { #
 
 	option = {
 		name = jap_gw_emperror_event.20.a
-		trigger = {
-			# условия
-		}
 		annex_country = {
 			target = TUK
 			transfer_troops = yes
@@ -1420,16 +1450,10 @@ country_event = { #
 
 	option = {
 		name = jap_gw_emperror_event.21.a
-		trigger = {
-			# условия
-		}
 	}
 
 	option = {
-		name = jap_gw_emperror_event.21.a
-		trigger = {
-			# условия
-		}
+		name = jap_gw_emperror_event.21.b
 		declare_war_on = {
 			target = TUK
 			type = annex_everything
@@ -1462,23 +1486,20 @@ country_event = { #
 ###   GW TORIHIKI EVENT SECTION   ###
 #####################################
 
-country_event = { #
+country_event = {
 	id = jap_gw_torihiki_event.1
 	title = jap_gw_torihiki_event.1.t
 	desc = jap_gw_torihiki_event.1.d
 	picture = GFX_report_event_aotsm_generic_signing_the_contract
 
-	hidden =  yes
-	
 	fire_only_once = yes
-
 	is_triggered_only = yes
 	
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event jap_gw_torihiki_event.1"
 	}
 
-	option = { # Встать на стороны Императора
+	option = { # Встать на сторону Императора
 		name = jap_gw_torihiki_event.1.a
 		custom_effect_tooltip = JAP_choose_emperor_way_tt
 		hidden_effect = {
@@ -1492,12 +1513,706 @@ country_event = { #
 			complete_national_focus = JAP_tuk_morisada_isihara
 		}
 	}
-	option = { # Втать на сторону сёгуна
+	option = { # Втать на сторону сегуна
 		name = jap_gw_torihiki_event.1.c
 		custom_effect_tooltip = JAP_choose_abe_masahiro_way_tt
 		hidden_effect = {
 			complete_national_focus = JAP_tuk_masahiro_abe
 		}
+	}
+}
+
+country_event = {
+	id = jap_gw_torihiki_event.2
+	title = jap_gw_torihiki_event.2.t
+	desc = jap_gw_torihiki_event.2.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event jap_gw_torihiki_event.2"
+	}
+
+	option = {
+		name = jap_gw_torihiki_event.2.a
+		add_manpower = 7500
+		add_ideas = JAP_tuk_reduce_foreigners_in_squadrons_idea
+	}
+}
+
+country_event = {
+	id = jap_gw_torihiki_event.3
+	title = jap_gw_torihiki_event.3.t
+	desc = jap_gw_torihiki_event.3.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event jap_gw_torihiki_event.3"
+	}
+
+	option = {
+		name = jap_gw_torihiki_event.3.a
+		add_ideas = JAP_tuk_increase_supply_procurement_idea
+	}
+}
+
+country_event = {
+	id = jap_gw_torihiki_event.4
+	title = jap_gw_torihiki_event.4.t
+	desc = jap_gw_torihiki_event.4.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event jap_gw_torihiki_event.4"
+	}
+
+	option = {
+		name = jap_gw_torihiki_event.4.a
+		add_timed_idea = {
+			idea = JAP_tuk_military_dominance_timed_idea
+			days = 180
+		}
+	}
+}
+
+country_event = {
+	id = jap_gw_torihiki_event.5
+	title = jap_gw_torihiki_event.5.t
+	desc = jap_gw_torihiki_event.5.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event jap_gw_torihiki_event.5"
+	}
+
+	option = {
+		name = jap_gw_torihiki_event.5.a
+		add_equipment_to_stockpile = {
+			type = convoy_1
+			amount = 250
+		}
+	}
+}
+
+country_event = {
+	id = jap_gw_torihiki_event.6
+	title = jap_gw_torihiki_event.6.t
+	desc = jap_gw_torihiki_event.6.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event jap_gw_torihiki_event.6"
+	}
+
+	option = {
+		name = jap_gw_torihiki_event.6.a
+		random_state = {
+			limit = {
+				is_owned_and_controlled_by = TUK
+				is_core_of = TUK
+			}
+			remove_building = {
+				type = arms_factory
+				level = 2
+			}
+			remove_building = {
+				type = industrial_complex
+				level = 1
+			}
+		}
+		JAS = {
+			add_offsite_building = {
+				type = arms_factory
+				level = 2
+			}
+			add_offsite_building = {
+				type = industrial_complex
+				level = 1
+			}
+		}
+	}
+}
+
+country_event = {
+	id = jap_gw_torihiki_event.7
+	title = jap_gw_torihiki_event.7.t
+	desc = jap_gw_torihiki_event.7.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event jap_gw_torihiki_event.7"
+	}
+
+	option = {
+		name = jap_gw_torihiki_event.7.a
+		swap_ideas = {
+			remove_idea = civilian_economy
+			add_idea = war_economy
+		}
+	}
+}
+
+country_event = {
+	id = jap_gw_torihiki_event.8
+	title = jap_gw_torihiki_event.8.t
+	desc = jap_gw_torihiki_event.8.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event jap_gw_torihiki_event.8"
+	}
+
+	option = {
+		name = jap_gw_torihiki_event.8.a
+#		add_timed_idea = {
+#			idea = 
+#		}
+	}
+}
+
+country_event = {
+	id = jap_gw_torihiki_event.9
+	title = jap_gw_torihiki_event.9.t
+	desc = jap_gw_torihiki_event.9.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event jap_gw_torihiki_event.9"
+	}
+
+	option = {
+		name = jap_gw_torihiki_event.9.a
+#		add_timed_idea = {
+#			idea = 
+#			days = 
+#		}
+	}
+}
+
+country_event = {
+	id = jap_gw_torihiki_event.10
+	title = jap_gw_torihiki_event.10.t
+	desc = jap_gw_torihiki_event.10.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event jap_gw_torihiki_event.10"
+	}
+
+	option = {
+		name = jap_gw_torihiki_event.10.a
+		add_stability = 0.05
+		282 = {
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+				type = industrial_complex
+				level = 2
+				instant_build = yes
+			}
+		}
+	}
+}
+
+country_event = {
+	id = jap_gw_torihiki_event.11
+	title = jap_gw_torihiki_event.11.t
+	desc = jap_gw_torihiki_event.11.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event jap_gw_torihiki_event.11"
+	}
+
+	option = {
+		name = jap_gw_torihiki_event.11.a
+		add_stability = 0.025
+		economic_status_decrease = yes
+	}
+}
+
+country_event = {
+	id = jap_gw_torihiki_event.12
+	title = jap_gw_torihiki_event.12.t
+	desc = jap_gw_torihiki_event.12.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event jap_gw_torihiki_event.12"
+	}
+
+	option = {
+		name = jap_gw_torihiki_event.12.a
+		random_state = {
+			limit = {
+				is_core_of = NIS
+			}
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+			}
+		}
+		JAP = {
+			add_offsite_building = {
+				type = industrial_complex
+				level = 2
+			}
+		}
+	}
+}
+
+country_event = {
+	id = jap_gw_torihiki_event.13
+	title = jap_gw_torihiki_event.13.t
+	desc = jap_gw_torihiki_event.13.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event jap_gw_torihiki_event.13"
+	}
+
+	option = {
+		name = jap_gw_torihiki_event.13.a
+		navy_experience = 50
+	}
+}
+
+country_event = {
+	id = jap_gw_torihiki_event.14
+	title = jap_gw_torihiki_event.14.t
+	desc = jap_gw_torihiki_event.14.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event jap_gw_torihiki_event.14"
+	}
+
+	option = {
+		name = jap_gw_torihiki_event.14.a
+		add_stability = 0.05
+		add_political_power = 100
+	}
+}
+
+country_event = {
+	id = jap_gw_torihiki_event.15
+	title = jap_gw_torihiki_event.15.t
+	desc = jap_gw_torihiki_event.15.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event jap_gw_torihiki_event.15"
+	}
+
+	option = {
+		name = jap_gw_torihiki_event.15.a
+		add_stability = 0.05
+		add_political_power = 100
+	}
+}
+
+country_event = {
+	id = jap_gw_torihiki_event.16
+	title = jap_gw_torihiki_event.16.t
+	desc = jap_gw_torihiki_event.16.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event jap_gw_torihiki_event.16"
+	}
+
+	option = {
+		name = jap_gw_torihiki_event.16.a
+		JAP = {
+			annex_country = {
+				target = TUK
+				transfer_troops = yes
+			}
+		}
+	}
+}
+
+	### DELEGATION VISIT NISEY EVENTS
+
+country_event = {
+	id = jap_gw_torihiki_event.17
+	title = jap_gw_torihiki_event.17.t
+	desc = jap_gw_torihiki_event.17.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event jap_gw_torihiki_event.17"
+	}
+
+	option = {
+		name = jap_gw_torihiki_event.17.a
+		NIS = {
+			country_event = {
+				id = nisey_jap.1
+				days = 4
+			}
+		}
+	}
+}
+
+country_event = {
+	id = jap_gw_torihiki_event.18
+	title = jap_gw_torihiki_event.18.t
+	desc = jap_gw_torihiki_event.18.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event jap_gw_torihiki_event.18"
+	}
+
+	option = {
+		name = jap_gw_torihiki_event.18.a
+		TUK = {
+			add_offsite_building = {
+				type = arms_factory
+				level = 2
+			}
+			add_offsite_building = {
+				type = industrial_complex
+				level = 1
+			}
+		}
+	}
+}
+
+country_event = {
+	id = jap_gw_torihiki_event.19
+	title = jap_gw_torihiki_event.19.t
+	desc = jap_gw_torihiki_event.19.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event jap_gw_torihiki_event.19"
+	}
+
+	option = { # WIP
+		name = jap_gw_torihiki_event.19.a
+#		TUK = {
+#
+#		}
+	}
+}
+
+country_event = {
+	id = jap_gw_torihiki_event.20
+	title = jap_gw_torihiki_event.20.t
+	desc = jap_gw_torihiki_event.20.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event jap_gw_torihiki_event.20"
+	}
+
+	option = {
+		name = jap_gw_torihiki_event.20.a
+		TUK = {
+			add_equipment_to_stockpile = {
+    			type = infantry_equipment
+   				amount = 2500
+    			producer = NIS
+			}
+			add_equipment_to_stockpile = {
+    			type = support_equipment
+   				amount = 500
+    			producer = NIS
+			}
+			add_equipment_to_stockpile = {
+    			type = artillery_equipment
+   				amount = 300
+    			producer = NIS
+			}
+		}
+	}
+}
+
+country_event = {
+	id = jap_gw_torihiki_event.21
+	title = jap_gw_torihiki_event.21.t
+	desc = jap_gw_torihiki_event.21.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event jap_gw_torihiki_event.21"
+	}
+
+	option = {
+		name = jap_gw_torihiki_event.21.a
+	}
+}
+
+   ### END CHAIN OF EVENTS
+
+   ### APPEAL TO NEIGHBOR COUNTRIES CHAIN
+country_event = {
+	id = jap_gw_torihiki_event.22
+	title = jap_gw_torihiki_event.22.t
+	desc = jap_gw_torihiki_event.22.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event jap_gw_torihiki_event.22"
+	}
+
+	option = {
+		name = jap_gw_torihiki_event.22.a
+		every_neighbor_country = {
+				limit = { # lock appeal to japan civil war sides
+					NOT = {
+						tag = JAS
+						tag = JAP
+					}
+				}
+				country_event = {
+					id = jap_gw_torihiki_event.23
+					days = 3	
+				}
+			}
+	}
+}
+
+country_event = { # Appeal
+	id = jap_gw_torihiki_event.23
+	title = jap_gw_torihiki_event.23.t
+	desc = jap_gw_torihiki_event.23.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event jap_gw_torihiki_event.23"
+	}
+
+	option = { # Military help
+		name = jap_gw_torihiki_event.23.a
+		TUK = {
+			country_event = {
+				id = jap_gw_torihiki_event.24
+				days = 3
+			}
+		}
+	}
+
+	option = { # Supply help
+		name = jap_gw_torihiki_event.23.b
+		TUK = {
+			country_event = {
+				id = jap_gw_torihiki_event.25
+				days = 3
+			}
+		}
+	}
+
+	option = { # Reject
+		name = jap_gw_torihiki_event.23.c
+		TUK = {
+			country_event = {
+				id = jap_gw_torihiki_event.26
+				days = 3
+			}
+		}
+	}
+}
+
+country_event = {
+	id = jap_gw_torihiki_event.24
+	title = jap_gw_torihiki_event.24.t
+	desc = jap_gw_torihiki_event.24.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event jap_gw_torihiki_event.24"
+	}
+
+	option = { # WIP
+		name = jap_gw_torihiki_event.24.a
+#		TUK = {
+#
+#		}
+	}
+}
+
+country_event = {
+	id = jap_gw_torihiki_event.25
+	title = jap_gw_torihiki_event.25.t
+	desc = jap_gw_torihiki_event.25.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event jap_gw_torihiki_event.25"
+	}
+
+	option = {
+		name = jap_gw_torihiki_event.25.a
+		add_equipment_to_stockpile = {
+    			type = infantry_equipment
+   				amount = 500
+    			producer = FROM
+		}
+		add_equipment_to_stockpile = {
+    			type = support_equipment
+   				amount = 100
+    			producer = FROM
+		}
+	}
+}
+
+country_event = {
+	id = jap_gw_torihiki_event.26
+	title = jap_gw_torihiki_event.26.t
+	desc = jap_gw_torihiki_event.26.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event jap_gw_torihiki_event.26"
+	}
+
+	option = {
+		name = jap_gw_torihiki_event.26.a
+	}
+}
+
+	### END OF THE CHAIN
+
+###################################
+###   GW SHOGUN EVENT SECTION   ###
+###################################
+
+country_event = { # The Fate of the Torihiki
+	id = jap_gw_segun_event.9
+	title = jap_gw_segun_event.9.t
+	desc = jap_gw_segun_event.9.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+
+	hidden =  yes
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event jap_gw_segun_event.9"
+	}
+
+	option = {
+		name = jap_gw_segun_event.9.a
+		trigger = {
+			NOT = { has_war_with = TUK }
+		}
+		JAS = {
+			declare_war_on = {
+				target = TUK
+				type = annex_everything
+			}
+		}
+	}
+
+	option = { # WIP
+		name = jap_gw_segun_event.9.b
+		trigger = {
+			has_war_with = TUK
+		}
+#		JAS = {
+#			add_ideas = 
+#		}
+	}
+}
+
+country_event = { # Cleanse Japan of foreign influence
+	id = jap_gw_segun_event.12
+	title = jap_gw_segun_event.12.t
+	desc = jap_gw_segun_event.12.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+
+	hidden =  yes
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event jap_gw_segun_event.12"
+	}
+
+	option = {
+		name = jap_gw_segun_event.12.a
+		add_stability = 0.50
+		add_war_support = 0.25
 	}
 }
 
