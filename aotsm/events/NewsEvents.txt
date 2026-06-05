@@ -9858,3 +9858,66 @@ news_event = { #Конец непало-тибетского конфликта 
 		}
 	}
 }
+
+news_event = { #Германское чудо: полет человека над Берлином
+	id = news.307
+	title = news.307.t
+	desc = news.307.d
+	picture = GFX_news_event_first_plane_fly
+	
+	major = yes
+	
+	is_triggered_only = yes
+	
+	immediate = { log = "[GetDateText]: event news.307" }
+	
+	option = { 
+		name = news.307.a
+		trigger = {
+			tag = PRU
+		}
+	}
+	
+	option = { 
+		name = news.307.b
+		trigger = {
+			OR = {
+				tag = BYZ
+				is_in_faction_with = PRU
+			}
+		}
+	}
+	
+	option = { 
+		name = news.307.c
+		trigger = {
+			OR = {
+				tag = FRR
+				tag = RUS
+				tag = CBI
+				is_in_faction_with = FRR
+				is_in_faction_with = RUS
+				is_in_faction_with = CBI
+			}
+		}
+	}
+	
+	option = { 
+		name = news.307.e
+		trigger = {
+			NOT = {
+				OR = {
+					tag = PRU
+					tag = BYZ
+					tag = FRR
+					tag = RUS
+					tag = CBI
+					is_in_faction_with = PRU
+					is_in_faction_with = FRR
+					is_in_faction_with = RUS
+					is_in_faction_with = CBI
+				}
+			}
+		}
+	}
+}
