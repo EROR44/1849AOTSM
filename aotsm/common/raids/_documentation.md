@@ -1,4 +1,4 @@
-# Raid Categories (outdated)
+# Raid Categories
 ```
 raid_category_id = {
     intel_source = air # The intel type used to detect this raid. air, naval, army or civilian
@@ -8,6 +8,8 @@ raid_category_id = {
     available = {
         # Whether the category should be available (active) or not (country scope)
     }
+    free_targeting = yes # If set, the UI will let you use this category to target any province (as for nuclear raids)
+    # note that raid types still need province = any as the target type
 }
 ```
 
@@ -19,6 +21,7 @@ raid_type_id = {
 
 	custom_map_icon = GFX_ref [Optional] - override for the automatic icon lookup (if this is not set, will look for "GFX_raid_type_icon_{raid_name} )" 
     custom_terrain_icon = GFX_ref [Optional] - override for the automatic background based on target province terrain
+	target_loc_key = LOC_KEY #[Optional] - Custom loc key for overriding the target name. Use $LOCATION$ inside the loc key if you want to include the location name (state or VP).
 
 	unit_icon = GFX_ref
 	target_icon = GFX_ref
@@ -28,12 +31,24 @@ raid_type_id = {
 	command_power = 20 # command power allocation cost
 
 	arrow = {
-		type = line # arrow type: line, ballistic, air or naval
+		type = line # arrow type: line, ballistic, air, naval or land
 	}
 
 	unit_model = {
-	    # equipment, transport or convoy
-	    type = equipment # (will use the majority equipment type of the airwing)
+
+		# Entities to use as raid unit models, the game will try to find suitable entity in the following order:
+		#	1. First, a country-specific override, for example: GER_entity_name
+		#	2. Second, a culture-specific override, for example: westerngfx_entity_name
+		#	3. Then, the basic entity: entity_name
+		#	4. If still not found, the game will try to find the default_entity_name
+		entity = entity_name
+		default_entity = default_entity_name
+		
+		# Tells the game to use specific equipment's model as raid unit
+		# NOTE - only air equipment is currently supported!
+		equipment = air_transport
+
+	    start_offset = 15 # offsets the starting position of a unit by an amount, mostly needed so that convoy entities start in the sea and not on the shore
 	    scale = 0.5 # scale of the entity, is also multiplied by the global RAID_UNIT_ENTITY_BASE_SCALE define
 	}
 
@@ -48,6 +63,10 @@ raid_type_id = {
 			<triggers>
 		}
 	}
+
+	ai_min_success_chance = 0.1 # [Optional] Per-type override of RAIDS_MIN_SUCCESS_FOR_LAUNCH (0.0-1.0).
+
+	max_distance = 500 # [Optional] Hard cap on source-to-target path length, in universal distance units (same space as the engine's path lengths). Sources further away than this cannot be used. AI ignores this when unlimited_ai_range = yes.
 
 	fire_only_once = yes # if the raid can only be executed once
 	days_re_enable = 60 # How many days before the raid can be created again against the same target.
@@ -80,8 +99,17 @@ raid_type_id = {
 		# var:target_state and var:target_province can also be used when applicable
 	}
 
-	# Available represents being able to start a raid
+	# Launchable represents being able to start a raid
 	launchable = {
+		# Use FROM to refer to the target country, e.g. to require being at war
+		# var:target_state and var:target_province can also be used when applicable
+	}
+	
+	# Optional launchable trigger
+	# The scope is the country controlling the starting point used for raid, for example:
+	#  - the country that controls the territory where the starting base is located
+	#  - OR the country owning the fleet that is used to start the raid
+	launchable_from = {
 		# Use FROM to refer to the target country, e.g. to require being at war
 		# var:target_state and var:target_province can also be used when applicable
 	}
@@ -95,21 +123,18 @@ raid_type_id = {
 				is_coastal = yes # Optional
 			}
 			state = { <triggers> }
-			
-	target_loc_key = LOC_KEY [Optional] - Custom loc key for overriding the target name. Use $LOCATION$ if you want to include the location name (state or VP).
 	
     # Conditions on the starting point:
     starting_point = {
         types = { air_base, naval_base, rocket_site, carrier, submarine }
+		building_types = { supply_node } # list of building ids or tags
+		allow_faction_buildings = yes # whether buildings on allied territories can be used
     }
 
 	show_target = {  }
 
 	preparation_time = INT # number of days
 	cost = INT # Command Power Allocation
-
-	target_requirements = {  } # air_superiority = percentage / naval_supremacy = percentage (in air region over target / adjacent sea zone) Defaults to NONE
-	target_requirement_time = INT # Number of days
 
 	unit_requirements = {
 		# Battalions...
@@ -134,7 +159,7 @@ raid_type_id = {
         # will be collected after a raid is created
 		transport_plane_equipment = 5
 
-		nukes = 1					# number of nukes (if using nukes)
+		nukes = 1					# number of nukes (if using nukes). See: nuke_type
     }
 
 	additional_equipment = {
@@ -144,7 +169,7 @@ raid_type_id = {
 		# Note: ships (ship hulls) can also be used, and will be primarily be collected from existing fleets
 		ship_hull_light = 5
 
-		nukes = 1					# number of nukes (if using nukes)
+		nukes = 1					# number of nukes (if using nukes). See: nuke_type
 	}
 
 	nuke_type = nuclear_bomb		# type of nuke to use: nuclear_bomb or thermonuclear_bomb
@@ -196,7 +221,7 @@ Map icons can be assigned in the following ways:
 2. A custom scripted icon set through "custom_map_icon = [name]"
 
 In both of the above cases, the system will also try to find a customized icon for the target building type, by appending the building template to the end of the string:
-[1. or 2. from above] + "_" + [building_template_name]
+`[1. or 2. from above] + "_" + [building_template_name]`
 
 # Raid Outcomes
 
@@ -205,9 +230,6 @@ These are defined in the *success_levels* part of the RaidType.
 There are four levels: *failure*, *limited_success*, *success*, and *critical_success*.
 
 The following effects are supported, taking *failure* as an example:
-
-Note that *actor_effects* and *victim_effects* both use the same scope, but separating them allows for
-easily separating them for UI purposes (showing separate lists of how the actor and victim country were affected by the outcome)
 
 ```
 failure = {
@@ -261,9 +283,15 @@ failure = {
 
 ```
 
+Note that *actor_effects* and *victim_effects* both use the same scope, but separating them allows for
+easily separating them for UI purposes (showing separate lists of how the actor and victim country were affected by the outcome)
+
+As another note on the terminology of these outcomes, unfortunately there were some changes to the naming during development which were not properly consolidated in time. 
+**Failure**, **Critical Failure** and **Disaster** all refer to the same thing (the worst outcome).
+
 # Success Chance Formulas & Modifiers
 
-"Success Chance Formulas" are essentially lists of different **modifiers** which can affect the probability of a certain
+"Success Chance Formulas" are essentially lists of different **success chance modifiers** which can affect the probability of a certain
 raid outcome. They are used in *success_factors* in the RaidType (see above). *success*, *critical* and *disaster* are all
 scripted in the same way through this formula construct.
 
@@ -283,26 +311,28 @@ scripted in the same way through this formula construct.
 
 - *success* defines the probability of a raid being a success
 - *critical* defines the probability of a successful raid being a critical success (conditional probability)
-- *disaster* defines the probability of a raid being a disaster/critical failure (not conditional)
+- *disaster* defines the probability of a raid being a critical failure (not conditional)
 
-### List of modifiers:
+## Predefined success chance modifiers:
+
+### Generic:
 - *prep_time*: The preparation progress. Reference values from 0.0 (no preparation) to 1.0 (full preparation).
 - *experience*: The experience of the unit assigned to the raid. Reference values from 0.0-1.0
 - *anti_air*: The anti-air defense value of the target state. Reference values e.g. from 0 to 5 (meaning 5 basic AA buildings)
 - *resistance*: The amount of resistance in the target state. Reference values from 0 to 100
 - *enemy_units*: The number of enemy divisions in the target province. For province-target missions ONLY.
 - *air_superiority*: The air superiority score (fraction) of the actor country in the target region. Reference values from 0.0 to 1.0
-- *naval_supremacy*: The naval supremacy score (fraction) of the actor country in the target sea zone. Reference values from 0.0 to 1.0
+
 - *interception*: The number of enemy planes executing interception missions in the target region.
 - *intel*: The amount of intel the actor country has on the target. Reference values depend on defines.
 
-#### Air Units Only:
+### Air Units Only:
 - *air_defence*: The air defense value of the air unit assigned to the raid. Typical reference values from 0 to 50
 - *air_agility*: The air agility value of the air unit assigned to the raid. Typical reference values from 0 to 50
 - *strategic_bomber*: The strategic bombing value of the air unit assigned to the raid. Reference values from 0 to 1
 - *reliability*: The reliability (fraction) of the air unit assigned to the raid. Reference values from 0 to 1
 
-#### Land Units Only:
+### Land Units Only:
 - *recon*: The recon level of the land unit assigned to the raid, if there is one. Typical reference values from 0 to 10
 - *organisation*: The organisation (absolute) of the land unit assigned to the raid, if there is one. Reference values from 0 to 100+
 - *strength*: The strength (factor) of the land unit assigned to the raid, if there is one. Reference values from 0.0 to 1.0
@@ -365,6 +395,139 @@ success_factors = {
         }
     }
 }
+```
+
+## Custom success chance modifiers:
+
+Success chance modifiers can also be scripted in a custom way, where a MTTH block is used to sample the "source" value that the modifier is based on.
+
+For example, a success modifier can be scripted that scales based on the political power of the actor country, through the 'political_power' variable:
+```
+political_power_test = {
+    scope = country # Needed because we need to sample a dynamic variable from the country scope
+    formula = {
+        # MTTH block
+        base = 1
+        modifier = {
+            factor = political_power # Dynamically mapped name variable
+        }
+    }
+    weight = 0.1
+    reference = 500
+    can_actor_affect = yes # If true, this modifier will be included in the list of measures the actor country can take to increase the success chance of the raid
+    can_target_affect = no # If true, this modifier will be included in the list of countermeasures the target country can take to decreases the success chance of the raid
+}
+```
+Since *weight = 0.1* and *reference = 500*, this means that if the actor country has 500 political power, the success chance will be increased by 10%.
+
+You can also use custom success modifiers to do conditional checks, e.g. increasing success chance if the actor country has taken a certain focus:
+```
+completed_focus_test = {
+    formula = {
+        # MTTH block
+        base = 0
+        modifier = {
+            has_completed_focus = GER_prioritize_economic_growth
+            add = 1
+        }
+    }
+    weight = 0.1
+    can_actor_affect = yes # If true, this modifier will be included in the list of measures the actor country can take to increase the success chance of the raid
+    can_target_affect = no # If true, this modifier will be included in the list of countermeasures the target country can take to decreases the success chance of the raid
+}
+```
+
+### Scopes for custom success chance modifiers
+
+Custom success chance modifiers generally support these scopes:
+- *country*
+- *state* (raid target)
+- *character* (unit leader)
+- *unit* (division)
+
+Note that in the examples above, the *political_power_test* modifier has explicitly defined *scope = country*.
+This is because it uses the *political_power* variable, which needs to be sampled from a country, but the dependence on country scope cannot be implicitly deduced from the variable alone.
+Unfortunately, the system currently does not support sampling variables from multiple sources. Since the modifiers can support any of the three scopes above, we need to explicitly define the scope when using dynamic variables to make sure we are sampling the variable from the correct source.
+
+In the second case, we do not need to explicitly define the scope, since the trigger *completed_focus* can be implicitly deduced to belong to country scope.
+
+#### Some example of state-scoped custom success chance modifiers:
+
+```
+infrastructure = {
+    scope = state # Needed because we need to sample a dynamic variable from the state scope
+    formula = {
+        base = 1
+        modifier = {
+            factor = infrastructure_level
+        }
+    }
+    weight = -0.1
+    reference = 5
+    can_target_affect = yes
+    can_actor_affect = no
+}
+
+capital = {
+    formula = {
+        base = 0
+        modifier = {
+            is_capital = yes
+            add = 1
+        }
+    }
+    weight = 0.1
+    can_target_affect = no
+    can_actor_affect = no
+}
+```
+
+### Unit-based custom success chance modifiers
+
+If a custom success chance modifier only uses unit or character scope, it will be displayed already in the unit selection menu. Here are some examples of how unit/character modifiers can be set up:
+
+Sampling a dynamic variable from the unit leader, e.g. the planning skill level:
+```
+planning_skill_test = {
+    scope = character # Needed because we need to sample a dynamic variable from the character scope
+    formula = {
+        base = 1
+        modifier = {
+            factor = planning_level
+        }
+    }
+    weight = 0.1
+    reference = 5
+    can_target_affect = no
+    can_actor_affect = yes
+}
+```
+
+Using a unit-scope trigger:
+```
+division_check = {
+    formula = {
+        base = 0
+        modifier = {
+            division_has_battalion_in_template = marine
+            add = 1
+        }
+    }
+    weight = 0.15
+    can_target_affect = no
+    can_actor_affect = yes
+}
+```
+
+### Localization for custom success chance modifiers
+
+Given a custom success chance modifier named `political_power_test`, the game will look for the following loc strings to display the modifier in the UI:
+```
+success_modifier_political_power_test: "£pol_power §HPolitical Power§!"
+success_modifier_political_power_test_negative: "low £pol_power §HPolitical Power§!" # Optional (displayed if the modifier has negative effect)
+success_modifier_political_power_test_improvement: "- Increase £pol_power §HPolitical Power§!" # Optional (but required if can_actor_affect is true)
+success_modifier_political_power_test_counterplay: "- Decrease enemy £pol_power §HPolitical Power§!" # Optional
+success_modifier_political_power_test_source: "£pol_power $VAL|H0$/$MAX|H0$" # Optional
 ```
 
 # Raid Instance Effects
@@ -442,7 +605,8 @@ raid_add_unit_experience = <value> # The value is 0.0-1.0, representing progress
 
 example:
 
-# Gain 25% progress towards the max level
+Gain 25% progress towards the max level
+```
 raid_add_unit_experience = 0.25
 ```
 Supports both explicit values and variables
