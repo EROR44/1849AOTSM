@@ -1,11 +1,51 @@
 on_actions = {
-    on_daily_AZT = {
+    on_peace = {
+		effect = {
+			# Aztec switch law
+			if = {
+				limit = {
+					AZT = { has_idea = AZT_macehualtin_law_war }
+				}
+                AZT = {
+				    swap_ideas = {
+                        remove_idea = AZT_macehualtin_law_war
+					    add_idea = AZT_macehualtin_law_peacetime
+                    }
+				}
+                multiply_variable = { AZT.get_cost_for_check_the_readness_of_the_militia = 3 } # Decision Cost
+			}
+        }
+    }
+
+    on_war = {
+        effect = {
+            # Aztec switch law
+            if = {
+                limit = {
+                    AZT = { has_idea = AZT_macehualtin_law_peacetime }
+                }
+                AZT = {
+                    swap_ideas = {
+                        remove_idea = AZT_macehualtin_law_peacetime
+                        add_idea = AZT_macehualtin_law_war
+                    }
+                }
+               divide_variable = { AZT.get_cost_for_check_the_readness_of_the_militia = 3 } # Decision Cost
+            }
+        }
+    }
+
+    on_monthly = {
         effect = {
             if = {
                 limit = {
-                    has_tech = electronic_mechanical_engineering
+                    AZT = {
+                        has_country_flag = AZT_cholera_gui_visible_flag
+                    }
                 }
-                country_event = { id = azt_random_events.1 days = 1 }
+                AZT = {
+                    AZT_get_random_cholera_event_effect = yes
+                }
             }
         }
     }
