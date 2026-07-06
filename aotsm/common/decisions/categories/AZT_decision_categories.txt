@@ -1,11 +1,49 @@
-AZT_tension_decision_category = {
+AZT_tension_category = {
 	icon = SWI_imperial_council
 	allowed = { original_tag = AZT }
 
-    visible = { has_global_flag = AZT_tension_GUI_flag }
+    visible = { has_country_flag = AZT_tension_gui_visible_flag }
+
+	priority = 101
+
+	scripted_gui = AZT_tension_gui
+	visible_when_empty = yes
+}
+
+AZT_cholera_category = {
+	icon = SWI_imperial_council
+	allowed = { original_tag = AZT }
+
+    visible = { has_country_flag = AZT_cholera_gui_visible_flag }
 
 	priority = 1000
 
-	scripted_gui = AZT_tension_gui
+	scripted_gui = AZT_cholera_gui
+	visible_when_empty = yes
+}
+
+AZT_macehualtin_category = { 
+
+	icon = GFX_decision_category_AZT_macehualtin
+	picture = GFX_decision_cat_picture_AZT_macehualtin
+	
+	allowed = {
+		tag = AZT
+	}
+
+	priority = {
+		base = 99
+		modifier = {
+			add = 1001
+			AZT = { has_war = yes }
+		}
+	}
+
+	visible = {
+		OR = {
+			has_idea = AZT_macehualtin_law_peacetime
+			has_idea = AZT_macehualtin_law_war
+		}
+	}
 	visible_when_empty = yes
 }
