@@ -1,0 +1,225 @@
+AZT_complicate_cholera_in_state = {
+	custom_effect_tooltip = AZT_complicate_cholera_in_state_tt
+	subtract_from_variable = { AZT_cholera_state_status = 1 }
+	AZT_clamp_states_status_vars = yes
+}
+
+AZT_alleviate_cholera_in_state = {
+	custom_effect_tooltip = AZT_alleviate_cholera_in_state_tt
+	add_to_variable = { AZT_cholera_state_status = 1 }
+	AZT_clamp_states_status_vars = yes
+}
+
+AZT_update_cholera_gui = {
+	add_to_variable = { AZT_cholera_gui_dirty = 1 }
+}
+
+AZT_clamp_states_status_vars = {
+	clamp_variable = {
+		var = 478.AZT_cholera_state_status 
+		min = 0
+		max = 2
+	}
+    clamp_variable = {
+		var = 485.AZT_cholera_state_status 
+		min = 0
+		max = 2
+	}
+    clamp_variable = {
+		var = 277.AZT_cholera_state_status 
+		min = 0
+		max = 2
+	}
+    clamp_variable = {
+		var = 1026.AZT_cholera_state_status 
+		min = 0
+		max = 2
+	}
+    clamp_variable = {
+		var = 477.AZT_cholera_state_status 
+		min = 0
+		max = 2
+	}
+    clamp_variable = {
+		var = 962.AZT_cholera_state_status 
+		min = 0
+		max = 2
+	}
+    clamp_variable = {
+		var = 963.AZT_cholera_state_status 
+		min = 0
+		max = 2
+	}
+    clamp_variable = {
+		var = 476.AZT_cholera_state_status 
+		min = 0
+		max = 2
+	}
+    clamp_variable = {
+		var = 964.AZT_cholera_state_status 
+		min = 0
+		max = 2
+	}
+    clamp_variable = {
+		var = 1027.AZT_cholera_state_status 
+		min = 0
+		max = 2
+	}
+}
+
+AZT_start_cholera_gui = {
+	custom_effect_tooltip = AZT_new_cocolitztli_focus_tt
+	hidden_effect = {
+		set_country_flag = AZT_cholera_gui_visible_flag
+
+		set_variable = { 478.AZT_cholera_state_status = 1 }
+		set_variable = { 485.AZT_cholera_state_status = 0 }
+		set_variable = { 277.AZT_cholera_state_status = 0 }
+		set_variable = { 1026.AZT_cholera_state_status = 2 }
+		set_variable = { 477.AZT_cholera_state_status = 1 }
+		set_variable = { 962.AZT_cholera_state_status = 2 }
+		set_variable = { 963.AZT_cholera_state_status = 0 }
+		set_variable = { 476.AZT_cholera_state_status = 0 }
+		set_variable = { 964.AZT_cholera_state_status = 1 }
+		set_variable = { 1027.AZT_cholera_state_status = 2 }
+
+		set_variable = { AZT_current_state_num = 1026 }
+
+		1027 = {
+			add_to_array = { AZT.GetStateIdForCholeraDecision = THIS }
+		}
+
+		every_state = {
+			limit = {
+				is_owned_and_controlled_by = AZT
+			}
+			add_to_array = {
+				array = AZT.aotsm_get_states_for_cholera_gui
+				value = THIS
+			}
+		}
+		AZT_update_cholera_gui = yes
+	}
+}
+
+AZT_start_tension_gui = {
+	set_country_flag = AZT_tension_gui_visible_flag
+	set_variable = { AZT.AZT_tension_value = 0 }
+}
+
+AZT_check_cores_states_array_effect = {
+	clear_array = AZT.aotsm_start_cores_states_array
+
+	every_state = {
+		limit = {
+			is_owned_and_controlled_by = AZT
+			is_core_of = AZT
+		}
+		add_to_array = {
+			array = AZT.aotsm_start_cores_states_array
+			value = THIS #THIS = this state
+		}
+	}
+}
+
+AZT_set_state_for_random_cholera_event = {
+	clear_variable = AZT.get_state_for_random_cholera_event
+	random_list = {
+		10 = {
+			set_variable = { AZT.get_state_for_random_cholera_event = 478 }
+		}
+		10 = {
+			set_variable = { AZT.get_state_for_random_cholera_event = 485 }
+		}
+		10 = {
+			set_variable = { AZT.get_state_for_random_cholera_event = 277 }
+		}
+		10 = {
+			set_variable = { AZT.get_state_for_random_cholera_event = 1026 }
+		}
+		10 = {
+			set_variable = { AZT.get_state_for_random_cholera_event = 477 }
+		}
+		10 = {
+			set_variable = { AZT.get_state_for_random_cholera_event = 962 }
+		}
+		10 = {
+			set_variable = { AZT.get_state_for_random_cholera_event = 963 }
+		}
+		10 = {
+			set_variable = { AZT.get_state_for_random_cholera_event = 476 }
+		}
+		10 = {
+			set_variable = { AZT.get_state_for_random_cholera_event = 964 }
+		}
+		10 = {
+			set_variable = { AZT.get_state_for_random_cholera_event = 1027 }
+		}
+	}
+}
+
+AZT_set_state_for_cholera_event_4 = {
+	AZT = {
+		random_state = {
+			limit = {
+				is_in_array = { AZT.aotsm_get_states_for_cholera_gui = THIS }
+				AZT_state_have_the_resources_trigger = yes
+			}
+			add_to_array = {
+				array = AZT.this_state_can_be_used_for_cholera_event_4
+				value = THIS
+			}
+		}
+	}
+}
+
+AZT_get_random_cholera_event_effect = {
+	random_list = {
+		40 = {
+			modifier = {
+				add = 5
+				AZT = { has_country_flag = AZT_dont_use_random_cholera_state_events_4 }
+			}
+			AZT = { country_event = { id = azt_random_cholera_state_events.1 days = 3 } }
+		}
+		40 = {
+			modifier = {
+				add = 5
+				AZT = { has_country_flag = AZT_dont_use_random_cholera_state_events_4 }
+			}
+			modifier = {
+				add = 5
+				AZT = { has_country_flag = AZT_dont_use_random_cholera_state_events_6 }
+			}
+			AZT = { country_event = { id = azt_random_cholera_state_events.2 days = 3 } }
+		}
+		40 = {
+			modifier = {
+				add = 5
+				AZT = { has_country_flag = AZT_dont_use_random_cholera_state_events_4 }
+			}
+			modifier = {
+				add = 5
+				AZT = { has_country_flag = AZT_dont_use_random_cholera_state_events_6 }
+			}
+			AZT = { country_event = { id = azt_random_cholera_state_events.3 days = 3 } }
+		}
+		30 = {
+			modifier = {
+				factor = 0
+				AZT = { has_country_flag = AZT_dont_use_random_cholera_state_events_4 }
+			}
+			AZT = { country_event = { id = azt_random_cholera_state_events.4 days = 3 } }
+		}
+		30 = {
+			AZT = { country_event = { id = azt_random_cholera_state_events.5 days = 3 } }
+		}
+		20 = {
+			modifier = {
+				factor = 0
+				AZT = { has_country_flag = AZT_dont_use_random_cholera_state_events_6 }
+			}
+			AZT = { country_event = { id = azt_random_cholera_state_events.1 days = 3 } }
+		}
+	}
+}

@@ -1,0 +1,602 @@
+AZT_macehualtin_category = {
+	AZT_draft_the_militia_in_state_decision = {
+
+		icon = GFX_decision_generic_military
+
+		target_array = AZT.aotsm_start_cores_states_array
+		target_root_trigger = { 
+			original_tag = AZT
+		} 
+		
+		state_target = yes
+		on_map_mode = map_and_decisions_view
+
+		available = {
+			FROM = {
+				is_owned_and_controlled_by = AZT
+			}
+            AZT = {
+                has_war = yes
+				AZT_the_divison_limit_will_not_be_reached_after_the_draft_of_the_militia = yes
+            }
+		}
+
+        cancel_trigger = {
+            FROM = {
+                NOT = {
+                    is_owned_and_controlled_by = AZT
+                }
+            }
+			AZT = { AZT_the_divison_limit_will_not_be_reached_after_the_draft_of_the_militia = yes }
+        }
+
+        allowed = {
+            tag = AZT
+        }
+
+		visible = {
+			FROM = {
+				is_in_array = { AZT.aotsm_start_cores_states_array = FROM }
+			}
+		}
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = 80
+				has_war = yes
+			}
+		}
+
+		days_remove = AZT.get_days_for_draft_the_militia_var
+		cost = 5
+
+		remove_effect = {
+			custom_effect_tooltip = AZT_draft_the_militia_in_state_tt
+			FROM = { add_manpower = AZT.get_manpower_for_draft_the_militia_var }
+			hidden_effect = {
+				FROM = { # from = state
+					create_unit = {
+  						division = "name = \"Macehualtin\" division_template = \"Macehualtin Division\" start_experience_factor = 0"
+    					owner = AZT
+    					count = 1
+					 	id = 1521
+   					}
+					remove_from_array = { AZT.aotsm_start_cores_states_array = FROM }
+				}
+			}
+		}
+	}
+
+    AZT_check_the_readness_of_the_militia_decision = {
+
+		icon = decision_category_NOR_fascist_deploy_prep
+		
+		on_map_mode = decision_view_only
+
+		visible = {
+			always = yes
+		}
+
+        allowed = {
+            tag = AZT
+        }
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = 80
+				has_war = yes
+			}
+		}
+
+		days_remove = 14
+		cost = AZT.get_cost_for_check_the_readness_of_the_militia
+
+		remove_effect = {
+			custom_effect_tooltip = AZT_check_the_readness_of_the_militia_tt
+			hidden_effect = {
+				AZT_check_cores_states_array_effect = yes
+			}
+		}
+	}
+}
+
+AZT_cholera_category = { # Don't forget about random events
+	AZT_support_for_affected_industries = { # dont touch this, all is very interconnected
+
+		icon = generic_factory
+
+		target_array = AZT.aotsm_get_states_for_cholera_gui
+		target_root_trigger = { 
+			original_tag = AZT
+		} 
+		
+		state_target = yes
+		on_map_mode = map_and_decisions_view
+
+		available = {
+			FROM = {
+				is_owned_and_controlled_by = AZT
+				NOT = { check_variable = { AZT_cholera_state_status = 2 } }
+			}
+		}
+
+        cancel_trigger = {
+			hidden_trigger = {
+				FROM = {
+					check_variable = { AZT_cholera_state_status = 2 }
+				}
+			}
+        }
+
+        allowed = {
+            tag = AZT
+        }
+
+		visible = {
+			FROM = {
+				is_in_array = { AZT.aotsm_get_states_for_cholera_gui = FROM }
+				is_in_array = { AZT.GetStateIdForCholeraDecision = FROM }
+				NOT = { check_variable = { AZT_cholera_state_status = 2 } } # 2 - max value, it's good state status
+			}
+		}
+
+		ai_will_do = {
+			base = 10
+		}
+
+		days_remove = 21
+		cost = 10
+		days_re_enable = 30
+
+		modifier = {
+			consumer_goods_factor = 0.15
+		}
+
+		remove_effect = {
+			custom_effect_tooltip = AZT_alleviate_cholera_in_state_tt
+			hidden_effect = {
+				FROM = {
+					AZT_alleviate_cholera_in_state = yes
+				}
+				AZT_update_cholera_gui = yes
+			}
+		}	
+	}
+
+	AZT_regional_public_support  = {
+
+		icon = generic_factory
+
+		target_array = AZT.aotsm_get_states_for_cholera_gui
+		target_root_trigger = { 
+			original_tag = AZT
+		} 
+		
+		state_target = yes
+		on_map_mode = map_and_decisions_view
+
+		available = {
+			FROM = {
+				is_owned_and_controlled_by = AZT
+				NOT = { check_variable = { AZT_cholera_state_status = 2 } }
+			}
+		}
+
+        cancel_trigger = {
+			hidden_trigger = {
+				FROM = {
+					check_variable = { AZT_cholera_state_status = 2 }
+				}
+			}
+        }
+
+        allowed = {
+            tag = AZT
+        }
+
+		visible = {
+			FROM = {
+				is_in_array = { AZT.aotsm_get_states_for_cholera_gui = FROM }
+				is_in_array = { AZT.GetStateIdForCholeraDecision = FROM }
+				NOT = { check_variable = { AZT_cholera_state_status = 2 } } # 2 - max value, it's good state status
+			}
+		}
+
+		ai_will_do = {
+			base = 10
+		}
+
+		days_remove = 21
+		cost = 10
+		days_re_enable =30
+
+		modifier = {
+			political_power_gain = -0.15
+		}
+
+		remove_effect = {
+			custom_effect_tooltip = AZT_alleviate_cholera_in_state_tt
+			hidden_effect = {
+				FROM = {
+					AZT_alleviate_cholera_in_state = yes
+				}
+				AZT_update_cholera_gui = yes
+			}
+		}	
+	}
+
+	AZT_poverty_reduction = {
+
+		icon = generic_factory
+
+		target_array = AZT.aotsm_get_states_for_cholera_gui
+		target_root_trigger = { 
+			original_tag = AZT
+		} 
+		
+		state_target = yes
+		on_map_mode = map_and_decisions_view
+
+		available = {
+			FROM = {
+				is_owned_and_controlled_by = AZT
+				NOT = { check_variable = { AZT_cholera_state_status = 2 } }
+			}
+		}
+
+        cancel_trigger = {
+			hidden_trigger = {
+				FROM = {
+					check_variable = { AZT_cholera_state_status = 2 }
+				}
+			}
+        }
+
+        allowed = {
+            tag = AZT
+        }
+
+		visible = {
+			FROM = {
+				is_in_array = { AZT.aotsm_get_states_for_cholera_gui = FROM }
+				is_in_array = { AZT.GetStateIdForCholeraDecision = FROM }
+				NOT = { check_variable = { AZT_cholera_state_status = 2 } } # 2 - max value, it's good state status
+			}
+		}
+
+		ai_will_do = {
+			base = 10
+		}
+
+		days_remove = 21
+		cost = 10
+		days_re_enable = 30
+
+		modifier = {
+			political_power_gain = -0.2
+			industrial_capacity_factory = 0.1
+			production_factory_efficiency_gain_factor = 0.1
+		}
+
+		remove_effect = {
+			custom_effect_tooltip = AZT_alleviate_cholera_in_state_tt
+			hidden_effect = {
+				FROM = {
+					AZT_alleviate_cholera_in_state = yes
+				}
+				AZT_update_cholera_gui = yes
+			}
+		}	
+	}
+
+	AZT_tax_burden_reduction = {
+
+		icon = generic_factory
+
+		target_array = AZT.aotsm_get_states_for_cholera_gui
+		target_root_trigger = { 
+			original_tag = AZT
+		}
+
+		fire_only_once = yes
+		
+		state_target = yes
+		on_map_mode = map_and_decisions_view
+
+		available = {
+			FROM = {
+				is_owned_and_controlled_by = AZT
+				NOT = { check_variable = { AZT_cholera_state_status = 2 } }
+			}
+		}
+
+        cancel_trigger = {
+			hidden_trigger = {
+				FROM = {
+					check_variable = { AZT_cholera_state_status = 2 }
+				}
+			}
+        }
+
+        allowed = {
+            tag = AZT
+        }
+
+		visible = {
+			FROM = {
+				OR = {
+					is_in_array = { AZT.aotsm_get_states_for_cholera_gui = 1026 }
+					is_in_array = { AZT.aotsm_get_states_for_cholera_gui = 1027 }
+					is_in_array = { AZT.aotsm_get_states_for_cholera_gui = 962 }
+				}
+				is_in_array = { AZT.GetStateIdForCholeraDecision = FROM }
+				NOT = { check_variable = { AZT_cholera_state_status = 2 } } # 2 - max value, it's good state status
+			}
+		}
+
+		ai_will_do = {
+			base = 10
+		}
+
+		days_remove = 28
+		cost = 10
+
+		modifier = {
+			political_power_gain = -0.05
+			stability_weekly = 0.005
+		}
+
+		remove_effect = {
+			custom_effect_tooltip = AZT_alleviate_cholera_in_state_tt
+			hidden_effect = {
+				FROM = {
+					AZT_alleviate_cholera_in_state = yes
+				}
+				AZT_update_cholera_gui = yes
+			}
+		}	
+	}
+
+	AZT_employment_program = {
+
+		icon = generic_factory
+
+		target_array = AZT.aotsm_get_states_for_cholera_gui
+		target_root_trigger = { 
+			original_tag = AZT
+		}
+
+		fire_only_once = yes
+		
+		state_target = yes
+		on_map_mode = map_and_decisions_view
+
+		available = {
+			FROM = {
+				is_owned_and_controlled_by = AZT
+				NOT = { check_variable = { AZT_cholera_state_status = 2 } }
+			}
+		}
+
+        cancel_trigger = {
+			hidden_trigger = {
+				FROM = {
+					check_variable = { AZT_cholera_state_status = 2 }
+				}
+			}
+        }
+
+        allowed = {
+            tag = AZT
+        }
+
+		visible = {
+			FROM = {
+				OR = {
+					arms_factory > 0
+					industrial_complex > 0
+					dockyard > 0
+				}
+				is_in_array = { AZT.GetStateIdForCholeraDecision = FROM }
+				NOT = { check_variable = { AZT_cholera_state_status = 2 } } # 2 - max value, it's good state status
+			}
+		}
+
+		ai_will_do = {
+			base = 10
+		}
+
+		days_remove = 28
+		cost = 25
+
+		modifier = {
+			political_power_gain = 0.1
+			production_factory_efficiency_gain_factor = 0.2
+		}
+
+		remove_effect = {
+			custom_effect_tooltip = AZT_alleviate_cholera_in_state_tt
+			add_political_power = -5
+			hidden_effect = {
+				FROM = {
+					AZT_alleviate_cholera_in_state = yes
+				}
+				AZT_update_cholera_gui = yes
+			}
+		}	
+	}
+
+	AZT_trade_concession_in_cuetlashtan = {
+
+		icon = generic_factory
+
+		fire_only_once = yes
+		
+		on_map_mode = map_and_decisions_view
+
+		available = {
+			962 = {
+				is_owned_and_controlled_by = AZT
+			}
+		}
+
+        allowed = {
+            tag = AZT
+        }
+
+		visible = {
+			962 = {
+				is_in_array = { AZT.GetStateIdForCholeraDecision = THIS }
+				NOT = { check_variable = { AZT_cholera_state_status = 2 } }
+			}
+		}
+
+		ai_will_do = {
+			base = 45
+		}
+
+		days_remove = 49
+		cost = 10
+
+		modifier = {
+			transport_capacity = 0.2
+			trade_opinion_factor = 0.2
+			political_power_gain = 0.05
+		}
+
+		remove_effect = {
+			custom_effect_tooltip = AZT_alleviate_cholera_in_state_tt
+			hidden_effect = {
+				962 = {
+					AZT_alleviate_cholera_in_state = yes
+				}
+				AZT_update_cholera_gui = yes
+			}
+		}	
+	}
+
+	AZT_centralized_funding_for_the_region = {
+
+		target_array = AZT.aotsm_get_states_for_cholera_gui
+		target_root_trigger = { 
+			original_tag = AZT
+		}
+
+		fire_only_once = yes
+		
+		state_target = yes
+		on_map_mode = map_and_decisions_view
+
+		available = {
+			FROM = {
+				is_owned_and_controlled_by = AZT
+				NOT = { check_variable = { AZT_cholera_state_status = 2 } }
+				custom_trigger_tooltip = {
+					tooltip = AZT_centralized_funding_for_the_region_tt
+					check_variable = { AZT_cholera_state_status = 0 }
+				}
+			}
+		}
+
+        cancel_trigger = {
+			hidden_trigger = {
+				FROM = {
+					check_variable = { AZT_cholera_state_status = 2 }
+				}
+			}
+        }
+
+        allowed = {
+            tag = AZT
+        }
+
+		visible = {
+			FROM = {
+				is_in_array = { AZT.aotsm_get_states_for_cholera_gui = FROM }
+				is_in_array = { AZT.GetStateIdForCholeraDecision = FROM }
+				NOT = { check_variable = { AZT_cholera_state_status = 2 } } # 2 - max value, it's good state status
+				check_variable = { AZT_cholera_state_status = 0 }
+			}
+		}
+
+		ai_will_do = {
+			base = 10
+		}
+
+		days_remove = 35
+		cost = 10
+
+		modifier = {
+			political_power_factor = -0.15
+			consumer_goods_factor = 0.075
+			stability_weekly = 0.002
+		}
+
+		remove_effect = {
+			custom_effect_tooltip = AZT_alleviate_cholera_in_state_tt
+			add_political_power = -5
+			hidden_effect = {
+				FROM = {
+					AZT_alleviate_cholera_in_state = yes
+				}
+				AZT_update_cholera_gui = yes
+			}
+		}	
+	}
+
+###########################
+###   DEBUG DECISIONS   ###
+###########################
+
+	AZT_debug_complicate_state_status = {
+
+		icon = generic_research
+		
+		on_map_mode = decision_view_only
+
+        allowed = {
+            tag = AZT
+        }
+
+		visible = {
+			is_debug = yes
+		}
+
+		complete_effect = {
+			random_state = {
+				limit = {
+					is_in_array = { AZT.GetStateIdForCholeraDecision = THIS }
+				}
+				AZT_complicate_cholera_in_state = yes
+			}
+			AZT_update_cholera_gui = yes
+		}	
+	}
+
+	AZT_debug_alleviate_state_status = {
+
+		icon = generic_research
+		
+		on_map_mode = decision_view_only
+
+		allowed = {
+            tag = AZT
+        }
+
+		visible = {
+			is_debug = yes
+		}
+
+		complete_effect = {
+			random_state = {
+				limit = {
+					is_in_array = { AZT.GetStateIdForCholeraDecision = THIS }
+				}
+				AZT_alleviate_cholera_in_state = yes
+			}
+			AZT_update_cholera_gui = yes
+		}
+	}
+}
