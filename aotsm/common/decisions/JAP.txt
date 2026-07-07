@@ -1,0 +1,121 @@
+JAP_country_situation_cat = {
+
+    #Таймеры
+
+    JAP_start_civil_war_timer = {
+	
+		icon = aotsm_generic_propaganda
+		
+		activation = {
+			always = yes
+		}
+		
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = none_trigger_tt	
+				always = no
+			}
+		}
+		
+		selectable_mission = no
+		
+		visible = {
+			
+		}		
+		
+		is_good = no
+		
+		days_mission_timeout = 120 #11 янв 1851
+
+		fire_only_once = yes
+		
+		complete_effect = {		
+            country_event = jap_event.1
+            hidden_effect = {
+                activate_mission = JAP_cw_torihiki_enters_into_war_timer
+            }
+		}
+		
+		timeout_effect = {
+			
+		}
+	}
+
+    JAP_cw_torihiki_enters_into_war_timer = {
+	
+		icon = aotsm_generic_propaganda
+		
+		activation = {
+			always = no #активируется по скрипту
+		}
+		
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = none_trigger_tt	
+				always = no
+			}
+		}
+		
+		selectable_mission = no
+		
+		visible = {
+			
+		}		
+		
+		is_good = no
+		
+		days_mission_timeout = 300 #11 янв 1851
+
+		fire_only_once = yes
+		
+		complete_effect = {		
+            hidden_effect ={
+                TUK = {
+                    set_country_flag = JAP_torihiki_ready_to_enters_into_civil_war_flag
+                }
+            }
+		}
+		
+		timeout_effect = {
+			
+		}
+	}
+
+    #Решения
+
+    JAP_torihiki_enters_into_civil_war = {
+  
+		icon = generic_military
+					
+		available = {
+			has_country_flag = JAP_torihiki_ready_to_enters_into_civil_war_flag
+		}
+		
+		allowed = { 
+			
+		}
+		
+		visible = {
+			tag = TUK
+		}
+	
+		fire_only_once = yes
+	
+		modifier = {
+			
+		}
+
+		ai_will_do = {
+			base = 20
+		}
+		
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision JAP_torihiki_enters_into_civil_war"
+			
+		}
+
+		remove_effect = {
+		
+		}
+	}
+}
