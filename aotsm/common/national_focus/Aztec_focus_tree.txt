@@ -39,7 +39,7 @@ focus_tree = {
 		
 		x = 25
 		y = 0
-		cost = 2
+		cost = 3
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
 
 		completion_reward = { #WIP
@@ -58,7 +58,7 @@ focus_tree = {
 		
 		x = 0
 		y = 1
-		cost = 2
+		cost = 3
 		
 		relative_position_id = AZT_a_new_year_in_the_life_of_the_empire
 		
@@ -83,7 +83,7 @@ focus_tree = {
 		
 		x = -2
 		y = 1
-		cost = 2
+		cost = 5
 		
 		relative_position_id = AZT_preparation_country
 		
@@ -108,7 +108,7 @@ focus_tree = {
 		
 		x = 0
 		y = 1
-		cost = 2
+		cost = 1
 		
 		relative_position_id = AZT_preparation_country
 		
@@ -140,7 +140,7 @@ focus_tree = {
 		
 		x = 2
 		y = 1
-		cost = 2
+		cost = 3
 		
 		relative_position_id = AZT_preparation_country
 		
@@ -155,12 +155,12 @@ focus_tree = {
 	}
 
 	focus = {
-		id = AZT_the_divine_gift_of_the_imperial_family
-		icon = GFX_focus_AZT_the_divine_gift_of_the_imperial_family
+		id = AZT_the_majesty_of_the_emperor
+		icon = GFX_focus_AZT_the_majesty_of_the_emperor
 		
 		x = 0
 		y = 1
-		cost = 2
+		cost = 3
 		
 		relative_position_id = AZT_throughout_the_empire
 		
@@ -171,12 +171,42 @@ focus_tree = {
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
 
 		completion_reward = { #WIP
-			log = "[GetDateText]: [Root.GetName]: focus AZT_the_divine_gift_of_the_imperial_family"
-			add_political_power = 100
-			add_popularity = {
-				ideology = reactionist
-				popularity = 0.05
+			log = "[GetDateText]: [Root.GetName]: focus AZT_the_majesty_of_the_emperor"
+			add_political_power = 50
+			hidden_effect = {
+				remove_trait = {
+    				character = AZT_Montesuma_IV
+    				ideology = paternalism
+    				trait = aztec_emperor_trait_without_modifiers
+				}
 			}
+			add_trait = {
+    			character = AZT_Montesuma_IV
+    			ideology = paternalism
+    			trait = aztec_emperor_trait
+			}
+			hidden_effect = {
+				set_temp_variable = {
+					var = ban_ideology_var
+					value = party_popularity@democratic
+				}
+				add_popularity = {
+					ideology = democratic
+					popularity = ban_ideology_var
+				}
+			}
+			custom_effect_tooltip = ban_democratic_party_tt
+			hidden_effect = {
+				set_temp_variable = {
+					var = ban_ideology_var
+					value = party_popularity@socialism
+				}
+				add_popularity = {
+					ideology = socialism
+					popularity = ban_ideology_var
+				}
+			}
+			custom_effect_tooltip = ban_socialism_party_tt
 		}
 	}
 
@@ -186,11 +216,11 @@ focus_tree = {
 		
 		x = 0
 		y = 1
-		cost = 2
+		cost = 3
 		
-		relative_position_id = AZT_the_divine_gift_of_the_imperial_family
+		relative_position_id = AZT_the_majesty_of_the_emperor
 		
-		prerequisite = { focus = AZT_the_divine_gift_of_the_imperial_family }
+		prerequisite = { focus = AZT_the_majesty_of_the_emperor }
 		
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
@@ -210,7 +240,7 @@ focus_tree = {
 		
 		x = 0
 		y = 2
-		cost = 2
+		cost = 3
 		
 		relative_position_id = AZT_the_austrian_monopoly
 		
@@ -227,51 +257,47 @@ focus_tree = {
 		}
 	}
 
-	focus = {
-		id = AZT_contact_with_Tlamacazqui
-		icon = GFX_focus_AZT_contact_with_Tlamacazqui
-		
-		x = -3
-		y = 1
-		cost = 2
-		
-		relative_position_id = AZT_the_divine_gift_of_the_imperial_family
-		
-		prerequisite = { focus = AZT_the_divine_gift_of_the_imperial_family }
-		
-		search_filters = { FOCUS_FILTER_POLITICAL }
-
-		completion_reward = { #WIP
-			log = "[GetDateText]: [Root.GetName]: focus AZT_contact_with_Tlamacazqui"
+#	focus = {
+#		id = AZT_contact_with_Tlamacazqui
+#		icon = GFX_focus_AZT_contact_with_Tlamacazqui
+#		
+#		x = -3
+#		y = 1
+#		cost = 3
+#		
+#		relative_position_id = AZT_the_majesty_of_the_emperor
+#		
+#		prerequisite = { focus = AZT_the_majesty_of_the_emperor }
+#		
+#		search_filters = { FOCUS_FILTER_POLITICAL }
+#
+#		completion_reward = { #WIP
+#			log = "[GetDateText]: [Root.GetName]: focus AZT_contact_with_Tlamacazqui"
 #			AZT = { 
 #				country_event = {
 #					id = 
 #				}
 #			}
-		}
-	}
+#		}
+#	}
 
 	focus = {
-		id = AZT_enlist_the_support_of_pagans
-		icon = GFX_focus_AZT_enlist_the_support_of_pagans
+		id = AZT_enlist_the_support_of_traditionalists
+		icon = GFX_focus_AZT_enlist_the_support_of_traditionalists
 		
-		x = 0
+		x = -3
 		y = 1
-		cost = 2
+		cost = 3
 		
-		relative_position_id = AZT_contact_with_Tlamacazqui
+		relative_position_id = AZT_the_majesty_of_the_emperor
 		
-		prerequisite = { focus = AZT_contact_with_Tlamacazqui }
+		prerequisite = { focus = AZT_the_majesty_of_the_emperor }
 		
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: focus AZT_enlist_the_support_of_pagans"
-			add_political_power = 35
-			add_power_balance_value = {
-				id = AZT_bop_emperor_tlamakatske
-				value = 0.05
-			}
+			log = "[GetDateText]: [Root.GetName]: focus AZT_enlist_the_support_of_traditionalists"
+			add_political_power = 20
 		}
 	}
 
@@ -280,22 +306,19 @@ focus_tree = {
 		icon = GFX_focus_AZT_the_aztec_faith
 		
 		x = 0
-		y = 1
-		cost = 2
+		y = 2
+		cost = 3
 		
-		relative_position_id = AZT_enlist_the_support_of_pagans
+		relative_position_id = AZT_enlist_the_support_of_traditionalists
 		
-		prerequisite = { focus = AZT_enlist_the_support_of_pagans }
+		prerequisite = { focus = AZT_enlist_the_support_of_traditionalists }
 		
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
 
 		completion_reward = { #WIP
 			log = "[GetDateText]: [Root.GetName]: focus AZT_the_aztec_faith"
-#			AZT = {
-#				country_event = {
-#					id = 
-#				}
-#			}
+			add_political_power = 10
+			add_stability = 0.05
 		}
 	}
 	
@@ -305,11 +328,11 @@ focus_tree = {
 		
 		x = 3
 		y = 1
-		cost = 2
+		cost = 3
 		
-		relative_position_id = AZT_the_divine_gift_of_the_imperial_family
+		relative_position_id = AZT_the_majesty_of_the_emperor
 		
-		prerequisite = { focus = AZT_the_divine_gift_of_the_imperial_family }
+		prerequisite = { focus = AZT_the_majesty_of_the_emperor }
 		
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
@@ -329,7 +352,7 @@ focus_tree = {
 		
 		x = -1
 		y = 2
-		cost = 2
+		cost = 3
 		
 		relative_position_id = AZT_the_empires_economy
 		
@@ -353,7 +376,7 @@ focus_tree = {
 		
 		x = 1
 		y = 2
-		cost = 2
+		cost = 4
 		
 		relative_position_id = AZT_the_empires_economy
 		
@@ -373,7 +396,7 @@ focus_tree = {
 		
 		x = 0
 		y = 1
-		cost = 2
+		cost = 1
 		
 		relative_position_id = AZT_introduction_of_duties_on_steel_exports
 		

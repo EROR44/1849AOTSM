@@ -1,14 +1,38 @@
-add_namespace = azt_random_events
-add_namespace = azt_random_cholera_state_events
+add_namespace = azt_event # general events
+add_namespace = azt_scripted_events # random events, more often - scripted
+add_namespace = azt_random_cholera_state_events # random cholera events with states statuse
+
+########################
+###  GENERAL EVENTS  ###
+########################
+
+country_event = {
+    id = azt_event.1
+    title = azt_event.1.t
+    desc = azt_event.1.d
+    picture = GFX_AZT_your_text_picture
+    
+    is_triggered_only = yes
+    
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event: azt_event.1" 
+		hidden_effect = { AZT_set_state_for_random_cholera_event = yes }
+	}
+
+    option = {
+        name = azt_event.1.a
+		
+    }
+}
 
 #######################
-###  RANDOM EVENTS  ### 
+###  RANDOM EVENTS  ###
 #######################
 
 country_event = { # Acamapichtli Ship
-	id = azt_random_events.1
-	title = azt_random_events.1.t
-	desc = azt_random_events.1.d
+	id = azt_scripted_events.1
+	title = azt_scripted_events.1.t
+	desc = azt_scripted_events.1.d
 	picture = GFX_acamapichtli_ship
 	
 	trigger = {
@@ -18,12 +42,12 @@ country_event = { # Acamapichtli Ship
 		}
 	}
 
-	immediate = { log = "[GetDateText]: [Root.GetName]: event: azt_random_events.1" }
+	immediate = { log = "[GetDateText]: [Root.GetName]: event: azt_scripted_events.1" }
 	
 	fire_only_once = yes
 	
 	option = {
-		name = azt_random_events.1.a
+		name = azt_scripted_events.1.a
 		remove_ideas = AZT_mothballed_ship_idea
 		custom_effect_tooltip = AZT_Acamapichtli_ship_tt
 		hidden_effect = {
@@ -239,7 +263,6 @@ country_event = { # Cases of infection in the army
 
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event: azt_random_cholera_state_events.6"
-		hidden_effect = { AZT_set_state_for_random_cholera_event = yes }
 	}
     
     option = {

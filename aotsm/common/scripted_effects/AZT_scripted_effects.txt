@@ -102,9 +102,49 @@ AZT_start_cholera_gui = {
 	}
 }
 
+AZT_remove_cholera_gui = {
+	# GUI VISIBILITY
+	clr_country_flag = AZT_cholera_gui_visible_flag
+
+	# DECISION ARRAYS
+	clear_array = GetStateIdForCholeraDecision
+	clear_array = aotsm_get_states_for_cholera_gui
+
+	# STATES STATUSES VARS
+	clear_variable = 478.AZT_cholera_state_status
+	clear_variable = 485.AZT_cholera_state_status
+	clear_variable = 277.AZT_cholera_state_status
+	clear_variable = 1026.AZT_cholera_state_status
+	clear_variable = 477.AZT_cholera_state_status
+	clear_variable = 962.AZT_cholera_state_status
+	clear_variable = 963.AZT_cholera_state_status
+	clear_variable = 476.AZT_cholera_state_status
+	clear_variable = 964.AZT_cholera_state_status
+	clear_variable = 1027.AZT_cholera_state_status
+
+	### BUTTONS VARIABLE ###
+	clear_variable = AZT_current_state_num
+
+	### GUI DIRTY ###
+	clear_variable = AZT_cholera_gui_dirty
+
+	### EVENT TARGETS ###
+	clear_array = this_state_can_be_used_for_cholera_event_4
+	clear_variable = get_state_for_random_cholera_event
+
+	# EVENT FLAGS #
+	clr_country_flag = AZT_dont_use_random_cholera_state_events_6
+	clr_country_flag = AZT_dont_use_random_cholera_state_events_4
+}
+
 AZT_start_tension_gui = {
 	set_country_flag = AZT_tension_gui_visible_flag
-	set_variable = { AZT.AZT_tension_value = 0 }
+	set_variable = { AZT_tension_value = 0 }
+}
+
+AZT_remove_tension_gui = {
+	clr_country_flag = AZT_tension_gui_visible_flag
+	clear_variable = AZT_tension_value
 }
 
 AZT_check_cores_states_array_effect = {
@@ -222,4 +262,25 @@ AZT_get_random_cholera_event_effect = {
 			AZT = { country_event = { id = azt_random_cholera_state_events.1 days = 3 } }
 		}
 	}
+}
+
+AZT_austrian_trade_monopoly_effect = {
+	every_other_country = {
+		limit = {
+			NOT = { tag = MEC }
+		}
+        add_opinion_modifier = {
+            target = AZT
+            modifier = end_trade
+        }
+    }
+}
+
+AZT_remove_austrian_trade_monopoly_effect = {
+	every_other_country = {
+        remove_opinion_modifier = {
+            target = AZT
+            modifier = end_trade
+        }
+    }
 }
