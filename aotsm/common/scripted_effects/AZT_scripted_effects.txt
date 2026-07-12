@@ -89,10 +89,7 @@ AZT_start_cholera_gui = {
 			add_to_array = { AZT.GetStateIdForCholeraDecision = THIS }
 		}
 
-		every_state = {
-			limit = {
-				is_owned_and_controlled_by = AZT
-			}
+		every_owned_state = {
 			add_to_array = {
 				array = AZT.aotsm_get_states_for_cholera_gui
 				value = THIS
@@ -150,7 +147,7 @@ AZT_remove_tension_gui = {
 AZT_check_cores_states_array_effect = {
 	clear_array = AZT.aotsm_start_cores_states_array
 
-	every_state = {
+	every_owned_state = {
 		limit = {
 			is_owned_and_controlled_by = AZT
 			is_core_of = AZT
@@ -200,7 +197,7 @@ AZT_set_state_for_random_cholera_event = {
 
 AZT_set_state_for_cholera_event_4 = {
 	AZT = {
-		random_state = {
+		random_owned_state = {
 			limit = {
 				is_in_array = { AZT.aotsm_get_states_for_cholera_gui = THIS }
 				AZT_state_have_the_resources_trigger = yes
@@ -283,4 +280,10 @@ AZT_remove_austrian_trade_monopoly_effect = {
             modifier = end_trade
         }
     }
+}
+
+AZT_focus_allow_branch_dirty = {
+	complete_national_focus = AZT_the_reign_of_Montezuma_IV
+	set_country_flag = AZT_open_all_focus_branches_flag
+	mark_focus_tree_layout_dirty = yes
 }
