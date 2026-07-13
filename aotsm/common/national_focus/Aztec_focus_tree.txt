@@ -39,16 +39,18 @@ focus_tree = {
 		
 		x = 25
 		y = 0
-		cost = 2
+		cost = 3
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
 
-		completion_reward = { #WIP
+		allow_branch = { NOT = { has_completed_focus = AZT_the_reign_of_Montezuma_IV } }
+
+		completion_reward = { 
 			log = "[GetDateText]: [Root.GetName]: focus AZT_a_new_year_in_the_life_of_the_empire"
-#			AZT = {
-#				country_event = {
-#					id = 
-#				}
-#			}
+			AZT = {
+				country_event = {
+					id = azt_event.2
+				}
+			}
 		}	
 	}
 	
@@ -58,7 +60,7 @@ focus_tree = {
 		
 		x = 0
 		y = 1
-		cost = 2
+		cost = 3
 		
 		relative_position_id = AZT_a_new_year_in_the_life_of_the_empire
 		
@@ -66,14 +68,14 @@ focus_tree = {
 		
 		search_filters = { FOCUS_FILTER_STABILITY FOCUS_FILTER_POLITICAL }
 
-		completion_reward = { #WIP
+		completion_reward = { 
 			log = "[GetDateText]: [Root.GetName]: focus AZT_preparation_country"
-#			AZT = {
-#				country_event = {
-#					id = 
-#					days = 2
-#				}
-#			}
+			AZT = {
+				country_event = {
+					id = azt_event.3
+					days = 2
+				}
+			}
 		}
 	}
 	
@@ -83,7 +85,7 @@ focus_tree = {
 		
 		x = -2
 		y = 1
-		cost = 2
+		cost = 5
 		
 		relative_position_id = AZT_preparation_country
 		
@@ -91,14 +93,9 @@ focus_tree = {
 		
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
 
-		completion_reward = { #WIP
+		completion_reward = { 
 			log = "[GetDateText]: [Root.GetName]: focus AZT_new_cocolitztli"
-#			AZT = {
-#				country_event = {
-#					id = 
-#				}
-#			}
-			AZT_start_cholera_gui = yes
+			country_event = azt_event.1
 		}
 	}
 
@@ -108,7 +105,7 @@ focus_tree = {
 		
 		x = 0
 		y = 1
-		cost = 2
+		cost = 1
 		
 		relative_position_id = AZT_preparation_country
 		
@@ -116,21 +113,21 @@ focus_tree = {
 		
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
 
-		completion_reward = { #WIP
+		completion_reward = { 
 			log = "[GetDateText]: [Root.GetName]: focus AZT_throughout_the_empire"
-#			AZT = { # starts a chain of events for the emperor's trip
+			AZT = { # starts a chain of events for the emperor's trip
+				country_event = {
+					id = azt_event.4
+				}
 #				country_event = {
 #					id = 
+#					days = 
 #				}
 #				country_event = {
 #					id = 
 #					days = 
 #				}
-#				country_event = {
-#					id = 
-#					days = 
-#				}
-#			}
+			}
 		}
 	}
 
@@ -140,7 +137,7 @@ focus_tree = {
 		
 		x = 2
 		y = 1
-		cost = 2
+		cost = 3
 		
 		relative_position_id = AZT_preparation_country
 		
@@ -155,12 +152,12 @@ focus_tree = {
 	}
 
 	focus = {
-		id = AZT_the_divine_gift_of_the_imperial_family
-		icon = GFX_focus_AZT_the_divine_gift_of_the_imperial_family
+		id = AZT_the_majesty_of_the_emperor
+		icon = GFX_focus_AZT_the_majesty_of_the_emperor
 		
 		x = 0
 		y = 1
-		cost = 2
+		cost = 3
 		
 		relative_position_id = AZT_throughout_the_empire
 		
@@ -170,13 +167,43 @@ focus_tree = {
 		
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
 
-		completion_reward = { #WIP
-			log = "[GetDateText]: [Root.GetName]: focus AZT_the_divine_gift_of_the_imperial_family"
-			add_political_power = 100
-			add_popularity = {
-				ideology = reactionist
-				popularity = 0.05
+		completion_reward = { 
+			log = "[GetDateText]: [Root.GetName]: focus AZT_the_majesty_of_the_emperor"
+			add_political_power = 50
+			hidden_effect = {
+				remove_trait = {
+    				character = AZT_Montesuma_IV
+    				ideology = paternalism
+    				trait = aztec_emperor_trait_without_modifiers
+				}
 			}
+			add_trait = {
+    			character = AZT_Montesuma_IV
+    			ideology = paternalism
+    			trait = aztec_emperor_trait
+			}
+			hidden_effect = {
+				set_temp_variable = {
+					var = ban_ideology_var
+					value = party_popularity@democratic
+				}
+				add_popularity = {
+					ideology = democratic
+					popularity = ban_ideology_var
+				}
+			}
+			custom_effect_tooltip = ban_democratic_party_tt
+			hidden_effect = {
+				set_temp_variable = {
+					var = ban_ideology_var
+					value = party_popularity@socialism
+				}
+				add_popularity = {
+					ideology = socialism
+					popularity = ban_ideology_var
+				}
+			}
+			custom_effect_tooltip = ban_socialism_party_tt
 		}
 	}
 
@@ -186,21 +213,21 @@ focus_tree = {
 		
 		x = 0
 		y = 1
-		cost = 2
+		cost = 3
 		
-		relative_position_id = AZT_the_divine_gift_of_the_imperial_family
+		relative_position_id = AZT_the_majesty_of_the_emperor
 		
-		prerequisite = { focus = AZT_the_divine_gift_of_the_imperial_family }
+		prerequisite = { focus = AZT_the_majesty_of_the_emperor }
 		
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
-		completion_reward = { #WIP
+		completion_reward = { 
 			log = "[GetDateText]: [Root.GetName]: focus AZT_the_austrian_monopoly"
-#			AZT = {
-#				country_event = {
-#					id = 
-#				}
-#			}
+			AZT = {
+				country_event = {
+					id = azt_event.5
+				}
+			}
 		}
 	}
 
@@ -209,8 +236,8 @@ focus_tree = {
 		icon = GFX_focus_AZT_introduction_of_duties_on_steel_exports
 		
 		x = 0
-		y = 2
-		cost = 2
+		y = 1
+		cost = 3
 		
 		relative_position_id = AZT_the_austrian_monopoly
 		
@@ -218,7 +245,7 @@ focus_tree = {
 		
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY FOCUS_FILTER_INDUSTRY }
 
-		completion_reward = { #WIP
+		completion_reward = { 
 			log = "[GetDateText]: [Root.GetName]: focus AZT_introduction_of_duties_on_steel_exports"
 			add_timed_idea = {
 				idea = AZT_revenue_from_duties_timed_idea
@@ -227,50 +254,51 @@ focus_tree = {
 		}
 	}
 
-	focus = {
-		id = AZT_contact_with_Tlamacazqui
-		icon = GFX_focus_AZT_contact_with_Tlamacazqui
-		
-		x = -3
-		y = 1
-		cost = 2
-		
-		relative_position_id = AZT_the_divine_gift_of_the_imperial_family
-		
-		prerequisite = { focus = AZT_the_divine_gift_of_the_imperial_family }
-		
-		search_filters = { FOCUS_FILTER_POLITICAL }
-
-		completion_reward = { #WIP
-			log = "[GetDateText]: [Root.GetName]: focus AZT_contact_with_Tlamacazqui"
+#	focus = {
+#		id = AZT_contact_with_Tlamacazqui
+#		icon = GFX_focus_AZT_contact_with_Tlamacazqui
+#		
+#		x = -3
+#		y = 1
+#		cost = 3
+#		
+#		relative_position_id = AZT_the_majesty_of_the_emperor
+#		
+#		prerequisite = { focus = AZT_the_majesty_of_the_emperor }
+#		
+#		search_filters = { FOCUS_FILTER_POLITICAL }
+#
+#		completion_reward = { #WIP
+#			log = "[GetDateText]: [Root.GetName]: focus AZT_contact_with_Tlamacazqui"
 #			AZT = { 
 #				country_event = {
 #					id = 
 #				}
 #			}
-		}
-	}
+#		}
+#	}
 
 	focus = {
-		id = AZT_enlist_the_support_of_pagans
-		icon = GFX_focus_AZT_enlist_the_support_of_pagans
+		id = AZT_enlist_the_support_of_traditionalists
+		icon = GFX_focus_AZT_enlist_the_support_of_traditionalists
 		
-		x = 0
+		x = -3
 		y = 1
-		cost = 2
+		cost = 3
 		
-		relative_position_id = AZT_contact_with_Tlamacazqui
+		relative_position_id = AZT_the_majesty_of_the_emperor
 		
-		prerequisite = { focus = AZT_contact_with_Tlamacazqui }
+		prerequisite = { focus = AZT_the_majesty_of_the_emperor }
 		
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: focus AZT_enlist_the_support_of_pagans"
-			add_political_power = 35
-			add_power_balance_value = {
-				id = AZT_bop_emperor_tlamakatske
-				value = 0.05
+			log = "[GetDateText]: [Root.GetName]: focus AZT_enlist_the_support_of_traditionalists"
+			AZT = { 
+				country_event = {
+					id = azt_event.6
+					days = 7
+				}
 			}
 		}
 	}
@@ -281,21 +309,18 @@ focus_tree = {
 		
 		x = 0
 		y = 1
-		cost = 2
+		cost = 3
 		
-		relative_position_id = AZT_enlist_the_support_of_pagans
+		relative_position_id = AZT_enlist_the_support_of_traditionalists
 		
-		prerequisite = { focus = AZT_enlist_the_support_of_pagans }
+		prerequisite = { focus = AZT_enlist_the_support_of_traditionalists }
 		
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
 
-		completion_reward = { #WIP
+		completion_reward = { 
 			log = "[GetDateText]: [Root.GetName]: focus AZT_the_aztec_faith"
-#			AZT = {
-#				country_event = {
-#					id = 
-#				}
-#			}
+			add_political_power = 10
+			add_stability = 0.05
 		}
 	}
 	
@@ -305,21 +330,21 @@ focus_tree = {
 		
 		x = 3
 		y = 1
-		cost = 2
+		cost = 3
 		
-		relative_position_id = AZT_the_divine_gift_of_the_imperial_family
+		relative_position_id = AZT_the_majesty_of_the_emperor
 		
-		prerequisite = { focus = AZT_the_divine_gift_of_the_imperial_family }
+		prerequisite = { focus = AZT_the_majesty_of_the_emperor }
 		
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
-		completion_reward = { #WIP
+		completion_reward = { 
 			log = "[GetDateText]: [Root.GetName]: focus AZT_the_empires_economy"
-#			AZT = {
-#				country_event = {
-#					id = 
-#				}
-#			}
+			AZT = {
+				country_event = {
+					id = azt_event.7
+				}
+			}
 		}
 	}
 
@@ -328,8 +353,8 @@ focus_tree = {
 		icon = GFX_focus_AZT_military_manufactories
 		
 		x = -1
-		y = 2
-		cost = 2
+		y = 1
+		cost = 3
 		
 		relative_position_id = AZT_the_empires_economy
 		
@@ -352,8 +377,8 @@ focus_tree = {
 		icon = GFX_focus_AZT_provide_food_to_the_population
 		
 		x = 1
-		y = 2
-		cost = 2
+		y = 1
+		cost = 4
 		
 		relative_position_id = AZT_the_empires_economy
 		
@@ -373,7 +398,7 @@ focus_tree = {
 		
 		x = 0
 		y = 1
-		cost = 2
+		cost = 1
 		
 		relative_position_id = AZT_introduction_of_duties_on_steel_exports
 		
@@ -384,106 +409,373 @@ focus_tree = {
 		
 		search_filters = { FOCUS_FILTER_POLITICAL }
 
-		completion_reward = { #WIP
+		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: focus AZT_speech_to_the_nation"
-#			AZT = {
-#				country_event = {
-#					id = 
-#				}
-#			}
+			AZT = {
+				country_event = {
+					id = azt_event.8
+				}
+			}
 		}
 	}
 	
-##############################
-###   MAIN POLITICAL WAY   ###
-##############################
+#############################
+###   1850-1851 FOCUSES   ###
+#############################
 	focus = {
-		id = AZT_consequences_of_the_epidemic_of_1842
-		icon = GFX_focus_generic_diplomatic_treaty
+		id = AZT_the_reign_of_Montezuma_IV
+		icon = GFX_focus_AZT_the_reign_of_Montezuma_IV
 		
-		x = -12
+		x = 15
 		y = 0
-		cost = 5
-		
-		#relative_position_id = AZT_speech_of_the_emperror
-		
-		available = {
-		
-		}
-		
-		allow_branch = {
-        	has_country_flag = AZT_main_politic_way_focuses_visible
-    	}
+		cost = 1
+		search_filters = { FOCUS_FILTER_POLITICAL }
 
-		available_if_capitulated = yes
-		
-		search_filters = {  }
+		allow_branch = { 
+			OR = {
+				has_completed_focus = AZT_the_reign_of_Montezuma_IV
+				has_country_flag = AZT_open_all_focus_branches_flag
+			}
+		}
 
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: focus AZT_consequences_of_the_epidemic_of_1842 "
-
-			hidden_effect = {
-				
+			log = "[GetDateText]: [Root.GetName]: focus AZT_the_reign_of_Montezuma_IV"
+			mark_focus_tree_layout_dirty = yes
+		}
+	}
+	
+	focus = {
+		id = AZT_loyal_elite
+		icon = GFX_focus_AZT_loyal_elite
+		
+		x = 15
+		y = 1
+		cost = 2.9
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		prerequisite = { focus = AZT_the_reign_of_Montezuma_IV }
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus AZT_loyal_elite"
+			add_political_power = 20
+			add_power_balance_value = {
+				id = AZT_bop_emperor_tlamakatske
+				value = 0.1
 			}
 		}
 	}
 	
 	focus = {
-		id = AZT_1
-		icon = GFX_focus_generic_diplomatic_treaty
+		id = AZT_citizens_and_government
+		icon = GFX_focus_AZT_citizens_and_government
 		
-		x = -3
-		y = 1
-		cost = 5
+		x = 15
+		y = 2
+		cost = 2.9
+		search_filters = { FOCUS_FILTER_POLITICAL }
 		
-		relative_position_id = AZT_consequences_of_the_epidemic_of_1842
-		
-		prerequisite = { focus = AZT_consequences_of_the_epidemic_of_1842 }
-		
-		available = {
-		
-		}
-		
-		available_if_capitulated = yes
-		
-		search_filters = {  }
-
+		prerequisite = { focus = AZT_loyal_elite }
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: focus AZT_ "
-
-			hidden_effect = {
-				
-			}
+			log = "[GetDateText]: [Root.GetName]: focus AZT_citizens_and_government"
+			
 		}
 	}
 	
 	focus = {
-		id = AZT_2
-		icon = GFX_focus_generic_diplomatic_treaty
+		id = AZT_battle_with_nepotism
+		icon = GFX_focus_AZT_battle_with_nepotism
 		
-		x = 3
-		y = 1
-		cost = 5
+		x = 15
+		y = 4
+		cost = 2.9
+		search_filters = { FOCUS_FILTER_POLITICAL }
 		
-		relative_position_id = AZT_consequences_of_the_epidemic_of_1842
-		
-		prerequisite = { focus = AZT_consequences_of_the_epidemic_of_1842 }
-		
-		available = {
-		
-		}
-		
-		available_if_capitulated = yes
-		
-		search_filters = {  }
-
+		prerequisite = { focus = AZT_citizens_and_government }
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: focus AZT_ "
-
-			hidden_effect = {
-				
-			}
+			log = "[GetDateText]: [Root.GetName]: focus AZT_battle_with_nepotism"
+			
 		}
 	}
+	
+	focus = {
+		id = AZT_goverment_press
+		icon = GFX_focus_AZT_goverment_press
+		
+		x = 15
+		y = 7
+		cost = 2.9
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		prerequisite = { focus = AZT_battle_with_nepotism }
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus AZT_goverment_press"
+			
+		}
+	}
+	
+	focus = {
+		id = AZT_resuscitate_the_economy
+		icon = GFX_focus_AZT_resuscitate_the_economy
+		
+		x = 9
+		y = 2
+		cost = 2.9
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		
+		prerequisite = { focus = AZT_loyal_elite }
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus AZT_resuscitate_the_economy"
+			
+		}
+	}
+	
+	focus = {
+		id = AZT_war_industry
+		icon = GFX_focus_AZT_war_industry
+		
+		x = 5
+		y = 3
+		cost = 2.9
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		
+		prerequisite = { focus = AZT_resuscitate_the_economy }
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus AZT_war_industry"
+			
+		}
+	}
+	
+	focus = {
+		id = AZT_design_bureau
+		icon = GFX_focus_AZT_design_bureau
+		
+		x = 5
+		y = 6
+		cost = 2.9
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		
+		prerequisite = { focus = AZT_war_industry }
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus AZT_design_bureau"
+			
+		}
+	}
+	
+	focus = {
+		id = AZT_meeting_with_mittleazteken
+		icon = GFX_focus_AZT_meeting_with_mittleazteken
+		
+		x = 9
+		y = 3
+		cost = 1
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		
+		prerequisite = { focus = AZT_resuscitate_the_economy }
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus AZT_meeting_with_mittleazteken"
+			
+		}
+	}
+	
+	focus = {
+		id = AZT_trade_with_sonora
+		icon = GFX_focus_AZT_trade_with_sonora
+		
+		x = 11
+		y = 6
+		cost = 2.9
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		
+		mutually_exclusive = { focus = AZT_trade_with_japan }
+		
+		prerequisite = { focus = AZT_meeting_with_mittleazteken }
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus AZT_trade_with_sonora"
+			
+		}
+	}
+	
+	focus = {
+		id = AZT_trade_with_japan
+		icon = GFX_focus_AZT_trade_with_japan
+		
+		x = 7
+		y = 6
+		cost = 2.9
+		search_filters = { FOCUS_FILTER_INDUSTRY }
 
+		mutually_exclusive = { focus = AZT_trade_with_sonora }
+		
+		prerequisite = { focus = AZT_meeting_with_mittleazteken }
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus AZT_trade_with_japan"
+			
+		}
+	}
+	
+	focus = {
+		id = AZT_capitalist_industry
+		icon = GFX_focus_AZT_capitalist_industry
+		
+		x = 13
+		y = 3
+		cost = 2.9
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		
+		prerequisite = { focus = AZT_resuscitate_the_economy }
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus AZT_capitalist_industry"
+			
+		}
+	}
+	
+	focus = {
+		id = AZT_teotitlan_steel_mill
+		icon = GFX_focus_AZT_teotitlan_steel_mill
+		
+		x = 13
+		y = 4
+		cost = 2.9
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		
+		prerequisite = { focus = AZT_capitalist_industry }
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus AZT_teotitlan_steel_mill"
+			
+		}
+	}
+	
+	focus = {
+		id = AZT_expand_manufactories
+		icon = GFX_focus_AZT_expand_manufactories
+		
+		x = 13
+		y = 6
+		cost = 2.9
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		
+		prerequisite = { focus = AZT_teotitlan_steel_mill }
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus AZT_expand_manufactories"
+			
+		}
+	}
+	
+	focus = {
+		id = AZT_empire_industry
+		icon = GFX_focus_AZT_empire_industry
+		
+		x = 9
+		y = 7
+		cost = 2.9
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		
+		prerequisite = { focus = AZT_expand_manufactories }
+		prerequisite = { focus = AZT_design_bureau }
+		prerequisite = { focus = AZT_trade_with_japan focus = AZT_trade_with_sonora }
+		
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus AZT_empire_industry"
+		}
+	}
+	
+	focus = {
+		id = AZT_army_questions
+		icon = GFX_focus_AZT_army_questions
+		
+		x = 21
+		y = 2
+		cost = 2.9
+		search_filters = { FOCUS_FILTER_ARMY }
+		
+		prerequisite = { focus = AZT_loyal_elite }
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus AZT_army_questions"
+			
+		}
+	}
+	
+	focus = {
+		id = AZT_new_standarts
+		icon = GFX_focus_AZT_new_standarts
+		
+		x = 21
+		y = 3
+		cost = 2.9
+		search_filters = { FOCUS_FILTER_ARMY }
+		
+		prerequisite = { focus = AZT_army_questions }
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus AZT_new_standarts"
+			
+		}
+	}
+	
+	focus = {
+		id = AZT_medical_commission
+		icon = GFX_focus_AZT_medical_commission
+		
+		x = 18
+		y = 5
+		cost = 2.9
+		search_filters = { FOCUS_FILTER_ARMY }
+		
+		prerequisite = { focus = AZT_new_standarts }
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus AZT_medical_commission"
+			
+		}
+	}
+	
+	focus = {
+		id = AZT_real_battles
+		icon = GFX_focus_AZT_real_battles
+		
+		x = 24
+		y = 5
+		cost = 2.9
+		search_filters = { FOCUS_FILTER_ARMY }
+		
+		prerequisite = { focus = AZT_new_standarts }
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus AZT_real_battles"
+			
+		}
+	}
+	
+	focus = {
+		id = AZT_military_command
+		icon = GFX_focus_AZT_military_command
+		
+		x = 21
+		y = 7
+		cost = 2.9
+		search_filters = { FOCUS_FILTER_ARMY }
+		
+		prerequisite = { focus = AZT_real_battles }
+		prerequisite = { focus = AZT_medical_commission }
+		
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus AZT_military_command"
+			
+		}
+	}
+	
+	focus = {
+		id = AZT_ending_political_isolation
+		icon = GFX_focus_AZT_ending_political_isolation
+		
+		x = 15
+		y = 8
+		cost = 1.5
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		prerequisite = { focus = AZT_military_command }
+		prerequisite = { focus = AZT_goverment_press }
+		prerequisite = { focus = AZT_empire_industry }
+		
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus AZT_ending_political_isolation"
+			
+		}
+	}
 }
