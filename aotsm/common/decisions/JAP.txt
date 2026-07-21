@@ -118,6 +118,114 @@ JAP_power_balance_among_fractions_cat = {
 		
 		}
 	}
+
+    JAP_mobilisate_recruts_in_region_decision = {
+
+		icon = GFX_decision_generic_military
+
+		target_array = JAP.aotsm_owned_states_array
+		target_root_trigger = { 
+			original_tag = JAP 
+		} 
+		
+		state_target = yes
+		on_map_mode = map_only
+		fire_only_once = yes
+
+		available = {
+			has_war = yes
+			has_country_flag = JAS_unlock_unlock_cw_mobilization_decisions_flag
+			FROM = { #Необходимо для корректной проверки
+				is_controlled_by = ROOT
+			}
+			NOT = {
+				has_country_flag = JAP_recruit_in_process_flag
+			}
+		}
+
+		visible = {
+			has_war = yes
+			has_country_flag = JAS_unlock_unlock_cw_mobilization_decisions_flag
+			FROM = { #Необходимо для корректной проверки
+				is_controlled_by = ROOT
+				NOT ={
+					OR = {
+						has_dynamic_modifier = {
+							modifier = JP_state_prison_island_modifier
+							scope = state
+						}
+						has_dynamic_modifier = {
+							modifier = JP_state_kioto_modifier
+							scope = state
+						}
+						has_dynamic_modifier = {
+							modifier = JP_state_tsusima_island_modifier
+							scope = state
+						}
+						has_dynamic_modifier = {
+							modifier = JP_state_kanto_modifier
+							scope = state
+						}
+						has_dynamic_modifier = {
+							modifier = JP_state_shogun_land_modifier
+							scope = state
+						}
+						state = 638
+						state = 645
+						state = 646
+						state = 648
+						state = 993
+						state = 994
+					}
+				}
+			}
+			NOT = {
+				JAP_civil_war_is_end_trigger = yes
+			}
+		}
+
+		ai_will_do = {
+			base = 30
+			modifier = {
+				add = 50
+				has_war_with = JAS 
+			}
+			modifier = {
+				add = -500
+				has_army_size = {
+					size > 25
+					type = all 
+				}
+			}
+			
+		}
+
+		#cost = 5
+		days_remove = 15
+		days_re_enable = 30
+
+		modifier = {
+			
+		}
+
+		complete_effect = {
+			hidden_effect = {
+				set_country_flag = JAP_recruit_in_process_flag
+			}
+		}			
+
+		remove_effect = {
+			FROM = { 
+				create_unit = {
+					division = "name = \"Garrison\" division_template = \"Garrison\" start_experience_factor = 0.5 start_equipment_factor = 1.0" 
+					owner = JAP
+				}	
+			}
+			hidden_effect = {
+				clr_country_flag = JAP_recruit_in_process_flag
+			}
+		}
+	}
 }
 
 JAP_balance_of_power_cat = {

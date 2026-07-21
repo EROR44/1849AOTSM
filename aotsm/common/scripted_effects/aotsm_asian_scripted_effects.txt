@@ -111,12 +111,12 @@ aotsm_start_jap_civil_war_effect = {
         set_cosmetic_tag = JAP_JAP_CW_NAME
     }
     TUK = {      
+        add_state_core = 282
+        add_state_core = 989
         transfer_state = 282
         transfer_state = 728
         transfer_state = 745
         transfer_state = 989
-        add_state_core = 282
-        add_state_core = 989
         inherit_technology = JAP
         #load_oob = "TUK_civil_war_army" 
         calculate_maximum_divisions = yes
@@ -158,6 +158,15 @@ aotsm_start_jap_civil_war_effect = {
 
 aotsm_add_to_jap_civil_war_kanto_effect = {
     TUK = {
+        every_state = {
+            limit = {
+                is_core_of = JAP
+                NOT = {
+                    is_core_of = TUK
+                }
+            }
+            add_core_of = TUK
+        }
         if = { 
             limit = {
                 JAP = {
