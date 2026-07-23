@@ -1,17 +1,28 @@
 on_actions = {
+
+    on_weekly_AZT = {
+        effect = {
+            if = {
+                limit = {
+                    has_idea = AZT_aus_trade_monopoly_idea
+                }
+                AZT_austrian_trade_monopoly_effect = yes
+            }
+        }
+    }
+
     on_peace = {
 		effect = {
 			# Aztec switch law
 			if = {
 				limit = {
-					AZT = { has_idea = AZT_macehualtin_law_war }
+                    tag = AZT
+					has_idea = AZT_macehualtin_law_war
 				}
-                AZT = {
-				    swap_ideas = {
-                        remove_idea = AZT_macehualtin_law_war
-					    add_idea = AZT_macehualtin_law_peacetime
-                    }
-				}
+				swap_ideas = {
+                    remove_idea = AZT_macehualtin_law_war
+				    add_idea = AZT_macehualtin_law_peacetime
+                }
                 multiply_variable = { AZT.get_cost_for_check_the_readness_of_the_militia = 3 } # Decision Cost
                 delete_units = { 
 				    division_template = "Macehualtin"
@@ -26,6 +37,7 @@ on_actions = {
             # Aztec switch law
             if = {
                 limit = {
+                    tag = AZT
                     AZT = { has_idea = AZT_macehualtin_law_peacetime }
                 }
                 AZT = {

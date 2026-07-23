@@ -160,7 +160,6 @@ AZT_check_cores_states_array_effect = {
 }
 
 AZT_set_state_for_random_cholera_event = {
-	clear_variable = AZT.get_state_for_random_cholera_event
 	random_list = {
 		10 = {
 			set_variable = { AZT.get_state_for_random_cholera_event = 478 }
@@ -256,21 +255,111 @@ AZT_get_random_cholera_event_effect = {
 				factor = 0
 				AZT = { has_country_flag = AZT_dont_use_random_cholera_state_events_6 }
 			}
-			AZT = { country_event = { id = azt_random_cholera_state_events.1 days = 3 } }
+			AZT = { country_event = { id = azt_random_cholera_state_events.6 days = 3 } }
 		}
 	}
 }
 
 AZT_austrian_trade_monopoly_effect = {
 	every_other_country = {
-		limit = {
-			NOT = { tag = MEC }
-		}
-        add_opinion_modifier = {
-            target = AZT
-            modifier = end_trade
-        }
+       	remove_opinion_modifier = {
+        	target = AZT
+        	modifier = end_trade
+    	}
     }
+	if = {
+		limit = {
+			has_completed_focus = AZT_trade_with_japan
+		}
+		every_other_country = {
+			limit = {
+				NOT = { tag = MEC }
+				NOT = { tag = JAP }
+				NOT = { tag = TUK }
+				NOT = { 
+					OR = {
+						is_puppet_of = JAP
+						is_subject_of = JAP
+						is_in_faction_with = JAP
+					}
+				}
+			}
+			add_opinion_modifier = {
+        		target = AZT
+            	modifier = end_trade
+        	}
+		}
+	}
+	else_if = {
+		limit = {
+			has_completed_focus = AZT_trade_with_sonora
+			NOT = {
+				SON = {
+					is_puppet_of = PRT
+					is_subject_of = PRT
+				}
+			}
+		}
+		every_other_country = {
+			limit = {
+				NOT = { tag = MEC }
+				NOT = { tag = SON }
+				NOT = {
+					OR = {
+						is_puppet_of = SON
+						is_subject_of = SON
+					}
+				}
+			}
+			add_opinion_modifier = {
+        		target = AZT
+            	modifier = end_trade
+        	}
+		}
+	}
+	else_if = {
+		limit = {
+			has_completed_focus = AZT_trade_with_sonora
+			SON = {
+				is_puppet_of = PRT
+				is_subject_of = PRT
+			}
+		}
+		every_other_country = {
+			limit = {
+				NOT = { tag = MEC }
+				NOT = { tag = SON }
+				NOT = {
+					OR = {
+						is_puppet_of = SON
+						is_subject_of = SON
+					}
+				}
+				NOT = { tag = PRT }
+				NOT = {
+					OR = {
+						is_puppet_of = PRT
+						is_subject_of = PRT
+					}
+				}
+			}
+			add_opinion_modifier = {
+        		target = AZT
+            	modifier = end_trade
+        	}
+		}
+	}
+	else = {
+		every_other_country = {
+			limit = {
+				NOT = { tag = MEC }
+			}
+       		add_opinion_modifier = {
+        		target = AZT
+            	modifier = end_trade
+        	}
+    	}
+	}
 }
 
 AZT_remove_austrian_trade_monopoly_effect = {
