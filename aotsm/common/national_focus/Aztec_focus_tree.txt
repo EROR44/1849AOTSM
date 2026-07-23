@@ -586,6 +586,21 @@ focus_tree = {
 		cost = 2.9
 		search_filters = { FOCUS_FILTER_INDUSTRY }
 		
+		available = {
+			SON = {
+				exists = yes
+			}
+		}
+
+		enable_automatic_bypass = no
+		bypass = {
+			NOT = {
+				SON = {
+					exists = yes
+				}
+			}
+		}
+
 		mutually_exclusive = { focus = AZT_trade_with_japan }
 		
 		prerequisite = { focus = AZT_meeting_with_mittleazteken }
@@ -603,6 +618,19 @@ focus_tree = {
 		y = 6
 		cost = 2.9
 		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		available = {
+			OR = {
+				NOT = { has_global_flag = JAP_civil_war_is_started }
+				custom_trigger_tooltip = {
+					tooltip = AZT_jap_emperor_win_civil_war_and_exists_focus_tt
+					JAP = {
+						exists = yes
+					}
+					has_global_flag = JAP_emperror_win_in_jap_civil_war
+				}
+			}
+		}
 
 		mutually_exclusive = { focus = AZT_trade_with_sonora }
 		
