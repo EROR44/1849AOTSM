@@ -617,23 +617,25 @@ focus_tree = {
 		cost = 2.9
 		search_filters = { FOCUS_FILTER_INDUSTRY }
 
-		available = {
-			OR = {
-				NOT = { has_global_flag = JAP_civil_war_is_started }
-				custom_trigger_tooltip = {
-					tooltip = AZT_jap_emperor_win_civil_war_and_exists_focus_tt
-					OR = {
-						JAP = { exists = yes }
-						has_global_flag = JAP_emperror_win_in_jap_civil_war
-					}
+		enable_automatic_bypass = no
+		bypass = {
+			NOT = {
+				JAP = {
+					has_cosmetic_tag = JAP_JAP_WIN_CW
 				}
+			}
+		}
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = AZT_jap_emperor_win_civil_war_and_exists_focus_tt
+				has_global_flag = JAP_emperror_win_in_jap_civil_war
 			}
 		}
 		
 		prerequisite = { focus = AZT_meeting_with_mittleazteken }
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: focus AZT_trade_with_japan"
-			
 		}
 	}
 	
