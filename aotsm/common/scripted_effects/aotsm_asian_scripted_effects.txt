@@ -364,3 +364,48 @@ aotsm_end_japan_civil_war_effect = {
     }
 }
 
+aotsm_create_joseon_occupation_zone_effect = {
+    KOR = {
+        set_politics = { ruling_party = authoritarian elections_allowed = no }
+        retire_country_leader = yes
+        add_country_leader_role = {
+			character = KOR_Kim_Song_Ryeong
+			promote_leader = yes
+
+            country_leader = {	
+                desc = "POLITICS_KIM_SONG_RYEONG_DESC"
+                ideology = dictature
+                traits = { general_goverment }
+                expire = "1900.1.1.1"
+                id = -1
+            }
+		}      
+        if = {
+            limit = {
+                has_global_flag = JAP_emperror_win_in_jap_civil_war
+            }
+            set_cosmetic_tag = KOR_JAP_OCCUPATION
+        }
+        else_if = {           
+            limit = {
+                has_global_flag = JAP_segun_win_in_jap_civil_war
+            }
+            set_cosmetic_tag = KOR_JAS_OCCUPATION
+        }
+        else_if = {           
+            limit = {
+                has_global_flag = JAP_torihiki_win_in_jap_civil_war
+            }
+            set_cosmetic_tag = KOR_TUK_OCCUPATION
+        }
+    }
+    JAP = {
+        set_autonomy = {
+			target = KOR
+			autonomy_state = autonomy_occupationzone
+			end_wars = no
+			end_civil_wars = no
+		}
+        transfer_state = 1028
+    }
+}
