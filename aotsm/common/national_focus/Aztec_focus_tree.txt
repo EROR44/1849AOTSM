@@ -496,8 +496,8 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: focus AZT_battle_with_nepotism"
 			country_event = {
-					id = azt_event.15
-				}
+				id = azt_event.15
+			}
 		}
 	}
 	
@@ -548,11 +548,21 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: focus AZT_war_industry"
 			random_owned_controlled_state = {
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+				if = {
+					limit = {
+						infrastructure < 3
+					}
 					add_building_construction = {
-						type = arms_factory
+						type = infrastructure
 						level = 1
 						instant_build = yes
 					}
+				}
 			}
 		}
 	}
@@ -664,12 +674,20 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: focus AZT_capitalist_industry"
 			random_owned_controlled_state = {
-					add_building_construction = {
-						type = industrial_complex
-						level = 1
-						instant_build = yes
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+				if = {
+					limit = {
+						check_variable = { AZT_cholera_state_status < 2 }
 					}
+					AZT_alleviate_cholera_in_state = yes
+				}
 			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			add_2_point_westernisation = yes
 		}
 	}
 	
