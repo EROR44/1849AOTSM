@@ -42,6 +42,29 @@ country_event = { #
 	}
 }
 
+country_event = { # 1 мая 1851 - триггер для поствоенных событий
+	id = jap_script_event.2
+	title = jap_script_event.2.t
+	desc = jap_script_event.2.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+
+	hidden =  yes
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event jap_script_event.2"
+		country_event = { id = jap_event.2 days = 2 } # 3 мая 1851 года - Статус Карафуто
+	} 
+
+	option = {
+		name = jap_script_event.2.a
+		
+	}
+}
+
 #####################################################################################
 #############################MAIN_EVENT_SECTION######################################
 #####################################################################################
@@ -109,11 +132,14 @@ country_event = { #
 	
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event jap_event.2"
+		hidden_effect = {
+			aotsm_annex_karafuto_prefecture_effect = yes
+		}
 	}
 
 	option = {
 		name = jap_event.2.a
-		
+		custom_effect_tooltip = JAP_carafuto_become_a_part_of_empire_tt
 	}
 }
 
