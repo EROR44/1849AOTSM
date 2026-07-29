@@ -12,7 +12,17 @@ on_actions = {
 
         effect = {
 
-            #
+			#KOR capitulation - Joseon became a JAP puppet
+			if = {
+				limit = {
+					tag = KOR
+					has_global_flag = JAP_start_invasion_in_joseon_flag 
+					KOR = {
+						has_war_with = JAP
+					}
+				}
+				aotsm_create_joseon_occupation_zone_effect = yes
+			}
 
 			#OLD CODE - NEED TO REWRITE IT
 			
@@ -50,24 +60,6 @@ on_actions = {
 				}
 
 				add_threat = 2
-			}
-
-			#KOR capitulation
-			if = {
-				limit = {
-					tag = KOR
-					has_global_flag = jap_invasion_kor
-					KOR = {
-						has_war_with = JAP
-					}
-				}
-				JAP = {
-					annex_country = {
-						target = KOR
-						transfer_troops = no
-					}
-				}
-				clr_global_flag = jap_invasion_kor
 			}
 			
 			#PHI capitulation

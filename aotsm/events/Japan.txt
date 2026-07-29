@@ -56,11 +56,44 @@ country_event = { # 1 мая 1851 - триггер для поствоенных
 	
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event jap_script_event.2"
-		country_event = { id = jap_event.2 days = 2 } # 3 мая 1851 года - Статус Карафуто
+		country_event = { id = jap_event.2 days = 2 } # 3 мая 1859 года - Статус Карафуто
+		country_event = { id = jap_event.5 days = 120 } # 1 сентября 1851 года - Вопрос интерверции в Корею
+		country_event = { id = jap_event.11 days = 265 } # 28 февраля 1851 года - Интеграция Рюкю
+		country_event = { id = jap_event.14 days = 300 } # 1 марта 1851 года - Подготовка к оккупации Тайвани
 	} 
 
 	option = {
 		name = jap_script_event.2.a
+		
+	}
+}
+
+country_event = { # 11 октября 1851 - Диалог с Чосон - проверка согласились на вассалитет или нет
+	id = jap_script_event.3
+	title = jap_script_event.3.t
+	desc = jap_script_event.3.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+
+	hidden =  yes
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event jap_script_event.3"
+		if = {
+			limit = {
+				KOR = { 
+					NOT = { has_country_flag = KOR_is_aprove_vassalage_from_japan_flag } # Чек вассал ли Корея
+				}
+			}
+			country_event = { id = jap_event.9 days = 1 } # 12 октября 1851 - Япония готова к вторжению в Корею
+		}
+	} 
+
+	option = {
+		name = jap_script_event.3.a
 		
 	}
 }
@@ -90,7 +123,6 @@ country_event = { # Начало гражданской войны
 		name = jap_event.1.a
 		ai_chance = {
 			base = 5
-			
 		}
 		custom_effect_tooltip = JAP_choose_emperror_in_cw_tt
 	}
@@ -98,8 +130,7 @@ country_event = { # Начало гражданской войны
 	option = {
 		name = jap_event.1.b
 		ai_chance = {
-			base = 5
-			
+			base = 5		
 		}
 		custom_effect_tooltip = JAP_choose_segun_in_cw_tt
 		hidden_effect = {
@@ -111,7 +142,6 @@ country_event = { # Начало гражданской войны
 		name = jap_event.1.c
 		ai_chance = {
 			base = 5
-			
 		}
 		custom_effect_tooltip = JAP_choose_torihiki_in_cw_tt
 		hidden_effect = {
@@ -120,7 +150,7 @@ country_event = { # Начало гражданской войны
 	}
 }
 
-country_event = { # 
+country_event = { # Статус Карафуто
 	id = jap_event.2
 	title = jap_event.2.t
 	desc = jap_event.2.d
@@ -133,13 +163,458 @@ country_event = { #
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event jap_event.2"
 		hidden_effect = {
-			aotsm_annex_karafuto_prefecture_effect = yes
+			country_event = { id = jap_event.3 days = 7 } 
 		}
 	}
 
 	option = {
 		name = jap_event.2.a
+		custom_effect_tooltip = JAP_event_go_to_karafuto_government_tt
+	}
+}
+
+country_event = { # Высочайшее объявление о упразднении автономии
+	id = jap_event.3
+	title = jap_event.3.t
+	desc = jap_event.3.d
+	picture = GFX_report_event_aotsm_generic_signing_the_contract
+
+	fire_only_once = yes
+
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event jap_event.3"
+		hidden_effect = {
+			country_event = { id = jap_event.4 days = 7 } 
+		}
+	}
+
+	option = {
+		name = jap_event.3.a
+		
+	}
+}
+
+country_event = { # Мацумаэ Такахиро принимает условия 
+	id = jap_event.4
+	title = jap_event.4.t
+	desc = jap_event.4.d
+	picture = GFX_report_event_generic_sign_treaty
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event jap_event.4"
+		hidden_effect = {
+			aotsm_annex_karafuto_prefecture_effect = yes
+		}
+	}
+
+	option = {
+		name = jap_event.4.a
 		custom_effect_tooltip = JAP_carafuto_become_a_part_of_empire_tt
+	}
+}
+
+country_event = { # Вопрос интерверции в Корею
+	id = jap_event.5
+	title = jap_event.5.t
+	desc = jap_event.5.d
+	picture = GFX_report_event_generic_sign_treaty
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event jap_event.5"
+		hidden_effect = {
+			country_event = { id = jap_script_event.3 days = 30 } #cкрипт ивент
+		}
+	}
+
+	option = {
+		name = jap_event.5.a # Предложение добровольного вассалитета
+		trigger = {
+			has_global_flag = JAP_torihiki_win_in_jap_civil_war # Доступно только при победе Торихики
+		}
+		custom_effect_tooltip = JAP_send_notification_to_joseon_government_tt
+		hidden_effect = {
+			KOR = { 
+				country_event = { id = jap_event.6 days = 7 } 
+			}
+		}
+	}
+
+	option = {
+		name = jap_event.5.b # Военная интервенция
+		trigger = {
+			
+		}
+		custom_effect_tooltip = JAP_start_preparation_to_war_with_joseon_tt
+	}
+}
+
+country_event = { # Предложение вассалитета для Чосон от Японии
+	id = jap_event.6
+	title = jap_event.6.t
+	desc = jap_event.6.d
+	picture = GFX_report_event_generic_sign_treaty
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event jap_event.6"
+	}
+
+	option = {
+		name = jap_event.6.a # Отказ	
+		ai_chance = {
+			base = 25		
+		}
+		hidden_effect = {
+			JAP = { 
+				country_event = { id = jap_event.7 days = 7 } 
+			}
+		}
+	}
+
+	option = {
+		name = jap_event.6.b # Согласие	
+		ai_chance = {
+			base = 5
+			modifier = {
+				has_opinion = {
+					target = JAP
+					value > 89
+				}
+				add = 10
+			}
+		}
+		hidden_effect = {
+			set_country_flag = KOR_is_aprove_vassalage_from_japan_flag
+			JAP = { 
+				country_event = { id = jap_event.8 days = 7 } 
+			}
+		}	
+	}
+}
+
+country_event = { # Правительсто Чосон отказывает
+	id = jap_event.7
+	title = jap_event.7.t
+	desc = jap_event.7.d
+	picture = GFX_report_event_generic_sign_treaty
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event jap_event.7"
+	}
+
+	option = {
+		name = jap_event.7.a
+		trigger = {
+			# условия
+		}
+	}
+}
+
+country_event = { # Правительсто Чосон согласно
+	id = jap_event.8
+	title = jap_event.8.t
+	desc = jap_event.8.d
+	picture = GFX_report_event_generic_sign_treaty
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event jap_event.8"
+		hidden_effect = {
+			aotsm_create_joseon_occupation_zone_effect = yes
+		}
+	}
+
+	option = {
+		name = jap_event.8.a
+
+		add_war_support = 0.01
+		add_stability = 0.025
+	}
+}
+
+country_event = { # Япония готова к вторжению в Корею
+	id = jap_event.9
+	title = jap_event.9.t
+	desc = jap_event.9.d
+	picture = GFX_report_event_generic_sign_treaty
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event jap_event.9"
+		hidden_effect = {
+			country_event = { id = jap_event.10 days = 10 } 
+		}
+	}
+
+	option = {
+		name = jap_event.9.a
+		trigger = {
+			# условия
+		}
+	}
+}
+
+country_event = { # Начало интервенции в Корею
+	id = jap_event.10
+	title = jap_event.10.t
+	desc = jap_event.10.d
+	picture = GFX_report_event_generic_sign_treaty
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event jap_event.10"
+		hidden_effect = {
+			aotsm_jap_start_joseon_invasion_effect = yes
+		}
+	}
+
+	option = {
+		name = jap_event.10.a
+		trigger = {
+			# условия
+		}
+	}
+}
+
+country_event = { # Интеграция Рюкю
+	id = jap_event.11
+	title = jap_event.11.t
+	desc = jap_event.11.d
+	picture = GFX_report_event_generic_sign_treaty
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event jap_event.11"
+		hidden_effect = {
+			country_event = { id = jap_event.12 days = 7 } 
+		}
+	}
+
+	option = {
+		name = jap_event.11.a
+		trigger = {
+			# условия
+		}
+	}
+}
+
+country_event = { # Высочайшее объявление о упразднении автономии - ивент для Рюкю
+	id = jap_event.12
+	title = jap_event.12.t
+	desc = jap_event.12.d
+	picture = GFX_report_event_generic_sign_treaty
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event jap_event.12"
+		hidden_effect = {
+			country_event = { id = jap_event.13 days = 7 } 
+		}
+	}
+
+	option = {
+		name = jap_event.12.a
+		trigger = {
+			# условия
+		}
+	}
+}
+
+country_event = { # Ответ - Рюкю станивится частью Японии
+	id = jap_event.13
+	title = jap_event.13.t
+	desc = jap_event.13.d
+	picture = GFX_report_event_generic_sign_treaty
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event jap_event.13"
+		hidden_effect = {
+			aotsm_end_of_ryukyu_effect = yes
+		}
+	}
+
+	option = {
+		name = jap_event.13.a
+		custom_effect_tooltip = JAP_ryukyu_became_a_part_of_japan_tt
+	}
+}
+
+country_event = { # Подготовка к оккупации Тайвани
+	id = jap_event.14
+	title = jap_event.14.t
+	desc = jap_event.14.d
+	picture = GFX_report_event_generic_sign_treaty
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event jap_event.14"
+		hidden_effect = {
+			country_event = { id = jap_event.15 days = 30 } 
+		}
+	}
+
+	option = {
+		name = jap_event.14.a
+		trigger = {
+			# условия
+		}
+	}
+}
+
+country_event = { # Оккупация Тайвани
+	id = jap_event.15
+	title = jap_event.15.t
+	desc = jap_event.15.d
+	picture = GFX_report_event_generic_sign_treaty
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event jap_event.15"
+		hidden_effect = {
+			aotsm_jap_annex_taiwan_effect = yes
+		}
+	}
+
+	option = {
+		name = jap_event.15.a
+		trigger = {
+			# условия
+		}
+	}
+}
+
+country_event = { #
+	id = jap_event.16
+	title = jap_event.16.t
+	desc = jap_event.16.d
+	picture = GFX_report_event_generic_sign_treaty
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event jap_event.16"
+	}
+
+	option = {
+		name = jap_event.16.a
+		trigger = {
+			# условия
+		}
+	}
+}
+
+country_event = { #
+	id = jap_event.17
+	title = jap_event.17.t
+	desc = jap_event.17.d
+	picture = GFX_report_event_generic_sign_treaty
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event jap_event.17"
+	}
+
+	option = {
+		name = jap_event.17.a
+		trigger = {
+			# условия
+		}
+	}
+}
+
+country_event = { #
+	id = jap_event.18
+	title = jap_event.18.t
+	desc = jap_event.18.d
+	picture = GFX_report_event_generic_sign_treaty
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event jap_event.18"
+	}
+
+	option = {
+		name = jap_event.18.a
+		trigger = {
+			# условия
+		}
+	}
+}
+
+country_event = { #
+	id = jap_event.19
+	title = jap_event.19.t
+	desc = jap_event.19.d
+	picture = GFX_report_event_generic_sign_treaty
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event jap_event.19"
+	}
+
+	option = {
+		name = jap_event.19.a
+		trigger = {
+			# условия
+		}
+	}
+}
+
+country_event = { #
+	id = jap_event.20
+	title = jap_event.20.t
+	desc = jap_event.20.d
+	picture = GFX_report_event_generic_sign_treaty
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event jap_event.20"
+	}
+
+	option = {
+		name = jap_event.20.a
+		trigger = {
+			# условия
+		}
 	}
 }
 
