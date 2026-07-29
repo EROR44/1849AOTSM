@@ -118,7 +118,7 @@ aotsm_start_jap_civil_war_effect = {
         transfer_state = 745
         transfer_state = 989
         inherit_technology = JAP
-        #load_oob = "TUK_civil_war_army" 
+        load_oob = "TUK_civil_war_army" 
         calculate_maximum_divisions = yes
         country_lock_all_division_template = yes
     }
@@ -461,3 +461,93 @@ aotsm_jap_annex_taiwan_effect = {
     news_event = { id = news.news.311 days = 1 }
     set_global_flag = JAP_taiwan_is_owned_by_japan_flag
 }
+
+aotsm_jap_start_invasion_in_tondo_effect = {
+    JAP = {
+        set_global_flag = JAP_start_invasion_in_tondo_flag
+        declare_war_on = {
+			target = PHI
+			type = annex_everything
+		}
+    }
+    news_event = { id = news.314 days = 1 }
+}
+
+aotsm_create_tondo_occupation_zone_effect = {
+    PHI = {
+        set_politics = { ruling_party = authoritarian elections_allowed = no }
+        retire_country_leader = yes
+        add_country_leader_role = {
+			character = PHI_Occupational_Soviet
+			promote_leader = yes
+
+            country_leader = {	
+                desc = "POLITICS_OCCUPATIONAL_SOVIET_DESC"
+                ideology = dictature
+                traits = { general_goverment }
+                expire = "1900.1.1.1"
+                id = -1
+            }
+		}      
+        set_cosmetic_tag = PHI_JAP_OCCUPATION #Возможно только по пути "Победа императора в Нанбокусенсо"
+    }
+    JAP = {
+        set_autonomy = {
+			target = PHI
+			autonomy_state = autonomy_occupationzone
+			end_wars = no
+			end_civil_wars = no
+		}
+    }
+    news_event = { id = news.25 days = 1 }
+    clr_global_flag = JAP_start_invasion_in_tondo_flag
+    set_global_flag = JAP_end_invasion_in_tondo_flag
+}
+
+aotsm_jap_annex_palavan_effect = {
+    PHI = {
+		transfer_state = 626
+	}
+    KAL = {
+        remove_state_core = 626
+        add_state_claim = 626
+    }
+    news_event = { id = news.148 days = 1 }
+}
+
+aotsm_create_indochina_occupation_zone_effect = {    
+    every_state = {
+        limit = {
+            is_core_of = RAT
+        }
+        transfer_state_to = IJP
+        add_core_of = IJP
+    }   
+    every_state = {
+        limit = {
+            is_core_of = VIE
+        }
+        transfer_state_to = IJP
+        add_core_of = IJP
+    }   
+    every_state = {
+        limit = {
+            is_core_of = KHM
+        }
+        transfer_state_to = IJP
+        add_core_of = IJP
+    }
+    IJP = {
+        inherit_technology = JAP
+    }
+    JAP = {
+        set_autonomy = {
+			target = IJP
+			autonomy_state = autonomy_occupationzone
+			end_wars = no
+			end_civil_wars = no
+		}
+    }
+}
+
+ 

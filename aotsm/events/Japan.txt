@@ -56,10 +56,16 @@ country_event = { # 1 мая 1851 - триггер для поствоенных
 	
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event jap_script_event.2"
-		country_event = { id = jap_event.2 days = 2 } # 3 мая 1859 года - Статус Карафуто
+		country_event = { id = jap_event.2 days = 2 } # 3 мая 1850 года - Статус Карафуто
 		country_event = { id = jap_event.5 days = 120 } # 1 сентября 1851 года - Вопрос интерверции в Корею
 		country_event = { id = jap_event.11 days = 265 } # 28 февраля 1851 года - Интеграция Рюкю
 		country_event = { id = jap_event.14 days = 300 } # 1 марта 1851 года - Подготовка к оккупации Тайвани
+		if = {
+			limit = {
+				has_global_flag = JAP_emperror_win_in_jap_civil_war
+			}
+			country_event = { id = jap_event.16 days = 480 } # 1 октября 1851 года - Подготовка к интервенции в Тондо
+		}
 	} 
 
 	option = {
@@ -364,9 +370,18 @@ country_event = { # Япония готова к вторжению в Коре�
 	}
 
 	option = {
-		name = jap_event.9.a
-		trigger = {
-			# условия
+		name = jap_event.9.a	
+		#activate_mission = JAP_prepare_for_invasion_to_joseon_timer
+		if = {
+			limit = {
+				has_power_balance = {
+					id = JAP_civil_government_and_army_bop
+				}
+			}
+			add_power_balance_value = {
+                id = JAP_civil_government_and_army_bop
+                value = 0.05
+            }
 		}
 	}
 }
@@ -482,9 +497,17 @@ country_event = { # Подготовка к оккупации Тайвани
 	}
 
 	option = {
-		name = jap_event.14.a
-		trigger = {
-			# условия
+		name = jap_event.14.a	
+		if = {
+			limit = {
+				has_power_balance = {
+					id = JAP_civil_government_and_army_bop
+				}
+			}
+			add_power_balance_value = {
+                id = JAP_civil_government_and_army_bop
+                value = 0.025
+            }
 		}
 	}
 }
@@ -513,7 +536,7 @@ country_event = { # Оккупация Тайвани
 	}
 }
 
-country_event = { #
+country_event = { # Вопрос интервенции в Тондо
 	id = jap_event.16
 	title = jap_event.16.t
 	desc = jap_event.16.d
@@ -524,17 +547,30 @@ country_event = { #
 
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event jap_event.16"
+		hidden_effect = {
+			country_event = { id = jap_event.17 days = 30 } # Начало интервенции в Тондо 
+			country_event = { id = jap_event.18 days = 65 } # Японские войска оккупируют Палаван
+		}
 	}
 
 	option = {
 		name = jap_event.16.a
-		trigger = {
-			# условия
+		#activate_mission = JAP_prepare_for_invasion_to_tondo_timer
+		if = {
+			limit = {
+				has_power_balance = {
+					id = JAP_civil_government_and_army_bop
+				}
+			}
+			add_power_balance_value = {
+                id = JAP_civil_government_and_army_bop
+                value = 0.05
+            }
 		}
 	}
 }
 
-country_event = { #
+country_event = { # Начало интервенции в Тондо 
 	id = jap_event.17
 	title = jap_event.17.t
 	desc = jap_event.17.d
@@ -545,6 +581,9 @@ country_event = { #
 
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event jap_event.17"
+		hidden_effect = {
+			aotsm_jap_start_invasion_in_tondo_effect = yes
+		}
 	}
 
 	option = {
@@ -555,7 +594,7 @@ country_event = { #
 	}
 }
 
-country_event = { #
+country_event = { # Японские войска оккупируют Палаван
 	id = jap_event.18
 	title = jap_event.18.t
 	desc = jap_event.18.d
@@ -566,6 +605,9 @@ country_event = { #
 
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event jap_event.18"
+		hidden_effect = {
+			aotsm_jap_annex_palavan_effect = yes
+		}
 	}
 
 	option = {
