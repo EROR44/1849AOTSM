@@ -34,6 +34,9 @@ country_event = { #
 		log = "[GetDateText]: [Root.GetName]: event jap_script_event.1"
 		#country_event = { id = jap_event.1 days = 119 } #Начало гражданской войны #перенесено в таймер
 		country_event = { id = jap_story_event.1 days = 7 } #Запуск цепочки ивентов-справок
+		RUK = {
+			country_event = { id = ryukyu_event.1 days = 264 } # 25 октября 1849 года - Смерть лидера Рюкю - Сё Ику
+		}
 	}
 
 	option = {
@@ -57,8 +60,8 @@ country_event = { # 1 мая 1851 - триггер для поствоенных
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event jap_script_event.2"
 		country_event = { id = jap_event.2 days = 2 } # 3 мая 1850 года - Статус Карафуто
-		country_event = { id = jap_event.5 days = 120 } # 1 сентября 1851 года - Вопрос интерверции в Корею
-		country_event = { id = jap_event.11 days = 265 } # 28 февраля 1851 года - Интеграция Рюкю
+		country_event = { id = jap_event.5 days = 120 } # 1 сентября 1850 года - Вопрос интерверции в Корею
+		country_event = { id = jap_event.11 days = 265 } # 28 февраля 1850 года - Интеграция Рюкю
 		country_event = { id = jap_event.14 days = 300 } # 1 марта 1851 года - Подготовка к оккупации Тайвани
 		if = {
 			limit = {
@@ -3233,18 +3236,32 @@ country_event = { # Turn to Romea
 
 	option = { # Yes
 		name = jap_gw_emperror_event.3.a
-		JAP = {
-			country_event = {
-				id = jap_gw_emperror_event.7
+		ai_chance = {
+			base = 15
+			modifier = {
+				is_historical_focus_on = yes
+				add = -15
+			}
+		}
+		hidden_effect = {
+			JAP = {
+				country_event = { id = jap_gw_emperror_event.7 days = 7 }
 			}
 		}
 	}
 
 	option = { # No
 		name = jap_gw_emperror_event.3.b
-		JAP = {
-			country_event = {
-				id = jap_gw_emperror_event.8
+		ai_chance = {
+			base = 25
+			modifier = {
+				is_historical_focus_on = yes
+				add = 50
+			}
+		}
+		hidden_effect = {
+			JAP = {
+				country_event = { id = jap_gw_emperror_event.8 days = 7 }
 			}
 		}
 	}
@@ -3308,18 +3325,32 @@ country_event = { # Turn to CBI
 
 	option = { # Yes
 		name = jap_gw_emperror_event.6.a
-		JAP = {
-			country_event = {
-				id = jap_gw_emperror_event.4
+		ai_chance = {
+			base = 15
+			modifier = {
+				is_historical_focus_on = yes
+				add = -15
+			}
+		}
+		hidden_effect = {
+			JAP = {
+				country_event = { id = jap_gw_emperror_event.4 days = 7 }
 			}
 		}
 	}
 
 	option = { # No
 		name = jap_gw_emperror_event.6.b
-		JAP = {
-			country_event = {
-				id = jap_gw_emperror_event.5
+		ai_chance = {
+			base = 25
+			modifier = {
+				is_historical_focus_on = yes
+				add = 50
+			}
+		}
+		hidden_effect = {
+			JAP = {
+				country_event = { id = jap_gw_emperror_event.5 days = 7 }
 			}
 		}
 	}
@@ -3383,8 +3414,21 @@ country_event = { #
 
 	option = {
 		name = jap_gw_emperror_event.9.a
-		trigger = {
-			# условия
+		add_political_power = -25
+		add_equipment_to_stockpile = {
+			type = infantry_equipment
+			amount = 2000
+			producer = BYZ
+		}
+		add_equipment_to_stockpile = {
+			type = artillery_equipment
+			amount = 500
+			producer = BYZ
+		}
+		add_equipment_to_stockpile = {
+			type = support_equipment
+			amount = 300
+			producer = BYZ
 		}
 	}
 }
