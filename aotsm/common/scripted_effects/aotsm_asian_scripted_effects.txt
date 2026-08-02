@@ -325,7 +325,6 @@ aotsm_end_japan_civil_war_effect = {
             }
         }
         aotsm_transfer_all_segunate_characters_to_jap_effect = yes
-        JAP = { change_tag_from = JAS }	
         JAP = {
             retire_country_leader = yes
             add_country_leader_role = {
@@ -345,7 +344,8 @@ aotsm_end_japan_civil_war_effect = {
         }  
         news_event = { id = news.29 days = 1 } 
         clr_global_flag = JAP_civil_war_is_started
-        set_global_flag = JAP_segun_win_in_jap_civil_war
+        set_global_flag = JAP_segun_win_in_jap_civil_war    
+        JAP = { change_tag_from = JAS }	
     }
     else_if = { 
         limit = {
@@ -355,7 +355,6 @@ aotsm_end_japan_civil_war_effect = {
             }
         }
         aotsm_transfer_all_torihiki_characters_to_jap_effect = yes
-        JAP = { change_tag_from = TUK }
         JAP = {
             retire_country_leader = yes
             add_country_leader_role = {
@@ -376,6 +375,7 @@ aotsm_end_japan_civil_war_effect = {
         news_event = { id = news.30 days = 1 } 
         clr_global_flag = JAP_civil_war_is_started
         set_global_flag = JAP_torihiki_win_in_jap_civil_war
+        JAP = { change_tag_from = TUK }
     }
     if = {
         limit = {
@@ -384,10 +384,19 @@ aotsm_end_japan_civil_war_effect = {
             }
         }
         JAP = {
-            annex_country = {
-                target = JAS
-                transfer_troops = no
+            white_peace = JAS
+        }
+        #JAP = {
+        #    annex_country = {
+        #        target = JAS
+        #        transfer_troops = no
+        #    }
+        #} 
+        every_state = {
+            limit = {
+                is_owned_by = JAS
             }
+            transfer_state_to = JAP
         }
     }
     if = {
@@ -397,11 +406,36 @@ aotsm_end_japan_civil_war_effect = {
             }
         }
         JAP = {
-            annex_country = {
-                target = TUK
-                transfer_troops = no
+            white_peace = TUK
+        }
+        #JAP = {
+        #    annex_country = {
+        #        target = TUK
+        #        transfer_troops = no
+        #    }
+        #}
+        every_state = {
+            limit = {
+                is_owned_by = TUK
+            }
+            transfer_state_to = TUK
+        }
+    } 
+    every_state = {
+        limit = {
+            OR = {
+                is_core_of = JAS
             }
         }
+        remove_core_of = JAS
+    }
+    every_state = {
+        limit = {
+            OR = {
+                is_core_of = TUK
+            }
+        }
+        remove_core_of = TUK
     }
     JAP ={ 
         country_status_increase = yes 
