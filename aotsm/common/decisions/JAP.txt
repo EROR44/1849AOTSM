@@ -40,6 +40,49 @@ JAP_power_balance_among_fractions_cat = {
 			country_event = jap_event.1
             hidden_effect = {
                 activate_mission = JAP_cw_torihiki_enters_into_war_timer
+				activate_mission = JAP_cw_end_of_nanbusosenko_timer
+            }
+		}
+	}
+
+    JAP_cw_end_of_nanbusosenko_timer = {
+	
+		icon = aotsm_generic_propaganda
+		
+		activation = {
+			has_global_flag = JAP_civil_war_is_started
+		}
+		
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = none_trigger_tt	
+				always = no
+			}
+		}
+
+		cancel_trigger = {
+			NOT = {
+				has_global_flag = JAP_civil_war_is_started
+			}
+			has_war = yes	
+		}
+		
+		selectable_mission = no
+		
+		visible = {
+			has_global_flag = JAP_civil_war_is_started
+		}		
+		
+		is_good = yes
+		
+		days_mission_timeout = 365 #1 мая 1850
+
+		fire_only_once = yes
+		
+		timeout_effect = {
+			aotsm_end_japan_civil_war_effect = yes
+            hidden_effect = {
+                country_event = { id = jap_script_event.2 days = 1 }
             }
 		}
 	}
@@ -74,7 +117,7 @@ JAP_power_balance_among_fractions_cat = {
 		
 		is_good = no
 		
-		days_mission_timeout = 300 #11 янв 1851
+		days_mission_timeout = 120 #300 #11 янв 1851
 
 		fire_only_once = yes
 		
@@ -771,6 +814,10 @@ JAP_power_balance_among_fractions_cat = {
 			}
 		}
 	}
+}
+
+JAP_japanization_process_cat = {
+	
 }
 
 JAP_balance_of_power_cat = {

@@ -87,7 +87,47 @@ aotsm_jap_cw_transfer_units_to_fractions_effect = { #on civil war start
 	}
 }
 
+aotsm_jap_unlock_recruitment_divisions_effect = {
+    JAP = {
+        set_division_force_allow_recruiting = {
+            division_template = "Imperial Guard"
+        }
+        set_division_force_allow_recruiting = {
+            division_template = "Hohei Shidan"
+        }
+        set_division_force_allow_recruiting = {
+            division_template = "Kihei Shidan"
+        }
+        set_division_force_allow_recruiting = {
+            division_template = "Garrison"
+        }
+        set_division_force_allow_recruiting = {
+            division_template = "Rikusentai"
+        }
+    }
+}
+
 aotsm_start_jap_civil_war_effect = {
+    534 = {
+        create_unit = {
+			division = "name = \"Hohei Shidan\" division_template = \"Hohei Shidan\" start_experience_factor = 0.5 start_equipment_factor = 1.0" 
+			owner = JAP
+		}	
+        create_unit = {
+			division = "name = \"Hohei Shidan\" division_template = \"Hohei Shidan\" start_experience_factor = 0.5 start_equipment_factor = 1.0" 
+			owner = JAP
+		}	
+    }
+    987 = {
+        create_unit = {
+			division = "name = \"Hohei Shidan\" division_template = \"Hohei Shidan\" start_experience_factor = 0.5 start_equipment_factor = 1.0" 
+			owner = JAP
+		}	
+        create_unit = {
+			division = "name = \"Hohei Shidan\" division_template = \"Hohei Shidan\" start_experience_factor = 0.5 start_equipment_factor = 1.0" 
+			owner = JAP
+		}	
+    }
     JAP = { 
         swap_ideas = {
 			remove_idea = JP_shogunate_trouble
@@ -118,7 +158,7 @@ aotsm_start_jap_civil_war_effect = {
         transfer_state = 745
         transfer_state = 989
         inherit_technology = JAP
-        #load_oob = "TUK_civil_war_army" 
+        load_oob = "TUK_civil_war_army" 
         calculate_maximum_divisions = yes
         country_lock_all_division_template = yes
     }
@@ -148,7 +188,8 @@ aotsm_start_jap_civil_war_effect = {
 		}
         calculate_maximum_divisions = yes
         country_lock_all_division_template = yes
-	}
+	}  
+    aotsm_jap_unlock_recruitment_divisions_effect = yes
     aotsm_jap_cw_transfer_units_to_fractions_effect = yes
     aotsm_se_JAP_start_civil_war_effect = yes #суперивент/ивент о начале гражданской войны в Японии
     calculate_prestige = yes
@@ -263,6 +304,7 @@ aotsm_end_japan_civil_war_effect = {
     if = { 
         limit = {
             JAP = {
+                exists = yes
                 has_country_flag = JAP_is_winner_in_civil_war_flag
             }
         }
@@ -271,18 +313,18 @@ aotsm_end_japan_civil_war_effect = {
             drop_cosmetic_tag = yes
             set_cosmetic_tag = JAP_JAP_WIN_CW
         }  
-        #news_event = { id = news.## days = 1 } 
+        news_event = { id = news.28 days = 1 } 
         clr_global_flag = JAP_civil_war_is_started
         set_global_flag = JAP_emperror_win_in_jap_civil_war
     }
     else_if = { 
         limit = {
             JAS = {
+                exists = yes
                 has_country_flag = JAP_is_winner_in_civil_war_flag
             }
         }
         aotsm_transfer_all_segunate_characters_to_jap_effect = yes
-        JAP = { change_tag_from = JAS }	
         JAP = {
             retire_country_leader = yes
             add_country_leader_role = {
@@ -300,18 +342,19 @@ aotsm_end_japan_civil_war_effect = {
             drop_cosmetic_tag = yes
             set_cosmetic_tag = JAP_JAS_WIN_CW
         }  
-        #news_event = { id = news.## days = 1 } 
+        news_event = { id = news.29 days = 1 } 
         clr_global_flag = JAP_civil_war_is_started
-        set_global_flag = JAP_segun_win_in_jap_civil_war
+        set_global_flag = JAP_segun_win_in_jap_civil_war    
+        JAP = { change_tag_from = JAS }	
     }
     else_if = { 
         limit = {
             TUK = {
+                exists = yes
                 has_country_flag = JAP_is_winner_in_civil_war_flag
             }
         }
         aotsm_transfer_all_torihiki_characters_to_jap_effect = yes
-        JAP = { change_tag_from = TUK }
         JAP = {
             retire_country_leader = yes
             add_country_leader_role = {
@@ -329,9 +372,10 @@ aotsm_end_japan_civil_war_effect = {
             drop_cosmetic_tag = yes
             set_cosmetic_tag = JAP_TUK_WIN_CW
         }  
-        #news_event = { id = news.## days = 1 } 
+        news_event = { id = news.30 days = 1 } 
         clr_global_flag = JAP_civil_war_is_started
         set_global_flag = JAP_torihiki_win_in_jap_civil_war
+        JAP = { change_tag_from = TUK }
     }
     if = {
         limit = {
@@ -340,10 +384,22 @@ aotsm_end_japan_civil_war_effect = {
             }
         }
         JAP = {
-            annex_country = {
-                target = JAS
-                transfer_troops = no
+            white_peace = JAS
+        }
+        #JAP = {
+        #    annex_country = {
+        #        target = JAS
+        #        transfer_troops = no
+        #    }
+        #} 
+        every_state = {
+            limit = {
+                is_owned_by = JAS
+                NOT = {
+                    is_owned_by = JAP
+                }
             }
+            transfer_state_to = TUK
         }
     }
     if = {
@@ -353,14 +409,225 @@ aotsm_end_japan_civil_war_effect = {
             }
         }
         JAP = {
-            annex_country = {
-                target = TUK
-                transfer_troops = no
-            }
+            white_peace = TUK
         }
+        #JAP = {
+        #    annex_country = {
+        #        target = TUK
+        #        transfer_troops = no
+        #    }
+        #}
+        every_state = {
+            limit = {
+                is_owned_by = TUK
+                NOT = {
+                    is_owned_by = JAP
+                }
+            }
+            transfer_state_to = JAP
+        }
+    } 
+    every_state = {
+        limit = {
+            is_core_of = JAS
+        }
+        remove_core_of = JAS
+    }
+    every_state = {
+        limit = {
+            is_core_of = TUK
+        }
+        remove_core_of = TUK
     }
     JAP ={ 
         country_status_increase = yes 
     }
 }
 
+aotsm_annex_karafuto_prefecture_effect = {
+    SKH = {
+        remove_state_core = 537
+        remove_state_core = 655
+    }
+    JAP = {
+        annex_country = {
+			target = SKH
+			transfer_troops = no
+		}
+        add_state_core = 537
+        add_state_core = 655
+    }
+    news_event = { id = news.310 days = 1 }
+}
+
+aotsm_jap_start_joseon_invasion_effect = {
+    JAP = {
+        set_global_flag = JAP_start_invasion_in_joseon_flag
+        declare_war_on = {
+			target = KOR
+			type = annex_everything
+		}
+    }
+    news_event = { id = news.313 days = 1 }
+}
+
+aotsm_create_joseon_occupation_zone_effect = {
+    KOR = {
+        set_politics = { ruling_party = authoritarian elections_allowed = no }
+        retire_country_leader = yes
+        add_country_leader_role = {
+			character = KOR_Kim_Song_Ryeong
+			promote_leader = yes
+
+            country_leader = {	
+                desc = "POLITICS_KIM_SONG_RYEONG_DESC"
+                ideology = dictature
+                traits = { general_goverment }
+                expire = "1900.1.1.1"
+                id = -1
+            }
+		}      
+        if = {
+            limit = {
+                has_global_flag = JAP_emperror_win_in_jap_civil_war
+            }
+            set_cosmetic_tag = KOR_JAP_OCCUPATION
+        }
+        else_if = {           
+            limit = {
+                has_global_flag = JAP_segun_win_in_jap_civil_war
+            }
+            set_cosmetic_tag = KOR_JAS_OCCUPATION
+        }
+        else_if = {           
+            limit = {
+                has_global_flag = JAP_torihiki_win_in_jap_civil_war
+            }
+            set_cosmetic_tag = KOR_TUK_OCCUPATION
+        }
+    }
+    JAP = {
+        set_autonomy = {
+			target = KOR
+			autonomy_state = autonomy_occupationzone
+			end_wars = no
+			end_civil_wars = no
+		}
+        transfer_state = 1028
+    }
+    news_event = { id = news.24 days = 1 }
+    clr_global_flag = JAP_start_invasion_in_joseon_flag
+    set_global_flag = JAP_end_invasion_in_joseon_flag
+}
+
+aotsm_end_of_ryukyu_effect = {
+    RUK = {
+        remove_state_core = 526
+    }
+    JAP = {
+        annex_country = {
+			target = RUK
+			transfer_troops = no
+		}
+        add_state_core = 526
+    }
+    news_event = { id = news.309 days = 1 }
+}
+
+aotsm_jap_annex_taiwan_effect = {
+    JAP = {
+        transfer_state = 524
+    }
+    news_event = { id = news.311 days = 1 }
+    set_global_flag = JAP_taiwan_is_owned_by_japan_flag
+}
+
+aotsm_jap_start_invasion_in_tondo_effect = {
+    JAP = {
+        set_global_flag = JAP_start_invasion_in_tondo_flag
+        declare_war_on = {
+			target = PHI
+			type = annex_everything
+		}
+    }
+    news_event = { id = news.314 days = 1 }
+}
+
+aotsm_create_tondo_occupation_zone_effect = {
+    PHI = {
+        set_politics = { ruling_party = authoritarian elections_allowed = no }
+        retire_country_leader = yes
+        add_country_leader_role = {
+			character = PHI_Occupational_Soviet
+			promote_leader = yes
+
+            country_leader = {	
+                desc = "POLITICS_OCCUPATIONAL_SOVIET_DESC"
+                ideology = dictature
+                traits = { general_goverment }
+                expire = "1900.1.1.1"
+                id = -1
+            }
+		}      
+        set_cosmetic_tag = PHI_JAP_OCCUPATION #Возможно только по пути "Победа императора в Нанбокусенсо"
+    }
+    JAP = {
+        set_autonomy = {
+			target = PHI
+			autonomy_state = autonomy_occupationzone
+			end_wars = no
+			end_civil_wars = no
+		}
+    }
+    news_event = { id = news.25 days = 1 }
+    clr_global_flag = JAP_start_invasion_in_tondo_flag
+    set_global_flag = JAP_end_invasion_in_tondo_flag
+}
+
+aotsm_jap_annex_palavan_effect = {
+    PHI = {
+		transfer_state = 626
+	}
+    KAL = {
+        remove_state_core = 626
+        add_state_claim = 626
+    }
+    news_event = { id = news.148 days = 1 }
+}
+
+aotsm_create_indochina_occupation_zone_effect = {    
+    every_state = {
+        limit = {
+            is_core_of = RAT
+        }
+        transfer_state_to = IJP
+        add_core_of = IJP
+    }   
+    every_state = {
+        limit = {
+            is_core_of = VIE
+        }
+        transfer_state_to = IJP
+        add_core_of = IJP
+    }   
+    every_state = {
+        limit = {
+            is_core_of = KHM
+        }
+        transfer_state_to = IJP
+        add_core_of = IJP
+    }
+    IJP = {
+        inherit_technology = JAP
+    }
+    JAP = {
+        set_autonomy = {
+			target = IJP
+			autonomy_state = autonomy_occupationzone
+			end_wars = no
+			end_civil_wars = no
+		}
+    }
+}
+
+ 
