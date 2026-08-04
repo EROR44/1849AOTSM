@@ -12,7 +12,31 @@ on_actions = {
 
         effect = {
 
-            #
+			#KOR capitulation - Joseon became a JAP puppet
+			if = {
+				limit = {
+					tag = KOR
+					has_global_flag = JAP_start_invasion_in_joseon_flag 
+					KOR = {
+						has_war_with = JAP
+					}
+				}
+				aotsm_create_joseon_occupation_zone_effect = yes
+				add_threat = 2
+			}
+			
+			#PHI capitulation - Tondo became a JAP puppet
+			if = {
+				limit = {
+					tag = PHI
+					has_global_flag = JAP_start_invasion_in_tondo_flag
+					PHI = {
+						has_war_with = JAP
+					}
+				}
+				aotsm_create_tondo_occupation_zone_effect = yes
+				add_threat = 2
+			}
 
 			#OLD CODE - NEED TO REWRITE IT
 			
@@ -50,42 +74,6 @@ on_actions = {
 				}
 
 				add_threat = 2
-			}
-
-			#KOR capitulation
-			if = {
-				limit = {
-					tag = KOR
-					has_global_flag = jap_invasion_kor
-					KOR = {
-						has_war_with = JAP
-					}
-				}
-				JAP = {
-					annex_country = {
-						target = KOR
-						transfer_troops = no
-					}
-				}
-				clr_global_flag = jap_invasion_kor
-			}
-			
-			#PHI capitulation
-			if = {
-				limit = {
-					tag = PHI
-					has_global_flag = jap_invasion_phi
-					PHI = {
-						has_war_with = JAP
-					}
-				}
-				JAP = {
-					annex_country = {
-						target = PHI
-						transfer_troops = no
-					}
-				}
-				clr_global_flag = jap_invasion_phi
 			}
 			
 			#VIE capitulation
@@ -215,6 +203,15 @@ on_actions = {
 					has_global_flag = JAP_civil_war_is_started
                     JAP = { has_war_with = JAS }
 					990 = {
+						controller = {
+							OR = {
+								tag = JAP
+								is_subject_of = JAP
+								is_in_faction_with = JAP
+							}
+						}
+					}
+					533 = {
 						controller = {
 							OR = {
 								tag = JAP
