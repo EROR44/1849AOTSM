@@ -87,7 +87,7 @@ characters = {
 		}
 		advisor = {
 			slot = political_advisor
-			idea_token = AZT_AZT_Citlalli_Tecuhtli_token
+			idea_token = AZT_Citlalli_Tecuhtli_token
 			allowed = {
 				original_tag = AZT
 			}
@@ -217,6 +217,21 @@ characters = {
 			traits={ infantry_officer brilliant_strategist trait_cautious }
 			legacy_id=2603
 		}
+		advisor = {
+			slot = theorist
+			idea_token = AZT_Tonoak_Toltek_token
+			allowed = {
+				original_tag = AZT
+			}
+			available = {
+				
+			}
+			traits = { AZT_theorist_of_regular_troops }
+			cost = 100
+			ai_will_do = {
+				factor = 1.000
+			}
+		}
 	}
 	
 	AZT_Mazatl_Chapultepek = {
@@ -292,6 +307,35 @@ characters = {
 			logistics_skill=2
 			traits={ old_guard infantry_officer trait_engineer }
 			legacy_id=2607
+		}
+		advisor = {
+			slot = theorist
+			idea_token = AZT_Koatl_Teskoko_token
+			allowed = {
+				original_tag = AZT
+			}
+			available = {
+				
+			}
+			traits = { AZT_old_theorist_guard }
+			cost = 85
+			ai_will_do = {
+				factor = 1
+			}
+
+			on_add = {
+				custom_effect_tooltip = AZT_macehualtin_increase_draft_days_by_1_tt
+				if = {
+					limit = {
+						check_variable = { AZT.get_days_for_draft_the_militia_var > 1 }
+					}
+					subtract_from_variable = { AZT.get_days_for_draft_the_militia_var = 1 }
+				}
+			}
+
+			on_remove = {
+				add_to_variable = { AZT.get_days_for_draft_the_militia_var = 1 }
+			}
 		}
 	}
 	
@@ -675,6 +719,34 @@ characters = {
 			coordination_skill=2
 			legacy_id=2627
 		}
+		advisor = {
+			slot = navy_chief
+			idea_token = AZT_Itotiya_Akolhua_navy_chief_token
+			ledger = navy
+			allowed = {
+				original_tag = AZT
+			}
+			available = {
+				AZT_Itotiya_Akolhua = { is_high_command = no }
+			}
+			traits = { AZT_blockade_runner }
+			cost = 120
+			ai_will_do = { }
+		}
+		advisor = {
+			slot = high_command
+			idea_token = AZT_Itotiya_Akolhua_high_command_token
+			allowed = {
+				original_tag = AZT
+			}
+			available = {
+				AZT_Itotiya_Akolhua = { is_navy_chief = no }
+			}
+			ledger = navy
+			traits = { AZT_coast_defense_knight }
+			cost = 120
+			ai_will_do = { }
+		}
 	}
 	
 	AZT_Ksoko_Toltek = {
@@ -685,8 +757,8 @@ characters = {
 				small = GFX_idea_Ksoko_Toltek
 			}
 		}
-		navy_leader={
-			traits={ old_guard_navy battleship_adherent naval_lineage }
+		navy_leader = {
+			traits = { old_guard_navy battleship_adherent naval_lineage }
 			skill=3
 			attack_skill=2
 			defense_skill=3
@@ -939,9 +1011,28 @@ characters = {
 			allowed = {
 				original_tag = AZT
 			}
-			traits = { AZT_blockade_runner }
+			traits = { AZT_battlefleet_designer }
 			cost = 120
-			ai_will_do = { #WIP }
+			ai_will_do = { }
+		}
+	}
+
+	AZT_Pierre_Roch_Jurien = {
+		name = AZT_Pierre_Roch_Jurien_t
+		portraits = {
+			army = {
+				small = GFX_idea_Pierre_Roch_Jurien
+			}
+		}
+		advisor = {
+			slot = theorist
+			idea_token = AZT_Pierre_Roch_Jurien_token
+			allowed = {
+				original_tag = AZT
+			}
+			traits = { AZT_inspector_general }
+			cost = 120
+			ai_will_do = { }
 		}
 	}
 }
