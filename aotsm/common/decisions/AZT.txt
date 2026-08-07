@@ -41,11 +41,31 @@ AZT_macehualtin_category = {
 		}
 
 		ai_will_do = {
-			base = 0
+    		base = 5
+    		modifier = {
+        		add = 5
+        		any_enemy_country = {
+					fighting_army_strength_ratio = {
+    					ratio < 0.75
+					}
+				}
+		    }
 			modifier = {
-				add = 80
-				has_war = yes
-			}
+        		add = 5
+        		any_enemy_country = {
+					fighting_army_strength_ratio = {
+    					ratio < 0.50
+					}
+				}
+		    }
+			modifier = {
+        		add = 5
+        		any_enemy_country = {
+					fighting_army_strength_ratio = {
+    					ratio < 0.25
+					}
+				}
+		    }
 		}
 
 		days_remove = AZT.get_days_for_draft_the_militia_var
@@ -83,10 +103,31 @@ AZT_macehualtin_category = {
         }
 
 		ai_will_do = {
-			base = 0
+			base = 5
 			modifier = {
-				add = 80
-				has_war = yes
+        		add = 5
+        		has_war = yes
+				any_enemy_country = {
+					fighting_army_strength_ratio = {
+    					ratio < 1
+					}
+				}
+		    }
+			modifier = {
+        		add = 5
+        		has_war = yes
+				check_variable = { AZT.aotsm_start_cores_states_array^num < 4 }
+		    }
+			modifier = {
+        		add = 5
+        		has_war = yes
+				check_variable = { AZT.aotsm_start_cores_states_array^num < 2 }
+		    }
+			modifier = {
+				add = 5
+				has_war = no
+				has_political_power > 149
+				check_variable = { AZT.aotsm_start_cores_states_array^num < 4 }
 			}
 		}
 
@@ -98,6 +139,108 @@ AZT_macehualtin_category = {
 			hidden_effect = {
 				AZT_check_cores_states_array_effect = yes
 			}
+		}
+	}
+}
+
+AZT_tension_category = {
+
+	###########################
+	###   DEBUG DECISIONS   ###
+	###########################
+
+	AZT_debug_set_max_tension_value = {
+		icon = generic_research
+
+		allowed = {
+			tag = AZT
+		}
+
+		visible = {
+			is_debug = yes
+		}
+
+		fire_only_once = no
+		cost = 0
+
+		complete_effect = {
+			AZT_set_max_tension_value = yes
+		}
+	}
+
+	AZT_debug_set_min_tension_value = {
+		icon = generic_research
+
+		allowed = {
+			tag = AZT
+		}
+
+		visible = {
+			is_debug = yes
+		}
+
+		fire_only_once = no
+		cost = 0
+
+		complete_effect = {
+			AZT_set_min_tension_value = yes
+		}
+	}
+
+	AZT_debug_set_negative_tension_growing_value = {
+		icon = generic_research
+
+		allowed = {
+			tag = AZT
+		}
+
+		visible = {
+			is_debug = yes
+		}
+
+		fire_only_once = no
+		cost = 0
+
+		complete_effect = {
+			AZT_set_negative_tension_growing_value = yes
+		}
+	}
+
+	AZT_debug_set_positive_tension_growing_value = {
+		icon = generic_research
+
+		allowed = {
+			tag = AZT
+		}
+
+		visible = {
+			is_debug = yes
+		}
+
+		fire_only_once = no
+		cost = 0
+
+		complete_effect = {
+			AZT_set_positive_tension_growing_value = yes
+		}
+	}
+
+	AZT_debug_clear_tension_growing_value = {
+		icon = generic_research
+
+		allowed = {
+			tag = AZT
+		}
+
+		visible = {
+			is_debug = yes
+		}
+
+		fire_only_once = no
+		cost = 0
+
+		complete_effect = {
+			AZT_clear_tension_growing_value = yes
 		}
 	}
 }
@@ -144,7 +287,19 @@ AZT_cholera_category = { # Don't forget about random events
 		}
 
 		ai_will_do = {
-			base = 10
+			base = 0
+			modifier = {
+				add = 5
+				has_political_power > 120
+			}
+			modifier = {
+				add = 5
+				check_variable = { FROM.AZT_cholera_state_status = 1 }
+			}
+			modifier = {
+				add = 10
+				check_variable = { FROM.AZT_cholera_state_status < 1 }
+			}
 		}
 
 		days_remove = 21
@@ -216,7 +371,19 @@ AZT_cholera_category = { # Don't forget about random events
 		}
 
 		ai_will_do = {
-			base = 10
+			base = 0
+			modifier = {
+				add = 5
+				has_political_power > 120
+			}
+			modifier = {
+				add = 5
+				check_variable = { FROM.AZT_cholera_state_status = 1 }
+			}
+			modifier = {
+				add = 10
+				check_variable = { FROM.AZT_cholera_state_status < 1 }
+			}
 		}
 
 		days_remove = 21
@@ -288,7 +455,19 @@ AZT_cholera_category = { # Don't forget about random events
 		}
 
 		ai_will_do = {
-			base = 10
+			base = 0
+			modifier = {
+				add = 5
+				has_political_power > 120
+			}
+			modifier = {
+				add = 5
+				check_variable = { FROM.AZT_cholera_state_status = 1 }
+			}
+			modifier = {
+				add = 10
+				check_variable = { FROM.AZT_cholera_state_status < 1 }
+			}
 		}
 
 		days_remove = 21
@@ -368,7 +547,19 @@ AZT_cholera_category = { # Don't forget about random events
 		}
 
 		ai_will_do = {
-			base = 10
+			base = 0
+			modifier = {
+				add = 5
+				has_political_power > 120
+			}
+			modifier = {
+				add = 5
+				check_variable = { FROM.AZT_cholera_state_status = 1 }
+			}
+			modifier = {
+				add = 10
+				check_variable = { FROM.AZT_cholera_state_status < 1 }
+			}
 		}
 
 		days_remove = 28
@@ -446,7 +637,19 @@ AZT_cholera_category = { # Don't forget about random events
 		}
 
 		ai_will_do = {
-			base = 10
+			base = 0
+			modifier = {
+				add = 5
+				has_political_power > 120
+			}
+			modifier = {
+				add = 5
+				check_variable = { FROM.AZT_cholera_state_status = 1 }
+			}
+			modifier = {
+				add = 10
+				check_variable = { FROM.AZT_cholera_state_status < 1 }
+			}
 		}
 
 		days_remove = 28
@@ -505,7 +708,19 @@ AZT_cholera_category = { # Don't forget about random events
 		}
 
 		ai_will_do = {
-			base = 45
+			base = 0
+			modifier = {
+				add = 5
+				has_political_power > 120
+			}
+			modifier = {
+				add = 5
+				check_variable = { 962.AZT_cholera_state_status = 1 }
+			}
+			modifier = {
+				add = 10
+				check_variable = { 962.AZT_cholera_state_status < 1 }
+			}
 		}
 
 		days_remove = 49
@@ -575,7 +790,11 @@ AZT_cholera_category = { # Don't forget about random events
 		}
 
 		ai_will_do = {
-			base = 10
+			base = 5
+			modifier = {
+				add = 5
+				has_political_power < 99
+			}
 		}
 
 		days_remove = 35
@@ -608,9 +827,9 @@ AZT_cholera_category = { # Don't forget about random events
 		}	
 	}
 
-###########################
-###   DEBUG DECISIONS   ###
-###########################
+	###########################
+	###   DEBUG DECISIONS   ###
+	###########################
 
 	AZT_debug_complicate_state_status = {
 
@@ -659,6 +878,48 @@ AZT_cholera_category = { # Don't forget about random events
 				AZT_alleviate_cholera_in_state = yes
 			}
 			AZT_update_cholera_gui = yes
+		}
+	}
+}
+
+AZT_debug_decisions_cat = {
+
+	AZT_debug_focus_allow_branch = {
+		icon = generic_research
+
+		allowed = {
+			tag = AZT
+		}
+
+		visible = {
+			is_debug = yes
+		}
+
+		fire_only_once = no
+		cost = 0
+
+		complete_effect = {
+			AZT_focus_allow_branch_dirty = yes
+		}
+	}
+
+	AZT_debug_open_tension_gui = {
+		icon = generic_research
+
+		allowed = {
+			tag = AZT
+		}
+
+		visible = {
+			is_debug = yes
+			NOT = { has_country_flag = AZT_tension_gui_visible_flag }
+		}
+
+		fire_only_once = no
+		cost = 0
+
+		complete_effect = {
+			AZT_start_tension_gui = yes
 		}
 	}
 }

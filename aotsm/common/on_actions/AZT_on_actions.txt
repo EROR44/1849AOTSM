@@ -1,11 +1,5 @@
 on_actions = {
 
-    on_startup = {
-        effect = {
-            AZT = { country_event = { id = azt_scripted_events.2 days = 13 random_hours = 4 } }
-        }
-    }
-
     on_weekly_AZT = {
         effect = {
             if = {
@@ -13,6 +7,12 @@ on_actions = {
                     has_idea = AZT_aus_trade_monopoly_idea
                 }
                 AZT_austrian_trade_monopoly_effect = yes
+            }
+            if = {
+                limit = {
+                    has_country_flag = AZT_tension_gui_visible_flag
+                }
+                AZT_clamp_tension_value_effect = yes
             }
         }
     }
@@ -65,6 +65,27 @@ on_actions = {
                 }
                 AZT_get_random_cholera_event_effect = yes
             }
+            if = {
+                limit = {
+                    has_country_flag = AZT_tension_gui_visible_flag
+                    has_variable = AZT_tension_growing_var
+                }
+                AZT_clamp_tension_value_effect = yes
+                add_to_variable = { AZT_tension_value = AZT_tension_growing_var }
+            }
         }
     }
+
+    #ROOT is winner, FROM is loser
+	on_before_peace_conference_start = {
+		# DEBUG - where we haven't scripted peace
+		effect = {
+			if = {
+				limit = {
+					FROM = { tag = AZT }  # Aztec is loser
+				}
+				log = "[FROM.GetName] lost against [ROOT.GetName]"
+			}
+		}
+	}
 }
