@@ -136,12 +136,41 @@ AZT_remove_cholera_gui = {
 
 AZT_start_tension_gui = {
 	set_country_flag = AZT_tension_gui_visible_flag
-	set_variable = { AZT_tension_value = 0 }
+	set_variable = { AZT.AZT_tension_value = 0 }
+}
+
+AZT_set_max_tension_value = {
+	set_variable = { AZT.AZT_tension_value = 100 }
+}
+
+AZT_set_min_tension_value = {
+	set_variable = { AZT.AZT_tension_value = 0 }
+}
+
+AZT_set_negative_tension_growing_value = {
+	set_variable = { AZT.AZT_tension_growing_var = 100 }
+}
+
+AZT_set_positive_tension_growing_value = {
+	set_variable = { AZT.AZT_tension_growing_var = -100 }
+}
+
+AZT_clear_tension_growing_value = {
+	set_variable = { AZT.AZT_tension_growing_var = 0 }
+}
+
+AZT_clamp_tension_value_effect = {
+	clamp_variable = {
+		var = AZT.AZT_tension_value
+		min = 0
+		MAX = 100
+	}
 }
 
 AZT_remove_tension_gui = {
 	clr_country_flag = AZT_tension_gui_visible_flag
-	clear_variable = AZT_tension_value
+	clear_variable = AZT.AZT_tension_value
+	clear_variable = AZT.AZT_tension_growing_var
 }
 
 AZT_check_cores_states_array_effect = {
@@ -149,7 +178,6 @@ AZT_check_cores_states_array_effect = {
 
 	every_owned_state = {
 		limit = {
-			is_owned_and_controlled_by = AZT
 			is_core_of = AZT
 		}
 		add_to_array = {
@@ -261,12 +289,7 @@ AZT_get_random_cholera_event_effect = {
 }
 
 AZT_austrian_trade_monopoly_effect = {
-	every_other_country = {
-       	remove_opinion_modifier = {
-        	target = AZT
-        	modifier = end_trade
-    	}
-    }
+	AZT_remove_austrian_trade_monopoly_effect = yes
 	if = {
 		limit = {
 			has_completed_focus = AZT_trade_with_japan
@@ -375,4 +398,52 @@ AZT_focus_allow_branch_dirty = {
 	complete_national_focus = AZT_the_reign_of_Montezuma_IV
 	set_country_flag = AZT_open_all_focus_branches_flag
 	mark_focus_tree_layout_dirty = yes
+}
+
+AZT_add_3_to_tension_value = {
+	custom_effect_tooltip = AZT_add_3_to_tension_value_tt
+	add_to_variable = { AZT.AZT_tension_value = 3 }
+	AZT_clamp_tension_value_effect = yes
+}
+
+AZT_add_5_to_tension_value = {
+	custom_effect_tooltip = AZT_add_5_to_tension_value_tt
+	add_to_variable = { AZT.AZT_tension_value = 5 }
+	AZT_clamp_tension_value_effect = yes
+}
+
+AZT_add_10_to_tension_value = {
+	custom_effect_tooltip = AZT_add_10_to_tension_value_tt
+	add_to_variable = { AZT.AZT_tension_value = 10 }
+	AZT_clamp_tension_value_effect = yes
+}
+
+AZT_add_15_to_tension_value = {
+	custom_effect_tooltip = AZT_add_15_to_tension_value_tt
+	add_to_variable = { AZT.AZT_tension_value = 15 }
+	AZT_clamp_tension_value_effect = yes
+}
+
+AZT_subtract_3_from_tension_value = {
+	custom_effect_tooltip = AZT_subtract_3_from_tension_value_tt
+	subtract_from_variable = { AZT.AZT_tension_value = 3 }
+	AZT_clamp_tension_value_effect = yes
+}
+
+AZT_subtract_5_from_tension_value = {
+	custom_effect_tooltip = AZT_subtract_5_from_tension_value_tt
+	subtract_from_variable = { AZT.AZT_tension_value = 5 }
+	AZT_clamp_tension_value_effect = yes
+}
+
+AZT_subtract_10_from_tension_value = {
+	custom_effect_tooltip = AZT_subtract_10_from_tension_value_tt
+	subtract_from_variable = { AZT.AZT_tension_value = 10 }
+	AZT_clamp_tension_value_effect = yes
+}
+
+AZT_subtract_15_from_tension_value = {
+	custom_effect_tooltip = AZT_subtract_15_from_tension_value_tt
+	subtract_from_variable = { AZT.AZT_tension_value = 15 }
+	AZT_clamp_tension_value_effect = yes
 }

@@ -681,7 +681,9 @@ focus_tree = {
 				}
 				if = {
 					limit = {
-						check_variable = { AZT_cholera_state_status < 2 }
+						AZT = { has_country_flag = AZT_cholera_gui_visible_flag }
+						check_variable = { FROM.AZT_cholera_state_status < 3 }
+						NOT = { check_variable = { FROM.AZT_cholera_state_status = 0 } }
 					}
 					AZT_alleviate_cholera_in_state = yes
 				}
@@ -902,9 +904,8 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: focus AZT_restore_greatness_the_homeland"
 			country_event = {
-					id = azt_event.19
-					days = 13
-				}		
+				id = azt_event.19
+			}		
 		}
 	}
 	
@@ -960,5 +961,62 @@ focus_tree = {
 			
 		}
 	}
-	
+
+##################################
+###   MAIN POLITICAL FOCUSES   ###
+##################################
+
+	focus = {
+		id = AZT_crushed_but_not_defeated
+		icon = GFX_focus_AZT_crushed_but_not_defeated
+		
+		relative_position_id = AZT_a_new_year_in_the_life_of_the_empire
+
+		allow_branch = { 
+			OR = {
+				has_completed_focus = AZT_and_onward_marches_the_army
+				has_completed_focus = AZT_crushed_but_not_defeated
+				has_country_flag = AZT_open_all_focus_branches_flag
+			}
+		}
+
+		x = 10
+		y = 0
+		cost = 0
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		mutually_exclusive = { focus = AZT_and_onward_marches_the_army }
+		
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus AZT_crushed_but_not_defeated"
+			
+		}
+	}
+
+	focus = {
+		id = AZT_and_onward_marches_the_army
+		icon = GFX_focus_AZT_and_onward_marches_the_army
+		
+		relative_position_id = AZT_crushed_but_not_defeated
+
+		allow_branch = { 
+			OR = {
+				has_completed_focus = AZT_and_onward_marches_the_army
+				has_completed_focus = AZT_crushed_but_not_defeated
+				has_country_flag = AZT_open_all_focus_branches_flag
+			}
+		}
+
+		x = 8
+		y = 0
+		cost = 0
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		mutually_exclusive = { focus = AZT_crushed_but_not_defeated }
+		
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus AZT_and_onward_marches_the_army"
+			
+		}
+	}
 }

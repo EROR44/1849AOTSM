@@ -358,10 +358,11 @@ country_event = {
 	
 	option = {
         name = azt_event.19.a
-		 declare_war_on = {
-                target = MAY
-                type = annex_everything
-            }
+		declare_war_on = {
+            target = MAY
+            type = annex_everything
+        }
+		set_country_flag = AZT_vs_MAY_1
 	}
 }
 
@@ -457,18 +458,42 @@ country_event = { # Pierre Roch Jurien has died
 	id = azt_scripted_events.2
 	title = azt_scripted_events.2.t
 	desc = azt_scripted_events.2.d
-	picture = GFX_Pierre_Roch_Jurien_has_died
+	picture = GFX_report_event_pierre_roch_jurien_has_died
 	
 	is_triggered_only = yes
 
-	immediate = { log = "[GetDateText]: [Root.GetName]: event: azt_scripted_events.2" }
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event: azt_scripted_events.2"
+		hidden_effect = {
+			retire_character = AZT_Pierre_Roch_Jurien
+		}
+	}
 	
 	fire_only_once = yes
 	
 	option = {
 		name = azt_scripted_events.2.a
-		retire_character = AZT_Pierre_Roch_Jurien
+		effect_tooltip = {
+			retire_character = AZT_Pierre_Roch_Jurien
+		}
 	}
+}
+
+country_event = {
+	id = azt_scripted_events.3
+	title = azt_scripted_events.3.t
+	desc = azt_scripted_events.3.d
+	picture = GFX_none_picture
+	
+	is_triggered_only = yes
+	hidden = yes
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event: azt_scripted_events.3" 
+		country_event = { id = azt_scripted_events.2 days = 13 random_hours = 4 }
+	}
+	
+	fire_only_once = yes
 }
 
 #####################################
@@ -484,6 +509,8 @@ country_event = { # Reducing consumption in
     picture = GFX_AZT_random_cholera_state_events_picture
     
     is_triggered_only = yes
+
+	timeout_days = 3
     
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event: azt_random_cholera_state_events.1" 
@@ -508,6 +535,8 @@ country_event = { # Demographic crisis in
     
     is_triggered_only = yes
 
+	timeout_days = 3
+
 	immediate = { 
 		log = "[GetDateText]: [Root.GetName]: event: azt_random_cholera_state_events.2"
 		hidden_effect = { AZT_set_state_for_random_cholera_event = yes }
@@ -529,6 +558,8 @@ country_event = { # Mass unemployment in
     picture = GFX_AZT_random_cholera_state_events_picture
     
     is_triggered_only = yes
+
+	timeout_days = 3
 
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event: azt_random_cholera_state_events.3"
@@ -557,6 +588,8 @@ country_event = { # Collapse of the extractive industry IN
 	fire_only_once = yes
 
     is_triggered_only = yes
+
+	timeout_days = 7
 
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event: azt_random_cholera_state_events.4"
@@ -628,6 +661,8 @@ country_event = { # The collapse of agriculture IN
     
     is_triggered_only = yes
 
+	timeout_days = 3
+
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event: azt_random_cholera_state_events.5"
 		hidden_effect = { AZT_set_state_for_random_cholera_event = yes }
@@ -650,6 +685,8 @@ country_event = { # Cases of infection in the army
     
     is_triggered_only = yes
 	fire_only_once = yes
+
+	timeout_days = 3
 
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event: azt_random_cholera_state_events.6"
