@@ -11,7 +11,7 @@ AZT_alleviate_cholera_in_state = {
 }
 
 AZT_update_cholera_gui = {
-	add_to_variable = { AZT_cholera_gui_dirty = 1 }
+	add_to_variable = { AZT_cholera_gui_dirty = 0.001 }
 }
 
 AZT_clamp_states_status_vars = {
@@ -89,7 +89,61 @@ AZT_start_cholera_gui = {
 			add_to_array = { AZT.GetStateIdForCholeraDecision = THIS }
 		}
 
-		every_owned_state = {
+		478 = {
+			add_to_array = {
+				array = AZT.aotsm_get_states_for_cholera_gui
+				value = THIS
+			}
+		}
+		485 = {
+			add_to_array = {
+				array = AZT.aotsm_get_states_for_cholera_gui
+				value = THIS
+			}
+		}
+		277 = {
+			add_to_array = {
+				array = AZT.aotsm_get_states_for_cholera_gui
+				value = THIS
+			}
+		}
+		1026 = {
+			add_to_array = {
+				array = AZT.aotsm_get_states_for_cholera_gui
+				value = THIS
+			}
+		}
+		477 = {
+			add_to_array = {
+				array = AZT.aotsm_get_states_for_cholera_gui
+				value = THIS
+			}
+		}
+		962 = {
+			add_to_array = {
+				array = AZT.aotsm_get_states_for_cholera_gui
+				value = THIS
+			}
+		}
+		963 = {
+			add_to_array = {
+				array = AZT.aotsm_get_states_for_cholera_gui
+				value = THIS
+			}
+		}
+		476 = {
+			add_to_array = {
+				array = AZT.aotsm_get_states_for_cholera_gui
+				value = THIS
+			}
+		}
+		964 = {
+			add_to_array = {
+				array = AZT.aotsm_get_states_for_cholera_gui
+				value = THIS
+			}
+		}
+		1027 = {
 			add_to_array = {
 				array = AZT.aotsm_get_states_for_cholera_gui
 				value = THIS
@@ -187,6 +241,58 @@ AZT_check_cores_states_array_effect = {
 	}
 }
 
+AZT_check_owned_states_array_effect = {
+	every_owned_state = {
+		add_to_temp_array = {
+			array = AZT.AZT_aotsm_owned_states_array
+			value = THIS #THIS = this state
+		}
+	}
+	set_variable = { AZT.AZT_aotsm_owned_states_var = AZT.AZT_aotsm_owned_states_array^num }
+}
+
+AZT_remove_macehualtin_effect = {
+	custom_effect_tooltip = AZT_remove_macehualtin_effect_tt
+	if = {
+		limit = {
+			has_idea = AZT_macehualtin_law_war
+		}
+		swap_ideas = {
+			remove_idea = AZT_macehualtin_law_war
+			add_idea = limited_conscription
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = AZT_macehualtin_law_peacetime
+		}
+		swap_ideas = {
+			remove_idea = AZT_macehualtin_law_peacetime
+			add_idea = limited_conscription
+		}
+	}
+
+	clear_variable = AZT.AZT_aotsm_owned_states_var
+	clear_array = AZT.aotsm_start_cores_states_array
+	clear_variable = AZT.get_cost_for_check_the_readness_of_the_militia
+	clear_variable = AZT.get_manpower_for_draft_the_militia_var
+	clear_variable = AZT.get_cost_for_check_the_readness_of_the_militia
+
+	hidden_effect = {
+		delete_unit_template_and_units = {
+    		division_template = "Macehualtin"
+    		disband = no #will not refund equipment and manpower
+		}
+		set_technology = {
+			militia_tech = 0
+			mountain_warfare_militias_tech = 0
+			AZT_improved_militia_tech = 0
+			AZT_assault_warfare_militias_tech = 0
+			popup = no
+		}
+	}
+}
+
 AZT_set_state_for_random_cholera_event = {
 	random_list = {
 		10 = {
@@ -229,11 +335,13 @@ AZT_set_state_for_cholera_event_4 = {
 				is_in_array = { AZT.aotsm_get_states_for_cholera_gui = THIS }
 				AZT_state_have_the_resources_trigger = yes
 			}
-			add_to_array = {
-				array = AZT.this_state_can_be_used_for_cholera_event_4
+			add_to_temp_array = {
+				array = AZT.this_state_can_be_used_for_cholera_event_4_array
 				value = THIS
+				index = 0
 			}
 		}
+		set_variable = { AZT.this_state_can_be_used_for_cholera_event_4_var = AZT.this_state_can_be_used_for_cholera_event_4_array^0 }
 	}
 }
 
@@ -446,4 +554,68 @@ AZT_subtract_15_from_tension_value = {
 	custom_effect_tooltip = AZT_subtract_15_from_tension_value_tt
 	subtract_from_variable = { AZT.AZT_tension_value = 15 }
 	AZT_clamp_tension_value_effect = yes
+}
+
+maya_capitulation_in_third_war_with_aztec = {
+#	custom_effect_tooltip = maya_capitulation_in_third_war_with_aztec_tt
+	hidden_effect = {
+		AZT = {
+			remove_mission = AZT_third_maya_aztec_war_decision
+			clr_country_flag = AZT_third_maya_aztec_war_flag
+			complete_national_focus = AZT_and_onward_marches_the_army
+		}
+		MAY = {
+			white_peace = {
+				tag = AZT
+				message = MAY_lose_AZT_third_war
+			}
+			remove_mission = AZT_third_maya_aztec_war_decision
+		}
+		AZT = {
+			transfer_state = 313
+			transfer_state = 475
+			add_power_balance_value = {
+				id = AZT_bop_emperor_tlamakatske
+				value = 0.05
+			}
+			add_war_support = 0.05
+			set_country_flag = AZT_win_in_third_maya_aztec_war
+		}
+#		news_event = { # согласовать ивент и сделать позже
+#			id = news.ID
+#			days = 5
+#		}
+		log = "[GetDateText]: maya_capitulation_in_third_war_with_aztec = yes"
+	}
+}
+
+aztec_lose_in_third_maya_aztec_war = {
+	custom_effect_tooltip = aztec_lose_in_third_maya_aztec_war_tt
+	hidden_effect = {
+		AZT = {
+			remove_mission = AZT_third_maya_aztec_war_decision
+			clr_country_flag = AZT_third_maya_aztec_war_flag
+			white_peace = {
+				tag = MAY
+				message = AZT_lose_MAY_third_war
+			}
+			complete_national_focus = AZT_crushed_but_not_defeated
+			add_power_balance_value = {
+				id = AZT_bop_emperor_tlamakatske
+				value = -0.1
+			}
+			set_country_flag = AZT_lose_in_third_maya_aztec_war
+			country_event = { id = azt_event.20 days = 3 }
+		}
+		MAY = {
+			remove_mission = AZT_third_maya_aztec_war_decision
+			add_stability = 0.05
+			add_war_support = 0.1
+		}
+#		news_event = { # согласовать ивент и сделать позже
+#			id = news.ID
+#			days = 5
+#		}
+		log = "[GetDateText]: aztec_lose_in_third_maya_aztec_war = yes"
+	}
 }

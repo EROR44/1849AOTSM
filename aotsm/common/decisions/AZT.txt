@@ -17,7 +17,7 @@ AZT_macehualtin_category = {
 			}
             AZT = {
                 has_war = yes
-				AZT_the_divison_limit_will_not_be_reached_after_the_draft_of_the_militia = yes
+				AZT_the_division_limit_will_not_be_reached_after_the_draft_of_the_militia = yes
             }
 		}
 
@@ -27,7 +27,7 @@ AZT_macehualtin_category = {
                     is_owned_and_controlled_by = AZT
                 }
             }
-			AZT = { AZT_the_divison_limit_will_not_be_reached_after_the_draft_of_the_militia = yes }
+			AZT = { AZT_the_division_limit_will_not_be_reached_after_the_draft_of_the_militia = yes }
         }
 
         allowed = {
@@ -88,7 +88,7 @@ AZT_macehualtin_category = {
 		}
 	}
 
-    AZT_check_the_readness_of_the_militia_decision = {
+    AZT_check_the_readiness_of_the_militia_decision = {
 
 		icon = decision_category_NOR_fascist_deploy_prep
 		
@@ -106,36 +106,27 @@ AZT_macehualtin_category = {
 			base = 5
 			modifier = {
         		add = 5
-        		has_war = yes
-				any_enemy_country = {
-					fighting_army_strength_ratio = {
-    					ratio < 1
-					}
-				}
+				has_war = yes
+				check_variable = { AZT.aotsm_start_cores_states_array^num < 6 }
+				check_variable = { AZT.AZT_aotsm_owned_states_var < 11 }
 		    }
 			modifier = {
         		add = 5
         		has_war = yes
-				check_variable = { AZT.aotsm_start_cores_states_array^num < 4 }
+				check_variable = { AZT.aotsm_start_cores_states_array^num < 6 }
+				check_variable = { AZT.AZT_aotsm_owned_states_var < 16 }
 		    }
 			modifier = {
-        		add = 5
-        		has_war = yes
-				check_variable = { AZT.aotsm_start_cores_states_array^num < 2 }
-		    }
-			modifier = {
-				add = 5
-				has_war = no
-				has_political_power > 149
-				check_variable = { AZT.aotsm_start_cores_states_array^num < 4 }
+				factor = 0
+				check_variable = { AZT.AZT_aotsm_owned_states_var = AZT.AZT_aotsm_owned_states_var }
 			}
 		}
 
 		days_remove = 14
-		cost = AZT.get_cost_for_check_the_readness_of_the_militia
+		cost = AZT.get_cost_for_check_the_readiness_of_the_militia
 
 		remove_effect = {
-			custom_effect_tooltip = AZT_check_the_readness_of_the_militia_tt
+			custom_effect_tooltip = AZT_check_the_readiness_of_the_militia_tt
 			hidden_effect = {
 				AZT_check_cores_states_array_effect = yes
 			}
@@ -878,6 +869,44 @@ AZT_cholera_category = { # Don't forget about random events
 				AZT_alleviate_cholera_in_state = yes
 			}
 			AZT_update_cholera_gui = yes
+		}
+	}
+}
+
+AZT_third_maya_aztec_war = {
+
+	AZT_third_maya_aztec_war_decision = {
+	
+		activation = {
+			OR = {
+				tag = AZT
+				tag = MAY
+			}
+			AZT = { has_country_flag = AZT_third_maya_aztec_war_flag }
+			AZT = { has_war_with = MAY }
+		}
+		
+		available = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+				
+		icon = generic_ignite_civil_war
+
+		
+		days_mission_timeout = 180
+		
+		timeout_effect = {
+			aztec_lose_in_third_maya_aztec_war = yes
+		}
+		
+		cancel_trigger = {
+			maya_lose_in_third_war_with_aztec_trigger = yes
+		}
+		
+		cancel_effect = {
+			maya_capitulation_in_third_war_with_aztec = yes
 		}
 	}
 }
