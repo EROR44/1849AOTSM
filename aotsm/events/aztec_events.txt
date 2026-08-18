@@ -1,7 +1,10 @@
 add_namespace = azt_event # general events
 add_namespace = azt_scripted_events # random events, more often - scripted
 add_namespace = azt_random_cholera_state_events # random cholera events with states statuse
-add_namespace = azt_mec_mittleazteken # 
+add_namespace = azt_mec_mittleazteken
+add_namespace = azt_tonallan_incident
+add_namespace = azt_quetzolcoatl_tlatehui
+add_namespace = europeans_in_cromwland
 
 ########################
 ###  GENERAL EVENTS  ###
@@ -204,10 +207,18 @@ country_event = {
 	}
 	option = {
         name = azt_event.11.a
-		custom_effect_tooltip = AZT_macehualtin_increase_draft_days_by_3_tt
+		custom_effect_tooltip = {
+    		localization_key = AZT_macehualtin_increase_draft_days_tt
+    		MACEHUALTIN_INCREASE_DAYS = 3
+		}
 		add_to_variable = { AZT.get_days_for_draft_the_militia_var = 3 }
+		custom_effect_tooltip = generic_skip_one_line_tt
+		custom_effect_tooltip = AZT_macehualtin_will_perform_better_tt
 		hidden_effect = {
-			set_technology = { AZT_improved_militia_tech = 1 }
+			set_technology = {
+				AZT_improved_militia_tech = 1
+				popup = no
+			}
 		}
 	}
 }
@@ -242,6 +253,28 @@ country_event = {
 
     option = {
         name = azt_event.13.a
+		custom_effect_tooltip = available_political_advisor
+		show_ideas_tooltip = AZT_Montesuma_IV_token
+		custom_effect_tooltip = generic_skip_one_line_tt
+		show_ideas_tooltip = AZT_ITSKOATL_TESKOKO_token
+		custom_effect_tooltip = generic_skip_one_line_tt
+		show_ideas_tooltip = AZT_Tonoak_Toltek_token
+		custom_effect_tooltip = generic_skip_one_line_tt
+		show_ideas_tooltip = AZT_Zolin_Tepiltsin_token
+		custom_effect_tooltip = generic_skip_one_line_tt
+		show_ideas_tooltip = AZT_Koatl_Teskoko_token
+		custom_effect_tooltip = generic_skip_one_line_tt
+		show_ideas_tooltip = AZT_Huemak_Tekuli_token
+		custom_effect_tooltip = generic_skip_one_line_tt
+		show_ideas_tooltip = AZT_Yeman_Teskoko_token
+		custom_effect_tooltip = generic_skip_one_line_tt
+		show_ideas_tooltip = AZT_Tenoch_Akolhua_token
+		custom_effect_tooltip = generic_skip_one_line_tt
+		show_ideas_tooltip = AZT_Itotiya_Akolhua_navy_chief_token
+		custom_effect_tooltip = generic_skip_one_line_tt
+		show_ideas_tooltip = AZT_Itotiya_Akolhua_high_command_token
+		custom_effect_tooltip = generic_skip_one_line_tt
+		show_ideas_tooltip = AZT_Kipaktli_Akolhua_token
     }
 }
 
@@ -328,14 +361,15 @@ country_event = {
 	
 	option = {
         name = azt_event.18.a
+
 		add_state_claim = 475
 		add_state_claim = 313
 		
-		hidden_effect = {
-			add_opinion_modifier = {
-				target = MAY
-				modifier = history_enemy
-			}
+		add_opinion_modifier = {
+			target = MAY
+			modifier = history_enemy
+		}
+		MAY = {
 			add_opinion_modifier = {
 				target = AZT
 				modifier = history_enemy
@@ -362,7 +396,28 @@ country_event = {
             target = MAY
             type = annex_everything
         }
-		set_country_flag = AZT_vs_MAY_1
+		set_country_flag = AZT_third_maya_aztec_war_flag
+		hidden_effect = {
+			activate_mission = AZT_third_maya_aztec_war_decision
+			MAY = { activate_mission = AZT_third_maya_aztec_war_decision }
+		}
+	}
+}
+
+country_event = {
+    id = azt_event.20
+    title = azt_event.20.t
+    desc = azt_event.20.d
+    picture = GFX_AZT_your_text_picture
+    
+    is_triggered_only = yes
+    
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event: azt_event.20" 
+	}
+	
+	option = {
+        name = azt_event.20.a
 	}
 }
 
@@ -448,7 +503,7 @@ country_event = { # Acamapichtli Ship
 				requested_factories = 1
 				progress = 0.5
 				amount = 1
-				industrial_manufacturer = mio:AZT_manahuiaacalli_tequihuac_organisation
+				industrial_manufacturer = mio:AZT_yaotepeuhtihuitz_acalchiuhqueh_organisation
 			}
 		}
 	}
@@ -514,7 +569,6 @@ country_event = { # Reducing consumption in
     
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event: azt_random_cholera_state_events.1" 
-		hidden_effect = { AZT_set_state_for_random_cholera_event = yes }
 	}
 
     option = {
@@ -548,6 +602,7 @@ country_event = { # Demographic crisis in
 			AZT_complicate_cholera_in_state = yes
 			add_manpower = -10000
 		}
+		clear_variable = AZT.get_state_for_random_cholera_event
     }
 }
 
@@ -576,6 +631,7 @@ country_event = { # Mass unemployment in
 			idea = AZT_mass_unemployment_timed_idea
 			days = 60
 		}
+		clear_variable = AZT.get_state_for_random_cholera_event
     }
 }
 
@@ -601,54 +657,43 @@ country_event = { # Collapse of the extractive industry IN
     option = {
         name = azt_random_cholera_state_events.4.a
 		add_political_power = -50
-		random_state = {
-			limit = {
-				is_in_array = { AZT.aotsm_get_states_for_cholera_gui = THIS }
-				AZT_state_have_the_resources_trigger = yes
-				is_in_array = { AZT.this_state_can_be_used_for_cholera_event_4 = THIS }
-			}
+		var:AZT.this_state_can_be_used_for_cholera_event_4_var = {
+			custom_effect_tooltip = generic_skip_one_line_tt
 			add_dynamic_modifier = {
     			modifier = AZT_collapse_of_the_extractive_industry_state_modifier
     			days = 30
 			}
 		}
-		clear_array = AZT.this_state_can_be_used_for_cholera_event_4
+		clear_variable = AZT.this_state_can_be_used_for_cholera_event_4_var
 		AZT = { set_country_flag = AZT_dont_use_random_cholera_state_events_4 }
     }
 
 	option = {
         name = azt_random_cholera_state_events.4.b
 		add_political_power = -25
-		random_state = {
-			limit = {
-				is_in_array = { AZT.aotsm_get_states_for_cholera_gui = THIS }
-				AZT_state_have_the_resources_trigger = yes
-				is_in_array = { AZT.this_state_can_be_used_for_cholera_event_4 = THIS }
-			}
+		var:AZT.this_state_can_be_used_for_cholera_event_4_var = {
+			custom_effect_tooltip = generic_skip_one_line_tt
 			add_dynamic_modifier = {
     			modifier = AZT_collapse_of_the_extractive_industry_state_modifier_1
     			days = 45
 			}
 		}
-		clear_array = AZT.this_state_can_be_used_for_cholera_event_4
+		clear_variable = AZT.this_state_can_be_used_for_cholera_event_4_var
 		AZT = { set_country_flag = AZT_dont_use_random_cholera_state_events_4 }
     }
 
 	option = {
         name = azt_random_cholera_state_events.4.c
-		random_state = {
-			limit = {
-				is_in_array = { AZT.aotsm_get_states_for_cholera_gui = THIS }
-				AZT_state_have_the_resources_trigger = yes
-				is_in_array = { AZT.this_state_can_be_used_for_cholera_event_4 = THIS }
-			}
+		var:AZT.this_state_can_be_used_for_cholera_event_4_var = {
+			custom_effect_tooltip = generic_skip_one_line_tt
 			AZT_complicate_cholera_in_state = yes
+			custom_effect_tooltip = generic_skip_one_line_tt
 			add_dynamic_modifier = {
     			modifier = AZT_collapse_of_the_extractive_industry_state_modifier_2
     			days = 60
 			}
 		}
-		clear_array = AZT.this_state_can_be_used_for_cholera_event_4
+		clear_variable = var:AZT.this_state_can_be_used_for_cholera_event_4_var
 		AZT = { set_country_flag = AZT_dont_use_random_cholera_state_events_4 }
     }
 }
@@ -674,6 +719,7 @@ country_event = { # The collapse of agriculture IN
 		var:AZT.get_state_for_random_cholera_event = {
 			AZT_complicate_cholera_in_state = yes
 		}
+		clear_variable = AZT.get_state_for_random_cholera_event
     }
 }
 

@@ -16,25 +16,22 @@ characters = {
 			desc = "POLITICS_MONTESUMA_IV_DESC"
 			expire = "1900.1.1"
 			ideology = paternalism
-			traits = { aztec_emperor_trait_without_modifiers }
+			traits = { aztec_emperor_trait }
 			id = 2600
 		}		
-		advisor={
+		advisor = {
 			slot = army_chief
-			idea_token = AZT_MONTESUMA_IV
+			idea_token = AZT_Montesuma_IV_token
 			allowed = {
 				original_tag = AZT
 			}
-			available = {
-				
+			visible = {
+				has_completed_focus = AZT_military_command
 			}
 			traits = {
-				army_chief_offensive_3
+				AZT_army_chief_offensive
 			}
 			cost = 100
-			ai_will_do = {
-				factor = 1.000
-			}
 		}
 	}
 
@@ -95,10 +92,10 @@ characters = {
 				always = no
 			}
 			can_be_fired = no
-			traits = {  }
-			cost = 0
+			traits = { AZT_high_priest }
+			cost = -1
 			ai_will_do = {
-				factor = 75
+				
 			}
 			on_add = {
 				add_power_balance_value = {
@@ -181,17 +178,17 @@ characters = {
 			traits={ old_guard inflexible_strategist infantry_officer trait_mountaineer }
 			legacy_id=2602
 		}	
-		advisor={
+		advisor = {
 			slot = army_chief
-			idea_token = AZT_ITSKOATL_TESKOKO
+			idea_token = AZT_ITSKOATL_TESKOKO_token
 			allowed = {
 				original_tag = AZT
 			}
-			available = {
-				
+			visible = {
+				has_completed_focus = AZT_military_command
 			}
 			traits = {
-				army_chief_defensive_3
+				AZT_army_chief_defensive
 			}
 			cost = 150
 			ai_will_do = {
@@ -223,8 +220,8 @@ characters = {
 			allowed = {
 				original_tag = AZT
 			}
-			available = {
-				
+			visible = {
+				has_completed_focus = AZT_military_command
 			}
 			traits = { AZT_theorist_of_regular_troops }
 			cost = 100
@@ -270,6 +267,19 @@ characters = {
 			traits={ cavalry_officer cavalry_leader trickster }
 			legacy_id=2605
 		}
+		advisor = {
+			slot = high_command
+			idea_token = AZT_Zolin_Tepiltsin_token
+			allowed = {
+				original_tag = AZT
+			}
+			visible = {
+				has_completed_focus = AZT_military_command
+			}
+			ledger = army
+			traits = { army_cavalry_3 }
+			cost = 120
+		}
 	}
 	
 	AZT_Mekatl_Toltek = {
@@ -314,8 +324,8 @@ characters = {
 			allowed = {
 				original_tag = AZT
 			}
-			available = {
-				
+			visible = {
+				has_completed_focus = AZT_military_command
 			}
 			traits = { AZT_old_theorist_guard }
 			cost = 85
@@ -324,7 +334,10 @@ characters = {
 			}
 
 			on_add = {
-				custom_effect_tooltip = AZT_macehualtin_increase_draft_days_by_1_tt
+				custom_effect_tooltip = {
+    				localization_key = AZT_macehualtin_decrease_draft_days_tt
+    				MACEHUALTIN_DECREASE_DAYS = 1
+				}
 				if = {
 					limit = {
 						check_variable = { AZT.get_days_for_draft_the_militia_var > 1 }
@@ -432,14 +445,27 @@ characters = {
 			traits={ infantry_officer skilled_staffer }
 			legacy_id=2612
 		}
+		advisor = {
+			slot = high_command
+			idea_token = AZT_Huemak_Tekuli_token
+			allowed = {
+				original_tag = AZT
+			}
+			visible = {
+				has_completed_focus = AZT_military_command
+			}
+			ledger = army
+			traits = { army_logistics_1 }
+			cost = 120
+		}
 	}
 	
-	AZT_Yeman_Teskoko= {
+	AZT_Yeman_Teskoko = {
 		name = AZT_Yeman_Teskoko_t
 		portraits = {
 			army = {
 				large = "gfx/leaders/AZT/Portrait_Yaotl_Teskoko.dds"
-				small = GFX_idea_Dostoevskyi
+				small = GFX_idea_Yeman_Teskoko
 			}
 		}
 		corps_commander = {
@@ -450,6 +476,19 @@ characters = {
 			logistics_skill=3
 			traits={ infantry_officer swamp_fox }
 			legacy_id=2613
+		}
+		advisor = {
+			slot = high_command
+			idea_token = AZT_Yeman_Teskoko_token
+			allowed = {
+				original_tag = AZT
+			}
+			visible = {
+				has_completed_focus = AZT_military_command
+			}
+			ledger = army
+			traits = { army_infantry_2 }
+			cost = 120
 		}
 	}
 	
@@ -488,6 +527,19 @@ characters = {
 			logistics_skill=2
 			traits={ trait_cautious organizer }
 			legacy_id=2615
+		}
+		advisor = {
+			slot = high_command
+			idea_token = AZT_Tenoch_Akolhua_token
+			allowed = {
+				original_tag = AZT
+			}
+			visible = {
+				has_completed_focus = AZT_military_command
+			}
+			ledger = army
+			traits = { army_regrouping_1 }
+			cost = 120
 		}
 	}
 	
@@ -564,6 +616,19 @@ characters = {
 			logistics_skill=1
 			traits={ inflexible_strategist inspirational_leader }
 			legacy_id=2619
+		}
+		advisor = {
+			slot = high_command
+			idea_token = AZT_Zolin_Maseyalli_token
+			allowed = {
+				original_tag = AZT
+			}
+			visible = { # WIP, дописать в будущем
+				
+			}
+			ledger = army
+			traits = { army_regrouping_2 }
+			cost = 120
 		}
 	}
 	
@@ -729,9 +794,11 @@ characters = {
 			available = {
 				AZT_Itotiya_Akolhua = { is_high_command = no }
 			}
+			visible = {
+				has_completed_focus = AZT_military_command
+			}
 			traits = { AZT_blockade_runner }
 			cost = 120
-			ai_will_do = { }
 		}
 		advisor = {
 			slot = high_command
@@ -742,10 +809,12 @@ characters = {
 			available = {
 				AZT_Itotiya_Akolhua = { is_navy_chief = no }
 			}
+			visible = {
+				has_completed_focus = AZT_military_command
+			}
 			ledger = navy
 			traits = { AZT_coast_defense_knight }
 			cost = 120
-			ai_will_do = { }
 		}
 	}
 	
@@ -776,7 +845,7 @@ characters = {
 				small = GFX_idea_Kipaktli_Akolhua
 			}
 		}
-		navy_leader={
+		navy_leader = {
 			traits={ gunnery_expert superior_tactician }
 			skill=3
 			attack_skill=2
@@ -784,6 +853,19 @@ characters = {
 			maneuvering_skill=3
 			coordination_skill=2
 			legacy_id=2629
+		}
+		advisor = {
+			slot = high_command
+			idea_token = AZT_Kipaktli_Akolhua_token
+			allowed = {
+				original_tag = AZT
+			}
+			visible = {
+				has_completed_focus = AZT_military_command
+			}
+			ledger = navy
+			traits = { AZT_large_caliber_commando }
+			cost = 120
 		}
 	}
 	
@@ -943,9 +1025,6 @@ characters = {
 			visible = { AZT = { has_government = reactionist } }
 
 			cost =  150
-			ai_will_do = {
-				factor = 300
-			}
 		}
 	}
 
@@ -969,7 +1048,6 @@ characters = {
 
 			traits = { AZT_urban_planner }
 			cost = 150
-			ai_will_do = { factor = 1000 }
 		}
 	}
 	
@@ -993,7 +1071,6 @@ characters = {
 
 			traits = { AZT_convenient_bureaucrat }
 			cost = 150
-			ai_will_do = { factor = 500 }
 		}
 	}
 
@@ -1013,7 +1090,6 @@ characters = {
 			}
 			traits = { AZT_battlefleet_designer }
 			cost = 120
-			ai_will_do = { }
 		}
 	}
 
@@ -1032,7 +1108,26 @@ characters = {
 			}
 			traits = { AZT_inspector_general }
 			cost = 120
-			ai_will_do = { }
+		}
+	}
+
+	AZT_Emmanuel_de_Saint_Priest = {
+		name = AZT_Emmanuel_de_Saint_Priest_t
+		portraits = {
+			army = {
+				small = GFX_idea_Pierre_Roch_Jurien
+			}
+		}
+		advisor = {
+			slot = army_chief
+			idea_token = AZT_Emmanuel_de_Saint_Priest_token
+			allowed = {
+				original_tag = AZT
+			}
+			traits = {
+				AZT_army_chief_organizational
+			}
+			cost = 200
 		}
 	}
 }
