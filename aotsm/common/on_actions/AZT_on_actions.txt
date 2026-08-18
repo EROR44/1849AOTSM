@@ -44,13 +44,11 @@ on_actions = {
             if = {
                 limit = {
                     tag = AZT
-                    AZT = { has_idea = AZT_macehualtin_law_peacetime }
+                    has_idea = AZT_macehualtin_law_peacetime
                 }
-                AZT = {
-                    swap_ideas = {
-                        remove_idea = AZT_macehualtin_law_peacetime
-                        add_idea = AZT_macehualtin_law_war
-                    }
+                swap_ideas = {
+                    remove_idea = AZT_macehualtin_law_peacetime
+                    add_idea = AZT_macehualtin_law_war
                 }
                divide_variable = { AZT.get_cost_for_check_the_readness_of_the_militia = 3 } # Decision Cost
             }
@@ -73,6 +71,15 @@ on_actions = {
                 AZT_clamp_tension_value_effect = yes
                 add_to_variable = { AZT_tension_value = AZT_tension_growing_var }
             }
+            if = {
+                limit = {
+                    OR = {
+                        has_idea = AZT_macehualtin_law_war
+                        has_idea = AZT_macehualtin_law_peacetime
+                    }
+                }
+                AZT_check_owned_states_array_effect = yes
+            }
         }
     }
 
@@ -88,4 +95,24 @@ on_actions = {
 			}
 		}
 	}
+
+    on_state_control_changed = {
+        effect = {
+            if = {
+                limit = {
+                    FROM = {
+                        tag = AZT
+                        has_country_flag = AZT_third_maya_aztec_war_flag
+                    }
+                    ROOT = {
+                        tag = MAY
+                    }
+                    FROM.FROM = {
+                        is_owned_by = AZT
+                    }
+                }
+                aztec_lose_in_third_maya_aztec_war = yes
+            }
+        }
+    }
 }
