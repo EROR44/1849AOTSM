@@ -360,9 +360,10 @@ focus_tree = {
 		completion_reward = { # WIP
 			log = "[GetDateText]: [Root.GetName]: focus AZT_avoid_stagnation"
 			custom_effect_tooltip = AZT_avoid_stagnation_tt
-			add_timed_idea = {
-				idea = AZT_efforts_to_eliminate_stagnation_timed_idea
-				days = 90
+			custom_effect_tooltip = generic_skip_one_line_tt
+			swap_ideas = {
+				remove_idea = AZT_stagnating_production_idea
+				add_idea = AZT_stagnating_production_2_idea
 			}
 		}
 	}
@@ -889,6 +890,7 @@ focus_tree = {
 		y = 10
 		cost = 2.9
 		search_filters = { FOCUS_FILTER_POLITICAL }
+		will_lead_to_war_with = MAY
 		
 		prerequisite = { focus = AZT_southern_company }
 		
@@ -965,9 +967,16 @@ focus_tree = {
 
 		allow_branch = { 
 			OR = {
-				has_completed_focus = AZT_and_onward_marches_the_army
 				has_completed_focus = AZT_crushed_but_not_defeated
 				has_country_flag = AZT_open_all_focus_branches_flag
+			}
+		}
+
+		offset = {
+			x = 4
+			y = 0
+			trigger = {
+				has_completed_focus = AZT_crushed_but_not_defeated
 			}
 		}
 
@@ -993,8 +1002,15 @@ focus_tree = {
 		allow_branch = { 
 			OR = {
 				has_completed_focus = AZT_and_onward_marches_the_army
-				has_completed_focus = AZT_crushed_but_not_defeated
 				has_country_flag = AZT_open_all_focus_branches_flag
+			}
+		}
+
+		offset = {
+			x = -4
+			y = 0
+			trigger = {
+				has_completed_focus = AZT_and_onward_marches_the_army
 			}
 		}
 
@@ -1008,6 +1024,39 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: focus AZT_and_onward_marches_the_army"
 			
+		}
+	}
+
+	focus = {
+		id = AZT_foreign_affairs
+		icon = GFX_focus_AZT_foreign_affairs
+		
+		relative_position_id = AZT_crushed_but_not_defeated
+
+		offset = {
+			x = -1
+			y = 0
+			trigger = {
+				OR = {
+					has_completed_focus = AZT_and_onward_marches_the_army
+					has_completed_focus = AZT_crushed_but_not_defeated
+				}
+			}
+		}
+
+		x = 4
+		y = 1
+		cost = 0
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		prerequisite = {
+			focus = AZT_crushed_but_not_defeated
+			focus = AZT_and_onward_marches_the_army
+		}
+		
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus AZT_foreign_affairs"
+			custom_effect_tooltip = AZT_foreign_affairs_focus_tt
 		}
 	}
 }
