@@ -434,13 +434,42 @@ country_event = {
 	}
 	option = {
         name = azt_mec_mittleazteken.1.a
+		country_event = { id = azt_mec_mittleazteken.2 days = 1 }
+		hidden_effect = {
+			random_list = {
+				10 = {
+					modifier = {
+						add = -5
+						OR = {
+							has_global_flag = austrian_capitulation_first_brotherwar_flag
+							AUS = {
+								has_idea = aus_reparation_for_help_for_aus
+							}
+						}
+					}
+				}
+				10 = {
+					set_country_flag = AZT_mittleazteken_second_version_of_event
+					log = "[GetDateText]: set_country_flag = AZT_mittleazteken_second_version_of_event"
+				}
+			}
+		}
 	}
 }
 
 country_event = {
     id = azt_mec_mittleazteken.2
     title = azt_mec_mittleazteken.2.t
-    desc = azt_mec_mittleazteken.2.d
+    desc = {
+		text = azt_mec_mittleazteken.2.d
+	}
+	desc = {
+		text = azt_mec_mittleazteken.2.d.a
+		trigger = {
+			has_country_flag = AZT_mittleazteken_second_version_of_event
+		}
+	}
+
     picture = GFX_AZT_your_text_picture
     
     is_triggered_only = yes
@@ -448,8 +477,28 @@ country_event = {
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event: azt_mec_mittleazteken.2" 
 	}
-	option = {
+
+	option = { # for first version
+		custom_effect_tooltip = AZT_mec_mittleazteken_event_1_tt
         name = azt_mec_mittleazteken.2.a
+	}
+	
+	option = { # for second version, we accept
+		name = azt_mec_mittleazteken.2.b
+		custom_effect_tooltip = AZT_mec_mittleazteken_event_2_tt
+		trigger = {
+			has_country_flag = AZT_mittleazteken_second_version_of_event
+		}
+		clr_country_flag = AZT_mittleazteken_second_version_of_event
+	}
+
+	option = { # for second version, we disagree
+		name = azt_mec_mittleazteken.2.c
+		custom_effect_tooltip = AZT_mec_mittleazteken_event_3_tt
+		trigger = {
+			has_country_flag = AZT_mittleazteken_second_version_of_event
+		}
+		clr_country_flag = AZT_mittleazteken_second_version_of_event
 	}
 }
 
@@ -657,34 +706,43 @@ country_event = { # Collapse of the extractive industry IN
     option = {
         name = azt_random_cholera_state_events.4.a
 		add_political_power = -50
-		var:AZT.this_state_can_be_used_for_cholera_event_4_var = {
+		random_state = {
+			limit = {
+				is_in_array = { AZT.this_state_can_be_used_for_cholera_event_4_array = THIS }
+			}
 			custom_effect_tooltip = generic_skip_one_line_tt
 			add_dynamic_modifier = {
     			modifier = AZT_collapse_of_the_extractive_industry_state_modifier
     			days = 30
 			}
 		}
-		clear_variable = AZT.this_state_can_be_used_for_cholera_event_4_var
+		clear_array = AZT.this_state_can_be_used_for_cholera_event_4_array
 		AZT = { set_country_flag = AZT_dont_use_random_cholera_state_events_4 }
     }
 
 	option = {
         name = azt_random_cholera_state_events.4.b
 		add_political_power = -25
-		var:AZT.this_state_can_be_used_for_cholera_event_4_var = {
+		random_state = {
+			limit = {
+				is_in_array = { AZT.this_state_can_be_used_for_cholera_event_4_array = THIS }
+			}
 			custom_effect_tooltip = generic_skip_one_line_tt
 			add_dynamic_modifier = {
     			modifier = AZT_collapse_of_the_extractive_industry_state_modifier_1
     			days = 45
 			}
 		}
-		clear_variable = AZT.this_state_can_be_used_for_cholera_event_4_var
+		clear_array = AZT.this_state_can_be_used_for_cholera_event_4_array
 		AZT = { set_country_flag = AZT_dont_use_random_cholera_state_events_4 }
     }
 
 	option = {
         name = azt_random_cholera_state_events.4.c
-		var:AZT.this_state_can_be_used_for_cholera_event_4_var = {
+		random_state = {
+			limit = {
+				is_in_array = { AZT.this_state_can_be_used_for_cholera_event_4_array = THIS }
+			}
 			custom_effect_tooltip = generic_skip_one_line_tt
 			AZT_complicate_cholera_in_state = yes
 			custom_effect_tooltip = generic_skip_one_line_tt
@@ -693,9 +751,17 @@ country_event = { # Collapse of the extractive industry IN
     			days = 60
 			}
 		}
-		clear_variable = var:AZT.this_state_can_be_used_for_cholera_event_4_var
+		clear_array = AZT.this_state_can_be_used_for_cholera_event_4_array
 		AZT = { set_country_flag = AZT_dont_use_random_cholera_state_events_4 }
     }
+
+	option = {
+		name = azt_random_cholera_state_events.4.e
+		trigger = {
+			check_variable = { AZT.this_state_can_be_used_for_cholera_event_4_array^num = 0 }
+		}
+		add_political_power = -25
+	}
 }
 
 country_event = { # The collapse of agriculture IN
