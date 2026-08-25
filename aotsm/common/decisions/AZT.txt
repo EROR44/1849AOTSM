@@ -149,6 +149,7 @@ AZT_tension_category = {
 
 		visible = {
 			is_debug = yes
+			is_ai = no
 		}
 
 		fire_only_once = no
@@ -168,6 +169,7 @@ AZT_tension_category = {
 
 		visible = {
 			is_debug = yes
+			is_ai = no
 		}
 
 		fire_only_once = no
@@ -187,6 +189,7 @@ AZT_tension_category = {
 
 		visible = {
 			is_debug = yes
+			is_ai = no
 		}
 
 		fire_only_once = no
@@ -206,6 +209,7 @@ AZT_tension_category = {
 
 		visible = {
 			is_debug = yes
+			is_ai = no
 		}
 
 		fire_only_once = no
@@ -225,6 +229,7 @@ AZT_tension_category = {
 
 		visible = {
 			is_debug = yes
+			is_ai = no
 		}
 
 		fire_only_once = no
@@ -257,14 +262,6 @@ AZT_cholera_category = { # Don't forget about random events
 			}
 		}
 
-        cancel_trigger = {
-			hidden_trigger = {
-				FROM = {
-					check_variable = { AZT_cholera_state_status = 2 }
-				}
-			}
-        }
-
         allowed = {
             tag = AZT
         }
@@ -272,16 +269,25 @@ AZT_cholera_category = { # Don't forget about random events
 		visible = {
 			FROM = {
 				is_in_array = { AZT.aotsm_get_states_for_cholera_gui = FROM }
-				is_in_array = { AZT.GetStateIdForCholeraDecision = FROM }
 				NOT = { check_variable = { AZT_cholera_state_status = 2 } } # 2 - max value, it's good state status
+			}
+			OR = {
+				AND = {
+					is_ai = yes
+					FROM = { NOT = { has_state_flag = AZT_addressing_cholera_consequence_flag_tt } }
+				}
+				FROM = { is_in_array = { AZT.GetStateIdForCholeraDecision = FROM } }
 			}
 		}
 
 		ai_will_do = {
-			base = 0
+			base = 5
 			modifier = {
 				add = 5
-				has_political_power > 120
+				all_owned_state = {
+					is_in_array = { AZT.aotsm_get_states_for_cholera_gui = FROM }
+					NOT = { has_state_flag = AZT_addressing_cholera_consequence_flag_tt }
+				}
 			}
 			modifier = {
 				add = 5
@@ -289,12 +295,12 @@ AZT_cholera_category = { # Don't forget about random events
 			}
 			modifier = {
 				add = 10
-				check_variable = { FROM.AZT_cholera_state_status < 1 }
+				check_variable = { FROM.AZT_cholera_state_status = 0 }
 			}
 		}
 
 		days_remove = 21
-		cost = 20
+		cost = 25
 		days_re_enable = 30
 
 		complete_effect = {
@@ -341,14 +347,6 @@ AZT_cholera_category = { # Don't forget about random events
 			}
 		}
 
-        cancel_trigger = {
-			hidden_trigger = {
-				FROM = {
-					check_variable = { AZT_cholera_state_status = 2 }
-				}
-			}
-        }
-
         allowed = {
             tag = AZT
         }
@@ -356,16 +354,25 @@ AZT_cholera_category = { # Don't forget about random events
 		visible = {
 			FROM = {
 				is_in_array = { AZT.aotsm_get_states_for_cholera_gui = FROM }
-				is_in_array = { AZT.GetStateIdForCholeraDecision = FROM }
 				NOT = { check_variable = { AZT_cholera_state_status = 2 } } # 2 - max value, it's good state status
+			}
+			OR = {
+				AND = {
+					is_ai = yes
+					FROM = { NOT = { has_state_flag = AZT_addressing_cholera_consequence_flag_tt } }
+				}
+				FROM = { is_in_array = { AZT.GetStateIdForCholeraDecision = FROM } }
 			}
 		}
 
 		ai_will_do = {
-			base = 0
+			base = 5
 			modifier = {
 				add = 5
-				has_political_power > 120
+				all_owned_state = {
+					is_in_array = { AZT.aotsm_get_states_for_cholera_gui = FROM }
+					NOT = { has_state_flag = AZT_addressing_cholera_consequence_flag_tt }
+				}
 			}
 			modifier = {
 				add = 5
@@ -373,12 +380,12 @@ AZT_cholera_category = { # Don't forget about random events
 			}
 			modifier = {
 				add = 10
-				check_variable = { FROM.AZT_cholera_state_status < 1 }
+				check_variable = { FROM.AZT_cholera_state_status = 0 }
 			}
 		}
 
 		days_remove = 21
-		cost = 20
+		cost = 25
 		days_re_enable =30
 
 		complete_effect = {
@@ -425,14 +432,6 @@ AZT_cholera_category = { # Don't forget about random events
 			}
 		}
 
-        cancel_trigger = {
-			hidden_trigger = {
-				FROM = {
-					check_variable = { AZT_cholera_state_status = 2 }
-				}
-			}
-        }
-
         allowed = {
             tag = AZT
         }
@@ -440,16 +439,25 @@ AZT_cholera_category = { # Don't forget about random events
 		visible = {
 			FROM = {
 				is_in_array = { AZT.aotsm_get_states_for_cholera_gui = FROM }
-				is_in_array = { AZT.GetStateIdForCholeraDecision = FROM }
 				NOT = { check_variable = { AZT_cholera_state_status = 2 } } # 2 - max value, it's good state status
+			}
+			OR = {
+				AND = {
+					is_ai = yes
+					FROM = { NOT = { has_state_flag = AZT_addressing_cholera_consequence_flag_tt } }
+				}
+				FROM = { is_in_array = { AZT.GetStateIdForCholeraDecision = FROM } }
 			}
 		}
 
 		ai_will_do = {
-			base = 0
+			base = 5
 			modifier = {
 				add = 5
-				has_political_power > 120
+				all_owned_state = {
+					is_in_array = { AZT.aotsm_get_states_for_cholera_gui = FROM }
+					NOT = { has_state_flag = AZT_addressing_cholera_consequence_flag_tt }
+				}
 			}
 			modifier = {
 				add = 5
@@ -457,12 +465,12 @@ AZT_cholera_category = { # Don't forget about random events
 			}
 			modifier = {
 				add = 10
-				check_variable = { FROM.AZT_cholera_state_status < 1 }
+				check_variable = { FROM.AZT_cholera_state_status = 0 }
 			}
 		}
 
 		days_remove = 21
-		cost = 20
+		cost = 25
 		days_re_enable = 30
 
 		complete_effect = {
@@ -495,7 +503,7 @@ AZT_cholera_category = { # Don't forget about random events
 
 		icon = generic_factory
 
-		target_array = AZT.aotsm_get_states_for_cholera_gui
+		targets = { 1026 1027 962 }
 		target_root_trigger = { 
 			original_tag = AZT
 		}
@@ -513,35 +521,31 @@ AZT_cholera_category = { # Don't forget about random events
 			}
 		}
 
-        cancel_trigger = {
-			hidden_trigger = {
-				FROM = {
-					check_variable = { AZT_cholera_state_status = 2 }
-				}
-			}
-        }
-
         allowed = {
             tag = AZT
         }
 
 		visible = {
 			FROM = {
-				OR = {
-					is_in_array = { AZT.aotsm_get_states_for_cholera_gui = 1026 }
-					is_in_array = { AZT.aotsm_get_states_for_cholera_gui = 1027 }
-					is_in_array = { AZT.aotsm_get_states_for_cholera_gui = 962 }
-				}
-				is_in_array = { AZT.GetStateIdForCholeraDecision = FROM }
 				NOT = { check_variable = { AZT_cholera_state_status = 2 } } # 2 - max value, it's good state status
+			}
+			OR = {
+				AND = {
+					is_ai = yes
+					FROM = { NOT = { has_state_flag = AZT_addressing_cholera_consequence_flag_tt } }
+				}
+				FROM = { is_in_array = { AZT.GetStateIdForCholeraDecision = FROM } }
 			}
 		}
 
 		ai_will_do = {
-			base = 0
+			base = 10
 			modifier = {
 				add = 5
-				has_political_power > 120
+				all_owned_state = {
+					is_in_array = { AZT.aotsm_get_states_for_cholera_gui = FROM }
+					NOT = { has_state_flag = AZT_addressing_cholera_consequence_flag_tt }
+				}
 			}
 			modifier = {
 				add = 5
@@ -549,12 +553,12 @@ AZT_cholera_category = { # Don't forget about random events
 			}
 			modifier = {
 				add = 10
-				check_variable = { FROM.AZT_cholera_state_status < 1 }
+				check_variable = { FROM.AZT_cholera_state_status = 0 }
 			}
 		}
 
 		days_remove = 28
-		cost = 20
+		cost = 25
 
 		complete_effect = {
 			hidden_effect = {
@@ -603,14 +607,6 @@ AZT_cholera_category = { # Don't forget about random events
 			}
 		}
 
-        cancel_trigger = {
-			hidden_trigger = {
-				FROM = {
-					check_variable = { AZT_cholera_state_status = 2 }
-				}
-			}
-        }
-
         allowed = {
             tag = AZT
         }
@@ -622,16 +618,25 @@ AZT_cholera_category = { # Don't forget about random events
 					industrial_complex > 0
 					dockyard > 0
 				}
-				is_in_array = { AZT.GetStateIdForCholeraDecision = FROM }
 				NOT = { check_variable = { AZT_cholera_state_status = 2 } } # 2 - max value, it's good state status
+			}
+			OR = {
+				AND = {
+					is_ai = yes
+					FROM = { NOT = { has_state_flag = AZT_addressing_cholera_consequence_flag_tt } }
+				}
+				FROM = { is_in_array = { AZT.GetStateIdForCholeraDecision = FROM } }
 			}
 		}
 
 		ai_will_do = {
-			base = 0
+			base = 5
 			modifier = {
 				add = 5
-				has_political_power > 120
+				all_owned_state = {
+					is_in_array = { AZT.aotsm_get_states_for_cholera_gui = FROM }
+					NOT = { has_state_flag = AZT_addressing_cholera_consequence_flag_tt }
+				}
 			}
 			modifier = {
 				add = 5
@@ -639,12 +644,12 @@ AZT_cholera_category = { # Don't forget about random events
 			}
 			modifier = {
 				add = 10
-				check_variable = { FROM.AZT_cholera_state_status < 1 }
+				check_variable = { FROM.AZT_cholera_state_status = 0 }
 			}
 		}
 
 		days_remove = 28
-		cost = 30
+		cost = 35
 
 		complete_effect = {
 			hidden_effect = {
@@ -693,24 +698,26 @@ AZT_cholera_category = { # Don't forget about random events
 
 		visible = {
 			962 = {
-				is_in_array = { AZT.GetStateIdForCholeraDecision = THIS }
 				NOT = { check_variable = { AZT_cholera_state_status = 2 } }
+			}
+			OR = {
+				AND = {
+					is_ai = yes
+					962 = { NOT = { has_state_flag = AZT_addressing_cholera_consequence_flag_tt } }
+				}
+				962 = { is_in_array = { AZT.GetStateIdForCholeraDecision = 962 } }
 			}
 		}
 
 		ai_will_do = {
-			base = 0
+			base = 15
 			modifier = {
-				add = 5
-				has_political_power > 120
-			}
-			modifier = {
-				add = 5
+				add = 10
 				check_variable = { 962.AZT_cholera_state_status = 1 }
 			}
 			modifier = {
-				add = 10
-				check_variable = { 962.AZT_cholera_state_status < 1 }
+				add = 15
+				check_variable = { 962.AZT_cholera_state_status = 0 }
 			}
 		}
 
@@ -759,11 +766,11 @@ AZT_cholera_category = { # Don't forget about random events
 			FROM = {
 				is_owned_and_controlled_by = AZT
 				NOT = { check_variable = { AZT_cholera_state_status = 2 } }
-				custom_trigger_tooltip = {
-					tooltip = AZT_centralized_funding_for_the_region_tt
-					check_variable = { AZT_cholera_state_status = 0 }
-				}
 				NOT = { has_state_flag = AZT_addressing_cholera_consequence_flag_tt }
+			}
+			custom_trigger_tooltip = {
+				tooltip = AZT_centralized_funding_for_the_region_tt
+				check_variable = { FROM.AZT_cholera_state_status = 0 }
 			}
 		}
 
@@ -774,9 +781,15 @@ AZT_cholera_category = { # Don't forget about random events
 		visible = {
 			FROM = {
 				is_in_array = { AZT.aotsm_get_states_for_cholera_gui = FROM }
-				is_in_array = { AZT.GetStateIdForCholeraDecision = FROM }
 				NOT = { check_variable = { AZT_cholera_state_status = 2 } } # 2 - max value, it's good state status
 				check_variable = { AZT_cholera_state_status = 0 }
+			}
+			OR = {
+				AND = {
+					is_ai = yes
+					FROM = { NOT = { has_state_flag = AZT_addressing_cholera_consequence_flag_tt } }
+				}
+				FROM = { is_in_array = { AZT.GetStateIdForCholeraDecision = FROM } }
 			}
 		}
 
@@ -784,7 +797,14 @@ AZT_cholera_category = { # Don't forget about random events
 			base = 5
 			modifier = {
 				add = 5
-				has_political_power < 99
+				all_owned_state = {
+					is_in_array = { AZT.aotsm_get_states_for_cholera_gui = FROM }
+					NOT = { has_state_flag = AZT_addressing_cholera_consequence_flag_tt }
+				}
+			}
+			modifier = {
+				add = 5
+				has_political_power < 25
 			}
 		}
 
@@ -834,6 +854,7 @@ AZT_cholera_category = { # Don't forget about random events
 
 		visible = {
 			is_debug = yes
+			is_ai = no
 		}
 
 		complete_effect = {
@@ -859,6 +880,7 @@ AZT_cholera_category = { # Don't forget about random events
 
 		visible = {
 			is_debug = yes
+			is_ai = no
 		}
 
 		complete_effect = {
