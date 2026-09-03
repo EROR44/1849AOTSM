@@ -11,6 +11,10 @@ on_actions = {
             if = {
                 limit = {
                     has_country_flag = AZT_tension_gui_visible_flag
+                    OR = {
+                        check_variable = { AZT.AZT_tension_value > 100 }
+                        check_variable = { AZT.AZT_tension_value < 0 }
+                    }
                 }
                 AZT_clamp_tension_value_effect = yes
             }
@@ -67,9 +71,10 @@ on_actions = {
                 limit = {
                     has_country_flag = AZT_tension_gui_visible_flag
                     has_variable = AZT_tension_growing_var
+                    check_variable = { AZT.AZT_tension_value < AZT.AZT_tension_growing_var }
                 }
                 AZT_clamp_tension_value_effect = yes
-                add_to_variable = { AZT_tension_value = AZT_tension_growing_var }
+                add_to_variable = { AZT.AZT_tension_value = AZT.AZT_tension_growing_var }
             }
             if = {
                 limit = {
@@ -106,12 +111,13 @@ on_actions = {
                     }
                     ROOT = {
                         tag = MAY
+                        has_war_with = AZT
                     }
                     FROM.FROM = {
                         is_owned_by = AZT
                     }
                 }
-                aztec_lose_in_third_maya_aztec_war = yes
+                aotsm_aztec_lose_in_third_maya_aztec_war_effect = yes
             }
         }
     }
