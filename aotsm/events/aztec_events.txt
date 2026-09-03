@@ -431,33 +431,18 @@ country_event = {
     
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event: azt_mec_mittleazteken.1"
-		hidden_effect = {
-			random_list = {
-				10 = {
-					modifier = {
-						add = -5
-						OR = {
-							has_global_flag = austrian_capitulation_first_brotherwar_flag
-							AUS = {
-								has_idea = aus_reparation_for_help_for_aus
-							}
-						}
-					}
-				}
-				10 = {
-					set_country_flag = AZT_mittleazteken_second_version_of_event
-					log = "[GetDateText]: set_country_flag = AZT_mittleazteken_second_version_of_event"
-				}
-			}
-		}
 	}
+
 	option = {
         name = azt_mec_mittleazteken.1.a
-		country_event = { id = azt_mec_mittleazteken.2 days = 1 }
+		custom_effect_tooltip = AZT_we_will_send_a_delegation_to_MEC_event_tt
+		hidden_effect = {
+			MEC = { country_event = { id = azt_mec_mittleazteken.3 days = 2 } }
+		}
 	}
 }
 
-country_event = {
+country_event = { # ROOT - AZT
     id = azt_mec_mittleazteken.2
     title = azt_mec_mittleazteken.2.t
     desc = {
@@ -481,6 +466,11 @@ country_event = {
 	option = { # for first version
 		custom_effect_tooltip = AZT_mec_mittleazteken_event_1_tt
         name = azt_mec_mittleazteken.2.a
+		swap_ideas = {
+			remove_idea = AZT_aus_trade_monopoly_idea
+			add_idea = AZT_aus_trade_monopoly_1_idea
+		}
+		hidden_effect = { MEC = { country_event = { id = azt_mec_mittleazteken.5 days = 2 } } }
 	}
 	
 	option = { # for second version, we accept
@@ -489,6 +479,20 @@ country_event = {
 		trigger = {
 			has_country_flag = AZT_mittleazteken_second_version_of_event
 		}
+		swap_ideas = {
+			remove_idea = AZT_aus_trade_monopoly_idea
+			add_idea = AZT_aus_trade_monopoly_1_idea
+		}
+		give_resource_rights = {
+    		receiver = MEC
+    		state = 485
+			resources = { oil }
+		}
+		give_resource_rights = {
+    		receiver = MEC
+			state = 277
+		}
+		hidden_effect = { MEC = { country_event = { id = azt_mec_mittleazteken.4 days = 2 } } }
 		clr_country_flag = AZT_mittleazteken_second_version_of_event
 	}
 
@@ -498,7 +502,166 @@ country_event = {
 		trigger = {
 			has_country_flag = AZT_mittleazteken_second_version_of_event
 		}
+		MEC = { country_event = { id = azt_mec_mittleazteken.6 days = 2 } }
 		clr_country_flag = AZT_mittleazteken_second_version_of_event
+	}
+}
+
+country_event = { # ROOT - MEC, FROM - AZT
+    id = azt_mec_mittleazteken.3
+    title = azt_mec_mittleazteken.3.t
+    desc = azt_mec_mittleazteken.3.d
+    picture = GFX_AZT_your_text_picture
+    
+    is_triggered_only = yes
+    
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event: azt_mec_mittleazteken.3"
+	}
+
+	option = { 
+        name = azt_mec_mittleazteken.3.a
+		random_list = {
+			10 = {
+				# nothing
+			}
+			10 = {
+				modifier = {
+					add = 5
+					has_global_flag = austrian_capitulation_first_brotherwar_flag
+					MEC = { is_puppet_of = AUS }
+				}
+				modifier = {
+					add = 5
+					AUS = {
+						has_idea = aus_reparation_for_help_for_aus
+					}
+					MEC = { is_puppet_of = AUS }
+				}
+				AZT = { set_country_flag = AZT_mittleazteken_second_version_of_event }
+				log = "[GetDateText]: set_country_flag = AZT_mittleazteken_second_version_of_event"
+			}
+		}
+		ai_chance = {
+			base = 20
+		}
+	}
+
+	option = {
+		name = azt_mec_mittleazteken.3.b
+		AZT = { country_event = { id = azt_mec_mittleazteken.7 days = 2 } }
+		ai_chance = {
+			base = 0
+			modifier = {
+				add = 10
+				is_historical_focus_on = yes
+			}
+		}
+	}
+}
+
+country_event = {
+    id = azt_mec_mittleazteken.4
+    title = azt_mec_mittleazteken.4.t
+    desc = azt_mec_mittleazteken.4.d
+    picture = GFX_AZT_your_text_picture
+    
+    is_triggered_only = yes
+    
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event: azt_mec_mittleazteken.4"
+	}
+
+	option = {
+        name = azt_mec_mittleazteken.4.a
+		effect_tooltip = {
+			AZT = {
+				swap_ideas = {
+					remove_idea = AZT_aus_trade_monopoly_idea
+					add_idea = AZT_aus_trade_monopoly_1_idea
+				}
+			}
+			give_resource_rights = {
+    			receiver = MEC
+    			state = 485
+			}
+			give_resource_rights = {
+    			receiver = MEC
+    			state = 277
+			}
+		}
+		ai_chance = {
+			base = 20
+		}
+	}
+}
+
+country_event = {
+    id = azt_mec_mittleazteken.5
+    title = azt_mec_mittleazteken.5.t
+    desc = azt_mec_mittleazteken.5.d
+    picture = GFX_AZT_your_text_picture
+    
+    is_triggered_only = yes
+    
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event: azt_mec_mittleazteken.5"
+	}
+
+	option = {
+        name = azt_mec_mittleazteken.5.a
+		add_political_power = 100
+		effect_tooltip = {
+			AZT = {
+				swap_ideas = {
+					remove_idea = AZT_aus_trade_monopoly_idea
+					add_idea = AZT_aus_trade_monopoly_1_idea
+				}
+			}
+		}
+		ai_chance = {
+			base = 20
+		}
+	}
+}
+
+country_event = {
+	id = azt_mec_mittleazteken.6
+    title = azt_mec_mittleazteken.6.t
+    desc = azt_mec_mittleazteken.6.d
+    picture = GFX_AZT_your_text_picture
+    
+    is_triggered_only = yes
+    
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event: azt_mec_mittleazteken.6"
+	}
+
+	option = {
+        name = azt_mec_mittleazteken.6.a
+		ai_chance = {
+			base = 20
+		}
+	}
+}
+
+country_event = {
+	id = azt_mec_mittleazteken.7
+    title = azt_mec_mittleazteken.7.t
+    desc = azt_mec_mittleazteken.7.d
+    picture = GFX_AZT_your_text_picture
+    
+    is_triggered_only = yes
+    
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event: azt_mec_mittleazteken.7"
+	}
+
+	option = {
+        name = azt_mec_mittleazteken.7.a
+		ai_chance = {
+			base = 20
+		}
 	}
 }
 
@@ -514,9 +677,7 @@ country_event = { # Acamapichtli Ship
 	
 	trigger = {
 		tag = AZT
-		AZT = {
-			has_tech = aotsm_lamp_electrical_engineering_tech
-		}
+		has_tech = aotsm_early_fire_control_system_tech
 	}
 
 	immediate = { log = "[GetDateText]: [Root.GetName]: event: azt_scripted_events.1" }
