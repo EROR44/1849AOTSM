@@ -164,7 +164,7 @@ focus_tree = {
 
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: focus AZT_inspect_the_army"
-			country_lock_all_division_template = no
+			country_event = azt_event.22
 		}
 	}
 
@@ -587,7 +587,7 @@ focus_tree = {
 		ai_will_do = {
 			modifier = {
 				factor = 30
-				has_completed_focus = AZT_empire_industry
+				has_completed_focus = AZT_the_coal_and_steam_age
 				has_completed_focus = AZT_military_command
 			}
 		}
@@ -727,6 +727,10 @@ focus_tree = {
 			SON = {
 				exists = yes
 			}
+			OR = {
+				has_country_flag = AZT_swapped_tenochtitlan_treaty
+				AZT_trade_monopoly_not_exists_trigger = yes
+			}
 		}
 
 		enable_automatic_bypass = no
@@ -794,11 +798,28 @@ focus_tree = {
 				}
 			}
 		}
+
+		available = {
+			OR = {
+				custom_trigger_tooltip = {
+					tooltip = aotsm_w_is_completed_trigger_tt
+					ROOT = { has_idea = westernisation_end }
+				}
+				custom_trigger_tooltip = {
+					tooltip = {
+						localization_key = aotsm_check_westernization_value_greater_tt
+						POINTS_NUM = 15
+					}
+					check_variable = { var = ROOT.aotsm_westernisation_points_num value = 15 compare = greater_than_or_equals }
+				}
+			}
+		}
 		
 		prerequisite = { focus = AZT_resuscitate_the_economy }
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: focus AZT_capitalist_industry"
 			random_owned_controlled_state = {
+				add_extra_state_shared_building_slots = 1
 				add_building_construction = {
 					type = industrial_complex
 					level = 1
@@ -807,8 +828,8 @@ focus_tree = {
 				if = {
 					limit = {
 						AZT = { has_country_flag = AZT_cholera_gui_visible_flag }
-						check_variable = { AZT_cholera_state_status < 3 }
-						NOT = { check_variable = { AZT_cholera_state_status = 0 } }
+						THIS = { is_in_array = { AZT.aotsm_get_states_for_cholera_gui = THIS } }
+						check_variable = { AZT_cholera_state_status = 0 }
 					}
 					AZT_alleviate_cholera_in_state = yes
 				}
@@ -839,15 +860,15 @@ focus_tree = {
 			log = "[GetDateText]: [Root.GetName]: focus AZT_teotitlan_steel_mill"
 			1027 = {
 				add_building_construction = {
-				type = industrial_complex
-				level = 1
-				instant_build = yes
+					type = industrial_complex
+					level = 1
+					instant_build = yes
 				}
-				
+				add_extra_state_shared_building_slots = 1
 				add_building_construction = {
-				type = infrastructure
-				level = 1
-				instant_build = yes
+					type = infrastructure
+					level = 1
+					instant_build = yes
 				}
 			}
 		}
@@ -880,8 +901,8 @@ focus_tree = {
 	}
 	
 	focus = {
-		id = AZT_empire_industry
-		#icon = GFX_focus_AZT_empire_industry
+		id = AZT_the_coal_and_steam_age
+		#icon = GFX_focus_AZT_the_coal_and_steam_age
 		
 		x = 9
 		y = 7
@@ -900,7 +921,7 @@ focus_tree = {
 		prerequisite = { focus = AZT_trade_with_japan focus = AZT_trade_with_sonora }
 		
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: focus AZT_empire_industry"
+			log = "[GetDateText]: [Root.GetName]: focus AZT_the_coal_and_steam_age"
 			add_timed_idea = {
 				idea = AZT_restructuring_of_imperial_industry_idea
 				days = 365
@@ -1019,7 +1040,7 @@ focus_tree = {
 		ai_will_do = {
 			modifier = {
 				factor = 30
-				has_completed_focus = AZT_empire_industry
+				has_completed_focus = AZT_the_coal_and_steam_age
 			}
 		}
 		
@@ -1049,7 +1070,7 @@ focus_tree = {
 		
 		prerequisite = { focus = AZT_military_command }
 		prerequisite = { focus = AZT_goverment_press }
-		prerequisite = { focus = AZT_empire_industry }
+		prerequisite = { focus = AZT_the_coal_and_steam_age }
 		
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: focus AZT_ending_political_isolation"
