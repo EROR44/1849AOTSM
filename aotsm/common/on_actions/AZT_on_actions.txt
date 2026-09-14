@@ -4,7 +4,10 @@ on_actions = {
         effect = {
             if = {
                 limit = {
-                    has_idea = AZT_aus_trade_monopoly_idea
+                    OR = {
+                        has_idea = AZT_aus_trade_monopoly_idea
+						has_idea = AZT_aus_trade_monopoly_1_idea
+                    }
                 }
                 AZT_austrian_trade_monopoly_effect = yes
             }
@@ -34,10 +37,15 @@ on_actions = {
 				    add_idea = AZT_macehualtin_law_peacetime
                 }
                 multiply_variable = { AZT.get_cost_for_check_the_readness_of_the_militia = 3 } # Decision Cost
-                delete_units = { 
-				    division_template = "Macehualtin"
-				    disband = no # if yes, equipment will be returned to country equipment. default is no
-			    }
+                if = {
+                    limit = {
+                        has_template = "Macehualtin"
+                    }
+                    delete_units = { 
+				        division_template = "Macehualtin"
+				        disband = no # if yes, equipment will be returned to country equipment. default is no
+			        }
+                }
 			}
         }
     }
