@@ -11,7 +11,7 @@ AZT_alleviate_cholera_in_state = {
 }
 
 AZT_update_cholera_gui = {
-	add_to_variable = { AZT_cholera_gui_dirty = 0.001 }
+	add_to_variable = { AZT.AZT_cholera_gui_dirty = 0.001 }
 }
 
 AZT_clamp_states_status_vars = {
@@ -82,8 +82,6 @@ AZT_start_cholera_gui = {
 		set_variable = { 476.AZT_cholera_state_status = 0 }
 		set_variable = { 964.AZT_cholera_state_status = 1 }
 		set_variable = { 1027.AZT_cholera_state_status = 2 }
-
-		set_variable = { AZT.AZT_current_state_num = 1026 }
 
 		if = {
 			limit = {
@@ -178,9 +176,6 @@ AZT_remove_cholera_gui = {
 	clear_variable = 476.AZT_cholera_state_status
 	clear_variable = 964.AZT_cholera_state_status
 	clear_variable = 1027.AZT_cholera_state_status
-
-	### BUTTONS VARIABLE ###
-	clear_variable = AZT_current_state_num
 
 	### GUI DIRTY ###
 	clear_variable = AZT_cholera_gui_dirty
@@ -286,10 +281,15 @@ AZT_remove_macehualtin_effect = {
 	clear_variable = AZT.get_cost_for_check_the_readness_of_the_militia
 
 	hidden_effect = {
-		delete_unit_template_and_units = {
-    		division_template = "Macehualtin"
-    		disband = no #will not refund equipment and manpower
-		}
+		if = {
+            limit = {
+                has_template = "Macehualtin"
+            }
+            delete_unit_template_and_units = { 
+		        division_template = "Macehualtin"
+		        disband = no # if yes, equipment will be returned to country equipment. default is no
+	       }
+        }
 		set_technology = {
 			militia_tech = 0
 			mountain_warfare_militias_tech = 0
@@ -348,6 +348,21 @@ AZT_set_state_for_cholera_event_4 = {
 				value = THIS
 			}
 		}
+		if = {
+			limit = {
+				check_variable = { AZT.this_state_can_be_used_for_cholera_event_4_array^num = 0 }
+			}
+			random_owned_state = {
+				limit = {
+					is_in_array = { AZT.aotsm_get_states_for_cholera_gui = THIS }
+					AZT_state_have_the_resources_trigger = yes
+				}
+				add_to_array = {
+					array = AZT.this_state_can_be_used_for_cholera_event_4_array
+					value = THIS
+				}
+			}
+		}
 	}
 }
 
@@ -397,9 +412,27 @@ AZT_get_random_cholera_event_effect = {
 				factor = 0
 				AZT = { has_country_flag = AZT_dont_use_random_cholera_state_events_6 }
 			}
+			modifier = {
+				factor = 0
+				AZT = {
+					NOT = { any_owned_state = { AZT_state_have_the_resources_trigger = yes } }
+				}
+			}
 			AZT = { country_event = { id = azt_random_cholera_state_events.6 days = 3 } }
 		}
 	}
+}
+
+AZT_austrian_trade_monopoly_on_startup_effect = {
+	every_other_country = {
+		limit = {
+			NOT = { tag = MEC }
+		}
+       	add_opinion_modifier = {
+        	target = AZT
+          	modifier = end_trade
+    	}
+    }
 }
 
 AZT_austrian_trade_monopoly_effect = {
@@ -407,6 +440,7 @@ AZT_austrian_trade_monopoly_effect = {
 	if = {
 		limit = {
 			has_completed_focus = AZT_trade_with_japan
+			NOT = { has_completed_focus = AZT_trade_with_sonora }
 		}
 		every_other_country = {
 			limit = {
@@ -420,6 +454,50 @@ AZT_austrian_trade_monopoly_effect = {
 						is_in_faction_with = JAP
 					}
 				}
+				NOT = { is_neighbor_of = AZT }
+			}
+			add_opinion_modifier = {
+        		target = AZT
+            	modifier = end_trade
+        	}
+		}
+	}
+	else_if = {
+		limit = {
+			has_completed_focus = AZT_trade_with_japan
+			has_completed_focus = AZT_trade_with_sonora
+		}
+		every_other_country = {
+			limit = {
+				NOT = { tag = MEC }
+				NOT = { tag = JAP }
+				NOT = { tag = TUK }
+				NOT = { 
+					OR = {
+						is_puppet_of = JAP
+						is_subject_of = JAP
+						is_in_faction_with = JAP
+					}
+				}
+				NOT = { tag = SON }
+				NOT = {
+					OR = {
+						is_puppet_of = SON
+						is_subject_of = SON
+					}
+				}
+				if = {
+					limit = {
+						SON = {
+							OR = {
+								is_puppet_of = PRT
+								is_subject_of = PRT
+							}
+						}
+					}
+					NOT = { tag = PRT }
+				}
+				NOT = { is_neighbor_of = AZT }
 			}
 			add_opinion_modifier = {
         		target = AZT
@@ -430,6 +508,7 @@ AZT_austrian_trade_monopoly_effect = {
 	else_if = {
 		limit = {
 			has_completed_focus = AZT_trade_with_sonora
+			NOT = { has_completed_focus = AZT_trade_with_japan }
 			NOT = {
 				SON = {
 					is_puppet_of = PRT
@@ -447,37 +526,17 @@ AZT_austrian_trade_monopoly_effect = {
 						is_subject_of = SON
 					}
 				}
-			}
-			add_opinion_modifier = {
-        		target = AZT
-            	modifier = end_trade
-        	}
-		}
-	}
-	else_if = {
-		limit = {
-			has_completed_focus = AZT_trade_with_sonora
-			SON = {
-				is_puppet_of = PRT
-				is_subject_of = PRT
-			}
-		}
-		every_other_country = {
-			limit = {
-				NOT = { tag = MEC }
-				NOT = { tag = SON }
-				NOT = {
-					OR = {
-						is_puppet_of = SON
-						is_subject_of = SON
+				NOT = { is_neighbor_of = AZT }
+				if = {
+					limit = {
+						SON = {
+							OR = {
+								is_puppet_of = PRT
+								is_subject_of = PRT
+							}
+						}
 					}
-				}
-				NOT = { tag = PRT }
-				NOT = {
-					OR = {
-						is_puppet_of = PRT
-						is_subject_of = PRT
-					}
+					NOT = { tag = PRT }
 				}
 			}
 			add_opinion_modifier = {
@@ -490,6 +549,7 @@ AZT_austrian_trade_monopoly_effect = {
 		every_other_country = {
 			limit = {
 				NOT = { tag = MEC }
+				NOT = { is_neighbor_of = AZT }
 			}
        		add_opinion_modifier = {
         		target = AZT
