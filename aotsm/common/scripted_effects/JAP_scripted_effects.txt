@@ -85,3 +85,61 @@ JAP_go_to_tot_economic_mobilisation_effect = {
         }
     }
 }
+
+JAP_calculate_factions_superiority_num_effect = {
+
+    set_variable = { jap_cw_total_controlled_states_num = 0 }
+    add_to_variable = { jap_cw_total_controlled_states_num = JAP.num_of_controlled_states }
+    add_to_variable = { jap_cw_total_controlled_states_num = JAS.num_of_controlled_states }
+    add_to_variable = { jap_cw_total_controlled_states_num = TUK.num_of_controlled_states }
+
+    set_variable = { JAP.jap_temp_percent_of_controlled_states = JAP.num_of_controlled_states }
+    set_variable = { JAS.jap_temp_percent_of_controlled_states = JAS.num_of_controlled_states }
+    set_variable = { TUK.jap_temp_percent_of_controlled_states = TUK.num_of_controlled_states }
+
+    multiply_variable = { JAP.jap_temp_percent_of_controlled_states = 100 }
+    multiply_variable = { JAS.jap_temp_percent_of_controlled_states = 100 }
+    multiply_variable = { TUK.jap_temp_percent_of_controlled_states = 100 }
+
+    divide_variable = { JAP.jap_temp_percent_of_controlled_states = jap_cw_total_controlled_states_num }
+    divide_variable = { JAS.jap_temp_percent_of_controlled_states = jap_cw_total_controlled_states_num }
+    divide_variable = { TUK.jap_temp_percent_of_controlled_states = jap_cw_total_controlled_states_num }
+
+    set_variable = { JAP.jap_cw_num_of_controlled_states = JAP.jap_temp_percent_of_controlled_states }
+    set_variable = { JAS.jap_cw_num_of_controlled_states = JAS.jap_temp_percent_of_controlled_states }
+    set_variable = { TUK.jap_cw_num_of_controlled_states = TUK.jap_temp_percent_of_controlled_states }
+
+    set_variable = { JAP.jap_temp_percent_of_controlled_states = 0 }
+    set_variable = { JAS.jap_temp_percent_of_controlled_states = 0 }
+    set_variable = { TUK.jap_temp_percent_of_controlled_states = 0 }
+}
+
+JAP_cw_who_is_winner_effect = {
+    if = {
+        limit = {
+            check_variable = { JAP.jap_cw_num_of_controlled_states > JAS.jap_cw_num_of_controlled_states }
+            check_variable = { JAP.jap_cw_num_of_controlled_states > TUK.jap_cw_num_of_controlled_states }
+        }
+        JAP = {
+            set_country_flag = JAP_is_winner_in_civil_war_flag
+        }
+    }
+    else_if = {
+        limit = {
+            check_variable = { JAS.jap_cw_num_of_controlled_states > JAP.jap_cw_num_of_controlled_states }
+            check_variable = { JAS.jap_cw_num_of_controlled_states > TUK.jap_cw_num_of_controlled_states }
+        }
+        JAS = {
+            set_country_flag = JAS_is_winner_in_civil_war_flag
+        }
+    }
+    else_if = {
+        limit = {
+            check_variable = { TUK.jap_cw_num_of_controlled_states > JAP.jap_cw_num_of_controlled_states }
+            check_variable = { TUK.jap_cw_num_of_controlled_states > JAS.jap_cw_num_of_controlled_states }
+        }
+        TUK = {
+            set_country_flag = TUK_is_winner_in_civil_war_flag
+        }
+    }
+}
