@@ -372,7 +372,7 @@ calculate_base_prestige = { #only on startup - подсчет индивидуа
 			limit = {
 				tag = CBI
 			}
-		add_to_variable = { country_start_prestige = 5 }
+			add_to_variable = { country_start_prestige = 5 }
 		}
 		else_if = {
 			limit = {
@@ -448,43 +448,9 @@ calculate_prestige = {
 		add_to_variable = { country_industry_score = country_leypoldit_complex }
 		add_to_variable = { country_industry_score = country_nuclear_reactors }
 		add_to_variable = { country_industry_score = country_radar_stations_num }
-		
-		if = { #градация по промышленному развитию
-			limit = {
-				has_idea = agrarian_country
-			}
-			multiply_variable = { country_industry_score = 0.2 }
-		}
-		else_if = {
-			limit = {
-				has_idea = manufactory_production
-			}
-			multiply_variable = { country_industry_score = 0.4 }
-		}
-		else_if = {
-			limit = {
-				has_idea = manufactory_production
-			}
-			multiply_variable = { country_industry_score = 0.5 }
-		}
-		else_if = {
-			limit = {
-				has_idea = backward_industry
-			}
-			multiply_variable = { country_industry_score = 0.6 }
-		}
-		else_if = {
-			limit = {
-				has_idea = medium_developed_industry
-			}
-			multiply_variable = { country_industry_score = 0.8 }
-		}
-		else_if = {
-			limit = {
-				has_idea = modern_industry
-			}
-			multiply_variable = { country_industry_score = 0.9 }
-		}
+
+		# Градация по промышленному развитию
+		multiply_variable = { country_industry_score = modifier@aotsm_industry_score_multiplier }
 
 		# Science
 		set_variable = { country_tech_num = num_researched_technologies  } 
@@ -493,7 +459,6 @@ calculate_prestige = {
 		add_to_variable = { country_science_score = country_tech_num }
 		multiply_variable = { country_science_score = 0.35 }
 		add_to_variable = { country_science_score = amount_research_slots }
-		
 		
 		# Army Land
 		set_variable = { country_land_army = num_battalions  }
