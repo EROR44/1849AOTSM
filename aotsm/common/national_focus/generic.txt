@@ -419,7 +419,7 @@ focus_tree = {
 	}
 	focus = {
 		id = GEN_investments_in_human_resources
-		icon = GFX_goal_generic_scientific_exchange
+		icon = GFX_focus_generic_aotsm_research_1
 		
 		x = 2
 		y = 1
@@ -443,7 +443,7 @@ focus_tree = {
 	}
 	focus = {
 		id = GEN_the_education_reform
-		icon = GFX_focus_research
+		icon = GFX_focus_generic_aotsm_research_3
 		
 		x = 0
 		y = 1
@@ -468,7 +468,7 @@ focus_tree = {
 	}
 	focus = {
 		id = GEN_promotion_new_researhces
-		icon = GFX_focus_research2
+		icon = GFX_focus_generic_aotsm_research_2
 		
 		x = 0
 		y = 1
@@ -815,6 +815,7 @@ focus_tree = {
 			army_experience = 25
 		}
 	}
+
 	focus = {
 		id = GEN_combat_strategy
 		icon = GFX_goal_generic_cavalry
@@ -842,6 +843,76 @@ focus_tree = {
 			}
 		}
 	}
+
+	focus = {
+		id = GEN_infantry_army
+		icon = GFX_focus_generic_manpower
+		prerequisite = { focus = GEN_combat_strategy }
+		mutually_exclusive = { focus = GEN_mechanised_army }
+		x = -1
+		y = 1
+		
+		available = {
+		
+		}
+		
+		relative_position_id = GEN_combat_strategy
+		
+		cost = 10
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+			#add_ideas = GEN_infantry_army	
+			add_tech_bonus = {
+				bonus = 0.25
+				uses = 1
+				category = infantry_weapons
+			}
+			add_tech_bonus = {
+				name = infantry_artillery_bonus
+				bonus = 0.25
+				uses = 1
+				category = artillery
+			}
+		}
+	}
+
+	focus = {
+		id = GEN_mechanised_army
+		icon = GFX_focus_generic_build_armored_car_1
+		prerequisite = { focus = GEN_combat_strategy }
+		mutually_exclusive = { focus = GEN_infantry_army }
+		x = 1
+		y = 1
+		
+		available = {
+		
+		}
+		
+		relative_position_id = GEN_combat_strategy
+		
+		cost = 10
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+			#add_ideas = GEN_mechanised_army
+			add_tech_bonus = {
+				bonus = 0.25
+				uses = 1
+				name = mech_army_bonus
+				category = infantry_weapons
+			}
+			add_tech_bonus = {
+				name = infantry_artillery_bonus
+				bonus = 0.25
+				uses = 1
+				category = artillery
+			}
+		}
+	}
+	
 	focus = {
 		id = GEN_combat_strategy_2 
 		icon = GFX_goal_generic_army_doctrines
@@ -873,75 +944,6 @@ focus_tree = {
 			}
 		}
 	}
-	focus = {
-		id = GEN_infantry_army
-		icon = GFX_focus_generic_manpower
-		prerequisite = { focus = GEN_combat_strategy }
-		mutually_exclusive = { focus = GEN_mechanised_army }
-		x = -1
-		y = 1
-		
-		available = {
-		
-		}
-		
-		relative_position_id = GEN_combat_strategy
-		
-		cost = 10
-		
-		available_if_capitulated = yes
-
-		completion_reward = {
-			#add_ideas = GEN_infantry_army
-			add_tech_bonus = {
-				bonus = 0.8
-				uses = 1
-				name = mech_army_bonus
-				category = infantry_weapons
-			}
-			add_tech_bonus = {
-				name = infantry_artillery_bonus
-				bonus = 0.8
-				uses = 1
-				category = artillery
-			}
-		}
-	}
-	focus = {
-		id = GEN_mechanised_army
-		icon = GFX_goal_generic_army_motorized
-		prerequisite = { focus = GEN_combat_strategy }
-		mutually_exclusive = { focus = GEN_infantry_army }
-		x = 1
-		y = 1
-		
-		available = {
-		
-		}
-		
-		relative_position_id = GEN_combat_strategy
-		
-		cost = 10
-		
-		available_if_capitulated = yes
-
-		completion_reward = {
-			#add_ideas = GEN_mechanised_army
-			add_tech_bonus = {
-				name = infantry_artillery_bonus
-				bonus = 0.8
-				uses = 1
-				category = motorized_equipment
-				category = cat_mechanized_equipment
-			}	
-			add_tech_bonus = {
-				name = infantry_artillery_bonus
-				bonus = 0.8
-				uses = 1
-				category = artillery
-			}
-		}
-	}
 	
 #################################################################
 ####################AVIA_SECTION#################################
@@ -955,7 +957,7 @@ focus_tree = {
 		y = 0
 		
 		available = {
-			
+			date > 1854.6.1 #Переписать на триггер от события
 		}
 		
 		relative_position_id = GEN_army_reform
