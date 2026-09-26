@@ -37,10 +37,27 @@ country_event = { #покушение на лагранжа
 			
 		}
 		ai_chance = {
-			base = 10
+			base = 40
 			modifier = {
-				add = 500
-				is_historical_focus_on = yes
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = FRR_ai_behavior
+						option = FRANCE_DEMOCRATIC_RULE
+					}
+					has_game_rule = {
+						rule = FRR_ai_behavior
+						option = FRANCE_AUTHORITARIAN
+					}
+					has_game_rule = {
+						rule = FRR_ai_behavior
+						option = FRANCE_AUTHORITARIAN_ALTERNATIVE
+					}
+					has_game_rule = {
+						rule = FRR_ai_behavior
+						option = FRANCE_REACTIONIST
+					}
+				}
 			}
 		}
 		add_stability = -0.03
@@ -59,13 +76,50 @@ country_event = { #покушение на лагранжа
 		trigger = {
 			
 		}
+
 		ai_chance = {
 			base = 40
 			modifier = {
-				add = -500
+				add = -40
 				is_historical_focus_on = yes
+				NOT = {
+					OR = {
+						has_game_rule = {
+							rule = FRR_ai_behavior
+							option = FRANCE_SOCIALIST_ALTERNATIVE
+						}
+						has_game_rule = {
+							rule = FRR_ai_behavior
+							option = FRANCE_DEMOCRATIC_RULE
+						}
+						has_game_rule = {
+							rule = FRR_ai_behavior
+							option = FRANCE_AUTHORITARIAN
+						}
+						has_game_rule = {
+							rule = FRR_ai_behavior
+							option = FRANCE_AUTHORITARIAN_ALTERNATIVE
+						}
+						has_game_rule = {
+							rule = FRR_ai_behavior
+							option = FRANCE_REACTIONIST
+						}
+					}
+					has_game_rule = {
+						rule = FRR_ai_behavior
+						option = RANDOM
+					}
+				}
+			}
+			modifier = {
+				factor = 0
+				has_game_rule = {
+					rule = FRR_ai_behavior
+					option = FRANCE_SOCIALIST_HISTORICAL
+				}
 			}
 		}
+
 		kill_country_leader = yes
 		add_country_leader_role = {
 			character = FRR_Temporary_geverment
@@ -122,8 +176,11 @@ country_event = {#экстренная сессия правительства
 		ai_chance = {
 			base = 40
 			modifier = {
-				add = 100
-				is_historical_focus_on = yes
+				factor = 0
+				has_game_rule = {
+					rule = FRR_ai_behavior
+					option = FRANCE_SOCIALIST_ALTERNATIVE
+				}
 			}
 		}
 		hidden_effect = {
@@ -137,10 +194,16 @@ country_event = {#экстренная сессия правительства
 			
 		}
 		ai_chance = {
-			base = 0
+			base = 40
 			modifier = {
-				add = 40
-				is_historical_focus_on = no
+				factor = 0
+				OR = {
+					is_historical_focus_on = yes
+					has_game_rule = {
+						rule = FRR_ai_behavior
+						option = FRANCE_SOCIALIST_HISTORICAL
+					}
+				}
 			}
 		}
 		hidden_effect = {
@@ -148,7 +211,6 @@ country_event = {#экстренная сессия правительства
 			retire_character = FRR_Sharl_Lagranj
 			promote_character = FRR_Luis_Blank
 		}
-	
 	}
 	
 }
@@ -756,6 +818,27 @@ country_event = { #Шарль Лаграндж мертв - выборы нов�
 		}
 		ai_chance = {
 			base = 20
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = FRR_ai_behavior
+						option = FRANCE_DEMOCRATIC_RULE
+					}
+					has_game_rule = {
+						rule = FRR_ai_behavior
+						option = FRANCE_AUTHORITARIAN
+					}
+					has_game_rule = {
+						rule = FRR_ai_behavior
+						option = FRANCE_AUTHORITARIAN_ALTERNATIVE
+					}
+					has_game_rule = {
+						rule = FRR_ai_behavior
+						option = FRANCE_REACTIONIST
+					}
+				}
+			}
 		}
 		retire_character = FRR_Temporary_geverment
 		promote_character = FRR_Luis_Blank
@@ -775,6 +858,27 @@ country_event = { #Шарль Лаграндж мертв - выборы нов�
 		}
 		ai_chance = {
 			base = 20
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = FRR_ai_behavior
+						option = FRANCE_SOCIALIST_ALTERNATIVE
+					}
+					has_game_rule = {
+						rule = FRR_ai_behavior
+						option = FRANCE_AUTHORITARIAN
+					}
+					has_game_rule = {
+						rule = FRR_ai_behavior
+						option = FRANCE_AUTHORITARIAN_ALTERNATIVE
+					}
+					has_game_rule = {
+						rule = FRR_ai_behavior
+						option = FRANCE_REACTIONIST
+					}
+				}
+			}
 		}
 		retire_character = FRR_Temporary_geverment
 		promote_character = FRR_Mishel_Shevalie
@@ -795,7 +899,28 @@ country_event = { #Шарль Лаграндж мертв - выборы нов�
 			
 		}
 		ai_chance = {
-			base = 40
+			base = 20
+			modifier = {
+				add = 20
+				is_historical_focus_on = no
+			}
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = FRR_ai_behavior
+						option = FRANCE_SOCIALIST_ALTERNATIVE
+					}
+					has_game_rule = {
+						rule = FRR_ai_behavior
+						option = FRANCE_DEMOCRATIC_RULE
+					}
+					has_game_rule = {
+						rule = FRR_ai_behavior
+						option = FRANCE_REACTIONIST
+					}
+				}
+			}
 		}
 		retire_character = FRR_Temporary_geverment
 		promote_character = FRR_Anri_Sharl_de_Artua
@@ -815,7 +940,32 @@ country_event = { #Шарль Лаграндж мертв - выборы нов�
 			
 		}
 		ai_chance = {
-			base = 60
+			base = 20
+			modifier = {
+				add = 20
+				is_historical_focus_on = no
+			}
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = FRR_ai_behavior
+						option = FRANCE_SOCIALIST_ALTERNATIVE
+					}
+					has_game_rule = {
+						rule = FRR_ai_behavior
+						option = FRANCE_AUTHORITARIAN
+					}
+					has_game_rule = {
+						rule = FRR_ai_behavior
+						option = FRANCE_AUTHORITARIAN_ALTERNATIVE
+					}
+					has_game_rule = {
+						rule = FRR_ai_behavior
+						option = FRANCE_DEMOCRATIC_RULE
+					}
+				}
+			}
 		}
 		retire_character = FRR_Temporary_geverment
 		promote_character = FRR_Louis_Napoleon		
