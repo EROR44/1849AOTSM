@@ -3611,7 +3611,7 @@ focus_tree = {
 
 	focus = {
 		id = QIN_support_khans
-	#	icon = GFX_
+		icon = GFX_focus_QIN_support_khans
 		prerequisite = { focus = QIN_condemn_intervention_in_central_asia }
 		x = 0
 		y = 1
@@ -3795,7 +3795,7 @@ focus_tree = {
 
 	focus = {
 		id = QIN_northern_manchuria_dispute
-	#	icon = GFX_
+		icon = GFX_focus_QIN_northern_manchuria_dispute
 		prerequisite = { focus = QIN_dialogue_with_russia focus = QIN_remain_neutrality }
 		x = 3
 		y = 1
@@ -3821,7 +3821,7 @@ focus_tree = {
 
 	focus = {
 		id = QIN_give_up_northern_manchuria
-	#	icon = GFX_
+		icon = GFX_focus_QIN_give_up_northern_manchuria
 		mutually_exclusive = { focus = QIN_keep_up_northern_manchuria }
 		prerequisite = { focus = QIN_northern_manchuria_dispute }
 		x = -1
@@ -4224,6 +4224,61 @@ focus_tree = {
 	}
 
 	focus = {
+		id = QIN_japan_china_trade_development
+		#icon = GFX_focus_QIN_japan_china_trade_development
+
+		prerequisite = { focus = QIN_neutrality_with_japan }
+		x = 0
+		y = 1
+		relative_position_id = QIN_neutrality_with_japan
+
+		cost = 5
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		available = {  }
+
+		bypass = {  }
+
+		cancel_if_invalid = yes
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus QIN_japan_china_trade_development completed"
+
+		}
+	}
+
+
+	focus = {
+		id = QIN_japanese_goods_tariffs
+		#icon = GFX_focus_QIN_japan_china_trade_development
+
+		prerequisite = { focus = QIN_japan_china_trade_development }
+		x = 0
+		y = 1
+		relative_position_id = QIN_japan_china_trade_development
+
+		cost = 5
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		available = {  }
+
+		bypass = {  }
+
+		cancel_if_invalid = yes
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus QIN_japanese_goods_tariffs completed"
+
+		}
+	}
+
+	focus = {
 		id = QIN_build_relationships_with_japan
 		icon = GFX_focus_generic_be_friend_with_japan
 		mutually_exclusive = { focus = QIN_neutrality_with_japan }
@@ -4251,7 +4306,61 @@ focus_tree = {
 	}
 
 	focus = {
-		id = QIN_the_issue_of_taiwans_return
+		id = QIN_factory_cities_status
+		#icon = GFX_focus_QIN_factory_cities_status
+
+		prerequisite = { focus = QIN_build_relationships_with_japan }
+		x = 0
+		y = 1
+		relative_position_id = QIN_build_relationships_with_japan
+
+		cost = 5
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		available = {  }
+
+		bypass = {  }
+
+		cancel_if_invalid = yes
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus QIN_factory_cities_status completed"
+
+		}
+	}
+
+	focus = {
+		id = QIN_technology_exchange_program
+		#icon = GFX_focus_QIN_technology_exchange_program
+
+		prerequisite = { focus = QIN_factory_cities_status }
+		x = 0
+		y = 1
+		relative_position_id = QIN_factory_cities_status
+
+		cost = 5
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		available = {  }
+
+		bypass = {  }
+
+		cancel_if_invalid = yes
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus QIN_technology_exchange_program completed"
+
+		}
+	}
+
+	focus = {
+		id = QIN_the_taiwans_quiestion
 	#	icon = GFX_
 
 		prerequisite = { 
@@ -4259,7 +4368,7 @@ focus_tree = {
 			focus = QIN_neutrality_with_japan 
 		}
 		x = 0
-		y = 2
+		y = 3
 		relative_position_id = QIN_eastern_direction
 
 		cost = 5
@@ -4277,7 +4386,44 @@ focus_tree = {
 		cancel_if_invalid = yes
 
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: focus QIN_the_issue_of_taiwans_return completed"
+			log = "[GetDateText]: [Root.GetName]: focus QIN_the_taiwans_quiestion completed"
+
+		}
+	}
+
+	focus = {
+		id = QIN_new_view_old_neighbor
+	#	icon = GFX_
+
+		relative_position_id = QIN_the_taiwans_quiestion
+		prerequisite = { focus = QIN_the_taiwans_quiestion }
+		prerequisite = { 
+			focus = QIN_japanese_goods_tariffs 
+			focus = QIN_technology_exchange_program 
+		}
+		x = 0
+		y = 1
+		relative_position_id = QIN_the_taiwans_quiestion
+
+		cost = 5
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		available = { 
+			OR = {
+				has_completed_focus = QIN_japanese_goods_tariffs
+				has_completed_focus = QIN_technology_exchange_program
+			}
+		}
+
+		bypass = {  }
+
+		cancel_if_invalid = yes
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus QIN_new_view_old_neighbor completed"
 
 		}
 	}
@@ -5581,6 +5727,380 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: focus QIN_complete_military_modernization completed"
 			country_event = qin_army_event.37
+		}
+	}
+
+###################################################################
+########################JAPAN_INVASION_SECTION#####################
+###################################################################
+
+	focus = {
+		id = QIN_struggle_against_japanese_intervention
+		#icon = GFX_focus_QIN_struggle_against_japanese_intervention
+
+		x = 0
+		y = 7
+		relative_position_id = QIN_center_of_earth_and_others
+
+		cost = 0
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		available = { 
+			aotsm_performed_by_event_or_solution = yes 
+		}
+
+		bypass = {  }
+
+		cancel_if_invalid = yes
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus QIN_struggle_against_japanese_intervention completed"
+
+		}
+	}
+
+	focus = {
+		id = QIN_defense_northern_capital
+		#icon = GFX_focus_QIN_defense_northern_capital
+
+		prerequisite = { focus = QIN_struggle_against_japanese_intervention }
+		x = -3
+		y = 2
+		relative_position_id = QIN_struggle_against_japanese_intervention
+
+		cost = 5
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		available = { 
+			608 = {
+				is_controlled_by = QIN
+			}
+		}
+
+		bypass = {  }
+
+		cancel_if_invalid = yes
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus QIN_defense_northern_capital completed"
+
+		}
+	}
+
+	focus = {
+		id = QIN_defense_southern_capital
+		#icon = GFX_focus_QIN_defense_southern_capital
+
+		prerequisite = { focus = QIN_struggle_against_japanese_intervention }
+		x = 3
+		y = 2
+		relative_position_id = QIN_struggle_against_japanese_intervention
+
+		cost = 5
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		available = { 
+			971 = {
+				is_controlled_by = QIN
+			}
+		}
+
+		bypass = {  }
+
+		cancel_if_invalid = yes
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus QIN_defense_southern_capital completed"
+
+		}
+	}
+
+	focus = {
+		id = QIN_defensive_strategy
+		#icon = GFX_focus_QIN_defensive_strategy
+		mutually_exclusive = { focus = QIN_offensive_strategy }
+		prerequisite = { focus = QIN_struggle_against_japanese_intervention }
+		x = -5
+		y = 1
+		relative_position_id = QIN_struggle_against_japanese_intervention
+
+		cost = 2
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		available = {  }
+
+		bypass = {  }
+
+		cancel_if_invalid = yes
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus QIN_defensive_strategy completed"
+
+		}
+	}
+
+	focus = {
+		id = QIN_garrison_reinforcement
+		#icon = GFX_focus_QIN_garrison_reinforcement
+
+		prerequisite = { focus = QIN_defensive_strategy }
+		x = 0
+		y = 1
+		relative_position_id = QIN_defensive_strategy
+
+		cost = 2
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		available = {  }
+
+		bypass = {  }
+
+		cancel_if_invalid = yes
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus QIN_garrison_reinforcement completed"
+
+		}
+	}
+
+	focus = {
+		id = QIN_partisan_tactics
+		#icon = GFX_focus_QIN_partisan_tactics
+
+		prerequisite = { focus = QIN_garrison_reinforcement }
+		x = 0
+		y = 1
+		relative_position_id = QIN_garrison_reinforcement
+
+		cost = 2
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		available = {  }
+
+		bypass = {  }
+
+		cancel_if_invalid = yes
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus QIN_partisan_tactics completed"
+
+		}
+	}
+
+	focus = {
+		id = QIN_offensive_strategy
+		#icon = GFX_focus_QIN_offensive_strategy
+		mutually_exclusive = { focus = QIN_defensive_strategy }
+		prerequisite = { focus = QIN_struggle_against_japanese_intervention }
+		x = 5
+		y = 1
+		relative_position_id = QIN_struggle_against_japanese_intervention
+
+		cost = 2
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		available = {  }
+
+		bypass = {  }
+
+		cancel_if_invalid = yes
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus QIN_offensive_strategy completed"
+
+		}
+	}
+
+	focus = {
+		id = QIN_asymmetric_warfare_tactics
+		#icon = GFX_focus_QIN_asymmetric_warfare_tactics
+
+		prerequisite = { focus = QIN_offensive_strategy }
+		x = 0
+		y = 1
+		relative_position_id = QIN_offensive_strategy
+
+		cost = 2
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		available = {  }
+
+		bypass = {  }
+
+		cancel_if_invalid = yes
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus QIN_asymmetric_warfare_tactics completed"
+
+		}
+	}
+
+	focus = {
+		id = QIN_willpower_against_occupiers
+		#icon = GFX_focus_QIN_willpower_against_occupiers
+
+		prerequisite = { focus = QIN_asymmetric_warfare_tactics }
+		x = 0
+		y = 1
+		relative_position_id = QIN_asymmetric_warfare_tactics
+
+		cost = 2
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		available = {  }
+
+		bypass = {  }
+
+		cancel_if_invalid = yes
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus QIN_willpower_against_occupiers completed"
+
+		}
+	}
+
+	focus = {
+		id = QIN_wartime_measures
+		#icon = GFX_focus_QIN_wartime_measures
+
+		prerequisite = { focus = QIN_struggle_against_japanese_intervention }
+		x = 0
+		y = 2
+		relative_position_id = QIN_struggle_against_japanese_intervention
+
+		cost = 5
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		available = {  }
+
+		bypass = {  }
+
+		cancel_if_invalid = yes
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus QIN_wartime_measures completed"
+
+		}
+	}
+
+	focus = {
+		id = QIN_expansion_production_lines
+		#icon = GFX_focus_QIN_expansion_production_lines
+
+		prerequisite = { focus = QIN_wartime_measures }
+		x = -1
+		y = 1
+		relative_position_id = QIN_wartime_measures
+
+		cost = 5
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		available = {  }
+
+		bypass = {  }
+
+		cancel_if_invalid = yes
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus QIN_expansion_production_lines completed"
+
+		}
+	}
+
+	focus = {
+		id = QIN_emergency_recruitment
+		#icon = GFX_focus_QIN_emergency_recruitment
+
+		prerequisite = { focus = QIN_wartime_measures }
+		x = 1 
+		y = 1
+		relative_position_id = QIN_wartime_measures
+
+		cost = 5
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		available = {  }
+
+		bypass = {  }
+
+		cancel_if_invalid = yes
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus QIN_emergency_recruitment completed"
+
+		}
+	}
+
+	focus = {
+		id = QIN_for_the_celestial_empire_and_the_emperor
+		#icon = GFX_focus_QIN_for_the_celestial_empire_and_the_emperor
+
+		prerequisite = { focus = QIN_expansion_production_lines }
+		prerequisite = { focus = QIN_emergency_recruitment }
+		prerequisite = { 
+			focus = QIN_partisan_tactics 
+			focus = QIN_willpower_against_occupiers 
+		}
+		x = 0
+		y = 2
+		relative_position_id = QIN_wartime_measures
+
+		cost = 5
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		available = { 
+			OR = {
+				has_completed_focus = QIN_partisan_tactics 
+				has_completed_focus = QIN_willpower_against_occupiers 
+			}
+		}
+
+		bypass = {  }
+
+		cancel_if_invalid = yes
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: focus QIN_for_the_celestial_empire_and_the_emperor completed"
+
 		}
 	}
 
