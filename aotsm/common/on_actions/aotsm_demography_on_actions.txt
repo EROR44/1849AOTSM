@@ -1,0 +1,9 @@
+# Initialization and country display caches only; no demographic events.
+on_actions = {
+	# on_startup has no country scope; enter one before calling a scripted effect.
+	# The global initialization guard ensures that it runs once.
+	on_startup = { effect = { every_country = { aotsm_demo_initialize = yes } } }
+	on_monthly = { effect = { if = { limit = { has_global_flag = aotsm_demo_initialized_v1 } aotsm_demo_refresh_country = yes } } }
+	on_state_control_changed = { effect = { if = { limit = { has_global_flag = aotsm_demo_initialized_v1 } aotsm_demo_refresh_country = yes FROM = { aotsm_demo_refresh_country = yes } } } }
+	on_annex = { effect = { if = { limit = { has_global_flag = aotsm_demo_initialized_v1 } aotsm_demo_refresh_country = yes FROM = { aotsm_demo_refresh_country = yes } } } }
+}
