@@ -1,0 +1,2277 @@
+# State-scope relative changes; no on_actions, events or starting-data edits.
+# Inputs: aotsm_demography_target_id_var, aotsm_demography_relative_percent_var.
+# Read an existing ID from global.aotsm_demo_c_id_<key> or global.aotsm_demo_r_id_<key>.
+# Outputs: aotsm_demography_relative_applied_var (0/1), aotsm_demography_relative_delta_var.
+# Target zero/absent, target 100%, missing initialization and rounded zero changes are no-ops.
+# Other groups are rescaled proportionally; the largest other group receives rounding residual.
+# Native meta_effect uses token keys; ordinary scripted effects do not accept named arguments.
+# The global token lookup is built lazily once; bump its flag version when registry IDs change.
+# Internal working arrays are temporary and cleared after each public call.
+# The generic input range is -100..100; convenience effects use +/-1, +/-5, +/-10.
+# Example in state scope:
+# set_temp_variable = { aotsm_demography_target_id_var = global.aotsm_demo_c_id_nahua }
+# aotsm_demography_increase_culture_10_percent_effect = yes
+
+aotsm_demography_initialize_relative_registry_effect = {
+	if = {
+		limit = {
+			NOT = {
+				has_global_flag = aotsm_demography_relative_registry_v1_flag
+			}
+		}
+
+		resize_array = {
+			array = global.aotsm_demography_relative_culture_keys_array
+			size = 349
+			value = 0
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^1 = token:aotsm_demo_c_hellenic
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^2 = token:aotsm_demo_c_turkish
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^3 = token:aotsm_demo_c_armenian
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^4 = token:aotsm_demo_c_georgian
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^5 = token:aotsm_demo_c_azerbaijani
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^6 = token:aotsm_demo_c_kurdish
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^7 = token:aotsm_demo_c_assyrian
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^8 = token:aotsm_demo_c_arab
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^9 = token:aotsm_demo_c_persian
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^10 = token:aotsm_demo_c_baluchi
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^11 = token:aotsm_demo_c_pashtun
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^12 = token:aotsm_demo_c_tajik
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^13 = token:aotsm_demo_c_uzbek
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^14 = token:aotsm_demo_c_turkmen
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^15 = token:aotsm_demo_c_kazakh
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^16 = token:aotsm_demo_c_kyrgyz
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^17 = token:aotsm_demo_c_karakalpak
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^18 = token:aotsm_demo_c_hazara
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^19 = token:aotsm_demo_c_russian
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^20 = token:aotsm_demo_c_ukrainian
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^21 = token:aotsm_demo_c_belarusian
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^22 = token:aotsm_demo_c_polish
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^23 = token:aotsm_demo_c_lithuanian
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^24 = token:aotsm_demo_c_latvian
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^25 = token:aotsm_demo_c_estonian
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^26 = token:aotsm_demo_c_finnish
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^27 = token:aotsm_demo_c_karelian
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^28 = token:aotsm_demo_c_saami
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^29 = token:aotsm_demo_c_tatar
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^30 = token:aotsm_demo_c_bashkir
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^31 = token:aotsm_demo_c_chuvash
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^32 = token:aotsm_demo_c_mari
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^33 = token:aotsm_demo_c_udmurt
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^34 = token:aotsm_demo_c_mordvin
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^35 = token:aotsm_demo_c_komi
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^36 = token:aotsm_demo_c_kalmyk
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^37 = token:aotsm_demo_c_buryat
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^38 = token:aotsm_demo_c_yakut
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^39 = token:aotsm_demo_c_evenk
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^40 = token:aotsm_demo_c_nenets
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^41 = token:aotsm_demo_c_khanty
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^42 = token:aotsm_demo_c_chukchi
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^43 = token:aotsm_demo_c_koryak
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^44 = token:aotsm_demo_c_ossetian
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^45 = token:aotsm_demo_c_chechen
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^46 = token:aotsm_demo_c_circassian
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^47 = token:aotsm_demo_c_dagestani
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^48 = token:aotsm_demo_c_german
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^49 = token:aotsm_demo_c_austrian
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^50 = token:aotsm_demo_c_czech
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^51 = token:aotsm_demo_c_slovak
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^52 = token:aotsm_demo_c_hungarian
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^53 = token:aotsm_demo_c_wallachian
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^54 = token:aotsm_demo_c_slovene
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^55 = token:aotsm_demo_c_croat
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^56 = token:aotsm_demo_c_serb
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^57 = token:aotsm_demo_c_bosnian
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^58 = token:aotsm_demo_c_bulgarian
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^59 = token:aotsm_demo_c_albanian
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^60 = token:aotsm_demo_c_piemontese
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^61 = token:aotsm_demo_c_sardinian
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^62 = token:aotsm_demo_c_french
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^63 = token:aotsm_demo_c_occitan
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^64 = token:aotsm_demo_c_breton
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^65 = token:aotsm_demo_c_dutch
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^66 = token:aotsm_demo_c_flemish
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^67 = token:aotsm_demo_c_walloon
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^68 = token:aotsm_demo_c_frisian
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^69 = token:aotsm_demo_c_english
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^70 = token:aotsm_demo_c_scottish
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^71 = token:aotsm_demo_c_irish
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^72 = token:aotsm_demo_c_welsh
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^73 = token:aotsm_demo_c_cornish
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^74 = token:aotsm_demo_c_swedish
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^75 = token:aotsm_demo_c_danish
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^76 = token:aotsm_demo_c_norwegian
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^77 = token:aotsm_demo_c_icelandic
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^78 = token:aotsm_demo_c_castilian
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^79 = token:aotsm_demo_c_catalan
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^80 = token:aotsm_demo_c_galician
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^81 = token:aotsm_demo_c_basque
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^82 = token:aotsm_demo_c_portuguese
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^85 = token:aotsm_demo_c_jewish
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^86 = token:aotsm_demo_c_roma
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^87 = token:aotsm_demo_c_egyptian
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^88 = token:aotsm_demo_c_nubian
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^89 = token:aotsm_demo_c_amazigh
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^90 = token:aotsm_demo_c_tuareg
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^91 = token:aotsm_demo_c_beja
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^92 = token:aotsm_demo_c_amhara
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^93 = token:aotsm_demo_c_tigray
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^94 = token:aotsm_demo_c_oromo
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^95 = token:aotsm_demo_c_somali
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^96 = token:aotsm_demo_c_afar
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^97 = token:aotsm_demo_c_wolof
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^98 = token:aotsm_demo_c_fulani
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^99 = token:aotsm_demo_c_mandinka
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^100 = token:aotsm_demo_c_bambara
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^101 = token:aotsm_demo_c_songhai
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^102 = token:aotsm_demo_c_hausa
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^103 = token:aotsm_demo_c_kanuri
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^104 = token:aotsm_demo_c_mossi
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^105 = token:aotsm_demo_c_akan
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^106 = token:aotsm_demo_c_ewe
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^107 = token:aotsm_demo_c_fon
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^108 = token:aotsm_demo_c_yoruba
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^109 = token:aotsm_demo_c_igbo
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^110 = token:aotsm_demo_c_edo
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^111 = token:aotsm_demo_c_kru
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^112 = token:aotsm_demo_c_kongo
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^113 = token:aotsm_demo_c_luba
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^114 = token:aotsm_demo_c_lunda
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^115 = token:aotsm_demo_c_kuba
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^116 = token:aotsm_demo_c_banda
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^117 = token:aotsm_demo_c_kotoko
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^118 = token:aotsm_demo_c_fang
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^119 = token:aotsm_demo_c_swahili
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^120 = token:aotsm_demo_c_ganda
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^121 = token:aotsm_demo_c_nyoro
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^122 = token:aotsm_demo_c_rundi
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^123 = token:aotsm_demo_c_kikuyu
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^124 = token:aotsm_demo_c_luo
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^125 = token:aotsm_demo_c_maasai
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^126 = token:aotsm_demo_c_bemba
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^127 = token:aotsm_demo_c_tonga
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^128 = token:aotsm_demo_c_shona
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^129 = token:aotsm_demo_c_ndebele
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^130 = token:aotsm_demo_c_zulu
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^131 = token:aotsm_demo_c_xhosa
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^132 = token:aotsm_demo_c_tswana
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^133 = token:aotsm_demo_c_sotho
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^134 = token:aotsm_demo_c_nama
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^135 = token:aotsm_demo_c_san
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^136 = token:aotsm_demo_c_griqua
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^137 = token:aotsm_demo_c_malagasy
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^138 = token:aotsm_demo_c_yao
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^139 = token:aotsm_demo_c_makua
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^140 = token:aotsm_demo_c_punjabi
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^141 = token:aotsm_demo_c_kashmiri
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^142 = token:aotsm_demo_c_dogra
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^143 = token:aotsm_demo_c_sindhi
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^144 = token:aotsm_demo_c_gujarati
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^145 = token:aotsm_demo_c_marathi
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^146 = token:aotsm_demo_c_rajasthani
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^147 = token:aotsm_demo_c_hindustani
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^148 = token:aotsm_demo_c_bihari
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^149 = token:aotsm_demo_c_bengali
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^150 = token:aotsm_demo_c_assamese
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^151 = token:aotsm_demo_c_himalayan
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^152 = token:aotsm_demo_c_nepali
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^153 = token:aotsm_demo_c_newar
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^154 = token:aotsm_demo_c_odia
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^155 = token:aotsm_demo_c_gond
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^156 = token:aotsm_demo_c_bhil
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^157 = token:aotsm_demo_c_tamil
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^158 = token:aotsm_demo_c_telugu
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^159 = token:aotsm_demo_c_kannada
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^160 = token:aotsm_demo_c_malayali
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^161 = token:aotsm_demo_c_konkani
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^162 = token:aotsm_demo_c_sinhalese
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^163 = token:aotsm_demo_c_maldivian
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^164 = token:aotsm_demo_c_han
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^165 = token:aotsm_demo_c_manchu
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^166 = token:aotsm_demo_c_mongol
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^167 = token:aotsm_demo_c_uyghur
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^168 = token:aotsm_demo_c_hui
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^169 = token:aotsm_demo_c_tibetan
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^170 = token:aotsm_demo_c_zhuang
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^171 = token:aotsm_demo_c_hmong
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^172 = token:aotsm_demo_c_yi
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^173 = token:aotsm_demo_c_bai
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^174 = token:aotsm_demo_c_japanese
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^175 = token:aotsm_demo_c_korean
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^176 = token:aotsm_demo_c_ainu
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^177 = token:aotsm_demo_c_nivkh
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^178 = token:aotsm_demo_c_ryukyuan
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^179 = token:aotsm_demo_c_burmese
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^180 = token:aotsm_demo_c_mon
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^181 = token:aotsm_demo_c_karen
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^182 = token:aotsm_demo_c_shan
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^183 = token:aotsm_demo_c_kachin
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^184 = token:aotsm_demo_c_thai
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^185 = token:aotsm_demo_c_lao
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^186 = token:aotsm_demo_c_khmer
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^187 = token:aotsm_demo_c_viet
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^188 = token:aotsm_demo_c_cham
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^189 = token:aotsm_demo_c_malay
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^190 = token:aotsm_demo_c_javanese
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^191 = token:aotsm_demo_c_sundanese
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^192 = token:aotsm_demo_c_balinese
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^193 = token:aotsm_demo_c_batak
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^194 = token:aotsm_demo_c_bugis
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^195 = token:aotsm_demo_c_dayak
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^196 = token:aotsm_demo_c_bajau
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^197 = token:aotsm_demo_c_palawan
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^198 = token:aotsm_demo_c_tagalog
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^199 = token:aotsm_demo_c_cebuano
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^200 = token:aotsm_demo_c_ilocano
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^201 = token:aotsm_demo_c_waray
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^202 = token:aotsm_demo_c_mindanao
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^203 = token:aotsm_demo_c_palauan
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^204 = token:aotsm_demo_c_moluccan
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^205 = token:aotsm_demo_c_papuan
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^206 = token:aotsm_demo_c_timorese
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^207 = token:aotsm_demo_c_andamanese
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^208 = token:aotsm_demo_c_kiribati
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^209 = token:aotsm_demo_c_carolinian
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^210 = token:aotsm_demo_c_marshallese
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^211 = token:aotsm_demo_c_nauruan
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^212 = token:aotsm_demo_c_fijian
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^213 = token:aotsm_demo_c_samoan
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^214 = token:aotsm_demo_c_polynesian
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^215 = token:aotsm_demo_c_maori
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^216 = token:aotsm_demo_c_kanak
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^217 = token:aotsm_demo_c_australian
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^218 = token:aotsm_demo_c_noongar
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^219 = token:aotsm_demo_c_yolngu
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^220 = token:aotsm_demo_c_anangu
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^221 = token:aotsm_demo_c_wiradjuri
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^222 = token:aotsm_demo_c_kulin
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^223 = token:aotsm_demo_c_palawa
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^224 = token:aotsm_demo_c_nahua
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^225 = token:aotsm_demo_c_otomi
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^226 = token:aotsm_demo_c_totonac
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^227 = token:aotsm_demo_c_zapotec
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^228 = token:aotsm_demo_c_mixtec
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^229 = token:aotsm_demo_c_purepecha
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^230 = token:aotsm_demo_c_maya
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^231 = token:aotsm_demo_c_apache
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^232 = token:aotsm_demo_c_coahuiltecan
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^233 = token:aotsm_demo_c_huastec
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^234 = token:aotsm_demo_c_pame
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^235 = token:aotsm_demo_c_guaicura
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^236 = token:aotsm_demo_c_opata
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^237 = token:aotsm_demo_c_concho
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^238 = token:aotsm_demo_c_toboso
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^239 = token:aotsm_demo_c_tepehuan
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^240 = token:aotsm_demo_c_tahue
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^241 = token:aotsm_demo_c_zacatec
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^242 = token:aotsm_demo_c_guachichil
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^243 = token:aotsm_demo_c_oodham
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^244 = token:aotsm_demo_c_yaqui
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^245 = token:aotsm_demo_c_mayo
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^246 = token:aotsm_demo_c_cochimi
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^247 = token:aotsm_demo_c_chumash
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^248 = token:aotsm_demo_c_tongva
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^249 = token:aotsm_demo_c_ohlone
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^250 = token:aotsm_demo_c_miwok
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^251 = token:aotsm_demo_c_iroquois
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^252 = token:aotsm_demo_c_mikmaq
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^253 = token:aotsm_demo_c_powhatan
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^254 = token:aotsm_demo_c_chickasaw
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^255 = token:aotsm_demo_c_cree
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^256 = token:aotsm_demo_c_innu
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^257 = token:aotsm_demo_c_cherokee
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^258 = token:aotsm_demo_c_choctaw
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^259 = token:aotsm_demo_c_muscogee
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^260 = token:aotsm_demo_c_timucua
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^261 = token:aotsm_demo_c_calusa
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^262 = token:aotsm_demo_c_dakota
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^263 = token:aotsm_demo_c_salish
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^264 = token:aotsm_demo_c_yakama
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^265 = token:aotsm_demo_c_chinook
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^266 = token:aotsm_demo_c_comanche
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^267 = token:aotsm_demo_c_paiute
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^268 = token:aotsm_demo_c_washo
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^269 = token:aotsm_demo_c_shoshone
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^270 = token:aotsm_demo_c_ute
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^271 = token:aotsm_demo_c_blackfoot
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^272 = token:aotsm_demo_c_inuit
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^273 = token:aotsm_demo_c_yupik
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^274 = token:aotsm_demo_c_aleut
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^275 = token:aotsm_demo_c_tlingit
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^276 = token:aotsm_demo_c_haida
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^277 = token:aotsm_demo_c_shawnee
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^278 = token:aotsm_demo_c_ojibwe
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^279 = token:aotsm_demo_c_potawatomi
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^280 = token:aotsm_demo_c_miami
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^281 = token:aotsm_demo_c_assiniboine
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^282 = token:aotsm_demo_c_hopi
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^283 = token:aotsm_demo_c_zuni
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^284 = token:aotsm_demo_c_navajo
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^285 = token:aotsm_demo_c_arapaho
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^286 = token:aotsm_demo_c_cheyenne
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^287 = token:aotsm_demo_c_kiowa
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^288 = token:aotsm_demo_c_pawnee
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^289 = token:aotsm_demo_c_caddo
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^290 = token:aotsm_demo_c_osage
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^291 = token:aotsm_demo_c_taino
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^292 = token:aotsm_demo_c_arawak
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^293 = token:aotsm_demo_c_carib
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^294 = token:aotsm_demo_c_wayuu
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^295 = token:aotsm_demo_c_miskito
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^296 = token:aotsm_demo_c_rama
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^297 = token:aotsm_demo_c_embera
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^298 = token:aotsm_demo_c_wounaan
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^299 = token:aotsm_demo_c_guna
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^300 = token:aotsm_demo_c_muisca
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^301 = token:aotsm_demo_c_shuar
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^302 = token:aotsm_demo_c_quechua
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^303 = token:aotsm_demo_c_aymara
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^304 = token:aotsm_demo_c_atacameno
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^305 = token:aotsm_demo_c_mapuche
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^306 = token:aotsm_demo_c_tehuelche
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^307 = token:aotsm_demo_c_guarani
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^308 = token:aotsm_demo_c_qom
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^309 = token:aotsm_demo_c_wichi
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^310 = token:aotsm_demo_c_selknam
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^311 = token:aotsm_demo_c_yaghan
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^312 = token:aotsm_demo_c_kayapo
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^313 = token:aotsm_demo_c_xavante
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^314 = token:aotsm_demo_c_kaingang
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^315 = token:aotsm_demo_c_tikuna
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^316 = token:aotsm_demo_c_baniwa
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^317 = token:aotsm_demo_c_tukano
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^318 = token:aotsm_demo_c_yanomami
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^319 = token:aotsm_demo_c_satere_mawe
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^320 = token:aotsm_demo_c_munduruku
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^321 = token:aotsm_demo_c_mura
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^322 = token:aotsm_demo_c_apurina
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^323 = token:aotsm_demo_c_ashaninka
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^324 = token:aotsm_demo_c_tupinamba
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^325 = token:aotsm_demo_c_corsican
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^326 = token:aotsm_demo_c_faroese
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^327 = token:aotsm_demo_c_hawaiian
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^328 = token:aotsm_demo_c_chamorro
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^329 = token:aotsm_demo_c_ligurian
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^330 = token:aotsm_demo_c_lombard
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^331 = token:aotsm_demo_c_venetian
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^332 = token:aotsm_demo_c_emilian_romagnol
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^333 = token:aotsm_demo_c_tuscan
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^334 = token:aotsm_demo_c_umbro_latin
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^335 = token:aotsm_demo_c_neapolitan
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^336 = token:aotsm_demo_c_sicilian
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^337 = token:aotsm_demo_c_friulian
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^338 = token:aotsm_demo_c_alpine_romance
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^339 = token:aotsm_demo_c_south_slavic
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^340 = token:aotsm_demo_c_arberesh
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^341 = token:aotsm_demo_c_swiss
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^342 = token:aotsm_demo_c_moldavian
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^343 = token:aotsm_demo_c_coptic
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^344 = token:aotsm_demo_c_aragonese
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^345 = token:aotsm_demo_c_astur_leonese
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^346 = token:aotsm_demo_c_andalusian
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^347 = token:aotsm_demo_c_ingush
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_culture_keys_array^348 = token:aotsm_demo_c_iraqi
+		}
+
+		resize_array = {
+			array = global.aotsm_demography_relative_religion_keys_array
+			size = 23
+			value = 0
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_religion_keys_array^1 = token:aotsm_demo_r_orthodox_christian
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_religion_keys_array^2 = token:aotsm_demo_r_byz_christian
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_religion_keys_array^3 = token:aotsm_demo_r_copt_christian
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_religion_keys_array^4 = token:aotsm_demo_r_catolicysm
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_religion_keys_array^5 = token:aotsm_demo_r_protestantism
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_religion_keys_array^6 = token:aotsm_demo_r_anglicanism
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_religion_keys_array^7 = token:aotsm_demo_r_shangdiism
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_religion_keys_array^8 = token:aotsm_demo_r_islamism
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_religion_keys_array^9 = token:aotsm_demo_r_buddism
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_religion_keys_array^10 = token:aotsm_demo_r_induism
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_religion_keys_array^11 = token:aotsm_demo_r_judaism
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_religion_keys_array^12 = token:aotsm_demo_r_konfucianstvo
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_religion_keys_array^13 = token:aotsm_demo_r_sintoism
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_religion_keys_array^14 = token:aotsm_demo_r_aztec_paganism
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_religion_keys_array^15 = token:aotsm_demo_r_paganism
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_religion_keys_array^16 = token:aotsm_demo_r_atheism
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_religion_keys_array^17 = token:aotsm_demo_r_sikhism
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_religion_keys_array^18 = token:aotsm_demo_r_animism
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_religion_keys_array^19 = token:aotsm_demo_r_totemism
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_religion_keys_array^20 = token:aotsm_demo_r_shamanism
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_religion_keys_array^21 = token:aotsm_demo_r_mayan_paganism
+		}
+
+		set_variable = {
+			global.aotsm_demography_relative_religion_keys_array^22 = token:aotsm_demo_r_incan_paganism
+		}
+
+		set_global_flag = aotsm_demography_relative_registry_v1_flag
+	}
+}
+
+aotsm_demography_read_relative_group_effect = {
+	meta_effect = {
+		text = {
+			set_temp_variable = {
+				aotsm_demography_relative_share_var = [VARIABLE]
+			}
+		}
+
+		VARIABLE = "[?aotsm_demography_relative_key_var.GetTokenKey]"
+	}
+}
+
+aotsm_demography_write_relative_group_effect = {
+	meta_effect = {
+		text = {
+			set_variable = {
+				[VARIABLE] = aotsm_demography_relative_new_shares_array^aotsm_demography_relative_index_var
+			}
+		}
+
+		VARIABLE = "[?aotsm_demography_relative_key_var.GetTokenKey]"
+	}
+}
+
+aotsm_demography_sort_relative_groups_effect = {
+	clear_temp_array = aotsm_demography_relative_sorted_ids_array
+
+	resize_temp_array = {
+		array = aotsm_demography_relative_selected_array
+		size = aotsm_demography_relative_ids_array^num
+		value = 0
+	}
+
+	for_loop_effect = {
+		start = 0
+		end = aotsm_demography_relative_ids_array^num
+		value = aotsm_demography_relative_pass_var
+		break = aotsm_demography_relative_loop_break_var
+
+		set_temp_variable = {
+			aotsm_demography_relative_best_share_var = 0
+		}
+
+		set_temp_variable = {
+			aotsm_demography_relative_best_id_var = 1000000
+		}
+
+		set_temp_variable = {
+			aotsm_demography_relative_best_index_var = -1
+		}
+
+		for_loop_effect = {
+			start = 0
+			end = aotsm_demography_relative_ids_array^num
+			value = aotsm_demography_relative_index_var
+			break = aotsm_demography_relative_loop_break_var
+
+			if = {
+				limit = {
+					check_variable = {
+						var = aotsm_demography_relative_selected_array^aotsm_demography_relative_index_var
+						value = 0
+						compare = equals
+					}
+
+					check_variable = {
+						var = aotsm_demography_relative_new_shares_array^aotsm_demography_relative_index_var
+						value = 0
+						compare = greater_than
+					}
+
+					OR = {
+						check_variable = {
+							var = aotsm_demography_relative_new_shares_array^aotsm_demography_relative_index_var
+							value = aotsm_demography_relative_best_share_var
+							compare = greater_than
+						}
+
+						AND = {
+							check_variable = {
+								var = aotsm_demography_relative_new_shares_array^aotsm_demography_relative_index_var
+								value = aotsm_demography_relative_best_share_var
+								compare = equals
+							}
+
+							check_variable = {
+								var = aotsm_demography_relative_ids_array^aotsm_demography_relative_index_var
+								value = aotsm_demography_relative_best_id_var
+								compare = less_than
+							}
+						}
+					}
+				}
+
+				set_temp_variable = {
+					aotsm_demography_relative_best_share_var = aotsm_demography_relative_new_shares_array^aotsm_demography_relative_index_var
+				}
+
+				set_temp_variable = {
+					aotsm_demography_relative_best_id_var = aotsm_demography_relative_ids_array^aotsm_demography_relative_index_var
+				}
+
+				set_temp_variable = {
+					aotsm_demography_relative_best_index_var = aotsm_demography_relative_index_var
+				}
+			}
+		}
+
+		if = {
+			limit = {
+				check_variable = {
+					var = aotsm_demography_relative_best_index_var
+					value = 0
+					compare = greater_than_or_equals
+				}
+			}
+
+			set_temp_variable = {
+				aotsm_demography_relative_selected_array^aotsm_demography_relative_best_index_var = 1
+			}
+
+			add_to_temp_array = {
+				aotsm_demography_relative_sorted_ids_array = aotsm_demography_relative_best_id_var
+			}
+		}
+	}
+}
+
+aotsm_demography_calculate_relative_change_effect = {
+	set_temp_variable = {
+		aotsm_demography_relative_sum_var = 0
+	}
+
+	set_temp_variable = {
+		aotsm_demography_relative_old_var = 0
+	}
+
+	set_temp_variable = {
+		aotsm_demography_relative_target_index_var = -1
+	}
+
+	set_temp_variable = {
+		aotsm_demography_relative_balance_index_var = -1
+	}
+
+	set_temp_variable = {
+		aotsm_demography_relative_balance_share_var = 0
+	}
+
+	for_loop_effect = {
+		start = 0
+		end = aotsm_demography_relative_ids_array^num
+		value = aotsm_demography_relative_index_var
+		break = aotsm_demography_relative_loop_break_var
+
+		add_to_temp_variable = {
+			aotsm_demography_relative_sum_var = aotsm_demography_relative_old_shares_array^aotsm_demography_relative_index_var
+		}
+
+		if = {
+			limit = {
+				check_variable = {
+					var = aotsm_demography_relative_ids_array^aotsm_demography_relative_index_var
+					value = aotsm_demography_target_id_var
+					compare = equals
+				}
+			}
+
+			set_temp_variable = {
+				aotsm_demography_relative_target_index_var = aotsm_demography_relative_index_var
+			}
+
+			set_temp_variable = {
+				aotsm_demography_relative_old_var = aotsm_demography_relative_old_shares_array^aotsm_demography_relative_index_var
+			}
+		}
+
+		if = {
+			limit = {
+				NOT = {
+					check_variable = {
+						var = aotsm_demography_relative_ids_array^aotsm_demography_relative_index_var
+						value = aotsm_demography_target_id_var
+						compare = equals
+					}
+				}
+
+				check_variable = {
+					var = aotsm_demography_relative_old_shares_array^aotsm_demography_relative_index_var
+					value = aotsm_demography_relative_balance_share_var
+					compare = greater_than
+				}
+			}
+
+			set_temp_variable = {
+				aotsm_demography_relative_balance_index_var = aotsm_demography_relative_index_var
+			}
+
+			set_temp_variable = {
+				aotsm_demography_relative_balance_share_var = aotsm_demography_relative_old_shares_array^aotsm_demography_relative_index_var
+			}
+		}
+	}
+
+	if = {
+		limit = {
+			check_variable = {
+				var = aotsm_demography_relative_sum_var
+				value = 100
+				compare = equals
+			}
+
+			check_variable = {
+				var = aotsm_demography_relative_target_index_var
+				value = 0
+				compare = greater_than_or_equals
+			}
+
+			check_variable = {
+				var = aotsm_demography_relative_balance_index_var
+				value = 0
+				compare = greater_than_or_equals
+			}
+
+			check_variable = {
+				var = aotsm_demography_relative_old_var
+				value = 0
+				compare = greater_than
+			}
+
+			check_variable = {
+				var = aotsm_demography_relative_old_var
+				value = 100
+				compare = less_than
+			}
+		}
+
+		set_temp_variable = {
+			aotsm_demography_relative_factor_var = aotsm_demography_relative_percent_var
+		}
+
+		divide_temp_variable = {
+			aotsm_demography_relative_factor_var = 100
+		}
+
+		add_to_temp_variable = {
+			aotsm_demography_relative_factor_var = 1
+		}
+
+		set_temp_variable = {
+			aotsm_demography_relative_new_var = aotsm_demography_relative_old_var
+		}
+
+		multiply_temp_variable = {
+			aotsm_demography_relative_new_var = 1000
+		}
+
+		multiply_temp_variable = {
+			aotsm_demography_relative_new_var = aotsm_demography_relative_factor_var
+		}
+
+		round_temp_variable = aotsm_demography_relative_new_var
+
+		divide_temp_variable = {
+			aotsm_demography_relative_new_var = 1000
+		}
+
+		clamp_temp_variable = {
+			var = aotsm_demography_relative_new_var
+			min = 0
+			max = 100
+		}
+
+		if = {
+			limit = {
+				NOT = {
+					check_variable = {
+						var = aotsm_demography_relative_new_var
+						value = aotsm_demography_relative_old_var
+						compare = equals
+					}
+				}
+			}
+
+			set_temp_variable = {
+				aotsm_demography_relative_remaining_old_var = 100
+			}
+
+			subtract_from_temp_variable = {
+				aotsm_demography_relative_remaining_old_var = aotsm_demography_relative_old_var
+			}
+
+			set_temp_variable = {
+				aotsm_demography_relative_remaining_new_var = 100
+			}
+
+			subtract_from_temp_variable = {
+				aotsm_demography_relative_remaining_new_var = aotsm_demography_relative_new_var
+			}
+
+			set_temp_variable = {
+				aotsm_demography_relative_budget_var = aotsm_demography_relative_remaining_new_var
+			}
+
+			set_temp_variable = {
+				aotsm_demography_relative_precision_var = 100
+			}
+
+			set_temp_variable = {
+				aotsm_demography_relative_unit_multiplier_var = 10
+			}
+
+			if = {
+				limit = {
+					check_variable = {
+						var = aotsm_demography_relative_remaining_old_var
+						value = 1
+						compare = less_than_or_equals
+					}
+				}
+
+				set_temp_variable = {
+					aotsm_demography_relative_precision_var = 1000
+				}
+
+				set_temp_variable = {
+					aotsm_demography_relative_unit_multiplier_var = 1
+				}
+			}
+
+			resize_temp_array = {
+				array = aotsm_demography_relative_new_shares_array
+				size = aotsm_demography_relative_ids_array^num
+				value = 0
+			}
+
+			set_temp_variable = {
+				aotsm_demography_relative_new_shares_array^aotsm_demography_relative_target_index_var = aotsm_demography_relative_new_var
+			}
+
+			for_loop_effect = {
+				start = 0
+				end = aotsm_demography_relative_ids_array^num
+				value = aotsm_demography_relative_index_var
+				break = aotsm_demography_relative_loop_break_var
+
+				if = {
+					limit = {
+						NOT = {
+							check_variable = {
+								var = aotsm_demography_relative_index_var
+								value = aotsm_demography_relative_target_index_var
+								compare = equals
+							}
+						}
+
+						NOT = {
+							check_variable = {
+								var = aotsm_demography_relative_index_var
+								value = aotsm_demography_relative_balance_index_var
+								compare = equals
+							}
+						}
+					}
+
+					set_temp_variable = {
+						aotsm_demography_relative_scaled_var = aotsm_demography_relative_old_shares_array^aotsm_demography_relative_index_var
+					}
+
+					multiply_temp_variable = {
+						aotsm_demography_relative_scaled_var = aotsm_demography_relative_precision_var
+					}
+
+					multiply_temp_variable = {
+						aotsm_demography_relative_scaled_var = aotsm_demography_relative_remaining_new_var
+					}
+
+					divide_temp_variable = {
+						aotsm_demography_relative_scaled_var = aotsm_demography_relative_remaining_old_var
+					}
+
+					multiply_temp_variable = {
+						aotsm_demography_relative_scaled_var = aotsm_demography_relative_unit_multiplier_var
+					}
+
+					round_temp_variable = aotsm_demography_relative_scaled_var
+
+					divide_temp_variable = {
+						aotsm_demography_relative_scaled_var = 1000
+					}
+
+					clamp_temp_variable = {
+						var = aotsm_demography_relative_scaled_var
+						min = 0
+						max = aotsm_demography_relative_budget_var
+					}
+
+					set_temp_variable = {
+						aotsm_demography_relative_new_shares_array^aotsm_demography_relative_index_var = aotsm_demography_relative_scaled_var
+					}
+
+					subtract_from_temp_variable = {
+						aotsm_demography_relative_budget_var = aotsm_demography_relative_scaled_var
+					}
+				}
+			}
+
+			set_temp_variable = {
+				aotsm_demography_relative_new_shares_array^aotsm_demography_relative_balance_index_var = aotsm_demography_relative_budget_var
+			}
+
+			aotsm_demography_sort_relative_groups_effect = yes
+
+			for_loop_effect = {
+				start = 0
+				end = aotsm_demography_relative_ids_array^num
+				value = aotsm_demography_relative_index_var
+				break = aotsm_demography_relative_loop_break_var
+
+				set_temp_variable = {
+					aotsm_demography_relative_key_var = aotsm_demography_relative_keys_array^aotsm_demography_relative_index_var
+				}
+
+				aotsm_demography_write_relative_group_effect = yes
+			}
+
+			set_temp_variable = {
+				aotsm_demography_relative_applied_var = 1
+			}
+
+			set_temp_variable = {
+				aotsm_demography_relative_delta_var = aotsm_demography_relative_new_var
+			}
+
+			subtract_from_temp_variable = {
+				aotsm_demography_relative_delta_var = aotsm_demography_relative_old_var
+			}
+		}
+	}
+}
+
+aotsm_demography_clear_relative_arrays_effect = {
+	clear_temp_array = aotsm_demography_relative_ids_array
+	clear_temp_array = aotsm_demography_relative_keys_array
+	clear_temp_array = aotsm_demography_relative_old_shares_array
+	clear_temp_array = aotsm_demography_relative_new_shares_array
+	clear_temp_array = aotsm_demography_relative_selected_array
+	clear_temp_array = aotsm_demography_relative_sorted_ids_array
+}
+
+aotsm_demography_change_culture_relative_effect = {
+	set_temp_variable = {
+		aotsm_demography_relative_applied_var = 0
+	}
+
+	set_temp_variable = {
+		aotsm_demography_relative_delta_var = 0
+	}
+
+	set_temp_variable = {
+		aotsm_demography_relative_loop_break_var = 0
+	}
+
+	aotsm_demography_clear_relative_arrays_effect = yes
+
+	if = {
+		limit = {
+			has_global_flag = aotsm_demo_initialized_v1
+
+			is_in_array = {
+				aotsm_demo_c_ids = aotsm_demography_target_id_var
+			}
+
+			NOT = {
+				check_variable = {
+					var = aotsm_demography_relative_percent_var
+					value = 0
+					compare = equals
+				}
+			}
+
+			check_variable = {
+				var = aotsm_demography_relative_percent_var
+				value = -100
+				compare = greater_than_or_equals
+			}
+
+			check_variable = {
+				var = aotsm_demography_relative_percent_var
+				value = 100
+				compare = less_than_or_equals
+			}
+		}
+
+		aotsm_demography_initialize_relative_registry_effect = yes
+
+		for_each_loop = {
+			array = aotsm_demo_c_ids
+			value = aotsm_demography_relative_id_var
+			index = aotsm_demography_relative_source_index_var
+			break = aotsm_demography_relative_loop_break_var
+
+			set_temp_variable = {
+				aotsm_demography_relative_key_var = global.aotsm_demography_relative_culture_keys_array^aotsm_demography_relative_id_var
+			}
+
+			aotsm_demography_read_relative_group_effect = yes
+
+			add_to_temp_array = {
+				aotsm_demography_relative_ids_array = aotsm_demography_relative_id_var
+			}
+
+			add_to_temp_array = {
+				aotsm_demography_relative_keys_array = aotsm_demography_relative_key_var
+			}
+
+			add_to_temp_array = {
+				aotsm_demography_relative_old_shares_array = aotsm_demography_relative_share_var
+			}
+		}
+
+		aotsm_demography_calculate_relative_change_effect = yes
+
+		if = {
+			limit = {
+				check_variable = {
+					var = aotsm_demography_relative_applied_var
+					value = 1
+					compare = equals
+				}
+			}
+
+			clear_array = aotsm_demo_c_ids
+
+			for_each_loop = {
+				array = aotsm_demography_relative_sorted_ids_array
+				value = aotsm_demography_relative_id_var
+				index = aotsm_demography_relative_result_index_var
+				break = aotsm_demography_relative_loop_break_var
+
+				add_to_array = {
+					aotsm_demo_c_ids = aotsm_demography_relative_id_var
+				}
+			}
+
+			aotsm_demo_refresh_state = yes
+			aotsm_demo_update_scroll_extents = yes
+
+			owner = {
+				aotsm_demo_refresh_country = yes
+			}
+
+			force_update_map_mode = {
+				mapmode = aotsm_culture_map_mode
+			}
+		}
+	}
+
+	aotsm_demography_clear_relative_arrays_effect = yes
+}
+
+aotsm_demography_increase_culture_1_percent_effect = {
+	set_temp_variable = {
+		aotsm_demography_relative_percent_var = 1
+	}
+
+	aotsm_demography_change_culture_relative_effect = yes
+}
+
+aotsm_demography_increase_culture_5_percent_effect = {
+	set_temp_variable = {
+		aotsm_demography_relative_percent_var = 5
+	}
+
+	aotsm_demography_change_culture_relative_effect = yes
+}
+
+aotsm_demography_increase_culture_10_percent_effect = {
+	set_temp_variable = {
+		aotsm_demography_relative_percent_var = 10
+	}
+
+	aotsm_demography_change_culture_relative_effect = yes
+}
+
+aotsm_demography_decrease_culture_1_percent_effect = {
+	set_temp_variable = {
+		aotsm_demography_relative_percent_var = -1
+	}
+
+	aotsm_demography_change_culture_relative_effect = yes
+}
+
+aotsm_demography_decrease_culture_5_percent_effect = {
+	set_temp_variable = {
+		aotsm_demography_relative_percent_var = -5
+	}
+
+	aotsm_demography_change_culture_relative_effect = yes
+}
+
+aotsm_demography_decrease_culture_10_percent_effect = {
+	set_temp_variable = {
+		aotsm_demography_relative_percent_var = -10
+	}
+
+	aotsm_demography_change_culture_relative_effect = yes
+}
+
+aotsm_demography_change_religion_relative_effect = {
+	set_temp_variable = {
+		aotsm_demography_relative_applied_var = 0
+	}
+
+	set_temp_variable = {
+		aotsm_demography_relative_delta_var = 0
+	}
+
+	set_temp_variable = {
+		aotsm_demography_relative_loop_break_var = 0
+	}
+
+	aotsm_demography_clear_relative_arrays_effect = yes
+
+	if = {
+		limit = {
+			has_global_flag = aotsm_demo_initialized_v1
+
+			is_in_array = {
+				aotsm_demo_r_ids = aotsm_demography_target_id_var
+			}
+
+			NOT = {
+				check_variable = {
+					var = aotsm_demography_relative_percent_var
+					value = 0
+					compare = equals
+				}
+			}
+
+			check_variable = {
+				var = aotsm_demography_relative_percent_var
+				value = -100
+				compare = greater_than_or_equals
+			}
+
+			check_variable = {
+				var = aotsm_demography_relative_percent_var
+				value = 100
+				compare = less_than_or_equals
+			}
+		}
+
+		aotsm_demography_initialize_relative_registry_effect = yes
+
+		for_each_loop = {
+			array = aotsm_demo_r_ids
+			value = aotsm_demography_relative_id_var
+			index = aotsm_demography_relative_source_index_var
+			break = aotsm_demography_relative_loop_break_var
+
+			set_temp_variable = {
+				aotsm_demography_relative_key_var = global.aotsm_demography_relative_religion_keys_array^aotsm_demography_relative_id_var
+			}
+
+			aotsm_demography_read_relative_group_effect = yes
+
+			add_to_temp_array = {
+				aotsm_demography_relative_ids_array = aotsm_demography_relative_id_var
+			}
+
+			add_to_temp_array = {
+				aotsm_demography_relative_keys_array = aotsm_demography_relative_key_var
+			}
+
+			add_to_temp_array = {
+				aotsm_demography_relative_old_shares_array = aotsm_demography_relative_share_var
+			}
+		}
+
+		aotsm_demography_calculate_relative_change_effect = yes
+
+		if = {
+			limit = {
+				check_variable = {
+					var = aotsm_demography_relative_applied_var
+					value = 1
+					compare = equals
+				}
+			}
+
+			clear_array = aotsm_demo_r_ids
+
+			for_each_loop = {
+				array = aotsm_demography_relative_sorted_ids_array
+				value = aotsm_demography_relative_id_var
+				index = aotsm_demography_relative_result_index_var
+				break = aotsm_demography_relative_loop_break_var
+
+				add_to_array = {
+					aotsm_demo_r_ids = aotsm_demography_relative_id_var
+				}
+			}
+
+			aotsm_demo_refresh_state = yes
+			aotsm_demo_update_scroll_extents = yes
+
+			owner = {
+				aotsm_demo_refresh_country = yes
+			}
+
+			force_update_map_mode = {
+				mapmode = religion_map_mode
+			}
+		}
+	}
+
+	aotsm_demography_clear_relative_arrays_effect = yes
+}
+
+aotsm_demography_increase_religion_1_percent_effect = {
+	set_temp_variable = {
+		aotsm_demography_relative_percent_var = 1
+	}
+
+	aotsm_demography_change_religion_relative_effect = yes
+}
+
+aotsm_demography_increase_religion_5_percent_effect = {
+	set_temp_variable = {
+		aotsm_demography_relative_percent_var = 5
+	}
+
+	aotsm_demography_change_religion_relative_effect = yes
+}
+
+aotsm_demography_increase_religion_10_percent_effect = {
+	set_temp_variable = {
+		aotsm_demography_relative_percent_var = 10
+	}
+
+	aotsm_demography_change_religion_relative_effect = yes
+}
+
+aotsm_demography_decrease_religion_1_percent_effect = {
+	set_temp_variable = {
+		aotsm_demography_relative_percent_var = -1
+	}
+
+	aotsm_demography_change_religion_relative_effect = yes
+}
+
+aotsm_demography_decrease_religion_5_percent_effect = {
+	set_temp_variable = {
+		aotsm_demography_relative_percent_var = -5
+	}
+
+	aotsm_demography_change_religion_relative_effect = yes
+}
+
+aotsm_demography_decrease_religion_10_percent_effect = {
+	set_temp_variable = {
+		aotsm_demography_relative_percent_var = -10
+	}
+
+	aotsm_demography_change_religion_relative_effect = yes
+}
