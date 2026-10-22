@@ -1,5 +1,7 @@
 # State-scope relative changes; no on_actions, events or starting-data edits.
-# Inputs: aotsm_demography_target_id_var, aotsm_demography_relative_percent_var.
+# Relative inputs: aotsm_demography_target_id_var, aotsm_demography_relative_percent_var.
+# Absolute increase inputs: aotsm_demography_target_id_var, aotsm_demography_points_var.
+# Points API supports absent/zero targets; it defers all display cache refreshes to its caller.
 # Read an existing ID from global.aotsm_demo_c_id_<key> or global.aotsm_demo_r_id_<key>.
 # Outputs: aotsm_demography_relative_applied_var (0/1), aotsm_demography_relative_delta_var.
 # Target zero/absent, target 100%, missing initialization and rounded zero changes are no-ops.
@@ -1732,10 +1734,13 @@ aotsm_demography_calculate_relative_change_effect = {
 				compare = greater_than_or_equals
 			}
 
-			check_variable = {
-				var = aotsm_demography_relative_old_var
-				value = 0
-				compare = greater_than
+			OR = {
+				check_variable = {
+					var = aotsm_demography_relative_old_var
+					value = 0
+					compare = greater_than
+				}
+				check_variable = { var = aotsm_demography_absolute_mode_var value = 1 compare = equals }
 			}
 
 			check_variable = {
@@ -1745,34 +1750,45 @@ aotsm_demography_calculate_relative_change_effect = {
 			}
 		}
 
-		set_temp_variable = {
-			aotsm_demography_relative_factor_var = aotsm_demography_relative_percent_var
+		if = {
+			limit = { check_variable = { var = aotsm_demography_absolute_mode_var value = 0 compare = equals } }
+			set_temp_variable = {
+				aotsm_demography_relative_factor_var = aotsm_demography_relative_percent_var
+			}
+
+			divide_temp_variable = {
+				aotsm_demography_relative_factor_var = 100
+			}
+
+			add_to_temp_variable = {
+				aotsm_demography_relative_factor_var = 1
+			}
+
+			set_temp_variable = {
+				aotsm_demography_relative_new_var = aotsm_demography_relative_old_var
+			}
+
+			multiply_temp_variable = {
+				aotsm_demography_relative_new_var = 1000
+			}
+
+			multiply_temp_variable = {
+				aotsm_demography_relative_new_var = aotsm_demography_relative_factor_var
+			}
+
+			round_temp_variable = aotsm_demography_relative_new_var
+
+			divide_temp_variable = {
+				aotsm_demography_relative_new_var = 1000
+			}
 		}
-
-		divide_temp_variable = {
-			aotsm_demography_relative_factor_var = 100
-		}
-
-		add_to_temp_variable = {
-			aotsm_demography_relative_factor_var = 1
-		}
-
-		set_temp_variable = {
-			aotsm_demography_relative_new_var = aotsm_demography_relative_old_var
-		}
-
-		multiply_temp_variable = {
-			aotsm_demography_relative_new_var = 1000
-		}
-
-		multiply_temp_variable = {
-			aotsm_demography_relative_new_var = aotsm_demography_relative_factor_var
-		}
-
-		round_temp_variable = aotsm_demography_relative_new_var
-
-		divide_temp_variable = {
-			aotsm_demography_relative_new_var = 1000
+		if = {
+			limit = { check_variable = { var = aotsm_demography_absolute_mode_var value = 1 compare = equals } }
+			set_temp_variable = { aotsm_demography_relative_new_var = aotsm_demography_relative_old_var }
+			add_to_temp_variable = { aotsm_demography_relative_new_var = aotsm_demography_points_var }
+			multiply_temp_variable = { aotsm_demography_relative_new_var = 1000 }
+			round_temp_variable = aotsm_demography_relative_new_var
+			divide_temp_variable = { aotsm_demography_relative_new_var = 1000 }
 		}
 
 		clamp_temp_variable = {
@@ -1959,6 +1975,7 @@ aotsm_demography_clear_relative_arrays_effect = {
 }
 
 aotsm_demography_change_culture_relative_effect = {
+	set_temp_variable = { aotsm_demography_absolute_mode_var = 0 }
 	set_temp_variable = {
 		aotsm_demography_relative_applied_var = 0
 	}
@@ -2118,6 +2135,7 @@ aotsm_demography_decrease_culture_10_percent_effect = {
 }
 
 aotsm_demography_change_religion_relative_effect = {
+	set_temp_variable = { aotsm_demography_absolute_mode_var = 0 }
 	set_temp_variable = {
 		aotsm_demography_relative_applied_var = 0
 	}
@@ -2274,4 +2292,188 @@ aotsm_demography_decrease_religion_10_percent_effect = {
 	}
 
 	aotsm_demography_change_religion_relative_effect = yes
+}
+
+
+# State scope; valid registry target ID and positive percentage points are supplied by the caller.
+# Outputs: relative_applied_var and relative_delta_var; caller refreshes state/country/maps.
+aotsm_demography_increase_culture_points_effect = {
+	set_temp_variable = { aotsm_demography_absolute_mode_var = 1 }
+	set_temp_variable = {
+		aotsm_demography_relative_applied_var = 0
+	}
+
+	set_temp_variable = {
+		aotsm_demography_relative_delta_var = 0
+	}
+
+	set_temp_variable = {
+		aotsm_demography_relative_loop_break_var = 0
+	}
+
+	aotsm_demography_clear_relative_arrays_effect = yes
+
+	if = {
+		limit = {
+			has_global_flag = aotsm_demo_initialized_v1
+
+			check_variable = { var = aotsm_demography_points_var value = 0 compare = greater_than }
+		}
+
+		aotsm_demography_initialize_relative_registry_effect = yes
+
+		for_each_loop = {
+			array = aotsm_demo_c_ids
+			value = aotsm_demography_relative_id_var
+			index = aotsm_demography_relative_source_index_var
+			break = aotsm_demography_relative_loop_break_var
+
+			set_temp_variable = {
+				aotsm_demography_relative_key_var = global.aotsm_demography_relative_culture_keys_array^aotsm_demography_relative_id_var
+			}
+
+			aotsm_demography_read_relative_group_effect = yes
+
+			add_to_temp_array = {
+				aotsm_demography_relative_ids_array = aotsm_demography_relative_id_var
+			}
+
+			add_to_temp_array = {
+				aotsm_demography_relative_keys_array = aotsm_demography_relative_key_var
+			}
+
+			add_to_temp_array = {
+				aotsm_demography_relative_old_shares_array = aotsm_demography_relative_share_var
+			}
+		}
+
+		if = {
+			limit = { NOT = { is_in_array = { aotsm_demo_c_ids = aotsm_demography_target_id_var } } }
+			add_to_temp_array = { aotsm_demography_relative_ids_array = aotsm_demography_target_id_var }
+			set_temp_variable = { aotsm_demography_relative_key_var = global.aotsm_demography_relative_culture_keys_array^aotsm_demography_target_id_var }
+			add_to_temp_array = { aotsm_demography_relative_keys_array = aotsm_demography_relative_key_var }
+			add_to_temp_array = { aotsm_demography_relative_old_shares_array = 0 }
+		}
+		aotsm_demography_calculate_relative_change_effect = yes
+
+		if = {
+			limit = {
+				check_variable = {
+					var = aotsm_demography_relative_applied_var
+					value = 1
+					compare = equals
+				}
+			}
+
+			clear_array = aotsm_demo_c_ids
+
+			for_each_loop = {
+				array = aotsm_demography_relative_sorted_ids_array
+				value = aotsm_demography_relative_id_var
+				index = aotsm_demography_relative_result_index_var
+				break = aotsm_demography_relative_loop_break_var
+
+				add_to_array = {
+					aotsm_demo_c_ids = aotsm_demography_relative_id_var
+				}
+			}
+
+
+		}
+	}
+
+	aotsm_demography_clear_relative_arrays_effect = yes
+	set_temp_variable = { aotsm_demography_absolute_mode_var = 0 }
+}
+
+
+# State scope; valid registry target ID and positive percentage points are supplied by the caller.
+# Outputs: relative_applied_var and relative_delta_var; caller refreshes state/country/maps.
+aotsm_demography_increase_religion_points_effect = {
+	set_temp_variable = { aotsm_demography_absolute_mode_var = 1 }
+	set_temp_variable = {
+		aotsm_demography_relative_applied_var = 0
+	}
+
+	set_temp_variable = {
+		aotsm_demography_relative_delta_var = 0
+	}
+
+	set_temp_variable = {
+		aotsm_demography_relative_loop_break_var = 0
+	}
+
+	aotsm_demography_clear_relative_arrays_effect = yes
+
+	if = {
+		limit = {
+			has_global_flag = aotsm_demo_initialized_v1
+
+			check_variable = { var = aotsm_demography_points_var value = 0 compare = greater_than }
+		}
+
+		aotsm_demography_initialize_relative_registry_effect = yes
+
+		for_each_loop = {
+			array = aotsm_demo_r_ids
+			value = aotsm_demography_relative_id_var
+			index = aotsm_demography_relative_source_index_var
+			break = aotsm_demography_relative_loop_break_var
+
+			set_temp_variable = {
+				aotsm_demography_relative_key_var = global.aotsm_demography_relative_religion_keys_array^aotsm_demography_relative_id_var
+			}
+
+			aotsm_demography_read_relative_group_effect = yes
+
+			add_to_temp_array = {
+				aotsm_demography_relative_ids_array = aotsm_demography_relative_id_var
+			}
+
+			add_to_temp_array = {
+				aotsm_demography_relative_keys_array = aotsm_demography_relative_key_var
+			}
+
+			add_to_temp_array = {
+				aotsm_demography_relative_old_shares_array = aotsm_demography_relative_share_var
+			}
+		}
+
+		if = {
+			limit = { NOT = { is_in_array = { aotsm_demo_r_ids = aotsm_demography_target_id_var } } }
+			add_to_temp_array = { aotsm_demography_relative_ids_array = aotsm_demography_target_id_var }
+			set_temp_variable = { aotsm_demography_relative_key_var = global.aotsm_demography_relative_religion_keys_array^aotsm_demography_target_id_var }
+			add_to_temp_array = { aotsm_demography_relative_keys_array = aotsm_demography_relative_key_var }
+			add_to_temp_array = { aotsm_demography_relative_old_shares_array = 0 }
+		}
+		aotsm_demography_calculate_relative_change_effect = yes
+
+		if = {
+			limit = {
+				check_variable = {
+					var = aotsm_demography_relative_applied_var
+					value = 1
+					compare = equals
+				}
+			}
+
+			clear_array = aotsm_demo_r_ids
+
+			for_each_loop = {
+				array = aotsm_demography_relative_sorted_ids_array
+				value = aotsm_demography_relative_id_var
+				index = aotsm_demography_relative_result_index_var
+				break = aotsm_demography_relative_loop_break_var
+
+				add_to_array = {
+					aotsm_demo_r_ids = aotsm_demography_relative_id_var
+				}
+			}
+
+
+		}
+	}
+
+	aotsm_demography_clear_relative_arrays_effect = yes
+	set_temp_variable = { aotsm_demography_absolute_mode_var = 0 }
 }
