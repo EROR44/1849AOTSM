@@ -556,6 +556,11 @@ QIN_check_who_is_new_emperror = {
 
 QIN_clamp_governors_num_vars = { #Проверь значение max в соответсвии с количеством лидеров провинций
 	clamp_variable = {
+		var = QIN_yungui_governor_num
+		min = 0
+		max = 7
+	}
+	clamp_variable = {
 		var = QIN_shengan_governor_num  
 		min = 0
 		max = 6
@@ -563,7 +568,7 @@ QIN_clamp_governors_num_vars = { #Проверь значение max в соо�
 	clamp_variable = {
 		var = QIN_minzhe_governor_num  
 		min = 0
-		max = 5
+		max = 6
 	}
 	clamp_variable = {
 		var = QIN_huguang_governor_num  
@@ -573,7 +578,7 @@ QIN_clamp_governors_num_vars = { #Проверь значение max в соо�
 	clamp_variable = {
 		var = QIN_liangjiang_governor_num   
 		min = 0
-		max = 6
+		max = 5
 	}
 	clamp_variable = {
 		var = QIN_sichuan_governor_num    
@@ -583,7 +588,7 @@ QIN_clamp_governors_num_vars = { #Проверь значение max в соо�
 	clamp_variable = {
 		var = QIN_chzili_governor_num   
 		min = 0
-		max = 7
+		max = 5
 	}
 	clamp_variable = {
 		var = QIN_liangguang_governor_num   
@@ -598,7 +603,7 @@ QIN_clamp_governors_num_vars = { #Проверь значение max в соо�
 	clamp_variable = {
 		var = QIN_jilin_governor_num   
 		min = 0
-		max = 3
+		max = 4
 	}
 	clamp_variable = {
 		var = QIN_shengjing_governor_num   
@@ -618,7 +623,7 @@ QIN_clamp_governors_num_vars = { #Проверь значение max в соо�
 	clamp_variable = {
 		var = QIN_shaanxi_governor_num   
 		min = 0
-		max = 7
+		max = 8
 	}
 	clamp_variable = {
 		var = QIN_qinghai_governor_num   
@@ -636,7 +641,7 @@ QIN_clamp_governors_num_vars = { #Проверь значение max в соо�
 		max = 5
 	}
 	clamp_variable = { #нет списка - изменить значение на корректное
-		var = QIN_dongsansheng_guvernor_num  
+		var = QIN_dongsansheng_governor_num
 		min = 0
 		max = 1
 	}
@@ -799,7 +804,7 @@ QIN_clamp_num_of_state_frame_vars = {
 	}
 
 	clamp_variable = {
-		var = QIN_minzhe_governor_num 
+		var = QIN_minzhe_frame_num
 		min = 0
 		max = 1
 	}
@@ -3061,4 +3066,267 @@ QIN_add_15k_manpower_effect = {
 		}
 		add_manpower = -5000
 	}
+}
+
+# Country scope (QIN). Call initialize when opening; it preserves edited/empty lists.
+QIN_reset_region_leaders_lists = {
+	clear_array = QIN_viceroys_entries
+	add_to_array = { QIN_viceroys_entries = 1 } # chzili
+	add_to_array = { QIN_viceroys_entries = 2 } # liangjiang
+	add_to_array = { QIN_viceroys_entries = 3 } # shengan
+	add_to_array = { QIN_viceroys_entries = 4 } # minzhe
+	add_to_array = { QIN_viceroys_entries = 5 } # huguang
+	add_to_array = { QIN_viceroys_entries = 6 } # liangguang
+	add_to_array = { QIN_viceroys_entries = 7 } # yungui
+	add_to_array = { QIN_viceroys_entries = 8 } # sichuan
+	add_to_array = { QIN_viceroys_entries = 9 } # dongsansheng
+	clear_array = QIN_governor_entries
+	add_to_array = { QIN_governor_entries = 10 } # shaanxi
+	add_to_array = { QIN_governor_entries = 11 } # henan
+	add_to_array = { QIN_governor_entries = 12 } # shandong
+	add_to_array = { QIN_governor_entries = 13 } # xining
+	add_to_array = { QIN_governor_entries = 14 } # suiyuan
+	add_to_array = { QIN_governor_entries = 15 } # uliastai
+	add_to_array = { QIN_governor_entries = 16 } # shengjing
+	add_to_array = { QIN_governor_entries = 17 } # jilin
+	add_to_array = { QIN_governor_entries = 18 } # heilongjiang
+	set_country_flag = QIN_region_leaders_lists_initialized_flag
+	QIN_update_region_leaders_list_layout = yes
+}
+
+QIN_initialize_region_leaders_lists = {
+	if = {
+		limit = { NOT = { has_country_flag = QIN_region_leaders_lists_initialized_flag } }
+		QIN_reset_region_leaders_lists = yes
+	}
+	QIN_update_region_leaders_list_layout = yes
+}
+
+QIN_update_region_leaders_list_layout = {
+	set_variable = { QIN_viceroys_scroll_bottom = QIN_viceroys_entries^num }
+	multiply_variable = { QIN_viceroys_scroll_bottom = 160 }
+	subtract_from_variable = { QIN_viceroys_scroll_bottom = 1 }
+	clamp_variable = { var = QIN_viceroys_scroll_bottom min = 0 }
+	set_variable = { QIN_governor_scroll_bottom = QIN_governor_entries^num }
+	multiply_variable = { QIN_governor_scroll_bottom = 160 }
+	subtract_from_variable = { QIN_governor_scroll_bottom = 1 }
+	clamp_variable = { var = QIN_governor_scroll_bottom min = 0 }
+}
+
+# LIST = QIN_governor_entries / QIN_viceroys_entries, REGION = stable numeric ID.
+QIN_add_region_leader_card = {
+	QIN_initialize_region_leaders_lists = yes
+	if = {
+		limit = { NOT = { is_in_array = { [LIST] = [REGION] } } }
+		add_to_array = { [LIST] = [REGION] }
+	}
+	QIN_update_region_leaders_list_layout = yes
+}
+
+QIN_remove_region_leader_card = {
+	QIN_initialize_region_leaders_lists = yes
+	remove_from_array = { [LIST] = [REGION] }
+	QIN_update_region_leaders_list_layout = yes
+}
+
+# Existing scripts store loyalty on QIN, in the range 0..2.
+QIN_clamp_region_leader_loyality_vars = {
+	clamp_variable = { var = QIN_chzili_guvernor_loyality_level min = 0 max = 2 }
+	clamp_variable = { var = QIN_liangjiang_guvernor_loyality_level min = 0 max = 2 }
+	clamp_variable = { var = QIN_shengan_guvernor_loyality_level min = 0 max = 2 }
+	clamp_variable = { var = QIN_minzhe_guvernor_loyality_level min = 0 max = 2 }
+	clamp_variable = { var = QIN_huguang_guvernor_loyality_level min = 0 max = 2 }
+	clamp_variable = { var = QIN_liangguang_guvernor_loyality_level min = 0 max = 2 }
+	clamp_variable = { var = QIN_yungui_guvernor_loyality_level min = 0 max = 2 }
+	clamp_variable = { var = QIN_sichuan_guvernor_loyality_level min = 0 max = 2 }
+	clamp_variable = { var = QIN_dongsansheng_guvernor_loyality_level min = 0 max = 2 }
+	clamp_variable = { var = QIN_shaanxi_guvernor_loyality_level min = 0 max = 2 }
+	clamp_variable = { var = QIN_henan_guvernor_loyality_level min = 0 max = 2 }
+	clamp_variable = { var = QIN_shandong_guvernor_loyality_level min = 0 max = 2 }
+	clamp_variable = { var = QIN_qinghai_guvernor_loyality_level min = 0 max = 2 }
+	clamp_variable = { var = QIN_suiyuan_guvernor_loyality_level min = 0 max = 2 }
+	clamp_variable = { var = QIN_uliastai_guvernor_loyality_level min = 0 max = 2 }
+	clamp_variable = { var = QIN_shengjing_guvernor_loyality_level min = 0 max = 2 }
+	clamp_variable = { var = QIN_jilin_guvernor_loyality_level min = 0 max = 2 }
+	clamp_variable = { var = QIN_heilongjiang_guvernor_loyality_level min = 0 max = 2 }
+}
+
+QIN_add_1_to_chzili_guvernor_loyality_level = {
+	add_to_variable = { QIN_chzili_guvernor_loyality_level = 1 }
+	QIN_clamp_region_leader_loyality_vars = yes
+}
+
+QIN_remove_1_from_chzili_guvernor_loyality_level = {
+	subtract_from_variable = { QIN_chzili_guvernor_loyality_level = 1 }
+	QIN_clamp_region_leader_loyality_vars = yes
+}
+
+QIN_add_1_to_liangjiang_guvernor_loyality_level = {
+	add_to_variable = { QIN_liangjiang_guvernor_loyality_level = 1 }
+	QIN_clamp_region_leader_loyality_vars = yes
+}
+
+QIN_remove_1_from_liangjiang_guvernor_loyality_level = {
+	subtract_from_variable = { QIN_liangjiang_guvernor_loyality_level = 1 }
+	QIN_clamp_region_leader_loyality_vars = yes
+}
+
+QIN_add_1_to_shengan_guvernor_loyality_level = {
+	add_to_variable = { QIN_shengan_guvernor_loyality_level = 1 }
+	QIN_clamp_region_leader_loyality_vars = yes
+}
+
+QIN_remove_1_from_shengan_guvernor_loyality_level = {
+	subtract_from_variable = { QIN_shengan_guvernor_loyality_level = 1 }
+	QIN_clamp_region_leader_loyality_vars = yes
+}
+
+QIN_add_1_to_minzhe_guvernor_loyality_level = {
+	add_to_variable = { QIN_minzhe_guvernor_loyality_level = 1 }
+	QIN_clamp_region_leader_loyality_vars = yes
+}
+
+QIN_remove_1_from_minzhe_guvernor_loyality_level = {
+	subtract_from_variable = { QIN_minzhe_guvernor_loyality_level = 1 }
+	QIN_clamp_region_leader_loyality_vars = yes
+}
+
+QIN_add_1_to_huguang_guvernor_loyality_level = {
+	add_to_variable = { QIN_huguang_guvernor_loyality_level = 1 }
+	QIN_clamp_region_leader_loyality_vars = yes
+}
+
+QIN_remove_1_from_huguang_guvernor_loyality_level = {
+	subtract_from_variable = { QIN_huguang_guvernor_loyality_level = 1 }
+	QIN_clamp_region_leader_loyality_vars = yes
+}
+
+QIN_add_1_to_liangguang_guvernor_loyality_level = {
+	add_to_variable = { QIN_liangguang_guvernor_loyality_level = 1 }
+	QIN_clamp_region_leader_loyality_vars = yes
+}
+
+QIN_remove_1_from_liangguang_guvernor_loyality_level = {
+	subtract_from_variable = { QIN_liangguang_guvernor_loyality_level = 1 }
+	QIN_clamp_region_leader_loyality_vars = yes
+}
+
+QIN_add_1_to_yungui_guvernor_loyality_level = {
+	add_to_variable = { QIN_yungui_guvernor_loyality_level = 1 }
+	QIN_clamp_region_leader_loyality_vars = yes
+}
+
+QIN_remove_1_from_yungui_guvernor_loyality_level = {
+	subtract_from_variable = { QIN_yungui_guvernor_loyality_level = 1 }
+	QIN_clamp_region_leader_loyality_vars = yes
+}
+
+QIN_add_1_to_sichuan_guvernor_loyality_level = {
+	add_to_variable = { QIN_sichuan_guvernor_loyality_level = 1 }
+	QIN_clamp_region_leader_loyality_vars = yes
+}
+
+QIN_remove_1_from_sichuan_guvernor_loyality_level = {
+	subtract_from_variable = { QIN_sichuan_guvernor_loyality_level = 1 }
+	QIN_clamp_region_leader_loyality_vars = yes
+}
+
+QIN_add_1_to_dongsansheng_guvernor_loyality_level = {
+	add_to_variable = { QIN_dongsansheng_guvernor_loyality_level = 1 }
+	QIN_clamp_region_leader_loyality_vars = yes
+}
+
+QIN_remove_1_from_dongsansheng_guvernor_loyality_level = {
+	subtract_from_variable = { QIN_dongsansheng_guvernor_loyality_level = 1 }
+	QIN_clamp_region_leader_loyality_vars = yes
+}
+
+QIN_add_1_to_shaanxi_guvernor_loyality_level = {
+	add_to_variable = { QIN_shaanxi_guvernor_loyality_level = 1 }
+	QIN_clamp_region_leader_loyality_vars = yes
+}
+
+QIN_remove_1_from_shaanxi_guvernor_loyality_level = {
+	subtract_from_variable = { QIN_shaanxi_guvernor_loyality_level = 1 }
+	QIN_clamp_region_leader_loyality_vars = yes
+}
+
+QIN_add_1_to_henan_guvernor_loyality_level = {
+	add_to_variable = { QIN_henan_guvernor_loyality_level = 1 }
+	QIN_clamp_region_leader_loyality_vars = yes
+}
+
+QIN_remove_1_from_henan_guvernor_loyality_level = {
+	subtract_from_variable = { QIN_henan_guvernor_loyality_level = 1 }
+	QIN_clamp_region_leader_loyality_vars = yes
+}
+
+QIN_add_1_to_shandong_guvernor_loyality_level = {
+	add_to_variable = { QIN_shandong_guvernor_loyality_level = 1 }
+	QIN_clamp_region_leader_loyality_vars = yes
+}
+
+QIN_remove_1_from_shandong_guvernor_loyality_level = {
+	subtract_from_variable = { QIN_shandong_guvernor_loyality_level = 1 }
+	QIN_clamp_region_leader_loyality_vars = yes
+}
+
+QIN_add_1_to_qinghai_guvernor_loyality_level = {
+	add_to_variable = { QIN_qinghai_guvernor_loyality_level = 1 }
+	QIN_clamp_region_leader_loyality_vars = yes
+}
+
+QIN_remove_1_from_qinghai_guvernor_loyality_level = {
+	subtract_from_variable = { QIN_qinghai_guvernor_loyality_level = 1 }
+	QIN_clamp_region_leader_loyality_vars = yes
+}
+
+QIN_add_1_to_suiyuan_guvernor_loyality_level = {
+	add_to_variable = { QIN_suiyuan_guvernor_loyality_level = 1 }
+	QIN_clamp_region_leader_loyality_vars = yes
+}
+
+QIN_remove_1_from_suiyuan_guvernor_loyality_level = {
+	subtract_from_variable = { QIN_suiyuan_guvernor_loyality_level = 1 }
+	QIN_clamp_region_leader_loyality_vars = yes
+}
+
+QIN_add_1_to_uliastai_guvernor_loyality_level = {
+	add_to_variable = { QIN_uliastai_guvernor_loyality_level = 1 }
+	QIN_clamp_region_leader_loyality_vars = yes
+}
+
+QIN_remove_1_from_uliastai_guvernor_loyality_level = {
+	subtract_from_variable = { QIN_uliastai_guvernor_loyality_level = 1 }
+	QIN_clamp_region_leader_loyality_vars = yes
+}
+
+QIN_add_1_to_shengjing_guvernor_loyality_level = {
+	add_to_variable = { QIN_shengjing_guvernor_loyality_level = 1 }
+	QIN_clamp_region_leader_loyality_vars = yes
+}
+
+QIN_remove_1_from_shengjing_guvernor_loyality_level = {
+	subtract_from_variable = { QIN_shengjing_guvernor_loyality_level = 1 }
+	QIN_clamp_region_leader_loyality_vars = yes
+}
+
+QIN_add_1_to_jilin_guvernor_loyality_level = {
+	add_to_variable = { QIN_jilin_guvernor_loyality_level = 1 }
+	QIN_clamp_region_leader_loyality_vars = yes
+}
+
+QIN_remove_1_from_jilin_guvernor_loyality_level = {
+	subtract_from_variable = { QIN_jilin_guvernor_loyality_level = 1 }
+	QIN_clamp_region_leader_loyality_vars = yes
+}
+
+QIN_add_1_to_heilongjiang_guvernor_loyality_level = {
+	add_to_variable = { QIN_heilongjiang_guvernor_loyality_level = 1 }
+	QIN_clamp_region_leader_loyality_vars = yes
+}
+
+QIN_remove_1_from_heilongjiang_guvernor_loyality_level = {
+	subtract_from_variable = { QIN_heilongjiang_guvernor_loyality_level = 1 }
+	QIN_clamp_region_leader_loyality_vars = yes
 }
