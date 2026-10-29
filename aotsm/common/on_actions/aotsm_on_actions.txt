@@ -38,21 +38,11 @@ on_actions = {
 				}
 				country_event = aotsm_notification_event.3
 			}
-			every_country = { #welcome screen GUI block
-				limit = {
+			every_country = { # Вызов Welcome Screen 
+				limit = { 
 					is_ai = no
 				}
-				#country_event = history.1 #потом убрать
-				set_country_flag = aotsm_open_welcome_screen_flag
-				set_variable = {
-					aotsm_contry_lore_page = 0
-				}
-				set_variable = {
-					aotsm_lore_section_num = 0
-				}
-				set_variable = {
-					aotsm_others_page_num = 0
-				}
+				aotsm_welcome_on_startup = yes
 			}
 			every_country = {
                	limit = { exists = yes }
@@ -72,8 +62,10 @@ on_actions = {
 						has_idea = backward_nation
 					}
 					NOT = {
-						tag = QIN
-						tag = AZT
+						OR  = {
+							tag = QIN
+							tag = AZT
+						}
 					}
 				}
 				country_event = { id = aotsm_westernisation_event.1 days = 7 }

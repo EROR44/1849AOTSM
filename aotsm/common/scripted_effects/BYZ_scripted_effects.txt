@@ -1,0 +1,152 @@
+# Balkan hellenization prototype. Country wrappers retain existing progress and rewards.
+# State baseline is captured on first eligible application; pre-integration progress is not replayed.
+
+aotsm_byz_hellenization_apply_culture_effect = {
+	set_temp_variable = { aotsm_demography_target_id_var = global.aotsm_demo_c_id_hellenic }
+	set_temp_variable = { aotsm_demography_points_var = aotsm_byz_demo_points_var }
+	aotsm_demography_increase_culture_points_effect = yes
+	if = {
+		limit = { check_variable = { var = aotsm_demography_relative_applied_var value = 1 compare = equals } }
+		set_temp_variable = { aotsm_byz_demo_changed_var = 1 }
+	}
+}
+
+aotsm_byz_hellenization_apply_religion_effect = {
+	set_temp_variable = { aotsm_demography_target_id_var = global.aotsm_demo_r_id_byz_christian }
+	set_temp_variable = { aotsm_demography_points_var = aotsm_byz_demo_points_var }
+	aotsm_demography_increase_religion_points_effect = yes
+	if = {
+		limit = { check_variable = { var = aotsm_demography_relative_applied_var value = 1 compare = equals } }
+		set_temp_variable = { aotsm_byz_demo_changed_var = 1 }
+	}
+}
+
+aotsm_byz_hellenization_state_effect = {
+	if = {
+		limit = { is_owned_by = BYZ is_controlled_by = BYZ }
+		if = {
+			limit = { NOT = { has_state_flag = aotsm_byz_hellenization_initialized_flag } }
+			set_state_flag = aotsm_byz_hellenization_initialized_flag
+			set_variable = { aotsm_byz_demo_c_base_var = aotsm_demo_c_hellenic }
+			set_variable = { aotsm_byz_demo_r_base_var = aotsm_demo_r_byz_christian }
+			set_variable = { aotsm_byz_demo_applied_var = BYZ.aotsm_byz_demo_previous_var }
+		}
+		set_temp_variable = { aotsm_byz_demo_changed_var = 0 }
+		set_temp_variable = { aotsm_byz_demo_step_var = BYZ.aotsm_byz_demo_current_var }
+		subtract_from_temp_variable = { aotsm_byz_demo_step_var = aotsm_byz_demo_applied_var }
+		clamp_temp_variable = { var = aotsm_byz_demo_step_var min = 0 max = 100 }
+		set_temp_variable = { aotsm_byz_demo_points_var = 35 }
+		subtract_from_temp_variable = { aotsm_byz_demo_points_var = aotsm_byz_demo_c_base_var }
+		clamp_temp_variable = { var = aotsm_byz_demo_points_var min = 0 max = 35 }
+		multiply_temp_variable = { aotsm_byz_demo_points_var = aotsm_byz_demo_step_var }
+		divide_temp_variable = { aotsm_byz_demo_points_var = 100 }
+		aotsm_byz_hellenization_apply_culture_effect = yes
+		set_temp_variable = { aotsm_byz_demo_points_var = 100 }
+		subtract_from_temp_variable = { aotsm_byz_demo_points_var = aotsm_byz_demo_r_base_var }
+		clamp_temp_variable = { var = aotsm_byz_demo_points_var min = 0 max = 3 }
+		multiply_temp_variable = { aotsm_byz_demo_points_var = aotsm_byz_demo_step_var }
+		divide_temp_variable = { aotsm_byz_demo_points_var = 100 }
+		aotsm_byz_hellenization_apply_religion_effect = yes
+		set_variable = { aotsm_byz_demo_applied_var = BYZ.aotsm_byz_demo_current_var }
+		if = {
+			limit = { check_variable = { var = aotsm_byz_demo_changed_var value = 1 compare = equals } }
+			aotsm_demo_refresh_state = yes
+			aotsm_demo_update_scroll_extents = yes
+		}
+	}
+}
+
+aotsm_byz_hellenization_bulgaria_progress_effect = {
+	set_variable = { aotsm_byz_demo_previous_var = byz_hellenization_of_bulgaria_var }
+	add_to_variable = { byz_hellenization_of_bulgaria_var = aotsm_byz_hellenization_step_var }
+	clamp_variable = { var = byz_hellenization_of_bulgaria_var min = 0 max = 100 }
+	set_variable = { aotsm_byz_demo_current_var = byz_hellenization_of_bulgaria_var }
+	if = {
+		limit = { has_global_flag = aotsm_demo_initialized_v1 }
+		set_temp_variable = { aotsm_byz_demo_changed_var = 0 }
+		48 = { aotsm_byz_hellenization_state_effect = yes }
+		77 = { aotsm_byz_hellenization_state_effect = yes }
+		106 = { aotsm_byz_hellenization_state_effect = yes }
+		211 = { aotsm_byz_hellenization_state_effect = yes }
+		212 = { aotsm_byz_hellenization_state_effect = yes }
+		801 = { aotsm_byz_hellenization_state_effect = yes }
+		803 = { aotsm_byz_hellenization_state_effect = yes }
+		983 = { aotsm_byz_hellenization_state_effect = yes }
+		aotsm_demo_refresh_country = yes
+		force_update_map_mode = { mapmode = aotsm_culture_map_mode }
+		force_update_map_mode = { mapmode = religion_map_mode }
+	}
+}
+
+aotsm_byz_hellenization_albania_progress_effect = {
+	set_variable = { aotsm_byz_demo_previous_var = byz_hellenization_of_albania_var }
+	add_to_variable = { byz_hellenization_of_albania_var = aotsm_byz_hellenization_step_var }
+	clamp_variable = { var = byz_hellenization_of_albania_var min = 0 max = 100 }
+	set_variable = { aotsm_byz_demo_current_var = byz_hellenization_of_albania_var }
+	if = {
+		limit = { has_global_flag = aotsm_demo_initialized_v1 }
+		set_temp_variable = { aotsm_byz_demo_changed_var = 0 }
+		44 = { aotsm_byz_hellenization_state_effect = yes }
+		aotsm_demo_refresh_country = yes
+		force_update_map_mode = { mapmode = aotsm_culture_map_mode }
+		force_update_map_mode = { mapmode = religion_map_mode }
+	}
+}
+
+aotsm_byz_hellenization_serbia_progress_effect = {
+	set_variable = { aotsm_byz_demo_previous_var = byz_hellenization_of_serbia_var }
+	add_to_variable = { byz_hellenization_of_serbia_var = aotsm_byz_hellenization_step_var }
+	clamp_variable = { var = byz_hellenization_of_serbia_var min = 0 max = 100 }
+	set_variable = { aotsm_byz_demo_current_var = byz_hellenization_of_serbia_var }
+	if = {
+		limit = { has_global_flag = aotsm_demo_initialized_v1 }
+		set_temp_variable = { aotsm_byz_demo_changed_var = 0 }
+		105 = { aotsm_byz_hellenization_state_effect = yes }
+		107 = { aotsm_byz_hellenization_state_effect = yes }
+		108 = { aotsm_byz_hellenization_state_effect = yes }
+		802 = { aotsm_byz_hellenization_state_effect = yes }
+		995 = { aotsm_byz_hellenization_state_effect = yes }
+		aotsm_demo_refresh_country = yes
+		force_update_map_mode = { mapmode = aotsm_culture_map_mode }
+		force_update_map_mode = { mapmode = religion_map_mode }
+	}
+}
+
+aotsm_byz_hellenization_bosnia_progress_effect = {
+	set_variable = { aotsm_byz_demo_previous_var = byz_hellenization_of_bosnia_var }
+	add_to_variable = { byz_hellenization_of_bosnia_var = aotsm_byz_hellenization_step_var }
+	clamp_variable = { var = byz_hellenization_of_bosnia_var min = 0 max = 100 }
+	set_variable = { aotsm_byz_demo_current_var = byz_hellenization_of_bosnia_var }
+	if = {
+		limit = { has_global_flag = aotsm_demo_initialized_v1 }
+		set_temp_variable = { aotsm_byz_demo_changed_var = 0 }
+		104 = { aotsm_byz_hellenization_state_effect = yes }
+		804 = { aotsm_byz_hellenization_state_effect = yes }
+		979 = { aotsm_byz_hellenization_state_effect = yes }
+		980 = { aotsm_byz_hellenization_state_effect = yes }
+		981 = { aotsm_byz_hellenization_state_effect = yes }
+		982 = { aotsm_byz_hellenization_state_effect = yes }
+		aotsm_demo_refresh_country = yes
+		force_update_map_mode = { mapmode = aotsm_culture_map_mode }
+		force_update_map_mode = { mapmode = religion_map_mode }
+	}
+}
+
+aotsm_byz_hellenization_croatia_progress_effect = {
+	set_variable = { aotsm_byz_demo_previous_var = byz_hellenization_of_croatia_var }
+	add_to_variable = { byz_hellenization_of_croatia_var = aotsm_byz_hellenization_step_var }
+	clamp_variable = { var = byz_hellenization_of_croatia_var min = 0 max = 100 }
+	set_variable = { aotsm_byz_demo_current_var = byz_hellenization_of_croatia_var }
+	if = {
+		limit = { has_global_flag = aotsm_demo_initialized_v1 }
+		set_temp_variable = { aotsm_byz_demo_changed_var = 0 }
+		102 = { aotsm_byz_hellenization_state_effect = yes }
+		103 = { aotsm_byz_hellenization_state_effect = yes }
+		109 = { aotsm_byz_hellenization_state_effect = yes }
+		163 = { aotsm_byz_hellenization_state_effect = yes }
+		736 = { aotsm_byz_hellenization_state_effect = yes }
+		aotsm_demo_refresh_country = yes
+		force_update_map_mode = { mapmode = aotsm_culture_map_mode }
+		force_update_map_mode = { mapmode = religion_map_mode }
+	}
+}
