@@ -1,0 +1,64 @@
+#####################
+###   By Hakiro   ###
+#####################
+
+scripted_gui = {
+    aotsm_epilogue_screen = {
+        context_type = player_context
+		window_name = "aotsm_epilogue_screen"
+		
+		visible = {
+			has_global_flag = aotsm_epilogue_screen_visible_flag
+		}
+
+		triggers = {
+
+		}
+
+		effects = {
+			continue_btn_click = {
+				clr_global_flag = aotsm_epilogue_screen_visible_flag
+				set_global_flag = aotsm_epilogue_screen_credits_visible_flag
+			}
+		}
+
+		properties = {
+			epilogue_picture = { image = "[aotsm_Get_Epilogue_Picture]" }
+		}
+    }
+
+	aotsm_epilogue_credits_screen = {
+        context_type = player_context
+		window_name = "aotsm_epilogue_credits_screen"
+		
+		visible = {
+			has_global_flag = aotsm_epilogue_screen_credits_visible_flag
+		}
+
+		triggers = {
+			credits_thanks_for_playing_visible = {
+				NOT = { has_global_flag = aotsm_epilogue_screen_credits_list_visible_flag }
+			}
+			credits_list_visible = {
+				has_global_flag = aotsm_epilogue_screen_credits_list_visible_flag
+			}
+		}
+
+		effects = {
+			go_to_credits_list_btn_click = {
+				if = {
+					limit = {
+						NOT = { has_global_flag = aotsm_epilogue_screen_credits_list_visible_flag  }
+					}
+					set_global_flag = aotsm_epilogue_screen_credits_list_visible_flag
+				}
+				else = {
+					clr_global_flag = aotsm_epilogue_screen_credits_list_visible_flag
+				}
+			}
+			close_btn_click = {
+				clr_global_flag = aotsm_epilogue_screen_credits_visible_flag
+			}
+		}
+    }
+}
