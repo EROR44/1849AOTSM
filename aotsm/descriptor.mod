@@ -10,6 +10,7 @@ tags={
 replace_path="common/idea_tags"
 replace_path="common/ideas"
 replace_path="common/country_tags"
+replace_path="common/country_leader"
 replace_path="common/countries"
 replace_path="common/national_focus"
 replace_path="common/decisions"
