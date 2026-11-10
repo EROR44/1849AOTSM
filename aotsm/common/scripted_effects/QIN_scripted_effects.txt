@@ -520,31 +520,77 @@ QIN_remove_1_isuan_supporters_influemce = {
 	QIN_clamp_influence_vars = yes
 }
 
+QIN_set_leader_the_regency_council = {
+	ROOT = {
+		kill_country_leader = yes
+		promote_character = QIN_Regent_Soviet
+	}
+}
+
 QIN_check_who_is_new_emperror = {
 	ROOT = {
 		if = {
 			limit = {
-				check_variable = { QIN_ichzu_supporters_influemce_num > QIN_isin_supporters_influemce_num }
-				check_variable = { QIN_ichzu_supporters_influemce_num > QIN_isuan_supporters_influemce_num }
+				OR = {
+					has_country_flag = QIN_ichzu_set_the_heir_of_emperror_flag
+					AND = {
+						NOT = {
+							OR = {
+								has_country_flag = QIN_ichzu_set_the_heir_of_emperror_flag
+								has_country_flag = QIN_isin_set_the_heir_of_emperror_flag
+								has_country_flag = QIN_isuan_set_the_heir_of_emperror_flag
+							}
+						}
+						check_variable = { QIN_ichzu_supporters_influemce_num > QIN_isin_supporters_influemce_num }
+						check_variable = { QIN_ichzu_supporters_influemce_num > QIN_isuan_supporters_influemce_num }
+					}
+				}
 			}
-			retire_character = QIN_Aisin_Gioro_Mianning
+			retire_country_leader = yes
 			promote_character = QIN_Aisin_Gioro_Ichu
+			set_country_flag = QIN_ichzu_is_new_emperror_flag
 		}
 		else_if = {
 			limit = {
-				check_variable = { QIN_isin_supporters_influemce_num > QIN_ichzu_supporters_influemce_num }
-				check_variable = { QIN_isin_supporters_influemce_num > QIN_isuan_supporters_influemce_num }
+				OR = {
+					has_country_flag = QIN_isin_set_the_heir_of_emperror_flag
+					AND = {
+						NOT = {
+							OR = {
+								has_country_flag = QIN_ichzu_set_the_heir_of_emperror_flag
+								has_country_flag = QIN_isin_set_the_heir_of_emperror_flag
+								has_country_flag = QIN_isuan_set_the_heir_of_emperror_flag
+							}
+						}
+						check_variable = { QIN_isin_supporters_influemce_num > QIN_ichzu_supporters_influemce_num }
+						check_variable = { QIN_isin_supporters_influemce_num > QIN_isuan_supporters_influemce_num }
+					}
+				}
 			}
-			retire_character = QIN_Aisin_Gioro_Mianning
+			retire_country_leader = yes
 			promote_character = QIN_Aisin_Gioro_Isin
+			set_country_flag = QIN_isin_is_new_emperror_flag
 		}
 		else_if = {
 			limit = {
-				check_variable = { QIN_isuan_supporters_influemce_num > QIN_ichzu_supporters_influemce_num }
-				check_variable = { QIN_isuan_supporters_influemce_num > QIN_isin_supporters_influemce_num }
+				OR = {
+					has_country_flag = QIN_isuan_set_the_heir_of_emperror_flag
+					AND = {
+						NOT = {
+							OR = {
+								has_country_flag = QIN_ichzu_set_the_heir_of_emperror_flag
+								has_country_flag = QIN_isin_set_the_heir_of_emperror_flag
+								has_country_flag = QIN_isuan_set_the_heir_of_emperror_flag
+							}
+						}
+						check_variable = { QIN_isuan_supporters_influemce_num > QIN_ichzu_supporters_influemce_num }
+						check_variable = { QIN_isuan_supporters_influemce_num > QIN_isin_supporters_influemce_num }
+					}
+				}
 			}
-			retire_character = QIN_Aisin_Gioro_Mianning
+			retire_country_leader = yes
 			promote_character = QIN_Aisin_Gioro_Isuan
+			set_country_flag = QIN_isuan_is_new_emperror_flag
 		}
 		else_if = {
 			log = "[GetDateText]: [Root.GetName]: effect QIN_check_who_is_new_emperror ERROR"
