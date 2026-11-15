@@ -1,0 +1,42 @@
+scripted_gui = {
+	aotsm_city_info = {
+		context_type = selected_state_context
+		parent_window_token = selected_state_view
+		window_name = "aotsm_city_info_window"
+		visible = {
+			aotsm_city_info_available_trigger = yes
+		}
+		ai_enabled = { always = no }
+		effects = {
+			aotsm_city_info_open_click = {
+				if = {
+					limit = {
+						ROOT = { has_country_flag = aotsm_city_info_open_flag }
+						state = var:ROOT.aotsm_city_info_state
+					}
+					ROOT = { clr_country_flag = aotsm_city_info_open_flag }
+				}
+				else = {
+					set_variable = { ROOT.aotsm_city_info_state = THIS }
+					ROOT = { set_country_flag = aotsm_city_info_open_flag }
+				}
+			}
+		}
+	}
+	aotsm_city_info_popup = {
+		context_type = selected_state_context
+		window_name = "aotsm_city_info_panel"
+		properties = {
+			aotsm_city_info_backdrop = { image = "[aotsm_city_info_backdrop_t]" }
+		}
+		visible = {
+			aotsm_city_info_available_trigger = yes
+			ROOT = { has_country_flag = aotsm_city_info_open_flag }
+			state = var:ROOT.aotsm_city_info_state
+		}
+		ai_enabled = { always = no }
+		effects = {
+			aotsm_city_info_close_click = { ROOT = { clr_country_flag = aotsm_city_info_open_flag } }
+		}
+	}
+}
