@@ -12,13 +12,28 @@ scripted_gui = {
 		}
 
 		triggers = {
-
+			epilogue_text_visible = {
+				NOT = { has_global_flag = aotsm_epilogue_screen_credits_text_visible_flag }
+			}
+			credits_text_visible = {
+				has_global_flag = aotsm_epilogue_screen_credits_text_visible_flag
+			}
 		}
 
 		effects = {
-			continue_btn_click = {
+			aotsm_epilogue_close_btn_click = {
 				clr_global_flag = aotsm_epilogue_screen_visible_flag
-				set_global_flag = aotsm_epilogue_screen_credits_visible_flag
+			}
+			aotsm_epilogue_swap_texts_btn_click = {
+				if = {
+					limit = {
+						NOT = { has_global_flag = aotsm_epilogue_screen_credits_text_visible_flag  }
+					}
+					set_global_flag = aotsm_epilogue_screen_credits_text_visible_flag
+				}
+				else = {
+					clr_global_flag = aotsm_epilogue_screen_credits_text_visible_flag
+				}
 			}
 		}
 
