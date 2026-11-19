@@ -2791,7 +2791,7 @@ NAI = {
 	WANTED_UNITS_THREAT_BASE = 0.7,                             -- If no threat, multiply min wanted units by this
 	WANTED_UNITS_THREAT_MAX = 6.0,                             -- Normalized threat is clamped to this
 	WANTED_UNITS_WAR_THREAT_FACTOR = 1.15,                       -- Factor threat with this if country is at war. this value is overriden by the value in ideology database if that value exceedes this.
-	WANTED_UNITS_DANGEROUS_NEIGHBOR_FACTOR = 1.15,              -- Factor if has dangerous neighbor
+	WANTED_UNITS_DANGEROUS_NEIGHBOR_FACTOR = 1.10,              -- Factor if has dangerous neighbor
 	WANTED_UNITS_MANPOWER_DIVISOR = 21000,                      -- Normalizing divisor for AI manpower. (for each x max available manpower, they want one division)
 	WANTED_UNITS_WEIGHT_FRONTS_WANT = 0.35,                      -- Weight of front needs when computing final nr wanted units
 	WANTED_UNITS_WEIGHT_FACTORIES = 0.45,                        -- Weight of military factories when computing final nr wanted units
@@ -3401,6 +3401,7 @@ NAI = {
 
 	AI_UPDATE_ROLES_FREQUENCY_HOURS = 48;               -- Update the roles for a country AI this often (affects performance)
 	AI_NAVAL_GOALS_UPDATE_FREQUENCY_DAYS = 7;           -- Regenerate naval AI objectives this often in days (affects performance)
+	AI_CONVOY_COUNT_CACHE_REBUILD_INTERVAL_HOURS = 20;  -- Recount the convoys per strategic region the naval AI raids this often (affects performance)
 
 	UPDATE_SUPPLY_BOTTLENECKS_FREQUENCY_HOURS = 168;     -- Check for and try to fix supply bottlenecks this often. (168 hours = 1 week)
 	FIX_SUPPLY_BOTTLENECK_SATURATION_THRESHOLD = 0.85;  -- Try to fix supply bottlenecks if supply node saturation exceeds this value.
@@ -3434,7 +3435,7 @@ NAI = {
 	ARMY_LEADER_ASSIGN_EXILED_LEADS_OWN_EXILED_TROOPS = 100,    -- If exiled leader, increase chance of leading army with exiled troops from same country as the leader
 	ARMY_LEADER_ASSIGN_WITHDRAW_DAYS = 7,						-- General will withdraw from HQ after that many days without an order HQ can influence (frontline or naval invasion)
 	ARMY_LEADER_MIN_DIVISIONS_FOR_HQ = 10,						-- Army must contain at least this many divisions before the AI will deploy an HQ unit for it
-	MAX_DEPLOYED_ARMY_HQS = 5,									-- AI will not deploy more than this many army HQs at once
+	MAX_DEPLOYED_ARMY_HQS = 4,									-- AI will not deploy more than this many army HQs at once
 	MAX_CAPTURED_GENERALS_TO_STOP_HQ_DEPLOY = 3,				-- AI stops deploying new army HQs once this many of its army leaders are captured
 
 	-- the following defines concern the general's modifiers
@@ -3506,7 +3507,7 @@ NAI = {
 
 	-- AIFC stands for "AI Force Concentration". Using acronym to keep define names shorter.
 	AIFC_UPDATE_FREQUENCY_DAYS = 5,                             -- How often will AI run its AI force concentration logic. Lowering this number may decrease performance.
-	AIFC_FRESHNESS_BASE_VALUE = 45.0,                           -- AIFC fronts have a "freshness value" which decreases if no progress is made. When it reaches zero, it will give up on the current target and try another.
+	AIFC_FRESHNESS_BASE_VALUE = 55.0,                           -- AIFC fronts have a "freshness value" which decreases if no progress is made. When it reaches zero, it will give up on the current target and try another.
 	AIFC_REFRESH_NEED_PER_DAY = 1.0,                            -- Decrease freshness value with this every day.
 	AIFC_REFRESH_NEED_SUPPLY_FACTOR_PER_DAY = 0.8,              -- Decrease freshness value with this multiplied by average supply ratio every day.
 	AIFC_FRESHNESS_ADD_ON_PROGRESS = 25.0,                      -- Increase freshness value with this when we advance a province along the target path.
@@ -4444,7 +4445,7 @@ NAITheatre = {
 	AI_THEATRE_GENERATION_MAX_DISTANCE_TO_MERGE = 200,					-- Small Theatres - Dont merge with too far away theatres, higher value means less merging will occur
 	AI_THEATRE_GENERATION_MAX_DISTANCE_TO_FILL = 350,					-- Final generation step - Max distance to fill states, higher values means less theatres
 
-	AI_THEATRE_DISTRIBUTION_SAME_THEATRE_SCORE_MODIFIER = 0.25, 			-- Value that affects the score of units when distributing to fronts within the same theatre, its a percentage multiplier, the higher it is the higher the chance of units staying in close proximity
+	AI_THEATRE_DISTRIBUTION_SAME_THEATRE_SCORE_MODIFIER = 1.0, 			-- Value that affects the score of units when distributing to fronts within the same theatre, its a percentage multiplier, the higher it is the higher the chance of units staying in close proximity
 	AI_THEATRE_DISTRIBUTION_MAX_SCORE = 250000, 						-- Max Score that a unit can have when being distributed to ai fronts, higher value means more granularity in score changes, lower values means less variation in where units can go
 	AI_THEATRE_DISTRIBUTION_PERCENTAGE_OF_MINIMUM_UNITS_TO_KEEP = 1.0,	-- How much should a frontline adheer to its minimum unit demand, when removing/reassigning units
 	AI_THEATRE_DISTRIBUTION_MAX_PERCENT_UNMET_DEMAND_PER_FRONT = 0.5,   -- Percentage of how much fronts should request from other lower priority fronts, 0 means once a front gets hold of a unit it stays there forever until its demand is reduced, controlls shuffling of units.
